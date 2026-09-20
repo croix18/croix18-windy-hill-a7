@@ -67,7 +67,9 @@ def check_docscan(files):
                 if re.search(r"MA\.\d+\.[A-Z]+\.\d+\.\d+", t):
                     findings.append(f"docscan: benchmark code on student surface — {where}")
             if student:
-                if re.search(r"\bcalculators?\b", t, re.I):
+                # HOUSE STYLE §13b: "describing what the FAST platform provides is a different thing and
+                # belongs on the reference sheet" — the Reference Sheet may name the on-screen calculator.
+                if re.search(r"\bcalculators?\b", t, re.I) and "Reference Sheet" not in base:
                     findings.append(f"docscan: calculator line on student surface — {where}")
                 if re.search(r"\bhomework\b", t, re.I):
                     findings.append(f"docscan: 'homework' on student surface — {where}")
