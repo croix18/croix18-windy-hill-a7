@@ -87,6 +87,7 @@ From the B1G-M reading notes for 7.NSO.1.1 / 8.NSO.1.3 / 8.NSO.1.4:
 
 1. **MN items as bank seed, or original items only?** The MN practice/homework/assessment items are mathematically usable once the seven defects above are excluded and the notation is fixed. Using them (restyled, renumbered, answers re-derived by script) gets the Unit 3 banks up fastest; writing only original items avoids leaning on licensed material. I can do either; the checks run the same way.
 2. **The two video warm-ups (3.1.1, 3.4.1)** — replace with math warm-ups (my default) or keep a 2-minute video slot on those two days?
+   **RULED, 20 September 2026 — Croix: "Get rid of the video warm ups."** No video slot anywhere in the unit. Every lesson opens with the four-question spaced-retrieval warm-up; the 3.01 and 3.04 Teacher Editions record the replacement. Standing for every unit from here on.
 
 Everything else is settled by existing rules and needs no answer.
 
