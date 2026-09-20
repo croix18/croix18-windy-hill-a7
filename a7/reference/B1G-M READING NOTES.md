@@ -936,3 +936,75 @@ guide and it supersedes the two grade guides as the spine.** 57 benchmarks in th
   → Jamilah: r = 1.1 ft → ½π(1.21) ≈ 1.9 ft². Corrects my earlier 2.3.
 - 8.F.1.1 mapping alt text "99991".
 - Appendix A references 7.AR.3.1.
+
+---
+# FLORIDA'S B.E.S.T. STANDARDS FOR MATHEMATICS (the full standards document, 234 pp.) — read 20 Sept
+
+Source: `mathbeststandardsfinal.zip` (Croix, 20 Sept); text kept in
+`sources/Florida BEST Standards for Mathematics (text).txt`. Read in full: introduction, coding
+scheme, progression table, fluency stages, MTRs, Kindergarten–Grade 8 (every benchmark,
+clarification and example), the Algebra 1 and Geometry course sections, Appendices A, B, D, E
+and both glossaries. The 9–12 strand section (Algebra 2 / Financial Literacy / Trigonometry /
+Logic / Calculus content beyond the two courses) was read as benchmark statements only — none
+of it is within two years of this class.
+
+## What it adds beyond the B1G-M (which quotes the benchmark text verbatim)
+- **Fluency vocabulary is defined and staged** (p. 5–6): *exploration* → *procedural
+  reliability* → *procedural fluency*, with *automaticity* for facts. When a Grade 8 benchmark
+  says "with procedural fluency" (NSO.1.3, NSO.1.5) it means an efficient, accurate procedure
+  including a standard algorithm — not exploration. Appendix B's chart for grade 8: plot/order/
+  compare rational and irrational numbers; procedural fluency with scientific-notation numbers
+  and with the Laws of Exponents. That is the whole grade-8 fluency expectation.
+- **Appendix D (Properties)** is the exact list of names a student verbalizes at each step
+  (7.AR.2.2 / 8.AR.2.1 "verbalize the properties used"): associative, commutative, additive
+  identity, additive inverse, multiplicative identity, multiplicative inverse, distributive;
+  reflexive, symmetric, transitive, addition/subtraction/multiplication/division and
+  substitution properties of equality; asymmetric, transitive, addition/subtraction,
+  multiplication (c > 0 / c < 0) and division (c > 0 / c < 0) properties of inequality. The TE
+  uses these names, and the inequality flip is taught AS the c < 0 case of the multiplication
+  property — that is the state's framing.
+- **Appendix E (Formulas)** — "provided for teachers and not intended to comprise a
+  comprehensive formula list for students." Laws of Exponents, in the state's order and wording:
+  product of powers, quotient of powers, power of a power, power of a product, power of a
+  quotient, negative exponent (a⁻¹ = 1/a and (a/b)⁻¹ = b/a), identity exponent, zero exponent,
+  rational exponent (Algebra 1). Each stated with its converse. Our Unit 3 / Unit 14 lessons
+  derive them in this order and under these names. Also: rhombus area given two ways (bh and
+  ½d₁d₂), cylinder SA = 2B + Ph, V = Bh — the "B + Ph" framing matches 7.GR.2.1's net approach.
+- **Glossary definitions we adopt verbatim** (6–12): function ("each element of the domain
+  corresponds to exactly one element of the range"), linear function ("constant rate of
+  change"), slope (Δy/Δx, vertical over horizontal), scientific notation ("at least 1 and less
+  than 10"), significant digits, association (form/direction/strength), outlier ("much higher or
+  much lower"), theoretical vs experimental probability, sample space, event, repeated
+  experiment, rigid transformation, dilation, similarity ("rigid transformation combined with a
+  dilation, including k = 1"), pi (irrational; 3.14, 22/7, 355/113). Note: the glossary states
+  simple interest as A = P(1 + rt) while the B1G-M gives I = Prt — use I = Prt (the benchmark's
+  own wording) and note the glossary's total-amount form in the TE.
+- **The order-of-operations definition** (glossary) is exactly the non-PEMDAS reading the B1G-M
+  wants: grouping symbols; exponents; multiplication and division left to right; addition and
+  subtraction left to right — with a worked example.
+- **Grade 6 is the true floor for the dropped Grade 7 content.** For every "dropped" MA.7
+  benchmark, the corresponding Grade 6 benchmark is what our students provably have:
+  6.NSO.4 integer operations with procedural fluency; 6.NSO.2 positive fraction/decimal
+  operations; 6.AR.1.4 equivalent expressions with integer coefficients; 6.AR.2.2–2.3 one-step
+  equations (integers); 6.AR.1.2 one-step inequalities of the form x > a; 6.AR.3 ratios, rates,
+  percents (part/whole = percent/100), conversions WITHIN a system; 6.GR.1 coordinate plane all
+  four quadrants, axis reflections, distances on the same x or y; 6.GR.2 triangle/rectangle area
+  (formulas known from memory), prism volume, prism/pyramid SA from nets; 6.DP.1 mean/median/
+  mode/range, box plots, histograms. This is the list the TE cites for "students already own."
+- **Algebra 1 is what these students take next year.** The benchmarks our Grade 8 work feeds
+  directly: 912.NSO.1.1 (rational exponents), 912.NSO.1.4 (operations with radicals), 912.AR.1.3–
+  1.7 (polynomials, factoring), 912.AR.2.1–2.8 (linear equations incl. point-slope & standard
+  forms, compound inequalities, two-variable inequalities), 912.AR.3.1 (quadratics — the
+  x² = p work), 912.AR.9.1 (systems by elimination/substitution), 912.F.1.1–1.8, 912.F.2.1,
+  912.DP.2.4–2.6 (formal line of fit, residuals), 912.DP.3.1 (two-way tables). Domain/range in
+  Algebra 1 uses inequality and set-builder notation — so F.1.1's "list or inequality" is the
+  on-ramp; we do not introduce interval notation.
+- **Geometry course**: 912.GR.1.1–1.6 proofs (vertical angles congruent; transversal angle
+  pairs; triangle angle sum 180°; exterior angles sum 360°; triangle inequality; isosceles base
+  angles), 912.GR.2.x transformations with rotations about the origin OR a point on the figure
+  and coordinates rules like (x, y) → (−x, y), 912.GR.3.1 weighted averages (the 3/11
+  interpolation from 8.NSO.1.2), 912.T.1.1–1.2 trig ratios built on Pythagorean + similar
+  triangles. Nothing here changes the Grade 8 build; it confirms which Grade 8 ideas are
+  foundations (angle relationships, coordinate rules, similar triangles) rather than dead ends.
+- Grade 8 course text (pp. 87–95) matches the B1G-M and the Source of Truth word for word;
+  no discrepancies found. Grade 7 course text likewise.
