@@ -1,0 +1,277 @@
+{
+ "deck": "A7 4.01  Slides.pptx",
+ "slides": [
+  {
+   "n": 1,
+   "title": "Adding and Subtracting in Scientific Notation",
+   "sub": "",
+   "min": 1,
+   "note": "Post the learning target. Say the 'today' line and nothing else yet.",
+   "kind": "title"
+  },
+  {
+   "n": 2,
+   "title": "Warm-Up",
+   "sub": "On your own. Four minutes. No notes.",
+   "min": 4,
+   "note": "Q4 is today's lesson in miniature. 0.49 and 1.2 cannot be added until they are written over the same place value; 4.95 \u00d7 10\u2074 and 1.21 \u00d7 10\u2075 cannot be added until they are written over the same power of ten. A board that answers 0.61 lined up the digits instead of the places \u2014 that is exactly the student who will add 4.95 and 1.21 today and keep whichever exponent they saw last.",
+   "kind": "warmup"
+  },
+  {
+   "n": 3,
+   "title": "Warm-Up",
+   "sub": "Answers.",
+   "min": 1,
+   "note": "Reveal. Ask for the band each question came from only if time allows.",
+   "kind": "warmup"
+  },
+  {
+   "n": 4,
+   "title": "Notes",
+   "sub": "Copy the table.",
+   "min": 4,
+   "note": "Start from the planets. Neptune is about 4.95 \u00d7 10\u2074 km across; Saturn is about 1.21 \u00d7 10\u2075 km. Ask whether the two together are wider than Jupiter (1.43 \u00d7 10\u2075 km) before anyone computes. Then the two roads: write both in standard form and add, or write both over the same power of ten and add the coefficients. Same number, 170,500 km, both ways. Read 12.1 \u00d7 10\u2074 out loud as 'twelve point one ten-thousands' \u2014 that sentence is why the powers must match.\nOFF: 'You can only add things that are the same size. Ten-thousands add to ten-thousands, and the label never changes.'",
+   "kind": "notes"
+  },
+  {
+   "n": 5,
+   "title": "Notes",
+   "sub": "",
+   "min": 3,
+   "note": "When the powers already match there is nothing to set up. Add or subtract the coefficients and copy the power of ten down. Then the second line, which is the part students skip: look at the coefficient you ended with. 13 is not less than 10, so the answer is not finished \u2014 move the point one place left and raise the exponent by one.\nOFF: 'The power of ten is a label. Six thousands plus two thousands is eight thousands \u2014 you never add the word thousands.'",
+   "kind": "notes"
+  },
+  {
+   "n": 6,
+   "title": "Notes",
+   "sub": "",
+   "min": 4,
+   "note": "Move one number, not both, and move it to match the other. Every place the exponent goes up, the decimal point goes one place left; the number itself never changes. Then the state guide's named wrong answer, written out and killed: a student who adds the coefficients and adds the exponents turns 1,300 + 340,000 into 470,000,000. Ask the class which of the two numbers is anywhere near 4.7 \u00d7 10\u2078.\nOFF: 'The exponents are never added. Adding 10 to the fifth and 10 to the third does not make 10 to the eighth \u2014 it does not make a power of ten at all.'",
+   "kind": "notes"
+  },
+  {
+   "n": 7,
+   "title": "Example 1",
+   "sub": "Same power, and the answer is not finished.",
+   "min": 1,
+   "note": "SPOKEN ONLY. The powers already match, so ask the harder question first: what will be true about the coefficient when the two are added? (8.6 and 5.9 are each close to 10, so their sum is over 10.)",
+   "kind": "example"
+  },
+  {
+   "n": 8,
+   "title": "Example 1",
+   "sub": "Worked.",
+   "min": 2,
+   "note": "Add the coefficients, keep 10\u2077, then repair. A board with 14.5 \u00d7 10\u2077 has the right value and an unfinished answer \u2014 that is the guide's named misconception and it is worth a full sentence at the board.",
+   "kind": "example"
+  },
+  {
+   "n": 9,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "Same shape with negative exponents. Catches 12.3 \u00d7 10\u207b\u00b3 (unfinished) and 1.23 \u00d7 10\u207b\u2074 (point moved the wrong way). 1.23 \u00d7 10\u207b\u00b2 is right.",
+   "kind": "yourturn"
+  },
+  {
+   "n": 10,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 11,
+   "title": "Example 2",
+   "sub": "Different powers, and a subtraction.",
+   "min": 1,
+   "note": "SPOKEN ONLY. Ask which number is easier to move, and why moving the smaller one up is the safer habit \u2014 the answer's power of ten is then already the bigger one.",
+   "kind": "example"
+  },
+  {
+   "n": 12,
+   "title": "Example 2",
+   "sub": "Worked.",
+   "min": 2,
+   "note": "Rewrite 4.5 \u00d7 10\u2075 over 10\u2076 \u2014 exponent up one, point one place left \u2014 and the subtraction becomes ordinary. A board with 2.8 \u00d7 10\u2076 or 2.8 \u00d7 10\u00b9 subtracted the coefficients without matching first; a board with 6.85 \u00d7 10\u00b9 subtracted the exponents.",
+   "kind": "example"
+  },
+  {
+   "n": 13,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "The exponents are two apart \u2014 the widest gap this benchmark allows. 9.0 \u00d7 10\u207b\u2076 becomes 0.09 \u00d7 10\u207b\u2074. Catches 4.7 \u00d7 10\u207b\u2074 (no matching) and 5.51 \u00d7 10\u207b\u2076 (wrong power kept).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 14,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 15,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The plain case. A board with 7.3 \u00d7 10\u00b9\u2070 added the exponents; a board with 1.312 \u00d7 10\u00b9\u00b9 multiplied.",
+   "kind": "wb"
+  },
+  {
+   "n": 16,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 17,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Ruling 22's board: the ticket price is there to be read past. The question asks for tickets, and nothing in it needs the money. A board holding 38 anywhere used it.",
+   "kind": "wb"
+  },
+  {
+   "n": 18,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 19,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The state guide's own item. The sum is 13 \u00d7 10\u207b\u2075, which is correct in value and wrong in form. A board holding 13 \u00d7 10\u207b\u2075 is the misconception the guide names \u2014 praise the arithmetic, then finish it together.",
+   "kind": "wb"
+  },
+  {
+   "n": 20,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 21,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The repair in the other direction: a coefficient below 1 is also unfinished. Point one place right, exponent down one. A board holding 0.7 \u00d7 10\u2078 has done the subtraction and stopped one step early.",
+   "kind": "wb"
+  },
+  {
+   "n": 22,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 23,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic, and the one that matters most today. B is the guide's named misconception; a board full of B means Notes III's last line did not land. D is the careful student who did the right thing badly \u2014 name that one out loud.",
+   "kind": "wb"
+  },
+  {
+   "n": 24,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 25,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic. B and A have the same value, and the question asks for the form \u2014 that is the whole point. If the room splits between A and B, sixty seconds and a re-vote before you reveal.",
+   "kind": "wb"
+  },
+  {
+   "n": 26,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 27,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Negative exponents, one apart. Moving up from 10\u207b\u00b3 to 10\u207b\u00b2 takes the point one place left, so 6.4 becomes 0.64. A board with 1.4 \u00d7 10\u207b\u00b2 never matched the powers.",
+   "kind": "wb"
+  },
+  {
+   "n": 28,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 29,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Working backwards, and it forces the repair to be read in reverse: the finished answer has to be un-finished before the blank can be filled. A board with \u22123.48 subtracted 4.5 from 1.02.",
+   "kind": "wb"
+  },
+  {
+   "n": 30,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 31,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Take your time. Boards up when you have written it.",
+   "min": 0,
+   "note": "Written, and it is the exit evidence. Full credit needs all three pieces: he added the coefficients without first writing both over the same power of ten; he added the exponents, which is never done; and the sum is 3.413 \u00d7 10\u2075. A student who names only one mistake has half the item. 'He added wrong' names neither.",
+   "kind": "wb"
+  },
+  {
+   "n": 32,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 33,
+   "title": "Independent Set",
+   "sub": "Six questions. On your own, in silence.",
+   "min": 6,
+   "note": "Hand out the Independent Set. Silent work. Circulate and mark what you see; do not teach. Whatever is not finished goes home.",
+   "kind": "independent"
+  },
+  {
+   "n": 34,
+   "title": "IXL",
+   "sub": "Last five minutes.",
+   "min": 5,
+   "note": "IXL: every listed skill is required, SmartScore 67, due at the start of the next class.",
+   "kind": "ixl"
+  }
+ ]
+}

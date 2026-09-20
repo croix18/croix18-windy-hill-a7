@@ -226,8 +226,13 @@ def capcheck_lesson(L):
                         or ("not_bound" in skip and "could not be checked" in f):
                     continue
                 out.append(f)
-    for grp in ("warmup", "notes", "examples", "whiteboard", "bank", "additional", "independent", "vocab", "te"):
+    for grp in ("warmup", "notes", "examples", "whiteboard", "bank", "additional", "independent", "vocab"):
         scan(L.get(grp), grp)
+    # The teacher's edition is prose ABOUT the textbook: naming the book's own "45 × 10⁶" or the
+    # guide's "leaving 12 × 10⁹" is the point of the sentence, so the coefficient scan is off
+    # there. The boundary scans stay on — an out-of-bounds value quoted in the TE is still worth
+    # seeing — and every value the TE prints as an answer comes from an item that was scanned.
+    scan(L.get("te"), "te", skip=("not_sci",))
     return out
 
 
