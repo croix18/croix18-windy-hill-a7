@@ -1,0 +1,269 @@
+{
+ "deck": "A7 3.08  Slides.pptx",
+ "slides": [
+  {
+   "n": 1,
+   "title": "Writing Large Numbers in Scientific Notation",
+   "sub": "",
+   "min": 1,
+   "note": "Post the learning target. Say the 'today' line and nothing else yet.",
+   "kind": "title"
+  },
+  {
+   "n": 2,
+   "title": "Warm-Up",
+   "sub": "On your own. Four minutes. No notes.",
+   "min": 4,
+   "note": "Q2 and Q4 are the two halves of today: a power of 10 names a place. 10\u2076 is a million, and the 4 in 4,500,000 sits in the millions place, so 4,500,000 is 4.5 millions \u2014 4.5 \u00d7 10\u2076. Say that sentence once at the reveal and the lesson is half taught.",
+   "kind": "warmup"
+  },
+  {
+   "n": 3,
+   "title": "Warm-Up",
+   "sub": "Answers.",
+   "min": 1,
+   "note": "Reveal. Ask for the band each question came from only if time allows.",
+   "kind": "warmup"
+  },
+  {
+   "n": 4,
+   "title": "Notes",
+   "sub": "Copy the table.",
+   "min": 3,
+   "note": "The exponent is the number of zeros, and it is also the place of the 1: 10\u00b3 is one thousand, and the 1 sits in the thousands place. Students fill the last two cells. Then the book's warm-up number: seven quintillion, five hundred quadrillion grains of sand on Earth's beaches, 7,500,000,000,000,000,000 \u2014 twenty digits, and nobody wants to copy it twice.",
+   "kind": "notes"
+  },
+  {
+   "n": 5,
+   "title": "Notes",
+   "sub": "",
+   "min": 4,
+   "note": "Definition first, then the two examples. 2,000,000 is 2 millions: 2 \u00d7 10\u2076. 26,000,000 is 2.6 ten-millions: the 2 is in the ten-millions place, so 2.6 \u00d7 10\u2077. The rule of thumb \u2014 count how many places the decimal point moves \u2014 is on the last line, and it agrees with place value every time. Then the constraint, which the state guide names as the first misconception: 20 \u00d7 10\u2075 equals 2,000,000 but is NOT scientific notation, because 20 is not less than 10.\nOFF: 'One nonzero digit in front of the decimal point. That is the whole rule.'",
+   "kind": "notes"
+  },
+  {
+   "n": 6,
+   "title": "Notes",
+   "sub": "",
+   "min": 4,
+   "note": "Three cases, one line each. Same power of 10: divide the coefficients. Same coefficient: divide the powers \u2014 and 10\u00b3 times is one thousand times, not three times, which is the guide's second named misconception. Both different: divide both and multiply the results. The last line is the calculator: 8.4E6 means 8.4 \u00d7 10\u2076; E is not an error.\nOFF: '10\u00b3 times larger is a thousand times larger. The exponent is not the answer; the power is.'",
+   "kind": "notes"
+  },
+  {
+   "n": 7,
+   "title": "Example 1",
+   "sub": "Standard form to scientific notation.",
+   "min": 1,
+   "note": "SPOKEN ONLY. The book's Florida education-funding figure. Ask which digit goes in front of the decimal point and which place it is in before anyone writes.",
+   "kind": "example"
+  },
+  {
+   "n": 8,
+   "title": "Example 1",
+   "sub": "Worked.",
+   "min": 2,
+   "note": "The 3 is in the ten-billions place: 10\u00b9\u2070. The coefficient keeps every nonzero digit after it \u2014 3.01, not 3.1 and not 3. A board with 3.1 \u00d7 10\u00b9\u2070 dropped the zero between the 3 and the 1; a board with 3.01 \u00d7 10\u2079 counted the zeros after the 1 instead of the places the point moved.",
+   "kind": "example"
+  },
+  {
+   "n": 9,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "The book's auction painting. Catches 1.15 \u00d7 10\u2078 (dropped the zero) and 1.105 \u00d7 10\u2077 (counted the zeros after the 5). 1.105 \u00d7 10\u2078 is right.",
+   "kind": "yourturn"
+  },
+  {
+   "n": 10,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 11,
+   "title": "Example 2",
+   "sub": "How many times larger?",
+   "min": 1,
+   "note": "SPOKEN ONLY. Coefficients differ and powers differ. Ask for the plan \u2014 divide both, multiply the results \u2014 before anyone touches a calculator.",
+   "kind": "example"
+  },
+  {
+   "n": 12,
+   "title": "Example 2",
+   "sub": "Worked.",
+   "min": 2,
+   "note": "8.1 \u00f7 5.4 = 1.5 and 10\u2078 \u00f7 10\u2077 = 10. So 15 times. A board with 1.5 stopped at the coefficients; a board with 10 stopped at the powers; a board with 150 wrote 10\u00b2 for 10\u2078 \u00f7 10\u2077. Confirm in standard form: 810,000,000 \u00f7 54,000,000 = 15.",
+   "kind": "example"
+  },
+  {
+   "n": 13,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "The book's alligators. 1.5 \u00f7 2.0 = 0.75 and 10\u2076 \u00f7 10\u2075 = 10, so 7.5 \u2014 a case where the coefficient ratio is less than 1 and the answer is still 'times larger'. A board with 0.75 forgot the powers.",
+   "kind": "yourturn"
+  },
+  {
+   "n": 14,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 15,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "One digit, six zeros. A board with 4 \u00d7 10\u2077 counted seven digits instead of six zeros; a board with 40 \u00d7 10\u2075 broke the coefficient rule.",
+   "kind": "wb"
+  },
+  {
+   "n": 16,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 17,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Reading the notation back. A board with 720,000 moved five places (counted the 2 as a zero); a board with 7.20000 attached zeros without moving the point.",
+   "kind": "wb"
+  },
+  {
+   "n": 18,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 19,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Three nonzero digits. 356 \u00d7 10\u00b3 is equal in value but not scientific notation; 3.56 \u00d7 10\u00b3 counted only the zeros.",
+   "kind": "wb"
+  },
+  {
+   "n": 20,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 21,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The coefficient is a trap: 9.5 is bigger than 1.2, but 10\u2076 beats 10\u2075. Compare the powers first, the coefficients only when the powers tie.",
+   "kind": "wb"
+  },
+  {
+   "n": 22,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 23,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic. B is the guide's first misconception and the one to name; C and D are the two counting errors.",
+   "kind": "wb"
+  },
+  {
+   "n": 24,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 25,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic \u2014 the guide's misconception in its purest form. A board full of B means Notes III's last line did not land: 10\u00b3 is a thousand.",
+   "kind": "wb"
+  },
+  {
+   "n": 26,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 27,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The book's own comparison. A board with 4 stopped at the coefficients; a board with 40 wrote 10 for 10\u00b2. Both are half an answer.",
+   "kind": "wb"
+  },
+  {
+   "n": 28,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 29,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The state guide's item shape that the book never asks. E9 means \u00d7 10\u2079. A board with 3.5\u2079 read E as an exponent on 3.5; a board with 35,000,000,000 moved the point ten places.",
+   "kind": "wb"
+  },
+  {
+   "n": 30,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 31,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Take your time. Boards up when you have written it.",
+   "min": 0,
+   "note": "Written. The book's Guided Instruction item 3, kept. Full credit: both answers with the reason (20 is not less than 10) and the corrected form 2 \u00d7 10\u2076. A student who says 'it is wrong' has not separated value from form \u2014 that separation is the point of the item.",
+   "kind": "wb"
+  },
+  {
+   "n": 32,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 33,
+   "title": "IXL",
+   "sub": "Last five minutes.",
+   "min": 5,
+   "note": "IXL: whatever is not finished is tonight's practice; SmartScore 67.",
+   "kind": "ixl"
+  }
+ ]
+}

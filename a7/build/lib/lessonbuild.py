@@ -104,21 +104,35 @@ def distractorcheck_lesson(L):
     return out
 
 
+_SCI = re.compile(r"(\d+(?:\.\d+)?)\s*(?:\\+times|×)\s*10\s*(?:\^|[⁰¹²³⁴⁵⁶⁷⁸⁹⁻])")
+
+
 def capcheck_lesson(L):
     """Ruling 13 caps for this unit: integer exponents only; rational bases; sci-notation
-    coefficients in [1,10). Scans every LaTeX/text in the spec."""
+    coefficients in [1,10). Walks every item (and every notes/example block) of the spec;
+    a block that deliberately shows a coefficient outside [1,10) — because it is ABOUT the
+    constraint — carries not_sci=True."""
     out = []
-    blob = json.dumps(L)
-    # fractional exponent like ^{1/2} or ^{\frac
+    blob = json.dumps(L, ensure_ascii=False)
     if re.search(r"\^\{\s*\\frac", blob) or re.search(r"\^\{\s*\d+/\d+", blob):
         out.append(f"{L['code']}: fractional exponent found")
-    for mcoef in re.finditer(r"(\d+(?:\.\d+)?)\s*\\times\s*10\^", blob):
-        v = float(mcoef.group(1))
-        if not (1 <= v < 10):
-            # allowed only when the item is ABOUT the constraint
-            ctx = blob[max(0, mcoef.start() - 200):mcoef.start()]
-            if "not_sci" not in ctx and "notsci" not in ctx:
-                out.append(f"{L['code']}: scientific-notation coefficient {v} outside [1,10) (tag the item not_sci if deliberate)")
+
+    def scan(obj, where):
+        if isinstance(obj, dict):
+            if obj.get("not_sci"):
+                return
+            for k, v in obj.items():
+                scan(v, f"{where}.{k}")
+        elif isinstance(obj, (list, tuple)):
+            for i, v in enumerate(obj):
+                scan(v, f"{where}[{i}]")
+        elif isinstance(obj, str):
+            for m in _SCI.finditer(obj):
+                v = float(m.group(1))
+                if not (1 <= v < 10):
+                    out.append(f"{L['code']} {where}: scientific-notation coefficient {v} outside [1,10) (tag the block not_sci=True if deliberate)")
+    for grp in ("warmup", "notes", "examples", "whiteboard", "bank", "additional", "vocab", "te"):
+        scan(L.get(grp), grp)
     return out
 
 

@@ -1,0 +1,269 @@
+{
+ "deck": "A7 3.09  Slides.pptx",
+ "slides": [
+  {
+   "n": 1,
+   "title": "Writing Small Numbers in Scientific Notation",
+   "sub": "",
+   "min": 1,
+   "note": "Post the learning target. Say the 'today' line and nothing else yet.",
+   "kind": "title"
+  },
+  {
+   "n": 2,
+   "title": "Warm-Up",
+   "sub": "On your own. Four minutes. No notes.",
+   "min": 4,
+   "note": "Q2 and Q4 are the two halves of today: 10\u207b\u00b3 is a thousandth, and 0.007 is 7 thousandths, so 0.007 is 7 \u00d7 10\u207b\u00b3. Say that at the reveal. Q1 is yesterday's skill and today's is the mirror image.",
+   "kind": "warmup"
+  },
+  {
+   "n": 3,
+   "title": "Warm-Up",
+   "sub": "Answers.",
+   "min": 1,
+   "note": "Reveal. Ask for the band each question came from only if time allows.",
+   "kind": "warmup"
+  },
+  {
+   "n": 4,
+   "title": "Notes",
+   "sub": "Copy the table.",
+   "min": 3,
+   "note": "The 3.04 law with base 10: 10\u207b\u207f is 1 over 10\u207f, and as a decimal it is a 1 in the nth decimal place. 10\u207b\u00b3 is one thousandth, 0.001, and the 1 is in the thousandths place. Students fill the last two cells. The count to watch: 0.001 has two zeros after the point and the 1 in the THIRD place \u2014 the exponent counts places, not zeros.\nOFF: 'The exponent tells you which decimal place the 1 is in. Not how many zeros.'",
+   "kind": "notes"
+  },
+  {
+   "n": 5,
+   "title": "Notes",
+   "sub": "",
+   "min": 4,
+   "note": "Same definition as yesterday; the exponent is negative because the number is less than 1. A red blood cell is 0.000007 m across: the 7 is in the millionths place, so 7 \u00d7 10\u207b\u2076. Then 0.0000672: the first nonzero digit, 6, is in the hundred-thousandths place, so 6.72 \u00d7 10\u207b\u2075 \u2014 and it has only four zeros after the point. Reading back: 3.4 \u00d7 10\u207b\u2079 puts the 3 in the billionths place, eight zeros then 34. The rule of thumb: the point moves right n places, the exponent is \u2212n.\nOFF: 'Find the first nonzero digit. Its place is the exponent. Everything else is the coefficient.'",
+   "kind": "notes"
+  },
+  {
+   "n": 6,
+   "title": "Notes",
+   "sub": "",
+   "min": 4,
+   "note": "Same routine as yesterday; the only new thing is that dividing powers of 10 with negative exponents is integer subtraction: 10\u207b\u2074 \u00f7 10\u207b\u2077 = 10\u00b3. Line 1 is the book's collaboration item, and it is sound. Line 2 crosses from a large number to a small one \u2014 the state guide's item shape \u2014 and the exponent difference 8 \u2212 (\u22124) = 12 does all the work. 'Times smaller' is the same division read the other way: 1.8 \u00d7 10\u207b\u2077 is 4,000 times smaller than 7.2 \u00d7 10\u207b\u2074.\nOFF: 'The larger exponent wins. \u22124 is larger than \u22127, so 10\u207b\u2074 is the bigger power.'",
+   "kind": "notes"
+  },
+  {
+   "n": 7,
+   "title": "Example 1",
+   "sub": "A quantity in words, to scientific notation.",
+   "min": 1,
+   "note": "SPOKEN ONLY. The book's oxygen density. Two steps: words to a decimal, decimal to scientific notation. Ask what 'millionths' means as a place before anyone writes.",
+   "kind": "example"
+  },
+  {
+   "n": 8,
+   "title": "Example 1",
+   "sub": "Worked.",
+   "min": 2,
+   "note": "1,332 millionths is 1,332 \u00f7 1,000,000 = 0.001332. The first nonzero digit, 1, is in the thousandths place: 1.332 \u00d7 10\u207b\u00b3. A board with 1.332 \u00d7 10\u207b\u2076 used the word 'millionths' as the exponent without converting; a board with 1.332 \u00d7 10\u207b\u00b2 counted the zeros.",
+   "kind": "example"
+  },
+  {
+   "n": 9,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "The book's human hair. 67 hundred-thousandths = 0.00067 = 6.7 \u00d7 10\u207b\u2074. Catches 6.7 \u00d7 10\u207b\u2075 ('hundred-thousandths' used as the exponent) and 6.7 \u00d7 10\u207b\u00b3 (zeros counted).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 10,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 11,
+   "title": "Example 2",
+   "sub": "How many times larger?",
+   "min": 1,
+   "note": "SPOKEN ONLY. The book's collaboration item. Ask which number is larger before anyone divides \u2014 the exponents decide, and \u22124 beats \u22127.",
+   "kind": "example"
+  },
+  {
+   "n": 12,
+   "title": "Example 2",
+   "sub": "Worked.",
+   "min": 2,
+   "note": "7.2 \u00f7 1.8 = 4 and 10\u207b\u2074 \u00f7 10\u207b\u2077 = 10\u00b3 (\u22124 minus \u22127 is 3). So 4,000 times. A board with 4 stopped at the coefficients; a board with 4 \u00d7 10\u207b\u00b3 subtracted the exponents the wrong way (\u22127 \u2212 (\u22124)); a board with 40 wrote 10 for 10\u00b3. Confirm: 0.00072 \u00f7 0.00000018 = 4,000.",
+   "kind": "example"
+  },
+  {
+   "n": 13,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "The book's practice item. 5.2 \u00f7 2.6 = 2 and 10\u207b\u00b3 \u00f7 10\u207b\u2078 = 10\u2075: 200,000. A board with 2 \u00d7 10\u207b\u2075 subtracted the wrong way.",
+   "kind": "yourturn"
+  },
+  {
+   "n": 14,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 15,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The law with base 10. A board with 0.00001 counted four zeros and then wrote the 1; a board with \u221210,000 read the exponent's sign as the number's sign.",
+   "kind": "wb"
+  },
+  {
+   "n": 16,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 17,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "One digit. 3 \u00d7 10\u00b3 has the sign wrong (that is 3,000); 3 \u00d7 10\u207b\u00b2 counted the zeros.",
+   "kind": "wb"
+  },
+  {
+   "n": 18,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 19,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The book's Mycoplasma bacterium, 2.5 \u00d7 10\u207b\u2074 mm. A board with 0.000025 moved five places; a board with 25,000 moved the wrong way.",
+   "kind": "wb"
+  },
+  {
+   "n": 20,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 21,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The book's ticket-out-the-door value. Four zeros after the point but the 9 is in the fifth place: 10\u207b\u2075. A board with 9.88 \u00d7 10\u207b\u2074 counted zeros; a board with 988 \u00d7 10\u207b\u2077 is equal in value but broke the coefficient rule.",
+   "kind": "wb"
+  },
+  {
+   "n": 22,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 23,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic. B is the zero-counter, the most common wrong board today; C is the coefficient rule; D is the sign.",
+   "kind": "wb"
+  },
+  {
+   "n": 24,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 25,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic for the comparison. D is the integer-subtraction slip \u2014 the one that says the powers were handled, just backwards.",
+   "kind": "wb"
+  },
+  {
+   "n": 26,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 27,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Powers first. 7.4 is the bigger coefficient, but 10\u207b\u2078 is a much smaller power. A board with 7.4 \u00d7 10\u207b\u2078 compared the coefficients or thought 8 beats 5.",
+   "kind": "wb"
+  },
+  {
+   "n": 28,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 29,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The state guide's E-notation shape, small side. A board with \u22124,200,000 read the minus as the number's sign; a board with 0.00000042 moved seven places.",
+   "kind": "wb"
+  },
+  {
+   "n": 30,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 31,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Take your time. Boards up when you have written it.",
+   "min": 0,
+   "note": "Written. The state guide's task for this benchmark. Full credit: the thicker line, the factor 3, and a value strictly between 0.02 and 0.06 written in either form. A student who answers '3 times thinner' for the first line has the comparison right and the direction reversed \u2014 mark it right only if the sentence says which line is which. A student who gives 4 \u00d7 10\u207b\u00b9 has the coefficient right and the power wrong (that is 0.4 in, thicker than both).",
+   "kind": "wb"
+  },
+  {
+   "n": 32,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 33,
+   "title": "IXL",
+   "sub": "Last five minutes.",
+   "min": 5,
+   "note": "IXL: whatever is not finished is tonight's practice; SmartScore 67.",
+   "kind": "ixl"
+  }
+ ]
+}
