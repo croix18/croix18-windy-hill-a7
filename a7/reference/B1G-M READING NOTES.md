@@ -53,8 +53,7 @@ Task 3: cupcakes — 2 c flour, 1/2 c butter, 3/4 c sugar per batch; has 8 c flo
 2 c sugar → flour 4 batches, butter 4, sugar 2⅔ → 2 batches; one more batch needs ¼ c sugar.
 
 ## MA.7.AR.1.1 — Add and subtract linear expressions with rational coefficients
-Clarification 1: forms ax ± b or b ± ax, a and b rational. Example: 7½ x − 4 − (2 − ... ) — text
-mangled; check page 29 image if we reuse. Guide: avoid variables o, i, l. Same-type rule again.
+Clarification 1: forms ax ± b or b ± ax, a and b rational. Example (from page image): (7x − 4) − (2 − ½x) = 7½x − 6 = 15/2 x − 6. Guide: avoid variables o, i, l. Same-type rule again.
 Misconceptions: combining unlike terms; dropping the distributed negative: 3 − (2x + 7) → 3 − 2x + 7.
 Tiered: write −(…) as +(−1)(…). Items: (5x − 1) − (0.06x − 4 + 0.4x) = 4.54x + 3;
 (4 + ⅔x) + (⅙x − 3) = ⅚x + 1; (2x − ⅘ − 3x) − (−8x + 2) = 7x − 2⅘ = 7x − 14/5.
@@ -62,8 +61,10 @@ Vertical: next MA.8.AR.1.2, MA.8.AR.1.3.
 
 ## MA.7.AR.1.2 — Determine whether two linear expressions are equivalent
 Any form, rational coefficients. Guide: give multiple equivalent forms, "not just the most
-simplified"; ½x ≡ ⅕x + 3/10 x. Item 1 is a matching item (four targets: 3⅛x − 1 9/10,
-3⅛x − 6 3/10, 3⅞x − 1 9/10, 2x − 4¾ — page 34; layout mangled, use page image before reuse).
+simplified"; ½x ≡ ⅕x + 3/10 x. Item 1 is a matching item (verified on the page image and worked):
+(3½x − 4 1/10) − (⅜x + 2⅕) = 3⅛x − 6 3/10; (3½x − 4 1/10) + (⅜x + 2⅕) = 3⅞x − 1 9/10;
+2(1½x − 1 3/10) + ½(1⅖ + ¼x) = 3⅛x − 1 9/10; 2(1½x − 1 3/10) − (1⅖ + ¼x) = 2¾x − 4.
+Task 1 Part A source expression: 4/3(6 − x) + 3(⅔x + 1) = ⅔x + 11.
 Vertical: next MA.8.AR.1.1, MA.8.AR.1.3.
 
 ## MA.7.AR.2.1 — Write and solve one-step inequalities; represent solutions algebraically or graphically
@@ -140,8 +141,9 @@ Examples: line through (5, 2) → k = 2/5; e = 9h. Guide: "Problem types include
 NEGATIVE constants of proportionality." Connect to π as the k in C = πd (MA.7.GR.1.3).
 Misconceptions: reversed ratio; ignoring axis scale; any line is proportional (revisit y = px).
 Task: Port Canaveral fees 15→33.75, 17→38.25, 20→45, 21→47.25 → k = 2.25 $/ft; Fort Lauderdale
-graph (page 55 image) → compare. Items: 2 scoops : 12 oz → k = 6 oz/scoop (or 1/6); table
-3→4.5, 4→6, 6→9, 9→13.5 → k = 1.5; item 2 has a second graph (page 55).
+graph (page image: through (15, 37.5) and (25, 62.5)) → k = 2.50 $/ft → Port Canaveral cheaper.
+Items: 2 scoops : 12 oz → k = 6 oz/scoop (or 1/6); table 3→4.5, 4→6, 6→9, 9→13.5 → k = 1.5;
+item 2.2 is a line through the origin with NEGATIVE slope — a negative-k item, as promised.
 Vertical: next MA.8.AR.3.2 (slope).
 
 ## MA.7.AR.4.3 — Graph proportional relationships from a table, equation, or description
@@ -166,9 +168,10 @@ Vertical: next MA.8.AR.3.2, 3.3, 3.4.
 ## MA.7.AR.4.5 — Solve real-world problems involving proportional relationships
 Culmination of AR.4; compare two proportional relationships. Example: Gordy 1,407 mi, 23.1 mpg,
 17.5 gal tank → range 404.25 mi/tank → 1407/404.25 = 3.48 → starts full, so 3 refills.
-Task: Patsy shortbread (16 cookies: 10 tbsp butter, 1½ c flour, 1½ c powdered sugar, ½ tsp salt,
-½ tsp vanilla — layout mangled, verify on page 63 image) scaled to 60 (×3.75) and 84 (×5.25);
-Part C compares 1 : 2¾ vs 1½ : 1½ ratio.
+Task (verified on image): Patsy shortbread, 16 cookies: 10 tbsp butter, 1½ c powdered sugar,
+1½ c flour, ½ tsp vanilla, ½ tsp salt → ×3.75 for 60 cookies (37.5 tbsp, 5⅝ c, 5⅝ c, 1⅞ tsp,
+1⅞ tsp); ×5.25 for 84 (52.5 tbsp, 7⅞ c, 7⅞ c) vs on hand 16 tbsp, 2 c sugar, 4 c flour.
+Part C: Jeb 1¾ sugar : 2 flour = 0.875 vs Patsy 1 : 1 → Jeb's ratio is SMALLER; claim false.
 Item: carriage ½ mi in 8 min → 2.5 mi in 40 min (graph).
 Vertical: next MA.8.AR.3.4, 3.5.
 
@@ -176,15 +179,19 @@ Vertical: next MA.8.AR.3.4, 3.5.
 Clarification 2: NOT expected to memorize the formulas (→ reference sheet). Derive from rectangle
 (slice-and-slide) and from two trapezoids → parallelogram. Misconceptions: slant side used as
 height; base/height lost in rotated orientations (two possible heights on a parallelogram).
-Items are figure-based (park trapezoid, "find the area of the figure") — page 67 image.
+Items (from images): park trapezoid bases 10 yd and 20 yd, height 12.5 yd, slant labeled
+6.4 yd → A = ½(10 + 20)(12.5) = 187.5 yd² (the 6.4 slant is a distractor AND geometrically
+impossible with height 12.5 — guide erratum). Item 2: parallelogram base 5 m, height 3 m, slant
+5 m → 15 m² (slant is the distractor).
 Vertical: next HS MA.912.GR.3.3, 4.4.
 
 ## MA.7.GR.1.2 — Area of polygons/composite figures by decomposing into triangles or quadrilaterals
 Clarification 1: NOT on the coordinate plane; NOT missing dimensions. Include subtraction
 decompositions (big minus hole). Misconceptions: forgetting to add pieces; double-counting;
 not decomposing far enough.
-Tasks/items are figure-based (patio screens Job #1/#2 with stone cut-outs; set-piece on grid;
-kite sail) — pages 69–71 images. Vertical: next HS GR.3.4, 4.3, 4.4.
+Tasks/items are figure-based: patio screens Job #1/#2 (page 70 image too low-res to read the
+dimensions); set-piece on a 1-ft grid; Item 1 T-shape (8½ × 4¾ top with a cut corner, 1½ × 5½
+stem — image); Item 2 kite: diagonals 90 cm and (30 + 90) = 120 cm → ½·90·120 = 5,400 cm². Vertical: next HS GR.3.4, 4.3, 4.4.
 
 ## MA.7.GR.1.3 — Circumference: explore C/d proportionality; apply formula
 Clarification 1: explore circular objects → π as constant of proportionality. Clarification 2:
@@ -203,10 +210,11 @@ Clarification 2: fractional parts of a circle (sectors — pizza: 12-in, 6 slice
 memorize A = πr² (→ reference sheet). NOT finding r or d from a given area.
 Misconceptions: r/d swap; π as variable; C vs A; DOUBLING r instead of squaring (5·2 vs 5²).
 Tiered: write A = (π)(r)(r).
-Task: seven r = 5 cm circles inside one large circle (large r = 15) — page 76 image; large area
-225π; shaded = regions between small circles (figure needed). Items: r = 4 → 50.27 cm²
-(nearest hundredth); "exact area" items in terms of π; Jamilah semicircle countertop add-on
-(page 77 image), nearest tenth.
+Task: seven r = 5 cm circles hex-packed inside one large circle (R = 15) — large area 225π;
+total gap 225π − 175π = 50π but the two shaded gaps are not a clean fraction of it (do not
+reuse without redrawing). Items: r = 4 → 50.27 cm²; exact areas: r = 2.2 → 4.84π cm²,
+d = 5.6 → 7.84π cm²; Jamilah: rectangle 6.2 × 2.4 with a semicircle below — total height 3.6
+→ semicircle r = 1.2 → ½π(1.44) ≈ 2.3 ft² (a stray "4 feet" label conflicts; erratum).
 Vertical: next HS GR.4.4, 4.6, 6.4.
 
 ## MA.7.GR.1.5 — Dimensions and areas incl. scale drawings and scale factors
@@ -214,7 +222,8 @@ Clarification 1: scale factor = constant of proportionality between correspondin
 Clarification 2: areas scale by k². Clarification 3: find k from dimensions AND dimensions from k.
 Misconceptions: can't read a map; scaling area like length; proportions set up wrong; believing
 k is always > 1 (answering 2 when it is ½).
-Tasks: delta wing, 2 cm : 192 cm (k = 96) — page 80 image; Mariko 80:1 floor plan, room
+Tasks: delta wing 8.125 cm × 5 cm right triangle, 2 cm : 192 cm (k = 96) → 780 cm × 480 cm →
+area 187,200 cm²; Mariko 80:1 floor plan, room
 1⅞ in × 2½ in → 150 in × 200 in = 12.5 ft × 16⅔ ft = 208⅓ ft². Items: Figure 1 → Figure 2
 scale factor (image); Andrew's wall 3.5 in ↔ 26.25 ft (k = 7.5 ft/in) → height 30 ft → 787.5 ft².
 Vertical: next MA.8.GR.2.2 (dilations), HS GR.4.3.
@@ -226,8 +235,9 @@ Misconceptions: base/height/"B" vocabulary; thinking the side a cylinder lies on
 mixing area/SA/volume formulas.
 Tasks: blue room d = 34 ft, h = 9 → paint floor+wall+ceiling = 2π(17²) + 2π(17)(9) = 578π + 306π
 = 884π ≈ 2,777.2 ft²; windows = lateral 306π ≈ 961.3 ft²; glass ceiling = 289π ≈ 907.9 ft².
-Items: cylinder with d = 2⅝ in? and h = 4⅜ in (mixed-number dims, mangled layout — page 83 image
-decides which is r and which is h); "exact surface area" item; snare drum d = 14, h = 6 →
+Items (image): cylinder LYING ON ITS SIDE, diameter 2⅝ in, length 4⅜ in → r = 1.3125 →
+SA = 2π(1.7227) + 2π(1.3125)(4.375) ≈ 46.9 in² (orientation tests the base misconception);
+net with r = 3 cm, h = 6 cm → 18π + 36π = 54π cm²; snare drum d = 14, h = 6 →
 2π(49) + 2π(7)(6) = 98π + 84π = 182π ≈ 571.8 in².
 Vertical: next HS GR.4.6.
 
@@ -400,7 +410,7 @@ expansion. Negative integer exponents YES; fractional exponents NO.
 calculator. Include working backwards / find the unknown exponent. Misconception: negative
 exponent ↔ denominator (worked: (5/4)⁻³ = (4/5)³ = 64/125); also 4² × 4⁻⁶ = 1/256.
 Tasks: show difference between −b and b⁻¹; pattern 4⁵ → 4⁻⁵, why 4⁰ = 1.
-Items: (3⁶/3⁻⁴)² = (3¹⁰)² = 3²⁰ (page 24; garbled — could be (3⁶)²/3⁻⁴; check image);
+Items (image): (3⁶/3⁻⁴)² = (3¹⁰)² = 3²⁰;
 (−2/3)⁻³ · (0.8)² = (−27/8)(0.64) = −2.16; which equal 1/2⁶: 2⁻⁵·2⁻¹ YES, 2⁻²·2⁻⁴ YES,
 2¹·2⁵ no (2⁶), 2¹·2⁶ no, 2²·2⁻⁸ YES, 2²·2³ no. (Multi-select item shape.)
 Vertical: prev MA.7.NSO.1.1; next MA.912.NSO.1.1.
@@ -438,26 +448,24 @@ Vertical: prev MA.7.NSO.1.1, 2.1; next MA.912.GR.4.
 
 ## MA.8.NSO.1.7 — Multi-step order of operations with rational numbers incl. exponents and radicals
 Clar. 1: ≤ 6 steps. Clar. 2: simplify radicals by factoring: square roots of perfect squares up
-to 225; cube roots of perfect cubes from −125 to 125. Example: (−½)² + ∛(2³ + 8) = ¼ + ∛16?? —
-text says "+ √16 = ¼ + 4 = 17/4", so the radicand is (2³ + 8) = 16 under a SQUARE root
-(page 33; the ∛ glyph in the text is an artifact — verify on the image before reuse). Avoid
+to 225; cube roots of perfect cubes from −125 to 125. Example (verified on image): (−½)² + √(2³ + 8) = ¼ + √16 = ¼ + 4 = 17/4. Avoid
 PEMDAS mnemonic. Misconceptions: square vs cube roots; order errors; recency bias; keyword
 hunting. Worked tiered example: (−⅓)² − ∛(2² + 4) = 1/9 − 2 = −17/9.
-Task: Dotson backyard 600 ft², three equal squares (each 200 ft², side √200 ≈ 14.14 ft) —
-fencing needs the layout figure (page 35 image); panels 3½ × 6 ft at $60.05 vs 3½ × 8 ft at
+Task: Dotson backyard 600 ft², three equal squares (each 200 ft², side √200 ≈ 14.14 ft) in an
+L: gazebo above the pool, workout area beside the pool, house along the bottom edge (2 squares
+wide) → fence = 8 sides − 2 = 6 × 14.14 ≈ 84.9 ft; panels 3½ × 6 ft at $60.05 vs 3½ × 8 ft at
 $88.66 → $10.01/ft vs $11.08/ft → 6-ft panels better value.
-Item: √(∛27 − 1.4·(3 − 5)²)?? — garbled (page 35 image): looks like √( ∛27 − 1.4(3 − 5)² )... 
-= √(3 − 1.4·4) = √(3 − 5.6) = √(−2.6) — impossible, so the structure must differ; MUST read image.
+Item (verified on image): ∛27 − 1.4(√(3² − 5)) = 3 − 1.4(2) = 0.2.
 Vertical: prev MA.7.NSO.2.1; next MA.912.NSO.1.4.
 
 ## MA.8.AR.1.1 — Laws of Exponents → equivalent ALGEBRAIC expressions; integer exponents; monomial bases
 Example: (3x³y⁻²)³ = 27x⁹y⁻⁶. Monomial = coefficient × variables with integer exponents.
 Negative exponent ↔ reciprocal base. Same x⁵…x⁻⁵ pattern table. Misconceptions: negative
 exponent/fractions; multiplying exponent INTO the base (6³ = 18); misapplied laws.
-Task: (15x²y³)?? — Rachel's expanded 15·15·15·x·x·x·y·y·y·y·y·y and Justina's 3,375x³y⁶ both
-correct (the original is (15xy²)³; text garbled). Task 2: x⁵ → x⁻⁵ pattern, why x⁰ = 1.
-Items: x⁵x⁸ = x¹³; (a³/(4b⁻⁷))⁵?? → "equivalent expression with only two exponents and no
-negative exponents" (page 38 image); y⁻³z⁻⁴ = 1/(y³z⁴).
+Task (image): (15xy²)³ — Rachel's expanded 15·15·15·x·x·x·y·y·y·y·y·y and Justina's 3,375x³y⁶
+are both correct. Task 2: x⁵ → x⁻⁵ pattern, why x⁰ = 1.
+Items: x⁵x⁸ = x¹³; (a³/(4b⁻⁷))⁵ = a¹⁵b³⁵/1024 ("only two exponents, no negatives");
+y⁻³z⁻⁴ = 1/(y³z⁴).
 Vertical: prev MA.7.NSO.1.1, 2.1; next MA.912.NSO.1.2.
 
 ## MA.8.AR.1.2 — Multiply two linear expressions with rational coefficients
@@ -466,12 +474,12 @@ Example: (1.1 + x)(−2.3x) = −2.53x − 2.3x². Algebra tiles, area model (45
 3y(y² + 2y) = 3y³ + 6y²). Misconceptions: distributing to only one term; sign errors;
 changing the degree to combine terms.
 Task: Kevin: −½x(4x + 8) → he wrote −2x² + 8 (distributed to one term; correct −2x² − 4x).
-Task 2: rectangle area in terms of x (page 41 image), then x = 4 cm.
+Task 2 (image): rectangle 2.5x + 4 by 0.25x → 0.625x² + x; x = 4 → 14 cm².
 Items: −⅞x(¾x − ⅚) = −21/32 x² + 35/48 x; 0.25x(0.55x − 0.3) = 0.1375x² − 0.075x.
 Vertical: prev MA.7.NSO.1.1, 2.2, AR.1.1, 1.2; next MA.912.AR.1.3, 1.4, 1.7.
 
 ## MA.8.AR.1.3 — Rewrite a sum with a common monomial factor as factor × sum
-Example: 99x³ − 11x² = 11x²(9 − x) = −11x²(−9 + x). Start whole-number coefficients, then
+Example (image; the text extraction scrambled it): 99x − 11x³ = 11x(9 − x²) = −11x(−9 + x²). Start whole-number coefficients, then
 rational. Multiple variables: 24xy² + 8xy = 8xy(3y + 1). Review GCF (MA.6.NSO.3.2).
 Misconceptions: integer rules; exponent laws; changing degree; factoring out of only one term:
 18x³y + 3x²y → 3x²y(6y + 3x²y) [wrong; correct 3x²y(6x + 1)].
@@ -527,8 +535,8 @@ triangles on the coordinate plane. First benchmark that names SLOPE; constant ra
 constant of proportionality unless through origin. Interpret slope in context.
 Formula m = (y₁ − y₂)/(x₁ − x₂). Vocabulary: "vertical change divided by horizontal change"
 or "rise over run." Misconception: inverting x and y in the slope.
-Tasks: Mr. Elliot pool draining graph (page 56 image) — slope negative gal/h; Jack $1.75 per 2
-gal + $2 fee (slope 0.875 $/gal) vs Jill's graph (image). Item: table x −1..3, y −18, −9, 0, 9,
+Tasks (images): Mr. Elliot pool (0, 10080) → (10, 2880): slope −720 gal/h; Jack 0.875x + 2 vs
+Jill through origin and (12, 9): 0.75 $/gal — Jill is cheaper for every positive amount. Item: table x −1..3, y −18, −9, 0, 9,
 18 → m = 9.
 Vertical: prev MA.7.AR.4.2; next MA.912.AR.2.2.
 
@@ -536,7 +544,9 @@ Vertical: prev MA.7.AR.4.2; next MA.912.AR.2.2.
 Point-slope and standard form NOT expected. y-intercept = y when x = 0. Equations also given
 as y = ax + b or y = b + mx (not always y = mx + b). Positive/negative slopes and intercepts.
 Graphs must have easily identifiable points. Misconceptions: swapping m and b; inverted slope.
-Task: Victoria's profit graph (page 59 image). Items: graph (image); table (0,−4),(1,−1),(2,2),
+Task (image): Victoria's profit graph — through about (0, −100) and (80, 500) → y = 7.5x − 100
+(intercept = fixed cost, slope = profit per game). Item 1 graph: through (−1, 5) and (1, −1)?
+— steep negative line, y ≈ −3x + 2 (low-res; do not reuse). Item 2 table (0,−4),(1,−1),(2,2),
 (3,5) → y = 3x − 4.
 Vertical: prev MA.7.AR.4.4; next MA.912.AR.2.2, 2.3.
 
@@ -544,7 +554,8 @@ Vertical: prev MA.7.AR.4.4; next MA.912.AR.2.2, 2.3.
 Discrete contexts may be drawn as a line OR as points (gym $10 + $6/class → (0,10),(1,16)…).
 Misconceptions: swapping m and b; inverting rise/run direction (slope ⅔ → 2 taken as
 horizontal). Tiered: table x | y = 2x + 5 | y | point.
-Task: Brent's savings table (page 62 image), TV $1500 + $110 tax; graph y = 0.25x − 3.5.
+Task (image): Brent 1→$190, 4→$415, 6→$565, 9→$840, 12→$1,065 → $75/month, start $115;
+needs $1,610 → month 20 → about 8 more months after month 12; graph y = 0.25x − 3.5.
 Items: y = x − 2; car wash −25 + 10c (earned vs cars: "supplies cost $25, $10 per car" →
 y = 10x − 25); table (−1,2),(0,0),(1,−2),(2,−4) → y = −2x.
 Vertical: prev MA.7.AR.4.3; next MA.912.AR.2.4.
@@ -572,8 +583,9 @@ Vertical: prev MA.7.AR.4.2, 4.3; next MA.912.AR.9.1.
 ## MA.8.AR.4.2 — From a graphed system, decide one / none / infinitely many solutions
 Same three-case framework. Misconception: coincident lines → "infinite" misread.
 Task: Ashley y = −½x and y = ⅓x — "no y-intercept so no intersection" is wrong (both have
-b = 0; they intersect at the origin). Task 2 / Item 1: graphed systems A, B, C (page 70–71
-images).
+b = 0; they intersect at the origin). Task 2 (image): Part A two lines crossing near (−2, 3)?? (low-res); Part B parallel lines.
+Item 1 (image): System A two crossing lines → one; System B two horizontal lines → none;
+System C a slanted line and a horizontal line → one.
 Vertical: prev MA.7.AR.4.3–4.5; next MA.912.AR.9.1, 9.4.
 
 ## MA.8.AR.4.3 — Solve systems of two linear equations by GRAPHING (context or mathematical)
@@ -627,7 +639,8 @@ Tasks: baseball 90 ft → home to second = √16200 = 90√2 ≈ 127.3 ft (radic
 guide's own task exceeds Clar. 3; with calculator fine); shoe box 10 × 7 × 5: 13-in pencil —
 face diagonal √149 ≈ 12.2, space diagonal √174 ≈ 13.19 → fits (barely); box that just fits 9 in
 (e.g., 9² = 81 = 4² + 4² + 7² → 4 × 4 × 7, or flat 9-in box).
-Items: ladder 10 ft, base 3 ft → √91 ≈ 9.54 ft; figure AB (page 86 image); legs x, hyp 25 →
+Items: ladder 10 ft, base 3 ft → √91 ≈ 9.54 ft; right triangle with hypotenuse BC = 10 m,
+leg AC = 6 m → AB = 8 m; legs x, hyp 25 →
 2x² = 625 → x = √312.5 ≈ 17.68 ft.
 Vertical: prev MA.6.GR.2.1; next MA.912.GR.1.3, 7.2, T.1.1, 1.2.
 
@@ -658,8 +671,8 @@ swapped.
 Task 2 always/sometimes/never: (a) always; (b) never; (c) sometimes; (d) never (vertical
 angles equal — complementary only if each is 45°, so "sometimes" is arguable: two lines
 crossing at 90° give vertical angles of 90°, never complementary… at 45°/135° the 45° pair sums
-to 90° → SOMETIMES; flag before reuse). Item: angle 1 = angle 2 + 12; find angle 3 (figure,
-page 94 image).
+to 90° → SOMETIMES; flag before reuse). Item (image): two lines l and m crossing; angles 1, 2 adjacent (linear pair), 3 vertical to 1:
+∠2 = 84°, ∠1 = 96°, ∠3 = 96°.
 Vertical: prev MA.4.GR.1, 5.GR.1.1; next MA.912.GR.1.1.
 
 ## MA.8.GR.1.5 — Interior and exterior angles of a triangle
@@ -713,8 +726,8 @@ slope via similar triangles (AR.3.2 Clar. 2). Shadow problem: tree 24-ft shadow,
 2-ft shadow → 36 ft. Misconceptions: assuming similar means equal sides; mismatching
 corresponding sides in rotated orientations.
 Task: man 6 ft / base 4 ft ↔ tower base 20 ft → 30 ft (Part B asks "is this realistic" — the
-guide's own answer is no, towers are 50–200+ ft). Items: "are the two triangles similar";
-"height h in meters" (figures, page 108 image).
+guide's own answer is no, towers are 50–200+ ft). Items (image): triangles 10, 6, 8 vs 15, 9, 12 → all ratios 1.5 → similar; nested right
+triangles: 0.9 m at 6 m from A, h at 18 m → h = 2.7 m.
 Vertical: prev MA.7.GR.1.5; next MA.912.GR.1.2, 1.3, 1.6.
 
 ## MA.8.DP.1.1 — Construct a scatter plot or a line graph as appropriate
@@ -797,3 +810,10 @@ Vertical: prev MA.7.DP.2; next MA.912.DP.4.
 - p.44 AR.2.1 lists previous benchmark MA.7.AR.2.1 (one-step inequalities) where MA.7.AR.2.2
   (two-step equations) is the true predecessor; likewise AR.2.2 lists 7.AR.2.2. Swapped in the
   source.
+
+### Image pass (done after the text pass)
+Viewed the page images for every task/item the text extraction garbled or that lives only in a
+figure: G7 pp. 29, 34, 55, 63, 67–71, 76, 77, 80, 83, 92, 96, 99, 101; G8 pp. 21, 22, 24, 33,
+35, 38, 41, 54, 56, 59, 62, 70, 71, 82, 86, 94, 108, 114, 115, 117. Corrections folded into the
+benchmark entries above. Page images too low-resolution to read dimensions: G7 p. 70 (patio
+screens), G8 p. 59 item 1 and p. 70 task 2A — flagged inline, not reused.
