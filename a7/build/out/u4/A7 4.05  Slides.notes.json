@@ -1,0 +1,277 @@
+{
+ "deck": "A7 4.05  Slides.pptx",
+ "slides": [
+  {
+   "n": 1,
+   "title": "Evaluating Expressions with Radicals",
+   "sub": "",
+   "min": 1,
+   "note": "Post the learning target. Say the 'today' line and nothing else yet.",
+   "kind": "title"
+  },
+  {
+   "n": 2,
+   "title": "Warm-Up",
+   "sub": "On your own. Four minutes. No notes.",
+   "min": 4,
+   "note": "Q3 and Q4 are the two halves of today. Q3 is the root itself, which students have and should not have to think about. Q4 is order \u2014 and the only thing this lesson adds to it is that the radical bar is a pair of parentheses you cannot see. A board that answers 68 to Q4 subtracted first, and that student will take the root before finishing what is under the bar.",
+   "kind": "warmup"
+  },
+  {
+   "n": 3,
+   "title": "Warm-Up",
+   "sub": "Answers.",
+   "min": 1,
+   "note": "Reveal. Ask for the band each question came from only if time allows.",
+   "kind": "warmup"
+  },
+  {
+   "n": 4,
+   "title": "Notes",
+   "sub": "Copy all three lines.",
+   "min": 4,
+   "note": "Start with three separate roots, which students can do: 5 minus 6 plus 1 is 0. Then the new thing: when there is arithmetic under the bar, it is finished first. The bar is doing exactly what parentheses do \u2014 it just does not look like parentheses. Say the sentence and then show the error it prevents: the root of a sum is not the sum of the roots.\nOFF: 'Whatever sits under the bar is inside a pair of parentheses you cannot see. Finish it, then take the root.'",
+   "kind": "notes"
+  },
+  {
+   "n": 5,
+   "title": "Notes",
+   "sub": "",
+   "min": 4,
+   "note": "A square root asks what number times itself; a cube root asks what number three times. The consequences are different and the state guide names the confusion between them as a misconception. A square root sign gives the nonnegative root only, and a square root of a negative number is not a number we have. A cube root keeps the sign of what is under it, so a negative radicand is fine. Roots of fractions come apart: top and bottom each get the root.\nOFF: 'Cube roots of negative numbers are ordinary. Square roots of negative numbers are not numbers you have \u2014 that is the difference to hold on to.'",
+   "kind": "notes"
+  },
+  {
+   "n": 6,
+   "title": "Notes",
+   "sub": "",
+   "min": 4,
+   "note": "Nothing about the negative exponent changes: it is still a reciprocal, exactly as in 3.04. Work the radical and the power separately, each one finished, and then combine them. The state assessment's own item is the second line, and it is worth doing slowly \u2014 the root gives 5 and the power gives one hundred and twenty-fifth, and only then do they meet.\nOFF: 'A negative exponent is still a reciprocal. The radical does not change a single thing about that.'",
+   "kind": "notes"
+  },
+  {
+   "n": 7,
+   "title": "Example 1",
+   "sub": "A power and a radical in one expression.",
+   "min": 1,
+   "note": "SPOKEN ONLY. The state guide's own worked example. Ask what is under the bar and what is not, before anything is evaluated.",
+   "kind": "example"
+  },
+  {
+   "n": 8,
+   "title": "Example 1",
+   "sub": "Worked.",
+   "min": 2,
+   "note": "Two independent pieces. The square of a negative fraction is positive \u2014 that is 3.04 and Unit 2, not new. Under the bar, 2\u00b3 is 8 and 8 plus 8 is 16. A board with \u22121/4 squared the fraction and kept the sign; a board with 1/4 + 2\u221a2 took the root before finishing the sum.",
+   "kind": "example"
+  },
+  {
+   "n": 9,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "The guide's tiered version: a cube root this time, and a subtraction. 2\u00b2 + 4 is 8 and the cube root of 8 is 2. Catches \u22121/9 \u2212 2 (sign kept on the square) and 1/9 \u2212 8 (the root never taken).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 10,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 11,
+   "title": "Example 2",
+   "sub": "A radical inside a product.",
+   "min": 1,
+   "note": "SPOKEN ONLY. The guide's item. Ask which operation is waiting on which: the multiplication cannot happen until the root is taken, and the root cannot be taken until the subtraction under the bar is done.",
+   "kind": "example"
+  },
+  {
+   "n": 12,
+   "title": "Example 2",
+   "sub": "Worked.",
+   "min": 2,
+   "note": "Three layers, innermost first: under the bar, then the root, then the multiplication, then the subtraction. A board with 1.6 subtracted before multiplying; a board with 3 \u2212 1.4 \u00b7 4 = \u22122.6 took the root of 3\u00b2 and of 5 separately.",
+   "kind": "example"
+  },
+  {
+   "n": 13,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "A negative cube root and a product that grows. 5\u00b2 \u2212 9 is 16, its root is 4, and 2.5 times 4 is 10. Catches 8 written as \u221212 (sign of the cube root dropped onto the product) and 2 (the 2.5 ignored).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 14,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 15,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The plain case, and it should be instant. A board with 60.5 halved the radicand; a board with \u00b111 gave both roots, and the radical sign asks for one.",
+   "kind": "wb"
+  },
+  {
+   "n": 16,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 17,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Ruling 22's board: the fencing price is there to be read past. The question asks for one side, and nothing in it needs the money. A board holding 12 anywhere used the price; a board with 52 found the perimeter instead.",
+   "kind": "wb"
+  },
+  {
+   "n": 18,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 19,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "A negative radicand under a cube root is ordinary. A board with 5 dropped the sign; a board with 'no real number' applied the square-root rule to a cube root \u2014 the guide's named confusion, and the one to name out loud.",
+   "kind": "wb"
+  },
+  {
+   "n": 20,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 21,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The grouping rule with a power inside it. A board with 2\u221a2 + \u221a17 took roots before finishing; a board with 25 finished under the bar and forgot the root.",
+   "kind": "wb"
+  },
+  {
+   "n": 22,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 23,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic, and the most important board of the day. B is the error the whole lesson exists to prevent; a board full of B means Notes I did not land and the bar needs to be circled on the board and called parentheses out loud.",
+   "kind": "wb"
+  },
+  {
+   "n": 24,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 25,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic. D is the one worth a full sentence: a square root of a negative is not a number we have, and a cube root of a negative is perfectly ordinary. Those two facts sit one line apart in Notes II on purpose.",
+   "kind": "wb"
+  },
+  {
+   "n": 26,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 27,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Roots of fractions, one of each kind, landing on the same value from different directions. A board with 2/36 added the denominators; a board with 1/3 stopped after the first radical.",
+   "kind": "wb"
+  },
+  {
+   "n": 28,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 29,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The state assessment's own item. Three separate things happen before anything is combined: 4\u00b3 is 64, 64 \u2212 39 is 25, and 5\u207b\u00b3 is 1/125. A board with 625 read 5\u207b\u00b3 as 5\u00b3; a board with \u22121/25 put the exponent's sign on the answer, which is 3.04's misconception resurfacing.",
+   "kind": "wb"
+  },
+  {
+   "n": 30,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 31,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Take your time. Boards up when you have written it.",
+   "min": 0,
+   "note": "Written, and it is the exit evidence. Full credit: Simon's rule is the square-root rule; a cube root asks for the number used three times, and (\u22123)(\u22123)(\u22123) is \u221227, so the value is \u22123. A student who only writes '\u22123' has the answer and not the reason, and the reason is what the item is for.",
+   "kind": "wb"
+  },
+  {
+   "n": 32,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 33,
+   "title": "Independent Set",
+   "sub": "Six questions. On your own, in silence.",
+   "min": 6,
+   "note": "Hand out the Independent Set. Silent work. Circulate and mark what you see; do not teach. Whatever is not finished goes home.",
+   "kind": "independent"
+  },
+  {
+   "n": 34,
+   "title": "IXL",
+   "sub": "Last five minutes.",
+   "min": 5,
+   "note": "IXL: every listed skill is required, SmartScore 67, due at the start of the next class.",
+   "kind": "ixl"
+  }
+ ]
+}
