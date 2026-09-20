@@ -90,11 +90,11 @@ U = dict(
             dict(stem="A laser emits  $6.5 \\times 10^{14}$  photons each second. How many does it emit in  $4.0 \\times 10^{2}$  seconds?", answer="$2.6 \\times 10^{17}$ photons", why="$6.5 \\cdot 4.0 = 26$, so $26 \\times 10^{16}$ before it is finished.", check=("eq", "F(65,10)*10**14*F(40,10)*10**2", "F(26,10)*10**17"), space=0.8, not_sci=True),
         ]),
         dict(letter="C", title="Real-World Problems and Significant Digits", lessons="Lesson 4", benchmark="MA.8.NSO.1.6", items=[
-            dict(stem="How many significant digits are in each measurement?  6,040 g   ·   0.00920 m   ·   45.00 s", answer="3  ·  3  ·  4", why="6,040: the middle zero counts, the trailing one does not. 0.00920: leading zeros never count, the trailing one does. 45.00: all four.", check=("many", ("eq", "F(604,100)*10**3", "6040"), ("eq", "F(920,100000)", "F(92,10000)"), ("eq", "F(4500,100)", "45")), space=0.8),
+            dict(stem="How many significant digits are in each measurement?  6,040 g   ·   0.00920 m   ·   45.00 s", answer="3  ·  3  ·  4", why="6,040: the middle zero counts, the trailing one does not. 0.00920: leading zeros never count, the trailing one does. 45.00: all four.", check=("many", ("eq", "sig('6,040')", "3"), ("eq", "sig('0.00920')", "3"), ("eq", "sig('45.00')", "4")), space=0.8),
             dict(stem="A rectangular panel measures  $3.2 \\times 10^{2}$  mm by  $1.45 \\times 10^{2}$  mm. Find its area, with the correct number of significant digits.", answer="$4.6 \\times 10^{4}$ square millimetres", why="46,400 exactly; 2 significant digits and 3, so the answer keeps 2.",
                  check=("many", ("eq", "F(32,10)*10**2*F(145,100)*10**2", "46400"), ("eq", "1000*floor(F(46400)/1000+F(1,2))", "46000")), space=0.9),
             dict(stem="A train travels  $4.80 \\times 10^{2}$  km in  6.0  hours. Find its average speed, with the correct number of significant digits.", answer="$8.0 \\times 10^{1}$ km/h", why="Exactly 80; two significant digits are justified, so it is written 80 with both digits.", check=("eq", "F(480,100)*10**2/F(60,10)", "80"), space=0.8),
-            dict(stem="Two lengths are measured:  $5.40 \\times 10^{3}$  mm and  $2.8 \\times 10^{2}$  mm. Find their sum, with the correct precision.", answer="$5.68 \\times 10^{3}$ mm", why="5,400 and 280 both stop at the tens place, so the sum, 5,680, does too.", check=("eq", "F(540,100)*10**3+F(28,10)*10**2", "5680"), space=0.8),
+            dict(stem="Two lengths are measured:  $5.40 \\times 10^{3}$  mm and  $2.8 \\times 10^{2}$  mm. Find their sum, with the correct precision.", answer="$5.68 \\times 10^{3}$ mm", why="5,400 and 280 both stop at the tens place, so the sum, 5,680, does too.", check=("many", ("eq", "F(540,100)*10**3+F(28,10)*10**2", "5680"), ("eq", "10*floor(F(5680)/10+F(1,2))", "5680"), ("eq", "F(568,100)*10**3", "5680"), ("eq", "sig('5.68')", "3")), space=0.8),
             dict(stem="Two masses are measured:  $7.60 \\times 10^{-2}$  g and  $3.45 \\times 10^{-3}$  g. Find their difference, with the correct precision.", answer="$7.26 \\times 10^{-2}$ g", why="0.07255 exactly; 0.0760 stops at the ten-thousandths, so the answer stops there and rounds up.",
                  check=("many", ("eq", "F(760,100)*F(10)**-2-F(345,100)*F(10)**-3", "F(7255,100000)"),
                         ("eq", "F(1,10000)*floor(F(7255,100000)/F(1,10000)+F(1,2))", "F(726,10000)")), space=0.9),
@@ -118,8 +118,8 @@ U = dict(
             dict(stem="$-6^{2} + (-6)^{2}$", answer="0", why="The exponent attaches to its own base; the parentheses decide what that base is.", check=("many", ("eq", "-6**2", "-36"), ("eq", "-6**2+(-6)**2", "0")), space=0.6),
             dict(stem="$20\\left(\\left(\\frac{1}{2}\\right)^{2} + 5^{-1}\\right)$", answer="9", why="$20 \\cdot \\frac{9}{20}$.", check=("many", ("eq", "F(1,2)**2+F(5)**-1", "F(9,20)"), ("eq", "20*F(9,20)", "9")), space=0.7),
             dict(stem="Which expression is equivalent in value to  $2 + 4 \\cdot 5^{2}$ ?", choices=["$102$", "$150$", "$900$", "$42$"], correct=0, answer="A",
-                 errors={"B": "2 + 4 was done first, then 6 · 25 [8.NSO.1.7: multiply before adding]", "C": "$(2 + 4 \\cdot 5)^{2}$ — the power applied to everything [8.NSO.1.7]", "D": "5² read as 5 · 2 [8.NSO.1.3: an exponent is not a factor]"},
-                 why="", check=("eq", "2+4*5**2", "102")),
+                 errors={"B": "2 + 4 was done first, then 6 · 25 [8.NSO.1.7: multiply before adding]", "C": "the whole expression was read left to right and then squared: $((2 + 4) \\cdot 5)^{2}$ [8.NSO.1.7]", "D": "5² read as 5 · 2 [8.NSO.1.3: an exponent is not a factor]"},
+                 why="", check=("many", ("eq", "2+4*5**2", "102"), ("eq", "(2+4)*5**2", "150"), ("eq", "((2+4)*5)**2", "900"), ("eq", "2+4*5*2", "42"))),
         ]),
         dict(letter="F", title="Real-World Problems and the Order of Operations", lessons="Lessons 7–8", benchmark="MA.8.NSO.1.7", items=[
             dict(stem="Evaluate  $5x^{2}$  when  $x = -3$.", answer="45", why="$5(-3)^{2} = 5(9)$.", check=("eq", "5*(-3)**2", "45"), space=0.5),
@@ -183,16 +183,16 @@ U = dict(
             ]),
             dict(title="Real-World Problems and Significant Digits", benchmark="MA.8.NSO.1.6", items=[
                 dict(stem="Give the number of significant digits in each measurement.", parts=[
-                    dict(label="a", stem="3,080 grams", answer="3", why="The middle zero counts; the trailing zero does not, with no decimal point written.", check=("eq", "F(308,100)*10**3", "3080"), space=0.5),
-                    dict(label="b", stem="0.00405 metres", answer="3", why="Leading zeros never count; the zero between the 4 and the 5 does.", check=("eq", "F(405,100000)", "F(405,100)*F(10)**-3"), space=0.5),
-                    dict(label="c", stem="12.500 seconds", answer="5", why="A decimal point is written, so both trailing zeros count.", check=("eq", "F(12500,1000)", "F(125,10)"), space=0.5)]),
+                    dict(label="a", stem="3,080 grams", answer="3", why="The middle zero counts; the trailing zero does not, with no decimal point written.", check=("eq", "sig('3,080')", "3"), space=0.5),
+                    dict(label="b", stem="0.00405 metres", answer="3", why="Leading zeros never count; the zero between the 4 and the 5 does.", check=("eq", "sig('0.00405')", "3"), space=0.5),
+                    dict(label="c", stem="12.500 seconds", answer="5", why="A decimal point is written, so both trailing zeros count.", check=("eq", "sig('12.500')", "5"), space=0.5)]),
                 dict(stem="Solve. Report each answer with the correct number of significant digits.", parts=[
                     dict(label="a", stem="A rectangular plate measures $2.4 \\times 10^{2}$ mm by $1.35 \\times 10^{2}$ mm. Find its area.", answer="$3.2 \\times 10^{4}$ square millimetres", why="32,400 exactly; 2 significant digits and 3, so the answer keeps 2.",
                          check=("many", ("eq", "F(24,10)*10**2*F(135,100)*10**2", "32400"), ("eq", "1000*floor(F(32400)/1000+F(1,2))", "32000")), space=0.8),
                     dict(label="b", stem="A vehicle travels $5.60 \\times 10^{2}$ km in 8.0 hours. Find its average speed.", answer="$7.0 \\times 10^{1}$ km/h", why="Exactly 70; two significant digits are justified, so the zero is written.", check=("eq", "F(560,100)*10**2/F(80,10)", "70"), space=0.8)]),
                 dict(stem="Solve. Report each answer with the correct precision.", parts=[
-                    dict(label="a", stem="Two lengths are measured: $6.25 \\times 10^{3}$ mm and $4.1 \\times 10^{2}$ mm. Find their sum.", answer="$6.660 \\times 10^{3}$ mm", why="6,250 and 410 both stop at the tens place, so the sum, 6,660, does too. A sum can carry more significant digits than either measurement.",
-                         check=("eq", "F(625,100)*10**3+F(41,10)*10**2", "6660"), space=0.8),
+                    dict(label="a", stem="Two lengths are measured: $6.25 \\times 10^{3}$ mm and $4.1 \\times 10^{2}$ mm. Find their sum.", answer="$6.66 \\times 10^{3}$ mm", why="6,250 and 410 both stop at the tens place, so the sum, 6,660, does too — and its last significant digit is the second 6, in the tens place. Writing 6.660 would claim the ones place, which neither measurement supports.",
+                         check=("many", ("eq", "F(625,100)*10**3+F(41,10)*10**2", "6660"), ("eq", "10*floor(F(6660)/10+F(1,2))", "6660"), ("eq", "F(666,100)*10**3", "6660"), ("eq", "sig('6.66')", "3")), space=0.8),
                     dict(label="b", stem="Two masses are measured: $9.30 \\times 10^{-2}$ g and $4.75 \\times 10^{-3}$ g. Find their difference.", answer="$8.83 \\times 10^{-2}$ g", why="0.08825 exactly; 0.0930 stops at the ten-thousandths, so the answer stops there.",
                          check=("many", ("eq", "F(930,100)*F(10)**-2-F(475,100)*F(10)**-3", "F(8825,100000)"),
                                 ("eq", "F(1,10000)*floor(F(8825,100000)/F(1,10000)+F(1,2))", "F(883,10000)")), space=0.8)]),

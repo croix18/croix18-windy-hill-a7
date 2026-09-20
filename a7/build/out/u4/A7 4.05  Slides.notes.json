@@ -62,7 +62,7 @@
    "title": "Example 1",
    "sub": "Worked.",
    "min": 2,
-   "note": "Two independent pieces. The square of a negative fraction is positive \u2014 that is 3.04 and Unit 2, not new. Under the bar, 2\u00b3 is 8 and 8 plus 8 is 16. A board with \u22121/4 squared the fraction and kept the sign; a board with 1/4 + 2\u221a2 took the root before finishing the sum.",
+   "note": "Two independent pieces. The square of a negative fraction is positive \u2014 that is 3.04 and Unit 2, not new. Under the bar, 2\u00b3 is 8 and 8 plus 8 is 16. A board with \u22121/4 squared the fraction and kept the sign; a board with 1/4 + 4\u221a2 took the root of each piece separately, since \u221a(2\u00b3) and \u221a8 are each 2\u221a2.",
    "kind": "example"
   },
   {
@@ -94,7 +94,7 @@
    "title": "Example 2",
    "sub": "Worked.",
    "min": 2,
-   "note": "Three layers, innermost first: under the bar, then the root, then the multiplication, then the subtraction. A board with 1.6 subtracted before multiplying; a board with 3 \u2212 1.4 \u00b7 4 = \u22122.6 took the root of 3\u00b2 and of 5 separately.",
+   "note": "Three layers, innermost first: under the bar, then the root, then the multiplication, then the subtraction. A board with 3.2 subtracted before multiplying, giving (3 \u2212 1.4)(2); a board with \u22122.6 left the radicand 4 un-rooted and worked 3 \u2212 1.4(4).",
    "kind": "example"
   },
   {

@@ -17,9 +17,23 @@ COURSE = "Grade 7 Accelerated"
 
 
 # ---------------------------------------------------------------- mathcheck
+def _sigdigs(num):
+    """The significant digits of a numeral WRITTEN AS A STRING. The count depends on how the
+    number is written, not on its value — 3.200 and 3.2 are the same number and different claims
+    — which is why the argument must be a string and why sympy cannot be asked this directly."""
+    s = str(num).strip().replace(",", "").lstrip("+-")
+    if not re.fullmatch(r"\d*\.?\d*", s) or not s.strip("."):
+        raise ValueError(f"sig() needs a plain numeral written out, not {num!r}")
+    if "." in s:
+        intp, frac = s.split(".", 1)
+        return len((intp + frac).lstrip("0"))          # leading zeros never count; trailing ones do
+    return len(s.rstrip("0").lstrip("0"))              # no decimal point: trailing zeros do not count
+
+
 def _ev(expr):
     env = {"F": F, "sqrt": sp.sqrt, "Integer": Integer, "sp": sp, "Rational": F, "nsimplify": nsimplify,
            "pi": sp.pi, "Abs": sp.Abs, "abs": sp.Abs, "N": sp.N, "floor": sp.floor, "Float": sp.Float,
+           "sig": _sigdigs,
            # symbols for the Thread A (MA.8.AR.1.1) algebraic checks. Declared positive so that
            # x**0 -> 1 and x**-n and quotients simplify without a zero-base caveat; the items
            # themselves state "nonzero" where it matters.

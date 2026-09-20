@@ -62,7 +62,7 @@
    "title": "Example 1",
    "sub": "Worked.",
    "min": 2,
-   "note": "The power is inside the parentheses, so it goes first even though it is a level below grouping \u2014 because it is inside. Then the subtraction inside, then the multiplication, then the cube root, then the addition. A board with 3.44 multiplied 4 by 8.63 first; a board with \u22126.44 forgot the cube root.",
+   "note": "The power is inside the parentheses, so it goes first even though it is a level below grouping \u2014 because it is inside. Then the subtraction inside, then the multiplication, then the cube root, then the addition. A board with 29.28 multiplied 4 by 8.63 first; a board with \u22126.44 forgot the cube root.",
    "kind": "example"
   },
   {
@@ -94,7 +94,7 @@
    "title": "Example 2",
    "sub": "Worked.",
    "min": 2,
-   "note": "Three groups, each finished on its own before anything crosses between them. Under the radical, 1/3 is 3/9, so the difference is 1/9. A board with 1/12 \u2212 1/9 took the root of only one part; a board with positive 1/4 subtracted the wrong way round.",
+   "note": "Three groups, each finished on its own before anything crosses between them. Under the radical, 1/3 is 3/9, so the difference is 1/9. A board with \u22121/36 never took the root, leaving 1/12 \u2212 1/9; a board with positive 1/4 subtracted the wrong way round.",
    "kind": "example"
   },
   {
