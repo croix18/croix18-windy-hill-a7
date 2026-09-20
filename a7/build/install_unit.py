@@ -1,29 +1,25 @@
 #!/usr/bin/env python3
-"""Install the built Unit 3 outputs into the package folder and write 00 - START HERE.md.
-python3 install_unit3.py   (run after every lesson and the unit documents have been built and checked)
+"""Install a unit's built outputs into its package folder and write 00 - START HERE.md.
+    python3 install_unit.py u3/manifest.py
+Run after every lesson and the unit documents have been built and checks.py reports 0 findings.
+The package folder is deleted and rebuilt from out/<unit>/ every time — never edit it by hand.
 """
-import os, re, shutil, sys, json
+import os, re, shutil, sys, json, importlib.util
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from lib.tekit import plan_from_sidecar
 
+_spec = importlib.util.spec_from_file_location("manifest", sys.argv[1])
+_m = importlib.util.module_from_spec(_spec); _spec.loader.exec_module(_m)
+M = _m.M
 HERE = os.path.dirname(os.path.abspath(__file__))
-OUT = os.path.join(HERE, "out", "u3")
+UNITDIR = os.path.basename(os.path.dirname(os.path.abspath(sys.argv[1])))
+OUT = os.path.join(HERE, "out", UNITDIR)
 REPO = os.path.abspath(os.path.join(HERE, "..", ".."))
-PKG = os.path.join(REPO, "a7", "packages", "A7 Unit 3 - Exponents and Scientific Notation")
+PKG = os.path.join(REPO, "a7", "packages", M["folder"])
 REF = os.path.join(REPO, "a7", "reference")
+LESSONS = M["lessons"]
+U = M["unit"]
 
-LESSONS = [  # code, label, title, benchmark, the line that carries the day
-    ("3.01", "3.01", "Product Laws of Exponents", "MA.7.NSO.1.1", "Same base, add — and the base has to match."),
-    ("3.02", "3.02", "Quotient Laws of Exponents", "MA.7.NSO.1.1", "Same base, subtract — and exponent 0 is not 0."),
-    ("3.03", "3.03", "Exponential Expressions", "MA.7.NSO.1.1", "Two plans, one value — the order is yours."),
-    ("3.04", "3.04", "Negative Exponent Law", "MA.8.NSO.1.3", "Reciprocal, not opposite."),
-    ("3.05", "3.05", "Applying Exponent Laws", "MA.8.NSO.1.3", "Flip the numbers, not the sign."),
-    ("3.06", "3.06–07", "Evaluating and Equivalent Expressions", "MA.8.NSO.1.3", "Rewrite the base to compare."),
-    ("3.T1", "T-A1", "Exponent Laws with Variable Bases", "MA.8.AR.1.1", "Everything inside the parentheses gets the exponent — the number included."),
-    ("3.T2", "T-A2", "Negative Exponents with Variable Bases", "MA.8.AR.1.1", "Only the factor wearing the negative exponent moves."),
-    ("3.08", "3.08", "Writing Large Numbers in Scientific Notation", "MA.8.NSO.1.4", "One nonzero digit in front of the decimal point."),
-    ("3.09", "3.09", "Writing Small Numbers in Scientific Notation", "MA.8.NSO.1.4", "The exponent counts places, not zeros."),
-]
 
 FOLDERS = ["Question Banks", "Slides", "Handouts", "Assessments", "Answer Keys", "Teacher Editions", "Reference"]
 
@@ -64,7 +60,7 @@ def install():
             shutil.copy2(os.path.join(OUT, name), os.path.join(PKG, folder, name))
         n += 1
     # reference material (not handouts)
-    for src, dst in [(os.path.join(REPO, "a7", "unit03", "UNIT 3 AUDIT.md"), "UNIT 3 AUDIT - Math Nation package.md"),
+    for src, dst in [(os.path.join(REPO, M["audit_src"]), f"UNIT {U} AUDIT - Math Nation package.md"),
                      (os.path.join(REF, "A7 SCOPE AND SEQUENCE 2026-27.md"), "A7 SCOPE AND SEQUENCE 2026-27.md"),
                      (os.path.join(REF, "A7 IXL DUE DATES 2026-27.md"), "A7 IXL DUE DATES 2026-27.md"),
                      (os.path.join(REF, "Florida BEST Grade 8 - Source of Truth.md"), "Florida BEST Grade 8 - Source of Truth.md")]:
@@ -87,17 +83,17 @@ def start_here(n_files):
     t = timing_rows()
     lines = []
     A = lines.append
-    A("# A7 Unit 3 — Exponents and Scientific Notation")
+    A(f"# A7 Unit {U} — {M['title']}")
     A("")
-    A("Windy Hill Middle School · course 1205050 · ten teaching days (nine book lessons, merged to eight, plus the two Thread A days), a review, a two-period assessment.")
+    A(f"Windy Hill Middle School · course 1205050 · {M['summary']}.")
     A("")
-    A("Nothing exists until it is committed. This folder is generated from `a7/build/u3/` by `install_unit3.py`; edit the specs and rebuild rather than editing these files by hand.")
+    A(f"Nothing exists until it is committed. This folder is generated from `a7/build/{UNITDIR}/` by `install_unit.py`; edit the specs and rebuild rather than editing these files by hand.")
     A("")
     A("---")
     A("")
     A("## How the files are named")
     A("")
-    A("**`A7 <unit>.<lesson>  <what it is>`** — two spaces before the type, two-digit lesson numbers. `A7 3.04  Question Bank` is Accelerated grade 7, Unit 3, Lesson 4, the question bank. The two Thread A days are `A7 3.T1` and `A7 3.T2` (they are MA.8.AR.1.1, woven into this unit under ruling 14, and carry no book lesson number). Unit-wide documents drop the lesson number: `A7 3  Unit Review`, `A7 3  Unit Assessment`, `A7 3  Reference Sheet`.")
+    A(f"**`A7 <unit>.<lesson>  <what it is>`** — two spaces before the type, two-digit lesson numbers. `A7 {U}.04  Question Bank` is Accelerated grade 7, Unit {U}, Lesson 4, the question bank. {M.get('naming_note', '')} Unit-wide documents drop the lesson number: `A7 {U}  Unit Review`, `A7 {U}  Unit Assessment`, `A7 {U}  Reference Sheet`.")
     A("")
     A("---")
     A("")
@@ -125,10 +121,10 @@ def start_here(n_files):
     for code, label, title, bm, line in LESSONS:
         A(f"| {label} | {title} | {bm} | {line} |")
     A("| — | Unit Review | all four | unscored; the SSDD block is named on the key only |")
-    A("| — | Unit Assessment, day 1 | MA.7.NSO.1.1, MA.8.NSO.1.3 | 19 points |")
-    A("| — | Unit Assessment, day 2 | MA.8.AR.1.1, MA.8.NSO.1.4 | 20 points |")
+    for di, (bms, pts) in enumerate(M["assessment_days"]):
+        A(f"| — | Unit Assessment, day {di + 1} | {bms} | {pts} points |")
     A("")
-    A("Book order with Thread A woven in after 3.07 (ruling 14): the laws are complete on numbers before they are restated on letters, and both are complete before scientific notation. Math Nation's 3.6 and 3.7 are one period here (3.06–07). MA.7.NSO.1.1 is grade 7 content the Grade 8 FAST assumes; the other three benchmarks report under Number Sense and Operations (8.NSO.1.3, 8.NSO.1.4) and Algebraic Reasoning (8.AR.1.1).")
+    A(M["order_note"])
     A("")
     A("---")
     A("")
@@ -138,7 +134,7 @@ def start_here(n_files):
     A("")
     A("## Timing")
     A("")
-    A("<!-- timing table: generated by install_unit3.py from the deck side-cars. Do not edit by hand. -->")
+    A("<!-- timing table: generated by install_unit.py from the deck side-cars. Do not edit by hand. -->")
     A("")
     A("| Lesson | Teaching (title, warm-up, notes, examples) | Whiteboard round | IXL | Total |")
     A("|---|---|---|---|---|")
@@ -167,10 +163,8 @@ def start_here(n_files):
     A("")
     A("## Before the unit starts")
     A("")
-    A("- **Seven defects in the Math Nation package are not reproduced here.** Practice L1 #7 (key 104,796 → 104,976), Additional Practice L8 #2 (10⁶ + 10⁴ keyed 101000 → 1,010,000), Additional Practice L9 #3 (malformed item, wrong key), Homework L3 #7 (4,046 → 4,096), Homework L9 #4b (3 → 1,000), Homework L9 #4c (item unsound; keyed 3,000, true ratio ≈ 527), Homework L9 #5 (two matching rows equal). `Reference/UNIT 3 AUDIT - Math Nation package.md` has the page numbers.")
-    A("- **Three things the state guide expects that the book never asks are in every relevant bank and on the assessment:** unknown-exponent items (7ⁿ ÷ 7² = 343), the −b versus b⁻¹ contrast in writing, and calculator E notation with comparisons that cross from very large to very small.")
-    A("- **The assessment is two periods, 39 points, one question map.** Day 1 is numerical (sections 1–2, 19 points); day 2 is variable bases and scientific notation (sections 3–4, 20 points). Numbering runs straight through; the key's Score Tracker maps every question to its benchmark.")
-    A("- **The Reference Sheet is the only handout.** Give it out at 3.04 or earlier; it is the document students study from. It does not go into the test.")
+    for b in M["before_unit"]:
+        A("- " + b)
     A("")
     A(f"Installed: {n_files} files from the build, plus this page and the Reference folder.")
     A("")

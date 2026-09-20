@@ -19,8 +19,17 @@ not happen.
                      the 14 Sept model — nine-question rounds, IXL last, no worksheets, no grey
                      bars, no speaker notes on slides)
     a7/reference/    the rulebook (HOUSE STYLE.md) and the standing reference documents
-    a7/build/        generators, figure libraries and figure indexes    ← being rebuilt
-    tools/           the check suite and finish() choke point            ← being rebuilt
+    a7/build/        the build system (Python): specs per unit in a7/build/<unit>/, the
+                     generators in lib/, the check suite, the installer. START WITH
+                     a7/build/BUILDING A UNIT.md — the whole procedure, then SPEC SCHEMA.md.
+    tools/           setup_env.sh (fresh session), push.sh, the scope calendar, PDF helpers
+
+## Building the next unit
+
+1. `bash tools/setup_env.sh` in a fresh session, then `cd a7/build && python3 build_all.py u3` (the PDFs are git-ignored; this regenerates them and proves the toolchain).
+2. Follow `a7/build/BUILDING A UNIT.md` in order: intake → audit (sent first) → one lesson at a
+   time, each built, checked, viewed and pushed → unit documents → manifest → install → report.
+3. Unit 3 (`a7/build/u3/`) is the reference implementation; copy its specs, never start blank.
 
 ## The rulebook is the master
 
