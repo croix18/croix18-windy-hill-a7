@@ -181,7 +181,8 @@ L = dict(
                      "F": "30 — $5(3) \\cdot 2$; this is what $5x^{2}$ becomes when the exponent is read as a factor [8.NSO.1.3]"},
              why="",
              check=("many", ("eq", "5*3**2", "45"), ("eq", "(5*3)**2", "225"), ("eq", "3**2+36", "45"),
-                    ("eq", "F(135,3)", "45"), ("eq", "3*3**2+18", "45"), ("eq", "5*3*2", "30"))),
+                    ("eq", "F(135,3)", "45"), ("eq", "3*3**2+18", "45"), ("eq", "5*3*2", "30"),
+                    ("true", "(5*3)**2 != 45"), ("true", "5*3*2 != 45"))),
     ],
 
     additional=[
@@ -227,7 +228,8 @@ L = dict(
                      "F": "16 — $2(4) \\cdot 2$; this is what $2x^{2}$ becomes when the exponent is read as a factor [8.NSO.1.3]"},
              why="",
              check=("many", ("eq", "2*4**2", "32"), ("eq", "(2*4)**2", "64"), ("eq", "4**2+16", "32"),
-                    ("eq", "F(128,4)", "32"), ("eq", "4**2*2", "32"), ("eq", "2*4*2", "16"))),
+                    ("eq", "F(128,4)", "32"), ("eq", "4**2*2", "32"), ("eq", "2*4*2", "16"),
+                    ("true", "(2*4)**2 != 32"), ("true", "2*4*2 != 32"))),
     ],
 
     mtr=[("MTR.7.1", "The whole period — every expression today arrives inside a situation, and the unit is part of the answer on every board."),

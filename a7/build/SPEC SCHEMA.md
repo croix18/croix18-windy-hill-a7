@@ -104,6 +104,14 @@ flags work like `not_sci`: put them on the item dict and they cover everything i
 A tuple sympy evaluates at build time with `F = Rational`, `sqrt`, `pi`, `abs`, `floor`,
 `Float`, `sp` (sympy itself), and the letters `a b c d k m n p q r s t w x y z` as **positive
 symbols** (so `x**0` is 1 and quotients cancel; use only these letters as variable bases):
+- `sig("0.00470")` returns 3 — the significant digits of a numeral WRITTEN AS A STRING. The
+  count depends on how the number is written, not on its value (3.200 and 3.2 are the same
+  number and different claims), so the argument is quoted and sympy is never asked directly.
+  Every "how many significant digits" item checks its own count this way.
+- **A select-all must check its wrong options too**: each option not in `correct` needs a
+  `("true", "<that option> != <the target>")` clause. Without it an option that is secretly
+  equal to the target passes the build, and a student who selects it is marked wrong for
+  being right. `distractorcheck` counts the clauses and refuses if there are too few.
 - `("eq", "expr", "keyed")` — exact symbolic equality. Use `F(2)**-3`, `F(3,4)**2`; never
   Python floats where a rational exists. Variable bases: `("eq", "(3*m**2*n)**3/(9*m**4*n)",
   "3*m**2*n**2")`.

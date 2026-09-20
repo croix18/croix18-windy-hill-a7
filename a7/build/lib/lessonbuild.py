@@ -113,6 +113,18 @@ def distractorcheck_lesson(L):
                     e = (it.get("errors") or {}).get(letter, "")
                     if not e or "[" not in e:
                         out.append(f"{L['code']} {grp}[{i}] option {letter}: no named error with a benchmark cite")
+                # A select-all's wrong options are the ones that go wrong quietly: an option that
+                # happens to equal the target is marked wrong for being right. Each wrong option
+                # must therefore carry a clause that asserts it is NOT the target value.
+                if isinstance(it.get("correct"), (list, tuple, set)):
+                    chk = it.get("check") or ()
+                    clauses = list(chk[1:]) if chk and chk[0] == "many" else ([chk] if chk else [])
+                    nots = sum(1 for c in clauses if c and c[0] == "true" and "!=" in str(c[1]))
+                    n_wrong = len(it["choices"]) - len(it["correct"])
+                    if nots < n_wrong:
+                        out.append(f"{L['code']} {grp}[{i}]: select-all has {n_wrong} wrong options "
+                                   f"but only {nots} clauses asserting an option is NOT the target; "
+                                   f"every wrong option needs its own (\"true\", \"… != …\") clause")
                 vals = [str(c) for c in it["choices"]]
                 if len(set(vals)) != len(vals):
                     out.append(f"{L['code']} {grp}[{i}]: two choices print the same value")

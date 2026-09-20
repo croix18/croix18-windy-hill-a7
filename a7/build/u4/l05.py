@@ -167,7 +167,8 @@ L = dict(
                      "F": "5 — the radicand is 25, not 9; the bar groups the whole sum [8.NSO.1.7]"},
              why="C's radicand is $16 - 7 = 9$ and D's is $4 + 23 = 27$.",
              check=("many", ("eq", "sqrt(9)", "3"), ("eq", "3**3", "27"), ("eq", "sqrt(4**2-7)", "3"),
-                    ("eq", "2**2+23", "27"), ("eq", "(-3)**3", "-27"), ("eq", "sqrt(3**2+16)", "5"))),
+                    ("eq", "2**2+23", "27"), ("eq", "(-3)**3", "-27"), ("eq", "sqrt(3**2+16)", "5"),
+                    ("true", "F(-3) != 3"), ("true", "sqrt(3**2+16) != 3"))),
     ],
 
     additional=[
@@ -210,7 +211,8 @@ L = dict(
              errors={"E": "\u22124 — an odd root keeps the sign of its radicand [8.NSO.1.7]",
                      "F": "5 — the radicand is 8 + 17 = 25, not 16; the bar groups the whole sum [8.NSO.1.7]"},
              why="", check=("many", ("eq", "sqrt(16)", "4"), ("eq", "4**3", "64"), ("eq", "sqrt(5**2-9)", "4"),
-                            ("eq", "3**3+37", "64"), ("eq", "(-4)**3", "-64"), ("eq", "sqrt(2**3+17)", "5"))),
+                            ("eq", "3**3+37", "64"), ("eq", "(-4)**3", "-64"), ("eq", "sqrt(2**3+17)", "5"),
+                            ("true", "F(-4) != 4"), ("true", "sqrt(2**3+17) != 4"))),
     ],
 
     mtr=[("MTR.5.1", "Notes I — the radical bar is recognised as a grouping symbol by comparing √(9 + 16) with √9 + √16, so the rule is derived from the difference rather than announced."),

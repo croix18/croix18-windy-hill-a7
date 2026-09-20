@@ -174,7 +174,8 @@ L = dict(
                      "F": "8 — one level, left to right: 12 ÷ 3 = 4 and then 4 · 2 [8.NSO.1.7]"},
              why="",
              check=("many", ("eq", "sqrt(16)", "4"), ("eq", "F(6**2-4,2**3)", "4"), ("eq", "2+3-1", "4"),
-                    ("eq", "F(1,2)**-2", "4"), ("eq", "-2**2", "-4"), ("eq", "F(12)/3*2", "8"))),
+                    ("eq", "F(1,2)**-2", "4"), ("eq", "-2**2", "-4"), ("eq", "F(12)/3*2", "8"),
+                    ("true", "-2**2 != 4"), ("true", "F(12)/3*2 != 4"))),
     ],
 
     additional=[
@@ -217,7 +218,8 @@ L = dict(
                      "F": "36 — one level, left to right: 36 ÷ 2 = 18 and then 18 · 2 [8.NSO.1.7]"},
              why="",
              check=("many", ("eq", "sqrt(81)", "9"), ("eq", "F(7**2-4,5)", "9"), ("eq", "4+6-1", "9"),
-                    ("eq", "F(1,3)**-2", "9"), ("eq", "-3**2", "-9"), ("eq", "F(36)/2*2", "36"))),
+                    ("eq", "F(1,3)**-2", "9"), ("eq", "-3**2", "-9"), ("eq", "F(36)/2*2", "36"),
+                    ("true", "-3**2 != 9"), ("true", "F(36)/2*2 != 9"))),
     ],
 
     mtr=[("MTR.5.1", "Notes I — the four levels are read off the expression's structure and the class is never given a mnemonic, because the guide asks us not to give one."),
