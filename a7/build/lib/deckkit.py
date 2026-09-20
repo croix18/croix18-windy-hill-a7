@@ -191,6 +191,15 @@ class Deck:
     def table(self, widths, rows, size=15, header=True, x=None, row_h=0.42):
         """Simple table: widths in inches; rows of strings. Header row shaded."""
         x = LM + (CW - sum(widths)) / 2 if x is None else x
+        # Row height is fixed, so a cell whose text has to wrap draws its second line outside the
+        # cell border and over whatever is below. The same character-count estimate _mixed uses
+        # decides it here, before anything is drawn.
+        for ri, row in enumerate(rows):
+            for ci, val in enumerate(row):
+                est = len(str(val)) * size / 72 * (0.58 if (header and ri == 0) else 0.52)
+                if est > widths[ci] - 0.16:
+                    raise RuntimeError(f"table cell wraps out of its row (needs about {est:.2f} in, "
+                                       f"column is {widths[ci]:.2f} in): {str(val)[:50]!r}")
         shp = self.s.shapes.add_table(len(rows), len(widths), Inches(x), Inches(self.cursor),
                                       Inches(sum(widths)), Inches(row_h * len(rows)))
         tbl = shp.table

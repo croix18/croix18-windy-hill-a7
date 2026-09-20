@@ -143,6 +143,7 @@ Do not batch lessons before the first push. One lesson, checked, viewed, pushed;
 | `radicand '…' is not plain arithmetic on integers` | capcheck could not reduce the radicand | work it by hand; if it is sound, tag `not_bound=True` and say why |
 | `line runs off the slide (14.7 in)` | a mixed text+math row too wide | split the row, shorten the words, or move the math to its own row |
 | `box crosses the footer` / `math into footer` | too many rows on one slide | fewer rows, or split into two notes slides |
+| `table cell wraps out of its row` | a notes table's cell is too long for its column, and a wrapped second line draws outside the border | shorten the cell, widen the column, use fewer columns, or move the words into an `items2` line under the table |
 | `plan does not fit … leave whiteboards 22` | the fixed minutes are too few/many | adjust `min` on notes/examples so the remainder lands in 10–20 (aim 15–19) |
 | `Unknown symbol: \le` | mathtext, not TeX | `\leq`; see the LaTeX paragraph in SPEC SCHEMA |
 | `docscan: calculator line on student surface` | the word calculator on a student page | "a computer displays 3.5E9"; the TE may say calculator |
