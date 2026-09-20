@@ -40,18 +40,18 @@ table of contents needed.
 |---|---|---|---|---|---|
 | NSO.1.1 irrationals on a number line | N | – | 2 | 7.NSO.1.2 (in course) | ✔ U2 |
 | NSO.1.2 plot/order/compare incl. roots | N | – | 2 | 7.NSO.1.2 | ✔ U2 |
-| NSO.1.3 integer exponents, numeric | N | – | ? | 7.NSO.1.1 (carried) | |
-| NSO.1.4 scientific notation, compare | N | – | ? | 7.NSO.1.1, 7.NSO.2.1 (dropped) | |
-| NSO.1.5 operations in sci. notation | N | – | ? | same | |
-| NSO.1.6 real-world sci. notation, sig digits | N | – | ? | same | |
-| NSO.1.7 order of ops w/ exponents, radicals | N | **E** | 4 | 7.NSO.2.1 (dropped — name the gap) | |
+| NSO.1.3 integer exponents, numeric | N | – | 3 (3.1–3.7) | 7.NSO.1.1 (carried) | |
+| NSO.1.4 scientific notation, compare | N | – | 3 (3.8–3.9) | 7.NSO.1.1, 7.NSO.2.1 (dropped) | |
+| NSO.1.5 operations in sci. notation | N | – | 4 (4.1–4.3) | same | |
+| NSO.1.6 real-world sci. notation, sig digits | N | – | 4 (4.4) | same | |
+| NSO.1.7 order of ops w/ exponents, radicals | N | **E** | 4 (4.5–4.8) | 7.NSO.2.1 (dropped — name the gap) | |
 | AR.1.1 exponent laws, algebraic | A | **E** | 14 | 7.NSO.1.1, 7.NSO.2.1 | |
 | AR.1.2 monomial × linear | A | S | 14 | 7.AR.1.1, 1.2 (dropped) | |
 | AR.1.3 factor common monomial | A | S | 14 | 6.NSO.3.2, 7.AR.1.1, 1.2 | |
 | AR.2.1 multi-step equations | A | **E** | 11 | 7.AR.2.2 (in course) | ✔ U1 (two-step) |
 | AR.2.2 two-step inequalities | A | **E** | 1 | 7.AR.2.1 (dropped) | ✔ U1 |
 | AR.2.3 x² = p, x³ = q | A | – | 2 | 7.AR.2.2 | ✔ U2 |
-| AR.3.1 linear ⇒ proportional? | L (via F.1.2) | – | 7/10 | 7.AR.4.1 (carried) | |
+| AR.3.1 linear ⇒ proportional? | L (via F.1.2) | – | 10 (10.1), 12 (12.8) | 7.AR.4.1 (carried) | |
 | AR.3.2 slope | L | S | 10 | 7.AR.4.2 | |
 | AR.3.3 slope-intercept equation | L | S | 10 | 7.AR.4.4 | |
 | AR.3.4 graph a linear equation | L | S | 10 | 7.AR.4.3 | |
@@ -65,23 +65,25 @@ table of contents needed.
 | GR.1.1 Pythagorean, side lengths | G | **E** | 6 | 6.GR.2.1 | |
 | GR.1.2 Pythagorean, distance | G | S | 6 | 6.GR.1.2, 1.3 | |
 | GR.1.3 triangle inequality, converse | G | S | 6 | 5.GR.1.1 | |
-| GR.1.4 supp/comp/vertical/adjacent | G | – | ? | 4.GR.1, 5.GR.1.1 | |
-| GR.1.5 interior/exterior angles of a triangle | G | – | ? | 4.GR.1.2, 1.3, 5.GR.1.1 | |
-| GR.1.6 polygon angle sums | G | – | ? | 6.GR.2.2, 7.GR.1.2 (dropped) | |
+| GR.1.4 supp/comp/vertical/adjacent | G | – | 16 (16.1) | 4.GR.1, 5.GR.1.1 | |
+| GR.1.5 interior/exterior angles of a triangle | G | – | 16 (16.2) | 4.GR.1.2, 1.3, 5.GR.1.1 | |
+| GR.1.6 polygon angle sums | G | – | 16 (16.3–16.4) | 6.GR.2.2, 7.GR.1.2 (dropped) | |
 | GR.2.1 name the rigid transformation | G | S | 15 | 6.GR.1.1, 7.GR.1.5 (carried) | |
 | GR.2.2 dilation scale factor | G | S | 15 | 7.GR.1.5 | |
 | GR.2.3 transformations with coordinates | G | **E** | 15 | 6.GR.1.1, 7.GR.1.5 | |
-| GR.2.4 similar triangles | G | – | ? | 7.GR.1.5 | |
+| GR.2.4 similar triangles | G | – | 6 (6.7–6.8) | 7.GR.1.5 | |
 | DP.1.1 scatter plot vs line graph | L | S | 13 | 6.DP.1, 7.DP.1 | |
 | DP.1.2 patterns of association | L | S | 13 | same | |
 | DP.1.3 informal line of fit | L | **E** | 13 | same | |
-| DP.2.1 sample space, repeated | N | – | ? | 7.DP.2.1 (dropped) | |
-| DP.2.2 theoretical prob., repeated (via DP.2.3) | N | – | ? | 7.DP.2.3 (dropped) | |
-| DP.2.3 real-world prob., predictions | N | – | ? | 7.DP.2 (dropped) | |
+| DP.2.1 sample space, repeated | N | – | 17 (17.1) | 7.DP.2.1 (dropped) | |
+| DP.2.2 theoretical prob., repeated (via DP.2.3) | N | – | 17 (17.2–17.3) | 7.DP.2.3 (dropped) | |
+| DP.2.3 real-world prob., predictions | N | – | 17 (17.4–17.6) | 7.DP.2 (dropped) | |
 
-Eleven benchmarks have no unit on the county sheet (NSO.1.3–1.6, GR.1.4–1.6, GR.2.4, DP.2.1–2.3).
-They are all tested. **Open: the accelerated book's table of contents for Units 3, 5, 9 and
-anything past 15**, so every row gets a unit.
+Every row now has a unit: the book's table of contents (17 units) arrived 20 Sept via IXL's
+skill plan and is transcribed in `MATH NATION A7 BOOK - table of contents and IXL plan.md`.
+Carried MA.7 benchmarks by unit: 7.NSO.1.2 → 1.1–1.2; 7.AR.2.2 → 1.3–1.7; 7.NSO.1.1 → 3.1–3.3;
+7.GR.1.5 → 5.1–5.4; 7.AR.3.3 → 5.7–5.11; 7.AR.4.1–4.5 → 7; 7.GR.1.3–1.4 → 8.1–8.8; 7.DP.1.4 →
+8.8–8.9; 7.GR.2.1–2.3 → 9; 7.DP.1.5 → 13.1–13.3.
 
 The 17 carried MA.7 benchmarks are taught where the spine needs them: 7.AR.4.1–4.5 inside
 Unit 7 as the on-ramp to AR.3; 7.GR.1.3–1.4 in Unit 8; 7.GR.1.5 ahead of GR.2.2; 7.AR.3.3
