@@ -81,9 +81,11 @@ L = dict(
         dict(text=["Write  $7.2 \\times 10^{4}$  in standard form."], hint="Move the point four places.", gloss="7.2 × 10,000", answer="72,000",
              note="Reading the notation back. A board with 720,000 moved five places (counted the 2 as a zero); a board with 7.20000 attached zeros without moving the point.", check=("eq", "F(72,10)*10**4", "72000"),
              wrong="720,000 — the point was moved five places [8.NSO.1.4: 10⁴ moves the point four places]; 7.20000 — zeros appended without moving the point"),
-        dict(text=["Write  356,000  in scientific notation."], hint="Every nonzero digit stays in the coefficient.", gloss="3.56 hundred-thousands", answer="3.56 × 10⁵",
-             note="Three nonzero digits. 356 × 10³ is equal in value but not scientific notation; 3.56 × 10³ counted only the zeros.", check=("eq", "F(356,100)*10**5", "356000"),
-             wrong="356 × 10³ — coefficient not in [1, 10) [B1G-M 8.NSO.1.4 misconception]; 3.56 × 10³ — counted the zeros instead of the places the point moves",
+        dict(text=["A stadium's renovation used  356,000  bolts.", "The stadium seats 71,000 people.", "Write the number of bolts in scientific notation."],
+             qtext="A stadium's renovation used 356,000 bolts. The stadium seats 71,000 people. Write the number of bolts in scientific notation.",
+             unneeded="seating figure", hint="Every nonzero digit stays in the coefficient.", gloss="3.56 hundred-thousands", answer="3.56 × 10⁵",
+             note="Ruling 22's board: the seating figure is there to be read past, and it is the harder kind of extra — it is a number that could itself be converted. Three nonzero digits in the bolts. 356 × 10³ is equal in value but not scientific notation; 3.56 × 10³ counted only the zeros.", check=("eq", "F(356,100)*10**5", "356000"),
+             wrong="356 × 10³ — coefficient not in [1, 10) [B1G-M 8.NSO.1.4 misconception]; 3.56 × 10³ — counted the zeros instead of the places the point moves; 7.1 × 10⁴ — the wrong number was converted",
              not_sci=True),
         dict(text=["Which is greater,  $9.5 \\times 10^{5}$  or  $1.2 \\times 10^{6}$ ?"], hint="Look at the powers first.", gloss="950,000 versus 1,200,000", answer="1.2 × 10⁶",
              note="The coefficient is a trap: 9.5 is bigger than 1.2, but 10⁶ beats 10⁵. Compare the powers first, the coefficients only when the powers tie.", check=("true", "F(12,10)*10**6 > F(95,10)*10**5"),
@@ -182,7 +184,36 @@ L = dict(
         dict(not_sci=True, stem="In question 12, only one of the four equal expressions is written in scientific notation. Which one is it, and why are the other three not?", answer="$6.2 \\times 10^{6}$. The coefficient must be at least 1 and less than 10; 62, 620 and 0.62 are not.", why="", check=("true", "1 <= 6.2 < 10 and not (1 <= 62 < 10) and not (1 <= 620 < 10) and not (1 <= 0.62 < 10)"), space=1.0),
     ],
 
+    mtr=[("MTR.7.1", "Every board and the bank — populations, distances and counts from outside the classroom, written the way science writes them."),
+         ("MTR.5.1", "Notes I — the powers of ten are set against place value, so the exponent is read as a count of places rather than a count of zeros."),
+         ("MTR.6.1", "Board 4 — the comparison is settled by the exponent first; students say which number is larger before they look at the coefficients.")],
+
+    hoq=[("9.5 × 10⁵ has the larger coefficient but is the smaller number. Explain how that happens.", "DOK 2"),
+         ("Marcus writes 20 × 10⁵. It equals 2,000,000 but it is not scientific notation. What work is the coefficient rule doing?", "DOK 3"),
+         ("Two numbers are each written as a coefficient times a power of ten. When can you compare the coefficients, and when can you not?", "DOK 3")],
+
+    differentiation=dict(
+        ese="Give the place-value strip from Notes I — 10⁰ through 10⁹ with the place names under it — and let the student walk the decimal point along the strip, one place per power, instead of counting zeros in their head.",
+        ell="Coefficient and standard form are the two phrases the questions use. Write 3.56 × 10⁵ = 356,000 once with COEFFICIENT under the 3.56 and STANDARD FORM under the 356,000, and point at them all period.",
+        enrichment="Ask how many times larger 6.4 × 10⁹ is than 1.6 × 10⁵, then for a number whose scientific notation has a coefficient of exactly 1."),
+
+    closure="Board 9 is written work and it is the exit evidence: the student has to say both things — equal in value, and not in scientific notation — and give 2 × 10⁶. Read the boards, not the papers.",
+
+    independent=[
+        dict(stem="Write  8,200,000  in scientific notation.", answer="8.2 × 10⁶", why="", check=("eq", "F(82,10)*10**6", "8200000"), space=0.7),
+        dict(stem="Write  $6.4 \\times 10^{5}$  in standard form.", answer="640,000", why="", check=("eq", "F(64,10)*10**5", "640000"), space=0.7),
+        dict(stem="Write  915,000,000  in scientific notation.", answer="9.15 × 10⁸", why="Three nonzero digits stay in the coefficient.", check=("eq", "F(915,100)*10**8", "915000000"), space=0.7),
+        dict(stem="Which is greater,  $4.7 \\times 10^{7}$  or  $9.3 \\times 10^{6}$ ?", answer="$4.7 \\times 10^{7}$", why="The exponent decides first.", check=("true", "F(47,10)*10**7 > F(93,10)*10**6"), space=0.8),
+        dict(stem="How many times larger is  $9 \\times 10^{7}$  than  $3 \\times 10^{4}$ ?", answer="3,000", why="9 ÷ 3 = 3, and 10⁷ ÷ 10⁴ = 10³.", check=("eq", "9*10**7/(3*10**4)", "3000"), space=0.8),
+        dict(stem="A computer displays a number as  2.6E7.  Write it in standard form.", answer="26,000,000", why="E means times ten to the.", check=("eq", "F(26,10)*10**7", "26000000"), space=0.8),
+    ],
+
     te=dict(
+        say=["Exactly one nonzero digit sits in front of the decimal point. One — not two, and not none.",
+             "The exponent counts the places the decimal point moved. It does not count zeros.",
+             "To compare, read the exponent first. Only when the exponents match does the coefficient decide."],
+        must="Express very large quantities in scientific notation and read them back into standard form; determine how many times larger one number is than another.",
+        must_not="Coefficients are at least 1 and less than 10. Large numbers today; negative powers of ten are 3.09, and operations in scientific notation are Unit 4.",
         read_first=[
             "This lesson rebuilds Math Nation 3.8 (SE pp. 139–145) and opens MA.8.NSO.1.4. The book's sequence — powers of ten and place value, the definition, the coefficient constraint, then 'how many times larger' in three cases — is kept as Notes I–III. Its Florida funding, painting, alligator and 8.4 × 10⁶ items are kept as the examples and whiteboard 7.",
             "Two things the state guide expects that the book does not ask are added: calculator E notation (whiteboard 8, bank 7c) and the '10³ times is not 3 times' misconception as a diagnostic (whiteboard 6). The guide's own items — the blue whale and elephant, Florida and Lake Okeechobee, China and Mexico — are bank 9 and Additional 9.",

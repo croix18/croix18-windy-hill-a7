@@ -10,6 +10,7 @@ from sympy import Rational as F, sqrt, Integer, nsimplify
 from .dockit import Doc, INK, VOCAB, RED, GRAY
 from .deckkit import Deck, LM, CW
 from . import tekit
+from . import plankit
 from .tekit import TE
 
 COURSE = "Grade 7 Accelerated"
@@ -64,7 +65,7 @@ def mathcheck_item(item, where):
 def mathcheck_lesson(L):
     findings = []
     n = 0
-    for grp in ("warmup", "whiteboard", "bank", "additional"):
+    for grp in ("warmup", "whiteboard", "bank", "additional", "independent"):
         for i, it in enumerate(L.get(grp, [])):
             if it.get("heading") or it.get("table"):
                 continue
@@ -87,7 +88,7 @@ def _flatten(item):
 
 def distractorcheck_lesson(L):
     out = []
-    for grp in ("whiteboard", "bank", "additional", "warmup"):
+    for grp in ("whiteboard", "bank", "additional", "independent", "warmup"):
         for i, it in enumerate(L.get(grp, [])):
             if it.get("choices"):
                 corr = it["correct"] if isinstance(it["correct"], (list, tuple, set)) else [it["correct"]]
@@ -131,7 +132,7 @@ def capcheck_lesson(L):
                 v = float(m.group(1))
                 if not (1 <= v < 10):
                     out.append(f"{L['code']} {where}: scientific-notation coefficient {v} outside [1,10) (tag the block not_sci=True if deliberate)")
-    for grp in ("warmup", "notes", "examples", "whiteboard", "bank", "additional", "vocab", "te"):
+    for grp in ("warmup", "notes", "examples", "whiteboard", "bank", "additional", "independent", "vocab", "te"):
         scan(L.get(grp), grp)
     return out
 
@@ -173,7 +174,10 @@ def build_bank(L, items, kind, key, outdir):
     eyebrow = f"{COURSE}  ·  Unit {L['unit']}  ·  {_label(L)}"
     sub = f"{kind} {code}"
     doc = Doc(eyebrow, L["title"], sub, key=key)
-    doc.instruction("Show your work. Circle your final answer.")
+    if kind == "Independent Set":
+        doc.instruction("Six questions, on your own, in silence. Show the step that does the work.")
+    else:
+        doc.instruction("Show your work. Circle your final answer.")
     n = 0
     for it in items:
         if it.get("heading"):
@@ -285,7 +289,8 @@ def build_deck(L, outdir):
         D.section(title, "Answer.", 0, q.get("note_a", "Reveal. Scan the back row first; question the blank boards before the wrong ones."), "wb")
         D.cursor = 2.3
         _wb_body(D, q, reveal=True)
-    # ---- IXL
+    # ---- independent set (ruling 21), then IXL
+    D.independent(INDEP_MIN)
     D.ixl(L["ixl"], IXL_MIN)
     name = f"A7 {code}  Slides.pptx"
     path = os.path.join(outdir, name)
@@ -294,6 +299,7 @@ def build_deck(L, outdir):
 
 
 IXL_MIN = 5
+INDEP_MIN = 6            # ruling 21: six questions, six minutes, after the boards
 
 
 def _wb_body(D, q, reveal):
@@ -328,6 +334,17 @@ def _wb_body(D, q, reveal):
             D.answer_line(q["answer"], y=y)
 
 
+def board_text(q):
+    """The board's question as prose: its latex and its text lines, in the order they appear."""
+    if q.get("qtext"):
+        return q["qtext"]
+    bits = []
+    if q.get("latex"):
+        bits.append("$" + q["latex"] + "$")
+    bits += list(q.get("text", []))
+    return "  ".join(bits)
+
+
 def _first_sentence(t):
     t = (t or "").split("\n")[0].strip()
     for stop in (". ", "? ", "! "):
@@ -348,6 +365,12 @@ def _slide_line(s):
 
 SPLIT_MOVE = ("Split (no option near two-thirds)? Sixty seconds, convince your neighbour, "
               "re-vote, then reveal.")
+
+
+def _locator(ev):
+    """An MTR's evidence reads '<where> — <what happens there>'. Page 1 of the Teacher Edition
+    carries only the <where>; the whole sentence is section 3 of the Lesson Plan (ruling 25)."""
+    return ev.split(" — ")[0].strip() if " — " in ev else _first_sentence(ev)
 
 
 def build_te(L, deck_path, outdir):
@@ -373,7 +396,7 @@ def build_te(L, deck_path, outdir):
     te.label("Target", L["target"])
     mtr = L.get("mtr") or []
     if mtr:
-        te.label("MTR", "   ·   ".join(f"**{m}** — {ev}" for m, ev in mtr))
+        te.label("MTR", "   ·   ".join(f"**{m}** — {_locator(ev)}" for m, ev in mtr))
     tekit.timing_table(te, rows)
     te.h2("Say these three things out loud today")
     say = T.get("say") or [x for x in (T.get("lives"), *(T.get("read_first") or [])) if x][:3]
@@ -393,7 +416,7 @@ def build_te(L, deck_path, outdir):
             # a board is two slides (question, reveal); one line covers both
             q = L["whiteboard"][wb_seen]
             rev = side[i + 1] if i + 1 < len(side) and side[i + 1]["kind"] == "wb" else s
-            qt = q.get("qtext") or " ".join(q.get("text", [])) or ("$" + q.get("latex", "") + "$")
+            qt = board_text(q)
             ans = q.get("answer") or ("$" + q.get("answer_latex", "") + "$")
             errs = q.get("errors") or {}
             wrong = "; ".join(f"({k}) {v}" for k, v in errs.items()) if errs else q.get("wrong", "")
@@ -440,21 +463,42 @@ def build_te(L, deck_path, outdir):
     return path
 
 
+def _ruling_checks(L):
+    out = []
+    if not L.get("mtr"):
+        out.append(f"{L['code']}: ruling 25 — no `mtr`; name the two or three MTRs this lesson exercises, each with its evidence")
+    ind = L.get("independent") or []
+    n_ind = len([i for i in ind if not i.get("heading")])
+    if n_ind != 6:
+        out.append(f"{L['code']}: ruling 21 — the independent set has {n_ind} questions, needs exactly 6")
+    unneeded = [i for i, q in enumerate(L["whiteboard"]) if q.get("unneeded")]
+    if len(unneeded) != 1:
+        out.append(f"{L['code']}: ruling 22 — {len(unneeded)} boards carry a figure the question does not need, needs exactly 1"
+                   + (f" (boards {[u + 1 for u in unneeded]})" if unneeded else ""))
+    if not (L["te"].get("say") and len(L["te"]["say"]) == 3):
+        out.append(f"{L['code']}: ruling 26 — te.say must be the three sentences to say out loud today")
+    return out
+
+
 def build_lesson(L, outdir):
     os.makedirs(outdir, exist_ok=True)
     findings, n = mathcheck_lesson(L)
     d = distractorcheck_lesson(L)
     c = capcheck_lesson(L)
+    r = _ruling_checks(L)
     print(f"mathcheck {L['code']}: {n} items checked, {len(findings)} findings")
-    for f in findings + d + c:
+    for f in findings + d + c + r:
         print("  ", f)
-    if findings or d or c:
+    if findings or d or c or r:
         raise SystemExit(f"{L['code']}: build refused")
     out = {}
     out["bank"] = build_bank(L, L["bank"], "Question Bank", False, outdir)
     out["bank_key"] = build_bank(L, L["bank"], "Question Bank", True, outdir)
     out["add"] = build_bank(L, L["additional"], "Question Bank - Additional", False, outdir)
     out["add_key"] = build_bank(L, L["additional"], "Question Bank - Additional", True, outdir)
+    out["indep"] = build_bank(L, L["independent"], "Independent Set", False, outdir)
+    out["indep_key"] = build_bank(L, L["independent"], "Independent Set", True, outdir)
     out["deck"] = build_deck(L, outdir)
     out["te"] = build_te(L, out["deck"], outdir)
+    out["plan"] = plankit.build_plan(L, out["deck"], outdir, COURSE, _label(L))
     return out

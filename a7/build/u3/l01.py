@@ -91,9 +91,11 @@ L = dict(
         dict(latex="5^{2}\\cdot 5^{3}", hint="Write it as one power.", gloss="same base, so add the exponents", answer_latex="5^{5}",
              note="Product of powers, the plain case. A board with 25⁵ multiplied the bases; 5⁶ multiplied the exponents.", check=("eq", "5**2*5**3", "5**5"),
              wrong="25⁵ — multiplied the bases [7.NSO.1.1 misconception: operating on the bases]; 5⁶ — multiplied the exponents [confused with power of a power]"),
-        dict(latex="2^{4}\\cdot 2^{2}", hint="Find the value.", gloss="2⁶", answer="64",
-             note="Same law, now evaluated. 2⁸ = 256 on a board means the exponents were multiplied; 4⁶ means the bases were.", check=("eq", "2**4*2**2", "64"),
-             wrong="256 — multiplied the exponents (2⁸); 4096 — multiplied the bases (4⁶)"),
+        dict(text=["A tile pattern grows by a factor of  $2^{4}$  one week,", "and by  $2^{2}$  the next week. It started with 9 tiles.", "Write the two-week growth factor as one power, then find its value."],
+             qtext="A tile pattern grows by a factor of 2⁴ one week, and by 2² the next week. It started with 9 tiles. Write the two-week growth factor as one power, then find its value.",
+             unneeded="starting count of 9", hint="Find the value.", gloss="2⁴ · 2² = 2⁶", answer="2⁶ = 64",
+             note="Ruling 22's board: the starting count is there to be read past. Growth factors multiply, so the two-week factor is 2⁴ · 2² and nothing in the question needs the 9. A board with 576 multiplied by it.", check=("eq", "2**4*2**2", "64"),
+             wrong="576 — the starting count was used [the question asks for the factor, not a tile count]; 256 — multiplied the exponents (2⁸); 4096 — multiplied the bases (4⁶)"),
         dict(latex="(2\\cdot 5)^{3}", hint="Find the value.", gloss="2³ · 5³ = 8 · 125, or 10³", answer="1000",
              note="Power of a product. Either route lands on 1000. A board with 30 multiplied 10 by 3.", check=("eq", "(2*5)**3", "1000"),
              wrong="30 — multiplied the base by the exponent [misconception: exponent treated as a factor]; 250 — applied the exponent to one factor only"),
@@ -183,7 +185,36 @@ L = dict(
              why="D: 100³ = 1,000,000 = 10⁶.", check=("many", ("eq", "10**3*10**3", "10**6"), ("eq", "(10**2)**3", "10**6"), ("eq", "10**2*10**4", "10**6"), ("eq", "100**3", "10**6"), ("true", "10**2*10**3 != 10**6"), ("true", "(10**3)**3 != 10**6"))),
     ],
 
+    mtr=[("MTR.5.1", "Notes I and II — 5²·5³ is expanded into five factors of 5 before the rule is named, so the law is read off the structure rather than memorised."),
+         ("MTR.3.1", "Boards 1, 3, 4 and 7 — one law, one move, written and up on the cue; today is where the fluency for the rest of the unit is set."),
+         ("MTR.4.1", "Board 5 — when the room splits between 4⁵ and 16⁵, the sixty-second re-vote before the reveal.")],
+
+    hoq=[("Why does 5²·5³ have five factors of 5 and not six? Show the expansion that settles it.", "DOK 2"),
+         ("(2·5)³ equals 2³·5³. Test whether (2 + 5)³ equals 2³ + 5³, and say what the difference between the two situations is.", "DOK 3"),
+         ("A student writes (3²)⁴ = 3⁶. Which law did they reach for, and why is it the wrong one here?", "DOK 3")],
+
+    differentiation=dict(
+        ese="Give the four laws on a half-sheet, one worked example each, in the order of Notes II–IV, and let it stay on the desk through the round. The student's job is to name the law before writing, not to recall it.",
+        ell="Base and exponent are the two nouns the whole unit rests on. Label 5³ once on the board — 5 is the base, 3 is the exponent, 125 is the power — and point at the labels on every board that asks which expression is equivalent.",
+        enrichment="Ask for (2³)⁴ and (2⁴)³ side by side and why they agree, then for a single power of 2 equal to 4³ · 8²."),
+
+    closure="Board 9 is written work and it is the exit evidence: the student has to say that the power of a product law needs a product inside the parentheses, not a sum. Read the boards, not the papers.",
+
+    independent=[
+        dict(stem="Write as one power.  $3^{4}\\cdot 3^{5}$", answer="$3^{9}$", why="", check=("eq", "3**4*3**5", "3**9"), space=0.7),
+        dict(stem="Find the value.  $2^{3}\\cdot 2^{2}$", answer="$2^{5} = 32$", why="", check=("eq", "2**3*2**2", "32"), space=0.7),
+        dict(stem="Write as one power.  $\\left(7^{3}\\right)^{2}$", answer="$7^{6}$", why="Power of a power: multiply.", check=("eq", "(7**3)**2", "7**6"), space=0.7),
+        dict(stem="Find the value.  $(3\\cdot 4)^{2}$", answer="144", why="3² · 4² = 9 · 16, or 12².", check=("eq", "(3*4)**2", "144"), space=0.7),
+        dict(stem="Find the value.  $(-2)^{3}\\cdot(-2)^{2}$", answer="$(-2)^{5} = -32$", why="An odd power of a negative base is negative.", check=("eq", "(-2)**3*(-2)**2", "-32"), space=0.8),
+        dict(stem="Find the value of $n$.  $5^{2}\\cdot 5^{n} = 5^{7}$", answer="n = 5", why="2 + n = 7.", check=("eq", "5**2*5**5", "5**7"), space=0.8),
+    ],
+
     te=dict(
+        say=["Same base, add the exponents. Different bases, and the law does not apply at all.",
+             "An exponent outside parentheses reaches every factor inside — the number as well as the letter.",
+             "A power of a power multiplies; a product of powers adds. Say which one you are using before you write."],
+        must="Whole-number exponents with rational bases. Build each law from expansion, then apply it to rewrite an expression and to evaluate one.",
+        must_not="No zero exponent yet — that is 3.02 — and no negative exponents until 3.04. No variables until the Thread A days.",
         read_first=[
             "This lesson rebuilds Math Nation 3.1 (SE pp. 99–105) as front-taught notes and individual boards. The book's version is four partner Explorations in a row; every table in them survives here, worked from the front, because a single student can complete each one.",
             "The mathematics in the book's lesson is clean — every value on its pages checks. The defect is in its practice key: the Additional Practice answer for (−3·6)⁴ is printed 104,796 and is 104,976. That item is on the Additional bank here with the right value.",

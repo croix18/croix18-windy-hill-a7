@@ -79,9 +79,11 @@ L = dict(
     ],
 
     whiteboard=[
-        dict(latex="\\frac{6^{4}\\cdot 6^{0}}{6^{2}}", hint="Find the value.", gloss="6⁴ · 1 over 6², so 6²", answer="36",
-             note="Example 1's shape with a new base. A board with 0 read 6⁰ as 0; a board with 1296 forgot the denominator.", check=("eq", "6**4*6**0/6**2", "36"),
-             wrong="0 — zero exponent read as 0 [B1G-M 8.NSO.1.3 misconception]; 1296 — the 6² in the denominator was ignored"),
+        dict(text=["A spreadsheet holds  $6^{4}\\cdot 6^{0}$  cells in  $6^{2}$  equal columns.", "The file is 3 megabytes.", "How many cells are in each column?"],
+             qtext="A spreadsheet holds 6⁴ · 6⁰ cells in 6² equal columns. The file is 3 megabytes. How many cells are in each column?",
+             unneeded="3 megabytes", hint="Find the value.", gloss="6⁴ · 1 over 6², so 6²", answer="36",
+             note="Ruling 22's board: the file size is there to be read past. Example 1's shape with a new base. A board with 0 read 6⁰ as 0; a board with 1296 forgot the denominator.", check=("eq", "6**4*6**0/6**2", "36"),
+             wrong="0 — zero exponent read as 0 [B1G-M 8.NSO.1.3 misconception]; 1296 — the 6² in the denominator was ignored; anything built from 3 — the unneeded figure was used"),
         dict(latex="\\left(3^{0}\\cdot 3^{2}\\right)^{3}", hint="Find the value.", gloss="(3²)³ = 3⁶", answer="729",
              note="Product then power of a power. A board with 27 used 3³ (added 0 + 2 + ... then lost the multiply); 3⁵ = 243 added 2 + 3.", check=("eq", "(3**0*3**2)**3", "729"),
              wrong="243 — added the exponents 2 + 3 in the power of a power step [confused with product of powers]; 0 — zero exponent read as 0"),
@@ -168,7 +170,36 @@ L = dict(
         dict(stem="Kim says that $\\frac{(-18)^{3}}{6^{3}}$ can be rewritten as $\\left(\\frac{-18}{6}\\right)^{3}$ before evaluating. Is she right? Name the law, and give the value.", answer="Yes — power of a quotient, read from right to left; $(-3)^{3} = -27$.", why="", check=("eq", "(-18)**3/6**3", "-27"), space=1.0),
     ],
 
+    mtr=[("MTR.2.1", "Notes II and board 9 — the same expression is carried to the end by two different plans, written side by side, and the two answers are compared."),
+         ("MTR.3.1", "Boards 1 through 4 — four multi-law expressions, one each, written without a reference sheet."),
+         ("MTR.6.1", "Board 5 — a sixth power over 2¹⁰ lands on 4; students say why an answer that small is reasonable before they trust it.")],
+
+    hoq=[("Winston works inside the parentheses first and Yvette expands first. Why is the order yours here, but not in 2 + 3 · 4?", "DOK 3"),
+         ("3.2⁰ sits inside a sixth power and changes nothing. What would have to change about that factor for it to matter?", "DOK 3"),
+         ("Which plan for (0.5³)² ÷ 0.5² uses fewer digits, and why?", "DOK 2")],
+
+    differentiation=dict(
+        ese="The seven laws from Notes I stay on the desk as a half-sheet. Before writing, the student says the plan out loud in two words — 'inside first' or 'expand first' — and the teacher confirms the plan, not the answer.",
+        ell="Plan and evaluate are the two verbs on every slide today. Write PLAN = decide the order and EVALUATE = find the number on the board, and ask for the plan in words before any board goes up.",
+        enrichment="Ask for a single power of 2 equal to (2³ · 4²) ÷ 8, then for one expression that two different laws can both finish, to the same value."),
+
+    closure="Board 9 is written work and it is the exit evidence: the student has to carry both plans to the end and show they land on the same value. Read the boards, not the papers.",
+
+    independent=[
+        dict(stem="Find the value.  $\\frac{4^{2}\\cdot 4^{0}}{4^{1}}$", answer="$4^{1} = 4$", why="6⁰-style factor: 4⁰ is 1.", check=("eq", "F(4)**2*F(4)**0/F(4)**1", "4"), space=0.8),
+        dict(stem="Find the value.  $\\left(2^{0}\\cdot 2^{3}\\right)^{2}$", answer="$\\left(2^{3}\\right)^{2} = 2^{6} = 64$", why="", check=("eq", "(F(2)**0*F(2)**3)**2", "64"), space=0.8),
+        dict(stem="Write as one power.  $\\left(\\frac{5^{6}}{5^{4}}\\right)^{3}$", answer="$5^{6}$", why="Inside first gives 5²; then (5²)³.", check=("eq", "(F(5)**6/F(5)**4)**3", "5**6"), space=0.8),
+        dict(stem="Find the value.  $0.2^{2}\\cdot\\left(0.2^{1}\\right)^{2}$", answer="$0.2^{4} = 0.0016$", why="", check=("eq", "F(2,10)**2*(F(2,10)**1)**2", "F(16,10000)"), space=0.8),
+        dict(stem="Find the value.  $\\frac{(-3)^{3}\\cdot(-3)^{0}}{(-3)^{2}}$", answer="$(-3)^{1} = -3$", why="", check=("eq", "F(-3)**3*F(-3)**0/F(-3)**2", "-3"), space=0.8),
+        dict(stem="Show that  $\\left(\\frac{10^{4}}{10^{2}}\\right)^{2}$  and  $\\frac{10^{8}}{10^{4}}$  have the same value.", answer="Both are $10^{4} = 10{,}000$.", why="Two plans, one value — the point of the lesson.", check=("many", ("eq", "(F(10)**4/F(10)**2)**2", "10**4"), ("eq", "F(10)**8/F(10)**4", "10**4")), space=1.0),
+    ],
+
     te=dict(
+        say=["Make the plan before you make a mark. Inside the parentheses first, or expand first — either, but pick one.",
+             "A zero exponent is a 1 sitting in the expression. It changes nothing, and it is not nothing.",
+             "The laws work on multiplication and division only. They never cross a plus sign."],
+        must="Two or three laws in one expression, whole-number exponents and rational bases; generate an equivalent expression and evaluate it.",
+        must_not="No negative exponents yet. The laws never cross addition or subtraction, and order of operations stays at six steps or fewer.",
         read_first=[
             "This lesson rebuilds Math Nation 3.3 (SE pp. 112–117), the book's 'apply more than one law' day. The book's three collaborative pieces — Winston/Yvette, Caroline/Jamir, and the roundtable in teams of three — are here as Notes II, Example 1 and the whiteboard round. Nothing mathematical in the book's lesson pages needed repair.",
             "One repair on the Additional bank: the book's Homework L3 #7 key prints (¾)⁶ = 729/4,046; the denominator is 4⁶ = 4,096.",

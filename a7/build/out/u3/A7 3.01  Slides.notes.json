@@ -142,7 +142,7 @@
    "title": "Whiteboards   \u00b7   Question 2 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "Same law, now evaluated. 2\u2078 = 256 on a board means the exponents were multiplied; 4\u2076 means the bases were.",
+   "note": "Ruling 22's board: the starting count is there to be read past. Growth factors multiply, so the two-week factor is 2\u2074 \u00b7 2\u00b2 and nothing in the question needs the 9. A board with 576 multiplied by it.",
    "kind": "wb"
   },
   {
@@ -267,10 +267,18 @@
   },
   {
    "n": 34,
+   "title": "Independent Set",
+   "sub": "Six questions. On your own, in silence.",
+   "min": 6,
+   "note": "Hand out the Independent Set. Silent work. Circulate and mark what you see; do not teach. Whatever is not finished goes home.",
+   "kind": "independent"
+  },
+  {
+   "n": 35,
    "title": "IXL",
    "sub": "Last five minutes.",
    "min": 5,
-   "note": "IXL: whatever is not finished is tonight's practice; SmartScore 67.",
+   "note": "IXL: every listed skill is required, SmartScore 67, due at the start of the next class.",
    "kind": "ixl"
   }
  ]

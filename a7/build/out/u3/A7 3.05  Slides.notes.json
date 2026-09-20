@@ -118,7 +118,7 @@
    "title": "Whiteboards   \u00b7   Question 1 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "The rule, plain. A board with (2/3)\u2074 dropped the minus without flipping; a board with \u2212(3/2)\u2074 made the exponent's sign the value's sign.",
+   "note": "Ruling 22's board: the serving size is there to be read past \u2014 the question asks only for the factor. A board with (2/3)\u2074 dropped the minus without flipping; a board with \u2212(3/2)\u2074 made the exponent's sign the value's sign.",
    "kind": "wb"
   },
   {
@@ -259,10 +259,18 @@
   },
   {
    "n": 33,
+   "title": "Independent Set",
+   "sub": "Six questions. On your own, in silence.",
+   "min": 6,
+   "note": "Hand out the Independent Set. Silent work. Circulate and mark what you see; do not teach. Whatever is not finished goes home.",
+   "kind": "independent"
+  },
+  {
+   "n": 34,
    "title": "IXL",
    "sub": "Last five minutes.",
    "min": 5,
-   "note": "IXL: whatever is not finished is tonight's practice; SmartScore 67.",
+   "note": "IXL: every listed skill is required, SmartScore 67, due at the start of the next class.",
    "kind": "ixl"
   }
  ]

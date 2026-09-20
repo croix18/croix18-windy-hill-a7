@@ -76,9 +76,11 @@ L = dict(
         dict(latex="\\frac{10^{5}}{10^{3}}", hint="Write it as one power.", gloss="same base, subtract the exponents", answer_latex="10^{2}",
              note="Quotient of powers, plain case. A board with 10⁸ added; 1² divided the bases.", check=("eq", "10**5/10**3", "10**2"),
              wrong="10⁸ — added the exponents [confused with product of powers]; 1² — divided the bases [7.NSO.1.1 misconception: operating on the bases]"),
-        dict(latex="\\frac{8^{4}}{8^{1}}", hint="Find the value.", gloss="8³", answer="512",
-             note="Now evaluated. 8⁴ ÷ 8 = 4096 ÷ 8 = 512 is the check. A board with 4096 ignored the denominator; 8⁴ ÷ 1 is the same slip.", check=("eq", "8**4/8**1", "512"),
-             wrong="4096 — kept 8⁴ and treated 8¹ as 1 [identity law misread as zero exponent]; 64 — subtracted 4 − 1 wrong or used 8²"),
+        dict(text=["A server stores  $8^{4}$  files in  $8^{1}$  folders, evenly.", "It has been running for 30 days.", "How many files are in each folder?"],
+             qtext="A server stores 8⁴ files in 8¹ folders, evenly. It has been running for 30 days. How many files are in each folder?",
+             unneeded="30 days", hint="Find the value.", gloss="8⁴ ÷ 8¹ = 8³", answer="512",
+             note="Ruling 22's board: the running time is there to be read past. 8⁴ ÷ 8 = 4096 ÷ 8 = 512 is the check. A board with 4096 ignored the denominator; 8⁴ ÷ 1 is the same slip.", check=("eq", "8**4/8**1", "512"),
+             wrong="4096 — kept 8⁴ and treated 8¹ as 1 [identity law misread as zero exponent]; 64 — subtracted 4 − 1 wrong or used 8²; anything built from 30 — the unneeded figure was used"),
         dict(latex="\\frac{(-6)^{6}}{(-6)^{5}}", hint="Find the value.", gloss="(−6)¹", answer="−6",
              note="One factor left, with its sign. A board with 6 dropped the sign; a board with 1 divided the bases.", check=("eq", "(-6)**6/(-6)**5", "-6"),
              wrong="6 — dropped the sign of the base; 1 — divided the bases [7.NSO.1.1 misconception]"),
@@ -167,7 +169,36 @@ L = dict(
              why="D: 7² = 49, so 49/49 = 1.", check=("many", ("eq", "8**0", "1"), ("eq", "2**5/2**5", "1"), ("eq", "F(3,7)**0", "1"), ("eq", "F(7**2,49)", "1"), ("true", "2**5/2**4 != 1"), ("true", "0**5 != 1"))),
     ],
 
+    mtr=[("MTR.5.1", "Notes III — the class reaches 2⁰ two ways, by cancelling matching factors and by subtracting the exponents, and sees that the value 1 is forced by the law rather than declared."),
+         ("MTR.6.1", "Board 3 — (−6)⁶ over (−6)⁵ leaves one factor of −6; students say whether the answer is positive or negative before they write anything."),
+         ("MTR.4.1", "Board 5 — when the room splits between 1 and 0 on 9⁰, the sixty-second re-vote before the reveal.")],
+
+    hoq=[("Cancelling 2³/2³ gives 1 and subtracting the exponents gives 2⁰. Why must those be the same number?", "DOK 3"),
+         ("The quotient law says the base has to be nonzero. Say what goes wrong if it is 0.", "DOK 2"),
+         ("0.5⁸ ÷ 0.5⁵ is 0.125, which is smaller than 1. Explain how dividing one power by another can leave a number under 1.", "DOK 3")],
+
+    differentiation=dict(
+        ese="Write the quotient expanded once — 8·8·8·8 over 8 — and leave that line on the desk. On the first two boards the student crosses out matching factors and counts what is left; subtraction of exponents takes over from board 3.",
+        ell="Quotient and product are the two words in play. Put QUOTIENT = divide and PRODUCT = multiply on the board with 8⁴ ÷ 8¹ under one and 8⁴ · 8¹ under the other, and point at them as each board goes up.",
+        enrichment="Ask why 0⁰ is left undefined while 9⁰ is 1, then for the value of (2/3)⁵ ÷ (2/3)⁵ without computing either power."),
+
+    closure="Board 9 is written work and it is the exit evidence: the student has to say that both students are right and that 2⁰ is 1. Read the boards, not the papers.",
+
+    independent=[
+        dict(stem="Write as one power.  $\\frac{6^{7}}{6^{3}}$", answer="$6^{4}$", why="", check=("eq", "6**7/6**3", "6**4"), space=0.7),
+        dict(stem="Find the value.  $\\frac{5^{6}}{5^{4}}$", answer="$5^{2} = 25$", why="", check=("eq", "5**6/5**4", "25"), space=0.7),
+        dict(stem="Find the value.  $\\frac{(-4)^{5}}{(-4)^{3}}$", answer="$(-4)^{2} = 16$", why="An even power of a negative base is positive.", check=("eq", "F(-4)**5/F(-4)**3", "16"), space=0.7),
+        dict(stem="Rewrite so the exponent is on the numerator and on the denominator.  $\\left(\\frac{3}{7}\\right)^{4}$", answer="$\\frac{3^{4}}{7^{4}}$", why="", check=("eq", "F(3,7)**4", "F(3**4,7**4)"), space=0.8),
+        dict(stem="Find the value.  $\\left(\\frac{12}{13}\\right)^{0}$", answer="1", why="Any nonzero base to the zero power is 1.", check=("eq", "F(12,13)**0", "1"), space=0.7),
+        dict(stem="Find the value of $n$.  $\\frac{2^{9}}{2^{n}} = 2^{4}$", answer="n = 5", why="9 − n = 4.", check=("eq", "F(2)**9/F(2)**5", "2**4"), space=0.8),
+    ],
+
     te=dict(
+        say=["Same base, subtract the exponents — top minus bottom, in that order.",
+             "An exponent on a fraction lands on the top and on the bottom, both.",
+             "Anything nonzero to the zero power is 1. Not 0 — 1."],
+        must="Whole-number exponents with rational bases; the zero exponent is derived from the quotient law, not announced.",
+        must_not="Bases are nonzero wherever a quotient or a zero exponent appears, and 0⁰ is never asked. Negative exponents wait for 3.04.",
         read_first=[
             "This lesson rebuilds Math Nation 3.2 (SE pp. 106–111). The book runs three rotating partner stations — quotient of powers, power of a quotient, zero exponent — and then a matching activity. All three discoveries are here as Notes I–III, taught from the front with the same expansions the stations used.",
             "The zero exponent is taught two ways on one slide on purpose: the pattern table (each column divided by the base) and the quotient 2³/2³. The B1G-M for 8.NSO.1.3 names 'a base to the zero power equals zero' as the misconception to expect; both roads end at 1, and Question 9 of the round asks for that sentence in writing.",

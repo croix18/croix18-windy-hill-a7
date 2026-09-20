@@ -317,15 +317,25 @@ class Deck:
                 self._text(LM + 1.2, y + i * 0.62, CW - 1.5, 0.55, "", size, runs=[(f"{chr(65 + i)}.   ", size, True, False, col), (o, size, correct == i, False, col)])
             self.cursor = y + n * 0.62 + 0.2
 
+    def independent(self, minutes=6):
+        """Ruling 21: six questions, silent, written, after the boards and before IXL."""
+        self.section("Independent Set", "Six questions. On your own, in silence.", minutes,
+                     "Hand out the Independent Set. Silent work. Circulate and mark what you see; do not teach. "
+                     "Whatever is not finished goes home.", "independent")
+        self.cursor = 2.2
+        self.numbered(["Six questions. Work down the page.",
+                       "Show the step that does the work, not just the answer.",
+                       "Silence until the six minutes are up."], gap=0.14)
+
     def ixl(self, skills, minutes=5):
-        self.section("IXL", "Last five minutes.", minutes, "IXL: whatever is not finished is tonight's practice; SmartScore 67.", "ixl")
+        self.section("IXL", "Last five minutes.", minutes, "IXL: every listed skill is required, SmartScore 67, due at the start of the next class.", "ixl")
         rows = ["Open IXL and start today's skills.",
                 "Work on paper where the question needs work. The answer box does not show it.",
-                "Stop at a SmartScore of 67 on each skill. Whatever you do not finish is tonight's practice."]
+                "Every skill listed is required, to a SmartScore of 67. Due at the start of the next class."]
         self.cursor = 2.0
         self.numbered(rows, gap=0.1)
         self.cursor += 0.05
-        self._text(LM + 0.2, self.cursor, CW - 0.4, 0.4, "Today's skills", 21, bold=True)
+        self._text(LM + 0.2, self.cursor, CW - 0.4, 0.4, "Today's skills — all required", 21, bold=True)
         self.cursor += 0.45
         for s in skills:
             self._text(LM + 0.6, self.cursor, CW - 1.0, 0.36, s, 19, color=INK)

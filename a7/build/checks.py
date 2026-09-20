@@ -30,7 +30,9 @@ FONT_FILES = {"Times New Roman": "/usr/share/fonts/truetype/liberation/Liberatio
 
 def is_student(name):
     n = name.lower()
-    return ("key" not in n) and ("teacher edition" not in n) and ("reference sheet" not in n or True) and ("notes.json" not in n)
+    # Teacher surfaces: keys, the Teacher Edition, and (ruling 25) the Lesson Plan, which carries
+    # benchmark codes, the calculator note and the answers in red by design.
+    return ("key" not in n) and ("teacher edition" not in n) and ("lesson plan" not in n) and ("notes.json" not in n)
 
 
 def docx_text(path):

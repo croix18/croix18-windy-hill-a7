@@ -134,7 +134,7 @@
    "title": "Whiteboards   \u00b7   Question 2 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "Now evaluated. 8\u2074 \u00f7 8 = 4096 \u00f7 8 = 512 is the check. A board with 4096 ignored the denominator; 8\u2074 \u00f7 1 is the same slip.",
+   "note": "Ruling 22's board: the running time is there to be read past. 8\u2074 \u00f7 8 = 4096 \u00f7 8 = 512 is the check. A board with 4096 ignored the denominator; 8\u2074 \u00f7 1 is the same slip.",
    "kind": "wb"
   },
   {
@@ -259,10 +259,18 @@
   },
   {
    "n": 33,
+   "title": "Independent Set",
+   "sub": "Six questions. On your own, in silence.",
+   "min": 6,
+   "note": "Hand out the Independent Set. Silent work. Circulate and mark what you see; do not teach. Whatever is not finished goes home.",
+   "kind": "independent"
+  },
+  {
+   "n": 34,
    "title": "IXL",
    "sub": "Last five minutes.",
    "min": 5,
-   "note": "IXL: whatever is not finished is tonight's practice; SmartScore 67.",
+   "note": "IXL: every listed skill is required, SmartScore 67, due at the start of the next class.",
    "kind": "ixl"
   }
  ]

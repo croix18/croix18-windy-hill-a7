@@ -21,9 +21,10 @@ Nothing exists until it is committed. This folder is generated from `a7/build/u3
 | **Handouts** | The Reference Sheet. Students study from it; it may NOT be used on the assessment (ruling 13). There is no study guide (ruling 11). |
 | **Assessments** | Unit Review (unscored) and Unit Assessment (two periods) — student copies. |
 | **Answer Keys** | Every key in the unit, without exception. |
-| **Teacher Editions** | One per lesson: Read This First, the timing table read from the deck, slide-by-slide notes, the whiteboard round with the named wrong answers, what changed from Math Nation. |
+| **Teacher Editions** | One per lesson, **four pages, read in twenty minutes** (ruling 26). Page 1 is the period — benchmark with its Must and Must-not lines, the target, the MTRs, the timing table and the three sentences to say out loud. Then one line per slide, each board carrying its answer, its named distractors and the split-board move. Misconceptions to Watch at the end. |
 | **PDFs** | A mirror of the six folders above, same filenames. This is what gets printed and posted. |
-| **Reference** | Not handouts: the Math Nation package audit, the scope and sequence, the IXL due-date sheet, the Grade 8 source of truth. |
+| **Lesson Plans** | One Florida-format plan per lesson (ruling 25): standards, the MTRs with their evidence, the sequence read from the deck, gradual release, higher-order questions with DOK, checks for understanding with the response to each, differentiation. |
+| **Reference** | Not handouts: `BANK - Unit N.md` (how each question bank varies, what the audit found, what changed from the book, and every bank answer — ruling 26 moved this out of the teacher's edition), the Math Nation package audit, the scope and sequence, the IXL due-date sheet, the Grade 8 source of truth. |
 
 **Nothing with an answer printed on it sits outside `Answer Keys`.**
 
@@ -60,18 +61,18 @@ Title and learning target (1 min) → warm-up, four spaced-retrieval questions (
 
 | Lesson | Teaching (title, warm-up, notes, examples) | Whiteboard round | IXL | Total |
 |---|---|---|---|---|
-| 3.01 | 32 min | 16 min | 5 min | 53 min |
-| 3.02 | 29 min | 19 min | 5 min | 53 min |
-| 3.03 | 28 min | 20 min | 5 min | 53 min |
-| 3.04 | 29 min | 19 min | 5 min | 53 min |
-| 3.05 | 29 min | 19 min | 5 min | 53 min |
-| 3.06–07 | 32 min | 16 min | 5 min | 53 min |
-| T-A1 | 29 min | 19 min | 5 min | 53 min |
-| T-A2 | 29 min | 19 min | 5 min | 53 min |
-| 3.08 | 29 min | 19 min | 5 min | 53 min |
-| 3.09 | 29 min | 19 min | 5 min | 53 min |
+| 3.01 | 38 min | 10 min | 5 min | 53 min |
+| 3.02 | 35 min | 13 min | 5 min | 53 min |
+| 3.03 | 34 min | 14 min | 5 min | 53 min |
+| 3.04 | 35 min | 13 min | 5 min | 53 min |
+| 3.05 | 35 min | 13 min | 5 min | 53 min |
+| 3.06–07 | 38 min | 10 min | 5 min | 53 min |
+| T-A1 | 35 min | 13 min | 5 min | 53 min |
+| T-A2 | 35 min | 13 min | 5 min | 53 min |
+| 3.08 | 35 min | 13 min | 5 min | 53 min |
+| 3.09 | 35 min | 13 min | 5 min | 53 min |
 
-The whiteboard round is the remainder — 16–20 minutes across the unit — and the build refuses any plan whose remainder falls outside 10–20. Every plan totals 53 exactly. There is no shortened variant; short days are absorbed by the person in the room.
+The whiteboard round is the remainder — 10–14 minutes across the unit — and the build refuses any plan whose remainder falls outside 10–20. Every plan totals 53 exactly. There is no shortened variant; short days are absorbed by the person in the room.
 
 <!-- end timing table -->
 
@@ -98,4 +99,4 @@ The whiteboard round is the remainder — 16–20 minutes across the unit — an
 - **The assessment is one paper over two periods, 41 points** (ruling 27). Students stop when the first period ends and continue from where they stopped — it is not two papers, and nothing on it says 'Day 1'. Four sections by benchmark, numbered 1–21 straight through. **Questions 10 and 21 are transfer items** (ruling 18): the same benchmarks, on surfaces that appear on no review and in no question bank. The key names them and the Score Tracker maps every question to its benchmark.
 - **The Reference Sheet is the only handout.** Give it out at 3.04 or earlier; it is the document students study from. It does not go into the test.
 
-Installed: 130 files from the build, plus this page and the Reference folder.
+Installed: 190 files from the build, plus this page and the Reference folder.

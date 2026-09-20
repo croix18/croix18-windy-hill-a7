@@ -78,9 +78,11 @@ L = dict(
         dict(latex="(y^{4})^{3}", hint="Write as a single power.", gloss="power of a power: multiply", answer_latex="y^{12}",
              note="A board with y⁷ added. Ask that student to write out three copies of y⁴.", check=("eq", "(y**4)**3", "y**12"),
              wrong="y⁷ — added the exponents [8.AR.1.1: power of a power confused with a product]"),
-        dict(latex="(2x^{3})^{4}", hint="Write as a single monomial.", gloss="raise the 2 as well: 2⁴ · x¹²", answer_latex="16x^{12}",
-             note="The coefficient is the thing that gets forgotten. 2x¹² never raised the 2; 8x¹² multiplied 2 by 4 — the guide's 'multiplying the exponent into the base' (6³ = 18) in algebraic clothing.", check=("eq", "(2*x**3)**4", "16*x**12"),
-             wrong="2x¹² — the coefficient was not raised [B1G-M 8.AR.1.1: power of a product]; 8x¹² — coefficient multiplied by the exponent [B1G-M misconception: multiplying the exponent into the base]"),
+        dict(text=["A cube has edge  $2x^{3}$  centimeters.", "Its surface area is  $24x^{6}$  square centimeters.", "Write the cube's volume as a single monomial."],
+             qtext="A cube has edge 2x³ centimeters. Its surface area is 24x⁶ square centimeters. Write the cube's volume as a single monomial.",
+             unneeded="surface area", hint="Write as a single monomial.", gloss="(2x³)³: raise the 2 as well", answer_latex="8x^{9}",
+             note="Ruling 22's board: the surface area is true — 6(2x³)² = 24x⁶ — and completely unnecessary; the volume needs the edge only. The coefficient is the thing that gets forgotten: 2x⁹ never raised the 2, and 8x⁶ added the exponents instead of multiplying.", check=("eq", "(2*x**3)**3", "8*x**9"),
+             wrong="2x⁹ — the coefficient was not raised [B1G-M 8.AR.1.1: power of a product]; 8x⁶ — exponents added instead of multiplied [confused with product of powers]; anything built from 24x⁶ — the unneeded figure was used"),
         dict(latex="(3a^{2}b)(4ab^{5})", hint="Write as a single monomial.", gloss="3 · 4, a² · a, b · b⁵", answer_latex="12a^{3}b^{6}",
              note="Two variables and an invisible exponent 1 on a and on b. 7a³b⁶ added the coefficients; 12a²b⁵ ignored the exponent-1 factors.", check=("eq", "(3*a**2*b)*(4*a*b**5)", "12*a**3*b**6"),
              wrong="7a³b⁶ — coefficients added instead of multiplied [8.AR.1.1: coefficients are factors]; 12a²b⁵ — the factors a and b with exponent 1 were dropped"),
@@ -176,7 +178,36 @@ L = dict(
              why="", check=("many", ("eq", "m**3*m**7", "m**10"), ("eq", "(m**5)**2", "m**10"), ("eq", "m**14/m**4", "m**10"), ("eq", "(m**2)**5", "m**10"), ("true", "sp.simplify(m**2*m**5 - m**10) != 0"), ("true", "sp.simplify(m**20/m**2 - m**10) != 0"))),
     ],
 
+    mtr=[("MTR.5.1", "Notes I — x⁵ · x³ is expanded into eight letters before the rule is restated, so the law is recognised as the one from 3.01 rather than met as a new one."),
+         ("MTR.3.1", "Boards 1, 2 and 7 — one move each, written and up on the cue; the law has to be automatic before the negative exponents arrive tomorrow."),
+         ("MTR.4.1", "Board 5 — when the room splits over whether the 5 gets squared, the sixty-second re-vote before the reveal.")],
+
+    hoq=[("Rachel writes fifteen factors and Justina writes 3,375x³y⁶. Which form is easier to check, and which is easier to use in the next step?", "DOK 2"),
+         ("(2x³)³ has a 2 inside the parentheses. Why does the exponent reach the 2 instead of stopping at the x?", "DOK 3"),
+         ("x³ · xⁿ = x¹¹ has exactly one answer. Would x³ · yⁿ = x³y⁸ also have exactly one? Say what changed.", "DOK 3")],
+
+    differentiation=dict(
+        ese="Let the student write the expansion under the first two boards — x·x·x·x·x for x⁵ — and count. Boards 3 and 4 are done in two passes: circle the coefficients and handle them, then the letters.",
+        ell="Monomial and coefficient are new nouns. Write 12a³b⁶ once with COEFFICIENT under the 12 and BASES under the a and the b, and leave it up through the round.",
+        enrichment="Ask for (2x²y)³ · (3xy⁴)² as a single monomial, and for the n that makes (xⁿ)⁴ = x²⁰."),
+
+    closure="Board 9 is written work and it is the exit evidence: the student has to say that both forms are the same expression and show that 15³ is 3,375. Read the boards, not the papers.",
+
+    independent=[
+        dict(stem="Write as one power.  $x^{6}\\cdot x^{9}$", answer="$x^{15}$", why="", check=("eq", "x**6*x**9", "x**15"), space=0.7),
+        dict(stem="Write as a single monomial.  $\\left(a^{5}\\right)^{4}$", answer="$a^{20}$", why="Power of a power: multiply.", check=("eq", "(a**5)**4", "a**20"), space=0.7),
+        dict(stem="Write as a single monomial.  $\\left(3y^{2}\\right)^{3}$", answer="$27y^{6}$", why="The 3 is raised too.", check=("eq", "(3*y**2)**3", "27*y**6"), space=0.8),
+        dict(stem="Write as a single monomial.  $\\left(2m^{4}\\right)\\left(5m^{3}\\right)$", answer="$10m^{7}$", why="Coefficients multiply; exponents add.", check=("eq", "(2*m**4)*(5*m**3)", "10*m**7"), space=0.8),
+        dict(stem="Write as a single monomial.  $\\frac{20x^{9}}{4x^{3}}$", answer="$5x^{6}$", why="Coefficients divide; exponents subtract.", check=("eq", "20*x**9/(4*x**3)", "5*x**6"), space=0.8),
+        dict(stem="Find the value of $n$.  $y^{4}\\cdot y^{n} = y^{10}$", answer="n = 6", why="4 + n = 10.", check=("eq", "y**4*y**6", "y**10"), space=0.8),
+    ],
+
     te=dict(
+        say=["Every law from last week is the same law. The base is a letter now; nothing else changed.",
+             "An exponent outside the parentheses reaches every factor inside — the coefficient included.",
+             "Only like bases combine. An x and a y never merge."],
+        must="Whole-number exponents on monomial bases: multiply and divide monomials, and raise a monomial to a power, generating an equivalent expression each time.",
+        must_not="Whole-number exponents today; the negative ones are tomorrow. No rational exponents, and monomials only — nothing with a plus sign in it.",
         read_first=[
             "This is the first of the two Thread A days placed inside Unit 3 under ruling 14: MA.8.AR.1.1 (Math Nation Unit 14, lessons 14.1 and 14.2) taught right after the numerical laws are complete and before scientific notation. The content is the same seven laws with variable bases, and the lesson is built to say so out loud — every law is introduced by the numerical version the class already owns.",
             "Math Nation's Unit 14 pages were not part of the Unit 3 package, so the items here are original, aligned to the benchmark text, the B1G-M's example ((3x³y⁻²)³ — held for tomorrow, because of the negative exponent), its listed items (x⁵x⁸ = x¹³) and its task (Rachel and Justina, whiteboard 9). The three IXL skills for the day are the ones the Math Nation plan attaches to 14.1 and 14.2.",

@@ -76,9 +76,12 @@ L = dict(
         dict(latex="8^{-3}", hint="Rewrite with a positive exponent.", gloss="reciprocal of 8³", answer_latex="\\frac{1}{8^{3}}",
              note="The law, plain. A board with −8³ or −512 made the exponent's sign the value's sign — the misconception the guide names first.", check=("eq", "F(8)**-3", "F(1,8**3)"),
              wrong="−8³ or −512 — negative exponent read as a negative value [B1G-M 8.NSO.1.3 misconception: −b vs b⁻¹]; 1/8 — the exponent was dropped"),
-        dict(latex="2^{-4}", hint="Find the value.", gloss="1 over 2⁴", answer_latex="\\frac{1}{16}",
-             note="Now evaluated. −16 and −8 (2 · −4) are the two wrong boards to name.", check=("eq", "F(2)**-4", "F(1,16)"),
-             wrong="−16 — negative exponent read as a negative value [B1G-M 8.NSO.1.3]; −8 — multiplied base by exponent"),
+        dict(text=["A pollen grain's mass is  $2^{-4}$  milligram.", "Its width is 25 micrometers.", "What is the value of  $2^{-4}$ ?"],
+             qtext="A pollen grain's mass is 2⁻⁴ milligram. Its width is 25 micrometers. What is the value of 2⁻⁴?",
+             unneeded="25 micrometers", hint="Find the value.", gloss="1 over 2⁴", answer_latex="\\frac{1}{16}",
+             note="Ruling 22's board: the width is there to be read past. Nothing in the question needs it. −16 and −8 (2 · −4) are the two wrong boards to name; a board with 25 in it read the wrong number.",
+             check=("eq", "F(2)**-4", "F(1,16)"),
+             wrong="−16 — negative exponent read as a negative value [B1G-M 8.NSO.1.3]; −8 — multiplied base by exponent; anything built from 25 — the unneeded figure was used"),
         dict(latex="\\frac{1}{10^{-2}}", hint="Rewrite with a positive exponent, then find the value.", gloss="the power moves up: 10²", answer="10² = 100",
              note="The second form of the law. A board with 1/100 applied the law to a power that was already in the denominator — it moved nothing.", check=("eq", "1/F(10)**-2", "100"),
              wrong="1/100 or 0.01 — the negative exponent was made positive without moving the power [law applied in only one direction]"),
@@ -178,7 +181,37 @@ L = dict(
              why="D: −6 − (−2) = −4.", check=("many", ("eq", "F(3)**-4", "F(1,81)"), ("eq", "F(9)**-2", "F(1,81)"), ("eq", "F(1,3)**4", "F(1,81)"), ("eq", "F(3)**-6/F(3)**-2", "F(1,81)"), ("true", "-F(3)**4 != F(1,81)"), ("true", "F(3)**-3 != F(1,81)"))),
     ],
 
+    mtr=[("MTR.5.1", "Notes I — the halving table; students fill 2⁻¹, 2⁻² and 2⁻³ from the pattern before the rule is named."),
+         ("MTR.4.1", "Board 5 — when the room splits between 1/25 and −25, the sixty-second re-vote before the reveal."),
+         ("MTR.6.1", "Board 1 — a reciprocal of 8³ is a small positive number, so −512 cannot be right; students say why.")],
+
+    hoq=[("Why does an exponent that keeps going down past zero give a positive value? Point to the row in the table where you can see it.", "DOK 2"),
+         ("Ellen writes 5⁻² = −25. What would have to be true about the expression for −25 to be the answer?", "DOK 3"),
+         ("Two students evaluate (−2)⁻³ and get 1/8 and −1/8. Which sign came from the base and which from the exponent?", "DOK 3")],
+
+    differentiation=dict(
+        ese="Hand the Notes I table already half filled — 2⁴ through 2⁰ complete — so the student's work is the last three cells and the pattern is visible, not remembered. The completed table stays on the desk for the whiteboard round.",
+        ell="The lesson turns on two English words. Put RECIPROCAL (flip it) and OPPOSITE (change the sign) side by side on the board with 8 → 1/8 under one and 8 → −8 under the other, and point at them on every board that asks for a value.",
+        enrichment="Ask for (2/3)⁻² a day before 3.05 introduces it, and for the n that makes 2ⁿ = 1/1024."),
+
+    closure="Board 9 is written work and it is the exit evidence: the student has to use the word reciprocal. Read the boards, not the papers.",
+
+    independent=[
+        dict(stem="Rewrite with a positive exponent. Do not evaluate.  $9^{-2}$", answer="$\\frac{1}{9^{2}}$", why="", check=("eq", "F(9)**-2", "F(1,81)"), space=0.7),
+        dict(stem="Find the value.  $3^{-4}$", answer="$\\frac{1}{81}$", why="Reciprocal of 3⁴, not −81.", check=("eq", "F(3)**-4", "F(1,81)"), space=0.7),
+        dict(stem="Find the value.  $(-4)^{-2}$", answer="$\\frac{1}{16}$", why="An even power of a negative base is positive.", check=("eq", "F(-4)**-2", "F(1,16)"), space=0.7),
+        dict(stem="Find the value.  $\\frac{1}{10^{-3}}$", answer="1,000", why="The power moves up.", check=("eq", "1/F(10)**-3", "1000"), space=0.7),
+        dict(stem="Find the value.  $5^{2}\\cdot 5^{-5}$", answer="$5^{-3} = \\frac{1}{125}$", why="2 + (−5) = −3.", check=("eq", "F(5)**2*F(5)**-5", "F(1,125)"), space=0.8),
+        dict(stem="Find the value of $n$.  $2^{n} = \\frac{1}{16}$", answer="n = −4", why="", check=("eq", "F(2)**-4", "F(1,16)"), space=0.8),
+    ],
+
     te=dict(
+        say=["A negative exponent asks for a reciprocal. It never asks for a negative number.",
+             "The base keeps its own sign. The exponent only tells you to flip.",
+             "Every law from last week still works — the exponents are just integers now."],
+        must="Integer exponents, negatives included. Apply the laws to evaluate numerical expressions and to generate equivalent ones, with procedural fluency.",
+        must_not="No fractional exponents. Bases are nonzero wherever a negative exponent appears; rational bases wait for 3.05.",
+
         read_first=[
             "This lesson rebuilds Math Nation 3.4 (SE pp. 118–123) and is the first MA.8.NSO.1.3 lesson of the unit: exponents are integers from here on. The book's discovery is the halving pattern past 2⁰, kept as Notes I; its collaboration tables (product and quotient laws with negative exponents) are Notes III and bank questions 7–8.",
             "The state guide asks for one thing the book does not do explicitly: a task showing the difference between −b and b⁻¹. That is Notes II's contrast line, warm-up question 4, whiteboard 5 and 9, and bank question 9. Expect the −25 answer today; the lesson is built around meeting it.",

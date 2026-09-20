@@ -174,7 +174,7 @@
    "title": "Whiteboards   \u00b7   Question 4 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "Notes III, plain. A board with 2\u2078 added 3 + 5; a board with 2\u2075 replaced 8 by 2.",
+   "note": "Ruling 22's board: the price is there to be read past. Notes III, plain, underneath. A board with 2\u2078 added 3 + 5; a board with 2\u2075 replaced 8 by 2.",
    "kind": "wb"
   },
   {
@@ -267,10 +267,18 @@
   },
   {
    "n": 34,
+   "title": "Independent Set",
+   "sub": "Six questions. On your own, in silence.",
+   "min": 6,
+   "note": "Hand out the Independent Set. Silent work. Circulate and mark what you see; do not teach. Whatever is not finished goes home.",
+   "kind": "independent"
+  },
+  {
+   "n": 35,
    "title": "IXL",
    "sub": "Last five minutes.",
    "min": 5,
-   "note": "IXL: whatever is not finished is tonight's practice; SmartScore 67.",
+   "note": "IXL: every listed skill is required, SmartScore 67, due at the start of the next class.",
    "kind": "ixl"
   }
  ]

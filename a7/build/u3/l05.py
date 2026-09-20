@@ -68,9 +68,11 @@ L = dict(
     ],
 
     whiteboard=[
-        dict(latex="\\left(\\frac{2}{3}\\right)^{-4}", hint="Rewrite with a positive exponent.", gloss="flip the base", answer_latex="\\left(\\frac{3}{2}\\right)^{4}",
-             note="The rule, plain. A board with (2/3)⁴ dropped the minus without flipping; a board with −(3/2)⁴ made the exponent's sign the value's sign.", check=("eq", "F(2,3)**-4", "F(3,2)**4"),
-             wrong="(2/3)⁴ — the minus was dropped without flipping [8.NSO.1.3 negative exponent law]; −(3/2)⁴ — negative exponent read as a negative value [B1G-M misconception]"),
+        dict(text=["A recipe is scaled by a factor of  $\\left(\\frac{2}{3}\\right)^{-4}$.", "The original recipe serves 6 people.", "Rewrite the factor with a positive exponent."],
+             qtext="A recipe is scaled by a factor of (2/3)⁻⁴. The original recipe serves 6 people. Rewrite the factor with a positive exponent.",
+             unneeded="number of people it serves", hint="Rewrite with a positive exponent.", gloss="flip the base", answer_latex="\\left(\\frac{3}{2}\\right)^{4}",
+             note="Ruling 22's board: the serving size is there to be read past — the question asks only for the factor. A board with (2/3)⁴ dropped the minus without flipping; a board with −(3/2)⁴ made the exponent's sign the value's sign.", check=("eq", "F(2,3)**-4", "F(3,2)**4"),
+             wrong="(2/3)⁴ — the minus was dropped without flipping [8.NSO.1.3 negative exponent law]; −(3/2)⁴ — negative exponent read as a negative value [B1G-M misconception]; anything built from 6 — the unneeded figure was used"),
         dict(latex="\\left(\\frac{3}{-5}\\right)^{-9}", hint="Rewrite with a positive exponent.", gloss="flip the numbers; the sign stays in the fraction", answer_latex="\\left(\\frac{-5}{3}\\right)^{9}",
              note="Sign inside the denominator. A board with (5/3)⁹ took the opposite as well as the reciprocal — the named misconception.", check=("eq", "F(3,-5)**-9", "F(-5,3)**9"),
              wrong="(5/3)⁹ — took the opposite as well as the reciprocal [B1G-M 8.NSO.1.3 misconception: opposite instead of reciprocal]"),
@@ -167,7 +169,36 @@ L = dict(
             dict(label="b", stem="$\\left(\\frac{1}{3}\\right)^{n} = 27$", answer="n = −3", why="", check=("eq", "F(1,3)**-3", "27"), space=0.6)]),
     ],
 
+    mtr=[("MTR.5.1", "Notes I — 3.04's halving table redone with a fraction base, so the flip appears as the next line of a pattern the class already owns rather than a second rule."),
+         ("MTR.4.1", "Board 5 — when the room splits between (−8/7)² and (8/7)², the sixty-second re-vote before the reveal."),
+         ("MTR.6.1", "Board 3 — a base between −1 and 0 raised to a negative even power; students say which side of 1 the value lands on before computing it.")],
+
+    hoq=[("Marco says two negatives make a positive, so (−2/3)⁻⁵ is (2/3)⁵. Which negative is he cancelling, and what does each of the two actually do?", "DOK 3"),
+         ("4⁻³ and (1/4)³ are the same number. Write 4 as a fraction and show why they have to be.", "DOK 2"),
+         ("For which bases is (a/b)⁻ⁿ larger than 1, and for which is it smaller? Give an example of each.", "DOK 3")],
+
+    differentiation=dict(
+        ese="Give the rule as one picture — the fraction with a curved arrow turning it over and the exponent's minus crossed out — and let the student redraw it at the top of the page. On the first four boards the only job is the flip; the arithmetic comes after.",
+        ell="Flip is the word. Say 'flip the fraction, drop the minus' on every board, and keep 2/3 → 3/2 written up as the picture of what flip means.",
+        enrichment="Ask for 0.4⁻² by converting the decimal to a fraction first, and for the n that makes (2/3)ⁿ = 81/16."),
+
+    closure="Board 9 is written work and it is the exit evidence: the student has to say separately what the base's sign does and what the exponent's sign does. Read the boards, not the papers.",
+
+    independent=[
+        dict(stem="Rewrite with a positive exponent.  $\\left(\\frac{3}{4}\\right)^{-2}$", answer="$\\left(\\frac{4}{3}\\right)^{2}$", why="", check=("eq", "F(3,4)**-2", "F(4,3)**2"), space=0.8),
+        dict(stem="Find the value.  $\\left(\\frac{2}{5}\\right)^{-2}$", answer="$\\frac{25}{4}$", why="Flip, then square.", check=("eq", "F(2,5)**-2", "F(25,4)"), space=0.8),
+        dict(stem="Rewrite with a positive exponent.  $\\left(-\\frac{5}{6}\\right)^{-3}$", answer="$\\left(-\\frac{6}{5}\\right)^{3}$", why="The base keeps its sign through the flip.", check=("eq", "F(-5,6)**-3", "F(-6,5)**3"), space=0.8),
+        dict(stem="Find the value.  $\\left(\\frac{1}{2}\\right)^{-4}$", answer="16", why="(2/1)⁴.", check=("eq", "F(1,2)**-4", "16"), space=0.8),
+        dict(stem="Find the value.  $\\left(\\frac{3}{2}\\right)^{-1}\\cdot\\left(\\frac{3}{2}\\right)^{3}$", answer="$\\left(\\frac{3}{2}\\right)^{2} = \\frac{9}{4}$", why="−1 + 3 = 2.", check=("eq", "F(3,2)**-1*F(3,2)**3", "F(9,4)"), space=0.8),
+        dict(stem="Find the value of $n$.  $\\left(\\frac{4}{7}\\right)^{n} = \\left(\\frac{7}{4}\\right)^{3}$", answer="n = −3", why="Flipping the base flips the exponent's sign.", check=("eq", "F(4,7)**-3", "F(7,4)**3"), space=0.8),
+    ],
+
     te=dict(
+        say=["A negative exponent flips the base. On a fraction, that means turn it over.",
+             "The base keeps its own sign through the flip. Negative two-thirds flips to negative three-halves, not three-halves.",
+             "A whole number is a fraction over 1, so 4⁻³ and (1/4)³ are one rule, not two."],
+        must="Rational-number bases with integer exponents: rewrite with positive exponents, and apply several laws to generate an equivalent expression.",
+        must_not="No fractional exponents. Bases are nonzero, and the exponent's sign never moves the base's sign.",
         read_first=[
             "This lesson rebuilds Math Nation 3.5 (SE pp. 124–129). The book's guided instruction (the (2/5) pattern table) is Notes I; its Fernanda/Junior collaboration is Notes III; its equivalence table and matching activity are bank questions 5 and 10. Every value on the book's pages checks.",
             "The one item shape the book gets subtly wrong is whiteboard 5 here, where two options have the same VALUE (64/49) for different reasons. The book's own teacher note flags it; ours keeps the item because the discussion it starts is the point, and the teacher note says how to run it.",

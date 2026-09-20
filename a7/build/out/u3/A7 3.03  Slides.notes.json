@@ -118,7 +118,7 @@
    "title": "Whiteboards   \u00b7   Question 1 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "Example 1's shape with a new base. A board with 0 read 6\u2070 as 0; a board with 1296 forgot the denominator.",
+   "note": "Ruling 22's board: the file size is there to be read past. Example 1's shape with a new base. A board with 0 read 6\u2070 as 0; a board with 1296 forgot the denominator.",
    "kind": "wb"
   },
   {
@@ -259,10 +259,18 @@
   },
   {
    "n": 33,
+   "title": "Independent Set",
+   "sub": "Six questions. On your own, in silence.",
+   "min": 6,
+   "note": "Hand out the Independent Set. Silent work. Circulate and mark what you see; do not teach. Whatever is not finished goes home.",
+   "kind": "independent"
+  },
+  {
+   "n": 34,
    "title": "IXL",
    "sub": "Last five minutes.",
    "min": 5,
-   "note": "IXL: whatever is not finished is tonight's practice; SmartScore 67.",
+   "note": "IXL: every listed skill is required, SmartScore 67, due at the start of the next class.",
    "kind": "ixl"
   }
  ]

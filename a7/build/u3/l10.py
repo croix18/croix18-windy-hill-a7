@@ -81,9 +81,11 @@ L = dict(
         dict(text=["Write  $2.5 \\times 10^{-4}$  in standard form."], hint="Move the point four places left.", gloss="the 2 lands in the ten-thousandths place", answer="0.00025",
              note="The book's Mycoplasma bacterium, 2.5 × 10⁻⁴ mm. A board with 0.000025 moved five places; a board with 25,000 moved the wrong way.", check=("eq", "F(25,10)*F(10)**-4", "F(25,100000)"),
              wrong="0.000025 — point moved five places [8.NSO.1.4: 10⁻⁴ moves the point four places]; 25,000 — point moved right instead of left [negative exponent read as a large number]"),
-        dict(text=["Write  0.0000988  in scientific notation."], hint="Every nonzero digit stays in the coefficient.", gloss="the 9 is in the hundred-thousandths place", answer="9.88 × 10⁻⁵",
-             note="The book's ticket-out-the-door value. Four zeros after the point but the 9 is in the fifth place: 10⁻⁵. A board with 9.88 × 10⁻⁴ counted zeros; a board with 988 × 10⁻⁷ is equal in value but broke the coefficient rule.", check=("eq", "F(988,100)*F(10)**-5", "F(988,10**7)"),
-             wrong="9.88 × 10⁻⁴ — counted the zeros [8.NSO.1.4: exponent = places moved]; 988 × 10⁻⁷ — coefficient not in [1, 10) [B1G-M 8.NSO.1.4 misconception]",
+        dict(text=["A machine's cutting tolerance is  0.0000988  inch.", "The part it cuts is 4 inches long.", "Write the tolerance in scientific notation."],
+             qtext="A machine's cutting tolerance is 0.0000988 inch. The part it cuts is 4 inches long. Write the tolerance in scientific notation.",
+             unneeded="4-inch length of the part", hint="Every nonzero digit stays in the coefficient.", gloss="the 9 is in the hundred-thousandths place", answer="9.88 × 10⁻⁵",
+             note="Ruling 22's board: the part's length is there to be read past. The book's ticket-out-the-door value underneath. Four zeros after the point but the 9 is in the fifth place: 10⁻⁵. A board with 9.88 × 10⁻⁴ counted zeros; a board with 988 × 10⁻⁷ is equal in value but broke the coefficient rule.", check=("eq", "F(988,100)*F(10)**-5", "F(988,10**7)"),
+             wrong="9.88 × 10⁻⁴ — counted the zeros [8.NSO.1.4: exponent = places moved]; 988 × 10⁻⁷ — coefficient not in [1, 10) [B1G-M 8.NSO.1.4 misconception]; anything built from 4 — the unneeded figure was used",
              not_sci=True),
         dict(kind="mc", not_sci=True, text=["Which is  0.00081  written in scientific notation?"], choices=["8.1 × 10⁻⁴", "8.1 × 10⁻³", "81 × 10⁻⁵", "8.1 × 10⁴"], correct=0, answer="A — 8.1 × 10⁻⁴",
              errors={"B": "counted the three zeros instead of the four places [8.NSO.1.4: exponent = places moved]",
@@ -187,7 +189,36 @@ L = dict(
             dict(label="b", stem="How many times smaller is the grain of pollen than the bag of flour?", answer="$2.5 \\times 10^{11}$ times smaller — the same comparison read the other way.", why="", check=("eq", "(8*F(10)**-9)/(2*10**3)", "1/(F(25,10)*10**11)"), space=0.6)]),
     ],
 
+    mtr=[("MTR.5.1", "Notes I — negative powers of ten are set against the decimal places, so 10⁻³ is read as three places to the right of the point."),
+         ("MTR.6.1", "Board 7 — a comparison of two very small numbers; students say which exponent wins before they look at the coefficients."),
+         ("MTR.7.1", "Board 9 and the bank — thicknesses, tolerances and densities, which are the quantities this notation exists for.")],
+
+    hoq=[("0.003 becomes 3 × 10⁻³, and 3 × 10³ is 3,000. Why does the same digit 3 give numbers so far apart?", "DOK 2"),
+         ("A student says 0.0000988 is 9.88 × 10⁻⁴ because there are four zeros. Where does the count actually come from?", "DOK 3"),
+         ("Two numbers have the same coefficient and exponents of −3 and −7. How many times larger is the first, and how do you know without dividing the coefficients?", "DOK 3")],
+
+    differentiation=dict(
+        ese="Give the decimal-place strip from Notes I — 10⁻¹ through 10⁻⁸ with the places marked — and let the student walk the decimal point along it, one place per power, rather than counting zeros in their head.",
+        ell="The comparison questions turn on two phrases, times larger and times smaller. Put both on the board over the same pair of numbers and read the question out loud twice before any board goes up.",
+        enrichment="Ask how many times larger 5 × 10⁻² is than 2 × 10⁻⁶, then for a number between 4 × 10⁻⁵ and 5 × 10⁻⁵ written in scientific notation."),
+
+    closure="Board 9 is written work and it is the exit evidence: the student has to name B as the thicker line, give the factor 3, and write a thickness that falls between the two. Read the boards, not the papers.",
+
+    independent=[
+        dict(stem="Write  0.00047  in scientific notation.", answer="4.7 × 10⁻⁴", why="", check=("eq", "F(47,100000)", "F(47,10)*F(10)**-4"), space=0.7),
+        dict(stem="Write  $5.2 \\times 10^{-3}$  in standard form.", answer="0.0052", why="", check=("eq", "F(52,10)*F(10)**-3", "F(52,10000)"), space=0.7),
+        dict(stem="Write  0.0000061  in scientific notation.", answer="6.1 × 10⁻⁶", why="The 6 is in the millionths place.", check=("eq", "F(61,10000000)", "F(61,10)*F(10)**-6"), space=0.7),
+        dict(stem="Which is greater,  $2.4 \\times 10^{-6}$  or  $8.1 \\times 10^{-9}$ ?", answer="$2.4 \\times 10^{-6}$", why="−6 is greater than −9.", check=("true", "F(24,10)*F(10)**-6 > F(81,10)*F(10)**-9"), space=0.8),
+        dict(stem="How many times larger is  $8 \\times 10^{-2}$  than  $4 \\times 10^{-5}$ ?", answer="2,000", why="8 ÷ 4 = 2, and 10⁻² ÷ 10⁻⁵ = 10³.", check=("eq", "8*F(10)**-2/(4*F(10)**-5)", "2000"), space=0.8),
+        dict(stem="A computer displays a number as  3.7E−5.  Write it in standard form.", answer="0.000037", why="", check=("eq", "F(37,10)*F(10)**-5", "F(37,1000000)"), space=0.8),
+    ],
+
     te=dict(
+        say=["Small number, negative exponent. The minus is about size; it never makes the number negative.",
+             "The exponent counts the places the decimal point moves, not the zeros you can see.",
+             "Compare the exponents first. The coefficients only break a tie."],
+        must="Express very small quantities in scientific notation and read them back; determine how many times larger or smaller one number is than another.",
+        must_not="Coefficients are at least 1 and less than 10. A negative exponent never makes the value negative, and operations in scientific notation are Unit 4.",
         read_first=[
             "This lesson rebuilds Math Nation 3.9 (SE pp. 146–151) and completes MA.8.NSO.1.4. The book's sequence — negative powers of ten and decimal places, the definition for numbers less than 1, then 'how many times larger or smaller' — is kept as Notes I–III. Its oxygen density, human hair, Mycoplasma, 0.0000988 and 7.2 × 10⁻⁴ ÷ 1.8 × 10⁻⁷ items are kept.",
             "Three book items were NOT reused, per the audit. Homework 4b's key says 10⁻⁸ is 3 times smaller than 10⁻⁵ (it is 1,000 times). Homework 4c asks how many times smaller 7.4 × 10⁻⁸ is than 0.000039 and keys 3,000; the true ratio is about 527, and the item's scaffold pulls in two directions — bank 8 keeps the same two numbers and asks only which is greater, which is sound. Homework 5's matching pairs '112 ten millionths' with 1.12 · 10⁻⁷, but 112 ten-millionths is 0.0000112 = 1.12 × 10⁻⁵, the same value as another row; Additional 10 uses '112 billionths', which is 1.12 × 10⁻⁷.",

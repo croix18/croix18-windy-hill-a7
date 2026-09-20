@@ -86,9 +86,11 @@ L = dict(
         dict(latex="\\frac{\\left(2^{-1}\\right)^{3}\\cdot\\left(\\frac{1}{2}\\right)^{-4}}{2\\cdot 2^{2}}", hint="Find the value.", gloss="2⁻³ · 2⁴ over 2³ = 2⁻²", answer_latex="\\frac{1}{4}",
              note="The book's choose-your-own-adventure expression: four laws. Everything becomes a power of 2: −3 + 4 − 3 = −2. A board with 4 forgot the final flip; a board with 2 miscounted the denominator as 2².", check=("eq", "(F(2)**-1)**3*F(1,2)**-4/(2*2**2)", "F(1,4)"),
              wrong="4 — 2⁻² left unflipped [negative exponent law]; 1/2 — the denominator 2 · 2² counted as 2² [product of powers]"),
-        dict(latex="8^{5}", hint="Write it as a power of 2.", gloss="8 = 2³, so (2³)⁵", answer_latex="2^{15}",
-             note="Notes III, plain. A board with 2⁸ added 3 + 5; a board with 2⁵ replaced 8 by 2.", check=("eq", "8**5", "2**15"),
-             wrong="2⁸ — added 3 + 5 in the power-of-a-power step [confused with product of powers]; 2⁵ — replaced the base 8 by 2 without the exponent 3"),
+        dict(text=["A drive holds  $8^{5}$  megabytes.", "It costs 45 dollars.", "Write  $8^{5}$  as a power of 2."],
+             qtext="A drive holds 8⁵ megabytes. It costs 45 dollars. Write 8⁵ as a power of 2.",
+             unneeded="price of 45 dollars", hint="Write it as a power of 2.", gloss="8 = 2³, so (2³)⁵", answer_latex="2^{15}",
+             note="Ruling 22's board: the price is there to be read past. Notes III, plain, underneath. A board with 2⁸ added 3 + 5; a board with 2⁵ replaced 8 by 2.", check=("eq", "8**5", "2**15"),
+             wrong="2⁸ — added 3 + 5 in the power-of-a-power step [confused with product of powers]; 2⁵ — replaced the base 8 by 2 without the exponent 3; anything built from 45 — the unneeded figure was used"),
         dict(kind="mc", latex="9^{4}", text=["Which expression is equivalent?"], choices=["3⁸", "3⁶", "3⁴", "3¹⁶"], correct=0, answer="A — 3⁸",
              errors={"B": "added 2 + 4 instead of multiplying [power of a power confused with product of powers]",
                      "C": "replaced 9 by 3 and kept the exponent [the 3² was not written]",
@@ -175,7 +177,36 @@ L = dict(
             dict(label="b", stem="$\\left(\\frac{1}{4}\\right)^{n} = 2^{10}$", answer="n = −5", why="", check=("eq", "F(1,4)**-5", "2**10"), space=0.5)]),
     ],
 
+    mtr=[("MTR.2.1", "Notes I — two students' plans for one expression are written side by side and both are carried to the end, so the value is seen to be independent of the route."),
+         ("MTR.5.1", "Notes III and boards 4, 7 and 8 — 8, 4 and 16 are rewritten as powers of 2, which is the only way expressions with different bases can be compared at all."),
+         ("MTR.6.1", "Board 9 — Xavier's claim is tested rather than believed; the student converts the second expression and finds 2⁻⁶.")],
+
+    hoq=[("Two expressions have different bases. What has to be true before you are allowed to say they are equivalent?", "DOK 2"),
+         ("Xavier's two expressions differ by exactly one in the exponent. Where in his conversion did that one go missing?", "DOK 3"),
+         ("Could 3⁵ ever be written as a power of 2? Say why or why not.", "DOK 3")],
+
+    differentiation=dict(
+        ese="Give the powers of 2, 3 and 5 from Unit 2 as a printed strip — 2¹ to 2¹⁰, 3¹ to 3⁵, 5¹ to 5⁴ — and let it stay out. Rewriting a base is a lookup today, not a recall.",
+        ell="Equivalent is the word being tested. Write EQUIVALENT = same value, different form with 8⁵ = 2¹⁵ under it, and ask 'same value?' on every board that shows two expressions.",
+        enrichment="Ask whether 4⁶ and 8⁴ are equivalent and how the student knows, then for two expressions with different bases that both equal 2⁻⁶."),
+
+    closure="Board 9 is written work and it is the exit evidence: the student has to convert the second expression and name the exponent it really has. Read the boards, not the papers.",
+
+    independent=[
+        dict(stem="Find the value.  $\\frac{(-5)^{4}}{(-5)^{0}\\cdot(-5)^{2}}$", answer="$(-5)^{2} = 25$", why="4 − 0 − 2 = 2.", check=("eq", "F(-5)**4/(F(-5)**0*F(-5)**2)", "25"), space=0.8),
+        dict(stem="Find the value.  $\\left(\\frac{2}{3}\\right)^{-2}\\cdot\\left(\\frac{2}{3}\\right)^{3}$", answer="$\\frac{2}{3}$", why="−2 + 3 = 1.", check=("eq", "F(2,3)**-2*F(2,3)**3", "F(2,3)"), space=0.8),
+        dict(stem="Write as a power of 2.  $16^{3}$", answer="$2^{12}$", why="16 = 2⁴.", check=("eq", "F(16)**3", "2**12"), space=0.8),
+        dict(stem="Write as a power of 3.  $27^{2}\\cdot 9$", answer="$3^{8}$", why="3⁶ · 3².", check=("eq", "F(27)**2*F(9)", "3**8"), space=0.8),
+        dict(stem="Are  $4^{-2}$  and  $2^{-4}$  equivalent? Show why.", answer="Yes — both are $\\frac{1}{16}$.", why="4⁻² = (2²)⁻² = 2⁻⁴.", check=("many", ("eq", "F(4)**-2", "F(1,16)"), ("eq", "F(2)**-4", "F(1,16)")), space=1.0),
+        dict(stem="Find the value.  $\\left(3^{-1}\\right)^{2}\\cdot 3^{5}$", answer="$3^{3} = 27$", why="−2 + 5 = 3.", check=("eq", "(F(3)**-1)**2*F(3)**5", "27"), space=0.8),
+    ],
+
     te=dict(
+        say=["Different bases cannot be compared. Rewrite both to the same base first, then look.",
+             "Every law you know can appear in one expression at once. The order is yours; the value is not.",
+             "Test a claim before you agree with it. Convert, then decide."],
+        must="Integer exponents and rational bases, with procedural fluency: evaluate, and decide equivalence by rewriting to a common base.",
+        must_not="Bases that get rewritten are powers of 2, 3 or 5. No prime factorisation of arbitrary numbers, and no fractional exponents.",
         read_first=[
             "This period is Math Nation 3.6 and 3.7 taught as one lesson (scope and sequence, ruling 14: paired book lessons run as one period). 3.6 is 'evaluate with several laws'; 3.7 is 'rewrite to a common base and decide equivalence'. Notes I–II carry 3.6, Notes III–IV carry 3.7, and the round mixes the two.",
             "Everything on the book's pages for both lessons checks. The one defect in the surrounding material is on their homework key for 3.6 (nothing wrong) — no repairs were needed here; the audit list below records what was verified.",

@@ -21,7 +21,7 @@ LESSONS = M["lessons"]
 U = M["unit"]
 
 
-FOLDERS = ["Question Banks", "Slides", "Handouts", "Assessments", "Answer Keys", "Teacher Editions", "Reference"]
+FOLDERS = ["Question Banks", "Independent Sets", "Slides", "Handouts", "Assessments", "Answer Keys", "Teacher Editions", "Lesson Plans", "Reference"]
 
 
 def dest_folder(name):
@@ -31,6 +31,10 @@ def dest_folder(name):
         return "Answer Keys"
     if "Teacher Edition" in name:
         return "Teacher Editions"
+    if "Lesson Plan" in name:
+        return "Lesson Plans"
+    if "Independent Set" in name:
+        return "Independent Sets"
     if "Reference Sheet" in name:
         return "Handouts"
     if "Unit Review" in name or "Unit Assessment" in name:

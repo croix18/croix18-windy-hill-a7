@@ -75,9 +75,11 @@ L = dict(
         dict(latex="\\frac{1}{y^{-5}}", hint="Rewrite with a positive exponent.", gloss="the power moves up", answer_latex="y^{5}",
              note="The second form. A board with 1/y⁵ made the exponent positive without moving the power.", check=("eq", "1/y**-5", "y**5"),
              wrong="1/y⁵ — the sign was changed but the power was not moved [8.AR.1.1: law applied in one direction only]"),
-        dict(latex="3x^{-2}", hint="Rewrite with a positive exponent.", gloss="only the x moves", answer_latex="\\frac{3}{x^{2}}",
-             note="The coefficient stays. A board with 1/(3x²) moved the 3 as well — today's leading error, and the one to name at the board.", check=("eq", "3*x**-2", "3/x**2"),
-             wrong="1/(3x²) — the coefficient was moved with the variable [B1G-M 8.AR.1.1: negative exponent applies only to its own base]; −3x² — read as a negative"),
+        dict(text=["A model's scale factor is  $3x^{-2}$.", "The model is 12 centimeters long.", "Rewrite the factor using only positive exponents."],
+             qtext="A model's scale factor is 3x⁻². The model is 12 centimeters long. Rewrite the factor using only positive exponents.",
+             unneeded="length of 12 centimeters", hint="Rewrite with a positive exponent.", gloss="only the x moves", answer_latex="\\frac{3}{x^{2}}",
+             note="Ruling 22's board: the model's length is there to be read past. The coefficient stays put. A board with 1/(3x²) moved the 3 as well — today's leading error, and the one to name at the board.", check=("eq", "3*x**-2", "3/x**2"),
+             wrong="1/(3x²) — the coefficient was moved with the variable [B1G-M 8.AR.1.1: negative exponent applies only to its own base]; −3x² — read as a negative; anything built from 12 — the unneeded figure was used"),
         dict(latex="y^{-3}z^{-4}", hint="Rewrite with positive exponents.", gloss="both factors move down", answer_latex="\\frac{1}{y^{3}z^{4}}",
              note="The state guide's own item. A board with 1/(yz)⁷ or 1/(yz⁷) combined unlike bases.", check=("eq", "y**-3*z**-4", "1/(y**3*z**4)"),
              wrong="1/(yz)⁷ — exponents on different bases were added [8.AR.1.1: like bases only]; −y³z⁴ — read as a negative"),
@@ -173,7 +175,36 @@ L = dict(
              why="", check=("many", ("eq", "m**-8", "1/m**8"), ("eq", "m**3*m**-11", "1/m**8"), ("eq", "m**2/m**10", "1/m**8"), ("eq", "(m**-4)**2", "1/m**8"), ("true", "sp.simplify(-m**8 - 1/m**8) != 0"), ("true", "sp.simplify((m**-2)**-4 - 1/m**8) != 0"))),
     ],
 
+    mtr=[("MTR.5.1", "Notes I — 3.04's halving table rewritten with a letter, so x⁻¹ = 1/x is the next line of a pattern the class already owns."),
+         ("MTR.6.1", "Board 4 — two negative exponents on two different letters; students say how many factors end up under the bar before they write anything."),
+         ("MTR.4.1", "Board 6 — when the room splits over whether the 2 gets squared, the sixty-second re-vote before the reveal.")],
+
+    hoq=[("3x⁻² and (3x)⁻² are not the same expression. Write the fraction for each and say exactly what moved.", "DOK 3"),
+         ("x⁻⁵ · xⁿ = x² has one answer. Is there an n that makes the product x⁰, and what would that mean?", "DOK 3"),
+         ("Is x⁻³ ever a negative number? Say when, and what has to be true about x.", "DOK 3")],
+
+    differentiation=dict(
+        ese="Give the fraction bar as a picture: a factor with a negative exponent crosses the bar and the minus disappears. The first four boards are one crossing each, and the student draws the arrow before writing the answer.",
+        ell="Simplified form has a specific meaning here. Write it on the board as a checklist — every exponent positive, every like base combined — and point at it before each board goes up.",
+        enrichment="Ask for (2x⁻¹y²)⁻³ with positive exponents only, and for the n that makes x⁻² · xⁿ = 1."),
+
+    closure="Board 9 is written work and it is the exit evidence: the student has to name x⁻³ as the reciprocal of x³ and give both values at x = 2. Read the boards, not the papers.",
+
+    independent=[
+        dict(stem="Rewrite using only positive exponents.  $m^{-6}$", answer="$\\frac{1}{m^{6}}$", why="", check=("eq", "m**-6", "1/m**6"), space=0.7),
+        dict(stem="Rewrite using only positive exponents.  $5y^{-3}$", answer="$\\frac{5}{y^{3}}$", why="The 5 stays upstairs.", check=("eq", "5*y**-3", "5/y**3"), space=0.7),
+        dict(stem="Rewrite using only positive exponents.  $\\frac{1}{x^{-7}}$", answer="$x^{7}$", why="The factor moves up.", check=("eq", "1/x**-7", "x**7"), space=0.7),
+        dict(stem="Simplify. Use positive exponents only.  $x^{2}\\cdot x^{-9}$", answer="$\\frac{1}{x^{7}}$", why="2 + (−9) = −7.", check=("eq", "x**2*x**-9", "1/x**7"), space=0.8),
+        dict(stem="Simplify. Use positive exponents only.  $\\left(3m^{-2}\\right)^{3}$", answer="$\\frac{27}{m^{6}}$", why="The 3 is cubed as well.", check=("eq", "(3*m**-2)**3", "27/m**6"), space=0.8),
+        dict(stem="Find the value of $n$.  $y^{-3}\\cdot y^{n} = y^{4}$", answer="n = 7", why="−3 + n = 4.", check=("eq", "y**-3*y**7", "y**4"), space=0.8),
+    ],
+
     te=dict(
+        say=["A negative exponent on a letter means what it meant on a number: reciprocal.",
+             "Only the factor wearing the negative exponent moves. In 3x⁻², the 3 stays upstairs.",
+             "Simplified means no negative exponents are left. Check every one before the board goes up."],
+        must="Integer exponents on monomial bases, negatives included: rewrite so that only positive exponents are left, and combine several laws in one expression.",
+        must_not="Variables are nonzero wherever a negative exponent appears. No rational exponents, and monomials only.",
         read_first=[
             "Second Thread A day (Math Nation 14.3 and 14.4 under ruling 14): the negative exponent law and multiple laws, with variable bases. The lesson is built on 3.04 — the same table, the same 'reciprocal, not opposite' line — and on yesterday's regrouping of coefficients and variables.",
             "The items are original, aligned to the benchmark text and to the B1G-M for MA.8.AR.1.1: its example (3x³y⁻²)³ = 27x⁹y⁻⁶ is the shape of Notes III's last line and bank 7b; its items y⁻³z⁻⁴ = 1/(y³z⁴) (whiteboard 4) and (a³/(4b⁻⁷))⁵ = a¹⁵b³⁵/1,024 (Example 2 and bank 8c) are used as written; its task 2 (the x⁵ … x⁻⁵ table) is Notes I; its task 3 (x³ vs x⁻³) is whiteboard 9, as a written contrast.",
