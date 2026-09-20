@@ -1,0 +1,29 @@
+# Unit 4 manifest — what install_unit.py needs to assemble the package and write 00 - START HERE.md.
+M = dict(
+    unit=4, title="Solving Problems with Rational Numbers",
+    folder="A7 Unit 4 - Solving Problems with Rational Numbers",
+    audit_src="a7/unit04/UNIT 4 AUDIT.md",           # repo-relative; copied into Reference/
+    summary="six teaching days (eight book lessons, merged to six), a review, a two-period assessment",
+    # (file code, label as printed, title, benchmark, the line that carries the day) — in teaching order
+    lessons=[
+        ("4.01", "4.01", "Adding and Subtracting in Scientific Notation", "MA.8.NSO.1.5", "The powers of ten have to match before a single digit is added."),
+        ("4.02", "4.02–03", "Multiplying and Dividing in Scientific Notation", "MA.8.NSO.1.5", "Multiply the fronts, add the backs — and nothing has to match."),
+        ("4.04", "4.04", "Real-World Problems and Significant Digits", "MA.8.NSO.1.6", "Products count digits; sums count places."),
+        ("4.05", "4.05", "Evaluating Expressions with Radicals", "MA.8.NSO.1.7", "The radical bar is a pair of parentheses you cannot see."),
+        ("4.06", "4.06", "Order of Operations with Radicals", "MA.8.NSO.1.7", "Read the expression and ask what is holding what."),
+        ("4.07", "4.07–08", "Real-World Order of Operations", "MA.8.NSO.1.7", "No word tells you which operation to use. Read the situation."),
+    ],
+    assessment=("all three benchmarks, sections by benchmark", 34),
+    naming_note="Two days carry two book lessons each: `A7 4.02` is Math Nation's lessons 2 and 3 (multiplying and dividing), and `A7 4.07` is its lessons 7 and 8 (the two real-world days, which are three rotating stations in the book and are taught from the front here).",
+    order_note="Book order, with 4.2 + 4.3 and 4.7 + 4.8 merged under ruling 30 — both merges were already in the scope and sequence. 4.05 and 4.06 stay separate days even though IXL gives them the same skill; under ruling 28 that is one assignment covering the run, due after the second of the two. No thread day falls inside Unit 4. All three benchmarks report under Number Sense and Operations on the Grade 8 FAST, so the review's parts split by lesson and the assessment's sections split by benchmark.",
+    before_unit=[
+        "**Fifteen defects in the Math Nation package are not reproduced here.** Two Teacher Edition answer keys are wrong by a factor of ten (4.4.3 Q1b, 4.4.4 Q1b — both are worked answers the teacher reads aloud). Two worked examples do not match the problems they claim to solve (Homework L3 Q4, Homework L1 Q4). One practice item has no correct answer at all (Practice L1 Q1). Two physical facts are false — the speed of light given as 3 × 10⁹ m/s, where the value the book circles as the student's error is the physically correct one, and a 2020 smartphone clocked at 2.7 MHz. `Reference/UNIT 4 AUDIT - Math Nation package.md` has every one with its page.",
+        "**The significant-digit rule is stated wrongly in the book and is taught correctly here.** Teacher Edition 4.4.2 gives the rule as a count of significant digits and then applies it to a subtraction — and so does the book's own unit assessment. The counting rule governs products and quotients; sums and differences are governed by the place where each measurement's last digit sits. Every example the book uses comes out the same either way, so nothing printed there is numerically wrong, but a student who learns it as stated will be wrong elsewhere. Lesson 4.04's Notes III teaches both rules side by side, and 1,234 + 5.6 is the case where they disagree.",
+        "**Four items in the book add or subtract exponents more than 2 apart**, outside this benchmark's own clarification — and one of them is two questions away from a margin note quoting that very rule. None are reproduced. Every addition and subtraction in this unit has a gap of 0, 1 or 2, and the build refuses anything wider.",
+        "**The flooring item is rebuilt, not reused.** The book's version puts underlay under the Bathroom heading while its price sits inside the bedroom's area group, and prices grout per square foot in the table while adding it as a flat amount in the expression, so three of its questions have no unambiguous answer. Lesson 4.07's Example 2 and boards 4 and 6 rebuild the context with the question saying which prices are rates and which are flat.",
+        "**Three things the state guide expects that the book never asks are in every relevant bank and on the assessment:** a quotient crossing from very large to very small, the renormalisation misconception (12 × 10⁹ left where 1.2 × 10¹⁰ was needed) as a named wrong option, and the exponents-multiplied misconception as a named wrong option.",
+        "**The assessment is one paper over two periods, 34 points** (ruling 27). Students stop when the first period ends and continue from where they stopped — it is not two papers, and nothing on it says 'Day 1'. Three sections by benchmark, numbered 1–18 straight through. **Questions 6 and 18 are transfer items** (ruling 18): the same benchmarks, on surfaces that appear on no review and in no question bank. The key names them and the Score Tracker maps every question to its benchmark.",
+        "**The Reference Sheet is the only handout.** Give it out at 4.01; it is the document students study from, and its perfect-square and perfect-cube lists are what 4.05 and 4.06 assume. It does not go into the test.",
+        "**No mnemonic and no keyword strategy anywhere in this unit.** The state guide names both as misconceptions — PEMDAS because it has no letter for the radical bar or the fraction bar, and circling-and-boxing because two problems with the same numbers and the same words can need different operations. The word PEMDAS appears nowhere in the package.",
+    ],
+)

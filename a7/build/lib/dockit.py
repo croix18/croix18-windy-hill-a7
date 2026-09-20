@@ -179,6 +179,18 @@ class Doc:
     def table(self, widths, rows, header=False, borders=True, align_center=False, size=11,
               shade_header=True, cell_align=None, keep=False):
         """rows: list of lists of cell content strings (rich markup allowed). Returns table."""
+        # A math span in a cell is an inline picture: it cannot wrap, so one wider than its column
+        # is silently clipped at the cell edge. Text wraps and the row grows, so only the pictures
+        # are measured here.
+        for ri, row in enumerate(rows):
+            for ci, content in enumerate(row):
+                txt = content.get("text", "") if isinstance(content, dict) else (content or "")
+                for part in re.findall(r"\$[^$]+\$", str(txt)):
+                    _, mw, _ = mathimg.m(part[1:-1], "doc", INK)
+                    avail = widths[ci] / 1440 - 200 / 1440
+                    if mw > avail:
+                        raise RuntimeError(f"math in a table cell is wider than its column "
+                                           f"({mw:.2f} in in {widths[ci] / 1440:.2f} in): {part[:50]!r}")
         t = self.d.add_table(rows=0, cols=len(widths))
         t.autofit = False
         tblPr = t._tbl.tblPr

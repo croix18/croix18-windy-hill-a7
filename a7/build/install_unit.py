@@ -127,7 +127,8 @@ def start_here(n_files):
     A("|---|---|---|---|")
     for code, label, title, bm, line in LESSONS:
         A(f"| {label} | {title} | {bm} | {line} |")
-    A("| — | Unit Review | all four | unscored; the SSDD block is named on the key only |")
+    n_bm = len({l[3] for l in M["lessons"]})
+    A(f"| — | Unit Review | all {('two', 'three', 'four', 'five', 'six')[n_bm - 2] if 2 <= n_bm <= 6 else n_bm} | unscored; the SSDD block is named on the key only |")
     _bms, _pts = M["assessment"]
     A(f"| — | Unit Assessment — two periods, one paper | {_bms} | {_pts} points |")
     A("")
@@ -137,7 +138,7 @@ def start_here(n_files):
     A("")
     A("## How a period runs (rulings 10–12)")
     A("")
-    A("Title and learning target (1 min) → warm-up, four spaced-retrieval questions (5) → notes (10–11) → two worked examples with a Your Turn each (10) → **nine whiteboard questions**, question 9 written (the remainder) → IXL, the last five minutes. Every wrong option on every multiple-choice item is a named error with its benchmark cited, in the Teacher Edition and on the keys (§16 rule 4).")
+    A("Title and learning target (1 min) → warm-up, four spaced-retrieval questions (5) → notes (10–11) → two worked examples with a Your Turn each (10) → **nine whiteboard questions**, question 9 written (the remainder, 10\u201320) \u2192 the **independent set**, six questions written in silence (6, ruling 21) \u2192 IXL, the last five minutes. Every wrong option on every multiple-choice item is a named error with its benchmark cited, in the Teacher Edition and on the keys (§16 rule 4).")
     A("")
     A("## Timing")
     A("")
