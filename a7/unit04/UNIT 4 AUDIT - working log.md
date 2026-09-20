@@ -150,3 +150,46 @@ the rational versions 1/8, 1/27, 1/125), so Clarification 2 is respected through
 - **The context of both versions** asks how long sound takes to travel from Earth to the Sun.
   Sound does not travel through a vacuum. The arithmetic is fine; the physics is not, and this is
   the kind of thing a student notices out loud.
+
+---
+
+## Teacher Edition — Lessons 1 to 4
+
+The TE reproduces each in-lesson student page with its answers printed in red. 70 values
+re-derived across Lessons 1–4.
+
+**Sound throughout:** 4.1.2 Exploration (Neptune + Saturn = 1.67×10⁵ km, wider than Jupiter's
+1.43×10⁵ ✓); 4.1.3 Guided Instruction (the four-row equivalence table, 2.185×10⁶, 1.125×10⁶,
+7.17×10⁻³, 1.252×10⁻²); 4.1.4 Q1–Q2; 4.1.5 Try It all five; every value in Lesson 2 including
+**all eighteen "Give Me Five!" game cards**; every value in Lesson 3 (toilet paper, the five
+conjecture tables, Gizmo Gadgets, the four quotients); 4.4.1 Warm-Up's four rows; 4.4.2's
+significant-digit table and the Apollo/smartphone arithmetic; 4.4.4 parts a, c, d and Q2.
+
+### Defects — Teacher Edition
+
+| # | Where | What it says | What is true |
+|---|---|---|---|
+| **D9** | 4.4.3 Guided Instruction Q1b | National debt $26.9 trillion ÷ North Bay's 197,974 people → key **1.36 × 10⁹** | 2.69×10¹³ ÷ 1.97974×10⁵ = **1.3588 × 10⁸**. The key's exponent is one too high — this is the worked answer the teacher reads out. |
+| **D10** | 4.4.4 Your Turn Q1b | "4(1.2 × 10⁷) + 3.0 × 10⁸ **−** 3.48 × 10⁹ ≈ 3 × 10⁸" | 4.8×10⁷ + 3.0×10⁸ = **3.48 × 10⁸**. Exponent one too high, **and** the key prints a minus sign where the equals sign belongs, so the line as printed is not even an equation. |
+| **D11** | 4.3.3 Guided Instruction Q2 | "The speed of light is (3 × 10⁹) meters per second." | The speed of light is **3 × 10⁸ m/s**. Worse, with the true value the answer is 500 s — which is exactly **Mara's answer, the one the book circles as the error**. A student who knows that light takes about eight minutes to reach Earth is told the right number is wrong. |
+| **D12** | 4.4.2 Guided Instruction Q3 | Smartphone processing speed **2.7 MHz** | A modern smartphone runs at about 2.7 **GHz**. As printed, a 2020 phone is 2.6 times faster than a 1966 guidance computer, which is the opposite of the point the item is making. (Using GHz would put the subtraction's exponents 3 apart, outside the benchmark — which may be why it was changed, but a false fact is not the fix.) |
+| **D13** | 4.4.2 Guided Instruction, the sig-digit rule | "If two numbers are written with different precision, then the precision is the least **number of significant digits**." The book then applies this to **subtraction** (Q1d, and the assessment's Q2) | That is the rule for **products and quotients**. For sums and differences precision is governed by **decimal places**. The two rules agree on every example the book uses, so nothing in the book is wrong *numerically* — but the rule as stated is wrong, and a student who applies it to 1.234×10³ + 5.6 gets 1.2×10³ where 1.240×10³ is right. |
+
+### Outside the boundary — Teacher Edition
+
+- **4.1.4 Guided Practice Q3**: 2.37 × 10³² + 14.29 × 10³⁴. Written properly that is 2.37×10³² +
+  1.429×10³⁵, an **exponent gap of 3**. The margin note on the facing page quotes Clarification 1
+  ("within two of each other") and says the lesson has built understanding to within one — so the
+  book knows the rule and breaks it two questions later.
+
+### Conflicts with our settled rules (not errors)
+
+- **Partner work is everywhere**: 4.1.2 Exploration, 4.3.2 Exploration (which also has students
+  collect initials from two other pairs), 4.2.4 "Give Me Five!" (a two-player game with cards and
+  a gameboard), 4.4.2 partner discussions, 4.6.3 Collaboration, 4.7.2 Collaboration, and the whole
+  of 4.8 (three stations). All taught from the front or rewritten as written work.
+- **"Students should not be allowed to use a calculator"** (4.2.1 Warm-Up) and **"The questions on
+  the unit assessment are no calculator"** (Assessment Guide p. 2). Croix's ruling is the
+  opposite and nothing about calculators is printed on any of our pages.
+- The TE tells teachers students "will not have a calculator on the **FSA**" (4.5.4 margin). The
+  test is the **FAST**, and Florida provides an on-screen scientific calculator at grades 7–8.
