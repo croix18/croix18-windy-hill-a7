@@ -1264,6 +1264,27 @@ write them on the te/lesson plan because I can't see them on the slides."
   library because the pipeline was live. *An instruction is not a procedure. Measure your own
   tree before you copy one.*
 
+## 13b(iv). Rulings — Croix, 20 September: the state guides are the backbone
+
+**Ruling 13 — Grade 8 B1G-M is the spine; Grade 7 B1G-M is the prerequisite map.** *Croix:*
+"Grade 8 is the spine. Yes to all four." Every lesson serves a named MA.8 benchmark; the 17
+carried MA.7 benchmarks are taught where the spine needs them; a lesson serving neither is
+enrichment and is flagged, not silently built. The full map, the caps, the reference-sheet split
+and the distractor catalogue are in `Reference/B1G-M BACKBONE.md`; the per-benchmark reading
+record is `Reference/B1G-M READING NOTES.md`.
+
+- **The guide's numeric caps are hard checks** (`capcheck`, a §13c check that fails the build:
+  radicands ≤ 225, cubes in [−125, 125], sci-notation ± within 2 exponents, slope-intercept only,
+  rotations about the origin, ≤ 20 points, two repetitions except coins, and the rest of the
+  table). It runs on the Unit 1–2 question banks retroactively before Unit 3 starts.
+- **The Reference Sheet follows the memorize/provide split literally.** Pythagorean Theorem and
+  converse OFF (the state says memorize); circle, quadrilateral, cylinder, simple interest and
+  F↔C formulas ON (the state says do not memorize); slope, the two triangle theorems and the
+  conversion tables mirror the FAST sheet line for line.
+- **Every distractor is recorded in the TE by its guide-named error**, with the benchmark cited.
+  "Arithmetic slip" is not an error name; `distractorcheck` fails a whiteboard or assessment
+  whose wrong option has no named-error line.
+
 ## 13b(ii). Rulings — Croix, 6 September
 
 **Ruling 8 — a question is never split across a page, and the paper is the price.**
