@@ -9,12 +9,18 @@ cd "$(dirname "$0")/.."
 T=$(tr -d '[:space:]' < .github-token)
 B=$(printf 'x-access-token:%s' "$T" | base64 -w0)
 MSG=${1:-"Update"}
+# The co-author trailer names the model that did the work. Each session sets it to its own
+# model before the first push; CLAUDE_MODEL_NAME overrides without editing this file.
+COAUTHOR=${CLAUDE_MODEL_NAME:-"Claude Opus 5"}
+TRAILER="Co-Authored-By: $COAUTHOR <noreply@anthropic.com>"
+[ -n "${CLAUDE_SESSION_URL:-}" ] && TRAILER="$TRAILER
+Claude-Session: $CLAUDE_SESSION_URL"
 git add -A
 if ! git diff --cached --quiet; then
   git -c user.name="Croix Shaffer" -c user.email="268190892+croix18@users.noreply.github.com" \
     commit -q -m "$MSG
 
-Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"
+$TRAILER"
 fi
 git -c "http.https://github.com/.extraheader=Authorization: Basic $B" push -q origin main 2>&1 | grep -v "acknowledgments\|push negotiation" || true
 # Trust the remote, not the message.
