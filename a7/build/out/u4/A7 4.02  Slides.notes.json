@@ -1,0 +1,277 @@
+{
+ "deck": "A7 4.02  Slides.pptx",
+ "slides": [
+  {
+   "n": 1,
+   "title": "Multiplying and Dividing in Scientific Notation",
+   "sub": "",
+   "min": 1,
+   "note": "Post the learning target. Say the 'today' line and nothing else yet.",
+   "kind": "title"
+  },
+  {
+   "n": 2,
+   "title": "Warm-Up",
+   "sub": "On your own. Four minutes. No notes.",
+   "min": 4,
+   "note": "Q1 and Q2 are the two halves of today, side by side. Q1 is yesterday's rule, where the power of ten sat still and only the coefficients moved. Q2 is the rule that takes over today, where the power of ten is the thing that moves. Say at the reveal: multiplying is not adding, so nothing has to line up.",
+   "kind": "warmup"
+  },
+  {
+   "n": 3,
+   "title": "Warm-Up",
+   "sub": "Answers.",
+   "min": 1,
+   "note": "Reveal. Ask for the band each question came from only if time allows.",
+   "kind": "warmup"
+  },
+  {
+   "n": 4,
+   "title": "Notes",
+   "sub": "Copy both lines.",
+   "min": 4,
+   "note": "Write the product with the parentheses as given, then regroup: coefficients together, powers of ten together. The two laws you already own finish it \u2014 multiply the coefficients, and the product of powers law adds the exponents. Say out loud that the powers of ten did not have to match; nothing lines up in a multiplication. Then the state guide's named wrong answer: a student who multiplies the exponents turns 6 \u00d7 10\u2079 into 6 \u00d7 10\u00b2\u2070. Ask how many zeros each of those has.\nOFF: 'Multiply the fronts, add the backs. The powers of ten never have to match when you multiply.'",
+   "kind": "notes"
+  },
+  {
+   "n": 5,
+   "title": "Notes",
+   "sub": "",
+   "min": 4,
+   "note": "Split the fraction into two fractions: coefficients over coefficients, power over power. Divide the first, subtract the exponents in the second \u2014 top minus bottom, in that order. The second line is the one the state guide asks for and the book never does: a quotient that crosses from very large to very small. Subtracting a negative exponent moves the answer up, not down, and 10\u2078 \u00f7 10\u207b\u2074 is 10\u00b9\u00b2 \u2014 a trillion, not ten thousand.\nOFF: 'Top minus bottom, always in that order. And subtracting a negative goes up.'",
+   "kind": "notes"
+  },
+  {
+   "n": 6,
+   "title": "Notes",
+   "sub": "",
+   "min": 3,
+   "note": "The last step is yesterday's last step, unchanged, and it comes up far more often in multiplication than it did in addition: two coefficients under 10 can easily multiply to more than 10. A quotient can go the other way and land under 1. Neither is a finished answer.\nOFF: 'Coefficient over 10, point left and exponent up. Coefficient under 1, point right and exponent down. Same repair as yesterday.'",
+   "kind": "notes"
+  },
+  {
+   "n": 7,
+   "title": "Example 1",
+   "sub": "Multiplying, and the answer needs finishing.",
+   "min": 1,
+   "note": "SPOKEN ONLY. The exponents are seven apart, which would be illegal in an addition and is nothing at all here. Ask for the coefficient product before anything else: will 4.5 times 6 be over 10?",
+   "kind": "example"
+  },
+  {
+   "n": 8,
+   "title": "Example 1",
+   "sub": "Worked.",
+   "min": 2,
+   "note": "Regroup, multiply, add the exponents, then repair. A board with 27 \u00d7 10\u2074 has the value right and is not finished; a board with 27 \u00d7 10\u207b\u00b2\u00b9 multiplied the exponents.",
+   "kind": "example"
+  },
+  {
+   "n": 9,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "Same shape, the other sign on the small exponent. 2.5 \u00b7 8 = 20, and 10\u2076 \u00b7 10\u207b\u00b2 = 10\u2074, so 20 \u00d7 10\u2074 \u2014 which is not finished. 2 \u00d7 10\u2075 is right.",
+   "kind": "yourturn"
+  },
+  {
+   "n": 10,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 11,
+   "title": "Example 2",
+   "sub": "Multiplication and division in one expression.",
+   "min": 1,
+   "note": "SPOKEN ONLY. The state guide's own item. Ask for the plan first \u2014 the two on top, then the one underneath \u2014 and make the plan the thing that is praised, not the answer.",
+   "kind": "example"
+  },
+  {
+   "n": 12,
+   "title": "Example 2",
+   "sub": "Worked.",
+   "min": 2,
+   "note": "The intermediate value is 60 \u00d7 10\u2076, which is exactly the unfinished form \u2014 and it does not have to be repaired yet, because the division is still to come. Repairing at the end is fewer steps and fewer chances to slip.",
+   "kind": "example"
+  },
+  {
+   "n": 13,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "A negative exponent inside the product and a division that pushes the answer below 1. 6 \u00b7 4 = 24 and 10\u2075 \u00b7 10\u207b\u00b3 = 10\u00b2, then 24 \u00f7 8 = 3 and 10\u00b2 \u00f7 10\u2074 = 10\u207b\u00b2.",
+   "kind": "yourturn"
+  },
+  {
+   "n": 14,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 15,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The plain case. A board with 6 \u00d7 10\u00b2\u2070 multiplied the exponents \u2014 the guide's named misconception, and the one to name out loud.",
+   "kind": "wb"
+  },
+  {
+   "n": 16,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 17,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Ruling 22's board: the paper price is there to be read past. The coefficients multiply to exactly 10, so the repair is forced \u2014 10 \u00d7 10\u2075 is 1 \u00d7 10\u2076. A board holding 3 anywhere used the price.",
+   "kind": "wb"
+  },
+  {
+   "n": 18,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 19,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Plain division. A board with 8 \u00d7 10\u00b9\u00b9 added the exponents; a board with 8.4 \u00d7 10\u2075 subtracted the coefficients instead of dividing them.",
+   "kind": "wb"
+  },
+  {
+   "n": 20,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 21,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "A quotient that lands under 1. Point one place right, exponent down one. A board holding 0.53 \u00d7 10\u207b\u00b2 did every hard part and stopped one step early.",
+   "kind": "wb"
+  },
+  {
+   "n": 22,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 23,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic, straight from the state guide. A board full of B means Notes I's last line did not land \u2014 go back and count zeros on 10\u2079 and 10\u00b2\u2070 out loud.",
+   "kind": "wb"
+  },
+  {
+   "n": 24,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 25,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic. A and B are the same number and the question asks for the form. If the room splits between them, sixty seconds and a re-vote before the reveal.",
+   "kind": "wb"
+  },
+  {
+   "n": 26,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 27,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The state guide's shape that the book never asks: a quotient crossing from very large to very small. A board with 1 \u00d7 10\u2074 subtracted 8 \u2212 4; a board with 1 \u00d7 10\u207b\u00b9\u00b2 went the wrong way entirely.",
+   "kind": "wb"
+  },
+  {
+   "n": 28,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 29,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Working backwards. The powers of ten already check out, so the whole question lives in the coefficients \u2014 the student who sees that answers in five seconds. A board with 4.2 divided in the wrong direction.",
+   "kind": "wb"
+  },
+  {
+   "n": 30,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 31,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Take your time. Boards up when you have written it.",
+   "min": 0,
+   "note": "Written, and it is the exit evidence. Marcus subtracted the coefficients instead of dividing them, and his power of ten is right. Sara divided the coefficients correctly and then added the exponents instead of subtracting. Full credit names both errors and gives 3 \u00d7 10\u2075. A student who writes 'they both got it wrong' has named nothing.",
+   "kind": "wb"
+  },
+  {
+   "n": 32,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 33,
+   "title": "Independent Set",
+   "sub": "Six questions. On your own, in silence.",
+   "min": 6,
+   "note": "Hand out the Independent Set. Silent work. Circulate and mark what you see; do not teach. Whatever is not finished goes home.",
+   "kind": "independent"
+  },
+  {
+   "n": 34,
+   "title": "IXL",
+   "sub": "Last five minutes.",
+   "min": 5,
+   "note": "IXL: every listed skill is required, SmartScore 67, due at the start of the next class.",
+   "kind": "ixl"
+  }
+ ]
+}
