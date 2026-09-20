@@ -60,7 +60,9 @@ def install():
             shutil.copy2(os.path.join(OUT, name), os.path.join(PKG, folder, name))
         n += 1
     # reference material (not handouts)
+    bank = os.path.join(REPO, "a7", f"unit{U:02d}", f"BANK - Unit {U}.md")
     for src, dst in [(os.path.join(REPO, M["audit_src"]), f"UNIT {U} AUDIT - Math Nation package.md"),
+                     (bank, f"BANK - Unit {U}.md"),
                      (os.path.join(REF, "A7 SCOPE AND SEQUENCE 2026-27.md"), "A7 SCOPE AND SEQUENCE 2026-27.md"),
                      (os.path.join(REF, "A7 IXL DUE DATES 2026-27.md"), "A7 IXL DUE DATES 2026-27.md"),
                      (os.path.join(REF, "Florida BEST Grade 8 - Source of Truth.md"), "Florida BEST Grade 8 - Source of Truth.md")]:
@@ -106,9 +108,10 @@ def start_here(n_files):
     A("| **Handouts** | The Reference Sheet. Students study from it; it may NOT be used on the assessment (ruling 13). There is no study guide (ruling 11). |")
     A("| **Assessments** | Unit Review (unscored) and Unit Assessment (two periods) — student copies. |")
     A("| **Answer Keys** | Every key in the unit, without exception. |")
-    A("| **Teacher Editions** | One per lesson: Read This First, the timing table read from the deck, slide-by-slide notes, the whiteboard round with the named wrong answers, what changed from Math Nation. |")
+    A("| **Teacher Editions** | One per lesson, **four pages, read in twenty minutes** (ruling 26). Page 1 is the period — benchmark with its Must and Must-not lines, the target, the MTRs, the timing table and the three sentences to say out loud. Then one line per slide, each board carrying its answer, its named distractors and the split-board move. Misconceptions to Watch at the end. |")
     A("| **PDFs** | A mirror of the six folders above, same filenames. This is what gets printed and posted. |")
-    A("| **Reference** | Not handouts: the Math Nation package audit, the scope and sequence, the IXL due-date sheet, the Grade 8 source of truth. |")
+    A("| **Lesson Plans** | One Florida-format plan per lesson (ruling 25): standards, the MTRs with their evidence, the sequence read from the deck, gradual release, higher-order questions with DOK, checks for understanding with the response to each, differentiation. |")
+    A("| **Reference** | Not handouts: `BANK - Unit N.md` (how each question bank varies, what the audit found, what changed from the book, and every bank answer — ruling 26 moved this out of the teacher's edition), the Math Nation package audit, the scope and sequence, the IXL due-date sheet, the Grade 8 source of truth. |")
     A("")
     A("**Nothing with an answer printed on it sits outside `Answer Keys`.**")
     A("")

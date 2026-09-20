@@ -328,97 +328,116 @@ def _wb_body(D, q, reveal):
             D.answer_line(q["answer"], y=y)
 
 
+def _first_sentence(t):
+    t = (t or "").split("\n")[0].strip()
+    for stop in (". ", "? ", "! "):
+        if stop in t:
+            return t[:t.index(stop) + 1].strip()
+    return t
+
+
+def _slide_line(s):
+    """Ruling 26: one line per slide, in the voice of someone standing beside the teacher.
+    An OFF: line IS the line (the phrase 'OFF THE SLIDE, YOURS TO SAY' retires)."""
+    note = s.get("note") or ""
+    for line in note.split("\n"):
+        if line.startswith("OFF:"):
+            return line[4:].strip().strip("'\u2018\u2019")
+    return _first_sentence(note)
+
+
+SPLIT_MOVE = ("Split (no option near two-thirds)? Sixty seconds, convince your neighbour, "
+              "re-vote, then reveal.")
+
+
 def build_te(L, deck_path, outdir):
+    """Ruling 26: four pages or fewer, read in twenty minutes. Page 1 is the period; then one
+    line per slide; then Misconceptions to Watch. No keys, no bank commentary, no paragraphs."""
     code = L["code"]
     side_path = deck_path[:-5] + ".notes.json"
     rows, wb_min, side, blocks = tekit.plan_from_sidecar(side_path)
     eyebrow = f"{COURSE}  ·  Unit {L['unit']}  ·  {_label(L)}"
     te = TE(eyebrow, L["title"])
     T = L["te"]
-    te.h1("Read This First")
-    for para in T["read_first"]:
-        te.body(para)
-    te.h1("Standard and Targets")
+
+    # ---------------- page 1: the period, and nothing else
+    te.h1("The Period")
     te.label(L["benchmark"], L["benchmark_text"])
-    for lab, txt in T.get("standard_notes", []):
-        te.label(lab, txt)
-    te.label("Learning target", L["target"])
-    te.label("Essential question", L["essential"])
-    te.label("Building on", L["building_on"])
-    te.label("Working toward", L["working_toward"])
-    if T.get("sits"):
-        te.label("Where this sits in the course", T["sits"])
-    te.h1("Lesson at a Glance")
-    te.body(f"Windy Hill periods run **{tekit.PERIOD} minutes**. The whiteboard round takes the remainder after the taught blocks — **{wb_min} minutes** in this lesson — and IXL takes the last {IXL_MIN}. Slide numbers below are read from the deck when this edition is built.")
+    notes = dict(T.get("standard_notes", []))
+    must = T.get("must") or notes.get("Clarification") or notes.get("Benchmark") or ""
+    must_not = T.get("must_not") or notes.get("Boundary") or ""
+    if must:
+        te.label("Must", must)
+    if must_not:
+        te.label("Must not", must_not)
+    te.label("Target", L["target"])
+    mtr = L.get("mtr") or []
+    if mtr:
+        te.label("MTR", "   ·   ".join(f"**{m}** — {ev}" for m, ev in mtr))
     tekit.timing_table(te, rows)
-    te.label("Materials", T.get("materials", "Whiteboards and markers. Calculators are allowed on everything."))
-    te.label("Where the lesson lives", T["lives"])
-    te.body("**No partner or group work anywhere in this lesson.** Every Math Nation exploration this lesson draws on was written for pairs; here the same tables are worked from the front and on individual boards.")
-    te.h1("Vocabulary")
-    te.vocab(L["vocab"])
-    te.h1("Warm-Up — spaced retrieval")
-    te.body("Four questions, two minutes silent, then the reveal. No reteach longer than one sentence per question.")
-    for i, q in enumerate(L["warmup"]):
-        p = te.para("", before=0, after=4, indent=360, hanging=360)
-        te._run(p, f"{i + 1}.  ", 10.5, bold=True); te.rich(p, q["stem"] + "    ", size=10.5)
-        te.rich(p, q["answer"], size=10.5, bold=True, italic=True, color=RED)
-        p = te.para("", before=0, after=6, indent=360)
-        te._run(p, "retrieves: ", 9.5, italic=True, color=GRAY); te.rich(p, f"{q['band']} — {q['source']}", size=9.5, italic=True, color=GRAY)
-    te.h1("Slide-by-Slide Teaching Notes")
-    for b in blocks:
-        for s in b["subs"]:
-            mins = f"{s['min']} min" if s["kind"] != "wb" else ""
-            if s["kind"] == "wb" and s is b["subs"][0]:
-                mins = f"{wb_min} min for the round"
-            te.h2(f"Slide {s['n']}.  {s['title']}" + (f" — {s['sub']}" if s["sub"] and s["kind"] not in ("wb",) else ""), mins)
-            if s["note"]:
-                for line in s["note"].split("\n"):
-                    if line.startswith("OFF:"):
-                        te.off_slide(line[4:].strip())
-                    else:
-                        te.bullets([line])
-    te.h1("The Whiteboard Round — what each board tells you")
-    te.body("Nine questions, one at a time, each with its reveal. Boards down until the cue, all up together, scan the back row first, question the blank boards before the wrong ones. Question 9 is written work. Every wrong option on a multiple-choice question is a named error; the benchmark it comes from is cited.")
-    data = [["#", "Question", "Answer", "What a wrong board says"]]
+    te.h2("Say these three things out loud today")
+    say = T.get("say") or [x for x in (T.get("lives"), *(T.get("read_first") or [])) if x][:3]
+    for i, line in enumerate(say[:3]):
+        p = te.para("", before=1, after=4, indent=360, hanging=360)
+        te._run(p, f"{i + 1}.  ", 10.5, bold=True)
+        te.rich(p, line, size=10.5)
+    te.d.add_page_break()
+
+    # ---------------- one line per slide, in slide order
+    te.h1("Slide by Slide")
+    wb_seen = 0
+    i = 0
+    while i < len(side):
+        s = side[i]
+        if s["kind"] == "wb":
+            # a board is two slides (question, reveal); one line covers both
+            q = L["whiteboard"][wb_seen]
+            rev = side[i + 1] if i + 1 < len(side) and side[i + 1]["kind"] == "wb" else s
+            qt = q.get("qtext") or " ".join(q.get("text", [])) or ("$" + q.get("latex", "") + "$")
+            ans = q.get("answer") or ("$" + q.get("answer_latex", "") + "$")
+            errs = q.get("errors") or {}
+            wrong = "; ".join(f"({k}) {v}" for k, v in errs.items()) if errs else q.get("wrong", "")
+            p = te.para("", before=1, after=3, indent=470, hanging=470)
+            te._run(p, f"{s['n']}\u2013{rev['n']}.  ", 10.5, bold=True)
+            te._run(p, f"Board {wb_seen + 1}.  ", 10.5, bold=True)
+            te.rich(p, qt + "  \u2192  ", size=10.5)
+            te.rich(p, ans, size=10.5, bold=True, italic=True, color=RED)
+            if q.get("unneeded"):
+                te.rich(p, f"   The {q['unneeded']} is not needed.", size=10, italic=True, color=GRAY)
+            if wrong:
+                te.rich(p, "   " + wrong, size=9.5, italic=True, color=GRAY)
+            if q.get("kind") == "mc":
+                te.rich(p, "   " + SPLIT_MOVE, size=9.5, italic=True, color=GRAY)
+            wb_seen += 1
+            i += 2
+            continue
+        line = _slide_line(s)
+        if s["kind"] == "warmup" and "Answers" in (s.get("sub") or ""):
+            line = "Reveal.  " + "   ".join(f"{k + 1}. {w['answer']}" for k, w in enumerate(L["warmup"]))
+        p = te.para("", before=1, after=3, indent=470, hanging=470)
+        te._run(p, f"{s['n']}.  ", 10.5, bold=True)
+        head = s["title"] + (f" \u2014 {s['sub']}" if s.get("sub") else "")
+        te._run(p, head + ".  ", 10.5, bold=True)
+        te.rich(p, line, size=10.5)
+        i += 1
+
+    # ---------------- misconceptions, tied to the board that surfaces each
+    te.h1("Misconceptions to Watch")
     for i, q in enumerate(L["whiteboard"]):
-        qt = q.get("qtext") or " ".join(q.get("text", [])) or ("$" + q["latex"] + "$")
-        ans = q.get("answer") or ("$" + q["answer_latex"] + "$")
         errs = q.get("errors") or {}
-        et = "; ".join(f"({k}) {v}" for k, v in errs.items()) if errs else q.get("wrong", "")
-        data.append([str(i + 1), qt, {"text": ans, "bold": True, "italic": True, "color": RED}, et])
-    te.table([400, 3300, 1900, 3760], data, header=True, size=9.5)
-    te.h1("Question Bank — variation and answers")
-    te.label("Variation.", T["variation"])
-    te.body("The bank and its Additional sheet are posted, never assigned; they feed the quizzes. Answers below are the same values the keys print — both come from one source.")
-    _answers_list(te, L["bank"], "Question Bank")
-    _answers_list(te, L["additional"], "Question Bank — Additional")
-    te.h1("What the audit against Math Nation found")
-    te.bullets(T["audit"])
-    if T.get("changes"):
-        te.h2("What changed from the book")
-        te.bullets(T["changes"])
+        src = "; ".join(v for v in errs.values()) if errs else q.get("wrong", "")
+        if not src:
+            continue
+        first = src.split(";")[0].strip()
+        p = te.para("", before=0, after=2, indent=360, hanging=360)
+        te._run(p, f"Board {i + 1}.  ", 10, bold=True)
+        te.rich(p, first, size=10)
+    if T.get("materials"):
+        te.label("Materials", T["materials"], after=2)
     name = f"A7 {code}  Teacher Edition.docx"
     path = os.path.join(outdir, name)
     te.save(path)
     return path
-
-
-def _answers_list(te, items, title):
-    te.h2(title)
-    n = 0
-    for it in items:
-        if it.get("heading") or it.get("table"):
-            continue
-        n += 1
-        p = te.para("", before=0, after=3, indent=360, hanging=360)
-        te._run(p, f"{n}.  ", 10, bold=True)
-        if it.get("parts"):
-            te.rich(p, "  ".join(f"({pp['label']}) " + (pp.get('answer') or '') for pp in it["parts"]), size=10, bold=True, italic=True, color=RED)
-        elif it.get("choices"):
-            corr = it["correct"] if isinstance(it["correct"], (list, tuple)) else [it["correct"]]
-            te.rich(p, ", ".join(chr(65 + c) for c in corr) + "  " + (it.get("answer") or ""), size=10, bold=True, italic=True, color=RED)
-        else:
-            te.rich(p, it.get("answer") or "", size=10, bold=True, italic=True, color=RED)
 
 
 def build_lesson(L, outdir):

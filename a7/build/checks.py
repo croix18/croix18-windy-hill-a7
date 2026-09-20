@@ -10,6 +10,7 @@ finding and exits 0 is worse than no check.
   pagecheck  no shipped PDF page is blank
   offpage    every word of every PDF lies inside its page box
   pdftwin    every .docx/.pptx has a .pdf twin newer than it whose text contains the source text
+  telength   ruling 26: no teacher's edition runs past four printed pages
   plancheck  every deck side-car totals 53 with a whiteboard remainder inside 10–20
   slidefit   no text box or picture in a deck crosses the footer rule or the slide edge
 """
@@ -239,6 +240,22 @@ def check_pdftwin(files):
     return findings
 
 
+def check_telength(files):
+    """Ruling 26: the teacher's edition is four pages or fewer, printed. A longer one is cut,
+    not shrunk — so this is a content finding, never a reason to change the font."""
+    findings = []; n = 0
+    for f in files:
+        base = os.path.basename(f)
+        if not (base.endswith(".pdf") and "Teacher Edition" in base):
+            continue
+        n += 1
+        pp = _pages(f)
+        if pp > 4:
+            findings.append(f"telength: {base} runs {pp} pages; ruling 26 caps the teacher's edition at 4 — cut it, do not shrink it")
+    print(f"telength: {n} teacher's editions measured, {len(findings)} findings")
+    return findings
+
+
 def check_plan(files):
     findings = []; n = 0
     for f in files:
@@ -283,7 +300,7 @@ def run(outdir):
     files = sorted(glob.glob(os.path.join(outdir, "*")))
     print(f"checks over {outdir}: {len(files)} files — " + ", ".join(f"{k} {v}" for k, v in collections.Counter(os.path.splitext(f)[1] for f in files).items()))
     findings = []
-    for chk in (check_docscan, check_keycheck, check_gdoc, check_glyph, check_pages, check_offpage, check_pdftwin, check_plan, check_slidefit):
+    for chk in (check_docscan, check_keycheck, check_gdoc, check_glyph, check_pages, check_offpage, check_pdftwin, check_telength, check_plan, check_slidefit):
         findings += chk(files)
     for f in findings:
         print("  FINDING", f)

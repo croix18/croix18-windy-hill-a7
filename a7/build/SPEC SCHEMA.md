@@ -108,13 +108,26 @@ An item may carry `ack="reason"` instead of a check **only** for a purely verbal
 use it to skip work.
 
 ### `te`
-`dict(read_first=[paragraphs], standard_notes=[(label, text)], sits, lives, materials,
-variation, audit=[bullets], changes=[bullets])`. `read_first` says what the lesson is, what was
-kept from the book and what was dropped and why; `sits` is where the lesson sits in the
-benchmark/FAST; `lives` is the one line the lesson lives on and which whiteboard proves it;
-`variation` explains the bank's variation structure; `audit` lists every book value verified and
-every defect found (with page); `changes` maps each book component (3.4.1, 3.4.2 …) to where it
-went.
+Under **ruling 26** the teacher's edition is **four printed pages or fewer** and `checks.py`
+fails a longer one. Only these fields reach it:
+
+- `must` / `must_not` — the benchmark's two lines, quoted from the Source of Truth or the B1G-M
+  notes. (If absent, they fall back to `standard_notes`' "Clarification" and "Boundary".)
+- **`say=[three strings]`** — the three sentences to say out loud today. They are the last thing
+  on page 1 and nothing else goes there.
+- `materials` — one line, printed at the end.
+
+Everything else in `te` — `read_first`, `variation`, `audit`, `changes`, `sits`, `lives` — no
+longer prints in the teacher's edition. It is written to **`a7/unitNN/BANK - Unit N.md`** by
+`bank_file.py`, together with every bank answer, and installs into the package's `Reference/`
+folder. Keep writing those fields: that file is where the unit's reasoning lives.
+
+### `mtr` and `hoq` — ruling 25
+- **`mtr=[("MTR.4.1", "evidence line"), …]`** — the two or three MA.K12.MTR.x.1 the lesson
+  actually exercises, each with one line of evidence from the period ("the re-vote on board 5").
+  Not all seven. **The build refuses a lesson with no `mtr`.**
+- `hoq=[(question, "DOK n"), …]` — the higher-order questions the plan prints with their DOK.
+- `differentiation=dict(ese, ell, enrichment)` — one concrete line each.
 
 ## `U` — the unit documents (`unit.py`)
 
