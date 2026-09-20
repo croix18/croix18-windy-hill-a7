@@ -8,3 +8,4 @@ node_modules/
 .~lock.*
 # build scratch, never the outputs
 a7/build/_tmp/
+.github-token

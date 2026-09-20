@@ -27,3 +27,11 @@ not happen.
 `a7/reference/HOUSE STYLE.md` is shared with the on-level (M7) course and exchanged against a
 stated base — see the `<!-- exchange:base … -->` line at its top. Rule 0, above everything:
 nothing that touches students goes out mathematically unsound.
+
+## Pushing
+
+`tools/push.sh "message"` commits everything and pushes, then checks the remote head against
+the local one — trust that check, not git's message. The token lives in `.github-token`
+(git-ignored). Why the script exists: `a7/reference/GITHUB FROM A SESSION.md`. Commits are
+authored as Croix's GitHub no-reply address because his account rejects pushes that expose his
+email. Remote: github.com/croix18/croix18-windy-hill-a7.
