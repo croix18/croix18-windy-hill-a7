@@ -1,925 +1,1731 @@
 {
  "1.1": {
   "main": [
-   "Convert fractions or mixed numbers to decimals"
+   {
+    "name": "Convert fractions or mixed numbers to decimals",
+    "code": "M2D"
+   }
   ],
   "also": [
-   "Convert between mixed numbers and improper fractions",
-   "Convert between percents, fractions, and decimals"
+   {
+    "name": "Convert between mixed numbers and improper fractions",
+    "code": "LGK"
+   },
+   {
+    "name": "Convert between percents, fractions, and decimals",
+    "code": "2HW"
+   }
   ]
  },
  "1.2": {
   "main": [
-   "Write a repeating decimal as a fraction"
+   {
+    "name": "Write a repeating decimal as a fraction",
+    "code": "W49"
+   }
   ],
   "also": [
-   "Convert decimals to fractions or mixed numbers"
+   {
+    "name": "Convert decimals to fractions or mixed numbers",
+    "code": "HZD"
+   }
   ]
  },
  "1.3": {
   "main": [
-   "Solve two-step equations: complete the solution"
+   {
+    "name": "Solve two-step equations: complete the solution",
+    "code": "X2L"
+   }
   ],
   "also": [
-   "Which x satisfies an equation?",
-   "Solve two-step equations using algebra tiles"
+   {
+    "name": "Which x satisfies an equation?",
+    "code": "DJS"
+   },
+   {
+    "name": "Solve two-step equations using algebra tiles",
+    "code": "R9E"
+   }
   ]
  },
  "1.4": {
   "main": [
-   "Solve two-step equations without parentheses",
-   "Solve equations of the form px + q = r with fractions"
+   {
+    "name": "Solve two-step equations without parentheses",
+    "code": "CMX"
+   },
+   {
+    "name": "Solve equations of the form px + q = r with fractions",
+    "code": "Y6Q"
+   }
   ],
   "also": []
  },
  "1.5": {
   "main": [
-   "Solve two-step equations with parentheses",
-   "Solve equations of the form p = r with fractions",
-   "Choose two-step equations: word problems"
+   {
+    "name": "Solve two-step equations with parentheses",
+    "code": "NSH"
+   },
+   {
+    "name": "Solve equations of the form p(x + q) = r with fractions",
+    "code": "A8D"
+   },
+   {
+    "name": "Choose two-step equations: word problems",
+    "code": "8NH"
+   }
   ],
   "also": [
-   "x + q",
-   "Solve two-step equations with integers",
-   "Solve equations involving like terms"
+   {
+    "name": "Solve two-step equations with integers",
+    "code": "QEB"
+   },
+   {
+    "name": "Solve equations involving like terms",
+    "code": "VSW"
+   }
   ]
  },
  "1.6": {
   "main": [
-   "Solve two-step equations: word problems"
+   {
+    "name": "Solve two-step equations: word problems",
+    "code": "D2Y"
+   }
   ],
   "also": []
  },
  "1.7": {
   "main": [
-   "Solve two-step equations: word problems"
+   {
+    "name": "Solve two-step equations: word problems",
+    "code": "D2Y"
+   }
   ],
   "also": []
  },
  "1.8": {
   "main": [
-   "Solutions to inequalities",
-   "Solve two-step inequalities",
-   "Graph solutions to two-step inequalities"
+   {
+    "name": "Solutions to inequalities",
+    "code": "G2U"
+   },
+   {
+    "name": "Solve two-step inequalities",
+    "code": "N9D"
+   },
+   {
+    "name": "Graph solutions to two-step inequalities",
+    "code": "WHT"
+   }
   ],
   "also": []
  },
  "1.9": {
   "main": [
-   "Solve multi-step inequalities",
-   "Graph solutions to multi-step inequalities",
-   "Solve multi-step inequalities: word problems"
+   {
+    "name": "Solve multi-step inequalities",
+    "code": "6AZ"
+   },
+   {
+    "name": "Graph solutions to multi-step inequalities",
+    "code": "HKW"
+   },
+   {
+    "name": "Solve multi-step inequalities: word problems",
+    "code": "DKH"
+   }
   ],
   "also": [
-   "Write inequalities from number lines"
+   {
+    "name": "Write inequalities from number lines",
+    "code": "YW9"
+   }
   ]
  },
  "1.10": {
   "main": [
-   "Solve multi-step inequalities",
-   "Graph solutions to multi-step inequalities",
-   "Solve multi-step inequalities: word problems"
+   {
+    "name": "Solve multi-step inequalities",
+    "code": "6AZ"
+   },
+   {
+    "name": "Graph solutions to multi-step inequalities",
+    "code": "HKW"
+   },
+   {
+    "name": "Solve multi-step inequalities: word problems",
+    "code": "DKH"
+   }
   ],
   "also": [
-   "Write inequalities from number lines"
+   {
+    "name": "Write inequalities from number lines",
+    "code": "YW9"
+   }
   ]
  },
  "2.1": {
   "main": [
-   "Identify square numbers",
-   "Evaluate squares",
-   "Complete a function table: quadratic functions"
+   {
+    "name": "Identify square numbers",
+    "code": "54P"
+   },
+   {
+    "name": "Evaluate squares",
+    "code": "H77"
+   },
+   {
+    "name": "Complete a function table: quadratic functions",
+    "code": "VN8"
+   }
   ],
   "also": []
  },
  "2.2": {
   "main": [
-   "Solve equations using square roots",
-   "Square roots of perfect squares"
+   {
+    "name": "Solve equations using square roots",
+    "code": "NNA"
+   },
+   {
+    "name": "Square roots of perfect squares",
+    "code": "9RS"
+   }
   ],
   "also": [
-   "Relationship between squares and square roots"
+   {
+    "name": "Relationship between squares and square roots",
+    "code": "8W2"
+   }
   ]
  },
  "2.3": {
   "main": [
-   "Evaluate cubes",
-   "Cube roots of positive and negative perfect cubes",
-   "Solve equations using cube roots"
+   {
+    "name": "Evaluate cubes",
+    "code": "AMR"
+   },
+   {
+    "name": "Cube roots of positive and negative perfect cubes",
+    "code": "J7K"
+   },
+   {
+    "name": "Solve equations using cube roots",
+    "code": "TQ5"
+   }
   ],
   "also": []
  },
  "2.4": {
   "main": [
-   "Estimate square roots and cube roots",
-   "Identify rational and irrational numbers"
+   {
+    "name": "Estimate square roots and cube roots",
+    "code": "PFD"
+   },
+   {
+    "name": "Identify rational and irrational numbers",
+    "code": "NV6"
+   }
   ],
   "also": [
-   "Square roots and cube roots",
-   "Identify rational and irrational square roots"
+   {
+    "name": "Square roots and cube roots",
+    "code": "9LU"
+   },
+   {
+    "name": "Identify rational and irrational square roots",
+    "code": "UGE"
+   }
   ]
  },
  "2.5": {
   "main": [
-   "Irrational numbers on number lines"
+   {
+    "name": "Irrational numbers on number lines",
+    "code": "QZ7"
+   }
   ],
   "also": []
  },
  "2.6": {
   "main": [
-   "Put rational numbers in order",
-   "Compare and order rational and irrational numbers"
+   {
+    "name": "Put rational numbers in order",
+    "code": "QP5"
+   },
+   {
+    "name": "Compare and order rational and irrational numbers",
+    "code": "EED"
+   }
   ],
   "also": [
-   "Compare rational numbers"
+   {
+    "name": "Compare rational numbers",
+    "code": "MUK"
+   }
   ]
  },
  "3.1": {
   "main": [
-   "Evaluate powers",
-   "Multiplication with exponents",
-   "Power rule"
+   {
+    "name": "Evaluate powers",
+    "code": "SZQ"
+   },
+   {
+    "name": "Multiplication with exponents",
+    "code": "5SK"
+   },
+   {
+    "name": "Power rule",
+    "code": "8DA"
+   }
   ],
   "also": [
-   "Understanding exponents"
+   {
+    "name": "Understanding exponents",
+    "code": "BFA"
+   }
   ]
  },
  "3.2": {
   "main": [
-   "Powers with negative bases"
+   {
+    "name": "Powers with negative bases",
+    "code": "WFW"
+   }
   ],
   "also": [
-   "Division with exponents",
-   "Identify equivalent expressions involving whole-number exponents"
+   {
+    "name": "Division with exponents",
+    "code": "XNC"
+   },
+   {
+    "name": "Identify equivalent expressions involving whole-number exponents",
+    "code": "KBE"
+   }
   ]
  },
  "3.3": {
   "main": [
-   "Evaluate expressions using properties of exponents"
+   {
+    "name": "Evaluate expressions using properties of exponents",
+    "code": "ZE9"
+   }
   ],
   "also": []
  },
  "3.4": {
   "main": [
-   "Understanding negative exponents",
-   "Evaluate powers with negative exponents"
+   {
+    "name": "Understanding negative exponents",
+    "code": "YBB"
+   },
+   {
+    "name": "Evaluate powers with negative exponents",
+    "code": "WGS"
+   }
   ],
   "also": []
  },
  "3.5": {
   "main": [
-   "Identify equivalent expressions involving exponents I"
+   {
+    "name": "Identify equivalent expressions involving exponents I",
+    "code": "VLM"
+   }
   ],
   "also": []
  },
  "3.6": {
   "main": [
-   "Evaluate expressions using properties of exponents"
+   {
+    "name": "Evaluate expressions using properties of exponents",
+    "code": "6T7"
+   }
   ],
   "also": []
  },
  "3.7": {
   "main": [
-   "Identify equivalent expressions involving exponents II"
+   {
+    "name": "Identify equivalent expressions involving exponents II",
+    "code": "QDM"
+   }
   ],
   "also": []
  },
  "3.8": {
   "main": [
-   "Convert between standard and scientific notation: large numbers",
-   "Compare large numbers"
+   {
+    "name": "Convert between standard and scientific notation: large numbers",
+    "code": "2AL"
+   },
+   {
+    "name": "Compare large numbers",
+    "code": "WEZ"
+   }
   ],
   "also": [
-   "Powers of ten"
+   {
+    "name": "Powers of ten",
+    "code": "LJQ"
+   }
   ]
  },
  "3.9": {
   "main": [
-   "Convert between standard and scientific notation: small numbers",
-   "Compare small numbers"
+   {
+    "name": "Convert between standard and scientific notation: small numbers",
+    "code": "85M"
+   },
+   {
+    "name": "Compare small numbers",
+    "code": "KDR"
+   }
   ],
   "also": [
-   "Powers of ten with negative exponents"
+   {
+    "name": "Powers of ten with negative exponents",
+    "code": "SKD"
+   }
   ]
  },
  "4.1": {
   "main": [
-   "Add and subtract numbers written in scientific notation"
+   {
+    "name": "Add and subtract numbers written in scientific notation",
+    "code": "HUR"
+   }
   ],
   "also": []
  },
  "4.2": {
   "main": [
-   "Multiply numbers written in scientific notation"
+   {
+    "name": "Multiply numbers written in scientific notation",
+    "code": "YZU"
+   }
   ],
   "also": []
  },
  "4.3": {
   "main": [
-   "Divide numbers written in scientific notation"
+   {
+    "name": "Divide numbers written in scientific notation",
+    "code": "SGT"
+   }
   ],
   "also": []
  },
  "4.4": {
   "main": [
-   "Add, subtract, multiply, and divide numbers written in scientific notation: word problems"
+   {
+    "name": "Add, subtract, multiply, and divide numbers written in scientific notation: word problems",
+    "code": "D5S"
+   }
   ],
   "also": []
  },
  "4.5": {
   "main": [
-   "Evaluate radical expressions"
+   {
+    "name": "Evaluate radical expressions",
+    "code": "D8J"
+   }
   ],
   "also": []
  },
  "4.6": {
   "main": [
-   "Evaluate radical expressions"
+   {
+    "name": "Evaluate radical expressions",
+    "code": "D8J"
+   }
   ],
   "also": []
  },
  "4.7": {
   "main": [
-   "Evaluate variable expressions: word problems"
+   {
+    "name": "Evaluate variable expressions: word problems",
+    "code": "DPG"
+   }
   ],
   "also": []
  },
  "4.8": {
   "main": [
-   "Evaluate variable expressions: word problems"
+   {
+    "name": "Evaluate variable expressions: word problems",
+    "code": "DPG"
+   }
   ],
   "also": []
  },
  "5.1": {
   "main": [
-   "Scale drawings: find the scale factor, missing side, or missing angle"
+   {
+    "name": "Scale drawings: find the scale factor, missing side, or missing angle",
+    "code": "WEA"
+   }
   ],
   "also": []
  },
  "5.2": {
   "main": [
-   "Perimeter and area: changes in scale"
+   {
+    "name": "Perimeter and area: changes in scale",
+    "code": "ZC6"
+   }
   ],
   "also": []
  },
  "5.3": {
   "main": [
-   "Scale drawings: find the scale factor or missing side"
+   {
+    "name": "Scale drawings: find the scale factor or missing side",
+    "code": "XHM"
+   }
   ],
   "also": []
  },
  "5.4": {
   "main": [
-   "Scale drawings: word problems"
+   {
+    "name": "Scale drawings: word problems",
+    "code": "84H"
+   }
   ],
   "also": [
-   "Scale drawings: scale factor word problems"
+   {
+    "name": "Scale drawings: scale factor word problems",
+    "code": "KCM"
+   }
   ]
+ },
+ "5.5": {
+  "main": [],
+  "also": []
+ },
+ "5.6": {
+  "main": [],
+  "also": []
  },
  "5.7": {
   "main": [
-   "Convert between customary and metric systems"
+   {
+    "name": "Convert between customary and metric systems",
+    "code": "E8Z"
+   }
   ],
   "also": [
-   "Compare and convert customary units",
-   "Compare and convert metric units"
+   {
+    "name": "Compare and convert customary units",
+    "code": "4B8"
+   },
+   {
+    "name": "Compare and convert metric units",
+    "code": "HW2"
+   }
   ]
  },
  "5.8": {
   "main": [
-   "Convert between customary and metric systems"
+   {
+    "name": "Convert between customary and metric systems",
+    "code": "E8Z"
+   }
   ],
   "also": [
-   "Compare and convert customary units",
-   "Compare and convert metric units"
+   {
+    "name": "Compare and convert customary units",
+    "code": "4B8"
+   },
+   {
+    "name": "Compare and convert metric units",
+    "code": "HW2"
+   }
   ]
  },
  "5.9": {
   "main": [
-   "Convert between customary and metric systems"
+   {
+    "name": "Convert between customary and metric systems",
+    "code": "E8Z"
+   }
   ],
   "also": [
-   "Compare and convert customary units",
-   "Compare and convert metric units"
+   {
+    "name": "Compare and convert customary units",
+    "code": "4B8"
+   },
+   {
+    "name": "Compare and convert metric units",
+    "code": "HW2"
+   }
   ]
  },
  "5.10": {
   "main": [
-   "Compare rates: word problems",
-   "Multi-step problems with customary or metric unit conversions"
+   {
+    "name": "Compare rates: word problems",
+    "code": "VVS"
+   },
+   {
+    "name": "Multi-step problems with customary or metric unit conversions",
+    "code": "UCT"
+   }
   ],
   "also": []
  },
  "5.11": {
   "main": [
-   "Compare rates: word problems",
-   "Multi-step problems with customary or metric unit conversions"
+   {
+    "name": "Compare rates: word problems",
+    "code": "VVS"
+   },
+   {
+    "name": "Multi-step problems with customary or metric unit conversions",
+    "code": "UCT"
+   }
   ],
   "also": []
  },
  "6.1": {
   "main": [
-   "Triangle inequality",
-   "Converse of the Pythagorean theorem: is it a right triangle?"
+   {
+    "name": "Triangle inequality",
+    "code": "2N5"
+   },
+   {
+    "name": "Converse of the Pythagorean theorem: is it a right triangle?",
+    "code": "EQZ"
+   }
   ],
   "also": []
  },
  "6.2": {
   "main": [
-   "Triangle inequality",
-   "Converse of the Pythagorean theorem: is it a right triangle?"
+   {
+    "name": "Triangle inequality",
+    "code": "2N5"
+   },
+   {
+    "name": "Converse of the Pythagorean theorem: is it a right triangle?",
+    "code": "EQZ"
+   }
   ],
   "also": []
  },
  "6.3": {
   "main": [
-   "Pythagorean theorem: find the missing leg or hypotenuse length"
+   {
+    "name": "Pythagorean theorem: find the missing leg or hypotenuse length",
+    "code": "MTM"
+   }
   ],
   "also": []
  },
  "6.4": {
   "main": [
-   "Pythagorean theorem: word problems"
+   {
+    "name": "Pythagorean theorem: word problems",
+    "code": "87U"
+   }
   ],
   "also": []
  },
  "6.5": {
   "main": [
-   "Find the distance between two points on a horizontal or vertical line",
-   "Find the distance between two points"
+   {
+    "name": "Find the distance between two points on a horizontal or vertical line",
+    "code": "L9V"
+   },
+   {
+    "name": "Find the distance between two points",
+    "code": "ZBP"
+   }
   ],
   "also": []
  },
  "6.6": {
   "main": [
-   "Pythagorean theorem: find the perimeter"
+   {
+    "name": "Pythagorean theorem: find the perimeter",
+    "code": "VGE"
+   }
   ],
   "also": []
  },
  "6.7": {
   "main": [
-   "Side lengths of similar triangles"
+   {
+    "name": "Side lengths of similar triangles",
+    "code": "QSK"
+   }
   ],
   "also": []
  },
  "6.8": {
   "main": [
-   "Similar triangles and indirect measurement"
+   {
+    "name": "Similar triangles and indirect measurement",
+    "code": "88W"
+   }
   ],
   "also": [
-   "Identify similar triangles"
+   {
+    "name": "Identify similar triangles",
+    "code": "6PD"
+   }
   ]
  },
  "7.1": {
   "main": [
-   "Graph a proportional relationship: word problems"
+   {
+    "name": "Graph a proportional relationship: word problems",
+    "code": "FJW"
+   }
   ],
   "also": []
  },
  "7.2": {
   "main": [
-   "Interpret graphs of proportional relationships",
-   "Find the constant of proportionality from a table",
-   "Find the constant of proportionality from from a graph"
+   {
+    "name": "Interpret graphs of proportional relationships",
+    "code": "RMH"
+   },
+   {
+    "name": "Find the constant of proportionality from a table",
+    "code": "LKZ"
+   },
+   {
+    "name": "Find the constant of proportionality from a graph",
+    "code": "ZUT"
+   }
   ],
+  "also": []
+ },
+ "7.3": {
+  "main": [],
   "also": []
  },
  "7.4": {
   "main": [
-   "Identify proportional relationships by graphing",
-   "Identify proportional relationships in tables and graphs"
+   {
+    "name": "Identify proportional relationships by graphing",
+    "code": "AAN"
+   },
+   {
+    "name": "Identify proportional relationships in tables and graphs",
+    "code": "VZK"
+   }
   ],
   "also": []
  },
  "7.5": {
   "main": [
-   "Write equations for proportional relationships from tables",
-   "Write equations for proportional relationships from from graphs"
+   {
+    "name": "Write equations for proportional relationships from tables",
+    "code": "6GU"
+   },
+   {
+    "name": "Write equations for proportional relationships from graphs",
+    "code": "JKH"
+   }
   ],
   "also": [
-   "Write and solve equations for proportional relationships"
+   {
+    "name": "Write and solve equations for proportional relationships",
+    "code": "VKK"
+   }
   ]
+ },
+ "7.6": {
+  "main": [],
+  "also": []
  },
  "7.7": {
   "main": [
-   "Compare proportional relationships represented in different ways"
+   {
+    "name": "Compare proportional relationships represented in different ways",
+    "code": "5A9"
+   }
   ],
   "also": []
  },
  "8.1": {
   "main": [
-   "Center, radius, and diameter of a circle",
-   "Circumference of circles"
+   {
+    "name": "Center, radius, and diameter of a circle",
+    "code": "7RY"
+   },
+   {
+    "name": "Circumference of circles",
+    "code": "9FM"
+   }
   ],
   "also": []
  },
  "8.2": {
   "main": [
-   "Center, radius, and diameter of a circle",
-   "Circumference of circles"
+   {
+    "name": "Center, radius, and diameter of a circle",
+    "code": "7RY"
+   },
+   {
+    "name": "Circumference of circles",
+    "code": "9FM"
+   }
   ],
   "also": []
  },
  "8.3": {
   "main": [
-   "Find the radius or diameter of a circle given the circumference"
+   {
+    "name": "Find the radius or diameter of a circle given the circumference",
+    "code": "2CM"
+   }
   ],
+  "also": []
+ },
+ "8.4": {
+  "main": [],
   "also": []
  },
  "8.5": {
   "main": [
-   "Area of circles"
+   {
+    "name": "Area of circles",
+    "code": "YA8"
+   }
   ],
   "also": []
  },
  "8.6": {
   "main": [
-   "Circles: word problems"
+   {
+    "name": "Circles: word problems",
+    "code": "P56"
+   }
   ],
+  "also": []
+ },
+ "8.7": {
+  "main": [],
   "also": []
  },
  "8.8": {
   "main": [
-   "Use fractions to find the measure of an angle"
+   {
+    "name": "Use fractions to find the measure of an angle",
+    "code": "V76"
+   }
   ],
   "also": []
  },
  "8.9": {
   "main": [
-   "Circle graphs and central angles",
-   "Interpret circle graphs"
+   {
+    "name": "Circle graphs and central angles",
+    "code": "KXS"
+   },
+   {
+    "name": "Interpret circle graphs",
+    "code": "WNJ"
+   }
   ],
   "also": []
  },
  "9.1": {
   "main": [
-   "Nets of three-dimensional figures"
+   {
+    "name": "Nets of three-dimensional figures",
+    "code": "3R2"
+   }
   ],
   "also": []
  },
  "9.2": {
   "main": [
-   "Surface area of cylinders",
-   "Lateral area of cylinders"
+   {
+    "name": "Surface area of cylinders",
+    "code": "CYQ"
+   },
+   {
+    "name": "Lateral area of cylinders",
+    "code": "C8K"
+   }
   ],
+  "also": []
+ },
+ "9.3": {
+  "main": [],
   "also": []
  },
  "9.4": {
   "main": [
-   "Volume of cylinders"
+   {
+    "name": "Volume of cylinders",
+    "code": "FHC"
+   }
   ],
+  "also": []
+ },
+ "9.5": {
+  "main": [],
   "also": []
  },
  "10.1": {
   "main": [
-   "Find the constant of proportionality from a table",
-   "Identify proportional relationships by graphing",
-   "Identify proportional relationships"
+   {
+    "name": "Find the constant of proportionality from a table",
+    "code": "ZCK"
+   },
+   {
+    "name": "Identify proportional relationships by graphing",
+    "code": "RXD"
+   },
+   {
+    "name": "Identify proportional relationships",
+    "code": "Z64"
+   }
   ],
   "also": [
-   "Write equations for proportional relationships from tables and graphs",
-   "Interpret graphs of proportional relationships"
+   {
+    "name": "Write equations for proportional relationships from tables and graphs",
+    "code": "VXM"
+   },
+   {
+    "name": "Interpret graphs of proportional relationships",
+    "code": "Q96"
+   }
   ]
  },
  "10.2": {
   "main": [
-   "Find the slope from two points"
+   {
+    "name": "Find the slope from two points",
+    "code": "ZAC"
+   }
   ],
   "also": [
-   "Find the slope from a table"
+   {
+    "name": "Find the slope from a table",
+    "code": "GSB"
+   }
   ]
  },
  "10.3": {
   "main": [
-   "Find the slope from a graph",
-   "Find the slope from a table"
+   {
+    "name": "Find the slope from a graph",
+    "code": "Q94"
+   },
+   {
+    "name": "Find the slope from a table",
+    "code": "GSB"
+   }
   ],
   "also": []
  },
  "10.4": {
   "main": [
-   "Rate of change of a linear function: graphs",
-   "Rate of change of a linear function: tables"
+   {
+    "name": "Rate of change of a linear function: graphs",
+    "code": "ZPF"
+   },
+   {
+    "name": "Rate of change of a linear function: tables",
+    "code": "8FE"
+   }
   ],
   "also": []
  },
  "10.5": {
   "main": [
-   "Slope-intercept form: find the slope and y-intercept",
-   "Graph a line using slope",
-   "Graph a line from an equation in slope-intercept form"
+   {
+    "name": "Slope-intercept form: find the slope and y-intercept",
+    "code": "U55"
+   },
+   {
+    "name": "Graph a line using slope",
+    "code": "FSV"
+   },
+   {
+    "name": "Graph a line from an equation in slope-intercept form",
+    "code": "W5E"
+   }
   ],
   "also": [
-   "Write a linear equation from a slope and y-intercept",
-   "Compare linear functions: tables, graphs, and equations"
+   {
+    "name": "Write a linear equation from a slope and y-intercept",
+    "code": "WHP"
+   },
+   {
+    "name": "Compare linear functions: tables, graphs, and equations",
+    "code": "N7D"
+   }
   ]
  },
  "10.6": {
   "main": [
-   "Complete a table and graph a linear function",
-   "Complete a table and make a graph: word problems"
+   {
+    "name": "Complete a table and graph a linear function",
+    "code": "DC2"
+   },
+   {
+    "name": "Complete a table and make a graph: word problems",
+    "code": "T7R"
+   }
   ],
   "also": [
-   "Complete a table for a linear function",
-   "Graph a line from an equation in standard form"
+   {
+    "name": "Complete a table for a linear function",
+    "code": "D9B"
+   },
+   {
+    "name": "Graph a line from an equation in standard form",
+    "code": "7MZ"
+   }
   ]
  },
  "10.7": {
   "main": [
-   "Interpret the slope and y-intercept of a linear function"
+   {
+    "name": "Interpret the slope and y-intercept of a linear function",
+    "code": "H5B"
+   }
   ],
   "also": [
-   "Interpret points on the graph of a linear function"
+   {
+    "name": "Interpret points on the graph of a linear function",
+    "code": "9E8"
+   }
   ]
+ },
+ "10.8": {
+  "main": [],
+  "also": []
  },
  "10.9": {
   "main": [
-   "Write a linear equation from a graph",
-   "Write a linear function from a table"
+   {
+    "name": "Write a linear equation from a graph",
+    "code": "WHM"
+   },
+   {
+    "name": "Write a linear function from a table",
+    "code": "UYY"
+   }
   ],
   "also": [
-   "Write a linear equation from a slope and a point",
-   "Write a linear equation from two points"
+   {
+    "name": "Write a linear equation from a slope and a point",
+    "code": "VKP"
+   },
+   {
+    "name": "Write a linear equation from two points",
+    "code": "2R9"
+   }
   ]
  },
  "10.10": {
   "main": [
-   "Write linear functions: word problems"
+   {
+    "name": "Write linear functions: word problems",
+    "code": "YK6"
+   }
   ],
   "also": []
  },
  "11.1": {
   "main": [
-   "Solve equations involving like terms",
-   "Solve equations using the distributive property",
-   "Solve two-step equations: word problems"
+   {
+    "name": "Solve equations involving like terms",
+    "code": "Q2B"
+   },
+   {
+    "name": "Solve equations using the distributive property",
+    "code": "QWE"
+   },
+   {
+    "name": "Solve two-step equations: word problems",
+    "code": "8CZ"
+   }
   ],
   "also": []
  },
  "11.2": {
   "main": [
-   "Solve equations with variables on both sides"
+   {
+    "name": "Solve equations with variables on both sides",
+    "code": "ZYL"
+   }
   ],
   "also": []
  },
  "11.3": {
   "main": [
-   "Find the number of solutions"
+   {
+    "name": "Find the number of solutions",
+    "code": "XDE"
+   }
   ],
   "also": [
-   "Create equations with no solutions or infinitely many solutions"
+   {
+    "name": "Create equations with no solutions or infinitely many solutions",
+    "code": "7TY"
+   }
   ]
  },
  "11.4": {
   "main": [
-   "Solve multi-step equations"
+   {
+    "name": "Solve multi-step equations",
+    "code": "55K"
+   }
   ],
   "also": [
-   "Solve multi-step equations: complete the solution",
-   "Solve equations: mixed review"
+   {
+    "name": "Solve multi-step equations: complete the solution",
+    "code": "PGH"
+   },
+   {
+    "name": "Solve equations: mixed review",
+    "code": "HZZ"
+   }
   ]
  },
  "11.5": {
   "main": [
-   "Is  a solution to the system of equations?",
-   "Find the number of solutions to a system of equations by graphing"
+   {
+    "name": "Is (x, y) a solution to the system of equations?",
+    "code": "N46"
+   },
+   {
+    "name": "Find the number of solutions to a system of equations by graphing",
+    "code": "AGZ"
+   }
   ],
   "also": [
-   "x, y",
-   "Solve a system of equations in slope-intercept form"
+   {
+    "name": "Solve a system of equations in slope-intercept form",
+    "code": "9Z8"
+   }
   ]
  },
  "11.6": {
   "main": [
-   "Is  a solution to the system of equations?",
-   "Find the number of solutions to a system of equations by graphing"
+   {
+    "name": "Is (x, y) a solution to the system of equations?",
+    "code": "N46"
+   },
+   {
+    "name": "Find the number of solutions to a system of equations by graphing",
+    "code": "AGZ"
+   }
   ],
   "also": [
-   "x, y",
-   "Solve a system of equations in slope-intercept form"
+   {
+    "name": "Solve a system of equations in slope-intercept form",
+    "code": "9Z8"
+   }
   ]
  },
  "11.7": {
   "main": [
-   "Solve a system of equations by graphing"
+   {
+    "name": "Solve a system of equations by graphing",
+    "code": "C8X"
+   }
   ],
   "also": [
-   "Write a system of equations given a graph"
+   {
+    "name": "Write a system of equations given a graph",
+    "code": "TS7"
+   }
   ]
  },
  "11.8": {
   "main": [
-   "Solve a system of equations by graphing: word problems"
+   {
+    "name": "Solve a system of equations by graphing: word problems",
+    "code": "W9J"
+   }
   ],
   "also": []
  },
  "12.1": {
   "main": [
-   "Relations: convert between mappings, tables, graphs, and ordered pairs"
+   {
+    "name": "Relations: convert between mappings, tables, graphs, and ordered pairs",
+    "code": "LQJ"
+   }
   ],
   "also": []
  },
  "12.2": {
   "main": [
-   "Domain and range of relations"
+   {
+    "name": "Domain and range of relations",
+    "code": "T7P"
+   }
   ],
   "also": []
  },
  "12.3": {
   "main": [
-   "Identify functions",
-   "Identify functions: graphs"
+   {
+    "name": "Identify functions",
+    "code": "JT2"
+   },
+   {
+    "name": "Identify functions: graphs",
+    "code": "AEB"
+   }
   ],
   "also": [
-   "Identify independent and dependent variables"
+   {
+    "name": "Identify independent and dependent variables",
+    "code": "FSF"
+   }
   ]
  },
  "12.4": {
   "main": [
-   "Identify graphs: word problems"
+   {
+    "name": "Identify graphs: word problems",
+    "code": "HWC"
+   }
   ],
   "also": []
  },
  "12.5": {
   "main": [
-   "Identify graphs: word problems"
+   {
+    "name": "Identify graphs: word problems",
+    "code": "HWC"
+   }
   ],
   "also": []
  },
  "12.6": {
   "main": [
-   "Identify graphs: word problems"
+   {
+    "name": "Identify graphs: word problems",
+    "code": "HWC"
+   }
   ],
   "also": []
  },
  "12.7": {
   "main": [
-   "Complete a function table from an equation",
-   "Complete a table for a function graph"
+   {
+    "name": "Complete a function table from an equation",
+    "code": "ESE"
+   },
+   {
+    "name": "Complete a table for a function graph",
+    "code": "7EK"
+   }
   ],
   "also": [
-   "Find values using function graphs"
+   {
+    "name": "Find values using function graphs",
+    "code": "7N2"
+   }
   ]
  },
  "12.8": {
   "main": [
-   "Identify linear and nonlinear functions: graphs and equations"
+   {
+    "name": "Identify linear and nonlinear functions: graphs and equations",
+    "code": "XB8"
+   }
   ],
   "also": []
  },
  "12.9": {
   "main": [
-   "Identify linear and nonlinear functions: tables"
+   {
+    "name": "Identify linear and nonlinear functions: tables",
+    "code": "VGS"
+   }
   ],
   "also": []
  },
  "13.1": {
   "main": [
-   "Choose the best type of graph"
+   {
+    "name": "Choose the best type of graph",
+    "code": "VP6"
+   }
   ],
   "also": []
  },
  "13.2": {
   "main": [
-   "Create dot plots",
-   "Create stem-and-leaf plots",
-   "Create histograms"
+   {
+    "name": "Create dot plots",
+    "code": "22B"
+   },
+   {
+    "name": "Create stem-and-leaf plots",
+    "code": "8AP"
+   },
+   {
+    "name": "Create histograms",
+    "code": "LGG"
+   }
   ],
   "also": [
-   "Box plots",
-   "Create and interpret dot plots with fractions"
+   {
+    "name": "Box plots",
+    "code": "SKN"
+   },
+   {
+    "name": "Create and interpret dot plots with fractions",
+    "code": "SHS"
+   }
   ]
  },
  "13.3": {
   "main": [
-   "Create bar graphs"
+   {
+    "name": "Create bar graphs",
+    "code": "E76"
+   }
   ],
+  "also": []
+ },
+ "13.4": {
+  "main": [],
   "also": []
  },
  "13.5": {
   "main": [
-   "Create line graphs"
+   {
+    "name": "Create line graphs",
+    "code": "ERM"
+   }
   ],
   "also": [
-   "Interpret line graphs"
+   {
+    "name": "Interpret line graphs",
+    "code": "TGQ"
+   }
   ]
  },
  "13.6": {
   "main": [
-   "Create scatter plots",
-   "Describe scatter plots",
-   "Describe associations between two variables using scatter plots"
+   {
+    "name": "Create scatter plots",
+    "code": "AVL"
+   },
+   {
+    "name": "Describe scatter plots",
+    "code": "CG8"
+   },
+   {
+    "name": "Describe associations between two variables using scatter plots",
+    "code": "9ER"
+   }
   ],
   "also": []
  },
  "13.7": {
   "main": [
-   "Outliers in scatter plots",
-   "Identify lines of best fit"
+   {
+    "name": "Outliers in scatter plots",
+    "code": "RP8"
+   },
+   {
+    "name": "Identify lines of best fit",
+    "code": "BG7"
+   }
   ],
   "also": [
-   "Make predictions with scatter plots"
+   {
+    "name": "Make predictions with scatter plots",
+    "code": "CM7"
+   }
   ]
  },
  "13.8": {
   "main": [
-   "Outliers in scatter plots",
-   "Identify lines of best fit"
+   {
+    "name": "Outliers in scatter plots",
+    "code": "RP8"
+   },
+   {
+    "name": "Identify lines of best fit",
+    "code": "BG7"
+   }
   ],
   "also": [
-   "Make predictions with scatter plots"
+   {
+    "name": "Make predictions with scatter plots",
+    "code": "CM7"
+   }
   ]
  },
  "13.9": {
   "main": [
-   "Interpret lines of best fit: word problems"
+   {
+    "name": "Interpret lines of best fit: word problems",
+    "code": "9DW"
+   }
   ],
   "also": [
-   "Write equations for lines of best fit"
+   {
+    "name": "Write equations for lines of best fit",
+    "code": "ZQ6"
+   }
   ]
  },
  "14.1": {
   "main": [
-   "Multiply powers: variable bases",
-   "Powers of a power: variable bases"
+   {
+    "name": "Multiply powers: variable bases",
+    "code": "TR9"
+   },
+   {
+    "name": "Powers of a power: variable bases",
+    "code": "2CU"
+   }
   ],
   "also": []
  },
  "14.2": {
   "main": [
-   "Divide monomials with positive exponents"
+   {
+    "name": "Divide monomials with positive exponents",
+    "code": "C8L"
+   }
   ],
   "also": []
  },
  "14.3": {
   "main": [
-   "Variables with negative exponents"
+   {
+    "name": "Variables with negative exponents",
+    "code": "2NL"
+   }
   ],
   "also": []
  },
  "14.4": {
   "main": [
-   "Multiply and divide powers: variable bases"
+   {
+    "name": "Multiply and divide powers: variable bases",
+    "code": "85P"
+   }
   ],
   "also": []
  },
  "14.5": {
   "main": [
-   "Multiply using the distributive property: area models",
-   "Multiply linear expressions with rational coefficients"
+   {
+    "name": "Multiply using the distributive property: area models",
+    "code": "8P3"
+   },
+   {
+    "name": "Multiply linear expressions with rational coefficients",
+    "code": "9B9"
+   }
   ],
   "also": []
  },
  "14.6": {
   "main": [
-   "Multiply using the distributive property: area models",
-   "Multiply linear expressions with rational coefficients"
+   {
+    "name": "Multiply using the distributive property: area models",
+    "code": "8P3"
+   },
+   {
+    "name": "Multiply linear expressions with rational coefficients",
+    "code": "9B9"
+   }
   ],
   "also": []
  },
  "14.7": {
   "main": [
-   "Common monomial factors",
-   "Factor out a monomial"
+   {
+    "name": "Common monomial factors",
+    "code": "K8S"
+   },
+   {
+    "name": "Factor out a monomial",
+    "code": "BFZ"
+   }
   ],
   "also": []
  },
  "14.8": {
   "main": [
-   "Common monomial factors",
-   "Factor out a monomial"
+   {
+    "name": "Common monomial factors",
+    "code": "K8S"
+   },
+   {
+    "name": "Factor out a monomial",
+    "code": "BFZ"
+   }
   ],
   "also": []
  },
  "15.1": {
   "main": [
-   "Describe how a figure moves"
+   {
+    "name": "Describe how a figure moves",
+    "code": "WER"
+   }
   ],
   "also": [
-   "Congruence statements and corresponding parts"
+   {
+    "name": "Congruence statements and corresponding parts",
+    "code": "LPP"
+   }
   ]
  },
  "15.2": {
   "main": [
-   "Identify reflections and rotations",
-   "Rotate polygons about a point"
+   {
+    "name": "Identify reflections and rotations",
+    "code": "S8S"
+   },
+   {
+    "name": "Rotate polygons about a point",
+    "code": "A5K"
+   }
   ],
   "also": []
  },
  "15.3": {
   "main": [
-   "Identify translations",
-   "Translations: graph the image",
-   "Translations: find the coordinates"
+   {
+    "name": "Identify translations",
+    "code": "HJ9"
+   },
+   {
+    "name": "Translations: graph the image",
+    "code": "XUS"
+   },
+   {
+    "name": "Translations: find the coordinates",
+    "code": "RUP"
+   }
   ],
   "also": []
  },
  "15.4": {
   "main": [
-   "Reflections: graph the image",
-   "Reflections: find the coordinates"
+   {
+    "name": "Reflections: graph the image",
+    "code": "QLJ"
+   },
+   {
+    "name": "Reflections: find the coordinates",
+    "code": "AQ8"
+   }
   ],
   "also": []
  },
  "15.5": {
   "main": [
-   "Rotations: graph the image",
-   "Rotations: find the coordinates"
+   {
+    "name": "Rotations: graph the image",
+    "code": "AC9"
+   },
+   {
+    "name": "Rotations: find the coordinates",
+    "code": "HHS"
+   }
   ],
   "also": []
  },
  "15.6": {
   "main": [
-   "Describe transformations"
+   {
+    "name": "Describe transformations",
+    "code": "VAY"
+   }
   ],
   "also": [
-   "Determine if two figures are congruent: justify your answer"
+   {
+    "name": "Determine if two figures are congruent: justify your answer",
+    "code": "HJU"
+   }
   ]
  },
  "15.7": {
   "main": [
-   "Classify dilations",
-   "Scaled polygons"
+   {
+    "name": "Classify dilations",
+    "code": "JTS"
+   },
+   {
+    "name": "Scaled polygons",
+    "code": "9ZA"
+   }
   ],
   "also": []
  },
  "15.8": {
   "main": [
-   "Dilations: graph the image",
-   "Dilations: find the coordinates"
+   {
+    "name": "Dilations: graph the image",
+    "code": "9T4"
+   },
+   {
+    "name": "Dilations: find the coordinates",
+    "code": "UV9"
+   }
   ],
   "also": [
-   "Similar and congruent figures",
-   "Determine if two figures are similar: justify your answer"
+   {
+    "name": "Similar and congruent figures",
+    "code": "U85"
+   },
+   {
+    "name": "Determine if two figures are similar: justify your answer",
+    "code": "CWB"
+   }
   ]
  },
  "15.9": {
   "main": [
-   "Dilations: find the scale factor"
+   {
+    "name": "Dilations: find the scale factor",
+    "code": "8NK"
+   }
   ],
   "also": []
  },
  "16.1": {
   "main": [
-   "Identify complementary, supplementary, vertical, adjacent, and congruent angles",
-   "Find measures of complementary, supplementary, vertical, and adjacent angles",
-   "Write and solve equations using angle relationships"
+   {
+    "name": "Identify complementary, supplementary, vertical, adjacent, and congruent angles",
+    "code": "HGV"
+   },
+   {
+    "name": "Find measures of complementary, supplementary, vertical, and adjacent angles",
+    "code": "R2B"
+   },
+   {
+    "name": "Write and solve equations using angle relationships",
+    "code": "DBV"
+   }
   ],
   "also": []
  },
  "16.2": {
   "main": [
-   "Find missing angles in triangles",
-   "Exterior Angle Theorem",
-   "Triangle Angle-Sum Theorem"
+   {
+    "name": "Find missing angles in triangles",
+    "code": "JFJ"
+   },
+   {
+    "name": "Exterior Angle Theorem",
+    "code": "FMP"
+   },
+   {
+    "name": "Triangle Angle-Sum Theorem",
+    "code": "6Q6"
+   }
   ],
   "also": []
  },
  "16.3": {
   "main": [
-   "Interior angles of polygons"
+   {
+    "name": "Interior angles of polygons",
+    "code": "JBP"
+   }
   ],
+  "also": []
+ },
+ "16.4": {
+  "main": [],
   "also": []
  },
  "17.1": {
   "main": [
-   "Compound events: find the number of outcomes",
-   "Sample spaces for repeated events"
+   {
+    "name": "Compound events: find the number of outcomes",
+    "code": "P5R"
+   },
+   {
+    "name": "Samples spaces for repeated events",
+    "code": "AGW"
+   }
   ],
   "also": []
  },
  "17.2": {
   "main": [
-   "Probability of repeated experiments"
+   {
+    "name": "Probability of repeated experiments",
+    "code": "BDZ"
+   }
   ],
   "also": [
-   "Probability of simple events"
+   {
+    "name": "Probability of simple events",
+    "code": "5ZY"
+   }
   ]
  },
  "17.3": {
   "main": [
-   "Experimental probability"
+   {
+    "name": "Experimental probability",
+    "code": "FRL"
+   }
   ],
   "also": []
  },
  "17.4": {
   "main": [
-   "Make predictions",
-   "Write a discrete probability distribution"
+   {
+    "name": "Make predictions",
+    "code": "38C"
+   },
+   {
+    "name": "Write a discrete probability distribution",
+    "code": "ELU"
+   }
   ],
   "also": []
  },
  "17.5": {
   "main": [
-   "Make predictions",
-   "Write a discrete probability distribution"
+   {
+    "name": "Make predictions",
+    "code": "38C"
+   },
+   {
+    "name": "Write a discrete probability distribution",
+    "code": "ELU"
+   }
   ],
   "also": []
  },
  "17.6": {
   "main": [
-   "Make predictions",
-   "Write a discrete probability distribution"
+   {
+    "name": "Make predictions",
+    "code": "38C"
+   },
+   {
+    "name": "Write a discrete probability distribution",
+    "code": "ELU"
+   }
   ],
   "also": []
  }
