@@ -22,15 +22,15 @@ def lessons_for(code):
             nums=list(range(first,nums[-1]+1))
     return [f"{u}.{n}" for n in nums]
 def ixl(code):
-    """Skills for a lesson row as (main, also) lists of (name, code). Dedupe by IXL code."""
-    main=[];also=[]
+    """Ruling 28: every skill IXL lists for the lesson is REQUIRED — the numbered ones and the
+    'also consider' ones alike. Nothing on the list is optional. Returns one list of (name, code),
+    deduped by code, numbered skills first."""
+    out=[]
     for L in lessons_for(code):
         v=SK.get(L,{"main":[],"also":[]})
-        for x in v["main"]:
-            if x["code"] not in [m[1] for m in main]: main.append((x["name"],x["code"]))
-        for x in v["also"]:
-            if x["code"] not in [m[1] for m in main+also]: also.append((x["name"],x["code"]))
-    return main,also
+        for x in v["main"]+v["also"]:
+            if x["code"] not in [m[1] for m in out]: out.append((x["name"],x["code"]))
+    return out
 start=d.date(2026,9,23)          # first day after the Unit 2 exam (Sep 21-22)
 end=d.date(2027,5,28)
 hol={d.date(2026,10,12),d.date(2026,11,11),d.date(2027,1,18),d.date(2027,2,15),
@@ -158,53 +158,89 @@ PLAN=[
  (16,"15/16.X2","Units 15–16 exam, day 2","","X"),
  (17,"17.01–03","Repeated experiments — consolidation of Thread C","8.DP.2.1 · 8.DP.2.2","L"),
  (17,"17.04–06","Predictions from theoretical probability","8.DP.2.3","L"),
- (17,"17.X","Unit 17 exam (one day)","","X"),
+ (17,"17.X1","Unit 17 exam, day 1","","X"),
+ (17,"17.X2","Unit 17 exam, day 2","","X"),
 ]
-# one flex day after every exam: reteach from exam evidence, or absorb a lost day
+# Ruling 27, as amended for A7 by Croix on 20 September: *"No review day, keep the reteach days.
+# M7 has less content and can absorb extra days."* So A7 gets NO per-unit review day before the
+# test — the Unit Review document goes home as practice instead — and the post-exam reteach day
+# stays. The two test days still obey the rest of ruling 27 (day 1 a Monday or a Thursday, day 2
+# the next school day, never straddling a weekend or a break); a spiral day absorbs any slack.
 P2=[]
 for r in PLAN:
     P2.append(r)
+    # one flex day after every exam: reteach from exam evidence, or absorb a lost day
     if r[4]=="X" and r[1].endswith("X2") and r[0] in (3,4,6,9,10,11,12):   # not after 5 (Grade 7 unit), 7 (PM2 review follows), 13 (keeps Unit 14 whole before spring break); Q4's buffer is the PM3 review block
         P2.append((r[0],"flex","Flex day — reteach from exam evidence, or absorb a lost day","","F"))
 PLAN=P2
-assert len(PLAN)<=len(days), (len(PLAN),len(days))
-rows=[]
-for (u,code,title,bm,kind),dt in zip(PLAN,days):
-    rows.append((dt,u,code,title,bm,kind))
+
+def _exam_ok(days,i):
+    """Ruling 27: day 1 is a Monday or a Thursday (so day 2 is never a Wednesday), and day 2 is
+    the very next calendar day, so the two halves never straddle a weekend or a break.
+    days[i] is exam day 1 and days[i+1] is day 2."""
+    if i+1>=len(days): return False
+    d1,d2=days[i],days[i+1]
+    return d1.weekday() in (0,3) and (d2-d1).days==1
+
+# Place the plan against the calendar, inserting a spiral day wherever the exam block will not fit.
+rows=[]; i=0; k=0
+SPIRAL=("Spiral day — mixed retrieval from the unit just finished and the two before it","","S")
+while k<len(PLAN):
+    u,code,title,bm,kind=PLAN[k]
+    if kind=="X" and code.endswith("X1") and not _exam_ok(days,i):
+        rows.append((days[i],u,"spiral",SPIRAL[0],SPIRAL[1],SPIRAL[2])); i+=1; continue
+    rows.append((days[i],u,code,title,bm,kind)); i+=1; k+=1
+assert i<=len(days), (i,len(days))
 # PM3 review fills every remaining period up to Apr 30; the window opens May 3
 pm3=d.date(2027,5,3)
 cats=["NSO and probability","algebraic reasoning (expressions, equations, systems)","linear relationships, functions, data","geometric reasoning"]
 n=0
-for dt in days[len(PLAN):]:
+for dt in days[i:]:
     if dt<pm3:
         n+=1
         title=f"PM3 review {n}: "+(cats[n-1] if n<=4 else "mixed FAST-shaped rounds, one category per whiteboard question")
         rows.append((dt,0,f"PM3-R{n}",title,"all","R"))
     elif dt<=d.date(2027,5,28) and not any(r[2]=="PM3" for r in rows):
-        rows.append((dt,0,"PM3","May 3–28: PM3 window (school date TBD). Non-test days: Algebra 1 bridge — operations with radicals, point-slope and standard form, systems by substitution","912.NSO.1.4 · 912.AR.2.2 · 912.AR.9.1","W"))
+        rows.append((dt,0,"PM3","May 3–28: PM3 window (school date TBD). Content finishes Apr 30, so the whole window is free: PM3 review before the test — mixed FAST-shaped whiteboard rounds, one reporting category per question — and the Algebra 1 bridge after it (operations with radicals, point-slope and standard form, systems by substitution)","912.NSO.1.4 · 912.AR.2.2 · 912.AR.9.1","W"))
 if __name__=="__main__":
     import sys
-    print(f"| Date | Day | Unit | Lesson | What is taught | Benchmark | IXL skill(s) — code | Also consider — code | Due |")
-    print("|---|---|---|---|---|---|---|---|---|")
+    print(f"| Date | Day | Unit | Lesson | What is taught | Benchmark | IXL skills — all required, code | Due |")
+    print("|---|---|---|---|---|---|---|---|")
     for i,(dt,u,code,title,bm,kind) in enumerate(rows):
         wd=dt.strftime("%a")
         flag=" (43 min)" if wd=="Wed" else ""
-        mark={"T":"**thread** ","X":"**exam** ","R":"**review** ","F":"*flex* ","W":""}.get(kind,"")
-        main,also=ixl(code)
+        mark={"T":"**thread** ","X":"**exam** ","R":"**review** ","F":"*flex* ","S":"*spiral* ","W":""}.get(kind,"")
+        sk=ixl(code)
         nxt=[r[0] for r in rows[i+1:] if r[5] not in ("W",)]
-        due=nxt[0].strftime('%b %d') if (main and nxt) else ""
-        M="; ".join(f"{n} — {c}" for n,c in main); A="; ".join(f"{n} — {c}" for n,c in also)
-        print(f"| {dt.strftime('%b %d')} | {wd}{flag} | {u if u else ''} | {code} | {mark}{title} | {bm} | {M} | {A} | {due} |")
-    # student-facing due-date sheet
+        due=nxt[0].strftime('%b %d') if (sk and nxt) else ""
+        M="; ".join(f"{n} — {c}" for n,c in sk)
+        print(f"| {dt.strftime('%b %d')} | {wd}{flag} | {u if u else ''} | {code} | {mark}{title} | {bm} | {M} | {due} |")
+    # student-facing due-date sheet (ruling 28)
     with open(os.path.join(HERE,"..","a7","reference","A7 IXL DUE DATES 2026-27.md"),"w") as f:
-        f.write(f"# A7 — IXL assignments and due dates, 2026–27\n\nEach class day ends with IXL. Whatever is not finished in class is that night's practice. **Done means a SmartScore of {SMARTSCORE} on every listed skill.** Due = the next class day. \"Also consider\" skills are optional extra practice on the same idea.\n\nThe three-character code after each skill is what you type into IXL's search box.\n\n| Assigned | Lesson | Required skills (SmartScore {SMARTSCORE}) | Optional (also consider) | Due |\n|---|---|---|---|---|\n")
-        for i,(dt,u,code,title,bm,kind) in enumerate(rows):
-            main,also=ixl(code)
-            if not main: continue
-            nxt=[r[0] for r in rows[i+1:] if r[5] not in ("W",)]
+        f.write(f"# A7 — IXL assignments and due dates, 2026–27\n\n"
+                f"Each class day ends with five minutes of IXL. That block is the **start** of the assignment, not the whole of it; "
+                f"whatever is not finished in class is that night's practice.\n\n"
+                f"**Every skill listed for a lesson is required. Nothing on this sheet is optional.** "
+                f"Done means a **SmartScore of {SMARTSCORE}** on every listed skill.\n\n"
+                f"Assigned the day of the lesson, **due at the start of the next class**. When two or more lessons in a row use the "
+                f"same skills, they are one assignment covering the run, due after the last lesson in it.\n\n"
+                f"The three-character code after each skill is what you type into IXL's search box.\n\n"
+                f"| Assigned | Lesson(s) | Skills — all required, to SmartScore {SMARTSCORE} | Due |\n|---|---|---|---|\n")
+        teach=[(i,r) for i,r in enumerate(rows) if ixl(r[2])]
+        j=0
+        while j<len(teach):
+            i0,r0=teach[j]; skills=ixl(r0[2])
+            k2=j
+            while k2+1<len(teach) and ixl(teach[k2+1][1][2])==skills and teach[k2+1][0]==teach[k2][0]+1:
+                k2+=1
+            i1,r1=teach[k2]
+            nxt=[q[0] for q in rows[i1+1:] if q[5] not in ("W",)]
             due=nxt[0].strftime('%a %b %d') if nxt else ""
-            M="; ".join(f"{n} ({c})" for n,c in main); A="; ".join(f"{n} ({c})" for n,c in also)
-            f.write(f"| {dt.strftime('%a %b %d')} | {code} {title} | {M} | {A} | {due} |\n")
+            lab=f"{r0[2]} {r0[3]}" if k2==j else f"{r0[2]}–{r1[2]} ({k2-j+1} lessons) {r0[3]}"
+            when=r0[0].strftime('%a %b %d') if k2==j else f"{r0[0].strftime('%a %b %d')}"
+            S="; ".join(f"{n} ({c})" for n,c in skills)
+            f.write(f"| {when} | {lab} | {S} | {due} |\n")
+            j=k2+1
     print(f"\nPlanned periods: {len(rows)} of {len(days)} available Sep 23–May 28; PM3 review days: {n}", file=sys.stderr)
     for dt,u,code,title,bm,kind in rows:
         if code.endswith("X1") or code=="17.X" or code.startswith("PM"):

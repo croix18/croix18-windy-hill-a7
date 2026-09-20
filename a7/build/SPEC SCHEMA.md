@@ -128,14 +128,20 @@ assessment=dict(total, tracker_order, tracker, follow_through, days=[…]))`.
   item per review carries the **SSDD block**: a stem with four lettered parts on the same
   surface asking four different things, with `key_stem="**SSDD.**   …"` so the label prints on
   the key only. The review is unscored: no points anywhere.
-- `assessment.days`: `[dict(title="Day 1", sub, sections=[dict(title, benchmark, items=[…])])]`.
-  Every lettered part is one point; every single-part item is one point. `total` and `tracker`
-  (benchmark → points) are asserted against the items at build time; `tracker_order` fixes the
-  Score Tracker's row order. Numbering runs straight through both days.
+- `assessment.sections`: `[dict(title, benchmark, items=[…])]` — **one paper, numbered straight
+  through, with no Day 1 / Day 2 division anywhere** (ruling 27). The paper's front line says it
+  runs over two periods and that students continue from where they stopped; the student line for
+  follow-through credit (ruling 19) sits under it. Every lettered part is one point; every
+  single-part item is one point. `total` and `tracker` (benchmark → points) are asserted against
+  the items at build time; `tracker_order` fixes the Score Tracker's row order.
+- **Exactly two items carry `transfer=True`** (ruling 18) and the build refuses any other count.
+  A transfer item is the same benchmark and the same one-operation demand on a surface that
+  appears on no review and in no question bank — not harder, not longer, not a chain. The key
+  prints *TRANSFER ITEM — not on the practice test. Same benchmark, a surface nobody rehearsed.*
 
 ## `M` — the manifest (`manifest.py`)
 
 `dict(unit, title, folder, audit_src, summary, lessons=[(code, label, title, benchmark,
-carry_line)], assessment_days=[(benchmarks, points)], naming_note, order_note,
+carry_line)], assessment=(benchmarks, points), naming_note, order_note,
 before_unit=[bullets])`. `lessons` is in teaching order and drives the START HERE tables and the
 timing table (read from the deck side-cars, never typed).

@@ -1341,6 +1341,15 @@ retires.
 
 ## 13b(x). Rulings — Croix, 20 September: the test runs two days, and IXL is required [both courses]
 
+**Ruling 27a — A7 gets no review day; the reteach day stays.** *Croix, 20 September (late),
+asked how to find the ~18 days ruling 27 costs the accelerated calendar:* **"No review day, keep
+the reteach days. M7 has less content and can absorb extra days."** So in A7 the per-unit review
+day is **not** scheduled — the Unit Review document goes home as practice instead — and the
+post-exam reteach (flex) day stays. Everything else in ruling 27 binds A7 unchanged: one paper
+over two days, day 1 a Monday or a Thursday, day 2 the next school day, never straddling a
+weekend or a break, with a spiral day absorbing any slack. **M7 keeps the review day.** With this
+amendment A7's content finishes 30 April and the whole 3–28 May PM3 window is free.
+
 **Ruling 27 — every unit test runs over two days.** Croix: *"I need two days for
 assessments."* Day 2 is the same paper continued — students stop where the period ends and pick
 up where they left off; it is not two papers. The reteach day is folded into the review day

@@ -146,12 +146,11 @@ U = dict(
 
     # ------------------------------------------------------------------ unit assessment (two periods)
     assessment=dict(
-        total=39,
+        total=41,
         tracker_order=["MA.7.NSO.1.1", "MA.8.NSO.1.3", "MA.8.AR.1.1", "MA.8.NSO.1.4"],
-        tracker={"MA.7.NSO.1.1": 9, "MA.8.NSO.1.3": 10, "MA.8.AR.1.1": 9, "MA.8.NSO.1.4": 11},
-        follow_through="Follow-through.  If a student writes a wrong power in one part and then evaluates their own power correctly in the next, the next part still earns its point. Mark each part against what they wrote, not against the key.",
-        days=[
-            dict(title="Day 1", sub="Sections 1 and 2 — numerical bases", sections=[
+        tracker={"MA.7.NSO.1.1": 9, "MA.8.NSO.1.3": 11, "MA.8.AR.1.1": 9, "MA.8.NSO.1.4": 12},
+        follow_through="Follow-through (ruling 19).  A later part is correct when the right operation is applied to the student's own earlier value. Look at what they wrote for the earlier part, do this part's operation to it, and tick if that is what they wrote. It applies only where the work is on the page.",
+        sections=[
                 dict(title="Laws of Exponents", benchmark="MA.7.NSO.1.1", items=[
                     dict(stem="Write each expression as a single power.", parts=[
                         dict(label="a", stem="$4^{3}\\cdot 4^{5}$", answer="$4^{8}$", why="Add the exponents; the base stays 4.", check=("eq", "4**3*4**5", "4**8"), space=0.5),
@@ -184,9 +183,9 @@ U = dict(
                          errors={"C": "−8² = −64 — the opposite, not the reciprocal [B1G-M 8.NSO.1.3 misconception]", "E": "2⁻⁸ = 1/256 — the exponent was not checked against 64 = 2⁶ [8.NSO.1.3]"},
                          why="All three correct and nothing else for the point.", check=("many", ("eq", "F(2)**-6", "F(1,64)"), ("eq", "F(4)**-3", "F(1,64)"), ("eq", "F(1,4)**3", "F(1,64)"), ("true", "-8**2 != F(1,64)"), ("true", "F(2)**-8 != F(1,64)"))),
                     dict(stem="Marco says the value of  $3^{-2}$  is  $-9$.  Explain why he is wrong, and give the correct value.", answer="A negative exponent means the reciprocal of the power, not a negative number. $3^{-2} = \\frac{1}{3^{2}} = \\frac{1}{9}$.", why="The point needs the correct value AND the reason (reciprocal, not opposite). 'He forgot parentheses' is about (−3)², a different expression.", check=("many", ("eq", "F(3)**-2", "F(1,9)"), ("true", "F(3)**-2 != -9")), space=1.2),
+                    dict(transfer=True, stem="Which is greater,  $2^{-3}$  or  $3^{-2}$ ?  Show how you know.", answer="$2^{-3}$ is greater.  $2^{-3} = \\frac{1}{8}$ and $3^{-2} = \\frac{1}{9}$, and $\\frac{1}{8} > \\frac{1}{9}$.", why="Both values must be found; a guess does not earn the point. The reciprocals put the bigger denominator on the smaller number: $3^{2} = 9$ is bigger than $2^{3} = 8$, so $3^{-2}$ is the smaller of the two.", check=("many", ("eq", "F(2)**-3", "F(1,8)"), ("eq", "F(3)**-2", "F(1,9)"), ("true", "F(2)**-3 > F(3)**-2")), space=1.0),
                 ]),
-            ]),
-            dict(title="Day 2", sub="Sections 3 and 4 — variable bases, and scientific notation", sections=[
+
                 dict(title="Variable Bases", benchmark="MA.8.AR.1.1", items=[
                     dict(stem="Write each expression as a single monomial.", parts=[
                         dict(label="a", stem="$x^{4}\\cdot x^{6}$", answer="$x^{10}$", why="", check=("eq", "x**4*x**6", "x**10"), space=0.5),
@@ -219,8 +218,8 @@ U = dict(
                         dict(label="b", stem="How many times larger is  $4.8 \\times 10^{-3}$  than  $1.6 \\times 10^{-7}$ ?", answer="$3 \\times 10^{4} = 30{,}000$ times", why="4.8 ÷ 1.6 = 3 and −3 − (−7) = 4.", check=("eq", "(F(48,10)*F(10)**-3)/(F(16,10)*F(10)**-7)", "30000"), space=0.7)]),
                     dict(stem="Which is greater,  $8.9 \\times 10^{-4}$  or  $2.1 \\times 10^{-3}$ ?  Explain how you know.", answer="$2.1 \\times 10^{-3}$ — the exponent −3 is greater than −4, so its power of 10 is larger; 0.0021 > 0.00089.", why="The point needs the choice and the reason. 8.9 × 10⁻⁴ compared the coefficients.", check=("true", "F(21,10)*F(10)**-3 > F(89,10)*F(10)**-4"), space=0.8),
                     dict(stem="A computer displays a number as  5.6E8.  Write the number in standard form.", answer="560,000,000", why="E8 means × 10⁸.", check=("eq", "F(56,10)*10**8", "560000000"), space=0.6),
+                    dict(transfer=True, stem="Between which two consecutive powers of 10 does  $4.7 \\times 10^{-5}$  lie?", answer="Between $10^{-5}$ and $10^{-4}$.", why="4.7 is between 1 and 10, so the number is between 1×10⁻⁵ and 1×10⁻⁴. Both powers are needed for the point.", check=("many", ("true", "F(10)**-5 < F(47,10)*F(10)**-5"), ("true", "F(47,10)*F(10)**-5 < F(10)**-4")), space=0.8),
                 ]),
-            ]),
         ],
     ),
 )

@@ -44,8 +44,7 @@ Nothing exists until it is committed. This folder is generated from `a7/build/u3
 | 3.08 | Writing Large Numbers in Scientific Notation | MA.8.NSO.1.4 | One nonzero digit in front of the decimal point. |
 | 3.09 | Writing Small Numbers in Scientific Notation | MA.8.NSO.1.4 | The exponent counts places, not zeros. |
 | — | Unit Review | all four | unscored; the SSDD block is named on the key only |
-| — | Unit Assessment, day 1 | MA.7.NSO.1.1, MA.8.NSO.1.3 | 19 points |
-| — | Unit Assessment, day 2 | MA.8.AR.1.1, MA.8.NSO.1.4 | 20 points |
+| — | Unit Assessment — two periods, one paper | all four benchmarks, sections by benchmark | 41 points |
 
 Book order with Thread A woven in after 3.07 (ruling 14): the laws are complete on numbers before they are restated on letters, and both are complete before scientific notation. Math Nation's 3.6 and 3.7 are one period here (3.06–07). MA.7.NSO.1.1 is grade 7 content the Grade 8 FAST assumes; the other three benchmarks report under Number Sense and Operations (8.NSO.1.3, 8.NSO.1.4) and Algebraic Reasoning (8.AR.1.1).
 
@@ -83,7 +82,8 @@ The whiteboard round is the remainder — 16–20 minutes across the unit — an
 - **No partner or group work anywhere.** Math Nation's explorations and collaborations are taught from the front; its partner-discussion tasks are written whiteboard questions.
 - **Calculators: allowed on everything, and nothing about them is printed on any student page.** The one exception the house style allows is the Reference Sheet's description of what the FAST platform provides (an on-screen scientific calculator) — that is a description, not a permission line.
 - **Old-school textbook styling.** No commentary panels, no grey bars, no clip art. American spellings.
-- **One point per lettered part, no partial credit.** The assessment key carries a `Scoring:` line under every question and a per-benchmark Score Tracker at the end.
+- **One point per lettered part, no partial credit**, with follow-through credit (ruling 19): a later part earns its point when the right operation is applied to the student's own earlier value, where that work is on the page. The key carries a `Scoring:` line under every question and a per-benchmark Score Tracker at the end.
+- **The assessment is one paper over two class periods** (ruling 27). Students stop when the period ends and continue from where they stopped; there is no Day 1 / Day 2 paper and no such heading. Two questions are **transfer items** (ruling 18) — same benchmark, a surface that appears on no review and in no question bank — and the key names them.
 - **No benchmark codes on student pages.** The deck title slide and the keys and Teacher Editions carry them.
 - **Opens cleanly in Google Docs.** Every document is a fixed-width table layout with no nested tables and a spacer after every block; fonts are Times New Roman / Georgia / Arial with FreeSerif for the bubbles only.
 - **Every answer is re-derived by machine at build time.** Every item carries a `check` that sympy evaluates (variable bases as symbols); every multiple-choice distractor must name its error; every scientific-notation coefficient is scanned for the [1, 10) rule; the build refuses on any finding. The post-build suite (`checks.py`) then reads the rendered PDFs for off-page text, glyph coverage, Google-Docs layout rules and the timing plan.
@@ -95,7 +95,7 @@ The whiteboard round is the remainder — 16–20 minutes across the unit — an
 
 - **Seven defects in the Math Nation package are not reproduced here.** Practice L1 #7 (key 104,796 → 104,976), Additional Practice L8 #2 (10⁶ + 10⁴ keyed 101000 → 1,010,000), Additional Practice L9 #3 (malformed item, wrong key), Homework L3 #7 (4,046 → 4,096), Homework L9 #4b (3 → 1,000), Homework L9 #4c (item unsound; keyed 3,000, true ratio ≈ 527), Homework L9 #5 (two matching rows equal). `Reference/UNIT 3 AUDIT - Math Nation package.md` has the page numbers.
 - **Three things the state guide expects that the book never asks are in every relevant bank and on the assessment:** unknown-exponent items (7ⁿ ÷ 7² = 343), the −b versus b⁻¹ contrast in writing, and calculator E notation with comparisons that cross from very large to very small.
-- **The assessment is two periods, 39 points, one question map.** Day 1 is numerical (sections 1–2, 19 points); day 2 is variable bases and scientific notation (sections 3–4, 20 points). Numbering runs straight through; the key's Score Tracker maps every question to its benchmark.
+- **The assessment is one paper over two periods, 41 points** (ruling 27). Students stop when the first period ends and continue from where they stopped — it is not two papers, and nothing on it says 'Day 1'. Four sections by benchmark, numbered 1–21 straight through. **Questions 10 and 21 are transfer items** (ruling 18): the same benchmarks, on surfaces that appear on no review and in no question bank. The key names them and the Score Tracker maps every question to its benchmark.
 - **The Reference Sheet is the only handout.** Give it out at 3.04 or earlier; it is the document students study from. It does not go into the test.
 
 Installed: 130 files from the build, plus this page and the Reference folder.

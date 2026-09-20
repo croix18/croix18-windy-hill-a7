@@ -27,7 +27,7 @@ def check_unit(U):
     findings = []
     n = 0
     review_items = _items([p["items"] for p in U["review"]])
-    exam_items = _items([s["items"] for d in U["assessment"]["days"] for s in d["sections"]])
+    exam_items = _items([sec["items"] for sec in U["assessment"]["sections"]])
     for label, items in (("review", review_items), ("assessment", exam_items)):
         for i, it in enumerate(items):
             for f in _flatten(it):
@@ -102,52 +102,62 @@ def _points(it):
 
 
 def assessment_ledger(U):
-    """Returns (total, per_benchmark {bm: (question numbers, points)}, per_day, per_section)."""
+    """Ruling 27: ONE paper, numbered straight through, no day sections.
+    Returns (total, per_benchmark {bm: (question numbers, points)}, per_section, transfer_qs)."""
     total = 0; n = 0
-    per_bm = {}; per_day = []; per_sec = []
-    for day in U["assessment"]["days"]:
-        dpts = 0
-        for sec in day["sections"]:
-            spts = 0
-            for it in sec["items"]:
-                if it.get("heading"):
-                    continue
-                n += 1
-                p = _points(it); v = sum(p) if isinstance(p, list) else p
-                spts += v
-                qs, pts = per_bm.setdefault(sec["benchmark"], ([], 0))
-                qs.append(n); per_bm[sec["benchmark"]] = (qs, pts + v)
-            per_sec.append((sec["title"], spts)); dpts += spts
-        per_day.append(dpts); total += dpts
-    return total, per_bm, per_day, per_sec
+    per_bm = {}; per_sec = []; transfer = []
+    for sec in U["assessment"]["sections"]:
+        spts = 0
+        for it in sec["items"]:
+            if it.get("heading"):
+                continue
+            n += 1
+            if it.get("transfer"):
+                transfer.append(n)
+            p = _points(it); v = sum(p) if isinstance(p, list) else p
+            spts += v
+            qs, pts = per_bm.setdefault(sec["benchmark"], ([], 0))
+            qs.append(n); per_bm[sec["benchmark"]] = (qs, pts + v)
+        per_sec.append((sec["title"], spts)); total += spts
+    return total, per_bm, per_sec, transfer
+
+
+CONTINUES = ("This assessment runs over two class periods. Stop when the period ends; "
+             "you will continue from where you stopped.")
+FOLLOW_THROUGH_STUDENT = ("If an earlier part is wrong, a later part still earns its point when the right "
+                          "operation is applied to your own earlier answer — but only if that work is on the page.")
+TRANSFER_FLAG = "TRANSFER ITEM — not on the practice test. Same benchmark, a surface nobody rehearsed."
 
 
 def build_assessment(U, outdir, key):
     A = U["assessment"]
-    total, per_bm, per_day, per_sec = assessment_ledger(U)
+    total, per_bm, per_sec, transfer = assessment_ledger(U)
     assert total == A["total"], f"assessment ledger {total} != declared {A['total']}"
     for bm, (qs, pts) in per_bm.items():
         assert A["tracker"][bm] == pts, f"tracker {bm}: declared {A['tracker'][bm]}, ledger {pts}"
     assert sum(A["tracker"].values()) == total
+    # Ruling 18: exactly two transfer items on every unit assessment.
+    assert len(transfer) == 2, f"ruling 18: {len(transfer)} transfer items, need exactly 2 (questions {transfer})"
     eyebrow = f"{COURSE}  ·  Unit {U['unit']}  ·  Assessment"
-    doc = Doc(eyebrow, U["title"], f"{total} points  ·  two class periods", key=key)
+    sub = f"{total} points" + ("  ·  two periods; students continue the same paper" if key else "")
+    doc = Doc(eyebrow, U["title"], sub, key=key)
     doc.instruction("Show your work. Circle your final answer.")
-    si = 0
-    for di, day in enumerate(A["days"]):
-        if di > 0:
-            doc.d.add_page_break()
-        doc.para(f"{day['title']}", size=12, bold=True, before=2, after=2, keep=True)
-        doc.para(day["sub"] + f"   ·   {per_day[di]} points", size=9.5, italic=True, color=GRAY, before=0, after=4)
-        for sec in day["sections"]:
-            si += 1
-            doc.section(f"{si}.  {sec['title']}", f"{per_sec[si - 1][1]} points")
-            for it in sec["items"]:
-                if it.get("heading"):
-                    doc.heading(it["heading"]); continue
-                it2 = dict(it)
-                if key and it.get("key_stem"):
-                    it2["stem"] = it["key_stem"]
-                _fmt_q(doc, it2, key=key, points=_points(it))
+    doc.para(CONTINUES, size=10, bold=True, before=0, after=3)
+    doc.para(FOLLOW_THROUGH_STUDENT, size=9.5, italic=True, color=GRAY, before=0, after=8)
+    si = 0; n = 0
+    for sec in A["sections"]:
+        si += 1
+        doc.section(f"{si}.  {sec['title']}", f"{per_sec[si - 1][1]} points")
+        for it in sec["items"]:
+            if it.get("heading"):
+                doc.heading(it["heading"]); continue
+            n += 1
+            it2 = dict(it)
+            if key and it.get("key_stem"):
+                it2["stem"] = it["key_stem"]
+            if key and it.get("transfer"):
+                it2["why"] = (it.get("why", "") + "  " if it.get("why") else "") + "**" + TRANSFER_FLAG + "**"
+            _fmt_q(doc, it2, key=key, points=_points(it), number=n)
     if key:
         doc.section("Score Tracker")
         doc.para(f"{total} points, one point per lettered part.  " + "  ·  ".join(f"Section {i + 1} — {p}" for i, (t, p) in enumerate(per_sec)),
@@ -159,6 +169,8 @@ def build_assessment(U, outdir, key):
         rows.append([{"text": "Total", "bold": True}, "", {"text": str(total), "bold": True}, ""])
         doc.table([2600, 3600, 1500, 1660], rows, header=True, size=10.5)
         doc.para(A["follow_through"], size=9.5, italic=True, color=GRAY, before=6, after=4)
+        doc.para(f"Transfer items (ruling 18): questions {transfer[0]} and {transfer[1]}. Neither surface appears on the "
+                 f"review or in any question bank.", size=9.5, italic=True, color=GRAY, before=2, after=4)
     name = f"A7 {U['unit']}  Unit Assessment{' Key' if key else ''}.docx"
     path = os.path.join(outdir, name)
     doc.save(path)
