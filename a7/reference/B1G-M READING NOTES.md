@@ -817,3 +817,122 @@ figure: G7 pp. 29, 34, 55, 63, 67–71, 76, 77, 80, 83, 92, 96, 99, 101; G8 pp. 
 35, 38, 41, 54, 56, 59, 62, 70, 71, 82, 86, 94, 108, 114, 115, 117. Corrections folded into the
 benchmark entries above. Page images too low-resolution to read dimensions: G7 p. 70 (patio
 screens), G8 p. 59 item 1 and p. 70 task 2A — flagged inline, not reused.
+
+---
+# GRADE 7 ACCELERATED B1G-M (course 1205050) — read 20 Sept, after the two grade guides
+
+Source: `B1G-M-Grade-7-Accelerated_1.docx` (Croix, 20 Sept). Text with TeX math and figure
+alt-text extracted to `sources/B1G-M Grade 7 Accelerated (text).txt`. **This is the course's own
+guide and it supersedes the two grade guides as the spine.** 57 benchmarks in this order:
+7.NSO.1.1, 7.NSO.1.2, 8.NSO.1.1–1.7 · 7.AR.2.2, 7.AR.3.3, 7.AR.4.1–4.5, 8.AR.1.1–1.3, 8.AR.2.1–2.3,
+8.AR.3.1–3.5, 8.AR.4.1–4.3 · 8.F.1.1–1.3 · 7.GR.1.3–1.5, 7.GR.2.1–2.3, 8.GR.1.1–1.6, 8.GR.2.1–2.4 ·
+7.DP.1.4, 7.DP.1.5, 8.DP.1.1–1.3, 8.DP.2.1–2.3. Exactly the 40 + 17 the Source of Truth lists.
+
+## What is different from the grade guides (the parts that matter)
+
+1. **Every "Purpose" paragraph is rewritten for this course.** "In grade 7 accelerated,
+   students…" and the Grade 8 half of each strand is folded into the same year: e.g. 7.AR.2.2
+   "students write and solve two-step equations AND multi-step linear equations"; 7.AR.4.2 "…and
+   expand the constant of proportionality to slope"; 7.GR.1.3 "…and use the Pythagorean Theorem
+   to find distance"; 7.GR.1.5 "directly connects to MA.8.GR.2.2".
+2. **Horizontal alignment now lists the in-course MA.7 ↔ MA.8 pairs.** These are the prerequisite
+   map I was going to derive by hand; the state has done it: 7.NSO.1.1 ↔ 8.NSO.1.3, 8.AR.1.1;
+   7.NSO.1.2 ↔ 8.NSO.1.1, 1.2; 7.AR.2.2 ↔ 8.AR.2.1, 2.3; 7.AR.3.3 ↔ 8.GR.1.2; 7.AR.4.1 ↔ 8.AR.3.1,
+   8.F.1.2, 8.DP.1.3, 8.GR.2.4; 7.AR.4.2 ↔ 8.AR.3.2; 7.AR.4.3 ↔ 8.AR.3.4, 8.AR.4.2, 4.3;
+   7.AR.4.4 ↔ 8.AR.3.2–3.4; 7.AR.4.5 ↔ 8.AR.3.4, 3.5; 7.GR.1.3 ↔ 8.GR.1.2; 7.GR.1.5 ↔ 8.GR.2.2;
+   7.DP.1.5 ↔ 8.DP.1.1.
+3. **Vertical "Previous Benchmarks" now mean previous COURSES.** Where the grade guide said
+   "prev MA.7.NSO.1.2" for 8.NSO.1.1, this guide says MA.6.NSO.1.2 — because 7.NSO.1.2 is taught in
+   this course. Dropped MA.7 benchmarks (7.NSO.2.x, 7.AR.1.x, 7.AR.2.1, 7.AR.3.1, 3.2, 7.DP.x) still
+   appear as previous benchmarks, i.e. the state assumes a 1205020 (Grade 6 Accelerated) history.
+   Matches Source of Truth Part 0 consequence 3.
+4. **The two AR.2 predecessor misprints from the Grade 8 guide are fixed here**: 8.AR.2.1 prev =
+   MA.7.AR.2.2; 8.AR.2.2 prev = MA.6.AR.2.2, 2.3, MA.7.AR.2.1.
+5. **Figure alt-text is present** for nearly every figure, which resolves several page-image
+   ambiguities (Victoria's graph: x-intercept 25, slope 4 → y = 4x − 100; Jill's slope ≈ 4/5;
+   Graph #1 slope ½ intercept 1 vs Graph #2 slope 2 through origin; triangle CAT C(1,1) A(5,7)
+   T(5,2); IJK I(4,0) J(2,−4) K(−2,4); JKLM JK = 6 → J'K' = 8, k = 4/3; spinner bar graph 41, 43,
+   39, 37, …).
+6. **Labels "Enrichment Task" and "Extension" appear** on items beyond the benchmark (GR.1.1
+   isosceles-right-triangle x² + x² = 400 is now "Enrichment"; DP.2.3 6-section spinner
+   "Extension"; DP.1.5 segmented bar charts "as an enrichment"). Useful: the state itself marks
+   what is off-benchmark.
+
+## Additions / changes to tasks and items, worked
+
+- 7.NSO.1.1 items: (½)²·(½)³ = (½)⁵ = 1/32; ((¼)²)³·(¼)³ = (¼)⁹; (8⁴)³·5²·5³ / (8⁷·(8·5)⁴) =
+  8¹²·5⁵ / (8¹¹·5⁴) = 8·5 = 40. Work-backwards examples: 7ⁿ/7² = 343 → n = 5; (5²)ⁿ = 5¹⁰ → n = 5.
+  New misconception: multiplying/dividing the BASES when applying product/quotient laws; inverting
+  product-of-powers and power-of-a-power (multiply in the first, add in the second).
+- 7.NSO.1.2 task: order ⅕, −0.4, 65%, −2⅓, 5.75, 9/7, 123%, 2.3̄ → −2⅓ < −0.4 < ⅕ < 65% < 123% <
+  9/7 (1.2857) < 2.3̄ < 5.75 (note 123% = 1.23 < 9/7 = 1.2857). Table: −4⅓ = −13/3 = −4.3̄ = −433.3̄%;
+  0.125 = ⅛ = 12.5%; 29/7 = 4 1/7 = 4.142857̄ = 414.3%; −8/25 = −0.32 = −32%; 2 7/9 = 25/9 = 2.7̄ =
+  277.8%. Items: Benny ⅓ left vs Juniper 30% → Benny (33.3%); 0.15 off → 15%; 5⅞ = 47/8 = 5.875 =
+  587.5%. Misconception added: using the remainder as the decimal (17 ÷ 3 = 5.2).
+- 8.NSO.1.2 new task: Haylie √8 (≈ 2.83) vs ∛9 (≈ 2.08). Item 2 table resolved: π² vs 9 (>);
+  √50 vs 7 (>); 5/3 vs √8 (<); −2π vs −6 (<).
+- 8.NSO.1.3 new task: "Aryella says 10⁰ = 134⁰" — agree, both 1.
+- 8.NSO.1.4 new tasks: Florida 6.5×10⁴ mi² vs Okeechobee 7.3×10² → ≈ 89 times (100 is a fair
+  estimate); China 1.44×10⁹ vs US 3.3145×10⁸ (≈ 4.3×) vs Mexico 1.292×10⁸ (≈ 11.1×).
+- 8.NSO.1.5 meteorite Part C: 680 / 0.084 ≈ 8,095 times; Part D: total 790.084 g ≤ 850 → fits.
+- 8.NSO.1.6 new: 4.66×10⁸ calc/s → ×60 = 2.796×10¹⁰ per minute; 5 processors × 20 min =
+  2.796×10¹² (sig digits: 3). Item 2: 7.79×10⁸ m ÷ 3×10⁸ m/s ≈ 2.6 s = 2.6×10⁰ s (one sig digit in
+  3×10⁸ strictly → 3 s; flag).
+- 7.AR.2.2 item 2 is now 5.6(z − 2) = 11 → z = 2 + 11/5.6 = 3.964… = 111/28.
+- 7.AR.3.3 items renamed (Mary/Jia — the stem names two different people: erratum);
+  Germany→Poland.
+- 7.AR.4.4 new item: Saylor 200 min / 5 days → m = 40d.
+- 7.AR.4.5 new item: Trey 14/21 = 9/13.5 = 11/16.5 = 3/4.5 = 8/12 = ⅔ measure per minute →
+  proportional. Note the guide adds: "In grade 7, it is not the expectation that students define
+  independent and dependent variables" — but 8.F.1.1 Clar. 1 requires those terms; teach them at
+  F.1.1, not before.
+- 8.AR.1.1 new task 3: x³ vs x⁻³ (partner discussion — for us a written contrast).
+- 8.AR.1.2 tiered text says "3x and 2x + 4 is 3y² + 6xy" while its table shows 6x² + 12x —
+  erratum in the guide; the table is right.
+- 8.AR.1.3 misconception example now 18xy³ + 3xy² → wrong 3xy²(6y + 3xy²); right 3xy²(6y + 1).
+  New task: −36x² + 24x — John 12x(−3x + 2), Savannah −6x(6x − 4): BOTH are correct rewrites (the
+  benchmark says "a common factor," not the greatest); John's uses the GCF. New item:
+  25x⁴y + 5xy³ = 5xy(5x³ + y²).
+- 8.AR.2.3 new task 3: x² = 64 → ±8; x³ = 64 → 4; x³ = −64 → −4.
+- 8.AR.3.2 new item: gym $25 + $5/month → slope 5; 12 months → $85.
+- 8.AR.3.3 Victoria (alt-text): x-intercept 25, slope 4 → y = 4x − 100; y-intercept −100 = cost
+  before any sale.
+- 8.AR.4.2 new item 2: y = 2x − 3 and 3y = 6x − 9 → same line → infinitely many. (Second equation
+  is not slope-intercept; AR.4.2 carries no such clarification, AR.4.3 does.)
+- 8.AR.4.3 item 4 changed: y = −1.5x + 2 and y = 2 − 3/2 x → coincident → infinitely many.
+- 8.F.1.1 new items: task 2 (build a function with rational domain/range < 10); item 3 — fill
+  the missing domain values in {(0,1), (1,2), (__,3), (__,4)}: any two values not 0 or 1 and not
+  equal to each other. Mapping-diagram alt text has "99991" for "1" (typo in the alt text).
+- 8.F.1.2 item 2 graph: through (0,−1), (2,0), (4,1) → linear, y = ½x − 1.
+- 7.GR.1.4 new task 2: garden r = 6 ft, whole = 100π → outer r = 10 → walkway 4 ft wide (the guide
+  itself finds r from an area here, against its own "not expected" note — π-form makes it a
+  perfect-square read, 100π → r = 10).
+- 7.GR.2.1 alt text calls 2⅝ in the RADIUS of the drawn cylinder while the figure marks it across
+  the end — unresolved; do not reuse that figure.
+- 7.GR.2.3 pool task now "2 inches from the top": r = 1.75 ft, h = 14 in = 7/6 ft → V =
+  π(3.0625)(1.1667) ≈ 11.2 ft³. New item: d = 12 yd, h = 9.4 → V = π(36)(9.4) = 338.4π yd³.
+- 8.GR.1.1 items changed: ladder 12 ft, 3 ft out → √135 ≈ 11.6 ft; enrichment 2x² = 400 → x ≈ 14.1.
+- 8.GR.1.3 task adds Option 4: 5, 6, 10 → triangle (5 + 6 > 10), not right (25 + 36 ≠ 100).
+- 8.GR.1.4 new items: ∠6 = 43°, ∠7 = 82°, find ∠1 (three intersecting lines; alt text garbled —
+  figure needed); "two supplementary angles, one is x" → other is 180 − x.
+- 8.GR.1.6 new item: Saylor, 9 sides → 7 triangles → 1,260° — correct.
+- 8.GR.2.2 new task 2: photo 10 w × 8 h enlarged to "65 tall by 52 wide" — 65/8 = 8.125 but
+  52/10 = 5.2: NOT a dilation. Guide erratum. Part B: 168 tall → k = 21 → 210 in wide.
+- 8.DP.1.1 new item 2: friends stopping at water stations 1–9 (5, 7, 4, 2, 15, 10, 2, 6, 25) —
+  station is ordinal → line graph is the appropriate choice.
+- 8.DP.1.5 new item: point-guard points {7, 10, 9, 12, 15, 17, 4, 13, 28, 6, 14, 11} — 12 values,
+  one outlier (28) → line plot or stem-and-leaf (keeps the values; shows the outlier).
+- 8.DP.2.3 spinner (alt text): 5 sections; 200 spins → 41, 43, 39, 37, (40) → P(same twice) =
+  5/25 = ⅕ theoretical → 20 of 100. Extension: 6 sections → 1/6.
+- Appendix A "Summary of Changes" cites 7.AR.3.1 — a benchmark not in this course. Artifact.
+
+## Errata in the accelerated guide (in addition to the grade-guide lists)
+- 8.AR.1.2 tiered example text vs table (3y² + 6xy vs 6x² + 12x).
+- 8.GR.2.2 band-photo enlargement is not a dilation (8.125 vs 5.2).
+- 7.AR.3.3 item 1 names Mary then Jia.
+- 7.GR.2.1 item 1 alt text (radius) contradicts the drawing (diameter).
+- 7.GR.1.4 Jamilah alt text: "diameter 6.2 − 4" and "radius 3.5 − 2.4" are inconsistent with each
+  other (1.1 vs 1.1 — actually consistent: 2.2/2 = 1.1; the page-image "3.6" was the misread).
+  → Jamilah: r = 1.1 ft → ½π(1.21) ≈ 1.9 ft². Corrects my earlier 2.3.
+- 8.F.1.1 mapping alt text "99991".
+- Appendix A references 7.AR.3.1.

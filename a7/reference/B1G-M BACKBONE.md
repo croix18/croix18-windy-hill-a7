@@ -1,6 +1,10 @@
 # B1G-M Backbone — how the state guides drive the A7 rebuild
 
-**Ruled by Croix, 20 September 2026:** *"Grade 8 is the spine. Yes to all four."* The four were:
+**Ruled by Croix, 20 September 2026:** *"Grade 8 is the spine. Yes to all four."* Later the same
+day Croix supplied the state's **Grade 7 Accelerated B1G-M** (course 1205050's own guide). It
+carries all 57 course benchmarks with the Grade 8 text, the 17 Grade 7 benchmarks rewritten for
+this course, and the in-course MA.7 ↔ MA.8 pairings spelled out — so it IS the spine document,
+and the Grade 8 guide is its source. Nothing in the four rulings changes. The four were:
 (1) Grade 8 B1G-M is the spec, Grade 7 B1G-M is the prerequisite map; (2) the guide's numeric caps
 become hard checks; (3) the reference sheet follows the memorize/provide split literally;
 (4) every distractor is recorded in the TE by its guide-named error. Recorded in HOUSE STYLE
@@ -13,8 +17,11 @@ become hard checks; (3) the reference sheet follows the memorize/provide split l
 - **Spine:** the 40 MA.8 benchmarks, in the Math Nation accelerated book's order (HOUSE STYLE §10).
   Every lesson names the MA.8 benchmark it serves; a lesson that serves none is enrichment and is
   flagged, not silently built.
-- **Map:** for each MA.8 benchmark, the Grade 8 guide's *Previous Benchmarks* names what a student
-  must already own. Where that is one of the 17 carried MA.7 benchmarks, the A7 lesson teaches it
+- **Map:** the accelerated guide's *Connecting Benchmarks* list the in-course MA.7 ↔ MA.8 pairs
+  (7.NSO.1.1 → 8.NSO.1.3/AR.1.1; 7.NSO.1.2 → 8.NSO.1.1/1.2; 7.AR.2.2 → 8.AR.2.1/2.3; 7.AR.3.3 →
+  8.GR.1.2; 7.AR.4.1 → 8.AR.3.1/F.1.2/DP.1.3/GR.2.4; 7.AR.4.2 → 8.AR.3.2; 7.AR.4.3 → 8.AR.3.4/4.2/4.3;
+  7.AR.4.4 → 8.AR.3.2–3.4; 7.AR.4.5 → 8.AR.3.4/3.5; 7.GR.1.3 → 8.GR.1.2; 7.GR.1.5 → 8.GR.2.2;
+  7.DP.1.5 → 8.DP.1.1). Its *Previous Benchmarks* name what comes from EARLIER courses. Where that is one of the 17 carried MA.7 benchmarks, the A7 lesson teaches it
   as a prerequisite inside the Grade 8 lesson (or the unit before). Where it is a MA.7 benchmark
   the course DROPS (Source of Truth Part 0), the TE names the gap and the lesson does not depend
   on it.
@@ -31,7 +38,7 @@ table of contents needed.
 
 | Benchmark | Cat | County | MN unit | Prerequisite (guide's "Previous") | Built? |
 |---|---|---|---|---|---|
-| NSO.1.1 irrationals on a number line | N | – | 2 | 7.NSO.1.2 (carried) | ✔ U2 |
+| NSO.1.1 irrationals on a number line | N | – | 2 | 7.NSO.1.2 (in course) | ✔ U2 |
 | NSO.1.2 plot/order/compare incl. roots | N | – | 2 | 7.NSO.1.2 | ✔ U2 |
 | NSO.1.3 integer exponents, numeric | N | – | ? | 7.NSO.1.1 (carried) | |
 | NSO.1.4 scientific notation, compare | N | – | ? | 7.NSO.1.1, 7.NSO.2.1 (dropped) | |
@@ -41,8 +48,8 @@ table of contents needed.
 | AR.1.1 exponent laws, algebraic | A | **E** | 14 | 7.NSO.1.1, 7.NSO.2.1 | |
 | AR.1.2 monomial × linear | A | S | 14 | 7.AR.1.1, 1.2 (dropped) | |
 | AR.1.3 factor common monomial | A | S | 14 | 6.NSO.3.2, 7.AR.1.1, 1.2 | |
-| AR.2.1 multi-step equations | A | **E** | 11 | 7.AR.2.2 (carried; guide misprints 2.1) | ✔ U1 (two-step) |
-| AR.2.2 two-step inequalities | A | **E** | 1 | 7.AR.2.1 (dropped; guide misprints 2.2) | ✔ U1 |
+| AR.2.1 multi-step equations | A | **E** | 11 | 7.AR.2.2 (in course) | ✔ U1 (two-step) |
+| AR.2.2 two-step inequalities | A | **E** | 1 | 7.AR.2.1 (dropped) | ✔ U1 |
 | AR.2.3 x² = p, x³ = q | A | – | 2 | 7.AR.2.2 | ✔ U2 |
 | AR.3.1 linear ⇒ proportional? | L (via F.1.2) | – | 7/10 | 7.AR.4.1 (carried) | |
 | AR.3.2 slope | L | S | 10 | 7.AR.4.2 | |
@@ -220,3 +227,16 @@ Listed at the end of each grade in `B1G-M READING NOTES.md`. Short form: G7 p.10
 Guinness cup volume vs stated gallons; G7 p.113 green/blue candy; G8 p.44/47 swapped Grade 7
 predecessors; G8 p.86 radicand 16,200 against its own 225 cap; G8 p.94 item (d) answer
 "sometimes," not "never."
+
+---
+
+## 8. Addendum, 20 Sept — the Grade 7 Accelerated guide
+
+Read in full after the two grade guides (record in `B1G-M READING NOTES.md`, last section).
+Changes to this spec: the spine document is the accelerated guide; the in-course pairing map in
+§1 comes from it verbatim; the AR.2 predecessor misprints are fixed in it. New errata to avoid:
+8.AR.1.2 tiered example (text ≠ table), 8.GR.2.2 band photo (not a dilation), 7.GR.2.1 cylinder
+alt-text (radius vs diameter). The guide labels its own off-benchmark items "Enrichment" and
+"Extension" — our TE adopts the same two words for the same purpose. Two new item shapes worth a
+template: "fill the missing domain values to make a function" (F.1.1) and "same line in two forms"
+(AR.4.2/4.3: y = 2x − 3 vs 3y = 6x − 9; y = −1.5x + 2 vs y = 2 − 3/2 x).
