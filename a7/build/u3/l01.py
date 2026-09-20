@@ -20,7 +20,7 @@ L = dict(
 
     warmup=[
         dict(stem="$\\sqrt{81}$", answer="9", band="yesterday", source="Unit 2 — the principal square root (2.02)", check=("eq", "sqrt(81)", "9")),
-        dict(stem="Between which two whole numbers is $\\sqrt{40}$?", answer="6 and 7", band="last week", source="Unit 2 — approximating roots (2.04): 36 < 40 < 49", check=("true", "6**2 < 40 < 7**2")),
+        dict(stem="Between which two whole numbers is $\\sqrt{40}$?", answer="6 and 7", band="last week", source="Unit 2 — approximating roots (2.04): 36 < 40 < 49", check=("true", "6**2 < 40 < 7**2"), not_bound=True),
         dict(stem="Solve  $3x - 7 = 11$", answer="x = 6", band="last unit", source="Unit 1 — two-step equations (1.04)", check=("eq", "3*6-7", "11")),
         dict(stem="Evaluate  $\\left(\\frac{2}{3}\\right)^{2}$", answer="$\\frac{4}{9}$", band="prior grade — the prerequisite this lesson needs", source="MA.6.NSO.3.3 — a fraction raised to a whole-number power", check=("eq", "F(2,3)**2", "F(4,9)")),
     ],

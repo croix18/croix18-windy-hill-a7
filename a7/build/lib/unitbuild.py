@@ -33,7 +33,7 @@ def check_unit(U):
             for f in _flatten(it):
                 n += 1
                 findings += mathcheck_item(f, f"U{U['unit']} {label}[{i}]")
-    pseudo = {"code": f"3.U", "bank": review_items, "additional": exam_items,
+    pseudo = {"code": f"{U['unit']}.U", "bank": review_items, "additional": exam_items,
               "te": {"reference": U["reference"]}}
     findings += distractorcheck_lesson(pseudo)
     findings += capcheck_lesson(pseudo)

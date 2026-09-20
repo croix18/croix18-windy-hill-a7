@@ -91,6 +91,15 @@ instruction line between groups. `lines=n` prints n ruled lines instead of `spac
 `not_sci=True` (first key) marks an item that is ABOUT the coefficient rule. `key_stem` (unit
 documents only) is a stem printed on the key in place of `stem` — the SSDD label lives there.
 
+**The two Unit 4 boundary escapes.** `capcheck` also refuses (a) an addition or subtraction whose
+two powers of ten are more than 2 apart, the MA.8.NSO.1.5 clarification, and (b) a radicand that
+is not a perfect square up to 225 or a perfect cube from −125 to 125. A rational radicand passes
+when its numerator and its denominator are each in range, so `∛(1/8)` and `√(1/9)` are fine. An
+item that shows a wider gap on purpose — because it is ABOUT the boundary — carries
+`not_gap=True`; one that uses a stretch radicand on purpose (a Unit 2 estimation retrieval item,
+or the Dotson √200 task) carries `not_bound=True` and says why in its `note` or `source`. Both
+flags work like `not_sci`: put them on the item dict and they cover everything inside it.
+
 ### `check` — the mathcheck field (mandatory on every item, part, warm-up and example)
 A tuple sympy evaluates at build time with `F = Rational`, `sqrt`, `pi`, `abs`, `floor`,
 `Float`, `sp` (sympy itself), and the letters `a b c d k m n p q r s t w x y z` as **positive

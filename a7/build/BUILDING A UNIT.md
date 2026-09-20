@@ -138,6 +138,9 @@ Do not batch lessons before the first push. One lesson, checked, viewed, pushed;
 | `UNSOLVED (name 'e' is not defined)` | a variable letter that is not a symbol | use only `a b c d k m n p q r s t w x y z` as bases |
 | `option C: no named error with a benchmark cite` | an mc distractor without `errors["C"]` containing `[…]` | name the error the student made and cite the benchmark or B1G-M |
 | `scientific-notation coefficient 20.0 outside [1,10)` | a coefficient like `20 × 10⁵` in an item not tagged | if the item is ABOUT the rule, put `not_sci=True` as its first key; otherwise fix the item |
+| `adding or subtracting 10^3 and 10^6 — a gap of 3` | MA.8.NSO.1.5 limits + and − to exponents within 2 | rewrite the item's numbers; `not_gap=True` only if the item is ABOUT the boundary |
+| `√250 — MA.8.NSO.1.7 is perfect squares up to 225` | a radicand outside the benchmark's list | use a perfect square ≤ 225 or a perfect cube in −125..125; `not_bound=True` for a Unit 2 estimation retrieval item, with the reason in its `source` |
+| `radicand '…' is not plain arithmetic on integers` | capcheck could not reduce the radicand | work it by hand; if it is sound, tag `not_bound=True` and say why |
 | `line runs off the slide (14.7 in)` | a mixed text+math row too wide | split the row, shorten the words, or move the math to its own row |
 | `box crosses the footer` / `math into footer` | too many rows on one slide | fewer rows, or split into two notes slides |
 | `plan does not fit … leave whiteboards 22` | the fixed minutes are too few/many | adjust `min` on notes/examples so the remainder lands in 10–20 (aim 15–19) |

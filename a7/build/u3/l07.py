@@ -17,7 +17,7 @@ L = dict(
     warmup=[
         dict(stem="Find the value:  $(2^{3})^{2}\\cdot 2^{-4}$", answer="4", band="yesterday", source="3.06–3.07 — several laws in one numerical expression: 2⁶ · 2⁻⁴ = 2²", check=("eq", "(2**3)**2*F(2)**-4", "4")),
         dict(stem="Write as one power:  $\\frac{6^{7}}{6^{5}}$", answer="6² = 36", band="last week", source="3.02 — quotient of powers", check=("eq", "6**7/6**5", "36")),
-        dict(stem="$\\sqrt{50}$ is between which two whole numbers?", answer="7 and 8", band="last unit", source="Unit 2 — locating a square root between consecutive integers (2.05): 49 < 50 < 64", check=("true", "7**2 < 50 < 8**2")),
+        dict(stem="$\\sqrt{50}$ is between which two whole numbers?", answer="7 and 8", band="last unit", source="Unit 2 — locating a square root between consecutive integers (2.05): 49 < 50 < 64", check=("true", "7**2 < 50 < 8**2"), not_bound=True),
         dict(stem="Write with an exponent:  $y\\cdot y\\cdot y\\cdot y\\cdot y$", answer="$y^{5}$", band="prior grade — the prerequisite this lesson needs", source="Grade 7 (Unit 1) — a repeated variable factor is a power, for the same reason 2 · 2 · 2 · 2 · 2 is 2⁵", check=("eq", "y*y*y*y*y", "y**5")),
     ],
     warmup_note="Q4 is the bridge: y · y · y · y · y is y⁵ for exactly the reason 2 · 2 · 2 · 2 · 2 is 2⁵. A student who can write that can do every law in this lesson by expanding. Q1 is yesterday's skill and the same skill as today's with the letters swapped in.",

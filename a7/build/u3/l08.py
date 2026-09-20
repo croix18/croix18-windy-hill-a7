@@ -16,7 +16,7 @@ L = dict(
     warmup=[
         dict(stem="Write as a single monomial:  $(3x^{2})^{3}$", answer="27x⁶", band="yesterday", source="T-A1 — power of a product: the 3 is cubed too", check=("eq", "(3*x**2)**3", "27*x**6")),
         dict(stem="Find the value:  $5^{-2}$", answer="1/25", band="this week", source="3.04 — the negative exponent law with a numerical base: reciprocal, not opposite", check=("eq", "F(5)**-2", "F(1,25)")),
-        dict(stem="Which is greater,  $\\sqrt{80}$  or  9?", answer="9", band="last unit", source="Unit 2 — comparing a root to a whole number (2.05): 9² = 81 > 80", check=("true", "9**2 > 80")),
+        dict(stem="Which is greater,  $\\sqrt{80}$  or  9?", answer="9", band="last unit", source="Unit 2 — comparing a root to a whole number (2.05): 9² = 81 > 80", check=("true", "9**2 > 80"), not_bound=True),
         dict(stem="What is the reciprocal of  $\\frac{2}{3}$ ?", answer="$\\frac{3}{2}$", band="prior grade — the prerequisite this lesson needs", source="Grade 6 — reciprocals (MA.6.NSO.2): the number that multiplies to give 1", check=("eq", "F(2,3)*F(3,2)", "1")),
     ],
     warmup_note="Q2 and Q4 together are the lesson: a negative exponent asks for a reciprocal. Q2 is the numerical version from 3.04; today the same law is applied to x. A student with −25 on Q2 will write −x² today, and that is the board to find early.",

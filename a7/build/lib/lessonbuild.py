@@ -107,6 +107,95 @@ def distractorcheck_lesson(L):
 
 _SCI = re.compile(r"(\d+(?:\.\d+)?)\s*(?:\\+times|×)\s*10\s*(?:\^|[⁰¹²³⁴⁵⁶⁷⁸⁹⁻])")
 
+# ---- the two Unit 4 boundaries that are machine-checkable (MA.8.NSO.1.5 / 1.6 / 1.7) ----
+_SUP = {"⁰": "0", "¹": "1", "²": "2", "³": "3", "⁴": "4", "⁵": "5",
+        "⁶": "6", "⁷": "7", "⁸": "8", "⁹": "9", "⁻": "-"}
+
+# one scientific-notation term, with its exponent captured in whichever form it is written
+_SCI_TERM = re.compile(r"(\d+(?:\.\d+)?)\s*(?:\\+times|×|\\+cdot)\s*10\s*"
+                       r"(?:\^\s*\{\s*(-?\d+)\s*\}|\^\s*(-?\d+)|([⁰¹²³⁴⁵⁶⁷⁸⁹⁻]+))")
+_GAP_JUNK = re.compile(r"[\s$]|\\+[,;:!]|\\+quad|\\+qquad|\\+ ")
+_ADDSUB = {"+", "-", "\u2212", "\\pm", "\\\\pm"}
+_SQRT_TEX = re.compile(r"\\+sqrt\s*(?:\[\s*(\d+)\s*\])?\s*(\{(?:[^{}]|\{[^{}]*\})*\})")
+_SQRT_UNI = re.compile(r"([\u221a\u221b])\s*\(?\s*(-?\d+)\s*\)?")
+_SAFE_ARITH = re.compile(r"[0-9+\-*/(). ]*")
+
+SQ_MAX = 225          # MA.8.NSO.1.7 boundary: perfect squares up to 225
+CUBE_LO, CUBE_HI = -125, 125   # and perfect cubes from -125 to 125
+GAP_MAX = 2           # MA.8.NSO.1.5 clarification: exponents within 2 for + and -
+
+
+def _sci_exp(m):
+    if m.group(2) is not None:
+        return int(m.group(2))
+    if m.group(3) is not None:
+        return int(m.group(3))
+    return int("".join(_SUP[c] for c in m.group(4)))
+
+
+def _radicand_value(tex):
+    """The radicand as an exact rational, or None if it is not plain arithmetic on integers.
+    A rational radicand is allowed when numerator and denominator are each in range (the book's
+    1/8, 1/27, 1/125, 1/9 forms) — the audit asked for this to be told to us, not guessed."""
+    t = tex.strip()
+    if t.startswith("{") and t.endswith("}"):
+        t = t[1:-1]
+    t = re.sub(r"\\+[dt]?frac\s*\{([^{}]*)\}\s*\{([^{}]*)\}", r"((\1)/(\2))", t)
+    t = t.replace("\\cdot", "*").replace("\\times", "*").replace("^", "**")
+    t = t.replace("{", "(").replace("}", ")")
+    if not t.strip() or not _SAFE_ARITH.fullmatch(t):
+        return None
+    try:
+        v = sp.nsimplify(sp.sympify(t))
+    except Exception:
+        return None
+    return v if getattr(v, "is_Rational", False) else None
+
+
+def _in_range(n, deg):
+    """One integer, against MA.8.NSO.1.7's list for roots of this degree."""
+    if deg == 2:
+        return 0 <= n <= SQ_MAX and bool(sp.integer_nthroot(int(n), 2)[1])
+    return CUBE_LO <= n <= CUBE_HI and bool(sp.integer_nthroot(abs(int(n)), 3)[1])
+
+
+def _rad_ok(v, deg):
+    p, q = sp.fraction(sp.Rational(v))
+    return _in_range(int(p), deg) and _in_range(int(q), deg)
+
+
+def boundcheck_str(s, where, code):
+    """Ruling 13 for Unit 4: addition and subtraction in scientific notation keep the two
+    exponents within 2 of each other; radicands are perfect squares up to 225 and perfect cubes
+    from -125 to 125. A block that shows a wider gap or a stretch radicand on purpose carries
+    not_gap=True or not_bound=True and says why in its note."""
+    out = []
+    terms = list(_SCI_TERM.finditer(s))
+    for a, b in zip(terms, terms[1:]):
+        if _GAP_JUNK.sub("", s[a.end():b.start()]) in _ADDSUB:
+            e1, e2 = _sci_exp(a), _sci_exp(b)
+            if abs(e1 - e2) > GAP_MAX:
+                out.append(f"{code} {where}: adding or subtracting 10^{e1} and 10^{e2} — a gap of "
+                           f"{abs(e1 - e2)}, and MA.8.NSO.1.5 limits it to {GAP_MAX} "
+                           f"(tag the block not_gap=True if the item is about the boundary)")
+    rads = [(int(m.group(1) or 2), m.group(2)) for m in _SQRT_TEX.finditer(s)]
+    rads += [(2 if m.group(1) == "\u221a" else 3, m.group(2)) for m in _SQRT_UNI.finditer(s)]
+    for deg, tex in rads:
+        if deg not in (2, 3):
+            out.append(f"{code} {where}: a {deg}th root — MA.8.NSO.1.7 is square and cube roots only")
+            continue
+        n = _radicand_value(tex)
+        if n is None:
+            out.append(f"{code} {where}: radicand {tex!r} is not plain arithmetic on integers, so "
+                       f"its bound could not be checked (work it by hand, then tag not_bound=True)")
+        elif not _rad_ok(n, deg):
+            name = "perfect squares up to %d" % SQ_MAX if deg == 2 else \
+                   "perfect cubes from %d to %d" % (CUBE_LO, CUBE_HI)
+            root = "\u221a" if deg == 2 else "cube root of "
+            out.append(f"{code} {where}: {root}{n} — MA.8.NSO.1.7 is {name} "
+                       f"(tag not_bound=True if deliberate, and say why in the note)")
+    return out
+
 
 def capcheck_lesson(L):
     """Ruling 13 caps for this unit: integer exponents only; rational bases; sci-notation
@@ -118,20 +207,25 @@ def capcheck_lesson(L):
     if re.search(r"\^\{\s*\\frac", blob) or re.search(r"\^\{\s*\d+/\d+", blob):
         out.append(f"{L['code']}: fractional exponent found")
 
-    def scan(obj, where):
+    def scan(obj, where, skip=()):
         if isinstance(obj, dict):
-            if obj.get("not_sci"):
-                return
+            skip = tuple(skip) + tuple(f for f in ("not_sci", "not_gap", "not_bound") if obj.get(f))
             for k, v in obj.items():
-                scan(v, f"{where}.{k}")
+                scan(v, f"{where}.{k}", skip)
         elif isinstance(obj, (list, tuple)):
             for i, v in enumerate(obj):
-                scan(v, f"{where}[{i}]")
+                scan(v, f"{where}[{i}]", skip)
         elif isinstance(obj, str):
-            for m in _SCI.finditer(obj):
-                v = float(m.group(1))
-                if not (1 <= v < 10):
-                    out.append(f"{L['code']} {where}: scientific-notation coefficient {v} outside [1,10) (tag the block not_sci=True if deliberate)")
+            if "not_sci" not in skip:
+                for m in _SCI.finditer(obj):
+                    v = float(m.group(1))
+                    if not (1 <= v < 10):
+                        out.append(f"{L['code']} {where}: scientific-notation coefficient {v} outside [1,10) (tag the block not_sci=True if deliberate)")
+            for f in boundcheck_str(obj, where, L["code"]):
+                if ("not_gap" in skip and "a gap of" in f) or ("not_bound" in skip and "MA.8.NSO.1.7" in f) \
+                        or ("not_bound" in skip and "could not be checked" in f):
+                    continue
+                out.append(f)
     for grp in ("warmup", "notes", "examples", "whiteboard", "bank", "additional", "independent", "vocab", "te"):
         scan(L.get(grp), grp)
     return out

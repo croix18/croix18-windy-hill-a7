@@ -16,7 +16,7 @@ L = dict(
 
     warmup=[
         dict(stem="Find the value:  $\\frac{10^{5}}{10^{3}}$", answer="100", band="yesterday", source="3.02 — quotient of powers", check=("eq", "10**5/10**3", "100")),
-        dict(stem="Is $\\sqrt{50}$ closer to 7 or to 8?", answer="7", band="last week", source="Unit 2 — approximating roots (2.04): 50 is 1 above 49 and 14 below 64", check=("true", "abs(sqrt(50)-7) < abs(sqrt(50)-8)")),
+        dict(stem="Is $\\sqrt{50}$ closer to 7 or to 8?", answer="7", band="last week", source="Unit 2 — approximating roots (2.04): 50 is 1 above 49 and 14 below 64", check=("true", "abs(sqrt(50)-7) < abs(sqrt(50)-8)"), not_bound=True),
         dict(stem="Solve  $4(x - 2) = 12$", answer="x = 5", band="last unit", source="Unit 1 — equations with parentheses (1.05)", check=("eq", "4*(5-2)", "12")),
         dict(stem="Evaluate  $2 + 3\\cdot 4^{2}$", answer="50", band="prior grade — the prerequisite this lesson needs", source="MA.6.NSO / 7.NSO.2.1 — order of operations: the exponent first, then multiply, then add", check=("eq", "2+3*4**2", "50")),
     ],

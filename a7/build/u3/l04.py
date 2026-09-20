@@ -16,7 +16,7 @@ L = dict(
 
     warmup=[
         dict(stem="Find the value:  $\\frac{5^{4}\\cdot 5^{0}}{5^{2}}$", answer="25", band="yesterday", source="3.03 — two laws in one expression", check=("eq", "5**4*5**0/5**2", "25")),
-        dict(stem="Which is greater, $\\sqrt{30}$ or 5.5?", answer="5.5", band="last week", source="Unit 2 — comparing a root to a decimal (2.05): 5.5² = 30.25 > 30", check=("true", "F(11,2)**2 > 30")),
+        dict(stem="Which is greater, $\\sqrt{30}$ or 5.5?", answer="5.5", band="last week", source="Unit 2 — comparing a root to a decimal (2.05): 5.5² = 30.25 > 30", check=("true", "F(11,2)**2 > 30"), not_bound=True),
         dict(stem="Solve  $-3x = 21$", answer="x = −7", band="last unit", source="Unit 1 — one-step equations with a negative coefficient (1.03)", check=("eq", "-3*(-7)", "21")),
         dict(stem="What is the reciprocal of $\\frac{3}{4}$?  What is the opposite of $\\frac{3}{4}$?", answer="$\\frac{4}{3}$  and  $-\\frac{3}{4}$", band="prior grade — the prerequisite this lesson needs", source="Grade 6 — reciprocals (MA.6.NSO.2): reciprocal and opposite are different words", check=("many", ("eq", "F(3,4)*F(4,3)", "1"), ("eq", "F(3,4)+F(-3,4)", "0"))),
     ],

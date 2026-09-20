@@ -16,7 +16,7 @@ L = dict(
     warmup=[
         dict(stem="Write  4,300,000  in scientific notation.", answer="4.3 × 10⁶", band="yesterday", source="3.08 — the 4 is in the millions place", check=("eq", "F(43,10)*10**6", "4300000")),
         dict(stem="Write  $10^{-3}$  as a fraction.", answer="$\\frac{1}{1{,}000}$", band="last week", source="3.04 — the negative exponent law with base 10", check=("eq", "F(10)**-3", "F(1,1000)")),
-        dict(stem="$\\sqrt{95}$  is between which two whole numbers?", answer="9 and 10", band="last unit", source="Unit 2 — locating a square root (2.05): 81 < 95 < 100", check=("true", "9**2 < 95 < 10**2")),
+        dict(stem="$\\sqrt{95}$  is between which two whole numbers?", answer="9 and 10", band="last unit", source="Unit 2 — locating a square root (2.05): 81 < 95 < 100", check=("true", "9**2 < 95 < 10**2"), not_bound=True),
         dict(stem="Write  0.007  as a fraction.", answer="$\\frac{7}{1{,}000}$", band="prior grade — the prerequisite this lesson needs", source="Grade 5 — decimal place value (MA.5.NSO.1): the 7 is in the thousandths place", check=("eq", "F(7,1000)*1000", "7")),
     ],
     warmup_note="Q2 and Q4 are the two halves of today: 10⁻³ is a thousandth, and 0.007 is 7 thousandths, so 0.007 is 7 × 10⁻³. Say that at the reveal. Q1 is yesterday's skill and today's is the mirror image.",
