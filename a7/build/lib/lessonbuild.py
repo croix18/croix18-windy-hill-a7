@@ -102,6 +102,14 @@ def distractorcheck_lesson(L):
                 vals = [str(c) for c in it["choices"]]
                 if len(set(vals)) != len(vals):
                     out.append(f"{L['code']} {grp}[{i}]: two choices print the same value")
+                # A whiteboard's options are drawn straight onto the slide as text; only the .docx
+                # surfaces render $latex$. A dollar-delimited option on a board prints its braces.
+                if grp == "whiteboard":
+                    for k, c in enumerate(vals):
+                        if "$" in c:
+                            out.append(f"{L['code']} whiteboard[{i}] option {chr(65 + k)}: "
+                                       f"$latex$ in a board's option, which the slide prints literally "
+                                       f"(use plain text with unicode superscripts): {c[:40]!r}")
     return out
 
 

@@ -136,6 +136,7 @@ Do not batch lessons before the first push. One lesson, checked, viewed, pushed;
 |---|---|---|
 | `mathcheck … = A but keyed B` | your answer is wrong, or the check expression is | re-derive by hand; fix whichever is wrong; never "fix" the check to match the answer |
 | `UNSOLVED (name 'e' is not defined)` | a variable letter that is not a symbol | use only `a b c d k m n p q r s t w x y z` as bases |
+| `$latex$ in a board's option` | a whiteboard multiple-choice option written with `$…$` | a slide draws its options as plain text; use unicode (12²(1.25) + 38). The .docx surfaces do render `$…$` |
 | `option C: no named error with a benchmark cite` | an mc distractor without `errors["C"]` containing `[…]` | name the error the student made and cite the benchmark or B1G-M |
 | `scientific-notation coefficient 20.0 outside [1,10)` | a coefficient like `20 × 10⁵` in an item not tagged | if the item is ABOUT the rule, put `not_sci=True` as its first key; otherwise fix the item |
 | `adding or subtracting 10^3 and 10^6 — a gap of 3` | MA.8.NSO.1.5 limits + and − to exponents within 2 | rewrite the item's numbers; `not_gap=True` only if the item is ABOUT the boundary |
