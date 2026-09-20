@@ -117,7 +117,10 @@ _SCI_TERM = re.compile(r"(\d+(?:\.\d+)?)\s*(?:\\+times|×|\\+cdot)\s*10\s*"
 _GAP_JUNK = re.compile(r"[\s$]|\\+[,;:!]|\\+quad|\\+qquad|\\+ ")
 _ADDSUB = {"+", "-", "\u2212", "\\pm", "\\\\pm"}
 _SQRT_TEX = re.compile(r"\\+sqrt\s*(?:\[\s*(\d+)\s*\])?\s*(\{(?:[^{}]|\{[^{}]*\})*\})")
-_SQRT_UNI = re.compile(r"([\u221a\u221b])\s*\(?\s*(-?\d+)\s*\)?")
+# A unicode root followed by a plain integer, or a plain integer in parentheses. A root written
+# in unicode over anything else (√(2³ + 8)) is left to the LaTeX form, which carries its
+# structure; guessing a radicand from a prefix is how a check starts lying.
+_SQRT_UNI = re.compile("[\u221a\u221b]\\s*(?:\\(\\s*(-?\\d+)\\s*\\)|(-?\\d+)(?![\\d.,^\u00b9\u00b2\u00b3\u2070-\u209f]))")
 _SAFE_ARITH = re.compile(r"[0-9+\-*/(). ]*")
 
 SQ_MAX = 225          # MA.8.NSO.1.7 boundary: perfect squares up to 225
@@ -164,6 +167,13 @@ def _rad_ok(v, deg):
     return _in_range(int(p), deg) and _in_range(int(q), deg)
 
 
+# Keys whose strings are teacher-only prose: the note beside a slide, the named wrong boards, the
+# distractor reasons, the retrieval source. Those sentences EXIST to quote what a student got
+# wrong, so the boundary scans do not run inside them. Everything a student is asked to work —
+# stem, text, latex, choices, answer, why, prompt, math, items2, rows, gloss, hint — is scanned.
+TEACHER_PROSE = {"note", "note_q", "wrong", "errors", "source", "warmup_note"}
+
+
 def boundcheck_str(s, where, code):
     """Ruling 13 for Unit 4: addition and subtraction in scientific notation keep the two
     exponents within 2 of each other; radicands are perfect squares up to 225 and perfect cubes
@@ -179,7 +189,8 @@ def boundcheck_str(s, where, code):
                            f"{abs(e1 - e2)}, and MA.8.NSO.1.5 limits it to {GAP_MAX} "
                            f"(tag the block not_gap=True if the item is about the boundary)")
     rads = [(int(m.group(1) or 2), m.group(2)) for m in _SQRT_TEX.finditer(s)]
-    rads += [(2 if m.group(1) == "\u221a" else 3, m.group(2)) for m in _SQRT_UNI.finditer(s)]
+    rads += [(2 if m.group(0)[0] == "\u221a" else 3, m.group(1) or m.group(2))
+             for m in _SQRT_UNI.finditer(s)]
     for deg, tex in rads:
         if deg not in (2, 3):
             out.append(f"{code} {where}: a {deg}th root — MA.8.NSO.1.7 is square and cube roots only")
@@ -221,18 +232,19 @@ def capcheck_lesson(L):
                     v = float(m.group(1))
                     if not (1 <= v < 10):
                         out.append(f"{L['code']} {where}: scientific-notation coefficient {v} outside [1,10) (tag the block not_sci=True if deliberate)")
-            for f in boundcheck_str(obj, where, L["code"]):
+            key = where.rsplit(".", 1)[-1].split("[")[0]
+            for f in ([] if key in TEACHER_PROSE else boundcheck_str(obj, where, L["code"])):
                 if ("not_gap" in skip and "a gap of" in f) or ("not_bound" in skip and "MA.8.NSO.1.7" in f) \
                         or ("not_bound" in skip and "could not be checked" in f):
                     continue
                 out.append(f)
     for grp in ("warmup", "notes", "examples", "whiteboard", "bank", "additional", "independent", "vocab"):
         scan(L.get(grp), grp)
-    # The teacher's edition is prose ABOUT the textbook: naming the book's own "45 × 10⁶" or the
-    # guide's "leaving 12 × 10⁹" is the point of the sentence, so the coefficient scan is off
-    # there. The boundary scans stay on — an out-of-bounds value quoted in the TE is still worth
-    # seeing — and every value the TE prints as an answer comes from an item that was scanned.
-    scan(L.get("te"), "te", skip=("not_sci",))
+    # The teacher's edition is prose ABOUT the textbook and about wrong boards: naming the book's
+    # own "45 × 10⁶", the guide's "leaving 12 × 10⁹" or the Dotson task's √200 is the point of the
+    # sentence, so no scan runs there. Every value the TE prints as an answer comes from an item
+    # that was scanned in its own group.
+    scan(L.get("te"), "te", skip=("not_sci", "not_gap", "not_bound"))
     return out
 
 
