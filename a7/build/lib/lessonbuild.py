@@ -18,7 +18,11 @@ COURSE = "Grade 7 Accelerated"
 # ---------------------------------------------------------------- mathcheck
 def _ev(expr):
     env = {"F": F, "sqrt": sp.sqrt, "Integer": Integer, "sp": sp, "Rational": F, "nsimplify": nsimplify,
-           "pi": sp.pi, "Abs": sp.Abs, "abs": sp.Abs, "N": sp.N, "floor": sp.floor, "Float": sp.Float}
+           "pi": sp.pi, "Abs": sp.Abs, "abs": sp.Abs, "N": sp.N, "floor": sp.floor, "Float": sp.Float,
+           # symbols for the Thread A (MA.8.AR.1.1) algebraic checks. Declared positive so that
+           # x**0 -> 1 and x**-n and quotients simplify without a zero-base caveat; the items
+           # themselves state "nonzero" where it matters.
+           **{s: sp.Symbol(s, positive=True) for s in "abcdkmnpqrstwxyz"}}
     return sp.sympify(eval(expr, {"__builtins__": {}}, env))
 
 
@@ -144,10 +148,15 @@ def _fmt_q(doc, it, number=None, key=False, points=None):
                  lines=it.get("lines"), points=points)
 
 
+def _label(L):
+    """'Lesson 4' for book lessons; threads carry their own label ('Thread A · Day 1')."""
+    return L.get("label") or f"Lesson {L['lesson_no']}"
+
+
 def build_bank(L, items, kind, key, outdir):
     """kind: 'Question Bank' or 'Question Bank - Additional'."""
     code = L["code"]
-    eyebrow = f"{COURSE}  ·  Unit {L['unit']}  ·  Lesson {L['lesson_no']}"
+    eyebrow = f"{COURSE}  ·  Unit {L['unit']}  ·  {_label(L)}"
     sub = f"{kind} {code}"
     doc = Doc(eyebrow, L["title"], sub, key=key)
     doc.instruction("Show your work. Circle your final answer.")
@@ -169,8 +178,8 @@ def build_bank(L, items, kind, key, outdir):
 
 def build_deck(L, outdir):
     code = L["code"]
-    footer = f"{COURSE} · Unit {L['unit']} · Lesson {L['lesson_no']} — {L['title']}"
-    D = Deck(COURSE, L["unit"], f"Lesson {L['lesson_no']}", L["title"], footer)
+    footer = f"{COURSE} · Unit {L['unit']} · {_label(L)} — {L['title']}"
+    D = Deck(COURSE, L["unit"], _label(L), L["title"], footer)
     D.title_slide(L["benchmark"], L["target"], L["yesterday"], L["today"], minutes=1,
                   note=L.get("title_note", "Post the learning target. Say the 'today' line and nothing else yet."))
     # ---- warm-up: four retrieval questions, one slide; reveal slide after
@@ -309,7 +318,7 @@ def build_te(L, deck_path, outdir):
     code = L["code"]
     side_path = deck_path[:-5] + ".notes.json"
     rows, wb_min, side, blocks = tekit.plan_from_sidecar(side_path)
-    eyebrow = f"{COURSE}  ·  Unit {L['unit']}  ·  Lesson {L['lesson_no']}"
+    eyebrow = f"{COURSE}  ·  Unit {L['unit']}  ·  {_label(L)}"
     te = TE(eyebrow, L["title"])
     T = L["te"]
     te.h1("Read This First")

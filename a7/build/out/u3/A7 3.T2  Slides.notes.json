@@ -1,0 +1,269 @@
+{
+ "deck": "A7 3.T2  Slides.pptx",
+ "slides": [
+  {
+   "n": 1,
+   "title": "Negative Exponents with Variable Bases",
+   "sub": "",
+   "min": 1,
+   "note": "Post the learning target. Say the 'today' line and nothing else yet.",
+   "kind": "title"
+  },
+  {
+   "n": 2,
+   "title": "Warm-Up",
+   "sub": "On your own. Four minutes. No notes.",
+   "min": 4,
+   "note": "Q2 and Q4 together are the lesson: a negative exponent asks for a reciprocal. Q2 is the numerical version from 3.04; today the same law is applied to x. A student with \u221225 on Q2 will write \u2212x\u00b2 today, and that is the board to find early.",
+   "kind": "warmup"
+  },
+  {
+   "n": 3,
+   "title": "Warm-Up",
+   "sub": "Answers.",
+   "min": 1,
+   "note": "Reveal. Ask for the band each question came from only if time allows.",
+   "kind": "warmup"
+  },
+  {
+   "n": 4,
+   "title": "Notes",
+   "sub": "Copy the table.",
+   "min": 4,
+   "note": "The 3.04 pattern table again, with x in place of 2: each entry is the previous one divided by x. After x\u2070 = 1 the next division gives 1/x, then 1/x\u00b2, then 1/x\u00b3. Students fill the last three cells before the rule is written. The state guide asks for this table (its task 2: x\u2075 down to x\u207b\u2075, 'why is x\u2070 = 1') and for a written contrast of x\u00b3 and x\u207b\u00b3 \u2014 that contrast is whiteboard 9.\nOFF: 'x\u207b\u00b3 is one over x\u00b3. It is a reciprocal. It is not negative, and it is not \u22123x.'",
+   "kind": "notes"
+  },
+  {
+   "n": 5,
+   "title": "Notes",
+   "sub": "",
+   "min": 4,
+   "note": "Each factor with a negative exponent moves across the bar on its own and its exponent turns positive. The coefficient does NOT move unless it has the negative exponent: 3x\u207b\u00b2 is 3 over x\u00b2, not 1 over 3x\u00b2. That is today's leading misconception and it is on whiteboard 3 and 6. The guide's item y\u207b\u00b3z\u207b\u2074 = 1/(y\u00b3z\u2074) is the second line.\nOFF: 'Only the factor wearing the negative exponent moves. Everything else stays put.'",
+   "kind": "notes"
+  },
+  {
+   "n": 6,
+   "title": "Notes",
+   "sub": "",
+   "min": 3,
+   "note": "Product and quotient laws are unchanged; the exponents are integers now, so the sums and differences can land below zero. The last step is always to write the answer with positive exponents. x\u2074 \u00b7 x\u207b\u2076 is x\u207b\u00b2, which is 1/x\u00b2. m\u00b3/m\u2077 is m\u207b\u2074, which is 1/m\u2074 \u2014 and ask the class to check it by cancelling three m's from seven.",
+   "kind": "notes"
+  },
+  {
+   "n": 7,
+   "title": "Example 1",
+   "sub": "Multiplying monomials with negative exponents.",
+   "min": 1,
+   "note": "SPOKEN ONLY. Same regrouping as yesterday: coefficients, x's, y's. Ask what \u22123 + 5 is and what 2 + (\u22124) is before anyone writes \u2014 the whole example is integer addition.",
+   "kind": "example"
+  },
+  {
+   "n": 8,
+   "title": "Example 1",
+   "sub": "Worked.",
+   "min": 2,
+   "note": "Add the exponents of each variable, then move the y\u207b\u00b2 down. A board with 12x\u00b2y\u207b\u00b2 stopped one step early; a board with 12x\u207b\u2078y\u2076 subtracted where it should have added; a board with 1/(12x\u00b2y\u00b2) moved the coefficient too.",
+   "kind": "example"
+  },
+  {
+   "n": 9,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "Catches the coefficient-mover (1/(4a\u00b3b\u00b2)) and the sign-dropper (4a\u2077b\u2074). 4a\u00b3/b\u00b2 is right.",
+   "kind": "yourturn"
+  },
+  {
+   "n": 10,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 11,
+   "title": "Example 2",
+   "sub": "Several laws in one expression \u2014 the state guide's item.",
+   "min": 1,
+   "note": "SPOKEN ONLY. Three laws: power of a quotient, power of a product (the 4 is raised), and the negative exponent. Ask which to do first (the outside exponent) and what happens to the 4.",
+   "kind": "example"
+  },
+  {
+   "n": 12,
+   "title": "Example 2",
+   "sub": "Worked.",
+   "min": 2,
+   "note": "Raise every factor to the 5th: a\u00b9\u2075 on top, 4\u2075 = 1,024 and b\u207b\u00b3\u2075 on the bottom. Then b\u207b\u00b3\u2075 moves up. The B1G-M's own description of the result: 'only two exponents, no negatives'. A board with 20 instead of 1,024 multiplied 4 by 5; a board with a\u00b9\u2075/(1,024b\u00b3\u2075) never moved the b.",
+   "kind": "example"
+  },
+  {
+   "n": 13,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "Catches the un-raised coefficient (x\u2076y\u2076/3) and the b-that-did-not-move (x\u2076/(27y\u2076)). x\u2076y\u2076/27 is right.",
+   "kind": "yourturn"
+  },
+  {
+   "n": 14,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 15,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The law, plain, with a letter. A board with \u2212x\u2074 made the exponent's sign the sign of the expression; a board with \u22124x multiplied.",
+   "kind": "wb"
+  },
+  {
+   "n": 16,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 17,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The second form. A board with 1/y\u2075 made the exponent positive without moving the power.",
+   "kind": "wb"
+  },
+  {
+   "n": 18,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 19,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The coefficient stays. A board with 1/(3x\u00b2) moved the 3 as well \u2014 today's leading error, and the one to name at the board.",
+   "kind": "wb"
+  },
+  {
+   "n": 20,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 21,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The state guide's own item. A board with 1/(yz)\u2077 or 1/(yz\u2077) combined unlike bases.",
+   "kind": "wb"
+  },
+  {
+   "n": 22,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 23,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic. D is the board that says Notes I did not land \u2014 go back to the table and divide 1 by x twice, out loud.",
+   "kind": "wb"
+  },
+  {
+   "n": 24,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 25,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic for two laws at once. B and D are the two coefficient errors; C is the exponent error.",
+   "kind": "wb"
+  },
+  {
+   "n": 26,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 27,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Subtraction landing below zero. A board with m\u2074 subtracted the wrong way; a board with m\u207b\u2074 stopped one step early. Cancelling three m's from seven confirms the answer.",
+   "kind": "wb"
+  },
+  {
+   "n": 28,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 29,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Working backwards across zero. A board with \u22123 added 2 and \u22125; a board with \u22127 has the sign wrong. \u22125 + 7 = 2.",
+   "kind": "wb"
+  },
+  {
+   "n": 30,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 31,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Take your time. Boards up when you have written it.",
+   "min": 0,
+   "note": "Written. The state guide's new task for this benchmark, done as a written contrast. Full credit: the word reciprocal (or '1 over x\u00b3') and both values. A student who writes \u22128 for x\u207b\u00b3 has the day's misconception; one who writes 'opposites' has the 3.04 confusion of opposite with reciprocal.",
+   "kind": "wb"
+  },
+  {
+   "n": 32,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 33,
+   "title": "IXL",
+   "sub": "Last five minutes.",
+   "min": 5,
+   "note": "IXL: whatever is not finished is tonight's practice; SmartScore 67.",
+   "kind": "ixl"
+  }
+ ]
+}

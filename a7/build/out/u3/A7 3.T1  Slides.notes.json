@@ -1,0 +1,269 @@
+{
+ "deck": "A7 3.T1  Slides.pptx",
+ "slides": [
+  {
+   "n": 1,
+   "title": "Exponent Laws with Variable Bases",
+   "sub": "",
+   "min": 1,
+   "note": "Post the learning target. Say the 'today' line and nothing else yet.",
+   "kind": "title"
+  },
+  {
+   "n": 2,
+   "title": "Warm-Up",
+   "sub": "On your own. Four minutes. No notes.",
+   "min": 4,
+   "note": "Q4 is the bridge: y \u00b7 y \u00b7 y \u00b7 y \u00b7 y is y\u2075 for exactly the reason 2 \u00b7 2 \u00b7 2 \u00b7 2 \u00b7 2 is 2\u2075. A student who can write that can do every law in this lesson by expanding. Q1 is yesterday's skill and the same skill as today's with the letters swapped in.",
+   "kind": "warmup"
+  },
+  {
+   "n": 3,
+   "title": "Warm-Up",
+   "sub": "Answers.",
+   "min": 1,
+   "note": "Reveal. Ask for the band each question came from only if time allows.",
+   "kind": "warmup"
+  },
+  {
+   "n": 4,
+   "title": "Notes",
+   "sub": "Copy both lines.",
+   "min": 4,
+   "note": "Expand once, from the front: x\u00b2 is x \u00b7 x, x\u00b3 is x \u00b7 x \u00b7 x, so the product is five x's. The law is the one they know; the only change is that nothing gets 'evaluated' at the end \u2014 x\u2075 is the answer. Then the coefficients: 3x\u00b2 \u00b7 5x\u2074 is 3 \u00b7 5 \u00b7 x\u00b2 \u00b7 x\u2074. Coefficients multiply; exponents add. Say the two wrong boards out loud before they appear: 15x\u2078 (multiplied the exponents) and 8x\u2076 (added the coefficients).\nOFF: 'Coefficients multiply. Exponents add. Two different operations in the same problem.'",
+   "kind": "notes"
+  },
+  {
+   "n": 5,
+   "title": "Notes",
+   "sub": "",
+   "min": 4,
+   "note": "(x\u00b3)\u2074 is four copies of x\u00b3, twelve x's: multiply. Then the power of a product, where the coefficient is the thing students forget to raise: (2y\u00b2)\u00b3 is 2y\u00b2 \u00b7 2y\u00b2 \u00b7 2y\u00b2, so the 2 is cubed too. The state guide's task is the pair Rachel/Justina: (15xy\u00b2)\u00b3 expanded as 15\u00b715\u00b715\u00b7x\u00b7x\u00b7x\u00b7y\u00b7y\u00b7y\u00b7y\u00b7y\u00b7y and written as 3,375x\u00b3y\u2076 are the same expression. Both are correct; one is finished.\nOFF: 'Everything inside the parentheses gets the exponent \u2014 the number included.'",
+   "kind": "notes"
+  },
+  {
+   "n": 6,
+   "title": "Notes",
+   "sub": "",
+   "min": 3,
+   "note": "x\u2077 over x\u00b2 cancels two x's and leaves five: subtract. Coefficients divide as numbers; each variable is handled on its own. Today every quotient comes out with positive exponents (or a zero exponent, which is 1) \u2014 tomorrow the subtraction is allowed to go below zero. Note the last line: n\u2074/n\u2074 is n\u2070 = 1, not 0 and not n.",
+   "kind": "notes"
+  },
+  {
+   "n": 7,
+   "title": "Example 1",
+   "sub": "Multiplying two monomials.",
+   "min": 1,
+   "note": "SPOKEN ONLY. Three kinds of factor in each monomial: a coefficient, x's and y's. Ask what happens to each kind before anyone writes.",
+   "kind": "example"
+  },
+  {
+   "n": 8,
+   "title": "Example 1",
+   "sub": "Worked.",
+   "min": 2,
+   "note": "Regroup by kind, then apply the product law twice. The y in the first factor has exponent 1 \u2014 a board with y\u2075 forgot it. A board with \u22128x\u2076y\u2075 multiplied the exponents; a board with 2x\u2075y\u2076 added the coefficients.",
+   "kind": "example"
+  },
+  {
+   "n": 9,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "Catches the missing exponent 1 on a and the exponent-multiplier (15a\u00b2b\u2078). 15a\u00b3b\u2076 is right.",
+   "kind": "yourturn"
+  },
+  {
+   "n": 10,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 11,
+   "title": "Example 2",
+   "sub": "A power of a product, then a quotient.",
+   "min": 1,
+   "note": "SPOKEN ONLY. Two laws in order: the numerator is a power of a product, then divide. Ask which law comes first and why (the exponent outside the parentheses has to be dealt with before anything can be divided).",
+   "kind": "example"
+  },
+  {
+   "n": 12,
+   "title": "Example 2",
+   "sub": "Worked.",
+   "min": 2,
+   "note": "Raise every factor in the numerator: 3\u00b3 = 27, (m\u00b2)\u00b3 = m\u2076, n\u00b3. Then divide the coefficients and subtract each variable's exponents. A board with 3m\u2076n\u00b3 on top never cubed the 3; a board with 3m\u00b2n\u00b3 forgot the n in the denominator.",
+   "kind": "example"
+  },
+  {
+   "n": 13,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "Catches the un-raised coefficient (2p\u00b9\u00b2/8p\u2075 = p\u2077/4) and the exponent-adder (2p\u2079). 2p\u2077 is right.",
+   "kind": "yourturn"
+  },
+  {
+   "n": 14,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 15,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The product law, plain, with a letter. The state guide's own item. A board with x\u2074\u2070 multiplied the exponents.",
+   "kind": "wb"
+  },
+  {
+   "n": 16,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 17,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "A board with y\u2077 added. Ask that student to write out three copies of y\u2074.",
+   "kind": "wb"
+  },
+  {
+   "n": 18,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 19,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The coefficient is the thing that gets forgotten. 2x\u00b9\u00b2 never raised the 2; 8x\u00b9\u00b2 multiplied 2 by 4 \u2014 the guide's 'multiplying the exponent into the base' (6\u00b3 = 18) in algebraic clothing.",
+   "kind": "wb"
+  },
+  {
+   "n": 20,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 21,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Two variables and an invisible exponent 1 on a and on b. 7a\u00b3b\u2076 added the coefficients; 12a\u00b2b\u2075 ignored the exponent-1 factors.",
+   "kind": "wb"
+  },
+  {
+   "n": 22,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 23,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic. B and D are the two coefficient errors; C is the exponent error. Three different repairs, so read the letters, not the count.",
+   "kind": "wb"
+  },
+  {
+   "n": 24,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 25,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic for the quotient. B is the one to expect: 'divide' applied to both the coefficients and the exponents.",
+   "kind": "wb"
+  },
+  {
+   "n": 26,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 27,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The zero exponent hiding in a quotient. A board with m\u2074n read n\u2070 as n; a board with 0 read it as 0 \u2014 the 3.02 misconception with a letter.",
+   "kind": "wb"
+  },
+  {
+   "n": 28,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 29,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Working backwards \u2014 the shape the guide expects and the book does not ask. A board with 33 or with 11/3 tried to multiply or divide.",
+   "kind": "wb"
+  },
+  {
+   "n": 30,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 31,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Take your time. Boards up when you have written it.",
+   "min": 0,
+   "note": "Written. The state guide's task for this benchmark. Full credit: 'both', with the reason that Rachel expanded the power and Justina simplified the same product. A student who picks Justina alone has not seen that the two are the same expression; one who picks Rachel alone thinks the 15 should not be cubed.",
+   "kind": "wb"
+  },
+  {
+   "n": 32,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 33,
+   "title": "IXL",
+   "sub": "Last five minutes.",
+   "min": 5,
+   "note": "IXL: whatever is not finished is tonight's practice; SmartScore 67.",
+   "kind": "ixl"
+  }
+ ]
+}
