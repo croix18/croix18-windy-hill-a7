@@ -1,0 +1,277 @@
+{
+ "deck": "A7 4.04  Slides.pptx",
+ "slides": [
+  {
+   "n": 1,
+   "title": "Real-World Problems and Significant Digits",
+   "sub": "",
+   "min": 1,
+   "note": "Post the learning target. Say the 'today' line and nothing else yet.",
+   "kind": "title"
+  },
+  {
+   "n": 2,
+   "title": "Warm-Up",
+   "sub": "On your own. Four minutes. No notes.",
+   "min": 4,
+   "note": "Q3 and Q4 are today's two tools. Q3 asks which digits are there at all \u2014 the zero between the 9 and the 2 survives the conversion, and that is exactly the zero that counts. Q4 asks how to stop at a named place, which is what every answer today ends with. Say at the reveal: today you will decide where to stop, and then stop there.",
+   "kind": "warmup"
+  },
+  {
+   "n": 3,
+   "title": "Warm-Up",
+   "sub": "Answers.",
+   "min": 1,
+   "note": "Reveal. Ask for the band each question came from only if time allows.",
+   "kind": "warmup"
+  },
+  {
+   "n": 4,
+   "title": "Notes",
+   "sub": "Copy the table.",
+   "min": 4,
+   "note": "Four rules, one table. Every nonzero digit counts. A zero between nonzero digits counts \u2014 it is holding a place that was measured. A leading zero never counts; it is only saying where the decimal point is. A trailing zero counts only when a decimal point is written, because writing 3.200 is a claim about the thousandths and writing 52,000 is not.\nOFF: 'Scientific notation makes this easy. In 5.2 times ten to the fourth, every digit you can see is significant \u2014 that is one of the reasons the notation exists.'",
+   "kind": "notes"
+  },
+  {
+   "n": 5,
+   "title": "Notes",
+   "sub": "",
+   "min": 4,
+   "note": "An answer cannot be more precise than the worst measurement that went into it. Count the significant digits in each measurement and give the answer the smaller count. Do the arithmetic in full first and round once, at the end \u2014 rounding early loses digits that the arithmetic still needed.\nOFF: 'Two significant digits in, two significant digits out. The answer is never better than the measurement it came from.'",
+   "kind": "notes"
+  },
+  {
+   "n": 6,
+   "title": "Notes",
+   "sub": "Copy all three lines.",
+   "min": 4,
+   "note": "This is the rule almost everyone gets wrong, textbooks included. For a sum or a difference you do not count digits \u2014 you look at WHERE each measurement's last digit sits, and the answer stops at the leftmost of those places. 1,234 stops at the ones place; 5.6 stops at the tenths; so the sum stops at the ones place. Counting digits instead would give 1.2 times ten cubed, which throws away two digits that were actually measured.\nOFF: 'Products count digits. Sums count places. They are two different rules and it matters which one you reach for.'",
+   "kind": "notes"
+  },
+  {
+   "n": 7,
+   "title": "Example 1",
+   "sub": "A product of two measurements.",
+   "min": 1,
+   "note": "SPOKEN ONLY. Ask for the significant-digit count of each measurement before anyone multiplies. The count decides the answer's shape, and knowing it first stops the class from rounding in the middle.",
+   "kind": "example"
+  },
+  {
+   "n": 8,
+   "title": "Example 1",
+   "sub": "Worked.",
+   "min": 2,
+   "note": "Multiply in full \u2014 10,750 \u2014 and round once. 1.25 has three significant digits and 8.6 has two, so the answer keeps two. A board with 1.075 \u00d7 10\u2074 did the arithmetic and skipped the question; a board with 1.0 \u00d7 10\u2074 rounded 10,750 down instead of up.",
+   "kind": "example"
+  },
+  {
+   "n": 9,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "Same shape, the counts the other way round. 460 \u00b7 235 = 108,100, and the two-digit measurement is the first one this time. Catches 1.081 \u00d7 10\u2075 (not rounded) and 1.08 \u00d7 10\u2075 (rounded to three).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 10,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 11,
+   "title": "Example 2",
+   "sub": "A difference of two measurements.",
+   "min": 1,
+   "note": "SPOKEN ONLY. Ask where each measurement's last digit sits before anything is subtracted. This is the item the book gets wrong, and the place question is the whole of it.",
+   "kind": "example"
+  },
+  {
+   "n": 12,
+   "title": "Example 2",
+   "sub": "Worked.",
+   "min": 2,
+   "note": "Subtract in full, then stop at the leftmost last-digit place. 0.00309 stops at the hundred-thousandths; 0.00003472 stops eight places out. The leftmost of the two is the hundred-thousandths, so that is where the answer stops. A board with 3.05528 \u00d7 10\u207b\u00b3 never rounded; a board with 3.1 \u00d7 10\u207b\u00b3 counted digits instead of places.",
+   "kind": "example"
+  },
+  {
+   "n": 13,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "3,850 stops at the tens place and 274 stops at the ones, so the answer stops at the tens. The rounding bites: 3,576 becomes 3,580. A board with 3.576 \u00d7 10\u00b3 did the subtraction and skipped the question.",
+   "kind": "yourturn"
+  },
+  {
+   "n": 14,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 15,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "All four rules in one number. The two leading zeros never count; the 4 and the 7 do; the trailing zero counts because a decimal point is written. A board with 2 dropped the trailing zero, and that zero is the whole point of writing it.",
+   "kind": "wb"
+  },
+  {
+   "n": 16,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 17,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Ruling 22's board: the depth is there to be read past \u2014 a surface area needs two measurements, not three. Both are two-digit measurements, so the answer keeps two. A board holding 3 anywhere used the depth.",
+   "kind": "wb"
+  },
+  {
+   "n": 18,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 19,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The rule with the arithmetic removed, so only the rule is being tested. A board with 7.4 \u00d7 10\u2075 used the wrong count; a board with 7.4126 \u00d7 10\u2075 used no count at all.",
+   "kind": "wb"
+  },
+  {
+   "n": 20,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 21,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The place rule, and it costs a lot here: 2,500 stops at the hundreds place, so a sum of 2,971 has to be reported as 3,000. Students hate this one and they are right to \u2014 it is telling them the truth about what was measured. A board with 2.971 \u00d7 10\u00b3 skipped the rounding; a board with 3.0 \u00d7 10\u00b3 has it.",
+   "kind": "wb"
+  },
+  {
+   "n": 22,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 23,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic. The number carries three of the four rules at once. A board full of D means Notes I's middle-zero row did not land.",
+   "kind": "wb"
+  },
+  {
+   "n": 24,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 25,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic, and it stacks yesterday's rule on today's. A and B differ only in the rounding; if the room splits between them, sixty seconds and a re-vote before the reveal.",
+   "kind": "wb"
+  },
+  {
+   "n": 26,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 27,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "A quotient that comes out exact and still has to be cut. 4.20 has three significant digits and 3.0 has two, so the answer keeps two: 140. Writing 140. with no decimal point is the honest two-digit form, and 1.4 \u00d7 10\u00b2 says it without ambiguity \u2014 which is the argument for the notation.",
+   "kind": "wb"
+  },
+  {
+   "n": 28,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 29,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Working backwards, and the answer is written 4.0 rather than 4 on purpose: the question asked for two significant digits, so the zero has to be there. A board with 4 gave the right number in the wrong form \u2014 that is worth a sentence, not a mark.",
+   "kind": "wb"
+  },
+  {
+   "n": 30,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 31,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Take your time. Boards up when you have written it.",
+   "min": 0,
+   "note": "Written, and it is the exit evidence. Ellis has used the multiply-and-divide rule on an addition. Full credit: the rule for a sum is about the place where each measurement's last digit sits, not the number of digits; 1,234 stops at the ones place and 5.6 at the tenths, so the sum stops at the ones place; 1,239.6 becomes 1,240. A student who only writes 'he used the wrong rule' has not said what the right one is.",
+   "kind": "wb"
+  },
+  {
+   "n": 32,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 33,
+   "title": "Independent Set",
+   "sub": "Six questions. On your own, in silence.",
+   "min": 6,
+   "note": "Hand out the Independent Set. Silent work. Circulate and mark what you see; do not teach. Whatever is not finished goes home.",
+   "kind": "independent"
+  },
+  {
+   "n": 34,
+   "title": "IXL",
+   "sub": "Last five minutes.",
+   "min": 5,
+   "note": "IXL: every listed skill is required, SmartScore 67, due at the start of the next class.",
+   "kind": "ixl"
+  }
+ ]
+}
