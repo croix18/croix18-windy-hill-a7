@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+node_modules/
+*.bak
+*~
+.DS_Store
+# LibreOffice lock files
+.~lock.*
+# build scratch, never the outputs
+a7/build/_tmp/
