@@ -6,7 +6,10 @@ handoff copy, `3 - HOUSE STYLE SPEC.md` in the accelerated handoff folder, and b
 forks this file was made from. There is one rulebook from here on, and a second copy of it is not
 a variant — it is a defect.
 
-<!-- exchange:base m7-8sep-2791 sha1 ecd302a94d3b -->
+<!-- exchange:base m7-20sep-rulings-18-28 sha1 (M7 to confirm) -->
+<!-- merged 20 September 2026 (late) by A7 under ruling 3: M7's numbering stands.
+     A7's former rulings 13, 14, 15 are now 29, 30, 31; M7's 16-28 are carried below.
+     A ruling names the course it binds when it is not both. -->
 
 **How the two forks exchange this file, ruled 7 September 2026 after a replace nearly deleted a
 week of the other fork's work.** *Replace only works when the replacing file is a superset, and
@@ -1264,9 +1267,103 @@ write them on the te/lesson plan because I can't see them on the slides."
   library because the pipeline was live. *An instruction is not a procedure. Measure your own
   tree before you copy one.*
 
-## 13b(iv). Rulings — Croix, 20 September: the state guides are the backbone
+## 13b(vii). Rulings 16, 17, 23, 24 — not yet carried
 
-**Ruling 13 — Grade 8 B1G-M is the spine; Grade 7 B1G-M is the prerequisite map.** *Croix:*
+M7 holds rulings 16–28. The 20 September handoff sent A7 the texts of **18, 19, 20, 21, 22, 25,
+26, 27 and 28**, which are below. **Rulings 16, 17, 23 and 24 are not in this file yet** — ask M7
+for their texts at the next exchange and paste them here. Nothing in the A7 toolchain claims to
+implement them.
+
+## 13b(viii). Rulings — Croix, 20 September: the assessment and the practice model [both courses]
+
+**Ruling 18 — two transfer items on every unit assessment, flagged in the key, never on the
+practice test.** Two items on the real assessment are transfer items — the same benchmark, the
+same DOK, a surface nobody has rehearsed — and they are on neither the practice test nor the
+review deck. The key flags each one: *TRANSFER ITEM — not on the practice test. Same benchmark, a
+surface nobody rehearsed.* A transfer item is not harder, not longer, not a chain. It is the same
+one-operation question wearing different clothes. If it needs a step the unit did not teach, it
+is a new question, not a transfer item, and it goes back.
+
+**Ruling 19 — follow-through credit, mechanically.** One point per part, no partial credit,
+stays. A later part is correct when the right operation is applied to the student's own earlier
+value. The marker looks at the student's number for part a, does part b's operation to it, and
+ticks if that is what the student wrote. It only applies where the work is on the page. The
+student is told: *"If an earlier part is wrong, a later part still earns its point when the
+right operation is applied to your own earlier answer — but only if that work is on the page."*
+
+**Ruling 20 — one peer move, on a split board only.** *"No partner or group work, anywhere,
+ever"* stays as the default. One move is allowed, and only one: when a hold-up-a-letter board
+splits — no option holding about two-thirds of the room — sixty seconds of *convince the person
+next to you*, then re-vote, then reveal. It is timed, it is scripted, it is triggered by the
+board and not by the clock, and it is not group work. It costs a minute; the plan names where
+the minute comes from.
+
+**Ruling 21 — independent written practice is back, in a small dose.** The worksheet stays
+gone. But whiteboards are teacher-paced and vanish when erased, and five minutes of IXL is not
+deliberate practice. So: every lesson carries a short independent set — six questions, varied on
+§16 rule 2's discipline, done silently after the boards, before IXL. Six, not twenty; the point
+is pace and a written record, not volume. The teacher's edition carries the two-line variation
+note. Where a lesson's minutes will not stretch, the set is the homework, and the teacher's
+edition says so.
+
+**Ruling 22 — one board per round carries a number that is not needed.** Ruling 15 stands for
+the assessment: cut the reading, keep the math. It was slightly wrong for practice, because FAST
+items do carry a figure a student has to read past. So on the whiteboard round, one board per
+round carries a number the question does not need, and the teacher's edition names it. Not a
+trick and not a chain — the same one-operation question with one extra figure in it. The
+assessment is not touched.
+
+*(The "ruling 15" that ruling 22 refers to is M7's ruling 15, on cutting the reading in
+assessment items — not A7's former ruling 15, which is now ruling 31.)*
+
+## 13b(ix). Rulings — Croix, 20 September: the plan and the teacher's edition [both courses]
+
+**Ruling 25 — every lesson ships with a Florida-format lesson plan, and the MTRs are named in
+it.** Info table, standards, MTRs with the evidence for each, learning target and essential
+question, sequence table, gradual release, higher-order questions with DOK, checks for
+understanding with the response to each, differentiation (ESE / ELL / enrichment), closure,
+vocabulary, materials, homework. One page-set per lesson, 53 minutes. Applies to every lesson
+built from here on.
+
+**Ruling 26 — the teacher's edition is lean, and it is read in twenty minutes.** Croix:
+*"Teacher's editions can be leaner and easier for me to read and follow along with. I should be
+able to print out the teacher's editions, read them 20 minutes before class starts, and know
+exactly what I'll be teaching."* Page 1 is the period: standards and target (quoting the
+benchmark's Must / Must-not lines), the MTR, the timing table, and the three sentences to say out
+loud today — nothing else on page 1. Then one line per slide, in slide order, in the voice of
+someone standing beside you: what to say, what to watch for, the answer; a board's line carries
+its answer, its named distractors, and the one thing to say when the room splits; no paragraphs.
+Keys are not in the TE — they live in `Answer Keys`; the question bank commentary moves to
+`Reference/BANK - Unit N.md`. Misconceptions to Watch stays, as a short list at the end, each
+tied to the board that surfaces it. Four pages or fewer, printed; a TE that runs longer is cut,
+not shrunk. Every "OFF THE SLIDE, YOURS TO SAY" line becomes the slide's one line; the phrase
+retires.
+
+## 13b(x). Rulings — Croix, 20 September: the test runs two days, and IXL is required [both courses]
+
+**Ruling 27 — every unit test runs over two days.** Croix: *"I need two days for
+assessments."* Day 2 is the same paper continued — students stop where the period ends and pick
+up where they left off; it is not two papers. The reteach day is folded into the review day
+(what the review boards expose gets fixed on the spot; the practice test is the homework), and
+the test takes the next two school days. Neither test day is a Wednesday (43 minutes), so day 1
+is a Monday or a Thursday; the two days never straddle a weekend or a break; the review day is
+always the school day right before day 1, and any slack between the last lesson and the review
+is a spiral day. Croix is fine with review days on Wednesdays, and allowed Unit 3's test to run
+Tuesday–Wednesday (22–23 September) this once.
+
+**Ruling 28 — IXL: every listed skill is required, to a SmartScore of 60 on-level and 67
+accelerated, due next class.** Croix: *"Include the also consider. Students are expected to get
+at least up to 60 SmartScore."* and, 20 September (late), *"Accelerated has smartscore of 67 and
+on level is 60."* All skills IXL lists for the lesson are assigned — the numbered ones and the
+"also consider" ones alike; nothing on the list is optional. Done means the SmartScore on each
+skill: **M7 60, A7 67.** Assigned the day of the lesson, due at the start of the next class; the
+five-minute block at the end of the period is the start, not the whole. When the next lesson
+keeps the same skills, it is one assignment covering the run, due after its last lesson. A
+lesson IXL lists nothing for assigns nothing new.
+
+## 13b(xi). Rulings — Croix, 20 September: the state guides are the backbone [A7 first, both courses]
+
+**Ruling 29 — Grade 8 B1G-M is the spine; Grade 7 B1G-M is the prerequisite map.** *Croix:*
 "Grade 8 is the spine. Yes to all four." Every lesson serves a named MA.8 benchmark; the 17
 carried MA.7 benchmarks are taught where the spine needs them; a lesson serving neither is
 enrichment and is flagged, not silently built. The full map, the caps, the reference-sheet split
@@ -1285,9 +1382,9 @@ record is `Reference/B1G-M READING NOTES.md`.
   "Arithmetic slip" is not an error name; `distractorcheck` fails a whiteboard or assessment
   whose wrong option has no named-error line.
 
-## 13b(v). Ruling — Croix, 20 September: book order, three woven threads
+## 13b(xii). Ruling — Croix, 20 September: book order, three woven threads [A7]
 
-**Ruling 14 — the year runs in Math Nation's unit order (3 → 17), with the Q4 Grade 8 content
+**Ruling 30 — the year runs in Math Nation's unit order (3 → 17), with the Q4 Grade 8 content
 woven in early.** *Croix:* "my dad and I decided to follow book order this year … Any way I can
 weave it in a way where we are mostly teaching the same material but I get in some of those
 things intermittently." So: no unit moves; three two-period threads sit inside the unit that
@@ -1298,9 +1395,9 @@ Unit exams are two periods; quizzes take the warm-up. The plan and its day table
 `Reference/A7 SCOPE AND SEQUENCE 2026-27.md`, generated by `tools/scope_calendar.py` — edit the
 PLAN, never the table.
 
-## 13b(vi). Ruling — Croix, 20 September: no video warm-ups
+## 13b(xiii). Ruling — Croix, 20 September: no video warm-ups [both courses]
 
-**Ruling 15 — there is no video slot in a period.** *Croix:* "Get rid of the video warm ups."
+**Ruling 31 — there is no video slot in a period.** *Croix:* "Get rid of the video warm ups."
 Math Nation's video openers (3.1.1 growth-mindset, 3.4.1 career profile, and any like them in
 later units) are dropped, not shortened. Every lesson opens with the four-question spaced-retrieval
 warm-up (yesterday / last week / last unit / prior-grade prerequisite). The Teacher Edition's
