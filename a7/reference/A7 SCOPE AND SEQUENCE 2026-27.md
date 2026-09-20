@@ -89,9 +89,12 @@ thread's own question bank, and only the genuinely new content gets full lessons
 
 ## IXL for the last five minutes
 
-Each lesson row in the book table names IXL's aligned skill(s); those are the day's posted skills.
-Thread periods use the consolidation unit's skills (14.1–14.4, 16.1–16.2, 17.1–17.2). Eleven book
-lessons have no IXL skill; on those days the neighbouring lesson's skill stays posted.
+Every lesson row in the day table carries IXL's aligned skill(s) for that lesson and the "also
+consider" extras, with a **Due** column (the next class day). **A7 students stop at a SmartScore of
+67.** The student-facing version — assigned date, required skills, optional skills, due date — is
+`A7 IXL DUE DATES 2026-27.md`, generated from the same plan. Thread periods use the consolidation
+unit's skills (14.1–14.4, 16.1–16.2, 17.1–17.3). Skill **codes** are blank (____) until IXL's
+printed skill plan arrives; the names are exact.
 
 ## Open items
 
@@ -108,138 +111,139 @@ lessons have no IXL skill; on those days the neighbouring lesson's skill stays p
 
 `3.06+07` = book lessons 3.6 and 3.7 in one period. **thread** = woven Grade 8 content.
 Wednesday periods are 43 minutes — the plan is the same; the teacher absorbs the difference.
+IXL columns: required skills, optional "also consider" skills, and the due date (next class day); SmartScore target 67.
 
-| Date | Day | Unit | Lesson | What is taught | Benchmark |
-|---|---|---|---|---|---|
-| Sep 23 | Wed (43 min) | 3 | 3.01 | Product laws of exponents | 7.NSO.1.1 · 8.NSO.1.3 |
-| Sep 24 | Thu | 3 | 3.02 | Quotient laws of exponents | 7.NSO.1.1 · 8.NSO.1.3 |
-| Sep 25 | Fri | 3 | 3.03 | Exponential expressions | 8.NSO.1.3 |
-| Sep 28 | Mon | 3 | 3.04 | Negative exponent law | 8.NSO.1.3 |
-| Sep 29 | Tue | 3 | 3.05 | Applying exponent laws | 8.NSO.1.3 |
-| Sep 30 | Wed (43 min) | 3 | 3.06+07 | Evaluating and equivalent expressions with integer exponents | 8.NSO.1.3 |
-| Oct 01 | Thu | 3 | T-A1 | **thread** Thread A: the same laws with variable bases (14.1–14.2) | 8.AR.1.1 |
-| Oct 02 | Fri | 3 | T-A2 | **thread** Thread A: negative exponents and multiple laws, variable bases (14.3–14.4) | 8.AR.1.1 |
-| Oct 05 | Mon | 3 | 3.08 | Large numbers in scientific notation | 8.NSO.1.4 |
-| Oct 06 | Tue | 3 | 3.09 | Small numbers in scientific notation; how many times larger | 8.NSO.1.4 |
-| Oct 07 | Wed (43 min) | 3 | 3.X1 | **exam** Unit 3 exam, day 1 |  |
-| Oct 08 | Thu | 3 | 3.X2 | **exam** Unit 3 exam, day 2 |  |
-| Oct 09 | Fri | 3 | flex | *flex* Flex day — reteach from exam evidence, or absorb a lost day |  |
-| Oct 13 | Tue | 4 | 4.01 | Add and subtract in scientific notation | 8.NSO.1.5 |
-| Oct 14 | Wed (43 min) | 4 | 4.02+03 | Multiply and divide in scientific notation | 8.NSO.1.5 |
-| Oct 15 | Thu | 4 | 4.04 | Real-world scientific notation; significant digits | 8.NSO.1.6 |
-| Oct 16 | Fri | 4 | 4.05 | Expressions with radicals (perfect squares to 225, cubes −125 to 125) | 8.NSO.1.7 |
-| Oct 19 | Mon | 4 | 4.06 | Order of operations with exponents and radicals | 8.NSO.1.7 |
-| Oct 20 | Tue | 4 | 4.07+08 | Real-world order-of-operations problems | 8.NSO.1.7 |
-| Oct 21 | Wed (43 min) | 4 | 4.X1 | **exam** Unit 4 exam, day 1 |  |
-| Oct 22 | Thu | 4 | 4.X2 | **exam** Unit 4 exam, day 2 |  |
-| Oct 23 | Fri | 4 | flex | *flex* Flex day — reteach from exam evidence, or absorb a lost day |  |
-| Oct 26 | Mon | 5 | 5.01 | Scale drawings | 7.GR.1.5 |
-| Oct 27 | Tue | 5 | 5.02+03 | Scale factor: perimeter and area (k and k²) | 7.GR.1.5 |
-| Oct 28 | Wed (43 min) | 5 | 5.04 | Real-world scale drawings | 7.GR.1.5 |
-| Oct 29 | Thu | 5 | 5.06+07 | Converting length across systems; currency | 7.AR.3.3 |
-| Oct 30 | Fri | 5 | 5.08+09 | Converting mass, area and volume across systems | 7.AR.3.3 |
-| Nov 02 | Mon | 5 | 5.10+11 | Multi-step proportion problems | 7.AR.3.3 · 7.AR.4.5 |
-| Nov 03 | Tue | 5 | 5.X1 | **exam** Unit 5 exam, day 1 |  |
-| Nov 04 | Wed (43 min) | 5 | 5.X2 | **exam** Unit 5 exam, day 2 |  |
-| Nov 05 | Thu | 6 | 6.01+02 | Triangle Inequality Theorem; converse of the Pythagorean Theorem | 8.GR.1.3 |
-| Nov 06 | Fri | 6 | 6.03 | Pythagorean Theorem (memorize) | 8.GR.1.1 |
-| Nov 09 | Mon | 6 | 6.04 | Pythagorean Theorem in real-world problems | 8.GR.1.1 |
-| Nov 10 | Tue | 6 | 6.05 | Distance on the coordinate plane | 8.GR.1.2 |
-| Nov 12 | Thu | 6 | 6.06 | Real-world coordinate-plane problems; perimeter | 8.GR.1.2 |
-| Nov 13 | Fri | 6 | T-B1 | **thread** Thread B: angle pairs — supplementary, complementary, vertical, adjacent (16.1) | 8.GR.1.4 |
-| Nov 16 | Mon | 6 | T-B2 | **thread** Thread B: interior and exterior angles of a triangle (16.2) | 8.GR.1.5 |
-| Nov 17 | Tue | 6 | 6.07+08 | Similar triangles; indirect measurement | 8.GR.2.4 |
-| Nov 18 | Wed (43 min) | 6 | 6.X1 | **exam** Unit 6 exam, day 1 |  |
-| Nov 19 | Thu | 6 | 6.X2 | **exam** Unit 6 exam, day 2 |  |
-| Nov 20 | Fri | 6 | flex | *flex* Flex day — reteach from exam evidence, or absorb a lost day |  |
-| Nov 30 | Mon | 7 | 7.01 | Graphing proportional relationships | 7.AR.4.3 |
-| Dec 01 | Tue | 7 | 7.02+03 | Constant of proportionality (table, graph, description) | 7.AR.4.2 |
-| Dec 02 | Wed (43 min) | 7 | 7.04 | Is it proportional? | 7.AR.4.1 · 8.AR.3.1 |
-| Dec 03 | Thu | 7 | 7.05+06 | Equations of proportional relationships; translating representations | 7.AR.4.4 |
-| Dec 04 | Fri | 7 | 7.07 | Comparing proportional relationships | 7.AR.4.5 |
-| Dec 07 | Mon | 7 | 7.X1 | **exam** Unit 7 exam, day 1 |  |
-| Dec 08 | Tue | 7 | 7.X2 | **exam** Unit 7 exam, day 2 |  |
-| Dec 09 | Wed (43 min) |  | PM2-R1 | **review** PM2 review 1: number system, exponents, scientific notation (whiteboards) | 8.NSO.1.1–1.7 |
-| Dec 10 | Thu |  | PM2-R2 | **review** PM2 review 2: equations, inequalities, Pythagorean, angles (whiteboards) | 8.AR.2 · 8.GR.1 |
-| Dec 11 | Fri |  | PM2-R3 | **review** PM2 review 3: proportional → linear preview; mixed FAST-shaped round | 8.AR.3 · 8.AR.1.1 |
-| Dec 14 | Mon | 8 | 8.01+02 | Circle relationships; circumference | 7.GR.1.3 |
-| Dec 15 | Tue | 8 | 8.03 | Radius and diameter from circumference | 7.GR.1.3 |
-| Dec 16 | Wed (43 min) | 8 | 8.04+05 | Area of a circle | 7.GR.1.4 |
-| Dec 17 | Thu | 8 | 8.06 | Circumference and area problems; sectors | 7.GR.1.4 |
-| Dec 18 | Fri | 8 | 8.08+09 | Sectors and circle graphs | 7.GR.1.4 · 7.DP.1.4 |
-| Jan 06 | Wed (43 min) | 9 | 9.01+02 | Surface area of cylinders from nets | 7.GR.2.1 · 7.GR.2.2 |
-| Jan 07 | Thu | 9 | 9.03+04+05 | Volume of cylinders; problems | 7.GR.2.3 |
-| Jan 08 | Fri | 9 | 8/9.X1 | **exam** Units 8–9 exam, day 1 |  |
-| Jan 11 | Mon | 9 | 8/9.X2 | **exam** Units 8–9 exam, day 2 |  |
-| Jan 12 | Tue | 9 | flex | *flex* Flex day — reteach from exam evidence, or absorb a lost day |  |
-| Jan 13 | Wed (43 min) | 10 | 10.01 | Proportional relationships revisited (linear ⇒ proportional?) | 8.AR.3.1 |
-| Jan 14 | Thu | 10 | 10.02+03 | Slope from two points, graphs, tables | 8.AR.3.2 |
-| Jan 15 | Fri | 10 | 10.04 | Slope in context | 8.AR.3.2 · 8.AR.3.5 |
-| Jan 19 | Tue | 10 | 10.05 | Slope-intercept form; graph a line | 8.AR.3.4 |
-| Jan 20 | Wed (43 min) | 10 | 10.06 | Graphing from tables and contexts | 8.AR.3.4 |
-| Jan 21 | Thu | 10 | 10.07+08 | Interpreting slope and intercept (graphs, equations, tables, descriptions; F↔C) | 8.AR.3.5 |
-| Jan 22 | Fri | 10 | 10.09 | Writing equations of lines | 8.AR.3.3 |
-| Jan 25 | Mon | 10 | 10.10 | Writing equations for contexts; lines of fit preview | 8.AR.3.3 · 8.AR.3.5 |
-| Jan 26 | Tue | 10 | 10.X1 | **exam** Unit 10 exam, day 1 |  |
-| Jan 27 | Wed (43 min) | 10 | 10.X2 | **exam** Unit 10 exam, day 2 |  |
-| Jan 28 | Thu | 10 | flex | *flex* Flex day — reteach from exam evidence, or absorb a lost day |  |
-| Jan 29 | Fri | 11 | 11.01 | Equations with like terms and the distributive property | 8.AR.2.1 |
-| Feb 01 | Mon | 11 | 11.02 | Variables on both sides | 8.AR.2.1 |
-| Feb 02 | Tue | 11 | 11.03 | One, none, infinitely many solutions | 8.AR.2.1 |
-| Feb 03 | Wed (43 min) | 11 | 11.04 | Multi-step equations | 8.AR.2.1 |
-| Feb 04 | Thu | 11 | 11.05+06 | Systems: which points are solutions; how many solutions | 8.AR.4.1 · 8.AR.4.2 |
-| Feb 05 | Fri | 11 | 11.07 | Solving systems by graphing | 8.AR.4.3 |
-| Feb 08 | Mon | 11 | 11.08 | Systems in context (approximate solutions) | 8.AR.4.3 |
-| Feb 09 | Tue | 11 | 11.X1 | **exam** Unit 11 exam, day 1 |  |
-| Feb 10 | Wed (43 min) | 11 | 11.X2 | **exam** Unit 11 exam, day 2 |  |
-| Feb 11 | Thu | 11 | flex | *flex* Flex day — reteach from exam evidence, or absorb a lost day |  |
-| Feb 12 | Fri | 12 | 12.01+02 | Relations; domain and range | 8.F.1.1 |
-| Feb 16 | Tue | 12 | 12.03 | Is it a function? | 8.F.1.1 |
-| Feb 17 | Wed (43 min) | 12 | 12.04+05 | Describing graphs: increasing, decreasing, constant | 8.F.1.3 |
-| Feb 18 | Thu | 12 | 12.06 | Sketching graphs from descriptions | 8.F.1.3 |
-| Feb 19 | Fri | 12 | 12.07 | Functions from equations, tables, graphs | 8.F.1.2 |
-| Feb 22 | Mon | 12 | 12.08+09 | Is it linear? (graphs, equations, tables) | 8.F.1.2 · 8.AR.3.1 |
-| Feb 23 | Tue | 12 | 12.X1 | **exam** Unit 12 exam, day 1 |  |
-| Feb 24 | Wed (43 min) | 12 | 12.X2 | **exam** Unit 12 exam, day 2 |  |
-| Feb 25 | Thu | 12 | flex | *flex* Flex day — reteach from exam evidence, or absorb a lost day |  |
-| Feb 26 | Fri | 13 | 13.01+02+03 | Choosing and creating displays (numerical, categorical) | 7.DP.1.5 |
-| Mar 01 | Mon | 13 | 13.04+05 | Bivariate data; line graphs | 8.DP.1.1 |
-| Mar 02 | Tue | 13 | 13.06 | Scatter plots and association | 8.DP.1.1 · 8.DP.1.2 |
-| Mar 03 | Wed (43 min) | 13 | 13.07+08 | Lines of fit; outliers | 8.DP.1.3 · 8.DP.1.2 |
-| Mar 04 | Thu | 13 | 13.09 | Interpreting the equation of a line of fit | 8.DP.1.3 · 8.AR.3.5 |
-| Mar 08 | Mon | 13 | T-C1 | **thread** Thread C: sample spaces of repeated experiments (17.1) | 8.DP.2.1 |
-| Mar 09 | Tue | 13 | T-C2 | **thread** Thread C: theoretical probability of repeated experiments (17.2–17.3) | 8.DP.2.2 |
-| Mar 10 | Wed (43 min) | 13 | 13.X1 | **exam** Unit 13 exam, day 1 |  |
-| Mar 11 | Thu | 13 | 13.X2 | **exam** Unit 13 exam, day 2 |  |
-| Mar 12 | Fri | 14 | 14.01–04 | Exponent laws with variable bases — consolidation of Thread A | 8.AR.1.1 |
-| Mar 15 | Mon | 14 | 14.05+06 | Multiplying a monomial by a linear expression | 8.AR.1.2 |
-| Mar 16 | Tue | 14 | 14.07+08 | Factoring a common monomial | 8.AR.1.3 |
-| Mar 17 | Wed (43 min) | 14 | 14.X1 | **exam** Unit 14 exam, day 1 |  |
-| Mar 18 | Thu | 14 | 14.X2 | **exam** Unit 14 exam, day 2 |  |
-| Mar 19 | Fri | 15 | 15.01 | Slides, flips, spins | 8.GR.2.1 |
-| Mar 29 | Mon | 15 | 15.02+03 | Reflections, rotations, translations — identify and describe | 8.GR.2.1 |
-| Mar 30 | Tue | 15 | 15.03b | Translations on the coordinate plane | 8.GR.2.3 |
-| Mar 31 | Wed (43 min) | 15 | 15.04 | Reflections on the coordinate plane | 8.GR.2.3 |
-| Apr 01 | Thu | 15 | 15.05 | Rotations on the coordinate plane (about the origin) | 8.GR.2.3 |
-| Apr 02 | Fri | 15 | 15.06 | Describing rigid transformations; congruence | 8.GR.2.1 · 8.GR.2.3 |
-| Apr 05 | Mon | 15 | 15.07+09 | Dilations and scale factor | 8.GR.2.2 |
-| Apr 06 | Tue | 15 | 15.08 | Dilations on the coordinate plane (centered at the origin) | 8.GR.2.3 |
-| Apr 07 | Wed (43 min) | 16 | 16.01+02 | Angle relationships — consolidation of Thread B | 8.GR.1.4 · 8.GR.1.5 |
-| Apr 08 | Thu | 16 | 16.03+04 | Interior angles of polygons | 8.GR.1.6 |
-| Apr 09 | Fri | 16 | 15/16.X1 | **exam** Units 15–16 exam, day 1 |  |
-| Apr 12 | Mon | 16 | 15/16.X2 | **exam** Units 15–16 exam, day 2 |  |
-| Apr 13 | Tue | 17 | 17.01–03 | Repeated experiments — consolidation of Thread C | 8.DP.2.1 · 8.DP.2.2 |
-| Apr 14 | Wed (43 min) | 17 | 17.04–06 | Predictions from theoretical probability | 8.DP.2.3 |
-| Apr 15 | Thu | 17 | 17.X | **exam** Unit 17 exam (one day) |  |
-| Apr 19 | Mon |  | PM3-R1 | **review** PM3 review 1: NSO and probability | all |
-| Apr 20 | Tue |  | PM3-R2 | **review** PM3 review 2: algebraic reasoning (expressions, equations, systems) | all |
-| Apr 21 | Wed (43 min) |  | PM3-R3 | **review** PM3 review 3: linear relationships, functions, data | all |
-| Apr 22 | Thu |  | PM3-R4 | **review** PM3 review 4: geometric reasoning | all |
-| Apr 23 | Fri |  | PM3-R5 | **review** PM3 review 5: mixed FAST-shaped rounds, one category per whiteboard question | all |
-| Apr 26 | Mon |  | PM3-R6 | **review** PM3 review 6: mixed FAST-shaped rounds, one category per whiteboard question | all |
-| Apr 27 | Tue |  | PM3-R7 | **review** PM3 review 7: mixed FAST-shaped rounds, one category per whiteboard question | all |
-| Apr 28 | Wed (43 min) |  | PM3-R8 | **review** PM3 review 8: mixed FAST-shaped rounds, one category per whiteboard question | all |
-| Apr 29 | Thu |  | PM3-R9 | **review** PM3 review 9: mixed FAST-shaped rounds, one category per whiteboard question | all |
-| Apr 30 | Fri |  | PM3-R10 | **review** PM3 review 10: mixed FAST-shaped rounds, one category per whiteboard question | all |
-| May 03 | Mon |  | PM3 | May 3–28: PM3 window (school date TBD). Non-test days: Algebra 1 bridge — operations with radicals, point-slope and standard form, systems by substitution | 912.NSO.1.4 · 912.AR.2.2 · 912.AR.9.1 |
+| Date | Day | Unit | Lesson | What is taught | Benchmark | IXL skill(s) — code | Also consider — code | Due |
+|---|---|---|---|---|---|---|---|---|
+| Sep 23 | Wed (43 min) | 3 | 3.01 | Product laws of exponents | 7.NSO.1.1 · 8.NSO.1.3 | Evaluate powers — ____; Multiplication with exponents — ____; Power rule — ____ | Understanding exponents — ____ | Sep 24 |
+| Sep 24 | Thu | 3 | 3.02 | Quotient laws of exponents | 7.NSO.1.1 · 8.NSO.1.3 | Powers with negative bases — ____ | Division with exponents — ____; Identify equivalent expressions involving whole-number exponents — ____ | Sep 25 |
+| Sep 25 | Fri | 3 | 3.03 | Exponential expressions | 8.NSO.1.3 | Evaluate expressions using properties of exponents — ____ |  | Sep 28 |
+| Sep 28 | Mon | 3 | 3.04 | Negative exponent law | 8.NSO.1.3 | Understanding negative exponents — ____; Evaluate powers with negative exponents — ____ |  | Sep 29 |
+| Sep 29 | Tue | 3 | 3.05 | Applying exponent laws | 8.NSO.1.3 | Identify equivalent expressions involving exponents I — ____ |  | Sep 30 |
+| Sep 30 | Wed (43 min) | 3 | 3.06+07 | Evaluating and equivalent expressions with integer exponents | 8.NSO.1.3 | Evaluate expressions using properties of exponents — ____; Identify equivalent expressions involving exponents II — ____ |  | Oct 01 |
+| Oct 01 | Thu | 3 | T-A1 | **thread** Thread A: the same laws with variable bases (14.1–14.2) | 8.AR.1.1 | Multiply powers: variable bases — ____; Powers of a power: variable bases — ____; Divide monomials with positive exponents — ____ |  | Oct 02 |
+| Oct 02 | Fri | 3 | T-A2 | **thread** Thread A: negative exponents and multiple laws, variable bases (14.3–14.4) | 8.AR.1.1 | Variables with negative exponents — ____; Multiply and divide powers: variable bases — ____ |  | Oct 05 |
+| Oct 05 | Mon | 3 | 3.08 | Large numbers in scientific notation | 8.NSO.1.4 | Convert between standard and scientific notation: large numbers — ____; Compare large numbers — ____ | Powers of ten — ____ | Oct 06 |
+| Oct 06 | Tue | 3 | 3.09 | Small numbers in scientific notation; how many times larger | 8.NSO.1.4 | Convert between standard and scientific notation: small numbers — ____; Compare small numbers — ____ | Powers of ten with negative exponents — ____ | Oct 07 |
+| Oct 07 | Wed (43 min) | 3 | 3.X1 | **exam** Unit 3 exam, day 1 |  |  |  |  |
+| Oct 08 | Thu | 3 | 3.X2 | **exam** Unit 3 exam, day 2 |  |  |  |  |
+| Oct 09 | Fri | 3 | flex | *flex* Flex day — reteach from exam evidence, or absorb a lost day |  |  |  |  |
+| Oct 13 | Tue | 4 | 4.01 | Add and subtract in scientific notation | 8.NSO.1.5 | Add and subtract numbers written in scientific notation — ____ |  | Oct 14 |
+| Oct 14 | Wed (43 min) | 4 | 4.02+03 | Multiply and divide in scientific notation | 8.NSO.1.5 | Multiply numbers written in scientific notation — ____; Divide numbers written in scientific notation — ____ |  | Oct 15 |
+| Oct 15 | Thu | 4 | 4.04 | Real-world scientific notation; significant digits | 8.NSO.1.6 | Add, subtract, multiply, and divide numbers written in scientific notation: word problems — ____ |  | Oct 16 |
+| Oct 16 | Fri | 4 | 4.05 | Expressions with radicals (perfect squares to 225, cubes −125 to 125) | 8.NSO.1.7 | Evaluate radical expressions — ____ |  | Oct 19 |
+| Oct 19 | Mon | 4 | 4.06 | Order of operations with exponents and radicals | 8.NSO.1.7 | Evaluate radical expressions — ____ |  | Oct 20 |
+| Oct 20 | Tue | 4 | 4.07+08 | Real-world order-of-operations problems | 8.NSO.1.7 | Evaluate variable expressions: word problems — ____ |  | Oct 21 |
+| Oct 21 | Wed (43 min) | 4 | 4.X1 | **exam** Unit 4 exam, day 1 |  |  |  |  |
+| Oct 22 | Thu | 4 | 4.X2 | **exam** Unit 4 exam, day 2 |  |  |  |  |
+| Oct 23 | Fri | 4 | flex | *flex* Flex day — reteach from exam evidence, or absorb a lost day |  |  |  |  |
+| Oct 26 | Mon | 5 | 5.01 | Scale drawings | 7.GR.1.5 | Scale drawings: find the scale factor, missing side, or missing angle — ____ |  | Oct 27 |
+| Oct 27 | Tue | 5 | 5.02+03 | Scale factor: perimeter and area (k and k²) | 7.GR.1.5 | Perimeter and area: changes in scale — ____; Scale drawings: find the scale factor or missing side — ____ |  | Oct 28 |
+| Oct 28 | Wed (43 min) | 5 | 5.04 | Real-world scale drawings | 7.GR.1.5 | Scale drawings: word problems — ____ | Scale drawings: scale factor word problems — ____ | Oct 29 |
+| Oct 29 | Thu | 5 | 5.06+07 | Converting length across systems; currency | 7.AR.3.3 | Convert between customary and metric systems — ____ | Compare and convert customary units — ____; Compare and convert metric units — ____ | Oct 30 |
+| Oct 30 | Fri | 5 | 5.08+09 | Converting mass, area and volume across systems | 7.AR.3.3 | Convert between customary and metric systems — ____ | Compare and convert customary units — ____; Compare and convert metric units — ____ | Nov 02 |
+| Nov 02 | Mon | 5 | 5.10+11 | Multi-step proportion problems | 7.AR.3.3 · 7.AR.4.5 | Compare rates: word problems — ____; Multi-step problems with customary or metric unit conversions — ____ |  | Nov 03 |
+| Nov 03 | Tue | 5 | 5.X1 | **exam** Unit 5 exam, day 1 |  |  |  |  |
+| Nov 04 | Wed (43 min) | 5 | 5.X2 | **exam** Unit 5 exam, day 2 |  |  |  |  |
+| Nov 05 | Thu | 6 | 6.01+02 | Triangle Inequality Theorem; converse of the Pythagorean Theorem | 8.GR.1.3 | Triangle inequality — ____; Converse of the Pythagorean theorem: is it a right triangle? — ____ |  | Nov 06 |
+| Nov 06 | Fri | 6 | 6.03 | Pythagorean Theorem (memorize) | 8.GR.1.1 | Pythagorean theorem: find the missing leg or hypotenuse length — ____ |  | Nov 09 |
+| Nov 09 | Mon | 6 | 6.04 | Pythagorean Theorem in real-world problems | 8.GR.1.1 | Pythagorean theorem: word problems — ____ |  | Nov 10 |
+| Nov 10 | Tue | 6 | 6.05 | Distance on the coordinate plane | 8.GR.1.2 | Find the distance between two points on a horizontal or vertical line — ____; Find the distance between two points — ____ |  | Nov 12 |
+| Nov 12 | Thu | 6 | 6.06 | Real-world coordinate-plane problems; perimeter | 8.GR.1.2 | Pythagorean theorem: find the perimeter — ____ |  | Nov 13 |
+| Nov 13 | Fri | 6 | T-B1 | **thread** Thread B: angle pairs — supplementary, complementary, vertical, adjacent (16.1) | 8.GR.1.4 | Identify complementary, supplementary, vertical, adjacent, and congruent angles — ____; Find measures of complementary, supplementary, vertical, and adjacent angles — ____; Write and solve equations using angle relationships — ____ |  | Nov 16 |
+| Nov 16 | Mon | 6 | T-B2 | **thread** Thread B: interior and exterior angles of a triangle (16.2) | 8.GR.1.5 | Find missing angles in triangles — ____; Exterior Angle Theorem — ____; Triangle Angle-Sum Theorem — ____ |  | Nov 17 |
+| Nov 17 | Tue | 6 | 6.07+08 | Similar triangles; indirect measurement | 8.GR.2.4 | Side lengths of similar triangles — ____; Similar triangles and indirect measurement — ____ | Identify similar triangles — ____ | Nov 18 |
+| Nov 18 | Wed (43 min) | 6 | 6.X1 | **exam** Unit 6 exam, day 1 |  |  |  |  |
+| Nov 19 | Thu | 6 | 6.X2 | **exam** Unit 6 exam, day 2 |  |  |  |  |
+| Nov 20 | Fri | 6 | flex | *flex* Flex day — reteach from exam evidence, or absorb a lost day |  |  |  |  |
+| Nov 30 | Mon | 7 | 7.01 | Graphing proportional relationships | 7.AR.4.3 | Graph a proportional relationship: word problems — ____ |  | Dec 01 |
+| Dec 01 | Tue | 7 | 7.02+03 | Constant of proportionality (table, graph, description) | 7.AR.4.2 | Interpret graphs of proportional relationships — ____; Find the constant of proportionality from a table — ____; Find the constant of proportionality from from a graph — ____ |  | Dec 02 |
+| Dec 02 | Wed (43 min) | 7 | 7.04 | Is it proportional? | 7.AR.4.1 · 8.AR.3.1 | Identify proportional relationships by graphing — ____; Identify proportional relationships in tables and graphs — ____ |  | Dec 03 |
+| Dec 03 | Thu | 7 | 7.05+06 | Equations of proportional relationships; translating representations | 7.AR.4.4 | Write equations for proportional relationships from tables — ____; Write equations for proportional relationships from from graphs — ____ | Write and solve equations for proportional relationships — ____ | Dec 04 |
+| Dec 04 | Fri | 7 | 7.07 | Comparing proportional relationships | 7.AR.4.5 | Compare proportional relationships represented in different ways — ____ |  | Dec 07 |
+| Dec 07 | Mon | 7 | 7.X1 | **exam** Unit 7 exam, day 1 |  |  |  |  |
+| Dec 08 | Tue | 7 | 7.X2 | **exam** Unit 7 exam, day 2 |  |  |  |  |
+| Dec 09 | Wed (43 min) |  | PM2-R1 | **review** PM2 review 1: number system, exponents, scientific notation (whiteboards) | 8.NSO.1.1–1.7 |  |  |  |
+| Dec 10 | Thu |  | PM2-R2 | **review** PM2 review 2: equations, inequalities, Pythagorean, angles (whiteboards) | 8.AR.2 · 8.GR.1 |  |  |  |
+| Dec 11 | Fri |  | PM2-R3 | **review** PM2 review 3: proportional → linear preview; mixed FAST-shaped round | 8.AR.3 · 8.AR.1.1 |  |  |  |
+| Dec 14 | Mon | 8 | 8.01+02 | Circle relationships; circumference | 7.GR.1.3 | Center, radius, and diameter of a circle — ____; Circumference of circles — ____ |  | Dec 15 |
+| Dec 15 | Tue | 8 | 8.03 | Radius and diameter from circumference | 7.GR.1.3 | Find the radius or diameter of a circle given the circumference — ____ |  | Dec 16 |
+| Dec 16 | Wed (43 min) | 8 | 8.04+05 | Area of a circle | 7.GR.1.4 | Area of circles — ____ |  | Dec 17 |
+| Dec 17 | Thu | 8 | 8.06 | Circumference and area problems; sectors | 7.GR.1.4 | Circles: word problems — ____ |  | Dec 18 |
+| Dec 18 | Fri | 8 | 8.08+09 | Sectors and circle graphs | 7.GR.1.4 · 7.DP.1.4 | Use fractions to find the measure of an angle — ____; Circle graphs and central angles — ____; Interpret circle graphs — ____ |  | Jan 06 |
+| Jan 06 | Wed (43 min) | 9 | 9.01+02 | Surface area of cylinders from nets | 7.GR.2.1 · 7.GR.2.2 | Nets of three-dimensional figures — ____; Surface area of cylinders — ____; Lateral area of cylinders — ____ |  | Jan 07 |
+| Jan 07 | Thu | 9 | 9.03+04+05 | Volume of cylinders; problems | 7.GR.2.3 | Volume of cylinders — ____ |  | Jan 08 |
+| Jan 08 | Fri | 9 | 8/9.X1 | **exam** Units 8–9 exam, day 1 |  |  |  |  |
+| Jan 11 | Mon | 9 | 8/9.X2 | **exam** Units 8–9 exam, day 2 |  |  |  |  |
+| Jan 12 | Tue | 9 | flex | *flex* Flex day — reteach from exam evidence, or absorb a lost day |  |  |  |  |
+| Jan 13 | Wed (43 min) | 10 | 10.01 | Proportional relationships revisited (linear ⇒ proportional?) | 8.AR.3.1 | Find the constant of proportionality from a table — ____; Identify proportional relationships by graphing — ____; Identify proportional relationships — ____ | Write equations for proportional relationships from tables and graphs — ____; Interpret graphs of proportional relationships — ____ | Jan 14 |
+| Jan 14 | Thu | 10 | 10.02+03 | Slope from two points, graphs, tables | 8.AR.3.2 | Find the slope from two points — ____; Find the slope from a graph — ____; Find the slope from a table — ____ | Find the slope from a table — ____ | Jan 15 |
+| Jan 15 | Fri | 10 | 10.04 | Slope in context | 8.AR.3.2 · 8.AR.3.5 | Rate of change of a linear function: graphs — ____; Rate of change of a linear function: tables — ____ |  | Jan 19 |
+| Jan 19 | Tue | 10 | 10.05 | Slope-intercept form; graph a line | 8.AR.3.4 | Slope-intercept form: find the slope and y-intercept — ____; Graph a line using slope — ____; Graph a line from an equation in slope-intercept form — ____ | Write a linear equation from a slope and y-intercept — ____; Compare linear functions: tables, graphs, and equations — ____ | Jan 20 |
+| Jan 20 | Wed (43 min) | 10 | 10.06 | Graphing from tables and contexts | 8.AR.3.4 | Complete a table and graph a linear function — ____; Complete a table and make a graph: word problems — ____ | Complete a table for a linear function — ____; Graph a line from an equation in standard form — ____ | Jan 21 |
+| Jan 21 | Thu | 10 | 10.07+08 | Interpreting slope and intercept (graphs, equations, tables, descriptions; F↔C) | 8.AR.3.5 | Interpret the slope and y-intercept of a linear function — ____ | Interpret points on the graph of a linear function — ____ | Jan 22 |
+| Jan 22 | Fri | 10 | 10.09 | Writing equations of lines | 8.AR.3.3 | Write a linear equation from a graph — ____; Write a linear function from a table — ____ | Write a linear equation from a slope and a point — ____; Write a linear equation from two points — ____ | Jan 25 |
+| Jan 25 | Mon | 10 | 10.10 | Writing equations for contexts; lines of fit preview | 8.AR.3.3 · 8.AR.3.5 | Write linear functions: word problems — ____ |  | Jan 26 |
+| Jan 26 | Tue | 10 | 10.X1 | **exam** Unit 10 exam, day 1 |  |  |  |  |
+| Jan 27 | Wed (43 min) | 10 | 10.X2 | **exam** Unit 10 exam, day 2 |  |  |  |  |
+| Jan 28 | Thu | 10 | flex | *flex* Flex day — reteach from exam evidence, or absorb a lost day |  |  |  |  |
+| Jan 29 | Fri | 11 | 11.01 | Equations with like terms and the distributive property | 8.AR.2.1 | Solve equations involving like terms — ____; Solve equations using the distributive property — ____; Solve two-step equations: word problems — ____ |  | Feb 01 |
+| Feb 01 | Mon | 11 | 11.02 | Variables on both sides | 8.AR.2.1 | Solve equations with variables on both sides — ____ |  | Feb 02 |
+| Feb 02 | Tue | 11 | 11.03 | One, none, infinitely many solutions | 8.AR.2.1 | Find the number of solutions — ____ | Create equations with no solutions or infinitely many solutions — ____ | Feb 03 |
+| Feb 03 | Wed (43 min) | 11 | 11.04 | Multi-step equations | 8.AR.2.1 | Solve multi-step equations — ____ | Solve multi-step equations: complete the solution — ____; Solve equations: mixed review — ____ | Feb 04 |
+| Feb 04 | Thu | 11 | 11.05+06 | Systems: which points are solutions; how many solutions | 8.AR.4.1 · 8.AR.4.2 | Is  a solution to the system of equations? — ____; Find the number of solutions to a system of equations by graphing — ____ | x, y — ____; Solve a system of equations in slope-intercept form — ____ | Feb 05 |
+| Feb 05 | Fri | 11 | 11.07 | Solving systems by graphing | 8.AR.4.3 | Solve a system of equations by graphing — ____ | Write a system of equations given a graph — ____ | Feb 08 |
+| Feb 08 | Mon | 11 | 11.08 | Systems in context (approximate solutions) | 8.AR.4.3 | Solve a system of equations by graphing: word problems — ____ |  | Feb 09 |
+| Feb 09 | Tue | 11 | 11.X1 | **exam** Unit 11 exam, day 1 |  |  |  |  |
+| Feb 10 | Wed (43 min) | 11 | 11.X2 | **exam** Unit 11 exam, day 2 |  |  |  |  |
+| Feb 11 | Thu | 11 | flex | *flex* Flex day — reteach from exam evidence, or absorb a lost day |  |  |  |  |
+| Feb 12 | Fri | 12 | 12.01+02 | Relations; domain and range | 8.F.1.1 | Relations: convert between mappings, tables, graphs, and ordered pairs — ____; Domain and range of relations — ____ |  | Feb 16 |
+| Feb 16 | Tue | 12 | 12.03 | Is it a function? | 8.F.1.1 | Identify functions — ____; Identify functions: graphs — ____ | Identify independent and dependent variables — ____ | Feb 17 |
+| Feb 17 | Wed (43 min) | 12 | 12.04+05 | Describing graphs: increasing, decreasing, constant | 8.F.1.3 | Identify graphs: word problems — ____ |  | Feb 18 |
+| Feb 18 | Thu | 12 | 12.06 | Sketching graphs from descriptions | 8.F.1.3 | Identify graphs: word problems — ____ |  | Feb 19 |
+| Feb 19 | Fri | 12 | 12.07 | Functions from equations, tables, graphs | 8.F.1.2 | Complete a function table from an equation — ____; Complete a table for a function graph — ____ | Find values using function graphs — ____ | Feb 22 |
+| Feb 22 | Mon | 12 | 12.08+09 | Is it linear? (graphs, equations, tables) | 8.F.1.2 · 8.AR.3.1 | Identify linear and nonlinear functions: graphs and equations — ____; Identify linear and nonlinear functions: tables — ____ |  | Feb 23 |
+| Feb 23 | Tue | 12 | 12.X1 | **exam** Unit 12 exam, day 1 |  |  |  |  |
+| Feb 24 | Wed (43 min) | 12 | 12.X2 | **exam** Unit 12 exam, day 2 |  |  |  |  |
+| Feb 25 | Thu | 12 | flex | *flex* Flex day — reteach from exam evidence, or absorb a lost day |  |  |  |  |
+| Feb 26 | Fri | 13 | 13.01+02+03 | Choosing and creating displays (numerical, categorical) | 7.DP.1.5 | Choose the best type of graph — ____; Create dot plots — ____; Create stem-and-leaf plots — ____; Create histograms — ____; Create bar graphs — ____ | Box plots — ____; Create and interpret dot plots with fractions — ____ | Mar 01 |
+| Mar 01 | Mon | 13 | 13.04+05 | Bivariate data; line graphs | 8.DP.1.1 | Create line graphs — ____ | Interpret line graphs — ____ | Mar 02 |
+| Mar 02 | Tue | 13 | 13.06 | Scatter plots and association | 8.DP.1.1 · 8.DP.1.2 | Create scatter plots — ____; Describe scatter plots — ____; Describe associations between two variables using scatter plots — ____ |  | Mar 03 |
+| Mar 03 | Wed (43 min) | 13 | 13.07+08 | Lines of fit; outliers | 8.DP.1.3 · 8.DP.1.2 | Outliers in scatter plots — ____; Identify lines of best fit — ____ | Make predictions with scatter plots — ____ | Mar 04 |
+| Mar 04 | Thu | 13 | 13.09 | Interpreting the equation of a line of fit | 8.DP.1.3 · 8.AR.3.5 | Interpret lines of best fit: word problems — ____ | Write equations for lines of best fit — ____ | Mar 08 |
+| Mar 08 | Mon | 13 | T-C1 | **thread** Thread C: sample spaces of repeated experiments (17.1) | 8.DP.2.1 | Compound events: find the number of outcomes — ____; Sample spaces for repeated events — ____ |  | Mar 09 |
+| Mar 09 | Tue | 13 | T-C2 | **thread** Thread C: theoretical probability of repeated experiments (17.2–17.3) | 8.DP.2.2 | Probability of repeated experiments — ____; Experimental probability — ____ | Probability of simple events — ____ | Mar 10 |
+| Mar 10 | Wed (43 min) | 13 | 13.X1 | **exam** Unit 13 exam, day 1 |  |  |  |  |
+| Mar 11 | Thu | 13 | 13.X2 | **exam** Unit 13 exam, day 2 |  |  |  |  |
+| Mar 12 | Fri | 14 | 14.01–04 | Exponent laws with variable bases — consolidation of Thread A | 8.AR.1.1 | Multiply powers: variable bases — ____; Powers of a power: variable bases — ____; Divide monomials with positive exponents — ____; Variables with negative exponents — ____; Multiply and divide powers: variable bases — ____ |  | Mar 15 |
+| Mar 15 | Mon | 14 | 14.05+06 | Multiplying a monomial by a linear expression | 8.AR.1.2 | Multiply using the distributive property: area models — ____; Multiply linear expressions with rational coefficients — ____ |  | Mar 16 |
+| Mar 16 | Tue | 14 | 14.07+08 | Factoring a common monomial | 8.AR.1.3 | Common monomial factors — ____; Factor out a monomial — ____ |  | Mar 17 |
+| Mar 17 | Wed (43 min) | 14 | 14.X1 | **exam** Unit 14 exam, day 1 |  |  |  |  |
+| Mar 18 | Thu | 14 | 14.X2 | **exam** Unit 14 exam, day 2 |  |  |  |  |
+| Mar 19 | Fri | 15 | 15.01 | Slides, flips, spins | 8.GR.2.1 | Describe how a figure moves — ____ | Congruence statements and corresponding parts — ____ | Mar 29 |
+| Mar 29 | Mon | 15 | 15.02+03 | Reflections, rotations, translations — identify and describe | 8.GR.2.1 | Identify reflections and rotations — ____; Rotate polygons about a point — ____; Identify translations — ____; Translations: graph the image — ____; Translations: find the coordinates — ____ |  | Mar 30 |
+| Mar 30 | Tue | 15 | 15.03b | Translations on the coordinate plane | 8.GR.2.3 | Identify translations — ____; Translations: graph the image — ____; Translations: find the coordinates — ____ |  | Mar 31 |
+| Mar 31 | Wed (43 min) | 15 | 15.04 | Reflections on the coordinate plane | 8.GR.2.3 | Reflections: graph the image — ____; Reflections: find the coordinates — ____ |  | Apr 01 |
+| Apr 01 | Thu | 15 | 15.05 | Rotations on the coordinate plane (about the origin) | 8.GR.2.3 | Rotations: graph the image — ____; Rotations: find the coordinates — ____ |  | Apr 02 |
+| Apr 02 | Fri | 15 | 15.06 | Describing rigid transformations; congruence | 8.GR.2.1 · 8.GR.2.3 | Describe transformations — ____ | Determine if two figures are congruent: justify your answer — ____ | Apr 05 |
+| Apr 05 | Mon | 15 | 15.07+09 | Dilations and scale factor | 8.GR.2.2 | Classify dilations — ____; Scaled polygons — ____; Dilations: find the scale factor — ____ |  | Apr 06 |
+| Apr 06 | Tue | 15 | 15.08 | Dilations on the coordinate plane (centered at the origin) | 8.GR.2.3 | Dilations: graph the image — ____; Dilations: find the coordinates — ____ | Similar and congruent figures — ____; Determine if two figures are similar: justify your answer — ____ | Apr 07 |
+| Apr 07 | Wed (43 min) | 16 | 16.01+02 | Angle relationships — consolidation of Thread B | 8.GR.1.4 · 8.GR.1.5 | Identify complementary, supplementary, vertical, adjacent, and congruent angles — ____; Find measures of complementary, supplementary, vertical, and adjacent angles — ____; Write and solve equations using angle relationships — ____; Find missing angles in triangles — ____; Exterior Angle Theorem — ____; Triangle Angle-Sum Theorem — ____ |  | Apr 08 |
+| Apr 08 | Thu | 16 | 16.03+04 | Interior angles of polygons | 8.GR.1.6 | Interior angles of polygons — ____ |  | Apr 09 |
+| Apr 09 | Fri | 16 | 15/16.X1 | **exam** Units 15–16 exam, day 1 |  |  |  |  |
+| Apr 12 | Mon | 16 | 15/16.X2 | **exam** Units 15–16 exam, day 2 |  |  |  |  |
+| Apr 13 | Tue | 17 | 17.01–03 | Repeated experiments — consolidation of Thread C | 8.DP.2.1 · 8.DP.2.2 | Compound events: find the number of outcomes — ____; Sample spaces for repeated events — ____; Probability of repeated experiments — ____; Experimental probability — ____ | Probability of simple events — ____ | Apr 14 |
+| Apr 14 | Wed (43 min) | 17 | 17.04–06 | Predictions from theoretical probability | 8.DP.2.3 | Make predictions — ____; Write a discrete probability distribution — ____ |  | Apr 15 |
+| Apr 15 | Thu | 17 | 17.X | **exam** Unit 17 exam (one day) |  |  |  |  |
+| Apr 19 | Mon |  | PM3-R1 | **review** PM3 review 1: NSO and probability | all |  |  |  |
+| Apr 20 | Tue |  | PM3-R2 | **review** PM3 review 2: algebraic reasoning (expressions, equations, systems) | all |  |  |  |
+| Apr 21 | Wed (43 min) |  | PM3-R3 | **review** PM3 review 3: linear relationships, functions, data | all |  |  |  |
+| Apr 22 | Thu |  | PM3-R4 | **review** PM3 review 4: geometric reasoning | all |  |  |  |
+| Apr 23 | Fri |  | PM3-R5 | **review** PM3 review 5: mixed FAST-shaped rounds, one category per whiteboard question | all |  |  |  |
+| Apr 26 | Mon |  | PM3-R6 | **review** PM3 review 6: mixed FAST-shaped rounds, one category per whiteboard question | all |  |  |  |
+| Apr 27 | Tue |  | PM3-R7 | **review** PM3 review 7: mixed FAST-shaped rounds, one category per whiteboard question | all |  |  |  |
+| Apr 28 | Wed (43 min) |  | PM3-R8 | **review** PM3 review 8: mixed FAST-shaped rounds, one category per whiteboard question | all |  |  |  |
+| Apr 29 | Thu |  | PM3-R9 | **review** PM3 review 9: mixed FAST-shaped rounds, one category per whiteboard question | all |  |  |  |
+| Apr 30 | Fri |  | PM3-R10 | **review** PM3 review 10: mixed FAST-shaped rounds, one category per whiteboard question | all |  |  |  |
+| May 03 | Mon |  | PM3 | May 3–28: PM3 window (school date TBD). Non-test days: Algebra 1 bridge — operations with radicals, point-slope and standard form, systems by substitution | 912.NSO.1.4 · 912.AR.2.2 · 912.AR.9.1 |  |  |  |
 

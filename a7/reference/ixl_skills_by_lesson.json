@@ -1,0 +1,926 @@
+{
+ "1.1": {
+  "main": [
+   "Convert fractions or mixed numbers to decimals"
+  ],
+  "also": [
+   "Convert between mixed numbers and improper fractions",
+   "Convert between percents, fractions, and decimals"
+  ]
+ },
+ "1.2": {
+  "main": [
+   "Write a repeating decimal as a fraction"
+  ],
+  "also": [
+   "Convert decimals to fractions or mixed numbers"
+  ]
+ },
+ "1.3": {
+  "main": [
+   "Solve two-step equations: complete the solution"
+  ],
+  "also": [
+   "Which x satisfies an equation?",
+   "Solve two-step equations using algebra tiles"
+  ]
+ },
+ "1.4": {
+  "main": [
+   "Solve two-step equations without parentheses",
+   "Solve equations of the form px + q = r with fractions"
+  ],
+  "also": []
+ },
+ "1.5": {
+  "main": [
+   "Solve two-step equations with parentheses",
+   "Solve equations of the form p = r with fractions",
+   "Choose two-step equations: word problems"
+  ],
+  "also": [
+   "x + q",
+   "Solve two-step equations with integers",
+   "Solve equations involving like terms"
+  ]
+ },
+ "1.6": {
+  "main": [
+   "Solve two-step equations: word problems"
+  ],
+  "also": []
+ },
+ "1.7": {
+  "main": [
+   "Solve two-step equations: word problems"
+  ],
+  "also": []
+ },
+ "1.8": {
+  "main": [
+   "Solutions to inequalities",
+   "Solve two-step inequalities",
+   "Graph solutions to two-step inequalities"
+  ],
+  "also": []
+ },
+ "1.9": {
+  "main": [
+   "Solve multi-step inequalities",
+   "Graph solutions to multi-step inequalities",
+   "Solve multi-step inequalities: word problems"
+  ],
+  "also": [
+   "Write inequalities from number lines"
+  ]
+ },
+ "1.10": {
+  "main": [
+   "Solve multi-step inequalities",
+   "Graph solutions to multi-step inequalities",
+   "Solve multi-step inequalities: word problems"
+  ],
+  "also": [
+   "Write inequalities from number lines"
+  ]
+ },
+ "2.1": {
+  "main": [
+   "Identify square numbers",
+   "Evaluate squares",
+   "Complete a function table: quadratic functions"
+  ],
+  "also": []
+ },
+ "2.2": {
+  "main": [
+   "Solve equations using square roots",
+   "Square roots of perfect squares"
+  ],
+  "also": [
+   "Relationship between squares and square roots"
+  ]
+ },
+ "2.3": {
+  "main": [
+   "Evaluate cubes",
+   "Cube roots of positive and negative perfect cubes",
+   "Solve equations using cube roots"
+  ],
+  "also": []
+ },
+ "2.4": {
+  "main": [
+   "Estimate square roots and cube roots",
+   "Identify rational and irrational numbers"
+  ],
+  "also": [
+   "Square roots and cube roots",
+   "Identify rational and irrational square roots"
+  ]
+ },
+ "2.5": {
+  "main": [
+   "Irrational numbers on number lines"
+  ],
+  "also": []
+ },
+ "2.6": {
+  "main": [
+   "Put rational numbers in order",
+   "Compare and order rational and irrational numbers"
+  ],
+  "also": [
+   "Compare rational numbers"
+  ]
+ },
+ "3.1": {
+  "main": [
+   "Evaluate powers",
+   "Multiplication with exponents",
+   "Power rule"
+  ],
+  "also": [
+   "Understanding exponents"
+  ]
+ },
+ "3.2": {
+  "main": [
+   "Powers with negative bases"
+  ],
+  "also": [
+   "Division with exponents",
+   "Identify equivalent expressions involving whole-number exponents"
+  ]
+ },
+ "3.3": {
+  "main": [
+   "Evaluate expressions using properties of exponents"
+  ],
+  "also": []
+ },
+ "3.4": {
+  "main": [
+   "Understanding negative exponents",
+   "Evaluate powers with negative exponents"
+  ],
+  "also": []
+ },
+ "3.5": {
+  "main": [
+   "Identify equivalent expressions involving exponents I"
+  ],
+  "also": []
+ },
+ "3.6": {
+  "main": [
+   "Evaluate expressions using properties of exponents"
+  ],
+  "also": []
+ },
+ "3.7": {
+  "main": [
+   "Identify equivalent expressions involving exponents II"
+  ],
+  "also": []
+ },
+ "3.8": {
+  "main": [
+   "Convert between standard and scientific notation: large numbers",
+   "Compare large numbers"
+  ],
+  "also": [
+   "Powers of ten"
+  ]
+ },
+ "3.9": {
+  "main": [
+   "Convert between standard and scientific notation: small numbers",
+   "Compare small numbers"
+  ],
+  "also": [
+   "Powers of ten with negative exponents"
+  ]
+ },
+ "4.1": {
+  "main": [
+   "Add and subtract numbers written in scientific notation"
+  ],
+  "also": []
+ },
+ "4.2": {
+  "main": [
+   "Multiply numbers written in scientific notation"
+  ],
+  "also": []
+ },
+ "4.3": {
+  "main": [
+   "Divide numbers written in scientific notation"
+  ],
+  "also": []
+ },
+ "4.4": {
+  "main": [
+   "Add, subtract, multiply, and divide numbers written in scientific notation: word problems"
+  ],
+  "also": []
+ },
+ "4.5": {
+  "main": [
+   "Evaluate radical expressions"
+  ],
+  "also": []
+ },
+ "4.6": {
+  "main": [
+   "Evaluate radical expressions"
+  ],
+  "also": []
+ },
+ "4.7": {
+  "main": [
+   "Evaluate variable expressions: word problems"
+  ],
+  "also": []
+ },
+ "4.8": {
+  "main": [
+   "Evaluate variable expressions: word problems"
+  ],
+  "also": []
+ },
+ "5.1": {
+  "main": [
+   "Scale drawings: find the scale factor, missing side, or missing angle"
+  ],
+  "also": []
+ },
+ "5.2": {
+  "main": [
+   "Perimeter and area: changes in scale"
+  ],
+  "also": []
+ },
+ "5.3": {
+  "main": [
+   "Scale drawings: find the scale factor or missing side"
+  ],
+  "also": []
+ },
+ "5.4": {
+  "main": [
+   "Scale drawings: word problems"
+  ],
+  "also": [
+   "Scale drawings: scale factor word problems"
+  ]
+ },
+ "5.7": {
+  "main": [
+   "Convert between customary and metric systems"
+  ],
+  "also": [
+   "Compare and convert customary units",
+   "Compare and convert metric units"
+  ]
+ },
+ "5.8": {
+  "main": [
+   "Convert between customary and metric systems"
+  ],
+  "also": [
+   "Compare and convert customary units",
+   "Compare and convert metric units"
+  ]
+ },
+ "5.9": {
+  "main": [
+   "Convert between customary and metric systems"
+  ],
+  "also": [
+   "Compare and convert customary units",
+   "Compare and convert metric units"
+  ]
+ },
+ "5.10": {
+  "main": [
+   "Compare rates: word problems",
+   "Multi-step problems with customary or metric unit conversions"
+  ],
+  "also": []
+ },
+ "5.11": {
+  "main": [
+   "Compare rates: word problems",
+   "Multi-step problems with customary or metric unit conversions"
+  ],
+  "also": []
+ },
+ "6.1": {
+  "main": [
+   "Triangle inequality",
+   "Converse of the Pythagorean theorem: is it a right triangle?"
+  ],
+  "also": []
+ },
+ "6.2": {
+  "main": [
+   "Triangle inequality",
+   "Converse of the Pythagorean theorem: is it a right triangle?"
+  ],
+  "also": []
+ },
+ "6.3": {
+  "main": [
+   "Pythagorean theorem: find the missing leg or hypotenuse length"
+  ],
+  "also": []
+ },
+ "6.4": {
+  "main": [
+   "Pythagorean theorem: word problems"
+  ],
+  "also": []
+ },
+ "6.5": {
+  "main": [
+   "Find the distance between two points on a horizontal or vertical line",
+   "Find the distance between two points"
+  ],
+  "also": []
+ },
+ "6.6": {
+  "main": [
+   "Pythagorean theorem: find the perimeter"
+  ],
+  "also": []
+ },
+ "6.7": {
+  "main": [
+   "Side lengths of similar triangles"
+  ],
+  "also": []
+ },
+ "6.8": {
+  "main": [
+   "Similar triangles and indirect measurement"
+  ],
+  "also": [
+   "Identify similar triangles"
+  ]
+ },
+ "7.1": {
+  "main": [
+   "Graph a proportional relationship: word problems"
+  ],
+  "also": []
+ },
+ "7.2": {
+  "main": [
+   "Interpret graphs of proportional relationships",
+   "Find the constant of proportionality from a table",
+   "Find the constant of proportionality from from a graph"
+  ],
+  "also": []
+ },
+ "7.4": {
+  "main": [
+   "Identify proportional relationships by graphing",
+   "Identify proportional relationships in tables and graphs"
+  ],
+  "also": []
+ },
+ "7.5": {
+  "main": [
+   "Write equations for proportional relationships from tables",
+   "Write equations for proportional relationships from from graphs"
+  ],
+  "also": [
+   "Write and solve equations for proportional relationships"
+  ]
+ },
+ "7.7": {
+  "main": [
+   "Compare proportional relationships represented in different ways"
+  ],
+  "also": []
+ },
+ "8.1": {
+  "main": [
+   "Center, radius, and diameter of a circle",
+   "Circumference of circles"
+  ],
+  "also": []
+ },
+ "8.2": {
+  "main": [
+   "Center, radius, and diameter of a circle",
+   "Circumference of circles"
+  ],
+  "also": []
+ },
+ "8.3": {
+  "main": [
+   "Find the radius or diameter of a circle given the circumference"
+  ],
+  "also": []
+ },
+ "8.5": {
+  "main": [
+   "Area of circles"
+  ],
+  "also": []
+ },
+ "8.6": {
+  "main": [
+   "Circles: word problems"
+  ],
+  "also": []
+ },
+ "8.8": {
+  "main": [
+   "Use fractions to find the measure of an angle"
+  ],
+  "also": []
+ },
+ "8.9": {
+  "main": [
+   "Circle graphs and central angles",
+   "Interpret circle graphs"
+  ],
+  "also": []
+ },
+ "9.1": {
+  "main": [
+   "Nets of three-dimensional figures"
+  ],
+  "also": []
+ },
+ "9.2": {
+  "main": [
+   "Surface area of cylinders",
+   "Lateral area of cylinders"
+  ],
+  "also": []
+ },
+ "9.4": {
+  "main": [
+   "Volume of cylinders"
+  ],
+  "also": []
+ },
+ "10.1": {
+  "main": [
+   "Find the constant of proportionality from a table",
+   "Identify proportional relationships by graphing",
+   "Identify proportional relationships"
+  ],
+  "also": [
+   "Write equations for proportional relationships from tables and graphs",
+   "Interpret graphs of proportional relationships"
+  ]
+ },
+ "10.2": {
+  "main": [
+   "Find the slope from two points"
+  ],
+  "also": [
+   "Find the slope from a table"
+  ]
+ },
+ "10.3": {
+  "main": [
+   "Find the slope from a graph",
+   "Find the slope from a table"
+  ],
+  "also": []
+ },
+ "10.4": {
+  "main": [
+   "Rate of change of a linear function: graphs",
+   "Rate of change of a linear function: tables"
+  ],
+  "also": []
+ },
+ "10.5": {
+  "main": [
+   "Slope-intercept form: find the slope and y-intercept",
+   "Graph a line using slope",
+   "Graph a line from an equation in slope-intercept form"
+  ],
+  "also": [
+   "Write a linear equation from a slope and y-intercept",
+   "Compare linear functions: tables, graphs, and equations"
+  ]
+ },
+ "10.6": {
+  "main": [
+   "Complete a table and graph a linear function",
+   "Complete a table and make a graph: word problems"
+  ],
+  "also": [
+   "Complete a table for a linear function",
+   "Graph a line from an equation in standard form"
+  ]
+ },
+ "10.7": {
+  "main": [
+   "Interpret the slope and y-intercept of a linear function"
+  ],
+  "also": [
+   "Interpret points on the graph of a linear function"
+  ]
+ },
+ "10.9": {
+  "main": [
+   "Write a linear equation from a graph",
+   "Write a linear function from a table"
+  ],
+  "also": [
+   "Write a linear equation from a slope and a point",
+   "Write a linear equation from two points"
+  ]
+ },
+ "10.10": {
+  "main": [
+   "Write linear functions: word problems"
+  ],
+  "also": []
+ },
+ "11.1": {
+  "main": [
+   "Solve equations involving like terms",
+   "Solve equations using the distributive property",
+   "Solve two-step equations: word problems"
+  ],
+  "also": []
+ },
+ "11.2": {
+  "main": [
+   "Solve equations with variables on both sides"
+  ],
+  "also": []
+ },
+ "11.3": {
+  "main": [
+   "Find the number of solutions"
+  ],
+  "also": [
+   "Create equations with no solutions or infinitely many solutions"
+  ]
+ },
+ "11.4": {
+  "main": [
+   "Solve multi-step equations"
+  ],
+  "also": [
+   "Solve multi-step equations: complete the solution",
+   "Solve equations: mixed review"
+  ]
+ },
+ "11.5": {
+  "main": [
+   "Is  a solution to the system of equations?",
+   "Find the number of solutions to a system of equations by graphing"
+  ],
+  "also": [
+   "x, y",
+   "Solve a system of equations in slope-intercept form"
+  ]
+ },
+ "11.6": {
+  "main": [
+   "Is  a solution to the system of equations?",
+   "Find the number of solutions to a system of equations by graphing"
+  ],
+  "also": [
+   "x, y",
+   "Solve a system of equations in slope-intercept form"
+  ]
+ },
+ "11.7": {
+  "main": [
+   "Solve a system of equations by graphing"
+  ],
+  "also": [
+   "Write a system of equations given a graph"
+  ]
+ },
+ "11.8": {
+  "main": [
+   "Solve a system of equations by graphing: word problems"
+  ],
+  "also": []
+ },
+ "12.1": {
+  "main": [
+   "Relations: convert between mappings, tables, graphs, and ordered pairs"
+  ],
+  "also": []
+ },
+ "12.2": {
+  "main": [
+   "Domain and range of relations"
+  ],
+  "also": []
+ },
+ "12.3": {
+  "main": [
+   "Identify functions",
+   "Identify functions: graphs"
+  ],
+  "also": [
+   "Identify independent and dependent variables"
+  ]
+ },
+ "12.4": {
+  "main": [
+   "Identify graphs: word problems"
+  ],
+  "also": []
+ },
+ "12.5": {
+  "main": [
+   "Identify graphs: word problems"
+  ],
+  "also": []
+ },
+ "12.6": {
+  "main": [
+   "Identify graphs: word problems"
+  ],
+  "also": []
+ },
+ "12.7": {
+  "main": [
+   "Complete a function table from an equation",
+   "Complete a table for a function graph"
+  ],
+  "also": [
+   "Find values using function graphs"
+  ]
+ },
+ "12.8": {
+  "main": [
+   "Identify linear and nonlinear functions: graphs and equations"
+  ],
+  "also": []
+ },
+ "12.9": {
+  "main": [
+   "Identify linear and nonlinear functions: tables"
+  ],
+  "also": []
+ },
+ "13.1": {
+  "main": [
+   "Choose the best type of graph"
+  ],
+  "also": []
+ },
+ "13.2": {
+  "main": [
+   "Create dot plots",
+   "Create stem-and-leaf plots",
+   "Create histograms"
+  ],
+  "also": [
+   "Box plots",
+   "Create and interpret dot plots with fractions"
+  ]
+ },
+ "13.3": {
+  "main": [
+   "Create bar graphs"
+  ],
+  "also": []
+ },
+ "13.5": {
+  "main": [
+   "Create line graphs"
+  ],
+  "also": [
+   "Interpret line graphs"
+  ]
+ },
+ "13.6": {
+  "main": [
+   "Create scatter plots",
+   "Describe scatter plots",
+   "Describe associations between two variables using scatter plots"
+  ],
+  "also": []
+ },
+ "13.7": {
+  "main": [
+   "Outliers in scatter plots",
+   "Identify lines of best fit"
+  ],
+  "also": [
+   "Make predictions with scatter plots"
+  ]
+ },
+ "13.8": {
+  "main": [
+   "Outliers in scatter plots",
+   "Identify lines of best fit"
+  ],
+  "also": [
+   "Make predictions with scatter plots"
+  ]
+ },
+ "13.9": {
+  "main": [
+   "Interpret lines of best fit: word problems"
+  ],
+  "also": [
+   "Write equations for lines of best fit"
+  ]
+ },
+ "14.1": {
+  "main": [
+   "Multiply powers: variable bases",
+   "Powers of a power: variable bases"
+  ],
+  "also": []
+ },
+ "14.2": {
+  "main": [
+   "Divide monomials with positive exponents"
+  ],
+  "also": []
+ },
+ "14.3": {
+  "main": [
+   "Variables with negative exponents"
+  ],
+  "also": []
+ },
+ "14.4": {
+  "main": [
+   "Multiply and divide powers: variable bases"
+  ],
+  "also": []
+ },
+ "14.5": {
+  "main": [
+   "Multiply using the distributive property: area models",
+   "Multiply linear expressions with rational coefficients"
+  ],
+  "also": []
+ },
+ "14.6": {
+  "main": [
+   "Multiply using the distributive property: area models",
+   "Multiply linear expressions with rational coefficients"
+  ],
+  "also": []
+ },
+ "14.7": {
+  "main": [
+   "Common monomial factors",
+   "Factor out a monomial"
+  ],
+  "also": []
+ },
+ "14.8": {
+  "main": [
+   "Common monomial factors",
+   "Factor out a monomial"
+  ],
+  "also": []
+ },
+ "15.1": {
+  "main": [
+   "Describe how a figure moves"
+  ],
+  "also": [
+   "Congruence statements and corresponding parts"
+  ]
+ },
+ "15.2": {
+  "main": [
+   "Identify reflections and rotations",
+   "Rotate polygons about a point"
+  ],
+  "also": []
+ },
+ "15.3": {
+  "main": [
+   "Identify translations",
+   "Translations: graph the image",
+   "Translations: find the coordinates"
+  ],
+  "also": []
+ },
+ "15.4": {
+  "main": [
+   "Reflections: graph the image",
+   "Reflections: find the coordinates"
+  ],
+  "also": []
+ },
+ "15.5": {
+  "main": [
+   "Rotations: graph the image",
+   "Rotations: find the coordinates"
+  ],
+  "also": []
+ },
+ "15.6": {
+  "main": [
+   "Describe transformations"
+  ],
+  "also": [
+   "Determine if two figures are congruent: justify your answer"
+  ]
+ },
+ "15.7": {
+  "main": [
+   "Classify dilations",
+   "Scaled polygons"
+  ],
+  "also": []
+ },
+ "15.8": {
+  "main": [
+   "Dilations: graph the image",
+   "Dilations: find the coordinates"
+  ],
+  "also": [
+   "Similar and congruent figures",
+   "Determine if two figures are similar: justify your answer"
+  ]
+ },
+ "15.9": {
+  "main": [
+   "Dilations: find the scale factor"
+  ],
+  "also": []
+ },
+ "16.1": {
+  "main": [
+   "Identify complementary, supplementary, vertical, adjacent, and congruent angles",
+   "Find measures of complementary, supplementary, vertical, and adjacent angles",
+   "Write and solve equations using angle relationships"
+  ],
+  "also": []
+ },
+ "16.2": {
+  "main": [
+   "Find missing angles in triangles",
+   "Exterior Angle Theorem",
+   "Triangle Angle-Sum Theorem"
+  ],
+  "also": []
+ },
+ "16.3": {
+  "main": [
+   "Interior angles of polygons"
+  ],
+  "also": []
+ },
+ "17.1": {
+  "main": [
+   "Compound events: find the number of outcomes",
+   "Sample spaces for repeated events"
+  ],
+  "also": []
+ },
+ "17.2": {
+  "main": [
+   "Probability of repeated experiments"
+  ],
+  "also": [
+   "Probability of simple events"
+  ]
+ },
+ "17.3": {
+  "main": [
+   "Experimental probability"
+  ],
+  "also": []
+ },
+ "17.4": {
+  "main": [
+   "Make predictions",
+   "Write a discrete probability distribution"
+  ],
+  "also": []
+ },
+ "17.5": {
+  "main": [
+   "Make predictions",
+   "Write a discrete probability distribution"
+  ],
+  "also": []
+ },
+ "17.6": {
+  "main": [
+   "Make predictions",
+   "Write a discrete probability distribution"
+  ],
+  "also": []
+ }
+}

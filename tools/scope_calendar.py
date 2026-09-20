@@ -3,7 +3,30 @@
 Edit PLAN (in order) and re-run; the markdown table is regenerated from it.
 Calendar: Aug 10 2026 - May 28 2027, holidays per the board-approved calendar (verify
 against the school copy). Wednesdays are 43-minute periods: absorbed on the day, not planned."""
-import datetime as d
+import datetime as d, json, re, os
+HERE=os.path.dirname(os.path.abspath(__file__))
+SK=json.load(open(os.path.join(HERE,"..","a7","reference","ixl_skills_by_lesson.json")))
+SMARTSCORE=67   # A7 students stop at a SmartScore of 67
+THREAD_SKILLS={"T-A1":["14.1","14.2"],"T-A2":["14.3","14.4"],"T-B1":["16.1"],"T-B2":["16.2"],"T-C1":["17.1"],"T-C2":["17.2","17.3"]}
+def lessons_for(code):
+    if code in THREAD_SKILLS: return THREAD_SKILLS[code]
+    m=re.match(r'^(\d+)\.(\d+)(?:[+–-](.*))?',code)
+    if not m or code.endswith(("X1","X2","X")) : return []
+    u=m.group(1); first=int(m.group(2)); rest=m.group(3)
+    nums=[first]
+    if rest:
+        for part in re.split(r'[+–-]',rest):
+            part=part.strip()
+            if part.isdigit(): nums.append(int(part))
+        if "–" in code:  # a range like 14.01–04
+            nums=list(range(first,nums[-1]+1))
+    return [f"{u}.{n}" for n in nums]
+def ixl(code):
+    main=[];also=[]
+    for L in lessons_for(code):
+        v=SK.get(L,{"main":[],"also":[]})
+        main+= [x for x in v["main"] if x not in main]; also+=[x for x in v["also"] if x not in also and x not in main]
+    return main,also
 start=d.date(2026,9,23)          # first day after the Unit 2 exam (Sep 21-22)
 end=d.date(2027,5,28)
 hol={d.date(2026,10,12),d.date(2026,11,11),d.date(2027,1,18),d.date(2027,2,15),
@@ -157,13 +180,28 @@ for dt in days[len(PLAN):]:
         rows.append((dt,0,"PM3","May 3–28: PM3 window (school date TBD). Non-test days: Algebra 1 bridge — operations with radicals, point-slope and standard form, systems by substitution","912.NSO.1.4 · 912.AR.2.2 · 912.AR.9.1","W"))
 if __name__=="__main__":
     import sys
-    print(f"| Date | Day | Unit | Lesson | What is taught | Benchmark |")
-    print("|---|---|---|---|---|---|")
-    for dt,u,code,title,bm,kind in rows:
+    print(f"| Date | Day | Unit | Lesson | What is taught | Benchmark | IXL skill(s) — code | Also consider — code | Due |")
+    print("|---|---|---|---|---|---|---|---|---|")
+    for i,(dt,u,code,title,bm,kind) in enumerate(rows):
         wd=dt.strftime("%a")
         flag=" (43 min)" if wd=="Wed" else ""
         mark={"T":"**thread** ","X":"**exam** ","R":"**review** ","F":"*flex* ","W":""}.get(kind,"")
-        print(f"| {dt.strftime('%b %d')} | {wd}{flag} | {u if u else ''} | {code} | {mark}{title} | {bm} |")
+        main,also=ixl(code)
+        nxt=[r[0] for r in rows[i+1:] if r[5] not in ("W",)]
+        due=nxt[0].strftime('%b %d') if (main and nxt) else ""
+        M="; ".join(f"{x} — ____" for x in main); A="; ".join(f"{x} — ____" for x in also)
+        print(f"| {dt.strftime('%b %d')} | {wd}{flag} | {u if u else ''} | {code} | {mark}{title} | {bm} | {M} | {A} | {due} |")
+    # student-facing due-date sheet
+    with open(os.path.join(HERE,"..","a7","reference","A7 IXL DUE DATES 2026-27.md"),"w") as f:
+        f.write(f"# A7 — IXL assignments and due dates, 2026–27\n\nEach class day ends with IXL. Whatever is not finished in class is that night's practice. **Done means a SmartScore of {SMARTSCORE} on every listed skill.** Due = the next class day. \"Also consider\" skills are optional extra practice on the same idea.\n\nSkill codes: fill in from IXL's printed skill plan (the ____ blanks) — see the note at the end.\n\n| Assigned | Lesson | Required skills (SmartScore {SMARTSCORE}) | Optional (also consider) | Due |\n|---|---|---|---|---|\n")
+        for i,(dt,u,code,title,bm,kind) in enumerate(rows):
+            main,also=ixl(code)
+            if not main: continue
+            nxt=[r[0] for r in rows[i+1:] if r[5] not in ("W",)]
+            due=nxt[0].strftime('%a %b %d') if nxt else ""
+            M="; ".join(f"{x} (____)" for x in main); A="; ".join(f"{x} (____)" for x in also)
+            f.write(f"| {dt.strftime('%a %b %d')} | {code} {title} | {M} | {A} | {due} |\n")
+        f.write("\n*Codes:* IXL's page shows skill names; the codes (e.g. 8th grade F.5) print on IXL's \"Print skill plan\" PDF. Send that PDF and the blanks get filled by script, or fill them once in `a7/reference/ixl_skills_by_lesson.json` (add a `code` per skill) and re-run `tools/scope_calendar.py`.\n")
     print(f"\nPlanned periods: {len(rows)} of {len(days)} available Sep 23–May 28; PM3 review days: {n}", file=sys.stderr)
     for dt,u,code,title,bm,kind in rows:
         if code.endswith("X1") or code=="17.X" or code.startswith("PM"):
