@@ -45,7 +45,7 @@ L = dict(
              items=["Parentheses first — including a fraction bar, which is a pair of parentheses in disguise.",
                     "Exponents next — the laws of exponents are applied here.",
                     "Then multiply and divide, left to right; then add and subtract.",
-                    "**The laws never cross a + or a −:  $2^{3} + 2^{2} = 8 + 4 = 12$, not $2^{5}$.**"],
+                    "**Never across a + or a −:  $2^{3} + 2^{2} = 8 + 4 = 12$, not $2^{5}$.**"],
              letters=True),
     ],
 

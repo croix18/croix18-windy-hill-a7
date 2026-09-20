@@ -253,7 +253,7 @@ class Deck:
                 path, w, h = mathimg.m(part[1:-1], surface, color)
                 pieces.append(("img", path, w, h)); total += w; maxh = max(maxh, h)
             else:
-                w = len(part) * size / 72 * 0.50 + 0.05
+                w = len(part) * size / 72 * (0.58 if bold else 0.52) + 0.08
                 pieces.append(("txt", part, w, 0.5)); total += w
         if align == "center":
             x = x + ((width if width else CW) - total) / 2
@@ -267,7 +267,7 @@ class Deck:
             x += w
         return total, maxh
 
-    def measure(self, text, surface="slidemid", size=26):
+    def measure(self, text, surface="slidemid", size=26, bold=False):
         """Width in inches a mixed line would take, without drawing it."""
         import re
         total = 0.0
@@ -278,7 +278,7 @@ class Deck:
                 _, w, h = mathimg.m(part[1:-1], surface, INK)
                 total += w
             else:
-                total += len(part) * size / 72 * 0.50 + 0.05
+                total += len(part) * size / 72 * (0.58 if bold else 0.52) + 0.08
         return total
 
     def math_row(self, parts, surface="slidemid", y=None, gap=0.35, size=26, color=INK, bold=False, align="center", x=None):

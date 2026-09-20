@@ -184,7 +184,7 @@ def build_deck(L, outdir):
     for i, q in enumerate(wu):
         y0 = D.cursor
         tw, hh = D._mixed(f"{i + 1}.   " + q["stem"], LM + 1.2, y0, "slide", 23, INK)
-        aw = D.measure(q["answer"], "slide", 23)
+        aw = D.measure(q["answer"], "slide", 23, bold=True)
         if LM + 1.2 + tw + 0.6 + aw <= LM + CW:
             D._mixed(q["answer"], LM + 1.2 + tw + 0.6, y0, "slide", 23, RED, True)
             D.cursor = y0 + hh + 0.22

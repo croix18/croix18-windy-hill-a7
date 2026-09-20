@@ -1,0 +1,277 @@
+{
+ "deck": "A7 3.06  Slides.pptx",
+ "slides": [
+  {
+   "n": 1,
+   "title": "Evaluating and Equivalent Expressions",
+   "sub": "",
+   "min": 1,
+   "note": "Post the learning target. Say the 'today' line and nothing else yet.",
+   "kind": "title"
+  },
+  {
+   "n": 2,
+   "title": "Warm-Up",
+   "sub": "On your own. Four minutes. No notes.",
+   "min": 4,
+   "note": "Q4 is the prerequisite for the second half of today: one number, three bases. A board that stops at 8\u00b2 has not yet seen that 8 is itself a power of 2 \u2014 that is Notes III.",
+   "kind": "warmup"
+  },
+  {
+   "n": 3,
+   "title": "Warm-Up",
+   "sub": "Answers.",
+   "min": 1,
+   "note": "Reveal. Ask for the band each question came from only if time allows.",
+   "kind": "warmup"
+  },
+  {
+   "n": 4,
+   "title": "Notes",
+   "sub": "",
+   "min": 3,
+   "note": "Melanie applies the product law first (\u22122 + 5 = 3), then the quotient law. Adonis rewrites 5\u207b\u00b2 as 1/25 first and does arithmetic. Both reach 25. The teaching point from 3.03 again: apply the laws BEFORE evaluating when you can \u2014 the numbers stay small.",
+   "kind": "notes"
+  },
+  {
+   "n": 5,
+   "title": "Notes",
+   "sub": "Copy the worked line.",
+   "min": 4,
+   "note": "Power of a power (2 \u00b7 \u22123 = \u22126), then quotient (\u22126 \u2212 (\u22125) = \u22121), then the negative exponent law to finish. Then the error-analysis pair from the book: the first student multiplied exponents where the product law adds; the second flipped a fraction without flipping the exponent. Both are on the board as 'find the step'.",
+   "kind": "notes"
+  },
+  {
+   "n": 6,
+   "title": "Notes",
+   "sub": "",
+   "min": 4,
+   "note": "8 is 2\u00b3, so 8\u2075 is (2\u00b3)\u2075 = 2\u00b9\u2075. 9 is 3\u00b2, so 9\u2074 = 3\u2078. And 2\u00b3 \u00b7 4\u00b3 = 2\u00b3 \u00b7 (2\u00b2)\u00b3 = 2\u00b3 \u00b7 2\u2076 = 2\u2079. The table of squares, cubes and fourth powers from Unit 2 is the tool; the move is power of a power. Ask: which bases can be rewritten as powers of 2? (4, 8, 16, 32, 64.) Of 3? (9, 27, 81.)",
+   "kind": "notes"
+  },
+  {
+   "n": 7,
+   "title": "Notes",
+   "sub": "",
+   "min": 3,
+   "note": "Xavier says both expressions rewrite to 2\u207b\u2077. Rewrite each: (1/4)\u00b2 = (2\u207b\u00b2)\u00b2 = 2\u207b\u2074, times 2\u207b\u00b3 is 2\u207b\u2077. (1/2)\u2074 = 2\u207b\u2074, times 4\u207b\u00b9 = 2\u207b\u00b2 is 2\u207b\u2076. Not equivalent \u2014 same base makes the comparison honest. This is the shape of whiteboard 9.",
+   "kind": "notes"
+  },
+  {
+   "n": 8,
+   "title": "Example 1",
+   "sub": "Evaluate.",
+   "min": 1,
+   "note": "SPOKEN ONLY. What does the negative exponent do to 3/4? Is the 3 outside part of the base? (No \u2014 it is a separate factor.)",
+   "kind": "example"
+  },
+  {
+   "n": 9,
+   "title": "Example 1",
+   "sub": "Worked.",
+   "min": 2,
+   "note": "Flip, square, then multiply by 3. A student who writes (9/4)\u207b\u00b2 \u00b7 3 or (3/4)\u207b\u2076 pulled the 3 into the base. 16/3 is right; 5\u2153 is the same value.",
+   "kind": "example"
+  },
+  {
+   "n": 10,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "Catches a student who folds the outside 2 into the base (board shows (4/5)\u207b\u00b2 or 4/25 \u00b7 2) and one who never flipped (4/25 \u00b7 2 = 8/25). 25/2 is right.",
+   "kind": "yourturn"
+  },
+  {
+   "n": 11,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 12,
+   "title": "Example 2",
+   "sub": "Equivalent or not?",
+   "min": 1,
+   "note": "SPOKEN ONLY. The two expressions have bases 3 and 6 on the left, and 3, 2 and 2 on the right. What base can 6 be broken into? Then both sides can be written with 3s and 2s only.",
+   "kind": "example"
+  },
+  {
+   "n": 13,
+   "title": "Example 2",
+   "sub": "Worked.",
+   "min": 2,
+   "note": "Left: 6\u00b3 = (3\u00b72)\u00b3 = 3\u00b3\u00b72\u00b3, so 3\u2075\u00b72\u00b3. Right: (3\u00b72)\u2075 = 3\u2075\u00b72\u2075, over 2\u00b2 leaves 3\u2075\u00b72\u00b3. Identical, so equivalent; the value is 243 \u00b7 8 = 1944 if anyone wants it.",
+   "kind": "example"
+  },
+  {
+   "n": 14,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "Catches a student who cannot split 10 into 2 \u00b7 5 (board stops at 10\u00b3) and one who subtracts the wrong exponent on the right. Both are 2\u2075 \u00b7 5\u00b3; yes.",
+   "kind": "yourturn"
+  },
+  {
+   "n": 15,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 16,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Zero exponent then quotient. A board with 343 dropped the sign; 'undefined' read (\u22127)\u2070 as 0.",
+   "kind": "wb"
+  },
+  {
+   "n": 17,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 18,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The book's Danny/Reina expression. \u22123 \u2212 (\u22122) = \u22121, then flip. A board with 3/4 forgot to flip; (3/4)\u207b\u2075 subtracted the wrong way.",
+   "kind": "wb"
+  },
+  {
+   "n": 19,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 20,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The book's choose-your-own-adventure expression: four laws. Everything becomes a power of 2: \u22123 + 4 \u2212 3 = \u22122. A board with 4 forgot the final flip; a board with 2 miscounted the denominator as 2\u00b2.",
+   "kind": "wb"
+  },
+  {
+   "n": 21,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 22,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Notes III, plain. A board with 2\u2078 added 3 + 5; a board with 2\u2075 replaced 8 by 2.",
+   "kind": "wb"
+  },
+  {
+   "n": 23,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 24,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic. 9 = 3\u00b2, so (3\u00b2)\u2074 = 3\u2078 = 6561 = 9\u2074. B is the common board.",
+   "kind": "wb"
+  },
+  {
+   "n": 25,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 26,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic; this is Xavier's first expression. (1/4)\u00b2 = (2\u207b\u00b2)\u00b2 = 2\u207b\u2074, times 2\u207b\u00b3.",
+   "kind": "wb"
+  },
+  {
+   "n": 27,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 28,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Common base by rewriting one factor. A board with 8\u2076 or 8\u00b3 multiplied the bases.",
+   "kind": "wb"
+  },
+  {
+   "n": 29,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 30,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Product of powers, then common base. 1024 either way. A board with 2\u2075 forgot to double the exponent when 4 became 2\u00b2.",
+   "kind": "wb"
+  },
+  {
+   "n": 31,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 32,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Take your time. Boards up when you have written it.",
+   "min": 0,
+   "note": "Written. Full credit: both rewrites shown and the sentence. A student who agrees with Xavier usually wrote 4\u207b\u00b9 as 2\u207b\u00b9 \u2014 the same slip as option B on question 6.",
+   "kind": "wb"
+  },
+  {
+   "n": 33,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 34,
+   "title": "IXL",
+   "sub": "Last five minutes.",
+   "min": 5,
+   "note": "IXL: whatever is not finished is tonight's practice; SmartScore 67.",
+   "kind": "ixl"
+  }
+ ]
+}

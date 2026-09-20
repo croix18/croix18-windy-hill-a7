@@ -1,0 +1,269 @@
+{
+ "deck": "A7 3.05  Slides.pptx",
+ "slides": [
+  {
+   "n": 1,
+   "title": "Applying Exponent Laws",
+   "sub": "",
+   "min": 1,
+   "note": "Post the learning target. Say the 'today' line and nothing else yet.",
+   "kind": "title"
+  },
+  {
+   "n": 2,
+   "title": "Warm-Up",
+   "sub": "On your own. Four minutes. No notes.",
+   "min": 4,
+   "note": "Q4 is today's move: a negative fraction's reciprocal is negative. A board with 5/2 (sign dropped) or 2/5 (opposite of the opposite) is the error this lesson is built to catch \u2014 the B1G-M lists 'takes the opposite instead of the reciprocal' as the misconception for this benchmark.",
+   "kind": "warmup"
+  },
+  {
+   "n": 3,
+   "title": "Warm-Up",
+   "sub": "Answers.",
+   "min": 1,
+   "note": "Reveal. Ask for the band each question came from only if time allows.",
+   "kind": "warmup"
+  },
+  {
+   "n": 4,
+   "title": "Notes",
+   "sub": "Copy the table.",
+   "min": 4,
+   "note": "Each row is the previous row divided by 2/5, which is multiplying by 5/2. Going down from (2/5)\u2070 = 1: 1 \u00b7 5/2 = 5/2, then 25/4, then 125/8. Students see that (2/5)\u207b\u00b9 is 5/2 \u2014 the reciprocal \u2014 before the rule is stated.\nOFF: 'To divide by two fifths you multiply by five halves. That is why the base flips.'",
+   "kind": "notes"
+  },
+  {
+   "n": 5,
+   "title": "Notes",
+   "sub": "",
+   "min": 4,
+   "note": "State the rule and then the reason: (a/b)\u207b\u207f = 1/(a/b)\u207f = 1 \u00f7 a\u207f/b\u207f = b\u207f/a\u207f = (b/a)\u207f. Then the sign question: (\u22122/3)\u207b\u2075 is (\u22123/2)\u2075 \u2014 the minus rides along with the fraction. A student who writes (2/3)\u2075 took the opposite AND the reciprocal, which is the named misconception.\nOFF: 'Reciprocal flips top and bottom. It does not touch the sign.'",
+   "kind": "notes"
+  },
+  {
+   "n": 6,
+   "title": "Notes",
+   "sub": "",
+   "min": 3,
+   "note": "Fernanda: quotient of powers first, then power of a power, then rewrite the decimal as a fraction and flip. Junior: power of a quotient first, then quotient. Both land on (2/5)\u00b2. The decimal-to-fraction step is the one to watch: 2.5 = 5/2, so (2.5)\u207b\u00b2 = (5/2)\u207b\u00b2 = (2/5)\u00b2.",
+   "kind": "notes"
+  },
+  {
+   "n": 7,
+   "title": "Example 1",
+   "sub": "Flip, then evaluate.",
+   "min": 1,
+   "note": "SPOKEN ONLY. What is the base? What does the negative exponent tell you to do to it? Do the numbers or the sign flip?",
+   "kind": "example"
+  },
+  {
+   "n": 8,
+   "title": "Example 1",
+   "sub": "Worked.",
+   "min": 2,
+   "note": "Flip: (\u22128/7)\u00b2. Square: 64/49. Even power, so positive. A board with \u221264/49 squared only the numerator's magnitude and kept a sign; a board with 49/64 never flipped.",
+   "kind": "example"
+  },
+  {
+   "n": 9,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "Catches a student who flips the sign with the fraction (the answer here is negative, and a board with +8/125 dropped it) and one who never flipped (\u2212125/8). \u22128/125 is right.",
+   "kind": "yourturn"
+  },
+  {
+   "n": 10,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 11,
+   "title": "Example 2",
+   "sub": "Two laws, then a flip.",
+   "min": 1,
+   "note": "SPOKEN ONLY. Same base twice \u2014 which law joins them? What is the exponent after that, and what does its sign tell you?",
+   "kind": "example"
+  },
+  {
+   "n": 12,
+   "title": "Example 2",
+   "sub": "Worked.",
+   "min": 2,
+   "note": "Product of powers: \u22122 + 4 = 2. The exponent is already positive, so no flip. Value 25/64. The trap is flipping anyway because a negative exponent appeared somewhere in the problem.",
+   "kind": "example"
+  },
+  {
+   "n": 13,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "Catches a student who adds to \u22121 and stops there (a negative exponent is not a finished answer), and one who writes (5/4)\u00b9\u2070 (added 7 + 3 but kept the minus). (4/5)\u00b9\u2070 is right.",
+   "kind": "yourturn"
+  },
+  {
+   "n": 14,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 15,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The rule, plain. A board with (2/3)\u2074 dropped the minus without flipping; a board with \u2212(3/2)\u2074 made the exponent's sign the value's sign.",
+   "kind": "wb"
+  },
+  {
+   "n": 16,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 17,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Sign inside the denominator. A board with (5/3)\u2079 took the opposite as well as the reciprocal \u2014 the named misconception.",
+   "kind": "wb"
+  },
+  {
+   "n": 18,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 19,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Flip then square. A board with \u221281/64 kept a sign through an even power; 64/81 never flipped.",
+   "kind": "wb"
+  },
+  {
+   "n": 20,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 21,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Bigger numbers, same move. A board that tried to evaluate wasted the time: rewrite was asked.",
+   "kind": "wb"
+  },
+  {
+   "n": 22,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 23,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic. Note that A and B have the SAME VALUE (64/49) because the power is even \u2014 a student who chooses B for that reason is right about the value and wrong about the law. Ask them to redo it with exponent \u22123, where B would be wrong in value too.",
+   "kind": "wb"
+  },
+  {
+   "n": 24,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 25,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic. \u22122 \u2212 (\u22124) = 2. The B board is the interesting one: it did the arithmetic right and then flipped out of habit.",
+   "kind": "wb"
+  },
+  {
+   "n": 26,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 27,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Two bases that are reciprocals of each other: flip the first and they match. A board with 1 multiplied 2/5 by 5/2 and forgot the exponent flipped the first factor.",
+   "kind": "wb"
+  },
+  {
+   "n": 28,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 29,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Product then power of a power: (5 \u2212 2) \u00b7 3 = 9. A board with (2/3)\u00b2\u00b9 multiplied 5 \u00b7 \u22122 \u00b7 3 wrongly; (2/3)\u2076 added 3 + 3.",
+   "kind": "wb"
+  },
+  {
+   "n": 30,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 31,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Take your time. Boards up when you have written it.",
+   "min": 0,
+   "note": "Written. This is the misconception the state guide names for this benchmark, in the student's own words. Full credit: the correct rewrite and a sentence that separates reciprocal from opposite. Value, if anyone asks: \u2212243/32.",
+   "kind": "wb"
+  },
+  {
+   "n": 32,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 33,
+   "title": "IXL",
+   "sub": "Last five minutes.",
+   "min": 5,
+   "note": "IXL: whatever is not finished is tonight's practice; SmartScore 67.",
+   "kind": "ixl"
+  }
+ ]
+}
