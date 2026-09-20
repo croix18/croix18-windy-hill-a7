@@ -12,6 +12,7 @@ finding and exits 0 is worse than no check.
   pdftwin    every .docx/.pptx has a .pdf twin newer than it whose text contains the source text
   telength   ruling 26: no teacher's edition runs past four printed pages
   plancheck  every deck side-car totals 53 with a whiteboard remainder inside 10–20
+  footer     nothing but the footer itself renders below a slide's footer rule
   slidefit   no text box or picture in a deck crosses the footer rule or the slide edge
 """
 import os, re, sys, glob, json, zipfile, subprocess, collections
@@ -276,6 +277,36 @@ def check_plan(files):
     return findings
 
 
+def check_footer(files):
+    """Nothing but the footer may sit below a slide's footer rule. deckkit refuses a text box
+    whose DECLARED height crosses the rule, but a box sized for one line that wraps to two slips
+    past that guard, so the rendered PDF is checked too. The footer's own words are the ones that
+    appear below the rule on every slide of the deck; anything else down there is a spill."""
+    FOOT_PT = 6.78 * 72
+    findings = []; n = 0
+    WORD = re.compile(r'<word xMin="([\d.]+)" yMin="([\d.]+)" xMax="([\d.]+)" yMax="([\d.]+)">([^<]*)</word>')
+    for f in files:
+        base = os.path.basename(f)
+        if not (f.endswith(".pdf") and "Slides" in base):
+            continue
+        html = subprocess.run(["pdftotext", "-bbox", f, "-"], capture_output=True, text=True).stdout
+        pages = re.findall(r'<page width="[\d.]+" height="[\d.]+">(.*?)</page>', html, re.S)
+        # yMAX, not yMin: a wrapped line hangs below the rule while its top is still above it
+        below = [[m.group(5) for m in WORD.finditer(p) if float(m.group(4)) > FOOT_PT + 2] for p in pages]
+        if not below:
+            continue
+        common = set(below[0])
+        for b in below[1:]:
+            common &= set(b)
+        for i, b in enumerate(below):
+            n += len(b)
+            extra = [w for w in b if w not in common and not w.strip().isdigit()]
+            if extra:
+                findings.append(f"footer: {' '.join(extra)[:60]!r} sits below the footer rule — {base} slide {i + 1}")
+    print(f"footer: {n} words below the rule, {len(findings)} findings")
+    return findings
+
+
 def check_slidefit(files):
     findings = []; n = 0
     EMU = 914400
@@ -302,7 +333,7 @@ def run(outdir):
     files = sorted(glob.glob(os.path.join(outdir, "*")))
     print(f"checks over {outdir}: {len(files)} files — " + ", ".join(f"{k} {v}" for k, v in collections.Counter(os.path.splitext(f)[1] for f in files).items()))
     findings = []
-    for chk in (check_docscan, check_keycheck, check_gdoc, check_glyph, check_pages, check_offpage, check_pdftwin, check_telength, check_plan, check_slidefit):
+    for chk in (check_docscan, check_keycheck, check_gdoc, check_glyph, check_pages, check_offpage, check_pdftwin, check_telength, check_footer, check_plan, check_slidefit):
         findings += chk(files)
     for f in findings:
         print("  FINDING", f)

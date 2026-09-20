@@ -149,6 +149,7 @@ Do not batch lessons before the first push. One lesson, checked, viewed, pushed;
 | `docscan: benchmark code on student surface` | `MA.…` on a student page | move it to the key/TE |
 | `glyph: … U+207D` | a character with no glyph in the deck/doc fonts | use plain characters; superscript digits and ⁻ ᵐ ⁿ are fine |
 | `offpage` / `slidefit` findings | text outside the page/slide box | shorten; view the page |
+| `footer: '…' sits below the footer rule` | a notes line sized for one line wrapped to two and hangs past the rule | shorten the `items2` line, or drop a math row from that notes slide |
 
 ## 5. The unit documents, the manifest, the package
 
