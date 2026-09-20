@@ -9,3 +9,4 @@ node_modules/
 # build scratch, never the outputs
 a7/build/_tmp/
 .github-token
+a7/build/out/**/*.pdf

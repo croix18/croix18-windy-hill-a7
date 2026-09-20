@@ -1,0 +1,277 @@
+{
+ "deck": "A7 3.01  Slides.pptx",
+ "slides": [
+  {
+   "n": 1,
+   "title": "Product Laws of Exponents",
+   "sub": "",
+   "min": 1,
+   "note": "Post the learning target. Say the 'today' line and nothing else yet.",
+   "kind": "title"
+  },
+  {
+   "n": 2,
+   "title": "Warm-Up",
+   "sub": "On your own. Four minutes. No notes.",
+   "min": 4,
+   "note": "Q4 is the prerequisite: a rational base is squared by squaring numerator and denominator. A board showing 4/3 or 2/9 tells you the base was not treated as one number.",
+   "kind": "warmup"
+  },
+  {
+   "n": 3,
+   "title": "Warm-Up",
+   "sub": "Answers.",
+   "min": 1,
+   "note": "Reveal. Ask for the band each question came from only if time allows.",
+   "kind": "warmup"
+  },
+  {
+   "n": 4,
+   "title": "Notes",
+   "sub": "Copy the three words.",
+   "min": 3,
+   "note": "Students copy the three vocabulary rows. Say them aloud: base, exponent, power. The exponent COUNTS factors; it is not a factor itself \u2014 that is the misconception behind 2\u00b3 = 6.\nOFF: Ask: what does 2 to the 3 mean? Insist on the answer 'three 2s multiplied', not 'six'.",
+   "kind": "notes"
+  },
+  {
+   "n": 5,
+   "title": "Notes",
+   "sub": "Where the rule comes from.",
+   "min": 4,
+   "note": "Expand both powers, count the factors, then write the rule. The law only applies when the bases match: 3\u00b2\u00b72\u00b3 has no shortcut, and the reveal on the second row is the reason.\nOFF: 'We are not adding the bases and not multiplying the exponents. We are counting factors.'",
+   "kind": "notes"
+  },
+  {
+   "n": 6,
+   "title": "Notes",
+   "sub": "",
+   "min": 3,
+   "note": "Expand (2\u00b75)\u00b3 as three copies of (2\u00b75), regroup with the commutative and associative properties, and read off 2\u00b3\u00b75\u00b3. The trap is a SUM inside the parentheses: (10 + (\u22122))\u00b3 is 8\u00b3, and the exponent does not distribute over addition. Question 9 of the round tests exactly this.",
+   "kind": "notes"
+  },
+  {
+   "n": 7,
+   "title": "Notes",
+   "sub": "",
+   "min": 4,
+   "note": "(4\u00b2)\u00b3 is three copies of 4\u00b2, so six 4s: multiply the exponents. Then the identity law: one factor of the base is the base. Students who write 4\u00b2 \u00b7 3 = 12 or 4\u2075 (adding) are confusing this with the product law; the reveal on the table makes the count visible.\nOFF: 'Product of powers: add. Power of a power: multiply. Both come from counting factors, so count if you forget.'",
+   "kind": "notes"
+  },
+  {
+   "n": 8,
+   "title": "Example 1",
+   "sub": "Two ways to the same value.",
+   "min": 1,
+   "note": "SPOKEN ONLY. Read the expression, ask which law applies and why (same base). Do not write yet.",
+   "kind": "example"
+  },
+  {
+   "n": 9,
+   "title": "Example 1",
+   "sub": "Worked both ways.",
+   "min": 2,
+   "note": "Left column: the law, one exponent, then the value. Right column: evaluate each power and multiply. Same 243 either way \u2014 that is the check students can always run.",
+   "kind": "example"
+  },
+  {
+   "n": 10,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "Catches a student who multiplied the exponents (2\u00b9\u00b2 = 4096) or multiplied the bases (4\u2077). A board reading 128 or 2\u2077 is right.",
+   "kind": "yourturn"
+  },
+  {
+   "n": 11,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 12,
+   "title": "Example 2",
+   "sub": "A negative base and a power of a power.",
+   "min": 1,
+   "note": "SPOKEN ONLY. The brackets are not absolute value bars \u2014 say so before anyone asks. Ask: how many factors of (\u22122) are there in total?",
+   "kind": "example"
+  },
+  {
+   "n": 13,
+   "title": "Example 2",
+   "sub": "Worked.",
+   "min": 2,
+   "note": "Multiply the exponents: six factors of \u22122. An even number of negative factors gives a positive product; the sign question is the one students carry into Lesson 3.02.",
+   "kind": "example"
+  },
+  {
+   "n": 14,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "Catches the added-exponent error ((\u22123)\u2075 = \u2212243, a negative answer) and the dropped sign (a student who writes 3\u2076 gets 729 too \u2014 ask them to write the base with its sign).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 15,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 16,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Product of powers, the plain case. A board with 25\u2075 multiplied the bases; 5\u2076 multiplied the exponents.",
+   "kind": "wb"
+  },
+  {
+   "n": 17,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 18,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Same law, now evaluated. 2\u2078 = 256 on a board means the exponents were multiplied; 4\u2076 means the bases were.",
+   "kind": "wb"
+  },
+  {
+   "n": 19,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 20,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Power of a product. Either route lands on 1000. A board with 30 multiplied 10 by 3.",
+   "kind": "wb"
+  },
+  {
+   "n": 21,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 22,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Power of a power. 3\u2076 means the exponents were added.",
+   "kind": "wb"
+  },
+  {
+   "n": 23,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 24,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic. B is the most common wrong board; a board full of B means the two laws are being told apart by the LOOK of the expression rather than by counting factors \u2014 go back to the Notes II expansion.",
+   "kind": "wb"
+  },
+  {
+   "n": 25,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 26,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic, mirror of Q5. D is rare but instructive: the student treated the exponent as a number to be squared.",
+   "kind": "wb"
+  },
+  {
+   "n": 27,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 28,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Same base with a sign. A board with 27 dropped the sign; a board with \u22123\u00b3 read as \u221227 is fine but ask for the parentheses.",
+   "kind": "wb"
+  },
+  {
+   "n": 29,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 30,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Rational base. This is the B1G-M example item for 7.NSO.1.1. A board with 1/10 multiplied the bases' denominators by the count; 1/6 multiplied exponents and used \u00bd once.",
+   "kind": "wb"
+  },
+  {
+   "n": 31,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 32,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Take your time. Boards up when you have written it.",
+   "min": 0,
+   "note": "Written. The law needs a product; a sum is evaluated first. Accept any answer that says 'add first' and lands on 512. A student who writes 10\u00b3 + (\u22122)\u00b3 = 992 has distributed the exponent over addition \u2014 the misconception this question exists to surface.",
+   "kind": "wb"
+  },
+  {
+   "n": 33,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 34,
+   "title": "IXL",
+   "sub": "Last five minutes.",
+   "min": 5,
+   "note": "IXL: whatever is not finished is tonight's practice; SmartScore 67.",
+   "kind": "ixl"
+  }
+ ]
+}
