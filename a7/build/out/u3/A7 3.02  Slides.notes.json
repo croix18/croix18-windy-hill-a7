@@ -1,0 +1,269 @@
+{
+ "deck": "A7 3.02  Slides.pptx",
+ "slides": [
+  {
+   "n": 1,
+   "title": "Quotient Laws of Exponents",
+   "sub": "",
+   "min": 1,
+   "note": "Post the learning target. Say the 'today' line and nothing else yet.",
+   "kind": "title"
+  },
+  {
+   "n": 2,
+   "title": "Warm-Up",
+   "sub": "On your own. Four minutes. No notes.",
+   "min": 4,
+   "note": "Q4 is the move the whole lesson runs on: cancel a factor of 5 from top and bottom, and one 5 is left. A board showing 125/25 unsimplified has the arithmetic and not the idea.",
+   "kind": "warmup"
+  },
+  {
+   "n": 3,
+   "title": "Warm-Up",
+   "sub": "Answers.",
+   "min": 1,
+   "note": "Reveal. Ask for the band each question came from only if time allows.",
+   "kind": "warmup"
+  },
+  {
+   "n": 4,
+   "title": "Notes",
+   "sub": "Where the rule comes from.",
+   "min": 4,
+   "note": "Expand 5\u2076 over 5\u00b3, cancel three pairs, three 5s remain. Then the rule. Ask why the base must be nonzero (division by zero) and why the bases must match (nothing cancels in 5\u2076/2\u00b3).\nOFF: 'Subtract, do not divide. 5\u2076 over 5\u00b3 is 5\u00b3, not 5\u00b2.' Question 6 in the round has 4\u2074 waiting for the divider.",
+   "kind": "notes"
+  },
+  {
+   "n": 5,
+   "title": "Notes",
+   "sub": "",
+   "min": 3,
+   "note": "Three copies of 8/10, multiplied: 8\u00b78\u00b78 over 10\u00b710\u00b710. The reveal on the line is the law. The task 'apply the law, do not simplify' exists because students want to reduce 8/10 first \u2014 both routes are right and give 0.512, and that is worth saying once.",
+   "kind": "notes"
+  },
+  {
+   "n": 6,
+   "title": "Notes",
+   "sub": "",
+   "min": 4,
+   "note": "Road 1: the pattern table, each column divided by the base. Road 2: 2\u00b3/2\u00b3 is 1 because anything nonzero over itself is 1, and it is 2\u2070 by the quotient law \u2014 so 2\u2070 = 1. The misconception is a\u2070 = 0; the table kills it because the next entry after 2 is 2 \u00f7 2, not 2 \u2212 2.\nOFF: 'Zero exponent means NO factors of the base are multiplied in. What is left is the 1 you always start from.'",
+   "kind": "notes"
+  },
+  {
+   "n": 7,
+   "title": "Example 1",
+   "sub": "A negative base.",
+   "min": 1,
+   "note": "SPOKEN ONLY. Same base? Yes, (\u22122). Which law? Then ask what the sign of the answer will be before anyone computes.",
+   "kind": "example"
+  },
+  {
+   "n": 8,
+   "title": "Example 1",
+   "sub": "Worked.",
+   "min": 2,
+   "note": "Subtract, keep the base with its sign, evaluate: three negative factors, negative answer. The check row divides 64 by \u22128. A student who gets +8 dropped the sign at the last step.",
+   "kind": "example"
+  },
+  {
+   "n": 9,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "Catches a divider (3\u00b3 = 27 from 6 \u00f7 2) and a student who wrote 1\u2074 by dividing the bases. 81 or 3\u2074 is right.",
+   "kind": "yourturn"
+  },
+  {
+   "n": 10,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 11,
+   "title": "Example 2",
+   "sub": "A decimal base inside a quotient.",
+   "min": 1,
+   "note": "SPOKEN ONLY. Two routes: apply the power of a quotient, or divide first (0.2 \u00f7 10 = 0.02) and raise that. Ask which they would choose and why.",
+   "kind": "example"
+  },
+  {
+   "n": 12,
+   "title": "Example 2",
+   "sub": "Worked both ways.",
+   "min": 2,
+   "note": "Route 1 keeps the numbers small until the last step. Route 2 is one power of a small decimal; a calculator gives 0.00000016 either way. Count the decimal places on the board: 0.0016 has four, 10\u2074 moves four more.",
+   "kind": "example"
+  },
+  {
+   "n": 13,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "Catches a student who cubes only the numerator (27/4) or only the denominator (3/64). 27/64 is right; 0.421875 is the same value and also right.",
+   "kind": "yourturn"
+  },
+  {
+   "n": 14,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 15,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Quotient of powers, plain case. A board with 10\u2078 added; 1\u00b2 divided the bases.",
+   "kind": "wb"
+  },
+  {
+   "n": 16,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 17,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Now evaluated. 8\u2074 \u00f7 8 = 4096 \u00f7 8 = 512 is the check. A board with 4096 ignored the denominator; 8\u2074 \u00f7 1 is the same slip.",
+   "kind": "wb"
+  },
+  {
+   "n": 18,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 19,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "One factor left, with its sign. A board with 6 dropped the sign; a board with 1 divided the bases.",
+   "kind": "wb"
+  },
+  {
+   "n": 20,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 21,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "A rewrite, not a value. A board with (\u22125)\u2077/10 applied the exponent to the numerator only; a board with \u22125\u2077/10\u2077 has lost the parentheses (same value here, but insist on them \u2014 the sign matters in 3.04).",
+   "kind": "wb"
+  },
+  {
+   "n": 22,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 23,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic. A board full of B is the classic; send them back to the pattern table on Notes III \u2014 2, then 2 \u00f7 2.",
+   "kind": "wb"
+  },
+  {
+   "n": 24,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 25,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic. B is the one to watch: 8 \u00f7 2 = 4 looks like the law. The expansion on Notes I is the answer \u2014 count what cancels.",
+   "kind": "wb"
+  },
+  {
+   "n": 26,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 27,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Decimal base. A board with 0.5\u2078 \u00f7 0.5\u2075 typed into a calculator gets 0.125 too \u2014 fine, but ask for the single power.",
+   "kind": "wb"
+  },
+  {
+   "n": 28,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 29,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The fraction is a distraction; the exponent decides. A board with 10/11 confused zero with the identity exponent.",
+   "kind": "wb"
+  },
+  {
+   "n": 30,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 31,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Take your time. Boards up when you have written it.",
+   "min": 0,
+   "note": "Written. The point is not 'both'; the point is the sentence 'so 2\u2070 = 1'. A student who writes 'Hannah, because 2\u2070 = 0' has the misconception in writing, which is the best place to find it.",
+   "kind": "wb"
+  },
+  {
+   "n": 32,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 33,
+   "title": "IXL",
+   "sub": "Last five minutes.",
+   "min": 5,
+   "note": "IXL: whatever is not finished is tonight's practice; SmartScore 67.",
+   "kind": "ixl"
+  }
+ ]
+}

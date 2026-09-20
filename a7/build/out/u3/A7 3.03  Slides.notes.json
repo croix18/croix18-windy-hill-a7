@@ -1,0 +1,269 @@
+{
+ "deck": "A7 3.03  Slides.pptx",
+ "slides": [
+  {
+   "n": 1,
+   "title": "Exponential Expressions",
+   "sub": "",
+   "min": 1,
+   "note": "Post the learning target. Say the 'today' line and nothing else yet.",
+   "kind": "title"
+  },
+  {
+   "n": 2,
+   "title": "Warm-Up",
+   "sub": "On your own. Four minutes. No notes.",
+   "min": 4,
+   "note": "Q4 is the prerequisite: exponents before multiplication before addition. A board with 80 (added first) or 146 (multiplied 3\u00b74 first) is the order-of-operations slip that will show up again inside today's expressions.",
+   "kind": "warmup"
+  },
+  {
+   "n": 3,
+   "title": "Warm-Up",
+   "sub": "Answers.",
+   "min": 1,
+   "note": "Reveal. Ask for the band each question came from only if time allows.",
+   "kind": "warmup"
+  },
+  {
+   "n": 4,
+   "title": "Notes",
+   "sub": "Copy the table. It is your reference for the rest of the unit.",
+   "min": 3,
+   "note": "This table is the durable record: students have no worksheet and no study guide, so the notes are what they keep (ruling 11). Read down the middle column once, aloud. Then the one sentence that organises the table: product and quotient laws need the SAME base; the power laws move an exponent onto every factor or exponent inside.",
+   "kind": "notes"
+  },
+  {
+   "n": 5,
+   "title": "Notes",
+   "sub": "Two students, two orders, one value.",
+   "min": 4,
+   "note": "Winston: quotient first (inside the parentheses), then power of a power. Yvette: power of a quotient first, then power of a power on top and bottom, then quotient. Both reach 2\u2076 = 64. The teaching point is that a plan is required and the order is free \u2014 not that one order is right.\nOFF: 'Pick the order that makes the numbers smallest soonest. Inside the parentheses first is usually that order.'",
+   "kind": "notes"
+  },
+  {
+   "n": 6,
+   "title": "Notes",
+   "sub": "",
+   "min": 3,
+   "note": "The laws are shortcuts for multiplying and dividing powers. They never cross an addition or subtraction: 2\u00b3 + 2\u00b2 is 8 + 4 = 12, not 2\u2075. Parentheses first, then exponents (that is where the laws live), then multiply and divide left to right, then add and subtract.",
+   "kind": "notes"
+  },
+  {
+   "n": 7,
+   "title": "Example 1",
+   "sub": "A zero exponent inside a product inside a quotient.",
+   "min": 1,
+   "note": "SPOKEN ONLY. Ask for a plan out loud before anything is written: what will you do with 4\u2070? What law joins 4\u2075 and 4\u2070? What law handles the fraction bar?",
+   "kind": "example"
+  },
+  {
+   "n": 8,
+   "title": "Example 1",
+   "sub": "Worked \u2014 Caroline's plan and Jamir's plan.",
+   "min": 2,
+   "note": "Caroline adds 5 + 0 first (product of powers), then subtracts. Jamir replaces 4\u2070 with 1 first (zero exponent), multiplies, then subtracts. Same 4\u00b3 = 64. Ask which plan they prefer \u2014 the answer does not matter, having one does.",
+   "kind": "example"
+  },
+  {
+   "n": 9,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "Catches a student who reads 5\u2070 as 0 (the whole product becomes 0) and one who adds 4 + 0 + 2 (5\u2076). 25 is right.",
+   "kind": "yourturn"
+  },
+  {
+   "n": 10,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 11,
+   "title": "Example 2",
+   "sub": "Three laws, a decimal and a negative base.",
+   "min": 1,
+   "note": "SPOKEN ONLY. Plan: 11.6\u2070 is 1. The fraction has two different bases with the same exponent \u2014 that is the power of a quotient read backwards, so (\u221215 \u00f7 1.5)\u2074. Ask what \u221215 \u00f7 1.5 is before anyone raises anything.",
+   "kind": "example"
+  },
+  {
+   "n": 12,
+   "title": "Example 2",
+   "sub": "Worked.",
+   "min": 2,
+   "note": "Zero exponent, then power of a quotient backwards, then one power of \u221210. Four negative factors: positive. A student who leaves 11.6 in the answer never applied the zero law; one who gets \u221210000 miscounted the sign.",
+   "kind": "example"
+  },
+  {
+   "n": 13,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "Catches a dropped sign (27) and a student who applied the zero law to the wrong power (7 \u00b7 something). \u221227 is right.",
+   "kind": "yourturn"
+  },
+  {
+   "n": 14,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 15,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Example 1's shape with a new base. A board with 0 read 6\u2070 as 0; a board with 1296 forgot the denominator.",
+   "kind": "wb"
+  },
+  {
+   "n": 16,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 17,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Product then power of a power. A board with 27 used 3\u00b3 (added 0 + 2 + ... then lost the multiply); 3\u2075 = 243 added 2 + 3.",
+   "kind": "wb"
+  },
+  {
+   "n": 18,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 19,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Power of a power then quotient. 0.5\u2074 = 1/16. A board with 0.125 stopped at 0.5\u00b3 (divided 6 by 2).",
+   "kind": "wb"
+  },
+  {
+   "n": 20,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 21,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Identity exponent on the outside; quotient inside. 2.5\u00b2 = 6.25. A board with 2.5 subtracted to 1.",
+   "kind": "wb"
+  },
+  {
+   "n": 22,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 23,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic. Four errors live in this one expression; each option is one of them. A board full of C is the zero-exponent misconception again \u2014 it should be dying by now.",
+   "kind": "wb"
+  },
+  {
+   "n": 24,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 25,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic; it is the book's own ticket-out-the-door item, kept because it is good. The route is power of a quotient backwards: (0.2 \u00f7 2)\u00b3 = 0.1\u00b3, then 0.1\u00b3 \u00b7 0.1\u00b2 = 0.1\u2075 = 0.00001.",
+   "kind": "wb"
+  },
+  {
+   "n": 26,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 27,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Identity, power of a power, product. Four decimal places. A board with 0.001 has 0.1\u00b3 from adding 2 + 1.",
+   "kind": "wb"
+  },
+  {
+   "n": 28,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 29,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Same base throughout. Three negative factors: negative. A board with 64 dropped the sign; a board reading 'undefined' read (\u22124)\u2070 as 0 and divided by it \u2014 a good error to name aloud.",
+   "kind": "wb"
+  },
+  {
+   "n": 30,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 31,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Take your time. Boards up when you have written it.",
+   "min": 0,
+   "note": "Written. Full credit needs the two law names (Winston: quotient of powers; Yvette: power of a quotient / power of a power) and the value. A student who says 'no, because the expressions look different' has not yet accepted that equivalent means same value.",
+   "kind": "wb"
+  },
+  {
+   "n": 32,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 33,
+   "title": "IXL",
+   "sub": "Last five minutes.",
+   "min": 5,
+   "note": "IXL: whatever is not finished is tonight's practice; SmartScore 67.",
+   "kind": "ixl"
+  }
+ ]
+}

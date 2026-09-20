@@ -25,7 +25,7 @@ def _rgb(h):
     return RGBColor.from_string(h)
 
 
-SUP = dict(zip("⁰¹²³⁴⁵⁶⁷⁸⁹⁻⁺", "0123456789-+"))
+SUP = dict(zip("⁰¹²³⁴⁵⁶⁷⁸⁹⁻⁺ᵐⁿ", "0123456789-+mn"))
 
 
 def _split_sup(text):

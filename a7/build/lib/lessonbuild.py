@@ -18,7 +18,7 @@ COURSE = "Grade 7 Accelerated"
 # ---------------------------------------------------------------- mathcheck
 def _ev(expr):
     env = {"F": F, "sqrt": sp.sqrt, "Integer": Integer, "sp": sp, "Rational": F, "nsimplify": nsimplify,
-           "pi": sp.pi, "Abs": sp.Abs, "N": sp.N}
+           "pi": sp.pi, "Abs": sp.Abs, "abs": sp.Abs, "N": sp.N, "floor": sp.floor, "Float": sp.Float}
     return sp.sympify(eval(expr, {"__builtins__": {}}, env))
 
 
@@ -184,8 +184,13 @@ def build_deck(L, outdir):
     for i, q in enumerate(wu):
         y0 = D.cursor
         tw, hh = D._mixed(f"{i + 1}.   " + q["stem"], LM + 1.2, y0, "slide", 23, INK)
-        D._mixed(q["answer"], LM + 1.2 + tw + 0.6, y0, "slide", 23, RED, True)
-        D.cursor = y0 + hh + 0.22
+        aw = D.measure(q["answer"], "slide", 23)
+        if LM + 1.2 + tw + 0.6 + aw <= LM + CW:
+            D._mixed(q["answer"], LM + 1.2 + tw + 0.6, y0, "slide", 23, RED, True)
+            D.cursor = y0 + hh + 0.22
+        else:
+            _, h2 = D._mixed(q["answer"], LM + 2.0, y0 + hh + 0.05, "slide", 23, RED, True)
+            D.cursor = y0 + hh + 0.05 + h2 + 0.22
     # ---- notes
     for ni, note in enumerate(L["notes"]):
         D.section("Notes", note.get("sub", ""), note["min"], note["note"], "notes")

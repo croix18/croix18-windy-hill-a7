@@ -22,7 +22,7 @@ def _rgb(h):
     return RGBColor.from_string(h)
 
 
-SUP = dict(zip("⁰¹²³⁴⁵⁶⁷⁸⁹⁻⁺", "0123456789-+"))
+SUP = dict(zip("⁰¹²³⁴⁵⁶⁷⁸⁹⁻⁺ᵐⁿ", "0123456789-+mn"))
 
 
 def _split_sup(text):
@@ -115,7 +115,7 @@ class Deck:
         self._text(LM, 2.24, CW, 1.1, self.title, 34, bold=True, align="center", anchor="middle")
         self._line(3.6, 3.56, 6.1, 1.5); self._line(3.6, 3.65, 6.1, 0.75)
         self._text(LM, 3.83, CW, 0.34, benchmark, 16, bold=True, align="center")
-        tl = max(1, -(-len(target) // 100))
+        tl = max(1, -(-len(target) // 84))
         self._text(LM, 4.2, CW, 0.4 * tl, target, 19, italic=True, align="center")
         by = 4.8 + 0.38 * (tl - 1)
         self._rect(2.6, by, 8.1, 1.15, FILL, "BFBFBF")
@@ -266,6 +266,20 @@ class Deck:
                 self._text(x, y + (maxh - 0.5) / 2, w + 0.15, 0.5, val, size, bold=bold, color=color, anchor="middle", wrap=False)
             x += w
         return total, maxh
+
+    def measure(self, text, surface="slidemid", size=26):
+        """Width in inches a mixed line would take, without drawing it."""
+        import re
+        total = 0.0
+        for part in re.split(r"(\$[^$]+\$)", text):
+            if not part:
+                continue
+            if part.startswith("$"):
+                _, w, h = mathimg.m(part[1:-1], surface, INK)
+                total += w
+            else:
+                total += len(part) * size / 72 * 0.50 + 0.05
+        return total
 
     def math_row(self, parts, surface="slidemid", y=None, gap=0.35, size=26, color=INK, bold=False, align="center", x=None):
         """A row mixing text and $latex$ pieces, vertically aligned; centered unless align='left'."""
