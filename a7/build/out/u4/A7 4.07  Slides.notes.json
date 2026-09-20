@@ -1,0 +1,277 @@
+{
+ "deck": "A7 4.07  Slides.pptx",
+ "slides": [
+  {
+   "n": 1,
+   "title": "Real-World Order of Operations",
+   "sub": "",
+   "min": 1,
+   "note": "Post the learning target. Say the 'today' line and nothing else yet.",
+   "kind": "title"
+  },
+  {
+   "n": 2,
+   "title": "Warm-Up",
+   "sub": "On your own. Four minutes. No notes.",
+   "min": 4,
+   "note": "Q4 is the prerequisite and it carries the day's one habit. 2x\u00b2 with x = 3 is 2(9), which is 18 \u2014 not (2 \u00b7 3)\u00b2, which is 36. The parentheses around the substituted value are what keep the exponent attached to the x alone. A board that answers 36 will make the same mistake on every formula today.",
+   "kind": "warmup"
+  },
+  {
+   "n": 3,
+   "title": "Warm-Up",
+   "sub": "Answers.",
+   "min": 1,
+   "note": "Reveal. Ask for the band each question came from only if time allows.",
+   "kind": "warmup"
+  },
+  {
+   "n": 4,
+   "title": "Notes",
+   "sub": "Copy both lines.",
+   "min": 4,
+   "note": "One habit, and it prevents most of the errors in this lesson. When a letter is replaced by a value, the value goes inside parentheses \u2014 then the exponent stays attached to what it was attached to, and a negative value keeps its sign. Work the kinetic-energy formula out loud: the square happens to the 10 alone, then the product, then the half.\nOFF: 'Every substituted value goes into parentheses. That single habit prevents half of what goes wrong in this lesson.'",
+   "kind": "notes"
+  },
+  {
+   "n": 5,
+   "title": "Notes",
+   "sub": "Copy both problems.",
+   "min": 4,
+   "note": "Two problems, the same three numbers, the same words, and two different operations. Circling the numbers and boxing the key words gives exactly the same markings on both \u2014 which is why the state guide names that strategy as a misconception rather than a method. What decides is what is happening: in the first, four dollars happens six times; in the second, fifteen dollars happens four times.\nOFF: 'There is no word that tells you which operation to use. Read what is happening, not which words are present.'",
+   "kind": "notes"
+  },
+  {
+   "n": 6,
+   "title": "Notes",
+   "sub": "",
+   "min": 4,
+   "note": "Two rules that cost marks on the state test more often than any arithmetic does. Carry the exact value as far as you can and round once, at the end: a fence of six sides each \u221a200 feet long is 84.85 feet, and a student who rounds the side to 14 first loses most of a foot. Then the unit: feet, dollars, joules. An answer with no unit is not an answer to a real-world question.\nOFF: 'Round once, at the very end. Rounding in the middle moves the answer, and it moves it further every step you take afterwards.'",
+   "kind": "notes"
+  },
+  {
+   "n": 7,
+   "title": "Example 1",
+   "sub": "A formula with a power in it.",
+   "min": 1,
+   "note": "SPOKEN ONLY. Ask what the exponent is attached to before a single value is substituted \u2014 it is attached to the v, not to the m and not to the half.",
+   "kind": "example"
+  },
+  {
+   "n": 8,
+   "title": "Example 1",
+   "sub": "Worked.",
+   "min": 2,
+   "note": "Substitute in parentheses, square the speed, then multiply. A board with 202,500 squared the whole product; a board with 9,000 read v\u00b2 as 2v. The unit is joules and a board without it is not finished.",
+   "kind": "example"
+  },
+  {
+   "n": 9,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "Same formula, smaller numbers. 12\u00b2 is 144 and half of 850 is 425. Catches 5,100 (the square forgotten) and 26,010,000 (the whole product squared).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 10,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 11,
+   "title": "Example 2",
+   "sub": "A cost with a rate and a flat fee.",
+   "min": 1,
+   "note": "SPOKEN ONLY. Ask which of the three prices depends on the size of the floor and which does not. That question \u2014 not a key word \u2014 is what puts the parentheses where they go.",
+   "kind": "example"
+  },
+  {
+   "n": 12,
+   "title": "Example 2",
+   "sub": "Worked.",
+   "min": 2,
+   "note": "The two per-square-foot prices go inside the group that is multiplied by the area; the flat fee stays outside it. A board with 81(2.89 + 0.75 + 95) put the installation inside and charged it 81 times; a board with 9(3.64) + 95 used the side instead of the area.",
+   "kind": "example"
+  },
+  {
+   "n": 13,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "One rate and one flat fee this time. 6\u00b2 is 36 and 36(4.25) is 153. Catches 36(4.25 + 13.48) \u2014 the flat fee charged per square foot \u2014 and 6(4.25) + 13.48.",
+   "kind": "yourturn"
+  },
+  {
+   "n": 14,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 15,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The habit, on its own. A board with \u221212 squared only the 2; a board with 36 squared the whole 3x.",
+   "kind": "wb"
+  },
+  {
+   "n": 16,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 17,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Ruling 22's board: the price of the bicycle is there to be read past. Nothing in the formula takes a cost. A board holding 480 anywhere used it; a board without the unit is not finished.",
+   "kind": "wb"
+  },
+  {
+   "n": 18,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 19,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Half of Notes II, on its own. A board with 114 multiplied 15 + 4 by 6, which is exactly what circling the numbers and boxing 'each' produces.",
+   "kind": "wb"
+  },
+  {
+   "n": 20,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 21,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The second half of the lesson's structure question. A board with 64(3.50 + 60) charged the installation on every square foot; a board with 8(3.50) + 60 used the side instead of the area.",
+   "kind": "wb"
+  },
+  {
+   "n": 22,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 23,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic. Three errors, three levels: what the exponent is attached to, what an exponent means, and reading the whole formula. A board full of B means Notes I's parentheses habit did not land.",
+   "kind": "wb"
+  },
+  {
+   "n": 24,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 25,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic, and it is the repair of a defect in the book: its own flooring item prices one material per square foot in the table and adds it as a flat amount in the expression, so three of its questions have no unambiguous answer. Here the question says which is which.",
+   "kind": "wb"
+  },
+  {
+   "n": 26,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 27,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The state guide's own backyard task, reduced to its arithmetic. 200 is not a perfect square, so the root is carried exactly and rounded once at the end \u2014 which is why this board is tagged out of the radicand scan. A board with 84 rounded the side to 14 first and lost most of a foot; that is the point of the board, so name it rather than marking it.",
+   "kind": "wb"
+  },
+  {
+   "n": 28,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 29,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Substitution into a fraction bar \u2014 yesterday's grouping rule with letters in front of it. A board with 9.2 divided only the 4 by 5; a board with 49/5 \u2212 4 divided before finishing the numerator.",
+   "kind": "wb"
+  },
+  {
+   "n": 30,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 31,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Take your time. Boards up when you have written it.",
+   "min": 0,
+   "note": "Written, and it is the exit evidence. Both problems contain 15, 4 and 6 and both contain 'plus' and 'each', so circling and boxing produce identical markings \u2014 and the two answers are 39 and 66. Full credit needs both totals and a sentence saying that what decides is which quantity is repeated, not which words appear. A student who writes only the two numbers has done the arithmetic and missed the item.",
+   "kind": "wb"
+  },
+  {
+   "n": 32,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 33,
+   "title": "Independent Set",
+   "sub": "Six questions. On your own, in silence.",
+   "min": 6,
+   "note": "Hand out the Independent Set. Silent work. Circulate and mark what you see; do not teach. Whatever is not finished goes home.",
+   "kind": "independent"
+  },
+  {
+   "n": 34,
+   "title": "IXL",
+   "sub": "Last five minutes.",
+   "min": 5,
+   "note": "IXL: every listed skill is required, SmartScore 67, due at the start of the next class.",
+   "kind": "ixl"
+  }
+ ]
+}
