@@ -193,3 +193,39 @@ significant-digit table and the Apollo/smartphone arithmetic; 4.4.4 parts a, c, 
   opposite and nothing about calculators is printed on any of our pages.
 - The TE tells teachers students "will not have a calculator on the **FSA**" (4.5.4 margin). The
   test is the **FAST**, and Florida provides an on-screen scientific calculator at grades 7–8.
+
+---
+
+## Teacher Edition — Lessons 5 to 8
+
+45 more values re-derived. **Lessons 5, 7 and 8 are arithmetically clean**, including every
+rounded answer (BMI 24.9002 → 24.9; cone 79.32409 → 79.324; TV 35.40595 → 35.406; the box
+volumes 4.6296 → 4.63, 1.2714 → 1.27, 16.4317 → 16.43; 51,724.14 octopus eggs → 51,724).
+
+Verified sound: 4.5.1 (√25 − √36 + √1 = 0); 4.5.3 Simon's four steps (1/2), Q2 (14), and all
+three students in Q3 — Cassandra −8.81 correct, Simon −9.81 and Tonya 24.81 with their errors
+named accurately; 4.5.4 (−1/2, 4/15); 4.5.5 (−27, 4, 3/4, 218/9); 4.6.2 (−71/8, −72, 14/3);
+4.6.3 Liesel (7/8) and Deshawn (−108 both ways); 4.6.4 Chandler (−14, −90) and **all four
+grouping expressions A–D (128, −1/5, −125, −383)** — the best item in the unit; 4.6.5 (2.5);
+4.7.2 Rodney (28,394 in³, 200 ft³ unit); 4.7.4 (2/5, 50.25, 2,976 J); 4.8.1 (−151/4, 0);
+4.8.2 Liliana (455.47, 375.84); 4.8.3 Phillip (706.56, 2,156.25); 4.8.4 Michaela (8,886).
+
+### Two more defects
+
+| # | Where | What it says | What is true |
+|---|---|---|---|
+| **D14** | 4.6.3 Q1d | "Roscoe is correct because the products of squared numbers are **always positive**." | A square is **never negative**, which is not the same thing. The expression is (√n − 11)², and at **n = 121 its value is 0** — not positive. The question asks whether the value can be negative, so the right sentence is "never negative", and the book's own table stops one row short of the case that would have shown it. |
+| **D15** | 4.8.2 Q1b | "Circle the part of the expression that represents the cost of **carpeting** the bedroom." The key circles **9²(2.89 + 0.75 + 1)** | That group is carpet **plus padding plus underlay** — $375.84. Carpeting alone is 9²(2.89) = $234.09. Either the circle or the question is wrong. |
+
+### The Dominic / Liliana flooring item, resolved across all three versions
+
+The same context appears in Practice L8, Homework L8 and TE 4.8.2 with different numbers. Comparing
+them isolates two separate faults:
+
+- **Underlay sits under *Bathroom* in the table but inside the bedroom's area group in the
+  expression — in all three versions.** The TE's own key confirms the expression's reading
+  ("bedroom only" = $375.84, which includes the underlay). So the table's column header is what
+  is wrong, consistently.
+- **Grout is priced "$/ft²" in the Practice and Homework tables but added as a flat amount in the
+  expression.** The TE version prices grout at a flat "$13.48" with no "/ft²" — so the TE is right
+  and the two student documents introduced the error.
