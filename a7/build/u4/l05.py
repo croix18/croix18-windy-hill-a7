@@ -118,7 +118,7 @@ L = dict(
         dict(text=["$\\sqrt{4^{3} - 39} \\cdot 5^{-3}$"], hint="Finish each piece, then multiply.", gloss="5 times one hundred twenty-fifth", answer="1/25",
              note="The state assessment's own item. Three separate things happen before anything is combined: 4³ is 64, 64 − 39 is 25, and 5⁻³ is 1/125. A board with 625 read 5⁻³ as 5³; a board with −1/25 put the exponent's sign on the answer, which is 3.04's misconception resurfacing.",
              check=("many", ("eq", "4**3-39", "25"), ("eq", "sqrt(25)*F(5)**-3", "F(1,25)")),
-             wrong="625 — 5⁻³ read as 5³ [8.NSO.1.3: a negative exponent is a reciprocal]; −1/25 — the exponent's sign made the value's sign [B1G-M 8.NSO.1.3 misconception: −b versus b⁻¹]"),
+             wrong="625 — 5⁻³ read as 5³ [8.NSO.1.3: a negative exponent is a reciprocal]; −1/25 — the exponent's sign made the value's sign [B1G-M 8.NSO.1.3 task: −b vs b⁻¹]"),
         dict(kind="written", text=["Simon says that  $\\sqrt[3]{-27}$  is not a real number,", "because you cannot take the root of a negative.", "Explain why he is wrong, and give the value."],
              qtext="Simon says that the cube root of −27 is not a real number, because you cannot take the root of a negative. Explain why he is wrong, and give the value.",
              hint="Which root is he thinking of?", gloss="a cube root is not a square root", answer="−3",

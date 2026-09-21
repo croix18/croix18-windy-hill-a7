@@ -62,7 +62,7 @@
    "title": "Example 1",
    "sub": "Worked.",
    "min": 2,
-   "note": "Add the exponents of each variable, then move the y\u207b\u00b2 down. A board with 12x\u00b2y\u207b\u00b2 stopped one step early; a board with 12x\u207b\u2078y\u2076 subtracted where it should have added; a board with 1/(12x\u00b2y\u00b2) moved the coefficient too.",
+   "note": "Add the exponents of each variable, then move the y\u207b\u00b2 down. A board with 12x\u00b2y\u207b\u00b2 stopped one step early; a board with 12x\u207b\u2078y\u2076 subtracted where it should have added; a board with x\u00b2/(12y\u00b2) moved the coefficient down too.",
    "kind": "example"
   },
   {
@@ -70,7 +70,7 @@
    "title": "Your Turn",
    "sub": "Same steps, your numbers. Boards up when done.",
    "min": 2,
-   "note": "Catches the coefficient-mover (1/(4a\u00b3b\u00b2)) and the sign-dropper (4a\u2077b\u2074). 4a\u00b3/b\u00b2 is right.",
+   "note": "Catches the coefficient-mover (a\u00b3/(4b\u00b2)) and the sign-dropper (4a\u2077b\u2074). 4a\u00b3/b\u00b2 is right.",
    "kind": "yourturn"
   },
   {

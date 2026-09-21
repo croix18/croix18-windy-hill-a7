@@ -14,7 +14,7 @@
    "title": "Warm-Up",
    "sub": "On your own. Four minutes. No notes.",
    "min": 4,
-   "note": "Q4 is today's move: a negative fraction's reciprocal is negative. A board with 5/2 (sign dropped) or 2/5 (opposite of the opposite) is the error this lesson is built to catch \u2014 the B1G-M lists 'takes the opposite instead of the reciprocal' as the misconception for this benchmark.",
+   "note": "Q4 is today's move: a negative fraction's reciprocal is negative. A board with 5/2 (sign dropped) or 2/5 (opposite of the opposite) is the error this lesson is built to catch \u2014 the B1G-M's first task for this benchmark \u2014 explain the difference between \u2212b and b\u207b\u00b9 \u2014 is aimed at exactly this.",
    "kind": "warmup"
   },
   {
@@ -62,7 +62,7 @@
    "title": "Example 1",
    "sub": "Worked.",
    "min": 2,
-   "note": "Flip: (\u22128/7)\u00b2. Square: 64/49. Even power, so positive. A board with \u221264/49 squared only the numerator's magnitude and kept a sign; a board with 49/64 never flipped.",
+   "note": "Flip: (\u22128/7)\u00b2. Square: 64/49. Even power, so positive. A board with \u221264/49 squared the digits but kept the minus, reading (\u22128/7)\u00b2 as \u2212(8/7)\u00b2; a board with 49/64 never flipped.",
    "kind": "example"
   },
   {
@@ -134,7 +134,7 @@
    "title": "Whiteboards   \u00b7   Question 2 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "Sign inside the denominator. A board with (5/3)\u2079 took the opposite as well as the reciprocal \u2014 the named misconception.",
+   "note": "Sign inside the denominator. A board with (5/3)\u2079 took the opposite as well as the reciprocal \u2014 the \u2212b vs b\u207b\u00b9 confusion the guide's task targets.",
    "kind": "wb"
   },
   {
@@ -182,7 +182,7 @@
    "title": "Whiteboards   \u00b7   Question 5 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "Diagnostic. Note that A and B have the SAME VALUE (64/49) because the power is even \u2014 a student who chooses B for that reason is right about the value and wrong about the law. Ask them to redo it with exponent \u22123, where B would be wrong in value too.",
+   "note": "Diagnostic, and the odd power is the point. Example 1's even power hid the sign of the base: (\u22128/7)\u00b2 and (8/7)\u00b2 are both 64/49. Here the cube keeps the sign, so the four options are four different numbers \u2014 A is \u2212512/343 and B is +512/343. A board with B flipped the base and dropped its minus; ask what the reciprocal of \u22127/8 is. C never flipped; D took the opposite instead of the reciprocal.",
    "kind": "wb"
   },
   {
@@ -230,7 +230,7 @@
    "title": "Whiteboards   \u00b7   Question 8 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "Product then power of a power: (5 \u2212 2) \u00b7 3 = 9. A board with (2/3)\u00b2\u00b9 multiplied 5 \u00b7 \u22122 \u00b7 3 wrongly; (2/3)\u2076 added 3 + 3.",
+   "note": "Product then power of a power: (5 + (\u22122)) \u00b7 3 = 9. A board with (2/3)\u00b2\u00b9 dropped the minus and used (5 + 2) \u00b7 3; (2/3)\u2076 added 3 + 3.",
    "kind": "wb"
   },
   {
@@ -246,7 +246,7 @@
    "title": "Whiteboards   \u00b7   Question 9 of 9",
    "sub": "Take your time. Boards up when you have written it.",
    "min": 0,
-   "note": "Written. This is the misconception the state guide names for this benchmark, in the student's own words. Full credit: the correct rewrite and a sentence that separates reciprocal from opposite. Value, if anyone asks: \u2212243/32.",
+   "note": "Written. This is the confusion the state guide's task for this benchmark targets (\u2212b vs b\u207b\u00b9), in the student's own words. Full credit: the correct rewrite and a sentence that separates reciprocal from opposite. Value, if anyone asks: \u2212243/32.",
    "kind": "wb"
   },
   {

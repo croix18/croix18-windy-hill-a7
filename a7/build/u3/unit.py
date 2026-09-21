@@ -111,7 +111,7 @@ U = dict(
                      dict(label="c", stem="Is it equivalent to  $\\frac{4^{5}}{4^{2}}$ ?  Explain.", answer="Yes — $4^{-2}$ is $\\frac{1}{4^{2}}$, so the product is $\\frac{4^{5}}{4^{2}} = 4^{3}$ either way.", why="", check=("eq", "F(4)**-2*4**5", "4**5/4**2"), space=0.7),
                      dict(label="d", stem="Find $n$ so that  $4^{-2}\\cdot 4^{n} = 1$.", answer="n = 2", why="−2 + n = 0.", check=("eq", "F(4)**-2*4**2", "1"), space=0.5)]),
             dict(stem="Select ALL of the expressions equivalent to  $3^{-2}$.", choices=["$\\frac{1}{9}$", "$\\frac{3^{4}}{3^{6}}$", "$-9$", "$\\left(\\frac{1}{3}\\right)^{2}$", "$3^{2}\\cdot 3^{-4}$", "$-6$"], correct=[0, 1, 3, 4], answer="A, B, D and E",
-                 errors={"C": "negative exponent read as a negative value [B1G-M 8.NSO.1.3 misconception: −b vs b⁻¹]", "F": "base multiplied by exponent [exponent treated as a factor]"},
+                 errors={"C": "negative exponent read as a negative value [B1G-M 8.NSO.1.3 task: −b vs b⁻¹]", "F": "base multiplied by exponent [exponent treated as a factor]"},
                  why="", check=("many", ("eq", "F(3)**-2", "F(1,9)"), ("eq", "F(3)**4/3**6", "F(1,9)"), ("eq", "F(1,3)**2", "F(1,9)"), ("eq", "3**2*F(3)**-4", "F(1,9)"), ("true", "-9 != F(1,9)"), ("true", "-6 != F(1,9)"))),
             dict(stem="Aryella says that  $10^{0}$  and  $134^{0}$  are equal. Is she right? Explain.", answer="Yes. Any nonzero base to the zero power is 1, so both equal 1.", why="", check=("eq", "10**0", "134**0"), space=0.8),
         ]),
@@ -177,7 +177,7 @@ U = dict(
                         dict(label="c", stem="$\\left(\\frac{1}{2}\\right)^{-3}$", answer="8", why="Flip to 2, then cube.", check=("eq", "F(1,2)**-3", "8"), space=0.6),
                         dict(label="d", stem="$2^{5}\\cdot 2^{-7}$", answer="$2^{-2} = \\frac{1}{4}$", why="5 + (−7) = −2.", check=("eq", "2**5*F(2)**-7", "F(1,4)"), space=0.6)]),
                     dict(stem="Which is the value of  $5^{-2}$ ?", choices=["$\\frac{1}{25}$", "$-25$", "$-10$", "$\\frac{1}{10}$"], correct=0, answer="A",
-                         errors={"B": "negative exponent read as a negative value [B1G-M 8.NSO.1.3 misconception: −b vs b⁻¹]", "C": "base multiplied by exponent [exponent treated as a factor]", "D": "reciprocal of 5 · 2 instead of 5² [reciprocal right, power wrong]"},
+                         errors={"B": "negative exponent read as a negative value [B1G-M 8.NSO.1.3 task: −b vs b⁻¹]", "C": "base multiplied by exponent [exponent treated as a factor]", "D": "reciprocal of 5 · 2 instead of 5² [reciprocal right, power wrong]"},
                          why="", check=("eq", "F(5)**-2", "F(1,25)")),
                     dict(stem="Select ALL of the expressions whose value is  $\\frac{1}{64}$.", choices=["$2^{-6}$", "$4^{-3}$", "$-8^{2}$", "$\\left(\\frac{1}{4}\\right)^{3}$", "$2^{-8}$"], correct=[0, 1, 3], answer="A, B and D",
                          errors={"C": "−8² = −64 — the opposite, not the reciprocal [B1G-M 8.NSO.1.3 misconception]", "E": "2⁻⁸ = 1/256 — the exponent was not checked against 64 = 2⁶ [8.NSO.1.3]"},
@@ -210,7 +210,7 @@ U = dict(
                     dict(stem="Write each number in standard form.", parts=[
                         dict(label="a", stem="$2.9 \\times 10^{5}$", answer="290,000", why="", check=("eq", "F(29,10)*10**5", "290000"), space=0.5),
                         dict(label="b", stem="$7.1 \\times 10^{-6}$", answer="0.0000071", why="", check=("eq", "F(71,10)*F(10)**-6", "F(71,10**7)"), space=0.5)]),
-                    dict(not_sci=True, stem="Which is  0.0036  written in scientific notation?", choices=["$3.6 \\times 10^{-3}$", "$3.6 \\times 10^{-2}$", "$36 \\times 10^{-4}$", "$3.6 \\times 10^{3}$"], correct=0, answer="A",
+                    dict(form_only="C", not_sci=True, stem="Which is  0.0036  written in scientific notation?", choices=["$3.6 \\times 10^{-3}$", "$3.6 \\times 10^{-2}$", "$36 \\times 10^{-4}$", "$3.6 \\times 10^{3}$"], correct=0, answer="A",
                          errors={"B": "counted the zeros instead of the places [8.NSO.1.4: exponent = places moved]", "C": "equal in value, but 36 is not less than 10 [B1G-M 8.NSO.1.4 misconception: coefficient outside 1 to 10]", "D": "the sign was dropped: that is 3,600 [8.NSO.1.4]"},
                          why="", check=("eq", "F(36,10)*F(10)**-3", "F(36,10000)")),
                     dict(stem="Answer each question.", parts=[

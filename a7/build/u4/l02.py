@@ -104,7 +104,7 @@ L = dict(
                      "D": "the exponents were subtracted, 4 − 5 [8.NSO.1.5: multiplication adds the exponents]"},
              note="Diagnostic, straight from the state guide. A board full of B means Notes I's last line did not land — go back and count zeros on 10⁹ and 10²⁰ out loud.",
              check=("eq", "2*10**4*3*10**5", "6*10**9")),
-        dict(kind="mc", text=["$(5 \\times 10^{6})(4 \\times 10^{3})$", "Which is the product, written in scientific notation?"],
+        dict(form_only="B", kind="mc", text=["$(5 \\times 10^{6})(4 \\times 10^{3})$", "Which is the product, written in scientific notation?"],
              qtext="(5 × 10⁶)(4 × 10³). Which is the product, written in scientific notation?",
              choices=["2 × 10¹⁰", "20 × 10⁹", "2 × 10⁹", "20 × 10¹⁸"], correct=0, answer="A — 2 × 10¹⁰",
              errors={"B": "equal in value, but 20 is not less than 10 [B1G-M 8.NSO.1.5 named misconception: leaving 12 × 10⁹ instead of 1.2 × 10¹⁰]",

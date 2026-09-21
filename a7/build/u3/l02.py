@@ -17,7 +17,7 @@ L = dict(
     warmup=[
         dict(stem="Write as one power:  $3^{2}\\cdot 3^{3}$", answer="$3^{5}$", band="yesterday", source="3.01 — product of powers", check=("eq", "3**2*3**3", "3**5")),
         dict(stem="$\\sqrt[3]{-27}$", answer="−3", band="last week", source="Unit 2 — cube roots (2.03)", check=("eq", "(-3)**3", "-27")),
-        dict(stem="Solve  $2x + 3 < 11$", answer="x < 4", band="last unit", source="Unit 1 — two-step inequalities (1.08)", check=("true", "2*4+3 == 11")),
+        dict(stem="Solve  $2x + 3 < 11$", answer="x < 4", band="last unit", source="Unit 1 — two-step inequalities (1.08)", check=("true", "(2*3+3 < 11) and not (2*5+3 < 11) and (2*4+3 == 11)")),
         dict(stem="Simplify  $\\frac{5\\cdot 5\\cdot 5}{5\\cdot 5}$", answer="5", band="prior grade — the prerequisite this lesson needs", source="Grade 6 — cancelling common factors in a fraction (MA.6.NSO.2)", check=("eq", "F(125,25)", "5")),
     ],
     warmup_note="Q4 is the move the whole lesson runs on: cancel a factor of 5 from top and bottom, and one 5 is left. A board showing 125/25 unsimplified has the arithmetic and not the idea.",
@@ -88,7 +88,7 @@ L = dict(
              note="A rewrite, not a value. A board with (−5)⁷/10 applied the exponent to the numerator only; a board with −5⁷/10⁷ has lost the parentheses (same value here, but insist on them — the sign matters in 3.04).", check=("eq", "(F(-5,10))**7", "F((-5)**7, 10**7)"),
              wrong="(−5)⁷/10 — exponent applied to the numerator only [7.NSO.1.1 misconception: exponent applied to part of a base]; (−0.5)⁷ — simplified first (correct value, but not what was asked)"),
         dict(kind="mc", latex="9^{0}", text=["Which is the value?"], choices=["1", "0", "9", "1/9"], correct=0, answer="A — 1",
-             errors={"B": "zero exponent read as 'nothing', so 0 [B1G-M 8.NSO.1.3 misconception: a base to the zero power equals zero]",
+             errors={"B": "zero exponent read as 'nothing', so 0 [8.NSO.1.3: zero exponent law, a⁰ = 1]",
                      "C": "confused the zero exponent with the identity exponent, 9¹ [7.NSO.1.1 law names]",
                      "D": "treated the zero exponent as a reciprocal, which is what a NEGATIVE exponent does [misconception carried into 8.NSO.1.3]"},
              note="Diagnostic. A board full of B is the classic; send them back to the pattern table on Notes III — 2, then 2 ÷ 2.",
@@ -101,15 +101,15 @@ L = dict(
              check=("eq", "4**8/4**2", "4**6")),
         dict(latex="\\frac{0.5^{8}}{0.5^{5}}", hint="Find the value.", gloss="0.5³", answer="0.125",
              note="Decimal base. A board with 0.5⁸ ÷ 0.5⁵ typed into a calculator gets 0.125 too — fine, but ask for the single power.", check=("eq", "F(1,2)**8/F(1,2)**5", "F(1,8)"),
-             wrong="0.03125 — used 0.5⁵ (added instead of subtracting, then misread); 0.5 — subtracted to 1 by dividing 8 by 5 badly"),
+             wrong="0.5¹³ — added the exponents instead of subtracting [quotient of powers confused with product of powers]; 0.5 — the exponents divided, 8 ÷ 5 taken as 1 [the law subtracts, it does not divide]"),
         dict(latex="\\left(\\frac{10}{11}\\right)^{0}", hint="Find the value.", gloss="any nonzero base to the zero power", answer="1",
              note="The fraction is a distraction; the exponent decides. A board with 10/11 confused zero with the identity exponent.", check=("eq", "F(10,11)**0", "1"),
-             wrong="10/11 — identity exponent instead of zero exponent; 0 — zero-exponent misconception [B1G-M 8.NSO.1.3]"),
+             wrong="10/11 — identity exponent instead of zero exponent; 0 — zero exponent read as 0 [8.NSO.1.3: zero exponent law, a⁰ = 1]"),
         dict(kind="written", text=["Hannah cancels:  $\\frac{2^{3}}{2^{3}} = \\frac{8}{8} = 1$.   Sebastian subtracts:  $\\frac{2^{3}}{2^{3}} = 2^{0}$.", "Who is right?"], qtext="Hannah cancels 2³/2³ to 1. Sebastian subtracts to 2⁰. Who is right?",
              hint="Say what each one did, and what it tells you about 2⁰.", gloss="both are right, so 2⁰ must equal 1", answer="Both — 2⁰ = 1",
              note="Written. The point is not 'both'; the point is the sentence 'so 2⁰ = 1'. A student who writes 'Hannah, because 2⁰ = 0' has the misconception in writing, which is the best place to find it.",
              check=("many", ("eq", "F(8,8)", "1"), ("eq", "2**0", "1")),
-             wrong="'Hannah, because 2⁰ = 0' — the zero-exponent misconception [B1G-M 8.NSO.1.3]; 'Sebastian only' — did not accept that a nonzero number over itself is 1"),
+             wrong="'Hannah, because 2⁰ = 0' — zero exponent read as 0 [8.NSO.1.3: zero exponent law, a⁰ = 1]; 'Sebastian only' — did not accept that a nonzero number over itself is 1"),
     ],
 
     bank=[
@@ -137,7 +137,7 @@ L = dict(
              errors={"B": "divided the exponents [7.NSO.1.1 misconception: 'divide' applied to the exponents]", "C": "divided the bases [7.NSO.1.1 misconception: operating on the bases]", "D": "added the exponents [confused with product of powers]"},
              why="Same base, subtract.", check=("eq", "12**9/12**3", "12**6")),
         dict(stem="Select ALL of the expressions whose value is 1.", choices=["$5^{0}$", "$\\frac{3^{4}}{3^{4}}$", "$(-4)^{0}$", "$1^{5}$", "$\\frac{3^{4}}{3^{3}}$", "$3^{0}\\cdot 3$"], correct=[0, 1, 2, 3], answer="A, B, C and D",
-             errors={"E": "3⁴/3³ = 3, not 1 — a student who picks it thinks any quotient of equal bases is 1 [quotient law: the exponents must match for a⁰]", "F": "3⁰ · 3 = 3 — a student who picks it multiplied 1 by 3 and kept 1, or read 3⁰ as 0 and stopped [B1G-M 8.NSO.1.3 zero-exponent misconception]"},
+             errors={"E": "3⁴/3³ = 3, not 1 — a student who picks it thinks any quotient of equal bases is 1 [quotient law: the exponents must match for a⁰]", "F": "3⁰ · 3 = 1 · 3 = 3 — a student who picks it let the zero exponent cover the whole product [8.NSO.1.3: zero exponent law — the 0 belongs to its own base]"},
              why="", check=("many", ("eq", "5**0", "1"), ("eq", "3**4/3**4", "1"), ("eq", "(-4)**0", "1"), ("eq", "1**5", "1"), ("true", "3**4/3**3 != 1"), ("true", "3**0*3 != 1"))),
     ],
 
@@ -165,7 +165,7 @@ L = dict(
              errors={"B": "divided the exponents [7.NSO.1.1 misconception: 'divide' applied to the exponents]", "C": "divided the bases [7.NSO.1.1 misconception: operating on the bases]", "D": "added the exponents [confused with product of powers]"},
              why="", check=("eq", "6**10/6**5", "6**5")),
         dict(stem="Select ALL of the expressions whose value is 1.", choices=["$8^{0}$", "$\\frac{2^{5}}{2^{5}}$", "$\\left(\\frac{3}{7}\\right)^{0}$", "$\\frac{7^{2}}{49}$", "$\\frac{2^{5}}{2^{4}}$", "$0^{5}$"], correct=[0, 1, 2, 3], answer="A, B, C and D",
-             errors={"E": "2⁵/2⁴ = 2 — mismatched exponents do not give a⁰ [quotient law]", "F": "0⁵ = 0 — a student who picks it confused a zero BASE with a zero EXPONENT [B1G-M 8.NSO.1.3]"},
+             errors={"E": "2⁵/2⁴ = 2 — mismatched exponents do not give a⁰ [quotient law]", "F": "0⁵ = 0 — a student who picks it confused a zero BASE with a zero EXPONENT [8.NSO.1.3: the zero exponent law is about the exponent, not the base]"},
              why="D: 7² = 49, so 49/49 = 1.", check=("many", ("eq", "8**0", "1"), ("eq", "2**5/2**5", "1"), ("eq", "F(3,7)**0", "1"), ("eq", "F(7**2,49)", "1"), ("true", "2**5/2**4 != 1"), ("true", "0**5 != 1"))),
     ],
 
@@ -201,7 +201,7 @@ L = dict(
         must_not="Bases are nonzero wherever a quotient or a zero exponent appears, and 0⁰ is never asked. Negative exponents wait for 3.04.",
         read_first=[
             "This lesson rebuilds Math Nation 3.2 (SE pp. 106–111). The book runs three rotating partner stations — quotient of powers, power of a quotient, zero exponent — and then a matching activity. All three discoveries are here as Notes I–III, taught from the front with the same expansions the stations used.",
-            "The zero exponent is taught two ways on one slide on purpose: the pattern table (each column divided by the base) and the quotient 2³/2³. The B1G-M for 8.NSO.1.3 names 'a base to the zero power equals zero' as the misconception to expect; both roads end at 1, and Question 9 of the round asks for that sentence in writing.",
+            "The zero exponent is taught two ways on one slide on purpose: the pattern table (each column divided by the base) and the quotient 2³/2³. The error to expect is 'a base to the zero power equals zero' (common, though the B1G-M does not list it); both roads end at 1, and Question 9 of the round asks for that sentence in writing.",
             "The book's own key for this lesson checks. Nothing in it needed repair; the rebuild is about format, not mathematics."],
         standard_notes=[("Clarification", "Whole-number exponents, rational bases. The zero exponent is inside 'whole-number exponents'; negative exponents wait for 3.04."),
                         ("Boundary", "Bases are nonzero wherever a quotient or a zero exponent appears; the notes say so and the bank never asks about 0⁰.")],

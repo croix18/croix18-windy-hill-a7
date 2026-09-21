@@ -51,7 +51,7 @@ the unit is planned. The printed keys in `Answer Keys/` are generated from the s
 **Read this once, when you plan the unit.**
 
 - This lesson rebuilds Math Nation 3.2 (SE pp. 106–111). The book runs three rotating partner stations — quotient of powers, power of a quotient, zero exponent — and then a matching activity. All three discoveries are here as Notes I–III, taught from the front with the same expansions the stations used.
-- The zero exponent is taught two ways on one slide on purpose: the pattern table (each column divided by the base) and the quotient 2³/2³. The B1G-M for 8.NSO.1.3 names 'a base to the zero power equals zero' as the misconception to expect; both roads end at 1, and Question 9 of the round asks for that sentence in writing.
+- The zero exponent is taught two ways on one slide on purpose: the pattern table (each column divided by the base) and the quotient 2³/2³. The error to expect is 'a base to the zero power equals zero' (common, though the B1G-M does not list it); both roads end at 1, and Question 9 of the round asks for that sentence in writing.
 - The book's own key for this lesson checks. Nothing in it needed repair; the rebuild is about format, not mathematics.
 
 **What the audit against Math Nation found.**
@@ -159,8 +159,8 @@ the unit is planned. The printed keys in `Answer Keys/` are generated from the s
 **Read this once, when you plan the unit.**
 
 - This lesson rebuilds Math Nation 3.5 (SE pp. 124–129). The book's guided instruction (the (2/5) pattern table) is Notes I; its Fernanda/Junior collaboration is Notes III; its equivalence table and matching activity are bank questions 5 and 10. Every value on the book's pages checks.
-- The one item shape the book gets subtly wrong is whiteboard 5 here, where two options have the same VALUE (64/49) for different reasons. The book's own teacher note flags it; ours keeps the item because the discussion it starts is the point, and the teacher note says how to run it.
-- The B1G-M misconception for this benchmark — taking the opposite instead of the reciprocal, (−2/3)⁻⁵ as (2/3)⁵ — is warm-up 4, Notes II, whiteboard 2, 5 and 9, and bank question 11.
+- Whiteboard 5 was first built on the book's (−7/8)⁻², where (8/7)² has the same value as the key (64/49) — a student who chose it was right and was marked wrong. It now uses (−7/8)⁻³: the odd power keeps the sign, so every option is a different number and the discussion about the reciprocal's sign still happens.
+- The B1G-M task for this benchmark — the difference between −b and b⁻¹; here, (−2/3)⁻⁵ misread as (2/3)⁵ — is warm-up 4, Notes II, whiteboard 2, 5 and 9, and bank question 11.
 
 **What the audit against Math Nation found.**
 

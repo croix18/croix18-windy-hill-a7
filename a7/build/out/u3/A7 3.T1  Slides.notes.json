@@ -102,7 +102,7 @@
    "title": "Your Turn",
    "sub": "Same steps, your numbers. Boards up when done.",
    "min": 2,
-   "note": "Catches the un-raised coefficient (2p\u00b9\u00b2/8p\u2075 = p\u2077/4) and the exponent-adder (2p\u2079). 2p\u2077 is right.",
+   "note": "Catches the un-raised coefficient (2p\u00b9\u00b2/8p\u2075 = p\u2077/4) and the exponent-adder \u2014 2p\u00b2 if the 3 and 4 are added in the power step, 2p\u00b9\u2077 if the 12 and 5 are added in the quotient step. 2p\u2077 is right.",
    "kind": "yourturn"
   },
   {

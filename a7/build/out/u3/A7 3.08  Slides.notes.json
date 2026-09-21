@@ -30,7 +30,7 @@
    "title": "Notes",
    "sub": "Copy the table.",
    "min": 3,
-   "note": "The exponent is the number of zeros, and it is also the place of the 1: 10\u00b3 is one thousand, and the 1 sits in the thousands place. Students fill the last two cells. Then the book's warm-up number: seven quintillion, five hundred quadrillion grains of sand on Earth's beaches, 7,500,000,000,000,000,000 \u2014 twenty digits, and nobody wants to copy it twice.",
+   "note": "The exponent is the number of zeros, and it is also the place of the 1: 10\u00b3 is one thousand, and the 1 sits in the thousands place. Students fill the last two cells. Then the book's warm-up number: seven quintillion, five hundred quadrillion grains of sand on Earth's beaches, 7,500,000,000,000,000,000 \u2014 nineteen digits, and nobody wants to copy it twice.",
    "kind": "notes"
   },
   {
@@ -38,7 +38,7 @@
    "title": "Notes",
    "sub": "",
    "min": 4,
-   "note": "Definition first, then the two examples. 2,000,000 is 2 millions: 2 \u00d7 10\u2076. 26,000,000 is 2.6 ten-millions: the 2 is in the ten-millions place, so 2.6 \u00d7 10\u2077. The rule of thumb \u2014 count how many places the decimal point moves \u2014 is on the last line, and it agrees with place value every time. Then the constraint, which the state guide names as the first misconception: 20 \u00d7 10\u2075 equals 2,000,000 but is NOT scientific notation, because 20 is not less than 10.\nOFF: 'One nonzero digit in front of the decimal point. That is the whole rule.'",
+   "note": "Definition first, then the two examples. 2,000,000 is 2 millions: 2 \u00d7 10\u2076. 26,000,000 is 2.6 ten-millions: the 2 is in the ten-millions place, so 2.6 \u00d7 10\u2077. The rule of thumb \u2014 count how many places the decimal point moves \u2014 is on the last line, and it agrees with place value every time. Then the constraint, the second misconception the state guide names: 20 \u00d7 10\u2075 equals 2,000,000 but is NOT scientific notation, because 20 is not less than 10.\nOFF: 'One nonzero digit in front of the decimal point. That is the whole rule.'",
    "kind": "notes"
   },
   {
@@ -70,7 +70,7 @@
    "title": "Your Turn",
    "sub": "Same steps, your numbers. Boards up when done.",
    "min": 2,
-   "note": "The book's auction painting. Catches 1.15 \u00d7 10\u2078 (dropped the zero) and 1.105 \u00d7 10\u2077 (counted the zeros after the 5). 1.105 \u00d7 10\u2078 is right.",
+   "note": "The book's auction painting. Catches 1.15 \u00d7 10\u2078 (dropped the interior zero) and 1.105 \u00d7 10\u2076 (counted the six zeros instead of the eight places \u2014 counting zeros works for 10\u207f and fails here). 1.105 \u00d7 10\u2078 is right.",
    "kind": "yourturn"
   },
   {
@@ -182,7 +182,7 @@
    "title": "Whiteboards   \u00b7   Question 5 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "Diagnostic. B is the guide's first misconception and the one to name; C and D are the two counting errors.",
+   "note": "Diagnostic. B is the guide's second named misconception and the one to name; C and D are the two counting errors.",
    "kind": "wb"
   },
   {

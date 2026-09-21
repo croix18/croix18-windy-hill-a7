@@ -135,7 +135,7 @@ L = dict(
              hint="The same three numbers, the same words.", gloss="39 and 66", answer="39 dollars and 66 dollars",
              note="Written, and it is the exit evidence. Both problems contain 15, 4 and 6 and both contain 'plus' and 'each', so circling and boxing produce identical markings — and the two answers are 39 and 66. Full credit needs both totals and a sentence saying that what decides is which quantity is repeated, not which words appear. A student who writes only the two numbers has done the arithmetic and missed the item.",
              check=("many", ("eq", "15+4*6", "39"), ("eq", "15*4+6", "66"), ("true", "15+4*6 != 15*4+6")),
-             wrong="39 and 66 with no explanation — the item asks why [B1G-M 8.NSO.1.7 misconception: keyword hunting]; 39 twice — the second structure was not read"),
+             wrong="39 and 66 with no explanation — the item asks why [same key words, different structures: the explanation is the evidence]; 39 twice — the second structure was not read"),
     ],
 
     bank=[
