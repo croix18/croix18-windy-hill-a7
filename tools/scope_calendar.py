@@ -211,7 +211,12 @@ if __name__=="__main__":
         flag=" (43 min)" if wd=="Wed" else ""
         mark={"T":"**thread** ","X":"**exam** ","R":"**review** ","F":"*flex* ","S":"*spiral* ","W":""}.get(kind,"")
         sk=ixl(code)
-        nxt=[r[0] for r in rows[i+1:] if r[5] not in ("W",)]
+        # ruling 28: lessons in a row with the same skills are one assignment, due after the last
+        # of them (the same run rule as the due-date sheet below, so the two never disagree)
+        end=i
+        while sk and end+1<len(rows) and ixl(rows[end+1][2])==sk:
+            end+=1
+        nxt=[r[0] for r in rows[end+1:] if r[5] not in ("W",)]
         due=nxt[0].strftime('%b %d') if (sk and nxt) else ""
         M="; ".join(f"{n} — {c}" for n,c in sk)
         print(f"| {dt.strftime('%b %d')} | {wd}{flag} | {u if u else ''} | {code} | {mark}{title} | {bm} | {M} | {due} |")

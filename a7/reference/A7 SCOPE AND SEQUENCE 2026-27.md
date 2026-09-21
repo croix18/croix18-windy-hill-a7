@@ -17,7 +17,7 @@
 | Oct 14 | Wed (43 min) | 4 | 4.01 | Add and subtract in scientific notation | 8.NSO.1.5 | Add and subtract numbers written in scientific notation — HUR | Oct 15 |
 | Oct 15 | Thu | 4 | 4.02+03 | Multiply and divide in scientific notation | 8.NSO.1.5 | Multiply numbers written in scientific notation — YZU; Divide numbers written in scientific notation — SGT | Oct 16 |
 | Oct 16 | Fri | 4 | 4.04 | Real-world scientific notation; significant digits | 8.NSO.1.6 | Add, subtract, multiply, and divide numbers written in scientific notation: word problems — D5S | Oct 19 |
-| Oct 19 | Mon | 4 | 4.05 | Expressions with radicals (perfect squares to 225, cubes −125 to 125) | 8.NSO.1.7 | Evaluate radical expressions — D8J | Oct 20 |
+| Oct 19 | Mon | 4 | 4.05 | Expressions with radicals (perfect squares to 225, cubes −125 to 125) | 8.NSO.1.7 | Evaluate radical expressions — D8J | Oct 21 |
 | Oct 20 | Tue | 4 | 4.06 | Order of operations with exponents and radicals | 8.NSO.1.7 | Evaluate radical expressions — D8J | Oct 21 |
 | Oct 21 | Wed (43 min) | 4 | 4.07+08 | Real-world order-of-operations problems | 8.NSO.1.7 | Evaluate variable expressions: word problems — DPG | Oct 22 |
 | Oct 22 | Thu | 4 | 4.X1 | **exam** Unit 4 exam, day 1 |  |  |  |
@@ -26,7 +26,7 @@
 | Oct 27 | Tue | 5 | 5.01 | Scale drawings | 7.GR.1.5 | Scale drawings: find the scale factor, missing side, or missing angle — WEA | Oct 28 |
 | Oct 28 | Wed (43 min) | 5 | 5.02+03 | Scale factor: perimeter and area (k and k²) | 7.GR.1.5 | Perimeter and area: changes in scale — ZC6; Scale drawings: find the scale factor or missing side — XHM | Oct 29 |
 | Oct 29 | Thu | 5 | 5.04 | Real-world scale drawings | 7.GR.1.5 | Scale drawings: word problems — 84H; Scale drawings: scale factor word problems — KCM | Oct 30 |
-| Oct 30 | Fri | 5 | 5.06+07 | Converting length across systems; currency | 7.AR.3.3 | Convert between customary and metric systems — E8Z; Compare and convert customary units — 4B8; Compare and convert metric units — HW2 | Nov 02 |
+| Oct 30 | Fri | 5 | 5.06+07 | Converting length across systems; currency | 7.AR.3.3 | Convert between customary and metric systems — E8Z; Compare and convert customary units — 4B8; Compare and convert metric units — HW2 | Nov 03 |
 | Nov 02 | Mon | 5 | 5.08+09 | Converting mass, area and volume across systems | 7.AR.3.3 | Convert between customary and metric systems — E8Z; Compare and convert customary units — 4B8; Compare and convert metric units — HW2 | Nov 03 |
 | Nov 03 | Tue | 5 | 5.10+11 | Multi-step proportion problems | 7.AR.3.3 · 7.AR.4.5 | Compare rates: word problems — VVS; Multi-step problems with customary or metric unit conversions — UCT | Nov 04 |
 | Nov 04 | Wed (43 min) | 5 | spiral | *spiral* Spiral day — mixed retrieval from the unit just finished and the two before it |  |  |  |
@@ -90,7 +90,7 @@
 | Feb 22 | Mon | 11 | flex | *flex* Flex day — reteach from exam evidence, or absorb a lost day |  |  |  |
 | Feb 23 | Tue | 12 | 12.01+02 | Relations; domain and range | 8.F.1.1 | Relations: convert between mappings, tables, graphs, and ordered pairs — LQJ; Domain and range of relations — T7P | Feb 24 |
 | Feb 24 | Wed (43 min) | 12 | 12.03 | Is it a function? | 8.F.1.1 | Identify functions — JT2; Identify functions: graphs — AEB; Identify independent and dependent variables — FSF | Feb 25 |
-| Feb 25 | Thu | 12 | 12.04+05 | Describing graphs: increasing, decreasing, constant | 8.F.1.3 | Identify graphs: word problems — HWC | Feb 26 |
+| Feb 25 | Thu | 12 | 12.04+05 | Describing graphs: increasing, decreasing, constant | 8.F.1.3 | Identify graphs: word problems — HWC | Mar 01 |
 | Feb 26 | Fri | 12 | 12.06 | Sketching graphs from descriptions | 8.F.1.3 | Identify graphs: word problems — HWC | Mar 01 |
 | Mar 01 | Mon | 12 | 12.07 | Functions from equations, tables, graphs | 8.F.1.2 | Complete a function table from an equation — ESE; Complete a table for a function graph — 7EK; Find values using function graphs — 7N2 | Mar 02 |
 | Mar 02 | Tue | 12 | 12.08+09 | Is it linear? (graphs, equations, tables) | 8.F.1.2 · 8.AR.3.1 | Identify linear and nonlinear functions: graphs and equations — XB8; Identify linear and nonlinear functions: tables — VGS | Mar 03 |
