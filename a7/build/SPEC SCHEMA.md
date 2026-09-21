@@ -112,6 +112,17 @@ symbols** (so `x**0` is 1 and quotients cancel; use only these letters as variab
   `("true", "<that option> != <the target>")` clause. Without it an option that is secretly
   equal to the target passes the build, and a student who selects it is marked wrong for
   being right. `distractorcheck` counts the clauses and refuses if there are too few.
+- **No two choices may be the same number.** `distractorcheck` reads every option as an exact
+  value (plain unicode like `0.2³ · 0.1²`, or one `$latex$` span, with a trailing unit allowed)
+  and refuses (a) a wrong option equal to the key — a student who picks it is right — and (b) on
+  a one-answer item, two wrong options equal to each other, which give each other away. It sees
+  what the printed-string check cannot: `(3/6)³` and `(1/2)³`, or `(8/7)²` and `(−8/7)²`. An
+  option it cannot read (words, "not a real number") switches the check off for that item only.
+  **`form_only="B"`** exempts the listed letters, for a question that asks for a FORM: `52 × 10⁶`
+  is 52,000,000 and is not scientific notation; `3.20 × 10³` is 3,200 and claims a third
+  significant digit. The exemption holds only when the question's own words name the form
+  (`scientific notation` or `significant digit`), so "Which is the value of …?" can never use
+  it — if the question asks for the value, an option with the value is right.
 - `("eq", "expr", "keyed")` — exact symbolic equality. Use `F(2)**-3`, `F(3,4)**2`; never
   Python floats where a rational exists. Variable bases: `("eq", "(3*m**2*n)**3/(9*m**4*n)",
   "3*m**2*n**2")`.

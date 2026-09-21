@@ -4,9 +4,11 @@ from its `check` field (mathcheck); an item with no check and no acknowledged hu
 fails the build. Every multiple-choice wrong option must carry a named error (distractorcheck,
 §16 rule 4, mandatory under ruling 10).
 """
-import os, re, json
+import os, re, json, itertools
 import sympy as sp
 from sympy import Rational as F, sqrt, Integer, nsimplify
+from sympy.parsing.sympy_parser import (parse_expr, standard_transformations,
+                                        implicit_multiplication_application, convert_xor, rationalize)
 from .dockit import Doc, INK, VOCAB, RED, GRAY
 from .deckkit import Deck, LM, CW
 from . import tekit
@@ -28,6 +30,79 @@ def _sigdigs(num):
         intp, frac = s.split(".", 1)
         return len((intp + frac).lstrip("0"))          # leading zeros never count; trailing ones do
     return len(s.rstrip("0").lstrip("0"))              # no decimal point: trailing zeros do not count
+
+
+# ---- reading a multiple-choice option as a number (for the same-value check) ----
+_OPT_SUP = str.maketrans("⁰¹²³⁴⁵⁶⁷⁸⁹⁻", "0123456789-")
+_OPT_SYMS = {s: sp.Symbol(s, positive=True) for s in "abcdkmnpqrstwxyz"}
+_OPT_TR = standard_transformations + (implicit_multiplication_application, convert_xor, rationalize)
+_OPT_UNIT = re.compile(r"\s+(?:cm|mm|km|m|kg|mg|g|mL|L|in|ft|mi|lb|s|h)[²³]?\s*$")
+# A question that asks for a FORM may legitimately offer a wrong option equal in value to the key
+# (52 × 10⁶ is 52,000,000 and is not scientific notation). form_only is only honoured when the
+# question names the form it is asking for, in one of these words.
+FORM_WORDS = ("scientific notation", "significant digit")
+
+
+def _opt_brace(s, j):
+    d = 0
+    for k in range(j, len(s)):
+        d += (s[k] == "{") - (s[k] == "}")
+        if d == 0:
+            return s[j + 1:k], k + 1
+    raise ValueError("unbalanced braces")
+
+
+def _opt_latex_calls(s):
+    """\\frac{A}{B} -> ((A)/(B)), \\sqrt[3]{A} -> cbrt(A), \\sqrt{A} -> sqrt(A); innermost first."""
+    while True:
+        i, t = max((s.rfind(t), t) for t in ("\\frac", "\\sqrt[3]", "\\sqrt"))
+        if i < 0:
+            return s
+        if t == "\\sqrt" and s.startswith("\\sqrt[3]", i):
+            t = "\\sqrt[3]"
+        a, j = _opt_brace(s, i + len(t))
+        if t == "\\frac":
+            b, j = _opt_brace(s, j)
+            s = s[:i] + f"(({a})/({b}))" + s[j:]
+        else:
+            s = s[:i] + ("cbrt(" if t == "\\sqrt[3]" else "sqrt(") + a + ")" + s[j:]
+
+
+def _optval(opt):
+    """The exact value of a choice as sympy — from plain unicode ('0.2³ · 0.1²', '4/x⁶') or one
+    $latex$ span, with a trailing unit allowed — or None when the choice is not a plain value
+    ('not a real number', 'Rachel only'). None means 'cannot compare', never 'different'."""
+    s = _OPT_UNIT.sub("", str(opt).strip())
+    if s.startswith("$") and s.endswith("$") and s.count("$") == 2:
+        s = s[1:-1].replace("\\left", "").replace("\\right", "").replace("{,}", "")
+        s = s.replace("\\cdot", "*").replace("\\times", "*").replace("\\div", "/")
+        try:
+            s = _opt_latex_calls(s)
+        except ValueError:
+            return None
+        s = re.sub(r"\^\{([^{}]*)\}", r"**(\1)", s)
+        s = re.sub(r"\^(\d)", r"**\1", s).replace("{", "(").replace("}", ")")
+        if "\\" in s:
+            return None
+    elif "$" in s:
+        return None
+    else:
+        s = re.sub(r"(?<=\d),(?=\d{3}\b)", "", s)
+        s = re.sub(r"([⁰¹²³⁴⁵⁶⁷⁸⁹⁻]+)", lambda m: "**(" + m.group(1).translate(_OPT_SUP) + ")", s)
+        s = s.replace("·", "*").replace("×", "*").replace("÷", "/")
+        s = re.sub(r"√\(", "sqrt(", s)
+        s = re.sub(r"∛\(", "cbrt(", s)
+        s = re.sub(r"√(\d+)", r"sqrt(\1)", s)
+        s = re.sub(r"∛(-?\d+)", r"cbrt(\1)", s)
+    s = s.replace("\u2212", "-").replace("\u2013", "-")
+    if re.search(r"[A-Za-z]{2,}", re.sub(r"sqrt|cbrt", "", s)):
+        return None
+    try:
+        e = parse_expr(s, local_dict={**_OPT_SYMS, "sqrt": sp.sqrt, "cbrt": lambda v: sp.real_root(v, 3)},
+                       transformations=_OPT_TR, evaluate=True)
+        return sp.simplify(e)
+    except Exception:
+        return None
 
 
 def _ev(expr):
@@ -100,6 +175,50 @@ def _flatten(item):
     return [item]
 
 
+def _samevalue(code, grp, i, it, corr):
+    """Two choices that are the same NUMBER, which the printed-string check cannot see: (3/6)³ and
+    (1/2)³, or (8/7)² and (−8/7)². A wrong option equal to the key marks a right answer wrong. Two
+    equal wrong options on a one-answer item give each other away. (On a select-all, two wrong
+    options may share a value — each is judged on its own.) The only exemption is form_only: the
+    letters of options that are wrong in how they are WRITTEN, on a question that names the form."""
+    out = []
+    vals = [_optval(c) for c in it["choices"]]
+    if any(v is None for v in vals):
+        return out
+    fo = set(it.get("form_only", ""))
+    where = f"{code} {grp}[{i}]"
+    if fo:
+        q = " ".join(str(it.get(k, "")) for k in ("stem", "text", "qtext", "latex")).lower()
+        if not any(w in q for w in FORM_WORDS):
+            out.append(f"{where}: form_only={''.join(sorted(fo))} but the question never names the form "
+                       f"it asks for ({' / '.join(FORM_WORDS)}) — so an option equal to the key is a right answer")
+            fo = set()
+        for L_ in sorted(fo):
+            if ord(L_) - 65 in corr:
+                out.append(f"{where}: form_only lists {L_}, which is a keyed answer")
+    multi = len(corr) > 1 or isinstance(it.get("correct"), (list, tuple, set))
+    for a, b in itertools.combinations(range(len(vals)), 2):
+        try:
+            same = sp.simplify(vals[a] - vals[b]) == 0
+        except Exception:
+            same = False
+        if not same:
+            continue
+        la, lb = chr(65 + a), chr(65 + b)
+        ka, kb = a in corr, b in corr
+        if ka and kb:
+            continue
+        if ka != kb:
+            wrong = lb if ka else la
+            if wrong not in fo:
+                out.append(f"{where}: option {wrong} equals the keyed answer ({it['choices'][a]} = "
+                           f"{it['choices'][b]} = {vals[a]}) — a student who picks it is right")
+        elif not multi and not ({la, lb} & fo):
+            out.append(f"{where}: wrong options {la} and {lb} are the same number ({vals[a]}) — "
+                       f"either both are right or both are wrong, and a student can see which")
+    return out
+
+
 def distractorcheck_lesson(L):
     out = []
     for grp in ("whiteboard", "bank", "additional", "independent", "warmup"):
@@ -128,6 +247,7 @@ def distractorcheck_lesson(L):
                 vals = [str(c) for c in it["choices"]]
                 if len(set(vals)) != len(vals):
                     out.append(f"{L['code']} {grp}[{i}]: two choices print the same value")
+                out += _samevalue(L["code"], grp, i, it, corr)
                 # A whiteboard's options are drawn straight onto the slide as text; only the .docx
                 # surfaces render $latex$. A dollar-delimited option on a board prints its braces.
                 if grp == "whiteboard":
