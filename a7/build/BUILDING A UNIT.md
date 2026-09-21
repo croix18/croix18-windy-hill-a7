@@ -177,6 +177,10 @@ Do not batch lessons before the first push. One lesson, checked, viewed, pushed;
    writes `00 - START HERE.md` with the timing table read from the decks.
 4. `python3 build_all.py <unit> --install` — rebuilds everything from the specs, runs the suite
    (0 findings) and reinstalls the package — then push. This is the shipping gate.
+5. Regenerate Croix's master sheet so the new unit's days get their links and details:
+   `python3 ../../tools/master_sheet.py`, then the xlsx skill's `recalc.py` on
+   `../reference/A7 Master Sheet 2026-27.xlsx` (0 errors), then
+   `python3 ../../tools/check_master_sheet.py` (0 problems). Push, and send Croix the new file.
 
 ## 6. The final report to Croix
 
