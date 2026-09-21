@@ -3,7 +3,7 @@ M = dict(
     unit=3, title="Exponents and Scientific Notation",
     folder="A7 Unit 3 - Exponents and Scientific Notation",
     audit_src="a7/unit03/UNIT 3 AUDIT.md",           # repo-relative; copied into Reference/
-    summary="ten teaching days (nine book lessons, merged to eight, plus the two Thread A days), a review, a two-period assessment",
+    summary="ten teaching days (nine book lessons, merged to eight, plus the two Thread A days), a review sent home as practice, a two-period assessment",
     # (file code, label as printed, title, benchmark, the line that carries the day) — in teaching order
     lessons=[
         ("3.01", "3.01", "Product Laws of Exponents", "MA.7.NSO.1.1", "Same base, add — and the base has to match."),

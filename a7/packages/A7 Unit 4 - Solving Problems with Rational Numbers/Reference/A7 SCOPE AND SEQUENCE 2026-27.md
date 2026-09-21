@@ -2,7 +2,7 @@
 |---|---|---|---|---|---|---|---|
 | Sep 23 | Wed (43 min) | 3 | 3.01 | Product laws of exponents | 7.NSO.1.1 · 8.NSO.1.3 | Evaluate powers — SZQ; Multiplication with exponents — 5SK; Power rule — 8DA; Understanding exponents — BFA | Sep 24 |
 | Sep 24 | Thu | 3 | 3.02 | Quotient laws of exponents | 7.NSO.1.1 · 8.NSO.1.3 | Powers with negative bases — WFW; Division with exponents — XNC; Identify equivalent expressions involving whole-number exponents — KBE | Sep 25 |
-| Sep 25 | Fri | 3 | 3.03 | Exponential expressions | 8.NSO.1.3 | Evaluate expressions using properties of exponents — ZE9 | Sep 28 |
+| Sep 25 | Fri | 3 | 3.03 | Exponential expressions | 7.NSO.1.1 · 8.NSO.1.3 | Evaluate expressions using properties of exponents — ZE9 | Sep 28 |
 | Sep 28 | Mon | 3 | 3.04 | Negative exponent law | 8.NSO.1.3 | Understanding negative exponents — YBB; Evaluate powers with negative exponents — WGS | Sep 29 |
 | Sep 29 | Tue | 3 | 3.05 | Applying exponent laws | 8.NSO.1.3 | Identify equivalent expressions involving exponents I — VLM | Sep 30 |
 | Sep 30 | Wed (43 min) | 3 | 3.06+07 | Evaluating and equivalent expressions with integer exponents | 8.NSO.1.3 | Evaluate expressions using properties of exponents — 6T7; Identify equivalent expressions involving exponents II — QDM | Oct 01 |

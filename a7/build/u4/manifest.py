@@ -3,7 +3,7 @@ M = dict(
     unit=4, title="Solving Problems with Rational Numbers",
     folder="A7 Unit 4 - Solving Problems with Rational Numbers",
     audit_src="a7/unit04/UNIT 4 AUDIT.md",           # repo-relative; copied into Reference/
-    summary="six teaching days (eight book lessons, merged to six), a review, a two-period assessment",
+    summary="six teaching days (eight book lessons, merged to six), a review sent home as practice, a two-period assessment",
     # (file code, label as printed, title, benchmark, the line that carries the day) — in teaching order
     lessons=[
         ("4.01", "4.01", "Adding and Subtracting in Scientific Notation", "MA.8.NSO.1.5", "The powers of ten have to match before a single digit is added."),

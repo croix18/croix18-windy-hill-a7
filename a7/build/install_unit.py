@@ -110,7 +110,7 @@ def start_here(n_files):
     A("| **Question Banks** | Per lesson: the Question Bank and the Question Bank – Additional. Retired worksheets are question banks (ruling 11): draw from them for practice, exit tickets or re-teaching; nothing in here has an answer on it. |")
     A("| **Slides** | The decks, as `.pptx`. No speaker notes — the notes live in the Teacher Edition (ruling 12). |")
     A("| **Handouts** | The Reference Sheet. Students study from it; it may NOT be used on the assessment (ruling 13). There is no study guide (ruling 11). |")
-    A("| **Assessments** | Unit Review (unscored) and Unit Assessment (two periods) — student copies. |")
+    A("| **Assessments** | Unit Review (unscored; it goes home as practice — ruling 27a, A7 has no review day) and Unit Assessment (two periods) — student copies. |")
     A("| **Answer Keys** | Every key in the unit, without exception. |")
     A("| **Teacher Editions** | One per lesson, **four pages, read in twenty minutes** (ruling 26). Page 1 is the period — benchmark with its Must and Must-not lines, the target, the MTRs, the timing table and the three sentences to say out loud. Then one line per slide, each board carrying its answer, its named distractors and the split-board move. Misconceptions to Watch at the end. |")
     A("| **PDFs** | A mirror of the six folders above, same filenames. This is what gets printed and posted. |")
@@ -128,7 +128,7 @@ def start_here(n_files):
     for code, label, title, bm, line in LESSONS:
         A(f"| {label} | {title} | {bm} | {line} |")
     n_bm = len({l[3] for l in M["lessons"]})
-    A(f"| — | Unit Review | all {('two', 'three', 'four', 'five', 'six')[n_bm - 2] if 2 <= n_bm <= 6 else n_bm} | unscored; the SSDD block is named on the key only |")
+    A(f"| — | Unit Review | all {('two', 'three', 'four', 'five', 'six')[n_bm - 2] if 2 <= n_bm <= 6 else n_bm} | unscored, sent home as practice (ruling 27a); the SSDD block is named on the key only |")
     _bms, _pts = M["assessment"]
     A(f"| — | Unit Assessment — two periods, one paper | {_bms} | {_pts} points |")
     A("")

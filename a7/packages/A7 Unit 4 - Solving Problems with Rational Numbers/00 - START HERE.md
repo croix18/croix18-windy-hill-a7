@@ -1,6 +1,6 @@
 # A7 Unit 4 — Solving Problems with Rational Numbers
 
-Windy Hill Middle School · course 1205050 · six teaching days (eight book lessons, merged to six), a review, a two-period assessment.
+Windy Hill Middle School · course 1205050 · six teaching days (eight book lessons, merged to six), a review sent home as practice, a two-period assessment.
 
 Nothing exists until it is committed. This folder is generated from `a7/build/u4/` by `install_unit.py`; edit the specs and rebuild rather than editing these files by hand.
 
@@ -19,7 +19,7 @@ Nothing exists until it is committed. This folder is generated from `a7/build/u4
 | **Question Banks** | Per lesson: the Question Bank and the Question Bank – Additional. Retired worksheets are question banks (ruling 11): draw from them for practice, exit tickets or re-teaching; nothing in here has an answer on it. |
 | **Slides** | The decks, as `.pptx`. No speaker notes — the notes live in the Teacher Edition (ruling 12). |
 | **Handouts** | The Reference Sheet. Students study from it; it may NOT be used on the assessment (ruling 13). There is no study guide (ruling 11). |
-| **Assessments** | Unit Review (unscored) and Unit Assessment (two periods) — student copies. |
+| **Assessments** | Unit Review (unscored; it goes home as practice — ruling 27a, A7 has no review day) and Unit Assessment (two periods) — student copies. |
 | **Answer Keys** | Every key in the unit, without exception. |
 | **Teacher Editions** | One per lesson, **four pages, read in twenty minutes** (ruling 26). Page 1 is the period — benchmark with its Must and Must-not lines, the target, the MTRs, the timing table and the three sentences to say out loud. Then one line per slide, each board carrying its answer, its named distractors and the split-board move. Misconceptions to Watch at the end. |
 | **PDFs** | A mirror of the six folders above, same filenames. This is what gets printed and posted. |
@@ -40,7 +40,7 @@ Nothing exists until it is committed. This folder is generated from `a7/build/u4
 | 4.05 | Evaluating Expressions with Radicals | MA.8.NSO.1.7 | The radical bar is a pair of parentheses you cannot see. |
 | 4.06 | Order of Operations with Radicals | MA.8.NSO.1.7 | Read the expression and ask what is holding what. |
 | 4.07–08 | Real-World Order of Operations | MA.8.NSO.1.7 | No word tells you which operation to use. Read the situation. |
-| — | Unit Review | all three | unscored; the SSDD block is named on the key only |
+| — | Unit Review | all three | unscored, sent home as practice (ruling 27a); the SSDD block is named on the key only |
 | — | Unit Assessment — two periods, one paper | all three benchmarks, sections by benchmark | 34 points |
 
 Book order, with 4.2 + 4.3 and 4.7 + 4.8 merged under ruling 30 — both merges were already in the scope and sequence. 4.05 and 4.06 stay separate days even though IXL gives them the same skill; under ruling 28 that is one assignment covering the run, due after the second of the two. No thread day falls inside Unit 4. All three benchmarks report under Number Sense and Operations on the Grade 8 FAST, so the review's parts split by lesson and the assessment's sections split by benchmark.

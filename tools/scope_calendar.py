@@ -48,7 +48,7 @@ while x<=end:
 PLAN=[
  (3,"3.01","Product laws of exponents","7.NSO.1.1 · 8.NSO.1.3","L"),
  (3,"3.02","Quotient laws of exponents","7.NSO.1.1 · 8.NSO.1.3","L"),
- (3,"3.03","Exponential expressions","8.NSO.1.3","L"),
+ (3,"3.03","Exponential expressions","7.NSO.1.1 · 8.NSO.1.3","L"),
  (3,"3.04","Negative exponent law","8.NSO.1.3","L"),
  (3,"3.05","Applying exponent laws","8.NSO.1.3","L"),
  (3,"3.06+07","Evaluating and equivalent expressions with integer exponents","8.NSO.1.3","L"),

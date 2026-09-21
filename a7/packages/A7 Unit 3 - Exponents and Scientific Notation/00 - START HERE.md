@@ -1,6 +1,6 @@
 # A7 Unit 3 — Exponents and Scientific Notation
 
-Windy Hill Middle School · course 1205050 · ten teaching days (nine book lessons, merged to eight, plus the two Thread A days), a review, a two-period assessment.
+Windy Hill Middle School · course 1205050 · ten teaching days (nine book lessons, merged to eight, plus the two Thread A days), a review sent home as practice, a two-period assessment.
 
 Nothing exists until it is committed. This folder is generated from `a7/build/u3/` by `install_unit.py`; edit the specs and rebuild rather than editing these files by hand.
 
@@ -19,7 +19,7 @@ Nothing exists until it is committed. This folder is generated from `a7/build/u3
 | **Question Banks** | Per lesson: the Question Bank and the Question Bank – Additional. Retired worksheets are question banks (ruling 11): draw from them for practice, exit tickets or re-teaching; nothing in here has an answer on it. |
 | **Slides** | The decks, as `.pptx`. No speaker notes — the notes live in the Teacher Edition (ruling 12). |
 | **Handouts** | The Reference Sheet. Students study from it; it may NOT be used on the assessment (ruling 13). There is no study guide (ruling 11). |
-| **Assessments** | Unit Review (unscored) and Unit Assessment (two periods) — student copies. |
+| **Assessments** | Unit Review (unscored; it goes home as practice — ruling 27a, A7 has no review day) and Unit Assessment (two periods) — student copies. |
 | **Answer Keys** | Every key in the unit, without exception. |
 | **Teacher Editions** | One per lesson, **four pages, read in twenty minutes** (ruling 26). Page 1 is the period — benchmark with its Must and Must-not lines, the target, the MTRs, the timing table and the three sentences to say out loud. Then one line per slide, each board carrying its answer, its named distractors and the split-board move. Misconceptions to Watch at the end. |
 | **PDFs** | A mirror of the six folders above, same filenames. This is what gets printed and posted. |
@@ -44,7 +44,7 @@ Nothing exists until it is committed. This folder is generated from `a7/build/u3
 | T-A2 | Negative Exponents with Variable Bases | MA.8.AR.1.1 | Only the factor wearing the negative exponent moves. |
 | 3.08 | Writing Large Numbers in Scientific Notation | MA.8.NSO.1.4 | One nonzero digit in front of the decimal point. |
 | 3.09 | Writing Small Numbers in Scientific Notation | MA.8.NSO.1.4 | The exponent counts places, not zeros. |
-| — | Unit Review | all four | unscored; the SSDD block is named on the key only |
+| — | Unit Review | all four | unscored, sent home as practice (ruling 27a); the SSDD block is named on the key only |
 | — | Unit Assessment — two periods, one paper | all four benchmarks, sections by benchmark | 41 points |
 
 Book order with Thread A woven in after 3.07 (ruling 30): the laws are complete on numbers before they are restated on letters, and both are complete before scientific notation. Math Nation's 3.6 and 3.7 are one period here (3.06–07). MA.7.NSO.1.1 is grade 7 content the Grade 8 FAST assumes; the other three benchmarks report under Number Sense and Operations (8.NSO.1.3, 8.NSO.1.4) and Algebraic Reasoning (8.AR.1.1).
