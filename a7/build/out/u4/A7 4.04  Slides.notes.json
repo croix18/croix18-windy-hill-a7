@@ -94,7 +94,7 @@
    "title": "Example 2",
    "sub": "Worked.",
    "min": 2,
-   "note": "Subtract in full, then stop at the leftmost last-digit place. 0.00309 stops at the hundred-thousandths; 0.00003472 stops eight places out. The leftmost of the two is the hundred-thousandths, so that is where the answer stops. A board with 3.05528 \u00d7 10\u207b\u00b3 never rounded; a board with 3.1 \u00d7 10\u207b\u00b3 counted digits instead of places.",
+   "note": "Subtract in full, then stop at the leftmost last-digit place. 0.00309 stops at the hundred-thousandths; 0.00003472 stops eight places out. The leftmost of the two is the hundred-thousandths, so that is where the answer stops. A board with 3.05528 \u00d7 10\u207b\u00b3 never rounded; a board with 3.1 \u00d7 10\u207b\u00b3 rounded one place too far \u2014 here counting digits would also have given 3.06 \u00d7 10\u207b\u00b3, which is why the book never noticed its rule was wrong.",
    "kind": "example"
   },
   {
@@ -214,7 +214,7 @@
    "title": "Whiteboards   \u00b7   Question 7 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "A quotient that comes out exact and still has to be cut. 4.20 has three significant digits and 3.0 has two, so the answer keeps two: 140. Writing 140. with no decimal point is the honest two-digit form, and 1.4 \u00d7 10\u00b2 says it without ambiguity \u2014 which is the argument for the notation.",
+   "note": "A quotient that comes out exact and still has to be cut. 4.20 has three significant digits and 3.0 has two, so the answer keeps two: 140. Writing 140 with no decimal point is the honest two-digit form, and 1.4 \u00d7 10\u00b2 says it without ambiguity \u2014 which is the argument for the notation.",
    "kind": "wb"
   },
   {
@@ -270,7 +270,7 @@
    "title": "IXL",
    "sub": "Last five minutes.",
    "min": 5,
-   "note": "IXL: every listed skill is required, SmartScore 67, due at the start of the next class.",
+   "note": "IXL: every listed skill is required, SmartScore 67. Due at the start of the next class.",
    "kind": "ixl"
   }
  ]

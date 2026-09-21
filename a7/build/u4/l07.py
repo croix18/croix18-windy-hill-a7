@@ -232,7 +232,7 @@ L = dict(
                     ("true", "(2*4)**2 != 32"), ("true", "2*4*2 != 32"))),
     ],
 
-    mtr=[("MTR.7.1", "The whole period — every expression today arrives inside a situation, and the unit is part of the answer on every board."),
+    mtr=[("MTR.7.1", "Notes I–III, both Examples and boards 2, 3, 4, 6, 7 and 9 — the expression arrives inside a situation, and the unit is part of the answer."),
          ("MTR.2.1", "Notes II and board 9 — the same three numbers are written as two different expressions, so the structure is seen to come from the situation and not from the page."),
          ("MTR.4.1", "Board 6 — when the room splits over whether the flat fee goes inside the parentheses, the sixty-second re-vote before the reveal.")],
 

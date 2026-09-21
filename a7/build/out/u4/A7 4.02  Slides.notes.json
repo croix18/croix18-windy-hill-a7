@@ -230,7 +230,7 @@
    "title": "Whiteboards   \u00b7   Question 8 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "Working backwards. The powers of ten already check out, so the whole question lives in the coefficients \u2014 the student who sees that answers in five seconds. A board with 4.2 divided in the wrong direction.",
+   "note": "Working backwards. The powers of ten already check out, so the whole question lives in the coefficients \u2014 the student who sees that answers in five seconds. A board with 4.2 subtracted the coefficients; a board with 0.5 divided them the wrong way round.",
    "kind": "wb"
   },
   {
@@ -270,7 +270,7 @@
    "title": "IXL",
    "sub": "Last five minutes.",
    "min": 5,
-   "note": "IXL: every listed skill is required, SmartScore 67, due at the start of the next class.",
+   "note": "IXL: every listed skill is required, SmartScore 67. Due at the start of the next class.",
    "kind": "ixl"
   }
  ]
