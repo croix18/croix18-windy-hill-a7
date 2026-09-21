@@ -728,6 +728,11 @@ def build_te(L, deck_path, outdir):
     return path
 
 
+def rulingcheck_lesson(L):
+    """Rulings 21, 22, 25, 26 and 28 as facts about the spec."""
+    return _ruling_checks(L)
+
+
 def _ruling_checks(L):
     out = []
     if not L.get("mtr"):
@@ -755,7 +760,7 @@ def build_lesson(L, outdir):
     findings, n = mathcheck_lesson(L)
     d = distractorcheck_lesson(L)
     c = capcheck_lesson(L)
-    r = _ruling_checks(L)
+    r = rulingcheck_lesson(L)
     print(f"mathcheck {L['code']}: {n} items checked, {len(findings)} findings")
     for f in findings + d + c + r:
         print("  ", f)

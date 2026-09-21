@@ -156,6 +156,10 @@ Do not batch lessons before the first push. One lesson, checked, viewed, pushed;
 | `docscan: benchmark code on student surface` | `MA.…` on a student page | move it to the key/TE |
 | `glyph: … U+207D` | a character with no glyph in the deck/doc fonts | use plain characters; superscript digits and ⁻ ᵐ ⁿ are fine |
 | `offpage` / `slidefit` findings | text outside the page/slide box | shorten; view the page |
+| `overlap: text on text` / `figure on text` | two slide elements drawn on each other, found in the rendered PDF | move one; a placer that sets its own `y` must leave room for what came before |
+| `imagedrift: … not in the figure library` | a document embeds an image that is not a current `figs/` file — an older rendering or an orphan | rebuild the document; never edit the index by hand |
+| `suitecheck: …` | HOUSE STYLE's `suite:a7` tables disagree with what runs | edit the table in HOUSE STYLE (its A7 block is maintained from this side) and tell Croix, who relays it to M7 |
+| `ruling 28 — an IXL skill is marked optional` | an `ixl` entry carrying "Optional" or "Also consider" | every listed skill is required; drop the words. A run of the same skill across two lessons uses `ixl_due` (SPEC SCHEMA) |
 | `footer: '…' sits below the footer rule` | a notes line sized for one line wrapped to two and hangs past the rule | shorten the `items2` line, or drop a math row from that notes slide |
 
 ## 5. The unit documents, the manifest, the package

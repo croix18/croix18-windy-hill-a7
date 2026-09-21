@@ -14,6 +14,9 @@ finding and exits 0 is worse than no check.
   plancheck  every deck side-car totals 53 with a whiteboard remainder inside 10–20
   footer     nothing but the footer itself renders below a slide's footer rule
   slidefit   no text box or picture in a deck crosses the footer rule or the slide edge
+  overlap    on a rendered slide, no two lines of text collide and no figure sits on any words
+  imagedrift every image embedded in a .docx or .pptx is a file in the figure library, byte for byte
+  suitecheck HOUSE STYLE's suite:a7 tables name every check this file and the build run, and only those
 """
 import os, re, sys, glob, json, zipfile, subprocess, collections
 from xml.etree import ElementTree as ET
@@ -329,11 +332,144 @@ def check_slidefit(files):
     return findings
 
 
+def check_overlap(files):
+    """§13 item 7: two checks the bbox and the eye both miss — text drawn over text, and a figure
+    drawn over words — read from the RENDERED slide PDF. A filled panel or a drawn rule is an
+    image too, and text sits on those by design; they are told apart from a figure by their
+    pixels (a flat fill has no ink), and the count skipped is printed as part of the denominator.
+    Thresholds: two lines collide when their boxes share more than 0.38 of the shorter line's
+    height (a wrapped continuation line shares none — it sits below); a figure collides with a
+    line when the shared area is more than 15% of the smaller of the two."""
+    import io as _io, itertools
+    try:
+        import pymupdf
+        from PIL import Image, ImageStat
+    except ImportError as e:
+        return [f"overlap: cannot run ({e})"]
+    findings = []; nl = nf = npanel = 0; ndecks = 0
+    for f in files:
+        if not f.endswith("Slides.pdf"):
+            continue
+        ndecks += 1
+        base = os.path.basename(f)
+        d = pymupdf.open(f); flat = {}
+        def is_flat(xref):
+            if xref not in flat:
+                try:
+                    im = Image.open(_io.BytesIO(d.extract_image(xref)["image"])).convert("L")
+                    flat[xref] = ImageStat.Stat(im).stddev[0] < 3.0
+                except Exception:
+                    flat[xref] = False
+            return flat[xref]
+        for pno, pg in enumerate(d, 1):
+            lines = []
+            for b in pg.get_text("dict")["blocks"]:
+                if b["type"] != 0:
+                    continue
+                for ln in b["lines"]:
+                    t = "".join(sp["text"] for sp in ln["spans"]).strip()
+                    if t:
+                        lines.append((pymupdf.Rect(ln["bbox"]), t))
+            figs = []
+            for im in pg.get_image_info(xrefs=True):
+                if im.get("xref") and is_flat(im["xref"]):
+                    npanel += 1
+                    continue
+                figs.append(pymupdf.Rect(im["bbox"]))
+            nl += len(lines); nf += len(figs)
+            for (ra, ta), (rb, tb) in itertools.combinations(lines, 2):
+                x = ra & rb
+                if not x.is_empty and x.height > 0.38 * min(ra.height, rb.height) and x.width > 1:
+                    findings.append(f"overlap: text on text, {base} slide {pno}: {ta[:40]!r} ~ {tb[:40]!r}")
+            for (ra, ta), rf in itertools.product(lines, figs):
+                x = ra & rf
+                if not x.is_empty and x.width > 2 and x.height > 2 and x.get_area() > 0.15 * min(ra.get_area(), rf.get_area()):
+                    findings.append(f"overlap: figure on text, {base} slide {pno}: {ta[:40]!r} under a figure at {[round(v) for v in rf]}")
+    if ndecks == 0:
+        findings.append("overlap: examined NO decks")
+    print(f"overlap: {ndecks} decks, {nl} text lines, {nf} figures ({npanel} panels and rules skipped as flat fills), {len(findings)} findings")
+    return findings
+
+
+def check_imagedrift(files):
+    """§13's imagedrift: a document embeds a COPY of each figure at build time. Every embedded image
+    must be, byte for byte, a file in figs/ — otherwise the document was built from a figure the
+    library no longer has (an orphan) or from an older rendering of one (drift), and rebuilding it
+    would change what students see."""
+    import hashlib
+    figs = os.path.join(os.path.dirname(os.path.abspath(__file__)), "figs")
+    lib = set()
+    for p in glob.glob(os.path.join(figs, "*.png")):
+        with open(p, "rb") as fh:
+            lib.add(hashlib.sha256(fh.read()).hexdigest())
+    findings = []; ndocs = nimg = 0
+    for f in files:
+        if not f.endswith((".docx", ".pptx")):
+            continue
+        ndocs += 1
+        z = zipfile.ZipFile(f)
+        for n in z.namelist():
+            if "/media/" not in n:
+                continue
+            nimg += 1
+            if hashlib.sha256(z.read(n)).hexdigest() not in lib:
+                findings.append(f"imagedrift: {os.path.basename(f)} embeds {n}, which is not in the figure library")
+    if ndocs == 0 or nimg == 0:
+        findings.append(f"imagedrift: examined {ndocs} documents and {nimg} images — a check that examined nothing cannot be clean")
+    print(f"imagedrift: {ndocs} documents, {nimg} embedded images against {len(lib)} library files, {len(findings)} findings")
+    return findings
+
+
+SUITE_DOC = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "reference", "HOUSE STYLE.md")
+BUILD_GATES = ("mathcheck", "distractorcheck", "capcheck", "rulingcheck")
+
+
+def check_suite(files):
+    """HOUSE STYLE §13c: a list of what a system does is a claim about that system, and any list a
+    script could derive must be derived. The suite:a7 block carries two tables — the build gates
+    and this file's checks. Each must name every check that runs, and only those."""
+    findings = []
+    try:
+        txt = open(SUITE_DOC, encoding="utf-8").read()
+    except OSError as e:
+        return [f"suitecheck: cannot read HOUSE STYLE ({e})"]
+    m = re.search(r"<!-- suite:a7.*?-->(.*?)(?=\n## |\n<!-- suite:)", txt, re.S)
+    if not m:
+        return ["suitecheck: no suite:a7 block in HOUSE STYLE"]
+    block = m.group(1)
+    def rows(label):
+        t = re.search(r"\| *" + re.escape(label) + r" *\|.*?\n\|[-| ]+\|\n((?:\|.*\n)+)", block)
+        return [] if not t else re.findall(r"^\| *`([a-z]+)`", t.group(1), re.M)
+    have_build = rows("gate (A7, at build)")
+    have_docs = rows("check (A7, checks.py)")
+    want_docs = [fn.__name__.replace("check_", "") for fn in RUN_LIST]
+    alias = {"gdoc": "gdoccheck", "pages": "pagecheck", "plan": "plancheck", "suite": "suitecheck"}
+    want_docs = [alias.get(n, n) for n in want_docs]
+    for missing in [n for n in BUILD_GATES if n not in have_build]:
+        findings.append(f"suitecheck: build gate `{missing}` runs but has no row in HOUSE STYLE's suite:a7 table")
+    for extra in [n for n in have_build if n not in BUILD_GATES]:
+        findings.append(f"suitecheck: HOUSE STYLE names build gate `{extra}`, which nothing runs")
+    for missing in [n for n in want_docs if n not in have_docs]:
+        findings.append(f"suitecheck: `{missing}` runs in checks.py but has no row in HOUSE STYLE's suite:a7 table")
+    for extra in [n for n in have_docs if n not in want_docs]:
+        findings.append(f"suitecheck: HOUSE STYLE names `{extra}`, which checks.py does not run")
+    cnt = re.search(r"checks\.py` \((\w+)", block)
+    words = {"eleven": 11, "twelve": 12, "thirteen": 13, "fourteen": 14, "fifteen": 15, "sixteen": 16}
+    if cnt and words.get(cnt.group(1)) not in (None, len(want_docs)):
+        findings.append(f"suitecheck: HOUSE STYLE says checks.py runs {cnt.group(1)}; it runs {len(want_docs)}")
+    print(f"suitecheck: {len(have_build)} gate rows and {len(have_docs)} check rows read against {len(BUILD_GATES)} gates and {len(want_docs)} checks, {len(findings)} findings")
+    return findings
+
+
+RUN_LIST = (check_docscan, check_keycheck, check_gdoc, check_glyph, check_pages, check_offpage, check_pdftwin,
+            check_telength, check_footer, check_plan, check_slidefit, check_overlap, check_imagedrift, check_suite)
+
+
 def run(outdir):
     files = sorted(glob.glob(os.path.join(outdir, "*")))
     print(f"checks over {outdir}: {len(files)} files — " + ", ".join(f"{k} {v}" for k, v in collections.Counter(os.path.splitext(f)[1] for f in files).items()))
     findings = []
-    for chk in (check_docscan, check_keycheck, check_gdoc, check_glyph, check_pages, check_offpage, check_pdftwin, check_telength, check_footer, check_plan, check_slidefit):
+    for chk in RUN_LIST:
         findings += chk(files)
     for f in findings:
         print("  FINDING", f)

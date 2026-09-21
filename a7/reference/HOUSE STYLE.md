@@ -1412,6 +1412,19 @@ later units) are dropped, not shortened. Every lesson opens with the four-questi
 warm-up (yesterday / last week / last unit / prior-grade prerequisite). The Teacher Edition's
 "What changed" list records each replacement so the book's numbering still maps.
 
+## 13b(xiv). Rulings — Croix, 21 September: the shipped units, and the stale block [A7; number to be assigned by M7 under ruling 3]
+
+**Ruling 32 (proposed) — A7 Units 1 and 2 stay as shipped.** Asked whether the two units built
+before the spec system — which exist only as .docx and .pptx, so no gate can run on them — should
+be re-authored as specs, hand-audited under §13, or left, Croix chose *leave as shipped*. Both are
+taught. No check is claimed over them, and nothing in this file should be read as covering them;
+the same-value check that found six defects in Unit 4 has never seen Unit 1 or 2.
+
+**The A7 block of §13c is A7's to rewrite, and the master is still one file.** Asked who fixes a
+shared file whose A7 tables described tools the A7 tree does not have, Croix chose: A7 rewrites
+its own block and he relays the diff to M7, so the master stays single under ruling 3. Done the
+same day; the block now derives from the tree, and `suitecheck` keeps it so.
+
 ## 13b(ii). Rulings — Croix, 6 September
 
 **Ruling 8 — a question is never split across a page, and the paper is the price.**
@@ -1662,47 +1675,74 @@ with no row, a row naming a check nothing runs, and a stated count that disagree
 | `xmlshape` | did any post-build tool change XML it was not asked to change, diffed against the generator's own output? |
 | `pagebind` | is any question split across a page? |
 
-<!-- suite:a7 — the accelerated fork's list. Maintained from the A7 side, where `tablecheck.py`
-     reads THIS BLOCK against that fork's checkall.py and fails on a check with no row, a row
-     naming a check nothing runs, and a count that disagrees. Read from the on-level side but not
-     verified there: neither tree can read the other.
-     ROWS ARE BACKTICKED AGAIN, 8 September. They were stripped so that an on-level pattern
-     scanning the whole file could not read them as claims about the on-level tree — a defence
-     against a guard that had no boundary. Both guards now slice on these markers before they
-     match anything, so the boundary does the work the punctuation was standing in for, and the
-     table can be written the way every other table in this file is written. The marker is the
-     contract; the formatting is not. -->
+<!-- suite:a7 — the accelerated fork's list. Maintained from the A7 side. Since 20 September 2026
+     the accelerated tree is the Python spec build in `a7/build/` (`BUILDING A UNIT.md`, `SPEC
+     SCHEMA.md`); its `checks.py` carries a `suitecheck` that reads THIS BLOCK — the two backticked
+     tables below — against the gates the build runs and the checks `checks.py` runs, and fails on a
+     check with no row, a row naming a check nothing runs, and a stated count that disagrees. Read
+     from the on-level side but not verified there: neither tree can read the other. -->
 
-**Accelerated (A7) — twenty-four, in the order `checkall.py` runs them,** checked from that side by
-`tablecheck.py`. Recorded here so each course can see what the other covers; from the on-level side
-this is read, not verified.
+**Accelerated (A7) — the gate has two layers, and the first refuses to build.** *Rewritten 21
+September 2026, when a person-check found this block describing a tree that no longer existed:
+the `checkall.py` toolchain and its twenty-four checks were replaced on 20 September by a
+spec-driven build in which every item carries its own machine check, and nothing in this file said
+so for a day. The record of the earlier tree is kept below, marked as history, because the rules it
+earned still hold; the tables it carried do not.*
 
-| check (A7) | asks |
+**Layer 1 — at build, in `build_lesson` and `build_unit`. Four gates; any finding refuses the build,
+so nothing that fails one has ever been rendered.**
+
+| gate (A7, at build) | asks |
 |---|---|
-| `mathcheck` | is every arithmetic claim a student is told TRUE? |
-| `glyphaudit` | does every character have a glyph in the font that will be used? |
-| `imagedrift` | does every embedded figure match the library? |
-| `docscan` | does any LIVE shipped document break one of the standing rulings, on the surface that ruling applies to? |
-| `pdftwin` | does every shipped PDF say what its document says? |
-| `shapeoverlap` | does any picture sit on top of any words? |
-| `partsum` | do the per-slide minutes inside a block add up to the block? |
-| `slideoverlap` | do any two lines of text collide, by rendering? |
-| `offpage` | is every word on the page it is drawn on, read from the rendered PDF? |
-| `exprcheck` | does the question print the values its key states? |
-| `sheretime` | does every START HERE timing table agree with its decks? |
-| `designcheck` | does every §16 claim in `designrules.json` hold? |
-| `figstale` | is every figure newer than the generator that draws it? |
-| `tedeck` | is every teacher's edition newer than the deck whose speaker notes it prints? |
-| `docstale` | is every built document newer than the generator that writes it? |
-| `piglyph` | does any figure DRAW a capital Π where a lowercase π belongs? |
-| `gdoccheck` | will Google Docs — the editor Croix actually opens these in — import this .docx faithfully? |
-| `emptypage` | is any shipped page BLANK — and, as a report beside it, how many are nearly empty? |
-| `indexdrift` | does each index match its source and its images? |
-| `speccheck` | does every spec copy match its master, does any of them still state a retired rule, and does any of them still use the wrong pronoun for Croix? |
-| `tablecheck` | does the A7 table name every check that runs, and only those? |
-| `xmlshape` | did any post-build tool change XML it was not asked to change — and were the namespace prefixes rewritten, reported once rather than once per tag? |
-| `exprsize` | does every expression in a document print at one digit size? |
-| `specdiff` | is any retired assertion still live anywhere in the tree? |
+| `mathcheck` | is every answer a student is told TRUE? Each item's `check` is re-derived by sympy from the spec — never read from a key — and an item with no check and no acknowledged hand derivation is a finding. The unit assessment's point ledger is asserted here too, against its declared total and against its per-benchmark tracker (§13 item 4, totals two ways). |
+| `distractorcheck` | does every wrong option carry a named error with a cite; does a select-all assert that each wrong option is NOT the target; are any two options the same NUMBER — a wrong option equal to the key marks a right answer wrong, and `form_only` exempts an option wrong only in how it is written, on a question whose own words name the form; does a board option carry `$latex$`, which the slide prints literally? |
+| `capcheck` | is every item inside its benchmark's boundary — a scientific-notation coefficient in [1, 10); a sum or difference with the exponents within 2 (MA.8.NSO.1.5); a radicand that is a perfect square ≤ 225 or a perfect cube in −125..125 (MA.8.NSO.1.7) — except where the item is tagged as being ABOUT the rule, with its reason? |
+| `rulingcheck` | rulings 21, 22, 25, 26 and 28 as facts about the spec: six independent questions; exactly one board with a number the question does not need; the MTRs named with their evidence; three sentences to say aloud; no IXL skill marked optional or "also consider" under a heading that says all are required. |
+
+The generators refuse too, which is why a layout defect is a build failure rather than a finding
+found afterwards: a text box that runs into the footer rule or off the slide, a table cell that
+would wrap inside a fixed-height row, an inline math picture wider than its column, a line that
+runs off the slide, an inner table.
+
+**Layer 2 — over the built directory, `checks.py` (fourteen; any finding exits 1, and a check that
+examined nothing cannot report clean).**
+
+| check (A7, checks.py) | asks |
+|---|---|
+| `docscan` | does any student surface carry a benchmark code, the calculator line, the word homework, or partner work? |
+| `keycheck` | does any student paper carry an ANSWER KEY mark or a run in the answer colour? |
+| `gdoccheck` | will Google Docs — the editor Croix actually opens these in — import this .docx faithfully: native fonts only, no nested tables, every table pinned, no two tables touching? |
+| `glyph` | does every non-ASCII character in every run have a glyph in the font that will draw it, in every part of the file the reader sees? |
+| `pagecheck` | is any shipped PDF page BLANK? |
+| `offpage` | does every word of every PDF lie inside its page box, measured from the rendered file? |
+| `pdftwin` | does every .docx and .pptx have a .pdf twin, newer than it, whose text contains the source text? |
+| `telength` | ruling 26: does any teacher's edition run past four printed pages? |
+| `footer` | does anything but the footer itself render below a slide's footer rule? |
+| `plancheck` | does every deck's side-car total 53 minutes with the whiteboard remainder inside 10–20? |
+| `slidefit` | does any text box or picture in a deck cross the footer rule or the slide edge? |
+| `overlap` | on the rendered slide, do any two lines of text collide, and does any figure sit on any words? A filled panel or a drawn rule is told from a figure by its pixels, and the number skipped is printed with the denominator. |
+| `imagedrift` | is every image embedded in a .docx or .pptx a file in the figure library, byte for byte — so no document carries an orphaned or older rendering of a figure? |
+| `suitecheck` | do the two tables in this block name every gate and every check that runs, and only those? |
+
+**How this gate meets §13, item by item, with the gaps named — because a list of what a system
+covers is only worth reading beside a list of what it does not.**
+
+| §13 asks | what the A7 tree does |
+|---|---|
+| 1. Work every answer independently | `mathcheck`, from the spec, at every build. The key and the question are printed from ONE spec entry, so the old `exprcheck` question — does the question print the values its key states — cannot arise. |
+| 2. Every figure solvable from its printed labels | **Not mechanical.** The figures here are expression images rendered from the item's own LaTeX, so a figure cannot disagree with its item; whether the labels a diagram prints are enough to solve it is read by a person on the contact sheet. No unit so far has a diagram of that kind. |
+| 3. Render, rasterize, and look at every page | `pagecheck`, `offpage`, `footer` and `slidefit` measure; `contact_sheet.py` renders every page into one grid, and `BUILDING A UNIT.md` §7 makes looking at it a required step. **The looking is a person, and it found what the tools could not on 21 September: eleven ruling numbers pointing at nothing, an IXL slide contradicting itself, and a dozen teacher notes whose arithmetic did not follow.** |
+| 4. Totals two ways | `build_unit` asserts the assessment ledger by section and by benchmark against the declared total. |
+| 5. Glyph audit of every document | `glyph`, every run, every part. |
+| 6. Every .docx has a .pdf twin | `pdftwin`, which also requires the PDF's text to contain the source's. |
+| 7. Deck geometry, not only words | `slidefit` and `footer` for the edges; `overlap` for text on text and figures on words; `plancheck` for the side-car minutes (the successor of `partsum` and `decktime`). |
+| `indexdrift` / `imagedrift` | `imagedrift` above. The index concern — a generator that says one fontset while its images are another — cannot arise here: a figure is fingerprinted by its LaTeX and size, the index is merged never rebuilt, and `mathimg.check_index` verifies every indexed figure exists at its stored size. |
+| `speccheck` / `specdiff` — a retired rule still stated in a markdown file, or a spec copy behind its master | **Not present, and this is the gap that matters.** Two of this project's worst finds were markdown, and the 21 September reading found a retired instruction live in `SPEC SCHEMA.md` and eleven ruling numbers in the tree that the merge had renumbered. The spec copies are not an issue — every package file is written by `install_unit.py` from `out/` and compared on install — but nothing scans the markdown for retired assertions. Until it does, reading the tree's markdown after any change that touches more than one file is the check, and it is a person. |
+| `sheretime` | the START HERE is generated from the manifest and each deck's side-car by `install_unit.py`, and `plancheck` verifies the side-cars; there is no second copy to disagree. |
+| `xmlshape`, `exprsize`, `piglyph`, `tedeck`, `docstale`, `figstale` | no post-build tool rewrites XML here (`gdoccheck` still parses every part); every expression is rendered at one size per surface by construction (`mathimg`); the STIX fontset is fixed in `mathimg` and π is not drawn by a fallback; the teacher's edition is built from the same spec in the same run as the deck, so it cannot be older; `pdftwin` requires every PDF to be newer than its source, and `figstale` is `mathimg.check_index`. |
+
+*The record below is of the accelerated tree as it stood before 20 September 2026 — the
+`checkall.py` toolchain — kept as history because what it learned still binds.*
 
 Two more run inside the accelerated fork's `finish.py` rather than in its `checkall.py`, because
 they are REPAIRS and a repair belongs at the choke point every packaging script already passes
