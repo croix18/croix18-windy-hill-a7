@@ -1,6 +1,6 @@
 # A7 3.06  Integer Exponents: Evaluating and Equivalent Expressions — Math Nation 3.6 + 3.7 as one period.
 L = dict(
-    code="3.06", unit=3, lesson_no="6–7", title="Evaluating and Equivalent Expressions",
+    code="3.06", unit=3, lesson_no=6, label="Lessons 6–7", title="Evaluating and Equivalent Expressions",
     benchmark="MA.8.NSO.1.3",
     benchmark_text="Extend previous understanding of the laws of exponents to include integer exponents. Apply the laws of exponents to evaluate numerical expressions and generate equivalent numerical expressions, limited to integer exponents and rational-number bases, with procedural fluency.",
     target="I can evaluate an expression with integer exponents using the laws, and decide whether two expressions with different bases are equivalent.",
