@@ -12,7 +12,7 @@ L = dict(
     vocab=[("quotient of powers law", "$\\frac{a^{m}}{a^{n}} = a^{m-n}$, $a \\ne 0$ — same base, subtract the exponents"),
            ("power of a quotient law", "$\\left(\\frac{a}{b}\\right)^{m} = \\frac{a^{m}}{b^{m}}$, $b \\ne 0$ — the exponent goes to numerator and denominator"),
            ("zero exponent law", "$a^{0} = 1$ for every nonzero $a$")],
-    ixl=["Powers with negative bases — WFW", "Optional: Division with exponents — XNC", "Optional: Identify equivalent expressions involving whole-number exponents — KBE"],
+    ixl=["Powers with negative bases — WFW", "Division with exponents — XNC", "Identify equivalent expressions involving whole-number exponents — KBE"],
 
     warmup=[
         dict(stem="Write as one power:  $3^{2}\\cdot 3^{3}$", answer="$3^{5}$", band="yesterday", source="3.01 — product of powers", check=("eq", "3**2*3**3", "3**5")),
@@ -208,7 +208,7 @@ L = dict(
         sits="Second of the three MA.7.NSO.1.1 lessons. 3.03 combines today's laws with yesterday's in one expression.",
         lives="Notes I (the cancelling expansion) and Notes III (the two roads to 2⁰ = 1). Whiteboard 5 and 6 are the diagnostics: a board full of B on Q5 is the zero-equals-zero misconception, a board full of B on Q6 is dividing the exponents.",
         materials="Whiteboards and markers. Calculators are allowed on everything; 5⁶ = 15,625 is on the notes for the value check.",
-        variation="Questions 1–3 hold the law fixed and vary the base: whole number, then a quotient that leaves one factor, then a negative base. 5–6 hold the power-of-a-quotient law and switch which part is negative. 7–8 are the zero exponent from the pattern and then from a sentence. 9–11 ask for the law by name on decimal bases. The pattern breaks at 12c, where the quotient equals 1 and the student must see that the exponents match, and at 14, where two of the six options are NOT 1 for two different reasons. The Additional sheet mirrors this and breaks with 0⁵ — a zero base, not a zero exponent.",
+        variation="Questions 1–3 hold the law fixed and vary the base: whole number, then a quotient that leaves one factor, then a negative base. 5–6 hold the power-of-a-quotient law and switch which part is negative. 7–8 are the zero exponent from the pattern and then from a sentence. 9–11 ask for the law by name on decimal and fraction bases. The pattern breaks at 12c, where the quotient equals 1 and the student must see that the exponents match, and at 14, where two of the six options are NOT 1 for two different reasons. The Additional sheet mirrors this and breaks with 0⁵ — a zero base, not a zero exponent.",
         audit=["Math Nation 3.2 pages verified: −8, 81, −343, 0.125, 0.00000016, the 122-block warm-up pattern (n + n + 2 + n²).",
                "The book's warm-up (a growing block pattern) is sound but previews nothing and retrieves nothing from this course; replaced by spaced retrieval.",
                "Practice L2 and Homework L2 keys both check; their items are on the banks here with the notation cleaned (parentheses on negative bases).",

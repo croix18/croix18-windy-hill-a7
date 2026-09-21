@@ -127,8 +127,9 @@ def build_plan(L, deck_path, outdir, course, label):
     doc.para("**Vocabulary.**  " + "; ".join(f"__{t}__" for t, _ in L["vocab"]), size=10.5, before=0, after=3)
     doc.para("**Materials.**  " + T.get("materials", "Whiteboards and markers."), size=10.5, before=0, after=3)
     doc.para("**Practice.**  The six-question independent set is worked silently in class; whatever is not finished goes home. "
-             + "IXL, all skills required to a SmartScore of 67, due at the start of the next class: "
-             + "; ".join(L["ixl"]) + ".", size=10.5, before=0, after=4)
+             + "IXL, all skills required to a SmartScore of 67, "
+             + (L["ixl_due"].rstrip(".")[0].lower() + L["ixl_due"].rstrip(".")[1:] if L.get("ixl_due") else "due at the start of the next class")
+             + ": " + "; ".join(L["ixl"]) + ".", size=10.5, before=0, after=4)
 
     name = f"A7 {code}  Lesson Plan.docx"
     path = os.path.join(outdir, name)

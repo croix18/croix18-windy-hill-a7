@@ -556,7 +556,7 @@ def build_deck(L, outdir):
         _wb_body(D, q, reveal=True)
     # ---- independent set (ruling 21), then IXL
     D.independent(INDEP_MIN)
-    D.ixl(L["ixl"], IXL_MIN)
+    D.ixl(L["ixl"], IXL_MIN, **({"due": L["ixl_due"]} if L.get("ixl_due") else {}))
     name = f"A7 {code}  Slides.pptx"
     path = os.path.join(outdir, name)
     D.save(path)
@@ -742,6 +742,11 @@ def _ruling_checks(L):
                    + (f" (boards {[u + 1 for u in unneeded]})" if unneeded else ""))
     if not (L["te"].get("say") and len(L["te"]["say"]) == 3):
         out.append(f"{L['code']}: ruling 26 — te.say must be the three sentences to say out loud today")
+    # Ruling 28: every IXL skill listed is required — "nothing on the list is optional". The slide
+    # prints "all required" over the list, so a skill marked optional contradicts it on the screen.
+    for s in L.get("ixl", []):
+        if re.search(r"\boptional\b", s, re.I):
+            out.append(f"{L['code']}: ruling 28 — an IXL skill is marked optional ({s!r}); every listed skill is required, so drop the word or the skill")
     return out
 
 

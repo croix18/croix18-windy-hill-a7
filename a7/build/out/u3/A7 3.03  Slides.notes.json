@@ -134,7 +134,7 @@
    "title": "Whiteboards   \u00b7   Question 2 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "Product then power of a power. A board with 27 used 3\u00b3 (added 0 + 2 + ... then lost the multiply); 3\u2075 = 243 added 2 + 3.",
+   "note": "Product then power of a power. A board with 27 kept only the outer exponent, 3\u00b3; 3\u2075 = 243 added 2 + 3.",
    "kind": "wb"
   },
   {
@@ -214,7 +214,7 @@
    "title": "Whiteboards   \u00b7   Question 7 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "Identity, power of a power, product. Four decimal places. A board with 0.001 has 0.1\u00b3 from adding 2 + 1.",
+   "note": "Identity, power of a power, product. Four decimal places. A board with 0.001 has 0.1\u00b3: the outer square on (0.1\u00b9)\u00b2 was dropped, leaving 0.1\u00b2 \u00b7 0.1\u00b9.",
    "kind": "wb"
   },
   {
@@ -270,7 +270,7 @@
    "title": "IXL",
    "sub": "Last five minutes.",
    "min": 5,
-   "note": "IXL: every listed skill is required, SmartScore 67, due at the start of the next class.",
+   "note": "IXL: every listed skill is required, SmartScore 67. Due at the start of the next class.",
    "kind": "ixl"
   }
  ]

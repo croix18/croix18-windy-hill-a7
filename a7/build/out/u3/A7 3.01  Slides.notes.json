@@ -54,7 +54,7 @@
    "title": "Notes",
    "sub": "",
    "min": 4,
-   "note": "(4\u00b2)\u00b3 is three copies of 4\u00b2, so six 4s: multiply the exponents. Then the identity law: one factor of the base is the base. Students who write 4\u00b2 \u00b7 3 = 12 or 4\u2075 (adding) are confusing this with the product law; the reveal on the table makes the count visible.\nOFF: 'Product of powers: add. Power of a power: multiply. Both come from counting factors, so count if you forget.'",
+   "note": "(4\u00b2)\u00b3 is three copies of 4\u00b2, so six 4s: multiply the exponents. Then the identity law: one factor of the base is the base. Students who write 4\u2075 (adding the exponents) are confusing this with the product law; a board with 48 read (4\u00b2)\u00b3 as 4\u00b2 \u00b7 3. The reveal on the table makes the count visible.\nOFF: 'Product of powers: add. Power of a power: multiply. Both come from counting factors, so count if you forget.'",
    "kind": "notes"
   },
   {
@@ -278,7 +278,7 @@
    "title": "IXL",
    "sub": "Last five minutes.",
    "min": 5,
-   "note": "IXL: every listed skill is required, SmartScore 67, due at the start of the next class.",
+   "note": "IXL: every listed skill is required, SmartScore 67. Due at the start of the next class.",
    "kind": "ixl"
   }
  ]

@@ -16,6 +16,7 @@ L = dict(
            ("radicand", "the number under the radical bar. The bar groups it, so whatever is under it is evaluated before the root is taken"),
            ("principal square root", "the nonnegative one. $\\sqrt{49}$ is 7 — not −7, and not both, even though $(-7)^{2}$ is also 49")],
     ixl=["Evaluate radical expressions — D8J"],
+    ixl_due="This skill continues tomorrow: one assignment, due at the start of the class after 4.06.",
 
     warmup=[
         dict(stem="How many significant digits are in  0.0250 ?", answer="3", band="yesterday", source="4.04 — leading zeros never count; the trailing zero does, because a decimal point is written", check=("many", ("eq", "sig('0.0250')", "3"), ("eq", "F(250,10000)", "F(25,1000)"))),

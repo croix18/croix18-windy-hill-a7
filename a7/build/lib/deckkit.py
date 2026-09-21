@@ -336,11 +336,13 @@ class Deck:
                        "Show the step that does the work, not just the answer.",
                        "Silence until the six minutes are up."], gap=0.14)
 
-    def ixl(self, skills, minutes=5):
-        self.section("IXL", "Last five minutes.", minutes, "IXL: every listed skill is required, SmartScore 67, due at the start of the next class.", "ixl")
+    def ixl(self, skills, minutes=5, due="Due at the start of the next class."):
+        """Ruling 28. `due` is the third line; a lesson whose skills continue into the next lesson
+        passes its own (one assignment covering the run, due after its last lesson)."""
+        self.section("IXL", "Last five minutes.", minutes, "IXL: every listed skill is required, SmartScore 67. " + due, "ixl")
         rows = ["Open IXL and start today's skills.",
                 "Work on paper where the question needs work. The answer box does not show it.",
-                "Every skill listed is required, to a SmartScore of 67. Due at the start of the next class."]
+                "Every skill listed is required, to a SmartScore of 67. " + due]
         self.cursor = 2.0
         self.numbered(rows, gap=0.1)
         self.cursor += 0.05

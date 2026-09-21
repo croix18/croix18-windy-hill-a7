@@ -11,7 +11,7 @@ the unit is planned. The printed keys in `Answer Keys/` are generated from the s
 
 *MA.7.NSO.1.1*
 
-**Variation.**  Bank questions 1–5 vary one thing at a time inside the product law: two powers, then three, then evaluate-and-multiply against the law, then a negative base, then a case the student must judge (Jose, same base). Questions 6–8 move to the power of a product with the same three moves. The pattern breaks at question 13, where the exponent is the unknown, and at 15, where an equivalent expression has a different base (4³ = 2⁶). The Additional sheet mirrors the structure with different numbers and breaks at Leeland (different bases — the law does not apply).
+**Variation.**  Bank questions 1–5 vary one thing at a time inside the product law: two powers, then three, then evaluate-and-multiply against the law, then a negative base, then a case the student must judge (Jose, same base). Questions 6–8 move to the power of a product with the same three moves. The pattern breaks at question 12, where the exponent is the unknown, and at 14, where an equivalent expression has a different base (4³ = 2⁶). The Additional sheet mirrors the structure with different numbers and breaks at Leeland (different bases — the law does not apply).
 
 **Read this once, when you plan the unit.**
 
@@ -46,7 +46,7 @@ the unit is planned. The printed keys in `Answer Keys/` are generated from the s
 
 *MA.7.NSO.1.1*
 
-**Variation.**  Questions 1–3 hold the law fixed and vary the base: whole number, then a quotient that leaves one factor, then a negative base. 5–6 hold the power-of-a-quotient law and switch which part is negative. 7–8 are the zero exponent from the pattern and then from a sentence. 9–11 ask for the law by name on decimal bases. The pattern breaks at 12c, where the quotient equals 1 and the student must see that the exponents match, and at 14, where two of the six options are NOT 1 for two different reasons. The Additional sheet mirrors this and breaks with 0⁵ — a zero base, not a zero exponent.
+**Variation.**  Questions 1–3 hold the law fixed and vary the base: whole number, then a quotient that leaves one factor, then a negative base. 5–6 hold the power-of-a-quotient law and switch which part is negative. 7–8 are the zero exponent from the pattern and then from a sentence. 9–11 ask for the law by name on decimal and fraction bases. The pattern breaks at 12c, where the quotient equals 1 and the student must see that the exponents match, and at 14, where two of the six options are NOT 1 for two different reasons. The Additional sheet mirrors this and breaks with 0⁵ — a zero base, not a zero exponent.
 
 **Read this once, when you plan the unit.**
 
@@ -80,7 +80,7 @@ the unit is planned. The printed keys in `Answer Keys/` are generated from the s
 
 *MA.7.NSO.1.1*
 
-**Variation.**  Question 1 is a read-the-work item (name the laws in two students' plans). Questions 2–5 hold the shape 'two laws, evaluate' and vary the second law: power of a power, then zero exponent, then identity, then a zero exponent in a denominator. 6–7 add a third law. The pattern breaks at 8, a select-all where three of six options are equivalent for three different reasons, and at 11, where the exponent is unknown inside a two-law expression. The Additional sheet mirrors every position with different numbers.
+**Variation.**  Question 1 is a read-the-work item (name the laws in two students' plans). Questions 2–5 hold the shape 'two laws, evaluate' and vary the second law: power of a power, then zero exponent, then identity, then a zero exponent in a denominator. 6–7 add a third law. The pattern breaks at 8, a select-all where three of six options are equivalent for three different reasons, and at 10, where the exponent is unknown inside a two-law expression. The Additional sheet mirrors every position with different numbers.
 
 **Read this once, when you plan the unit.**
 

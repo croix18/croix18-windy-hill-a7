@@ -37,7 +37,8 @@ Sheet alone may describe the FAST calculator.
 | `essential` | str | essential question (TE only) |
 | `building_on`, `working_toward` | str | vertical alignment lines (TE) |
 | `vocab` | list of (term, definition) | definition may carry `$…$` |
-| `ixl` | list of str | `"Skill name — CODE"`; codes from `a7/reference/ixl_skills_by_lesson.json`; prefix `"Also consider: "` for the plan's optional skill |
+| `ixl` | list of str | `"Skill name — CODE"`; codes from `a7/reference/ixl_skills_by_lesson.json`. Ruling 28: every skill the plan lists — the numbered ones and the "also consider" ones alike — is required, so nothing is prefixed "Optional" or "Also consider" (the build refuses the word "optional") |
+| `ixl_due` | str | only for a lesson whose skills continue into the next lesson (ruling 28: one assignment covering the run, due after its last lesson). Replaces the slide's and plan's "Due at the start of the next class." — e.g. 4.05: `"This skill continues tomorrow: one assignment, due at the start of the class after 4.06."` |
 | `warmup` | list of 4 dicts | see below — bands: yesterday / last week (or "this week") / last unit / prior grade |
 | `warmup_note` | str | TE note for the warm-up slide |
 | `title_note` | str, optional | TE note for the title slide |
