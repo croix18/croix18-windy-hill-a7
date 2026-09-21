@@ -8,7 +8,7 @@ Nothing exists until it is committed. This folder is generated from `a7/build/u3
 
 ## How the files are named
 
-**`A7 <unit>.<lesson>  <what it is>`** — two spaces before the type, two-digit lesson numbers. `A7 3.04  Question Bank` is Accelerated grade 7, Unit 3, Lesson 4, the question bank. The two Thread A days are `A7 3.T1` and `A7 3.T2` (they are MA.8.AR.1.1, woven into this unit under ruling 14, and carry no book lesson number). Unit-wide documents drop the lesson number: `A7 3  Unit Review`, `A7 3  Unit Assessment`, `A7 3  Reference Sheet`.
+**`A7 <unit>.<lesson>  <what it is>`** — two spaces before the type, two-digit lesson numbers. `A7 3.04  Question Bank` is Accelerated grade 7, Unit 3, Lesson 4, the question bank. The two Thread A days are `A7 3.T1` and `A7 3.T2` (they are MA.8.AR.1.1, woven into this unit under ruling 30, and carry no book lesson number). Unit-wide documents drop the lesson number: `A7 3  Unit Review`, `A7 3  Unit Assessment`, `A7 3  Reference Sheet`.
 
 ---
 
@@ -47,7 +47,7 @@ Nothing exists until it is committed. This folder is generated from `a7/build/u3
 | — | Unit Review | all four | unscored; the SSDD block is named on the key only |
 | — | Unit Assessment — two periods, one paper | all four benchmarks, sections by benchmark | 41 points |
 
-Book order with Thread A woven in after 3.07 (ruling 14): the laws are complete on numbers before they are restated on letters, and both are complete before scientific notation. Math Nation's 3.6 and 3.7 are one period here (3.06–07). MA.7.NSO.1.1 is grade 7 content the Grade 8 FAST assumes; the other three benchmarks report under Number Sense and Operations (8.NSO.1.3, 8.NSO.1.4) and Algebraic Reasoning (8.AR.1.1).
+Book order with Thread A woven in after 3.07 (ruling 30): the laws are complete on numbers before they are restated on letters, and both are complete before scientific notation. Math Nation's 3.6 and 3.7 are one period here (3.06–07). MA.7.NSO.1.1 is grade 7 content the Grade 8 FAST assumes; the other three benchmarks report under Number Sense and Operations (8.NSO.1.3, 8.NSO.1.4) and Algebraic Reasoning (8.AR.1.1).
 
 ---
 

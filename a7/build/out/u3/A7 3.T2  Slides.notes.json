@@ -30,7 +30,7 @@
    "title": "Notes",
    "sub": "Copy the table.",
    "min": 4,
-   "note": "The 3.04 pattern table again, with x in place of 2: each entry is the previous one divided by x. After x\u2070 = 1 the next division gives 1/x, then 1/x\u00b2, then 1/x\u00b3. Students fill the last three cells before the rule is written. The state guide asks for this table (its task 2: x\u2075 down to x\u207b\u2075, 'why is x\u2070 = 1') and for a written contrast of x\u00b3 and x\u207b\u00b3 \u2014 that contrast is whiteboard 9.\nOFF: 'x\u207b\u00b3 is one over x\u00b3. It is a reciprocal. It is not negative, and it is not \u22123x.'",
+   "note": "The 3.04 pattern table again, with x in place of 2: each entry is the previous one divided by x. After x\u2070 = 1 the next division gives 1/x, then 1/x\u00b2, then 1/x\u00b3. Students fill the last three cells before the rule is written. The state guide asks for this table (its task 2, with base m: m\u207b\u2075 to m\u2075, 'why is m\u2070 = 1') and for a written contrast of x\u00b3 and x\u207b\u00b3 \u2014 that contrast is whiteboard 9.\nOFF: 'x\u207b\u00b3 is one over x\u00b3. It is a reciprocal. It is not negative, and it is not \u22123x.'",
    "kind": "notes"
   },
   {
@@ -270,7 +270,7 @@
    "title": "IXL",
    "sub": "Last five minutes.",
    "min": 5,
-   "note": "IXL: every listed skill is required, SmartScore 67, due at the start of the next class.",
+   "note": "IXL: every listed skill is required, SmartScore 67. Due at the start of the next class.",
    "kind": "ixl"
   }
  ]

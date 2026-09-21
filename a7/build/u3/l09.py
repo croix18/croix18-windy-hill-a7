@@ -12,7 +12,7 @@ L = dict(
     vocab=[("scientific notation", "a number written as a product $a \\times 10^{n}$ where $a$ is at least 1 and less than 10, and $n$ is an integer: $2.6 \\times 10^{7}$"),
            ("standard form", "the number written out with all of its digits: 26,000,000"),
            ("coefficient", "the factor $a$ in $a \\times 10^{n}$; it must satisfy $1 \\leq a < 10$")],
-    ixl=["Convert between standard and scientific notation: large numbers — 2AL", "Compare large numbers — WEZ", "Also consider: Powers of ten — LJQ"],
+    ixl=["Convert between standard and scientific notation: large numbers — 2AL", "Compare large numbers — WEZ", "Powers of ten — LJQ"],
 
     warmup=[
         dict(stem="Rewrite with a positive exponent:  $4x^{-3}$", answer="4/x³", band="yesterday", source="T-A2 — only the factor with the negative exponent moves", check=("eq", "4*x**-3", "4/x**3")),
@@ -37,7 +37,7 @@ L = dict(
              not_sci=True,
              letters=False),
         dict(numeral="III", head="How many times larger?", min=4, sub="",
-             note="Three cases, one line each. Same power of 10: divide the coefficients. Same coefficient: divide the powers — and 10³ times is one thousand times, not three times, which is the guide's second named misconception. Both different: divide both and multiply the results. The last line is the calculator: 8.4E6 means 8.4 × 10⁶; E is not an error.\nOFF: '10³ times larger is a thousand times larger. The exponent is not the answer; the power is.'",
+             note="Three cases, one line each. Same power of 10: divide the coefficients. Same coefficient: divide the powers — and 10³ times is one thousand times, not three times — the guide's fourth named misconception, its '10⁴ times read as 4 times'. Both different: divide both and multiply the results. The last line is the calculator: 8.4E6 means 8.4 × 10⁶; E is not an error.\nOFF: '10³ times larger is a thousand times larger. The exponent is not the answer; the power is.'",
              math=["$\\frac{6.4 \\times 10^{7}}{3.2 \\times 10^{7}} = 2$          $\\frac{2 \\times 10^{5}}{2 \\times 10^{2}} = 10^{3} = 1{,}000$",
                    "$\\frac{8.4 \\times 10^{6}}{2.1 \\times 10^{4}} = 4 \\times 10^{2} = 400$"],
              items2=["**Divide the coefficients. Divide the powers of 10. Multiply the two results.**",
@@ -50,7 +50,7 @@ L = dict(
              note_q="SPOKEN ONLY. The book's Florida education-funding figure. Ask which digit goes in front of the decimal point and which place it is in before anyone writes.",
              prompt=["In 2018, funding for education in Florida totaled 30,100,000,000 dollars.", "Express this value in scientific notation."], ask="",
              worked=[dict(sub="Worked.", min=2,
-                          note="The 3 is in the ten-billions place: 10¹⁰. The coefficient keeps every nonzero digit after it — 3.01, not 3.1 and not 3. A board with 3.1 × 10¹⁰ dropped the zero between the 3 and the 1; a board with 3.01 × 10⁹ counted the zeros after the 1 instead of the places the point moved.",
+                          note="The 3 is in the ten-billions place: 10¹⁰. The coefficient keeps every nonzero digit after it — 3.01, not 3.1 and not 3. A board with 3.1 × 10¹⁰ dropped the zero between the 3 and the 1; a board with 3.01 × 10⁹ counted the nine zeros instead of the ten places the point moves.",
                           rows=[("30{,}100{,}000{,}000 = 3.01 \\times 10^{10}", "the 3 is in the ten-billions place"),
                                 ("3.01 \\times 10{,}000{,}000{,}000 = 30{,}100{,}000{,}000", "check")],
                           answer="3.01 × 10¹⁰")],
@@ -184,7 +184,7 @@ L = dict(
         dict(not_sci=True, stem="In question 12, only one of the four equal expressions is written in scientific notation. Which one is it, and why are the other three not?", answer="$6.2 \\times 10^{6}$. The coefficient must be at least 1 and less than 10; 62, 620 and 0.62 are not.", why="", check=("true", "1 <= 6.2 < 10 and not (1 <= 62 < 10) and not (1 <= 620 < 10) and not (1 <= 0.62 < 10)"), space=1.0),
     ],
 
-    mtr=[("MTR.7.1", "Every board and the bank — populations, distances and counts from outside the classroom, written the way science writes them."),
+    mtr=[("MTR.7.1", "Example 1, both Your Turns, boards 3 and 8, and the bank — funding, prices, populations and counts from outside the classroom, written the way science writes them."),
          ("MTR.5.1", "Notes I — the powers of ten are set against place value, so the exponent is read as a count of places rather than a count of zeros."),
          ("MTR.6.1", "Board 4 — the comparison is settled by the exponent first; students say which number is larger before they look at the coefficients.")],
 

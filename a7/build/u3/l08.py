@@ -1,4 +1,4 @@
-# A7 3.T2  Negative Exponents with Variable Bases — Thread A, day 2 (MA.8.AR.1.1; MN 14.3–14.4 woven in under ruling 14).
+# A7 3.T2  Negative Exponents with Variable Bases — Thread A, day 2 (MA.8.AR.1.1; MN 14.3–14.4 woven in under ruling 30).
 L = dict(
     code="3.T2", unit=3, lesson_no="T-A2", label="Thread A · Day 2", title="Negative Exponents with Variable Bases",
     benchmark="MA.8.AR.1.1",
@@ -23,7 +23,7 @@ L = dict(
 
     notes=[
         dict(numeral="I", head="The pattern, with a letter", min=4, sub="Copy the table.",
-             note="The 3.04 pattern table again, with x in place of 2: each entry is the previous one divided by x. After x⁰ = 1 the next division gives 1/x, then 1/x², then 1/x³. Students fill the last three cells before the rule is written. The state guide asks for this table (its task 2: x⁵ down to x⁻⁵, 'why is x⁰ = 1') and for a written contrast of x³ and x⁻³ — that contrast is whiteboard 9.\nOFF: 'x⁻³ is one over x³. It is a reciprocal. It is not negative, and it is not −3x.'",
+             note="The 3.04 pattern table again, with x in place of 2: each entry is the previous one divided by x. After x⁰ = 1 the next division gives 1/x, then 1/x², then 1/x³. Students fill the last three cells before the rule is written. The state guide asks for this table (its task 2, with base m: m⁻⁵ to m⁵, 'why is m⁰ = 1') and for a written contrast of x³ and x⁻³ — that contrast is whiteboard 9.\nOFF: 'x⁻³ is one over x³. It is a reciprocal. It is not negative, and it is not −3x.'",
              table=([1.45] * 8, [["x⁴", "x³", "x²", "x¹", "x⁰", "x⁻¹", "x⁻²", "x⁻³"], ["x·x·x·x", "x·x·x", "x·x", "x", "1", "1/x", "1/x²", "1/x³"]]),
              math=["$x^{-n} = \\frac{1}{x^{n}}$          $\\frac{1}{x^{-n}} = x^{n}$          ($x \\ne 0$)"],
              letters=False, tsize=18),
@@ -206,8 +206,8 @@ L = dict(
         must="Integer exponents on monomial bases, negatives included: rewrite so that only positive exponents are left, and combine several laws in one expression.",
         must_not="Variables are nonzero wherever a negative exponent appears. No rational exponents, and monomials only.",
         read_first=[
-            "Second Thread A day (Math Nation 14.3 and 14.4 under ruling 14): the negative exponent law and multiple laws, with variable bases. The lesson is built on 3.04 — the same table, the same 'reciprocal, not opposite' line — and on yesterday's regrouping of coefficients and variables.",
-            "The items are original, aligned to the benchmark text and to the B1G-M for MA.8.AR.1.1: its example (3x³y⁻²)³ = 27x⁹y⁻⁶ is the shape of Notes III's last line and bank 7b; its items y⁻³z⁻⁴ = 1/(y³z⁴) (whiteboard 4) and (a³/(4b⁻⁷))⁵ = a¹⁵b³⁵/1,024 (Example 2 and bank 8c) are used as written; its task 2 (the x⁵ … x⁻⁵ table) is Notes I; its task 3 (x³ vs x⁻³) is whiteboard 9, as a written contrast.",
+            "Second Thread A day (Math Nation 14.3 and 14.4 under ruling 30): the negative exponent law and multiple laws, with variable bases. The lesson is built on 3.04 — the same table, the same 'reciprocal, not opposite' line — and on yesterday's regrouping of coefficients and variables.",
+            "The items are original, aligned to the benchmark text and to the B1G-M for MA.8.AR.1.1: its example (3x³y⁻²)³ = 27x⁹y⁻⁶ is the shape of Notes III's last line and bank 7b; its items y⁻³z⁻⁴ = 1/(y³z⁴) (whiteboard 4) and (a³/(4b⁻⁷))⁵ = a¹⁵b³⁵/1,024 (Example 2 and bank 8c) are used as written; its task 2 (the m⁻⁵ … m⁵ table, here with x) is Notes I; its task 3 (x³ vs x⁻³) is whiteboard 9, as a written contrast.",
             "The leading error today is not the sign error from 3.04 but a new one: moving the coefficient across the bar with the variable (3x⁻² → 1/(3x²)). Whiteboards 3 and 6 and bank 11 are built to surface it. The sign error is still there (whiteboard 5, option D) and is worth a look.",
             "Every answer is expected 'with positive exponents only'. A student who stops at x⁻⁵ has applied the law correctly and not finished; the key marks the finished form. Say this once, at Notes III."],
         standard_notes=[("Benchmark", "Apply the Laws of Exponents to generate equivalent algebraic expressions, limited to integer exponents and monomial bases."),
@@ -216,10 +216,10 @@ L = dict(
         lives="Notes II — 'only the factor wearing the negative exponent moves'. Whiteboard 6 tells you whether it landed; whiteboard 9 asks for the x³ / x⁻³ contrast in writing.",
         materials="Whiteboards and markers. Calculators are allowed on everything; 4⁵ = 1,024 in Example 2 is the one computation worth a calculator.",
         variation="Questions 1–6 are one move each: a plain negative exponent, one in a denominator, a coefficient that stays, two variables with one negative, a variable in the denominator moving up, three factors moving in two directions. 7–8 add a law before the rewrite (product, power of a product, product with two variables; quotient below zero, quotient with a coefficient, the guide's three-law item). 9 works backwards through zero in each law; 10 evaluates x², x⁻² and −x² at a number so that reciprocal and opposite are seen as values. 11 is the diagnostic multiple choice on the coefficient; 12 asks equivalence to 1/x⁶ six ways, with the two wrong options wrong for different reasons. The Additional sheet mirrors each position.",
-        audit=["All 55 items on the bank, additional bank, warm-up, examples and round were re-derived by sympy at build time with the variables declared as positive symbols (mathcheck: 0 findings).",
+        audit=["Every item on the bank, additional bank, warm-up, examples, independent set and round — 61 checks — was re-derived by sympy at build time with the variables declared as positive symbols (mathcheck: 0 findings).",
                "B1G-M items used as written: y⁻³z⁻⁴ = 1/(y³z⁴) (whiteboard 4); (a³/(4b⁻⁷))⁵ = a¹⁵b³⁵/1,024, checked 4⁵ = 1,024 and (−7)(5) = −35 (Example 2, bank 8c).",
                "The B1G-M example (3x³y⁻²)³ = 27x⁹y⁻⁶ is stated in the guide with a negative exponent left in the result; our items always finish with positive exponents, so the shape is used with the final step added.",
                "No Math Nation Unit 14 pages were available for audit; nothing here is copied from them."],
-        changes=["Math Nation 14.3 and 14.4 (two book lessons) → one period under ruling 14; the numerical negative-exponent law is a week old and needs restating, not reteaching.", "The guide's partner-discussion task (x³ vs x⁻³) → whiteboard 9, written, per the no-partner-work rule.", "Cool-downs → whiteboard round."],
+        changes=["Math Nation 14.3 and 14.4 (two book lessons) → one period under ruling 30; the numerical negative-exponent law is a week old and needs restating, not reteaching.", "The guide's partner-discussion task (x³ vs x⁻³) → whiteboard 9, written, per the no-partner-work rule.", "Cool-downs → whiteboard round."],
     ),
 )

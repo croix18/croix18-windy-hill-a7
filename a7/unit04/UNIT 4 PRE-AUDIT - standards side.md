@@ -30,7 +30,7 @@ day.
 | 4.X1, 4.X2 | — | Unit 4 exam, two periods | all three | — |
 | flex | — | Reteach from exam evidence, or absorb a lost day | — | — |
 
-Two merges (4.2+4.3 and 4.7+4.8) are already in the scope and sequence under ruling 14. Note
+Two merges (4.2+4.3 and 4.7+4.8) are already in the scope and sequence under ruling 30. Note
 that 4.05 and 4.06 are **not** merged, and that IXL gives both days the same skill (D8J) — the
 due-date sheet will therefore repeat it; that is the plan's doing, not an error.
 
@@ -166,7 +166,7 @@ items for our banks; whether Math Nation also has them is what the book-side aud
 - Unit 4 is the **second unit of the three under MA.8.NSO**, and the Grade 8 FAST reports all
   three benchmarks under Number Sense and Operations — the same reporting category as 3.04–3.09.
   The unit review's parts will therefore split by benchmark, not by reporting category.
-- The exam is **two periods** (ruling 14), so it takes the same shape as Unit 3's: one continuous
+- The exam is **two periods** (ruling 27), so it takes the same shape as Unit 3's: one continuous
   question map, sections by benchmark, one point per lettered part, Score Tracker on the key.
 - The flex day after the exam is in the calendar and is not a document we build.
 

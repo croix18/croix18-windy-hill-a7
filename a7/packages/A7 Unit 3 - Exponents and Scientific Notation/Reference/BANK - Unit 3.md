@@ -193,8 +193,8 @@ the unit is planned. The printed keys in `Answer Keys/` are generated from the s
 
 **Read this once, when you plan the unit.**
 
-- This period is Math Nation 3.6 and 3.7 taught as one lesson (scope and sequence, ruling 14: paired book lessons run as one period). 3.6 is 'evaluate with several laws'; 3.7 is 'rewrite to a common base and decide equivalence'. Notes I–II carry 3.6, Notes III–IV carry 3.7, and the round mixes the two.
-- Everything on the book's pages for both lessons checks. The one defect in the surrounding material is on their homework key for 3.6 (nothing wrong) — no repairs were needed here; the audit list below records what was verified.
+- This period is Math Nation 3.6 and 3.7 taught as one lesson (scope and sequence, ruling 30: paired book lessons run as one period). 3.6 is 'evaluate with several laws'; 3.7 is 'rewrite to a common base and decide equivalence'. Notes I–II carry 3.6, Notes III–IV carry 3.7, and the round mixes the two.
+- Everything on the book's pages for both lessons checks. So do its practice and homework keys for both lessons; no repairs were needed here, and the audit list below records what was verified.
 - The book's 3.7 needs calculators for its exploration (2¹⁴/2⁴, 4⁷·4⁻², 16·4·4² all equal 1024). Here the equality is shown by rewriting to base 2, which is the point; the calculator is a check.
 
 **What the audit against Math Nation found.**
@@ -230,21 +230,21 @@ the unit is planned. The printed keys in `Answer Keys/` are generated from the s
 
 **Read this once, when you plan the unit.**
 
-- This is the first of the two Thread A days placed inside Unit 3 under ruling 14: MA.8.AR.1.1 (Math Nation Unit 14, lessons 14.1 and 14.2) taught right after the numerical laws are complete and before scientific notation. The content is the same seven laws with variable bases, and the lesson is built to say so out loud — every law is introduced by the numerical version the class already owns.
+- This is the first of the two Thread A days placed inside Unit 3 under ruling 30: MA.8.AR.1.1 (Math Nation Unit 14, lessons 14.1 and 14.2) taught right after the numerical laws are complete and before scientific notation. The content is the same seven laws with variable bases, and the lesson is built to say so out loud — every law is introduced by the numerical version the class already owns.
 - Math Nation's Unit 14 pages were not part of the Unit 3 package, so the items here are original, aligned to the benchmark text, the B1G-M's example ((3x³y⁻²)³ — held for tomorrow, because of the negative exponent), its listed items (x⁵x⁸ = x¹³) and its task (Rachel and Justina, whiteboard 9). The three IXL skills for the day are the ones the Math Nation plan attaches to 14.1 and 14.2.
 - Every quotient today lands on a positive or zero exponent by design; negative results are tomorrow's lesson. Do not let a student 'discover' x⁻² today — say 'tomorrow' and move on.
 - The word monomial is used on the student pages. It is defined in the vocabulary box and on the reference sheet; the benchmark's boundary is 'monomial bases', so the word earns its place.
 
 **What the audit against Math Nation found.**
 
-- All 55 items on the bank, additional bank, warm-up, examples and round were re-derived by sympy at build time with the variables declared as symbols (mathcheck: 0 findings).
+- Every item on the bank, additional bank, warm-up, examples, independent set and round — 61 checks — was re-derived by sympy at build time with the variables declared as symbols (mathcheck: 0 findings).
 - The B1G-M items quoted: x⁵x⁸ = x¹³ (whiteboard 1, verified); the Rachel/Justina task (15xy²)³ = 3,375x³y⁶ (whiteboard 9, verified 15³ = 3,375).
 - The B1G-M example (3x³y⁻²)³ = 27x⁹y⁻⁶ contains a negative exponent and is held for day 2.
 - No Math Nation Unit 14 pages were available for audit; nothing here is copied from them.
 
 **What changed from the book.**
 
-- Math Nation 14.1 and 14.2 (two book lessons) → one period under ruling 14, since the numerical laws were completed yesterday and each law needs only its variable-base restatement.
+- Math Nation 14.1 and 14.2 (two book lessons) → one period under ruling 30, since the numerical laws were completed yesterday and each law needs only its variable-base restatement.
 - Book-style partner explorations → Notes I–III from the front, with expansion shown once per law.
 - Cool-downs → whiteboard round; the state guide's Rachel/Justina task → whiteboard 9, written.
 
@@ -264,21 +264,21 @@ the unit is planned. The printed keys in `Answer Keys/` are generated from the s
 
 **Read this once, when you plan the unit.**
 
-- Second Thread A day (Math Nation 14.3 and 14.4 under ruling 14): the negative exponent law and multiple laws, with variable bases. The lesson is built on 3.04 — the same table, the same 'reciprocal, not opposite' line — and on yesterday's regrouping of coefficients and variables.
-- The items are original, aligned to the benchmark text and to the B1G-M for MA.8.AR.1.1: its example (3x³y⁻²)³ = 27x⁹y⁻⁶ is the shape of Notes III's last line and bank 7b; its items y⁻³z⁻⁴ = 1/(y³z⁴) (whiteboard 4) and (a³/(4b⁻⁷))⁵ = a¹⁵b³⁵/1,024 (Example 2 and bank 8c) are used as written; its task 2 (the x⁵ … x⁻⁵ table) is Notes I; its task 3 (x³ vs x⁻³) is whiteboard 9, as a written contrast.
+- Second Thread A day (Math Nation 14.3 and 14.4 under ruling 30): the negative exponent law and multiple laws, with variable bases. The lesson is built on 3.04 — the same table, the same 'reciprocal, not opposite' line — and on yesterday's regrouping of coefficients and variables.
+- The items are original, aligned to the benchmark text and to the B1G-M for MA.8.AR.1.1: its example (3x³y⁻²)³ = 27x⁹y⁻⁶ is the shape of Notes III's last line and bank 7b; its items y⁻³z⁻⁴ = 1/(y³z⁴) (whiteboard 4) and (a³/(4b⁻⁷))⁵ = a¹⁵b³⁵/1,024 (Example 2 and bank 8c) are used as written; its task 2 (the m⁻⁵ … m⁵ table, here with x) is Notes I; its task 3 (x³ vs x⁻³) is whiteboard 9, as a written contrast.
 - The leading error today is not the sign error from 3.04 but a new one: moving the coefficient across the bar with the variable (3x⁻² → 1/(3x²)). Whiteboards 3 and 6 and bank 11 are built to surface it. The sign error is still there (whiteboard 5, option D) and is worth a look.
 - Every answer is expected 'with positive exponents only'. A student who stops at x⁻⁵ has applied the law correctly and not finished; the key marks the finished form. Say this once, at Notes III.
 
 **What the audit against Math Nation found.**
 
-- All 55 items on the bank, additional bank, warm-up, examples and round were re-derived by sympy at build time with the variables declared as positive symbols (mathcheck: 0 findings).
+- Every item on the bank, additional bank, warm-up, examples, independent set and round — 61 checks — was re-derived by sympy at build time with the variables declared as positive symbols (mathcheck: 0 findings).
 - B1G-M items used as written: y⁻³z⁻⁴ = 1/(y³z⁴) (whiteboard 4); (a³/(4b⁻⁷))⁵ = a¹⁵b³⁵/1,024, checked 4⁵ = 1,024 and (−7)(5) = −35 (Example 2, bank 8c).
 - The B1G-M example (3x³y⁻²)³ = 27x⁹y⁻⁶ is stated in the guide with a negative exponent left in the result; our items always finish with positive exponents, so the shape is used with the final step added.
 - No Math Nation Unit 14 pages were available for audit; nothing here is copied from them.
 
 **What changed from the book.**
 
-- Math Nation 14.3 and 14.4 (two book lessons) → one period under ruling 14; the numerical negative-exponent law is a week old and needs restating, not reteaching.
+- Math Nation 14.3 and 14.4 (two book lessons) → one period under ruling 30; the numerical negative-exponent law is a week old and needs restating, not reteaching.
 - The guide's partner-discussion task (x³ vs x⁻³) → whiteboard 9, written, per the no-partner-work rule.
 - Cool-downs → whiteboard round.
 

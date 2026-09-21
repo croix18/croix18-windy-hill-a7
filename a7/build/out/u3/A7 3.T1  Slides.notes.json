@@ -270,7 +270,7 @@
    "title": "IXL",
    "sub": "Last five minutes.",
    "min": 5,
-   "note": "IXL: every listed skill is required, SmartScore 67, due at the start of the next class.",
+   "note": "IXL: every listed skill is required, SmartScore 67. Due at the start of the next class.",
    "kind": "ixl"
   }
  ]

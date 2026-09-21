@@ -11,7 +11,7 @@ L = dict(
     working_toward="MA.8.NSO.1.5 (Unit 4) — adding, subtracting, multiplying and dividing in scientific notation; MA.8.NSO.1.6 — real-world problems in scientific notation, whose clarification brings in significant digits.",
     vocab=[("negative power of 10", "$10^{-n} = \\frac{1}{10^{n}}$: a 1 in the $n$th decimal place. $10^{-3} = \\frac{1}{1{,}000} = 0.001$"),
            ("scientific notation", "$a \\times 10^{n}$ with $1 \\leq a < 10$ and $n$ an integer — for a number less than 1, $n$ is negative: $0.00025 = 2.5 \\times 10^{-4}$")],
-    ixl=["Convert between standard and scientific notation: small numbers — 85M", "Compare small numbers — KDR", "Also consider: Powers of ten with negative exponents — SKD"],
+    ixl=["Convert between standard and scientific notation: small numbers — 85M", "Compare small numbers — KDR", "Powers of ten with negative exponents — SKD"],
 
     warmup=[
         dict(stem="Write  4,300,000  in scientific notation.", answer="4.3 × 10⁶", band="yesterday", source="3.08 — the 4 is in the millions place", check=("eq", "F(43,10)*10**6", "4300000")),

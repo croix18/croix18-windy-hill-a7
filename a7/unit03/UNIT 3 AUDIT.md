@@ -50,7 +50,7 @@ and sequence; the 3.06+07 merge and the Thread A placement after 3.07 both hold 
 - **Notation.** MN assessment Q3 writes negatives with a raised minus: (⁻5)³·4⁰/(⁻1⁷). We never do; we write (−5)³·4⁰ ÷ (−1)⁷ with explicit parentheses. Also MN writes products like (−3 · −2)⁸ and 1/(−4⁻⁵); we always parenthesize a negative base: (−3 · (−2))⁸, 1/((−4)⁻⁵) — the second one is ambiguous as MN prints it (the value happens to be the same either way, −4⁵ = (−4)⁵, which is why their key survives).
 - **Benchmark codes** are printed on MN student pages (slide 2 of every deck, TE headers). Ours carry none.
 
-## 5. Capcheck (ruling 13) — Unit 3 content against the Grade 8 guide
+## 5. Capcheck (ruling 29) — Unit 3 content against the Grade 8 guide
 
 - 8.NSO.1.3: every exponent in the unit is an integer; every base is rational. No fractional exponents anywhere. **Pass.**
 - 7.NSO.1.1 (carried, 3.1–3.3): whole-number exponents, rational bases incl. negatives and decimals. **Pass.**

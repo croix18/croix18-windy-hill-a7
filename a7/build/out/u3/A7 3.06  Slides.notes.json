@@ -70,7 +70,7 @@
    "title": "Example 1",
    "sub": "Worked.",
    "min": 2,
-   "note": "Flip, square, then multiply by 3. A student who writes (9/4)\u207b\u00b2 \u00b7 3 or (3/4)\u207b\u2076 pulled the 3 into the base. 16/3 is right; 5\u2153 is the same value.",
+   "note": "Flip, square, then multiply by 3. A student who writes (9/4)\u207b\u00b2 pulled the 3 into the base; one who writes (3/4)\u207b\u2076 pulled it into the exponent. 16/3 is right; 5\u2153 is the same value.",
    "kind": "example"
   },
   {
@@ -78,7 +78,7 @@
    "title": "Your Turn",
    "sub": "Same steps, your numbers. Boards up when done.",
    "min": 2,
-   "note": "Catches a student who folds the outside 2 into the base (board shows (4/5)\u207b\u00b2 or 4/25 \u00b7 2) and one who never flipped (4/25 \u00b7 2 = 8/25). 25/2 is right.",
+   "note": "Catches a student who folds the outside 2 into the base (a board with (4/5)\u207b\u00b2, or 25/16) and one who never flipped (4/25 \u00b7 2 = 8/25). 25/2 is right.",
    "kind": "yourturn"
   },
   {
@@ -278,7 +278,7 @@
    "title": "IXL",
    "sub": "Last five minutes.",
    "min": 5,
-   "note": "IXL: every listed skill is required, SmartScore 67, due at the start of the next class.",
+   "note": "IXL: every listed skill is required, SmartScore 67. Due at the start of the next class.",
    "kind": "ixl"
   }
  ]

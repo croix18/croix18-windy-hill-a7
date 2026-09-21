@@ -745,8 +745,8 @@ def _ruling_checks(L):
     # Ruling 28: every IXL skill listed is required — "nothing on the list is optional". The slide
     # prints "all required" over the list, so a skill marked optional contradicts it on the screen.
     for s in L.get("ixl", []):
-        if re.search(r"\boptional\b", s, re.I):
-            out.append(f"{L['code']}: ruling 28 — an IXL skill is marked optional ({s!r}); every listed skill is required, so drop the word or the skill")
+        if re.search(r"\boptional\b|also consider", s, re.I):
+            out.append(f"{L['code']}: ruling 28 — an IXL skill is marked optional or 'also consider' ({s!r}); every listed skill is required, so drop the words or the skill")
     return out
 
 

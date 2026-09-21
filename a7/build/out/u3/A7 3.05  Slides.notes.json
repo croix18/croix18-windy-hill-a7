@@ -38,7 +38,7 @@
    "title": "Notes",
    "sub": "",
    "min": 4,
-   "note": "State the rule and then the reason: (a/b)\u207b\u207f = 1/(a/b)\u207f = 1 \u00f7 a\u207f/b\u207f = b\u207f/a\u207f = (b/a)\u207f. Then the sign question: (\u22122/3)\u207b\u2075 is (\u22123/2)\u2075 \u2014 the minus rides along with the fraction. A student who writes (2/3)\u2075 took the opposite AND the reciprocal, which is the named misconception.\nOFF: 'Reciprocal flips top and bottom. It does not touch the sign.'",
+   "note": "State the rule and then the reason: (a/b)\u207b\u207f = 1/(a/b)\u207f = 1 \u00f7 a\u207f/b\u207f = b\u207f/a\u207f = (b/a)\u207f. Then the sign question: (\u22122/3)\u207b\u2075 is (\u22123/2)\u2075 \u2014 the minus rides along with the fraction. A student who writes (2/3)\u2075 took the opposite AND the reciprocal \u2014 the \u2212b vs b\u207b\u00b9 confusion the guide's task targets.\nOFF: 'Reciprocal flips top and bottom. It does not touch the sign.'",
    "kind": "notes"
   },
   {
@@ -102,7 +102,7 @@
    "title": "Your Turn",
    "sub": "Same steps, your numbers. Boards up when done.",
    "min": 2,
-   "note": "Catches a student who adds to \u22121 and stops there (a negative exponent is not a finished answer), and one who writes (5/4)\u00b9\u2070 (added 7 + 3 but kept the minus). (4/5)\u00b9\u2070 is right.",
+   "note": "Catches a student who adds to \u22121 and stops there (a negative exponent is not a finished answer), and one who writes (\u22125/4)\u00b9\u2070 \u2014 the exponents' signs dropped, 7 + 3, so the base never flipped. (\u22124/5)\u00b9\u2070 is right.",
    "kind": "yourturn"
   },
   {
@@ -270,7 +270,7 @@
    "title": "IXL",
    "sub": "Last five minutes.",
    "min": 5,
-   "note": "IXL: every listed skill is required, SmartScore 67, due at the start of the next class.",
+   "note": "IXL: every listed skill is required, SmartScore 67. Due at the start of the next class.",
    "kind": "ixl"
   }
  ]

@@ -1,4 +1,4 @@
-# A7 3.T1  Exponent Laws with Variable Bases — Thread A, day 1 (MA.8.AR.1.1; MN 14.1–14.2 woven in after 3.07 under ruling 14).
+# A7 3.T1  Exponent Laws with Variable Bases — Thread A, day 1 (MA.8.AR.1.1; MN 14.1–14.2 woven in after 3.07 under ruling 30).
 L = dict(
     code="3.T1", unit=3, lesson_no="T-A1", label="Thread A · Day 1", title="Exponent Laws with Variable Bases",
     benchmark="MA.8.AR.1.1",
@@ -178,7 +178,7 @@ L = dict(
              why="", check=("many", ("eq", "m**3*m**7", "m**10"), ("eq", "(m**5)**2", "m**10"), ("eq", "m**14/m**4", "m**10"), ("eq", "(m**2)**5", "m**10"), ("true", "sp.simplify(m**2*m**5 - m**10) != 0"), ("true", "sp.simplify(m**20/m**2 - m**10) != 0"))),
     ],
 
-    mtr=[("MTR.5.1", "Notes I — x⁵ · x³ is expanded into eight letters before the rule is restated, so the law is recognised as the one from 3.01 rather than met as a new one."),
+    mtr=[("MTR.5.1", "Notes I — x² · x³ is expanded into five letters before the rule is restated, so the law is recognised as the one from 3.01 rather than met as a new one."),
          ("MTR.3.1", "Boards 1, 2 and 7 — one move each, written and up on the cue; the law has to be automatic before the negative exponents arrive tomorrow."),
          ("MTR.4.1", "Board 5 — when the room splits over whether the 5 gets squared, the sixty-second re-vote before the reveal.")],
 
@@ -209,7 +209,7 @@ L = dict(
         must="Whole-number exponents on monomial bases: multiply and divide monomials, and raise a monomial to a power, generating an equivalent expression each time.",
         must_not="Whole-number exponents today; the negative ones are tomorrow. No rational exponents, and monomials only — nothing with a plus sign in it.",
         read_first=[
-            "This is the first of the two Thread A days placed inside Unit 3 under ruling 14: MA.8.AR.1.1 (Math Nation Unit 14, lessons 14.1 and 14.2) taught right after the numerical laws are complete and before scientific notation. The content is the same seven laws with variable bases, and the lesson is built to say so out loud — every law is introduced by the numerical version the class already owns.",
+            "This is the first of the two Thread A days placed inside Unit 3 under ruling 30: MA.8.AR.1.1 (Math Nation Unit 14, lessons 14.1 and 14.2) taught right after the numerical laws are complete and before scientific notation. The content is the same seven laws with variable bases, and the lesson is built to say so out loud — every law is introduced by the numerical version the class already owns.",
             "Math Nation's Unit 14 pages were not part of the Unit 3 package, so the items here are original, aligned to the benchmark text, the B1G-M's example ((3x³y⁻²)³ — held for tomorrow, because of the negative exponent), its listed items (x⁵x⁸ = x¹³) and its task (Rachel and Justina, whiteboard 9). The three IXL skills for the day are the ones the Math Nation plan attaches to 14.1 and 14.2.",
             "Every quotient today lands on a positive or zero exponent by design; negative results are tomorrow's lesson. Do not let a student 'discover' x⁻² today — say 'tomorrow' and move on.",
             "The word monomial is used on the student pages. It is defined in the vocabulary box and on the reference sheet; the benchmark's boundary is 'monomial bases', so the word earns its place."],
@@ -219,10 +219,10 @@ L = dict(
         lives="Notes II — 'everything inside the parentheses gets the exponent, the number included'. Whiteboard 5 tells you whether it landed; whiteboard 9 asks for it in writing.",
         materials="Whiteboards and markers. Calculators are allowed on everything; there is little for them to do today beyond 15³.",
         variation="Questions 1–6 are one law each: product, power of a power, power of a product, quotient, a negative coefficient, two variables in a quotient. 7–8 combine two laws in the two orders that occur (multiply then raise; raise then divide), and vary whether a zero exponent appears. 9 works backwards to a missing exponent in each of the three laws; 10 is the geometric setting, where the square is the trap (the coefficient is squared). 11 is the diagnostic multiple choice; 12 asks for equivalence judged four ways with two non-equivalent options wrong for two different reasons. The Additional sheet mirrors each position.",
-        audit=["All 55 items on the bank, additional bank, warm-up, examples and round were re-derived by sympy at build time with the variables declared as symbols (mathcheck: 0 findings).",
+        audit=["Every item on the bank, additional bank, warm-up, examples, independent set and round — 61 checks — was re-derived by sympy at build time with the variables declared as symbols (mathcheck: 0 findings).",
                "The B1G-M items quoted: x⁵x⁸ = x¹³ (whiteboard 1, verified); the Rachel/Justina task (15xy²)³ = 3,375x³y⁶ (whiteboard 9, verified 15³ = 3,375).",
                "The B1G-M example (3x³y⁻²)³ = 27x⁹y⁻⁶ contains a negative exponent and is held for day 2.",
                "No Math Nation Unit 14 pages were available for audit; nothing here is copied from them."],
-        changes=["Math Nation 14.1 and 14.2 (two book lessons) → one period under ruling 14, since the numerical laws were completed yesterday and each law needs only its variable-base restatement.", "Book-style partner explorations → Notes I–III from the front, with expansion shown once per law.", "Cool-downs → whiteboard round; the state guide's Rachel/Justina task → whiteboard 9, written."],
+        changes=["Math Nation 14.1 and 14.2 (two book lessons) → one period under ruling 30, since the numerical laws were completed yesterday and each law needs only its variable-base restatement.", "Book-style partner explorations → Notes I–III from the front, with expansion shown once per law.", "Cool-downs → whiteboard round; the state guide's Rachel/Justina task → whiteboard 9, written."],
     ),
 )

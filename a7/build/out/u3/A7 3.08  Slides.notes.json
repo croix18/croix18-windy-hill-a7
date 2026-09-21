@@ -46,7 +46,7 @@
    "title": "Notes",
    "sub": "",
    "min": 4,
-   "note": "Three cases, one line each. Same power of 10: divide the coefficients. Same coefficient: divide the powers \u2014 and 10\u00b3 times is one thousand times, not three times, which is the guide's second named misconception. Both different: divide both and multiply the results. The last line is the calculator: 8.4E6 means 8.4 \u00d7 10\u2076; E is not an error.\nOFF: '10\u00b3 times larger is a thousand times larger. The exponent is not the answer; the power is.'",
+   "note": "Three cases, one line each. Same power of 10: divide the coefficients. Same coefficient: divide the powers \u2014 and 10\u00b3 times is one thousand times, not three times \u2014 the guide's fourth named misconception, its '10\u2074 times read as 4 times'. Both different: divide both and multiply the results. The last line is the calculator: 8.4E6 means 8.4 \u00d7 10\u2076; E is not an error.\nOFF: '10\u00b3 times larger is a thousand times larger. The exponent is not the answer; the power is.'",
    "kind": "notes"
   },
   {
@@ -62,7 +62,7 @@
    "title": "Example 1",
    "sub": "Worked.",
    "min": 2,
-   "note": "The 3 is in the ten-billions place: 10\u00b9\u2070. The coefficient keeps every nonzero digit after it \u2014 3.01, not 3.1 and not 3. A board with 3.1 \u00d7 10\u00b9\u2070 dropped the zero between the 3 and the 1; a board with 3.01 \u00d7 10\u2079 counted the zeros after the 1 instead of the places the point moved.",
+   "note": "The 3 is in the ten-billions place: 10\u00b9\u2070. The coefficient keeps every nonzero digit after it \u2014 3.01, not 3.1 and not 3. A board with 3.1 \u00d7 10\u00b9\u2070 dropped the zero between the 3 and the 1; a board with 3.01 \u00d7 10\u2079 counted the nine zeros instead of the ten places the point moves.",
    "kind": "example"
   },
   {
@@ -270,7 +270,7 @@
    "title": "IXL",
    "sub": "Last five minutes.",
    "min": 5,
-   "note": "IXL: every listed skill is required, SmartScore 67, due at the start of the next class.",
+   "note": "IXL: every listed skill is required, SmartScore 67. Due at the start of the next class.",
    "kind": "ixl"
   }
  ]
