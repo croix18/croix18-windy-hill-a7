@@ -53,7 +53,7 @@ U = dict(
              not_sci=True),
         dict(title="5.   How Many Times Larger or Smaller", right="Lessons 8–9",
              blocks=["**Divide the coefficients. Divide the powers of 10 (subtract the exponents). Multiply the two results.**",
-                     dict(table=([2600, 3500, 3260], [
+                     dict(table=([2300, 3100, 3960], [
                          ["Case", "Example", "Answer"],
                          ["Same power of 10", "$\\frac{6.4 \\times 10^{7}}{3.2 \\times 10^{7}}$", "$2$ times"],
                          ["Same coefficient", "$\\frac{2 \\times 10^{5}}{2 \\times 10^{2}}$", "$10^{3} = 1{,}000$ times — not 3"],

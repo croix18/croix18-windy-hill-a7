@@ -10,7 +10,7 @@ from sympy import Rational as F, sqrt, Integer, nsimplify
 from sympy.parsing.sympy_parser import (parse_expr, standard_transformations,
                                         implicit_multiplication_application, convert_xor, rationalize)
 from .dockit import Doc, INK, VOCAB, RED, GRAY
-from .deckkit import Deck, LM, CW
+from .deckkit import Deck, LM, CW, FOOT_Y
 from . import tekit
 from . import plankit
 from .tekit import TE
@@ -581,6 +581,7 @@ def _wb_body(D, q, reveal):
         D.choices(q["choices"], correct=(q["correct"] if reveal else None))
     if not reveal:
         y = max(D.cursor + 0.15, 4.75)
+        y = min(y, FOOT_Y - 0.56 - (0.45 if (kind == "written" or q.get("hint")) else 0))
         if kind == "written":
             D._text(0.85, y, 11.6, 0.5, "Write your answer in sentences.", 26, bold=True, align="center")
             D._text(0.85, y + 0.53, 11.6, 0.4, q.get("hint", "This one is written work. Say why."), 19, italic=True, color=GRAY, align="center")
@@ -592,7 +593,7 @@ def _wb_body(D, q, reveal):
         if q.get("gloss"):
             D._text(2.0, D.cursor + 0.05, 9.3, 0.6, q["gloss"], 24, color=GRAY, align="center")
             D.cursor += 0.7
-        y = max(D.cursor + 0.15, 5.1)
+        y = min(max(D.cursor + 0.15, 5.1), FOOT_Y - 0.62)
         if q.get("answer_latex"):
             D.answer_math(q["answer_latex"], y=y)
         else:

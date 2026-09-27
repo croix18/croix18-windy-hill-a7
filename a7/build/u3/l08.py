@@ -17,7 +17,7 @@ L = dict(
         dict(stem="Write as a single monomial:  $(3x^{2})^{3}$", answer="27x⁶", band="yesterday", source="T-A1 — power of a product: the 3 is cubed too", check=("eq", "(3*x**2)**3", "27*x**6")),
         dict(stem="Find the value:  $5^{-2}$", answer="1/25", band="this week", source="3.04 — the negative exponent law with a numerical base: reciprocal, not opposite", check=("eq", "F(5)**-2", "F(1,25)")),
         dict(stem="Which is greater,  $\\sqrt{80}$  or  9?", answer="9", band="last unit", source="Unit 2 — comparing a root to a whole number (2.05): 9² = 81 > 80", check=("true", "9**2 > 80"), not_bound=True),
-        dict(stem="What is the reciprocal of  $\\frac{2}{3}$ ?", answer="$\\frac{3}{2}$", band="prior grade — the prerequisite this lesson needs", source="Grade 6 — reciprocals (MA.6.NSO.2): the number that multiplies to give 1", check=("eq", "F(2,3)*F(3,2)", "1")),
+        dict(stem="What is the reciprocal of  $\\frac{2}{3}$ ?", answer="$\\frac{3}{2}$", band="prior grade — the prerequisite this lesson needs", source="MA.6.NSO.2.2 — dividing by a fraction uses its reciprocal: the number that multiplies to give 1", check=("eq", "F(2,3)*F(3,2)", "1")),
     ],
     warmup_note="Q2 and Q4 together are the lesson: a negative exponent asks for a reciprocal. Q2 is the numerical version from 3.04; today the same law is applied to x. A student with −25 on Q2 will write −x² today, and that is the board to find early.",
 
@@ -216,7 +216,7 @@ L = dict(
         lives="Notes II — 'only the factor wearing the negative exponent moves'. Whiteboard 6 tells you whether it landed; whiteboard 9 asks for the x³ / x⁻³ contrast in writing.",
         materials="Whiteboards and markers. Calculators are allowed on everything; 4⁵ = 1,024 in Example 2 is the one computation worth a calculator.",
         variation="Questions 1–6 are one move each: a plain negative exponent, one in a denominator, a coefficient that stays, two variables with one negative, a variable in the denominator moving up, three factors moving in two directions. 7–8 add a law before the rewrite (product, power of a product, product with two variables; quotient below zero, quotient with a coefficient, the guide's three-law item). 9 works backwards through zero in each law; 10 evaluates x², x⁻² and −x² at a number so that reciprocal and opposite are seen as values. 11 is the diagnostic multiple choice on the coefficient; 12 asks equivalence to 1/x⁶ six ways, with the two wrong options wrong for different reasons. The Additional sheet mirrors each position.",
-        audit=["Every item on the bank, additional bank, warm-up, examples, independent set and round — 61 checks — was re-derived by sympy at build time with the variables declared as positive symbols (mathcheck: 0 findings).",
+        audit=["Every item on the bank, additional bank, warm-up, examples, independent set and round was re-derived by sympy at build time with the variables declared as positive symbols (mathcheck: 0 findings).",
                "B1G-M items used as written: y⁻³z⁻⁴ = 1/(y³z⁴) (whiteboard 4); (a³/(4b⁻⁷))⁵ = a¹⁵b³⁵/1,024, checked 4⁵ = 1,024 and (−7)(5) = −35 (Example 2, bank 8c).",
                "The B1G-M example (3x³y⁻²)³ = 27x⁹y⁻⁶ is stated in the guide with a negative exponent left in the result; our items always finish with positive exponents, so the shape is used with the final step added.",
                "No Math Nation Unit 14 pages were available for audit; nothing here is copied from them."],

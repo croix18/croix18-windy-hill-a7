@@ -17,7 +17,7 @@ L = dict(
         dict(stem="Find the value:  $2^{-3}$", answer="$\\frac{1}{8}$", band="yesterday", source="3.04 — negative exponent law", check=("eq", "F(2)**-3", "F(1,8)")),
         dict(stem="Rewrite with a positive exponent:  $\\frac{1}{7^{-2}}$", answer="$7^{2}$", band="earlier this week", source="3.04 — the law's second form", check=("eq", "1/F(7)**-2", "49")),
         dict(stem="Which is larger, $4^{3}$ or $3^{4}$?", answer="$3^{4}$ (81 > 64)", band="earlier this unit", source="3.01 — evaluating powers", check=("true", "3**4 > 4**3")),
-        dict(stem="Write the reciprocal of  $-\\frac{2}{5}$", answer="$-\\frac{5}{2}$", band="prior grade — the prerequisite this lesson needs", source="Grade 6 — reciprocals of fractions (MA.6.NSO.2): flip the fraction, keep the sign", check=("eq", "F(-2,5)*F(-5,2)", "1")),
+        dict(stem="Write the reciprocal of  $-\\frac{2}{5}$", answer="$-\\frac{5}{2}$", band="prior grade — the prerequisite this lesson needs", source="MA.6.NSO.2.2 — dividing by a fraction uses its reciprocal: flip the fraction, keep the sign", check=("eq", "F(-2,5)*F(-5,2)", "1")),
     ],
     warmup_note="Q4 is today's move: a negative fraction's reciprocal is negative. A board with 5/2 (sign dropped) or 2/5 (opposite of the opposite) is the error this lesson is built to catch — the B1G-M's first task for this benchmark — explain the difference between −b and b⁻¹ — is aimed at exactly this.",
 
@@ -201,11 +201,11 @@ L = dict(
         must_not="No fractional exponents. Bases are nonzero, and the exponent's sign never moves the base's sign.",
         read_first=[
             "This lesson rebuilds Math Nation 3.5 (SE pp. 124–129). The book's guided instruction (the (2/5) pattern table) is Notes I; its Fernanda/Junior collaboration is Notes III; its equivalence table and matching activity are bank questions 5 and 10. Every value on the book's pages checks.",
-            "Whiteboard 5 was first built on the book's (−7/8)⁻², where (8/7)² has the same value as the key (64/49) — a student who chose it was right and was marked wrong. It now uses (−7/8)⁻³: the odd power keeps the sign, so every option is a different number and the discussion about the reciprocal's sign still happens.",
+            "Whiteboard 5 uses (−7/8)⁻³ rather than the book's (−7/8)⁻². With an even power, (−8/7)² and (8/7)² are the same number (64/49), so a multiple-choice item cannot separate the student who kept the sign from the one who dropped it. The odd power keeps the sign, every option is a different number, and the discussion about the reciprocal's sign still happens.",
             "The B1G-M task for this benchmark — the difference between −b and b⁻¹; here, (−2/3)⁻⁵ misread as (2/3)⁵ — is warm-up 4, Notes II, whiteboard 2, 5 and 9, and bank question 11."],
         standard_notes=[("Clarification", "Rational-number bases with integer exponents; fractions and decimals both appear, and a decimal base is converted to a fraction before it is flipped."),
                         ("Boundary", "A whole-number base is a fraction over 1, so 4⁻³ = (1/4)³ — said on Notes II so that 3.04 and 3.05 are one rule, not two.")],
-        sits="Second MA.8.NSO.1.3 lesson. 3.06+07 uses everything from 3.01–3.05 in one expression.",
+        sits="Second MA.8.NSO.1.3 lesson. 3.06–3.07 uses everything from 3.01–3.05 in one expression.",
         lives="Notes II — 'flip the numbers, not the sign'. Whiteboard 9 asks for it in writing. If the round shows B on question 5, ask for the reciprocal of −7/8 out loud — the sign is the whole question.",
         materials="Whiteboards and markers. Calculators are allowed on everything; (−7/8)^(−2) on a calculator returns 1.306..., which is 64/49 — worth converting once so students trust both forms.",
         variation="Questions 1–4 are one move each and vary only where the sign sits: no sign, a sign on the fraction, a sign in the numerator, a bigger fraction with no sign. Question 5 puts four sign placements side by side. 6–9 add one law before the flip (product, quotient, power of a power, then a decimal that must become a fraction). The pattern breaks at 7, where the exponent comes out positive and there is nothing to flip, and at 10, where one of four candidate expressions is not equivalent. The Additional sheet mirrors each position with different numbers.",

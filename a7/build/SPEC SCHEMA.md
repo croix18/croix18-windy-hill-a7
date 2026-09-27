@@ -13,7 +13,7 @@ row makes the row a "mixed" row (text + images) that is laid out on one line and
 slide width** — the build raises "line runs off the slide" if it does not; split the row.
 
 LaTeX goes through matplotlib mathtext, not TeX: `\frac`, `\cdot`, `\times`, `\left(`, `\right)`,
-`\sqrt`, `\leq`, `\neq`, `\div` work; `\le`, `\text{}`, `\dfrac`, `\hbox` do **not**. Thousands
+`\sqrt`, `\leq`, `\neq`, `\div` work; `\le`, `\text{}`, `\hbox` do **not**. Write `\frac`, never `\dfrac`: on the slide surfaces the renderer sets every fraction at display size itself (27 Sep 2026), and on the document surfaces text-size fractions are right. Thousands
 separators inside math are `1{,}000`. Unicode superscripts (`⁰¹²³⁴⁵⁶⁷⁸⁹⁻⁺ᵐⁿ`) may be used in plain
 text and are converted to real superscript runs; `⁽ ⁾ ✗` and other exotic characters have no glyph
 in the fonts and fail the glyph check. Dollar signs in prose are impossible (they open math) —

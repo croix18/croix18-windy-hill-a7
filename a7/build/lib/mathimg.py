@@ -6,7 +6,7 @@ so every digit in a document is the same size (HOUSE STYLE §8) by construction.
 The index is MERGED, never rebuilt (HOUSE STYLE §2: "No generator rebuilds an index. Ever.").
 A figure is fingerprinted by its LaTeX + size; editing one character re-renders exactly one file.
 """
-import os, json, hashlib, re
+import re, os, json, hashlib
 import matplotlib
 matplotlib.use("Agg")
 matplotlib.rcParams["mathtext.fontset"] = "stix"
@@ -73,6 +73,9 @@ def _render(latex, pt, path, color):
 def m(latex, surface="doc", color="1A1A1A"):
     """Return (path, width_in, height_in) for a rendered expression."""
     pt = SIZES[surface]
+    if surface.startswith("slide"):
+        # projected fractions are set display-size; text-style \frac reads small from the back row
+        latex = re.sub(r"\\frac(?![A-Za-z])", r"\\dfrac", latex)
     key = hashlib.sha1(f"{latex}|{pt}|{color}".encode()).hexdigest()[:16]
     idx = _load()
     path = os.path.join(FIGS, key + ".png")

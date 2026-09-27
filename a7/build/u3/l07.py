@@ -141,7 +141,7 @@ L = dict(
              errors={"B": "5 · 2 instead of 5² [B1G-M 8.AR.1.1 misconception: multiplying the exponent into the base]", "C": "3 + 2 instead of 3 · 2 [power of a power confused with a product of powers]", "D": "the coefficient was not raised [8.AR.1.1: power of a product]"},
              why="", check=("eq", "(5*m**3)**2", "25*m**6")),
         dict(stem="Select ALL of the expressions that are equivalent to  $x^{12}$.", choices=["$x^{4}\\cdot x^{8}$", "$(x^{4})^{3}$", "$\\frac{x^{15}}{x^{3}}$", "$(x^{6})^{2}$", "$x^{4}\\cdot x^{3}$", "$x^{2}\\cdot x^{6}$"], correct=[0, 1, 2, 3], answer="A, B, C and D",
-             errors={"E": "x⁴ · x³ = x⁷ — the exponents were multiplied [8.AR.1.1: product law is additive in the exponents]", "F": "x² · x⁶ = x⁸ — 2 · 6 = 12 was read as the product law [B1G-M 8.AR.1.1 misconception: misapplied laws]"},
+             errors={"E": "x⁴ · x³ = x⁷, not x¹² — a student who picks it multiplied the exponents [8.AR.1.1: product law is additive in the exponents]", "F": "x² · x⁶ = x⁸, not x¹² — a student who picks it multiplied 2 · 6 [B1G-M 8.AR.1.1 misconception: misapplied laws]"},
              why="", check=("many", ("eq", "x**4*x**8", "x**12"), ("eq", "(x**4)**3", "x**12"), ("eq", "x**15/x**3", "x**12"), ("eq", "(x**6)**2", "x**12"), ("true", "sp.simplify(x**4*x**3 - x**12) != 0"), ("true", "sp.simplify(x**2*x**6 - x**12) != 0"))),
     ],
 
@@ -174,11 +174,11 @@ L = dict(
              errors={"B": "4 · 3 instead of 4³ [B1G-M 8.AR.1.1 misconception: multiplying the exponent into the base]", "C": "2 + 3 instead of 2 · 3 [power of a power confused with a product of powers]", "D": "the coefficient was not raised [8.AR.1.1: power of a product]"},
              why="", check=("eq", "(4*y**2)**3", "64*y**6")),
         dict(stem="Select ALL of the expressions that are equivalent to  $m^{10}$.", choices=["$m^{3}\\cdot m^{7}$", "$(m^{5})^{2}$", "$\\frac{m^{14}}{m^{4}}$", "$(m^{2})^{5}$", "$m^{2}\\cdot m^{5}$", "$\\frac{m^{20}}{m^{2}}$"], correct=[0, 1, 2, 3], answer="A, B, C and D",
-             errors={"E": "m² · m⁵ = m⁷ — the exponents were multiplied [8.AR.1.1: product law is additive in the exponents]", "F": "m²⁰ ÷ m² = m¹⁸ — the exponents were divided [B1G-M 8.AR.1.1 misconception: misapplied quotient law]"},
+             errors={"E": "m² · m⁵ = m⁷, not m¹⁰ — a student who picks it multiplied the exponents [8.AR.1.1: product law is additive in the exponents]", "F": "m²⁰ ÷ m² = m¹⁸, not m¹⁰ — a student who picks it divided the exponents, 20 ÷ 2 [B1G-M 8.AR.1.1 misconception: misapplied quotient law]"},
              why="", check=("many", ("eq", "m**3*m**7", "m**10"), ("eq", "(m**5)**2", "m**10"), ("eq", "m**14/m**4", "m**10"), ("eq", "(m**2)**5", "m**10"), ("true", "sp.simplify(m**2*m**5 - m**10) != 0"), ("true", "sp.simplify(m**20/m**2 - m**10) != 0"))),
     ],
 
-    mtr=[("MTR.5.1", "Notes I — x² · x³ is expanded into five letters before the rule is restated, so the law is recognised as the one from 3.01 rather than met as a new one."),
+    mtr=[("MTR.5.1", "Notes I — x² · x³ is expanded into five letters before the rule is restated, so the law is recognized as the one from 3.01 rather than met as a new one."),
          ("MTR.3.1", "Boards 1, 2 and 7 — one move each, written and up on the cue; the law has to be automatic before the negative exponents arrive tomorrow."),
          ("MTR.4.1", "Board 5 — when the room splits over whether the 5 gets squared, the sixty-second re-vote before the reveal.")],
 
@@ -219,7 +219,7 @@ L = dict(
         lives="Notes II — 'everything inside the parentheses gets the exponent, the number included'. Whiteboard 5 tells you whether it landed; whiteboard 9 asks for it in writing.",
         materials="Whiteboards and markers. Calculators are allowed on everything; there is little for them to do today beyond 15³.",
         variation="Questions 1–6 are one law each: product, power of a power, power of a product, quotient, a negative coefficient, two variables in a quotient. 7–8 combine two laws in the two orders that occur (multiply then raise; raise then divide), and vary whether a zero exponent appears. 9 works backwards to a missing exponent in each of the three laws; 10 is the geometric setting, where the square is the trap (the coefficient is squared). 11 is the diagnostic multiple choice; 12 asks for equivalence judged four ways with two non-equivalent options wrong for two different reasons. The Additional sheet mirrors each position.",
-        audit=["Every item on the bank, additional bank, warm-up, examples, independent set and round — 61 checks — was re-derived by sympy at build time with the variables declared as symbols (mathcheck: 0 findings).",
+        audit=["Every item on the bank, additional bank, warm-up, examples, independent set and round was re-derived by sympy at build time with the variables declared as positive symbols (mathcheck: 0 findings).",
                "The B1G-M items quoted: x⁵x⁸ = x¹³ (whiteboard 1, verified); the Rachel/Justina task (15xy²)³ = 3,375x³y⁶ (whiteboard 9, verified 15³ = 3,375).",
                "The B1G-M example (3x³y⁻²)³ = 27x⁹y⁻⁶ contains a negative exponent and is held for day 2.",
                "No Math Nation Unit 14 pages were available for audit; nothing here is copied from them."],

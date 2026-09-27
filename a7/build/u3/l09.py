@@ -7,7 +7,7 @@ L = dict(
     yesterday="Yesterday the exponent laws finished — numbers and letters.",
     today="Today they go to work on twenty-digit numbers.",
     essential="How does a power of 10 let us write a very large number briefly, and compare two of them?",
-    building_on="MA.7.NSO.1.1 and MA.8.NSO.1.3 (3.01–3.07) — powers of 10 and the laws; Grade 5 — place value to the billions.",
+    building_on="MA.7.NSO.1.1 and MA.8.NSO.1.3 (3.01–3.07) — powers of 10 and the laws; Grades 4–5 — whole-number place value.",
     working_toward="3.09 — small numbers and negative powers of ten; MA.8.NSO.1.5 (Unit 4) — operations in scientific notation.",
     vocab=[("scientific notation", "a number written as a product $a \\times 10^{n}$ where $a$ is at least 1 and less than 10, and $n$ is an integer: $2.6 \\times 10^{7}$"),
            ("standard form", "the number written out with all of its digits: 26,000,000"),
@@ -18,7 +18,7 @@ L = dict(
         dict(stem="Rewrite with a positive exponent:  $4x^{-3}$", answer="4/x³", band="yesterday", source="T-A2 — only the factor with the negative exponent moves", check=("eq", "4*x**-3", "4/x**3")),
         dict(stem="Find the value:  $(10^{2})^{3}$", answer="10⁶ = 1,000,000", band="last week", source="3.03 — power of a power with base 10", check=("eq", "(10**2)**3", "1000000")),
         dict(stem="Find the value:  $\\sqrt{121}$", answer="11", band="last unit", source="Unit 2 — perfect squares (2.01)", check=("eq", "sqrt(121)", "11")),
-        dict(stem="In 4,500,000, which place is the 4 in?", answer="millions", band="prior grade — the prerequisite this lesson needs", source="Grade 5 — place value (MA.5.NSO.1): the 4 is in the millions place, the 5 in the hundred thousands", check=("true", "10**6 <= 4500000 < 10**7")),
+        dict(stem="In 4,500,000, which place is the 4 in?", answer="millions", band="prior grade — the prerequisite this lesson needs", source="Grades 4–5 — whole-number place value: the 4 is in the millions place, the 5 in the hundred thousands", check=("true", "10**6 <= 4500000 < 10**7")),
     ],
     warmup_note="Q2 and Q4 are the two halves of today: a power of 10 names a place. 10⁶ is a million, and the 4 in 4,500,000 sits in the millions place, so 4,500,000 is 4.5 millions — 4.5 × 10⁶. Say that sentence once at the reveal and the lesson is half taught.",
 

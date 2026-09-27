@@ -148,6 +148,7 @@ Do not batch lessons before the first push. One lesson, checked, viewed, pushed;
 | `√250 — MA.8.NSO.1.7 is perfect squares up to 225` | a radicand outside the benchmark's list | use a perfect square ≤ 225 or a perfect cube in −125..125; `not_bound=True` for a Unit 2 estimation retrieval item, with the reason in its `source` |
 | `radicand '…' is not plain arithmetic on integers` | capcheck could not reduce the radicand | work it by hand; if it is sound, tag `not_bound=True` and say why |
 | `line runs off the slide (14.7 in)` | a mixed text+math row too wide | split the row, shorten the words, or move the math to its own row |
+| `text box runs into the footer … Answer it.` on a multiple-choice board | a tall display-size fraction above four options (slide fractions are set with `\dfrac` since 27 Sep 2026, so a `\frac` board is ~0.4 in taller than it was) | the placer clamps the prompt/answer line above the footer; if the options themselves collide, put the question on one `text` row or shorten the latex |
 | `box crosses the footer` / `math into footer` | too many rows on one slide | fewer rows, or split into two notes slides |
 | `table cell wraps out of its row` | a notes table's cell is too long for its column, and a wrapped second line draws outside the border | shorten the cell, widen the column, use fewer columns, or move the words into an `items2` line under the table |
 | `plan does not fit … leave whiteboards 22` | the fixed minutes are too few/many | adjust `min` on notes/examples so the remainder lands in 10–20 (aim 15–19) |

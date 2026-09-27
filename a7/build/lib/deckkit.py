@@ -7,12 +7,29 @@ import json, os
 from pptx import Presentation
 from pptx.util import Inches, Pt, Emu
 from pptx.dml.color import RGBColor
-from pptx.enum.text import PP_ALIGN, MSO_ANCHOR
+from pptx.enum.text import PP_ALIGN, MSO_ANCHOR, MSO_AUTO_SIZE
 from pptx.enum.shapes import MSO_SHAPE
 from . import mathimg
 
 INK, VOCAB, RED, GRAY, LT, FILL = "1A1A1A", "0B5394", "9E1B32", "6B6B6B", "D9D9D9", "F2F2F0"
 FONT = "Century Schoolbook"
+
+_FONT_FILES = {False: "/usr/share/texmf/fonts/opentype/public/tex-gyre/texgyreschola-regular.otf",
+               True: "/usr/share/texmf/fonts/opentype/public/tex-gyre/texgyreschola-bold.otf"}
+_FONT_CACHE = {}
+def _textw(text, size, bold=False):
+    """Width in inches of a text piece at `size` pt, measured with the Schola metrics (the Century
+    Schoolbook clone LibreOffice renders with) plus a 6% margin, falling back to the old estimate."""
+    try:
+        from PIL import ImageFont
+        key = (bool(bold), int(size * 4))
+        f = _FONT_CACHE.get(key)
+        if f is None:
+            f = _FONT_CACHE[key] = ImageFont.truetype(_FONT_FILES[bool(bold)], int(size * 4))
+        return f.getlength(text) / 4 / 72 * 1.06 + 0.08
+    except Exception:
+        return len(text) * size / 72 * (0.58 if bold else 0.52) + 0.08
+
 W, H = 13.3333, 7.5
 LM, CW = 0.85, 11.6
 FOOT_Y = 6.78
@@ -61,6 +78,8 @@ class Deck:
             raise RuntimeError(f"text box off the slide horizontally: {(text or '')[:50]}")
         tb = self.s.shapes.add_textbox(Inches(x), Inches(y), Inches(w), Inches(h))
         tf = tb.text_frame; tf.word_wrap = wrap
+        if not wrap:
+            tf.auto_size = MSO_AUTO_SIZE.NONE
         tf.margin_left = tf.margin_right = Inches(0.05); tf.margin_top = tf.margin_bottom = Inches(0.02)
         tf.vertical_anchor = {"top": MSO_ANCHOR.TOP, "middle": MSO_ANCHOR.MIDDLE}[anchor]
         para = tf.paragraphs[0]
@@ -262,7 +281,7 @@ class Deck:
                 path, w, h = mathimg.m(part[1:-1], surface, color)
                 pieces.append(("img", path, w, h)); total += w; maxh = max(maxh, h)
             else:
-                w = len(part) * size / 72 * (0.58 if bold else 0.52) + 0.08
+                w = _textw(part, size, bold)
                 pieces.append(("txt", part, w, 0.5)); total += w
         if align == "center":
             x = x + ((width if width else CW) - total) / 2
@@ -287,7 +306,7 @@ class Deck:
                 _, w, h = mathimg.m(part[1:-1], surface, INK)
                 total += w
             else:
-                total += len(part) * size / 72 * (0.58 if bold else 0.52) + 0.08
+                total += _textw(part, size, bold)
         return total
 
     def math_row(self, parts, surface="slidemid", y=None, gap=0.35, size=26, color=INK, bold=False, align="center", x=None):

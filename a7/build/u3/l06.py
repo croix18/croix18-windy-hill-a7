@@ -206,7 +206,7 @@ L = dict(
              "Every law you know can appear in one expression at once. The order is yours; the value is not.",
              "Test a claim before you agree with it. Convert, then decide."],
         must="Integer exponents and rational bases, with procedural fluency: evaluate, and decide equivalence by rewriting to a common base.",
-        must_not="Bases that get rewritten are powers of 2, 3 or 5. No prime factorisation of arbitrary numbers, and no fractional exponents.",
+        must_not="Bases that get rewritten are powers of 2, 3 or 5. No prime factorization of arbitrary numbers, and no fractional exponents.",
         read_first=[
             "This period is Math Nation 3.6 and 3.7 taught as one lesson (scope and sequence, ruling 30: paired book lessons run as one period). 3.6 is 'evaluate with several laws'; 3.7 is 'rewrite to a common base and decide equivalence'. Notes I–II carry 3.6, Notes III–IV carry 3.7, and the round mixes the two.",
             "Everything on the book's pages for both lessons checks. So do its practice and homework keys for both lessons; no repairs were needed here, and the audit list below records what was verified.",

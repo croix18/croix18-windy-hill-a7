@@ -18,7 +18,7 @@ L = dict(
         dict(stem="Write as one power:  $3^{2}\\cdot 3^{3}$", answer="$3^{5}$", band="yesterday", source="3.01 — product of powers", check=("eq", "3**2*3**3", "3**5")),
         dict(stem="$\\sqrt[3]{-27}$", answer="−3", band="last week", source="Unit 2 — cube roots (2.03)", check=("eq", "(-3)**3", "-27")),
         dict(stem="Solve  $2x + 3 < 11$", answer="x < 4", band="last unit", source="Unit 1 — two-step inequalities (1.08)", check=("true", "(2*3+3 < 11) and not (2*5+3 < 11) and (2*4+3 == 11)")),
-        dict(stem="Simplify  $\\frac{5\\cdot 5\\cdot 5}{5\\cdot 5}$", answer="5", band="prior grade — the prerequisite this lesson needs", source="Grade 6 — cancelling common factors in a fraction (MA.6.NSO.2)", check=("eq", "F(125,25)", "5")),
+        dict(stem="Simplify  $\\frac{5\\cdot 5\\cdot 5}{5\\cdot 5}$", answer="5", band="prior grade — the prerequisite this lesson needs", source="Grades 4–6 — equivalent fractions: a common factor cancels from numerator and denominator", check=("eq", "F(125,25)", "5")),
     ],
     warmup_note="Q4 is the move the whole lesson runs on: cancel a factor of 5 from top and bottom, and one 5 is left. A board showing 125/25 unsimplified has the arithmetic and not the idea.",
 
@@ -101,7 +101,7 @@ L = dict(
              check=("eq", "4**8/4**2", "4**6")),
         dict(latex="\\frac{0.5^{8}}{0.5^{5}}", hint="Find the value.", gloss="0.5³", answer="0.125",
              note="Decimal base. A board with 0.5⁸ ÷ 0.5⁵ typed into a calculator gets 0.125 too — fine, but ask for the single power.", check=("eq", "F(1,2)**8/F(1,2)**5", "F(1,8)"),
-             wrong="0.5¹³ — added the exponents instead of subtracting [quotient of powers confused with product of powers]; 0.5 — the exponents divided, 8 ÷ 5 taken as 1 [the law subtracts, it does not divide]"),
+             wrong="0.5¹³ — added the exponents instead of subtracting [quotient of powers confused with product of powers]; 0.5⁴⁰ — multiplied the exponents [confused with power of a power]"),
         dict(latex="\\left(\\frac{10}{11}\\right)^{0}", hint="Find the value.", gloss="any nonzero base to the zero power", answer="1",
              note="The fraction is a distraction; the exponent decides. A board with 10/11 confused zero with the identity exponent.", check=("eq", "F(10,11)**0", "1"),
              wrong="10/11 — identity exponent instead of zero exponent; 0 — zero exponent read as 0 [8.NSO.1.3: zero exponent law, a⁰ = 1]"),

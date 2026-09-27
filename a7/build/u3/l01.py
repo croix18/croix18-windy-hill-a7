@@ -185,7 +185,7 @@ L = dict(
              why="D: 100³ = 1,000,000 = 10⁶.", check=("many", ("eq", "10**3*10**3", "10**6"), ("eq", "(10**2)**3", "10**6"), ("eq", "10**2*10**4", "10**6"), ("eq", "100**3", "10**6"), ("true", "10**2*10**3 != 10**6"), ("true", "(10**3)**3 != 10**6"))),
     ],
 
-    mtr=[("MTR.5.1", "Notes II — 3²·3³ is expanded into five factors of 3 before the rule is named, so the law is read off the structure rather than memorised."),
+    mtr=[("MTR.5.1", "Notes II — 3²·3³ is expanded into five factors of 3 before the rule is named, so the law is read off the structure rather than memorized."),
          ("MTR.3.1", "Boards 1, 3, 4 and 7 — one law, one move, written and up on the cue; today is where the fluency for the rest of the unit is set."),
          ("MTR.4.1", "Board 5 — when the room splits between 4⁵ and 16⁵, the sixty-second re-vote before the reveal.")],
 
