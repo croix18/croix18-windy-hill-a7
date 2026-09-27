@@ -21,7 +21,7 @@ L = dict(
         dict(stem="$(4 \\times 10^{5})(3 \\times 10^{-2})$", answer="1.2 × 10⁴", band="yesterday", source="4.02–03 — multiply the coefficients, add the exponents, then finish the answer", check=("eq", "4*10**5*3*F(10)**-2", "F(12,10)*10**4")),
         dict(stem="$(6.3 \\times 10^{7}) - (4.1 \\times 10^{6})$", answer="5.89 × 10⁷", band="last week", source="4.01 — rewrite one number over the other's power, then subtract the coefficients", check=("eq", "F(63,10)*10**7-F(41,10)*10**6", "F(589,100)*10**7")),
         dict(stem="Write  0.00902  in scientific notation.", answer="9.02 × 10⁻³", band="last unit", source="3.09 — small numbers; note that the zero between the 9 and the 2 stays", check=("eq", "F(902,100000)", "F(902,100)*F(10)**-3")),
-        dict(stem="Round  4.738  to the nearest hundredth.", answer="4.74", band="prior grade — the prerequisite this lesson needs", source="MA.5.NSO.2.1 — rounding to a named place; every answer today ends with one of these", check=("eq", "F(1,100)*floor(F(4738,1000)/F(1,100)+F(1,2))", "F(474,100)")),
+        dict(stem="Round  4.738  to the nearest hundredth.", answer="4.74", band="prior grade — the prerequisite this lesson needs", source="MA.5.NSO.1.5 — rounding to a named place; every answer today ends with one of these", check=("eq", "F(1,100)*floor(F(4738,1000)/F(1,100)+F(1,2))", "F(474,100)")),
     ],
     warmup_note="Q3 and Q4 are today's two tools. Q3 asks which digits are there at all — the zero between the 9 and the 2 survives the conversion, and that is exactly the zero that counts. Q4 asks how to stop at a named place, which is what every answer today ends with. Say at the reveal: today you will decide where to stop, and then stop there.",
 

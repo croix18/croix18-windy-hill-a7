@@ -705,7 +705,7 @@ def build_te(L, deck_path, outdir):
         p = te.para("", before=1, after=3, indent=470, hanging=470)
         te._run(p, f"{s['n']}.  ", 10.5, bold=True)
         head = s["title"] + (f" \u2014 {s['sub']}" if s.get("sub") else "")
-        te._run(p, head + ".  ", 10.5, bold=True)
+        te._run(p, head + ("  " if head.endswith((".", "?", "!")) else ".  "), 10.5, bold=True)   # no ".." after a subtitle that ends in a period
         te.rich(p, line, size=10.5)
         i += 1
 

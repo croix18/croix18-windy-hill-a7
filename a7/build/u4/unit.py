@@ -1,7 +1,7 @@
 # A7 Unit 4 — Solving Problems with Rational Numbers: Reference Sheet, Unit Review, Unit Assessment.
 U = dict(
     unit=4, title="Solving Problems with Rational Numbers",
-    reference_intro="Everything on this page is tested from memory. The Grade 8 FAST reference sheet lists no rule for operating in scientific notation, nothing about significant digits, and no order of operations; what it gives you is an on-screen scientific calculator, which will happily give you twelve digits of an answer that deserves two.",
+    reference_intro="Everything on this page is tested from memory. The Grade 8 FAST reference sheet lists none of it; what the test gives you is an on-screen scientific calculator, which will happily give you twelve digits of an answer that deserves two.",
 
     reference=[
         dict(title="1.   Operations in Scientific Notation", right="Lessons 1–3 · the powers must match to add, never to multiply",
@@ -14,18 +14,18 @@ U = dict(
                          ["The exponents may be", "no more than 2 apart", "as far apart as they like"]])),
                      "**The exponents are never added when you add.**  $(1.3 \\times 10^{3}) + (3.4 \\times 10^{5})$ is not $4.7 \\times 10^{8}$. Ten to the fifth plus ten to the third is not a power of ten at all.",
                      "**Every answer ends with a coefficient at least 1 and less than 10.**  If it is over 10, move the point one place left and raise the exponent: $14.5 \\times 10^{7} = 1.45 \\times 10^{8}$. If it is under 1, move the point one place right and lower the exponent: $0.53 \\times 10^{-2} = 5.3 \\times 10^{-3}$.",
-                     "**Addition and subtraction are limited to exponents within 2 of each other.**  That is the benchmark's own rule; an item that breaks it is worked the same way, powers matched first. Multiplication and division have no such limit.",
-                     "**Moving the point and moving the exponent go opposite ways.**  Exponent up one, point one place left. The value never changes."],
+                     "**Addition and subtraction are limited to exponents within 2 of each other.**  That is the benchmark's own rule. Multiplication and division have no such limit.",
+                     ],
              not_sci=True),
         dict(title="2.   Significant Digits", right="Lesson 4 · two rules, and it matters which one",
              blocks=["**Significant digits are the digits of a MEASUREMENT that carry information.**  A count is not a measurement: 24 students is exactly 24, and 60 seconds in a minute is exact, so neither ever limits an answer.",
-                     dict(table=([3000, 2400, 3960], [
+                     dict(table=([3800, 1900, 3660], [
                          ["Rule", "Example", "Why"],
                          ["Every nonzero digit counts", "$4{,}207 \\rightarrow 4$", "they were all measured"],
                          ["A zero between nonzero digits counts", "$0.00405 \\rightarrow 3$", "it is holding a measured place"],
                          ["A leading zero never counts", "$0.0058 \\rightarrow 2$", "it only locates the decimal point"],
-                         ["A trailing zero counts, with a decimal point", "$3.200 \\rightarrow 4$", "writing it is a claim about thousandths"],
-                         ["and does not count without one", "$52{,}000 \\rightarrow 2$", "those zeros only hold places"]])),
+                         ["Trailing zero, with a decimal point: counts", "$3.200 \\rightarrow 4$", "writing it is a claim about thousandths"],
+                         ["Trailing zero, no decimal point: does not", "$52{,}000 \\rightarrow 2$", "those zeros only hold places"]])),
                      "**Two rules, and it matters which one you use.**  For a PRODUCT or a QUOTIENT, the answer takes the smaller of the two significant-digit counts. For a SUM or a DIFFERENCE, the answer stops at the leftmost place where either measurement's last digit sits.",
                      "**The case where they disagree.**  $1{,}234 + 5.6 = 1{,}239.6$. Counting digits would give $1.2 \\times 10^{3}$ and throw away two digits that were measured; the place rule gives 1,240, which is right. Counting digits is the rule for products, and it belongs to products only.",
                      "**Do all the arithmetic first and round once, at the end.**  Rounding in the middle moves the answer, and it keeps moving it every step afterwards.",
@@ -40,7 +40,7 @@ U = dict(
                      "**Roots of fractions come apart.**  $\\sqrt{\\frac{4}{25}} = \\frac{2}{5}$ and $\\sqrt[3]{\\frac{1}{125}} = \\frac{1}{5}$ — top and bottom each get the root.",
                      "**A root and a power in one expression: finish each piece, then combine.**  $\\sqrt{4^{3} - 39} \\cdot 5^{-3} = 5 \\cdot \\frac{1}{125} = \\frac{1}{25}$."]),
         dict(title="4.   The Order of Operations", right="Lesson 6 · read the structure, not a mnemonic",
-             blocks=["**There is no mnemonic here, and that is deliberate.**  A mnemonic has no letter for the radical bar or the fraction bar, and it makes people multiply before dividing. Read the expression and ask what is holding what.",
+             blocks=["**There is no mnemonic here, and that is deliberate.**  A mnemonic has no letter for the radical bar or the fraction bar. Read the expression and ask what is holding what.",
                      dict(table=([1300, 3300, 4760], [
                          ["Level", "What", "How"],
                          ["1", "Grouping symbols", "( ), [ ], the radical bar, the fraction bar — innermost first"],
@@ -54,17 +54,17 @@ U = dict(
              blocks=["**Substitute in parentheses, every time.**  With $x = -4$, $x^{2}$ is $(-4)^{2} = 16$. The parentheses keep the exponent attached to what it was attached to, and they keep a negative value negative.",
                      "**There is no key word that tells you which operation to use.**  Two problems can carry the same numbers and the same words and need different operations. 15 dollars plus 4 dollars for each of 6 gigabytes is $15 + 4(6) = 39$; 15 dollars for each of 4 lines plus 6 dollars of tax is $15(4) + 6 = 66$. Circling and boxing gives the same markings on both.",
                      "**A rate goes inside the parentheses that multiply the size; a flat fee stays outside.**  A square floor of side 9 feet at 2.89 dollars a square foot with a flat 95 dollars to install is $9^{2}(2.89) + 95$, never $9^{2}(2.89 + 95)$.",
-                     "**Round once, at the end, and write the unit.**  Six sides of $\\sqrt{200}$ feet is 84.85 feet; rounding the side to 14 first gives 84 and loses most of a foot. An answer with no unit is not an answer to a real-world question."]),
+                     "**Round once, at the end, and write the unit.**  Six sides of $\\sqrt{200}$ feet is 84.85 feet; rounding the side to 14 first gives 84. An answer with no unit is not an answer."]),
         dict(title="6.   Vocabulary",
              blocks=[dict(vocab=[
                  ("coefficient", "the factor $a$ in $a \\times 10^{n}$; in a finished answer, $1 \\leq a < 10$"),
                  ("significant digits", "the digits of a measurement that carry information — every nonzero digit, every zero between them, and trailing zeros only with a decimal point"),
                  ("measurement", "a quantity that was measured, so its last digit is uncertain; a count is not a measurement"),
-                 ("precision", "how far out a measurement's last digit sits. A sum or difference stops at the leftmost of the two"),
+                 ("precision", "how far out a measurement's last digit sits; a sum or difference stops at the leftmost of the two"),
                  ("radical", "a root symbol together with everything under its bar"),
                  ("radicand", "the number under the radical bar; the bar groups it, so it is finished before the root is taken"),
                  ("principal square root", "the nonnegative root that the square root sign names"),
-                 ("grouping symbol", "anything that holds part of an expression together and is finished first: ( ), [ ], the radical bar, the fraction bar"),
+                 ("grouping symbol", "anything that holds part of an expression together: ( ), [ ], the radical bar, the fraction bar"),
                  ("formula", "a rule written with letters that becomes a number once each letter is replaced by a value"),
                  ("substitute", "replace a letter with its value, in parentheses"),
                  ("rate", "an amount per unit — per square foot, per second — which multiplies the size; a flat fee does not")])]),
@@ -107,7 +107,7 @@ U = dict(
             dict(stem="$\\sqrt[3]{\\frac{1}{27}}$", answer="$\\frac{1}{3}$", why="Top and bottom each get the root.", check=("eq", "F(1,3)**3", "F(1,27)"), space=0.6),
             dict(stem="$\\sqrt{100} \\cdot 4^{-2}$", answer="$\\frac{5}{8}$", why="$10 \\cdot \\frac{1}{16}$.", check=("eq", "sqrt(100)*F(4)**-2", "F(5,8)"), space=0.6),
             dict(stem="$\\left(-\\frac{1}{2}\\right)^{2} + \\sqrt{3^{2} + 7}$", answer="$\\frac{17}{4}$", why="$\\frac{1}{4} + 4$.", check=("many", ("eq", "3**2+7", "16"), ("eq", "F(-1,2)**2+sqrt(16)", "F(17,4)")), space=0.7),
-            dict(stem="Kai says that  $\\sqrt[3]{-64}$  is not a real number. Is he right? Explain.", answer="No. A cube root asks for the number used three times, and $(-4)(-4)(-4) = -64$, so the value is −4. It is a square root of a negative number that is not a real number.", why="This is the misconception the state guide names most often for this benchmark.", check=("many", ("eq", "(-4)**3", "-64"), ("true", "F(-4)**3 < 0")), space=0.9),
+            dict(stem="Kai says that  $\\sqrt[3]{-64}$  is not a real number. Is he right? Explain.", answer="No. A cube root asks for the number used three times, and $(-4)(-4)(-4) = -64$, so the value is −4. It is a square root of a negative number that is not a real number.", why="This is the first misconception the state guide names for this benchmark.", check=("many", ("eq", "(-4)**3", "-64"), ("true", "F(-4)**3 < 0")), space=0.9),
         ]),
         dict(letter="E", title="The Order of Operations", lessons="Lesson 6", benchmark="MA.8.NSO.1.7", items=[
             dict(stem="$24 - 3 \\cdot 5 + 1$", answer="10", why="Multiply first, then left to right.", check=("eq", "24-3*5+1", "10"), space=0.5),

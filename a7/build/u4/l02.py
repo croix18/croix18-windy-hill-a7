@@ -21,7 +21,7 @@ L = dict(
         dict(stem="$(3.4 \\times 10^{6}) + (2.8 \\times 10^{6})$", answer="6.2 × 10⁶", band="yesterday", source="4.01 — same power: add the coefficients and keep the power", check=("eq", "F(34,10)*10**6+F(28,10)*10**6", "F(62,10)*10**6")),
         dict(stem="Write as one power:  $\\frac{10^{9}}{10^{4}}$", answer="10⁵", band="last week", source="3.02 — quotient of powers with base 10: subtract the exponents", check=("eq", "F(10)**9/F(10)**4", "10**5")),
         dict(stem="Find the value:  $\\sqrt{169}$", answer="13", band="last unit", source="Unit 2 — perfect squares (2.01). Roots return in 4.05", check=("eq", "sqrt(169)", "13")),
-        dict(stem="Find the quotient:  $\\frac{4.8}{1.6}$", answer="3", band="prior grade — the prerequisite this lesson needs", source="MA.6.NSO.2.3 — dividing decimals; today every quotient starts with one of these", check=("eq", "F(48,10)/F(16,10)", "3")),
+        dict(stem="Find the quotient:  $\\frac{4.8}{1.6}$", answer="3", band="prior grade — the prerequisite this lesson needs", source="MA.6.NSO.2.1 — dividing decimals; today every quotient starts with one of these", check=("eq", "F(48,10)/F(16,10)", "3")),
     ],
     warmup_note="Q1 and Q2 are the two halves of today, side by side. Q1 is yesterday's rule, where the power of ten sat still and only the coefficients moved. Q2 is the rule that takes over today, where the power of ten is the thing that moves. Say at the reveal: multiplying is not adding, so nothing has to line up.",
 
@@ -230,7 +230,7 @@ L = dict(
     differentiation=dict(
         ese="Give a two-column organiser — COEFFICIENTS on the left, POWERS OF TEN on the right — and have the student split every expression into the two columns before computing anything. The regrouping step in Notes I becomes a physical act, and the two laws are then applied one column at a time.",
         ell="Product and quotient are the two nouns, multiply and divide the two verbs. Write them in pairs on the board — PRODUCT goes with MULTIPLY and ADD the exponents, QUOTIENT goes with DIVIDE and SUBTRACT the exponents — and read each board's operation aloud before the boards go up.",
-        enrichment="Ask for (4 × 10⁵)² without a calculator, then for the two numbers whose product is 1.2 × 10⁷ and whose quotient is 3 × 10¹."),
+        enrichment="Ask for (4 × 10⁵)² without a calculator (1.6 × 10¹¹), then for the two numbers in scientific notation whose product is 1.2 × 10⁷ and whose quotient is 1.2 × 10¹ (1.2 × 10⁴ and 1 × 10³)."),
 
     closure="Board 9 is written work and it is the exit evidence: the student has to name Marcus's error and Sara's error separately and give 3 × 10⁵. Read the boards, not the papers.",
 

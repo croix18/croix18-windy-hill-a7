@@ -115,9 +115,12 @@ class Doc:
         return r
 
     def para(self, text="", size=11, bold=False, italic=False, color=INK, before=0, after=0,
-             indent=0, hanging=0, align=None, keep=False, container=None):
+             indent=0, hanging=0, align=None, keep=False, container=None, nowidow=False):
         target = container if container is not None else self.d
-        p = target.add_paragraph()
+        if container is not None and getattr(container, "_fresh", False):
+            p = container.paragraphs[0]; container._fresh = False   # a block's first paragraph
+        else:
+            p = target.add_paragraph()
         pf = p.paragraph_format
         pf.space_before = Pt(before); pf.space_after = Pt(after)
         if indent: pf.left_indent = Twips(indent)
@@ -125,6 +128,10 @@ class Doc:
         if align == "center": p.alignment = WD_ALIGN_PARAGRAPH.CENTER
         if align == "right": p.alignment = WD_ALIGN_PARAGRAPH.RIGHT
         if keep: pf.keep_with_next = True
+        if nowidow:
+            # LibreOffice drops a heading's keep-with-next when widow/orphan control cannot split
+            # the paragraph after it; letting that one paragraph split keeps the heading with it.
+            pf.widow_control = False
         if text:
             self.rich(p, text, size=size, bold=bold, italic=italic, color=color)
         return p
@@ -167,6 +174,20 @@ class Doc:
         bdr.append(b); pPr.append(bdr)
         r = p.add_run(); r.font.size = Pt(2)
         return p
+
+    def block(self):
+        """A borderless single-cell table that cannot split across pages. Write into it with
+        para(..., container=cell) / section(..., container=cell). Used where LibreOffice drops a
+        heading's keep-with-next: it leaves a heading alone at the foot of a page whenever not
+        even one line of the next paragraph fits."""
+        t = self.d.add_table(rows=1, cols=1); t.autofit = False
+        lay = OxmlElement("w:tblLayout"); lay.set(qn("w:type"), "fixed"); t._tbl.tblPr.append(lay)
+        c = t.rows[0].cells[0]; c.width = Twips(self.cw)
+        _set_cell_border(c); _cell_margins(c, 0, 0, 0, 0)
+        _grid(t, [self.cw])
+        trPr = t.rows[0]._tr.get_or_add_trPr(); trPr.append(OxmlElement("w:cantSplit"))
+        c._fresh = True
+        return c
 
     def underline_para(self, p, sz=8, space=1):
         """Bottom border ON the paragraph itself: an empty rule paragraph is not kept with its
@@ -217,7 +238,10 @@ class Doc:
                 p.paragraph_format.space_after = Pt(0)
                 if cell_align == "center" or (header and ri == 0):
                     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-                if keep:
+                if (keep and ri < len(rows) - 1) or (header and ri == 0 and len(rows) > 1):
+                    # keep: every row keeps with the next and the last row lets go. A header row
+                    # always keeps with the first body row: LibreOffice has dropped a whole table
+                    # body when a page broke right after a repeated header row.
                     p.paragraph_format.keep_with_next = True
                 if content is None:
                     continue
@@ -266,8 +290,8 @@ class Doc:
     def instruction(self, text):
         self.para(text, size=9.5, italic=True, color=GRAY, before=2, after=8)
 
-    def section(self, title, right=""):
-        p = self.para("", before=10, after=6, keep=True)
+    def section(self, title, right="", container=None):
+        p = self.para("", before=10, after=6, keep=True, container=container)
         self._run(p, title, 12, bold=True)
         if right:
             p.add_run("\t"); self._run(p, right, 9.5, italic=True, color=GRAY)

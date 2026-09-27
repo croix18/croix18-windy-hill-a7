@@ -54,8 +54,9 @@ def build_reference(U, outdir):
                 doc.para(block, before=3, after=4)
             elif block.get("table"):
                 widths, rows = block["table"]
+                # keep=True: a reference table is read as one thing, so it never straddles a page
                 doc.table(widths, rows, header=block.get("header", True), size=block.get("size", 10.5),
-                          align_center=True)
+                          align_center=True, keep=True)
             elif block.get("bullets"):
                 for b in block["bullets"]:
                     doc.para("•   " + b, before=1, after=2, indent=360, hanging=360)

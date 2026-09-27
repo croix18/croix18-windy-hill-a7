@@ -21,7 +21,7 @@ L = dict(
         dict(stem="$\\sqrt{5^{2} - 9}$", answer="4", band="yesterday", source="4.05 — finish under the bar first: 25 − 9 = 16", check=("many", ("eq", "5**2-9", "16"), ("eq", "sqrt(16)", "4"))),
         dict(stem="How many significant digits are in  1.020 ?", answer="4", band="last week", source="4.04 — the middle zero counts and the trailing zero counts, because a decimal point is written", check=("many", ("eq", "sig('1.020')", "4"), ("eq", "F(1020,1000)", "F(102,100)"))),
         dict(stem="Find the value:  $\\left(\\frac{2}{3}\\right)^{-2}$", answer="9/4", band="last unit", source="3.05 — a negative exponent flips the base", check=("eq", "F(2,3)**-2", "F(9,4)")),
-        dict(stem="Evaluate:  $12 \\div 3 \\cdot 2$", answer="8", band="prior grade — the prerequisite this lesson needs", source="MA.6.NSO.2.3 — multiplication and division are one level, taken left to right", check=("eq", "F(12)/3*2", "8")),
+        dict(stem="Evaluate:  $12 \\div 3 \\cdot 2$", answer="8", band="prior grade — the prerequisite this lesson needs", source="MA.5.AR.2.2 — multiplication and division are one level, taken left to right", check=("eq", "F(12)/3*2", "8")),
     ],
     warmup_note="Q4 is the prerequisite and it is the one half the room gets wrong. Multiplication and division are one level, taken as they come from the left: 12 ÷ 3 is 4 and 4 · 2 is 8. A board that answers 2 multiplied first because the multiplication sign looked more important. Say at the reveal that there is no rule anywhere that says multiply before divide.",
 
@@ -243,7 +243,7 @@ L = dict(
         dict(stem="$3 + 5(6 - 2)^{2}$", answer="83", why="$3 + 5(16)$.", check=("eq", "3+5*(6-2)**2", "83"), space=0.8),
         dict(stem="$\\frac{5^{2} - 1}{2^{2} + 2}$", answer="4", why="24 over 6.", check=("many", ("eq", "5**2-1", "24"), ("eq", "2**2+2", "6"), ("eq", "F(24,6)", "4")), space=0.8),
         dict(stem="$-4^{2} + (-4)^{2}$", answer="0", why="", check=("many", ("eq", "-4**2", "-16"), ("eq", "(-4)**2", "16"), ("eq", "-4**2+(-4)**2", "0")), space=0.8),
-        dict(stem="$\\sqrt{169 - 25} + 3^{-1}$", answer="$\\frac{37}{3}$", why="Under the bar: 144.", check=("many", ("eq", "169-25", "144"), ("eq", "sqrt(144)+F(3)**-1", "F(37,3)")), space=0.8),
+        dict(stem="$\\sqrt{100 - 19} + 2^{-2}$", answer="$\\frac{37}{4}$", why="Under the bar: 81, whose root is 9. Then $9 + \\frac{1}{4}$.", check=("many", ("eq", "100-19", "81"), ("eq", "sqrt(81)+F(2)**-2", "F(37,4)")), space=0.8),
     ],
 
     te=dict(
@@ -251,17 +251,17 @@ L = dict(
              "Nothing says multiply before divide. They are one level, taken left to right like a sentence.",
              "A fraction bar is a grouping symbol on the top and another one on the bottom."],
         must="Evaluate multi-step expressions with rational numbers, exponents and radicals, in six steps or fewer.",
-        must_not="No mnemonic. The state guide says to avoid PEMDAS because it leaves out grouping symbols, and the word appears nowhere in this unit.",
+        must_not="No mnemonic. The state guide says to avoid PEMDAS because it leaves out grouping symbols, and the word appears on no student page in this unit.",
 
         read_first=[
             "This lesson rebuilds Math Nation 4.6. The book's 4.6.4 — four expressions, A through D, that differ only in where the grouping symbols sit and evaluate to 128, −1/5, −125 and −383 — was the best item in the unit and its idea is what Notes I and boards 5 through 8 are built on.",
-            "The state guide is explicit: avoid the PEMDAS mnemonic, because it does not account for grouping symbols such as the radical bar and the fraction bar, and because it invites students to multiply before dividing. Notes I gives four levels rather than four letters, and Notes II spends a whole slide on left-to-right — the single most common order error in the course, and the one that half a room gets wrong in the warm-up.",
+            "The state guide is explicit: avoid mnemonics such as PEMDAS, which do not account for other grouping symbols — the radical bar, the fraction bar — and do not exercise the number sense that allows for calculating accurately in a different order. Notes I gives four levels rather than four letters, and Notes II spends a whole slide on left-to-right — the single most common order error in the course, and the one that half a room gets wrong in the warm-up.",
             "One book defect is repaired here rather than reproduced. Teacher Edition 4.6.3 question 1d argues that 'Roscoe is correct because the products of squared numbers are always positive'. A square is NEVER NEGATIVE, which is not the same claim, and the expression in question is (√n − 11)² — whose value at n = 121 is 0. The book's own table stops one row short of the case that would have shown it. Whiteboard 9 is that case, asked as the exit ticket.",
             "Also worth knowing: TE 4.6.3 question 2 tells teachers that 'any number raised to the third power means to multiply the number itself three times'. A number used as a factor three times is multiplied twice. Nothing here repeats that sentence.",
             "IXL gives 4.05 and 4.06 the same skill, D8J. Under ruling 28 that is one assignment covering the run of two lessons, due at the start of the class after the second of them — the due-date sheet already merges it."],
         standard_notes=[("Clarification", "Multi-step expressions are limited to six steps or fewer. Simplify radicals by factoring, within the benchmark's lists."),
                         ("Boundary", "Grouping symbols include the radical bar and the fraction bar, and are taught that way. Every radicand stays inside the perfect-square and perfect-cube lists.")],
-        sits="The second of four MA.8.NSO.1.7 lessons, and the one that generalises 4.05's single idea. Three of the guide's four named misconceptions for this benchmark live here: working left to right regardless of structure, doing the most recently taught operation first, and the square-versus-cube-root confusion carried over from yesterday. The fourth, keyword hunting, belongs to 4.07–08.",
+        sits="The second of four MA.8.NSO.1.7 lessons, and the one that generalises 4.05's single idea. Three of the guide's four named misconceptions for this benchmark live here: applying the order of operations incorrectly, doing the most recently taught operation first, and the square-versus-cube-root confusion carried over from yesterday. The fourth, keyword hunting, belongs to 4.07–08.",
         lives="Notes I — 'read the expression and ask what is holding what'. Boards 5 and 6 are the diagnostics, board 7 is the structural item that separates −2² from (−2)², and board 9 repairs the book's own wrong key in writing.",
         materials="Whiteboards and markers. Calculators are allowed on everything, and this is the lesson where a calculator is worth using against the class: enter −2² and (−2)² and let the machine settle it.",
         variation="Questions 1–6 are one structural decision each: multiply before adding, left-to-right division, a power inside parentheses, a fraction bar, the minus-sign-and-exponent contrast, and a radical with a negative exponent. 7 is the three items the state assessment supplies and 8 is three of our own with a bracket, a fraction bar and a cube root. 9 works backwards in three shapes. The pattern breaks at 10, where the student judges a rule rather than a value. 11 is the diagnostic multiple choice, whose three wrong options are three different levels misapplied, and 12 is the select-all. The Additional sheet mirrors each position, and its question 10 is the same error one level down — addition and subtraction rather than multiplication and division.",

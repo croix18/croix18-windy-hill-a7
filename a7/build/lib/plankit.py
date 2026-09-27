@@ -37,15 +37,17 @@ def build_plan(L, deck_path, outdir, course, label):
     ], header=False, size=10)
 
     # 2 -------------------------------------------------- standards
-    doc.section("2.  Standards")
-    doc.para(f"**{L['benchmark']}**  {L['benchmark_text']}", size=10.5, before=2, after=4)
+    blk = doc.block()
+    doc.section("2.  Standards", container=blk)
+    doc.para(f"**{L['benchmark']}**  {L['benchmark_text']}", size=10.5, before=2, after=4, container=blk)
     T = L["te"]
     notes = dict(T.get("standard_notes", []))
     must = T.get("must") or notes.get("Clarification") or notes.get("Benchmark")
     if must:
-        doc.para("**Must.**  " + must, size=10.5, before=0, after=3)
+        doc.para("**Must.**  " + must, size=10.5, before=0, after=3, container=blk)
     if T.get("must_not") or notes.get("Boundary"):
-        doc.para("**Must not.**  " + (T.get("must_not") or notes.get("Boundary")), size=10.5, before=0, after=4)
+        doc.para("**Must not.**  " + (T.get("must_not") or notes.get("Boundary")), size=10.5, before=0, after=4, container=blk)
+    doc.spacer(1)
 
     # 3 -------------------------------------------------- MTRs, with evidence
     doc.section("3.  Mathematical Thinking and Reasoning Standards", "the evidence for each, from this period")
@@ -55,11 +57,13 @@ def build_plan(L, deck_path, outdir, course, label):
     doc.table([1500, 3400, 4460], rows_mtr, header=True, size=10)
 
     # 4 -------------------------------------------------- target and essential question
-    doc.section("4.  Learning Target and Essential Question")
-    doc.para("**Learning target.**  " + L["target"], size=10.5, before=2, after=3)
-    doc.para("**Essential question.**  " + L["essential"], size=10.5, before=0, after=3)
-    doc.para("**Building on.**  " + L["building_on"], size=10, before=0, after=2)
-    doc.para("**Working toward.**  " + L["working_toward"], size=10, before=0, after=4)
+    blk = doc.block()
+    doc.section("4.  Learning Target and Essential Question", container=blk)
+    doc.para("**Learning target.**  " + L["target"], size=10.5, before=2, after=3, container=blk)
+    doc.para("**Essential question.**  " + L["essential"], size=10.5, before=0, after=3, container=blk)
+    doc.para("**Building on.**  " + L["building_on"], size=10, before=0, after=2, container=blk)
+    doc.para("**Working toward.**  " + L["working_toward"], size=10, before=0, after=4, container=blk)
+    doc.spacer(1)
 
     # 5 -------------------------------------------------- sequence, read from the deck
     doc.section("5.  Sequence", "read from the deck; never typed")
@@ -89,10 +93,12 @@ def build_plan(L, deck_path, outdir, course, label):
     doc.table([2300, 620, 3300, 3140], seq, header=True, size=9.5)
 
     # 6 -------------------------------------------------- gradual release
-    doc.section("6.  Gradual Release")
-    doc.para("**I do.**  The Notes slides and the worked half of each Example: the teacher writes, the class copies, and the OFF line is said out loud rather than printed.", size=10.5, before=2, after=3)
-    doc.para("**We do.**  Each Example's Your Turn: the same steps on the student's own numbers, revealed and named a minute later.", size=10.5, before=0, after=3)
-    doc.para(f"**You do.**  The nine-question whiteboard round ({wb_min} minutes) and then the six-question independent set, silent and written.", size=10.5, before=0, after=4)
+    blk = doc.block()
+    doc.section("6.  Gradual Release", container=blk)
+    doc.para("**I do.**  The Notes slides and the worked half of each Example: the teacher writes, the class copies, and the OFF line is said out loud rather than printed.", size=10.5, before=2, after=3, container=blk)
+    doc.para("**We do.**  Each Example's Your Turn: the same steps on the student's own numbers, revealed and named a minute later.", size=10.5, before=0, after=3, container=blk)
+    doc.para(f"**You do.**  The nine-question whiteboard round ({wb_min} minutes) and then the six-question independent set, silent and written.", size=10.5, before=0, after=4, container=blk)
+    doc.spacer(1)
 
     # 7 -------------------------------------------------- higher-order questions with DOK
     doc.section("7.  Higher-Order Questions")
@@ -115,21 +121,25 @@ def build_plan(L, deck_path, outdir, course, label):
     doc.para("**MTR.4.1 — the one peer move.**  " + SPLIT_MOVE, size=10, before=4, after=4)
 
     # 9 -------------------------------------------------- differentiation
-    doc.section("9.  Differentiation")
+    blk = doc.block()
+    doc.section("9.  Differentiation", container=blk)
     d = L.get("differentiation", {})
-    doc.para("**ESE / IEP.**  " + d.get("ese", ""), size=10.5, before=2, after=3)
-    doc.para("**ELL.**  " + d.get("ell", ""), size=10.5, before=0, after=3)
-    doc.para("**Enrichment.**  " + d.get("enrichment", ""), size=10.5, before=0, after=4)
+    doc.para("**ESE / IEP.**  " + d.get("ese", ""), size=10.5, before=2, after=3, container=blk)
+    doc.para("**ELL.**  " + d.get("ell", ""), size=10.5, before=0, after=3, container=blk)
+    doc.para("**Enrichment.**  " + d.get("enrichment", ""), size=10.5, before=0, after=4, container=blk)
+    doc.spacer(1)
 
     # 10 ------------------------------------------------- closure, vocabulary, materials, homework
-    doc.section("10.  Closure, Vocabulary, Materials, Practice")
-    doc.para("**Closure.**  " + L.get("closure", "The last board is written work; it is the exit evidence. Read the boards, not the papers."), size=10.5, before=2, after=3)
-    doc.para("**Vocabulary.**  " + "; ".join(f"__{t}__" for t, _ in L["vocab"]), size=10.5, before=0, after=3)
-    doc.para("**Materials.**  " + T.get("materials", "Whiteboards and markers."), size=10.5, before=0, after=3)
+    blk = doc.block()
+    doc.section("10.  Closure, Vocabulary, Materials, Practice", container=blk)
+    doc.para("**Closure.**  " + L.get("closure", "The last board is written work; it is the exit evidence. Read the boards, not the papers."), size=10.5, before=2, after=3, container=blk)
+    doc.para("**Vocabulary.**  " + "; ".join(f"__{t}__" for t, _ in L["vocab"]), size=10.5, before=0, after=3, container=blk)
+    doc.para("**Materials.**  " + T.get("materials", "Whiteboards and markers."), size=10.5, before=0, after=3, container=blk)
     doc.para("**Practice.**  The six-question independent set is worked silently in class; whatever is not finished goes home. "
              + "IXL, all skills required to a SmartScore of 67, "
              + (L["ixl_due"].rstrip(".")[0].lower() + L["ixl_due"].rstrip(".")[1:] if L.get("ixl_due") else "due at the start of the next class")
-             + ": " + "; ".join(L["ixl"]) + ".", size=10.5, before=0, after=4)
+             + ": " + "; ".join(L["ixl"]) + ".", size=10.5, before=0, after=4, container=blk)
+    doc.spacer(1)
 
     name = f"A7 {code}  Lesson Plan.docx"
     path = os.path.join(outdir, name)

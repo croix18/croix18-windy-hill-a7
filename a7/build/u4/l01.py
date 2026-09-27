@@ -20,7 +20,7 @@ L = dict(
         dict(stem="Write  0.00062  in scientific notation.", answer="6.2 × 10⁻⁴", band="yesterday", source="3.09 — small numbers in scientific notation: the 6 is in the ten-thousandths place", check=("eq", "F(62,100000)", "F(62,10)*F(10)**-4")),
         dict(stem="How many times larger is  $8 \\times 10^{7}$  than  $2 \\times 10^{4}$ ?", answer="4,000", band="last week", source="3.08 — divide the coefficients, divide the powers, multiply the results", check=("eq", "8*10**7/(2*10**4)", "4000")),
         dict(stem="Find the value:  $\\sqrt{144}$", answer="12", band="last unit", source="Unit 2 — perfect squares (2.01). Roots come back for good in 4.05", check=("eq", "sqrt(144)", "12")),
-        dict(stem="Find the sum:  $0.49 + 1.2$", answer="1.69", band="prior grade — the prerequisite this lesson needs", source="MA.6.NSO.2.3 — adding decimals: line up the place values, not the digits", check=("eq", "F(49,100)+F(12,10)", "F(169,100)")),
+        dict(stem="Find the sum:  $0.49 + 1.2$", answer="1.69", band="prior grade — the prerequisite this lesson needs", source="MA.5.NSO.2.3 — adding decimals: line up the place values, not the digits", check=("eq", "F(49,100)+F(12,10)", "F(169,100)")),
     ],
     warmup_note="Q4 is today's lesson in miniature. 0.49 and 1.2 cannot be added until they are written over the same place value; 4.95 × 10⁴ and 1.21 × 10⁵ cannot be added until they are written over the same power of ten. A board that answers 0.61 lined up the digits instead of the places — that is exactly the student who will add 4.95 and 1.21 today and keep whichever exponent they saw last.",
 

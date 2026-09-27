@@ -22,7 +22,7 @@ L = dict(
         dict(stem="$-5^{2} + (-5)^{2}$", answer="0", band="yesterday", source="4.06 — the exponent attaches to its own base; the parentheses decide what that base is", check=("many", ("eq", "-5**2", "-25"), ("eq", "-5**2+(-5)**2", "0"))),
         dict(stem="$\\sqrt{144} + 2^{-1}$", answer="25/2", band="last week", source="4.05 — finish each piece, then combine: 12 + 1/2", check=("eq", "sqrt(144)+F(2)**-1", "F(25,2)")),
         dict(stem="Find the value:  $\\left(\\frac{3}{4}\\right)^{-1}$", answer="4/3", band="last unit", source="3.05 — a negative exponent flips the base", check=("eq", "F(3,4)**-1", "F(4,3)")),
-        dict(stem="Evaluate  $2x^{2}$  when  $x = 3$.", answer="18", band="prior grade — the prerequisite this lesson needs", source="MA.6.AR.1.1 — substitute, then follow the structure: 2(3)² = 2(9)", check=("eq", "2*3**2", "18")),
+        dict(stem="Evaluate  $2x^{2}$  when  $x = 3$.", answer="18", band="prior grade — the prerequisite this lesson needs", source="MA.6.AR.1.3 — substitute, then follow the structure: 2(3)² = 2(9)", check=("eq", "2*3**2", "18")),
     ],
     warmup_note="Q4 is the prerequisite and it carries the day's one habit. 2x² with x = 3 is 2(9), which is 18 — not (2 · 3)², which is 36. The parentheses around the substituted value are what keep the exponent attached to the x alone. A board that answers 36 will make the same mistake on every formula today.",
 
@@ -249,7 +249,7 @@ L = dict(
 
     independent=[
         dict(stem="$6x^{2}$  when  $x = -2$", answer="24", why="$6(-2)^{2} = 6(4)$.", check=("eq", "6*(-2)**2", "24"), space=0.7),
-        dict(stem="$\\frac{1}{2}mv^{2}$  when  $m = 90$  and  $v = 4$", answer="720 joules", why="$45(16)$.", check=("eq", "F(1,2)*90*4**2", "720"), space=0.7),
+        dict(stem="$\\frac{1}{2}mv^{2}$  when  $m = 90$  and  $v = 4$", answer="720", why="$45(16)$.", check=("eq", "F(1,2)*90*4**2", "720"), space=0.7),
         dict(stem="$\\frac{a^{2} - b}{c}$  when  $a = 9$,  $b = 6$,  $c = 5$", answer="15", why="Finish the numerator first: $81 - 6 = 75$.", check=("many", ("eq", "9**2-6", "75"), ("eq", "F(75,5)", "15")), space=0.8),
         dict(stem="A square room of side 10 feet is carpeted at 2.65 dollars a square foot, with a flat 55 dollars for fitting. Find the total cost.", answer="320 dollars", why="$100(2.65) + 55$.", check=("eq", "10**2*F(265,100)+55", "320"), space=0.9),
         dict(stem="$2(x + y)^{2} - 3$  when  $x = 4$  and  $y = 1$", answer="47", why="$2(25) - 3$.", check=("eq", "2*(4+1)**2-3", "47"), space=0.8),
