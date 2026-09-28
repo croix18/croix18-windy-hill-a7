@@ -39,6 +39,16 @@ def is_student(name):
     return ("key" not in n) and ("teacher edition" not in n) and ("lesson plan" not in n) and ("notes.json" not in n)
 
 
+LESSON_EYEBROW = re.compile(r"GRADE \d+ ACCELERATED\s+·\s+UNIT \d+\s+·\s+\S")
+
+
+def is_title_slide(text):
+    """A lesson's title slide — the one slide of a lesson that may carry its benchmark code
+    (HOUSE STYLE: 'the deck title slide ... carries them'). Found by its eyebrow, so a lesson
+    inside the whole-unit deck is recognised wherever it starts."""
+    return bool(LESSON_EYEBROW.search(text))
+
+
 def docx_text(path):
     z = zipfile.ZipFile(path)
     x = z.read("word/document.xml").decode()
@@ -70,7 +80,7 @@ def check_docscan(files):
         n += 1
         for k, t in texts.items():
             where = f"{base}" + (f" slide {k}" if k else "")
-            if student and not (f.endswith(".pptx") and k == 1):
+            if student and not (f.endswith(".pptx") and (k == 1 or is_title_slide(t))):
                 if re.search(r"MA\.\d+\.[A-Z]+\.\d+\.\d+", t):
                     findings.append(f"docscan: benchmark code on student surface — {where}")
             if student:
@@ -242,6 +252,32 @@ def check_pdftwin(files):
         missing = [w for w in words if w not in pw]
         if words and len(missing) / len(words) > 0.02:
             findings.append(f"pdftwin: {len(missing)}/{len(words)} words of the source not in the PDF — {base}: {missing[:5]}")
+    # The whole-unit deck is a second copy of the lesson decks: after its cover and contents, it
+    # must match them slide for slide (each lesson numbers from 1 in both). A lesson rebuilt on its
+    # own leaves the unit deck stale until build_unit.py runs again — this is where that shows.
+    unit_decks = [f for f in files if f.endswith("Unit Slides.pptx")]
+    lessons = {}
+    for f in files:
+        if f.endswith("  Slides.pptx") and not f.endswith("Unit Slides.pptx"):
+            t = pptx_texts(f)
+            lessons[t[1]] = (os.path.basename(f), [t[k] for k in sorted(t)])
+    for u in unit_decks:
+        t = pptx_texts(u)
+        seq = [t[k] for k in sorted(t)]
+        i, used = 2, set()
+        while i < len(seq):
+            if seq[i] not in lessons:
+                findings.append(f"pdftwin: {os.path.basename(u)} slide {i + 1} opens no lesson deck — the unit deck is stale or out of order")
+                break
+            name, lt = lessons[seq[i]]
+            if seq[i:i + len(lt)] != lt:
+                bad = next(k for k in range(len(lt)) if i + k >= len(seq) or seq[i + k] != lt[k])
+                findings.append(f"pdftwin: {os.path.basename(u)} differs from {name} at its slide {bad + 1} — rebuild the unit deck (build_unit.py)")
+                break
+            used.add(name); i += len(lt)
+        left = sorted(v[0] for v in lessons.values() if v[0] not in used)
+        if left and i >= len(seq):
+            findings.append(f"pdftwin: {os.path.basename(u)} is missing {left}")
     print(f"pdftwin: {n} sources, {len(findings)} findings")
     return findings
 
@@ -284,7 +320,9 @@ def check_footer(files):
     """Nothing but the footer may sit below a slide's footer rule. deckkit refuses a text box
     whose DECLARED height crosses the rule, but a box sized for one line that wraps to two slips
     past that guard, so the rendered PDF is checked too. The footer's own words are the ones that
-    appear below the rule on every slide of the deck; anything else down there is a spill."""
+    appear below the rule on every slide of the LESSON; anything else down there is a spill. A
+    lesson deck is one lesson; the whole-unit deck is cut into lessons at each title slide (and
+    its cover and contents are one more run), because each lesson keeps its own running title."""
     FOOT_PT = 6.78 * 72
     findings = []; n = 0
     WORD = re.compile(r'<word xMin="([\d.]+)" yMin="([\d.]+)" xMax="([\d.]+)" yMax="([\d.]+)">([^<]*)</word>')
@@ -298,14 +336,18 @@ def check_footer(files):
         below = [[m.group(5) for m in WORD.finditer(p) if float(m.group(4)) > FOOT_PT + 2] for p in pages]
         if not below:
             continue
-        common = set(below[0])
-        for b in below[1:]:
-            common &= set(b)
-        for i, b in enumerate(below):
-            n += len(b)
-            extra = [w for w in b if w not in common and not w.strip().isdigit()]
-            if extra:
-                findings.append(f"footer: {' '.join(extra)[:60]!r} sits below the footer rule — {base} slide {i + 1}")
+        titles = [i for i, p in enumerate(pages) if is_title_slide(" ".join(m.group(5) for m in WORD.finditer(p)))]
+        cuts = sorted(set([0] + titles + [len(pages)]))
+        for a, b_ in zip(cuts, cuts[1:]):
+            run = below[a:b_]
+            common = set(run[0])
+            for b in run[1:]:
+                common &= set(b)
+            for i, b in enumerate(run, start=a):
+                n += len(b)
+                extra = [w for w in b if w not in common and not w.strip().isdigit()]
+                if extra:
+                    findings.append(f"footer: {' '.join(extra)[:60]!r} sits below the footer rule — {base} slide {i + 1}")
     print(f"footer: {n} words below the rule, {len(findings)} findings")
     return findings
 

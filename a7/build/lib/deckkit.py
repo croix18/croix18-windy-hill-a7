@@ -145,6 +145,41 @@ class Deck:
     def section(self, title, sub="", minutes=0, note="", kind="content"):
         return self._new(title, sub, minutes, note, kind)
 
+    # ---------- the whole-unit deck ----------
+    def start_lesson(self, lesson_label, title, footer):
+        """Switch the running title and footer to the next lesson and restart its slide numbers,
+        so a lesson inside the unit deck is numbered exactly as its own deck and its Teacher
+        Edition number it."""
+        self.lesson_label, self.title, self.footer = lesson_label, title, footer
+        self._n = 0
+
+    def unit_cover(self, title, lines):
+        """The unit deck's first slide: eyebrow, title, double rule, a few centred lines."""
+        self.s = self.p.slides.add_slide(self.blank); self._n += 1
+        self.side.append({"n": self._n, "title": title, "sub": "", "min": 0, "note": "", "kind": "title"})
+        self._text(LM, 1.95, CW, 0.38, f"{self.course}  ·  UNIT {self.unit}".upper(), 15, color=GRAY, align="center")
+        self._text(LM, 2.34, CW, 1.1, title, 38, bold=True, align="center", anchor="middle")
+        self._line(3.6, 3.66, 6.1, 1.5); self._line(3.6, 3.75, 6.1, 0.75)
+        y = 4.05
+        for ln in lines:
+            self._text(LM, y, CW, 0.42, ln, 19, italic=True, color=GRAY, align="center")
+            y += 0.46
+        self._foot()
+        return self.s
+
+    def link_row(self, slide, y, left, right, target):
+        """One contents row that jumps to `target` when clicked: label and title on the left,
+        the slide's position in the file on the right."""
+        prev = self.s
+        self.s = slide
+        a = self._text(LM + 0.4, y, 1.45, 0.44, left[0], 22, bold=True, anchor="middle")
+        b = self._text(LM + 1.95, y, 7.6, 0.44, left[1], 22, anchor="middle")
+        c = self._text(LM + 9.6, y, 1.6, 0.44, right, 17, italic=True, color=GRAY, align="right", anchor="middle")
+        for shape in (a, b, c):
+            shape.click_action.target_slide = target
+        self._line(LM + 0.4, y + 0.5, CW - 0.8, 0.5, LT)
+        self.s = prev
+
     def head(self, text, numeral=None):
         """A bold sub-heading with a thin rule (Notes I. / II.)."""
         label = (f"{numeral}.  " if numeral else "") + text
@@ -152,7 +187,7 @@ class Deck:
         self._line(LM, self.cursor + 0.48, CW, 0.75)
         self.cursor += 0.66
 
-    def items(self, rows, size=23, panel=False, letters=True, x=None, w=None, gap=0.1, start=0):
+    def items(self, rows, size=23, panel=False, letters=True, x=None, w=None, gap=0.1, start=0, slots=False):
         """Lettered rows. Each row: plain string, or (term, rest) for a vocab row (term blue bold),
         or ("**bold**", ...) — a row beginning with ** is set bold. Returns bottom y."""
         x = LM + 0.11 if x is None else x
@@ -171,7 +206,7 @@ class Deck:
                 xx = x + (0.77 if letters else 0.12)
                 if letters:
                     self._text(x + 0.12, y + 0.07, 0.6, 0.42, f"{chr(65 + start + i)}.", size, color=INK)
-                tw, h = self._mixed(text, xx, y + 0.05, "slidemid", size, INK, bold)
+                tw, h = self._mixed(text, xx, y + 0.05, "slidemid", size, INK, bold, slots=slots)
                 y += h + 0.18 + gap
                 continue
             lines = max(1, int(len(text) * (size / 23) / 82) + 1)
@@ -256,8 +291,8 @@ class Deck:
         self.cursor += row_h * len(rows) + 0.25
         return tbl
 
-    def math(self, latex, surface="slidebig", align="center", x=None, y=None, color=INK, gap=0.25):
-        path, w, h = mathimg.m(latex, surface, color)
+    def math(self, latex, surface="slidebig", align="center", x=None, y=None, color=INK, gap=0.25, slots=False):
+        path, w, h = mathimg.m(latex, surface, color, slots)
         yy = self.cursor if y is None else y
         if yy + h > FOOT_Y:
             raise RuntimeError(f"figure runs into the footer: {latex[:40]}")
@@ -267,7 +302,7 @@ class Deck:
             self.cursor = yy + h + gap
         return w, h
 
-    def _mixed(self, text, x, y, surface="slidemid", size=26, color=INK, bold=False, align="left", width=None):
+    def _mixed(self, text, x, y, surface="slidemid", size=26, color=INK, bold=False, align="left", width=None, slots=False):
         """Lay out one line mixing text and $latex$ pieces, images vertically centred on the text.
         Returns (total_width, line_height). Text width is estimated from character count and the
         pieces are placed left to right; align='center' centres the whole line inside [x, x+width]."""
@@ -278,7 +313,7 @@ class Deck:
             if not part:
                 continue
             if part.startswith("$"):
-                path, w, h = mathimg.m(part[1:-1], surface, color)
+                path, w, h = mathimg.m(part[1:-1], surface, color, slots)
                 pieces.append(("img", path, w, h)); total += w; maxh = max(maxh, h)
             else:
                 w = _textw(part, size, bold)
@@ -309,10 +344,10 @@ class Deck:
                 total += _textw(part, size, bold)
         return total
 
-    def math_row(self, parts, surface="slidemid", y=None, gap=0.35, size=26, color=INK, bold=False, align="center", x=None):
+    def math_row(self, parts, surface="slidemid", y=None, gap=0.35, size=26, color=INK, bold=False, align="center", x=None, slots=False):
         """A row mixing text and $latex$ pieces, vertically aligned; centered unless align='left'."""
         yy = self.cursor if y is None else y
-        total, maxh = self._mixed(parts, LM if x is None else x, yy, surface, size, color, bold, align=align)
+        total, maxh = self._mixed(parts, LM if x is None else x, yy, surface, size, color, bold, align=align, slots=slots)
         if y is None:
             self.cursor = yy + maxh + gap
         return maxh
@@ -372,8 +407,11 @@ class Deck:
             self.cursor += 0.36
 
     # ---------- finish ----------
-    def save(self, path):
+    def save(self, path, sidecar=True):
+        """sidecar=False for the whole-unit deck: its minutes are the lessons' minutes, already
+        recorded beside each lesson's own deck, and the timing check reads one period per file."""
         self.p.save(path)
-        with open(path[:-5] + ".notes.json", "w") as f:
-            json.dump({"deck": os.path.basename(path), "slides": self.side}, f, indent=1)
+        if sidecar:
+            with open(path[:-5] + ".notes.json", "w") as f:
+                json.dump({"deck": os.path.basename(path), "slides": self.side}, f, indent=1)
         return path

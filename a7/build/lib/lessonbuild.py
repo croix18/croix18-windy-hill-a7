@@ -463,6 +463,44 @@ def build_deck(L, outdir):
     code = L["code"]
     footer = f"{COURSE} · Unit {L['unit']} · {_label(L)} — {L['title']}"
     D = Deck(COURSE, L["unit"], _label(L), L["title"], footer)
+    _fill_deck(D, L)
+    name = f"A7 {code}  Slides.pptx"
+    path = os.path.join(outdir, name)
+    D.save(path)
+    return path
+
+
+def build_unit_deck(lessons, rows, U, outdir):
+    """The whole unit as one file, in teaching order: a cover, a contents slide whose rows jump to
+    each lesson's title slide, then every lesson's slides exactly as its own deck draws them.
+    The per-lesson decks stay — their side-cars feed the Teacher Editions and the lesson plans —
+    so this file carries no side-car of its own."""
+    unit = U["unit"]
+    D = Deck(COURSE, unit, f"Unit {unit}", U["title"], f"{COURSE} · Unit {unit} — {U['title']}")
+    count = ["No", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve"]
+    n = count[len(lessons)] if len(lessons) < len(count) else str(len(lessons))
+    D.unit_cover(U["title"], [f"{n} lessons in teaching order  ·  the next slide jumps to each one"])
+    contents = D.section("Contents", "Click a lesson to jump to it. Each lesson numbers its slides from 1, as its Teacher Edition does.", 0, "", "contents")
+    starts = []
+    for L in lessons:
+        starts.append(len(D.p.slides))            # the lesson's title slide, 0-based
+        D.start_lesson(_label(L), L["title"], f"{COURSE} · Unit {L['unit']} · {_label(L)} — {L['title']}")
+        _fill_deck(D, L)
+    slides = list(D.p.slides)
+    y = 1.95
+    for (label, title), i in zip(rows, starts):
+        D.link_row(contents, y, (label, title), f"slide {i + 1}", slides[i])
+        y += 0.46
+    path = os.path.join(outdir, f"A7 {unit}  Unit Slides.pptx")
+    D.save(path, sidecar=False)
+    return path
+
+
+def _fill_deck(D, L):
+    """Every slide of one lesson, appended to D. Colour (the base/exponent slots, HOUSE STYLE §2a)
+    goes on the surfaces where the teacher shows — Notes, worked examples, and every reveal — and
+    is withheld wherever the student still has to decide: warm-up, example and Your Turn prompts,
+    whiteboard questions (rules 4 and 6)."""
     D.title_slide(L["benchmark"], L["target"], L["yesterday"], L["today"], minutes=1,
                   note=L.get("title_note", "Post the learning target. Say the 'today' line and nothing else yet."))
     # ---- warm-up: four retrieval questions, one slide; reveal slide after
@@ -488,17 +526,17 @@ def build_deck(L, outdir):
         D.section("Notes", note.get("sub", ""), note["min"], note["note"], "notes")
         D.head(note["head"], note.get("numeral"))
         if note.get("items"):
-            D.items(note["items"], size=note.get("size", 23), panel=note.get("panel", False), letters=note.get("letters", True))
+            D.items(note["items"], size=note.get("size", 23), panel=note.get("panel", False), letters=note.get("letters", True), slots=True)
         if note.get("table"):
             D.table(*note["table"], size=note.get("tsize", 16))
         if note.get("math"):
             for mrow in note["math"]:
-                D.math_row(mrow, surface="slidemid", gap=0.3)
+                D.math_row(mrow, surface="slidemid", gap=0.3, slots=True)
         if note.get("text"):
             for t in note["text"]:
                 D.text(t, 22)
         if note.get("items2"):
-            D.items(note["items2"], size=note.get("size", 23), letters=note.get("letters", True), start=len(note.get("items", [])))
+            D.items(note["items2"], size=note.get("size", 23), letters=note.get("letters", True), start=len(note.get("items", [])), slots=True)
     # ---- examples: question slide, worked slide(s), your turn q + reveal
     for ex in L["examples"]:
         D.section(ex["title"], ex.get("sub", ""), ex["min_q"], ex["note_q"], "example")
@@ -515,7 +553,7 @@ def build_deck(L, outdir):
                 if isinstance(row, tuple):
                     latex, gloss = row
                     y0 = D.cursor
-                    wdt, hgt = D.math(latex, "slidemid", align="left", x=2.0)
+                    wdt, hgt = D.math(latex, "slidemid", align="left", x=2.0, slots=True)
                     gx = 2.0 + wdt + 0.5
                     D._text(gx, y0 + (hgt - 0.5) / 2, min(7.0, LM + CW - gx), 0.55, gloss, 21, italic=True, color=GRAY, anchor="middle")
                     D.cursor = y0 + hgt + 0.3
@@ -524,7 +562,7 @@ def build_deck(L, outdir):
             if w.get("answer"):
                 D.answer_line(w["answer"], y=max(D.cursor + 0.2, 5.0))
             if w.get("items"):
-                D.items(w["items"], size=23)
+                D.items(w["items"], size=23, slots=True)
         yt = ex.get("your_turn")
         if yt:
             D.section("Your Turn", "Same steps, your numbers. Boards up when done.", yt.get("min", 2), yt["note"], "yourturn")
@@ -534,7 +572,7 @@ def build_deck(L, outdir):
             D.section("Your Turn", "Answer.", 1, "Reveal; name what a wrong board most likely did (see the note above).", "yourturn")
             D.cursor = 2.4
             for row in yt["prompt"]:
-                D.math_row(row, surface="slidebig", gap=0.35) if "$" in row else D.text(row, 24, align="center")
+                D.math_row(row, surface="slidebig", gap=0.35, slots=True) if "$" in row else D.text(row, 24, align="center")
             if yt.get("gloss"):
                 D.text(yt["gloss"], 24, color=GRAY, align="center")
             if yt.get("answer_latex"):
@@ -543,7 +581,7 @@ def build_deck(L, outdir):
                 D.answer_line(yt["answer"], y=max(D.cursor + 0.2, 5.0))
     # ---- whiteboards: 9 questions, question + reveal each
     wb = L["whiteboard"]
-    assert len(wb) == 9, f"{code}: whiteboard round must be nine questions, got {len(wb)}"
+    assert len(wb) == 9, f"{L['code']}: whiteboard round must be nine questions, got {len(wb)}"
     for qi, q in enumerate(wb):
         last = qi == 8
         title = f"Whiteboards   ·   Question {qi + 1} of 9"
@@ -557,10 +595,6 @@ def build_deck(L, outdir):
     # ---- independent set (ruling 21), then IXL
     D.independent(INDEP_MIN)
     D.ixl(L["ixl"], IXL_MIN, **({"due": L["ixl_due"]} if L.get("ixl_due") else {}))
-    name = f"A7 {code}  Slides.pptx"
-    path = os.path.join(outdir, name)
-    D.save(path)
-    return path
 
 
 IXL_MIN = 5
@@ -570,10 +604,10 @@ INDEP_MIN = 6            # ruling 21: six questions, six minutes, after the boar
 def _wb_body(D, q, reveal):
     kind = q.get("kind", "free")
     if q.get("latex"):
-        D.math(q["latex"], "slidebig")
+        D.math(q["latex"], "slidebig", slots=reveal)
     for row in q.get("text", []):
         if "$" in row:
-            D.math_row(row, surface="slidemid", gap=0.3, size=26)
+            D.math_row(row, surface="slidemid", gap=0.3, size=26, slots=reveal)
         else:
             D.text(row, 26 if len(row) < 60 else 23, align="center")
     if kind == "mc":

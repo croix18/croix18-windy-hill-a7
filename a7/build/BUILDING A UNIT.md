@@ -148,6 +148,9 @@ Do not batch lessons before the first push. One lesson, checked, viewed, pushed;
 | `√250 — MA.8.NSO.1.7 is perfect squares up to 225` | a radicand outside the benchmark's list | use a perfect square ≤ 225 or a perfect cube in −125..125; `not_bound=True` for a Unit 2 estimation retrieval item, with the reason in its `source` |
 | `radicand '…' is not plain arithmetic on integers` | capcheck could not reduce the radicand | work it by hand; if it is sound, tag `not_bound=True` and say why |
 | `line runs off the slide (14.7 in)` | a mixed text+math row too wide | split the row, shorten the words, or move the math to its own row |
+| `slot colour: an exponent sits on '…', which is not a base` / `…with nothing to its left` | a coloured surface (notes, worked row, reveal) whose layout the base/exponent reader cannot place — HOUSE STYLE §2a | rewrite the expression so each exponent sits on a letter, a numeral or a bracketed group; never teach the reader a guess |
+| `slot colour: a radical set small` | a root index (`\sqrt[3]{…}`) on a coloured surface — an index is not an exponent | move the root to an uncoloured surface, or write it without the index |
+| `pdftwin: A7 3  Unit Slides.pptx differs from A7 3.04  Slides.pptx at its slide 16` | a lesson was rebuilt on its own and the whole-unit deck was not | `python3 build_unit.py u3/unit.py` (it rebuilds the unit deck from the specs) |
 | `text box runs into the footer … Answer it.` on a multiple-choice board | a tall display-size fraction above four options (slide fractions are set with `\dfrac` since 27 Sep 2026, so a `\frac` board is ~0.4 in taller than it was) | the placer clamps the prompt/answer line above the footer; if the options themselves collide, put the question on one `text` row or shorten the latex |
 | `box crosses the footer` / `math into footer` | too many rows on one slide | fewer rows, or split into two notes slides |
 | `table cell wraps out of its row` | a notes table's cell is too long for its column, and a wrapped second line draws outside the border | shorten the cell, widen the column, use fewer columns, or move the words into an `items2` line under the table |
@@ -164,6 +167,13 @@ Do not batch lessons before the first push. One lesson, checked, viewed, pushed;
 | `footer: '…' sits below the footer rule` | a notes line sized for one line wrapped to two and hangs past the rule | shorten the `items2` line, or drop a math row from that notes slide |
 
 ## 5. The unit documents, the manifest, the package
+
+**The whole-unit deck.** `build_unit.py` also writes `A7 <u>  Unit Slides.pptx` (+ PDF): a cover,
+a contents slide whose rows jump to each lesson, then every lesson's slides in the manifest's
+teaching order, each lesson numbered from 1 exactly as its own deck and its Teacher Edition number
+it. It has no side-car (the minutes live beside each lesson's deck). `checks.py` compares it to the
+lesson decks slide for slide, so **after rebuilding any one lesson, run `build_unit.py` again**.
+**After any change to a coloured expression, run `slotaudit.py <unit>` and read it** (HOUSE STYLE §2a).
 
 1. Copy `u3/unit.py` to `<unit>/unit.py`. Reference Sheet: every tested skill with its method,
    one worked example and the mistake that costs the most points, organized by topic; say what

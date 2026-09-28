@@ -17,7 +17,7 @@ Nothing exists until it is committed. This folder is generated from `a7/build/u3
 | Folder | What is in it |
 |---|---|
 | **Question Banks** | Per lesson: the Question Bank and the Question Bank – Additional. Retired worksheets are question banks (ruling 11): draw from them for practice, exit tickets or re-teaching; nothing in here has an answer on it. |
-| **Slides** | The decks, as `.pptx`. No speaker notes — the notes live in the Teacher Edition (ruling 12). |
+| **Slides** | One deck per lesson, as `.pptx`, and **`A7 3  Unit Slides`** — the whole unit in one file, in teaching order, with a contents slide that jumps to each lesson (each lesson keeps its own slide numbers, so the Teacher Edition still lines up). Base and exponent are colour-coded on notes, worked examples and answer slides; questions stay black. No speaker notes — the notes live in the Teacher Edition (ruling 12). |
 | **Handouts** | The Reference Sheet. Students study from it; it may NOT be used on the assessment (ruling 13). There is no study guide (ruling 11). |
 | **Assessments** | Unit Review (unscored; it goes home as practice — ruling 27a, A7 has no review day) and Unit Assessment (two periods) — student copies. |
 | **Answer Keys** | Every key in the unit, without exception. |
@@ -99,4 +99,4 @@ The whiteboard round is the remainder — 10–14 minutes across the unit — an
 - **The assessment is one paper over two periods, 41 points** (ruling 27). Students stop when the first period ends and continue from where they stopped — it is not two papers, and nothing on it says 'Day 1'. Four sections by benchmark, numbered 1–21 straight through. **Questions 10 and 21 are transfer items** (ruling 18): the same benchmarks, on surfaces that appear on no review and in no question bank. The key names them and the Score Tracker maps every question to its benchmark.
 - **The Reference Sheet is the only handout.** Give it out at 3.04 or earlier; it is the document students study from. It does not go into the test.
 
-Installed: 190 files from the build, plus this page and the Reference folder.
+Installed: 192 files from the build, plus this page and the Reference folder.

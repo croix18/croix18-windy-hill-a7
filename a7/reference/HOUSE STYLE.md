@@ -447,6 +447,30 @@ Six rules. Four, five and six are the ones that carry the teaching.
    walkthrough of a returned test — there is no single formula family on the slide, so blue means
    four different things in four questions. Bellwork and review run in black.
 
+**Exponents (A7 Unit 3 on): the two slots are the BASE and the EXPONENT.** Base CB1 blue,
+exponent CB2 orange. Coefficients, operators, fraction bars and every number without a written
+exponent stay INK (rule 3). The slots are read off the renderer's own layout
+(`mathimg._slot_colors`), never off the LaTeX: an exponent is whatever mathtext set small, and its
+base is the one letter, the whole numeral, or the whole bracketed group directly to its left on
+the same baseline. So:
+
+- in `3x²` only the x is blue — **the coefficient is not raised**, and the picture must not say it is;
+- in `(2y²)³` the 2 is blue, because it is inside the base — and `2³` on the next step shows it raised;
+- in `−5²` only the 5 is blue; in `(−5)²` the minus is blue too. The sign question is answered by the picture;
+- in `2.6 × 10⁷` the 10 is blue and the 2.6 is black: the two parts of scientific notation separate.
+
+**Where:** Notes, worked examples, and every reveal (the Your Turn answer, every whiteboard answer).
+**Withheld** (rules 4 and 6): the warm-up, the example and Your Turn prompts, the whiteboard
+questions, and everything printed — `slots` is ignored on the document surfaces.
+
+**What cannot be read is refused, not guessed.** A root index set small, or an exponent with
+nothing a base can be to its left, stops the build. After any change to a notes, worked-example or
+board expression, or to the reading rule itself, run `a7/build/slotaudit.py <unit>` and read
+every line: it prints each coloured expression as the renderer reads it, `[base]^{exponent}`.
+The first reading of Unit 3 (27 Sep) caught two rules that were wrong before any deck shipped —
+a digit walk that joined a numerator's last digit to the denominator's base (`1/5²` read as
+`[15]²`), and a letter walk that would have painted `3x²`'s coefficient blue.
+
 **Checking a color before you add one.** `RED 9E1B32` is a value in this system, not decoration —
 it is the answer color and it sits on the same slide as coded work.
 
