@@ -503,8 +503,29 @@ def check_suite(files):
     return findings
 
 
+def check_slotgeometry(files):
+    """HOUSE STYLE §2a: colour changes the colour of the ink and nothing else. Every expression the
+    unit's decks colour is rendered black (the renderer whose geometry shipped) and in colour, and
+    the ink is compared; more than 0.5% of it displaced is a finding. On 28 Sep the colour renderer
+    drew fraction bars one thickness low and 1 pt too thick — on a phone the denominators ran into
+    them — and this is the check that would have caught it before it shipped."""
+    units = sorted({os.path.basename(os.path.dirname(f)) for f in files if f.endswith("Slides.pptx")})
+    findings = []; n = 0
+    import slotaudit
+    for u in units:
+        flagged, worst, k = slotaudit.geometry(u)
+        n += k
+        for frac, code, where, latex in flagged:
+            findings.append(f"slotgeometry: {frac:.1%} of the ink moved when coloured — {code} {where}: {latex[:60]}")
+    if n == 0:
+        findings.append("slotgeometry: examined no coloured expressions — a check that examined nothing cannot be clean")
+    print(f"slotgeometry: {n} coloured expressions rendered twice and compared, {len(findings)} findings")
+    return findings
+
+
 RUN_LIST = (check_docscan, check_keycheck, check_gdoc, check_glyph, check_pages, check_offpage, check_pdftwin,
-            check_telength, check_footer, check_plan, check_slidefit, check_overlap, check_imagedrift, check_suite)
+            check_telength, check_footer, check_plan, check_slidefit, check_overlap, check_imagedrift,
+            check_slotgeometry, check_suite)
 
 
 def run(outdir):

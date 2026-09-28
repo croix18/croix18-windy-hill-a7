@@ -466,7 +466,11 @@ questions, and everything printed — `slots` is ignored on the document surface
 **What cannot be read is refused, not guessed.** A root index set small, or an exponent with
 nothing a base can be to its left, stops the build. After any change to a notes, worked-example or
 board expression, or to the reading rule itself, run `a7/build/slotaudit.py <unit>` and read
-every line: it prints each coloured expression as the renderer reads it, `[base]^{exponent}`.
+every line: it prints each coloured expression as the renderer reads it, `[base]^{exponent}`. And
+colour must never move ink: `checks.py`'s `slotgeometry` renders every coloured expression black
+and in colour and compares them. The first colour renderer (27 Sep) drew each fraction bar one
+bar-thickness too low and 1 pt too thick — Croix saw denominators and exponents running into the
+bars on his phone. Thumbnails had not shown it; the pixel comparison does.
 The first reading of Unit 3 (27 Sep) caught two rules that were wrong before any deck shipped —
 a digit walk that joined a numerator's last digit to the denominator's base (`1/5²` read as
 `[15]²`), and a letter walk that would have painted `3x²`'s coefficient blue.
@@ -1728,7 +1732,7 @@ found afterwards: a text box that runs into the footer rule or off the slide, a 
 would wrap inside a fixed-height row, an inline math picture wider than its column, a line that
 runs off the slide, an inner table.
 
-**Layer 2 — over the built directory, `checks.py` (fourteen; any finding exits 1, and a check that
+**Layer 2 — over the built directory, `checks.py` (fifteen; any finding exits 1, and a check that
 examined nothing cannot report clean).**
 
 | check (A7, checks.py) | asks |
@@ -1746,6 +1750,7 @@ examined nothing cannot report clean).**
 | `slidefit` | does any text box or picture in a deck cross the footer rule or the slide edge? |
 | `overlap` | on the rendered slide, do any two lines of text collide, and does any figure sit on any words? A filled panel or a drawn rule is told from a figure by its pixels, and the number skipped is printed with the denominator. |
 | `imagedrift` | is every image embedded in a .docx or .pptx a file in the figure library, byte for byte — so no document carries an orphaned or older rendering of a figure? |
+| `slotgeometry` | does colour change the colour of the ink and nothing else? Every expression a deck colours (§2a) is rendered black and in colour and the ink compared, pixel for pixel within 2 px; over 0.5% displaced is a finding. |
 | `suitecheck` | do the two tables in this block name every gate and every check that runs, and only those? |
 
 **How this gate meets §13, item by item, with the gaps named — because a list of what a system
