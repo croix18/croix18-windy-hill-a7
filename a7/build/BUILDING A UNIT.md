@@ -205,6 +205,17 @@ files live in `assets/` with the script that regenerates them (`assets/make_asse
    `../reference/A7 Master Sheet 2026-27.xlsx` (0 errors), then
    `python3 ../../tools/check_master_sheet.py` (0 problems). Push, and send Croix the new file.
 
+## 5a. Boards Up (Geopardy) — planned, not built (3 Oct 2026)
+
+Croix's review game lives in a separate repository, `croix18/Geopardy` (engine in `engine/`, one
+JSON file per unit in `units/`, `tools/build.py` makes a single-file game, `tools/check.sh`
+playtests it headless; read its `docs/HANDOFF.md` first). Its unit format is `categories[] →
+questions[] {q, a, work}` with `$…$` math, five tiers per category, easiest first, plus a Final.
+Every A7 bank item already carries a `check`, so a generator here can write a unit file from the
+specs — categories from the manifest's lessons, tiers from the bank's ordering — and only
+mathcheck-passing items reach the game. Agreed with Croix 3 Oct: possible, wanted later, not now.
+His other tool "Cadence" is separate and out of scope for this repository.
+
 ## 6. The final report to Croix
 
 One message, in this shape (see the end of the Unit 3 session for the model):
