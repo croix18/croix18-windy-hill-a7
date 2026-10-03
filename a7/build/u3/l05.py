@@ -68,11 +68,12 @@ L = dict(
     ],
 
     whiteboard=[
-        dict(text=["A copier shrinks a page to  $\\frac{2}{3}$  size, 4 times in a row.", "To undo it, multiply by  $\\left(\\frac{2}{3}\\right)^{-4}$.  The page is 6 inches wide.", "**Rewrite  $\\left(\\frac{2}{3}\\right)^{-4}$  with a positive exponent."],
-             qtext="A copier shrinks a page to 2/3 size, 4 times in a row. To undo it, multiply by (2/3)⁻⁴. The page is 6 inches wide. Rewrite (2/3)⁻⁴ with a positive exponent.",
-             unneeded="width of 6 inches", hint="Rewrite with a positive exponent.", gloss="flip the base", answer_latex="\\left(\\frac{3}{2}\\right)^{4}",
-             note="Ruling 22's board: the page width is there to be read past — the question asks only for the factor. A board with (2/3)⁴ dropped the minus without flipping; a board with −(3/2)⁴ made the exponent's sign the value's sign.", check=("eq", "F(2,3)**-4", "F(3,2)**4"),
-             wrong="(2/3)⁴ — the minus was dropped without flipping [8.NSO.1.3 negative exponent law]; −(3/2)⁴ — negative exponent read as a negative value [B1G-M 8.NSO.1.3 task: −b vs b⁻¹]; anything built from 6 — the unneeded figure was used"),
+        dict(text=["A copier is set to shrink a page to  $\\frac{2}{3}$  of its size.", "A page 6 inches wide is copied 4 times in a row, each copy from the last.", "**What fraction of the original page's size is the last copy?"],
+             qtext="A copier is set to shrink a page to 2/3 of its size. A page 6 inches wide is copied 4 times in a row, each copy from the last. What fraction of the original page's size is the last copy?",
+             unneeded="width of 6 inches", hint="Two thirds, of two thirds, of two thirds, of two thirds.", gloss="(2/3)⁴ = 2⁴ over 3⁴", answer_latex="\\frac{16}{81}",
+             note="Ruling 22's board: a real question with a fraction base — Notes I's table in a sentence. Four shrinks multiply: (2/3)⁴ = 16/81. The width is there to be read past. On the reveal, ask the room what setting would undo all four copies in one go: multiply by (2/3)⁻⁴ = (3/2)⁴, the law in the other direction. A board with 8/3 multiplied the fraction by 4; a board with 2/81 raised the denominator only.",
+             check=("many", ("eq", "F(2,3)**4", "F(16,81)"), ("eq", "F(2,3)**-4", "F(3,2)**4")),
+             wrong="8/3 — the fraction was multiplied by 4 instead of raised [an exponent counts factors]; 2/81 or 16/3 — only one of numerator and denominator was raised [power of a quotient]; 81/16 — a positive exponent was flipped [8.NSO.1.3: only a negative exponent flips the base]; anything built from 6 — the unneeded figure was used"),
         dict(latex="\\left(\\frac{3}{-5}\\right)^{-9}", hint="Rewrite with a positive exponent.", gloss="flip the numbers; the sign stays in the fraction", answer_latex="\\left(\\frac{-5}{3}\\right)^{9}",
              note="Sign inside the denominator. A board with (5/3)⁹ took the opposite as well as the reciprocal — the −b vs b⁻¹ confusion the guide's task targets.", check=("eq", "F(3,-5)**-9", "F(-5,3)**9"),
              wrong="(5/3)⁹ — took the opposite as well as the reciprocal [B1G-M 8.NSO.1.3 task: −b vs b⁻¹]"),

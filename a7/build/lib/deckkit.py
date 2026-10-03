@@ -146,6 +146,12 @@ class Deck:
         return self._new(title, sub, minutes, note, kind)
 
     # ---------- the whole-unit deck ----------
+    def count(self):
+        return len(self.p.slides)
+
+    def slide_ref(self, i):
+        return self.p.slides[i]
+
     def start_lesson(self, lesson_label, title, footer):
         """Switch the running title and footer to the next lesson and restart its slide numbers,
         so a lesson inside the unit deck is numbered exactly as its own deck and its Teacher
@@ -350,6 +356,41 @@ class Deck:
         if y is None:
             self.cursor = yy + maxh + gap
         return maxh
+
+    # ---------- composed rows shared with the HTML deck (lessonbuild calls only these) ----------
+    def warmup_answers(self, pairs):
+        """Each (stem, answer): the answer in red after the stem if it fits, else on the next line."""
+        for stem, answer in pairs:
+            y0 = self.cursor
+            tw, hh = self._mixed(stem, LM + 1.2, y0, "slide", 23, INK)
+            aw = self.measure(answer, "slide", 23, bold=True)
+            if LM + 1.2 + tw + 0.6 + aw <= LM + CW:
+                self._mixed(answer, LM + 1.2 + tw + 0.6, y0, "slide", 23, RED, True)
+                self.cursor = y0 + hh + 0.22
+            else:
+                _, h2 = self._mixed(answer, LM + 2.0, y0 + hh + 0.05, "slide", 23, RED, True)
+                self.cursor = y0 + hh + 0.05 + h2 + 0.22
+
+    def worked_row(self, latex, gloss, slots=False):
+        """A worked line: the expression at the left, its one-phrase reason in grey beside it."""
+        y0 = self.cursor
+        wdt, hgt = self.math(latex, "slidemid", align="left", x=2.0, slots=slots)
+        gx = 2.0 + wdt + 0.5
+        self._text(gx, y0 + (hgt - 0.5) / 2, min(7.0, LM + CW - gx), 0.55, gloss, 21, italic=True, color=GRAY, anchor="middle")
+        self.cursor = y0 + hgt + 0.3
+
+    def ask(self, text, hint=None):
+        """The board's standing instruction, low on the slide, with an optional grey hint under it."""
+        y = max(self.cursor + 0.15, 4.75)
+        y = min(y, FOOT_Y - 0.56 - (0.45 if hint else 0))
+        self._text(0.85, y, 11.6, 0.5, text, 26, bold=True, align="center")
+        if hint:
+            self._text(0.85, y + 0.53, 11.6, 0.4, hint, 19, italic=True, color=GRAY, align="center")
+
+    def gloss(self, text):
+        """The grey one-liner above a reveal's answer."""
+        self._text(2.0, self.cursor + 0.05, 9.3, 0.6, text, 24, color=GRAY, align="center")
+        self.cursor += 0.7
 
     def answer_line(self, text, y=5.2):
         self._text(LM, y, CW, 0.6, "Answer:   " + text, 32, bold=True, color=RED, align="center")

@@ -10,6 +10,8 @@ outdir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "out", unit)
 out = lessonbuild.build_lesson(m.L, outdir)
 # every document gets its PDF twin, each converted by its own command (§0: rebuild each file alone)
 for k, path in out.items():
+    if path.endswith(".html"):          # the HTML deck is its own final form (prints from the browser)
+        print("built", os.path.basename(path)); continue
     subprocess.run(["soffice", "--headless", "--convert-to", "pdf", "--outdir", outdir, path],
                    check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     pdf = path.rsplit(".", 1)[0] + ".pdf"

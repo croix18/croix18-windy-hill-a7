@@ -12,8 +12,8 @@ Markup that works in every string rendered on paper (`dockit.rich`): `$latex$` b
 row makes the row a "mixed" row (text + images) that is laid out on one line and **must fit the
 slide width** — the build raises "line runs off the slide" if it does not; split the row.
 
-LaTeX goes through matplotlib mathtext, not TeX: `\frac`, `\cdot`, `\times`, `\left(`, `\right)`,
-`\sqrt`, `\leq`, `\neq`, `\div` work; `\le`, `\text{}`, `\hbox` do **not**. Write `\frac`, never `\dfrac`: on the slide surfaces the renderer sets every fraction at display size itself (27 Sep 2026), and on the document surfaces text-size fractions are right. Thousands
+LaTeX goes through matplotlib mathtext for the pptx and the documents, and through KaTeX for the `.html` decks — the same string must satisfy both, so stay inside the intersection: `\frac`, `\cdot`, `\times`, `\left(`, `\right)`,
+`\sqrt`, `\sqrt[3]`, `\leq`, `\neq`, `\div`, `\pm`, `\infty`, `\approx` work; `\le`, `\text{}`, `\hbox` do **not**. Write `\frac`, never `\dfrac`: on the slide surfaces the renderer sets every fraction at display size itself (27 Sep 2026), and on the document surfaces text-size fractions are right. Thousands
 separators inside math are `1{,}000`. Unicode superscripts (`⁰¹²³⁴⁵⁶⁷⁸⁹⁻⁺ᵐⁿ`) may be used in plain
 text and are converted to real superscript runs; `⁽ ⁾ ✗` and other exotic characters have no glyph
 in the fonts and fail the glyph check. Dollar signs in prose are impossible (they open math) —
@@ -75,7 +75,7 @@ gloss, answer | answer_latex)`. `check` and `yt_check` are re-derived by sympy l
 `dict(kind="free"|"mc"|"written", latex | text=[rows], hint, gloss, answer | answer_latex, note,
 check, wrong, …)`. `latex` is set large and centered; `text` rows are centered (a row with `$`
 is a mixed row and must fit one line). `hint` prints under "Answer it." on the question slide.
-A `text` row beginning `**` is the ASK and is set bold; a board with any such row (or with `unneeded`) is laid out as a left-aligned 24 pt block, not centred lines — keep each row under about 60 characters plus its math. `gloss` is the gray line on the reveal. `note` is the TE note; `note_a` optionally the reveal's.
+A `text` row beginning `**` is the ASK and is set bold; a board with any such row (or with `unneeded`) is laid out as a left-aligned 24 pt block, not centred lines — keep each row under about 60 characters plus its math. **The ask names a thing in the story and the answer is that thing** ("What fraction of the sheet is the top layer?", "Which drive holds more?"); an ask that begins "Write", "Rewrite" or "What is the value of" on a board with a story is a computation in costume — write that board bare (HOUSE STYLE, ruling 22 in practice). `gloss` is the gray line on the reveal. `note` is the TE note; `note_a` optionally the reveal's.
 `wrong` is the TE's named-wrong-answers line for free/written questions: `"value — error name
 [benchmark cite]; …"`. **`kind="mc"`** adds `choices` (4 strings, unicode superscripts allowed),
 `correct` (index), `answer` ("A — 25m⁶") and **`errors`** — a dict from every wrong letter to

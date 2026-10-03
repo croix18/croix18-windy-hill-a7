@@ -11,6 +11,7 @@ from sympy.parsing.sympy_parser import (parse_expr, standard_transformations,
                                         implicit_multiplication_application, convert_xor, rationalize)
 from .dockit import Doc, INK, VOCAB, RED, GRAY
 from .deckkit import Deck, LM, CW, FOOT_Y
+from .htmlkit import HtmlDeck
 from . import tekit
 from . import plankit
 from .tekit import TE
@@ -470,30 +471,43 @@ def build_deck(L, outdir):
     return path
 
 
+def build_html_deck(L, outdir):
+    """The same lesson as one self-contained HTML file (htmlkit): KaTeX math, live colour code."""
+    code = L["code"]
+    footer = f"{COURSE} · Unit {L['unit']} · {_label(L)} — {L['title']}"
+    D = HtmlDeck(COURSE, L["unit"], _label(L), L["title"], footer)
+    _fill_deck(D, L)
+    path = os.path.join(outdir, f"A7 {code}  Slides.html")
+    D.save(path)
+    return path
+
+
 def build_unit_deck(lessons, rows, U, outdir):
     """The whole unit as one file, in teaching order: a cover, a contents slide whose rows jump to
     each lesson's title slide, then every lesson's slides exactly as its own deck draws them.
     The per-lesson decks stay — their side-cars feed the Teacher Editions and the lesson plans —
     so this file carries no side-car of its own."""
     unit = U["unit"]
-    D = Deck(COURSE, unit, f"Unit {unit}", U["title"], f"{COURSE} · Unit {unit} — {U['title']}")
     count = ["No", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve"]
     n = count[len(lessons)] if len(lessons) < len(count) else str(len(lessons))
-    D.unit_cover(U["title"], [f"{n} lessons in teaching order  ·  the next slide jumps to each one"])
-    contents = D.section("Contents", "Click a lesson to jump to it. Each lesson numbers its slides from 1, as its Teacher Edition does.", 0, "", "contents")
-    starts = []
-    for L in lessons:
-        starts.append(len(D.p.slides))            # the lesson's title slide, 0-based
-        D.start_lesson(_label(L), L["title"], f"{COURSE} · Unit {L['unit']} · {_label(L)} — {L['title']}")
-        _fill_deck(D, L)
-    slides = list(D.p.slides)
-    y = 1.95
-    for (label, title), i in zip(rows, starts):
-        D.link_row(contents, y, (label, title), f"slide {i + 1}", slides[i])
-        y += 0.46
-    path = os.path.join(outdir, f"A7 {unit}  Unit Slides.pptx")
-    D.save(path, sidecar=False)
-    return path
+    paths = []
+    for cls, ext in ((Deck, "pptx"), (HtmlDeck, "html")):
+        D = cls(COURSE, unit, f"Unit {unit}", U["title"], f"{COURSE} · Unit {unit} — {U['title']}")
+        D.unit_cover(U["title"], [f"{n} lessons in teaching order  ·  the next slide jumps to each one"])
+        contents = D.section("Contents", "Click a lesson to jump to it. Each lesson numbers its slides from 1, as its Teacher Edition does.", 0, "", "contents")
+        starts = []
+        for L in lessons:
+            starts.append(D.count())                  # the lesson's title slide, 0-based
+            D.start_lesson(_label(L), L["title"], f"{COURSE} · Unit {L['unit']} · {_label(L)} — {L['title']}")
+            _fill_deck(D, L)
+        y = 1.95
+        for (label, title), i in zip(rows, starts):
+            D.link_row(contents, y, (label, title), f"slide {i + 1}", D.slide_ref(i))
+            y += 0.46
+        path = os.path.join(outdir, f"A7 {unit}  Unit Slides.{ext}")
+        D.save(path, sidecar=False)
+        paths.append(path)
+    return paths[0]
 
 
 def _fill_deck(D, L):
@@ -511,16 +525,7 @@ def _fill_deck(D, L):
         D.math_row(f"{i + 1}.   " + q["stem"], surface="slide", gap=0.22, size=23, align="left", x=LM + 1.2)
     D.section("Warm-Up", "Answers.", 1, "Reveal. Ask for the band each question came from only if time allows.", "warmup")
     D.cursor = 1.95
-    for i, q in enumerate(wu):
-        y0 = D.cursor
-        tw, hh = D._mixed(f"{i + 1}.   " + q["stem"], LM + 1.2, y0, "slide", 23, INK)
-        aw = D.measure(q["answer"], "slide", 23, bold=True)
-        if LM + 1.2 + tw + 0.6 + aw <= LM + CW:
-            D._mixed(q["answer"], LM + 1.2 + tw + 0.6, y0, "slide", 23, RED, True)
-            D.cursor = y0 + hh + 0.22
-        else:
-            _, h2 = D._mixed(q["answer"], LM + 2.0, y0 + hh + 0.05, "slide", 23, RED, True)
-            D.cursor = y0 + hh + 0.05 + h2 + 0.22
+    D.warmup_answers([(f"{i + 1}.   " + q["stem"], q["answer"]) for i, q in enumerate(wu)])
     # ---- notes
     for ni, note in enumerate(L["notes"]):
         D.section("Notes", note.get("sub", ""), note["min"], note["note"], "notes")
@@ -552,11 +557,7 @@ def _fill_deck(D, L):
             for row in w["rows"]:
                 if isinstance(row, tuple):
                     latex, gloss = row
-                    y0 = D.cursor
-                    wdt, hgt = D.math(latex, "slidemid", align="left", x=2.0, slots=True)
-                    gx = 2.0 + wdt + 0.5
-                    D._text(gx, y0 + (hgt - 0.5) / 2, min(7.0, LM + CW - gx), 0.55, gloss, 21, italic=True, color=GRAY, anchor="middle")
-                    D.cursor = y0 + hgt + 0.3
+                    D.worked_row(latex, gloss, slots=True)
                 else:
                     D.text(row, 23)
             if w.get("answer"):
@@ -630,19 +631,13 @@ def _wb_body(D, q, reveal):
         D.cursor += 0.1
         D.choices(q["choices"], correct=(q["correct"] if reveal else None))
     if not reveal:
-        y = max(D.cursor + 0.15, 4.75)
-        y = min(y, FOOT_Y - 0.56 - (0.45 if (kind == "written" or q.get("hint")) else 0))
         if kind == "written":
-            D._text(0.85, y, 11.6, 0.5, "Write your answer in sentences.", 26, bold=True, align="center")
-            D._text(0.85, y + 0.53, 11.6, 0.4, q.get("hint", "This one is written work. Say why."), 19, italic=True, color=GRAY, align="center")
+            D.ask("Write your answer in sentences.", q.get("hint", "This one is written work. Say why."))
         else:
-            D._text(0.85, y, 11.6, 0.5, "Answer it.", 26, bold=True, align="center")
-            if q.get("hint") and not word:      # a word board's bold ask IS the hint
-                D._text(0.85, y + 0.53, 11.6, 0.4, q["hint"], 19, italic=True, color=GRAY, align="center")
+            D.ask("Answer it.", None if word else q.get("hint"))   # a word board's bold ask IS the hint
     else:
         if q.get("gloss"):
-            D._text(2.0, D.cursor + 0.05, 9.3, 0.6, q["gloss"], 24, color=GRAY, align="center")
-            D.cursor += 0.7
+            D.gloss(q["gloss"])
         y = min(max(D.cursor + 0.15, 5.1), FOOT_Y - 0.62)
         if q.get("answer_latex"):
             D.answer_math(q["answer_latex"], y=y)
@@ -859,6 +854,7 @@ def build_lesson(L, outdir):
     out["indep"] = build_bank(L, L["independent"], "Independent Set", False, outdir)
     out["indep_key"] = build_bank(L, L["independent"], "Independent Set", True, outdir)
     out["deck"] = build_deck(L, outdir)
+    out["html"] = build_html_deck(L, outdir)
     out["te"] = build_te(L, out["deck"], outdir)
     out["plan"] = plankit.build_plan(L, out["deck"], outdir, COURSE, _label(L))
     return out

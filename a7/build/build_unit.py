@@ -24,6 +24,8 @@ if missing:
 out["unit_deck"] = lessonbuild.build_unit_deck([specs[row[0]] for row in order],
                                                [(row[1], row[2]) for row in order], m.U, outdir)
 for k, path in out.items():
+    if path.endswith(".html"):          # the HTML deck is its own final form (prints from the browser)
+        print("built", os.path.basename(path)); continue
     subprocess.run(["soffice", "--headless", "--convert-to", "pdf", "--outdir", outdir, path],
                    check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     pdf = path.rsplit(".", 1)[0] + ".pdf"

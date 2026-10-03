@@ -485,7 +485,7 @@ def check_suite(files):
     have_build = rows("gate (A7, at build)")
     have_docs = rows("check (A7, checks.py)")
     want_docs = [fn.__name__.replace("check_", "") for fn in RUN_LIST]
-    alias = {"gdoc": "gdoccheck", "pages": "pagecheck", "plan": "plancheck", "suite": "suitecheck"}
+    alias = {"gdoc": "gdoccheck", "pages": "pagecheck", "plan": "plancheck", "suite": "suitecheck", "html": "htmlcheck"}
     want_docs = [alias.get(n, n) for n in want_docs]
     for missing in [n for n in BUILD_GATES if n not in have_build]:
         findings.append(f"suitecheck: build gate `{missing}` runs but has no row in HOUSE STYLE's suite:a7 table")
@@ -523,9 +523,109 @@ def check_slotgeometry(files):
     return findings
 
 
+HTML_PROBE = r"""
+() => {
+  const out = {slides: [], exprs: [], errors: 0};
+  const slides = [...document.querySelectorAll('.slide')];
+  slides.forEach((sl, i) => {
+    slides.forEach(x => x.classList.remove('on')); sl.classList.add('on');
+    const body = sl.querySelector('.body') || sl.querySelector('.cover');
+    const foot = sl.querySelector('.foot').getBoundingClientRect();
+    let over = 0, wide = 0;
+    sl.querySelectorAll('.body *, .cover *').forEach(el => {
+      if (!el.getClientRects().length || el.closest('.katex-mathml') || el.closest('svg')) return;   // a radical's SVG path reports its unclipped canvas
+      const r = el.getBoundingClientRect();
+      if (r.height > 0 && r.bottom > foot.top + 1) over = Math.max(over, r.bottom - foot.top);
+      const st = sl.getBoundingClientRect();
+      if (r.right > st.right - 60 + 1) wide = Math.max(wide, r.right - (st.right - 60));
+      if (r.left < st.left + 60 - 1 && r.width > 0) wide = Math.max(wide, (st.left + 60) - r.left);
+    });
+    out.slides.push({n: i + 1, over: Math.round(over), wide: Math.round(wide)});
+  });
+  out.errors = document.querySelectorAll('.katex-error').length;
+  const B = 'rgb(30, 90, 168)', E = 'rgb(192, 90, 0)';
+  document.querySelectorAll('.slots .k').forEach(k => {
+    const html = k.querySelector('.katex-html'); if (!html) return;
+    const walker = document.createTreeWalker(html, NodeFilter.SHOW_TEXT);
+    let s = '', prev = null, node;
+    while ((node = walker.nextNode())) {
+      const t = node.textContent; if (!t.trim()) continue;
+      const c = getComputedStyle(node.parentElement).color;
+      const tag = c === B ? 'B' : (c === E ? 'E' : '');
+      if (tag !== prev) { if (prev === 'B') s += ']'; if (prev === 'E') s += '}'; if (tag === 'B') s += '['; if (tag === 'E') s += '^{'; }
+      s += t; prev = tag;
+    }
+    if (prev === 'B') s += ']'; if (prev === 'E') s += '}';
+    out.exprs.push({tex: k.dataset.tex, read: s});
+  });
+  return out;
+}
+"""
+
+
+def _norm(s):
+    """The reading as an order-free bag of (glyph, colour): KaTeX lays a fraction's denominator
+    before its numerator in the DOM and splits a bracketed base around an inner exponent, so
+    neither order nor run boundaries are compared — only which colour every glyph received, which
+    is what the slot rule decides."""
+    s = re.sub(r"[\s√\u200b\ue000-\uf8ff]", "", s).replace("\u2212", "−").replace("{,}", ",").replace("≠", "=")
+    bag = []
+    for run in re.findall(r"\[[^\]]*\]|\^\{[^}]*\}|.", s):
+        if run.startswith("["):
+            bag += [f"[{c}]" for c in run[1:-1]]
+        elif run.startswith("^{"):
+            bag += [f"^{c}" for c in run[2:-1]]
+        else:
+            bag.append(run)
+    return "".join(sorted(bag))
+
+
+def check_html(files):
+    """The HTML decks, opened in a real browser: KaTeX typeset every expression (no .katex-error);
+    nothing on any slide reaches below the footer rule or past the side margins; and the colour
+    code the page applies to KaTeX's structure reads every expression exactly as mathimg reads
+    the mathtext layout for the pptx — [base]^{exponent}, compared string for string."""
+    findings = []; n = 0; nex = 0
+    decks = [f for f in files if f.endswith(".html")]
+    if not decks:
+        return ["htmlcheck: examined no HTML decks — a check that examined nothing cannot be clean"]
+    import slotaudit
+    from playwright.sync_api import sync_playwright
+    with sync_playwright() as p:
+        b = p.chromium.launch()
+        pg = b.new_page(viewport={"width": 1333, "height": 750})
+        for f in decks:
+            base = os.path.basename(f); n += 1
+            pg.goto("file://" + f); pg.wait_for_timeout(400)
+            r = pg.evaluate(HTML_PROBE)
+            if r["errors"]:
+                findings.append(f"htmlcheck: {r['errors']} expression(s) KaTeX could not typeset — {base}")
+            for sl in r["slides"]:
+                if sl["over"] > 2:
+                    findings.append(f"htmlcheck: content runs {sl['over']} px below the footer rule — {base} slide {sl['n']}")
+                if sl["wide"] > 2:
+                    findings.append(f"htmlcheck: content runs {sl['wide']} px past the side margin — {base} slide {sl['n']}")
+            seen = set()
+            for e in r["exprs"]:
+                nex += 1
+                if e["tex"] in seen:
+                    continue
+                seen.add(e["tex"])
+                try:
+                    want = slotaudit.show(e["tex"], 32)
+                except Exception as ex:
+                    findings.append(f"htmlcheck: mathtext refuses an expression the page coloured: {e['tex'][:50]} — {base}")
+                    continue
+                if _norm(want) != _norm(e["read"]):
+                    findings.append(f"htmlcheck: colour reading differs — page {_norm(e['read'])!r} vs mathtext {_norm(want)!r} — {base}")
+        b.close()
+    print(f"htmlcheck: {n} HTML decks opened, {nex} coloured expressions compared, {len(findings)} findings")
+    return findings
+
+
 RUN_LIST = (check_docscan, check_keycheck, check_gdoc, check_glyph, check_pages, check_offpage, check_pdftwin,
             check_telength, check_footer, check_plan, check_slidefit, check_overlap, check_imagedrift,
-            check_slotgeometry, check_suite)
+            check_slotgeometry, check_html, check_suite)
 
 
 def run(outdir):

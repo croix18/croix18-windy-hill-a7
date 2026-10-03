@@ -1357,6 +1357,18 @@ assessment items — not A7's former ruling 15, which is now ruling 31.)*
 > situation in a sentence a seventh-grader would say, then ask the question in a sentence that
 > names the thing wanted. If the only honest question is "what is 2⁻⁷", there is no situation —
 > write the board bare and put the extra figure on a different board.
+>
+> *Same day, second pass.* The first rewrite kept the rule in the margin and broke it on the
+> board: "A paper is folded in half 7 times. The top layer is 2⁻⁷ of the paper … What is the value
+> of 2⁻⁷?" — the story *told* the student the expression and then asked for its value, so a reader
+> still could not tell what was being asked. Croix: "Look at the first question. That's difficult
+> for students to understand." The test that was missing, now applied to every ruling-22 board in
+> Units 3 and 4: **the ask names a thing in the story, and the answer is that thing.** "What
+> fraction of the whole sheet is the top layer after 7 folds?" — 1/128, and 2⁻⁷ is how the
+> teacher writes it on the reveal. "What is the area of the rectangle?" — 2⁴ · 2² = 64. "Which
+> drive holds more?" — the same, 8⁵ = 2¹⁵. "How bright is the lamp from 2 meters away?" —
+> 3 · 2⁻² = 3/4. An ask that begins "Write", "Rewrite" or "What is the value of" on a board with
+> a story is the costume again, whatever the story is.
 
 ## 13b(ix). Rulings — Croix, 20 September: the plan and the teacher's edition [both courses]
 
@@ -1747,7 +1759,7 @@ found afterwards: a text box that runs into the footer rule or off the slide, a 
 would wrap inside a fixed-height row, an inline math picture wider than its column, a line that
 runs off the slide, an inner table.
 
-**Layer 2 — over the built directory, `checks.py` (fifteen; any finding exits 1, and a check that
+**Layer 2 — over the built directory, `checks.py` (sixteen; any finding exits 1, and a check that
 examined nothing cannot report clean).**
 
 | check (A7, checks.py) | asks |
@@ -1766,6 +1778,7 @@ examined nothing cannot report clean).**
 | `overlap` | on the rendered slide, do any two lines of text collide, and does any figure sit on any words? A filled panel or a drawn rule is told from a figure by its pixels, and the number skipped is printed with the denominator. |
 | `imagedrift` | is every image embedded in a .docx or .pptx a file in the figure library, byte for byte — so no document carries an orphaned or older rendering of a figure? |
 | `slotgeometry` | does colour change the colour of the ink and nothing else? Every expression a deck colours (§2a) is rendered black and in colour and the ink compared, pixel for pixel within 2 px; over 0.5% displaced is a finding. |
+| `htmlcheck` | does the browser deck say what the PowerPoint deck says? Every `.html` deck is opened in a real browser (Playwright): no KaTeX error, nothing rendered below the footer rule or past the slide edge, and the colour the page painted on each slotted expression read back and compared with the slot rule's own reading of the LaTeX. A deck that renders nothing coloured cannot report clean. |
 | `suitecheck` | do the two tables in this block name every gate and every check that runs, and only those? |
 
 **How this gate meets §13, item by item, with the gaps named — because a list of what a system

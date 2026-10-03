@@ -176,6 +176,17 @@ it. It has no side-car (the minutes live beside each lesson's deck). `checks.py`
 lesson decks slide for slide, so **after rebuilding any one lesson, run `build_unit.py` again**.
 **After any change to a coloured expression, run `slotaudit.py <unit>` and read it** (HOUSE STYLE §2a).
 
+**The HTML decks.** Every deck is written twice from the same spec and the same `_fill_deck`:
+`.pptx` (deckkit) and `.html` (htmlkit) — one self-contained file per deck, the math typeset in
+the browser by KaTeX from the spec's own LaTeX, Schola from the inlined fonts, arrow keys or a
+click to advance, `#17` in the address bar to open at slide 17, one slide per page when printed.
+There is no PDF twin of an `.html`; `install_unit.py` puts it in Slides beside the `.pptx`. The
+slot colours are painted by the page's own script from KaTeX's DOM (`.msupsub` is the exponent,
+what it sits on is the base) and `checks.py` `htmlcheck` opens every deck in a real browser and
+reads the colours back against `slotaudit.show()`'s reading of the LaTeX, so the two renderers
+cannot disagree about which slot is which without failing the suite. The vendored KaTeX and font
+files live in `assets/` with the script that regenerates them (`assets/make_assets.py`).
+
 1. Copy `u3/unit.py` to `<unit>/unit.py`. Reference Sheet: every tested skill with its method,
    one worked example and the mistake that costs the most points, organized by topic; say what
    the FAST provides and what must be memorized (Source of Truth Part 3). Unit Review: unscored,

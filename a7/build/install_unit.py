@@ -25,8 +25,8 @@ FOLDERS = ["Question Banks", "Independent Sets", "Slides", "Handouts", "Assessme
 
 
 def dest_folder(name):
-    if name.endswith(".pptx") or (name.endswith(".pdf") and "Slides" in name):
-        return "Slides"
+    if name.endswith((".pptx", ".html")) or (name.endswith(".pdf") and "Slides" in name):
+        return "Slides"                      # the .html deck is the same slides for a browser (no PDF twin)
     if " Key." in name:
         return "Answer Keys"
     if "Teacher Edition" in name:
@@ -108,7 +108,7 @@ def start_here(n_files):
     A("| Folder | What is in it |")
     A("|---|---|")
     A("| **Question Banks** | Per lesson: the Question Bank and the Question Bank – Additional. Retired worksheets are question banks (ruling 11): draw from them for practice, exit tickets or re-teaching; nothing in here has an answer on it. |")
-    A(f"| **Slides** | One deck per lesson, as `.pptx`, and **`A7 {U}  Unit Slides`** — the whole unit in one file, in teaching order, with a contents slide that jumps to each lesson (each lesson keeps its own slide numbers, so the Teacher Edition still lines up). Base and exponent are colour-coded on notes, worked examples and answer slides; questions stay black. No speaker notes — the notes live in the Teacher Edition (ruling 12). |")
+    A(f"| **Slides** | One deck per lesson, and **`A7 {U}  Unit Slides`** — the whole unit in one file, in teaching order, with a contents slide that jumps to each lesson (each lesson keeps its own slide numbers, so the Teacher Edition still lines up). Every deck comes twice, with the same slides: **`.html`** — open it in any browser (double-click; nothing to install), arrow keys or a click to advance, the math typeset by KaTeX, and it prints one slide per page — and **`.pptx`** for PowerPoint or Google Slides. Base and exponent are colour-coded on notes, worked examples and answer slides; questions stay black. No speaker notes — the notes live in the Teacher Edition (ruling 12). |")
     A("| **Handouts** | The Reference Sheet. Students study from it; it may NOT be used on the assessment (ruling 13). There is no study guide (ruling 11). |")
     A("| **Assessments** | Unit Review (unscored; it goes home as practice — ruling 27a, A7 has no review day) and Unit Assessment (two periods) — student copies. |")
     A("| **Answer Keys** | Every key in the unit, without exception. |")
