@@ -90,7 +90,7 @@ U = dict(
         ]),
         dict(letter="C", title="Real-World Problems and Significant Digits", lessons="Lesson 4", benchmark="MA.8.NSO.1.6", items=[
             dict(stem="How many significant digits are in each measurement?  6,040 g   ·   0.00920 m   ·   45.00 s", answer="3  ·  3  ·  4", why="6,040: the middle zero counts, the trailing one does not. 0.00920: leading zeros never count, the trailing one does. 45.00: all four.", check=("many", ("eq", "sig('6,040')", "3"), ("eq", "sig('0.00920')", "3"), ("eq", "sig('45.00')", "4")), space=0.8),
-            dict(stem="A rectangular panel measures  $3.2 \\times 10^{2}$  mm by  $1.45 \\times 10^{2}$  mm. Find its area, with the correct number of significant digits.", answer="$4.6 \\times 10^{4}$ square millimetres", why="46,400 exactly; 2 significant digits and 3, so the answer keeps 2.",
+            dict(stem="A rectangular panel measures  $3.2 \\times 10^{2}$  mm by  $1.45 \\times 10^{2}$  mm. Find its area, with the correct number of significant digits.", answer="$4.6 \\times 10^{4}$ square millimeters", why="46,400 exactly; 2 significant digits and 3, so the answer keeps 2.",
                  check=("many", ("eq", "F(32,10)*10**2*F(145,100)*10**2", "46400"), ("eq", "1000*floor(F(46400)/1000+F(1,2))", "46000")), space=0.9),
             dict(stem="A train travels  $4.80 \\times 10^{2}$  km in  6.0  hours. Find its average speed, with the correct number of significant digits.", answer="$8.0 \\times 10^{1}$ km/h", why="Exactly 80; two significant digits are justified, so it is written 80 with both digits.", check=("eq", "F(480,100)*10**2/F(60,10)", "80"), space=0.8),
             dict(stem="Two lengths are measured:  $5.40 \\times 10^{3}$  mm and  $2.8 \\times 10^{2}$  mm. Find their sum, with the correct precision.", answer="$5.68 \\times 10^{3}$ mm", why="5,400 and 280 both stop at the tens place, so the sum, 5,680, does too.", check=("many", ("eq", "F(540,100)*10**3+F(28,10)*10**2", "5680"), ("eq", "10*floor(F(5680)/10+F(1,2))", "5680"), ("eq", "F(568,100)*10**3", "5680"), ("eq", "sig('5.68')", "3")), space=0.8),
@@ -180,10 +180,10 @@ U = dict(
             dict(title="Real-World Problems and Significant Digits", benchmark="MA.8.NSO.1.6", items=[
                 dict(stem="Give the number of significant digits in each measurement.", parts=[
                     dict(label="a", stem="3,080 grams", answer="3", why="The middle zero counts; the trailing zero does not, with no decimal point written.", check=("eq", "sig('3,080')", "3"), space=0.5),
-                    dict(label="b", stem="0.00405 metres", answer="3", why="Leading zeros never count; the zero between the 4 and the 5 does.", check=("eq", "sig('0.00405')", "3"), space=0.5),
+                    dict(label="b", stem="0.00405 meters", answer="3", why="Leading zeros never count; the zero between the 4 and the 5 does.", check=("eq", "sig('0.00405')", "3"), space=0.5),
                     dict(label="c", stem="12.500 seconds", answer="5", why="A decimal point is written, so both trailing zeros count.", check=("eq", "sig('12.500')", "5"), space=0.5)]),
                 dict(stem="Solve. Report each answer with the correct number of significant digits.", parts=[
-                    dict(label="a", stem="A rectangular plate measures $2.4 \\times 10^{2}$ mm by $1.35 \\times 10^{2}$ mm. Find its area.", answer="$3.2 \\times 10^{4}$ square millimetres", why="32,400 exactly; 2 significant digits and 3, so the answer keeps 2.",
+                    dict(label="a", stem="A rectangular plate measures $2.4 \\times 10^{2}$ mm by $1.35 \\times 10^{2}$ mm. Find its area.", answer="$3.2 \\times 10^{4}$ square millimeters", why="32,400 exactly; 2 significant digits and 3, so the answer keeps 2.",
                          check=("many", ("eq", "F(24,10)*10**2*F(135,100)*10**2", "32400"), ("eq", "1000*floor(F(32400)/1000+F(1,2))", "32000")), space=0.8),
                     dict(label="b", stem="A vehicle travels $5.60 \\times 10^{2}$ km in 8.0 hours. Find its average speed.", answer="$7.0 \\times 10^{1}$ km/h", why="Exactly 70; two significant digits are justified, so the zero is written.", check=("eq", "F(560,100)*10**2/F(80,10)", "70"), space=0.8)]),
                 dict(stem="Solve. Report each answer with the correct precision.", parts=[

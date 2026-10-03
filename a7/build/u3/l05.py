@@ -68,10 +68,10 @@ L = dict(
     ],
 
     whiteboard=[
-        dict(text=["A recipe is scaled by a factor of  $\\left(\\frac{2}{3}\\right)^{-4}$.", "The original recipe serves 6 people.", "Rewrite the factor with a positive exponent."],
-             qtext="A recipe is scaled by a factor of (2/3)⁻⁴. The original recipe serves 6 people. Rewrite the factor with a positive exponent.",
-             unneeded="number of people it serves", hint="Rewrite with a positive exponent.", gloss="flip the base", answer_latex="\\left(\\frac{3}{2}\\right)^{4}",
-             note="Ruling 22's board: the serving size is there to be read past — the question asks only for the factor. A board with (2/3)⁴ dropped the minus without flipping; a board with −(3/2)⁴ made the exponent's sign the value's sign.", check=("eq", "F(2,3)**-4", "F(3,2)**4"),
+        dict(text=["A copier shrinks a page to  $\\frac{2}{3}$  size, 4 times in a row.", "To undo it, multiply by  $\\left(\\frac{2}{3}\\right)^{-4}$.  The page is 6 inches wide.", "**Rewrite  $\\left(\\frac{2}{3}\\right)^{-4}$  with a positive exponent."],
+             qtext="A copier shrinks a page to 2/3 size, 4 times in a row. To undo it, multiply by (2/3)⁻⁴. The page is 6 inches wide. Rewrite (2/3)⁻⁴ with a positive exponent.",
+             unneeded="width of 6 inches", hint="Rewrite with a positive exponent.", gloss="flip the base", answer_latex="\\left(\\frac{3}{2}\\right)^{4}",
+             note="Ruling 22's board: the page width is there to be read past — the question asks only for the factor. A board with (2/3)⁴ dropped the minus without flipping; a board with −(3/2)⁴ made the exponent's sign the value's sign.", check=("eq", "F(2,3)**-4", "F(3,2)**4"),
              wrong="(2/3)⁴ — the minus was dropped without flipping [8.NSO.1.3 negative exponent law]; −(3/2)⁴ — negative exponent read as a negative value [B1G-M 8.NSO.1.3 task: −b vs b⁻¹]; anything built from 6 — the unneeded figure was used"),
         dict(latex="\\left(\\frac{3}{-5}\\right)^{-9}", hint="Rewrite with a positive exponent.", gloss="flip the numbers; the sign stays in the fraction", answer_latex="\\left(\\frac{-5}{3}\\right)^{9}",
              note="Sign inside the denominator. A board with (5/3)⁹ took the opposite as well as the reciprocal — the −b vs b⁻¹ confusion the guide's task targets.", check=("eq", "F(3,-5)**-9", "F(-5,3)**9"),

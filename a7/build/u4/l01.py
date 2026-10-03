@@ -84,7 +84,7 @@ L = dict(
              note="The plain case. A board with 7.3 × 10¹⁰ added the exponents; a board with 1.312 × 10¹¹ multiplied.",
              check=("eq", "F(32,10)*10**5+F(41,10)*10**5", "F(73,10)*10**5"),
              wrong="7.3 × 10¹⁰ — the exponents were added as well as the coefficients [B1G-M 8.NSO.1.5 misconception: exponents added]; 1.312 × 10¹¹ — the numbers were multiplied [8.NSO.1.5: the operation is addition]"),
-        dict(text=["A stadium sold  $4.2 \\times 10^{4}$  tickets on Friday", "and  $3.5 \\times 10^{4}$  on Saturday. Each ticket cost 38 dollars.", "How many tickets were sold on the two days?"],
+        dict(text=["A stadium sold  $4.2 \\times 10^{4}$  tickets on Friday", "and  $3.5 \\times 10^{4}$  on Saturday. Each ticket cost 38 dollars.", "**How many tickets were sold on the two days?"],
              qtext="A stadium sold 4.2 × 10⁴ tickets on Friday and 3.5 × 10⁴ on Saturday. Each ticket cost 38 dollars. How many tickets were sold on the two days?",
              unneeded="ticket price of 38 dollars", hint="Same power.", gloss="4.2 + 3.5", answer="7.7 × 10⁴",
              note="Ruling 22's board: the ticket price is there to be read past. The question asks for tickets, and nothing in it needs the money. A board holding 38 anywhere used it.",

@@ -75,7 +75,7 @@ gloss, answer | answer_latex)`. `check` and `yt_check` are re-derived by sympy l
 `dict(kind="free"|"mc"|"written", latex | text=[rows], hint, gloss, answer | answer_latex, note,
 check, wrong, …)`. `latex` is set large and centered; `text` rows are centered (a row with `$`
 is a mixed row and must fit one line). `hint` prints under "Answer it." on the question slide.
-`gloss` is the gray line on the reveal. `note` is the TE note; `note_a` optionally the reveal's.
+A `text` row beginning `**` is the ASK and is set bold; a board with any such row (or with `unneeded`) is laid out as a left-aligned 24 pt block, not centred lines — keep each row under about 60 characters plus its math. `gloss` is the gray line on the reveal. `note` is the TE note; `note_a` optionally the reveal's.
 `wrong` is the TE's named-wrong-answers line for free/written questions: `"value — error name
 [benchmark cite]; …"`. **`kind="mc"`** adds `choices` (4 strings, unicode superscripts allowed),
 `correct` (index), `answer` ("A — 25m⁶") and **`errors`** — a dict from every wrong letter to

@@ -235,8 +235,7 @@ class Deck:
 
     def text(self, text, size=23, bold=False, italic=False, color=INK, align="left", h=None, x=None, w=None):
         x = LM if x is None else x; w = CW if w is None else w
-        cpl = int(w * 72 / (size * 0.50))
-        lines = max(1, -(-len(text) // cpl))
+        lines = max(1, -(-int(_textw(text, size, bold) * 100) // int((w - 0.1) * 100)))   # measured, not counted
         h = h or (0.45 * lines * (size / 23))
         self._text(x, self.cursor, w, h, text, size, bold, italic, color, align)
         self.cursor += h + 0.12

@@ -53,7 +53,7 @@ L = dict(
     examples=[
         dict(title="Example 1", sub="A formula with a power in it.", min_q=1,
              note_q="SPOKEN ONLY. Ask what the exponent is attached to before a single value is substituted — it is attached to the v, not to the m and not to the half.",
-             prompt=["Kinetic energy is  $K = \\frac{1}{2}mv^{2}$,", "for mass $m$ in kilograms and speed $v$ in metres per second.", "Find $K$ for a car of mass 1,200 kg travelling at 15 m/s."], ask="Give the answer with its unit.",
+             prompt=["Kinetic energy is  $K = \\frac{1}{2}mv^{2}$,", "for mass $m$ in kilograms and speed $v$ in meters per second.", "Find $K$ for a car of mass 1,200 kg travelling at 15 m/s."], ask="Give the answer with its unit.",
              worked=[dict(sub="Worked.", min=2,
                           note="Substitute in parentheses, square the speed, then multiply. A board with 81,000,000 squared the whole product, since ½(1,200)(15) is 9,000; a board with 18,000 read v² as 2v. The unit is joules and a board without it is not finished.",
                           rows=[("K = \\frac{1}{2}(1{,}200)(15)^{2}", "substitute, each value in parentheses"),
@@ -84,7 +84,7 @@ L = dict(
              note="The habit, on its own. A board with −12 squared only the 2; a board with 36 squared the whole 3x.",
              check=("eq", "3*(-2)**2", "12"),
              wrong="−12 — the exponent was applied to the 2 and not to the whole substituted value [8.NSO.1.7: substitute in parentheses]; 36 — the exponent was applied to 3x [8.NSO.1.7: the exponent belongs to its own base]"),
-        dict(text=["A cyclist of mass  $m = 70$  kg rides at  $v = 8$  m/s.", "Her bicycle cost 480 dollars.", "Find her kinetic energy,  $K = \\frac{1}{2}mv^{2}$."],
+        dict(text=["A cyclist of mass  $m = 70$  kg rides at  $v = 8$  m/s.", "Her bicycle cost 480 dollars.", "**Find her kinetic energy,  $K = \\frac{1}{2}mv^{2}$."],
              qtext="A cyclist of mass m = 70 kg rides at v = 8 m/s. Her bicycle cost 480 dollars. Find her kinetic energy, K = ½mv².",
              unneeded="price of the bicycle", hint="Substitute in parentheses.", gloss="35 times 64", answer="2,240 joules",
              note="Ruling 22's board: the price of the bicycle is there to be read past. Nothing in the formula takes a cost. A board holding 480 anywhere used it; a board without the unit is not finished.",
@@ -150,7 +150,7 @@ L = dict(
             dict(label="a", stem="$w = 150$,  $h = 65$", answer="25.0", why="$\\frac{105{,}450}{4{,}225} = 24.958\\ldots$", check=("many", ("eq", "65**2", "4225"), ("approx", "F(703*150,4225)", "F(250,10)", "0.05")), space=0.7),
             dict(label="b", stem="$w = 180$,  $h = 70$", answer="25.8", why="$\\frac{126{,}540}{4{,}900} = 25.824\\ldots$", check=("approx", "F(703*180,4900)", "F(258,10)", "0.05"), space=0.7),
             dict(label="c", stem="$w = 200$,  $h = 72$", answer="27.1", why="$\\frac{140{,}600}{5{,}184} = 27.122\\ldots$", check=("approx", "F(703*200,5184)", "F(271,10)", "0.05"), space=0.7)]),
-        dict(stem="Kinetic energy is  $K = \\frac{1}{2}mv^{2}$,  for mass $m$ in kilograms and speed $v$ in metres per second. Find $K$ in joules.", parts=[
+        dict(stem="Kinetic energy is  $K = \\frac{1}{2}mv^{2}$,  for mass $m$ in kilograms and speed $v$ in meters per second. Find $K$ in joules.", parts=[
             dict(label="a", stem="$m = 1{,}200$,  $v = 15$", answer="135,000 joules", why="", check=("eq", "F(1,2)*1200*15**2", "135000"), space=0.7),
             dict(label="b", stem="$m = 850$,  $v = 12$", answer="61,200 joules", why="", check=("eq", "F(1,2)*850*12**2", "61200"), space=0.7),
             dict(label="c", stem="$m = 70$,  $v = 8$", answer="2,240 joules", why="", check=("eq", "F(1,2)*70*8**2", "2240"), space=0.7)]),
@@ -194,7 +194,7 @@ L = dict(
             dict(label="a", stem="$w = 120$,  $h = 62$", answer="21.9", why="$\\frac{84{,}360}{3{,}844} = 21.945\\ldots$", check=("approx", "F(703*120,3844)", "F(219,10)", "0.05"), space=0.7),
             dict(label="b", stem="$w = 165$,  $h = 68$", answer="25.1", why="$\\frac{115{,}995}{4{,}624} = 25.085\\ldots$", check=("approx", "F(703*165,4624)", "F(251,10)", "0.05"), space=0.7),
             dict(label="c", stem="$w = 210$,  $h = 74$", answer="27.0", why="$\\frac{147{,}630}{5{,}476} = 26.959\\ldots$", check=("approx", "F(703*210,5476)", "F(270,10)", "0.05"), space=0.7)]),
-        dict(stem="Kinetic energy is  $K = \\frac{1}{2}mv^{2}$,  for mass $m$ in kilograms and speed $v$ in metres per second. Find $K$ in joules.", parts=[
+        dict(stem="Kinetic energy is  $K = \\frac{1}{2}mv^{2}$,  for mass $m$ in kilograms and speed $v$ in meters per second. Find $K$ in joules.", parts=[
             dict(label="a", stem="$m = 1{,}500$,  $v = 20$", answer="300,000 joules", why="", check=("eq", "F(1,2)*1500*20**2", "300000"), space=0.7),
             dict(label="b", stem="$m = 640$,  $v = 9$", answer="25,920 joules", why="", check=("eq", "F(1,2)*640*9**2", "25920"), space=0.7),
             dict(label="c", stem="$m = 55$,  $v = 4$", answer="440 joules", why="", check=("eq", "F(1,2)*55*4**2", "440"), space=0.7)]),
@@ -267,7 +267,7 @@ L = dict(
         variation="Questions 1–4 substitute into four shapes: a coefficient with a power, a formula with two letters, a fraction bar, and a binomial inside a power. 5 and 6 are cost expressions — one square, one rectangle — where the student has to decide what multiplies the area. 7 and 8 are two real formulas, each evaluated three times, so the structure is fixed and only the numbers move; 7 also requires rounding to a stated place. 9 works backwards in three shapes, ending with a cost equation that has to be unwound. The pattern breaks at 10, where two problems with the same numbers and the same words have different answers. 11 is the diagnostic multiple choice on cost structure and 12 the select-all on what an exponent is attached to. The Additional sheet mirrors each position.",
         audit=["Every item re-derived by sympy at build time (mathcheck: 0 findings). Every radicand and exponent gap scanned (capcheck: 0 findings outside the two tagged blocks, Notes III and whiteboard 7, where a real measurement gives a non-perfect radicand).",
                "The body-mass-index formula is the standard imperial one, B = 703w/h² for w in pounds and h in inches, and every value is carried exactly and rounded once: 24.958 → 25.0, 25.824 → 25.8, 27.122 → 27.1.",
-               "Kinetic energy is K = ½mv² with m in kilograms and v in metres per second, giving joules; 1,200 kg at 15 m/s is 135,000 J.",
+               "Kinetic energy is K = ½mv² with m in kilograms and v in meters per second, giving joules; 1,200 kg at 15 m/s is 135,000 J.",
                "Math Nation 4.7 and 4.8 values verified in the audit: 4.7.2 Rodney (28,394 in³), 4.7.4 (2/5, 50.25, 2,976 J), 4.8.1 (−151/4 and 0), 4.8.2 Liliana (455.47 and 375.84), 4.8.3 Phillip (706.56 and 2,156.25), 4.8.4 Michaela (8,886), and all ten items of both Practice 4.7 and Homework 4.7. The flooring ambiguity and the 4.8.2 key are the two defects, both listed above.",
                "The guide's backyard task verified: a side of √200 ≈ 14.1421 feet, six sides giving 84.8528 → 84.85 feet, and the 6-foot panels at 10.0083 dollars a foot beating the 8-foot panels at 11.0825."],
         changes=["4.7.1 Warm-Up (a Mark Cuban quotation and an acronym exercise, with no mathematics in it) → spaced retrieval under ruling 31.",

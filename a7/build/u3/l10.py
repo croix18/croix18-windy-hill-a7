@@ -81,7 +81,7 @@ L = dict(
         dict(text=["Write  $2.5 \\times 10^{-4}$  in standard form."], hint="Move the point four places left.", gloss="the 2 lands in the ten-thousandths place", answer="0.00025",
              note="The book's Mycoplasma bacterium, 2.5 × 10⁻⁴ mm. A board with 0.000025 moved five places; a board with 25,000 moved the wrong way.", check=("eq", "F(25,10)*F(10)**-4", "F(25,100000)"),
              wrong="0.000025 — point moved five places [8.NSO.1.4: 10⁻⁴ moves the point four places]; 25,000 — point moved right instead of left [negative exponent read as a large number]"),
-        dict(text=["A machine's cutting tolerance is  0.0000988  inch.", "The part it cuts is 4 inches long.", "Write the tolerance in scientific notation."],
+        dict(text=["A machine's cutting tolerance is  0.0000988  inch.", "The part it cuts is 4 inches long.", "**Write the tolerance in scientific notation."],
              qtext="A machine's cutting tolerance is 0.0000988 inch. The part it cuts is 4 inches long. Write the tolerance in scientific notation.",
              unneeded="4-inch length of the part", hint="Every nonzero digit stays in the coefficient.", gloss="the 9 is in the hundred-thousandths place", answer="9.88 × 10⁻⁵",
              note="Ruling 22's board: the part's length is there to be read past. The book's ticket-out-the-door value underneath. Four zeros after the point but the 9 is in the fifth place: 10⁻⁵. A board with 9.88 × 10⁻⁴ counted zeros; a board with 988 × 10⁻⁷ is equal in value but broke the coefficient rule.", check=("eq", "F(988,100)*F(10)**-5", "F(988,10**7)"),

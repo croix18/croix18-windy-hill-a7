@@ -1344,6 +1344,20 @@ assessment is not touched.
 *(The "ruling 15" that ruling 22 refers to is M7's ruling 15, on cutting the reading in
 assessment items — not A7's former ruling 15, which is now ruling 31.)*
 
+> **Ruling 22 in practice (Croix, 3 Oct 2026): he skipped every one of these boards** — "the
+> formatting is horrible, I often don't really understand what they are asking for." Two causes,
+> both A7's execution and not the ruling. (1) The situations were costumes on a computation: a
+> pollen grain whose mass is 2⁻⁷ microgram, a recipe scaled by (2/3)⁻⁴, a "growth factor" of 2⁴.
+> A reader cannot tell what is being asked because nothing real is being asked. (2) The board was
+> set like a poster — three centred lines with the ask buried in the third. Both fixed in Units 3
+> and 4: each situation is one a student could picture (a page folded in half seven times; a copier
+> set to 2/3; a lamp's brightness falling with distance), the extra figure is one that would
+> naturally be there, and the board is laid out as a page — a left-aligned block, 24 pt, the ask
+> in bold on its own line (spec: a `text` row beginning `**`). The rule for a new one: say the
+> situation in a sentence a seventh-grader would say, then ask the question in a sentence that
+> names the thing wanted. If the only honest question is "what is 2⁻⁷", there is no situation —
+> write the board bare and put the extra figure on a different board.
+
 ## 13b(ix). Rulings — Croix, 20 September: the plan and the teacher's edition [both courses]
 
 **Ruling 25 — every lesson ships with a Florida-format lesson plan, and the MTRs are named in

@@ -79,11 +79,11 @@ L = dict(
     ],
 
     whiteboard=[
-        dict(text=["A spreadsheet holds  $6^{4}\\cdot 6^{0}$  cells in  $6^{2}$  equal columns.", "The file is 3 megabytes.", "How many cells are in each column?"],
-             qtext="A spreadsheet holds 6⁴ · 6⁰ cells in 6² equal columns. The file is 3 megabytes. How many cells are in each column?",
-             unneeded="3 megabytes", hint="Find the value.", gloss="6⁴ · 1 over 6², so 6²", answer="36",
-             note="Ruling 22's board: the file size is there to be read past. Example 1's shape with a new base. A board with 0 read 6⁰ as 0; a board with 1296 forgot the denominator.", check=("eq", "6**4*6**0/6**2", "36"),
-             wrong="0 — zero exponent read as 0 [8.NSO.1.3: zero exponent law, a⁰ = 1]; 1296 — the 6² in the denominator was ignored; anything built from 3 — the unneeded figure was used"),
+        dict(text=["A warehouse holds  $6^{4}$  boxes in  $6^{2}$  equal rows.", "Each box weighs 3 kilograms.", "**How many boxes are in each row?"],
+             qtext="A warehouse holds 6⁴ boxes in 6² equal rows. Each box weighs 3 kilograms. How many boxes are in each row?",
+             unneeded="weight of 3 kilograms", hint="Find the value.", gloss="6⁴ over 6², so 6²", answer="36",
+             note="Ruling 22's board: the weight is there to be read past. A quotient of powers to open the round. A board with 1296 never divided by the rows; a board with 6⁶ added the exponents.", check=("eq", "6**4/6**2", "36"),
+             wrong="1296 — the 6² rows were ignored [the quotient was never taken]; 6⁶ or 46,656 — the exponents were added [confused with product of powers]; anything built from 3 — the unneeded figure was used"),
         dict(latex="\\left(3^{0}\\cdot 3^{2}\\right)^{3}", hint="Find the value.", gloss="(3²)³ = 3⁶", answer="729",
              note="Product then power of a power. A board with 27 kept only the outer exponent, 3³; 3⁵ = 243 added 2 + 3.", check=("eq", "(3**0*3**2)**3", "729"),
              wrong="243 — added the exponents 2 + 3 in the power of a power step [confused with product of powers]; 0 — zero exponent read as 0"),

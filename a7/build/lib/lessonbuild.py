@@ -605,11 +605,27 @@ def _wb_body(D, q, reveal):
     kind = q.get("kind", "free")
     if q.get("latex"):
         D.math(q["latex"], "slidebig", slots=reveal)
-    for row in q.get("text", []):
-        if "$" in row:
-            D.math_row(row, surface="slidemid", gap=0.3, size=26, slots=reveal)
-        else:
-            D.text(row, 26 if len(row) < 60 else 23, align="center")
+    rows = q.get("text", [])
+    word = bool(q.get("unneeded")) or any(r.startswith("**") for r in rows)
+    if word:
+        # A word board reads like a page, not a poster: a left-aligned block, 24 pt, the setup in
+        # roman and the ask in bold on its own line(s). Croix skipped every centred version
+        # ("the formatting is horrible, I often don't understand what they are asking", 3 Oct).
+        D.cursor = 2.05
+        for r in rows:
+            bold = r.startswith("**")
+            r = r.lstrip("*")
+            if "$" in r:
+                D.math_row(r, surface="slide", gap=0.22, size=24, align="left", x=LM + 0.5, bold=bold, slots=reveal)
+            else:
+                D.text(r, 24, bold=bold, align="left", x=LM + 0.5, w=CW - 0.6)
+        D.cursor += 0.05
+    else:
+        for row in rows:
+            if "$" in row:
+                D.math_row(row, surface="slidemid", gap=0.3, size=26, slots=reveal)
+            else:
+                D.text(row, 26 if len(row) < 60 else 23, align="center")
     if kind == "mc":
         D.cursor += 0.1
         D.choices(q["choices"], correct=(q["correct"] if reveal else None))
@@ -621,7 +637,7 @@ def _wb_body(D, q, reveal):
             D._text(0.85, y + 0.53, 11.6, 0.4, q.get("hint", "This one is written work. Say why."), 19, italic=True, color=GRAY, align="center")
         else:
             D._text(0.85, y, 11.6, 0.5, "Answer it.", 26, bold=True, align="center")
-            if q.get("hint"):
+            if q.get("hint") and not word:      # a word board's bold ask IS the hint
                 D._text(0.85, y + 0.53, 11.6, 0.4, q["hint"], 19, italic=True, color=GRAY, align="center")
     else:
         if q.get("gloss"):
@@ -641,7 +657,7 @@ def board_text(q):
     bits = []
     if q.get("latex"):
         bits.append("$" + q["latex"] + "$")
-    bits += list(q.get("text", []))
+    bits += [t.lstrip("*") for t in q.get("text", [])]
     return "  ".join(bits)
 
 

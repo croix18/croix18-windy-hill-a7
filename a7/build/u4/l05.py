@@ -82,7 +82,7 @@ L = dict(
              note="The plain case, and it should be instant. A board with 60.5 halved the radicand; a board with ±11 gave both roots, and the radical sign asks for one.",
              check=("eq", "sqrt(121)", "11"),
              wrong="60.5 — the radicand was halved [Unit 2, 2.02: a root is not a half]; ±11 — the radical sign names the principal root only [8.NSO.1.7]"),
-        dict(text=["A square patio has an area of  169  square feet.", "Fencing for it costs 12 dollars a foot.", "How long is one side of the patio?"],
+        dict(text=["A square patio has an area of  169  square feet.", "Fencing for it costs 12 dollars a foot.", "**How long is one side of the patio?"],
              qtext="A square patio has an area of 169 square feet. Fencing for it costs 12 dollars a foot. How long is one side of the patio?",
              unneeded="fencing price of 12 dollars a foot", hint="A square's side is the root of its area.", gloss="√169", answer="13 feet",
              note="Ruling 22's board: the fencing price is there to be read past. The question asks for one side, and nothing in it needs the money. A board holding 12 anywhere used the price; a board with 52 found the perimeter instead.",
