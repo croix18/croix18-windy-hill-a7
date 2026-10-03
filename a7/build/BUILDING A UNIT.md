@@ -205,9 +205,9 @@ files live in `assets/` with the script that regenerates them (`assets/make_asse
    `../reference/A7 Master Sheet 2026-27.xlsx` (0 errors), then
    `python3 ../../tools/check_master_sheet.py` (0 problems). Push, and send Croix the new file.
 
-## 5a. Boards Up (Geopardy) — planned, not built (3 Oct 2026)
+## 5a. Geopardy (the review game, formerly Boards Up) — planned, not built (3 Oct 2026)
 
-Croix's review game lives in a separate repository, `croix18/Geopardy` (engine in `engine/`, one
+Croix's review game Geopardy! lives in a separate repository, `croix18/Geopardy` (engine in `engine/`, one
 JSON file per unit in `units/`, `tools/build.py` makes a single-file game, `tools/check.sh`
 playtests it headless; read its `docs/HANDOFF.md` first). Its unit format is `categories[] →
 questions[] {q, a, work}` with `$…$` math, five tiers per category, easiest first, plus a Final.
