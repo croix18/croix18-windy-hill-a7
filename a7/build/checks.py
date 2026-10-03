@@ -463,7 +463,7 @@ def check_imagedrift(files):
 
 
 SUITE_DOC = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "reference", "HOUSE STYLE.md")
-BUILD_GATES = ("mathcheck", "distractorcheck", "capcheck", "rulingcheck")
+BUILD_GATES = ("mathcheck", "distractorcheck", "capcheck", "rulingcheck", "balancecheck")
 
 
 def check_suite(files):

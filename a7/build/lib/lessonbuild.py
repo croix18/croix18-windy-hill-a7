@@ -763,6 +763,40 @@ def build_te(L, deck_path, outdir):
     return path
 
 
+def balancecheck_lesson(L):
+    """The keyed letter must not be guessable. Students noticed (3 Oct 2026) that every
+    multiple-choice answer was A: the specs were written answer-first and printed in spec order.
+    shuffle_choices.py spread them; this gate keeps them spread. Over a lesson's single-answer
+    items (round, bank, additional, independent): no three in a row in one group keyed alike,
+    no letter over 60% when there are four or more, and never all alike when there are three or
+    more. Over its select-alls: the keyed set may not be the first k options in more than half."""
+    out = []
+    singles, multis = [], []
+    for grp in ("whiteboard", "bank", "additional", "independent"):
+        run = []
+        for i, it in enumerate(L.get(grp, [])):
+            if not it.get("choices"):
+                continue
+            if isinstance(it["correct"], (list, tuple, set)):
+                multis.append((grp, i, sorted(it["correct"]) == list(range(len(it["correct"])))))
+                continue
+            L_ = chr(65 + it["correct"])
+            singles.append(L_)
+            run.append(L_)
+            if len(run) >= 3 and len(set(run[-3:])) == 1:
+                out.append(f"{L['code']} {grp}[{i}]: three single-answer items in a row keyed {L_} — spread them (shuffle_choices.py)")
+    if len(singles) >= 3 and len(set(singles)) == 1:
+        out.append(f"{L['code']}: every single-answer item is keyed {singles[0]} — the key is guessable; run shuffle_choices.py")
+    if len(singles) >= 4:
+        top = max(set(singles), key=singles.count)
+        if singles.count(top) / len(singles) > 0.6:
+            out.append(f"{L['code']}: {singles.count(top)} of {len(singles)} single-answer items are keyed {top} — spread them")
+    prefix = [m for m in multis if m[2]]
+    if multis and len(prefix) * 2 > len(multis):
+        out.append(f"{L['code']}: {len(prefix)} of {len(multis)} select-alls key the first options (A, B, C…) — spread them")
+    return out
+
+
 def rulingcheck_lesson(L):
     """Rulings 21, 22, 25, 26 and 28 as facts about the spec."""
     return _ruling_checks(L)
@@ -795,7 +829,7 @@ def build_lesson(L, outdir):
     findings, n = mathcheck_lesson(L)
     d = distractorcheck_lesson(L)
     c = capcheck_lesson(L)
-    r = rulingcheck_lesson(L)
+    r = rulingcheck_lesson(L) + balancecheck_lesson(L)
     print(f"mathcheck {L['code']}: {n} items checked, {len(findings)} findings")
     for f in findings + d + c + r:
         print("  ", f)

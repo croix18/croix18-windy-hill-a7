@@ -182,7 +182,7 @@
    "title": "Whiteboards   \u00b7   Question 5 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "Diagnostic, and the odd power is the point. Example 1's even power hid the sign of the base: (\u22128/7)\u00b2 and (8/7)\u00b2 are both 64/49. Here the cube keeps the sign, so the four options are four different numbers \u2014 A is \u2212512/343 and B is +512/343. A board with B flipped the base and dropped its minus; ask what the reciprocal of \u22127/8 is. C never flipped; D took the opposite instead of the reciprocal.",
+   "note": "Diagnostic, and the odd power is the point. Example 1's even power hid the sign of the base: (\u22128/7)\u00b2 and (8/7)\u00b2 are both 64/49. Here the cube keeps the sign, so the four options are four different numbers \u2014 B is \u2212512/343 and D is +512/343. A board with D flipped the base and dropped its minus; ask what the reciprocal of \u22127/8 is. C never flipped; A took the opposite instead of the reciprocal.",
    "kind": "wb"
   },
   {
@@ -198,7 +198,7 @@
    "title": "Whiteboards   \u00b7   Question 6 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "Diagnostic. \u22122 \u2212 (\u22124) = 2. The B board is the interesting one: it did the arithmetic right and then flipped out of habit.",
+   "note": "Diagnostic. \u22122 \u2212 (\u22124) = 2. The A board is the interesting one: it did the arithmetic right and then flipped out of habit.",
    "kind": "wb"
   },
   {

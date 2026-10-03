@@ -182,7 +182,7 @@
    "title": "Whiteboards   \u00b7   Question 5 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "Diagnostic. D is the board that says Notes I did not land \u2014 go back to the table and divide 1 by x twice, out loud.",
+   "note": "Diagnostic. A is the board that says Notes I did not land \u2014 go back to the table and divide 1 by x twice, out loud.",
    "kind": "wb"
   },
   {
@@ -198,7 +198,7 @@
    "title": "Whiteboards   \u00b7   Question 6 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "Diagnostic for two laws at once. B and D are the two coefficient errors; C is the exponent error.",
+   "note": "Diagnostic for two laws at once. C and B are the two coefficient errors; A is the exponent error.",
    "kind": "wb"
   },
   {

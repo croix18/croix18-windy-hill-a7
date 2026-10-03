@@ -5,7 +5,7 @@ total and the per-benchmark Score Tracker at build time.
 """
 import os
 from .dockit import Doc, GRAY, RED
-from .lessonbuild import mathcheck_item, _flatten, distractorcheck_lesson, capcheck_lesson, COURSE, _fmt_q
+from .lessonbuild import mathcheck_item, _flatten, distractorcheck_lesson, capcheck_lesson, balancecheck_lesson, COURSE, _fmt_q
 
 UNSCORED_NOTE = ("HOW TO USE THIS.   This review covers every learning target from the unit — more than the "
                  "assessment does. Work it in parts. If you miss two or more in a part, that part is where to "
@@ -37,6 +37,7 @@ def check_unit(U):
               "te": {"reference": U["reference"]}}
     findings += distractorcheck_lesson(pseudo)
     findings += capcheck_lesson(pseudo)
+    findings += balancecheck_lesson(pseudo)
     return findings, n
 
 

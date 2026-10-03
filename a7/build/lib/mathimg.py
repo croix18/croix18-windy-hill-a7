@@ -54,6 +54,9 @@ def _slot_colors(glyphs, pt, scale=1.0):
         j = i
         while j + 1 < n and small[j + 1]:
             j += 1
+        if j + 1 < n and chr(glyphs[j + 1][2]) == "√":
+            i = j + 1                                # a root INDEX (the 3 of a cube root) is set small
+            continue                                 # before the radical: not an exponent, no slot — INK
         for k in range(i, j + 1):
             col[k] = CB2
         k = i - 1                                    # the base is what sits to its left

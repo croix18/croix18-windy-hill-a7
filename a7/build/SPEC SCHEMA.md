@@ -80,7 +80,7 @@ is a mixed row and must fit one line). `hint` prints under "Answer it." on the q
 [benchmark cite]; …"`. **`kind="mc"`** adds `choices` (4 strings, unicode superscripts allowed),
 `correct` (index), `answer` ("A — 25m⁶") and **`errors`** — a dict from every wrong letter to
 `"what the student did [benchmark or B1G-M cite]"`; the build refuses an mc item with a wrong
-option that has no cited error. **`kind="written"`** adds `qtext` (the plain-text question for
+option that has no cited error. **The keyed letter must vary** across a lesson's items (gate `balancecheck`): write a new item answer-first if that is easier, then run `shuffle_choices.py <unit>` once before the first build, and after that write each item's options in their final order. **`kind="written"`** adds `qtext` (the plain-text question for
 the TE) and the answer states the full-credit sentence.
 
 ### bank / additional item

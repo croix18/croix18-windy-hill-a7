@@ -17,7 +17,7 @@ Nothing exists until it is committed. This folder is generated from `a7/build/u4
 | Folder | What is in it |
 |---|---|
 | **Question Banks** | Per lesson: the Question Bank and the Question Bank – Additional. Retired worksheets are question banks (ruling 11): draw from them for practice, exit tickets or re-teaching; nothing in here has an answer on it. |
-| **Slides** | The decks, as `.pptx`. No speaker notes — the notes live in the Teacher Edition (ruling 12). |
+| **Slides** | One deck per lesson, as `.pptx`, and **`A7 4  Unit Slides`** — the whole unit in one file, in teaching order, with a contents slide that jumps to each lesson (each lesson keeps its own slide numbers, so the Teacher Edition still lines up). Base and exponent are colour-coded on notes, worked examples and answer slides; questions stay black. No speaker notes — the notes live in the Teacher Edition (ruling 12). |
 | **Handouts** | The Reference Sheet. Students study from it; it may NOT be used on the assessment (ruling 13). There is no study guide (ruling 11). |
 | **Assessments** | Unit Review (unscored; it goes home as practice — ruling 27a, A7 has no review day) and Unit Assessment (two periods) — student copies. |
 | **Answer Keys** | Every key in the unit, without exception. |
@@ -95,4 +95,4 @@ The whiteboard round is the remainder — 12–13 minutes across the unit — an
 - **The Reference Sheet is the only handout.** Give it out at 4.01; it is the document students study from, and its perfect-square and perfect-cube lists are what 4.05 and 4.06 assume. It does not go into the test.
 - **No mnemonic and no keyword strategy anywhere in this unit.** The state guide warns against both — PEMDAS in its instructional strategies, because it has no letter for the radical bar or the fraction bar, and circling-and-boxing as a named misconception, because two problems with the same numbers and the same words can need different operations. The word PEMDAS appears nowhere in the package.
 
-Installed: 118 files from the build, plus this page and the Reference folder.
+Installed: 120 files from the build, plus this page and the Reference folder.
