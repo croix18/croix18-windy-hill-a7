@@ -890,6 +890,7 @@ body.console #hud{display:none}
     const hasAns=slides[n].querySelector('.answer, .wa, ol.choices li.correct');
     slides[n].classList.toggle('veiled',!!hasAns&&!opts.unveiled&&!slides[n].classList.contains('shown'));
     // the URL is an input (#s=17, #L=3.06, #period=3 from Deckhand), never rewritten: a reload comes back to Today and Resume
+    resetTimer();                                   // a board's clock belongs to that board: leaving the slide ends it
     paintBar();paintRail();paintRound();
     if(L&&period&&!opts.silent)bookmark(L,seg,n);}
   function veiled(){return slides[cur].classList.contains('veiled');}
@@ -947,10 +948,11 @@ body.console #hud{display:none}
     $('timerDigits').textContent=Math.floor(timer.left/60)+':'+pad(Math.max(0,Math.ceil(timer.left%60)));}
   function startTimer(){stopTimer();timer.endAt=Date.now()+timer.left*1000;timer.run=setInterval(()=>{timer.left=Math.max(0,(timer.endAt-Date.now())/1000);paintTimer();if(timer.left<=0){stopTimer();$('timerRing').classList.add('done');beep();}},200);}
   function stopTimer(){if(timer.run)clearInterval(timer.run);timer.run=null;}
+  function resetTimer(){stopTimer();timer.left=timer.len;const r=$('timerRing');if(r){r.classList.remove('done');paintTimer();}}
   function beep(){try{const ac=new (window.AudioContext||window.webkitAudioContext)();const o=ac.createOscillator(),g=ac.createGain();o.connect(g);g.connect(ac.destination);o.frequency.value=880;g.gain.value=.08;o.start();o.stop(ac.currentTime+.35);}catch(e){}}
   document.querySelectorAll('#timerBox .tbtns button[data-t]').forEach(b=>b.onclick=()=>setTimer(+b.dataset.t));
   $('tStart').onclick=()=>{if(timer.left<=0)timer.left=timer.len;$('timerRing').classList.remove('done');startTimer();};
-  $('tStop').onclick=()=>{stopTimer();timer.left=timer.len;$('timerRing').classList.remove('done');paintTimer();};
+  $('tStop').onclick=resetTimer;
   // ---- today ---------------------------------------------------------------------------------------
   function planLesson(){if(!room||!S)return null;const p=room.plan(S,todayISO(),course);return p;}
   function paintToday(){const now=new Date();$('tDate').textContent=now.toLocaleDateString([],{weekday:'long',month:'long',day:'numeric'});
