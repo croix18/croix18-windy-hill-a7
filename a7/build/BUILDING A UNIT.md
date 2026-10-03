@@ -272,7 +272,45 @@ Send the START HERE, the Reference Sheet PDF and the assessment key PDF with it.
 - Never leave a lesson unpushed while starting the next one.
 - Never rescale a plan by trimming the whiteboard round below 10 minutes or IXL below 5.
 
-## 8. Open items carried forward (20 September 2026)
+## 8. State of the work — 3 October 2026 (read this before anything else)
+
+Where things stand at the end of the 3 Oct session, so the next session (any model) starts here.
+
+**Shipped today, all pushed (HEAD e9db9ff).** Units 3 and 4 rebuilt: every multiple-choice answer was
+A (students noticed) — spread by `shuffle_choices.py`, keyed letters now vary (gate `balancecheck`);
+the ruling-22 word boards rewritten so the ask names a thing in the story (§4 and HOUSE STYLE);
+the colour renderer's fraction bars fixed (check `slotgeometry`); every deck also as `.html` with
+KaTeX (check `htmlcheck`); the unit `.html` is now the **console** (§5 above: Today from the bell,
+rail with minutes, pacing, the whiteboard round with timer, veil and tally, per-period resume, the
+room code). Windmill vendored into `assets/windmill/` (`tools/vendor_windmill.py`).
+
+**The ecosystem.** Croix's tools — Deckhand (the panel), Cadence (items), Tally (grades, the source
+of the current unit), Geopardy (review game, renamed from Boards Up today) and the two Windy Hill
+builds — coordinate through **Windmill** (`croix18/Windmill`: the spine = the year's plan as JSON,
+the room contract, the reader, the room codes, the conformance test). The whole design, the per-tool
+changes, the spiral rule and the build order are in the *Room Coordination Plan*, a Claude doc:
+https://claude.ai/code/artifact/9db84d04-9444-48c4-adad-9c68905eefd8 (read it with the docs tool).
+Croix's standing instruction for it: "Keep it over engineered. I want everything." Data tiers:
+open (counts, codes, times) rides every road; roster (first names, seating) rides the Drive file or
+encrypted; standing (grades, scores, FAST) never leaves Tally.
+
+**Pending, in order.** (1) Monday 5 Oct: Croix runs the four panel tests (`Windmill/tests/room-test/`,
+"READ ME FIRST.txt"); the results choose the default road. (2) Tally's Publish button (writes
+`room.js` to the Drive folder; both codes; the Apps Script post). (3) Deckhand: room code field, Drive
+folder pick, Geopardy card beside the Cadence card, settle-in hands off to the console with
+`#period=N`, the `panel` writer. (4) Console phase 2: "another one" from build-time verified variants,
+the teacher-note overlay (held key), pacing actuals per segment. (5) Cadence: Today (the spiral rule),
+class sets from the room, Export a Geopardy board. (6) The loop: exit tickets → room → Tally's heat
+map; phone remote; room history; pacing truth; simulator; digest. Also still open: Unit 5 build (needs
+Math Nation Unit 5), IXL/Focus import for the master sheet, rulings 16/17/23/24 from M7.
+
+**Assumptions that need Croix's word** (also in Windmill's HANDOFF): periods 1 and 3 accelerated,
+2/4/5 on-level, 6 planning; the holidays in both calendars are unverified against the district PDF.
+
+**Tokens.** Four PATs were pasted into the 3 Oct chat; all are to be rotated. `.github-token` here
+holds the A7 token; Windmill's checkout holds the Windmill token (it reaches every repo).
+
+## 8a. Open items carried forward (20 September 2026)
 
 - Retroactive coefficient scan of the Unit 1–2 banks (the scan was inert until 20 September;
   those banks were built under the old toolchain and have not been re-scanned).
