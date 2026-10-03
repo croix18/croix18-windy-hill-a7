@@ -176,6 +176,26 @@ it. It has no side-car (the minutes live beside each lesson's deck). `checks.py`
 lesson decks slide for slide, so **after rebuilding any one lesson, run `build_unit.py` again**.
 **After any change to a coloured expression, run `slotaudit.py <unit>` and read it** (HOUSE STYLE §2a).
 
+**The console (the unit's `.html`, 3 Oct 2026).** `A7 <u>  Unit Slides.html` is not a deck with a
+contents page; it is the day wrapped around the slides (`lib/consolekit.py`, Room Coordination Plan
+phase 3). It opens on TODAY: the period read from the bell schedule (Deckhand's, via Windmill's
+spine), the plan's lesson for the date, this period's bookmark, the room's word from Tally if any;
+Resume / Start / Choose. A RAIL lists the lesson's segments with the Teacher Edition's minutes (the
+same grouping as `tekit.plan_from_sidecar`; the whiteboard block takes the remainder); the bar shows
+the segment, how far ahead or behind the plan the clock says, the period and the minutes to the
+bell. On a board the rail becomes the ROUND: a timer (30/45/60/90 s), the answer slide veiled until
+Space or R, and tally tiles — the letters for a multiple-choice board with the keyed one marked and
+the spec's error key under each, right / partly / not yet otherwise; hold a tile to take one back.
+Everything it records is the room's `panel` part (bookmark per period, tallies with benchmark and
+misconception keys) in the browser's store, the shape Deckhand will publish. Keys: Space/→ advance
+(first press on an answer slide lifts the veil), ← back, 1–9 jump to that board, L rail, T timer,
+R reveal, Esc Today, P print. `#period=3` in the URL (Deckhand's hand-off) sets the period; `#L=3.06`
+opens a lesson; `#s=17` a slide; the URL is never rewritten, so a reload returns to Today and Resume.
+Nothing teacher-only is drawn on the slide surface (ruling 12). The per-lesson `.html` decks stay
+plain decks. `tools/vendor_windmill.py` brings `room-reader.js`, `spine.js` and `benchmarks.json`
+from the Windmill checkout into `assets/windmill/` — rerun it after Windmill changes; `VERSION`
+there says which commit the decks carry.
+
 **The HTML decks.** Every deck is written twice from the same spec and the same `_fill_deck`:
 `.pptx` (deckkit) and `.html` (htmlkit) — one self-contained file per deck, the math typeset in
 the browser by KaTeX from the spec's own LaTeX, Schola from the inlined fonts, arrow keys or a

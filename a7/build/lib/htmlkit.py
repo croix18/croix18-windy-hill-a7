@@ -72,8 +72,10 @@ def _sups(t):
 class HtmlDeck:
     def __init__(self, course, unit, lesson_label, title, footer):
         self.course, self.unit, self.lesson_label, self.title, self.footer = course, unit, lesson_label, title, footer
+        self.page_title = title   # the file's title: the unit's, even after start_lesson() moves self.title along
         self.slides = []          # each: dict(kind, title, sub, body=[html], n, lesson)
         self.side = []
+        self.lessons = []         # unit deck: [{code, label, title, first}] — the console's rail
         self.cursor = 0.0
         self._n = 0
         self.s = None
@@ -222,9 +224,15 @@ class HtmlDeck:
     def slide_ref(self, i):
         return i
 
-    def start_lesson(self, lesson_label, title, footer):
+    def start_lesson(self, lesson_label, title, footer, code=None):
         self.lesson_label, self.title, self.footer = lesson_label, title, footer
         self._n = 0
+        self.lessons.append({"code": code or lesson_label, "label": lesson_label, "title": title, "first": len(self.slides)})
+
+    def tag(self, **kw):
+        """Metadata on the current slide for the console (a board's kind, letters, key, error keys,
+        benchmark). Nothing here is drawn; the console's JS reads it."""
+        self.s.update(kw)
 
     def unit_cover(self, title, lines):
         self._new(title, "", 0, "", "title")
@@ -237,8 +245,12 @@ class HtmlDeck:
         slide.setdefault("links", []).append((left[0], left[1], right, target))
 
     # ---------- finish ----------
-    def save(self, path, sidecar=False):
-        page = render_page(self)
+    def save(self, path, sidecar=False, console=False):
+        if console:                                  # the unit deck: the day wrapped around the slides
+            from .consolekit import render_console
+            page = render_console(self)
+        else:
+            page = render_page(self)
         with open(path, "w", encoding="utf-8") as f:
             f.write(page)
         return path
@@ -305,12 +317,15 @@ JS = r"""
   function fit(){const s=Math.min(innerWidth/W,innerHeight/H);stage.style.transform=`translate(-50%,-50%) scale(${s})`;stage.style.transformOrigin='center';}
   function show(n){n=Math.max(0,Math.min(slides.length-1,n));slides.forEach((s,k)=>s.classList.toggle('on',k===n));i=n;history.replaceState(null,'','#'+(n+1));
     document.getElementById('hud').textContent=(n+1)+' / '+slides.length;}
+  const CONSOLE=document.body.classList.contains('console');   // the unit console (consolekit) drives navigation itself
+  if(!CONSOLE){
   addEventListener('resize',fit);fit();
   addEventListener('keydown',e=>{if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();show(i+1)}
     else if(['ArrowLeft','PageUp','Backspace'].includes(e.key)){e.preventDefault();show(i-1)}
     else if(e.key==='Home')show(0);else if(e.key==='End')show(slides.length-1)});
   stage.addEventListener('click',e=>{if(e.target.closest('a'))return;show(e.clientX<innerWidth*0.25?i-1:i+1)});
   document.querySelectorAll('a[data-go]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();show(+a.dataset.go)}));
+  }
   // ---- math: KaTeX, display style everywhere so fractions stay full-size on a projector
   document.querySelectorAll('.k').forEach(el=>{
     try{const d=el.classList.contains('d');katex.render(d?el.dataset.tex:'\\displaystyle '+el.dataset.tex,el,{displayMode:d,throwOnError:true,strict:'ignore'});}
@@ -363,7 +378,7 @@ JS = r"""
     k.querySelectorAll('.msupsub').forEach(ms=>paint(ms,CB2));
     k.querySelectorAll('.root').forEach(r=>paint(r,getComputedStyle(k).color)); // root index: never an exponent
   });
-  show(Math.max(0,(parseInt(location.hash.slice(1))||1)-1));
+  if(!CONSOLE)show(Math.max(0,(parseInt(location.hash.slice(1))||1)-1));
 })();
 """
 
@@ -374,19 +389,22 @@ def render_page(D):
     js = JS.replace("WPX", f"{W:.2f}").replace("HPX", f"{H:.0f}")
     fonts = _font_face("regular", 400, False) + _font_face("bold", 700, False) + _font_face("italic", 400, True) + _font_face("bolditalic", 700, True)
     out = ['<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">',
-           f"<title>{esc(D.title)}</title>", "<style>", fonts, _read("katex.inline.css"), css, "</style></head><body>",
+           f"<title>{esc(getattr(D, 'page_title', D.title))}</title>", "<style>", fonts, _read("katex.inline.css"), css, "</style></head><body>",
            '<div id="stage">']
     for k, s in enumerate(D.slides):
+        attrs = f' data-n="{s["n"]}" data-kind="{esc(s["kind"])}"'
+        if s.get("wb"):
+            attrs += " data-wb='" + json.dumps(s["wb"], ensure_ascii=True).replace("'", "&#39;") + "'"
         body = "".join(s["body"])
         if s.get("links"):
             body += '<div class="contents' + (' tight' if len(s["links"]) > 8 else '') + '">' + "".join(
                 f'<a href="#{t + 1}" data-go="{t}"><span><b>{esc(a)}</b>{esc(b)}</span><span class="n">{esc(r)}</span></a>'
                 for (a, b, r, t) in s["links"]) + "</div>"
         if s.get("title_slide"):
-            out.append(f'<section class="slide title" data-n="{s["n"]}">{body}<div class="foot"><span>{esc(s["footer"])}</span><span class="n">{s["n"]}</span></div></section>')
+            out.append(f'<section class="slide title"{attrs}>{body}<div class="foot"><span>{esc(s["footer"])}</span><span class="n">{s["n"]}</span></div></section>')
         else:
             sub = f'<p class="sub">{esc(s["sub"])}</p>' if s["sub"] else '<p class="sub"></p>'
-            out.append(f'<section class="slide" data-n="{s["n"]}"><h1>{esc(s["title"])}</h1><div class="rules"></div>{sub}'
+            out.append(f'<section class="slide"{attrs}><h1>{esc(s["title"])}</h1><div class="rules"></div>{sub}'
                        f'<div class="body">{body}</div><div class="foot"><span>{esc(s["footer"])}</span><span class="n">{s["n"]}</span></div></section>')
     out.append('</div><div id="hud"></div><script>')
     out.append(_read("katex.min.js"))

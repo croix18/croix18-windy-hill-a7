@@ -563,6 +563,31 @@ HTML_PROBE = r"""
 """
 
 
+CONSOLE_PROBE = r"""
+() => {
+  if (!window.UNIT) return null;
+  const out = {lessons: UNIT.lessons.length, problems: []};
+  const titles = [...document.querySelectorAll('.slide.title')].length - 1;      // minus the unit cover
+  if (titles !== UNIT.lessons.length) out.problems.push(`${UNIT.lessons.length} lessons indexed, ${titles} lesson title slides`);
+  UNIT.lessons.forEach(L => {
+    const sum = L.segments.reduce((a, s) => a + s.min, 0);
+    if (sum !== UNIT.periodMin) out.problems.push(`${L.code}: segments total ${sum} min, not ${UNIT.periodMin}`);
+    const wb = L.segments.find(s => s.kind === 'wb');
+    if (!wb || wb.min < 10 || wb.min > 20) out.problems.push(`${L.code}: whiteboard block ${wb ? wb.min : 'missing'} min (need 10–20)`);
+    if (L.boards.length !== 18) out.problems.push(`${L.code}: ${L.boards.length} board slides, not 18`);
+    L.boards.forEach(b => { const d = document.querySelectorAll('.slide')[b.slide].dataset.wb; if (!d) out.problems.push(`${L.code} board ${b.i}: no data-wb`);
+      else { const w = JSON.parse(d); if (w.kind === 'mc' && (!w.letters || !w.key)) out.problems.push(`${L.code} board ${b.i}: mc without letters/key`);
+             if (!/^MA\.[78]\./.test(w.benchmark)) out.problems.push(`${L.code} board ${b.i}: benchmark ${w.benchmark}`); } });
+  });
+  try { const r = Room.load({win: window, list: window.BENCHMARKS, allowProblems: true}); if (r.problems.length) out.problems.push('room: ' + r.problems[0]);
+        if (!r.plan(SPINE, Object.keys(SPINE.days)[0], UNIT.course)) out.problems.push('room: the plan answers nothing for the first day'); }
+  catch (e) { out.problems.push('room: ' + e.message); }
+  if (typeof Console !== 'object' || typeof Console.show !== 'function') out.problems.push('console API missing');
+  return out;
+}
+"""
+
+
 def _norm(s):
     """The reading as an order-free bag of (glyph, colour): KaTeX lays a fraction's denominator
     before its numerator in the DOM and splits a bracketed base around an inner exponent, so
@@ -585,7 +610,7 @@ def check_html(files):
     nothing on any slide reaches below the footer rule or past the side margins; and the colour
     code the page applies to KaTeX's structure reads every expression exactly as mathimg reads
     the mathtext layout for the pptx — [base]^{exponent}, compared string for string."""
-    findings = []; n = 0; nex = 0
+    findings = []; n = 0; nex = 0; ncon = 0
     decks = [f for f in files if f.endswith(".html")]
     if not decks:
         return ["htmlcheck: examined no HTML decks — a check that examined nothing cannot be clean"]
@@ -598,6 +623,11 @@ def check_html(files):
             base = os.path.basename(f); n += 1
             pg.goto("file://" + f); pg.wait_for_timeout(400)
             r = pg.evaluate(HTML_PROBE)
+            c = pg.evaluate(CONSOLE_PROBE)
+            if c:
+                ncon += 1
+                for prob in c["problems"]:
+                    findings.append(f"htmlcheck: console — {prob} — {base}")
             if r["errors"]:
                 findings.append(f"htmlcheck: {r['errors']} expression(s) KaTeX could not typeset — {base}")
             for sl in r["slides"]:
@@ -619,7 +649,9 @@ def check_html(files):
                 if _norm(want) != _norm(e["read"]):
                     findings.append(f"htmlcheck: colour reading differs — page {_norm(e['read'])!r} vs mathtext {_norm(want)!r} — {base}")
         b.close()
-    print(f"htmlcheck: {n} HTML decks opened, {nex} coloured expressions compared, {len(findings)} findings")
+    if ncon == 0:
+        findings.append("htmlcheck: no unit console found — the unit deck should carry window.UNIT")
+    print(f"htmlcheck: {n} HTML decks opened ({ncon} console), {nex} coloured expressions compared, {len(findings)} findings")
     return findings
 
 

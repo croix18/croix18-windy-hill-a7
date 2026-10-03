@@ -152,12 +152,17 @@ class Deck:
     def slide_ref(self, i):
         return self.p.slides[i]
 
-    def start_lesson(self, lesson_label, title, footer):
+    def start_lesson(self, lesson_label, title, footer, code=None):
         """Switch the running title and footer to the next lesson and restart its slide numbers,
         so a lesson inside the unit deck is numbered exactly as its own deck and its Teacher
         Edition number it."""
         self.lesson_label, self.title, self.footer = lesson_label, title, footer
         self._n = 0
+
+    def tag(self, **kw):
+        """Metadata on the current slide (board kind, choices, benchmark) — the HTML console reads
+        it; a PowerPoint slide has nowhere to keep it, so this is a no-op here."""
+        return None
 
     def unit_cover(self, title, lines):
         """The unit deck's first slide: eyebrow, title, double rule, a few centred lines."""

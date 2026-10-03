@@ -498,14 +498,14 @@ def build_unit_deck(lessons, rows, U, outdir):
         starts = []
         for L in lessons:
             starts.append(D.count())                  # the lesson's title slide, 0-based
-            D.start_lesson(_label(L), L["title"], f"{COURSE} · Unit {L['unit']} · {_label(L)} — {L['title']}")
+            D.start_lesson(_label(L), L["title"], f"{COURSE} · Unit {L['unit']} · {_label(L)} — {L['title']}", code=L["code"])
             _fill_deck(D, L)
         y = 1.95
         for (label, title), i in zip(rows, starts):
             D.link_row(contents, y, (label, title), f"slide {i + 1}", D.slide_ref(i))
             y += 0.46
         path = os.path.join(outdir, f"A7 {unit}  Unit Slides.{ext}")
-        D.save(path, sidecar=False)
+        D.save(path, sidecar=False, **({"console": True} if ext == "html" else {}))
         paths.append(path)
     return paths[0]
 
@@ -587,10 +587,13 @@ def _fill_deck(D, L):
         last = qi == 8
         title = f"Whiteboards   ·   Question {qi + 1} of 9"
         subq = "Take your time. Boards up when you have written it." if last else "Boards up on three."
+        meta = _board_meta(L, qi, q)
         D.section(title, subq, 0, q["note"], "wb")
+        D.tag(wb=dict(meta, reveal=False))
         D.cursor = 2.4
         _wb_body(D, q, reveal=False)
         D.section(title, "Answer.", 0, q.get("note_a", "Reveal. Scan the back row first; question the blank boards before the wrong ones."), "wb")
+        D.tag(wb=dict(meta, reveal=True))
         D.cursor = 2.3
         _wb_body(D, q, reveal=True)
     # ---- independent set (ruling 21), then IXL
@@ -600,6 +603,19 @@ def _fill_deck(D, L):
 
 IXL_MIN = 5
 INDEP_MIN = 6            # ruling 21: six questions, six minutes, after the boards
+
+
+def _board_meta(L, qi, q):
+    """What the console needs to run a board: its number, kind, the letters and the keyed one(s),
+    the spec's error key per wrong option (the misconception each tally counts), the benchmark."""
+    kind = q.get("kind", "free")
+    meta = {"i": qi + 1, "kind": kind, "benchmark": L["benchmark"].split("·")[0].strip(), "lesson": L["code"]}
+    if kind == "mc":
+        letters = [chr(65 + k) for k in range(len(q["choices"]))]
+        c = q["correct"]
+        key = "".join(letters[k] for k in (c if isinstance(c, (list, tuple)) else [c]))
+        meta.update(letters=letters, key=key, errors={k: v.split("[")[0].strip() for k, v in q.get("errors", {}).items()})
+    return meta
 
 
 def _wb_body(D, q, reveal):
