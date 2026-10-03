@@ -214,7 +214,16 @@ questions[] {q, a, work}` with `$…$` math, five tiers per category, easiest fi
 Every A7 bank item already carries a `check`, so a generator here can write a unit file from the
 specs — categories from the manifest's lessons, tiers from the bank's ordering — and only
 mathcheck-passing items reach the game. Agreed with Croix 3 Oct: possible, wanted later, not now.
-His other tool "Cadence" is separate and out of scope for this repository.
+His other tools: **Cadence** (the item engine, `croix18/Cadence`), **Deckhand** (the panel's classroom
+OS, `croix18/Deckhand`) and **Tally** (`croix18/Tally`, his command hub for grades: IXL Score Grids and
+Focus gradebooks → one grade per unit). Tally is the ecosystem's source of "where are we": it keeps the
+unit each course is working in at `localStorage["tally.v1"].settings.currentUnit` as `{acc: N, on: N}`
+(set by the "Working in" selector on the class bar; sections are keyed `period-N` with `prep` acc|on).
+Tally's store holds real grades, so no other tool reads `tally.v1`; the agreed design (3 Oct) is that
+Tally publishes a small name-free handoff key on save — current unit per course and, later, class-level
+counts per benchmark — and the lesson deck, Cadence, Geopardy and Deckhand read only that, falling back
+to the master sheet's plan when Tally has not been opened on that device. All of this is planned, not
+built.
 
 ## 6. The final report to Croix
 
