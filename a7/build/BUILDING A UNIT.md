@@ -307,6 +307,13 @@ Math Nation Unit 5), IXL/Focus import for the master sheet, rulings 16/17/23/24 
 **Assumptions that need Croix's word** (also in Windmill's HANDOFF): periods 1 and 3 accelerated,
 2/4/5 on-level, 6 planning; the holidays in both calendars are unverified against the district PDF.
 
+**4 Oct, early.** M7 got the HTML decks and the console (its own fork of `htmlkit.py`/`consolekit.py`;
+this repository's copies are the masters — change here first, then port). Two fixes came back from
+that port: `rich()` treats `\$` as a literal dollar sign, and `choices()` gives long options the full
+width with the type stepping down. M7's `htmlcheck` also found a PowerPoint defect its suite could not
+see (an option wrapping over the one below); A7's `overlap` check guards that here. If the session
+ends: everything is pushed; the builds are regenerable with `build_all.py u3 --install` / `u4`.
+
 **Tokens.** Four PATs were pasted into the 3 Oct chat; all are to be rotated. `.github-token` here
 holds the A7 token; Windmill's checkout holds the Windmill token (it reaches every repo).
 

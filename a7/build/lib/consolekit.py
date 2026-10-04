@@ -287,7 +287,7 @@ JS = r"""
   function planLesson(){if(!room||!S)return null;const p=room.plan(S,todayISO(),course);return p;}
   function paintToday(){const now=new Date();$('tDate').textContent=now.toLocaleDateString([],{weekday:'long',month:'long',day:'numeric'});
     const di=dayInfo(now);const b=period?block(now,period):null;const pc=period?periodCourse(period):null;
-    $('tPeriod').innerHTML=period?`<b>${['','1st','2nd','3rd','4th','5th','6th','7th'][period]} period</b>${b?` · ${b.start}–${b.end}`:''}${pc&&pc!==course?` · <span style="color:#ff8a7a">that period is ${pc==='on'?'on-level':'accelerated'} — this is the Unit ${U.unit} accelerated deck</span>`:''}`:(di?'No period right now — pick one below.':'Not a school day on the plan — pick a period if you are teaching anyway.');
+    $('tPeriod').innerHTML=period?`<b>${['','1st','2nd','3rd','4th','5th','6th','7th'][period]} period</b>${b?` · ${b.start}–${b.end}`:''}${pc&&pc!==course?` · <span style="color:#ff8a7a">that period is ${pc==='on'?'on-level':'accelerated'} — this is the Unit ${U.unit} ${U.course==='on'?'on-level':'accelerated'} deck</span>`:''}`:(di?'No period right now — pick one below.':'Not a school day on the plan — pick a period if you are teaching anyway.');
     const p=planLesson();let planTxt='Plan: nothing for today';let planL=null;
     if(p){if(p.kind==='holiday')planTxt='Plan: '+p.title;else{planL=p.code?lessonByCode(p.code):null;planTxt=`Plan: <b>${p.code||p.kind}</b> ${p.title||''}${planL?'':(p.code?' — in another unit\'s deck':'')}`;}}
     $('tPlan').innerHTML=planTxt+(di?` · ${di.week}${di.wednesday?' · Wednesday (43 min)':''}`:'');

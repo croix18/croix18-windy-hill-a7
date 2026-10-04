@@ -40,12 +40,14 @@ def rich(text, size=None):
     """Plain spec text → HTML: $…$ becomes a KaTeX span (display style, so fractions stay
     full-size), unicode superscripts become <sup>, **…** becomes bold."""
     out = []
+    text = text.replace("\\$", "\ue000")                       # \$ = a literal dollar sign (money), never math
     for part in re.split(r"(\$[^$]+\$)", text):
         if not part:
             continue
         if part.startswith("$") and part.endswith("$") and len(part) > 2:
-            out.append(f'<span class="k" data-tex="{esc(part[1:-1])}"></span>')
+            out.append(f'<span class="k" data-tex="{esc(part[1:-1].replace(chr(0xe000), chr(92) + "$"))}"></span>')
         else:
+            part = part.replace("\ue000", "$")
             part = re.sub(r" {3,}", lambda m: f"\x00{len(m.group(0))}\x00", part)   # wide gaps survive as spans
             # bold runs
             pieces = re.split(r"(\*\*[^*]+\*\*)", part)
@@ -173,7 +175,11 @@ class HtmlDeck:
         return 0.5
 
     def choices(self, opts, size=24, correct=None, two_col=True):
-        out = [f'<ol class="choices{" two" if (two_col and len(opts) == 4) else ""}" style="font-size:{size}pt">']
+        two = two_col and len(opts) == 4 and all(len(o) <= 30 for o in opts)     # a long option gets the full width
+        if not two:                                                             # and the type steps down (M7, 4 Oct)
+            total = sum(len(o) for o in opts)
+            size = size if total <= 150 else 22 if total <= 210 else 20 if total <= 270 else 18
+        out = [f'<ol class="choices{" two" if two else ""}" style="font-size:{size}pt">']
         for i, o in enumerate(opts):
             cls = "correct" if correct == i else ""
             out.append(f'<li class="{cls}"><span class="L">{chr(65 + i)}.</span> {rich(o)}</li>')

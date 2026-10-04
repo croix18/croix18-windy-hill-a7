@@ -621,7 +621,7 @@ def check_html(files):
         pg = b.new_page(viewport={"width": 1333, "height": 750})
         for f in decks:
             base = os.path.basename(f); n += 1
-            pg.goto("file://" + f); pg.wait_for_timeout(400)
+            pg.goto("file://" + os.path.abspath(f)); pg.wait_for_timeout(400)
             r = pg.evaluate(HTML_PROBE)
             c = pg.evaluate(CONSOLE_PROBE)
             if c:
