@@ -352,6 +352,28 @@ adapted "to a7 and the family", and chose all four parts. What that changed HERE
   folder" (19 links, all in Units 1–2); `tools/check_master_sheet.py` holds every tab to this, reads
   what the next commit will hold (not HEAD), and now runs in `tools/check.sh` and in CI. Units 1–2
   are zipped by `tools/zip_package.py`. Every old name is in `../reference/A7 Rename List 2026-10-04.csv`.
+- **4 Oct, night — the plan follows the class (ruling 35; HOUSE STYLE §13b(xvi)).** Croix: "I need
+  the plan to be fluid and adjust on the fly." **The dates of this course are not typed anywhere any
+  more**: `tools/scope_calendar.py` builds the year's sequence (PLAN) and the kit's engine
+  (`lib/flow.py`) lays it on the school days that `../reference/A7 As Run 2026-27.csv` leaves. His
+  rule when the class is behind: push everything back — flex and spiral days absorb the loss first,
+  then tests move to the next Monday or Thursday.
+  **When he says a day went to something else**: add a line to the as-run CSV (`review`, `off`, or
+  the code of the lesson the class began that day; his words in a `#` line above it) → `python3
+  tools/scope_calendar.py` (it writes the scope and sequence and the IXL due-date sheet) → read him
+  the scope document's last section → in Windmill `python3 spine/spine.py --a7 … --m7 …`, check,
+  push → here `python3 tools/vendor_windmill.py`, `python3 tools/master_sheet.py` with its
+  recalculation and check, rebuild the units being taught (`build_all.py uN --install`), push, send
+  him the consoles. Windmill's `HANDOFF.md` has the whole story and what is not done.
+  **The log today**: Friday 2 October was an extra review day; Monday 5 October is T-A1 (the deck's
+  3.T1) — two days behind, so Thursday 1 October stands as "a day off the plan" the log does not
+  explain; state tests on Thursday 8 October, Thursday 14 January and Monday 1 March take every
+  period. **What that moved**: Unit 3's test 8–9 → **15–16 October (now in Q2)**, Unit 4's 22–23 →
+  29–30 October, and so on until Unit 10; **five of the seven flex days are absorbed, two are left;
+  content still ends 30 April.** He has been told.
+  The console offers each period its next lesson, takes a day marked review or no class and says
+  when the unit's test now falls; the master sheet reads the same layout (two new day codes, `extra`
+  and `off`).
 - **Open for Croix:** the teacher's edition and lesson plan differ in format between the courses
   (profile `TE_STYLE`, `PLAN_STYLE`) — converging them is his call. Everything in "Pending" below
   still stands.

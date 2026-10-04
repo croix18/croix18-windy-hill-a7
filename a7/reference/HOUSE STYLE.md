@@ -1537,6 +1537,38 @@ the older packages, the reference documents and everything else. So:
 - A file whose own heading still says *Worksheet* is not an error: ruling 11 made the retired
   worksheets question banks, and the name says what the file is used for now.
 
+## 13b(xvi). Ruling — Croix, 4 October: the plan follows the class [both courses; M7's ruling 35]
+
+**Ruling 35 (M7's number) — the plan is a sequence, and it moves when the class does.** Croix, 4 October 2026:
+*"I would like the plans to adjust or allow for flexibility but also adjust. For example, I took
+Friday as an extra review day, so for a7 Monday, we are working on the variables as bases lesson.
+We have another random state test this week, so thatll put us behind again. I need the plan to be
+fluid and adjust on the fly."* Asked what should give when a class falls behind, he chose **push
+everything back**: lessons keep their order; flex and spiral days absorb the loss first; then tests
+move to the next Monday or Thursday and the end-of-year review shrinks; and he is to be told when a
+test crosses a quarter's end or content runs past 30 April. So:
+
+- **No date is typed.** The calendar tool builds the year's sequence — every lesson in book order
+  (ruling 23), each unit's review and two test days (ruling 27) — and the kit's engine
+  (`lib/flow.py`) lays it on the school days. Every rule that used to be a line of the tool is now
+  a flag the engine reads: a test's first day is a Monday or a Thursday and its second the next
+  calendar day; a unit does not start with fewer than three days before a break; the days that have
+  to pass are spiral days; A7's flex days give way when the class is behind.
+- **A day that went to something else is one line in the as-run log**
+  (`reference/<COURSE> As Run 2026-27.csv`): `review` (class met, nothing new), `off` (no class — a
+  state test), or the code of the lesson the class began that day. Everything after it moves. The
+  log outranks the rules: what happened, happened on its day. Days known ahead (a state test in
+  January) go in the same file.
+- **The scope and sequence, the IXL due-date sheet, Windmill's spine, the packages' dates and the
+  consoles are all written from that one layout**, and the scope document ends with what the log
+  moved. An IXL assignment is due the next day the class meets — a no-class day is not a due date.
+- **On the panel the console follows each period by itself**: it offers the period's next lesson,
+  takes a day marked "review / catch-up" or "testing / no class", and shows how far the period is
+  from the year's plan and when the unit's test now falls. What it learns stays on the panel; the
+  log is the record, and it is updated when Croix says what happened.
+- **The engine never cuts.** When the year no longer holds the sequence — content past 30 April —
+  it says so and stops there; what to merge or drop is Croix's decision.
+
 ## 13b(ii). Rulings — Croix, 6 September
 
 **Ruling 8 — a question is never split across a page, and the paper is the price.**

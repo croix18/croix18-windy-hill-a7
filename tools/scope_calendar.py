@@ -174,52 +174,117 @@ for r in PLAN:
         P2.append((r[0],"flex","Flex day — reteach from exam evidence, or absorb a lost day","","F"))
 PLAN=P2
 
-def _exam_ok(days,i):
-    """Ruling 27: day 1 is a Monday or a Thursday (so day 2 is never a Wednesday), and day 2 is
-    the very next calendar day, so the two halves never straddle a weekend or a break.
-    days[i] is exam day 1 and days[i+1] is day 2."""
-    if i+1>=len(days): return False
-    d1,d2=days[i],days[i+1]
-    return d1.weekday() in (0,3) and (d2-d1).days==1
-
-# Place the plan against the calendar, inserting a spiral day wherever the exam block will not fit.
-rows=[]; i=0; k=0
+# ---- the plan follows the class (Croix, 4 October 2026) ------------------------------------------
+# "I need the plan to be fluid and adjust on the fly." The dates are no longer typed or fixed: they
+# are what the kit's engine (a7/build/lib/flow.py — the same rules the console runs on the panel)
+# gives when it lays PLAN, in order, onto the school days that are left after the as-run log
+# (a7/reference/A7 As Run 2026-27.csv) has taken out the days that went to something else.
+# His rule for a class that is behind: push everything back — flex and spiral days absorb the loss
+# first, then the tests move to the next Monday or Thursday.
+#   Ruling 27 (exam rule): day 1 is a Monday or a Thursday (so day 2 is never a Wednesday) and day 2
+#   is the very next calendar day, so the two halves never straddle a weekend or a break; a spiral
+#   day fills whatever has to pass first.
+import importlib.util as _ilu
+_sp=_ilu.spec_from_file_location("flow",os.path.join(HERE,"..","a7","build","lib","flow.py"))
+flow=_ilu.module_from_spec(_sp); _sp.loader.exec_module(flow)
+LOG_PATH=os.path.join(HERE,"..","a7","reference","A7 As Run 2026-27.csv")
+QUARTERS={d.date(2026,10,9):"Q1",d.date(2026,12,18):"Q2",d.date(2027,3,4):"Q3",d.date(2027,5,28):"Q4"}
+CONTENT_ENDS=d.date(2027,4,30)   # new content finishes before the PM3 window opens (May 3)
 SPIRAL=("Spiral day — mixed retrieval from the unit just finished and the two before it","","S")
-while k<len(PLAN):
-    u,code,title,bm,kind=PLAN[k]
-    if kind=="X" and code.endswith("X1") and not _exam_ok(days,i):
-        rows.append((days[i],u,"spiral",SPIRAL[0],SPIRAL[1],SPIRAL[2])); i+=1; continue
-    rows.append((days[i],u,code,title,bm,kind)); i+=1; k+=1
-assert i<=len(days), (i,len(days))
-# PM3 review fills every remaining period up to Apr 30; the window opens May 3
 pm3=d.date(2027,5,3)
 cats=["NSO and probability","algebraic reasoning (expressions, equations, systems)","linear relationships, functions, data","geometric reasoning"]
-n=0
-for dt in days[i:]:
-    if dt<pm3:
-        n+=1
-        title=f"PM3 review {n}: "+(cats[n-1] if n<=4 else "mixed FAST-shaped rounds, one category per whiteboard question")
-        rows.append((dt,0,f"PM3-R{n}",title,"all","R"))
-    elif dt<=d.date(2027,5,28) and not any(r[2]=="PM3" for r in rows):
-        rows.append((dt,0,"PM3","May 3–28: PM3 window (school date TBD). Content finishes Apr 30, so the whole window is free: PM3 review before the test — mixed FAST-shaped whiteboard rounds, one reporting category per question — and the Algebra 1 bridge after it (operations with radicals, point-slope and standard form, systems by substitution)","912.NSO.1.4 · 912.AR.2.2 · 912.AR.9.1","W"))
+PM3_WINDOW="May 3–28: PM3 window (school date TBD). Content finishes Apr 30, so the whole window is free: PM3 review before the test — mixed FAST-shaped whiteboard rounds, one reporting category per question — and the Algebra 1 bridge after it (operations with radicals, point-slope and standard form, systems by substitution)"
+def _item(r):
+    u,code,title,bm,kind=r
+    it={"kind":kind,"code":code,"title":title,"unit":u,"bm":bm}
+    if kind=="X" and code.endswith("X1"): it["examIn"]=0
+    if kind=="F": it["absorb"]=True
+    return it
+FLOW={"days":[x.isoformat() for x in days],"breaks":[],
+      "rules":{"exam":{"weekdays":[0,3],"minBeforeBreak":0},
+               "filler":{"unit":"next","entry":{"kind":SPIRAL[2],"code":"spiral","title":SPIRAL[0],"bm":SPIRAL[1]}}},
+      "tail":[{"before":pm3.isoformat(),"count":True,"code":"PM3-R{n}","title":"PM3 review {n}: {t}","titles":cats,
+               "titleRest":"mixed FAST-shaped rounds, one category per whiteboard question","entry":{"kind":"R","unit":0,"bm":"all"}},
+              {"entry":{"kind":"W","code":"PM3","unit":0,"title":PM3_WINDOW,"bm":"912.NSO.1.4 · 912.AR.2.2 · 912.AR.9.1"}}],
+      "items":[_item(r) for r in PLAN],"blocked":{}}
+flow.baseline(FLOW)
+LOG=flow.read_log(LOG_PATH)
+flow.apply_log(FLOW,LOG,{"review":"Extra review day — no new lesson","off":"No class"})
+LAID=flow.lay(FLOW)
+if LAID["left"]:
+    raise SystemExit("A7 plan: the year does not hold the sequence — no day is left for "
+                     +", ".join(FLOW["items"][k]["code"] for k in LAID["left"])+". Cut or merge something in PLAN, or free a day in the log.")
+BLOCKED_KIND={flow.EXTRA:"E",flow.OFF:"O"}      # an extra review / catch-up day; no class at all
+rows=[]; n=0
+for r in LAID["rows"]:
+    e=r["entry"]; dt=d.date.fromisoformat(r["date"])
+    if r["src"]=="blocked":
+        rows.append((dt,e.get("unit") or 0,e["kind"],e["title"],"",BLOCKED_KIND[e["kind"]]))
+    elif e["code"]=="PM3":
+        if not any(q[2]=="PM3" for q in rows): rows.append((dt,0,"PM3",e["title"],e["bm"],"W"))   # one row for the whole window
+    else:
+        rows.append((dt,e["unit"],e["code"],e["title"],e["bm"],e["kind"]))
+        if e["code"].startswith("PM3-R"): n+=1
+def _seq(i):
+    """The next row after i that the sequence owns (a day off does not interrupt a run of lessons)."""
+    j=i+1
+    while j<len(rows) and rows[j][5] in ("E","O"): j+=1
+    return j
+def run_end(i):
+    """Ruling 28: lessons in a row with the same skills are one assignment. → the last row of the run."""
+    sk=ixl(rows[i][2]); end=i
+    while sk and _seq(end)<len(rows) and ixl(rows[_seq(end)][2])==sk: end=_seq(end)
+    return end
+def due(i):
+    """The date the skills assigned on row i are due: the first day the class meets after the run."""
+    if not ixl(rows[i][2]): return None
+    nxt=[r[0] for r in rows[run_end(i)+1:] if r[5] not in ("W","O")]
+    return nxt[0] if nxt else None
+def report():
+    """What the log moved, in words (the end of the scope document, and stderr)."""
+    if not LOG: return []
+    ch=flow.changes(FLOW,LAID); out=["","## The plan follows the class","",
+        "The dates above are laid out from the sequence of lessons, the school calendar and the as-run log "
+        "(`A7 As Run 2026-27.csv`): a lost day is one line in the log, and everything after it moves. Rule (Croix, 4 October 2026): "
+        "push everything back — flex and spiral days absorb the loss first, then tests move to the next Monday or Thursday.",""]
+    out.append("**The log:**"); out.append("")
+    said={e["date"]:(f"the class began {e['what']}" if e["what"] not in ("review","off") else FLOW["blocked"][e["date"]]["title"]) for e in LOG}
+    for x,bl in FLOW["blocked"].items():
+        if bl.get("unrecorded"): said[x]="a day off the plan that the log does not name (the class was further behind than the log explains)"
+    for x in sorted(said): out.append(f"- {d.date.fromisoformat(x).strftime('%a %b %d %Y')}: {said[x]}")
+    out+=["","**What moved:**",""]
+    f=lambda s: d.date.fromisoformat(s).strftime('%a %b %d')
+    for it,base,now,by in ch["moved"]:
+        if it["kind"]=="X" and it["code"].endswith("X1"):
+            q0=next(q for e,q in sorted(QUARTERS.items()) if d.date.fromisoformat(base)<=e); q1=next(q for e,q in sorted(QUARTERS.items()) if d.date.fromisoformat(now)<=e)
+            out.append(f"- {it['title'].replace(', day 1','')}: {f(base)} → **{f(now)}** ({by:+d} school days)"+(f" — **now in {q1}, was in {q0}**" if q0!=q1 else ""))
+    gone=[it for it in FLOW["items"] if it.get("gone")]
+    if gone: out.append("- covered on a day the log does not name: "+", ".join(it["code"] for it in gone))
+    flex=[it for it in FLOW["items"] if it["kind"]=="F"]
+    out.append(f"- flex days absorbed: {len(ch['dropped'])} of {len(flex)}"+(" (after Unit "+", ".join(str(it['unit']) for it in ch['dropped'])+")" if ch['dropped'] else "")+f"; {len(flex)-len(ch['dropped'])} left to absorb later losses")
+    last=max((r[0] for r in rows if r[5] in ("L","T","X")),default=None)
+    if last:
+        late=last>CONTENT_ENDS
+        out.append(f"- the last day of content and tests: {last.strftime('%a %b %d')}"+(f" — **{sum(1 for x in days if CONTENT_ENDS<x<=last)} school days past Apr 30, inside the PM3 window**" if late else f" (content must end by Apr 30); PM3 review days before the window: {n}"))
+    return out
 if __name__=="__main__":
     import sys
-    print(f"| Date | Day | Unit | Lesson | What is taught | Benchmark | IXL skills — all required, code | Due |")
-    print("|---|---|---|---|---|---|---|---|")
+    TABLE=["| Date | Day | Unit | Lesson | What is taught | Benchmark | IXL skills — all required, code | Due |",
+           "|---|---|---|---|---|---|---|---|"]
     for i,(dt,u,code,title,bm,kind) in enumerate(rows):
         wd=dt.strftime("%a")
         flag=" (43 min)" if wd=="Wed" else ""
-        mark={"T":"**thread** ","X":"**exam** ","R":"**review** ","F":"*flex* ","S":"*spiral* ","W":""}.get(kind,"")
+        mark={"T":"**thread** ","X":"**exam** ","R":"**review** ","F":"*flex* ","S":"*spiral* ","W":"","E":"*extra* ","O":"*off* "}.get(kind,"")
         sk=ixl(code)
         # ruling 28: lessons in a row with the same skills are one assignment, due after the last
-        # of them (the same run rule as the due-date sheet below, so the two never disagree)
-        end=i
-        while sk and end+1<len(rows) and ixl(rows[end+1][2])==sk:
-            end+=1
-        nxt=[r[0] for r in rows[end+1:] if r[5] not in ("W",)]
-        due=nxt[0].strftime('%b %d') if (sk and nxt) else ""
+        # of them (run_end and due above — the due-date sheet below and the spine use the same two)
+        dd=due(i).strftime('%b %d') if due(i) else ""
         M="; ".join(f"{n} — {c}" for n,c in sk)
-        print(f"| {dt.strftime('%b %d')} | {wd}{flag} | {u if u else ''} | {code} | {mark}{title} | {bm} | {M} | {due} |")
+        TABLE.append(f"| {dt.strftime('%b %d')} | {wd}{flag} | {u if u else ''} | {code} | {mark}{title} | {bm} | {M} | {dd} |")
+    TABLE+=report()
+    print("\n".join(TABLE))
+    with open(os.path.join(HERE,"..","a7","reference","A7 Scope and Sequence 2026-27.md"),"w",encoding="utf-8") as f:
+        f.write("\n".join(TABLE)+"\n")
     # student-facing due-date sheet (ruling 28)
     with open(os.path.join(HERE,"..","a7","reference","A7 IXL Due Dates 2026-27.md"),"w") as f:
         f.write(f"# A7 — IXL assignments and due dates, 2026–27\n\n"
@@ -236,15 +301,14 @@ if __name__=="__main__":
         while j<len(teach):
             i0,r0=teach[j]; skills=ixl(r0[2])
             k2=j
-            while k2+1<len(teach) and ixl(teach[k2+1][1][2])==skills and teach[k2+1][0]==teach[k2][0]+1:
+            while k2+1<len(teach) and ixl(teach[k2+1][1][2])==skills and teach[k2+1][0]==_seq(teach[k2][0]):
                 k2+=1
             i1,r1=teach[k2]
-            nxt=[q[0] for q in rows[i1+1:] if q[5] not in ("W",)]
-            due=nxt[0].strftime('%a %b %d') if nxt else ""
+            due_=due(i0).strftime('%a %b %d') if due(i0) else ""
             lab=f"{r0[2]} {r0[3]}" if k2==j else f"{r0[2]}–{r1[2]} ({k2-j+1} lessons) {r0[3]}"
             when=r0[0].strftime('%a %b %d') if k2==j else f"{r0[0].strftime('%a %b %d')}"
             S="; ".join(f"{n} ({c})" for n,c in skills)
-            f.write(f"| {when} | {lab} | {S} | {due} |\n")
+            f.write(f"| {when} | {lab} | {S} | {due_} |\n")
             j=k2+1
     print(f"\nPlanned periods: {len(rows)} of {len(days)} available Sep 23–May 28; PM3 review days: {n}", file=sys.stderr)
     for dt,u,code,title,bm,kind in rows:

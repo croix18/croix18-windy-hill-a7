@@ -14,11 +14,12 @@ git check-ignore -q .github-token || fail ".github-token is not git-ignored"
 echo "== the build kit against its manifest, and every gate over every unit's specs"
 python3 a7/build/gates.py
 
-echo "== the IXL due-date sheet regenerates to what is committed"
-cp "a7/reference/A7 IXL Due Dates 2026-27.md" /tmp/a7_ixl.$$
-python3 tools/scope_calendar.py >/dev/null 2>&1
+echo "== the scope and the IXL due-date sheet regenerate to what is committed (the sequence, the calendar and the as-run log)"
+cp "a7/reference/A7 IXL Due Dates 2026-27.md" /tmp/a7_ixl.$$ ; cp "a7/reference/A7 Scope and Sequence 2026-27.md" /tmp/a7_scope.$$
+python3 tools/scope_calendar.py >/dev/null 2>/tmp/a7_scope_err.$$ || { cat /tmp/a7_scope_err.$$; fail "tools/scope_calendar.py does not run"; }
 cmp -s /tmp/a7_ixl.$$ "a7/reference/A7 IXL Due Dates 2026-27.md" || fail "tools/scope_calendar.py no longer writes the committed IXL due-date sheet"
-rm -f /tmp/a7_ixl.$$
+cmp -s /tmp/a7_scope.$$ "a7/reference/A7 Scope and Sequence 2026-27.md" || fail "tools/scope_calendar.py no longer writes the committed scope and sequence"
+rm -f /tmp/a7_ixl.$$ /tmp/a7_scope.$$ /tmp/a7_scope_err.$$
 
 echo "== every unit with specs has an installed package"
 for u in a7/build/u[0-9]*; do

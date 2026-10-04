@@ -1,0 +1,11 @@
+date,what,note
+# The as-run log: what the class actually did when it was not the plan. tools/scope_calendar.py lays the year from it.
+# what = review (extra review or catch-up day: class met; nothing new) | off (no class: a state test; an assembly) | a lesson's code (the class BEGAN that lesson on that date).
+# The note is what the day is called on the calendar. Add a line; run tools/scope_calendar.py; everything after the date moves.
+# Croix 4 Oct 2026: "I took Friday as an extra review day so for a7 Monday we are working on the variables as bases lesson." Asked which lesson: 3.T1 (the plan's T-A1).
+2026-10-02,review,Extra review day
+2026-10-05,T-A1,
+# Croix 4 Oct 2026: state tests on "Thurs the 8th. Then another on Jan 14. And another on Mar 1." Every period; no lesson.
+2026-10-08,off,State test — no class
+2027-01-14,off,State test — no class
+2027-03-01,off,State test — no class

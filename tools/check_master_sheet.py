@@ -134,7 +134,7 @@ for i, (cells, c) in enumerate(zip(rows, cal), 2):
         if u in (3, 4):
             w1, w2 = (" - Test.pdf", " - Test - Key.pdf") if exam else (" - Review.pdf", " - Review - Key.pdf")
             if not (t1 and urllib.parse.unquote(t1.target).endswith(w1)) or not (t2 and urllib.parse.unquote(t2.target).endswith(w2)): bad(f"r{i} {code} paper/key links")
-    lesson_like = not exam and code not in ("spiral", "flex") and not code.startswith("PM")
+    lesson_like = not exam and code not in ("spiral", "flex", "extra", "off") and not code.startswith("PM")
     if u in (3, 4) and lesson_like:
         built_rows += 1
         missing = [h for h in hdr[5:16] if not cells[H[h]].hyperlink]

@@ -32,7 +32,9 @@ not happen.
                      here (KIT.sha256). The on-level course is built by the same kit.
                      START WITH a7/build/BUILDING A UNIT.md — the whole procedure.
     tools/           setup_env.sh (fresh session), push.sh, check.sh (run before every push
-                     and by CI), vendor_windmill.py, the scope calendar, PDF helpers,
+                     and by CI), vendor_windmill.py, scope_calendar.py (the year's sequence, laid by
+                     the kit's engine on the days a7/reference/A7 As Run 2026-27.csv leaves —
+                     A LOST DAY IS ONE LINE IN THAT FILE; ruling 35, 4 Oct 2026), PDF helpers,
                      master_sheet.py and its check, zip_package.py (zips for Units 1-2;
                      a built unit is zipped by its install), legacy/ (the 4 Oct renaming)
 

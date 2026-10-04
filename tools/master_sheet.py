@@ -177,6 +177,9 @@ def stem_of(code, unit):
     return re.split(r"[+–]", code)[0]
 
 
+NO_LESSON = ("spiral", "flex", "extra", "off")     # days with no lesson of their own; extra and off come from the as-run log
+
+
 def is_exam(code):
     return bool(re.fullmatch(r"[\d/]+\.X\d", code))
 
@@ -256,7 +259,7 @@ def row_links(row):
     elif code == "spiral":
         pairs = {"Slides (PDF)": ("Unit Review", unit_doc(U, "Review", "Review")),
                  "Bank key": ("Review key", unit_doc(U, "Review", "Review - Key"))}
-    elif code == "flex" or code.startswith("PM"):
+    elif code in ("flex", "extra", "off") or code.startswith("PM"):       # extra, off: days the as-run log took (4 Oct 2026)
         pairs = {}
     else:
         s = stem_of(code, U)
@@ -382,8 +385,8 @@ def build(out):
         code, U = row["code"], row["unit"]
         links = row_links(row); links_by_row.append(links)
         exam = is_exam(code)
-        fill = EXAM_FILL if exam else GREY_FILL if code in ("spiral", "flex") or code.startswith("PM") else UNIT_FILLS[(U or 0) % 2]
-        L = specs.get(stem_of(code, U)) if not exam and code not in ("spiral", "flex") and not code.startswith("PM") else None
+        fill = EXAM_FILL if exam else GREY_FILL if code in NO_LESSON or code.startswith("PM") else UNIT_FILLS[(U or 0) % 2]
+        L = specs.get(stem_of(code, U)) if not exam and code not in NO_LESSON and not code.startswith("PM") else None
         put(ws, r, C["Date"], row["date"], fill=fill, fmt="ddd d mmm yyyy")
         put(ws, r, C["Day"], row["day"], fill=fill)
         put(ws, r, C["Unit"], U, fill=fill, align="center")
@@ -649,8 +652,8 @@ def build(out):
                         x = by_date[day]
                         label = x["taught"] if not x["code"].startswith("PM3") else "PM3 window"
                         cell.value = f"{day.day}   {x['code']}\n{label}"
-                        cell.fill = EXAM_FILL if is_exam(x["code"]) else GREY_FILL if x["code"] in ("spiral", "flex") or x["code"].startswith("PM") else PatternFill(fill_type=None)
-                        if x["code"] not in ("flex",) and not x["code"].startswith("PM") and not is_exam(x["code"]) and x["code"] != "spiral":
+                        cell.fill = EXAM_FILL if is_exam(x["code"]) else GREY_FILL if x["code"] in NO_LESSON or x["code"].startswith("PM") else PatternFill(fill_type=None)
+                        if x["code"] not in NO_LESSON and not x["code"].startswith("PM") and not is_exam(x["code"]):
                             cell.fill = UNIT_FILLS[(x["unit"] or 0) % 2]
                     elif day < START:
                         cell.value = f"{day.day}\nUnits 1–2"; cell.fill = GREY_FILL; cell.font = DIM
