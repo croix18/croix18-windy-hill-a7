@@ -948,7 +948,7 @@ def build(out):
     wa = wb.create_sheet("About")
     links_note = ("Links open Google Drive, and they are live: each one looks the document's address up, in this file's hidden Drive tab, at the moment you open the file. "
                   "A script in your own Google account refills that tab every hour from what is in your Drive right now, so a document that is replaced, moved or rebuilt is followed "
-                  "by itself — nobody remakes this sheet for that. If you edit a document, save your copy under the same file name in the folder Windy Hill > My versions: "
+                  "by itself — nobody remakes this sheet for that. If you edit a document, save your copy under the same file name in the folder My versions (inside your Windy Hill Master Folder): "
                   "the link then opens yours. Anything of your own that you name for a lesson (\"A7 3.01 …\") turns up under \"Everything for this lesson\".")
     search_note = ("Where your Drive does not hold a document — or before the script has ever run — its link is a search for the file's exact name instead: Drive opens showing that one file, "
                    "and a tap opens it. \"No results\" means the file is not in your Drive yet.")
@@ -971,8 +971,8 @@ def build(out):
     ] + ([
         (links_note, BODY),
         (search_note, BODY),
-        ("If Drive opens in the wrong Google account, switch to the one that holds the Windy Hill folder (the round picture, top right) and tap the link again.", BODY),
-        ("A copy of this file that is still an Excel file (.xlsx) has an empty Drive tab, so all of its links are searches. The live copy is the Google Sheet of the same name that the script makes in your Windy Hill folder (the Status tab of the Windy Hill Drive Index links to it).", BODY),
+        ("If Drive opens in the wrong Google account, switch to one the Windy Hill Master Folder is shared with (the round picture, top right) and tap the link again.", BODY),
+        ("A copy of this file that is still an Excel file (.xlsx) has an empty Drive tab, so all of its links are searches. The live copy is the Google Sheet of the same name that the script makes in your Windy Hill Master Folder (the Status tab of the Windy Hill Drive Index links to it).", BODY),
     ] if LINKS == "drive" else [
         ("Links open the file on GitHub. A PDF opens right in the browser; a PowerPoint file shows a download button instead. If GitHub asks you to sign in, use your croix18 account.", BODY),
         ("A link that reads \"in folder\" opens the lesson's folder, not the file: the file's own address is longer than a spreadsheet link may be (255 characters). The file is in that folder under the lesson's number and what it is.", BODY),
