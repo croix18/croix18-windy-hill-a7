@@ -257,6 +257,14 @@ files live in `assets/` with the script that regenerates them (`assets/make_asse
    `python3 ../../tools/master_sheet.py`, then the xlsx skill's `recalc.py` on
    `../reference/A7 Master Sheet 2026-27.xlsx` (0 errors), then
    `python3 ../../tools/check_master_sheet.py` (0 problems). Push, and send Croix the new file.
+   **Its links open Google Drive, not GitHub (4 Oct 2026 — GitHub is blocked at school):** each is
+   a Drive search for the file's exact title, which finds the file wherever it sits in his Drive
+   and survives a re-upload (Drive's own addresses are ids no session can see). So the new unit's
+   folder has to be in his Drive, unzipped, for its links to find anything — say so when the unit
+   is sent. `--links github` writes the repository's links; the check reads either, requires every
+   search to find exactly one thing among the packages, and refuses a mix. Not tested against real
+   Drive from a session: `windy-hill-m7` `NOTES.md` (top section) has the whole story and what
+   would make the links one tap.
 
 ## 5a. Geopardy (the review game, formerly Boards Up) — planned, not built (3 Oct 2026)
 

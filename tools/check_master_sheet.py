@@ -27,32 +27,74 @@ def bad(*a): P.append(" ".join(str(x) for x in a))
 tracked = {t for t in subprocess.run(["git", "-C", ROOT, "ls-files", "-z", "-c", "-o", "--exclude-standard"],
                                      capture_output=True, text=True).stdout.split("\0")
            if t and os.path.exists(os.path.join(ROOT, t))}
-def target(url):
-    if not url.startswith(BASE): bad("foreign link", url); return None, None
+URL_MAX = 255
+DRIVE = "https://drive.google.com/drive/search?q="
+# Everything Drive will hold once the packages are uploaded: every file the commit keeps under
+# a7/packages, and every folder above one.
+PKG_FILES = sorted(t for t in tracked if t.startswith("a7/packages/"))
+PKG_DIRS = sorted({"/".join(t.split("/")[:k]) for t in PKG_FILES for k in range(3, t.count("/") + 1)})
+def words(s): return re.findall(r"[a-z0-9]+", s.lower())
+def holds(title, phrase):
+    """Does a title hold a phrase, word for word, as Drive's title search reads it? (The last word may
+    be the start of a longer one: Drive matches a word by its beginning.)"""
+    t, ph = words(title), words(phrase)
+    return any(t[k:k + len(ph) - 1] == ph[:-1] and t[k + len(ph) - 1].startswith(ph[-1]) for k in range(len(t) - len(ph) + 1)) if ph else False
+def found(url, where):
+    """What a Drive search link finds among the packages: (is it a folder search, the paths found)."""
+    q = urllib.parse.unquote(url[len(DRIVE):])
+    phrases = re.findall(r'title:"([^"]*)"', q); folder = q.endswith(" type:folder")
+    if len(phrases) != 1 or f'title:"{phrases[0]}"' + (" type:folder" if folder else "") != q: bad(f"{where}: a Drive search this check cannot read:", q); return folder, []
+    return folder, [t for t in (PKG_DIRS if folder else PKG_FILES) if holds(t.rsplit("/", 1)[-1], phrases[0])]
+MODE = set()                                # 'drive' or 'github': one workbook, one kind of link
+def blob_url(path): return BASE + "blob/main/" + urllib.parse.quote(path, safe="/,()")
+def target(url, where=""):
+    """(kind, path): 'blob' a document, 'tree' a folder."""
+    if url.startswith(DRIVE):
+        MODE.add("drive")
+        folder, hits = found(url, where)
+        if len(hits) != 1: bad(f"{where}: the Drive search finds {len(hits)} among the packages:", urllib.parse.unquote(url[len(DRIVE):]), hits[:2]); return None, None
+        return ("tree" if folder else "blob"), hits[0]
+    if not url.startswith(BASE): bad(f"{where}: foreign link", url); return None, None
+    MODE.add("github")
     kind, rest = url[len(BASE):].split("/main/", 1); path = urllib.parse.unquote(rest)
     if kind == "blob" and path not in tracked: bad("blob not tracked:", path)
     if kind == "tree" and not any(t.startswith(path + "/") for t in tracked): bad("tree empty:", path)
     return kind, path
-URL_MAX = 255
-def blob_url(path): return BASE + "blob/main/" + urllib.parse.quote(path, safe="/,()")
 def every_link(cell, where):
-    """Any link, on any tab: it reaches something the commit holds, it is not longer than URL_MAX
-    (a longer one is cut off when the sheet is saved), and a cell that reads "in folder" is the
-    only kind that may open a folder in place of a document."""
+    """Any link, on any tab: it reaches something the commit holds (in Drive: the search for it finds
+    exactly that), it is not longer than URL_MAX (a longer one is cut off when the sheet is saved),
+    and only a cell that reads "in folder" or "folder" may open a folder in place of a document."""
     url = cell.hyperlink.target
     if len(url) > URL_MAX: bad(f"{where}: a link of {len(url)} characters")
-    kind, path = target(url)
-    if kind == "blob" and cell.value == "in folder": bad(f"{where}: says 'in folder' but opens a file")
+    kind, path = target(url, where)
+    if kind == "blob" and cell.value in ("in folder", "folder"): bad(f"{where}: says '{cell.value}' but opens a file")
+    if kind == "tree" and cell.value not in ("in folder", "folder"): bad(f"{where}: opens a folder but reads", cell.value)
     return kind, path
+def only_name(path):
+    """Is this the only file or folder of its name among the packages (so a Drive search finds it alone)?"""
+    n = path.rsplit("/", 1)[-1]
+    return sum(1 for t in PKG_FILES + PKG_DIRS if t.rsplit("/", 1)[-1] == n) == 1
 def meant(path, start, tail, where):
-    """A lesson's link that opens its folder instead of the file: right only when the file's own
-    address would be too long. Returns the one file in that folder the link stands for."""
+    """A document's link that opens a folder instead: right only when no link reaches the file itself —
+    on GitHub because its address would be too long, in Drive because other files share its name.
+    Returns the one file in that folder the link stands for."""
     hits = [t for t in tracked if t.startswith(path + "/") and "/" not in t[len(path) + 1:]
             and t.rsplit("/", 1)[-1].startswith(start) and t.endswith(tail)
             and t.rsplit("/", 1)[-1].count(" - ") == tail.count(" - ")]
     if len(hits) != 1: bad(f"{where}: the folder holds {len(hits)} files it could mean", path); return None
-    if len(blob_url(hits[0])) <= URL_MAX: bad(f"{where}: opens the folder though the file's own link fits", hits[0])
+    if "drive" in MODE:
+        if only_name(hits[0]): bad(f"{where}: opens the folder though a search finds the file alone", hits[0])
+    elif len(blob_url(hits[0])) <= URL_MAX: bad(f"{where}: opens the folder though the file's own link fits", hits[0])
     return hits[0]
+def folder_ok(cell, want, where):
+    """A folder's link: the folder itself — or, in Drive, where its name is one every unit has, the
+    unit's folder that holds it, and the cell then reads "in folder"."""
+    kind, path = every_link(cell, where)
+    if kind is None: return
+    if "drive" in MODE and not only_name(want):
+        unit = "/".join(want.split("/")[:3])
+        if (kind, path, cell.value) != ("tree", unit, "in folder"): bad(f"{where}: should open the unit's folder and read 'in folder'", path, cell.value)
+    elif (kind, path, cell.value) != ("tree", want, "folder"): bad(f"{where}: should open", want, "and read 'folder'; opens", path, "reads", cell.value)
 MON = {m: i for i, m in enumerate("Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec".split(), 1)}
 def d(s):
     m, day = s.split()[-2:]; return datetime.date(2026 if MON[m] >= 7 else 2027, MON[m], int(day))
@@ -89,6 +131,7 @@ rows = list(ws.iter_rows(min_row=2))
 if len(rows) != len(cal): bad("scope rows", len(rows), "calendar", len(cal))
 prev = None; nlinks = 0; built_rows = 0
 FILE = {}                                  # (row, column) -> the document a lesson's link stands for
+OPENS = {}                                 # (row, column) -> what any link on the row opens
 for i, (cells, c) in enumerate(zip(rows, cal), 2):
     v = {h: cells[j].value for h, j in H.items()}
     dt = D(v["Date"])
@@ -109,6 +152,10 @@ for i, (cells, c) in enumerate(zip(rows, cal), 2):
         if cell.hyperlink:
             nlinks += 1
             kind, path = every_link(cell, f"r{i} {code} {h}")
+            if kind is None: continue
+            OPENS[(i, h)] = path
+            if h == "Unit folder":
+                if kind != "tree" or not path.startswith(f"a7/packages/A7 Unit {u} - ") or path.count("/") != 2 or cell.value != "folder": bad(f"r{i} {code}: not its unit's folder", path, cell.value)
             if h != "Unit folder" and not exam and code != "spiral":
                 s = stem(code, u)
                 # the by-lesson layout (4 Oct 2026): "A7 <s> <Title> - <kind>[ - Key].<ext>"; the title is in
@@ -130,10 +177,11 @@ for i, (cells, c) in enumerate(zip(rows, cal), 2):
                 if f"/Lessons/{s}/" not in path: bad(f"r{i} {code} {h} not in its lesson's folder", path)
                 if not path.startswith(f"a7/packages/A7 Unit {u} - "): bad(f"r{i} wrong unit folder", path)
     if exam or code == "spiral":
-        t1 = cells[H["Slides (PDF)"]].hyperlink; t2 = cells[H["Bank key"]].hyperlink
+        t1 = OPENS.get((i, "Slides (PDF)")); t2 = OPENS.get((i, "Bank key"))
         if u in (3, 4):
             w1, w2 = (" - Test.pdf", " - Test - Key.pdf") if exam else (" - Review.pdf", " - Review - Key.pdf")
-            if not (t1 and urllib.parse.unquote(t1.target).endswith(w1)) or not (t2 and urllib.parse.unquote(t2.target).endswith(w2)): bad(f"r{i} {code} paper/key links")
+            sub = "Assessment" if exam else "Review"
+            if not (t1 and t1.endswith(w1) and t1.startswith(f"a7/packages/A7 Unit {u} - ") and f"/{sub}/A7 Unit {u} " in t1) or not (t2 and t2.endswith(w2) and f"/{sub}/A7 Unit {u} " in t2): bad(f"r{i} {code} paper/key links")
     lesson_like = not exam and code not in ("spiral", "flex", "extra", "off") and not code.startswith("PM")
     if u in (3, 4) and lesson_like:
         built_rows += 1
@@ -151,10 +199,11 @@ for i, (cells, c) in enumerate(zip(rows, cal), 2):
             if std_n and norm(title) not in std_n: bad(f"r{i} MTR title not in the standards:", title)
         if not cells[H["MTRs (tap for where they show up)"]].comment or not cells[H["Closure question (board 9)"]].comment: bad(f"r{i} comment missing")
         # slide 1 names the lesson
-        pth = FILE[(i, "Slides (PDF)")]
-        head = pymupdf.open(f"{ROOT}/{pth}")[0].get_text().split("\n")[0].strip()
-        lab = L.get("label") or f"Lesson {L['lesson_no']}"
-        if head != f"GRADE 7 ACCELERATED  ·  UNIT {u}  ·  {lab.upper()}": bad(f"r{i} slide 1 reads", head)
+        pth = FILE.get((i, "Slides (PDF)"))            # None: the link is already reported
+        if pth and pth in tracked:
+            head = pymupdf.open(f"{ROOT}/{pth}")[0].get_text().split("\n")[0].strip()
+            lab = L.get("label") or f"Lesson {L['lesson_no']}"
+            if head != f"GRADE 7 ACCELERATED  ·  UNIT {u}  ·  {lab.upper()}": bad(f"r{i} slide 1 reads", head)
     if u and u >= 5 and lesson_like:
         if v["Slides (PDF)"] != "not built yet" or any(cells[H[h]].hyperlink for h in hdr[5:16]): bad(f"r{i} unbuilt row")
     # benchmark wording
@@ -352,26 +401,39 @@ for r in wu.iter_rows(min_row=2, max_row=18):
     if counts.get(u) and r[4].value != counts[u]: bad("Units periods", u, r[4].value, counts[u])
     for x in r[6:]:
         if x.hyperlink: every_link(x, f"Units {x.coordinate}")
-DECK = {2: " - Slides.pdf", 3: " - Teacher Edition.pdf", 4: " - Question Bank.pdf", 5: " - Additional Question Bank.pdf"}
+    base_u = next(("/".join(t.split("/")[:3]) for t in tracked if t.startswith(f"a7/packages/A7 Unit {u} - ")), None)
+    if base_u:                                             # the two folder columns open this unit's folders
+        if r[6].hyperlink: folder_ok(r[6], base_u, f"Units {r[6].coordinate}")
+        else: bad(f"Units, Unit {u}: no package folder link")
+        deck = f"{base_u}/All Slides" if any(t.startswith(f"{base_u}/All Slides/") for t in tracked) else f"{base_u}/Lessons"
+        if r[13].hyperlink: folder_ok(r[13], deck, f"Units {r[13].coordinate}")
+        else: bad(f"Units, Unit {u}: no slides folder link")
+DECK = {2: " - Slides.pdf", 3: " - Teacher Edition.pdf", 4: " - Question Bank.pdf", 5: " - Additional Question Bank.pdf",
+        6: " - Question Bank - Key.pdf", 7: " - Additional Question Bank - Key.pdf"}
+if [c.value for c in wb["Units 1–2 decks"][1]] != ["Unit", "Lesson", "Slides (PDF)", "Teacher Edition", "Question Bank", "Question Bank – Additional", "Bank key", "Additional key"]: bad("Units 1–2 decks header")
 ndeck = nfolder = 0
-for r in wb["Units 1–2 decks"].iter_rows(min_row=2):
+lessons12 = sorted({(int(m[1]), m[2]) for t in tracked for m in [re.match(r"a7/packages/A7 Unit ([12]) - [^/]+/Lessons/([^/]+)/", t)] if m})
+drows = [r for r in wb["Units 1–2 decks"].iter_rows(min_row=2) if r[0].value is not None]
+if [(r[0].value, r[1].value) for r in drows] != lessons12: bad("Units 1–2 decks: the rows are not the lesson folders of Units 1 and 2")
+for r in drows:
     for j, x in enumerate(r):
-        if j < 2 or not x.hyperlink: continue
+        if j < 2: continue
         where = f"Units 1–2 decks {x.coordinate}"
-        kind, path = every_link(x, where)
-        if j not in DECK:                                  # the lesson's Keys folder
-            if kind != "tree" or not path.endswith(f"/Lessons/{r[1].value}/Keys"): bad(f"{where}: not the lesson's Keys folder", path)
+        sub = "/Keys" if j >= 6 else ""
+        have = [t for t in tracked if re.match(rf"a7/packages/A7 Unit {r[0].value} - [^/]+/Lessons/{re.escape(r[1].value)}{sub}/A7 {re.escape(r[1].value)} [^/]*$", t)
+                and t.endswith(DECK[j]) and t.rsplit("/", 1)[-1].count(" - ") == DECK[j].count(" - ")]
+        if not x.hyperlink:
+            if have: bad(where, "links nothing though the package holds", have[0])
             continue
+        kind, path = every_link(x, where)
+        if kind is None: continue
         if kind == "tree":
             if x.value != "in folder": bad(f"{where}: opens a folder but reads", x.value)
             path = meant(path, f"A7 {r[1].value} ", DECK[j], where); nfolder += 1
             if path is None: continue
         ndeck += 1
-        name = path.rsplit("/", 1)[-1]
-        if not (name.startswith(f"A7 {r[1].value} ") and name.endswith(DECK[j]) and name.count(" - ") == DECK[j].count(" - ")
-                and f"/Lessons/{r[1].value}/" in path and path.startswith(f"a7/packages/A7 Unit {r[0].value} - ")):
-            bad(f"{where} ->", path)
-print(f"Units 1–2 decks: {ndeck} document links checked by number and kind; {nfolder} open the lesson's folder (the file's own link would be over {URL_MAX})")
+        if [path] != have: bad(f"{where} ->", path)
+print(f"Units 1–2 decks: {len(drows)} lessons, {ndeck} document links checked by number and kind; {nfolder} open the lesson's folder (the file's own link would be over {URL_MAX})")
 for r in wb["Unit tests"].iter_rows():
     for x in r:
         if x.hyperlink and x.hyperlink.target: every_link(x, f"Unit tests {x.coordinate}")
@@ -389,5 +451,7 @@ for s in wb:
     for row in s.iter_rows():
         for x in row:
             if isinstance(x.value, str) and re.fullmatch(r"#(REF!|VALUE!|NAME\?|N/A|DIV/0!|NUM!)", x.value): bad("error value", s.title, x.coordinate)
+if len(MODE) != 1: bad("the workbook mixes kinds of link:", sorted(MODE))
+print("links:", "Google Drive, each a search for the file's exact name" if MODE == {"drive"} else "GitHub")
 print("\n".join(P) if P else "no problems"); print(len(P), "problems")
 sys.exit(1 if P else 0)
