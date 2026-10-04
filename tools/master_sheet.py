@@ -11,8 +11,10 @@ tracker · Standards · Unit tests · Month calendar · Vocabulary · Units · U
 Reads, and never edits: the calendar table (a7/reference/A7 Scope and Sequence 2026-27.md, made by
 scope_calendar.py), the IXL due-date sheet, the Source of Truth for benchmark wording, the Math
 Nation table of contents, the lesson and unit specs in a7/build, and the package folders. Links
-open Google Drive, by a search for the file's exact name (see "links" below; `--links github`
-points them at the repository instead). Rerun after any unit is built; the file records its commit.
+open Google Drive and are live: each looks its document's address up in a hidden Drive tab that a
+script in Croix's Google account refills every hour, and falls back to a search for the file's
+exact name (see "links" below; `--links github` points them at the repository instead). Rerun
+after any unit is built; the file records its commit.
 """
 import os, re, sys, csv, glob, hashlib, datetime, subprocess, unicodedata, urllib.parse, importlib.util, contextlib, io
 from openpyxl import Workbook
@@ -186,26 +188,46 @@ def is_exam(code):
 
 
 # ---------------------------------------------------------------- links
-# Where a link goes. Croix, 4 October 2026: "Anyway to link them to each other inside of the Google drive?
-# I don't get access to GitHub at school". Google Drive has no address for a file by its folder and
-# name — only by an id Drive makes up when the file is uploaded, which nothing here can know (and
-# which changes when a rebuilt file is uploaded again). What Drive does have is a search by exact
-# title, and every document this course ships has a name no other file has. So a link is that search:
-# it opens Drive showing the one file, wherever in his Drive it sits, and it stays right when the
-# file is replaced. `--links github` writes the repository's links instead (one tap, no search, and
-# no use on the school network).
+# Where a link goes — three decisions, all Croix's, all of 4 October 2026.
+#
+# 1. "Anyway to link them to each other inside of the Google drive? I don't get access to GitHub at
+#    school." So the links open Google Drive, not the repository (`--links github` still writes
+#    those: one tap, no use on the school network).
+# 2. Drive addresses a file by an id it makes up at upload; there is no address by folder and name,
+#    and nothing here can know an id. What Drive does have is a search by exact title, and every
+#    document a course ships has a name no other file has. That search is every link's FALLBACK:
+#    it opens Drive showing the one file, wherever it sits.
+# 3. "This is the most efficient way of doing this? So if I have to change something, you have to
+#    rebuild it?" No. So the address is not written into the link at all. It is LOOKED UP, in the
+#    file, each time it is opened: a hidden tab `Drive` lists code → Drive id, a script in his own
+#    Google account rewrites that tab every hour from what is in his Drive right now (Windmill
+#    drive/ — it also copies everything published here into his Drive, and prefers his own edited
+#    copy of a document to ours), and a link is
+#        =HYPERLINK(<the Links tab's cell>, "open")
+#    where that cell is
+#        =IFERROR("https://drive.google.com/file/d/" & VLOOKUP("<code>", Drive!$A:$B, 2, FALSE) & "/view", "<the search>")
+#    A file replaced, moved, renamed back, or edited by him is followed within the hour and nobody
+#    rebuilds anything; a file not in his Drive yet opens the search. As this file is written the
+#    Drive tab is empty — every link is its search — and it fills in his Drive.
+#
+# The code: "k" + the first 12 hex digits of MD5(name). A document is filed under its file name; a
+# unit's folder under its name; what sits directly inside a unit folder also under
+# "<unit folder>/<name>" (how a START HERE or a Lessons folder, names every unit has, is told apart).
 LINKS = "drive"
-# One tap, where Drive's own address for the file is known (same day, later: "Yeah let's do that … I
-# can run scripts on my personal"). A script in his account (Windmill drive/WindyHillIndex.gs, bound
-# to the spreadsheet "Windy Hill Drive Index") lists every course document's id; a session downloads
-# that list (Windmill drive/index.py) into tools/drive_index.csv; and a document the list holds is
-# linked by its id — https://drive.google.com/file/d/<id>/view. A document it does not hold (not
-# uploaded yet when the sheet was made) keeps the search link, so nothing ever links nowhere.
-DRIVE_INDEX = os.path.join(HERE, "drive_index.csv")
+DRIVE_TAB = None   # --drive-tab <csv>: a stand-in for what the script writes, so a test can recalculate the live links
 URL_MAX = 255      # Excel's HYPERLINK() takes no longer address, and LibreOffice cuts a cell's link there on save
 IN_FOLDER = "in folder"
 DRIVE = "https://drive.google.com/drive/search?q="
+FILE_URL, FOLDER_URL = "https://drive.google.com/file/d/", "https://drive.google.com/drive/folders/"
+SCOPE = "Scope & Sequence"
 _NAMES = None
+OTHERS = []        # the links that are not on the Scope tab, in the order written: (where, text, what the Links cell holds)
+
+
+class Link(str):
+    """A link's fallback address (a plain string, so it can stand wherever a URL did) that also
+    carries the formula for the live one, when there is a code to look up."""
+    formula = None
 
 
 def names():
@@ -221,47 +243,8 @@ def names():
 
 
 def key(name):
-    """The code a name is filed under in the Drive index (Windmill drive/index.py has the rule)."""
+    """The code a name is filed under in the Drive tab (Windmill drive/index.py has the rule)."""
     return "k" + hashlib.md5(unicodedata.normalize("NFC", name).encode("utf-8")).hexdigest()[:12]
-
-
-_INDEX = None
-REFRESHED = None                               # when the index was last refreshed in his Drive
-COUNT = {"direct": 0, "search": 0}             # links written, by kind
-
-
-def index():
-    """{code: Drive id}; {} when there is no index (every link is then a search)."""
-    global _INDEX, REFRESHED
-    if _INDEX is None:
-        _INDEX = {}
-        if LINKS == "drive" and os.path.exists(DRIVE_INDEX):
-            rows = [r for r in csv.reader(open(DRIVE_INDEX, encoding="utf-8")) if r]
-            if rows[0][0] != "windy-hill-index":
-                raise SystemExit(f"{DRIVE_INDEX} is not the Windy Hill index")
-            REFRESHED = rows[0][2]
-            _INDEX = {r[0]: r[1] for r in rows[1:]}
-    return _INDEX
-
-
-def drive_id(path):
-    """The Drive id of a package file or folder, or None: by its name when no other has it, and by
-    "<unit folder>/<name>" when it sits directly in its unit's folder (a START HERE, a Lessons folder)."""
-    name, unit = os.path.basename(path), unit_folder_of(path)
-    if path == unit or names().get(name) == 1:
-        hit = index().get(key(name))
-        if hit:
-            return hit
-    if os.path.dirname(path) == unit:
-        return index().get(key(os.path.basename(unit) + "/" + name))
-    return None
-
-
-def by_id(path, folder=False):
-    i = drive_id(path)
-    if not i:
-        return None
-    return f"https://drive.google.com/drive/folders/{i}" if folder else f"https://drive.google.com/file/d/{i}/view"
 
 
 def drive(*phrases, folder=False):
@@ -277,40 +260,58 @@ def gh(path, kind="blob"):
 
 
 def unit_folder_of(path):
-    """The package folder a path is in: a7/packages/A7 Unit 3 - …."""
+    """The package folder a path is in."""
     return os.path.join(PKG, os.path.relpath(path, PKG).split(os.sep)[0])
 
 
+def own_name(path):
+    """Does the name alone say which file this is, anywhere in his Drive? A unit's folder, and any
+    document named for its course ("M7 4.06 …") that no other shares. A bare name — a lesson folder
+    "2.01", a START HERE — does not: the other course has one too."""
+    name = os.path.basename(path)
+    return path == unit_folder_of(path) or (names().get(name) == 1 and name.startswith(os.path.basename(unit_folder_of(path)).split(" ")[0] + " "))
+
+
+def filed(path):
+    """The code the Drive tab files a package file or folder under; None when no code means it alone."""
+    name, unit = os.path.basename(path), unit_folder_of(path)
+    if own_name(path):
+        return key(name)
+    if os.path.dirname(path) == unit:
+        return key(os.path.basename(unit) + "/" + name)
+    return None
+
+
+def live(path, folder=False):
+    """(does the fallback open the thing itself?, the link) for a package file or folder."""
+    name, unit = os.path.basename(path), unit_folder_of(path)
+    itself = own_name(path)
+    link = Link(drive(name, folder=folder) if itself else drive(os.path.basename(unit), folder=True))
+    if len(link) > URL_MAX:
+        raise SystemExit(f"no search of {URL_MAX} characters finds {path}")
+    k = filed(path)
+    if k:
+        link.formula = (f'=IFERROR("{FOLDER_URL}"&VLOOKUP("{k}",Drive!$A:$B,2,0),"{link}")' if folder else
+                        f'=IFERROR("{FILE_URL}"&VLOOKUP("{k}",Drive!$A:$B,2,0)&"/view","{link}")')
+    return itself or bool(k), link
+
+
 def folder_link(path):
-    """(text, url) for a folder: by its Drive id where the index has it. Otherwise by a search for its
-    name — and a folder whose name every unit has (Lessons, Keys, All Slides) is then reached through
-    its unit's folder, and the cell says so."""
+    """(text, link) for a folder. A folder whose name every unit has (Lessons, Keys, Review Day) and
+    that has no code of its own is reached through its unit's folder, and the cell says so."""
     if LINKS == "github":
         return "folder", gh(path, "tree")
-    url = by_id(path, folder=True)
-    if url:
-        return "folder", url
-    if names().get(os.path.basename(path)) == 1:
-        return "folder", drive(os.path.basename(path), folder=True)
-    unit = unit_folder_of(path)
-    return IN_FOLDER, by_id(unit, folder=True) or drive(os.path.basename(unit), folder=True)
+    direct, link = live(path, folder=True)
+    return ("folder" if direct else IN_FOLDER), link
 
 
 def doc(path, text="open"):
-    """(text, url) for a document: by its Drive id where the index has it, else by a search for its
-    name. When no link can reach the file itself — on GitHub an address longer than URL_MAX (a long unit title and a long lesson
-    title, each space three characters; a link cut off at 255 opens nothing); in Drive a name that is not the only one of its kind and no id
-    for it — the link opens the folder it is in, and the cell says so."""
+    """(text, link) for a document. When no link can reach the file itself — on GitHub an address
+    longer than URL_MAX (a link cut off at 255 opens nothing); in Drive a name that is not the only
+    one of its kind and no code for it — the link opens the folder it is in, and the cell says so."""
     if LINKS == "drive":
-        url = by_id(path)
-        if url:
-            return text, url
-        name = os.path.basename(path)
-        url = drive(name) if names().get(name) == 1 else None
-        if url and len(url) <= URL_MAX:
-            return text, url
-        unit = unit_folder_of(path)
-        return IN_FOLDER, by_id(unit, folder=True) or drive(os.path.basename(unit), folder=True)
+        direct, link = live(path)
+        return (text if direct else IN_FOLDER), link
     url = gh(path)
     if len(url) <= URL_MAX:
         return text, url
@@ -318,6 +319,12 @@ def doc(path, text="open"):
     if len(url) > URL_MAX:
         raise SystemExit(f"no link of {URL_MAX} characters reaches {path}")
     return IN_FOLDER, url
+
+
+def everything(course, stem):
+    """A search for every file in his Drive named for a lesson — ours, his edited copies, and anything
+    of his own he names "<course> <lesson> …" (Croix: "I add my own files"). Not a lookup: a search."""
+    return Link(drive(f"{course} {stem}"))
 
 
 def put_doc(ws, r, c, path, text="open"):
@@ -360,16 +367,20 @@ def unit_doc(unit, sub, tail, ext="pdf"):
 
 
 LINK_COLS = ["Slides (PDF)", "Slides (PowerPoint)", "Teacher Edition", "Lesson Plan", "Question Bank", "Bank key",
-             "Bank – Additional", "Additional key", "Independent Set", "Independent key", "Unit folder"]
+             "Bank – Additional", "Additional key", "Independent Set", "Independent key", "Unit folder", "Everything for this lesson"]
+SCOPE_FIRST_LINK = 6                           # the Scope tab's first link column (F); the Links tab's is B
 
 
 def row_links(row):
     """{column: (text, url)} for a calendar row; {} when nothing is built for it."""
     U, code = row["unit"], row["code"]
     folder = pkg_folder(U)
+    # a lesson's row also searches Drive for everything named for it — ours, his copies, his own files
+    lesson = not (is_exam(code) or code in ("spiral", "flex", "extra", "off") or code.startswith("PM"))
+    more = {"Everything for this lesson": ("search", everything("A7", stem_of(code, U)))} if LINKS == "drive" and lesson else {}
     if not folder:
-        return {}
-    out = {"Unit folder": folder_link(folder)}
+        return more
+    out = dict(more, **{"Unit folder": folder_link(folder)})
     if is_exam(code):
         pairs = {"Slides (PDF)": ("Unit Assessment", unit_doc(U, "Assessment", "Test")),
                  "Bank key": ("Assessment key", unit_doc(U, "Assessment", "Test - Key"))}
@@ -393,8 +404,8 @@ def row_links(row):
     for col, (text, p) in pairs.items():
         if p:
             out[col] = doc(p, text)
-    if len(out) == 1 and pairs:
-        return {}                              # a unit folder exists but this lesson has no documents yet
+    if len(out) == 1 + len(more) and pairs:
+        return more                            # a unit folder exists but this lesson has no documents yet
     return out
 
 
@@ -428,9 +439,16 @@ def put(ws, r, c, value, font=BODY, link=None, fill=None, wrap=False, fmt=None, 
     cell = ws.cell(row=r, column=c, value=value)
     cell.font = font
     if link:
-        cell.hyperlink = link; cell.font = LINK
-        if LINKS == "drive":                   # counted where a link is written, so the About tab's numbers are the file's
-            COUNT["search" if link.startswith(DRIVE) else "direct"] += 1
+        cell.font = LINK
+        if LINKS == "drive":                   # the cell opens whatever its Links-tab cell says right now
+            if ws.title == SCOPE:              # the Links tab mirrors the Scope tab's link columns, row for row
+                at = f"Links!${get_column_letter(c - SCOPE_FIRST_LINK + 2)}${r}"
+            else:
+                OTHERS.append((f"'{ws.title}'!{cell.coordinate}", value, link))
+                at = f"Links!${get_column_letter(len(LINK_COLS) + 5)}${len(OTHERS) + 1}"
+            cell.value = '=HYPERLINK(%s,"%s")' % (at, str(value).replace('"', '""'))
+        else:
+            cell.hyperlink = link
     if internal:
         cell.hyperlink = Hyperlink(ref=cell.coordinate, location=internal); cell.font = LINK
     if fill:
@@ -559,10 +577,7 @@ def build(out):
         wl.cell(row=r, column=1, value=row["date"]).number_format = "d mmm yyyy"
         for j, col in enumerate(LINK_COLS, 2):
             if col in links:
-                wl.cell(row=r, column=j, value=links[col][1])
-    for row in wl.iter_rows():
-        for c in row:
-            c.font = BODY
+                wl.cell(row=r, column=j, value=getattr(links[col][1], "formula", None) or str(links[col][1]))
     wl.sheet_state = "hidden"
     link_rng = lambda col: f"Links!${get_column_letter(LINK_COLS.index(col) + 2)}${first}:${get_column_letter(LINK_COLS.index(col) + 2)}${last}"
 
@@ -884,7 +899,7 @@ def build(out):
     N = len(cal)
     # helper cells, at the bottom: which plan row to show, and the last day of school. The last row
     # is the PM3 window (3-28 May): on any day in it, Today shows that row.
-    HELP = 42
+    HELP = 44
     put(t, HELP, 1, "Plan row shown", font=DIM, border=None)
     put(t, HELP, 2, f"=IF(TODAY()>$B${HELP + 1},{N}+1,MIN(COUNTIF({rng('Date')},\"<\"&TODAY())+1,{N}))", font=DIM, border=None, align="left")
     put(t, HELP + 1, 1, "Last day of school", font=DIM, border=None)
@@ -923,8 +938,7 @@ def build(out):
     r += 1
     put(t, r, 1, "This tab follows today's date: on a class day it shows that day; on a weekend or holiday, the next class day. "
                  + ("The links open the file on GitHub (sign in as croix18 if it asks)." if LINKS == "github" else
-                    "A link opens Google Drive showing the one file with that name: tap it there." if not COUNT["direct"] else
-                    "A link opens the document in Google Drive." + ("" if not COUNT["search"] else " Where your Drive did not have the file yet, it opens Drive showing the one file with that name: tap it there.")), font=DIM, border=None)
+                    "A link opens the document in Google Drive — your own edited copy if you have made one. Where your Drive does not have the file yet, it opens Drive showing the one file with that name."), font=DIM, border=None)
     t.merge_cells(start_row=r, start_column=1, end_row=r, end_column=3)
     t.cell(row=r, column=1).alignment = Alignment(wrap_text=True, vertical="top"); t.row_dimensions[r].height = 30
     t.page_setup.orientation = "portrait"; t.page_setup.fitToWidth = 1; t.page_setup.fitToHeight = 0
@@ -932,19 +946,12 @@ def build(out):
 
     # ------------------------------------------------------------ About
     wa = wb.create_sheet("About")
-    SEARCH_NOTE = ("Drive opens showing the one file with that name, and a tap opens it. \"No results\" means that file is not in your Drive yet "
-                   "(upload the unit's folder, unzipped); two results mean an older copy is still there — open the newer one and delete the other.")
-    if not COUNT["direct"]:
-        links_note = ("Links open Google Drive. Drive has no address for a file by its folder and name, so each link is a search for the file's exact name: "
-                      + SEARCH_NOTE + " It works wherever the file sits in your Drive and keeps working when a rebuilt file replaces it.")
-    else:
-        when = datetime.datetime.strptime(REFRESHED, "%Y-%m-%dT%H:%MZ")
-        links_note = (f"Links open Google Drive. {COUNT['direct']} of the {COUNT['direct'] + COUNT['search']} links in this file open the document itself, in one tap: "
-                      f"its address in your Drive was in the Windy Hill Drive Index when that was last refreshed ({when.day} {when.strftime('%B %Y')}, {when.strftime('%H:%M')} UTC). "
-                      + (f"The other {COUNT['search']} are searches for the file's exact name, because that file was not in your Drive then: " + SEARCH_NOTE
-                         + " The next copy of this sheet links it directly." if COUNT["search"] else "")
-                      + " A direct link opens the copy that was in Drive on that date: if you delete that copy and upload a rebuilt one as a new file, ask for a new copy of this sheet "
-                        "(choosing \"Replace existing file\" when Drive asks keeps the address, and the link).")
+    links_note = ("Links open Google Drive, and they are live: each one looks the document's address up, in this file's hidden Drive tab, at the moment you open the file. "
+                  "A script in your own Google account refills that tab every hour from what is in your Drive right now, so a document that is replaced, moved or rebuilt is followed "
+                  "by itself — nobody remakes this sheet for that. If you edit a document, save your copy under the same file name in the folder Windy Hill > My versions: "
+                  "the link then opens yours. Anything of your own that you name for a lesson (\"A7 3.01 …\") turns up under \"Everything for this lesson\".")
+    search_note = ("Where your Drive does not hold a document — or before the script has ever run — its link is a search for the file's exact name instead: Drive opens showing that one file, "
+                   "and a tap opens it. \"No results\" means the file is not in your Drive yet.")
     lines = [
         ("What this is", BOLD),
         ("The 2026–27 plan for Grade 7 Accelerated (course 1205050) with everything for each day in one place: one row per class day from 23 September to 30 April, then the PM3 window (3–28 May).", BODY),
@@ -963,8 +970,9 @@ def build(out):
         ("Good to know", BOLD),
     ] + ([
         (links_note, BODY),
+        (search_note, BODY),
         ("If Drive opens in the wrong Google account, switch to the one that holds the Windy Hill folder (the round picture, top right) and tap the link again.", BODY),
-        ("A link that reads \"in folder\" opens the unit's folder, not the file: every unit has a file or folder of that name (START HERE, Lessons, All Slides), and without its address in the index a search by name could not tell them apart.", BODY),
+        ("A copy of this file that is still an Excel file (.xlsx) has an empty Drive tab, so all of its links are searches. The live copy is the Google Sheet of the same name that the script makes in your Windy Hill folder (the Status tab of the Windy Hill Drive Index links to it).", BODY),
     ] if LINKS == "drive" else [
         ("Links open the file on GitHub. A PDF opens right in the browser; a PowerPoint file shows a download button instead. If GitHub asks you to sign in, use your croix18 account.", BODY),
         ("A link that reads \"in folder\" opens the lesson's folder, not the file: the file's own address is longer than a spreadsheet link may be (255 characters). The file is in that folder under the lesson's number and what it is.", BODY),
@@ -974,15 +982,36 @@ def build(out):
         ("'No school' days are the holidays in the plan (tools/scope_calendar.py), taken from the board-approved calendar — check them against the school's copy.", BODY),
         ("", BODY),
         ("Where it comes from", BOLD),
-        (f"Generated by tools/master_sheet.py ({'GitHub links' if LINKS == 'github' else 'Google Drive links' + (f', index of {REFRESHED}' if COUNT['direct'] else ', no index')}) at commit {commit()} on {datetime.date.today().strftime('%d %B %Y')}, from the calendar table, the IXL due-date sheet, the Source of Truth (benchmark wording), Florida's B.E.S.T. standards (MTR titles), the Math Nation table of contents, the lesson and unit specs, and the package folders. The plan is edited in scope_calendar.py; this file is never edited by hand — except the yellow cells in the IXL tracker, which are yours.", BODY),
+        (f"Generated by tools/master_sheet.py ({'GitHub links' if LINKS == 'github' else 'live Google Drive links'}) at commit {commit()} on {datetime.date.today().strftime('%d %B %Y')}, from the calendar table, the IXL due-date sheet, the Source of Truth (benchmark wording), Florida's B.E.S.T. standards (MTR titles), the Math Nation table of contents, the lesson and unit specs, and the package folders. The plan is edited in scope_calendar.py; this file is never edited by hand — except the yellow cells in the IXL tracker, which are yours.", BODY),
     ]
     for i, (text, f) in enumerate(lines, 1):
         c = wa.cell(row=i, column=1, value=text); c.font = f; c.alignment = Alignment(wrap_text=True, vertical="top")
     wa.column_dimensions["A"].width = 120
 
-    # order: Today first, Links last (hidden)
+    # the links that are not on the Scope tab, beside the Links tab's grid: where, what the cell reads, what it opens
+    oc = len(LINK_COLS) + 3
+    for j, h in enumerate(("Where", "Reads", "Opens"), oc):
+        wl.cell(row=1, column=j, value=h if OTHERS else None)
+    for n, (where, text, link) in enumerate(OTHERS, 2):
+        wl.cell(row=n, column=oc, value=where); wl.cell(row=n, column=oc + 1, value=text)
+        wl.cell(row=n, column=oc + 2, value=getattr(link, "formula", None) or str(link))
+    for row in wl.iter_rows():
+        for c in row:
+            c.font = BODY
+
+    # ------------------------------------------------------------ Drive (hidden; the script in his account fills it)
     order = ["Today", "Scope & Sequence", "IXL tracker", "Standards", "Unit tests", "Month calendar", "Vocabulary",
              "Units", "Units 1–2 decks", "About", "Links"]
+    if LINKS == "drive":
+        wdr = wb.create_sheet("Drive")
+        rows = [r for r in csv.reader(open(DRIVE_TAB, encoding="utf-8")) if r] if DRIVE_TAB else []
+        head = rows[0] if rows else ["windy-hill-drive", "v2", "not filled yet: the Windy Hill script in your Google account fills this tab every hour", "0"]
+        for i, r in enumerate([head] + rows[1:], 1):
+            for j, v in enumerate(r, 1):
+                c = wdr.cell(row=i, column=j, value=v); c.font = BODY; c.number_format = "@"
+        wdr.column_dimensions["A"].width = 18; wdr.column_dimensions["B"].width = 48; wdr.column_dimensions["C"].width = 60
+        wdr.sheet_state = "hidden"
+        order.append("Drive")
     wb._sheets = [wb[n] for n in order]
     wb.active = 0
     wb.save(out)
@@ -995,6 +1024,8 @@ if __name__ == "__main__":
         k = args.index("--links"); LINKS = args[k + 1]; del args[k:k + 2]
         if LINKS not in ("drive", "github"):
             raise SystemExit("--links drive | github")
+    if "--drive-tab" in args:                  # fill the Drive tab from a list (code,id) — for testing; in use the script fills it
+        k = args.index("--drive-tab"); DRIVE_TAB = args[k + 1]; del args[k:k + 2]
     out = args[0] if args else os.path.join(REF, "A7 Master Sheet 2026-27.xlsx")
     n = build(out)
     print(f"wrote {out}: {n} class-day rows")

@@ -257,18 +257,14 @@ files live in `assets/` with the script that regenerates them (`assets/make_asse
    `python3 ../../tools/master_sheet.py`, then the xlsx skill's `recalc.py` on
    `../reference/A7 Master Sheet 2026-27.xlsx` (0 errors), then
    `python3 ../../tools/check_master_sheet.py` (0 problems). Push, and send Croix the new file.
-   **Its links open Google Drive, not GitHub (4 Oct 2026 — GitHub is blocked at school):** each is
-   a Drive search for the file's exact title, which finds the file wherever it sits in his Drive
-   and survives a re-upload (Drive's own addresses are ids no session can see). So the new unit's
-   folder has to be in his Drive, unzipped, for its links to find anything — say so when the unit
-   is sent. `--links github` writes the repository's links; the check reads either, requires every
-   search to find exactly one thing among the packages, and refuses a mix. Not tested against real
-   Drive from a session: `windy-hill-m7` `NOTES.md` (top section) has the whole story.
-   **One tap, once his Drive index exists:** Windmill `drive/README.md` — a script in his Google
-   account lists every document's Drive id; a session copies that list to `tools/drive_index.csv`
-   here (steps 1–4 there, at every rebuild of this sheet); `master_sheet.py` then links by id what
-   the index holds and by search what it does not, and the check holds every id to its row. As
-   committed on 4 Oct there is no index yet (he had not run the script).
+   **Its links open Google Drive and are live (4 Oct 2026 — GitHub is blocked at school, and
+   Croix asked not to depend on a rebuild):** a link cell looks its document's Drive address up in
+   the workbook's hidden Drive tab, which a script in HIS Google account refills every hour; the
+   fallback is a Drive search for the file's exact title. The same script copies everything this
+   repository publishes into his Drive and makes the live Google Sheet. So: **push, and it reaches
+   him; there is nothing to upload or send.** Windmill `drive/README.md` is the whole arrangement;
+   `windy-hill-m7` `NOTES.md` (top section) says what it means for the generator and the check,
+   which are the same here. `python3 ../../tools/test_live_links.py` exercises the looked-up half.
 
 ## 5a. Geopardy (the review game, formerly Boards Up) — planned, not built (3 Oct 2026)
 
