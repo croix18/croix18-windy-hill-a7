@@ -20,9 +20,13 @@ not happen.
                      bars, no speaker notes on slides)
     a7/reference/    the rulebook (HOUSE STYLE.md) and the standing reference documents
     a7/build/        the build system (Python): specs per unit in a7/build/<unit>/, the
-                     generators in lib/, the check suite, the installer. START WITH
-                     a7/build/BUILDING A UNIT.md — the whole procedure, then SPEC SCHEMA.md.
-    tools/           setup_env.sh (fresh session), push.sh, the scope calendar, PDF helpers
+                     course profile (course.py), the installer — and the SHARED BUILD KIT
+                     (lib/, checks.py, gates.py, the drivers, SPEC SCHEMA.md), which is
+                     published from croix18/Windmill (kit/), vendored here and never edited
+                     here (KIT.sha256). The on-level course is built by the same kit.
+                     START WITH a7/build/BUILDING A UNIT.md — the whole procedure.
+    tools/           setup_env.sh (fresh session), push.sh, check.sh (run before every push
+                     and by CI), vendor_windmill.py, the scope calendar, PDF helpers
 
 ## Building the next unit
 
@@ -39,7 +43,9 @@ nothing that touches students goes out mathematically unsound.
 
 ## Pushing
 
-`tools/push.sh "message"` commits everything and pushes, then checks the remote head against
+`tools/push.sh "message"` runs `tools/check.sh` (every build gate over every unit's specs, the kit
+against its manifest, the IXL due-date sheet, a package for every unit), commits everything and
+pushes, then checks the remote head against
 the local one — trust that check, not git's message. The token lives in `.github-token`
 (git-ignored). Why the script exists: `a7/reference/GITHUB FROM A SESSION.md`. Commits are
 authored as Croix's GitHub no-reply address because his account rejects pushes that expose his

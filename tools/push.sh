@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
-# Commit everything and push to GitHub from inside a Claude session.
+# Check (tools/check.sh), commit everything and push to GitHub from inside a Claude session.
 # Why the header: the sandbox proxy answers git's first (unauthenticated) request with 403
 # instead of 401, so git never offers credentials. Sending Basic auth preemptively works.
 # Token lives in .github-token (git-ignored, chmod 600). Never put it in the remote URL.
 set -euo pipefail
 cd "$(dirname "$0")/.."
+bash tools/check.sh          # gates, kit manifest, due-date sheet, packages — nothing unchecked is pushed
 [ -f .github-token ] || { echo "no .github-token" >&2; exit 1; }
 T=$(tr -d '[:space:]' < .github-token)
 B=$(printf 'x-access-token:%s' "$T" | base64 -w0)

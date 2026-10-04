@@ -70,7 +70,7 @@ L = dict(
     whiteboard=[
         dict(text=["A copier is set to shrink a page to  $\\frac{2}{3}$  of its size.", "A page 6 inches wide is copied 4 times in a row, each copy from the last.", "**What fraction of the original page's size is the last copy?"],
              qtext="A copier is set to shrink a page to 2/3 of its size. A page 6 inches wide is copied 4 times in a row, each copy from the last. What fraction of the original page's size is the last copy?",
-             unneeded="width of 6 inches", hint="Two thirds, of two thirds, of two thirds, of two thirds.", gloss="(2/3)⁴ = 2⁴ over 3⁴", answer_latex="\\frac{16}{81}",
+             unneeded="width of 6 inches", gloss="(2/3)⁴ = 2⁴ over 3⁴", answer_latex="\\frac{16}{81}",
              note="Ruling 22's board: a real question with a fraction base — Notes I's table in a sentence. Four shrinks multiply: (2/3)⁴ = 16/81. The width is there to be read past. On the reveal, ask the room what setting would undo all four copies in one go: multiply by (2/3)⁻⁴ = (3/2)⁴, the law in the other direction. A board with 8/3 multiplied the fraction by 4; a board with 2/81 raised the denominator only.",
              check=("many", ("eq", "F(2,3)**4", "F(16,81)"), ("eq", "F(2,3)**-4", "F(3,2)**4")),
              wrong="8/3 — the fraction was multiplied by 4 instead of raised [an exponent counts factors]; 2/81 or 16/3 — only one of numerator and denominator was raised [power of a quotient]; 81/16 — a positive exponent was flipped [8.NSO.1.3: only a negative exponent flips the base]; anything built from 6 — the unneeded figure was used"),

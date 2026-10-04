@@ -78,7 +78,7 @@ L = dict(
              wrong="−8³ or −512 — negative exponent read as a negative value [B1G-M 8.NSO.1.3 task: −b vs b⁻¹]; 1/8 — the exponent was dropped"),
         dict(text=["A sheet of paper 30 centimeters long is folded in half 7 times.", "Each fold makes the top layer half as big.", "**What fraction of the whole sheet is the top layer after 7 folds?"],
              qtext="A sheet of paper 30 centimeters long is folded in half 7 times. Each fold makes the top layer half as big. What fraction of the whole sheet is the top layer after 7 folds?",
-             unneeded="length of 30 centimeters", hint="Half, of half, of half … seven times.", gloss="halved 7 times: 2⁻⁷ = 1 over 2⁷", answer_latex="\\frac{1}{128}",
+             unneeded="length of 30 centimeters", gloss="halved 7 times: 2⁻⁷ = 1 over 2⁷", answer_latex="\\frac{1}{128}",
              note="Ruling 22's board: a real question whose answer is a negative exponent. Halving seven times is multiplying by 1/2 seven times — (1/2)⁷ = 1/2⁷ = 1/128 — and on the reveal write 2⁻⁷ = 1/2⁷ beside it: the exponent −7 says 'divide by 2 seven times'. The length is there to be read past. A board with 128 counted the layers (true, but not the fraction asked for); a board with 1/14 multiplied 2 by 7.",
              check=("many", ("eq", "F(1,2)**7", "F(1,128)"), ("eq", "F(2)**-7", "F(1,128)")),
              wrong="128 — the number of layers, not the fraction asked for [the question names the thing wanted]; 1/14 — multiplied base by exponent; −128 — negative exponent read as a negative value [B1G-M 8.NSO.1.3]; anything built from 30 — the unneeded figure was used"),

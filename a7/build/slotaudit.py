@@ -1,7 +1,8 @@
 """Every expression a unit's decks paint in slot colours (HOUSE STYLE §2a), as the renderer reads
-it: [base] in brackets, ^{exponent} marked, one line each. Rule 0 — a wrong base is a wrong
-statement about the mathematics — so this list is READ, line by line, after any change to a spec's
-notes, worked examples or boards, and after any change to mathimg._slot_colors.
+it, one line each: [base] in brackets and ^{exponent} marked where the two slots are the base and
+the exponent; ⟨A:…⟩ ⟨B:…⟩ ⟨H:…⟩ where a spec names its slots (lib/slotmark.py). Rule 0 — a wrong
+slot is a wrong statement about the mathematics — so this list is READ, line by line, after any
+change to a spec's notes, worked examples or boards, and after any change to the reading rules.
 
     python3 slotaudit.py u3              → prints the list; the last line counts refusals
     python3 slotaudit.py u3 --geometry   → also renders each expression black (the renderer whose
@@ -11,8 +12,22 @@ notes, worked examples or boards, and after any change to mathimg._slot_colors.
 import sys, os, re, glob, importlib.util, tempfile
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-from lib import mathimg
+from lib import mathimg, slotmark
+from lib.profile import C
 from matplotlib.font_manager import FontProperties
+
+AUTO = C.SLOTS == "exponent"
+
+
+def _specs(unit):
+    fs = sorted(glob.glob(os.path.join(HERE, unit, "l[0-9]*.py")))
+    rv = os.path.join(HERE, unit, "review.py")
+    return fs + ([rv] if C.REVIEW_IN_DECK and os.path.exists(rv) else [])
+
+
+def marks_in_specs(unit):
+    """How many slot marks the unit's lesson specs carry, read from the source text."""
+    return sum(len(re.findall(r"\\+s[ABH]\{", open(f, encoding="utf-8").read())) for f in _specs(unit))
 
 
 def pieces(row):
@@ -23,9 +38,11 @@ def collect(unit):
     """(lesson code, surface, latex, point size) for every expression the unit's decks colour —
     the same surfaces lessonbuild._fill_deck marks slots=True."""
     rows = []
-    for f in sorted(glob.glob(os.path.join(HERE, unit, "l[0-9]*.py"))):
+    for f in _specs(unit):
+        sys.path.insert(0, os.path.dirname(f))
         sp = importlib.util.spec_from_file_location("l", f)
         m = importlib.util.module_from_spec(sp); sp.loader.exec_module(m)
+        sys.path.pop(0)
         L = m.L; code = L["code"]
         for n in L["notes"]:
             for r in n.get("math", []):
@@ -49,10 +66,30 @@ def collect(unit):
                 rows.append((code, "wb-reveal", q["latex"], 40))
             for r in q.get("text", []):
                 rows += [(code, "wb-reveal", x, 32) for x in pieces(r)]
-    return rows
+    # where the slots are named, only a marked expression is coloured; where they are read off the
+    # layout, every expression on these surfaces is
+    return rows if AUTO else [r for r in rows if slotmark.has(r[2])]
+
+
+def show_named(latex, pt):
+    """A marked expression as the renderer coloured it: each run of one slot's glyphs in ⟨…⟩."""
+    latex = re.sub(r"\\frac(?![A-Za-z])", r"\\dfrac", latex)
+    r, col, rcol = mathimg.named_colors(latex, pt, dpi=72)
+    key = {v: k for k, v in slotmark.SLOT.items()}
+    out, prev = [], None
+    for g, c in zip(r.glyphs, col):
+        tag = key.get(c)
+        if tag != prev:
+            if prev: out.append("⟩")
+            if tag: out.append(f"⟨{tag}:")
+        out.append(chr(g[2])); prev = tag
+    if prev: out.append("⟩")
+    return "".join(out)
 
 
 def show(latex, pt):
+    if slotmark.has(latex):
+        return show_named(latex, pt)
     latex = re.sub(r"\\frac(?![A-Za-z])", r"\\dfrac", latex)
     r = mathimg._PARSER.parse(f"${latex}$", dpi=72, prop=FontProperties(size=pt))
     col = mathimg._slot_colors(r.glyphs, pt)
@@ -80,8 +117,8 @@ def geometry_differs(latex, pt, render_colour=None):
     latex = re.sub(r"\\frac(?![A-Za-z])", r"\\dfrac", latex)
     d = tempfile.mkdtemp()
     a, b = os.path.join(d, "black.png"), os.path.join(d, "colour.png")
-    mathimg._render(latex, pt, a, "#1A1A1A")
-    (render_colour or mathimg._render_slots)(latex, pt, b)
+    mathimg._render(slotmark.strip(latex), pt, a, "#1A1A1A")
+    (render_colour or (mathimg._render_named if slotmark.has(latex) else mathimg._render_slots))(latex, pt, b)
     A = np.asarray(Image.open(a).split()[-1]) > 128
     B = np.asarray(Image.open(b).split()[-1]) > 128
     if abs(A.shape[0] - B.shape[0]) > 6 or abs(A.shape[1] - B.shape[1]) > 6:

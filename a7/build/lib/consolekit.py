@@ -10,10 +10,11 @@ the shape Deckhand will publish. Nothing teacher-only is drawn on the slide surf
 """
 import json, os
 from .htmlkit import esc, render_page, _read
+from .profile import C
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 WM = os.path.join(HERE, "..", "assets", "windmill")
-PERIOD_MIN = 53
+PERIOD_MIN = C.PERIOD
 INDEX_TITLE = "Settle in; post the learning target"
 
 
@@ -37,10 +38,10 @@ def _segments(side, first, last, course_min=PERIOD_MIN):
         if b["kind"] == "wb":
             b["min"] = course_min - fixed
         base = {"title": "settle", "warmup": "wu", "notes": "notes", "example": "ex", "yourturn": "yt", "wb": "wb",
-                "independent": "ind", "ixl": "ixl"}.get(b["kind"], b["kind"])
+                "independent": "ind", "set": "ind", "close": "close", "ixl": "ixl"}.get(b["kind"], b["kind"])
         counts[base] = counts.get(base, 0) + 1
         b["id"] = base + (str(counts[base]) if base in ("ex", "yt") else "")
-        b["short"] = {"settle": "Settle in", "wu": "Warm-Up", "notes": "Notes", "wb": "Whiteboards", "ind": "Independent", "ixl": "IXL"}.get(base, b["title"])
+        b["short"] = {"settle": "Settle in", "wu": "Warm-Up", "notes": "Notes", "wb": "Whiteboards", "ind": "Independent", "close": "Before You Go", "ixl": "IXL"}.get(base, b["title"])
     return blocks
 
 
@@ -58,7 +59,8 @@ def unit_index(D, course_key, unit):
     return {"course": course_key, "unit": unit, "title": D.page_title, "lessons": lessons, "periodMin": PERIOD_MIN}
 
 
-def render_console(D, course_key="acc"):
+def render_console(D, course_key=None):
+    course_key = course_key or C.COURSE_KEY
     """The page: htmlkit's slides and chrome inside, the console around them."""
     base = render_page(D)
     idx = unit_index(D, course_key, D.unit)

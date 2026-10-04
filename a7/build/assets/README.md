@@ -1,6 +1,6 @@
 # Vendored assets for the HTML decks (htmlkit.py)
 
-Every `A7 <code>  Slides.html` inlines all of these, so a deck is ONE file that needs no network.
+Every `<course> <code>  Slides.html` inlines all of these, so a deck is ONE file that needs no network.
 Regenerate everything with `python3 make_assets.py <katex dist folder>` (the folder from
 `npm pack katex@0.19.0`); without the argument only the fonts are rebuilt.
 

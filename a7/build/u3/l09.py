@@ -83,7 +83,7 @@ L = dict(
              wrong="720,000 — the point was moved five places [8.NSO.1.4: 10⁴ moves the point four places]; 7.20000 — zeros appended without moving the point"),
         dict(text=["A stadium's renovation used  356,000  bolts.", "The stadium seats 71,000 people.", "**Write the number of bolts in scientific notation."],
              qtext="A stadium's renovation used 356,000 bolts. The stadium seats 71,000 people. Write the number of bolts in scientific notation.",
-             unneeded="seating figure", hint="Every nonzero digit stays in the coefficient.", gloss="3.56 hundred-thousands", answer="3.56 × 10⁵",
+             unneeded="seating figure", gloss="3.56 hundred-thousands", answer="3.56 × 10⁵",
              note="Ruling 22's board: the seating figure is there to be read past, and it is the harder kind of extra — it is a number that could itself be converted. Three nonzero digits in the bolts. 356 × 10³ is equal in value but not scientific notation; 3.56 × 10³ counted only the zeros.", check=("eq", "F(356,100)*10**5", "356000"),
              wrong="356 × 10³ — coefficient not in [1, 10) [B1G-M 8.NSO.1.4 misconception]; 3.56 × 10³ — counted the zeros instead of the places the point moves; 7.1 × 10⁴ — the wrong number was converted",
              not_sci=True),

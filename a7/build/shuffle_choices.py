@@ -1,7 +1,12 @@
 #!/usr/bin/env python3
 """Spread the keyed answers of a unit's multiple-choice items across the letters.
 
-    python3 shuffle_choices.py u3            → rewrites u3/l*.py and u3/unit.py in place, prints every change
+    python3 shuffle_choices.py u3            → rewrites u3/l*.py, review.py and unit.py in place, prints every change
+    python3 shuffle_choices.py u4 l06.py     → only the named files
+    python3 shuffle_choices.py u4 l09.py --seed=2   → another spread for that file (when the unit gate
+                                               still finds one letter carrying too many boards)
+    python3 shuffle_choices.py u5 --loose    → also remap a capital standing alone ("B is the trap…");
+                                               only for a unit whose prose has no A–F variables
 
 Every spec was written with the keyed answer first (correct=0 — a writing convenience), and the
 decks and banks printed the options in spec order, so every single-answer item keyed A and every
@@ -12,8 +17,9 @@ references in the teacher prose stay literal:
   - `choices` are reordered; `correct` follows; `errors` is re-keyed; `form_only` is re-lettered;
     an `answer` that names the letter ("A", "A — 4⁵", "A, B, C and D") is regenerated.
   - Letters inside the item's OWN teacher prose (note, note_a, why, wrong, the error texts) are
-    remapped where they unambiguously name an option: B–F standing alone, and A when followed by
-    is/was/gives/means/and/or/—/:/,  — never the article in "A board full of B".
+    remapped only where they name an option in so many words — "Reveal C", "option B", "(D)",
+    "C: …" — never a capital standing alone, which in a geometry unit is a variable (C = πd).
+    Every standalone capital the script left alone is printed as a READ line.
   - Letters are assigned per file from a seeded shuffle so consecutive items differ and no letter
     takes more than its share; select-alls take a seeded permutation of all positions.
   - Letter references OUTSIDE the item (a Teacher Edition line saying "a board full of B on Q5")
@@ -25,16 +31,52 @@ import ast, sys, os, re, random, glob
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 PROSE = ("note", "note_a", "why", "wrong", "hint", "gloss")
-LETTER = re.compile(r"(?<![A-Za-z0-9.\\])([B-F])(?![A-Za-z0-9])"
-                    r"|(?<![A-Za-z0-9.\\])(A)(?=\s+(?:is|was|gives|means|and|or|—|–)\b|\s*(?::|,|\)|—|$))")
+# An option is named in prose in a handful of fixed ways, and only those are remapped:
+#     "Reveal C."   "option B"   "options A and C"   "(D)"   "C: half the perimeter…"   "B — the …"
+# A capital standing alone is NOT assumed to be an option. In a geometry unit C is the
+# circumference and A is the area, and the first version of this rule rewrote "C = πd" as
+# "A = πd" inside a teaching note (M7 Unit 4, 4 Oct). Every other standalone A–F in an item's
+# prose is listed at the end for the author to read.
+LETTER = re.compile(r"(?<=Reveal )([A-F])\b"
+                    r"|(?<=[Oo]ption )([A-F])\b"
+                    r"|(?<=[Oo]ptions )([A-F])(?= and [A-F]\b)|(?<=[Oo]ptions [A-F] and )([A-F])\b"
+                    r"|(?<=\()([A-F])(?=\))"
+                    r"|(?:(?<=^)|(?<=[.;!?] )|(?<=\"))([A-F])(?=: | — )")
+LOOSE = re.compile(r"(?<![A-Za-z0-9.\\])([A-F])(?![A-Za-z0-9'’])")
 
 
 def remap_text(text, perm_letter):
-    """perm_letter: old letter -> new letter. Replaces unambiguous option references."""
+    """perm_letter: old letter -> new letter. Replaces the references that name an option."""
     def sub(m):
-        L = m.group(1) or m.group(2)
+        L = next(g for g in m.groups() if g)
         return perm_letter.get(L, L)
     return LETTER.sub(sub, text)
+
+
+def loose_letters(text):
+    """Standalone capitals A–F that the strict patterns did not touch and that read as an option:
+    not a variable in a formula (C = πd, C ÷ d) and not the article (A board, A student) — an A
+    counts only before is/was/gives/means/and/or, a dash, a colon, a comma or the end."""
+    strict = {m.start(g) for m in LETTER.finditer(text) for g in range(1, len(m.groups()) + 1) if m.group(g)}
+    out = []
+    for m in LOOSE.finditer(text):
+        tail = text[m.end():m.end() + 12]
+        if m.start(1) in strict or re.match(r"\s*(=|≈|÷|×|/|\+|−|-\s|\()", tail):
+            continue
+        if m.group(1) == "A" and not re.match(r"\s+(?:is|was|gives|means|and|or|—|–)\b|\s*(?::|,|\)|—|\.|$)", tail):
+            continue
+        out.append(m)
+    return out
+
+
+def remap_loose(text, perm_letter):
+    """remap_text, then the standalone letters loose_letters accepts. For a unit whose prose has
+    no A–F variables (--loose); every such change is printed."""
+    text = remap_text(text, perm_letter)
+    b = list(text)
+    for m in loose_letters(text):
+        b[m.start(1)] = perm_letter.get(m.group(1), m.group(1))
+    return "".join(b)
 
 
 def seg(src, node):
@@ -55,7 +97,7 @@ def plan_letters(n_items, n_choices_list, rng):
     return out
 
 
-def process(path, rng, report):
+def process(path, rng, report, loose=False):
     src = open(path, encoding="utf-8").read()
     tree = ast.parse(src)
     items = []
@@ -63,7 +105,12 @@ def process(path, rng, report):
         if isinstance(node, ast.Call) and getattr(node.func, "id", None) == "dict":
             kws = {k.arg: k for k in node.keywords}
             if "choices" in kws and "correct" in kws:
-                items.append((node, kws))
+                # only an item written out in the source can be permuted in the source; one whose
+                # options are computed (a parallel-forms unit.py) is reported for its author
+                if isinstance(kws["choices"].value, ast.List) and isinstance(kws["correct"].value, (ast.Constant, ast.List, ast.Tuple)):
+                    items.append((node, kws))
+                else:
+                    report.append(f"SKIPPED {os.path.basename(path)}:{node.lineno}  options are computed, not literal — spread these by hand")
     items.sort(key=lambda t: (t[0].lineno, t[0].col_offset))
     singles = [(n, k) for n, k in items if not isinstance(k["correct"].value, (ast.List, ast.Tuple))]
     targets = plan_letters(len(singles), [len(k["choices"].value.elts) for n, k in singles], rng)
@@ -112,7 +159,7 @@ def process(path, rng, report):
                 kl = kn.value
                 new_k = perm_letter[kl]
                 vtxt = seg(src, vn)
-                pairs.append((new_k, f'"{new_k}": ' + remap_text(vtxt, perm_letter)))
+                pairs.append((new_k, f'"{new_k}": ' + (remap_loose if loose else remap_text)(vtxt, perm_letter)))
             pairs.sort()
             s, e = span(d)
             edits.append((s, e, "{" + ", ".join(p[1] for p in pairs) + "}"))
@@ -145,12 +192,16 @@ def process(path, rng, report):
         for fld in PROSE:
             if fld in kws and isinstance(kws[fld].value, ast.Constant) and isinstance(kws[fld].value.value, str):
                 txt = seg(src, kws[fld].value)
-                new = remap_text(txt, perm_letter)
+                new = (remap_loose if loose else remap_text)(txt, perm_letter)
                 if new != txt:
                     s, e = span(kws[fld].value)
                     edits.append((s, e, new))
                     for m in LETTER.finditer(txt):
-                        report.append(f"{os.path.basename(path)}:{node.lineno} {fld}: …{txt[max(0,m.start()-30):m.end()+30]}…  → {perm_letter.get(m.group(1) or m.group(2))}")
+                        L0 = next(g for g in m.groups() if g)
+                        report.append(f"{os.path.basename(path)}:{node.lineno} {fld}: …{txt[max(0,m.start()-30):m.end()+30]}…  → {perm_letter.get(L0)}")
+                for m in loose_letters(txt):
+                    what = f"→ {perm_letter.get(m.group(1))}" if loose else "was left alone"
+                    report.append(f"{'LOOSE' if loose else 'READ'} {os.path.basename(path)}:{node.lineno} {fld}: a standalone {m.group(1)} {what} — …{txt[max(0,m.start()-40):m.end()+40]}…")
         report.append(f"{os.path.basename(path)}:{node.lineno}  keyed {','.join(chr(65+c) for c in old_correct)} → {','.join(chr(65+c) for c in new_correct)}   order {order}")
     # apply edits from the end, on the byte string the offsets were measured on
     b = src.encode("utf-8")
@@ -162,11 +213,17 @@ def process(path, rng, report):
 
 if __name__ == "__main__":
     unit = sys.argv[1]
-    files = sorted(glob.glob(os.path.join(HERE, unit, "l[0-9]*.py"))) + [os.path.join(HERE, unit, "unit.py")]
+    files = sorted(glob.glob(os.path.join(HERE, unit, "l[0-9]*.py"))) + \
+        [f for f in (os.path.join(HERE, unit, "review.py"), os.path.join(HERE, unit, "unit.py")) if os.path.exists(f)]
+    loose = "--loose" in sys.argv
+    seed = next((a.split("=", 1)[1] for a in sys.argv if a.startswith("--seed=")), "")   # a second spread for a file
+    only = [a for a in sys.argv[2:] if not a.startswith("--")]
+    if only:                                   # shuffle_choices.py u4 l06.py l07.py — just these files
+        files = [f for f in files if os.path.basename(f) in only]
     report, total = [], 0
     for f in files:
-        rng = random.Random(f"{unit}/{os.path.basename(f)}/2026-10-03")
-        total += process(f, rng, report)
+        rng = random.Random(f"{unit}/{os.path.basename(f)}/2026-10-03" + seed)
+        total += process(f, rng, report, loose)
     print("\n".join(report))
     print(f"\n{total} multiple-choice items permuted in {len(files)} files")
     # letter references outside the items, for the author

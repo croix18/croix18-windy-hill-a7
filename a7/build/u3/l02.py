@@ -78,7 +78,7 @@ L = dict(
              wrong="10⁸ — added the exponents [confused with product of powers]; 1² — divided the bases [7.NSO.1.1 misconception: operating on the bases]"),
         dict(text=["A website puts  $8^{4}$  photos into 8 equal albums.", "The site is 30 days old.", "**How many photos are in each album?"],
              qtext="A website puts 8⁴ photos into 8 equal albums. The site is 30 days old. How many photos are in each album?",
-             unneeded="30 days", hint="Find the value.", gloss="8⁴ ÷ 8¹ = 8³", answer="512",
+             unneeded="30 days", gloss="8⁴ ÷ 8¹ = 8³", answer="512",
              note="Ruling 22's board: the site's age is there to be read past. 8⁴ ÷ 8 = 8³; 4096 ÷ 8 = 512 is the check. A board with 4096 never divided by the 8 albums.", check=("eq", "8**4/8**1", "512"),
              wrong="4096 — never divided by the 8 albums [the quotient was not taken]; 64 — subtracted 4 − 1 wrong or used 8²; anything built from 30 — the unneeded figure was used"),
         dict(latex="\\frac{(-6)^{6}}{(-6)^{5}}", hint="Find the value.", gloss="(−6)¹", answer="−6",

@@ -12,7 +12,11 @@ no network. Arrow keys / space / click advance; ← goes back; Home/End; the URL
 Ctrl-P prints one slide per page.
 """
 import os, re, json, html, base64
-from . import mathimg   # for the slot colours only
+from . import figkit    # geometry figures, drawn from the numbers, embedded as data URIs
+from . import slotmark
+from .profile import C
+
+AUTO_SLOTS = C.SLOTS == "exponent"   # base blue / exponent orange, painted by the page off KaTeX's structure
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ASSETS = os.path.join(HERE, "..", "assets")
@@ -36,26 +40,34 @@ def esc(t):
     return html.escape(t, quote=False)
 
 
-def rich(text, size=None):
+def _tex(latex, slots):
+    """The LaTeX KaTeX is handed: a named slot becomes \\textcolor where the teacher shows, and is
+    dropped (its body kept) everywhere else."""
+    return slotmark.textcolor(latex) if slots else slotmark.strip(latex)
+
+
+def rich(text, size=None, slots=False):
     """Plain spec text → HTML: $…$ becomes a KaTeX span (display style, so fractions stay
-    full-size), unicode superscripts become <sup>, **…** becomes bold."""
+    full-size), unicode superscripts become <sup>, **…** becomes bold, and — with slots — a named
+    slot (\\sA{} \\sB{} \\sH{}) becomes a span in its colour."""
     out = []
     text = text.replace("\\$", "\ue000")                       # \$ = a literal dollar sign (money), never math
     for part in re.split(r"(\$[^$]+\$)", text):
         if not part:
             continue
         if part.startswith("$") and part.endswith("$") and len(part) > 2:
-            out.append(f'<span class="k" data-tex="{esc(part[1:-1].replace(chr(0xe000), chr(92) + "$"))}"></span>')
+            out.append(f'<span class="k" data-tex="{esc(_tex(part[1:-1].replace(chr(0xe000), chr(92) + "$"), slots))}"></span>')
         else:
             part = part.replace("\ue000", "$")
             part = re.sub(r" {3,}", lambda m: f"\x00{len(m.group(0))}\x00", part)   # wide gaps survive as spans
-            # bold runs
-            pieces = re.split(r"(\*\*[^*]+\*\*)", part)
-            for pc in pieces:
-                if pc.startswith("**") and pc.endswith("**") and len(pc) > 4:
-                    out.append("<b>" + _sups(pc[2:-2]) + "</b>")
-                else:
-                    out.append(_sups(pc))
+            for piece, slot in (slotmark.pieces(part) if slots else [(slotmark.strip(part), None)]):
+                run = []
+                for pc in re.split(r"(\*\*[^*]+\*\*)", piece):                  # bold runs
+                    if pc.startswith("**") and pc.endswith("**") and len(pc) > 4:
+                        run.append("<b>" + _sups(pc[2:-2]) + "</b>")
+                    else:
+                        run.append(_sups(pc))
+                out.append(f'<span class="slot" style="color:#{slot}">{"".join(run)}</span>' if slot else "".join(run))
     h = "".join(out)
     return re.sub(r"\x00(\d+)\x00", lambda m: f'<span class="gap" style="display:inline-block;width:{min(int(m.group(1)), 10) * 0.55}em"></span>', h)
 
@@ -96,18 +108,18 @@ class HtmlDeck:
         return self.s
 
     def _text(self, x, y, w, h, text, size=23, bold=False, italic=False, color=INK, align="left",
-              anchor="top", runs=None, wrap=True, foot=False):
+              anchor="top", runs=None, wrap=True, foot=False, slots=False):
         if runs:
-            inner = "".join(f'<span style="font-size:{sz}pt;{"font-weight:700;" if b else ""}{"font-style:italic;" if i else ""}color:#{c}">{rich(t)}</span>'
+            inner = "".join(f'<span style="font-size:{sz}pt;{"font-weight:700;" if b else ""}{"font-style:italic;" if i else ""}color:#{c}">{rich(t, slots=slots)}</span>'
                             for (t, sz, b, i, c) in runs)
             self._add(f'<p class="t {align}" style="font-size:{size}pt">{inner}</p>')
         else:
             st = f"font-size:{size}pt;color:#{color};" + ("font-weight:700;" if bold else "") + ("font-style:italic;" if italic else "")
-            self._add(f'<p class="t {align}" style="{st}">{rich(text)}</p>')
+            self._add(f'<p class="t {align}" style="{st}">{rich(text, slots=slots)}</p>')
 
     def _mixed(self, text, x, y, surface="slidemid", size=26, color=INK, bold=False, align="left", width=None, slots=False):
         st = f"font-size:{size}pt;color:#{color};" + ("font-weight:700;" if bold else "")
-        self._add(f'<p class="t {align} s-{surface}{" slots" if slots else ""}" style="{st}">{rich(text)}</p>')
+        self._add(f'<p class="t {align} s-{surface}{" slots" if slots and AUTO_SLOTS else ""}" style="{st}">{rich(text, slots=slots)}</p>')
         return 0.0, 0.5
 
     def measure(self, text, surface="slidemid", size=26, bold=False):
@@ -130,14 +142,14 @@ class HtmlDeck:
         self._add(f'<h3 class="head">{esc(label)}</h3>')
 
     def items(self, rows, size=23, panel=False, letters=True, x=None, w=None, gap=0.1, start=0, slots=False):
-        out = [f'<ol class="items{" panel" if panel else ""}{" slots" if slots else ""}" style="font-size:{size}pt" start="{start + 1}">']
+        out = [f'<ol class="items{" panel" if panel else ""}{" slots" if slots and AUTO_SLOTS else ""}" style="font-size:{size}pt" start="{start + 1}">']
         for row in rows:
             if isinstance(row, tuple):
                 term, rest = row
-                body = f'<span class="vocab">{esc(term)}</span>   —   {rich(rest)}'
+                body = f'<span class="vocab">{esc(term)}</span>   —   {rich(rest, slots=slots)}'
             else:
                 bold = row.startswith("**")
-                body = rich(row.strip("*"))
+                body = rich(row.strip("*"), slots=slots)
                 if bold:
                     body = f"<b>{body}</b>"
             out.append(f'<li class="{"lettered" if letters else "plain"}">{body}</li>')
@@ -150,8 +162,8 @@ class HtmlDeck:
         out.append("</ol>")
         self._add("".join(out))
 
-    def text(self, text, size=23, bold=False, italic=False, color=INK, align="left", h=None, x=None, w=None):
-        self._text(0, 0, 0, 0, text, size, bold, italic, color, align)
+    def text(self, text, size=23, bold=False, italic=False, color=INK, align="left", h=None, x=None, w=None, slots=False):
+        self._text(0, 0, 0, 0, text, size, bold, italic, color, align, slots=slots)
         return self.cursor
 
     def table(self, widths, rows, size=15, header=True, x=None, row_h=0.42):
@@ -167,7 +179,7 @@ class HtmlDeck:
 
     def math(self, latex, surface="slidebig", align="center", x=None, y=None, color=INK, gap=0.25, slots=False):
         big = surface == "slidebig"
-        self._add(f'<div class="k d {"big" if big else "mid"} {align}{" slots" if slots else ""}" data-tex="{esc(latex)}" style="color:#{color}"></div>')
+        self._add(f'<div class="k d {"big" if big else "mid"} {align}{" slots" if slots and AUTO_SLOTS else ""}" data-tex="{esc(_tex(latex, slots))}" style="color:#{color}"></div>')
         return 0.0, 0.6
 
     def math_row(self, parts, surface="slidemid", y=None, gap=0.35, size=26, color=INK, bold=False, align="center", x=None, slots=False):
@@ -175,11 +187,12 @@ class HtmlDeck:
         return 0.5
 
     def choices(self, opts, size=24, correct=None, two_col=True):
-        two = two_col and len(opts) == 4 and all(len(o) <= 30 for o in opts)     # a long option gets the full width
-        if not two:                                                             # and the type steps down (M7, 4 Oct)
+        mathy = any("$" in o.replace("\\$", "") for o in opts)                  # a typeset option is short however long its LaTeX is
+        two = two_col and len(opts) == 4 and (mathy or all(len(o) <= 30 for o in opts))   # a long option gets the full width
+        if not two:                                                             # and the type steps down as the pptx does
             total = sum(len(o) for o in opts)
             size = size if total <= 150 else 22 if total <= 210 else 20 if total <= 270 else 18
-        out = [f'<ol class="choices{" two" if two else ""}" style="font-size:{size}pt">']
+        out = [f'<ol class="choices{" two" if two else ""}{" mathy" if mathy else ""}" style="font-size:{size}pt">']
         for i, o in enumerate(opts):
             cls = "correct" if correct == i else ""
             out.append(f'<li class="{cls}"><span class="L">{chr(65 + i)}.</span> {rich(o)}</li>')
@@ -190,22 +203,22 @@ class HtmlDeck:
         self._add(f'<p class="answer bottom"><span class="lab">Answer:</span> {rich(text)}</p>')
 
     def answer_math(self, latex, y=5.1):
-        self._add(f'<p class="answer bottom"><span class="lab">Answer:</span> <span class="k big" data-tex="{esc(latex)}"></span></p>')
+        self._add(f'<p class="answer bottom"><span class="lab">Answer:</span> <span class="k big" data-tex="{esc(_tex(latex, False))}"></span></p>')
 
-    def warmup_answers(self, pairs):
+    def warmup_answers(self, pairs, x=None):
         for stem, answer in pairs:
             self._add(f'<p class="t left" style="font-size:23pt">{rich(stem)}<span class="wa">{rich(answer)}</span></p>')
 
     def worked_row(self, latex, gloss, slots=False):
-        self._add(f'<div class="worked"><span class="k d mid{" slots" if slots else ""}" data-tex="{esc(latex)}"></span>'
-                  f'<span class="why">{rich(gloss)}</span></div>')
+        self._add(f'<div class="worked"><span class="k d mid{" slots" if slots and AUTO_SLOTS else ""}" data-tex="{esc(_tex(latex, slots))}"></span>'
+                  f'<span class="why">{rich(gloss, slots=slots)}</span></div>')
 
-    def ask(self, text, hint=None):
+    def ask(self, text, hint=None, y=None):
         h = f'<p class="hint">{rich(hint)}</p>' if hint else ""
         self._add(f'<div class="ask bottom"><p>{esc(text)}</p>{h}</div>')
 
     def gloss(self, text):
-        self._add(f'<p class="gloss">{rich(text)}</p>')
+        self._add(f'<p class="gloss">{rich(text, slots=True)}</p>')
 
     def independent(self, minutes=6):
         self.section("Independent Set", "Six questions. On your own, in silence.", minutes,
@@ -215,13 +228,36 @@ class HtmlDeck:
                        "Show the step that does the work, not just the answer.",
                        "Silence until the six minutes are up."])
 
+    def independent_set(self, minutes, note, questions):
+        """Ruling 21 with the six questions on the slide (no handout)."""
+        self.section("Independent Practice", "Six questions. On your own, in writing.", minutes, note, "set")
+        size = 19 if sum(len(q) for q in questions) < 520 else 17
+        self.numbered(questions, size=size, gap=0.08)
+
+    def close(self, lines, minutes=1, note=""):
+        """Before You Go — the one thing today lives on, said back to the room."""
+        self.section("Before You Go", "", minutes, note, "close")
+        for ln in lines:
+            self.text(ln, 24)
+
     def ixl(self, skills, minutes=5, due="Due at the start of the next class."):
-        self.section("IXL", "Last five minutes.", minutes, "IXL: every listed skill is required, SmartScore 67. " + due, "ixl")
+        ss = C.IXL_SMARTSCORE
+        self.section("IXL", "Last five minutes.", minutes, f"IXL: every listed skill is required, SmartScore {ss}. " + due, "ixl")
         self.numbered(["Open IXL and start today's skills.",
                        "Work on paper where the question needs work. The answer box does not show it.",
-                       "Every skill listed is required, to a SmartScore of 67. " + due])
+                       f"Every skill listed is required, to a SmartScore of {ss}. " + due])
         self._add('<p class="t left" style="font-size:21pt;font-weight:700;margin-top:18px">Today\'s skills — all required</p>')
         self._add('<ul class="skills">' + "".join(f"<li>{esc(s)}</li>" for s in skills) + "</ul>")
+
+    def figure(self, spec, gap=0.16):
+        """A geometry figure drawn from its numbers (figkit), the same PNG the PowerPoint carries,
+        embedded as a data URI at its natural size (100 px per inch of the 13.33-inch stage)."""
+        path, w, h = figkit.draw(spec, spec.get("in", 4.2))
+        with open(path, "rb") as f:
+            b = base64.b64encode(f.read()).decode("ascii")
+        # natural size at most; the figure is the slide's one flexible block, so when the text
+        # around it needs the room the picture shrinks (the pptx does the same through `avail`)
+        self._add(f'<div class="fig"><img src="data:image/png;base64,{b}" style="max-width:{w * 100:.0f}px" alt=""></div>')
 
     # ---------- the whole-unit deck ----------
     def count(self):
@@ -246,7 +282,7 @@ class HtmlDeck:
         self._add(f'<div class="cover"><p class="eyebrow">{esc(f"{self.course}  ·  UNIT {self.unit}".upper())}</p><h2>{esc(title)}</h2><div class="rule"></div>'
                   + "".join(f'<p class="target">{esc(ln)}</p>' for ln in lines) + "</div>")
 
-    def link_row(self, slide, y, left, right, target):
+    def link_row(self, slide, y, left, right, target, pitch=0.46):
         # target is a 0-based slide index in the html deck (build_unit_deck passes the pptx slide; see save())
         slide.setdefault("links", []).append((left[0], left[1], right, target))
 
@@ -254,7 +290,7 @@ class HtmlDeck:
     def save(self, path, sidecar=False, console=False):
         if console:                                  # the unit deck: the day wrapped around the slides
             from .consolekit import render_console
-            page = render_console(self)
+            page = render_console(self, C.COURSE_KEY)
         else:
             page = render_page(self)
         with open(path, "w", encoding="utf-8") as f:
@@ -296,6 +332,7 @@ ol.choices{margin:6px 0 0;padding:0 0 0 40px;list-style:none;font-size:24pt}
 ol.choices.two{display:grid;grid-template-columns:1fr 1fr;row-gap:12px}
 ol.choices li .L{font-weight:700;display:inline-block;width:1.4em}
 ol.choices li.correct{color:#RED;font-weight:700}
+ol.choices.mathy{row-gap:14px}ol.choices.mathy li{display:flex;align-items:center;min-height:2.6em}ol.choices.mathy li .k{font-size:1.15em}
 .bottom{margin-top:auto}
 .answer{text-align:center;font-size:32pt;font-weight:700;color:#RED;margin:10px 0 0}.answer .lab{margin-right:.4em}.answer .k{font-size:40pt}
 .ask{text-align:center}.ask p{margin:0;font-size:26pt;font-weight:700}.ask .hint{font-size:19pt;font-style:italic;color:#GRAY;font-weight:400;margin-top:2px}
@@ -309,6 +346,7 @@ ol.choices li.correct{color:#RED;font-weight:700}
 .cover .box p{margin:4px 0}.cover .y{font-size:17pt;font-style:italic;color:#GRAY}.cover .td{font-size:17pt;font-weight:700}
 .contents{padding:0 40px}.contents a{display:flex;justify-content:space-between;text-decoration:none;color:#INK;font-size:22pt;padding:6px 0;border-bottom:1px solid #LT}
 .contents.tight a{font-size:19pt;padding:2px 0;line-height:1.3}.contents a b{display:inline-block;width:150px}.contents a span.n{font-size:17pt;font-style:italic;color:#GRAY}
+.fig{flex:1 1 0;min-height:0;display:flex;align-items:center;justify-content:center;margin:4px 0}.fig img{max-width:100%;max-height:100%;width:auto;height:auto}
 sup{font-size:.62em;vertical-align:.45em;line-height:0}
 #hud{position:fixed;right:14px;bottom:10px;color:#bbb;font:13px/1.2 system-ui,sans-serif;opacity:.7}
 @media print{html,body{background:#fff}#stage{position:static;transform:none!important;box-shadow:none;width:WPXpx;height:HPXpx}.slide{display:flex!important;position:relative;page-break-after:always;height:HPXpx}#hud{display:none}}

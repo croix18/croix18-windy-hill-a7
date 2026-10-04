@@ -83,7 +83,7 @@ L = dict(
              wrong="0.000025 — point moved five places [8.NSO.1.4: 10⁻⁴ moves the point four places]; 25,000 — point moved right instead of left [negative exponent read as a large number]"),
         dict(text=["A machine's cutting tolerance is  0.0000988  inch.", "The part it cuts is 4 inches long.", "**Write the tolerance in scientific notation."],
              qtext="A machine's cutting tolerance is 0.0000988 inch. The part it cuts is 4 inches long. Write the tolerance in scientific notation.",
-             unneeded="4-inch length of the part", hint="Every nonzero digit stays in the coefficient.", gloss="the 9 is in the hundred-thousandths place", answer="9.88 × 10⁻⁵",
+             unneeded="4-inch length of the part", gloss="the 9 is in the hundred-thousandths place", answer="9.88 × 10⁻⁵",
              note="Ruling 22's board: the part's length is there to be read past. The book's ticket-out-the-door value underneath. Four zeros after the point but the 9 is in the fifth place: 10⁻⁵. A board with 9.88 × 10⁻⁴ counted zeros; a board with 988 × 10⁻⁷ is equal in value but broke the coefficient rule.", check=("eq", "F(988,100)*F(10)**-5", "F(988,10**7)"),
              wrong="9.88 × 10⁻⁴ — counted the zeros [8.NSO.1.4: exponent = places moved]; 988 × 10⁻⁷ — coefficient not in [1, 10) [B1G-M 8.NSO.1.4 misconception]; anything built from 4 — the unneeded figure was used",
              not_sci=True),

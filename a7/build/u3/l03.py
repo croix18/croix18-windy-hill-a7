@@ -5,7 +5,7 @@ L = dict(
     benchmark_text="Know and apply the laws of exponents to evaluate numerical expressions and generate equivalent numerical expressions, limited to whole-number exponents and rational-number bases.",
     target="I can apply more than one law of exponents to evaluate an expression and to write an equivalent one.",
     yesterday="Yesterday: seven laws, one at a time.",
-    today="Today: two or three laws in one expression — and the order is yours.",
+    today="Today: several laws in one expression — the order is yours.",
     essential="How can the laws of exponents be used to generate equivalent numeric expressions?",
     building_on="Lessons 3.01–3.02 — the seven laws; MA.7.NSO.2.1 — order of operations with rational numbers.",
     working_toward="MA.8.NSO.1.3 — the same combined work with integer exponents (3.06–3.07); MA.8.AR.1.1 — with variable bases (Thread A).",
@@ -81,7 +81,7 @@ L = dict(
     whiteboard=[
         dict(text=["A warehouse holds  $6^{4}$  boxes in  $6^{2}$  equal rows.", "Each box weighs 3 kilograms.", "**How many boxes are in each row?"],
              qtext="A warehouse holds 6⁴ boxes in 6² equal rows. Each box weighs 3 kilograms. How many boxes are in each row?",
-             unneeded="weight of 3 kilograms", hint="Find the value.", gloss="6⁴ over 6², so 6²", answer="36",
+             unneeded="weight of 3 kilograms", gloss="6⁴ over 6², so 6²", answer="36",
              note="Ruling 22's board: the weight is there to be read past. A quotient of powers to open the round. A board with 1296 never divided by the rows; a board with 6⁶ added the exponents.", check=("eq", "6**4/6**2", "36"),
              wrong="1296 — the 6² rows were ignored [the quotient was never taken]; 6⁶ or 46,656 — the exponents were added [confused with product of powers]; anything built from 3 — the unneeded figure was used"),
         dict(latex="\\left(3^{0}\\cdot 3^{2}\\right)^{3}", hint="Find the value.", gloss="(3²)³ = 3⁶", answer="729",

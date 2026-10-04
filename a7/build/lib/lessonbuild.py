@@ -1,8 +1,13 @@
-"""Turn one LESSON spec into: Slides (.pptx + side-car), Question Bank, Question Bank - Additional,
-both keys, and the Teacher Edition. Every item's answer is re-derived by sympy at build time
-from its `check` field (mathcheck); an item with no check and no acknowledged human derivation
-fails the build. Every multiple-choice wrong option must carry a named error (distractorcheck,
-§16 rule 4, mandatory under ruling 10).
+"""Turn one LESSON spec into its deck (.pptx with side-car, and .html), teacher's edition and
+lesson plan, plus whatever the course's profile adds: question banks and their keys, the
+independent set as a handout, or one bank file per unit (lib/profile.py).
+
+The gates, each a refusal to build: every item's answer is re-derived by sympy from its `check`
+field (mathcheck) — an item with no check and no acknowledged human derivation fails; every
+multiple-choice wrong option carries a named error, and no two options are the same number
+(distractorcheck, §16 rule 4); the benchmark's boundaries hold (capcheck, ruling 13); the period
+has the shape the rulings give it (rulingcheck: 21, 22, 25, 26, 28); and the keyed letters are
+not guessable (balancecheck).
 """
 import os, re, json, itertools
 import sympy as sp
@@ -13,10 +18,12 @@ from .dockit import Doc, INK, VOCAB, RED, GRAY
 from .deckkit import Deck, LM, CW, FOOT_Y
 from .htmlkit import HtmlDeck
 from . import tekit
-from . import plankit
+from . import slotmark
 from .tekit import TE
+from .profile import C
 
-COURSE = "Grade 7 Accelerated"
+COURSE = C.COURSE
+PREFIX = C.PREFIX
 
 
 # ---------------------------------------------------------------- mathcheck
@@ -37,7 +44,7 @@ def _sigdigs(num):
 _OPT_SUP = str.maketrans("⁰¹²³⁴⁵⁶⁷⁸⁹⁻", "0123456789-")
 _OPT_SYMS = {s: sp.Symbol(s, positive=True) for s in "abcdkmnpqrstwxyz"}
 _OPT_TR = standard_transformations + (implicit_multiplication_application, convert_xor, rationalize)
-_OPT_UNIT = re.compile(r"\s+(?:cm|mm|km|m|kg|mg|g|mL|L|in|ft|mi|lb|s|h)[²³]?\s*$")
+_OPT_UNIT = re.compile(r"\s+((?:cm|mm|km|m|kg|mg|g|mL|L|in|ft|yd|mi|lb|s|h)[²³]?)\s*$")
 # A question that asks for a FORM may legitimately offer a wrong option equal in value to the key
 # (52 × 10⁶ is 52,000,000 and is not scientific notation). form_only is only honoured when the
 # question names the form it is asking for, in one of these words.
@@ -186,6 +193,9 @@ def _samevalue(code, grp, i, it, corr):
     vals = [_optval(c) for c in it["choices"]]
     if any(v is None for v in vals):
         return out
+    # the unit is part of the answer: 36 cm and 36 cm² are different options, and a board that
+    # offers both is asking exactly that (M7 Unit 4)
+    units = [(_OPT_UNIT.search(str(c).strip()) or [None, ""])[1] for c in it["choices"]]
     fo = set(it.get("form_only", ""))
     where = f"{code} {grp}[{i}]"
     if fo:
@@ -203,7 +213,7 @@ def _samevalue(code, grp, i, it, corr):
             same = sp.simplify(vals[a] - vals[b]) == 0
         except Exception:
             same = False
-        if not same:
+        if not same or units[a] != units[b]:
             continue
         la, lb = chr(65 + a), chr(65 + b)
         ka, kb = a in corr, b in corr
@@ -245,18 +255,23 @@ def distractorcheck_lesson(L):
                         out.append(f"{L['code']} {grp}[{i}]: select-all has {n_wrong} wrong options "
                                    f"but only {nots} clauses asserting an option is NOT the target; "
                                    f"every wrong option needs its own (\"true\", \"… != …\") clause")
+                # the letters an item's own words name must be the letters its key gives: an answer
+                # line, a "Reveal C." and an error keyed to the right option all go stale the moment
+                # the options are reordered (shuffle_choices.py rewrites them; this holds them there)
+                keyed = "".join(chr(65 + k) for k in sorted(corr))
+                extra = sorted(set((it.get("errors") or {})) & {chr(65 + k) for k in corr})
+                if extra:
+                    out.append(f"{L['code']} {grp}[{i}]: option {', '.join(extra)} is keyed correct and also carries a named error")
+                am = re.match(r"^([A-F])(?: —|$)", str(it.get("answer") or ""))
+                if am and len(corr) == 1 and am.group(1) != keyed:
+                    out.append(f"{L['code']} {grp}[{i}]: the answer line says {am.group(1)} and the key is {keyed}")
+                rm = re.search(r"\bReveal ([A-F])\b", str(it.get("note_a") or ""))
+                if rm and len(corr) == 1 and rm.group(1) != keyed:
+                    out.append(f"{L['code']} {grp}[{i}]: the reveal note says {rm.group(1)} and the key is {keyed}")
                 vals = [str(c) for c in it["choices"]]
                 if len(set(vals)) != len(vals):
                     out.append(f"{L['code']} {grp}[{i}]: two choices print the same value")
                 out += _samevalue(L["code"], grp, i, it, corr)
-                # A whiteboard's options are drawn straight onto the slide as text; only the .docx
-                # surfaces render $latex$. A dollar-delimited option on a board prints its braces.
-                if grp == "whiteboard":
-                    for k, c in enumerate(vals):
-                        if "$" in c:
-                            out.append(f"{L['code']} whiteboard[{i}] option {chr(65 + k)}: "
-                                       f"$latex$ in a board's option, which the slide prints literally "
-                                       f"(use plain text with unicode superscripts): {c[:40]!r}")
     return out
 
 
@@ -329,13 +344,13 @@ def _rad_ok(v, deg):
 TEACHER_PROSE = {"note", "note_q", "wrong", "errors", "source", "warmup_note"}
 
 
-def boundcheck_str(s, where, code):
+def boundcheck_str(s, where, code, caps=("gap", "radicand")):
     """Ruling 13 for Unit 4: addition and subtraction in scientific notation keep the two
     exponents within 2 of each other; radicands are perfect squares up to 225 and perfect cubes
     from -125 to 125. A block that shows a wider gap or a stretch radicand on purpose carries
     not_gap=True or not_bound=True and says why in its note."""
     out = []
-    terms = list(_SCI_TERM.finditer(s))
+    terms = list(_SCI_TERM.finditer(s)) if "gap" in caps else []
     for a, b in zip(terms, terms[1:]):
         if _GAP_JUNK.sub("", s[a.end():b.start()]) in _ADDSUB:
             e1, e2 = _sci_exp(a), _sci_exp(b)
@@ -343,9 +358,9 @@ def boundcheck_str(s, where, code):
                 out.append(f"{code} {where}: adding or subtracting 10^{e1} and 10^{e2} — a gap of "
                            f"{abs(e1 - e2)}, and MA.8.NSO.1.5 limits it to {GAP_MAX} "
                            f"(tag the block not_gap=True if the item is about the boundary)")
-    rads = [(int(m.group(1) or 2), m.group(2)) for m in _SQRT_TEX.finditer(s)]
+    rads = [(int(m.group(1) or 2), m.group(2)) for m in _SQRT_TEX.finditer(s)] if "radicand" in caps else []
     rads += [(2 if m.group(0)[0] == "\u221a" else 3, m.group(1) or m.group(2))
-             for m in _SQRT_UNI.finditer(s)]
+             for m in _SQRT_UNI.finditer(s)] if "radicand" in caps else []
     for deg, tex in rads:
         if deg not in (2, 3):
             out.append(f"{code} {where}: a {deg}th root — MA.8.NSO.1.7 is square and cube roots only")
@@ -364,13 +379,15 @@ def boundcheck_str(s, where, code):
 
 
 def capcheck_lesson(L):
-    """Ruling 13 caps for this unit: integer exponents only; rational bases; sci-notation
-    coefficients in [1,10). Walks every item (and every notes/example block) of the spec;
-    a block that deliberately shows a coefficient outside [1,10) — because it is ABOUT the
-    constraint — carries not_sci=True."""
+    """Ruling 13's caps, the ones the course's profile names (C.CAPS): integer exponents only
+    ("fracexp"); sci-notation coefficients in [1,10) ("sci"); and, where MA.8.NSO.1.5 / 1.7 are
+    taught, the exponent gap and the radicand bounds ("gap", "radicand"). Walks every item (and
+    every notes/example block) of the spec; a block that deliberately shows a coefficient outside
+    [1,10) — because it is ABOUT the constraint — carries not_sci=True."""
     out = []
-    blob = json.dumps(L, ensure_ascii=False)
-    if re.search(r"\^\{\s*\\frac", blob) or re.search(r"\^\{\s*\d+/\d+", blob):
+    caps = C.CAPS
+    blob = json.dumps(L, ensure_ascii=False, default=str)
+    if "fracexp" in caps and (re.search(r"\^\{\s*\\frac", blob) or re.search(r"\^\{\s*\d+/\d+", blob)):
         out.append(f"{L['code']}: fractional exponent found")
 
     def scan(obj, where, skip=()):
@@ -382,13 +399,13 @@ def capcheck_lesson(L):
             for i, v in enumerate(obj):
                 scan(v, f"{where}[{i}]", skip)
         elif isinstance(obj, str):
-            if "not_sci" not in skip:
+            if "not_sci" not in skip and "sci" in caps:
                 for m in _SCI.finditer(obj):
                     v = float(m.group(1))
                     if not (1 <= v < 10):
                         out.append(f"{L['code']} {where}: scientific-notation coefficient {v} outside [1,10) (tag the block not_sci=True if deliberate)")
             key = where.rsplit(".", 1)[-1].split("[")[0]
-            for f in ([] if key in TEACHER_PROSE else boundcheck_str(obj, where, L["code"])):
+            for f in ([] if key in TEACHER_PROSE else boundcheck_str(obj, where, L["code"], caps)):
                 if ("not_gap" in skip and "a gap of" in f) or ("not_bound" in skip and "MA.8.NSO.1.7" in f) \
                         or ("not_bound" in skip and "could not be checked" in f):
                     continue
@@ -426,7 +443,7 @@ def _fmt_q(doc, it, number=None, key=False, points=None):
         parts = [(p["label"], p["stem"], p.get("answer"), p.get("why"), p.get("space")) for p in it["parts"]]
     doc.question(it["stem"], answer=it.get("answer"), reasoning=it.get("why"), space=it.get("space", 1.0),
                  parts=parts, choices=it.get("choices"), choice_answer=it.get("correct"), number=number,
-                 lines=it.get("lines"), points=points)
+                 lines=it.get("lines"), points=points, fig=it.get("fig"))
 
 
 def _label(L):
@@ -454,7 +471,7 @@ def build_bank(L, items, kind, key, outdir):
             continue
         n += 1
         _fmt_q(doc, it, key=key)
-    name = f"A7 {code}  {kind}{' Key' if key else ''}.docx"
+    name = f"{PREFIX} {code}  {kind}{' Key' if key else ''}.docx"
     path = os.path.join(outdir, name)
     doc.save(path)
     return path
@@ -465,7 +482,7 @@ def build_deck(L, outdir):
     footer = f"{COURSE} · Unit {L['unit']} · {_label(L)} — {L['title']}"
     D = Deck(COURSE, L["unit"], _label(L), L["title"], footer)
     _fill_deck(D, L)
-    name = f"A7 {code}  Slides.pptx"
+    name = f"{PREFIX} {code}  Slides.pptx"
     path = os.path.join(outdir, name)
     D.save(path)
     return path
@@ -477,44 +494,58 @@ def build_html_deck(L, outdir):
     footer = f"{COURSE} · Unit {L['unit']} · {_label(L)} — {L['title']}"
     D = HtmlDeck(COURSE, L["unit"], _label(L), L["title"], footer)
     _fill_deck(D, L)
-    path = os.path.join(outdir, f"A7 {code}  Slides.html")
+    path = os.path.join(outdir, f"{PREFIX} {code}  Slides.html")
     D.save(path)
     return path
 
 
 def build_unit_deck(lessons, rows, U, outdir):
     """The whole unit as one file, in teaching order: a cover, a contents slide whose rows jump to
-    each lesson's title slide, then every lesson's slides exactly as its own deck draws them.
-    The per-lesson decks stay — their side-cars feed the Teacher Editions and the lesson plans —
-    so this file carries no side-car of its own."""
+    each lesson's title slide, then every lesson's slides exactly as its own deck draws them (the
+    review day too, where the course builds it as a lesson). The per-lesson decks stay — their
+    side-cars feed the Teacher Editions and the lesson plans — so this file carries no side-car
+    of its own. The .html twin is the console (lib/consolekit.py)."""
     unit = U["unit"]
+    bal = balancecheck_unit(lessons)
+    for f in bal:
+        print("  ", f)
+    if bal:
+        raise SystemExit("unit deck: build refused (balancecheck)")
     count = ["No", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve"]
-    n = count[len(lessons)] if len(lessons) < len(count) else str(len(lessons))
+    taught = [L for L in lessons if not L.get("review")]
+    n = count[len(taught)] if len(taught) < len(count) else str(len(taught))
+    what = f"{n} lessons" + (" and the review day," if len(taught) < len(lessons) else "") + " in teaching order"
     paths = []
     for cls, ext in ((Deck, "pptx"), (HtmlDeck, "html")):
         D = cls(COURSE, unit, f"Unit {unit}", U["title"], f"{COURSE} · Unit {unit} — {U['title']}")
-        D.unit_cover(U["title"], [f"{n} lessons in teaching order  ·  the next slide jumps to each one"])
+        D.unit_cover(U["title"], [f"{what}  ·  the next slide jumps to each one"])
         contents = D.section("Contents", "Click a lesson to jump to it. Each lesson numbers its slides from 1, as its Teacher Edition does.", 0, "", "contents")
         starts = []
         for L in lessons:
             starts.append(D.count())                  # the lesson's title slide, 0-based
             D.start_lesson(_label(L), L["title"], f"{COURSE} · Unit {L['unit']} · {_label(L)} — {L['title']}", code=L["code"])
             _fill_deck(D, L)
+        pitch = min(0.46, (FOOT_Y - 0.12 - 1.95) / max(1, len(rows)))     # eleven rows still end above the footer
         y = 1.95
         for (label, title), i in zip(rows, starts):
-            D.link_row(contents, y, (label, title), f"slide {i + 1}", D.slide_ref(i))
-            y += 0.46
-        path = os.path.join(outdir, f"A7 {unit}  Unit Slides.{ext}")
+            D.link_row(contents, y, (label, title), f"slide {i + 1}", D.slide_ref(i), pitch=pitch)
+            y += pitch
+        path = os.path.join(outdir, f"{PREFIX} {unit}  {C.UNIT_DECK}.{ext}")
         D.save(path, sidecar=False, **({"console": True} if ext == "html" else {}))
         paths.append(path)
     return paths[0]
 
 
+def _math_row(row):
+    """A row with real $…$ math in it (\\$ is money, not math)."""
+    return "$" in row.replace("\\$", "")
+
+
 def _fill_deck(D, L):
-    """Every slide of one lesson, appended to D. Colour (the base/exponent slots, HOUSE STYLE §2a)
-    goes on the surfaces where the teacher shows — Notes, worked examples, and every reveal — and
-    is withheld wherever the student still has to decide: warm-up, example and Your Turn prompts,
-    whiteboard questions (rules 4 and 6)."""
+    """Every slide of one lesson, appended to D. Colour (the slots, HOUSE STYLE §2a) goes on the
+    surfaces where the teacher shows — Notes, worked examples, and every reveal — and is withheld
+    wherever the student still has to decide: warm-up, example and Your Turn prompts, whiteboard
+    questions (rules 4 and 6)."""
     D.title_slide(L["benchmark"], L["target"], L["yesterday"], L["today"], minutes=1,
                   note=L.get("title_note", "Post the learning target. Say the 'today' line and nothing else yet."))
     # ---- warm-up: four retrieval questions, one slide; reveal slide after
@@ -534,12 +565,14 @@ def _fill_deck(D, L):
             D.items(note["items"], size=note.get("size", 23), panel=note.get("panel", False), letters=note.get("letters", True), slots=True)
         if note.get("table"):
             D.table(*note["table"], size=note.get("tsize", 16))
+        if note.get("fig"):
+            D.figure(note["fig"])
         if note.get("math"):
             for mrow in note["math"]:
                 D.math_row(mrow, surface="slidemid", gap=0.3, slots=True)
         if note.get("text"):
             for t in note["text"]:
-                D.text(t, 22)
+                D.text(t, 22, slots=True)
         if note.get("items2"):
             D.items(note["items2"], size=note.get("size", 23), letters=note.get("letters", True), start=len(note.get("items", [])), slots=True)
     # ---- examples: question slide, worked slide(s), your turn q + reveal
@@ -547,7 +580,9 @@ def _fill_deck(D, L):
         D.section(ex["title"], ex.get("sub", ""), ex["min_q"], ex["note_q"], "example")
         D.cursor = 2.3
         for row in ex["prompt"]:
-            D.math_row(row, surface="slidemid", gap=0.35) if "$" in row else D.text(row, 24, align="center")
+            D.math_row(row, surface="slidemid", gap=0.35) if _math_row(row) else D.text(row, 24, align="center")
+        if ex.get("fig"):
+            D.figure(ex["fig"])
         if ex.get("ask"):
             D.cursor += 0.2
             D.text(ex["ask"], 24, bold=True, align="center")
@@ -559,7 +594,7 @@ def _fill_deck(D, L):
                     latex, gloss = row
                     D.worked_row(latex, gloss, slots=True)
                 else:
-                    D.text(row, 23)
+                    D.text(row, 23, slots=True)
             if w.get("answer"):
                 D.answer_line(w["answer"], y=max(D.cursor + 0.2, 5.0))
             if w.get("items"):
@@ -569,23 +604,24 @@ def _fill_deck(D, L):
             D.section("Your Turn", "Same steps, your numbers. Boards up when done.", yt.get("min", 2), yt["note"], "yourturn")
             D.cursor = 2.4
             for row in yt["prompt"]:
-                D.math_row(row, surface="slidebig", gap=0.35) if "$" in row else D.text(row, 24, align="center")
+                D.math_row(row, surface="slidebig", gap=0.35) if _math_row(row) else D.text(row, 24, align="center")
             D.section("Your Turn", "Answer.", 1, "Reveal; name what a wrong board most likely did (see the note above).", "yourturn")
             D.cursor = 2.4
             for row in yt["prompt"]:
-                D.math_row(row, surface="slidebig", gap=0.35, slots=True) if "$" in row else D.text(row, 24, align="center")
+                D.math_row(row, surface="slidebig", gap=0.35, slots=True) if _math_row(row) else D.text(row, 24, align="center", slots=True)
             if yt.get("gloss"):
-                D.text(yt["gloss"], 24, color=GRAY, align="center")
+                D.text(yt["gloss"], 24, color=GRAY, align="center", slots=True)
             if yt.get("answer_latex"):
                 D.answer_math(yt["answer_latex"], y=max(D.cursor + 0.2, 4.9))
             else:
                 D.answer_line(yt["answer"], y=max(D.cursor + 0.2, 5.0))
-    # ---- whiteboards: 9 questions, question + reveal each
+    # ---- whiteboards: nine questions, question + reveal each
     wb = L["whiteboard"]
-    assert len(wb) == 9, f"{L['code']}: whiteboard round must be nine questions, got {len(wb)}"
+    N = C.WB_COUNT
+    assert len(wb) == N, f"{L['code']}: whiteboard round must be {N} questions, got {len(wb)}"
     for qi, q in enumerate(wb):
-        last = qi == 8
-        title = f"Whiteboards   ·   Question {qi + 1} of 9"
+        last = qi == N - 1
+        title = f"Whiteboards   ·   Question {qi + 1} of {N}"
         subq = "Take your time. Boards up when you have written it." if last else "Boards up on three."
         meta = _board_meta(L, qi, q)
         D.section(title, subq, 0, q["note"], "wb")
@@ -596,25 +632,39 @@ def _fill_deck(D, L):
         D.tag(wb=dict(meta, reveal=True))
         D.cursor = 2.3
         _wb_body(D, q, reveal=True)
-    # ---- independent set (ruling 21), then IXL
-    D.independent(INDEP_MIN)
+    # ---- the independent set (ruling 21), the close where the course has one, then IXL last
+    T = L["te"]
+    if not L.get("no_set"):           # Croix, 27 September: the M7 Unit 4 lessons carry no six-question set
+        if C.SET == "handout":
+            D.independent(INDEP_MIN)
+        else:
+            qs = [slotmark.strip(q["stem"]) for q in L["independent"] if not q.get("heading")]
+            assert len(qs) == 6, f"{L['code']}: the independent set is six questions, got {len(qs)}"
+            D.independent_set(INDEP_MIN, T.get("set_note", "Silent, on paper, at their own pace. Circulate and "
+                                               "mark the first two only; what is not finished goes home."), qs)
+    if C.CLOSE:
+        D.close(T["close"], 1, T.get("close_note", "Say it, then have the room say it back." +
+                                     ("" if (L.get("no_set") or C.SET == "handout") else " Collect the set on the way out.")))
     D.ixl(L["ixl"], IXL_MIN, **({"due": L["ixl_due"]} if L.get("ixl_due") else {}))
 
 
-IXL_MIN = 5
-INDEP_MIN = 6            # ruling 21: six questions, six minutes, after the boards
+IXL_MIN = C.IXL_MIN
+INDEP_MIN = C.SET_MIN    # ruling 21: six questions, six minutes, after the boards
 
 
 def _board_meta(L, qi, q):
     """What the console needs to run a board: its number, kind, the letters and the keyed one(s),
-    the spec's error key per wrong option (the misconception each tally counts), the benchmark."""
+    the spec's error key per wrong option (the misconception each tally counts), the benchmark
+    (the lesson's first, when it names two)."""
     kind = q.get("kind", "free")
-    meta = {"i": qi + 1, "kind": kind, "benchmark": L["benchmark"].split("·")[0].strip(), "lesson": L["code"]}
+    bm = (L.get("benchmarks") or [(L["benchmark"], "")])[0][0]
+    meta = {"i": qi + 1, "kind": kind, "benchmark": bm.split("·")[0].split(",")[0].strip(), "lesson": L["code"]}
     if kind == "mc":
         letters = [chr(65 + k) for k in range(len(q["choices"]))]
         c = q["correct"]
         key = "".join(letters[k] for k in (c if isinstance(c, (list, tuple)) else [c]))
-        meta.update(letters=letters, key=key, errors={k: v.split("[")[0].strip() for k, v in q.get("errors", {}).items()})
+        meta.update(letters=letters, key=key,
+                    errors={k: slotmark.strip(v).split("[")[0].strip() for k, v in q.get("errors", {}).items()})
     return meta
 
 
@@ -623,26 +673,38 @@ def _wb_body(D, q, reveal):
     if q.get("latex"):
         D.math(q["latex"], "slidebig", slots=reveal)
     rows = q.get("text", [])
-    word = bool(q.get("unneeded")) or any(r.startswith("**") for r in rows)
+    word = any(r.startswith("**") for r in rows)
     if word:
         # A word board reads like a page, not a poster: a left-aligned block, 24 pt, the setup in
-        # roman and the ask in bold on its own line(s). Croix skipped every centred version
-        # ("the formatting is horrible, I often don't understand what they are asking", 3 Oct).
+        # roman and the ask in bold on its own line(s) — a row that begins with **. Croix skipped
+        # every centred version ("the formatting is horrible, I often don't understand what they
+        # are asking", 3 Oct). The ask is ON the slide, in the text: M7's first decks kept it in
+        # the grey hint under "Answer it.", or only in the teacher's edition (found 4 Oct).
         D.cursor = 2.05
         for r in rows:
             bold = r.startswith("**")
             r = r.lstrip("*")
-            if "$" in r:
+            if _math_row(r):
                 D.math_row(r, surface="slide", gap=0.22, size=24, align="left", x=LM + 0.5, bold=bold, slots=reveal)
             else:
-                D.text(r, 24, bold=bold, align="left", x=LM + 0.5, w=CW - 0.6)
+                D.text(r, 24, bold=bold, align="left", x=LM + 0.5, w=CW - 0.6, slots=reveal)
         D.cursor += 0.05
     else:
         for row in rows:
-            if "$" in row:
+            if _math_row(row):
                 D.math_row(row, surface="slidemid", gap=0.3, size=26, slots=reveal)
             else:
-                D.text(row, 26 if len(row) < 60 else 23, align="center")
+                D.text(row, 26 if len(row) < 60 else 23, align="center", slots=reveal)
+    # fig_a: the reveal may show a different picture — M7 4.10 colours the rim for a circumference
+    # and the face for an area, so the answer slide says what was measured before the number
+    fig = q.get("fig_a") if (reveal and q.get("fig_a")) else q.get("fig")
+    if fig:
+        # the figure is the flexible block: it keeps the room what follows it needs — the gloss
+        # and the answer on a reveal, the ask and its hint on the question, the options on either
+        # — and is drawn smaller rather than pushing them into each other (4.06 boards 1–3)
+        below = ((0.75 if q.get("gloss") else 0.0) + 0.85) if reveal else (1.15 if q.get("hint") or kind == "written" else 0.75)
+        below += 1.75 if kind == "mc" else 0.0
+        D.figure(dict(fig, reserve=max(fig.get("reserve", 0.7), below)))
     if kind == "mc":
         D.cursor += 0.1
         D.choices(q["choices"], correct=(q["correct"] if reveal else None))
@@ -650,7 +712,7 @@ def _wb_body(D, q, reveal):
         if kind == "written":
             D.ask("Write your answer in sentences.", q.get("hint", "This one is written work. Say why."))
         else:
-            D.ask("Answer it.", None if word else q.get("hint"))   # a word board's bold ask IS the hint
+            D.ask("Answer it.", q.get("hint"))     # the hint is a scaffold, shown when the spec gives one
     else:
         if q.get("gloss"):
             D.gloss(q["gloss"])
@@ -661,7 +723,7 @@ def _wb_body(D, q, reveal):
             D.answer_line(q["answer"], y=y)
 
 
-def board_text(q):
+def board_text(q, sep="  "):
     """The board's question as prose: its latex and its text lines, in the order they appear."""
     if q.get("qtext"):
         return q["qtext"]
@@ -669,7 +731,7 @@ def board_text(q):
     if q.get("latex"):
         bits.append("$" + q["latex"] + "$")
     bits += [t.lstrip("*") for t in q.get("text", [])]
-    return "  ".join(bits)
+    return sep.join(bits)
 
 
 def _first_sentence(t):
@@ -692,6 +754,9 @@ def _slide_line(s):
 
 SPLIT_MOVE = ("Split (no option near two-thirds)? Sixty seconds, convince your neighbour, "
               "re-vote, then reveal.")
+# ruling 20 — the one peer move, as the table-style edition and the labels-style plan print it
+REVOTE = getattr(C, "REVOTE", "Split — no option near two-thirds? Sixty seconds, convince the person next to you, "
+                              "re-vote, then reveal.")
 
 
 def _locator(ev):
@@ -701,8 +766,14 @@ def _locator(ev):
 
 
 def build_te(L, deck_path, outdir):
-    """Ruling 26: four pages or fewer, read in twenty minutes. Page 1 is the period; then one
-    line per slide; then Misconceptions to Watch. No keys, no bank commentary, no paragraphs."""
+    """Ruling 26: the lean teacher's edition, four pages or fewer, in the course's style."""
+    L = slotmark.strip_deep(L)          # a printed page carries no colour (§2a)
+    return (_te_table if C.TE_STYLE == "table" else _te_lines)(L, deck_path, outdir)
+
+
+def _te_lines(L, deck_path, outdir):
+    """Page 1 is the period; then one line per slide, each board inline with its answer and its
+    named wrong answers; then Misconceptions to Watch. No keys, no bank commentary, no paragraphs."""
     code = L["code"]
     side_path = deck_path[:-5] + ".notes.json"
     rows, wb_min, side, blocks = tekit.plan_from_sidecar(side_path)
@@ -784,10 +855,131 @@ def build_te(L, deck_path, outdir):
         te.rich(p, first, size=10)
     if T.get("materials"):
         te.label("Materials", T["materials"], after=2)
-    name = f"A7 {code}  Teacher Edition.docx"
+    name = f"{PREFIX} {code}  Teacher Edition.docx"
     path = os.path.join(outdir, name)
     te.save(path)
     return path
+
+
+def _te_table(L, deck_path, outdir):
+    """Page 1 is the period: standards and target with TRUTH's must / must-not lines, the MTR, the
+    timing table, and the three sentences to say out loud. Then one line per slide, in slide
+    order, and the boards as one table. Keys are not here — they are in Answer Keys, and the bank
+    commentary is in Reference/BANK. Four pages or fewer, checked after the render."""
+    code = L["code"]
+    side_path = deck_path[:-5] + ".notes.json"
+    rows, wb_min, side, blocks = tekit.plan_from_sidecar(side_path)
+    eyebrow = f"{COURSE}  ·  Unit {L['unit']}  ·  {_label(L)}"
+    te = TE(eyebrow, L["title"])
+    T = L["te"]
+
+    # ---- page 1: the period, and nothing else
+    te.h1("The Period")
+    for bc, bt in L.get("benchmarks") or [(L["benchmark"], L["benchmark_text"])]:
+        te.label(bc, bt)          # a lesson on two benchmarks (4.10) prints both, in full
+    if T.get("must"):
+        te.label("Must", T["must"])
+    if T.get("must_not"):
+        te.label("Must not", T["must_not"])
+    te.label("Target", L["target"])
+    mtrs = L.get("mtr", [])
+    if mtrs:
+        # codes and the evidence only — the state's full wording is in the lesson plan (ruling 25)
+        te.label("MTR", "; ".join(f"**{c}** {why}" for c, why in mtrs))
+    # a Your Turn is part of its example as far as the person reading this at 8:05 is concerned
+    disp = []
+    for seg, rng, mins in rows:
+        if seg.startswith("Your Turn") and disp and disp[-1][0].startswith("Example"):
+            a, r0, m0 = disp[-1]
+            disp[-1] = (a, f"{r0.split(chr(8211))[0]}\u2013{rng.split(chr(8211))[-1]}", m0 + mins)
+        else:
+            disp.append((seg, rng, mins))
+    tekit.timing_table(te, disp)
+    te.body(f"The board round is the remainder — **{wb_min} min** here; slide numbers are read from the deck.")
+    te.h2("Say these three out loud today")
+    te.numbered_bold(T["say"])
+    te.page_break()
+
+    # ---- one line per slide. A reveal slide is not its own line (it is the same slide with the
+    # answer on it), and the board round is one line because the table below carries every board.
+    te.h1("The Slides, One Line Each")
+    for b in blocks:
+        if b["kind"] == "wb":
+            te.slide_line(f"{b['first']}–{b['last']}. The board round",
+                          "One board at a time, boards down until the cue. Every board, its answer "
+                          "and its named wrong answers are in the table below.",
+                          f"{wb_min} min")
+            continue
+        for s_ in b["subs"]:
+            if (s_.get("sub") or "").strip() in ("Answer.", "Answers."):
+                continue
+            head = f"{s_['n']}. {s_['title']}" + (f" — {s_['sub']}" if s_["sub"] else "")
+            line = (s_["note"] or "").replace("OFF:", "").strip()
+            line = " ".join(x.strip() for x in line.split("\n") if x.strip())
+            te.slide_line(head, line, f"{s_['min']} min" if s_["min"] else "")
+
+    # ---- the boards: answer, named wrong answers, what to say on a split
+    te.h1("The Boards")
+    data = [["#", "Question", "Answer", "A wrong board says"]]
+    for i, q in enumerate(L["whiteboard"]):
+        qt = board_text(q, " ")
+        ans = q.get("te_answer") or q.get("answer") or _plain(q.get("answer_latex", ""))
+        errs = q.get("errors") or {}
+        et = "; ".join(f"({k}) {v}" for k, v in errs.items()) if errs else q.get("wrong", "")
+        if q.get("unneeded"):
+            et = (et + "; " if et else "") + f"[{q['unneeded']} is not needed — ruling 22]"
+        data.append([str(i + 1), qt, {"text": ans, "bold": True, "italic": True, "color": RED}, et])
+    te.table([340, 2860, 2140, 4020], data, header=True, size=9)
+    te.body(f"**On a split:** {REVOTE}")
+
+    # ---- the six in-class questions, answers only (they are on the slide, not a handout)
+    if not L.get("no_set"):
+        te.h2("Independent practice — the six answers")
+        te.body("  ".join(f"**{i+1}.** {_plain((q.get('answer') or '').strip())}"
+                          for i, q in enumerate(L["independent"])))
+
+    # ---- misconceptions, each tied to its board
+    te.h1("Misconceptions to Watch")
+    te.bullets(T["watch"])
+    if not L.get("review"):
+        te.body(f"More questions on this lesson, with answers and the variation behind them, are in "
+                f"**BANK - Unit {L['unit']}.md** (Reference). " +
+                (f"Handout: {L['handout']}." if L.get("handout") else "Nothing in this lesson is a handout."))
+
+    name = f"{PREFIX} {code}  Teacher Edition.docx"
+    path = os.path.join(outdir, name)
+    te.save(path)
+    return path
+
+
+_FRAC = re.compile(r"\\d?frac\{([^{}]*)\}\{([^{}]*)\}")
+
+
+def _plain(latex):
+    """A one-line, image-free rendering of an answer for the teacher's edition table. A stacked
+    fraction set as a picture blows the row height out and costs a page (ruling 26)."""
+    t = _FRAC.sub(r"\1/\2", (latex or "").replace("\\$", "\ue000"))
+    t = t.replace("\\cdot", "·").replace("\\times", "×").replace("$", "").strip()
+    return t.replace("\ue000", "\\$")               # money stays escaped for rich()
+
+
+def _answers_list(te, items, title):
+    te.h2(title)
+    n = 0
+    for it in items:
+        if it.get("heading") or it.get("table"):
+            continue
+        n += 1
+        p = te.para("", before=0, after=3, indent=360, hanging=360)
+        te._run(p, f"{n}.  ", 10, bold=True)
+        if it.get("parts"):
+            te.rich(p, "  ".join(f"({pp['label']}) " + (pp.get('answer') or '') for pp in it["parts"]), size=10, bold=True, italic=True, color=RED)
+        elif it.get("choices"):
+            corr = it["correct"] if isinstance(it["correct"], (list, tuple)) else [it["correct"]]
+            te.rich(p, ", ".join(chr(65 + c) for c in corr) + "  " + (it.get("answer") or ""), size=10, bold=True, italic=True, color=RED)
+        else:
+            te.rich(p, it.get("answer") or "", size=10, bold=True, italic=True, color=RED)
+
 
 
 def balancecheck_lesson(L):
@@ -824,53 +1016,173 @@ def balancecheck_lesson(L):
     return out
 
 
-def rulingcheck_lesson(L):
-    """Rulings 21, 22, 25, 26 and 28 as facts about the spec."""
-    return _ruling_checks(L)
+# The seven Mathematical Thinking and Reasoning standards, in the state's own words (ruling 25).
+MTR_TEXT = {
+    "MTR.1.1": "Actively participate in effortful learning both individually and collectively.",
+    "MTR.2.1": "Demonstrate understanding by representing problems in multiple ways.",
+    "MTR.3.1": "Complete tasks with mathematical fluency.",
+    "MTR.4.1": "Engage in discussions that reflect on the mathematical thinking of self and others.",
+    "MTR.5.1": "Use patterns and structure to help understand and connect mathematical concepts.",
+    "MTR.6.1": "Assess the reasonableness of solutions.",
+    "MTR.7.1": "Apply mathematics to real-world contexts.",
+}
+
+# Every field a board may carry. A field no builder reads would ship as nothing — it is refused.
+WB_FIELDS = {"kind", "latex", "text", "hint", "gloss", "answer", "answer_latex", "te_answer", "fig", "fig_a",
+             "note", "note_a", "check", "wrong", "choices", "correct", "errors", "qtext", "unneeded", "ack",
+             "form_only", "not_sci", "not_gap", "not_bound"}
 
 
-def _ruling_checks(L):
+def differentiation_rows(L):
+    """[(label, text)] from either shape a spec may give: a list of pairs, or a dict with
+    ese / ell / enrichment."""
+    d = L.get("differentiation") or []
+    if isinstance(d, dict):
+        return [(lab, d[k]) for lab, k in (("ESE / IEP", "ese"), ("ELL", "ell"), ("Enrichment", "enrichment")) if d.get(k)]
+    return list(d)
+
+
+def balancecheck_unit(lessons):
+    """Across a whole unit's whiteboard rounds, every letter the boards offer is keyed at least
+    once and none carries more than 40% — a class that never sees D keyed stops reading D (M7
+    Units 4 and 5 shipped that way: A, B and C only, on every board, found 4 Oct)."""
+    keyed, offered = [], set()
+    for L in lessons:
+        for q in L.get("whiteboard", []):
+            if q.get("choices") and not isinstance(q["correct"], (list, tuple, set)):
+                keyed.append(chr(65 + q["correct"]))
+                offered |= {chr(65 + k) for k in range(len(q["choices"]))}
     out = []
+    if len(keyed) >= 8:
+        for L_ in sorted(offered - set(keyed)):
+            out.append(f"unit: no whiteboard question is keyed {L_} ({len(keyed)} single-answer boards) — spread the keys (shuffle_choices.py)")
+        top = max(set(keyed), key=keyed.count)
+        if keyed.count(top) / len(keyed) > 0.4:
+            out.append(f"unit: {keyed.count(top)} of {len(keyed)} whiteboard questions are keyed {top} — spread the keys")
+    return out
+
+
+def rulingcheck_lesson(L):
+    """Rulings 21, 22, 25, 26 and 28 as facts about the spec, refused at build time like a math error."""
+    out = []
+    code = L["code"]
+    for i, q in enumerate(L.get("whiteboard", [])):
+        for k in sorted(set(q) - WB_FIELDS):
+            out.append(f"{code} whiteboard[{i}]: field '{k}' is not read by any builder — "
+                       f"it would ship as nothing; remove it or wire it up")
     if not L.get("mtr"):
-        out.append(f"{L['code']}: ruling 25 — no `mtr`; name the two or three MTRs this lesson exercises, each with its evidence")
-    ind = L.get("independent") or []
-    n_ind = len([i for i in ind if not i.get("heading")])
-    if n_ind != 6:
-        out.append(f"{L['code']}: ruling 21 — the independent set has {n_ind} questions, needs exactly 6")
+        out.append(f"{code}: ruling 25 — no `mtr`; name the two or three MTRs this lesson exercises, each with its evidence")
+    for c, _ in L.get("mtr") or []:
+        if c not in MTR_TEXT:
+            out.append(f"{code}: unknown MTR code {c}")
+    if not L.get("hoq"):
+        out.append(f"{code}: ruling 25 — higher-order questions with DOK are missing")
+    if not differentiation_rows(L):
+        out.append(f"{code}: ruling 25 — differentiation (ESE / ELL / enrichment) is missing")
+    if not L.get("no_set"):
+        ind = L.get("independent") or []
+        n_ind = len([i for i in ind if not i.get("heading")])
+        if n_ind != 6:
+            out.append(f"{code}: ruling 21 — the independent set has {n_ind} questions, needs exactly 6")
     unneeded = [i for i, q in enumerate(L["whiteboard"]) if q.get("unneeded")]
     if len(unneeded) != 1:
-        out.append(f"{L['code']}: ruling 22 — {len(unneeded)} boards carry a figure the question does not need, needs exactly 1"
+        out.append(f"{code}: ruling 22 — {len(unneeded)} boards carry a figure the question does not need, needs exactly 1"
                    + (f" (boards {[u + 1 for u in unneeded]})" if unneeded else ""))
-    if not (L["te"].get("say") and len(L["te"]["say"]) == 3):
-        out.append(f"{L['code']}: ruling 26 — te.say must be the three sentences to say out loud today")
+    T = L["te"]
+    if not (T.get("say") and len(T["say"]) == 3):
+        out.append(f"{code}: ruling 26 — te.say must be the three sentences to say out loud today")
+    need = (("must", "must_not", "watch") if C.TE_STYLE == "table" else ()) \
+        + (("close",) if C.CLOSE else ()) + (("variation",) if C.BANK == "md" else ())
+    for f in need:
+        if not T.get(f):
+            out.append(f"{code}: te.{f} is required")
     # Ruling 28: every IXL skill listed is required — "nothing on the list is optional". The slide
     # prints "all required" over the list, so a skill marked optional contradicts it on the screen.
     for s in L.get("ixl", []):
         if re.search(r"\boptional\b|also consider", s, re.I):
-            out.append(f"{L['code']}: ruling 28 — an IXL skill is marked optional or 'also consider' ({s!r}); every listed skill is required, so drop the words or the skill")
+            out.append(f"{code}: ruling 28 — an IXL skill is marked optional or 'also consider' ({s!r}); every listed skill is required, so drop the words or the skill")
+    # ... and the skills and their codes are the IXL plan's (lib/ixlplan.py): the slide, the
+    # due-date sheet and the room all read one plan.
+    from . import ixlplan
+    out += ixlplan.check(L)
     return out
 
 
 def build_lesson(L, outdir):
     os.makedirs(outdir, exist_ok=True)
-    findings, n = mathcheck_lesson(L)
-    d = distractorcheck_lesson(L)
-    c = capcheck_lesson(L)
-    r = rulingcheck_lesson(L) + balancecheck_lesson(L)
+    P = slotmark.strip_deep(L)          # the gates and every printed page read the spec without its colour marks
+    findings, n = mathcheck_lesson(P)
+    d = distractorcheck_lesson(P)
+    c = capcheck_lesson(P)
+    r = rulingcheck_lesson(P) + balancecheck_lesson(P)
     print(f"mathcheck {L['code']}: {n} items checked, {len(findings)} findings")
     for f in findings + d + c + r:
         print("  ", f)
     if findings or d or c or r:
         raise SystemExit(f"{L['code']}: build refused")
+    from . import plankit
     out = {}
-    out["bank"] = build_bank(L, L["bank"], "Question Bank", False, outdir)
-    out["bank_key"] = build_bank(L, L["bank"], "Question Bank", True, outdir)
-    out["add"] = build_bank(L, L["additional"], "Question Bank - Additional", False, outdir)
-    out["add_key"] = build_bank(L, L["additional"], "Question Bank - Additional", True, outdir)
-    out["indep"] = build_bank(L, L["independent"], "Independent Set", False, outdir)
-    out["indep_key"] = build_bank(L, L["independent"], "Independent Set", True, outdir)
+    if C.BANK == "docx":
+        out["bank"] = build_bank(P, P["bank"], "Question Bank", False, outdir)
+        out["bank_key"] = build_bank(P, P["bank"], "Question Bank", True, outdir)
+        out["add"] = build_bank(P, P["additional"], "Question Bank - Additional", False, outdir)
+        out["add_key"] = build_bank(P, P["additional"], "Question Bank - Additional", True, outdir)
+    if C.SET == "handout" and not L.get("no_set"):
+        out["indep"] = build_bank(P, P["independent"], "Independent Set", False, outdir)
+        out["indep_key"] = build_bank(P, P["independent"], "Independent Set", True, outdir)
     out["deck"] = build_deck(L, outdir)
     out["html"] = build_html_deck(L, outdir)
     out["te"] = build_te(L, out["deck"], outdir)
-    out["plan"] = plankit.build_plan(L, out["deck"], outdir, COURSE, _label(L))
+    out["plan"] = plankit.build_plan(P, out["deck"], outdir)
+    if C.BANK == "md" and not L.get("review"):
+        write_bank(P, outdir)
     return out
+
+
+def write_bank(L, outdir):
+    """The question bank is not a per-lesson document any more (Croix, 20 September: slides,
+    teacher's edition, lesson plan, and nothing else). It accumulates in one markdown file per
+    unit under Reference — ruling 26's home for it — so the questions are there when he wants
+    them without four more files in every folder."""
+    path = os.path.join(outdir, f"BANK - Unit {L['unit']}.md")
+    head = f"# Question bank \u2014 Unit {L['unit']}\n\n*Generated by the build. Not a handout: draw from it for re-teaching, an exit ticket or a quiz. Every answer here is the one the build re-derived.*\n"
+    # one section per lesson, replaced in place on a rebuild (it used to append, and ten lessons
+    # rebuilt thirty times made a 33-section bank)
+    sections = {}
+    if os.path.exists(path):
+        cur = None
+        for line in open(path).read().split("\n"):
+            m = re.match(r"^## (\d+\.\d+)\b", line)
+            if m:
+                cur = m.group(1); sections[cur] = []
+            if cur:
+                sections[cur].append(line)
+        sections = {k: "\n".join(v).rstrip() + "\n" for k, v in sections.items()}
+    body = [f"## {L['code']}  {L['title']}  \u2014  {L['benchmark']}\n",
+            f"\n**Variation.** {L['te']['variation']}\n"]
+    for name, items in (("Bank", L["bank"]), ("Additional (same shapes, new numbers)", L["additional"]),
+                        ("The six in-class questions (on the slide)", L.get("independent", []))):
+        body.append(f"\n### {name}\n\n")
+        n = 0
+        for it in items:
+            if it.get("heading"):
+                body.append(f"\n*{it['heading']}*\n\n"); continue
+            n += 1
+            if it.get("parts"):
+                body.append(f"{n}. {it['stem']}\n")
+                for pp in it["parts"]:
+                    body.append(f"   - **({pp['label']})** {pp['stem']}  \u2192  **{pp.get('answer','')}**"
+                                + (f"  *({pp['why']})*" if pp.get("why") else "") + "\n")
+            elif it.get("choices"):
+                body.append(f"{n}. {it['stem']}\n")
+                for k, ch in enumerate(it["choices"]):
+                    mark = "**\u2713**" if k == it["correct"] else "\u2003"
+                    err = (it.get("errors") or {}).get(chr(65 + k), "")
+                    body.append(f"   - {mark} {chr(65+k)}. {ch}" + (f"  \u2014 *{err}*" if err else "") + "\n")
+            else:
+                body.append(f"{n}. {it['stem']}  \u2192  **{it.get('answer','')}**"
+                            + (f"  *({it['why']})*" if it.get("why") else "") + "\n")
+    sections[L["code"]] = "".join(body).lstrip("\n").rstrip() + "\n"
+    order = sorted(sections, key=lambda c: tuple(int(x) for x in c.split(".")))
+    open(path, "w").write(head + "".join("\n" + sections[c] for c in order))
+    return path

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Install a unit's built outputs into its package folder and write 00 - START HERE.md.
-    python3 install_unit.py u3/manifest.py
+    python3 install_unit.py u3            (or u3/manifest.py — both name the same unit)
 Run after every lesson and the unit documents have been built and checks.py reports 0 findings.
 The package folder is deleted and rebuilt from out/<unit>/ every time — never edit it by hand.
 """
@@ -8,6 +8,10 @@ import os, re, shutil, sys, json, importlib.util
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from lib.tekit import plan_from_sidecar
 
+_arg = sys.argv[1].rstrip("/")
+if not _arg.endswith(".py"):                 # build_all.py --install hands over the unit folder
+    _arg = os.path.join(os.path.dirname(os.path.abspath(__file__)), os.path.basename(_arg), "manifest.py")
+sys.argv[1] = _arg
 _spec = importlib.util.spec_from_file_location("manifest", sys.argv[1])
 _m = importlib.util.module_from_spec(_spec); _spec.loader.exec_module(_m)
 M = _m.M

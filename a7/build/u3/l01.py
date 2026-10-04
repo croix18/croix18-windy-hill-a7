@@ -93,7 +93,7 @@ L = dict(
              wrong="25⁵ — multiplied the bases [7.NSO.1.1 misconception: operating on the bases]; 5⁶ — multiplied the exponents [confused with power of a power]"),
         dict(text=["A rectangle is  $2^{4}$  centimeters long and  $2^{2}$  centimeters wide.", "Its perimeter is 40 centimeters.", "**What is the area of the rectangle, in square centimeters?"],
              qtext="A rectangle is 2⁴ centimeters long and 2² centimeters wide. Its perimeter is 40 centimeters. What is the area of the rectangle, in square centimeters?",
-             unneeded="perimeter of 40 centimeters", hint="Area is length times width.", gloss="2⁴ · 2² = 2⁶", answer="2⁶ = 64 square centimeters",
+             unneeded="perimeter of 40 centimeters", gloss="2⁴ · 2² = 2⁶", answer="2⁶ = 64 square centimeters",
              note="Ruling 22's board: a real question (an area) whose answer is the product law. Length times width is 2⁴ · 2² = 2⁶ = 64, and the perimeter — true: 2(16 + 4) = 40 — is there to be read past. Take 64; write 2⁶ beside it on the reveal. A board with 40 reached for the figure that was already there.",
              check=("many", ("eq", "2**4*2**2", "64"), ("eq", "2*(2**4+2**2)", "40")),
              wrong="40 — the perimeter was copied as the answer [the unneeded figure was used]; 20 — the sides were added, not multiplied; 256 — the exponents were multiplied (2⁸) [confused with power of a power]; 4096 — the bases were multiplied (4⁶)"),

@@ -6,10 +6,12 @@ import json
 from docx.shared import Pt, Twips
 from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
+from docx.enum.text import WD_BREAK
 from .dockit import Doc, INK, VOCAB, RED, GRAY, LT, FILL, _set_cell_border, _cell_margins, _shade
+from .profile import C
 
-PERIOD = 53
-IXL_MIN = 5
+PERIOD = C.PERIOD
+IXL_MIN = C.IXL_MIN
 
 
 class TE(Doc):
@@ -50,6 +52,27 @@ class TE(Doc):
             self._run(p, "  —  ", 10.5)
             self.rich(p, defn, size=10.5)
 
+    def numbered_bold(self, rows):
+        """The three sentences to say out loud. Numbered, bold, nothing else."""
+        for i, r in enumerate(rows):
+            p = self.para("", before=0, after=5, indent=360, hanging=300)
+            self._run(p, f"{i + 1}.  ", 10.5, bold=True)
+            self.rich(p, r, size=10.5, bold=True)
+
+    def slide_line(self, head, line, mins=""):
+        """One slide, one line: the heading, then what to say / watch for / the answer."""
+        p = self.para("", before=6, after=2, keep=True)
+        self._run(p, head, 10.5, bold=True)
+        if mins:
+            self._run(p, "    " + mins, 9, italic=True, color=GRAY)
+        if line:
+            q = self.para("", before=0, after=3, indent=300)
+            self.rich(q, line, size=10.5)
+
+    def page_break(self):
+        p = self.para("", before=0, after=0)
+        p.add_run().add_break(WD_BREAK.PAGE)
+
     def off_slide(self, text):
         p = self.para("", before=0, after=4, indent=360, hanging=220)
         self._run(p, "●  ", 8, color=INK, font="FreeSerif")
@@ -74,8 +97,9 @@ def plan_from_sidecar(path):
             blocks.append({"seg": seg, "first": s["n"], "last": s["n"], "min": s["min"], "kind": s["kind"], "subs": [s]})
     fixed = sum(b["min"] for b in blocks if b["kind"] != "wb")
     wb = PERIOD - fixed
-    if not (10 <= wb <= 20):
-        raise RuntimeError(f"plan does not fit: fixed blocks {fixed} min leave whiteboards {wb} (need 10–20)")
+    lo, hi = C.WB_RANGE
+    if not (lo <= wb <= hi):
+        raise RuntimeError(f"plan does not fit: fixed blocks {fixed} min leave whiteboards {wb} (need {lo}–{hi})")
     for b in blocks:
         if b["kind"] == "wb":
             b["min"] = wb

@@ -88,7 +88,7 @@ L = dict(
              wrong="4 — 2⁻² left unflipped [negative exponent law]; 1/2 — the denominator 2 · 2² counted as 2² [product of powers]"),
         dict(text=["One flash drive holds  $2^{15}$  megabytes.", "Another holds  $8^{5}$  megabytes. The first one costs 45 dollars.", "**Which holds more — or is it the same? Show why."],
              qtext="One flash drive holds 2¹⁵ megabytes. Another holds 8⁵ megabytes. The first one costs 45 dollars. Which holds more — or is it the same? Show why.",
-             unneeded="price of 45 dollars", hint="Write both with the same base.", gloss="8 = 2³, so 8⁵ = (2³)⁵", answer="The same: 8⁵ = (2³)⁵ = 2¹⁵",
+             unneeded="price of 45 dollars", gloss="8 = 2³, so 8⁵ = (2³)⁵", answer="The same: 8⁵ = (2³)⁵ = 2¹⁵",
              note="Ruling 22's board: a real question (which is bigger?) whose answer is Notes III — rewrite to a common base. 8 = 2³, so 8⁵ = (2³)⁵ = 2¹⁵: the same. The price is there to be read past. A board that says '8⁵, because 8 is bigger' compared bases; '2¹⁵, because 15 is bigger' compared exponents; both are the reason the common base exists. A board with 2⁸ added 3 + 5.",
              check=("eq", "8**5", "2**15"),
              wrong="'8⁵ holds more' — the bases were compared, not the values [8.NSO.1.3: rewrite to a common base]; '2¹⁵ holds more' — the exponents were compared; 2⁸ — added 3 + 5 in the power-of-a-power step [confused with product of powers]; anything built from 45 — the unneeded figure was used"),

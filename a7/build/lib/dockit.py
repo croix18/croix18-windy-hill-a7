@@ -15,6 +15,7 @@ from docx.enum.table import WD_TABLE_ALIGNMENT
 from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
 from . import mathimg
+from . import slotmark
 
 INK, VOCAB, RED, GRAY, LT, FILL = "1A1A1A", "0B5394", "9E1B32", "6B6B6B", "D9D9D9", "F2F2F0"
 BODY_FONT = "Times New Roman"
@@ -86,8 +87,10 @@ def _grid(t, widths):
 
 
 class Doc:
-    def __init__(self, eyebrow, title, sub, key=False, name_block=True, margins=1440):
+    def __init__(self, eyebrow, title, sub, key=False, name_block=True, margins=1440,
+                 banner="ANSWER KEY"):
         self.key = key
+        self.banner = banner          # ruling 32: a student's copy says WORKED ANSWERS
         self.d = Document()
         st = self.d.styles["Normal"]
         st.font.name = BODY_FONT; st.font.size = Pt(11); st.font.color.rgb = _rgb(INK)
@@ -104,7 +107,8 @@ class Doc:
     # ---------- primitives ----------
     def _run(self, p, text, size=11, bold=False, italic=False, color=INK, font=None):
         r = None
-        for piece, sup in _split_sup(text):
+        # a printed page is black and white on a copier: a slot mark never colours it (§2a)
+        for piece, sup in _split_sup(slotmark.strip(text)):
             r = p.add_run(piece)
             r.font.size = Pt(size); r.font.bold = bold; r.font.italic = italic
             r.font.color.rgb = _rgb(color)
@@ -138,13 +142,16 @@ class Doc:
 
     def rich(self, p, text, size=11, bold=False, italic=False, color=INK):
         """Inline markup: $latex$ becomes an image; **bold**; __vocab__ (blue bold)."""
+        text = slotmark.strip(text or "").replace("\\$", "\ue000")      # \$ is a literal dollar sign (money)
         parts = re.split(r"(\$[^$]+\$|\*\*[^*]+\*\*|__[^_]+__)", text)
         for part in parts:
             if not part:
                 continue
             if part.startswith("$") and part.endswith("$"):
-                self.img(p, part[1:-1], color=color)
-            elif part.startswith("**"):
+                self.img(p, part[1:-1].replace("\ue000", "\\$"), color=color)
+                continue
+            part = part.replace("\ue000", "$")
+            if part.startswith("**"):
                 self._run(p, part[2:-2], size, True, italic, color)
             elif part.startswith("__"):
                 self._run(p, part[2:-2], size, True, italic, VOCAB)
@@ -206,7 +213,8 @@ class Doc:
         for ri, row in enumerate(rows):
             for ci, content in enumerate(row):
                 txt = content.get("text", "") if isinstance(content, dict) else (content or "")
-                for part in re.findall(r"\$[^$]+\$", str(txt)):
+                txt = slotmark.strip(str(txt)).replace("\\$", "")          # \$ is money, not a math delimiter
+                for part in re.findall(r"\$[^$]+\$", txt):
                     _, mw, _ = mathimg.m(part[1:-1], "doc", INK)
                     avail = widths[ci] / 1440 - 200 / 1440
                     if mw > avail:
@@ -278,7 +286,7 @@ class Doc:
         p = c0.add_paragraph(); p.paragraph_format.space_after = Pt(0)
         self.rich(p, sub, size=9.5, italic=True, color=GRAY)
         if self.key:
-            self._run(p, "     ANSWER KEY", 9.5, bold=True, color=RED)
+            self._run(p, "     " + self.banner, 9.5, bold=True, color=RED)
         p = c1.paragraphs[0]; p.paragraph_format.space_after = Pt(0)
         if name_block:
             for i, lab in enumerate(("Name", "Date", "Period")):
@@ -305,7 +313,7 @@ class Doc:
 
     # ---------- questions ----------
     def question(self, stem, answer=None, reasoning=None, space=1.0, parts=None, points=None,
-                 choices=None, choice_answer=None, table=None, number=None, lines=None):
+                 choices=None, choice_answer=None, table=None, number=None, lines=None, fig=None):
         """One question in one unsplittable block.
         stem: rich text. answer/reasoning: key only. space: inches of work room (student only).
         parts: list of (label, text, answer, reasoning, space). choices: list of rich strings
@@ -327,6 +335,12 @@ class Doc:
         self.rich(p, stem)
         if points is not None and not parts:
             self._pts(p, points)
+        if fig:                                   # a figure drawn from the item's own numbers
+            from . import figkit
+            path, w, h = figkit.draw(fig, fig.get("in", 2.4))
+            fp = c.add_paragraph(); fp.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            fp.paragraph_format.space_before = Pt(2); fp.paragraph_format.space_after = Pt(4)
+            fp.add_run().add_picture(path, width=Inches(w), height=Inches(h))
         if table:
             widths, rows, hdr = table
             self._inner_table(c, widths, rows, hdr)

@@ -1743,7 +1743,7 @@ spec-driven build in which every item carries its own machine check, and nothing
 so for a day. The record of the earlier tree is kept below, marked as history, because the rules it
 earned still hold; the tables it carried do not.*
 
-**Layer 1 — at build, in `build_lesson` and `build_unit`. Four gates; any finding refuses the build,
+**Layer 1 — at build, in `build_lesson` and `build_unit`. Five gates; any finding refuses the build,
 so nothing that fails one has ever been rendered.**
 
 | gate (A7, at build) | asks |
@@ -1751,7 +1751,7 @@ so nothing that fails one has ever been rendered.**
 | `mathcheck` | is every answer a student is told TRUE? Each item's `check` is re-derived by sympy from the spec — never read from a key — and an item with no check and no acknowledged hand derivation is a finding. The unit assessment's point ledger is asserted here too, against its declared total and against its per-benchmark tracker (§13 item 4, totals two ways). |
 | `distractorcheck` | does every wrong option carry a named error with a cite; does a select-all assert that each wrong option is NOT the target; are any two options the same NUMBER — a wrong option equal to the key marks a right answer wrong, and `form_only` exempts an option wrong only in how it is written, on a question whose own words name the form; does a board option carry `$latex$`, which the slide prints literally? |
 | `capcheck` | is every item inside its benchmark's boundary — a scientific-notation coefficient in [1, 10); a sum or difference with the exponents within 2 (MA.8.NSO.1.5); a radicand that is a perfect square ≤ 225 or a perfect cube in −125..125 (MA.8.NSO.1.7) — except where the item is tagged as being ABOUT the rule, with its reason? |
-| `rulingcheck` | rulings 21, 22, 25, 26 and 28 as facts about the spec: six independent questions; exactly one board with a number the question does not need; the MTRs named with their evidence; three sentences to say aloud; no IXL skill marked optional or "also consider" under a heading that says all are required. |
+| `rulingcheck` | rulings 21, 22, 25, 26 and 28 as facts about the spec: six independent questions; exactly one board with a number the question does not need; the MTRs named with their evidence; three sentences to say aloud; no IXL skill marked optional or "also consider" under a heading that says all are required; and every IXL skill and code on a slide is the IXL plan's, read from the spine the build vendors — a lesson the plan lists skills for names exactly those (added 4 October, when the same rule found M7's Unit 5 carrying codes that exist nowhere; A7's Units 3 and 4 passed as they stood). |
 | `balancecheck` | is the keyed letter guessable? Over a lesson's single-answer items: never all alike, no letter over 60%, no three in a row alike in one group; over its select-alls, the keyed set is the first options in at most half. Added 3 Oct 2026 after students noticed every answer was A — the specs are written answer-first, and `shuffle_choices.py` spread them once in the source. |
 
 The generators refuse too, which is why a layout defect is a build failure rather than a finding
@@ -1759,7 +1759,7 @@ found afterwards: a text box that runs into the footer rule or off the slide, a 
 would wrap inside a fixed-height row, an inline math picture wider than its column, a line that
 runs off the slide, an inner table.
 
-**Layer 2 — over the built directory, `checks.py` (sixteen; any finding exits 1, and a check that
+**Layer 2 — over the built directory, `checks.py` (eighteen; any finding exits 1, and a check that
 examined nothing cannot report clean).**
 
 | check (A7, checks.py) | asks |
@@ -1772,6 +1772,7 @@ examined nothing cannot report clean).**
 | `offpage` | does every word of every PDF lie inside its page box, measured from the rendered file? |
 | `pdftwin` | does every .docx and .pptx have a .pdf twin, newer than it, whose text contains the source text? |
 | `telength` | ruling 26: does any teacher's edition run past four printed pages? |
+| `markup` | does any slide or page show markup a renderer failed to consume — a literal `**`, a `$`, a LaTeX command, a colour-slot mark? (From M7, where all of the first three shipped in Unit 5 with the rest of the suite at 0 findings.) |
 | `footer` | does anything but the footer itself render below a slide's footer rule? |
 | `plancheck` | does every deck's side-car total 53 minutes with the whiteboard remainder inside 10–20? |
 | `slidefit` | does any text box or picture in a deck cross the footer rule or the slide edge? |
@@ -1779,6 +1780,7 @@ examined nothing cannot report clean).**
 | `imagedrift` | is every image embedded in a .docx or .pptx a file in the figure library, byte for byte — so no document carries an orphaned or older rendering of a figure? |
 | `slotgeometry` | does colour change the colour of the ink and nothing else? Every expression a deck colours (§2a) is rendered black and in colour and the ink compared, pixel for pixel within 2 px; over 0.5% displaced is a finding. |
 | `htmlcheck` | does the browser deck say what the PowerPoint deck says? Every `.html` deck is opened in a real browser (Playwright): no KaTeX error, nothing rendered below the footer rule or past the slide edge, and the colour the page painted on each slotted expression read back and compared with the slot rule's own reading of the LaTeX. The unit console besides: every lesson indexed with its title slide, its segments summing to the period with the whiteboard block inside 10–20 minutes, eighteen tagged board slides, the room reader loading and the plan answering. A deck that renders nothing coloured, or a unit with no console, cannot report clean. |
+| `kitcheck` | is the build kit here — `lib/`, `checks.py`, the drivers, the assets — the one Windmill published, byte for byte against `KIT.sha256`? The kit is shared with the on-level course; a copy edited in place is a fork starting again (the two courses drifted eight hundred lines apart that way between 20 September and 4 October). Edit it in Windmill and vendor it. |
 | `suitecheck` | do the two tables in this block name every gate and every check that runs, and only those? |
 
 **How this gate meets §13, item by item, with the gaps named — because a list of what a system

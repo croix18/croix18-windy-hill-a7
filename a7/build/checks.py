@@ -11,15 +11,26 @@ finding and exits 0 is worse than no check.
   offpage    every word of every PDF lies inside its page box
   pdftwin    every .docx/.pptx has a .pdf twin newer than it whose text contains the source text
   telength   ruling 26: no teacher's edition runs past four printed pages
-  plancheck  every deck side-car totals 53 with a whiteboard remainder inside 10–20
+  markup     no slide or page shows markup a renderer failed to consume (**, $, LaTeX, a slot mark)
   footer     nothing but the footer itself renders below a slide's footer rule
+  plancheck  every deck side-car totals the period with a whiteboard remainder inside its range
   slidefit   no text box or picture in a deck crosses the footer rule or the slide edge
   overlap    on a rendered slide, no two lines of text collide and no figure sits on any words
   imagedrift every image embedded in a .docx or .pptx is a file in the figure library, byte for byte
-  suitecheck HOUSE STYLE's suite:a7 tables name every check this file and the build run, and only those
+  slotgeometry  colour moves no ink: every coloured expression, rendered black and in colour, agrees
+  htmlcheck  the HTML decks and the unit console, opened in a real browser
+  kitcheck   the build kit in this repository is the one Windmill published, byte for byte
+  suitecheck the rulebook's suite tables name every check this file and the build run, and only those
+
+This file is part of the shared build kit (croix18/Windmill, kit/). It is the same in both course
+repositories; what differs between the courses is in build/course.py. Edit it in Windmill.
 """
-import os, re, sys, glob, json, zipfile, subprocess, collections
+import os, re, sys, glob, json, zipfile, subprocess, collections, hashlib
 from xml.etree import ElementTree as ET
+HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, HERE)
+from lib.profile import C
+from lib import slotmark
 
 W = "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}"
 A = "{http://schemas.openxmlformats.org/drawingml/2006/main}"
@@ -39,7 +50,7 @@ def is_student(name):
     return ("key" not in n) and ("teacher edition" not in n) and ("lesson plan" not in n) and ("notes.json" not in n)
 
 
-LESSON_EYEBROW = re.compile(r"GRADE \d+ ACCELERATED\s+·\s+UNIT \d+\s+·\s+\S")
+LESSON_EYEBROW = re.compile(re.escape(C.COURSE.upper()) + r"\s+·\s+UNIT \d+\s+·\s+\S")
 
 
 def is_title_slide(text):
@@ -97,6 +108,9 @@ def check_docscan(files):
 
 
 def check_keycheck(files):
+    """A blank student paper carries no answers. A WORKED ANSWERS copy (ruling 32) is the one
+    exception — it is handed back to the class after the test, so it is answered on purpose; it
+    is still a student page for every other rule (no benchmark codes, no calculator line)."""
     findings = []; n = 0
     for f in files:
         base = os.path.basename(f)
@@ -104,10 +118,15 @@ def check_keycheck(files):
             continue
         n += 1
         x = zipfile.ZipFile(f).read("word/document.xml").decode()
+        answered = "worked answers" in base.lower()
         if "ANSWER KEY" in x:
             findings.append(f"keycheck: ANSWER KEY mark on student paper — {base}")
-        if re.search(r'w:color w:val="9E1B32"', x):
+        if not answered and re.search(r'w:color w:val="9E1B32"', x):
             findings.append(f"keycheck: answer-colour run on student paper — {base}")
+        if answered and not re.search(r'w:color w:val="9E1B32"', x):
+            findings.append(f"keycheck: WORKED ANSWERS copy has no answers on it — {base}")
+        if answered and ("TRANSFER" in x or "BONUS" in x):
+            findings.append(f"keycheck: ruling 32 — TRANSFER/BONUS printed on a student copy — {base}")
     print(f"keycheck: {n} student papers, {len(findings)} findings")
     return findings
 
@@ -255,10 +274,11 @@ def check_pdftwin(files):
     # The whole-unit deck is a second copy of the lesson decks: after its cover and contents, it
     # must match them slide for slide (each lesson numbers from 1 in both). A lesson rebuilt on its
     # own leaves the unit deck stale until build_unit.py runs again — this is where that shows.
-    unit_decks = [f for f in files if f.endswith("Unit Slides.pptx")]
+    UD = f"{C.UNIT_DECK}.pptx"
+    unit_decks = [f for f in files if f.endswith(UD)]
     lessons = {}
     for f in files:
-        if f.endswith("  Slides.pptx") and not f.endswith("Unit Slides.pptx"):
+        if f.endswith("  Slides.pptx") and not f.endswith(UD):
             t = pptx_texts(f)
             lessons[t[1]] = (os.path.basename(f), [t[k] for k in sorted(t)])
     for u in unit_decks:
@@ -292,8 +312,8 @@ def check_telength(files):
             continue
         n += 1
         pp = _pages(f)
-        if pp > 4:
-            findings.append(f"telength: {base} runs {pp} pages; ruling 26 caps the teacher's edition at 4 — cut it, do not shrink it")
+        if pp > C.TE_MAX_PAGES:
+            findings.append(f"telength: {base} runs {pp} pages; ruling 26 caps the teacher's edition at {C.TE_MAX_PAGES} — cut it, do not shrink it")
     print(f"telength: {n} teacher's editions measured, {len(findings)} findings")
     return findings
 
@@ -306,13 +326,42 @@ def check_plan(files):
         n += 1
         side = json.load(open(f))["slides"]
         fixed = sum(s["min"] for s in side if s["kind"] != "wb")
-        wb = 53 - fixed
-        if not (10 <= wb <= 20):
-            findings.append(f"plancheck: whiteboard remainder {wb} outside 10–20 — {os.path.basename(f)}")
+        wb = C.PERIOD - fixed
+        lo, hi = C.WB_RANGE
+        if not (lo <= wb <= hi):
+            findings.append(f"plancheck: whiteboard remainder {wb} outside {lo}–{hi} — {os.path.basename(f)}")
         for s in side:
             if s["kind"] != "wb" and s["kind"] != "title" and not s["note"]:
                 findings.append(f"plancheck: slide {s['n']} has no teaching note — {os.path.basename(f)}")
     print(f"plancheck: {n} decks, {len(findings)} findings")
+    return findings
+
+
+def check_markup(files):
+    """No slide and no page may show markup that a renderer failed to consume: **bold** markers,
+    $ signs, LaTeX commands, or a colour-slot mark. Every one of the first three shipped at least
+    once in M7 Unit 5 with the rest of the suite at 0 findings (partial bold on notes rows, $^2$
+    in answer lines, \\times in a gloss)."""
+    findings = []; n = 0
+    # a $ followed by a digit is money (\$ in a spec); a leaked delimiter is a $ before anything
+    # else, or a digit closing on a $ ("$9$" leaves "9$")
+    pats = [(r"\*\*", "**"), (r"\$(?!\d)|\d\$", "$"), (r"\\(frac|dfrac|times|div|cdot|text|pi|le|ge)\b", "LaTeX command"),
+            (r"\^\{|\}\^", "LaTeX exponent"), (r"\\s[ABH]\{", "slot mark")]
+    for f in files:
+        base = os.path.basename(f)
+        if f.endswith(".pptx"):
+            texts = pptx_texts(f)
+        elif f.endswith(".docx"):
+            texts = {0: docx_text(f)}
+        else:
+            continue
+        n += 1
+        for k, t in texts.items():
+            for pat, name in (pats if f.endswith(".pptx") else pats[4:]):
+                if re.search(pat, t):
+                    findings.append(f"markup: literal {name} on " + (f"slide {k}" if k else "the page") + f" — {base}")
+                    break
+    print(f"markup: {n} documents, {len(findings)} findings")
     return findings
 
 
@@ -439,67 +488,104 @@ def check_imagedrift(files):
     library no longer has (an orphan) or from an older rendering of one (drift), and rebuilding it
     would change what students see."""
     import hashlib
-    figs = os.path.join(os.path.dirname(os.path.abspath(__file__)), "figs")
+    figs = os.path.join(HERE, "figs")
     lib = set()
     for p in glob.glob(os.path.join(figs, "*.png")):
         with open(p, "rb") as fh:
             lib.add(hashlib.sha256(fh.read()).hexdigest())
-    findings = []; ndocs = nimg = 0
+    findings = []; ndocs = nimg = ncopied = 0
     for f in files:
         if not f.endswith((".docx", ".pptx")):
+            continue
+        if any(x in os.path.basename(f) for x in C.FIGURE_DOCS_EXEMPT):
+            ncopied += 1                      # a document copied into the unit, not built by this kit
             continue
         ndocs += 1
         z = zipfile.ZipFile(f)
         for n in z.namelist():
-            if "/media/" not in n:
+            if "/media/" not in n or n.endswith("/"):
                 continue
             nimg += 1
             if hashlib.sha256(z.read(n)).hexdigest() not in lib:
                 findings.append(f"imagedrift: {os.path.basename(f)} embeds {n}, which is not in the figure library")
     if ndocs == 0 or nimg == 0:
         findings.append(f"imagedrift: examined {ndocs} documents and {nimg} images — a check that examined nothing cannot be clean")
-    print(f"imagedrift: {ndocs} documents, {nimg} embedded images against {len(lib)} library files, {len(findings)} findings")
+    print(f"imagedrift: {ndocs} documents, {nimg} embedded images against {len(lib)} library files"
+          + (f" ({ncopied} copied-in documents skipped)" if ncopied else "") + f", {len(findings)} findings")
     return findings
 
 
-SUITE_DOC = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "reference", "HOUSE STYLE.md")
 BUILD_GATES = ("mathcheck", "distractorcheck", "capcheck", "rulingcheck", "balancecheck")
 
 
 def check_suite(files):
     """HOUSE STYLE §13c: a list of what a system does is a claim about that system, and any list a
-    script could derive must be derived. The suite:a7 block carries two tables — the build gates
-    and this file's checks. Each must name every check that runs, and only those."""
+    script could derive must be derived. The course's suite block (C.SUITE_BLOCK, in C.SUITE_DOC)
+    carries two tables — the build gates and this file's checks. Each must name every check that
+    runs, and only those."""
     findings = []
+    if not (C.SUITE_DOC and C.SUITE_BLOCK):
+        return ["suitecheck: course.py names no SUITE_DOC / SUITE_BLOCK — the rulebook must list what runs"]
     try:
-        txt = open(SUITE_DOC, encoding="utf-8").read()
+        txt = open(os.path.join(HERE, C.SUITE_DOC), encoding="utf-8").read()
     except OSError as e:
-        return [f"suitecheck: cannot read HOUSE STYLE ({e})"]
-    m = re.search(r"<!-- suite:a7.*?-->(.*?)(?=\n## |\n<!-- suite:)", txt, re.S)
+        return [f"suitecheck: cannot read the rulebook ({e})"]
+    m = re.search(r"<!-- " + re.escape(C.SUITE_BLOCK) + r"\b.*?-->(.*?)(?=\n## |\n<!-- suite:|\Z)", txt, re.S)
     if not m:
-        return ["suitecheck: no suite:a7 block in HOUSE STYLE"]
+        return [f"suitecheck: no {C.SUITE_BLOCK} block in the rulebook"]
     block = m.group(1)
     def rows(label):
         t = re.search(r"\| *" + re.escape(label) + r" *\|.*?\n\|[-| ]+\|\n((?:\|.*\n)+)", block)
         return [] if not t else re.findall(r"^\| *`([a-z]+)`", t.group(1), re.M)
-    have_build = rows("gate (A7, at build)")
-    have_docs = rows("check (A7, checks.py)")
+    have_build = rows(f"gate ({C.PREFIX}, at build)")
+    have_docs = rows(f"check ({C.PREFIX}, checks.py)")
     want_docs = [fn.__name__.replace("check_", "") for fn in RUN_LIST]
-    alias = {"gdoc": "gdoccheck", "pages": "pagecheck", "plan": "plancheck", "suite": "suitecheck", "html": "htmlcheck"}
+    alias = {"gdoc": "gdoccheck", "pages": "pagecheck", "plan": "plancheck", "suite": "suitecheck", "html": "htmlcheck", "kit": "kitcheck"}
     want_docs = [alias.get(n, n) for n in want_docs]
     for missing in [n for n in BUILD_GATES if n not in have_build]:
-        findings.append(f"suitecheck: build gate `{missing}` runs but has no row in HOUSE STYLE's suite:a7 table")
+        findings.append(f"suitecheck: build gate `{missing}` runs but has no row in the rulebook's {C.SUITE_BLOCK} table")
     for extra in [n for n in have_build if n not in BUILD_GATES]:
-        findings.append(f"suitecheck: HOUSE STYLE names build gate `{extra}`, which nothing runs")
+        findings.append(f"suitecheck: the rulebook names build gate `{extra}`, which nothing runs")
     for missing in [n for n in want_docs if n not in have_docs]:
-        findings.append(f"suitecheck: `{missing}` runs in checks.py but has no row in HOUSE STYLE's suite:a7 table")
+        findings.append(f"suitecheck: `{missing}` runs in checks.py but has no row in the rulebook's {C.SUITE_BLOCK} table")
     for extra in [n for n in have_docs if n not in want_docs]:
-        findings.append(f"suitecheck: HOUSE STYLE names `{extra}`, which checks.py does not run")
+        findings.append(f"suitecheck: the rulebook names `{extra}`, which checks.py does not run")
     cnt = re.search(r"checks\.py` \((\w+)", block)
-    words = {"eleven": 11, "twelve": 12, "thirteen": 13, "fourteen": 14, "fifteen": 15, "sixteen": 16}
+    words = {"eleven": 11, "twelve": 12, "thirteen": 13, "fourteen": 14, "fifteen": 15, "sixteen": 16,
+             "seventeen": 17, "eighteen": 18, "nineteen": 19, "twenty": 20}
     if cnt and words.get(cnt.group(1)) not in (None, len(want_docs)):
-        findings.append(f"suitecheck: HOUSE STYLE says checks.py runs {cnt.group(1)}; it runs {len(want_docs)}")
+        findings.append(f"suitecheck: the rulebook says checks.py runs {cnt.group(1)}; it runs {len(want_docs)}")
     print(f"suitecheck: {len(have_build)} gate rows and {len(have_docs)} check rows read against {len(BUILD_GATES)} gates and {len(want_docs)} checks, {len(findings)} findings")
+    return findings
+
+
+def check_kit(files):
+    """The build kit — lib/, this file, the drivers, the assets — is shared by both courses and
+    published from croix18/Windmill (kit/). Each course repository holds a copy with a manifest of
+    hashes (KIT.sha256). A copy edited in place is a fork starting again: the two courses drifted
+    eight hundred lines apart that way between 20 September and 4 October. Edit the kit in Windmill
+    and vendor it (tools/vendor_windmill.py); this check refuses anything else."""
+    man = os.path.join(HERE, "KIT.sha256")
+    if not os.path.exists(man):
+        return ["kitcheck: no KIT.sha256 beside checks.py — vendor the kit from Windmill (tools/vendor_windmill.py)"]
+    findings = []; n = 0
+    listed = set()
+    for line in open(man, encoding="utf-8"):
+        if not line.strip() or line.startswith("#"):
+            continue
+        want, rel = line.split(None, 1)
+        rel = rel.strip(); listed.add(rel); n += 1
+        p = os.path.join(HERE, rel)
+        if not os.path.exists(p):
+            findings.append(f"kitcheck: {rel} is in the kit and missing here"); continue
+        with open(p, "rb") as fh:
+            if hashlib.sha256(fh.read()).hexdigest() != want:
+                findings.append(f"kitcheck: {rel} differs from the published kit — make the change in Windmill (kit/) and vendor it")
+    for p in sorted(glob.glob(os.path.join(HERE, "lib", "*.py"))):
+        rel = os.path.relpath(p, HERE).replace(os.sep, "/")
+        if rel not in listed:
+            findings.append(f"kitcheck: {rel} is not part of the kit — course code lives outside lib/")
+    print(f"kitcheck: {n} kit files hashed against KIT.sha256, {len(findings)} findings")
     return findings
 
 
@@ -509,17 +595,19 @@ def check_slotgeometry(files):
     the ink is compared; more than 0.5% of it displaced is a finding. On 28 Sep the colour renderer
     drew fraction bars one thickness low and 1 pt too thick — on a phone the denominators ran into
     them — and this is the check that would have caught it before it shipped."""
-    units = sorted({os.path.basename(os.path.dirname(f)) for f in files if f.endswith("Slides.pptx")})
-    findings = []; n = 0
+    units = sorted({os.path.basename(os.path.dirname(os.path.abspath(f))) for f in files if f.endswith("Slides.pptx")})
+    findings = []; n = 0; marks = 0
     import slotaudit
     for u in units:
         flagged, worst, k = slotaudit.geometry(u)
         n += k
+        marks += slotaudit.marks_in_specs(u)
         for frac, code, where, latex in flagged:
             findings.append(f"slotgeometry: {frac:.1%} of the ink moved when coloured — {code} {where}: {latex[:60]}")
-    if n == 0:
+    if n == 0 and (C.SLOTS == "exponent" or marks):
         findings.append("slotgeometry: examined no coloured expressions — a check that examined nothing cannot be clean")
-    print(f"slotgeometry: {n} coloured expressions rendered twice and compared, {len(findings)} findings")
+    print(f"slotgeometry: {n} coloured expressions rendered twice and compared"
+          + ("" if n or C.SLOTS == "exponent" or marks else " (no spec in this unit marks a slot)") + f", {len(findings)} findings")
     return findings
 
 
@@ -557,6 +645,18 @@ HTML_PROBE = r"""
     }
     if (prev === 'B') s += ']'; if (prev === 'E') s += '}';
     out.exprs.push({tex: k.dataset.tex, read: s});
+  });
+  // named slots (\\textcolor in the source): which characters the page drew in each slot colour
+  const NAMED = {'rgb(30, 90, 168)': 'A', 'rgb(192, 90, 0)': 'B', 'rgb(57, 128, 128)': 'H'};
+  out.named = [];
+  document.querySelectorAll('.k').forEach(k => {
+    if (!/\\textcolor/.test(k.dataset.tex || '')) return;
+    const html = k.querySelector('.katex-html'); if (!html) return;
+    const got = {A: '', B: '', H: ''};
+    const walker = document.createTreeWalker(html, NodeFilter.SHOW_TEXT); let node;
+    while ((node = walker.nextNode())) { const t = node.textContent.replace(/\s/g, ''); if (!t) continue;
+      const key = NAMED[getComputedStyle(node.parentElement).color]; if (key) got[key] += t; }
+    out.named.push({tex: k.dataset.tex, got});
   });
   return out;
 }
@@ -610,7 +710,7 @@ def check_html(files):
     nothing on any slide reaches below the footer rule or past the side margins; and the colour
     code the page applies to KaTeX's structure reads every expression exactly as mathimg reads
     the mathtext layout for the pptx — [base]^{exponent}, compared string for string."""
-    findings = []; n = 0; nex = 0; ncon = 0
+    findings = []; n = 0; nex = 0; ncon = 0; nnamed = 0
     decks = [f for f in files if f.endswith(".html")]
     if not decks:
         return ["htmlcheck: examined no HTML decks — a check that examined nothing cannot be clean"]
@@ -648,16 +748,32 @@ def check_html(files):
                     continue
                 if _norm(want) != _norm(e["read"]):
                     findings.append(f"htmlcheck: colour reading differs — page {_norm(e['read'])!r} vs mathtext {_norm(want)!r} — {base}")
+            for e in r.get("named", []):
+                nnamed += 1
+                if e["tex"] in seen:
+                    continue
+                seen.add(e["tex"])
+                # the spec's marks, read back from the \textcolor the page was handed
+                want = {"A": "", "B": "", "H": ""}
+                for hexc, body in re.findall(r"\\textcolor\{#([0-9A-F]{6})\}\{((?:[^{}]|\{[^{}]*\})*)\}", e["tex"]):
+                    key = {v: k for k, v in slotmark.SLOT.items()}.get(hexc)
+                    if key:
+                        want[key] += re.sub(r"\\[a-zA-Z]+|[{}\s^_,]", "", body)
+                for key in "ABH":
+                    g = "".join(sorted(re.sub(r"[\s\u200b\ue000-\uf8ff,]", "", e["got"][key]).replace("\u2212", "-")))
+                    w = "".join(sorted(want[key].replace("\u2212", "-")))
+                    if g != w:
+                        findings.append(f"htmlcheck: slot {key} — the page coloured {g!r}, the spec marked {w!r}: {e['tex'][:60]} — {base}")
         b.close()
     if ncon == 0:
-        findings.append("htmlcheck: no unit console found — the unit deck should carry window.UNIT")
-    print(f"htmlcheck: {n} HTML decks opened ({ncon} console), {nex} coloured expressions compared, {len(findings)} findings")
+        findings.append(f"htmlcheck: no unit console found — the {C.UNIT_DECK} .html should carry window.UNIT")
+    print(f"htmlcheck: {n} HTML decks opened ({ncon} console), {nex + nnamed} coloured expressions compared, {len(findings)} findings")
     return findings
 
 
 RUN_LIST = (check_docscan, check_keycheck, check_gdoc, check_glyph, check_pages, check_offpage, check_pdftwin,
-            check_telength, check_footer, check_plan, check_slidefit, check_overlap, check_imagedrift,
-            check_slotgeometry, check_html, check_suite)
+            check_telength, check_markup, check_footer, check_plan, check_slidefit, check_overlap, check_imagedrift,
+            check_slotgeometry, check_html, check_kit, check_suite)
 
 
 def run(outdir):

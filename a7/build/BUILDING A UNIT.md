@@ -31,6 +31,7 @@ build that is not pushed did not happen (README).
 git clone https://github.com/croix18/croix18-windy-hill-a7.git windy-hill   # or pull
 cd windy-hill && bash tools/setup_env.sh                                     # apt + pip + fonts, verifies
 printf '%s' '<token from Croix>' > .github-token && chmod 600 .github-token  # git-ignored; never elsewhere
+bash tools/check.sh                                                          # gates over every unit, kit manifest, due-date sheet, packages
 cd a7/build && python3 build_all.py u3                                       # smoke test: rebuilds Unit 3, ends "checks: 0 findings"
 ```
 
@@ -41,6 +42,21 @@ background and keep working if your shell has a time limit.
 
 If the smoke test fails, fix the environment before touching content. Read
 `../reference/GITHUB FROM A SESSION.md` before diagnosing any push problem.
+
+## 1a. The kit, and changing it (4 October 2026)
+
+`lib/`, `checks.py`, `gates.py`, the `build_*.py` drivers, `slotaudit.py`, `shuffle_choices.py`,
+`contact_sheet.py`, `assets/` and `SPEC SCHEMA.md` are **the build kit — one code base for this
+course and the on-level one**, published from `croix18/Windmill` (`kit/`), vendored here by
+`tools/vendor_windmill.py` and listed in `KIT.sha256`. **They are never edited here**: `kitcheck`
+(in `checks.py` and `gates.py`) refuses a copy that differs. To change the kit: edit `kit/` in a
+Windmill checkout, run its `tools/check.sh` (the kit's tests, under a profile shaped like each
+course), vendor into both course repositories, and rebuild a unit of each — a change is finished
+when **both** courses rebuild at `checks: 0 findings` and nothing moved that the change did not
+mean to move. What this course settles for itself is `course.py` (the profile: `python3 -m
+lib.profile` prints it and marks what A7 sets); ours too are the unit folders, `install_unit.py`,
+and this file. `python3 gates.py [uN]` runs every build gate over the specs in seconds, with no
+rendering — `tools/check.sh` runs it before every push, and CI on every push.
 
 ## 2. Intake — the Math Nation package
 
@@ -156,6 +172,8 @@ Do not batch lessons before the first push. One lesson, checked, viewed, pushed;
 | `box crosses the footer` / `math into footer` | too many rows on one slide | fewer rows, or split into two notes slides |
 | `table cell wraps out of its row` | a notes table's cell is too long for its column, and a wrapped second line draws outside the border | shorten the cell, widen the column, use fewer columns, or move the words into an `items2` line under the table |
 | `plan does not fit … leave whiteboards 22` | the fixed minutes are too few/many | adjust `min` on notes/examples so the remainder lands in 10–20 (aim 15–19) |
+| `title-slide line does not fit its box` | `yesterday` or `today` wider than the box, measured with the font | shorten the line (seven shipped lines sat on the box's edge until 4 October) |
+| `ruling 28 — IXL code X is not in this course's IXL plan` / `the plan lists … and the slide does not` | an `ixl` entry that is not the plan's skill, code or lesson | the skills and codes are `../reference/ixl_skills_by_lesson.json`'s, via the spine; never type a code from memory |
 | `Unknown symbol: \le` | mathtext, not TeX | `\leq`; see the LaTeX paragraph in SPEC SCHEMA |
 | `docscan: calculator line on student surface` | the word calculator on a student page | "a computer displays 3.5E9"; the TE may say calculator |
 | `docscan: benchmark code on student surface` | `MA.…` on a student page | move it to the key/TE |
@@ -216,7 +234,7 @@ files live in `assets/` with the script that regenerates them (`assets/make_asse
    items. `python3 build_unit.py <unit>/unit.py`, then `checks.py`, then look at every page.
 2. Copy `u3/manifest.py` to `<unit>/manifest.py`; fill the lesson table (the "line that carries
    the day" is each lesson's `te.lives` idea in ten words), the assessment days, the notes.
-3. `python3 install_unit.py <unit>/manifest.py` — deletes and rebuilds the package folder and
+3. `python3 install_unit.py <unit>` — deletes and rebuilds the package folder and
    writes `00 - START HERE.md` with the timing table read from the decks.
 4. `python3 build_all.py <unit> --install` — rebuilds everything from the specs, runs the suite
    (0 findings) and reinstalls the package — then push. This is the shipping gate.
@@ -272,9 +290,40 @@ Send the START HERE, the Reference Sheet PDF and the assessment key PDF with it.
 - Never leave a lesson unpushed while starting the next one.
 - Never rescale a plan by trimming the whiteboard round below 10 minutes or IXL below 5.
 
-## 8. State of the work — 3 October 2026 (read this before anything else)
+## 8. State of the work — 4 October 2026 (read this before anything else)
 
-Where things stand at the end of the 3 Oct session, so the next session (any model) starts here.
+**4 Oct, later — one kit for both courses; everything below is pushed.** Croix asked for M7 to be
+adapted "to a7 and the family", and chose all four parts. What that changed HERE:
+
+- **The build library is no longer this repository's.** `lib/`, `checks.py`, `gates.py`, the
+  drivers, `slotaudit.py`, `shuffle_choices.py`, `contact_sheet.py`, `assets/` and `SPEC SCHEMA.md`
+  are the shared kit, published from `croix18/Windmill` (`kit/`) and vendored here (§1a). Ours:
+  `course.py`, the unit folders, `install_unit.py`, this file. The earlier note below that "this
+  repository's copies are the masters" is superseded: **Windmill's `kit/` is the master.**
+- **A7's output moved only where it was meant to.** Against the pre-kit build: Unit 3 — 100
+  documents identical in structure, 7 differ (3.03's title line; three two-line answer boxes now
+  sized for two lines); Unit 4 — 53 identical, 14 differ, all of them the six title-slide lines
+  below and the unit deck that repeats them. Both units rebuilt at `checks: 0 findings` (eighteen
+  checks) and reinstalled.
+- **Seven title-slide `today` lines were too long for their box** and sat on its edge in the
+  shipped decks (3.03, 4.01, 4.02, 4.04, 4.05, 4.06, 4.07). Shortened; the builder now measures
+  the line with the font and refuses one that does not fit.
+- **New for both courses:** the IXL plan as a gate (every skill and code on a slide is
+  `ixl_skills_by_lesson.json`'s, via the spine — Units 3 and 4 passed as they stood; M7's Unit 5
+  did not); options compared as numbers with their units; the letters an item's words name held to
+  its key; the keyed letters balanced across a unit; a figure's height refused if it ends outside
+  the figure; `tools/check.sh` before every push and in CI (`.github/workflows/check.yml`).
+- **Word boards:** a board's `hint` now always shows when it has one. A7's sixteen word-board
+  hints were removed from the specs so those slides stay exactly as Croix approved them.
+- `install_unit.py` takes the unit (`u3`) as well as the manifest path; `build_all.py uN --install`
+  calls it that way.
+- **Family:** the M7 repository now has this one's layout (`m7/build`, `m7/reference`,
+  `m7/packages`); Geopardy gained two M7 games; Windmill's handoff has the kit's takeover notes.
+- **Open for Croix:** the teacher's edition and lesson plan differ in format between the courses
+  (profile `TE_STYLE`, `PLAN_STYLE`) — converging them is his call. Everything in "Pending" below
+  still stands.
+
+Where things stood at the end of the 3 Oct session:
 
 **Shipped today, all pushed (HEAD e9db9ff).** Units 3 and 4 rebuilt: every multiple-choice answer was
 A (students noticed) — spread by `shuffle_choices.py`, keyed letters now vary (gate `balancecheck`);

@@ -77,7 +77,7 @@ L = dict(
              wrong="1/y⁵ — the sign was changed but the power was not moved [8.AR.1.1: law applied in one direction only]"),
         dict(text=["The brightness of a lamp from  $x$  meters away is  $3x^{-2}$  units.", "The lamp is 15 centimeters tall.", "**How bright is the lamp from 2 meters away?"],
              qtext="The brightness of a lamp from x meters away is 3x⁻² units. The lamp is 15 centimeters tall. How bright is the lamp from 2 meters away?",
-             unneeded="height of 15 centimeters", hint="Put 2 in for x. Only the x has the exponent.", gloss="3 · 2⁻² = 3 over 2²", answer_latex="\\frac{3}{4}",
+             unneeded="height of 15 centimeters", gloss="3 · 2⁻² = 3 over 2²", answer_latex="\\frac{3}{4}",
              note="Ruling 22's board: a real question (a brightness) that puts a number into a monomial with a negative exponent. 3 · 2⁻² = 3/2² = 3/4 of a unit. The coefficient stays put; only the x carries the exponent — on the reveal, write 3x⁻² = 3/x² first and then substitute. The height is there to be read past. A board with 1/12 moved the 3 down with the x — today's leading error, and the one to name at the board; a board with 12 dropped the minus; a board with −12 read the exponent's sign as the value's.",
              check=("many", ("eq", "3*x**-2", "3/x**2"), ("eq", "3*F(2)**-2", "F(3,4)")),
              wrong="1/12 — the coefficient was moved down with the variable [8.AR.1.1: a negative exponent applies only to its own base]; 12 — the minus on the exponent was dropped, 3 · 2²; −12 — negative exponent read as a negative value [B1G-M 8.NSO.1.3: −b vs b⁻¹]; anything built from 15 — the unneeded figure was used"),

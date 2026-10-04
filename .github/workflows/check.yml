@@ -1,0 +1,15 @@
+name: check
+on: [push, pull_request]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install sympy python-docx python-pptx matplotlib Pillow
+      - name: gates, kit manifest, due-date sheet, packages
+        run: |
+          touch .github-token   # the guard asks that the name is ignored, not that a token exists
+          bash tools/check.sh

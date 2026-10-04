@@ -1,9 +1,17 @@
 # SPEC SCHEMA — every field a lesson spec, unit spec and manifest can carry
 
-A lesson is one Python file, `a7/build/<unit>/lNN.py`, holding one dict named `L`. The unit
+**One schema for both courses.** This file is part of the shared build kit (published from
+`croix18/Windmill`, `kit/`; vendored into each course's `build/` and held there by `KIT.sha256`).
+Edit it in Windmill. Where a course differs it is because its `build/course.py` says so — the
+section "What the course profile changes" at the end lists every such place, and
+`python3 -m lib.profile` prints the profile.
+
+A lesson is one Python file, `build/<unit>/lNN.py`, holding one dict named `L`. The unit
 documents are `<unit>/unit.py` holding `U`; the package is described by `<unit>/manifest.py`
-holding `M`. **The canonical worked examples are `u3/l04.py` (a numerical lesson), `u3/l08.py`
-(a lesson with word-form items and tagged coefficients), `u3/unit.py` and `u3/manifest.py`.**
+holding `M`. **The canonical worked examples:** accelerated — `u3/l04.py` (a numerical lesson),
+`u3/l08.py` (word-form items and tagged coefficients), `u3/unit.py`, `u3/manifest.py`; on-level —
+`u4/l06.py` (figures and named colour slots), `u5/l03.py` (story boards and the six-question set on
+a slide), `u4/unit.py` (parallel forms), `u4/review.py` (the review day built as a lesson).
 Copy one and change every field; do not start from a blank file.
 
 Markup that works in every string rendered on paper (`dockit.rich`): `$latex$` becomes an image;
@@ -16,8 +24,8 @@ LaTeX goes through matplotlib mathtext for the pptx and the documents, and throu
 `\sqrt`, `\sqrt[3]`, `\leq`, `\neq`, `\div`, `\pm`, `\infty`, `\approx` work; `\le`, `\text{}`, `\hbox` do **not**. Write `\frac`, never `\dfrac`: on the slide surfaces the renderer sets every fraction at display size itself (27 Sep 2026), and on the document surfaces text-size fractions are right. Thousands
 separators inside math are `1{,}000`. Unicode superscripts (`⁰¹²³⁴⁵⁶⁷⁸⁹⁻⁺ᵐⁿ`) may be used in plain
 text and are converted to real superscript runs; `⁽ ⁾ ✗` and other exotic characters have no glyph
-in the fonts and fail the glyph check. Dollar signs in prose are impossible (they open math) —
-write "30,100,000,000 dollars". The word "calculator" and any `MA.x.xx.x.x` code may not appear
+in the fonts and fail the glyph check. A dollar sign in prose is written `\$` (`"\\$3 for 2 pens"`
+in a Python string that is not raw): a bare `$` opens math, and the builders refuse a plain text box that carries one. The word "calculator" and any `MA.x.xx.x.x` code may not appear
 on a student surface (docscan fails the build); write "a computer displays 3.5E9". The Reference
 Sheet alone may describe the FAST calculator.
 
@@ -37,7 +45,7 @@ Sheet alone may describe the FAST calculator.
 | `essential` | str | essential question (TE only) |
 | `building_on`, `working_toward` | str | vertical alignment lines (TE) |
 | `vocab` | list of (term, definition) | definition may carry `$…$` |
-| `ixl` | list of str | `"Skill name — CODE"`; codes from `a7/reference/ixl_skills_by_lesson.json`. Ruling 28: every skill the plan lists — the numbered ones and the "also consider" ones alike — is required, so nothing is prefixed "Optional" or "Also consider" (the build refuses the word "optional") |
+| `ixl` | list of str | `"Skill name — CODE"` or `"Skill name (CODE)"` (each course keeps the spelling its slides have always shown). **The skills and their codes are the course's IXL plan's**, and `rulingcheck` holds them to it (`lib/ixlplan.py`, reading the spine vendored into `assets/windmill/`): a code the plan does not have, a name that is not the plan's name for that code, or — for a lesson the plan lists skills for — any skill more or fewer than the plan's, refuses the build. A lesson the plan lists nothing for (a carry-over day, a thread day, the review) may show any skills the plan knows. Ruling 28: every skill listed is required, so nothing is prefixed "Optional" or "Also consider" |
 | `ixl_due` | str | only for a lesson whose skills continue into the next lesson (ruling 28: one assignment covering the run, due after its last lesson). Replaces the slide's and plan's "Due at the start of the next class." — e.g. 4.05: `"This skill continues tomorrow: one assignment, due at the start of the class after 4.06."` |
 | `warmup` | list of 4 dicts | see below — bands: yesterday / last week (or "this week") / last unit / prior grade |
 | `warmup_note` | str | TE note for the warm-up slide |
@@ -46,6 +54,11 @@ Sheet alone may describe the FAST calculator.
 | `examples` | list of 2 dicts | see below |
 | `whiteboard` | list of exactly 9 dicts | see below; #9 is `kind="written"` |
 | `bank`, `additional` | list of item dicts | the two question banks; `additional` mirrors `bank` position by position with new numbers |
+| `independent` | list of exactly 6 item dicts | the independent set (ruling 21), unless `no_set=True`. Printed as a handout with a key, or set on one slide with its six answers in the teacher's edition — the profile's `SET` decides |
+| `no_set` | bool, optional | the lesson carries no six-question set (M7 Unit 4 — Croix, 27 September) |
+| `review` | bool, optional | the spec is the review day built as a lesson (`uN/review.py`); it joins the unit deck where the profile's `REVIEW_IN_DECK` is set and writes nothing to the bank |
+| `handout` | str, optional | names a printed page the lesson uses that the build does not make (4.05's measuring sheet); printed under Materials |
+| `mtr`, `hoq`, `differentiation` | see below | ruling 25 — the build refuses a lesson without them |
 | `te` | dict | Teacher Edition prose, see below |
 
 ### warm-up question
@@ -74,13 +87,13 @@ gloss, answer | answer_latex)`. `check` and `yt_check` are re-derived by sympy l
 ### whiteboard question
 `dict(kind="free"|"mc"|"written", latex | text=[rows], hint, gloss, answer | answer_latex, note,
 check, wrong, …)`. `latex` is set large and centered; `text` rows are centered (a row with `$`
-is a mixed row and must fit one line). `hint` prints under "Answer it." on the question slide.
-A `text` row beginning `**` is the ASK and is set bold; a board with any such row (or with `unneeded`) is laid out as a left-aligned 24 pt block, not centred lines — keep each row under about 60 characters plus its math. **The ask names a thing in the story and the answer is that thing** ("What fraction of the sheet is the top layer?", "Which drive holds more?"); an ask that begins "Write", "Rewrite" or "What is the value of" on a board with a story is a computation in costume — write that board bare (HOUSE STYLE, ruling 22 in practice). `gloss` is the gray line on the reveal. `note` is the TE note; `note_a` optionally the reveal's.
+is a mixed row and must fit one line). `hint` prints small and grey under the question on the question slide — **it is a nudge, never the question**: a board whose ask lived in its hint shipped in M7 Unit 5 as a story with no question a student could read from the back of the room. A board with a `**` ask row shows its hint too, when it has one, so leave `hint` off a story board unless the nudge is worth a line.
+A `text` row beginning `**` is the ASK and is set bold; a board with any such row (or with `unneeded`) is laid out as a left-aligned 24 pt block — story in roman, ask in bold — not centred lines; keep each row under about 60 characters plus its math. `fig` (a figure from the unit's `figs.py`) and `fig_a` (the figure the reveal shows instead) sit under the text; `te_answer` is the answer as the teacher's edition prints it when the slide's `answer` is too terse. **The ask names a thing in the story and the answer is that thing** ("What fraction of the sheet is the top layer?", "Which drive holds more?"); an ask that begins "Write", "Rewrite" or "What is the value of" on a board with a story is a computation in costume — write that board bare (HOUSE STYLE, ruling 22 in practice). `gloss` is the gray line on the reveal. `note` is the TE note; `note_a` optionally the reveal's.
 `wrong` is the TE's named-wrong-answers line for free/written questions: `"value — error name
 [benchmark cite]; …"`. **`kind="mc"`** adds `choices` (4 strings, unicode superscripts allowed),
 `correct` (index), `answer` ("A — 25m⁶") and **`errors`** — a dict from every wrong letter to
 `"what the student did [benchmark or B1G-M cite]"`; the build refuses an mc item with a wrong
-option that has no cited error. **The keyed letter must vary** across a lesson's items (gate `balancecheck`): write a new item answer-first if that is easier, then run `shuffle_choices.py <unit>` once before the first build, and after that write each item's options in their final order. **`kind="written"`** adds `qtext` (the plain-text question for
+option that has no cited error. **The keyed letter must vary** — across a lesson's items, and across a unit's whiteboard rounds every letter is keyed at least once and none more than 40% of the time (gate `balancecheck`; M7's Units 4 and 5 first shipped with no board ever keyed D): write a new item answer-first if that is easier, then run `shuffle_choices.py <unit>` once before the first build (`--seed=N` for another spread; it rewrites `answer`, "Reveal X" and the error keys with the options, and lists every other letter it saw so a variable named A or C is never renamed), and after that write each item's options in their final order. **The letters an item's own words name must be its key**: `distractorcheck` refuses an `answer` line or a "Reveal C." note whose letter is not `correct`, and an `errors` entry on the keyed letter. **`kind="written"`** adds `qtext` (the plain-text question for
 the TE) and the answer states the full-credit sentence.
 
 ### bank / additional item
@@ -147,21 +160,55 @@ fails a longer one. Only these fields reach it:
 - `materials` — one line, printed at the end.
 
 Everything else in `te` — `read_first`, `variation`, `audit`, `changes`, `sits`, `lives` — no
-longer prints in the teacher's edition. It is written to **`a7/unitNN/BANK - Unit N.md`** by
-`bank_file.py`, together with every bank answer, and installs into the package's `Reference/`
-folder. Keep writing those fields: that file is where the unit's reasoning lives.
+longer prints in the teacher's edition. It is written to the unit's **`BANK - Unit N.md`**,
+together with every bank answer, and installs into the package's `Reference/` folder. Keep writing
+those fields: that file is where the unit's reasoning lives.
+
+Where the profile's `TE_STYLE` is `"table"` (M7) the teacher's edition is one line per slide and
+then the boards as a table, and these are also required: **`watch=[…]`** — the misconceptions to
+watch, each tied to its board ("Board 6, option B: …"; when the options are re-ordered these lines
+move with them); **`close=[…]`** — the "Before You Go" slide's lines (profile `CLOSE`);
+`variation` (profile `BANK = "md"`). Optional: `set_note` and `close_note` replace the standing
+teacher's-edition notes for the independent set and the close.
 
 ### `mtr` and `hoq` — ruling 25
 - **`mtr=[("MTR.4.1", "evidence line"), …]`** — the two or three MA.K12.MTR.x.1 the lesson
   actually exercises, each with one line of evidence from the period ("the re-vote on board 5").
   Not all seven. **The build refuses a lesson with no `mtr`.**
 - `hoq=[(question, "DOK n"), …]` — the higher-order questions the plan prints with their DOK.
-- `differentiation=dict(ese, ell, enrichment)` — one concrete line each.
+- `differentiation=dict(ese, ell, enrichment)` — one concrete line each — or a list of
+  `(label, line)` pairs.
+
+## Colour — the named slots (`\sA{}`, `\sB{}`, `\sH{}`)
+
+HOUSE STYLE §2a: on the slides where the teacher shows — notes, worked rows and their glosses,
+every reveal — a formula's slots are colour-coded, and the number that fills a slot carries the
+slot's colour, so the match is seen before it is explained. A course whose profile says
+`SLOTS = "exponent"` (A7) gets base blue and exponent orange read off the layout and marks nothing.
+A course whose profile says `SLOTS = "named"` (M7) marks each slot in the spec, where it stands,
+in LaTeX and in plain text alike (in a Python string that is not raw, the backslash is doubled):
+
+| mark | slot | colour |
+|---|---|---|
+| `\sA{…}` | the first slot — b, b₁, d₁, the circumference | blue 1E5AA8 |
+| `\sB{…}` | the second slot — b₂, d₂, the radius or the diameter | orange C05A00 |
+| `\sH{…}` | the height (and the apothem) | teal 398080 |
+
+    ("A = \\frac{1}{2}(\\sH{9})(\\sA{18.7} + \\sB{16.3})", "h = 9, the bases 18.7 and 16.3")
+    gloss="C = π\\sB{d} = 3.14 × \\sB{12}"
+
+The marks are stripped wherever the student is the one who has to decide — every question slide,
+every printed page, the gates — and the text reads as if they were never there. Marks do not nest.
+The review day is left black (§2a rule 6). `python3 slotaudit.py <unit>` lists every coloured
+expression as the renderer reads it; `checks.py`'s `slotgeometry` renders each one black and
+coloured and refuses if more than 0.5% of the ink moved.
 
 ## `U` — the unit documents (`unit.py`)
 
 `dict(unit, title, reference_intro, reference=[sections], review=[parts],
-assessment=dict(total, tracker_order, tracker, follow_through, days=[…]))`.
+assessment=dict(total, tracker_order, tracker, follow_through, sections=[…]))` for one paper, or
+`assessment=dict(…, forms={"A": sections, "B": sections, "practice": sections})` for parallel
+forms. `reference` and `review` are optional (M7 builds its review day as a lesson instead).
 
 - `reference` sections: `dict(title, right, blocks=[…], not_sci=…)`; a block is a prose string
   (bold lead + sentence), `dict(table=(widths_twips, rows), header=True/False)`,
@@ -180,10 +227,40 @@ assessment=dict(total, tracker_order, tracker, follow_through, days=[…]))`.
   A transfer item is the same benchmark and the same one-operation demand on a surface that
   appears on no review and in no question bank — not harder, not longer, not a chain. The key
   prints *TRANSFER ITEM — not on the practice test. Same benchmark, a surface nobody rehearsed.*
+- **Parallel forms** (ruling 33): Form A, Form B and the practice test are built from one item
+  list whose values come from `pick(form, a, b, p)`. Each form ships as its paper, its key and its
+  Worked Answers copy (ruling 32). The build checks every form, checks the forms position for
+  position (same shape, the transfer items at the same positions and never on the practice test),
+  and refuses any question that shares an answer with the same question on another form.
+- An item may carry `fig` (a figure from the unit's `figs.py`, drawn from its numbers — a height
+  that ends outside its figure is refused) and `table`.
 
 ## `M` — the manifest (`manifest.py`)
 
-`dict(unit, title, folder, audit_src, summary, lessons=[(code, label, title, benchmark,
-carry_line)], assessment=(benchmarks, points), naming_note, order_note,
-before_unit=[bullets])`. `lessons` is in teaching order and drives the START HERE tables and the
-timing table (read from the deck side-cars, never typed).
+The manifest belongs to the course's own `install_unit.py` (packaging is each course's), so its
+fields are that script's. A7: `dict(unit, title, folder, audit_src, summary, lessons=[(code,
+label, title, benchmark, carry_line)], assessment=(benchmarks, points), naming_note, order_note,
+before_unit=[bullets])`. M7: `dict(unit, title, folder, summary, handouts={code: [paths in the
+14 September package]}, review_note, order_note, before_unit=[bullets])` — its lessons, benchmarks
+and IXL skills are read from the specs. The one field the kit reads is **`lessons`**: when a
+manifest has it, it is the teaching order and the printed label and title of each row of the unit
+deck; without it the unit deck follows the spec files in order. The timing table on START HERE is
+read from the deck side-cars, never typed.
+
+## What the course profile changes
+
+`build/course.py` sets these; `lib/profile.py` holds the family defaults.
+
+| name | accelerated (A7) | on-level (M7) | what it decides |
+|---|---|---|---|
+| `SET` | `"handout"` | `"slide"` | the six-question independent set is a printed page with a key, or one slide with its answers in the teacher's edition |
+| `CLOSE` | no | yes | a "Before You Go" slide before IXL (`te.close`) |
+| `BANK` | `"docx"` | `"md"` | Question Bank and Additional as documents with keys per lesson, or one `BANK - Unit N.md` per unit |
+| `TE_STYLE` | `"lines"` | `"table"` | the teacher's edition's boards inline, or as a table (`te.watch` required) |
+| `PLAN_STYLE` | `"sections"` | `"labels"` | the Florida lesson plan as ten numbered sections, or headed paragraphs |
+| `UNIT_DECK` | `"Unit Slides"` | `"All Slides"` | the whole-unit deck's name; its `.html` is the console |
+| `REVIEW_IN_DECK` | no | yes | `uN/review.py` is built like a lesson and closes the unit deck |
+| `SLOTS` | `"exponent"` | `"named"` | the colour code: read off the layout, or marked in the spec |
+| `CAPS` | fracexp, sci, gap, radicand | fracexp, sci | which benchmark boundaries `capcheck` enforces |
+| `IXL_SMARTSCORE` | 67 | 60 | ruling 28 |
+| `PERIOD`, `WB_RANGE`, `SET_MIN`, `IXL_MIN`, `TE_MAX_PAGES` | family defaults: 53, (10, 20), 6, 5, 4 | the same | the period's arithmetic and ruling 26 |

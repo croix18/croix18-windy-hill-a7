@@ -1,7 +1,12 @@
-"""pptx builder matching the shipped A7 deck geometry (13.33 x 7.5 in, Century Schoolbook,
-INK/VOCAB/RED/GRAY, double rule under the title, footer rule + running title + page number).
+"""pptx builder: the house deck geometry (13.33 x 7.5 in, Century Schoolbook, INK/VOCAB/RED/GRAY,
+double rule under the title, footer rule + running title + page number), one kit for both courses.
 No speaker notes in the deck (ruling 12): every slide's minutes and teaching note go to a
 side-car JSON beside the .pptx, which the teacher's edition reads at build time.
+
+Guards, each one because the thing it refuses once shipped with every check green: $…$ in a plain
+text box (prints as LaTeX), a box or figure that crosses the footer rule, a line that runs off the
+slide, a partial **bold**, a table cell that wraps out of its row, a title-slide line too long for
+its box, an answer line that wraps into the footer, four options that do not fit.
 """
 import json, os
 from pptx import Presentation
@@ -10,6 +15,9 @@ from pptx.dml.color import RGBColor
 from pptx.enum.text import PP_ALIGN, MSO_ANCHOR, MSO_AUTO_SIZE
 from pptx.enum.shapes import MSO_SHAPE
 from . import mathimg
+from . import figkit
+from . import slotmark
+from .profile import C
 
 INK, VOCAB, RED, GRAY, LT, FILL = "1A1A1A", "0B5394", "9E1B32", "6B6B6B", "D9D9D9", "F2F2F0"
 FONT = "Century Schoolbook"
@@ -71,7 +79,13 @@ class Deck:
 
     # ---------- primitives ----------
     def _text(self, x, y, w, h, text, size=23, bold=False, italic=False, color=INK, align="left",
-              anchor="top", runs=None, wrap=True, foot=False):
+              anchor="top", runs=None, wrap=True, foot=False, slots=False):
+        # _text draws type, not mathematics: a $…$ span here would print its LaTeX verbatim and
+        # every check would pass (M7, 20 Sep — "Answer: 240 ft$^2$" shipped that way). Use
+        # _mixed/math_row for real math, or a unicode superscript for a unit. \$ is money.
+        for t in ([text] if text else []) + [r[0] for r in (runs or [])]:
+            if t and t.replace("\\$", "").count("$") >= 2:
+                raise RuntimeError(f"$…$ math in a plain text box — it would print as LaTeX: {t[:60]}")
         if not foot and y + h > FOOT_Y + 0.02:
             raise RuntimeError(f"text box runs into the footer (bottom {y + h:.2f} in): {(text or (runs and runs[0][0]) or '')[:50]}")
         if x < 0 or x + w > W + 0.01:
@@ -85,12 +99,15 @@ class Deck:
         para = tf.paragraphs[0]
         para.alignment = {"left": PP_ALIGN.LEFT, "center": PP_ALIGN.CENTER, "right": PP_ALIGN.RIGHT}[align]
         for (t, sz, b, i, c) in (runs or [(text, size, bold, italic, color)]):
-            for piece, sup in _split_sup(t):
-                r = para.add_run(); r.text = piece
-                r.font.name = FONT; r.font.size = Pt(sz); r.font.bold = b; r.font.italic = i
-                r.font.color.rgb = _rgb(c)
-                if sup:
-                    r.font._element.set("baseline", "30000")
+            # a named slot (\sA{} \sB{} \sH{}) is its own run in its own colour where the teacher
+            # shows; anywhere else the mark is dropped and the words stay (lib/slotmark.py)
+            for part, slot in (slotmark.pieces(t) if slots else [(slotmark.strip(t), None)]):
+                for piece, sup in _split_sup(part):
+                    r = para.add_run(); r.text = piece.replace("\\$", "$")   # \$ = a literal dollar sign
+                    r.font.name = FONT; r.font.size = Pt(sz); r.font.bold = b; r.font.italic = i
+                    r.font.color.rgb = _rgb(slot or c)
+                    if sup:
+                        r.font._element.set("baseline", "30000")
         return tb
 
     def _line(self, x, y, w, weight=1.5, color=INK):
@@ -127,6 +144,12 @@ class Deck:
 
     # ---------- slide types ----------
     def title_slide(self, benchmark, target, yesterday, today, minutes=1, note=""):
+        # the yesterday/today box holds one 17-pt line each; a longer line wraps out of the box
+        # (M7 4.01's first deck did — 28 Sep). Measured against the box, not counted.
+        for line, bold in ((yesterday, False), (today, True)):
+            wid = (_textw(line, 17, bold) - 0.08) / 1.06      # the font's own width, without _textw's safety margin
+            if wid > 7.6 - 0.1:
+                raise RuntimeError(f"title-slide line does not fit its box ({wid:.2f} in of 7.5): {line}")
         self.s = self.p.slides.add_slide(self.blank); self._n += 1
         self.side.append({"n": self._n, "title": self.title, "sub": "", "min": minutes, "note": note, "kind": "title"})
         eyebrow = f"{self.course}  ·  UNIT {self.unit}  ·  {self.lesson_label}".upper()
@@ -178,17 +201,20 @@ class Deck:
         self._foot()
         return self.s
 
-    def link_row(self, slide, y, left, right, target):
+    def link_row(self, slide, y, left, right, target, pitch=0.46):
         """One contents row that jumps to `target` when clicked: label and title on the left,
-        the slide's position in the file on the right."""
+        the slide's position in the file on the right. `pitch` is the row spacing: a unit with
+        more than ten rows closes it up (and steps the type down) so the last row clears the footer."""
         prev = self.s
         self.s = slide
-        a = self._text(LM + 0.4, y, 1.45, 0.44, left[0], 22, bold=True, anchor="middle")
-        b = self._text(LM + 1.95, y, 7.6, 0.44, left[1], 22, anchor="middle")
-        c = self._text(LM + 9.6, y, 1.6, 0.44, right, 17, italic=True, color=GRAY, align="right", anchor="middle")
+        tight = pitch < 0.455
+        h, sz = (pitch - 0.03, 20) if tight else (0.44, 22)
+        a = self._text(LM + 0.4, y, 1.45, h, left[0], sz, bold=True, anchor="middle")
+        b = self._text(LM + 1.95, y, 7.6, h, left[1], sz, anchor="middle")
+        c = self._text(LM + 9.6, y, 1.6, h, right, 17 if not tight else 16, italic=True, color=GRAY, align="right", anchor="middle")
         for shape in (a, b, c):
             shape.click_action.target_slide = target
-        self._line(LM + 0.4, y + 0.5, CW - 0.8, 0.5, LT)
+        self._line(LM + 0.4, y + (0.5 if not tight else pitch - 0.005), CW - 0.8, 0.5, LT)
         self.s = prev
 
     def head(self, text, numeral=None):
@@ -212,23 +238,27 @@ class Deck:
             else:
                 bold = row.startswith("**")
                 text = row.strip("*")
+                if "**" in text:
+                    # the deck bolds a whole row or nothing; a ** inside a row prints literally
+                    # (M7, 20 Sep: it shipped on 5.01 and again on the Unit 5 review)
+                    raise RuntimeError(f"partial **bold** in a slide row prints literally: {row[:60]}")
                 runs = [(text, size, bold, False, INK)]
-            if "$" in text:
+            if "$" in text.replace("\\$", ""):
                 xx = x + (0.77 if letters else 0.12)
                 if letters:
                     self._text(x + 0.12, y + 0.07, 0.6, 0.42, f"{chr(65 + start + i)}.", size, color=INK)
                 tw, h = self._mixed(text, xx, y + 0.05, "slidemid", size, INK, bold, slots=slots)
                 y += h + 0.18 + gap
                 continue
-            lines = max(1, int(len(text) * (size / 23) / 82) + 1)
+            lines = max(1, int(len(slotmark.strip(text)) * (size / 23) / 82) + 1)
             h = 0.52 * lines
             if panel:
                 self._rect(x - 0.03, y - 0.02, w, h + 0.12)
             if letters:
                 self._text(x + 0.12, y + 0.07, 0.6, 0.42, f"{chr(65 + start + i)}.", size, color=INK)
-                self._text(x + 0.77, y + 0.07, w - 0.95, h, "", size, runs=runs)
+                self._text(x + 0.77, y + 0.07, w - 0.95, h, "", size, runs=runs, slots=slots)
             else:
-                self._text(x + 0.12, y + 0.07, w - 0.3, h, "", size, runs=runs)
+                self._text(x + 0.12, y + 0.07, w - 0.3, h, "", size, runs=runs, slots=slots)
             y += h + 0.18 + gap
         self.cursor = y
         return y
@@ -244,11 +274,15 @@ class Deck:
             y += h + gap
         self.cursor = y
 
-    def text(self, text, size=23, bold=False, italic=False, color=INK, align="left", h=None, x=None, w=None):
+    def text(self, text, size=23, bold=False, italic=False, color=INK, align="left", h=None, x=None, w=None, slots=False):
         x = LM if x is None else x; w = CW if w is None else w
-        lines = max(1, -(-int(_textw(text, size, bold) * 100) // int((w - 0.1) * 100)))   # measured, not counted
+        # _textw carries a 6% margin and it stays: words do not fill a line to its last point, so a
+        # paragraph measured at the font's bare width wraps one line further than it was given
+        # (tried 4 October as `tight`; 4.04 board 9's story ran over its ask, and `overlap` said so)
+        wid = _textw(slotmark.strip(text).replace("\\$", "$"), size, bold)
+        lines = max(1, -(-int(wid * 100) // int((w - 0.1) * 100)))   # measured, not counted
         h = h or (0.45 * lines * (size / 23))
-        self._text(x, self.cursor, w, h, text, size, bold, italic, color, align)
+        self._text(x, self.cursor, w, h, text, size, bold, italic, color, align, slots=slots)
         self.cursor += h + 0.12
         return self.cursor
 
@@ -319,15 +353,15 @@ class Deck:
         import re
         pieces = []
         total = 0.0; maxh = 0.45
-        for part in re.split(r"(\$[^$]+\$)", text):
+        for part in re.split(r"(\$[^$]+\$)", text.replace("\\$", "\ue000")):
             if not part:
                 continue
             if part.startswith("$"):
-                path, w, h = mathimg.m(part[1:-1], surface, color, slots)
+                path, w, h = mathimg.m(part[1:-1].replace("\ue000", "\\$"), surface, color, slots)
                 pieces.append(("img", path, w, h)); total += w; maxh = max(maxh, h)
             else:
-                w = _textw(part, size, bold)
-                pieces.append(("txt", part, w, 0.5)); total += w
+                w = _textw(slotmark.strip(part).replace("\ue000", "$"), size, bold)
+                pieces.append(("txt", part.replace("\ue000", "\\$"), w, 0.5)); total += w   # _text prints \$ as $
         if align == "center":
             x = x + ((width if width else CW) - total) / 2
         if x + total > LM + CW + 0.05:
@@ -336,7 +370,7 @@ class Deck:
             if kind == "img":
                 self.s.shapes.add_picture(val, Inches(x), Inches(y + (maxh - h) / 2), Inches(w), Inches(h))
             else:
-                self._text(x, y + (maxh - 0.5) / 2, w + 0.15, 0.5, val, size, bold=bold, color=color, anchor="middle", wrap=False)
+                self._text(x, y + (maxh - 0.5) / 2, w + 0.15, 0.5, val, size, bold=bold, color=color, anchor="middle", wrap=False, slots=slots)
             x += w
         return total, maxh
 
@@ -344,14 +378,14 @@ class Deck:
         """Width in inches a mixed line would take, without drawing it."""
         import re
         total = 0.0
-        for part in re.split(r"(\$[^$]+\$)", text):
+        for part in re.split(r"(\$[^$]+\$)", text.replace("\\$", "\ue000")):
             if not part:
                 continue
             if part.startswith("$"):
-                _, w, h = mathimg.m(part[1:-1], surface, INK)
+                _, w, h = mathimg.m(part[1:-1].replace("\ue000", "\\$"), surface, INK)
                 total += w
             else:
-                total += _textw(part, size, bold)
+                total += _textw(slotmark.strip(part).replace("\ue000", "$"), size, bold)
         return total
 
     def math_row(self, parts, surface="slidemid", y=None, gap=0.35, size=26, color=INK, bold=False, align="center", x=None, slots=False):
@@ -363,14 +397,15 @@ class Deck:
         return maxh
 
     # ---------- composed rows shared with the HTML deck (lessonbuild calls only these) ----------
-    def warmup_answers(self, pairs):
+    def warmup_answers(self, pairs, x=None):
         """Each (stem, answer): the answer in red after the stem if it fits, else on the next line."""
+        x = LM + 1.2 if x is None else x
         for stem, answer in pairs:
             y0 = self.cursor
-            tw, hh = self._mixed(stem, LM + 1.2, y0, "slide", 23, INK)
+            tw, hh = self._mixed(stem, x, y0, "slide", 23, INK)
             aw = self.measure(answer, "slide", 23, bold=True)
-            if LM + 1.2 + tw + 0.6 + aw <= LM + CW:
-                self._mixed(answer, LM + 1.2 + tw + 0.6, y0, "slide", 23, RED, True)
+            if x + tw + 0.6 + aw <= LM + CW:
+                self._mixed(answer, x + tw + 0.6, y0, "slide", 23, RED, True)
                 self.cursor = y0 + hh + 0.22
             else:
                 _, h2 = self._mixed(answer, LM + 2.0, y0 + hh + 0.05, "slide", 23, RED, True)
@@ -381,24 +416,35 @@ class Deck:
         y0 = self.cursor
         wdt, hgt = self.math(latex, "slidemid", align="left", x=2.0, slots=slots)
         gx = 2.0 + wdt + 0.5
-        self._text(gx, y0 + (hgt - 0.5) / 2, min(7.0, LM + CW - gx), 0.55, gloss, 21, italic=True, color=GRAY, anchor="middle")
+        self._text(gx, y0 + (hgt - 0.5) / 2, min(7.0, LM + CW - gx), 0.55, gloss, 21, italic=True, color=GRAY, anchor="middle", slots=slots)
         self.cursor = y0 + hgt + 0.3
 
-    def ask(self, text, hint=None):
+    def ask(self, text, hint=None, y=None):
         """The board's standing instruction, low on the slide, with an optional grey hint under it."""
-        y = max(self.cursor + 0.15, 4.75)
+        y = max(self.cursor + 0.15, 4.75) if y is None else y
         y = min(y, FOOT_Y - 0.56 - (0.45 if hint else 0))
         self._text(0.85, y, 11.6, 0.5, text, 26, bold=True, align="center")
         if hint:
             self._text(0.85, y + 0.53, 11.6, 0.4, hint, 19, italic=True, color=GRAY, align="center")
 
     def gloss(self, text):
-        """The grey one-liner above a reveal's answer."""
-        self._text(2.0, self.cursor + 0.05, 9.3, 0.6, text, 24, color=GRAY, align="center")
+        """The grey one-liner above a reveal's answer. A reveal is where the teacher shows, so a
+        named slot in it is coloured."""
+        self._text(2.0, self.cursor + 0.05, 9.3, 0.6, text, 24, color=GRAY, align="center", slots=True)
         self.cursor += 0.7
 
     def answer_line(self, text, y=5.2):
-        self._text(LM, y, CW, 0.6, "Answer:   " + text, 32, bold=True, color=RED, align="center")
+        """The red answer under a question. A long answer wraps, and a box sized for one line lets
+        the second fall into the footer — so it is measured, and refused if it will not fit (M7,
+        20 Sep: board 9 shipped a reveal whose last word sat on the footer rule, every check green)."""
+        full = "Answer:   " + text
+        wid = self.measure(full, "slide", 32, bold=True)
+        lines = max(1, int(-(-wid // (CW - 0.4))))
+        need = lines * 32 * 1.32 / 72
+        if y + need > FOOT_Y + 0.02:
+            raise RuntimeError(f"answer line needs {lines} lines ({y + need:.2f} in) and runs into "
+                               f"the footer \u2014 shorten it: {text[:60]}")
+        self._text(LM, y, CW, max(0.6, need), full, 32, bold=True, color=RED, align="center")
 
     def answer_math(self, latex, y=5.1):
         path, w, h = mathimg.m(latex, "slidebig", RED)
@@ -407,26 +453,89 @@ class Deck:
         self._text(x, y + (h - 0.6) / 2, lw, 0.6, "Answer:", 32, bold=True, color=RED, anchor="middle")
         self.s.shapes.add_picture(path, Inches(x + lw), Inches(y), Inches(w), Inches(h))
 
+    def figure(self, spec, gap=0.16):
+        """Place a geometry figure, centred, at the cursor. The figure is drawn from the numbers
+        (lib/figkit), so a drawing that disagrees with its own labels cannot happen."""
+        avail = FOOT_Y - self.cursor - spec.get("reserve", 0.7)
+        path, w, h = figkit.draw(spec, spec.get("in", 4.2))
+        if h > avail and avail > 0.4:
+            path, w, h = figkit.draw(spec, spec.get("in", 4.2) * (avail / h))
+        if self.cursor + h > FOOT_Y:
+            raise RuntimeError(f"figure does not fit the slide ({h:.2f} in tall): {spec}")
+        self.s.shapes.add_picture(path, Inches(LM + (CW - w) / 2), Inches(self.cursor),
+                                  Inches(w), Inches(h))
+        self.cursor += h + gap
+
     def choices(self, opts, size=24, correct=None, two_col=True):
-        """A–D options. On an answer slide pass correct=index to colour it red."""
+        """A–D options. On an answer slide pass correct=index to colour it red.
+
+        An option may carry $…$ math; those are laid out with a row pitch read from the rendered
+        height, because a stacked fraction is taller than a line of type. A text option longer than
+        its column wraps onto the row below it (M7 5.07 board 6 shipped with B's third line printed
+        over D — found 4 Oct): every option is measured with the real font, two columns are used
+        only when all four fit on one line each, and otherwise the options go one per line, the
+        type stepping down until they end above the ask — or the build refuses."""
         y = self.cursor
         n = len(opts)
-        if two_col and n == 4:
+        if any("$" in o.replace("\\$", "") for o in opts):
+            cols = [(LM + 1.0, 5.0), (LM + 6.3, 5.0)]
+            hmax = [0.0, 0.0]
+            for i, o in enumerate(opts):
+                cx, _ = cols[i % 2]
+                r = i // 2
+                col = RED if correct == i else INK
+                yy = y + (hmax[0] + 0.22 if r else 0.0)
+                self._text(cx, yy + 0.06, 0.65, 0.5, f"{chr(65 + i)}.", size, bold=True, color=col)
+                _, hh = self._mixed(o, cx + 0.62, yy, "slidemid", size, col, correct == i)
+                hmax[r] = max(hmax[r], hh)
+            self.cursor = y + hmax[0] + 0.22 + hmax[1] + 0.2
+            return
+
+        def lines_in(o, width, i, sz=size):
+            w = _textw(f"{chr(65 + i)}.   " + o.replace("\\$", "$"), sz, bold=(correct == i))   # the keyed option is set bold on the reveal
+            return max(1, -(-w // (width + 0.15)))     # the +6% in _textw is conservative: 5.04 in measured fits a 5.0 in column
+
+        def run(i, o, sz, col):
+            return [(f"{chr(65 + i)}.   ", sz, True, False, col), (o, sz, correct == i, False, col)]
+
+        if two_col and n == 4 and all(lines_in(o, 5.0, i) == 1 for i, o in enumerate(opts)):
             cols = [(LM + 1.2, 5.0), (LM + 6.4, 5.0)]
             for i, o in enumerate(opts):
                 cx, cw_ = cols[i % 2]
                 row = i // 2
                 col = RED if correct == i else INK
-                self._text(cx, y + row * 0.75, cw_, 0.6, "", size, runs=[(f"{chr(65 + i)}.   ", size, True, False, col), (o, size, correct == i, False, col)])
+                self._text(cx, y + row * 0.75, cw_, 0.6, "", size, runs=run(i, o, size, col))
             self.cursor = y + 2 * 0.75 + 0.2
-        else:
+            return
+        if all(lines_in(o, CW - 1.5, i) == 1 for i, o in enumerate(opts)) and y + n * 0.62 <= 5.42 + 0.2:
+            # one per line at the full size and the open pitch, when nothing wraps and it fits
             for i, o in enumerate(opts):
                 col = RED if correct == i else INK
-                self._text(LM + 1.2, y + i * 0.62, CW - 1.5, 0.55, "", size, runs=[(f"{chr(65 + i)}.   ", size, True, False, col), (o, size, correct == i, False, col)])
+                self._text(LM + 1.2, y + i * 0.62, CW - 1.5, 0.55, "", size, runs=run(i, o, size, col))
             self.cursor = y + n * 0.62 + 0.2
+            return
+        # one column, fitted: the type steps down until the options end above the ask zone (the
+        # ask and its hint need the slide from 5.7 in; a reveal's answer line sits lower)
+        for sz in (size, 22, 20, 19, 18):
+            rows = []
+            for i, o in enumerate(opts):
+                k = lines_in(o, CW - 1.5, i, sz)
+                rows.append((k, k * sz * 1.25 / 72 + 0.06))      # a line is 1.25 × the size, plus the box margins
+            total = sum(h for _, h in rows) + 0.07 * (n - 1)
+            if y + total <= 5.42:                          # + 0.2 gap, + 0.15 to the ask, + 0.93 for the ask and its hint = 6.70
+                break
+        else:
+            raise RuntimeError(f"the options do not fit one slide even at 18 pt — shorten them: {opts[0][:40]}…")
+        for i, o in enumerate(opts):
+            col = RED if correct == i else INK
+            h = rows[i][1]
+            self._text(LM + 1.2, y, CW - 1.5, h, "", sz, runs=run(i, o, sz, col))
+            y += h + 0.07
+        self.cursor = y + 0.2
 
     def independent(self, minutes=6):
-        """Ruling 21: six questions, silent, written, after the boards and before IXL."""
+        """Ruling 21, the set as a handout: six questions, silent, written, after the boards and
+        before IXL. The slide gives the instructions; the questions are on the printed page."""
         self.section("Independent Set", "Six questions. On your own, in silence.", minutes,
                      "Hand out the Independent Set. Silent work. Circulate and mark what you see; do not teach. "
                      "Whatever is not finished goes home.", "independent")
@@ -435,13 +544,41 @@ class Deck:
                        "Show the step that does the work, not just the answer.",
                        "Silence until the six minutes are up."], gap=0.14)
 
+    def independent_set(self, minutes, note, questions):
+        """Ruling 21, the set on the slide: the six questions themselves, no handout (Croix,
+        20 September: three files per lesson, the bank kept in Reference)."""
+        self.section("Independent Practice", "Six questions. On your own, in writing.", minutes, note, "set")
+        # the six have to fit one slide — shrink the type rather than split the set across two,
+        # because ruling 21 is that a student works all six at their own pace
+        for size, gap in ((19, 0.10), (18, 0.08), (17, 0.06), (16, 0.05)):
+            n = len(self.s.shapes._spTree)
+            self.cursor = 1.72
+            try:
+                self.numbered(questions, size=size, gap=gap)
+                break
+            except RuntimeError:
+                tree = self.s.shapes._spTree
+                for sp in list(tree)[n:]:
+                    tree.remove(sp)
+        else:
+            raise RuntimeError("the six questions do not fit one slide even at 16 pt \u2014 shorten them")
+
+    def close(self, lines, minutes=1, note=""):
+        """Before You Go — the one thing today lives on, said back to the room."""
+        self.section("Before You Go", "", minutes, note, "close")
+        self.cursor = 2.1
+        for ln in lines:
+            self.text(ln, 24)
+            self.cursor += 0.12
+
     def ixl(self, skills, minutes=5, due="Due at the start of the next class."):
         """Ruling 28. `due` is the third line; a lesson whose skills continue into the next lesson
         passes its own (one assignment covering the run, due after its last lesson)."""
-        self.section("IXL", "Last five minutes.", minutes, "IXL: every listed skill is required, SmartScore 67. " + due, "ixl")
+        ss = C.IXL_SMARTSCORE
+        self.section("IXL", "Last five minutes.", minutes, f"IXL: every listed skill is required, SmartScore {ss}. " + due, "ixl")
         rows = ["Open IXL and start today's skills.",
                 "Work on paper where the question needs work. The answer box does not show it.",
-                "Every skill listed is required, to a SmartScore of 67. " + due]
+                f"Every skill listed is required, to a SmartScore of {ss}. " + due]
         self.cursor = 2.0
         self.numbered(rows, gap=0.1)
         self.cursor += 0.05

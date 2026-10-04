@@ -1,28 +1,51 @@
 #!/usr/bin/env python3
-"""Build the unit-wide documents: python3 build_unit.py u3/unit.py  → out/u3/"""
+"""Build the unit-wide documents and the whole-unit deck: python3 build_unit.py u3/unit.py  → out/u3/
+
+The deck's order is the `lessons` list of the unit's manifest.py when it has one (teaching order,
+with each row's printed label and title), and otherwise the lesson specs in file order; where the course builds its review
+day as a lesson (uN/review.py), the review closes the deck.
+(Part of the shared build kit — edit it in croix18/Windmill, kit/.)"""
 import sys, os, glob, importlib.util, subprocess
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, HERE)
 from lib import unitbuild, lessonbuild
-spec = importlib.util.spec_from_file_location("unit", sys.argv[1])
-m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
-unit = os.path.basename(os.path.dirname(os.path.abspath(sys.argv[1])))
-outdir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "out", unit)
+from lib.profile import C
+
+
+def load(path, name):
+    spec = importlib.util.spec_from_file_location(name, path)
+    m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
+    return m
+
+
+src = os.path.abspath(sys.argv[1])
+here = os.path.dirname(src)
+sys.path.insert(0, here)                            # a unit's own figs.py sits beside its specs
+m = load(src, "unit")
+unit = os.path.basename(here)
+outdir = os.path.join(HERE, "out", unit)
 out = unitbuild.build_unit(m.U, outdir)
-# the whole unit as one deck, in the manifest's teaching order
-here = os.path.dirname(os.path.abspath(sys.argv[1]))
-ms = importlib.util.spec_from_file_location("manifest", os.path.join(here, "manifest.py"))
-mm = importlib.util.module_from_spec(ms); ms.loader.exec_module(mm)
+# the whole unit as one deck
 specs = {}
 for f in sorted(glob.glob(os.path.join(here, "l[0-9]*.py"))):
-    ls = importlib.util.spec_from_file_location("lesson", f)
-    lm = importlib.util.module_from_spec(ls); ls.loader.exec_module(lm)
-    specs[lm.L["code"]] = lm.L
-order = mm.M["lessons"]
-missing = set(specs) ^ {row[0] for row in order}
-if missing:
-    raise SystemExit(f"unit deck: lesson specs and manifest disagree about {sorted(missing)}")
-out["unit_deck"] = lessonbuild.build_unit_deck([specs[row[0]] for row in order],
-                                               [(row[1], row[2]) for row in order], m.U, outdir)
+    L = load(f, "lesson").L
+    specs[L["code"]] = L
+man = os.path.join(here, "manifest.py")
+order = load(man, "manifest").M.get("lessons") if os.path.exists(man) else None
+if order:                               # a manifest may leave the order to the spec files
+    missing = set(specs) ^ {row[0] for row in order}
+    if missing:
+        raise SystemExit(f"unit deck: lesson specs and manifest disagree about {sorted(missing)}")
+    lessons = [specs[row[0]] for row in order]
+    rows = [(row[1], row[2]) for row in order]
+else:
+    lessons = [specs[c] for c in sorted(specs)]
+    rows = [(L["code"], L["title"]) for L in lessons]
+review = os.path.join(here, "review.py")
+if C.REVIEW_IN_DECK and os.path.exists(review):
+    R = load(review, "review").L
+    lessons.append(R); rows.append(("Review", R["title"]))
+out["unit_deck"] = lessonbuild.build_unit_deck(lessons, rows, m.U, outdir)
 for k, path in out.items():
     if path.endswith(".html"):          # the HTML deck is its own final form (prints from the browser)
         print("built", os.path.basename(path)); continue
