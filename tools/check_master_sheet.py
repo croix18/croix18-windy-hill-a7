@@ -12,7 +12,7 @@ test's question map and points against its spec; the month grid against the scho
 LaTeX left anywhere. With Florida's B.E.S.T. standards text present (outside the repo, at
 /root/best), also checks the MTR titles and that every Source of Truth statement is complete and
 verbatim. Exit status 1 on any problem."""
-import os, re, sys, glob, subprocess, datetime, urllib.parse, importlib.util, collections, io, contextlib
+import os, re, sys, csv, glob, hashlib, unicodedata, subprocess, datetime, urllib.parse, importlib.util, collections, io, contextlib
 import pymupdf
 from openpyxl import load_workbook
 ROOT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
@@ -45,14 +45,49 @@ def found(url, where):
     phrases = re.findall(r'title:"([^"]*)"', q); folder = q.endswith(" type:folder")
     if len(phrases) != 1 or f'title:"{phrases[0]}"' + (" type:folder" if folder else "") != q: bad(f"{where}: a Drive search this check cannot read:", q); return folder, []
     return folder, [t for t in (PKG_DIRS if folder else PKG_FILES) if holds(t.rsplit("/", 1)[-1], phrases[0])]
+# The Drive index: the ids a script in his Drive listed (Windmill drive/). A document it holds must be
+# linked by its id; one it does not hold, by the search. Read here its own way.
+INDEX, REFRESHED = {}, None
+if os.path.exists(f"{ROOT}/tools/drive_index.csv"):
+    with open(f"{ROOT}/tools/drive_index.csv", encoding="utf-8", newline="") as f:
+        rows_ = [r for r in csv.reader(f) if r]
+    if rows_[0][0] != "windy-hill-index" or len(rows_) - 1 != int(rows_[0][3]): bad("tools/drive_index.csv is not a whole Windy Hill index")
+    REFRESHED = rows_[0][2]
+    for r in rows_[1:]:
+        if not re.fullmatch(r"k[0-9a-f]{12}", r[0]) or not re.fullmatch(r"[A-Za-z0-9_-]{20,60}", r[1]) or r[0] in INDEX: bad("drive index line", r)
+        INDEX[r[0]] = r[1]
+def filed(name): return "k" + hashlib.md5(unicodedata.normalize("NFC", name).encode("utf-8")).hexdigest()[:12]
+def codes_of(path):
+    """The codes a package path may be filed under: its name, when no other path has it (a unit's folder
+    always may); and "<unit folder>/<name>" when it sits directly in its unit's folder."""
+    parts = path.split("/"); name = parts[-1]; out = []
+    if len(parts) == 3 or sum(1 for t in PKG_FILES + PKG_DIRS if t.rsplit("/", 1)[-1] == name) == 1: out.append(filed(name))
+    if len(parts) == 4: out.append(filed(parts[2] + "/" + name))
+    return out
+def id_of(path): return next((INDEX[c] for c in codes_of(path) if c in INDEX), None)
+BY_ID = {}
+for t_ in PKG_FILES + PKG_DIRS:
+    i_ = id_of(t_)
+    if i_:
+        if i_ in BY_ID: bad("the Drive index gives two package paths one id:", t_, BY_ID[i_])
+        BY_ID[i_] = t_
+NLINK = collections.Counter()               # links read, by kind
 MODE = set()                                # 'drive' or 'github': one workbook, one kind of link
 def blob_url(path): return BASE + "blob/main/" + urllib.parse.quote(path, safe="/,()")
 def target(url, where=""):
     """(kind, path): 'blob' a document, 'tree' a folder."""
+    m = re.fullmatch(r"https://drive\.google\.com/(?:file/d/([A-Za-z0-9_-]+)/view|drive/folders/([A-Za-z0-9_-]+))", url)
+    if m:                                    # a document or a folder by its Drive id
+        MODE.add("drive")
+        path = BY_ID.get(m[1] or m[2])
+        if not path: bad(f"{where}: a Drive id the index does not give to any package file:", m[1] or m[2]); return None, None
+        if (path in PKG_DIRS) != bool(m[2]): bad(f"{where}: a file's address used as a folder's, or the other way round:", path); return None, None
+        return ("tree" if m[2] else "blob"), path
     if url.startswith(DRIVE):
         MODE.add("drive")
         folder, hits = found(url, where)
         if len(hits) != 1: bad(f"{where}: the Drive search finds {len(hits)} among the packages:", urllib.parse.unquote(url[len(DRIVE):]), hits[:2]); return None, None
+        if id_of(hits[0]): bad(f"{where}: a search, though the index has this one's address:", hits[0])
         return ("tree" if folder else "blob"), hits[0]
     if not url.startswith(BASE): bad(f"{where}: foreign link", url); return None, None
     MODE.add("github")
@@ -83,6 +118,7 @@ def meant(path, start, tail, where):
             and t.rsplit("/", 1)[-1].count(" - ") == tail.count(" - ")]
     if len(hits) != 1: bad(f"{where}: the folder holds {len(hits)} files it could mean", path); return None
     if "drive" in MODE:
+        if id_of(hits[0]): bad(f"{where}: opens the folder though the index has the file's address", hits[0])
         if only_name(hits[0]): bad(f"{where}: opens the folder though a search finds the file alone", hits[0])
     elif len(blob_url(hits[0])) <= URL_MAX: bad(f"{where}: opens the folder though the file's own link fits", hits[0])
     return hits[0]
@@ -91,7 +127,7 @@ def folder_ok(cell, want, where):
     unit's folder that holds it, and the cell then reads "in folder"."""
     kind, path = every_link(cell, where)
     if kind is None: return
-    if "drive" in MODE and not only_name(want):
+    if "drive" in MODE and not only_name(want) and not id_of(want):
         unit = "/".join(want.split("/")[:3])
         if (kind, path, cell.value) != ("tree", unit, "in folder"): bad(f"{where}: should open the unit's folder and read 'in folder'", path, cell.value)
     elif (kind, path, cell.value) != ("tree", want, "folder"): bad(f"{where}: should open", want, "and read 'folder'; opens", path, "reads", cell.value)
@@ -439,9 +475,13 @@ for r in wb["Unit tests"].iter_rows():
         if x.hyperlink and x.hyperlink.target: every_link(x, f"Unit tests {x.coordinate}")
 
 # ---------------- whole workbook: no LaTeX left, one font, no error strings
+about = "\n".join(str(r[0].value or "") for r in wb["About"].iter_rows())
 for s in wbf:
     for row in s.iter_rows():
         for x in row:
+            if x.hyperlink and x.hyperlink.target:             # every link in the file, on any tab
+                every_link(x, f"{s.title} {x.coordinate}")
+                if x.hyperlink.target.startswith("https://drive.google.com/"): NLINK["search" if x.hyperlink.target.startswith(DRIVE) else "direct"] += 1
             vals = [x.value] if isinstance(x.value, str) and not x.value.startswith("=") else []
             if x.comment: vals.append(x.comment.text)
             for t in vals:
@@ -452,6 +492,13 @@ for s in wb:
         for x in row:
             if isinstance(x.value, str) and re.fullmatch(r"#(REF!|VALUE!|NAME\?|N/A|DIV/0!|NUM!)", x.value): bad("error value", s.title, x.coordinate)
 if len(MODE) != 1: bad("the workbook mixes kinds of link:", sorted(MODE))
-print("links:", "Google Drive, each a search for the file's exact name" if MODE == {"drive"} else "GitHub")
+print("links:", "GitHub" if MODE != {"drive"} else f"Google Drive — {NLINK['direct']} by the document's own address (index of {REFRESHED}), {NLINK['search']} by a search for its exact name")
+if MODE == {"drive"}:                      # the About tab says how many of each, and from which index
+    if NLINK["direct"]:
+        when = datetime.datetime.strptime(REFRESHED, "%Y-%m-%dT%H:%MZ")
+        for want in (f"{NLINK['direct']} of the {NLINK['direct'] + NLINK['search']} links in this file open the document itself", f"({when.day} {when.strftime('%B %Y')}, {when.strftime('%H:%M')} UTC)"):
+            if want not in about: bad("About does not say:", want)
+        if NLINK["search"] and f"The other {NLINK['search']} are searches" not in about: bad("About does not count the search links")
+    elif "each link is a search for the file's exact name" not in about: bad("About does not say the links are searches")
 print("\n".join(P) if P else "no problems"); print(len(P), "problems")
 sys.exit(1 if P else 0)

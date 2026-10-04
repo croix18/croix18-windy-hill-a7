@@ -263,8 +263,12 @@ files live in `assets/` with the script that regenerates them (`assets/make_asse
    folder has to be in his Drive, unzipped, for its links to find anything — say so when the unit
    is sent. `--links github` writes the repository's links; the check reads either, requires every
    search to find exactly one thing among the packages, and refuses a mix. Not tested against real
-   Drive from a session: `windy-hill-m7` `NOTES.md` (top section) has the whole story and what
-   would make the links one tap.
+   Drive from a session: `windy-hill-m7` `NOTES.md` (top section) has the whole story.
+   **One tap, once his Drive index exists:** Windmill `drive/README.md` — a script in his Google
+   account lists every document's Drive id; a session copies that list to `tools/drive_index.csv`
+   here (steps 1–4 there, at every rebuild of this sheet); `master_sheet.py` then links by id what
+   the index holds and by search what it does not, and the check holds every id to its row. As
+   committed on 4 Oct there is no index yet (he had not run the script).
 
 ## 5a. Geopardy (the review game, formerly Boards Up) — planned, not built (3 Oct 2026)
 
