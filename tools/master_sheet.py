@@ -8,7 +8,7 @@ Scope & Sequence (one row per class day: links to every document, IXL, learning 
 question, vocabulary, benchmark wording, MTRs, closure question, Math Nation lessons) · IXL
 tracker · Standards · Unit tests · Month calendar · Vocabulary · Units · Units 1–2 decks · About.
 
-Reads, and never edits: the calendar table (a7/reference/A7 SCOPE AND SEQUENCE 2026-27.md, made by
+Reads, and never edits: the calendar table (a7/reference/A7 Scope and Sequence 2026-27.md, made by
 scope_calendar.py), the IXL due-date sheet, the Source of Truth for benchmark wording, the Math
 Nation table of contents, the lesson and unit specs in a7/build, and the package folders. Links
 point at the GitHub repository. Rerun after any unit is built; the file records its commit.
@@ -28,10 +28,10 @@ ROOT = os.path.normpath(os.path.join(HERE, ".."))
 REF = os.path.join(ROOT, "a7", "reference")
 BUILD = os.path.join(ROOT, "a7", "build")
 PKG = os.path.join(ROOT, "a7", "packages")
-CAL = os.path.join(REF, "A7 SCOPE AND SEQUENCE 2026-27.md")
-DUE = os.path.join(REF, "A7 IXL DUE DATES 2026-27.md")
+CAL = os.path.join(REF, "A7 Scope and Sequence 2026-27.md")
+DUE = os.path.join(REF, "A7 IXL Due Dates 2026-27.md")
 SOT = os.path.join(REF, "Florida BEST Grade 8 - Source of Truth.md")
-TOC = os.path.join(REF, "MATH NATION A7 BOOK - table of contents and IXL plan.md")
+TOC = os.path.join(REF, "A7 IXL Skill Plan and Book Contents.md")
 REPO = "https://github.com/croix18/croix18-windy-hill-a7"
 FONT = "Arial"
 sys.path.insert(0, HERE)
@@ -182,8 +182,32 @@ def is_exam(code):
 
 
 # ---------------------------------------------------------------- links
+URL_MAX = 255      # Excel's HYPERLINK() takes no longer address, and LibreOffice cuts a cell's link there on save
+IN_FOLDER = "in folder"
+
+
 def gh(path, kind="blob"):
-    return f"{REPO}/{kind}/main/" + urllib.parse.quote(os.path.relpath(path, ROOT).replace(os.sep, "/"), safe="/")
+    # commas and parentheses are legal in a path as they stand; a space is not
+    return f"{REPO}/{kind}/main/" + urllib.parse.quote(os.path.relpath(path, ROOT).replace(os.sep, "/"), safe="/,()")
+
+
+def doc(path, text="open"):
+    """(text, url) for a document. Its own page — or, when that address would be longer than URL_MAX
+    (a long unit title and a long lesson title, each space three characters), the folder it is in,
+    and the cell says so. Since 4 Oct 2026 every name carries its title, so a few addresses are long;
+    a link cut off at 255 opens nothing, a folder with ten files in it opens the right place."""
+    url = gh(path)
+    if len(url) <= URL_MAX:
+        return text, url
+    url = gh(os.path.dirname(path), "tree")
+    if len(url) > URL_MAX:
+        raise SystemExit(f"no link of {URL_MAX} characters reaches {path}")
+    return IN_FOLDER, url
+
+
+def put_doc(ws, r, c, path, text="open"):
+    text, url = doc(path, text)
+    put(ws, r, c, text, link=url)
 
 
 def pkg_folder(unit):
@@ -191,10 +215,28 @@ def pkg_folder(unit):
     return hits[0] if hits else None
 
 
-def pfile(unit, sub, name):
+def _one(pattern):
+    hits = sorted(glob.glob(pattern))
+    return hits[0] if len(hits) == 1 else None
+
+
+def lesson_doc(unit, s, kind, key=False, ext="pdf"):
+    """A lesson's document in the by-lesson package (4 Oct 2026):
+    Lessons/<s>/[Keys/]A7 <s> <Title> - <kind>[ - Key].<ext> — the title is in the name, so the
+    file is found by its number and its kind."""
     folder = pkg_folder(unit)
-    p = os.path.join(folder, sub, name) if folder else None
-    return p if p and os.path.exists(p) else None
+    if not folder:
+        return None
+    return _one(os.path.join(glob.escape(folder), "Lessons", glob.escape(s), "Keys" if key else "",
+                             f"A7 {glob.escape(s)} * - {kind}{' - Key' if key else ''}.{ext}"))
+
+
+def unit_doc(unit, sub, tail, ext="pdf"):
+    """A unit-wide document: <sub>/A7 Unit <N> <Title> - <tail>.<ext>."""
+    folder = pkg_folder(unit)
+    if not folder:
+        return None
+    return _one(os.path.join(glob.escape(folder), sub, f"A7 Unit {unit} * - {tail}.{ext}"))
 
 
 LINK_COLS = ["Slides (PDF)", "Slides (PowerPoint)", "Teacher Edition", "Lesson Plan", "Question Bank", "Bank key",
@@ -209,29 +251,28 @@ def row_links(row):
         return {}
     out = {"Unit folder": ("folder", gh(folder, "tree"))}
     if is_exam(code):
-        pairs = {"Slides (PDF)": ("Unit Assessment", "PDFs/Assessments", f"A7 {U}  Unit Assessment.pdf"),
-                 "Bank key": ("Assessment key", "PDFs/Answer Keys", f"A7 {U}  Unit Assessment Key.pdf")}
+        pairs = {"Slides (PDF)": ("Unit Assessment", unit_doc(U, "Assessment", "Test")),
+                 "Bank key": ("Assessment key", unit_doc(U, "Assessment", "Test - Key"))}
     elif code == "spiral":
-        pairs = {"Slides (PDF)": ("Unit Review", "PDFs/Assessments", f"A7 {U}  Unit Review.pdf"),
-                 "Bank key": ("Review key", "PDFs/Answer Keys", f"A7 {U}  Unit Review Key.pdf")}
+        pairs = {"Slides (PDF)": ("Unit Review", unit_doc(U, "Review", "Review")),
+                 "Bank key": ("Review key", unit_doc(U, "Review", "Review - Key"))}
     elif code == "flex" or code.startswith("PM"):
         pairs = {}
     else:
         s = stem_of(code, U)
-        pairs = {"Slides (PDF)": ("open", "PDFs/Slides", f"A7 {s}  Slides.pdf"),
-                 "Slides (PowerPoint)": ("open", "Slides", f"A7 {s}  Slides.pptx"),
-                 "Teacher Edition": ("open", "PDFs/Teacher Editions", f"A7 {s}  Teacher Edition.pdf"),
-                 "Lesson Plan": ("open", "PDFs/Lesson Plans", f"A7 {s}  Lesson Plan.pdf"),
-                 "Question Bank": ("open", "PDFs/Question Banks", f"A7 {s}  Question Bank.pdf"),
-                 "Bank key": ("key", "PDFs/Answer Keys", f"A7 {s}  Question Bank Key.pdf"),
-                 "Bank – Additional": ("open", "PDFs/Question Banks", f"A7 {s}  Question Bank - Additional.pdf"),
-                 "Additional key": ("key", "PDFs/Answer Keys", f"A7 {s}  Question Bank - Additional Key.pdf"),
-                 "Independent Set": ("open", "PDFs/Independent Sets", f"A7 {s}  Independent Set.pdf"),
-                 "Independent key": ("key", "PDFs/Answer Keys", f"A7 {s}  Independent Set Key.pdf")}
-    for col, (text, sub, name) in pairs.items():
-        p = pfile(U, sub, name)
+        pairs = {"Slides (PDF)": ("open", lesson_doc(U, s, "Slides")),
+                 "Slides (PowerPoint)": ("open", lesson_doc(U, s, "Slides", ext="pptx")),
+                 "Teacher Edition": ("open", lesson_doc(U, s, "Teacher Edition")),
+                 "Lesson Plan": ("open", lesson_doc(U, s, "Lesson Plan")),
+                 "Question Bank": ("open", lesson_doc(U, s, "Question Bank")),
+                 "Bank key": ("key", lesson_doc(U, s, "Question Bank", key=True)),
+                 "Bank – Additional": ("open", lesson_doc(U, s, "Additional Question Bank")),
+                 "Additional key": ("key", lesson_doc(U, s, "Additional Question Bank", key=True)),
+                 "Independent Set": ("open", lesson_doc(U, s, "Independent Set")),
+                 "Independent key": ("key", lesson_doc(U, s, "Independent Set", key=True))}
+    for col, (text, p) in pairs.items():
         if p:
-            out[col] = (text, gh(p))
+            out[col] = doc(p, text)
     if len(out) == 1 and pairs:
         return {}                              # a unit folder exists but this lesson has no documents yet
     return out
@@ -463,14 +504,11 @@ def build(out):
             put(wt, r, 2, "before 23 Sep", font=DIM); put(wt, r, 3, None)
         points_row[u] = r
         put(wt, r, 4, None, align="center")
-        for j, (sub, name) in enumerate([("PDFs/Assessments", f"A7 {u}  Unit Assessment.pdf"),
-                                          ("PDFs/Answer Keys", f"A7 {u}  Unit Assessment Key.pdf"),
-                                          ("PDFs/Assessments", f"A7 {u}  Unit Review.pdf"),
-                                          ("PDFs/Answer Keys", f"A7 {u}  Unit Review Key.pdf"),
-                                          ("PDFs/Handouts", f"A7 {u}  Reference Sheet.pdf")], 5):
-            p = pfile(u, sub, name)
+        for j, p in enumerate([unit_doc(u, "Assessment", "Test"), unit_doc(u, "Assessment", "Test - Key"),
+                               unit_doc(u, "Review", "Review"), unit_doc(u, "Review", "Review - Key"),
+                               unit_doc(u, "Handouts", "Reference Sheet")], 5):
             if p:
-                put(wt, r, j, "open", link=gh(p))
+                put_doc(wt, r, j, p)
             else:
                 put(wt, r, j, "not built yet" if (j == 5 and not pkg_folder(u)) else None, font=DIM)
         r += 1
@@ -487,7 +525,7 @@ def build(out):
     item_cols = ["Question", "Parts", "Points", "Section", "Benchmark", "Format", "Transfer item"]
     for u in sorted(units):
         U = units[u]
-        total, per_bm, per_sec, transfer = unitbuild.assessment_ledger(U)
+        total, per_bm, per_sec, transfer = unitbuild.paper_ledger(U)      # the kit renamed it on 4 Oct
         put(wt, r, 1, f"Unit {u} test — question map", font=SUB, border=None); r += 1
         put(wt, r, 1, "One paper over two periods; one point per lettered part. Transfer items are not on the practice test.", font=DIM, border=None)
         r += 1
@@ -676,13 +714,14 @@ def build(out):
             put(wu, r, 6, "built, audited 21 Sep 2026" if u in (3, 4) else "built (before the spec system; not covered by the checks)", wrap=True)
             put(wu, r, 7, "folder", link=gh(folder, "tree"))
             sh = os.path.join(folder, "00 - START HERE.md")
-            put(wu, r, 8, "open", link=gh(sh)) if os.path.exists(sh) else put(wu, r, 8, None)
-            for j, (sub, name) in enumerate([("PDFs/Handouts", f"A7 {u}  Reference Sheet.pdf"), ("PDFs/Assessments", f"A7 {u}  Unit Review.pdf"),
-                                              ("PDFs/Answer Keys", f"A7 {u}  Unit Review Key.pdf"), ("PDFs/Assessments", f"A7 {u}  Unit Assessment.pdf"),
-                                              ("PDFs/Answer Keys", f"A7 {u}  Unit Assessment Key.pdf")], 9):
-                p = pfile(u, sub, name)
-                put(wu, r, j, "open", link=gh(p)) if p else put(wu, r, j, None)
-            put(wu, r, 14, "folder", link=gh(os.path.join(folder, "PDFs", "Slides"), "tree"))
+            put_doc(wu, r, 8, sh) if os.path.exists(sh) else put(wu, r, 8, None)
+            for j, p in enumerate([unit_doc(u, "Handouts", "Reference Sheet"), unit_doc(u, "Review", "Review"),
+                                   unit_doc(u, "Review", "Review - Key"), unit_doc(u, "Assessment", "Test"),
+                                   unit_doc(u, "Assessment", "Test - Key")], 9):
+                put_doc(wu, r, j, p) if p else put(wu, r, j, None)
+            # the whole unit in one deck where the kit built it (Units 3 on); otherwise the lessons' folders
+            deck = os.path.join(folder, "All Slides")
+            put(wu, r, 14, "folder", link=gh(deck if os.path.isdir(deck) else os.path.join(folder, "Lessons"), "tree"))
         else:
             put(wu, r, 6, "not built yet", font=DIM)
             for j in range(7, 15):
@@ -701,16 +740,14 @@ def build(out):
         folder = pkg_folder(u)
         if not folder:
             continue
-        for pdf in sorted(glob.glob(os.path.join(folder, "PDFs", "Slides", "A7 *  Slides.pdf"))):
-            s = re.match(r"A7 (\S+)  Slides\.pdf", os.path.basename(pdf)).group(1)
+        for pdf in sorted(glob.glob(os.path.join(glob.escape(folder), "Lessons", "*", "A7 * - Slides.pdf"))):
+            s = re.match(r"A7 (\S+) ", os.path.basename(pdf)).group(1)
             put(wd, r, 1, u, align="center", font=BOLD); put(wd, r, 2, s, font=BOLD)
-            put(wd, r, 3, "open", link=gh(pdf))
-            for j, (sub, name) in enumerate([("PDFs/Teacher Editions", f"A7 {s}  Teacher Edition.pdf"),
-                                              ("PDFs/Question Banks", f"A7 {s}  Question Bank.pdf"),
-                                              ("PDFs/Question Banks", f"A7 {s}  Question Bank - Additional.pdf")], 4):
-                p = pfile(u, sub, name)
-                put(wd, r, j, "open", link=gh(p)) if p else put(wd, r, j, None)
-            put(wd, r, 7, "folder", link=gh(os.path.join(folder, "PDFs", "Answer Keys"), "tree"))
+            put_doc(wd, r, 3, pdf)
+            for j, p in enumerate([lesson_doc(u, s, "Teacher Edition"), lesson_doc(u, s, "Question Bank"),
+                                   lesson_doc(u, s, "Additional Question Bank")], 4):
+                put_doc(wd, r, j, p) if p else put(wd, r, j, None)
+            put(wd, r, 7, "folder", link=gh(os.path.join(os.path.dirname(pdf), "Keys"), "tree"))
             r += 1
     for i, w in enumerate([6, 9, 13, 16, 14, 24, 16], 1):
         wd.column_dimensions[get_column_letter(i)].width = w
@@ -787,6 +824,7 @@ def build(out):
         ("", BODY),
         ("Good to know", BOLD),
         ("Links open the file on GitHub. A PDF opens right in the browser; a PowerPoint file shows a download button instead. If GitHub asks you to sign in, use your croix18 account.", BODY),
+        ("A link that reads \"in folder\" opens the lesson's folder, not the file: the file's own address is longer than a spreadsheet link may be (255 characters). The file is in that folder under the lesson's number and what it is.", BODY),
         ("'not built yet' means the unit's documents do not exist yet. Units 5 onward fill in as they are built; this file is regenerated from the plan each time.", BODY),
         ("IXL: every skill listed is required, to a SmartScore of 67, due at the start of the next class (ruling 28). Lessons in a row that use the same skills are one assignment, due after the last of them — the IXL due column already shows that date.", BODY),
         ("'No school' days are the holidays in the plan (tools/scope_calendar.py), taken from the board-approved calendar — check them against the school's copy.", BODY),

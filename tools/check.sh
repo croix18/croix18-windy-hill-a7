@@ -15,9 +15,9 @@ echo "== the build kit against its manifest, and every gate over every unit's sp
 python3 a7/build/gates.py
 
 echo "== the IXL due-date sheet regenerates to what is committed"
-cp "a7/reference/A7 IXL DUE DATES 2026-27.md" /tmp/a7_ixl.$$
+cp "a7/reference/A7 IXL Due Dates 2026-27.md" /tmp/a7_ixl.$$
 python3 tools/scope_calendar.py >/dev/null 2>&1
-cmp -s /tmp/a7_ixl.$$ "a7/reference/A7 IXL DUE DATES 2026-27.md" || fail "tools/scope_calendar.py no longer writes the committed IXL due-date sheet"
+cmp -s /tmp/a7_ixl.$$ "a7/reference/A7 IXL Due Dates 2026-27.md" || fail "tools/scope_calendar.py no longer writes the committed IXL due-date sheet"
 rm -f /tmp/a7_ixl.$$
 
 echo "== every unit with specs has an installed package"
@@ -26,4 +26,11 @@ for u in a7/build/u[0-9]*; do
   ls -d "a7/packages/A7 Unit $n - "*/ >/dev/null 2>&1 || fail "unit $n has specs and no package in a7/packages (build_all.py u$n --install)"
   [ -f "$(ls -d "a7/packages/A7 Unit $n - "*/ | head -1)00 - START HERE.md" ] || fail "unit $n's package has no START HERE"
 done
+echo "== the master sheet: every link reaches a file this commit holds, none longer than 255 characters"
+if python3 -c "import openpyxl, pymupdf" 2>/dev/null; then
+  python3 tools/check_master_sheet.py > /tmp/a7_ms.$$ 2>&1 || { tail -n 20 /tmp/a7_ms.$$; rm -f /tmp/a7_ms.$$; fail "the master sheet (python3 tools/master_sheet.py, recalculate, then tools/check_master_sheet.py)"; }
+  tail -n 2 /tmp/a7_ms.$$; rm -f /tmp/a7_ms.$$
+else
+  echo "   skipped: openpyxl and pymupdf are not installed here"
+fi
 echo "all checks passed"

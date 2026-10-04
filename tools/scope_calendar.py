@@ -221,7 +221,7 @@ if __name__=="__main__":
         M="; ".join(f"{n} — {c}" for n,c in sk)
         print(f"| {dt.strftime('%b %d')} | {wd}{flag} | {u if u else ''} | {code} | {mark}{title} | {bm} | {M} | {due} |")
     # student-facing due-date sheet (ruling 28)
-    with open(os.path.join(HERE,"..","a7","reference","A7 IXL DUE DATES 2026-27.md"),"w") as f:
+    with open(os.path.join(HERE,"..","a7","reference","A7 IXL Due Dates 2026-27.md"),"w") as f:
         f.write(f"# A7 — IXL assignments and due dates, 2026–27\n\n"
                 f"Each class day ends with five minutes of IXL. That block is the **start** of the assignment, not the whole of it; "
                 f"whatever is not finished in class is that night's practice.\n\n"

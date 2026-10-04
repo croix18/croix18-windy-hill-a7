@@ -173,4 +173,4 @@ const doc = new Document({
       B("Reporting Category Statements, B.E.S.T. Standards: Mathematics (May 2024), built from the Achievement Level Descriptions."),
       B("CPALMS, MA.7.AR.2.2 (access points and resources); Grade 7 Mathematics course description (1205040); Lake County Schools Scope & Sequence Guidance, M/J Grade 7 Mathematics."),
     ] }] });
-Packer.toBuffer(doc).then(b => { fs.writeFileSync("Essential Benchmark Learning Plan - MA.7.AR.2.2.docx", b); console.log("built"); });
+Packer.toBuffer(doc).then(b => { fs.writeFileSync("M7 Essential Benchmark Learning Plan MA.7.AR.2.2.docx", b); console.log("built"); });

@@ -10,3 +10,5 @@ node_modules/
 a7/build/_tmp/
 .github-token
 a7/build/out/**/*.pdf
+# install_unit.py writes zips of the package folders; they are regenerable
+a7/packages/zips/

@@ -1,6 +1,6 @@
 # A7 3.T2  Negative Exponents with Variable Bases — Thread A, day 2 (MA.8.AR.1.1; MN 14.3–14.4 woven in under ruling 30).
 L = dict(
-    code="3.T2", unit=3, lesson_no="T-A2", label="Thread A · Day 2", title="Negative Exponents with Variable Bases",
+    code="3.T2", plan_code="T-A2", unit=3, lesson_no="T-A2", label="Thread A · Day 2", title="Negative Exponents with Variable Bases",
     benchmark="MA.8.AR.1.1",
     benchmark_text="Apply the Laws of Exponents to generate equivalent algebraic expressions, limited to integer exponents and monomial bases.",
     target="I can rewrite an algebraic expression with negative exponents using only positive exponents, and apply several laws of exponents to a monomial expression.",

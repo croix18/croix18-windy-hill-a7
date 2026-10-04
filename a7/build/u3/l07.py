@@ -1,6 +1,6 @@
 # A7 3.T1  Exponent Laws with Variable Bases — Thread A, day 1 (MA.8.AR.1.1; MN 14.1–14.2 woven in after 3.07 under ruling 30).
 L = dict(
-    code="3.T1", unit=3, lesson_no="T-A1", label="Thread A · Day 1", title="Exponent Laws with Variable Bases",
+    code="3.T1", plan_code="T-A1", unit=3, lesson_no="T-A1", label="Thread A · Day 1", title="Exponent Laws with Variable Bases",
     benchmark="MA.8.AR.1.1",
     benchmark_text="Apply the Laws of Exponents to generate equivalent algebraic expressions, limited to integer exponents and monomial bases.",
     target="I can multiply and divide monomials, and raise a monomial to a power, by applying the laws of exponents to variable bases.",

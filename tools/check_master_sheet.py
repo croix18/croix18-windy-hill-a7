@@ -21,13 +21,38 @@ REF = f"{ROOT}/a7/reference"
 BASE = "https://github.com/croix18/croix18-windy-hill-a7/"
 P = []
 def bad(*a): P.append(" ".join(str(x) for x in a))
-tracked = set(subprocess.run(["git", "-C", ROOT, "ls-tree", "-r", "HEAD", "--name-only"], capture_output=True, text=True).stdout.splitlines())
+# what the next commit will hold: the index and every file on disk that git does not ignore (push.sh
+# commits with `git add -A`), so the check can run before the commit it guards. -z: names with
+# commas and spaces come back unquoted.
+tracked = {t for t in subprocess.run(["git", "-C", ROOT, "ls-files", "-z", "-c", "-o", "--exclude-standard"],
+                                     capture_output=True, text=True).stdout.split("\0")
+           if t and os.path.exists(os.path.join(ROOT, t))}
 def target(url):
     if not url.startswith(BASE): bad("foreign link", url); return None, None
     kind, rest = url[len(BASE):].split("/main/", 1); path = urllib.parse.unquote(rest)
     if kind == "blob" and path not in tracked: bad("blob not tracked:", path)
     if kind == "tree" and not any(t.startswith(path + "/") for t in tracked): bad("tree empty:", path)
     return kind, path
+URL_MAX = 255
+def blob_url(path): return BASE + "blob/main/" + urllib.parse.quote(path, safe="/,()")
+def every_link(cell, where):
+    """Any link, on any tab: it reaches something the commit holds, it is not longer than URL_MAX
+    (a longer one is cut off when the sheet is saved), and a cell that reads "in folder" is the
+    only kind that may open a folder in place of a document."""
+    url = cell.hyperlink.target
+    if len(url) > URL_MAX: bad(f"{where}: a link of {len(url)} characters")
+    kind, path = target(url)
+    if kind == "blob" and cell.value == "in folder": bad(f"{where}: says 'in folder' but opens a file")
+    return kind, path
+def meant(path, start, tail, where):
+    """A lesson's link that opens its folder instead of the file: right only when the file's own
+    address would be too long. Returns the one file in that folder the link stands for."""
+    hits = [t for t in tracked if t.startswith(path + "/") and "/" not in t[len(path) + 1:]
+            and t.rsplit("/", 1)[-1].startswith(start) and t.endswith(tail)
+            and t.rsplit("/", 1)[-1].count(" - ") == tail.count(" - ")]
+    if len(hits) != 1: bad(f"{where}: the folder holds {len(hits)} files it could mean", path); return None
+    if len(blob_url(hits[0])) <= URL_MAX: bad(f"{where}: opens the folder though the file's own link fits", hits[0])
+    return hits[0]
 MON = {m: i for i, m in enumerate("Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec".split(), 1)}
 def d(s):
     m, day = s.split()[-2:]; return datetime.date(2026 if MON[m] >= 7 else 2027, MON[m], int(day))
@@ -35,13 +60,13 @@ def D(v): return v.date() if isinstance(v, datetime.datetime) else v
 def norm(s): return re.sub(r"[^a-z0-9]", "", s.lower())
 
 # ---------------- sources, parsed independently
-cal = [[c.strip() for c in l.strip().strip("|").split("|")] for l in open(f"{REF}/A7 SCOPE AND SEQUENCE 2026-27.md", encoding="utf-8") if l.startswith("| ") and not l.startswith("| Date")]
-due = [[c.strip() for c in l.strip().strip("|").split("|")] for l in open(f"{REF}/A7 IXL DUE DATES 2026-27.md", encoding="utf-8") if l.startswith("| ") and not l.startswith("| Assigned")]
+cal = [[c.strip() for c in l.strip().strip("|").split("|")] for l in open(f"{REF}/A7 Scope and Sequence 2026-27.md", encoding="utf-8") if l.startswith("| ") and not l.startswith("| Date")]
+due = [[c.strip() for c in l.strip().strip("|").split("|")] for l in open(f"{REF}/A7 IXL Due Dates 2026-27.md", encoding="utf-8") if l.startswith("| ") and not l.startswith("| Assigned")]
 sot_txt = open(f"{REF}/Florida BEST Grade 8 - Source of Truth.md", encoding="utf-8").read()
 SOT = {}
 for m in re.finditer(r"^\*\*(MA\.[\w.]+)\*\* — (.+)$", sot_txt, re.M):
     SOT[m.group(1)] = re.sub(r"\*", "", m.group(2)).strip()
-toc_txt = open(f"{REF}/MATH NATION A7 BOOK - table of contents and IXL plan.md", encoding="utf-8").read()
+toc_txt = open(f"{REF}/A7 IXL Skill Plan and Book Contents.md", encoding="utf-8").read()
 STD = "/root/best/std/mathbeststandardsfinal/mathbeststandardsfinal.txt"
 std = open(STD, encoding="utf-8", errors="replace").read() if os.path.exists(STD) else None
 std_n = norm(std.replace(" - ", "-")) if std else None
@@ -63,6 +88,7 @@ ws = wb["Scope & Sequence"]; hdr = [c.value for c in ws[1]]; H = {h: i for i, h 
 rows = list(ws.iter_rows(min_row=2))
 if len(rows) != len(cal): bad("scope rows", len(rows), "calendar", len(cal))
 prev = None; nlinks = 0; built_rows = 0
+FILE = {}                                  # (row, column) -> the document a lesson's link stands for
 for i, (cells, c) in enumerate(zip(rows, cal), 2):
     v = {h: cells[j].value for h, j in H.items()}
     dt = D(v["Date"])
@@ -82,21 +108,31 @@ for i, (cells, c) in enumerate(zip(rows, cal), 2):
         cell = cells[H[h]]
         if cell.hyperlink:
             nlinks += 1
-            kind, path = target(cell.hyperlink.target)
-            if kind == "blob" and not exam and code != "spiral":
-                name = path.rsplit("/", 1)[-1]; s = stem(code, u)
-                want_name = {"Slides (PDF)": f"A7 {s}  Slides.pdf", "Slides (PowerPoint)": f"A7 {s}  Slides.pptx",
-                             "Teacher Edition": f"A7 {s}  Teacher Edition.pdf", "Lesson Plan": f"A7 {s}  Lesson Plan.pdf",
-                             "Question Bank": f"A7 {s}  Question Bank.pdf", "Bank key": f"A7 {s}  Question Bank Key.pdf",
-                             "Bank – Additional": f"A7 {s}  Question Bank - Additional.pdf",
-                             "Additional key": f"A7 {s}  Question Bank - Additional Key.pdf",
-                             "Independent Set": f"A7 {s}  Independent Set.pdf", "Independent key": f"A7 {s}  Independent Set Key.pdf"}[h]
-                if name != want_name: bad(f"r{i} {code} {h} ->", name)
+            kind, path = every_link(cell, f"r{i} {code} {h}")
+            if h != "Unit folder" and not exam and code != "spiral":
+                s = stem(code, u)
+                # the by-lesson layout (4 Oct 2026): "A7 <s> <Title> - <kind>[ - Key].<ext>"; the title is in
+                # the name, so a link is held to its number and to what the file is
+                want_tail = {"Slides (PDF)": " - Slides.pdf", "Slides (PowerPoint)": " - Slides.pptx",
+                             "Teacher Edition": " - Teacher Edition.pdf", "Lesson Plan": " - Lesson Plan.pdf",
+                             "Question Bank": " - Question Bank.pdf", "Bank key": " - Question Bank - Key.pdf",
+                             "Bank – Additional": " - Additional Question Bank.pdf",
+                             "Additional key": " - Additional Question Bank - Key.pdf",
+                             "Independent Set": " - Independent Set.pdf", "Independent key": " - Independent Set - Key.pdf"}[h]
+                if kind == "tree":                         # the file's own link would not fit: its folder
+                    if cell.value != "in folder": bad(f"r{i} {code} {h}: opens a folder but reads", cell.value)
+                    path = meant(path, f"A7 {s} ", want_tail, f"r{i} {code} {h}")
+                    if path is None: continue
+                FILE[(i, h)] = path
+                name = path.rsplit("/", 1)[-1]
+                if not (name.startswith(f"A7 {s} ") and name.endswith(want_tail) and name.count(" - ") == want_tail.count(" - ")):
+                    bad(f"r{i} {code} {h} ->", name)
+                if f"/Lessons/{s}/" not in path: bad(f"r{i} {code} {h} not in its lesson's folder", path)
                 if not path.startswith(f"a7/packages/A7 Unit {u} - "): bad(f"r{i} wrong unit folder", path)
     if exam or code == "spiral":
         t1 = cells[H["Slides (PDF)"]].hyperlink; t2 = cells[H["Bank key"]].hyperlink
         if u in (3, 4):
-            w1, w2 = (f"A7 {u}  Unit Assessment.pdf", f"A7 {u}  Unit Assessment Key.pdf") if exam else (f"A7 {u}  Unit Review.pdf", f"A7 {u}  Unit Review Key.pdf")
+            w1, w2 = (" - Test.pdf", " - Test - Key.pdf") if exam else (" - Review.pdf", " - Review - Key.pdf")
             if not (t1 and urllib.parse.unquote(t1.target).endswith(w1)) or not (t2 and urllib.parse.unquote(t2.target).endswith(w2)): bad(f"r{i} {code} paper/key links")
     lesson_like = not exam and code not in ("spiral", "flex") and not code.startswith("PM")
     if u in (3, 4) and lesson_like:
@@ -115,7 +151,7 @@ for i, (cells, c) in enumerate(zip(rows, cal), 2):
             if std_n and norm(title) not in std_n: bad(f"r{i} MTR title not in the standards:", title)
         if not cells[H["MTRs (tap for where they show up)"]].comment or not cells[H["Closure question (board 9)"]].comment: bad(f"r{i} comment missing")
         # slide 1 names the lesson
-        pth = urllib.parse.unquote(cells[H["Slides (PDF)"]].hyperlink.target.split("/main/", 1)[1])
+        pth = FILE[(i, "Slides (PDF)")]
         head = pymupdf.open(f"{ROOT}/{pth}")[0].get_text().split("\n")[0].strip()
         lab = L.get("label") or f"Lesson {L['lesson_no']}"
         if head != f"GRADE 7 ACCELERATED  ·  UNIT {u}  ·  {lab.upper()}": bad(f"r{i} slide 1 reads", head)
@@ -202,8 +238,8 @@ for i, (cells, lrow) in enumerate(zip(rows, list(wl.iter_rows(min_row=2))), 2):
         a = cells[H[h]].hyperlink.target if cells[H[h]].hyperlink else None
         b = lrow[j].value
         if a != b: bad(f"Links r{i} {h} mismatch")
-        if b and len(b) > 255: long_ += 1
-if long_: bad(f"{long_} URLs longer than 255 characters (HYPERLINK limit)")
+        if b and len(b) > URL_MAX: long_ += 1
+if long_: bad(f"{long_} URLs longer than {URL_MAX} characters (HYPERLINK limit)")
 
 # ---------------- IXL tracker
 wi = wb["IXL tracker"]; irows = [r for r in wi.iter_rows(min_row=5) if r[0].value is not None]
@@ -315,13 +351,30 @@ for r in wu.iter_rows(min_row=2, max_row=18):
     u = r[0].value
     if counts.get(u) and r[4].value != counts[u]: bad("Units periods", u, r[4].value, counts[u])
     for x in r[6:]:
-        if x.hyperlink: target(x.hyperlink.target)
+        if x.hyperlink: every_link(x, f"Units {x.coordinate}")
+DECK = {2: " - Slides.pdf", 3: " - Teacher Edition.pdf", 4: " - Question Bank.pdf", 5: " - Additional Question Bank.pdf"}
+ndeck = nfolder = 0
 for r in wb["Units 1–2 decks"].iter_rows(min_row=2):
-    for x in r[2:]:
-        if x.hyperlink: target(x.hyperlink.target)
+    for j, x in enumerate(r):
+        if j < 2 or not x.hyperlink: continue
+        where = f"Units 1–2 decks {x.coordinate}"
+        kind, path = every_link(x, where)
+        if j not in DECK:                                  # the lesson's Keys folder
+            if kind != "tree" or not path.endswith(f"/Lessons/{r[1].value}/Keys"): bad(f"{where}: not the lesson's Keys folder", path)
+            continue
+        if kind == "tree":
+            if x.value != "in folder": bad(f"{where}: opens a folder but reads", x.value)
+            path = meant(path, f"A7 {r[1].value} ", DECK[j], where); nfolder += 1
+            if path is None: continue
+        ndeck += 1
+        name = path.rsplit("/", 1)[-1]
+        if not (name.startswith(f"A7 {r[1].value} ") and name.endswith(DECK[j]) and name.count(" - ") == DECK[j].count(" - ")
+                and f"/Lessons/{r[1].value}/" in path and path.startswith(f"a7/packages/A7 Unit {r[0].value} - ")):
+            bad(f"{where} ->", path)
+print(f"Units 1–2 decks: {ndeck} document links checked by number and kind; {nfolder} open the lesson's folder (the file's own link would be over {URL_MAX})")
 for r in wb["Unit tests"].iter_rows():
     for x in r:
-        if x.hyperlink and x.hyperlink.target: target(x.hyperlink.target)
+        if x.hyperlink and x.hyperlink.target: every_link(x, f"Unit tests {x.coordinate}")
 
 # ---------------- whole workbook: no LaTeX left, one font, no error strings
 for s in wbf:

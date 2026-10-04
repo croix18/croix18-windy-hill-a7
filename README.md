@@ -15,10 +15,16 @@ not happen.
 
 ## Layout
 
-    a7/packages/     the shipped teaching packages, exactly as delivered (20 Sept: as re-cut to
-                     the 14 Sept model — nine-question rounds, IXL last, no worksheets, no grey
-                     bars, no speaker notes on slides)
-    a7/reference/    the rulebook (HOUSE STYLE.md) and the standing reference documents
+    a7/packages/     what ships: one folder per unit, laid out by lesson — All Slides/,
+                     Lessons/<N.NN>/ (number only; its keys in Keys/), Review/, Assessment/, Handouts/,
+                     Reference/ — every file named course, number, title, what it is
+                     ("A7 3.08 Writing Large Numbers in Scientific Notation - Slides.pptx";
+                     ruling 34, 4 Oct 2026). Units 3 on are written by the build; Units 1-2
+                     predate it and were renamed, never rebuilt. zips/ is git-ignored.
+    a7/reference/    the rulebook (HOUSE STYLE.md), the scope and sequence, the IXL due dates,
+                     each unit's audit and question-bank file, the master sheet, and
+                     "A7 Rename List 2026-10-04.csv" (every old file name and its new one)
+    a7/for Croix/    documents made for him outside the unit packages
     a7/build/        the build system (Python): specs per unit in a7/build/<unit>/, the
                      course profile (course.py), the installer — and the SHARED BUILD KIT
                      (lib/, checks.py, gates.py, the drivers, SPEC SCHEMA.md), which is
@@ -26,7 +32,9 @@ not happen.
                      here (KIT.sha256). The on-level course is built by the same kit.
                      START WITH a7/build/BUILDING A UNIT.md — the whole procedure.
     tools/           setup_env.sh (fresh session), push.sh, check.sh (run before every push
-                     and by CI), vendor_windmill.py, the scope calendar, PDF helpers
+                     and by CI), vendor_windmill.py, the scope calendar, PDF helpers,
+                     master_sheet.py and its check, zip_package.py (zips for Units 1-2;
+                     a built unit is zipped by its install), legacy/ (the 4 Oct renaming)
 
 ## Building the next unit
 

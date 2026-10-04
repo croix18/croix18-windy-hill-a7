@@ -2,13 +2,15 @@
 
 Windy Hill Middle School · course 1205050 · six teaching days (eight book lessons, merged to six), a review sent home as practice, a two-period assessment.
 
+**By the plan** (Windmill's spine as of 2026-10-03; `tools/scope_calendar.py` is its source): lessons Wed 14 Oct – Wed 21 Oct, the assessment Thu 22 Oct and Fri 23 Oct, 2026. The console opens on the plan's lesson for the day.
+
 Nothing exists until it is committed. This folder is generated from `a7/build/u4/` by `install_unit.py`; edit the specs and rebuild rather than editing these files by hand.
 
 ---
 
 ## How the files are named
 
-**`A7 <unit>.<lesson>  <what it is>`** — two spaces before the type, two-digit lesson numbers. `A7 4.04  Question Bank` is Accelerated grade 7, Unit 4, Lesson 4, the question bank. Two days carry two book lessons each: `A7 4.02` is Math Nation's lessons 2 and 3 (multiplying and dividing), and `A7 4.07` is its lessons 7 and 8 (the two real-world days, which are three rotating stations in the book and are taught from the front here). Unit-wide documents drop the lesson number: `A7 4  Unit Review`, `A7 4  Unit Assessment`, `A7 4  Reference Sheet`.
+**Course, number, title, then what it is** — `A7 4.05 Evaluating Expressions with Radicals - Slides.pptx`, `A7 4.05 Evaluating Expressions with Radicals - Question Bank.docx`, `A7 4.05 Evaluating Expressions with Radicals - Question Bank - Key.docx`. Unit-wide files carry the unit instead of a lesson: `A7 Unit 4 Solving Problems with Rational Numbers - All Slides.html`, `A7 Unit 4 Solving Problems with Rational Numbers - Test.docx`, `A7 Unit 4 Solving Problems with Rational Numbers - Test - Key.docx`, `A7 Unit 4 Solving Problems with Rational Numbers - Review.docx`, `A7 Unit 4 Solving Problems with Rational Numbers - Reference Sheet.docx`. Single spaces, pieces joined by ` - `, two-digit lesson numbers so everything sorts in teaching order. The same pattern in both courses (Croix, 4 October 2026). Two days carry two book lessons each: `A7 4.02` is Math Nation's lessons 2 and 3 (multiplying and dividing), and `A7 4.07` is its lessons 7 and 8 (the two real-world days, which are three rotating stations in the book and are taught from the front here).
 
 ---
 
@@ -16,32 +18,30 @@ Nothing exists until it is committed. This folder is generated from `a7/build/u4
 
 | Folder | What is in it |
 |---|---|
-| **Question Banks** | Per lesson: the Question Bank and the Question Bank – Additional. Retired worksheets are question banks (ruling 11): draw from them for practice, exit tickets or re-teaching; nothing in here has an answer on it. |
-| **Slides** | **Teach from `A7 4  Unit Slides.html`.** Open it in a browser on the panel (double-click from Drive; nothing to install). It opens on Today: it knows the period from the bell, the plan's lesson for the date and where this period stopped last time — Resume, Start, or choose a lesson. The rail on the left lists the lesson's segments with their minutes and the bar says whether the clock is ahead of or behind the plan. On a whiteboard question the rail runs the round: a timer, the answer veiled until you press Space, and tiles to tally the letters the room held (hold a tile to take one back). Space or → advance, ← back, 1–9 jump to that board, L hides the rail, T starts the timer, Esc returns to Today, P prints one slide per page. Also here: one deck per lesson as `.html` and `.pptx`, and `A7 4  Unit Slides.pptx` for PowerPoint or Google Slides (each lesson keeps its own slide numbers, so the Teacher Edition lines up). Base and exponent are colour-coded on notes, worked examples and answer slides; questions stay black. No speaker notes — the notes live in the Teacher Edition (ruling 12). |
+| **All Slides** | **Teach from `A7 Unit 4 Solving Problems with Rational Numbers - All Slides.html`.** Open it in a browser on the panel (double-click from Drive; nothing to install). It opens on Today: it knows the period from the bell, the plan's lesson for the date and where this period stopped last time — Resume, Start, or choose a lesson. The rail on the left lists the lesson's segments with their minutes and the bar says whether the clock is ahead of or behind the plan. On a whiteboard question the rail runs the round: a timer, the answer veiled until you press Space, and tiles to tally the letters the room held (hold a tile to take one back). Space or → advance, ← back, 1–9 jump to that board, L hides the rail, T starts the timer, Esc returns to Today, P prints one slide per page. `A7 Unit 4 Solving Problems with Rational Numbers - All Slides.pptx` is the same slides for PowerPoint or Google Slides (each lesson keeps its own slide numbers, so the Teacher Edition lines up). Base and exponent are colour-coded on notes, worked examples and answer slides; questions stay black. No speaker notes — the notes live in the Teacher Edition (ruling 12). |
+| **Lessons** | **One folder per lesson, named by its number (`3.08`; the title is in every file's name), everything for that day in it**, each document with its PDF beside it (the PDF is what gets printed and posted). *Slides* — the lesson's own deck as `.pptx` and `.html`. *Teacher Edition* — three or four pages, read in twenty minutes (ruling 26): page 1 is the period (benchmark with its Must and Must-not lines, the target, the MTRs, the timing table, the three sentences to say out loud), then one line per slide, each board carrying its answer, its named distractors and the split-board move, and Misconceptions to Watch at the end. *Lesson Plan* — the Florida-format plan (ruling 25): standards, the MTRs with their evidence, the sequence read from the deck, gradual release, higher-order questions with DOK, checks for understanding with the response to each, differentiation. *Independent Set* — the six questions written in silence (ruling 21). *Question Bank* and *Additional Question Bank* — retired worksheets are question banks (ruling 11): draw from them for practice, exit tickets or re-teaching. |
+| **Lessons / … / Keys** | Inside each lesson's folder: that lesson's three answer keys and nothing else. |
+| **Review** | The Unit Review and its key (unscored; it goes home as practice — ruling 27a, A7 has no review day). |
+| **Assessment** | The unit test (one paper, two periods) and its key. |
 | **Handouts** | The Reference Sheet. Students study from it; it may NOT be used on the assessment (ruling 13). There is no study guide (ruling 11). |
-| **Assessments** | Unit Review (unscored; it goes home as practice — ruling 27a, A7 has no review day) and Unit Assessment (two periods) — student copies. |
-| **Answer Keys** | Every key in the unit, without exception. |
-| **Teacher Editions** | One per lesson, **three or four pages, read in twenty minutes** (ruling 26). Page 1 is the period — benchmark with its Must and Must-not lines, the target, the MTRs, the timing table and the three sentences to say out loud. Then one line per slide, each board carrying its answer, its named distractors and the split-board move. Misconceptions to Watch at the end. |
-| **PDFs** | A mirror of the six folders above, same filenames. This is what gets printed and posted. |
-| **Lesson Plans** | One Florida-format plan per lesson (ruling 25): standards, the MTRs with their evidence, the sequence read from the deck, gradual release, higher-order questions with DOK, checks for understanding with the response to each, differentiation. |
-| **Reference** | Not handouts: `BANK - Unit N.md` (how each question bank varies, what the audit found, what changed from the book, and every bank answer — ruling 26 moved this out of the teacher's edition), the Math Nation package audit, the scope and sequence, the IXL due-date sheet, the Grade 8 source of truth. |
+| **Reference** | Not handouts: `A7 Unit 4 Solving Problems with Rational Numbers - Question Bank.md` (how each question bank varies, what the audit found, what changed from the book, and every bank answer — ruling 26 moved this out of the teacher's edition), the Math Nation package audit, the scope and sequence, the IXL due-date sheet, the Grade 8 source of truth. |
 
-**Nothing with an answer printed on it sits outside `Answer Keys`.**
+**Nothing with an answer printed on it sits beside a student page:** a lesson's keys are in its `Keys` folder, and every such file says Key in its name.
 
 ---
 
 ## Unit at a glance
 
-| Day | Lesson | Benchmark | The line that carries the day |
-|---|---|---|---|
-| 4.01 | Adding and Subtracting in Scientific Notation | MA.8.NSO.1.5 | The powers of ten have to match before a single digit is added. |
-| 4.02–03 | Multiplying and Dividing in Scientific Notation | MA.8.NSO.1.5 | Multiply the fronts, add the backs — and nothing has to match. |
-| 4.04 | Real-World Problems and Significant Digits | MA.8.NSO.1.6 | Products count digits; sums count places. |
-| 4.05 | Evaluating Expressions with Radicals | MA.8.NSO.1.7 | The radical bar is a pair of parentheses you cannot see. |
-| 4.06 | Order of Operations with Radicals | MA.8.NSO.1.7 | Read the expression and ask what is holding what. |
-| 4.07–08 | Real-World Order of Operations | MA.8.NSO.1.7 | No word tells you which operation to use. Read the situation. |
-| — | Unit Review | all three | unscored, sent home as practice (ruling 27a); the SSDD block is named on the key only |
-| — | Unit Assessment — two periods, one paper | all three benchmarks, sections by benchmark | 34 points |
+| Day | Planned | Lesson | Benchmark | The line that carries the day |
+|---|---|---|---|---|
+| 4.01 | Wed 14 Oct | Adding and Subtracting in Scientific Notation | MA.8.NSO.1.5 | The powers of ten have to match before a single digit is added. |
+| 4.02–03 | Thu 15 Oct | Multiplying and Dividing in Scientific Notation | MA.8.NSO.1.5 | Multiply the fronts, add the backs — and nothing has to match. |
+| 4.04 | Fri 16 Oct | Real-World Problems and Significant Digits | MA.8.NSO.1.6 | Products count digits; sums count places. |
+| 4.05 | Mon 19 Oct | Evaluating Expressions with Radicals | MA.8.NSO.1.7 | The radical bar is a pair of parentheses you cannot see. |
+| 4.06 | Tue 20 Oct | Order of Operations with Radicals | MA.8.NSO.1.7 | Read the expression and ask what is holding what. |
+| 4.07–08 | Wed 21 Oct | Real-World Order of Operations | MA.8.NSO.1.7 | No word tells you which operation to use. Read the situation. |
+| — | — | Unit Review | all three | unscored, sent home as practice (ruling 27a); the SSDD block is named on the key only |
+| — | Thu 22 Oct and Fri 23 Oct | Unit Assessment — two periods, one paper | all three benchmarks, sections by benchmark | 34 points |
 
 Book order, with 4.2 + 4.3 and 4.7 + 4.8 merged under ruling 30 — both merges were already in the scope and sequence. 4.05 and 4.06 stay separate days even though IXL gives them the same skill; under ruling 28 that is one assignment covering the run, due after the second of the two. No thread day falls inside Unit 4. All three benchmarks report under Number Sense and Operations on the Grade 8 FAST, so the review's parts split by lesson and the assessment's sections split by benchmark.
 

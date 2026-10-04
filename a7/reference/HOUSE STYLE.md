@@ -826,36 +826,68 @@ for pacing.
 
 ## 11. Naming and packaging
 
+*Rewritten 4 October 2026 — ruling 34. What stood here before (two spaces before the type, no
+title, packages foldered by type with every key in `Answer Keys`) is the convention of every file
+made before that day; `reference/… Rename List 2026-10-04.csv` maps each old name to its new one.*
+
 ```
-M7 2.03  Worksheet.docx
- │  │  │      └── what it is
- │  │  └───────── lesson 3, always two digits
- │  └──────────── unit 2
- └─────────────── course code
+M7 4.06 Finding Circumference - Slides.pptx
+ │  │  │          │                └── what it is
+ │  │  │          └─────────────────── the lesson's title
+ │  │  └────────────────────────────── lesson 6, always two digits
+ │  └───────────────────────────────── unit 4
+ └──────────────────────────────────── course code
+
+M7 Unit 4 Area - Test Form A - Key.pdf       a unit-wide file: the unit and its title, what it is, then Key or Worked Answers
 ```
+
+**One pattern, both courses**: course, number, title, then what the file is; single spaces; the
+pieces joined by ` - ` and by nothing else. A key is the same name with ` - Key` on the end; the
+copy that goes back to the class ends ` - Worked Answers`. Course codes: **M7** on-level, **A7**
+accelerated.
 
 **Lesson numbers are always two digits.** Drive and Classroom sort filenames as text, so a
 one-digit scheme puts `2.10` between `2.1` and `2.2` the first time a unit reaches ten lessons.
 Two digits everywhere is one rule instead of two.
 
-Two spaces before the type. Unit-wide documents drop the lesson number: `M7 2  Unit Review.docx`.
-Course codes: **M7** on-level, **A7** accelerated.
+**What a file may be** — for a lesson: Slides, Teacher Edition, Lesson Plan, Independent Set,
+Question Bank, Additional Question Bank, Handout. For a unit: All Slides (its `.html` is the
+console), Reference Sheet, Review, Review Day (a review built as a lesson: `… - Review Day -
+Slides`), Test, Test Form A, Test Form B, Practice Test, Question Bank. Nothing else is invented on
+the spot. Files made before the kit keep three more words — Circuit, Record Sheet, Quiz 1, Study
+Guide, Vocabulary Reference — in the same pattern. A retired worksheet is a Question Bank (ruling
+11) and is named one.
 
-Type names are exactly the list in section 9 — plus `Worksheet Key`, `Handout Key`,
-`Unit Review Key`, `Unit Assessment Key`. Nothing else is invented on the spot.
+**No builder types a file name.** `lib/names.py` in the build kit is the only place one is made,
+and what a file IS is read from the part after the first ` - `, never from the title.
 
-**Folders**, in every package:
+**Folders**, in every unit's package — by lesson:
 
 ```
-Worksheets/         Slides/          Handouts/        Assessments/
-Answer Keys/        Teacher Editions/
-PDFs/               a mirror of all six, same filenames
-Reference/          benchmark text, this file
+All Slides/                       the whole unit in one deck
+Lessons/4.06/                     everything for that day, each document with its PDF beside it
+Lessons/4.06/Keys/                that lesson's answer keys
+Review Day/   or   Review/        a review built as a lesson; or a review paper and its key
+Assessment/                       the test and its key — in Form A/, Form B/, Practice Test/ where there are forms
+Handouts/     Reference/
 00 - START HERE.md
 ```
 
-Every key lives in `Answer Keys` — including unit review and assessment keys. That is deliberate:
-there is exactly one folder you never upload to Classroom by accident.
+**A lesson's folder is its number only.** The title is in the unit's folder and in every file's name
+already; said a third time it makes paths that do not fit Windows' 260 characters once a unit's zip is
+extracted, and links too long for a spreadsheet. Asked, Croix chose the number (4 October). For the same
+reason a unit's zips carry no title (`M7 Unit 4 - Complete.zip`), and the installer refuses a package
+whose longest path is over 180 characters.
+
+A lesson's keys live in its own `Keys` folder: nothing with an answer on it sits beside a student
+page, and every such file says Key in its name. (Before ruling 34 every key lived in one
+`Answer Keys` folder for the same reason — the one folder you never upload to Classroom by accident.
+The reason stands; the folder is now per lesson.)
+
+**Reference documents** carry the course first and the same words in both courses:
+`A7 Scope and Sequence 2026-27`, `M7 IXL Due Dates 2026-27`, `M7 Unit 4 Area - Question Bank`,
+`A7 Unit 3 Exponents and Scientific Notation - Audit`. The rulebook, the manifest and the sources
+of truth keep the names every other document cites them by.
 
 ---
 
@@ -1478,6 +1510,32 @@ the same-value check that found six defects in Unit 4 has never seen Unit 1 or 2
 shared file whose A7 tables described tools the A7 tree does not have, Croix chose: A7 rewrites
 its own block and he relays the diff to M7, so the master stays single under ruling 3. Done the
 same day; the block now derives from the tree, and `suitecheck` keeps it so.
+
+## 13b(xv). Ruling — Croix, 4 October: one way to name a file, and one way to fold a unit [both courses; M7's ruling 34]
+
+**Ruling 34 — one naming convention, the title in every name, unit folders by lesson.** Croix,
+4 October 2026: *"Can you normalize all of the naming conventions in a7 and m7. I have file names
+with all sorts of stuff. It's tough to find what I need sometimes."* Offered three patterns, he
+chose the one that carries the lesson's title — `M7 4.06 Finding Circumference - Slides.pptx`,
+`M7 Unit 4 Area - Test Form A - Key.pdf`; offered three layouts, he chose **by lesson, in both
+courses** (what he had asked of M7 on 28 September), **each lesson's folder named by its number**
+once he was shown what a title there does to path lengths; and he chose every scope — the current units,
+the older packages, the reference documents and everything else. So:
+
+- **§11 is rewritten** and is the convention. The build makes every name in one place
+  (`lib/names.py`), lays every package out one way (`lib/packkit.py`), and the whole-unit deck is
+  `All Slides` in both courses.
+- **The units the kit builds were rebuilt under the new names** (A7 Units 3–4, M7 Units 4–5) at
+  `checks: 0 findings`. **The older packages were renamed and re-foldered and nothing inside any
+  file changed** — A7 Units 1–2 (which "stay as shipped": they cannot be rebuilt, and were not) and
+  M7 Units 2–3, which were split out of the 14 September package into a folder each; M7 Unit 3's
+  folder gathers the latest delivery of each of its files. What those folders replaced is in
+  `m7/archive/`, under its old names, so a superseded file cannot be mistaken for a current one.
+- **Every old name has its new one on record**: `reference/A7 Rename List 2026-10-04.csv` and
+  `reference/M7 Rename List 2026-10-04.csv`, written by `tools/legacy/rename_2026_10_04.py`, which
+  is also the statement of the rule the renaming followed.
+- A file whose own heading still says *Worksheet* is not an error: ruling 11 made the retired
+  worksheets question banks, and the name says what the file is used for now.
 
 ## 13b(ii). Rulings — Croix, 6 September
 

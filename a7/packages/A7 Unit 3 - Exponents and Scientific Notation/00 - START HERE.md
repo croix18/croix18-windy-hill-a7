@@ -2,13 +2,15 @@
 
 Windy Hill Middle School · course 1205050 · ten teaching days (nine book lessons, merged to eight, plus the two Thread A days), a review sent home as practice, a two-period assessment.
 
+**By the plan** (Windmill's spine as of 2026-10-03; `tools/scope_calendar.py` is its source): lessons Wed 23 Sep – Tue 6 Oct, the assessment Thu 8 Oct and Fri 9 Oct, 2026. The console opens on the plan's lesson for the day.
+
 Nothing exists until it is committed. This folder is generated from `a7/build/u3/` by `install_unit.py`; edit the specs and rebuild rather than editing these files by hand.
 
 ---
 
 ## How the files are named
 
-**`A7 <unit>.<lesson>  <what it is>`** — two spaces before the type, two-digit lesson numbers. `A7 3.04  Question Bank` is Accelerated grade 7, Unit 3, Lesson 4, the question bank. The two Thread A days are `A7 3.T1` and `A7 3.T2` (they are MA.8.AR.1.1, woven into this unit under ruling 30, and carry no book lesson number). Unit-wide documents drop the lesson number: `A7 3  Unit Review`, `A7 3  Unit Assessment`, `A7 3  Reference Sheet`.
+**Course, number, title, then what it is** — `A7 3.04 Negative Exponent Law - Slides.pptx`, `A7 3.04 Negative Exponent Law - Question Bank.docx`, `A7 3.04 Negative Exponent Law - Question Bank - Key.docx`. Unit-wide files carry the unit instead of a lesson: `A7 Unit 3 Exponents and Scientific Notation - All Slides.html`, `A7 Unit 3 Exponents and Scientific Notation - Test.docx`, `A7 Unit 3 Exponents and Scientific Notation - Test - Key.docx`, `A7 Unit 3 Exponents and Scientific Notation - Review.docx`, `A7 Unit 3 Exponents and Scientific Notation - Reference Sheet.docx`. Single spaces, pieces joined by ` - `, two-digit lesson numbers so everything sorts in teaching order. The same pattern in both courses (Croix, 4 October 2026). The two Thread A days are `A7 3.T1` and `A7 3.T2` (they are MA.8.AR.1.1, woven into this unit under ruling 30, and carry no book lesson number).
 
 ---
 
@@ -16,36 +18,34 @@ Nothing exists until it is committed. This folder is generated from `a7/build/u3
 
 | Folder | What is in it |
 |---|---|
-| **Question Banks** | Per lesson: the Question Bank and the Question Bank – Additional. Retired worksheets are question banks (ruling 11): draw from them for practice, exit tickets or re-teaching; nothing in here has an answer on it. |
-| **Slides** | **Teach from `A7 3  Unit Slides.html`.** Open it in a browser on the panel (double-click from Drive; nothing to install). It opens on Today: it knows the period from the bell, the plan's lesson for the date and where this period stopped last time — Resume, Start, or choose a lesson. The rail on the left lists the lesson's segments with their minutes and the bar says whether the clock is ahead of or behind the plan. On a whiteboard question the rail runs the round: a timer, the answer veiled until you press Space, and tiles to tally the letters the room held (hold a tile to take one back). Space or → advance, ← back, 1–9 jump to that board, L hides the rail, T starts the timer, Esc returns to Today, P prints one slide per page. Also here: one deck per lesson as `.html` and `.pptx`, and `A7 3  Unit Slides.pptx` for PowerPoint or Google Slides (each lesson keeps its own slide numbers, so the Teacher Edition lines up). Base and exponent are colour-coded on notes, worked examples and answer slides; questions stay black. No speaker notes — the notes live in the Teacher Edition (ruling 12). |
+| **All Slides** | **Teach from `A7 Unit 3 Exponents and Scientific Notation - All Slides.html`.** Open it in a browser on the panel (double-click from Drive; nothing to install). It opens on Today: it knows the period from the bell, the plan's lesson for the date and where this period stopped last time — Resume, Start, or choose a lesson. The rail on the left lists the lesson's segments with their minutes and the bar says whether the clock is ahead of or behind the plan. On a whiteboard question the rail runs the round: a timer, the answer veiled until you press Space, and tiles to tally the letters the room held (hold a tile to take one back). Space or → advance, ← back, 1–9 jump to that board, L hides the rail, T starts the timer, Esc returns to Today, P prints one slide per page. `A7 Unit 3 Exponents and Scientific Notation - All Slides.pptx` is the same slides for PowerPoint or Google Slides (each lesson keeps its own slide numbers, so the Teacher Edition lines up). Base and exponent are colour-coded on notes, worked examples and answer slides; questions stay black. No speaker notes — the notes live in the Teacher Edition (ruling 12). |
+| **Lessons** | **One folder per lesson, named by its number (`3.08`; the title is in every file's name), everything for that day in it**, each document with its PDF beside it (the PDF is what gets printed and posted). *Slides* — the lesson's own deck as `.pptx` and `.html`. *Teacher Edition* — three or four pages, read in twenty minutes (ruling 26): page 1 is the period (benchmark with its Must and Must-not lines, the target, the MTRs, the timing table, the three sentences to say out loud), then one line per slide, each board carrying its answer, its named distractors and the split-board move, and Misconceptions to Watch at the end. *Lesson Plan* — the Florida-format plan (ruling 25): standards, the MTRs with their evidence, the sequence read from the deck, gradual release, higher-order questions with DOK, checks for understanding with the response to each, differentiation. *Independent Set* — the six questions written in silence (ruling 21). *Question Bank* and *Additional Question Bank* — retired worksheets are question banks (ruling 11): draw from them for practice, exit tickets or re-teaching. |
+| **Lessons / … / Keys** | Inside each lesson's folder: that lesson's three answer keys and nothing else. |
+| **Review** | The Unit Review and its key (unscored; it goes home as practice — ruling 27a, A7 has no review day). |
+| **Assessment** | The unit test (one paper, two periods) and its key. |
 | **Handouts** | The Reference Sheet. Students study from it; it may NOT be used on the assessment (ruling 13). There is no study guide (ruling 11). |
-| **Assessments** | Unit Review (unscored; it goes home as practice — ruling 27a, A7 has no review day) and Unit Assessment (two periods) — student copies. |
-| **Answer Keys** | Every key in the unit, without exception. |
-| **Teacher Editions** | One per lesson, **three or four pages, read in twenty minutes** (ruling 26). Page 1 is the period — benchmark with its Must and Must-not lines, the target, the MTRs, the timing table and the three sentences to say out loud. Then one line per slide, each board carrying its answer, its named distractors and the split-board move. Misconceptions to Watch at the end. |
-| **PDFs** | A mirror of the six folders above, same filenames. This is what gets printed and posted. |
-| **Lesson Plans** | One Florida-format plan per lesson (ruling 25): standards, the MTRs with their evidence, the sequence read from the deck, gradual release, higher-order questions with DOK, checks for understanding with the response to each, differentiation. |
-| **Reference** | Not handouts: `BANK - Unit N.md` (how each question bank varies, what the audit found, what changed from the book, and every bank answer — ruling 26 moved this out of the teacher's edition), the Math Nation package audit, the scope and sequence, the IXL due-date sheet, the Grade 8 source of truth. |
+| **Reference** | Not handouts: `A7 Unit 3 Exponents and Scientific Notation - Question Bank.md` (how each question bank varies, what the audit found, what changed from the book, and every bank answer — ruling 26 moved this out of the teacher's edition), the Math Nation package audit, the scope and sequence, the IXL due-date sheet, the Grade 8 source of truth. |
 
-**Nothing with an answer printed on it sits outside `Answer Keys`.**
+**Nothing with an answer printed on it sits beside a student page:** a lesson's keys are in its `Keys` folder, and every such file says Key in its name.
 
 ---
 
 ## Unit at a glance
 
-| Day | Lesson | Benchmark | The line that carries the day |
-|---|---|---|---|
-| 3.01 | Product Laws of Exponents | MA.7.NSO.1.1 | Same base, add — and the base has to match. |
-| 3.02 | Quotient Laws of Exponents | MA.7.NSO.1.1 | Same base, subtract — and exponent 0 is not 0. |
-| 3.03 | Exponential Expressions | MA.7.NSO.1.1 | Two plans, one value — the order is yours. |
-| 3.04 | Negative Exponent Law | MA.8.NSO.1.3 | Reciprocal, not opposite. |
-| 3.05 | Applying Exponent Laws | MA.8.NSO.1.3 | Flip the numbers, not the sign. |
-| 3.06–07 | Evaluating and Equivalent Expressions | MA.8.NSO.1.3 | Rewrite the base to compare. |
-| T-A1 | Exponent Laws with Variable Bases | MA.8.AR.1.1 | Everything inside the parentheses gets the exponent — the number included. |
-| T-A2 | Negative Exponents with Variable Bases | MA.8.AR.1.1 | Only the factor wearing the negative exponent moves. |
-| 3.08 | Writing Large Numbers in Scientific Notation | MA.8.NSO.1.4 | One nonzero digit in front of the decimal point. |
-| 3.09 | Writing Small Numbers in Scientific Notation | MA.8.NSO.1.4 | The exponent counts places, not zeros. |
-| — | Unit Review | all four | unscored, sent home as practice (ruling 27a); the SSDD block is named on the key only |
-| — | Unit Assessment — two periods, one paper | all four benchmarks, sections by benchmark | 41 points |
+| Day | Planned | Lesson | Benchmark | The line that carries the day |
+|---|---|---|---|---|
+| 3.01 | Wed 23 Sep | Product Laws of Exponents | MA.7.NSO.1.1 | Same base, add — and the base has to match. |
+| 3.02 | Thu 24 Sep | Quotient Laws of Exponents | MA.7.NSO.1.1 | Same base, subtract — and exponent 0 is not 0. |
+| 3.03 | Fri 25 Sep | Exponential Expressions | MA.7.NSO.1.1 | Two plans, one value — the order is yours. |
+| 3.04 | Mon 28 Sep | Negative Exponent Law | MA.8.NSO.1.3 | Reciprocal, not opposite. |
+| 3.05 | Tue 29 Sep | Applying Exponent Laws | MA.8.NSO.1.3 | Flip the numbers, not the sign. |
+| 3.06–07 | Wed 30 Sep | Evaluating and Equivalent Expressions | MA.8.NSO.1.3 | Rewrite the base to compare. |
+| T-A1 | — | Exponent Laws with Variable Bases | MA.8.AR.1.1 | Everything inside the parentheses gets the exponent — the number included. |
+| T-A2 | — | Negative Exponents with Variable Bases | MA.8.AR.1.1 | Only the factor wearing the negative exponent moves. |
+| 3.08 | Mon 5 Oct | Writing Large Numbers in Scientific Notation | MA.8.NSO.1.4 | One nonzero digit in front of the decimal point. |
+| 3.09 | Tue 6 Oct | Writing Small Numbers in Scientific Notation | MA.8.NSO.1.4 | The exponent counts places, not zeros. |
+| — | — | Unit Review | all four | unscored, sent home as practice (ruling 27a); the SSDD block is named on the key only |
+| — | Thu 8 Oct and Fri 9 Oct | Unit Assessment — two periods, one paper | all four benchmarks, sections by benchmark | 41 points |
 
 Book order with Thread A woven in after 3.07 (ruling 30): the laws are complete on numbers before they are restated on letters, and both are complete before scientific notation. Math Nation's 3.6 and 3.7 are one period here (3.06–07). MA.7.NSO.1.1 is grade 7 content the Grade 8 FAST assumes; the other three benchmarks report under Number Sense and Operations (8.NSO.1.3, 8.NSO.1.4) and Algebraic Reasoning (8.AR.1.1).
 

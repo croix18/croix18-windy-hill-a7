@@ -6,17 +6,18 @@ Windy Hill Middle School · course 1205050 · six lessons, a review, an assessme
 
 ## How the files are named
 
-**`A7  <unit>.<lesson>` — two spaces — `<what it is>`**
+**Course, number, title, then what it is** — `A7 2.03 Cube Values - Slides.pptx`,
+`A7 2.03 Cube Values - Question Bank.docx`, `A7 2.03 Cube Values - Question Bank - Key.docx`.
+Unit-wide files carry the unit instead of a lesson: `A7 Unit 2 Real Numbers, Square Roots and Cube Roots - Test.docx`,
+`A7 Unit 2 Real Numbers, Square Roots and Cube Roots - Review - Key.docx`. Single spaces, the pieces joined by ` - `, two-digit lesson
+numbers so everything sorts in teaching order. It is the same pattern in every unit of both courses
+(Croix, 4 October 2026).
 
-`A7 2.03  Worksheet` is Accelerated grade 7, Unit 2, Lesson 3, the worksheet. This matches the
-on-level set exactly, so the two courses sit side by side in the drive without looking like they
-came from different places.
-
-Lesson numbers are **two digits**. `A7 1.10` has to sort after `A7 1.09`, and Drive and Classroom
-sort text rather than numbers, so a single digit would put Lesson 10 between Lessons 1 and 2.
-
-Unit-wide documents drop the lesson number: `A7 1  Unit Review`, `A7 1  Unit Assessment`,
-`A7 1  Reference Sheet`. A space sorts before a full stop, so those sit at the top of their folder.
+**These files were renamed and re-foldered on 4 October 2026; nothing inside any of them changed.**
+This unit was built by the first toolchain, before lesson specs existed, so it cannot be rebuilt —
+only moved. A document's own heading may still say *Worksheet* or *Additional Practice*: under
+ruling 11 a retired worksheet is a question bank, and its file is named that way. Every old name
+and where it went is in `a7/reference/A7 Rename List 2026-10-04.csv`.
 
 ---
 
@@ -24,20 +25,15 @@ Unit-wide documents drop the lesson number: `A7 1  Unit Review`, `A7 1  Unit Ass
 
 | Folder | What is in it |
 |---|---|
-| **Worksheets** | The student worksheets, and the Additional Practice sheets. Nothing in here has an answer on it. |
-| **Slides** | The decks, as `.pptx`. |
-| **Handouts** | The Reference Sheet, and any lesson-specific in-class page. |
-| **Assessments** | Unit Review, Unit Assessment, Practice Test, quizzes — student copies. |
-| **Answer Keys** | Every key in the unit, without exception. |
-| **Teacher Editions** | One per lesson. |
-| **PDFs** | A mirror of all six folders, same filenames. This is what gets printed and posted. |
+| **Lessons** | One folder per lesson, named by its number (the title is in every file's name), everything for that day in it: the Slides (`.pptx`), the Teacher Edition, the Question Bank and the Additional Question Bank — each document with its `.pdf` beside it, which is what gets printed and posted. |
+| **Lessons / … / Keys** | Inside each lesson's folder: that lesson's answer keys and nothing else. |
+| **Review** | The Unit Review and its key. |
+| **Assessment** | The unit test and its key. Lesson 2.06's student page is the Circuit, with its key in that lesson's `Keys`. |
+| **Handouts** | The Reference Sheet. |
 | **Reference** | Not a handout. See the bottom of this page. |
 
-**Nothing with an answer printed on it sits outside `Answer Keys`.** That is deliberate: it is the
-one folder you never upload to Classroom by accident.
-
-Every document ships as **.docx** to edit and **.pdf** to print. Slides ship as **.pptx** with the
-`.pdf` in the mirror.
+**Nothing with an answer printed on it sits beside a student page:** a lesson's keys are in its
+`Keys` folder, and every such file says Key in its name.
 
 ---
 

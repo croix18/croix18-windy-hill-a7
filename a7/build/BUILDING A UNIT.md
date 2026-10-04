@@ -58,6 +58,20 @@ lib.profile` prints it and marks what A7 sets); ours too are the unit folders, `
 and this file. `python3 gates.py [uN]` runs every build gate over the specs in seconds, with no
 rendering — `tools/check.sh` runs it before every push, and CI on every push.
 
+## 1b. File names and folders (ruling 34, 4 October 2026)
+
+No spec and no script types a file name. `lib/names.py` makes every one —
+`A7 3.08 Writing Large Numbers in Scientific Notation - Slides.pptx`,
+`A7 Unit 3 Exponents and Scientific Notation - Test - Key.docx` — from the spec's `code` and `title`
+and from `course.py` UNITS, and `lib/packkit.py` lays the package out **by lesson** (`All Slides/`,
+`Lessons/<N.NN>/` with that lesson's keys in `Keys/`, `Review/`, `Assessment/`, `Handouts/`,
+`Reference/`). A lesson's folder is its **number only** (`Lessons/4.06/`) and a unit's zips carry no title: with the title in the folder too, paths ran past 255 characters as links and past Windows' 260 once a zip was extracted; Croix was asked and chose number-only (4 October). The installer refuses a path over 180 characters inside `packages/`. So: a lesson's `title` is its name everywhere; `code` keeps two digits; a thread day
+carries `plan_code` (the plan's name for it, `T-A1`); **add a new unit's title to `course.py` UNITS
+before building it**; and a new kind of document is a new word in `names.py`, not a string in a
+builder. HOUSE STYLE §11 is the convention; `SPEC SCHEMA.md` "File names" is the detail. Units 1
+and 2 (not buildable) were renamed and re-foldered the same day; every old name is in
+`../reference/A7 Rename List 2026-10-04.csv`.
+
 ## 2. Intake — the Math Nation package
 
 Croix uploads the unit as a zip, often split (`pkg.z01 … pkg.z06 + pkg.zip`). Put the parts in one
@@ -76,18 +90,18 @@ python3 tools/pdf_supertext.py "<pdf>" > out.txt      # keeps exponents as ^{…
 Read a page as an image (`pdftoppm -r 80 -f N -l N`) whenever the text is scrambled — two-column
 layouts interleave, and the TE's boxed answers often come out as images only.
 
-Also open, for the unit: `../reference/A7 SCOPE AND SEQUENCE 2026-27.md` (which book lessons
+Also open, for the unit: `../reference/A7 Scope and Sequence 2026-27.md` (which book lessons
 merge, which threads are woven in, the dates), `../reference/ixl_skills_by_lesson.json` (IXL
 names and codes per book lesson — never type a code from memory), the benchmark text in
 `../reference/Florida BEST Grade 8 - Source of Truth.md`, and the B1G-M notes for every benchmark
-in the unit in `../reference/B1G-M READING NOTES.md` (the misconceptions you will name, the tasks
+in the unit in `../reference/A7 B1G-M Reading Notes.md` (the misconceptions you will name, the tasks
 and items the guide expects).
 
 ## 3. Audit first — and send it before you build anything
 
 Work **every** problem in the package: student pages, practice, homework, additional practice,
 assessment, and the keys. Use sympy, not your head, for every value. Write
-`a7/unitNN/UNIT N AUDIT.md` with the same sections as `a7/unit03/UNIT 3 AUDIT.md`:
+`a7/reference/A7 Unit N <Title> - Audit.md` with the same sections as `A7 Unit 3 Exponents and Scientific Notation - Audit.md`:
 
 1. Bottom line. 2. Defects that are student-facing or in a key (numbered D1, D2 … with page,
 what it says, what is true). 3. Teacher-facing slips. 4. Conflicts with the settled rules (partner
@@ -132,7 +146,7 @@ For each row of the scope and sequence (a book lesson, a merged pair, or a threa
 6. `python3 checks.py out/<unit>` — must end `checks: 0 findings`. Every finding is a defect;
    never argue with one, fix the content (or, if the check is wrong, fix the check in a separate
    commit that says why).
-7. **Look at everything.** `python3 contact_sheet.py "out/<unit>/A7 N.NN  Slides.pdf"` and view
+7. **Look at everything.** `python3 contact_sheet.py "out/<unit>/A7 N.NN <Title> - Slides.pdf"` and view
    `/tmp/sheets/…png`; then the bank key, the additional key and the TE at 45 dpi in a grid; then
    any slide that looked crowded at 60–80 dpi on its own. You are looking for: a title-slide box
    that wrapped, a gloss that ran into the margin or the math, a table cell that wrapped, a notes
@@ -167,7 +181,7 @@ Do not batch lessons before the first push. One lesson, checked, viewed, pushed;
 | `every single-answer item is keyed A — the key is guessable` / `select-alls key the first options` | the specs were written answer-first (correct=0) and printed in that order; students noticed on 3 Oct 2026 | write new items answer-first if you like, then run `python3 shuffle_choices.py <unit>` ONCE before the first build: it permutes each item's options in the source, re-keys `errors`, re-letters `answer`/`form_only`, remaps letters in the item's own teacher prose, and prints HAND-CHECK lines for letter references elsewhere (a Teacher Edition saying "a board full of B on Q5") — fix those by hand. Never run it twice on the same file; the gate `balancecheck` keeps the spread from then on |
 | `slot colour: an exponent sits on '…', which is not a base` / `…with nothing to its left` | a coloured surface (notes, worked row, reveal) whose layout the base/exponent reader cannot place — HOUSE STYLE §2a | rewrite the expression so each exponent sits on a letter, a numeral or a bracketed group; never teach the reader a guess |
 | `slot colour: a radical set small` | a root index (`\sqrt[3]{…}`) on a coloured surface — an index is not an exponent | move the root to an uncoloured surface, or write it without the index |
-| `pdftwin: A7 3  Unit Slides.pptx differs from A7 3.04  Slides.pptx at its slide 16` | a lesson was rebuilt on its own and the whole-unit deck was not | `python3 build_unit.py u3/unit.py` (it rebuilds the unit deck from the specs) |
+| `pdftwin: … - All Slides.pptx differs from A7 3.04 … - Slides.pptx at its slide 16` | a lesson was rebuilt on its own and the whole-unit deck was not | `python3 build_unit.py u3/unit.py` (it rebuilds the unit deck from the specs) |
 | `text box runs into the footer … Answer it.` on a multiple-choice board | a tall display-size fraction above four options (slide fractions are set with `\dfrac` since 27 Sep 2026, so a `\frac` board is ~0.4 in taller than it was) | the placer clamps the prompt/answer line above the footer; if the options themselves collide, put the question on one `text` row or shorten the latex |
 | `box crosses the footer` / `math into footer` | too many rows on one slide | fewer rows, or split into two notes slides |
 | `table cell wraps out of its row` | a notes table's cell is too long for its column, and a wrapped second line draws outside the border | shorten the cell, widen the column, use fewer columns, or move the words into an `items2` line under the table |
@@ -187,14 +201,14 @@ Do not batch lessons before the first push. One lesson, checked, viewed, pushed;
 
 ## 5. The unit documents, the manifest, the package
 
-**The whole-unit deck.** `build_unit.py` also writes `A7 <u>  Unit Slides.pptx` (+ PDF): a cover,
+**The whole-unit deck.** `build_unit.py` also writes `A7 Unit <u> <Title> - All Slides.pptx` (+ PDF): a cover,
 a contents slide whose rows jump to each lesson, then every lesson's slides in the manifest's
 teaching order, each lesson numbered from 1 exactly as its own deck and its Teacher Edition number
 it. It has no side-car (the minutes live beside each lesson's deck). `checks.py` compares it to the
 lesson decks slide for slide, so **after rebuilding any one lesson, run `build_unit.py` again**.
 **After any change to a coloured expression, run `slotaudit.py <unit>` and read it** (HOUSE STYLE §2a).
 
-**The console (the unit's `.html`, 3 Oct 2026).** `A7 <u>  Unit Slides.html` is not a deck with a
+**The console (the unit's `.html`, 3 Oct 2026).** `A7 Unit <u> <Title> - All Slides.html` is not a deck with a
 contents page; it is the day wrapped around the slides (`lib/consolekit.py`, Room Coordination Plan
 phase 3). It opens on TODAY: the period read from the bell schedule (Deckhand's, via Windmill's
 spine), the plan's lesson for the date, this period's bookmark, the room's word from Tally if any;
@@ -232,7 +246,8 @@ files live in `assets/` with the script that regenerates them (`assets/make_asse
    only). Unit Assessment: two periods, sections by benchmark, one point per lettered part,
    numbering straight through; the `total` and `tracker` you declare are asserted against the
    items. `python3 build_unit.py <unit>/unit.py`, then `checks.py`, then look at every page.
-2. Copy `u3/manifest.py` to `<unit>/manifest.py`; fill the lesson table (the "line that carries
+2. Add the unit's title to `course.py` UNITS (the package folder and every unit-wide file are named
+   from it). Copy `u3/manifest.py` to `<unit>/manifest.py`; fill the lesson table (the "line that carries
    the day" is each lesson's `te.lives` idea in ten words), the assessment days, the notes.
 3. `python3 install_unit.py <unit>` — deletes and rebuilds the package folder and
    writes `00 - START HERE.md` with the timing table read from the decks.
@@ -319,6 +334,24 @@ adapted "to a7 and the family", and chose all four parts. What that changed HERE
   calls it that way.
 - **Family:** the M7 repository now has this one's layout (`m7/build`, `m7/reference`,
   `m7/packages`); Geopardy gained two M7 games; Windmill's handoff has the kit's takeover notes.
+- **4 Oct, later still — one way to name a file (ruling 34; §1b above, HOUSE STYLE §11).** Every
+  file now carries its lesson's title (`A7 3.08 Writing Large Numbers in Scientific Notation -
+  Slides.pptx`), unit-wide files carry the unit's (`A7 Unit 3 Exponents and Scientific Notation -
+  Test - Key.docx`), the whole-unit deck is `All Slides` (it was `Unit Slides`), and **packages are
+  laid out by lesson** — `Lessons/<N.NN>/` (the number only: paths with the title twice broke the
+  master sheet's links and Windows' path limit; Croix chose number-only) with that lesson's keys in
+  `Keys/` — instead of by
+  type with a `PDFs` mirror. Units 3 and 4 were rebuilt under the new names at `checks: 0
+  findings`; against the build before the renaming, Unit 3's 107 documents are identical in
+  structure except the console's index (it gained each lesson's plan code). Units 1 and 2 were
+  renamed and re-foldered, nothing inside changed. `a7/unit03/` and `a7/unit04/` are gone: their
+  audits and bank files are in `a7/reference/` under unit names. The master sheet's links follow
+  the new layout, and **no link in it may be longer than 255 characters** (Excel's HYPERLINK takes no
+  more and LibreOffice cuts a cell's link there on save — it did, silently): `tools/master_sheet.py`
+  links a document whose own address is longer to its lesson's folder and the cell reads "in
+  folder" (19 links, all in Units 1–2); `tools/check_master_sheet.py` holds every tab to this, reads
+  what the next commit will hold (not HEAD), and now runs in `tools/check.sh` and in CI. Units 1–2
+  are zipped by `tools/zip_package.py`. Every old name is in `../reference/A7 Rename List 2026-10-04.csv`.
 - **Open for Croix:** the teacher's edition and lesson plan differ in format between the courses
   (profile `TE_STYLE`, `PLAN_STYLE`) — converging them is his call. Everything in "Pending" below
   still stands.

@@ -1,8 +1,6 @@
 # Unit 4 manifest — what install_unit.py needs to assemble the package and write 00 - START HERE.md.
 M = dict(
-    unit=4, title="Solving Problems with Rational Numbers",
-    folder="A7 Unit 4 - Solving Problems with Rational Numbers",
-    audit_src="a7/unit04/UNIT 4 AUDIT.md",           # repo-relative; copied into Reference/
+    unit=4,                                           # the title is course.py UNITS[4]
     summary="six teaching days (eight book lessons, merged to six), a review sent home as practice, a two-period assessment",
     # (file code, label as printed, title, benchmark, the line that carries the day) — in teaching order
     lessons=[

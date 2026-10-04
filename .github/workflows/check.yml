@@ -8,8 +8,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: pip install sympy python-docx python-pptx matplotlib Pillow
-      - name: gates, kit manifest, due-date sheet, packages
+      - run: pip install sympy python-docx python-pptx matplotlib Pillow openpyxl pymupdf
+      - name: gates, kit manifest, due-date sheet, packages, master sheet
         run: |
           touch .github-token   # the guard asks that the name is ignored, not that a token exists
           bash tools/check.sh

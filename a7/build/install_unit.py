@@ -1,109 +1,123 @@
 #!/usr/bin/env python3
-"""Install a unit's built outputs into its package folder and write 00 - START HERE.md.
-    python3 install_unit.py u3            (or u3/manifest.py — both name the same unit)
-Run after every lesson and the unit documents have been built and checks.py reports 0 findings.
-The package folder is deleted and rebuilt from out/<unit>/ every time — never edit it by hand.
+"""Install a built unit into its package folder, write 00 - START HERE.md, and zip it for delivery.
+    python3 install_unit.py u3            (build_all.py u3 --install ends here)
+
+Run after build_all.py reports `checks: 0 findings`. The package folder is deleted and rebuilt from
+out/<unit>/ every time — never edit it by hand. The layout, the copying (each file compared byte
+for byte with the build) and the zips are the shared kit's (lib/packkit.py — one layout for both
+courses, by lesson: Croix, 4 October 2026); this file is A7's own: where the packages live, which
+reference documents travel with a unit, and what START HERE says.
+
+    a7/packages/A7 Unit 3 - Exponents and Scientific Notation/
+        00 - START HERE.md
+        All Slides/                    A7 Unit 3 … - All Slides.html is the console
+        Lessons/3.08/                  A7 3.08 Writing Large Numbers in Scientific Notation - Slides,
+                                       Teacher Edition, Lesson Plan, Independent Set,
+                                       Question Bank, Additional Question Bank (docx/pptx/html and pdf)
+        Lessons/…/Keys/                that lesson's three answer keys — never beside a student page
+        Review/    Assessment/    Handouts/    Reference/
+    a7/packages/zips/   (git-ignored)  A7 Unit 3 - Complete.zip (and in parts when over the upload
+                                       limit), one per lesson, A7 Unit 3 - Lessons.zip,
+                                       A7 Unit 3 - Review and Assessment.zip
 """
-import os, re, shutil, sys, json, importlib.util
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from lib.tekit import plan_from_sidecar
+import os, re, sys, glob, shutil, importlib.util
 
-_arg = sys.argv[1].rstrip("/")
-if not _arg.endswith(".py"):                 # build_all.py --install hands over the unit folder
-    _arg = os.path.join(os.path.dirname(os.path.abspath(__file__)), os.path.basename(_arg), "manifest.py")
-sys.argv[1] = _arg
-_spec = importlib.util.spec_from_file_location("manifest", sys.argv[1])
-_m = importlib.util.module_from_spec(_spec); _spec.loader.exec_module(_m)
-M = _m.M
 HERE = os.path.dirname(os.path.abspath(__file__))
-UNITDIR = os.path.basename(os.path.dirname(os.path.abspath(sys.argv[1])))
+sys.path.insert(0, HERE)
+from lib.profile import C
+from lib import names, packkit
+import bank_file
+
+UNITDIR = os.path.basename(sys.argv[1].rstrip("/")) if len(sys.argv) > 1 else ""
+if UNITDIR.endswith(".py"):                      # the older call, install_unit.py u3/manifest.py
+    UNITDIR = os.path.basename(os.path.dirname(os.path.abspath(sys.argv[1])))
+if not re.fullmatch(r"u\d+", UNITDIR):
+    raise SystemExit("usage: python3 install_unit.py u3")
+U = int(UNITDIR[1:])
 OUT = os.path.join(HERE, "out", UNITDIR)
-REPO = os.path.abspath(os.path.join(HERE, "..", ".."))
-PKG = os.path.join(REPO, "a7", "packages", M["folder"])
-REF = os.path.join(REPO, "a7", "reference")
-LESSONS = M["lessons"]
-U = M["unit"]
+A7 = os.path.dirname(HERE)                               # the a7/ folder
+REPO = os.path.dirname(A7)
+REF = os.path.join(A7, "reference")
+PACKAGES = os.path.join(A7, "packages")
+ZIPS = os.path.join(PACKAGES, "zips")
+TITLE = names.unit_title(U)
+PKG = os.path.join(PACKAGES, packkit.package_folder(U))
 
 
-FOLDERS = ["Question Banks", "Independent Sets", "Slides", "Handouts", "Assessments", "Answer Keys", "Teacher Editions", "Lesson Plans", "Reference"]
+def load(path, name):
+    sp = importlib.util.spec_from_file_location(name, path)
+    m = importlib.util.module_from_spec(sp); sp.loader.exec_module(m)
+    return m
 
 
-def dest_folder(name):
-    if name.endswith((".pptx", ".html")) or (name.endswith(".pdf") and "Slides" in name):
-        return "Slides"                      # the .html deck is the same slides for a browser (no PDF twin)
-    if " Key." in name:
-        return "Answer Keys"
-    if "Teacher Edition" in name:
-        return "Teacher Editions"
-    if "Lesson Plan" in name:
-        return "Lesson Plans"
-    if "Independent Set" in name:
-        return "Independent Sets"
-    if "Reference Sheet" in name:
-        return "Handouts"
-    if "Unit Review" in name or "Unit Assessment" in name:
-        return "Assessments"
-    if "Question Bank" in name:
-        return "Question Banks"
-    return None
+M = load(os.path.join(HERE, UNITDIR, "manifest.py"), "manifest").M
+if M["unit"] != U:
+    raise SystemExit(f"{UNITDIR}/manifest.py says unit {M['unit']}")
+LESSONS = M["lessons"]                                   # (code, label, title, benchmark, the day's line), teaching order
+_by_code = {m.L["code"]: m.L for m in (load(f, "l") for f in sorted(glob.glob(os.path.join(HERE, UNITDIR, "l[0-9][0-9].py"))))}
+if set(_by_code) != {row[0] for row in LESSONS}:
+    raise SystemExit(f"lesson specs and manifest disagree about {sorted(set(_by_code) ^ {row[0] for row in LESSONS})}")
+SPECS = [_by_code[row[0]] for row in LESSONS]
+
+def reference_files():
+    """[(source path, name in the package's Reference/)]."""
+    ustem = names.unit_stem(U)
+    out = [(bank_file.write(UNITDIR), None),
+           (os.path.join(REF, f"{ustem} - Audit.md"), None),
+           (os.path.join(REF, "A7 Scope and Sequence 2026-27.md"), None),
+           (os.path.join(REF, "A7 IXL Due Dates 2026-27.md"), None),
+           (os.path.join(REF, "Florida BEST Grade 8 - Source of Truth.md"), None)]
+    return [(src, dst or os.path.basename(src)) for src, dst in out]
 
 
 def install():
-    if os.path.exists(PKG):
-        shutil.rmtree(PKG)
-    for f in FOLDERS:
-        os.makedirs(os.path.join(PKG, f), exist_ok=True)
-        if f != "Reference":
-            os.makedirs(os.path.join(PKG, "PDFs", f), exist_ok=True)
-    n = 0
-    for name in sorted(os.listdir(OUT)):
-        if name.endswith(".json"):
-            continue
-        folder = dest_folder(name)
-        if folder is None:
-            raise SystemExit(f"unplaced file: {name}")
-        if name.endswith(".pdf"):
-            shutil.copy2(os.path.join(OUT, name), os.path.join(PKG, "PDFs", folder, name))
-        else:
-            shutil.copy2(os.path.join(OUT, name), os.path.join(PKG, folder, name))
-        n += 1
-    # reference material (not handouts)
-    bank = os.path.join(REPO, "a7", f"unit{U:02d}", f"BANK - Unit {U}.md")
-    for src, dst in [(os.path.join(REPO, M["audit_src"]), f"UNIT {U} AUDIT - Math Nation package.md"),
-                     (bank, f"BANK - Unit {U}.md"),
-                     (os.path.join(REF, "A7 SCOPE AND SEQUENCE 2026-27.md"), "A7 SCOPE AND SEQUENCE 2026-27.md"),
-                     (os.path.join(REF, "A7 IXL DUE DATES 2026-27.md"), "A7 IXL DUE DATES 2026-27.md"),
-                     (os.path.join(REF, "Florida BEST Grade 8 - Source of Truth.md"), "Florida BEST Grade 8 - Source of Truth.md")]:
-        shutil.copy2(src, os.path.join(PKG, "Reference", dst))
-    return n
+    placed = packkit.install(OUT, PKG, SPECS)
+    os.makedirs(os.path.join(PKG, "Reference"), exist_ok=True)
+    for src, name in reference_files():
+        if not os.path.exists(src):
+            raise SystemExit(f"reference document missing: {src}")
+        shutil.copy2(src, os.path.join(PKG, "Reference", name))
+    return placed
 
 
 def timing_rows():
-    rows = []
-    for code, label, title, bm, line in LESSONS:
-        side = os.path.join(OUT, f"A7 {code}  Slides.notes.json")
-        plan, wb, _, blocks = plan_from_sidecar(side)
-        fixed = sum(m for seg, rng, m in plan if seg not in ("Whiteboards", "IXL"))
-        ixl = sum(m for seg, rng, m in plan if seg == "IXL")
-        rows.append((label, fixed, wb, ixl, fixed + wb + ixl))
-    return rows
+    label = {row[0]: row[1] for row in LESSONS}
+    return [(label[code], other, wb, ixl, tot) for code, other, wb, ixl, tot in packkit.timing_rows(SPECS, OUT)]
 
 
-def start_here(n_files):
+def start_here(placed):
     t = timing_rows()
+    dates, review_day, exam_days, plan_as_of = packkit.calendar(U, HERE)
+    day = packkit.day
+    console = names.unit(U, "All Slides", "html")
+    example = SPECS[min(3, len(SPECS) - 1)]
     lines = []
     A = lines.append
-    A(f"# A7 Unit {U} — {M['title']}")
+    A(f"# A7 Unit {U} — {TITLE}")
     A("")
-    A(f"Windy Hill Middle School · course 1205050 · {M['summary']}.")
+    A(f"Windy Hill Middle School · course {C.COURSE_CODE} · {M['summary']}.")
     A("")
+    if dates:
+        first, last = min(dates.values()), max(dates.values())
+        when = f"lessons {day(first)} – {day(last)}"
+        if exam_days:
+            when += f", the assessment {day(exam_days[0])}" + (f" and {day(exam_days[-1])}" if len(exam_days) > 1 else "")
+        A(f"**By the plan** (Windmill's spine as of {plan_as_of}; `tools/scope_calendar.py` is its source): {when}, "
+          f"{first.year if first.year == last.year else str(first.year) + '–' + str(last.year)}. "
+          "The console opens on the plan's lesson for the day.")
+        A("")
     A(f"Nothing exists until it is committed. This folder is generated from `a7/build/{UNITDIR}/` by `install_unit.py`; edit the specs and rebuild rather than editing these files by hand.")
     A("")
     A("---")
     A("")
     A("## How the files are named")
     A("")
-    A(f"**`A7 <unit>.<lesson>  <what it is>`** — two spaces before the type, two-digit lesson numbers. `A7 {U}.04  Question Bank` is Accelerated grade 7, Unit {U}, Lesson 4, the question bank. {M.get('naming_note', '')} Unit-wide documents drop the lesson number: `A7 {U}  Unit Review`, `A7 {U}  Unit Assessment`, `A7 {U}  Reference Sheet`.")
+    A(f"**Course, number, title, then what it is** — `{names.lesson(example, 'Slides', 'pptx')}`, "
+      f"`{names.lesson(example, 'Question Bank', 'docx')}`, `{names.lesson(example, 'Question Bank', 'docx', key=True)}`. "
+      f"Unit-wide files carry the unit instead of a lesson: `{console}`, `{names.unit(U, 'Test', 'docx')}`, "
+      f"`{names.unit(U, 'Test', 'docx', key=True)}`, `{names.unit(U, 'Review', 'docx')}`, `{names.unit(U, 'Reference Sheet', 'docx')}`. "
+      "Single spaces, pieces joined by ` - `, two-digit lesson numbers so everything sorts in teaching order. "
+      f"The same pattern in both courses (Croix, 4 October 2026). {M.get('naming_note', '')}")
     A("")
     A("---")
     A("")
@@ -111,30 +125,30 @@ def start_here(n_files):
     A("")
     A("| Folder | What is in it |")
     A("|---|---|")
-    A("| **Question Banks** | Per lesson: the Question Bank and the Question Bank – Additional. Retired worksheets are question banks (ruling 11): draw from them for practice, exit tickets or re-teaching; nothing in here has an answer on it. |")
-    A(f"| **Slides** | **Teach from `A7 {U}  Unit Slides.html`.** Open it in a browser on the panel (double-click from Drive; nothing to install). It opens on Today: it knows the period from the bell, the plan's lesson for the date and where this period stopped last time — Resume, Start, or choose a lesson. The rail on the left lists the lesson's segments with their minutes and the bar says whether the clock is ahead of or behind the plan. On a whiteboard question the rail runs the round: a timer, the answer veiled until you press Space, and tiles to tally the letters the room held (hold a tile to take one back). Space or → advance, ← back, 1–9 jump to that board, L hides the rail, T starts the timer, Esc returns to Today, P prints one slide per page. Also here: one deck per lesson as `.html` and `.pptx`, and `A7 {U}  Unit Slides.pptx` for PowerPoint or Google Slides (each lesson keeps its own slide numbers, so the Teacher Edition lines up). Base and exponent are colour-coded on notes, worked examples and answer slides; questions stay black. No speaker notes — the notes live in the Teacher Edition (ruling 12). |")
+    A(f"| **All Slides** | **Teach from `{console}`.** Open it in a browser on the panel (double-click from Drive; nothing to install). It opens on Today: it knows the period from the bell, the plan's lesson for the date and where this period stopped last time — Resume, Start, or choose a lesson. The rail on the left lists the lesson's segments with their minutes and the bar says whether the clock is ahead of or behind the plan. On a whiteboard question the rail runs the round: a timer, the answer veiled until you press Space, and tiles to tally the letters the room held (hold a tile to take one back). Space or → advance, ← back, 1–9 jump to that board, L hides the rail, T starts the timer, Esc returns to Today, P prints one slide per page. `{names.unit(U, 'All Slides', 'pptx')}` is the same slides for PowerPoint or Google Slides (each lesson keeps its own slide numbers, so the Teacher Edition lines up). Base and exponent are colour-coded on notes, worked examples and answer slides; questions stay black. No speaker notes — the notes live in the Teacher Edition (ruling 12). |")
+    A("| **Lessons** | **One folder per lesson, named by its number (`3.08`; the title is in every file's name), everything for that day in it**, each document with its PDF beside it (the PDF is what gets printed and posted). *Slides* — the lesson's own deck as `.pptx` and `.html`. *Teacher Edition* — three or four pages, read in twenty minutes (ruling 26): page 1 is the period (benchmark with its Must and Must-not lines, the target, the MTRs, the timing table, the three sentences to say out loud), then one line per slide, each board carrying its answer, its named distractors and the split-board move, and Misconceptions to Watch at the end. *Lesson Plan* — the Florida-format plan (ruling 25): standards, the MTRs with their evidence, the sequence read from the deck, gradual release, higher-order questions with DOK, checks for understanding with the response to each, differentiation. *Independent Set* — the six questions written in silence (ruling 21). *Question Bank* and *Additional Question Bank* — retired worksheets are question banks (ruling 11): draw from them for practice, exit tickets or re-teaching. |")
+    A("| **Lessons / … / Keys** | Inside each lesson's folder: that lesson's three answer keys and nothing else. |")
+    A("| **Review** | The Unit Review and its key (unscored; it goes home as practice — ruling 27a, A7 has no review day). |")
+    A("| **Assessment** | The unit test (one paper, two periods) and its key. |")
     A("| **Handouts** | The Reference Sheet. Students study from it; it may NOT be used on the assessment (ruling 13). There is no study guide (ruling 11). |")
-    A("| **Assessments** | Unit Review (unscored; it goes home as practice — ruling 27a, A7 has no review day) and Unit Assessment (two periods) — student copies. |")
-    A("| **Answer Keys** | Every key in the unit, without exception. |")
-    A("| **Teacher Editions** | One per lesson, **three or four pages, read in twenty minutes** (ruling 26). Page 1 is the period — benchmark with its Must and Must-not lines, the target, the MTRs, the timing table and the three sentences to say out loud. Then one line per slide, each board carrying its answer, its named distractors and the split-board move. Misconceptions to Watch at the end. |")
-    A("| **PDFs** | A mirror of the six folders above, same filenames. This is what gets printed and posted. |")
-    A("| **Lesson Plans** | One Florida-format plan per lesson (ruling 25): standards, the MTRs with their evidence, the sequence read from the deck, gradual release, higher-order questions with DOK, checks for understanding with the response to each, differentiation. |")
-    A("| **Reference** | Not handouts: `BANK - Unit N.md` (how each question bank varies, what the audit found, what changed from the book, and every bank answer — ruling 26 moved this out of the teacher's edition), the Math Nation package audit, the scope and sequence, the IXL due-date sheet, the Grade 8 source of truth. |")
+    A(f"| **Reference** | Not handouts: `{names.unit(U, 'Question Bank', 'md')}` (how each question bank varies, what the audit found, what changed from the book, and every bank answer — ruling 26 moved this out of the teacher's edition), the Math Nation package audit, the scope and sequence, the IXL due-date sheet, the Grade 8 source of truth. |")
     A("")
-    A("**Nothing with an answer printed on it sits outside `Answer Keys`.**")
+    A("**Nothing with an answer printed on it sits beside a student page:** a lesson's keys are in its `Keys` folder, and every such file says Key in its name.")
     A("")
     A("---")
     A("")
     A("## Unit at a glance")
     A("")
-    A("| Day | Lesson | Benchmark | The line that carries the day |")
-    A("|---|---|---|---|")
+    A("| Day | Planned | Lesson | Benchmark | The line that carries the day |")
+    A("|---|---|---|---|---|")
     for code, label, title, bm, line in LESSONS:
-        A(f"| {label} | {title} | {bm} | {line} |")
+        k = code if code in dates else _by_code[code].get("plan_code")      # a thread day is T-A1 in the plan
+        when = day(dates[k]) if k in dates else "—"
+        A(f"| {label} | {when} | {title} | {bm} | {line} |")
     n_bm = len({l[3] for l in M["lessons"]})
-    A(f"| — | Unit Review | all {('two', 'three', 'four', 'five', 'six')[n_bm - 2] if 2 <= n_bm <= 6 else n_bm} | unscored, sent home as practice (ruling 27a); the SSDD block is named on the key only |")
+    A(f"| — | — | Unit Review | all {('two', 'three', 'four', 'five', 'six')[n_bm - 2] if 2 <= n_bm <= 6 else n_bm} | unscored, sent home as practice (ruling 27a); the SSDD block is named on the key only |")
     _bms, _pts = M["assessment"]
-    A(f"| — | Unit Assessment — two periods, one paper | {_bms} | {_pts} points |")
+    A(f"| — | {' and '.join(packkit.day(d) for d in exam_days) if exam_days else '—'} | Unit Assessment — two periods, one paper | {_bms} | {_pts} points |")
     A("")
     A(M["order_note"])
     A("")
@@ -179,13 +193,16 @@ def start_here(n_files):
     for b in M["before_unit"]:
         A("- " + b)
     A("")
-    A(f"Installed: {n_files} files from the build, plus this page and the Reference folder.")
+    A(f"Installed: {len(placed)} files from the build, plus this page and the Reference folder.")
     A("")
     with open(os.path.join(PKG, "00 - START HERE.md"), "w") as f:
         f.write("\n".join(lines))
 
 
 if __name__ == "__main__":
-    n = install()
-    start_here(n)
-    print(f"installed {n} files into {PKG}")
+    if not os.path.isdir(OUT):
+        raise SystemExit(f"nothing built in {OUT}")
+    placed = install()
+    start_here(placed)
+    made = packkit.zips(PKG, ZIPS, U)
+    print(f"installed {len(placed)} files into {os.path.relpath(PKG, REPO)}; {len(made)} zips in {os.path.relpath(ZIPS, REPO)}")
