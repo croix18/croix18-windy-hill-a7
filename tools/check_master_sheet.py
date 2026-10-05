@@ -573,7 +573,7 @@ for s in wb:
 if DRIVE_MODE:
     kinds = collections.Counter("search" if v["kind"] == "search" else ("direct" if v["direct"] else "lookup") for v in LIVE.values())
     print(f"links: Google Drive, live — {kinds['direct'] + kinds['lookup']} looked up in the Drive tab ({len(DTAB)} lines there: {kinds['direct']} open the document itself, {kinds['lookup']} fall back to a search for its exact name), {kinds['search']} lesson searches")
-    for want in ("they are live", "My versions", "Everything for this lesson", "is a search for the file's exact name instead"):
+    for want in ("they are live", "My versions", "Everything for this lesson", "is a search for the file's exact name instead", "puts the new contents into the same Google Sheet", "writes your ticks and notes back"):
         if want not in about: bad("About does not say:", want)
     if [x.title for x in wb][-2:] != ["Links", "Drive"]: bad("the Links and Drive tabs are not last")
 else:

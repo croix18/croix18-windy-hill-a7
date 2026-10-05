@@ -265,6 +265,11 @@ files live in `assets/` with the script that regenerates them (`assets/make_asse
    him; there is nothing to upload or send.** Windmill `drive/README.md` is the whole arrangement;
    `windy-hill-m7` `NOTES.md` (top section) says what it means for the generator and the check,
    which are the same here. `python3 ../../tools/test_live_links.py` exercises the looked-up half.
+   Since version 3 of that script (4 Oct, late) a new edition of the master sheet goes into the
+   SAME Google Sheet — its address stays — and his IXL ticks and notes are written back by lesson
+   (keyed by the tracker's "Lesson(s)" text and which occurrence it is: keep that column stable).
+   The About tab says so, and `check_master_sheet.py` requires it to. Only the yellow cells are
+   carried. The script fetches the consoles and master sheets first, then the rest.
 
 ## 5a. Geopardy (the review game, formerly Boards Up) — planned, not built (3 Oct 2026)
 

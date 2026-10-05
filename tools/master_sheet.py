@@ -978,6 +978,8 @@ def build(out):
         ("A link that reads \"in folder\" opens the lesson's folder, not the file: the file's own address is longer than a spreadsheet link may be (255 characters). The file is in that folder under the lesson's number and what it is.", BODY),
     ]) + [
         ("'not built yet' means the unit's documents do not exist yet. Units 5 onward fill in as they are built; this file is regenerated from the plan each time.", BODY),
+        ('The yellow cells in the IXL tracker are yours. In the live Google Sheet they stay: when a new edition of this sheet is published, the script puts the new contents into the same Google Sheet, so its address and your bookmark stay (should Google ever refuse, it makes a new sheet, and the Status tab of the Windy Hill Drive Index links to it), and it writes your ticks and notes back, lesson by lesson (a copy of them is kept on the Kept tab of the Windy Hill Drive Index). Anything typed anywhere else in this sheet is replaced by the next edition. An Excel copy (.xlsx) carries no ticks.' if LINKS == "drive" else
+         'The yellow cells in the IXL tracker live in your copy only. A new copy of this file — after the plan moves, or a unit is built — arrives with them empty, so keep working in one copy and use a new one for its dates and links.', BODY),
         ("IXL: every skill listed is required, to a SmartScore of 67, due at the start of the next class (ruling 28). Lessons in a row that use the same skills are one assignment, due after the last of them — the IXL due column already shows that date.", BODY),
         ("'No school' days are the holidays in the plan (tools/scope_calendar.py), taken from the board-approved calendar — check them against the school's copy.", BODY),
         ("", BODY),
