@@ -287,6 +287,12 @@ under "Answer it.", no remark beside a worked step, no line above a reveal's ans
 the problem's own question ("Find the value.") or absent — never a direction to the room.
 A7's specs needed no change; Units 3 and 4 were rebuilt.
 
+**Ruling 21, amended the same night — the independent set is on the board.** *"The individual
+review portion of the slides needs to put the problems on the board."* The Independent Set slide
+now shows the six questions (typeset, the type stepping down until they fit); the printed page and
+its key are unchanged. Write stems that fit: six on one slide at 16 pt or larger, or the build
+refuses.
+
 **Ruling 38 (4 October 2026, later that night) — a figure's labels can be read, and are true.**
 The kit refuses a figure in which a line runs through a label, and a spec in which a figure and
 its own words use different units (`kit/SPEC SCHEMA.md` § Figures; HOUSE STYLE §13b(xviii)). Place

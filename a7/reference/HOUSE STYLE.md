@@ -1625,6 +1625,13 @@ the pieces first. That comes off so weird. Get rid of that."*
 6. A figure is given the room the removed lines left: a board's figure no longer reserves space
    for a hint or a gloss.
 
+**Ruling 21, amended — Croix, 4 October (night): the independent set is on the board.** *"Also,
+the individual review portion of the slides needs to put the problems on the board."* The six
+questions of the independent set are on a slide in both courses. In A7 they are also the printed
+Independent Set page with its key, as before; the slide that said only "Six questions. Work down
+the page." is gone. A set whose six questions do not fit one slide at 16 pt is shortened, not
+split: a student works all six at their own pace.
+
 ## 13b(xviii). Ruling 38 — 4 October (night): a figure's labels can be read, and are true [both courses; M7's ruling 38]
 
 Found on the eve of 4.04, reading its rebuilt deck: the barn of Example 1 had its roof drawn
