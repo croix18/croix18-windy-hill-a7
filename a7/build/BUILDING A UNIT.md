@@ -271,6 +271,30 @@ files live in `assets/` with the script that regenerates them (`assets/make_asse
    The About tab says so, and `check_master_sheet.py` requires it to. Only the yellow cells are
    carried. The script fetches the consoles and master sheets first, then the rest.
 
+**Ruling 37 (4 October 2026, night) — no comments on a slide.** Croix: *"on all slides remove
+the comments in the boxes and in parenthesis. If a problem is in parenthesis, it should be pulled
+out into the main text … Remove it everywhere."* The title slide has no yesterday/today box; no
+slide has the small grey italic line under its rules; an Example's whole problem — story, givens,
+question — is in `prompt`. A spec's `sub` is the slide's label in the Teacher's Edition only; a
+question a worked slide asks the room is its `lead`. HOUSE STYLE §13b(xvii); the kit's
+`SPEC SCHEMA.md`. Units 3 and 4 were rebuilt that night with no spec changed (every `sub` here
+was already a label). The same night the console's slide placement was fixed (it was wrong at
+every window size but one) and `htmlcheck` began measuring it.
+
+**Ruling 37, widened the same night.** *"But also those comments"* … **"Remove both."** No hint
+under "Answer it.", no remark beside a worked step, no line above a reveal's answer: `hint`,
+`gloss` and a worked row's remark stay in the spec and are on no slide. An Example's `ask` is
+the problem's own question ("Find the value.") or absent — never a direction to the room.
+A7's specs needed no change; Units 3 and 4 were rebuilt.
+
+**Ruling 38 (4 October 2026, later that night) — a figure's labels can be read, and are true.**
+The kit refuses a figure in which a line runs through a label, and a spec in which a figure and
+its own words use different units (`kit/SPEC SCHEMA.md` § Figures; HOUSE STYLE §13b(xviii)). Place
+a label beside a line with `off=(dx, dy)` in ems, never by a step in the figure's units; print a
+length that follows from the others only as what it truly is. Found in M7 Unit 4 (13 struck
+labels, three impossible slanted sides, one wrong unit); A7's Units 3 and 4 were surveyed and are
+clean. This is the rule to write Unit 5's figures by.
+
 ## 5a. Geopardy (the review game, formerly Boards Up) — planned, not built (3 Oct 2026)
 
 Croix's review game Geopardy! lives in a separate repository, `croix18/Geopardy` (engine in `engine/`, one

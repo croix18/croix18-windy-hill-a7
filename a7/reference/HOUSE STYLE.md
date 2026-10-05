@@ -1569,6 +1569,86 @@ test crosses a quarter's end or content runs past 30 April. So:
 - **The engine never cuts.** When the year no longer holds the sequence — content past 30 April —
   it says so and stops there; what to merge or drop is Croix's decision.
 
+## 13b(xvii). Ruling — Croix, 4 October (night): nothing on a slide but the lesson [both courses; M7's ruling 37]
+
+**Ruling 37 (M7's number) — no comments on a slide.** Croix, 4 October 2026, the night before teaching M7 4.04,
+looking at its Notes slides: *"Those are terrible. Please, on all slides remove the comments in the
+boxes and in parenthesis. If a problem is in parenthesis, it should be pulled out into the main
+text."* Asked which text he meant: the title slide's box, and *"the one that says all three lines
+and watch first. I want that whole thing eliminated across both slide decks."* Asked whether the
+same small grey line should go from Warm-Up, Whiteboards, Your Turn and the answer slides:
+*"Remove it everywhere."* Scope, his choice: all M7 and A7 decks.
+
+1. **The title slide has no yesterday/today box.** The spec still has `yesterday` and `today`: they
+   are the teacher's lines now, and the Teacher's Edition prints `today` in the title slide's note
+   as the one line to say.
+2. **No slide has the small grey italic line under its rules** — "Copy all three lines.", "Watch
+   first.", "On your own. Four minutes. No notes.", "Boards up on three.", "Same steps, your
+   numbers. Boards up when done.", "Answer.", "Last five minutes.", an Example's story, a worked
+   slide's label. In a spec, `sub` is the slide's label in the Teacher's Edition and nothing else.
+3. **A problem is in the main text, whole.** An Example's `prompt` carries the story and the givens
+   as well as the question (they used to sit in the grey line: "Kel is staining a deck. How much
+   decking is there?"). A question a worked slide puts to the room ("Which number goes in which
+   blank?") is that slide's `lead`: one bold line above the rows.
+4. **What he was offered and did not choose, so it stays:** the grey hint under "Answer it.", the
+   grey remark beside each worked step, the grey line above a reveal's answer.
+5. **Every Example and every Your Turn is a whole problem on its own slide** — Croix, the same
+   night, shown 4.05's Example 2 as it stood once the grey line was gone ("The fountain: r = 7 m."):
+   *"How is that a good example? The fountain. Huh?"* It had leaned on the grey line and on the
+   slide before it. An Example's `prompt` says what the thing is and what is to be found ("A
+   circular fountain has a radius of 7 m."); it does not say "the fountain", "he" or "this plan"
+   of something the slide has not introduced. A Your Turn states its own question; one that is
+   only an expression is given its Example's bold instruction by the build (or its own `ask`).
+
+Where it lives: the shared kit (Windmill `kit/lib/deckkit.py` `_new`, `title_slide`, `lead`;
+`htmlkit.py`; `lessonbuild._fill_deck`), with a test in `kit/tests/test_kit.py` that builds a deck
+both ways and looks for the removed text; `kit/SPEC SCHEMA.md`. Warm-ups and Notes now start
+straight under the rules; every other slide's body is where it was.
+
+In A7 nothing had to move: every Example's `sub` was already a label ("A negative base.") with
+the whole problem in `prompt`.
+
+**Widened the same night — ruling 37, items 4 to 6 as they stand.** Shown the rebuilt slides:
+*"But also those comments. Half the box. It's still a rombus..."*; asked about the other two grey
+things: **"Remove both."**; and of 4.04 Example 1's bottom line: *"Nothing on paper yet. Decide
+the pieces first. That comes off so weird. Get rid of that."*
+
+4. **No hint under "Answer it."**, **no remark beside a worked step**, **no line above a reveal's
+   answer.** (Item 4 above — "it stays" — is withdrawn.) A question slide shows the question; a
+   worked slide its steps and the answer; a reveal the answer. `hint`, `gloss` and a worked row's
+   remark stay in the spec and are on no slide. Nothing on a slide is grey but the footer and the
+   title slide's eyebrow.
+5. **An Example's bold bottom line (`ask`) is the problem's own question** — "Find its area.",
+   "Find both mistakes." — **or it is not there.** A direction about how the room is to work
+   ("Nothing on paper yet", "Thirty seconds", "Do not say them yet") is the teacher's to say; it
+   is in `note_q`, which the Teacher's Edition prints.
+6. A figure is given the room the removed lines left: a board's figure no longer reserves space
+   for a hint or a gloss.
+
+## 13b(xviii). Ruling 38 — 4 October (night): a figure's labels can be read, and are true [both courses; M7's ruling 38]
+
+Found on the eve of 4.04, reading its rebuilt deck: the barn of Example 1 had its roof drawn
+through the "6 m" of its own height. A figure is the one place a student reads a number off a
+picture, and Rule 0 covers the picture.
+
+1. **No line of a figure runs through one of its labels**, and none comes within a hair of one.
+   The kit checks every figure it draws and the build stops on one that fails (`figkit._struck`;
+   `kit/SPEC SCHEMA.md` § Figures). A fill is not a line; the pale unit grid is not a line.
+2. **A label beside a line is placed by `off`** — a step in ems of its own type from a point ON
+   the figure — not by a step in the figure's units. The second shrinks with the figure and the
+   type does not.
+3. **A length that follows from the other lengths is that length.** The side that is "not
+   needed" is still a side of this figure: a right trapezoid with bases 5 and 11 and height 4
+   has a leg of 7.2, and printing 5 is an error whether or not the answer uses it. Either compute
+   the label or choose numbers that make it come out (3-4-5, 6-8-10, 5-12-13). The unit's
+   `figs.py` refuses a leg that disagrees.
+4. **The figure and the words use one unit**, unless converting is the point of the problem
+   (`units_ok=True`). The build refuses the rest (`figkit.units_agree`).
+5. **A length printed for a whole diagonal is drawn against the whole diagonal** — outside the
+   shape on a dimension line — not beside half of it.
+
+A7's Units 3 and 4 were surveyed with the new check: no figure of theirs was struck and no unit disagreed.
+
 ## 13b(ii). Rulings — Croix, 6 September
 
 **Ruling 8 — a question is never split across a page, and the paper is the price.**

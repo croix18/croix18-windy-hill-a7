@@ -101,7 +101,7 @@ class HtmlDeck:
     def _new(self, title, sub, minutes, note, kind):
         self._n += 1
         self.s = {"kind": kind, "title": title, "sub": sub, "body": [], "n": self._n,
-                  "footer": self.footer, "lesson": self.lesson_label}
+                  "footer": self.footer, "lesson": self.lesson_label, "band": True}
         self.slides.append(self.s)
         self.side.append({"n": self._n, "title": title, "sub": sub, "min": minutes, "note": note, "kind": kind})
         self.cursor = 1.9
@@ -130,12 +130,20 @@ class HtmlDeck:
         self._new(self.title, "", minutes, note, "title")
         self.s["title_slide"] = True
         eyebrow = f"{self.course}  ·  UNIT {self.unit}  ·  {self.lesson_label}".upper()
+        # no yesterday/today box (deckkit.title_slide says why)
         self._add(f'<div class="cover"><p class="eyebrow">{esc(eyebrow)}</p><h2>{esc(self.title)}</h2><div class="rule"></div>'
-                  f'<p class="bm">{esc(benchmark)}</p><p class="target">{rich(target)}</p>'
-                  f'<div class="box"><p class="y">{esc(yesterday)}</p><p class="td">{esc(today)}</p></div></div>')
+                  f'<p class="bm">{esc(benchmark)}</p><p class="target">{rich(target)}</p></div>')
+
+    def lead(self, text):
+        """One bold line of main text under the rules, in the place the grey line had."""
+        self.s["lead"] = text
 
     def section(self, title, sub="", minutes=0, note="", kind="content"):
         return self._new(title, sub, minutes, note, kind)
+
+    def no_band(self):
+        """This slide's body starts straight under the rules (it has more to carry)."""
+        self.s["band"] = False
 
     def head(self, text, numeral=None):
         label = (f"{numeral}.  " if numeral else "") + text
@@ -209,16 +217,12 @@ class HtmlDeck:
         for stem, answer in pairs:
             self._add(f'<p class="t left" style="font-size:23pt">{rich(stem)}<span class="wa">{rich(answer)}</span></p>')
 
-    def worked_row(self, latex, gloss, slots=False):
-        self._add(f'<div class="worked"><span class="k d mid{" slots" if slots and AUTO_SLOTS else ""}" data-tex="{esc(_tex(latex, slots))}"></span>'
-                  f'<span class="why">{rich(gloss, slots=slots)}</span></div>')
+    def worked_row(self, latex, gloss=None, slots=False):
+        # the expression alone: the grey reason beside it is not on a slide (ruling 37)
+        self._add(f'<div class="worked"><span class="k d mid{" slots" if slots and AUTO_SLOTS else ""}" data-tex="{esc(_tex(latex, slots))}"></span></div>')
 
-    def ask(self, text, hint=None, y=None):
-        h = f'<p class="hint">{rich(hint)}</p>' if hint else ""
-        self._add(f'<div class="ask bottom"><p>{esc(text)}</p>{h}</div>')
-
-    def gloss(self, text):
-        self._add(f'<p class="gloss">{rich(text, slots=True)}</p>')
+    def ask(self, text, y=None):
+        self._add(f'<div class="ask bottom"><p>{esc(text)}</p></div>')
 
     def independent(self, minutes=6):
         self.section("Independent Set", "Six questions. On your own, in silence.", minutes,
@@ -308,6 +312,8 @@ html,body{margin:0;height:100%;background:#2b2b2b;font-family:'Schola',Georgia,'
 .slide h1{font-size:36pt;font-weight:700;margin:0;line-height:1.15}
 .slide .rules{border-top:2px solid #INK;border-bottom:1px solid #INK;height:6px;margin:8px 0 6px}
 .slide .sub{font-size:17pt;font-style:italic;color:#GRAY;margin:0 0 14px}
+.slide .sub.band{height:33px}
+.slide .lead{font-size:24pt;font-weight:700;margin:0 0 6px;line-height:1.3;padding-left:0}
 .body{flex:1 1 auto;display:flex;flex-direction:column;gap:10px;min-height:0;padding-bottom:8px;overflow:visible}
 .katex-display{margin:.15em 0}
 .foot{position:absolute;left:85px;right:85px;bottom:0;height:72px;border-top:1px solid #GRAY;display:flex;justify-content:space-between;align-items:flex-start;padding-top:6px;font-size:11pt;font-style:italic;color:#GRAY}
@@ -329,7 +335,7 @@ table.tbl{border-collapse:collapse;margin:4px auto}table.tbl th,table.tbl td{bor
 p.s-slidemid .k:not(.d){font-size:32pt}p.s-slidebig .k:not(.d){font-size:40pt}p.s-slide .k:not(.d){font-size:26pt}
 .body{gap:14px}
 .katex{font-size:1em}
-.worked{display:flex;align-items:center;gap:36px;padding-left:115px}.worked .k.d{display:inline-block;padding:0;margin:0}.worked .why{font-size:21pt;font-style:italic;color:#GRAY}
+.worked{display:flex;align-items:center;gap:36px;padding-left:115px}.worked .k.d{display:inline-block;padding:0;margin:0}
 ol.choices{margin:6px 0 0;padding:0 0 0 40px;list-style:none;font-size:24pt}
 ol.choices.two{display:grid;grid-template-columns:1fr 1fr;row-gap:12px}
 ol.choices li .L{font-weight:700;display:inline-block;width:1.4em}
@@ -337,15 +343,12 @@ ol.choices li.correct{color:#RED;font-weight:700}
 ol.choices.mathy{row-gap:14px}ol.choices.mathy li{display:flex;align-items:center;min-height:2.6em}ol.choices.mathy li .k{font-size:1.15em}
 .bottom{margin-top:auto}
 .answer{text-align:center;font-size:32pt;font-weight:700;color:#RED;margin:10px 0 0}.answer .lab{margin-right:.4em}.answer .k{font-size:40pt}
-.ask{text-align:center}.ask p{margin:0;font-size:26pt;font-weight:700}.ask .hint{font-size:19pt;font-style:italic;color:#GRAY;font-weight:400;margin-top:2px}
-.gloss{text-align:center;font-size:24pt;color:#GRAY;margin:0}
+.ask{text-align:center}.ask p{margin:0;font-size:26pt;font-weight:700}
 .wa{color:#RED;font-weight:700;margin-left:.9em}
 .cover{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding-bottom:60px}
 .cover .eyebrow{font-size:15pt;color:#GRAY;letter-spacing:.04em;margin:0 0 10px}.cover h2{font-size:34pt;margin:0 0 16px}
 .cover .rule{width:610px;border-top:2px solid #INK;border-bottom:1px solid #INK;height:6px;margin-bottom:16px}
 .cover .bm{font-size:16pt;font-weight:700;margin:0 0 8px}.cover .target{font-size:19pt;font-style:italic;margin:0 0 8px;max-width:1100px}
-.cover .box{margin-top:26px;background:#FILL;border:1px solid #BFBFBF;padding:14px 30px;width:760px}
-.cover .box p{margin:4px 0}.cover .y{font-size:17pt;font-style:italic;color:#GRAY}.cover .td{font-size:17pt;font-weight:700}
 .contents{padding:0 40px}.contents a{display:flex;justify-content:space-between;text-decoration:none;color:#INK;font-size:22pt;padding:6px 0;border-bottom:1px solid #LT}
 .contents.tight a{font-size:19pt;padding:2px 0;line-height:1.3}.contents a b{display:inline-block;width:150px}.contents a span.n{font-size:17pt;font-style:italic;color:#GRAY}
 .fig{flex:1 1 0;min-height:0;display:flex;align-items:center;justify-content:center;margin:4px 0}.fig img{max-width:100%;max-height:100%;width:auto;height:auto}
@@ -360,7 +363,10 @@ JS = r"""
   const W=WPX,H=HPX, stage=document.getElementById('stage');
   const slides=[...document.querySelectorAll('.slide')];
   let i=0;
-  function fit(){const s=Math.min(innerWidth/W,innerHeight/H);stage.style.transform=`translate(-50%,-50%) scale(${s})`;stage.style.transformOrigin='center';}
+  // sized by the document's own box, not window.innerWidth: on a touch screen a page wider than the screen
+  // is laid out zoomed out and innerWidth is the zoomed-out width (see consolekit's fit)
+  const VW=()=>document.documentElement.clientWidth,VH=()=>document.documentElement.clientHeight;
+  function fit(){const s=Math.min(VW()/W,VH()/H);stage.style.transform=`translate(-50%,-50%) scale(${s})`;stage.style.transformOrigin='center';}
   function show(n){n=Math.max(0,Math.min(slides.length-1,n));slides.forEach((s,k)=>s.classList.toggle('on',k===n));i=n;history.replaceState(null,'','#'+(n+1));
     document.getElementById('hud').textContent=(n+1)+' / '+slides.length;}
   const CONSOLE=document.body.classList.contains('console');   // the unit console (consolekit) drives navigation itself
@@ -369,7 +375,7 @@ JS = r"""
   addEventListener('keydown',e=>{if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();show(i+1)}
     else if(['ArrowLeft','PageUp','Backspace'].includes(e.key)){e.preventDefault();show(i-1)}
     else if(e.key==='Home')show(0);else if(e.key==='End')show(slides.length-1)});
-  stage.addEventListener('click',e=>{if(e.target.closest('a'))return;show(e.clientX<innerWidth*0.25?i-1:i+1)});
+  stage.addEventListener('click',e=>{if(e.target.closest('a'))return;show(e.clientX<VW()*0.25?i-1:i+1)});
   document.querySelectorAll('a[data-go]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();show(+a.dataset.go)}));
   }
   // ---- math: KaTeX, display style everywhere so fractions stay full-size on a projector
@@ -449,7 +455,15 @@ def render_page(D):
         if s.get("title_slide"):
             out.append(f'<section class="slide title"{attrs}>{body}<div class="foot"><span>{esc(s["footer"])}</span><span class="n">{s["n"]}</span></div></section>')
         else:
-            sub = f'<p class="sub">{esc(s["sub"])}</p>' if s["sub"] else '<p class="sub"></p>'
+            # The grey line under the rules is never printed (deckkit._new says why). A slide that had
+            # one keeps the band it stood in, so nothing below it moves; a `lead` is set in that band;
+            # a slide that asked for the room (band=False) starts its body straight under the rules.
+            if s.get("lead"):
+                sub = f'<p class="lead">{rich(s["lead"])}</p>'
+            elif s["sub"] and s.get("band", True):
+                sub = '<p class="sub band"></p>'
+            else:
+                sub = '<p class="sub"></p>'
             out.append(f'<section class="slide"{attrs}><h1>{esc(s["title"])}</h1><div class="rules"></div>{sub}'
                        f'<div class="body">{body}</div><div class="foot"><span>{esc(s["footer"])}</span><span class="n">{s["n"]}</span></div></section>')
     out.append('</div><div id="hud"></div><script>')

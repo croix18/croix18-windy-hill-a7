@@ -71,7 +71,7 @@ are forms), `Handouts/`, `Reference/`; the zips are named the same way.
 | `benchmark` | str | the ONE benchmark on the title slide, e.g. `"MA.8.NSO.1.3"` |
 | `benchmark_text` | str | the benchmark's exact wording (from the Source of Truth) |
 | `target` | str | "I can …" — ≤ ~170 characters or the title slide wraps to three lines |
-| `yesterday`, `today` | str | the two lines in the title-slide box; keep `today` ≤ ~60 characters |
+| `yesterday`, `today` | str | the teacher's two connecting lines. **Not on a slide** since 4 Oct 2026 (ruling 37: the title slide has no box); the Teacher's Edition prints `today` in the title slide's note as the one line to say |
 | `essential` | str | essential question (TE only) |
 | `building_on`, `working_toward` | str | vertical alignment lines (TE) |
 | `vocab` | list of (term, definition) | definition may carry `$…$` |
@@ -97,6 +97,34 @@ are forms), `Handouts/`, `Reference/`; the zips are named the same way.
 beside the stem and wraps to a second line if too wide; `band` is the retrieval band; `source`
 names the lesson/unit it retrieves ("3.02 — quotient of powers"); `check` as for items.
 
+### the grey line is gone (ruling 37, 4 October 2026)
+No slide carries a line of small grey italic under its rules any more — not "Copy all three
+lines.", not "Boards up on three.", not an Example's story. Croix: *"remove the comments … I want
+that whole thing eliminated across both slide decks … Remove it everywhere."* Every `sub` below is
+therefore **the slide's label in the Teacher's Edition and nothing else**. Whatever a student needs
+is in the body: an Example's whole problem in `prompt`; a question a worked slide puts to the room
+in that slide's `lead` (one bold line of main text; the build refuses one that does not fit a line).
+
+**And then the rest of the grey went too (the same night).** Shown the rebuilt slides, Croix:
+*"But also those comments. Half the box. It's still a rhombus..."* — the hint under "Answer it."
+Asked about the two grey things left, he chose **"Remove both"**. So no slide carries:
+
+- a board's `hint` (it was the grey line under "Answer it."; a written board shows only "Write
+  your answer in sentences.");
+- the remark beside a worked step — the second member of a `rows` tuple `(latex, remark)`;
+- a board's or a Your Turn's `gloss` (it was the grey line above the answer on the reveal).
+
+All three **stay in the spec**: they are the author's reasons and the checks still read them. A
+reveal shows the answer; a worked slide shows its steps and the answer; a question shows the
+question. Nothing on a slide is grey but the footer and a title slide's eyebrow.
+
+**An Example's `ask` is the problem's own question, or it is not there.** *"Also the thing at the
+bottom. Nothing on paper yet. Decide the pieces first. That comes off so weird. Get rid of
+that."* The bold line under an Example is "Find its area." or "Find both mistakes." — what the
+student is to find — never a direction about how the room is to work ("Nothing on paper yet",
+"Thirty seconds", "Do not say them yet"). Those are the teacher's to say and belong in `note_q`.
+A prompt that already ends in its question takes no `ask`.
+
 ### notes slide
 `dict(numeral, head, min, sub, note, …)` plus any of: `items` (lettered rows: plain strings,
 `"**bold row**"`, or `(term, rest)` vocab tuples), `letters=False` to drop the letters,
@@ -108,8 +136,10 @@ is not on the slide. A `not_sci=True` key on a notes dict exempts it from the co
 
 ### example
 `dict(title, sub, min_q, note_q, prompt=[rows], ask, worked=[…], check, your_turn={…}, yt_check)`.
-`prompt` rows: a `$…$` row is centered math; a plain row is centered text (wraps). `ask` is the
-bold instruction line ("" to omit). Each `worked` entry: `dict(sub, min, note, rows, answer)` where
+`prompt` rows: a `$…$` row is centered math; a plain row is centered text (wraps). **The prompt is
+the whole problem** — what the thing is and what is to be found, with nothing that leans on another slide ("the fountain", "he"); `sub` is not on the slide. A `your_turn` states its own question in its `prompt`; one whose prompt is a bare expression is given this Example's `ask` on its slides (or its own `ask`).
+`ask` is the bold instruction line ("" to omit). Each `worked` entry: `dict(sub, lead, min, note, rows, answer)` where
+`lead` (optional) is a question to the room, set bold above the rows, and
 `rows` are `(latex, gloss)` tuples — the latex is set at the left, the gray gloss beside it (keep
 the gloss ≤ ~45 characters) — or plain strings. `your_turn`: `dict(min, note, prompt=[rows],
 gloss, answer | answer_latex)`. `check` and `yt_check` are re-derived by sympy like any item.
@@ -118,7 +148,7 @@ gloss, answer | answer_latex)`. `check` and `yt_check` are re-derived by sympy l
 `dict(kind="free"|"mc"|"written", latex | text=[rows], hint, gloss, answer | answer_latex, note,
 check, wrong, …)`. `latex` is set large and centered; `text` rows are centered (a row with `$`
 is a mixed row and must fit one line). `hint` prints small and grey under the question on the question slide — **it is a nudge, never the question**: a board whose ask lived in its hint shipped in M7 Unit 5 as a story with no question a student could read from the back of the room. A board with a `**` ask row shows its hint too, when it has one, so leave `hint` off a story board unless the nudge is worth a line.
-A `text` row beginning `**` is the ASK and is set bold; a board with any such row (or with `unneeded`) is laid out as a left-aligned 24 pt block — story in roman, ask in bold — not centred lines; keep each row under about 60 characters plus its math. `fig` (a figure from the unit's `figs.py`) and `fig_a` (the figure the reveal shows instead) sit under the text; `te_answer` is the answer as the teacher's edition prints it when the slide's `answer` is too terse. **The ask names a thing in the story and the answer is that thing** ("What fraction of the sheet is the top layer?", "Which drive holds more?"); an ask that begins "Write", "Rewrite" or "What is the value of" on a board with a story is a computation in costume — write that board bare (HOUSE STYLE, ruling 22 in practice). `gloss` is the gray line on the reveal. `note` is the TE note; `note_a` optionally the reveal's.
+A `text` row beginning `**` is the ASK and is set bold; a board with any such row (or with `unneeded`) is laid out as a left-aligned 24 pt block — story in roman, ask in bold — not centred lines; keep each row under about 60 characters plus its math. `fig` (a figure from the unit's `figs.py`) and `fig_a` (the figure the reveal shows instead) sit under the text; `te_answer` is the answer as the teacher's edition prints it when the slide's `answer` is too terse. **The ask names a thing in the story and the answer is that thing** ("What fraction of the sheet is the top layer?", "Which drive holds more?"); an ask that begins "Write", "Rewrite" or "What is the value of" on a board with a story is a computation in costume — write that board bare (HOUSE STYLE, ruling 22 in practice). `gloss` is the working in a phrase and `hint` the scaffold: both are kept in the spec and **neither is on a slide** (ruling 37). `note` is the TE note; `note_a` optionally the reveal's.
 `wrong` is the TE's named-wrong-answers line for free/written questions: `"value — error name
 [benchmark cite]; …"`. **`kind="mc"`** adds `choices` (4 strings, unicode superscripts allowed),
 `correct` (index), `answer` ("A — 25m⁶") and **`errors`** — a dict from every wrong letter to
@@ -264,6 +294,38 @@ forms. `reference` and `review` are optional (M7 builds its review day as a less
   and refuses any question that shares an answer with the same question on another form.
 - An item may carry `fig` (a figure from the unit's `figs.py`, drawn from its numbers — a height
   that ends outside its figure is refused) and `table`.
+
+## Figures — what the kit refuses (ruling 38, 4 October 2026)
+
+A figure is the one place a student reads a number off a picture, so `lib/figkit.py` checks the
+picture itself, every time it draws one (lesson figures and unit-paper figures alike):
+
+- **No line through a label.** The figure is drawn with its lines alone and then once for each
+  label alone, and the two are compared pixel by pixel. A label that shares ink with a side, a
+  dashed height, a dimension line or a circle — or comes within a hair of one — stops the build
+  ("a line of this figure runs through its label “6 m”"). A fill is not a line, and neither is the
+  pale unit grid. `FIG_REPORT=<file>` turns the refusal into a survey: every struck label in a
+  build is appended to the file as a JSON line and nothing is refused.
+- **`off` — a label's clearance in its own type size.** A `text` shape may carry
+  `off=(dx, dy)`, a step away from its `xy` measured in ems of the label's type. Use it for every
+  label that sits beside a line: `_t(w / 2, 0, "14 m", va="top", off=(0, -0.3))` is under the
+  bottom side by a third of a line whatever size the figure is drawn. A step written in the
+  figure's own units (`-h * 0.16`) shrinks with the figure while the type does not, which is how
+  thirteen Unit 4 figures came to have a side through a number.
+- **A grid polygon's `name`** is put at the middle of its corners when that point has a unit of
+  room, and otherwise at the nearest point inside that does (`_label_point`) — the middle of an
+  L's corners is on its notch.
+- **Units.** `figkit.units_agree(spec)` runs at the start of every lesson and unit build: an item
+  with a `fig` whose words (`text`, `prompt`, `stem`, `answer`, a worked `answer`, …) use a unit
+  the figure does not print is refused. A scale problem drawn in centimetres and answered in
+  metres carries `units_ok=True`.
+- **A length that follows from the others is computed, not typed.** The unit's own `figs.py`
+  refuses a slanted side that disagrees with its figure (`figs.trapezoid`, `figs.trapezoid_h` in
+  M7 Unit 4): the number that is "not needed" is still a length of that figure.
+
+An Example's question slide starts a little under the rules; when its lines and its figure do not
+both fit from there it starts as much higher as it needs (`lessonbuild._example_top`), so the
+figure is not the thing made small.
 
 ## `M` — the manifest (`manifest.py`)
 

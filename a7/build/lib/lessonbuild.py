@@ -15,7 +15,8 @@ from sympy import Rational as F, sqrt, Integer, nsimplify
 from sympy.parsing.sympy_parser import (parse_expr, standard_transformations,
                                         implicit_multiplication_application, convert_xor, rationalize)
 from .dockit import Doc, INK, VOCAB, RED, GRAY
-from .deckkit import Deck, LM, CW, FOOT_Y
+from .deckkit import Deck, LM, CW, FOOT_Y, _textw
+from . import figkit
 from .htmlkit import HtmlDeck
 from . import tekit
 from . import slotmark
@@ -543,25 +544,57 @@ def _math_row(row):
     return "$" in row.replace("\\$", "")
 
 
+TOP = 1.6      # where a slide's body starts when it starts straight under the rules (the PowerPoint's inches)
+
+
+def _example_top(prompt, fig):
+    """Where an Example's question slide starts. Its usual place is a little way under the rules;
+    when the problem's lines and its figure do not both fit from there, it starts as much higher
+    as it needs — up to straight under the rules — so the figure is the one thing that is not
+    made small to pay for the words above it (M7 4.04 Example 1: three lines of problem left the
+    barn 1.5 inches wide, and its roof ran through its own height label)."""
+    start = 1.9 if len(prompt) > 1 or fig else 2.3
+    if not fig:
+        return start
+    rows = 0.0
+    for row in prompt:
+        if _math_row(row):
+            rows += 0.9
+        else:
+            wid = _textw(slotmark.strip(row).replace("\\$", "$"), 24)
+            rows += 0.45 * max(1, -(-int(wid * 100) // int((CW - 0.1) * 100))) * (24 / 23) + 0.12
+    h = figkit.draw(fig, fig.get("in", 4.2))[2]
+    return max(TOP, min(start, FOOT_Y - rows - h - fig.get("reserve", 0.7)))
+
+
+def _bare_math(row):
+    """A row that is one expression and nothing else: "$2^{3}\\cdot 2^{4}$"."""
+    r = row.replace("\\$", "").strip()
+    return r.startswith("$") and r.endswith("$") and r.count("$") == 2
+
+
 def _fill_deck(D, L):
     """Every slide of one lesson, appended to D. Colour (the slots, HOUSE STYLE §2a) goes on the
     surfaces where the teacher shows — Notes, worked examples, and every reveal — and is withheld
     wherever the student still has to decide: warm-up, example and Your Turn prompts, whiteboard
     questions (rules 4 and 6)."""
     D.title_slide(L["benchmark"], L["target"], L["yesterday"], L["today"], minutes=1,
-                  note=L.get("title_note", "Post the learning target. Say the 'today' line and nothing else yet."))
+                  note=L.get("title_note", f"Post the learning target. Say one line and nothing else yet: \u201c{L['today']}\u201d"))
     # ---- warm-up: four retrieval questions, one slide; reveal slide after
     wu = L["warmup"]
+    # (the second argument of section() is the slide's label in the Teacher's Edition; it is not drawn —
+    #  deckkit._new. A slide that reads from the top — warm-up, notes — starts straight under the rules.)
     D.section("Warm-Up", "On your own. Four minutes. No notes.", 4, L.get("warmup_note", "Spaced retrieval. Two minutes silent, then reveal. One sentence of reteach per question at most."), "warmup")
-    D.cursor = 1.95
+    D.no_band(); D.cursor = TOP
     for i, q in enumerate(wu):
         D.math_row(f"{i + 1}.   " + q["stem"], surface="slide", gap=0.22, size=23, align="left", x=LM + 1.2)
     D.section("Warm-Up", "Answers.", 1, "Reveal. Ask for the band each question came from only if time allows.", "warmup")
-    D.cursor = 1.95
+    D.no_band(); D.cursor = TOP
     D.warmup_answers([(f"{i + 1}.   " + q["stem"], q["answer"]) for i, q in enumerate(wu)])
     # ---- notes
     for ni, note in enumerate(L["notes"]):
         D.section("Notes", note.get("sub", ""), note["min"], note["note"], "notes")
+        D.no_band(); D.cursor = TOP - 0.08
         D.head(note["head"], note.get("numeral"))
         if note.get("items"):
             D.items(note["items"], size=note.get("size", 23), panel=note.get("panel", False), letters=note.get("letters", True), slots=True)
@@ -578,18 +611,29 @@ def _fill_deck(D, L):
         if note.get("items2"):
             D.items(note["items2"], size=note.get("size", 23), letters=note.get("letters", True), start=len(note.get("items", [])), slots=True)
     # ---- examples: question slide, worked slide(s), your turn q + reveal
+    # An Example's `sub` is its label in the Teacher's Edition; it is not on the slide. The whole
+    # problem — the story, the givens, the question — is in `prompt` (Croix, 4 October 2026: "If a
+    # problem is in [the grey line], it should be pulled out into the main text"). The question
+    # slide starts under the rules, so a prompt that carries its story has the room.
     for ex in L["examples"]:
         D.section(ex["title"], ex.get("sub", ""), ex["min_q"], ex["note_q"], "example")
-        D.cursor = 2.3
+        D.no_band()
+        fig = ex.get("fig")
+        if fig and ex.get("ask"):           # the figure gives up what the bold line under it needs (one line, or two)
+            ask_h = 0.47 * max(1, -(-len(ex["ask"]) // 76))
+            fig = dict(fig, reserve=max(fig.get("reserve", 0.7), 0.16 + 0.2 + ask_h + 0.14))    # and the ask stands clear of the footer rule
+        D.cursor = _example_top(ex["prompt"], fig)
         for row in ex["prompt"]:
             D.math_row(row, surface="slidemid", gap=0.35) if _math_row(row) else D.text(row, 24, align="center")
-        if ex.get("fig"):
-            D.figure(ex["fig"])
+        if fig:
+            D.figure(fig)
         if ex.get("ask"):
             D.cursor += 0.2
             D.text(ex["ask"], 24, bold=True, align="center")
         for wi, w in enumerate(ex["worked"]):
             D.section(ex["title"], w.get("sub", "Worked."), w.get("min", 2), w["note"], "example")
+            if w.get("lead"):               # a question this worked slide puts to the room: main text, one bold line
+                D.lead(w["lead"])
             D.cursor = 2.1
             for row in w["rows"]:
                 if isinstance(row, tuple):
@@ -603,16 +647,24 @@ def _fill_deck(D, L):
                 D.items(w["items"], size=23, slots=True)
         yt = ex.get("your_turn")
         if yt:
+            # A Your Turn says what to do. The grey line used to ("Same steps, your numbers."), and a
+            # Your Turn that was only an expression leaned on it: such a one now carries its Example's
+            # bold instruction ("Which law? Then find the value."), or its own `ask` when it has one.
+            yt_ask = yt.get("ask", ex.get("ask") if all(_bare_math(r) for r in yt["prompt"]) else None)
             D.section("Your Turn", "Same steps, your numbers. Boards up when done.", yt.get("min", 2), yt["note"], "yourturn")
             D.cursor = 2.4
             for row in yt["prompt"]:
                 D.math_row(row, surface="slidebig", gap=0.35) if _math_row(row) else D.text(row, 24, align="center")
+            if yt_ask:
+                D.cursor += 0.2
+                D.text(yt_ask, 24, bold=True, align="center")
             D.section("Your Turn", "Answer.", 1, "Reveal; name what a wrong board most likely did (see the note above).", "yourturn")
             D.cursor = 2.4
             for row in yt["prompt"]:
                 D.math_row(row, surface="slidebig", gap=0.35, slots=True) if _math_row(row) else D.text(row, 24, align="center", slots=True)
-            if yt.get("gloss"):
-                D.text(yt["gloss"], 24, color=GRAY, align="center", slots=True)
+            if yt_ask:
+                D.cursor += 0.2
+                D.text(yt_ask, 24, bold=True, align="center")
             if yt.get("answer_latex"):
                 D.answer_math(yt["answer_latex"], y=max(D.cursor + 0.2, 4.9))
             else:
@@ -701,23 +753,21 @@ def _wb_body(D, q, reveal):
     # and the face for an area, so the answer slide says what was measured before the number
     fig = q.get("fig_a") if (reveal and q.get("fig_a")) else q.get("fig")
     if fig:
-        # the figure is the flexible block: it keeps the room what follows it needs — the gloss
-        # and the answer on a reveal, the ask and its hint on the question, the options on either
+        # the figure is the flexible block: it keeps the room what follows it needs — the answer
+        # on a reveal, the ask on the question, the options on either
         # — and is drawn smaller rather than pushing them into each other (4.06 boards 1–3)
-        below = ((0.75 if q.get("gloss") else 0.0) + 0.85) if reveal else (1.15 if q.get("hint") or kind == "written" else 0.75)
+        below = 0.85 if reveal else 0.75
         below += 1.75 if kind == "mc" else 0.0
         D.figure(dict(fig, reserve=max(fig.get("reserve", 0.7), below)))
     if kind == "mc":
         D.cursor += 0.1
         D.choices(q["choices"], correct=(q["correct"] if reveal else None))
     if not reveal:
-        if kind == "written":
-            D.ask("Write your answer in sentences.", q.get("hint", "This one is written work. Say why."))
-        else:
-            D.ask("Answer it.", q.get("hint"))     # the hint is a scaffold, shown when the spec gives one
+        # the instruction and nothing under it: a board's `hint` and `gloss` stay in the spec — the
+        # grey hint under the ask and the grey line above a reveal's answer are not on a slide
+        # (ruling 37 as widened: "But also those comments. Half the box. It's still a rhombus")
+        D.ask("Write your answer in sentences." if kind == "written" else "Answer it.")
     else:
-        if q.get("gloss"):
-            D.gloss(q["gloss"])
         y = min(max(D.cursor + 0.15, 5.1), FOOT_Y - 0.62)
         if q.get("answer_latex"):
             D.answer_math(q["answer_latex"], y=y)
@@ -1113,6 +1163,7 @@ def rulingcheck_lesson(L):
 def build_lesson(L, outdir):
     os.makedirs(outdir, exist_ok=True)
     P = slotmark.strip_deep(L)          # the gates and every printed page read the spec without its colour marks
+    figkit.units_agree(P)               # a figure in centimetres is not answered in square inches
     findings, n = mathcheck_lesson(P)
     d = distractorcheck_lesson(P)
     c = capcheck_lesson(P)
