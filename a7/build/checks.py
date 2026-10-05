@@ -36,11 +36,14 @@ W = "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}"
 A = "{http://schemas.openxmlformats.org/drawingml/2006/main}"
 P = "{http://schemas.openxmlformats.org/presentationml/2006/main}"
 NATIVE_DOC_FONTS = {"Times New Roman", "Georgia", "FreeSerif", "Arial"}
-DECK_FONTS = {"Century Schoolbook"}
+DECK_FONTS = {"Lexend", "DejaVu Sans", "WindyPi"}   # the slide font (ruling 40), the face its missing signs are set in, and the one-glyph pi
 FONT_FILES = {"Times New Roman": "/usr/share/fonts/truetype/liberation/LiberationSerif-Regular.ttf",
               "Georgia": "/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf",
               "FreeSerif": "/usr/share/fonts/truetype/freefont/FreeSerif.ttf",
-              "Century Schoolbook": "/usr/share/texmf/fonts/opentype/public/tex-gyre/texgyreschola-regular.otf"}
+              "Century Schoolbook": "/usr/share/texmf/fonts/opentype/public/tex-gyre/texgyreschola-regular.otf",
+              "Lexend": os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets", "Lexend-Regular.ttf"),
+              "WindyPi": os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets", "WindyPi.ttf"),
+              "DejaVu Sans": "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"}
 
 
 def is_student(name):
@@ -201,15 +204,42 @@ def check_glyph(files):
             else:
                 for run in re.findall(r"<a:r>(.*?)</a:r>", x, re.S):
                     fm = re.search(r'typeface="([^"]+)"', run)
-                    font = fm.group(1) if fm else "Century Schoolbook"
+                    font = fm.group(1) if fm else "Lexend"
+                    if font not in DECK_FONTS:          # ruling 40: every word on a slide is in the slide font
+                        findings.append(f"glyph: a slide's text is set in {font}, not the slide font — {base}")
+                    if '<a:rPr' in run and re.search(r'<a:rPr[^>]*\bi="1"', run):
+                        findings.append(f"glyph: italic type on a slide (the slide font has none, so it would be slanted by machine) — {base}")
                     for t in re.findall(r"<a:t>([^<]*)</a:t>", run):
+                        # pi is never Lexend's on a slide (a flat-topped box): it is the one-glyph face, and that face is only pi
+                        if "\u03c0" in t and font != "WindyPi":
+                            findings.append(f"glyph: a pi on a slide is set in {font}, not the pi face — {base}")
+                        if font == "WindyPi" and t.strip("\u03c0"):
+                            findings.append(f"glyph: the pi face is asked for '{t}' — it has one glyph — {base}")
                         for ch in t:
                             if ord(ch) > 127:
                                 chars += 1
                                 if font in cmaps and ord(ch) not in cmaps[font]:
                                     findings.append(f"glyph: U+{ord(ch):04X} '{ch}' not in {font} — {base}")
+    # and what LibreOffice actually drew: a deck's PDF carries the slide font itself, not a
+    # substitute picked because the font was not installed on the machine that built it
+    decks_pdf = 0
+    for f in files:
+        base = os.path.basename(f)
+        if not (f.endswith(".pdf") and (names.is_kind(base, "Slides") or "All Slides" in base)):
+            continue
+        decks_pdf += 1
+        try:
+            out = subprocess.run(["pdffonts", f], capture_output=True, text=True, timeout=60).stdout.split("\n")[2:]
+        except Exception:
+            findings.append(f"glyph: pdffonts could not read {base}"); continue
+        used = {re.sub(r"^[A-Z]{6}\+", "", ln.split()[0]) for ln in out if ln.strip()}
+        if not any(u.startswith("Lexend") for u in used):
+            findings.append(f"glyph: the PDF does not carry Lexend (fonts drawn: {', '.join(sorted(used)) or 'none'}) — {base}")
+        odd = sorted(u for u in used if not u.startswith(("Lexend", "DejaVuSans", "WindyPi")))
+        if odd:
+            findings.append(f"glyph: the PDF draws text in {', '.join(odd)} — {base}")
     findings = sorted(set(findings))
-    print(f"glyph: {n} documents, {chars} non-ASCII characters, {len(findings)} findings")
+    print(f"glyph: {n} documents, {chars} non-ASCII characters, {decks_pdf} deck PDFs' fonts read, {len(findings)} findings")
     return findings
 
 
@@ -630,7 +660,7 @@ HTML_PROBE = r"""
       if (r.right > st.right - 60 + 1) wide = Math.max(wide, r.right - (st.right - 60));
       if (r.left < st.left + 60 - 1 && r.width > 0) wide = Math.max(wide, (st.left + 60) - r.left);
     });
-    out.slides.push({n: i + 1, over: Math.round(over), wide: Math.round(wide)});
+    out.slides.push({n: i + 1, over: Math.round(over), wide: Math.round(wide), fit: parseFloat(sl.dataset.fit || '1')});
   });
   out.errors = document.querySelectorAll('.katex-error').length;
   const B = 'rgb(30, 90, 168)', E = 'rgb(192, 90, 0)';
@@ -712,6 +742,7 @@ STAGE_PROBE = r"""
 """
 SCREENS = ((1920, 1080), (1366, 768), (1024, 768), (2560, 1440))     # the panel, a laptop, a tablet, a large monitor
 TOUCH = ((800, 1280), (1280, 800), (412, 915))                        # a tablet upright, on its side, and a phone
+FIT_FLOOR = 0.75          # an HTML slide may set itself this much smaller to clear its footer, and no more: at 75% a line of working is still 17.5 pt, above the 15 pt a table on a slide is already set in
 
 
 def _placed(g):
@@ -751,7 +782,7 @@ def check_html(files):
     nothing on any slide reaches below the footer rule or past the side margins; and the colour
     code the page applies to KaTeX's structure reads every expression exactly as mathimg reads
     the mathtext layout for the pptx — [base]^{exponent}, compared string for string."""
-    findings = []; n = 0; nex = 0; ncon = 0; nnamed = 0; nplaced = 0; ntouch = 0
+    findings = []; n = 0; nex = 0; ncon = 0; nnamed = 0; nplaced = 0; ntouch = 0; nfit = 0; minfit = 1.0
     decks = [f for f in files if f.endswith(".html")]
     if not decks:
         return ["htmlcheck: examined no HTML decks — a check that examined nothing cannot be clean"]
@@ -803,6 +834,13 @@ def check_html(files):
             for sl in r["slides"]:
                 if sl["over"] > 2:
                     findings.append(f"htmlcheck: content runs {sl['over']} px below the footer rule — {base} slide {sl['n']}")
+                # the page sets a slide smaller, whole, when its content is taller than its space
+                # (htmlkit fitSlides); a little is the browser's taller fractions, a lot is a slide
+                # carrying too much — and that is the spec's to fix, not the browser's to hide
+                if sl.get("fit", 1) < 1:
+                    nfit += 1; minfit = min(minfit, sl["fit"])
+                    if sl["fit"] < FIT_FLOOR:
+                        findings.append(f"htmlcheck: the slide had to be set at {sl['fit']:.0%} of its size to clear the footer (under {FIT_FLOOR:.0%}: fewer or shorter steps) — {base} slide {sl['n']}")
                 if sl["wide"] > 2:
                     findings.append(f"htmlcheck: content runs {sl['wide']} px past the side margin — {base} slide {sl['n']}")
             seen = set()
@@ -837,7 +875,7 @@ def check_html(files):
         b.close()
     if ncon == 0:
         findings.append(f"htmlcheck: no unit console found — the All Slides .html should carry window.UNIT")
-    print(f"htmlcheck: {n} HTML decks opened ({ncon} console), {nex + nnamed} coloured expressions compared, the slide's place measured {nplaced} times at {len(SCREENS)} screen sizes and {ntouch} times on {len(TOUCH)} touch screens, {len(findings)} findings")
+    print(f"htmlcheck: {n} HTML decks opened ({ncon} console), {nex + nnamed} coloured expressions compared, the slide's place measured {nplaced} times at {len(SCREENS)} screen sizes and {ntouch} times on {len(TOUCH)} touch screens, {nfit} slides set smaller to clear the footer (smallest {minfit:.0%}; floor {FIT_FLOOR:.0%}), {len(findings)} findings")
     return findings
 
 

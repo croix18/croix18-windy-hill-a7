@@ -6,7 +6,16 @@ Regenerate everything with `python3 make_assets.py <katex dist folder>` (the fol
 
 - `katex.min.js`, `katex.inline.css` — KaTeX 0.19.0 (MIT, see KATEX-LICENSE). The CSS is the shipped
   `katex.min.css` with every `@font-face` source replaced by its `.woff2` inlined as a data URI.
-- `schola-*.woff2` — TeX Gyre Schola (GUST font licence), the free Century Schoolbook clone the pptx
-  decks already render with under LibreOffice, subset to a fixed generous block list (Latin-1 and
-  Extended-A, punctuation, currency, letterlike, arrows, mathematical operators, Greek: 442 code
-  points), not to the characters today's specs happen to use.
+- `Lexend-Regular.ttf`, `Lexend-Bold.ttf` — Lexend, the slide font (ruling 40; SIL Open Font
+  License, `LEXEND-OFL.txt`; from github.com/googlefonts/lexend). `deckkit` measures every line of
+  slide text with these files and installs them for LibreOffice (`~/.local/share/fonts/windy-hill`)
+  the first time it is loaded, so a new machine renders the PDFs in Lexend without being told.
+- `lexend-regular.woff2`, `lexend-bold.woff2` — the same two faces for the HTML decks, whole.
+- `lexend-fallback.woff2` — the signs of the block list that Lexend has no glyph for (arrows, the
+  angle and triangle signs, the tick), cut from DejaVu Sans, so none of them falls back to
+  whatever the browser happens to have. The PowerPoint sets those signs in DejaVu Sans by name.
+- `WindyPi.ttf`, `windypi.woff2` — a face of ONE glyph: π, cut from STIX General Bold as matplotlib
+  ships it (SIL Open Font License, `STIX-OFL.txt`; renamed, as the licence asks). A slide never
+  uses Lexend's own π (a flat-topped box): `deckkit` names WindyPi for a π in a run of words and
+  installs it for LibreOffice beside Lexend, the HTML decks list it first in every font stack, and
+  `mathimg` sets the same glyph in an expression. Rebuilt by `make_assets.py` (`make_pi`).

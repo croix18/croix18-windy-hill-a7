@@ -293,6 +293,17 @@ now shows the six questions (typeset, the type stepping down until they fit); th
 its key are unchanged. Write stems that fit: six on one slide at 16 pt or larger, or the build
 refuses.
 
+**Rulings 39 and 40 (4–5 October) — steps on every answer slide; slides in Lexend.** Every
+board and every Your Turn carries `steps=[…]` (one to five rows, words with `$latex$`), drawn on
+its answer slide and worked by the build. Slides are set in Lexend (the kit installs it);
+printed documents are unchanged. **State on the morning of 5 October: steps are written for every lesson of
+Units 3 and 4** (16 lessons, 176 answer slides) and `course.py` says `STEPS = "required"`. The
+pattern for Unit 5: each row is one line of the working with the law visible in it
+(`$x^{5} \\cdot x^{8} = x^{5+8} = x^{13}$`), a short label where it names a part ("The a's:",
+"Divide the powers:"); the build checks every equality, numeric or in letters. Under a tall
+problem two tall rows are the limit — "cannot hold its steps" means write fewer. Since kit `9b1f030` (5 October) a line of working is one size (label and numbers alike), the HTML decks and the console set a too-tall slide smaller so nothing meets the footer (14 answer slides in Units 3–4, at 79–98%, each with its question slide; `htmlcheck` refuses under 75% — write fewer steps), and a slide's mathematics and figure labels are Lexend too (π stays the textbook's; `\cdot` is Lexend's raised dot; a variable l is the script ℓ — the kit swaps them, specs do not change). `steps` may pass through a form that is not yet scientific notation (matching the powers); an answer may not. Before a rebuild, dry-run every gate and the real `htmlcheck` on scratch decks (Windmill HANDOFF, 5 October 7 am): the HTML check runs last in a 15-minute build. HOUSE STYLE (rulings 39, 40);
+`SPEC SCHEMA.md`.
+
 **Ruling 38 (4 October 2026, later that night) — a figure's labels can be read, and are true.**
 The kit refuses a figure in which a line runs through a label, and a spec in which a figure and
 its own words use different units (`kit/SPEC SCHEMA.md` § Figures; HOUSE STYLE §13b(xviii)). Place

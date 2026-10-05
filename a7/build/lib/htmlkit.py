@@ -13,6 +13,7 @@ Ctrl-P prints one slide per page.
 """
 import os, re, json, html, base64
 from . import figkit    # geometry figures, drawn from the numbers, embedded as data URIs
+from . import mathimg   # the slide face's rules (ruling 40) are written once, there
 from . import slotmark
 from .profile import C
 
@@ -30,9 +31,23 @@ def _read(name, binary=False):
         return f.read()
 
 
-def _font_face(style, weight, italic):
-    data = base64.b64encode(_read(f"schola-{style}.woff2", True)).decode()
-    return (f"@font-face{{font-family:'Schola';font-weight:{weight};font-style:{'italic' if italic else 'normal'};"
+def _font_face(style, weight, italic=False):
+    """The slide font, inlined: Lexend (ruling 40); under the name LexendFallback the few signs
+    it has no glyph for; and WindyPi, a face of one glyph — the pi a slide uses in place of
+    Lexend's (deckkit.PI_FONT) — which every font stack lists first. `style` is regular, bold,
+    fallback or pi."""
+    if style == "pi":
+        data = base64.b64encode(_read("windypi.woff2", True)).decode()
+        # unicode-range: the face is offered for pi and nothing else, so it is never the font a
+        # line is measured by (CSS takes that from the first face that could draw a space); the
+        # file's own vertical metrics are Lexend's as well (make_assets.make_pi)
+        return (f"@font-face{{font-family:'WindyPi';font-weight:100 900;font-style:normal;size-adjust:95%;unicode-range:U+03C0;"
+                f"src:url(data:font/woff2;base64,{data}) format('woff2')}}")
+    data = base64.b64encode(_read(f"lexend-{style}.woff2", True)).decode()
+    fam = "LexendFallback" if style == "fallback" else "Lexend"
+    # size-adjust: the same 95% the PowerPoint sets Lexend at (deckkit.SCALE), so a line is as long
+    # in the browser as on the slide and the measured layouts agree
+    return (f"@font-face{{font-family:'{fam}';font-weight:{weight};font-style:normal;size-adjust:95%;"
             f"src:url(data:font/woff2;base64,{data}) format('woff2')}}")
 
 
@@ -42,8 +57,12 @@ def esc(t):
 
 def _tex(latex, slots):
     """The LaTeX KaTeX is handed: a named slot becomes \\textcolor where the teacher shows, and is
-    dropped (its body kept) everywhere else."""
-    return slotmark.textcolor(latex) if slots else slotmark.strip(latex)
+    dropped (its body kept) everywhere else. A variable l becomes the script l, as on the
+    PowerPoint (mathimg.lexend_tex): Lexend's l is a bare stroke, the mark of an absolute value."""
+    latex = slotmark.textcolor(latex) if slots else slotmark.strip(latex)
+    if mathimg.SLIDE_FACE:
+        latex = mathimg.lexend_tex(latex, pi=r"\pi ", cdot=r"\cdot ", ell=r"\ell ")
+    return latex
 
 
 def rich(text, size=None, slots=False):
@@ -110,11 +129,11 @@ class HtmlDeck:
     def _text(self, x, y, w, h, text, size=23, bold=False, italic=False, color=INK, align="left",
               anchor="top", runs=None, wrap=True, foot=False, slots=False):
         if runs:
-            inner = "".join(f'<span style="font-size:{sz}pt;{"font-weight:700;" if b else ""}{"font-style:italic;" if i else ""}color:#{c}">{rich(t, slots=slots)}</span>'
+            inner = "".join(f'<span style="font-size:{sz}pt;{"font-weight:700;" if b else ""}color:#{c}">{rich(t, slots=slots)}</span>'
                             for (t, sz, b, i, c) in runs)
             self._add(f'<p class="t {align}" style="font-size:{size}pt">{inner}</p>')
         else:
-            st = f"font-size:{size}pt;color:#{color};" + ("font-weight:700;" if bold else "") + ("font-style:italic;" if italic else "")
+            st = f"font-size:{size}pt;color:#{color};" + ("font-weight:700;" if bold else "")
             self._add(f'<p class="t {align}" style="{st}">{rich(text, slots=slots)}</p>')
 
     def _mixed(self, text, x, y, surface="slidemid", size=26, color=INK, bold=False, align="left", width=None, slots=False):
@@ -221,6 +240,27 @@ class HtmlDeck:
         # the expression alone: the grey reason beside it is not on a slide (ruling 37)
         self._add(f'<div class="worked"><span class="k d mid{" slots" if slots and AUTO_SLOTS else ""}" data-tex="{esc(_tex(latex, slots))}"></span></div>')
 
+    def steps_height(self, rows, gap=0.1):
+        return 0.0
+
+    def figure_steps(self, spec, rows, gap=0.16, size=None, rgap=0.1):
+        """An answer slide with a picture and working: the figure on the left, the steps beside it."""
+        from .deckkit import step_sizes
+        size = size or step_sizes()["size"]; surface = step_sizes()["surface"]
+        path, w, h = figkit.draw(figkit.slide(spec), spec.get("in", 4.2))
+        with open(path, "rb") as f:
+            b = base64.b64encode(f.read()).decode("ascii")
+        lines = "".join(f'<p class="t left s-{surface}{" slots" if AUTO_SLOTS else ""}" style="font-size:{size}pt">{rich(r, slots=True)}</p>' for r in rows)
+        self._add(f'<div class="figsteps"><div class="fig"><img src="data:image/png;base64,{b}" style="max-width:{min(w, 5.2) * 100:.0f}px" alt=""></div>'
+                  f'<div class="steps"><div>{lines}</div></div></div>')
+
+    def steps(self, rows, gap=0.1, size=None, surface=None):
+        """The working on an answer slide: one step to a line, left edges shared, the block centred."""
+        from .deckkit import step_sizes
+        size = size or step_sizes()["size"]; surface = surface or step_sizes()["surface"]
+        self._add('<div class="steps"><div>' + "".join(
+            f'<p class="t left s-{surface}{" slots" if AUTO_SLOTS else ""}" style="font-size:{size}pt">{rich(r, slots=True)}</p>' for r in rows) + "</div></div>")
+
     def ask(self, text, y=None):
         self._add(f'<div class="ask bottom"><p>{esc(text)}</p></div>')
 
@@ -267,7 +307,7 @@ class HtmlDeck:
     def figure(self, spec, gap=0.16):
         """A geometry figure drawn from its numbers (figkit), the same PNG the PowerPoint carries,
         embedded as a data URI at its natural size (100 px per inch of the 13.33-inch stage)."""
-        path, w, h = figkit.draw(spec, spec.get("in", 4.2))
+        path, w, h = figkit.draw(figkit.slide(spec), spec.get("in", 4.2))
         with open(path, "rb") as f:
             b = base64.b64encode(f.read()).decode("ascii")
         # natural size at most; the figure is the slide's one flexible block, so when the text
@@ -315,21 +355,42 @@ class HtmlDeck:
         return path
 
 
+# Ruling 40 in the browser: KaTeX lays the expression out, and the digits, letters and signs in
+# it are drawn in the slide font. Only KaTeX's own grown brackets, radicals and big operators keep
+# their fonts (they are built from pieces made to stack). A variable is upright: Lexend has no
+# italic and a slide carries none. WindyPi comes first so a pi is the textbook's, not Lexend's.
+MATHFACE = r"""
+.katex{font-family:'WindyPi','Lexend','LexendFallback',KaTeX_Main,math,serif}
+.katex .mathnormal,.katex .mathit,.katex .boldsymbol{font-family:'WindyPi','Lexend','LexendFallback',KaTeX_Math;font-style:normal}
+.katex .textrm,.katex .mathrm,.katex .mainrm,.katex .mathbf,.katex .textbf{font-family:'WindyPi','Lexend','LexendFallback',KaTeX_Main;font-style:normal}
+"""
+
+# \cdot is drawn with U+2219, which Lexend carries at exactly the size of its decimal point.
+# (KaTeX turns a typed middle dot, U+00B7, back into its own U+22C5 whatever it is wrapped in —
+# \text, \char — and Lexend has no U+22C5, so that dot came from a fallback face, small and faint.
+# htmlcheck's colour reading caught the difference, 5 October.)
+# \neq is drawn with Lexend's own not-equal sign: KaTeX builds its own from an equals sign and a
+# slash laid over it from another font, and over Lexend's heavier, wider equals the slash sits thin
+# and off-centre. (\char reaches the glyph; a typed sign is turned back into \neq.)
+KMACROS = {"\\cdot": "\\bullet ", "\\neq": "\\mathrel{\\char\"2260}", "\\ne": "\\mathrel{\\char\"2260}"}
+
 CSS = r"""
-html,body{margin:0;height:100%;background:#2b2b2b;font-family:'Schola',Georgia,'Times New Roman',serif;color:#INK}
+html,body{margin:0;height:100%;background:#2b2b2b;font-family:'WindyPi','Lexend','LexendFallback','DejaVu Sans',Verdana,sans-serif;color:#INK}
 #stage{position:absolute;left:50%;top:50%;width:WPXpx;height:HPXpx;transform-origin:0 0;background:#fff;overflow:hidden;box-shadow:0 0 40px rgba(0,0,0,.6)}
 .slide{display:none;position:absolute;inset:0;padding:40px 85px 84px 85px;box-sizing:border-box;flex-direction:column}
 .slide.on{display:flex}
 .slide h1{font-size:36pt;font-weight:700;margin:0;line-height:1.15}
 .slide .rules{border-top:2px solid #INK;border-bottom:1px solid #INK;height:6px;margin:8px 0 6px}
-.slide .sub{font-size:17pt;font-style:italic;color:#GRAY;margin:0 0 14px}
+.slide .sub{font-size:17pt;color:#GRAY;margin:0 0 14px}
 .slide .sub.band{height:33px}
 .slide .lead{font-size:24pt;font-weight:700;margin:0 0 6px;line-height:1.3;padding-left:0}
 .body{flex:1 1 auto;display:flex;flex-direction:column;gap:10px;min-height:0;padding-bottom:8px;overflow:visible}
 .katex-display{margin:.15em 0}
-.foot{position:absolute;left:85px;right:85px;bottom:0;height:72px;border-top:1px solid #GRAY;display:flex;justify-content:space-between;align-items:flex-start;padding-top:6px;font-size:11pt;font-style:italic;color:#GRAY}
+.foot{position:absolute;left:85px;right:85px;bottom:0;height:72px;border-top:1px solid #GRAY;display:flex;justify-content:space-between;align-items:flex-start;padding-top:6px;font-size:11pt;color:#GRAY}
 .foot .n{font-style:normal}
 p.t{margin:0;line-height:1.3}
+.figsteps{display:flex;align-items:center;justify-content:center;gap:80px;min-height:0;flex:0 1 auto}.figsteps .fig{flex:0 1 auto;min-width:0;min-height:0;margin:0}.figsteps .steps{flex:0 0 auto;margin:0}
+.steps{text-align:center;margin:10px 0 4px}.steps>div{display:inline-block;text-align:left}.steps p.t{margin:7px 0;padding-left:0}
 .left{text-align:left;padding-left:40px}.center{text-align:center}.right{text-align:right}
 h3.head{font-size:25pt;margin:4px 0 2px;padding-bottom:4px;border-bottom:1px solid #INK}
 ol.items{margin:0;padding-left:52px;line-height:1.35}
@@ -344,8 +405,10 @@ table.tbl{border-collapse:collapse;margin:4px auto}table.tbl th,table.tbl td{bor
 .k.d.big{font-size:40pt}.k.d.mid{font-size:32pt}
 .k:not(.d){font-size:1.05em}
 p.s-slidemid .k:not(.d){font-size:32pt}p.s-slidebig .k:not(.d){font-size:40pt}p.s-slide .k:not(.d){font-size:26pt}
+p.s-slidestep .k:not(.d),p.s-slidestepmid .k:not(.d){font-size:1em}
 .body{gap:14px}
 .katex{font-size:1em}
+MATHFACE
 .worked{display:flex;align-items:center;gap:36px;padding-left:115px}.worked .k.d{display:inline-block;padding:0;margin:0}
 ol.choices{margin:6px 0 0;padding:0 0 0 40px;list-style:none;font-size:24pt}
 ol.choices.two{display:grid;grid-template-columns:1fr 1fr;row-gap:12px}
@@ -359,9 +422,9 @@ ol.choices.mathy{row-gap:14px}ol.choices.mathy li{display:flex;align-items:cente
 .cover{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding-bottom:60px}
 .cover .eyebrow{font-size:15pt;color:#GRAY;letter-spacing:.04em;margin:0 0 10px}.cover h2{font-size:34pt;margin:0 0 16px}
 .cover .rule{width:610px;border-top:2px solid #INK;border-bottom:1px solid #INK;height:6px;margin-bottom:16px}
-.cover .bm{font-size:16pt;font-weight:700;margin:0 0 8px}.cover .target{font-size:19pt;font-style:italic;margin:0 0 8px;max-width:1100px}
+.cover .bm{font-size:16pt;font-weight:700;margin:0 0 8px}.cover .target{font-size:19pt;margin:0 0 8px;max-width:1100px}
 .contents{padding:0 40px}.contents a{display:flex;justify-content:space-between;text-decoration:none;color:#INK;font-size:22pt;padding:6px 0;border-bottom:1px solid #LT}
-.contents.tight a{font-size:19pt;padding:2px 0;line-height:1.3}.contents a b{display:inline-block;width:150px}.contents a span.n{font-size:17pt;font-style:italic;color:#GRAY}
+.contents.tight a{font-size:19pt;padding:2px 0;line-height:1.3}.contents a b{display:inline-block;width:150px}.contents a span.n{font-size:17pt;color:#GRAY}
 .fig{flex:1 1 0;min-height:0;display:flex;align-items:center;justify-content:center;margin:4px 0}.fig img{max-width:100%;max-height:100%;width:auto;height:auto}
 sup{font-size:.62em;vertical-align:.45em;line-height:0}
 #hud{position:fixed;right:14px;bottom:10px;color:#bbb;font:13px/1.2 system-ui,sans-serif;opacity:.7}
@@ -390,8 +453,10 @@ JS = r"""
   document.querySelectorAll('a[data-go]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();show(+a.dataset.go)}));
   }
   // ---- math: KaTeX, display style everywhere so fractions stay full-size on a projector
+  // (KMACROS: in the slide face the multiplication dot is Lexend's own, as heavy as a decimal point is)
+  const KMACROS=/*KMACROS*/{};
   document.querySelectorAll('.k').forEach(el=>{
-    try{const d=el.classList.contains('d');katex.render(d?el.dataset.tex:'\\displaystyle '+el.dataset.tex,el,{displayMode:d,throwOnError:true,strict:'ignore'});}
+    try{const d=el.classList.contains('d');katex.render(d?el.dataset.tex:'\\displaystyle '+el.dataset.tex,el,{displayMode:d,throwOnError:true,strict:'ignore',macros:KMACROS});}
     catch(err){el.textContent='[math error] '+el.dataset.tex;el.classList.add('katex-error');console.error(err);}
   });
   // ---- the slot colour code (HOUSE STYLE 2a): base blue, exponent orange, on .slots surfaces.
@@ -441,6 +506,39 @@ JS = r"""
     k.querySelectorAll('.msupsub').forEach(ms=>paint(ms,CB2));
     k.querySelectorAll('.root').forEach(r=>paint(r,getComputedStyle(k).color)); // root index: never an exponent
   });
+  // ---- nothing runs into the footer. The PowerPoint is laid out by measurement and refuses what does
+  // not fit; a browser lays the same slide out itself, and KaTeX's stacked fractions stand taller than
+  // the PowerPoint's. So the page measures every slide once it is typeset: a slide whose content is
+  // taller than the space above its footer rule is set smaller, whole, by exactly what it needs
+  // (data-fit records the factor; htmlcheck reads it and refuses a slide shrunk past FIT_FLOOR).
+  // A board's or a Your Turn's question slide takes its answer slide's factor, so the two agree.
+  function fitSlides(){
+    const bodyOf=sl=>sl.querySelector(':scope > .body');
+    slides.forEach(sl=>{const b=bodyOf(sl);if(b)b.style.zoom='';delete sl.dataset.fit;});
+    slides.forEach(sl=>{sl.style.visibility='hidden';sl.style.display='flex';});
+    const measure=sl=>{const b=bodyOf(sl),f=sl.querySelector('.foot');if(!b||!f)return null;
+      const top=b.getBoundingClientRect().top,foot=f.getBoundingClientRect().top;let bot=top;
+      b.querySelectorAll('*').forEach(el=>{if(!el.getClientRects().length||el.closest('.katex-mathml')||el.closest('svg'))return;
+        const r=el.getBoundingClientRect();if(r.height>0&&r.bottom>bot)bot=r.bottom;});
+      return {b,have:foot-top,need:bot-top};};
+    for(let pass=0;pass<5;pass++){
+      const ms=slides.map(measure);let again=false;
+      ms.forEach((m,k)=>{if(!m||m.have<=0||m.need<=m.have+0.25)return;
+        const k0=parseFloat(m.b.style.zoom)||1,z=Math.max(0.5,Math.floor(k0*m.have/m.need*0.99*1000)/1000);
+        if(z<k0){m.b.style.zoom=z;slides[k].dataset.fit=z;again=true;}});
+      if(!again)break;
+    }
+    const wbOf=sl=>{try{return JSON.parse(sl.dataset.wb||'null')}catch(e){return null}};
+    slides.forEach((sl,k)=>{if(!sl.dataset.fit||k===0)return;const pv=slides[k-1];
+      if(pv.dataset.fit||pv.dataset.kind!==sl.dataset.kind)return;
+      const a=wbOf(pv),c=wbOf(sl);
+      const pair=sl.dataset.kind==='wb'?(a&&c&&a.i===c.i&&a.lesson===c.lesson&&!a.reveal&&c.reveal):sl.dataset.kind==='yourturn';
+      if(pair){const b=bodyOf(pv);if(b){b.style.zoom=sl.dataset.fit;pv.dataset.fit=sl.dataset.fit;pv.dataset.fitpair='1';}}});
+    slides.forEach(sl=>{sl.style.visibility='';sl.style.display='';});
+  }
+  fitSlides();
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fitSlides);
+  addEventListener('load',fitSlides);
   if(!CONSOLE)show(Math.max(0,(parseInt(location.hash.slice(1))||1)-1));
 })();
 """
@@ -450,7 +548,10 @@ def render_page(D):
     css = (CSS.replace("WPX", f"{W:.2f}").replace("HPX", f"{H:.0f}").replace("#INK", "#" + INK).replace("#GRAY", "#" + GRAY)
            .replace("#VOCAB", "#" + VOCAB).replace("#RED", "#" + RED).replace("#LT", "#" + LT).replace("#FILL", "#" + FILL))
     js = JS.replace("WPX", f"{W:.2f}").replace("HPX", f"{H:.0f}")
-    fonts = _font_face("regular", 400, False) + _font_face("bold", 700, False) + _font_face("italic", 400, True) + _font_face("bolditalic", 700, True)
+    fonts = _font_face("pi", 400) + _font_face("regular", 400) + _font_face("bold", 700) + _font_face("fallback", 400)
+    css = css.replace("MATHFACE", MATHFACE if mathimg.SLIDE_FACE else "")
+    if mathimg.SLIDE_FACE:
+        js = js.replace("/*KMACROS*/{}", json.dumps(KMACROS))
     out = ['<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">',
            f"<title>{esc(getattr(D, 'page_title', D.title))}</title>", "<style>", fonts, _read("katex.inline.css"), css, "</style></head><body>",
            '<div id="stage">']

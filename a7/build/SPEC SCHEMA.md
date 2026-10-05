@@ -295,6 +295,97 @@ forms. `reference` and `review` are optional (M7 builds its review day as a less
 - An item may carry `fig` (a figure from the unit's `figs.py`, drawn from its numbers — a height
   that ends outside its figure is refused) and `table`.
 
+## Answer slides show their steps (ruling 39, 4 October 2026)
+
+*"But the answers should always show easy to follow steps."* A board (`whiteboard` item) and a
+Your Turn (`your_turn`) each carry **`steps`: a list of one to five rows**, drawn on the answer
+slide above the red answer, in the slide's own black type. A row is plain words with `$latex$`
+spans — `"Rectangle:  $14 \\times 8 = 112$"` — one step to a line, the way it would be written on
+the board: a short label where it names a piece ("Whole box:", "The a's:"), then the arithmetic.
+It is the mathematics, not a remark about it (the grey `gloss` and `hint` stay off the slide).
+
+- With a figure, the steps sit beside it (figure left, steps right); without one, under the
+  question. One or two short rows are set as large as a worked line.
+- A multiple-choice board's answer slide shows the steps in place of the four options; its
+  answer line names the letter and the value.
+- **Every step is worked by the build** (`lessonbuild.stepcheck_lesson`): each `=` between two
+  sides that compute must be true; `\\approx` is held to the places its right side shows (so write
+  `3.14 \\times 14 = 43.96`, not `\\pi`); an `=` between expressions in the same letters must be an
+  identity; and the last number the steps reach must be the item's `check` value. A false step
+  refuses the build. Keep units outside the `$…$`.
+- **The slide fits itself.** A board's or a Your Turn's question slide and answer slide start at
+  the same place and set the problem at the same size, chosen by laying the answer slide out on a
+  scratch deck: the usual place if everything fits, then higher, then the problem's mathematics
+  one size smaller. If nothing fits the build says "cannot hold its steps" — write fewer or
+  shorter rows (two tall fraction rows are usually the limit under a tall problem; a label row
+  and one chained line of mathematics is shorter than two lines of mathematics).
+- A slide without steps is a finding where the course profile says `STEPS = "required"`; until a
+  unit's steps are all written it is only counted ("N of M answer slides show their steps").
+
+## The slide font is Lexend (ruling 40, 4 October 2026)
+
+*"Start making every slide in the Google dislexia font."* — Lexend; asked, "words now, math
+next". Every word on a slide (PowerPoint, its PDF, the HTML deck, the console's slides) is
+Lexend, set at 95% of the size the layout asks for (`deckkit.SCALE`; `size-adjust` in the HTML):
+at that size a line is as long as it was in Century Schoolbook, so every measured layout holds,
+and the letters are still 7% taller. Nothing on a slide is italic (Lexend has none). A sign Lexend
+lacks (→ ∠ △ ✓) is set in DejaVu Sans by name. Printed documents (Teacher's Edition, plans,
+papers, handouts) are unchanged. `checks.py glyph` refuses a slide run in any other face, an
+italic run, and a deck PDF that does not carry Lexend.
+
+**The mathematics and the figures (5 October — the "math next" half).** A slide's expressions and
+the lettering on its figures are Lexend too; a printed page's are STIX, as before, and the two
+never share a file (the face is in each image's fingerprint).
+
+- *PowerPoint and PDF* — `mathimg.m(…, "slide…")` sets the expression with matplotlib's `custom`
+  math fontset pointed at the kit's own Lexend files, at 95% (`mathimg.LEXEND_SCALE`): a Lexend
+  digit then stands as tall as the STIX digit it replaces, so rows keep their height; a row is
+  about a tenth longer, and the fit gates (`_yt_fit`, `_wb_fit`, slidefit, overlap) decide what
+  still fits. Radicals, grown brackets and arrows are STIX's (Lexend has none). Variables are
+  upright. `mathimg.SLIDE_FACE = ""` puts slides back in STIX in one line.
+- *Three signs are not Lexend's*, in every surface, and the kit makes the change itself — a spec
+  goes on writing `\pi`, `\cdot` and `l`:
+  - **π** — Lexend's is a flat-topped box that reads as an n. A slide's π is the π of STIX
+    General Bold (the textbook's, at Lexend's weight): `\mathtt{\pi}` in an expression, the
+    one-glyph face **WindyPi** (`assets/WindyPi.ttf`, `windypi.woff2`, cut by `make_assets.py
+    make_pi`) for a π typed in words or on a figure. `deckkit._by_font` names it for the run; the
+    HTML lists it first in every font stack. `checks.py glyph` refuses a π set in anything else.
+  - **the multiplication dot** — `\cdot` is drawn with Lexend's own raised dot (U+2219: the size
+    of the middle dot a spec types in words and tables, exactly as heavy as Lexend's decimal
+    point, and the one dot KaTeX will also take from Lexend). The STIX dot beside Lexend digits
+    is fainter than the decimal point next to it. In the browser `\neq` is likewise Lexend's own
+    sign (`htmlkit.KMACROS`).
+  - **a variable l** — Lexend's is a bare stroke, the mark of an absolute-value bar; it is set as
+    the script ℓ. Letters inside `\text{}` are words and are left alone.
+- *HTML decks and the console* — KaTeX lays the expression out; `htmlkit.MATHFACE` draws its
+  digits, letters and signs in the slide font (KaTeX's own fonts remain for stacked brackets,
+  radicals and big operators), `KMACROS` makes `\cdot` the Lexend dot, `_tex` makes a variable l
+  the script ℓ.
+- *Figures* — a slide draws `figkit.slide(spec)` (the same spec with `face="slide"`): labels in
+  Lexend at 95%, a π in a label set as the textbook's. `dockit` draws the plain spec, so a
+  handout's figure is unchanged. The struck-label check runs on each face separately.
+- **A line of working is one size.** On an answer slide the words of a step and its mathematics
+  are set at one size (`deckkit.step_sizes`: 24.5 pt, or 29 pt for one or two short steps; the
+  HTML sets the step's KaTeX at `1em`). They used to be two sizes (23 with 26, 26 with 32) —
+  invisible across two typefaces, plain in one: the 40 of "40 ft would be" sat smaller than the 40
+  of "40 ÷ 5" on the same line. Each pair meets in the middle, so a row is as long as it was.
+- **The HTML deck fits itself.** The PowerPoint is laid out by measurement and refuses what does
+  not fit; a browser lays the same slide out itself and KaTeX's stacked fractions stand taller. So
+  the page measures every slide once it is typeset (`htmlkit` `fitSlides`): a slide whose content
+  is taller than the space above its footer rule is set smaller, whole, by what it needs
+  (`data-fit`), and a board's or Your Turn's question slide takes its answer slide's factor.
+  `htmlcheck` counts them and refuses a slide set under 75% (`checks.FIT_FLOOR`): that slide
+  carries too much, and it wants fewer or shorter steps.
+- **The pi face is measured like Lexend.** `WindyPi` carries Lexend's own ascent and descent and
+  is offered for U+03C0 only (`unicode-range`), so a line with a π in it — and a browser's idea of
+  the slide font's line — is no taller than its neighbours. (With STIX's metrics every digit KaTeX
+  set stood 13 px deeper and M7 Unit 5 ran 4–7 px past the footer rule; `htmlcheck` caught it.)
+  `deckkit` reinstalls a face whose bytes differ from the kit's, so a recut face reaches LibreOffice.
+- **Working rows and scientific notation.** An item's `steps` may pass through a form that is not
+  yet scientific notation (1.3 × 10³ = 0.013 × 10⁵ — matching the powers is the method);
+  `capcheck` no longer reads the [1, 10) rule into `steps`. Every such line is still held true by
+  `stepcheck`, and the item's answer is still scanned.
+
 ## Figures — what the kit refuses (ruling 38, 4 October 2026)
 
 A figure is the one place a student reads a number off a picture, so `lib/figkit.py` checks the

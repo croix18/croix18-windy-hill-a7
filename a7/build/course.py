@@ -14,6 +14,7 @@ UNITS = {1: "Equations and Inequalities", 2: "Real Numbers, Square Roots and Cub
 IXL_SMARTSCORE = 67                # ruling 28 — 67 accelerated, 60 on-level (Croix, 20 Sep)
 
 SET = "handout"                    # ruling 21: the six questions are a printed page and its key
+STEPS = "required"                 # ruling 39: every answer slide shows its steps (all of Units 3 and 4 written, 5 October)
 CLOSE = False
 BANK = "docx"                      # Question Bank and Question Bank - Additional, each with a key
 TE_STYLE = "lines"

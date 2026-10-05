@@ -1632,6 +1632,27 @@ Independent Set page with its key, as before; the slide that said only "Six ques
 the page." is gone. A set whose six questions do not fit one slide at 16 pt is shortened, not
 split: a student works all six at their own pace.
 
+**Ruling 39 — Croix, 4 October (late): an answer slide shows its steps.** *"But the answers
+should always show easy to follow steps."* Every board's answer slide and every Your Turn's shows
+the working above the answer: one step to a line, in black, a short label where it names a piece
+("Whole box:", "The a's:") and then the arithmetic — the way it would be written on the board.
+It is not the grey line that was removed (ruling 37): that was a remark; this is the mathematics.
+Beside the figure when there is one; in place of the four options on a choice board. The spec
+field is `steps`; the build works every equality in it and refuses a false one
+(`kit/SPEC SCHEMA.md`). Warm-up answers stay as they are (four quick retrievals, answers beside
+the questions).
+
+**Ruling 40 — Croix, 4 October (late): slides are set in Lexend.** *"Also, start making every
+slide in the Google dislexia font."* Asked which: Lexend. Asked about the mathematics: "words now,
+math next." Every word on a slide is Lexend, at 95% of the old point sizes (the lines are as long
+as they were; the letters are taller); nothing on a slide is italic. Printed documents are not
+slides and keep Century Schoolbook. Typeset mathematics and figure labels followed on 5 October: a slide's
+expressions and the lettering on its figures are Lexend too (95%, like the words). Three signs
+are deliberately not Lexend's, and the kit swaps them itself: **π** is the textbook's (STIX bold;
+Lexend's is a flat-topped box that reads as an n), **the multiplication dot** is Lexend's own
+raised dot (as heavy as its decimal point), and **a variable l** is the script ℓ. Printed pages
+keep STIX mathematics. (`kit/SPEC SCHEMA.md`, ruling 40.)
+
 ## 13b(xviii). Ruling 38 — 4 October (night): a figure's labels can be read, and are true [both courses; M7's ruling 38]
 
 Found on the eve of 4.04, reading its rebuilt deck: the barn of Example 1 had its roof drawn
