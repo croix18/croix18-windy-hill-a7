@@ -644,11 +644,15 @@ def check_slotgeometry(files):
 
 
 HTML_PROBE = r"""
-() => {
+async () => {
   const out = {slides: [], exprs: [], errors: 0};
   const slides = [...document.querySelectorAll('.slide')];
-  slides.forEach((sl, i) => {
+  if (document.fonts) await document.fonts.ready;
+  for (let i = 0; i < slides.length; i++) { const sl = slides[i];
     slides.forEach(x => x.classList.remove('on')); sl.classList.add('on');
+    // the page fits a slide as it comes on (htmlkit fitSlide, by a MutationObserver): let that run,
+    // exactly as it does when a person turns to the slide, and measure what they would then see
+    await Promise.resolve(); await new Promise(r => setTimeout(r, 0));
     const body = sl.querySelector('.body') || sl.querySelector('.cover');
     const foot = sl.querySelector('.foot').getBoundingClientRect();
     let over = 0, wide = 0;
@@ -661,7 +665,7 @@ HTML_PROBE = r"""
       if (r.left < st.left + 60 - 1 && r.width > 0) wide = Math.max(wide, (st.left + 60) - r.left);
     });
     out.slides.push({n: i + 1, over: Math.round(over), wide: Math.round(wide), fit: parseFloat(sl.dataset.fit || '1')});
-  });
+  }
   out.errors = document.querySelectorAll('.katex-error').length;
   const B = 'rgb(30, 90, 168)', E = 'rgb(192, 90, 0)';
   document.querySelectorAll('.slots .k').forEach(k => {
@@ -726,6 +730,21 @@ CONSOLE_PROBE = r"""
     if (bad || res.left.length) out.problems.push(`flow: the engine lays ${bad} day(s) differently from the spine, ${res.left.length} item(s) with no day`);
     UNIT.lessons.forEach(L => { if (Flow.indexOf(F, L.code, L.plan) < 0) out.problems.push(`flow: ${L.code} is not a day of the year's sequence`); });
     if (typeof Console.flow !== 'function') out.problems.push('flow: the console does not answer where a period is');
+  }
+  // the stepped reveal: an answer slide comes on with its answer AND its working under the veil, and
+  // one press shows both (the working is the answer, a line at a time)
+  if (typeof Console === 'object' && typeof Console.show === 'function' && typeof Console.unveil === 'function') {
+    const all = [...document.querySelectorAll('.slide')];
+    const k = all.findIndex(s => s.querySelector('.steps') && s.querySelector('.answer'));
+    if (k >= 0) {
+      const vis = sel => getComputedStyle(all[k].querySelector(sel)).visibility;
+      all[k].classList.remove('shown'); Console.show(k, {silent: true});
+      if (!all[k].classList.contains('veiled') || vis('.steps') !== 'hidden' || vis('.answer') !== 'hidden')
+        out.problems.push(`an answer slide comes on with its working or its answer showing (slide ${k + 1}: steps ${vis('.steps')}, answer ${vis('.answer')})`);
+      Console.unveil();
+      if (vis('.steps') !== 'visible' || vis('.answer') !== 'visible') out.problems.push(`one press does not show an answer slide's working and answer (slide ${k + 1})`);
+      all[k].classList.remove('shown');
+    }
   }
   return out;
 }
@@ -794,6 +813,12 @@ def check_html(files):
         for f in decks:
             base = os.path.basename(f); n += 1
             pg.goto("file://" + os.path.abspath(f)); pg.wait_for_timeout(400)
+            # the page asks for all its fonts when it opens and says when they are in (htmlkit):
+            # measure only then, however busy this machine is
+            try:
+                pg.wait_for_function("document.documentElement.dataset.fit === 'ready'", timeout=30000)
+            except Exception:
+                findings.append(f"htmlcheck: the page never said its fonts were in and its fit ready (data-fit) — {base}")
             r = pg.evaluate(HTML_PROBE)
             c = pg.evaluate(CONSOLE_PROBE)
             if c:
