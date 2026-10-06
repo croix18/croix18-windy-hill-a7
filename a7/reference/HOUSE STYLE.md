@@ -1672,23 +1672,25 @@ Asked about the unit console, which is HTML too: drop it with the rest.
    Deckhand's. A day is logged from the phone view of the plan. A board is two slides — the
    question, then the question with its steps and answer — so the reveal is the next slide.
 
-**Ruling 42 — Croix, 5 October (evening): an arrow is not an equals sign.** Of a 4.07 Notes slide
-that read "diameter × π → CIRCUMFERENCE": *"That needs to be an equal sign not an arrow. This is
-math."* An arrow on a student page says nothing a student can check — in these units it had stood
-for "equals", "so", "rounds to", "becomes" and "means", and only the first is an equation.
+**Ruling 42 — Croix, 5 October (evening): an arrow never stands in for an equals sign.** Of a 4.07
+Notes slide that read "diameter × π → CIRCUMFERENCE": *"That needs to be an equal sign not an arrow.
+This is math."* And when the first version of this ruling banned every arrow on a student page:
+*"I'm not anti arrow. Arrows have their place, but they shouldn't be stand ins for equal signs is
+all I was saying."*
 
-1. **No arrow is printed on a student page** — slide, figure, handout, bank, paper or reference
-   sheet. Where two sides are equal the sign is **=** (`diameter × π = CIRCUMFERENCE`). Where one
-   line follows from another the word is **so** (`C = 12π in, so d = 12π ÷ π = 12 in`). A rounded
-   value takes **≈** (`1,868.4 ≈ 1,868`). A change is said in a word (sides *become*; 1.25 *has*
-   3 digits), or written as the multiplication it is (`P = 14 × 2 = 28`, not `P = 14 → 28`). A
-   label takes a colon (`Diameter: C = πd`). A student's shown work is one chain of equals signs.
-2. **The build refuses one** (`rulingcheck`, `lib/lessonbuild.py arrowcheck`; the unit gate reads
-   the papers and the reference sheet the same way). The one arrow that IS mathematics — a
-   mapping, x → 2x, A → A′ — is allowed where its block carries `arrow_ok=True`.
-3. Teacher's prose is not a student page: "3.1.2 partner exploration → Notes I" in a Teacher's
-   Edition's list of changes stays. Arrows that stood for mathematics in teacher's prose (what to
-   write on the board, an audit line) were changed with the rest on 5 October.
+1. **Where two things are equal, the sign between them is =.** `diameter × π = CIRCUMFERENCE`;
+   `12 × 9 = 108`; `x² · x³ = x⁵`. Never an arrow from a calculation to its result.
+2. **An arrow keeps its place everywhere else**: one statement leading to the next
+   (`C = 12π in → d = 12 in`), a mapping (`x → 2x`, `A → A′`), a change (`14 → 28`), a label
+   pointing at its formula. Nothing about those is refused.
+3. **The build refuses the first kind** (`rulingcheck`, `lib/lessonbuild.py arrowcheck`; the unit
+   gate reads the papers and the reference sheet the same way): an arrow whose two sides are equal
+   — numbers, or expressions in the same letters — or one that runs from a calculation to the name
+   or number of its result. `arrow_ok=True` on a block overrules a reading the build got wrong.
+4. On 5 October every arrow on a student page in the four built units was replaced by what it
+   meant (=, so, ≈, the multiplication itself, a word, a colon) before he clarified. Those
+   replacements all read correctly and stand; **they are not a rule**. New specs use arrows
+   wherever an arrow is the right mark.
 
 ## 13b(xviii). Ruling 38 — 4 October (night): a figure's labels can be read, and are true [both courses; M7's ruling 38]
 

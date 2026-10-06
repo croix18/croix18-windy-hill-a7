@@ -214,13 +214,14 @@ Do not batch lessons before the first push. One lesson, checked, viewed, pushed;
 > from the panel (a day is logged from the phone view of the plan). Where this file says
 > "console" or `.html` below, read it as history. Send him the `.pptx`.
 
-> **Ruling 42 (5 October 2026, evening): an arrow is not an equals sign.** Croix, of an M7 slide:
-> *"That needs to be an equal sign not an arrow. This is math."* No arrow is printed on a student
-> page: `=` where two sides are equal, `so` where one line follows another, `≈` for a rounded
-> value (4.04: `10,750 ≈ 11,000 = 1.1 × 10⁴`), a word for a change (3.08: "from 26,000,000. to 2.6
-> is seven places"; the Unit 4 reference sheet: "4,207 has 4"). `rulingcheck` refuses one; a real
-> mapping takes `arrow_ok=True`. The "book section → our section" lists in a Teacher's Edition
-> are prose and stay. Table of replacements: `SPEC SCHEMA.md`, "An arrow is not an equals sign".
+> **Ruling 42 (5 October 2026, evening): an arrow never stands in for an equals sign.** Croix, of
+> an M7 slide: *"That needs to be an equal sign not an arrow. This is math."* — and, when every
+> arrow was then taken off the student pages: *"I'm not anti arrow. Arrows have their place, but
+> they shouldn't be stand ins for equal signs is all I was saying."* So: `=` where two things are
+> equal; an arrow wherever an arrow is the right mark (a step leading to the next, a mapping, a
+> change). `rulingcheck` refuses only an arrow whose two sides are equal or that runs from a
+> calculation to its result. The eleven replacements made that evening in Units 3 and 4 read
+> correctly and stand, but they are not a rule. `SPEC SCHEMA.md` has the cases.
 
 **The whole-unit deck.** `build_unit.py` also writes `A7 Unit <u> <Title> - All Slides.pptx` (+ PDF): a cover,
 a contents slide whose rows jump to each lesson, then every lesson's slides in the manifest's
