@@ -187,7 +187,7 @@ L = dict(
 
     differentiation=dict(
         ese="Give the rule as one picture — the fraction with a curved arrow turning it over and the exponent's minus crossed out — and let the student redraw it at the top of the page. On the first four boards the only job is the flip; the arithmetic comes after.",
-        ell="Flip is the word. Say 'flip the fraction, drop the minus' on every board, and keep 2/3 → 3/2 written up as the picture of what flip means.",
+        ell="Flip is the word. Say 'flip the fraction, drop the minus' on every board, and keep '2/3 flips to 3/2' written up as the picture of what flip means.",
         enrichment="Ask for 0.4⁻² by converting the decimal to a fraction first, and for the n that makes (2/3)ⁿ = 81/16."),
 
     closure="Board 9 is written work and it is the exit evidence: the student has to say separately what the base's sign does and what the exponent's sign does. Read the boards, not the papers.",

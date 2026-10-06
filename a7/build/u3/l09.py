@@ -33,7 +33,7 @@ L = dict(
              math=["$a \\times 10^{n}$   with   $1 \\leq a < 10$",
                    "$2{,}000{,}000 = 2 \\times 10^{6}$          $26{,}000{,}000 = 2.6 \\times 10^{7}$"],
              items2=["**The coefficient is at least 1 and less than 10: one nonzero digit before the decimal point.**",
-                     "The exponent is how many places the decimal point moves: 26,000,000. → 2.6, seven places, so 10⁷."],
+                     "The exponent is how many places the decimal point moves: from 26,000,000. to 2.6 is seven places, so 10⁷."],
              not_sci=True,
              letters=False),
         dict(numeral="III", head="How many times larger?", min=4, sub="",

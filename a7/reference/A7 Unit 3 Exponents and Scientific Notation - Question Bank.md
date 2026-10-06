@@ -127,7 +127,7 @@ the unit is planned. The printed keys in each lesson's `Keys` folder are generat
 
 **What the audit against Math Nation found.**
 
-- Math Nation 3.4 student pages verified: the pattern table, 1/16, 8⁻³ → 1/8³, 1/(−4⁻⁵) → −4⁵, 216, 1/256, 1, 64, 2401, 1/43,046,721, (5⁻³)² = 5⁻⁶.
+- Math Nation 3.4 student pages verified: the pattern table, 1/16, 8⁻³ = 1/8³, 1/(−4⁻⁵) = −4⁵, 216, 1/256, 1, 64, 2401, 1/43,046,721, (5⁻³)² = 5⁻⁶.
 - The book writes 1/(−4⁻⁵) without parentheses on the base; the value is the same either way here, but our items always write (−4)⁻⁵ so that the base's sign is unambiguous.
 - Teacher-page thumbnail (TE p. 226) prints −64/16384 = −1/256; the student page (p. 233) correctly has −64/−16384 = 1/256.
 - The book's 3.4.1 career video is not a warm-up under §9; replaced.
@@ -266,7 +266,7 @@ the unit is planned. The printed keys in each lesson's `Keys` folder are generat
 
 - Second Thread A day (Math Nation 14.3 and 14.4 under ruling 30): the negative exponent law and multiple laws, with variable bases. The lesson is built on 3.04 — the same table, the same 'reciprocal, not opposite' line — and on yesterday's regrouping of coefficients and variables.
 - The items are original, aligned to the benchmark text and to the B1G-M for MA.8.AR.1.1: its example (3x³y⁻²)³ = 27x⁹y⁻⁶ is the shape of Notes III's last line and bank 7b; its items y⁻³z⁻⁴ = 1/(y³z⁴) (whiteboard 4) and (a³/(4b⁻⁷))⁵ = a¹⁵b³⁵/1,024 (Example 2 and bank 8c) are used as written; its task 2 (the m⁻⁵ … m⁵ table, here with x) is Notes I; its task 3 (x³ vs x⁻³) is whiteboard 9, as a written contrast.
-- The leading error today is not the sign error from 3.04 but a new one: moving the coefficient across the bar with the variable (3x⁻² → 1/(3x²)). Whiteboards 3 and 6 and bank 11 are built to surface it. The sign error is still there (whiteboard 5, option A) and is worth a look.
+- The leading error today is not the sign error from 3.04 but a new one: moving the coefficient across the bar with the variable (3x⁻² written as 1/(3x²)). Whiteboards 3 and 6 and bank 11 are built to surface it. The sign error is still there (whiteboard 5, option A) and is worth a look.
 - Every answer is expected 'with positive exponents only'. A student who stops at x⁻⁵ has applied the law correctly and not finished; the key marks the finished form. Say this once, at Notes III.
 
 **What the audit against Math Nation found.**

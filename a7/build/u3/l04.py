@@ -198,7 +198,7 @@ L = dict(
 
     differentiation=dict(
         ese="Hand the Notes I table already half filled — 2⁴ through 2⁰ complete — so the student's work is the last three cells and the pattern is visible, not remembered. The completed table stays on the desk for the whiteboard round.",
-        ell="The lesson turns on two English words. Put RECIPROCAL (flip it) and OPPOSITE (change the sign) side by side on the board with 8 → 1/8 under one and 8 → −8 under the other, and point at them on every board that asks for a value.",
+        ell="The lesson turns on two English words. Put RECIPROCAL (flip it) and OPPOSITE (change the sign) side by side on the board with 'the reciprocal of 8 is 1/8' under one and 'the opposite of 8 is −8' under the other, and point at them on every board that asks for a value.",
         enrichment="Ask for (2/3)⁻² a day before 3.05 introduces it, and for the n that makes 2ⁿ = 1/1024."),
 
     closure="Board 9 is written work and it is the exit evidence: the student has to use the word reciprocal. Read the boards, not the papers.",
@@ -230,7 +230,7 @@ L = dict(
         lives="Notes II — 'reciprocal, not opposite'. Whiteboard 5 is the diagnostic that says whether it landed; whiteboard 9 asks for it in writing.",
         materials="Whiteboards and markers. Calculators are allowed on everything; on a calculator 5^(−2) returns 0.04, which is 1/25 and worth showing once.",
         variation="Questions 1–6 rewrite only, one move each: a plain negative exponent, one in a denominator, a negative base, a power of ten, a coefficient that is not a base, two powers with different bases. 7–8 add one law (product, then quotient) with the negative exponent, and vary the sign of the base and whether the answer lands above or below zero. The pattern breaks at 9, where four expressions that look alike are opposites and reciprocals of one another, and at 12, where two options are NOT 1/64 for two different reasons. The Additional sheet mirrors each position.",
-        audit=["Math Nation 3.4 student pages verified: the pattern table, 1/16, 8⁻³ → 1/8³, 1/(−4⁻⁵) → −4⁵, 216, 1/256, 1, 64, 2401, 1/43,046,721, (5⁻³)² = 5⁻⁶.",
+        audit=["Math Nation 3.4 student pages verified: the pattern table, 1/16, 8⁻³ = 1/8³, 1/(−4⁻⁵) = −4⁵, 216, 1/256, 1, 64, 2401, 1/43,046,721, (5⁻³)² = 5⁻⁶.",
                "The book writes 1/(−4⁻⁵) without parentheses on the base; the value is the same either way here, but our items always write (−4)⁻⁵ so that the base's sign is unambiguous.",
                "Teacher-page thumbnail (TE p. 226) prints −64/16384 = −1/256; the student page (p. 233) correctly has −64/−16384 = 1/256.",
                "The book's 3.4.1 career video is not a warm-up under §9; replaced.",

@@ -33,7 +33,7 @@ L = dict(
              math=["$0.000007 = 7 \\times 10^{-6}$          $0.0000672 = 6.72 \\times 10^{-5}$",
                    "$3.4 \\times 10^{-9} = 0.0000000034$"],
              items2=["**The coefficient is still at least 1 and less than 10. The exponent is negative for a number less than 1.**",
-                     "The exponent is how many places the point moves: 0.0000672 → 6.72 is five places right, so 10⁻⁵."],
+                     "The exponent is how many places the point moves: from 0.0000672 to 6.72 is five places right, so 10⁻⁵."],
              letters=False),
         dict(numeral="III", head="How many times larger — or smaller?", min=4, sub="",
              note="Same routine as yesterday; the only new thing is that dividing powers of 10 with negative exponents is integer subtraction: 10⁻⁴ ÷ 10⁻⁷ = 10³. Line 1 is the book's collaboration item, and it is sound. Line 2 crosses from a large number to a small one — the state guide's item shape — and the exponent difference 8 − (−4) = 12 does all the work. 'Times smaller' is the same division read the other way: 1.8 × 10⁻⁷ is 4,000 times smaller than 7.2 × 10⁻⁴.\nOFF: 'The larger exponent wins. −4 is larger than −7, so 10⁻⁴ is the bigger power.'",

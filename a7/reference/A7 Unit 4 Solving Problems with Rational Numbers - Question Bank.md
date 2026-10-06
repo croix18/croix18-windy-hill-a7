@@ -220,10 +220,10 @@ the unit is planned. The printed keys in each lesson's `Keys` folder are generat
 **What the audit against Math Nation found.**
 
 - Every item re-derived by sympy at build time (mathcheck: 0 findings). Every radicand and exponent gap scanned (capcheck: 0 findings outside the two tagged blocks, Notes III and whiteboard 7, where a real measurement gives a non-perfect radicand).
-- The body-mass-index formula is the standard imperial one, B = 703w/h² for w in pounds and h in inches, and every value is carried exactly and rounded once: 24.958 → 25.0, 25.824 → 25.8, 27.122 → 27.1.
+- The body-mass-index formula is the standard imperial one, B = 703w/h² for w in pounds and h in inches, and every value is carried exactly and rounded once: 24.958 ≈ 25.0, 25.824 ≈ 25.8, 27.122 ≈ 27.1.
 - Kinetic energy is K = ½mv² with m in kilograms and v in meters per second, giving joules; 1,200 kg at 15 m/s is 135,000 J.
 - Math Nation 4.7 and 4.8 values verified in the audit: 4.7.2 Rodney (28,394 in³), 4.7.4 (2/5, 50.25, 2,976 J), 4.8.1 (−151/4 and 0), 4.8.2 Liliana (455.47 and 375.84), 4.8.3 Phillip (706.56 and 2,156.25), 4.8.4 Michaela (8,886), and all ten items of both Practice 4.7 and Homework 4.7. The flooring ambiguity and the 4.8.2 key are the two defects, both listed above.
-- The guide's backyard task verified: a side of √200 ≈ 14.1421 feet, six sides giving 84.8528 → 84.85 feet, and the 6-foot panels at 10.0083 dollars a foot beating the 8-foot panels at 11.0825.
+- The guide's backyard task verified: a side of √200 ≈ 14.1421 feet, six sides giving 84.8528 ≈ 84.85 feet, and the 6-foot panels at 10.0083 dollars a foot beating the 8-foot panels at 11.0825.
 
 **What changed from the book.**
 
