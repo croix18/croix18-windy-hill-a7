@@ -10,10 +10,10 @@ reference documents travel with a unit, and what START HERE says.
 
     a7/packages/A7 Unit 3 - Exponents and Scientific Notation/
         00 - START HERE.md
-        All Slides/                    A7 Unit 3 … - All Slides.html is the console
+        All Slides/                    A7 Unit 3 … - All Slides.pptx and its PDF (no HTML: ruling 41)
         Lessons/3.08/                  A7 3.08 Writing Large Numbers in Scientific Notation - Slides,
                                        Teacher Edition, Lesson Plan, Independent Set,
-                                       Question Bank, Additional Question Bank (docx/pptx/html and pdf)
+                                       Question Bank, Additional Question Bank (docx/pptx and pdf)
         Lessons/…/Keys/                that lesson's three answer keys — never beside a student page
         Review/    Assessment/    Handouts/    Reference/
     a7/packages/zips/   (git-ignored)  A7 Unit 3 - Complete.zip (and in parts when over the upload
@@ -89,7 +89,7 @@ def start_here(placed):
     t = timing_rows()
     dates, review_day, exam_days, plan_as_of = packkit.calendar(U, HERE)
     day = packkit.day
-    console = names.unit(U, "All Slides", "html")
+    unit_deck = names.unit(U, "All Slides", "pptx")
     example = SPECS[min(3, len(SPECS) - 1)]
     lines = []
     A = lines.append
@@ -104,7 +104,7 @@ def start_here(placed):
             when += f", the assessment {day(exam_days[0])}" + (f" and {day(exam_days[-1])}" if len(exam_days) > 1 else "")
         A(f"**By the plan** (Windmill's spine as of {plan_as_of}; `tools/scope_calendar.py` is its source): {when}, "
           f"{first.year if first.year == last.year else str(first.year) + '–' + str(last.year)}. "
-          "The dates move when the as-run log does (the plan follows the class), and the console offers each period its next lesson.")
+          "The dates move when the as-run log does (the plan follows the class), and a day is logged from the phone view of the plan.")
         A("")
     A(f"Nothing exists until it is committed. This folder is generated from `a7/build/{UNITDIR}/` by `install_unit.py`; edit the specs and rebuild rather than editing these files by hand.")
     A("")
@@ -114,7 +114,7 @@ def start_here(placed):
     A("")
     A(f"**Course, number, title, then what it is** — `{names.lesson(example, 'Slides', 'pptx')}`, "
       f"`{names.lesson(example, 'Question Bank', 'docx')}`, `{names.lesson(example, 'Question Bank', 'docx', key=True)}`. "
-      f"Unit-wide files carry the unit instead of a lesson: `{console}`, `{names.unit(U, 'Test', 'docx')}`, "
+      f"Unit-wide files carry the unit instead of a lesson: `{unit_deck}`, `{names.unit(U, 'Test', 'docx')}`, "
       f"`{names.unit(U, 'Test', 'docx', key=True)}`, `{names.unit(U, 'Review', 'docx')}`, `{names.unit(U, 'Reference Sheet', 'docx')}`. "
       "Single spaces, pieces joined by ` - `, two-digit lesson numbers so everything sorts in teaching order. "
       f"The same pattern in both courses (Croix, 4 October 2026). {M.get('naming_note', '')}")
@@ -125,8 +125,13 @@ def start_here(placed):
     A("")
     A("| Folder | What is in it |")
     A("|---|---|")
-    A(f"| **All Slides** | **Teach from `{console}`.** Open it in a browser on the panel (double-click from Drive; nothing to install). It opens on Today: it knows the period from the bell, the period's next lesson and where this period stopped last time — Resume, Start, or choose a lesson. **The plan follows the class**: the console remembers what each period last taught and offers that period's NEXT lesson, not the date's; on a day with no new lesson, mark it on Today (\"Review / catch-up day\" or \"Testing / no class\") and everything after moves a day; the card says how far the period is from the year's plan and when the unit's test now falls. The rail on the left lists the lesson's segments with their minutes and the bar says whether the clock is ahead of or behind the plan. On a whiteboard question the rail runs the round: a timer, the answer veiled until you press Space, and tiles to tally the letters the room held (hold a tile to take one back). Space or → advance, ← back, 1–9 jump to that board, L hides the rail, T starts the timer, Esc returns to Today, P prints one slide per page. `{names.unit(U, 'All Slides', 'pptx')}` is the same slides for PowerPoint or Google Slides (each lesson keeps its own slide numbers, so the Teacher Edition lines up). Base and exponent are colour-coded on notes, worked examples and answer slides; questions stay black. No speaker notes — the notes live in the Teacher Edition (ruling 12). |")
-    A("| **Lessons** | **One folder per lesson, named by its number (`3.08`; the title is in every file's name), everything for that day in it**, each document with its PDF beside it (the PDF is what gets printed and posted). *Slides* — the lesson's own deck as `.pptx` and `.html`. *Teacher Edition* — three or four pages, read in twenty minutes (ruling 26): page 1 is the period (benchmark with its Must and Must-not lines, the target, the MTRs, the timing table, the three sentences to say out loud), then one line per slide, each board carrying its answer, its named distractors and the split-board move, and Misconceptions to Watch at the end. *Lesson Plan* — the Florida-format plan (ruling 25): standards, the MTRs with their evidence, the sequence read from the deck, gradual release, higher-order questions with DOK, checks for understanding with the response to each, differentiation. *Independent Set* — the six questions written in silence (ruling 21). *Question Bank* and *Additional Question Bank* — retired worksheets are question banks (ruling 11): draw from them for practice, exit tickets or re-teaching. |")
+    A(f"| **All Slides** | `{unit_deck}` — the whole unit in one PowerPoint, in teaching order; each lesson keeps its own "
+      "slide numbers, so the Teacher Edition lines up. **A deck is its Slides file** (ruling 41, 5 October 2026): there is "
+      "no HTML deck and no console. **To teach from one in Deckhand**: upload the lesson's `Slides.pptx` (or this file) to "
+      "Google Drive, open it — it opens as Google Slides — and paste that link into Deckhand's Slides card; the pen and "
+      "the timers are Deckhand's. The slides are set in Lexend, which Google Slides has, so they arrive as built. A board "
+      "is two slides: the question, then the same question with its steps and its answer. |")
+    A("| **Lessons** | **One folder per lesson, named by its number (`3.08`; the title is in every file's name), everything for that day in it**, each document with its PDF beside it (the PDF is what gets printed and posted). *Slides* — the lesson's own deck, a `.pptx` (upload it to Drive and it opens as Google Slides; paste that link into Deckhand's Slides card). *Teacher Edition* — three or four pages, read in twenty minutes (ruling 26): page 1 is the period (benchmark with its Must and Must-not lines, the target, the MTRs, the timing table, the three sentences to say out loud), then one line per slide, each board carrying its answer, its named distractors and the split-board move, and Misconceptions to Watch at the end. *Lesson Plan* — the Florida-format plan (ruling 25): standards, the MTRs with their evidence, the sequence read from the deck, gradual release, higher-order questions with DOK, checks for understanding with the response to each, differentiation. *Independent Set* — the six questions written in silence (ruling 21). *Question Bank* and *Additional Question Bank* — retired worksheets are question banks (ruling 11): draw from them for practice, exit tickets or re-teaching. |")
     A("| **Lessons / … / Keys** | Inside each lesson's folder: that lesson's three answer keys and nothing else. |")
     A("| **Review** | The Unit Review and its key (unscored; it goes home as practice — ruling 27a, A7 has no review day). |")
     A("| **Assessment** | The unit test (one paper, two periods) and its key. |")

@@ -15,6 +15,7 @@ IXL_SMARTSCORE = 67                # ruling 28 — 67 accelerated, 60 on-level (
 
 SET = "handout"                    # ruling 21: the six questions are a printed page and its key
 STEPS = "required"                 # ruling 39: every answer slide shows its steps (all of Units 3 and 4 written, 5 October)
+HTML = False                       # ruling 41 (Croix, 5 October): a deck is its Slides file — he runs the PowerPoint as Google Slides in Deckhand. No HTML deck, no console.
 CLOSE = False
 BANK = "docx"                      # Question Bank and Question Bank - Additional, each with a key
 TE_STYLE = "lines"

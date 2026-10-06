@@ -1653,6 +1653,25 @@ Lexend's is a flat-topped box that reads as an n), **the multiplication dot** is
 raised dot (as heavy as its decimal point), and **a variable l** is the script ℓ. Printed pages
 keep STIX mathematics. (`kit/SPEC SCHEMA.md`, ruling 40.)
 
+**Ruling 41 — Croix, 5 October (evening): a deck is its Slides file. No HTML.** *"I like running my
+files in deckhand because I can use deckhands tools like the pen and timers and stuff. So stop
+building the html. Keep it as slides files."* Asked how a deck reaches Deckhand: he uploads the
+PowerPoint to Drive, it opens as Google Slides, and he pastes that link into Deckhand's Slides card.
+Asked about the unit console, which is HTML too: drop it with the rest.
+
+1. **Nothing is built as HTML** — no per-lesson HTML deck, no unit console. `course.py` says
+   `HTML = False`; the kit keeps the code (`lib/htmlkit.py`, `lib/consolekit.py`) and its tests, and
+   `HTML = True` brings both back. `htmlcheck` now refuses an `.html` deck left among the built files.
+2. **The PowerPoint is the deck, and Google Slides is where it runs**, so a slide names only faces
+   Google Slides has: Lexend; Arial for a sign Lexend lacks (→); Times New Roman, bold, for a π in a
+   run of words (the textbook's π at Lexend's weight — Lexend's own is a flat-topped box). `glyph`
+   refuses any other face. Mathematics and figures are pictures and arrive as drawn. Nothing in the
+   build can open Google Slides: layout is checked in the PDF LibreOffice draws from the same file.
+3. **What went with the console**: the Today screen, each period's bookmark, the stepped reveal, the
+   whiteboard tally and the as-run log written from the panel. The pen and the timers are
+   Deckhand's. A day is logged from the phone view of the plan. A board is two slides — the
+   question, then the question with its steps and answer — so the reveal is the next slide.
+
 ## 13b(xviii). Ruling 38 — 4 October (night): a figure's labels can be read, and are true [both courses; M7's ruling 38]
 
 Found on the eve of 4.04, reading its rebuilt deck: the barn of Example 1 had its roof drawn
@@ -1977,7 +1996,7 @@ examined nothing cannot report clean).**
 | `overlap` | on the rendered slide, do any two lines of text collide, and does any figure sit on any words? A filled panel or a drawn rule is told from a figure by its pixels, and the number skipped is printed with the denominator. |
 | `imagedrift` | is every image embedded in a .docx or .pptx a file in the figure library, byte for byte — so no document carries an orphaned or older rendering of a figure? |
 | `slotgeometry` | does colour change the colour of the ink and nothing else? Every expression a deck colours (§2a) is rendered black and in colour and the ink compared, pixel for pixel within 2 px; over 0.5% displaced is a finding. |
-| `htmlcheck` | does the browser deck say what the PowerPoint deck says? Every `.html` deck is opened in a real browser (Playwright): no KaTeX error, nothing rendered below the footer rule or past the slide edge, and the colour the page painted on each slotted expression read back and compared with the slot rule's own reading of the LaTeX. The unit console besides: every lesson indexed with its title slide, its segments summing to the period with the whiteboard block inside 10–20 minutes, eighteen tagged board slides, the room reader loading and the plan answering. A deck that renders nothing coloured, or a unit with no console, cannot report clean. |
+| `htmlcheck` | **since ruling 41 the course builds no HTML**, and this check holds the other way round: an `.html` deck left among the built files is a finding (a stale console beside today's slides). Where a course sets `HTML = True` it is what it was: every `.html` deck opened in a real browser — no KaTeX error, nothing below the footer rule or past the slide edge, each coloured slot read back against the spec, the console's index and its reveal sound. |
 | `kitcheck` | is the build kit here — `lib/`, `checks.py`, the drivers, the assets — the one Windmill published, byte for byte against `KIT.sha256`? The kit is shared with the on-level course; a copy edited in place is a fork starting again (the two courses drifted eight hundred lines apart that way between 20 September and 4 October). Edit it in Windmill and vendor it. |
 | `suitecheck` | do the two tables in this block name every gate and every check that runs, and only those? |
 

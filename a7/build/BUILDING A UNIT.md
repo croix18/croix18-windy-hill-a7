@@ -201,6 +201,19 @@ Do not batch lessons before the first push. One lesson, checked, viewed, pushed;
 
 ## 5. The unit documents, the manifest, the package
 
+> **Ruling 41 (5 October 2026, evening): there is no console and no HTML deck any more.** Croix:
+> *"I like running my files in deckhand because I can use deckhands tools like the pen and timers
+> and stuff. So stop building the html. Keep it as slides files."* A deck is its `Slides.pptx`: he
+> uploads it to Drive, it opens as Google Slides, and he pastes the link into Deckhand's Slides
+> card. `course.py` says `HTML = False`; `htmlcheck` refuses an `.html` deck left in `out/`; the kit
+> keeps the HTML code and `HTML = True` brings it back. A slide names only fonts Google Slides has
+> (Lexend; Arial for the arrow; Times New Roman bold for a π in words). **Nothing in the build can
+> open Google Slides** — the layout is checked in LibreOffice's PDF of the same file, so a
+> screenshot from him of a line wrapping in Slides is evidence the build cannot see. Gone with
+> the console: Today, period bookmarks, the stepped reveal, the whiteboard tally, the as-run log
+> from the panel (a day is logged from the phone view of the plan). Where this file says
+> "console" or `.html` below, read it as history. Send him the `.pptx`.
+
 **The whole-unit deck.** `build_unit.py` also writes `A7 Unit <u> <Title> - All Slides.pptx` (+ PDF): a cover,
 a contents slide whose rows jump to each lesson, then every lesson's slides in the manifest's
 teaching order, each lesson numbered from 1 exactly as its own deck and its Teacher Edition number
@@ -360,6 +373,10 @@ Send the START HERE, the Reference Sheet PDF and the assessment key PDF with it.
 - Never rescale a plan by trimming the whiteboard round below 10 minutes or IXL below 5.
 
 ## 8. State of the work — 4 October 2026 (read this before anything else)
+
+**First, 5 October evening:** ruling 41 — no HTML, no console; the deck is the PowerPoint, run as
+Google Slides in Deckhand (the boxed note at the top of §5). Rulings 39 and 40 are complete for
+Units 3 and 4 (steps on every answer slide; Lexend for words, mathematics and figure labels).
 
 **4 Oct, later — one kit for both courses; everything below is pushed.** Croix asked for M7 to be
 adapted "to a7 and the family", and chose all four parts. What that changed HERE:
