@@ -1728,6 +1728,53 @@ A student with the notes open copies the answer, and the board measures handwrit
    teacher's-edition prose that quoted the old numbers. The gates re-ran on all four units at 0
    findings before anything was built.
 
+**Ruling 44 — Croix, 6 October (night): the words of a question and its picture agree.** Of M7
+4.05 board 3: *"The question says 30 but the graphic shows 20 for the diameter. I told you to make
+sure there were never errors like that."* The board read "A plate sits on a placemat 30 cm wide.
+Find the circumference of the plate." over a circle labelled 20 cm. The 30 was ruling 22's number
+nobody needs and the 20 was the plate, so every number was true and the answer was right — and the
+slide still read as a mistake, to him and to a class, because the only length in the words was not
+on the picture and the only length on the picture was not in the words. **A slide that a careful
+reader takes for an error is an error.** 4.06 board 4 (a 12 cm card, d = 10 cm) and 4.07 board 5
+(a 20 in card, 18π in) did the same.
+
+1. **A length the words give is on the picture; a number on the picture is in the words.** Where
+   a question has two lengths, the words name both, each with the thing it measures ("A plate
+   20 cm across sits on a placemat 30 cm wide"), and the picture draws both, to scale, each on
+   the thing it measures.
+2. **Ruling 22 stands** — one board a round still carries a number the question does not need —
+   but the extra number is never the only one in the words, and never left off the picture.
+3. **The build refuses the rest** (`rulingcheck` and the unit gate, `lib/figwords.py`): an item
+   whose words give a length the figure does not show while the figure shows a number the words
+   never mention. `figwords_ok=True` with a comment where the difference is the point and the
+   slide says so.
+4. **Ruling 38 checked that a figure's labels were true and in the words' unit. It did not compare
+   the numbers, and nobody looked at the slide as a reader would.** The gate now compares them;
+   and every slide with a picture is LOOKED AT before a unit ships — the check cannot see a right
+   number on the wrong thing.
+5. **The look-through (7 October, 1–2 am).** Every picture of M7 Units 4 and 5 — 129 of them —
+   was drawn beside its words (`figure_sheets.py`, in the build folder) and read by four readers
+   who had not seen the unit, told to answer from the picture alone. Every label was true and
+   every gate had passed. They found: a board whose answer could not be reached from its picture
+   (4.04 board 6 printed the right side of the L and left off the missing corner's width); the
+   L-shape on all three Unit 4 test forms, whose ledge length sat in the corner beside the step
+   and read as the step's (68 cm² became 74); a pool whose two lengths floated in the middle of
+   it; and two stems that said "Every length is marked" when it was not.
+6. **A length sits on the thing it measures, over its middle.** A label in a corner belongs to
+   both sides that meet there; a label floating inside a shape belongs to none. Step it off its
+   own side by ems (`off=`), ruling 38.
+7. **Every length the answer needs is printed or can be found from what is printed** — work the
+   item from the picture, not from the spec. And a sentence about the picture is a claim: "Every
+   length is marked" is written only when it is true. Say what the picture shows instead ("The
+   dashed line is the height of the triangle").
+8. **Say what a number is.** A bare length on a leader to a circle is "C = 31.4 cm"; a letter
+   over half a diameter names a radius, so d goes over the middle; two radii are never drawn
+   straight opposite each other; a height carries its right-angle mark.
+9. **The look-through is a step of every unit, not an apology for one**: `python3
+   figure_sheets.py uN --grid 4`, read every picture against the four questions in its header,
+   and, where the work is being done by agents, give the pictures to readers who did not write
+   them. (`kit/SPEC SCHEMA.md`, "The look-through".)
+
 ## 13b(xviii). Ruling 38 — 4 October (night): a figure's labels can be read, and are true [both courses; M7's ruling 38]
 
 Found on the eve of 4.04, reading its rebuilt deck: the barn of Example 1 had its roof drawn

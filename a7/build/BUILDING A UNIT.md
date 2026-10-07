@@ -236,6 +236,24 @@ Do not batch lessons before the first push. One lesson, checked, viewed, pushed;
 > builds on an earlier board on purpose, tag it `repeat_ok=True` with a comment. The question
 > banks are not read. (HOUSE STYLE, ruling 43; `SPEC SCHEMA.md` has the rules A–D, P, Q.)
 
+> **Ruling 44 (6 October 2026, night): the words of a question and its picture agree.** Croix, of
+> M7 4.05 board 3: *"The question says 30 but the graphic shows 20 for the diameter. I told you to
+> make sure there were never errors like that."* The words named only a 30 cm placemat (the number
+> nobody needs) and the picture showed only the 20 cm plate. Every number was true and the slide
+> still read as a mistake. **A length the words give is on the picture, and a number on the picture
+> is in the words; where there are two lengths, say both and draw both, each on the thing it
+> measures.** `rulingcheck` and the unit gate (`lib/figwords.py`) refuse the rest;
+> `figwords_ok=True` with a comment where the difference is the point. **And look at every slide
+> that has a picture, as a student would, before a unit ships** — the gate cannot see a right
+> number on the wrong thing. (HOUSE STYLE, ruling 44; `SPEC SCHEMA.md`.)
+>
+> **How: `python3 figure_sheets.py uN --grid 4`** (this folder) draws every picture of the unit
+> beside its words. For each: can the answer be reached from the picture and the words alone? does
+> every number sit on the thing it measures, over its middle — not in a corner, not floating? is
+> every length the words give on the picture? is everything the words say about the picture true?
+> The first look-through (7 October, M7 Units 4–5) found a board that could not be solved from its
+> picture and three test figures with a length beside the wrong side — with every gate at 0.
+
 **The whole-unit deck.** `build_unit.py` also writes `A7 Unit <u> <Title> - All Slides.pptx` (+ PDF): a cover,
 a contents slide whose rows jump to each lesson, then every lesson's slides in the manifest's
 teaching order, each lesson numbered from 1 exactly as its own deck and its Teacher Edition number
