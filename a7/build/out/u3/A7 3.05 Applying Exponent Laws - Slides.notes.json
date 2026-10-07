@@ -182,7 +182,7 @@
    "title": "Whiteboards   \u00b7   Question 5 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "Diagnostic, and the odd power is the point. Example 1's even power hid the sign of the base: (\u22128/7)\u00b2 and (8/7)\u00b2 are both 64/49. Here the cube keeps the sign, so the four options are four different numbers \u2014 B is \u2212512/343 and D is +512/343. A board with D flipped the base and dropped its minus; ask what the reciprocal of \u22127/8 is. C never flipped; A took the opposite instead of the reciprocal.",
+   "note": "Diagnostic, and the odd power is the point. Example 1's even power hid the sign of the base: (\u22128/7)\u00b2 and (8/7)\u00b2 are both 64/49. Here the cube keeps the sign, so the four options are four different numbers \u2014 B is \u22121000/343 and D is +1000/343. A board with D flipped the base and dropped its minus; ask what the reciprocal of \u22127/10 is. C never flipped; A took the opposite instead of the reciprocal.",
    "kind": "wb"
   },
   {
@@ -198,7 +198,7 @@
    "title": "Whiteboards   \u00b7   Question 6 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "Diagnostic. \u22122 \u2212 (\u22124) = 2. The A board is the interesting one: it did the arithmetic right and then flipped out of habit.",
+   "note": "Diagnostic. \u22123 \u2212 (\u22127) = 4. The A board is the interesting one: it did the arithmetic right and then flipped out of habit.",
    "kind": "wb"
   },
   {
@@ -214,7 +214,7 @@
    "title": "Whiteboards   \u00b7   Question 7 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "Two bases that are reciprocals of each other: flip the first and they match. A board with 1 multiplied 2/5 by 5/2 and forgot the exponent flipped the first factor.",
+   "note": "Two bases that are reciprocals of each other: flip the first and they match. A board with 1 multiplied 3/8 by 8/3 and forgot the exponent flipped the first factor.",
    "kind": "wb"
   },
   {
@@ -246,7 +246,7 @@
    "title": "Whiteboards   \u00b7   Question 9 of 9",
    "sub": "Take your time. Boards up when you have written it.",
    "min": 0,
-   "note": "Written. This is the confusion the state guide's task for this benchmark targets (\u2212b vs b\u207b\u00b9), in the student's own words. Full credit: the correct rewrite and a sentence that separates reciprocal from opposite. Value, if anyone asks: \u2212243/32.",
+   "note": "Written. This is the confusion the state guide's task for this benchmark targets (\u2212b vs b\u207b\u00b9), in the student's own words. Full credit: the correct rewrite and a sentence that separates reciprocal from opposite. Value, if anyone asks: \u221219,487,171/16,384.",
    "kind": "wb"
   },
   {

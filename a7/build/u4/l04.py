@@ -144,15 +144,15 @@ L = dict(
              note="Working backwards, and the answer is written 4.0 rather than 4 on purpose: the question asked for two significant digits, so the zero has to be there. A board with 4 gave the right number in the wrong form — that is worth a sentence, not a mark.",
              check=("eq", "F(36,10)*10**3/(F(90,10)*10**1)", "40"),
              wrong="4 × 10¹ — one significant digit where two were asked for [8.NSO.1.6: a trailing zero after a decimal point carries the second digit]; 4.0 × 10² — the exponent is one too high"),
-        dict(kind="written", text=["Ellis says: 1,234 has 4 significant digits and 5.6 has 2,", "so the sum  $1{,}234 + 5.6$  must be written with 2:  $1.2 \\times 10^{3}$.", "Explain why he is wrong, and give the correct sum."],
-             qtext="Ellis says that because 1,234 has 4 significant digits and 5.6 has 2, the sum 1,234 + 5.6 must be written with 2 significant digits, as 1.2 × 10³. Explain why he is wrong, and give the correct sum.",
-             hint="Which rule is for which operation?", steps=["Adding uses decimal places, not a count of digits.", "$1{,}234 + 5.6 = 1{,}239.6$", "1,234 stops at the ones place, so round to ones:  1,240"],
-             gloss="products count digits; sums count places", answer="1,240 = 1.240 × 10³",
-             note="Written, and it is the exit evidence. Ellis has used the multiply-and-divide rule on an addition. Full credit: the rule for a sum is about the place where each measurement's last digit sits, not the number of digits; 1,234 stops at the ones place and 5.6 at the tenths, so the sum stops at the ones place; 1,239.6 becomes 1,240. A student who only writes 'he used the wrong rule' has not said what the right one is.",
-             check=("many", ("eq", "F(1234)+F(56,10)", "F(12396,10)"),
-                    ("eq", "floor(F(12396,10)+F(1,2))", "1240"),
-                    ("true", "F(12396,10) != F(12,10)*10**3")),
-             wrong="'he used the wrong rule' — the right rule is not stated [the item asks for an explanation]; 1,239.6 — no rounding at all, which claims a tenth that 1,234 never measured"),
+        dict(kind="written", text=["Ellis says: 9,145 has 4 significant digits and 4.8 has 2,", "so the sum  $9{,}145 + 4.8$  must be written with 2:  $9.1 \\times 10^{3}$.", "Explain why he is wrong, and give the correct sum."],
+             qtext="Ellis says that because 9,145 has 4 significant digits and 4.8 has 2, the sum 9,145 + 4.8 must be written with 2 significant digits, as 9.1 × 10³. Explain why he is wrong, and give the correct sum.",
+             hint="Which rule is for which operation?", steps=["Adding uses decimal places, not a count of digits.", "$9{,}145 + 4.8 = 9{,}149.8$", "9,145 stops at the ones place, so round to ones:  9,150"],
+             gloss="products count digits; sums count places", answer="9,150 = 9.150 × 10³",
+             note="Written, and it is the exit evidence. Ellis has used the multiply-and-divide rule on an addition. Full credit: the rule for a sum is about the place where each measurement's last digit sits, not the number of digits; 9,145 stops at the ones place and 4.8 at the tenths, so the sum stops at the ones place; 9,149.8 becomes 9,150. A student who only writes 'he used the wrong rule' has not said what the right one is.",
+             check=("many", ("eq", "F(9145)+F(48,10)", "F(91498,10)"),
+                    ("eq", "floor(F(91498,10)+F(1,2))", "9150"),
+                    ("true", "F(91498,10) != F(91,10)*10**3")),
+             wrong="'he used the wrong rule' — the right rule is not stated [the item asks for an explanation]; 9,149.8 — no rounding at all, which claims a tenth that 9,145 never measured"),
     ],
 
     bank=[
@@ -248,7 +248,7 @@ L = dict(
         ell="Significant, precise and measurement are three words doing specific work today. Put MEASUREMENT = a number someone measured beside COUNT = a number someone counted, with 4.20 meters under one and 24 students under the other, and ask which kind each number is before every problem.",
         enrichment="Ask what 1,000 means when it is written with no decimal point — one significant digit or four — and how a scientist would write each of the two. Then ask why the state guide's own Puerto Rico item is genuinely ambiguous."),
 
-    closure="Board 9 is written work and it is the exit evidence: the student has to say what the rule for a sum actually is, not only that Ellis used the wrong one, and give 1.240 × 10³. Read the boards, not the papers.",
+    closure="Board 9 is written work and it is the exit evidence: the student has to say what the rule for a sum actually is, not only that Ellis used the wrong one, and give 9.150 × 10³. Read the boards, not the papers.",
 
     independent=[
         dict(stem="How many significant digits are in  6,030  grams?", answer="3", why="The middle zero counts; the trailing zero does not, because no decimal point is written.", check=("eq", "sig('6,030')", "3"), space=0.7),
@@ -273,7 +273,7 @@ L = dict(
 
         read_first=[
             "This lesson rebuilds Math Nation 4.4 and is the only MA.8.NSO.1.6 day. It carries a correction the book does not have, so read the next paragraph before teaching it.",
-            "THE BOOK STATES THE SIGNIFICANT-DIGIT RULE WRONGLY. Teacher Edition 4.4.2 says 'if two numbers are written with different precision, then the precision is the least number of significant digits' — and then applies that to a subtraction in question 1d, and the unit assessment does the same in its question 2. The counting rule is for products and quotients. Sums and differences are governed by the place where each measurement's last digit sits. Every example the book uses happens to come out the same either way, so nothing printed in the book is numerically wrong — but a student who learns the rule as stated will be wrong elsewhere, and 1,234 + 5.6 is where it shows: the place rule gives 1,240 and the counting rule gives 1.2 × 10³, throwing away two digits that were measured. Notes III teaches both rules side by side and whiteboard 9 is that exact case.",
+            "THE BOOK STATES THE SIGNIFICANT-DIGIT RULE WRONGLY. Teacher Edition 4.4.2 says 'if two numbers are written with different precision, then the precision is the least number of significant digits' — and then applies that to a subtraction in question 1d, and the unit assessment does the same in its question 2. The counting rule is for products and quotients. Sums and differences are governed by the place where each measurement's last digit sits. Every example the book uses happens to come out the same either way, so nothing printed in the book is numerically wrong — but a student who learns the rule as stated will be wrong elsewhere, and 1,234 + 5.6 is where it shows: the place rule gives 1,240 and the counting rule gives 1.2 × 10³, throwing away two digits that were measured. Notes III teaches both rules side by side on that exact case, and whiteboard 9 asks for the same disagreement in writing on a sum of its own, 9,145 + 4.8, where the place rule gives 9,150 and the counting rule gives 9.1 × 10³.",
             "Croix's default, from the audit: we teach it correctly. If the class meets the book's version elsewhere, the sentence to say is that the book's rule is the product rule and it has been applied to the wrong operation.",
             "The second thing this lesson insists on is that a count is not a measurement. Sixty seconds in a minute, five processors and twenty minutes are exact, so they never limit the significant digits — bank 10 is built entirely on that point, and it is the distinction that makes the rule make sense rather than feel arbitrary.",
             "Four book items were NOT reused, per the audit. Teacher Edition 4.4.3 question 1b keys 1.36 × 10⁹ where the division gives 1.3588 × 10⁸ — a factor of ten, in an answer the teacher reads aloud. Teacher Edition 4.4.4 question 1b keys 3 × 10⁸ for a sum that is 3.48 × 10⁸, and prints a minus sign where the equals sign belongs. Teacher Edition 4.4.2 question 3 gives a 2020 smartphone's processing speed as 2.7 MHz; it is about 2.7 GHz, and as printed the phone is slower than a 1966 guidance computer, which inverts the item's point. Homework 4.4 question 3 asks about 'three popular gaming systems' over a two-row table of phone makers, in which Samsung's profit is given as 2.37 × 10¹⁴ dollars — more than world GDP — and two of its parts add exponents three apart.",

@@ -30,7 +30,7 @@
    "title": "Notes",
    "sub": "Copy the table.",
    "min": 4,
-   "note": "The 3.04 pattern table again, with x in place of 2: each entry is the previous one divided by x. After x\u2070 = 1 the next division gives 1/x, then 1/x\u00b2, then 1/x\u00b3. Students fill the last three cells before the rule is written. The state guide asks for this table (its task 2, with base m: m\u207b\u2075 to m\u2075, 'why is m\u2070 = 1') and for a written contrast of x\u00b3 and x\u207b\u00b3 \u2014 that contrast is whiteboard 9.\nOFF: 'x\u207b\u00b3 is one over x\u00b3. It is a reciprocal. It is not negative, and it is not \u22123x.'",
+   "note": "The 3.04 pattern table again, with x in place of 2: each entry is the previous one divided by x. After x\u2070 = 1 the next division gives 1/x, then 1/x\u00b2, then 1/x\u00b3. Students fill the last three cells before the rule is written. The state guide asks for this table (its task 2, with base m: m\u207b\u2075 to m\u2075, 'why is m\u2070 = 1') and for a written contrast of x\u00b3 and x\u207b\u00b3 \u2014 that contrast is whiteboard 9, asked there with the exponent 5.\nOFF: 'x\u207b\u00b3 is one over x\u00b3. It is a reciprocal. It is not negative, and it is not \u22123x.'",
    "kind": "notes"
   },
   {
@@ -118,7 +118,7 @@
    "title": "Whiteboards   \u00b7   Question 1 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "The law, plain, with a letter. A board with \u2212x\u2074 made the exponent's sign the sign of the expression; a board with \u22124x multiplied.",
+   "note": "The law, plain, with a letter. A board with \u2212x\u2078 made the exponent's sign the sign of the expression; a board with \u22128x multiplied.",
    "kind": "wb"
   },
   {
@@ -150,7 +150,7 @@
    "title": "Whiteboards   \u00b7   Question 3 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "Ruling 22's board: a real question (a brightness) that puts a number into a monomial with a negative exponent. 3 \u00b7 2\u207b\u00b2 = 3/2\u00b2 = 3/4 of a unit. The coefficient stays put; only the x carries the exponent \u2014 on the reveal, write 3x\u207b\u00b2 = 3/x\u00b2 first and then substitute. The height is there to be read past. A board with 1/12 moved the 3 down with the x \u2014 today's leading error, and the one to name at the board; a board with 12 dropped the minus; a board with \u221212 read the exponent's sign as the value's.",
+   "note": "Ruling 22's board: a real question (a brightness) that puts a number into a monomial with a negative exponent. 5 \u00b7 3\u207b\u00b2 = 5/3\u00b2 = 5/9 of a unit. The coefficient stays put; only the x carries the exponent \u2014 on the reveal, write 5x\u207b\u00b2 = 5/x\u00b2 first and then substitute. (Notes II has 3x\u207b\u00b2 = 3/x\u00b2; the board has a coefficient and a distance of its own \u2014 ruling 43.) The height is there to be read past. A board with 1/45 moved the 5 down with the x \u2014 today's leading error, and the one to name at the board; a board with 45 dropped the minus; a board with \u221245 read the exponent's sign as the value's.",
    "kind": "wb"
   },
   {
@@ -166,7 +166,7 @@
    "title": "Whiteboards   \u00b7   Question 4 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "The state guide's own item. A board with 1/(yz)\u2077 or 1/(yz\u2077) combined unlike bases.",
+   "note": "The shape of the state guide's item y\u207b\u00b3z\u207b\u2074, which is worked in Notes II; this board has letters and exponents of its own (ruling 43). A board with 1/(pq)\u2079 or 1/(pq\u2079) combined unlike bases.",
    "kind": "wb"
   },
   {
@@ -182,7 +182,7 @@
    "title": "Whiteboards   \u00b7   Question 5 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "Diagnostic. A is the board that says Notes I did not land \u2014 go back to the table and divide 1 by x twice, out loud.",
+   "note": "Diagnostic. A is the board that says Notes I did not land \u2014 go back to the table and keep dividing by x past x\u2070, out loud: 1/x, 1/x\u00b2, 1/x\u00b3 \u2014 reciprocals, not opposites.",
    "kind": "wb"
   },
   {
@@ -214,7 +214,7 @@
    "title": "Whiteboards   \u00b7   Question 7 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "Subtraction landing below zero. A board with m\u2074 subtracted the wrong way; a board with m\u207b\u2074 stopped one step early. Cancelling three m's from seven confirms the answer.",
+   "note": "Subtraction landing below zero. A board with a\u2079 subtracted the wrong way; a board with a\u207b\u2079 stopped one step early. Cancelling two a's from eleven confirms the answer.",
    "kind": "wb"
   },
   {
@@ -246,7 +246,7 @@
    "title": "Whiteboards   \u00b7   Question 9 of 9",
    "sub": "Take your time. Boards up when you have written it.",
    "min": 0,
-   "note": "Written. The state guide's new task for this benchmark, done as a written contrast. Full credit: the word reciprocal (or '1 over x\u00b3') and both values. A student who writes \u22128 for x\u207b\u00b3 has the day's misconception; one who writes 'opposites' has the 3.04 confusion of opposite with reciprocal.",
+   "note": "Written. The state guide's new task for this benchmark, done as a written contrast. The guide contrasts x\u00b3 and x\u207b\u00b3; those are two cells of the Notes I table, so the board asks the same contrast with the exponent 5, which the table does not reach (ruling 43). Full credit: the word reciprocal (or '1 over x\u2075') and both values. A student who writes \u221232 for x\u207b\u2075 has the day's misconception; one who writes 'opposites' has the 3.04 confusion of opposite with reciprocal.",
    "kind": "wb"
   },
   {

@@ -17,7 +17,7 @@ the unit is planned. The printed keys in each lesson's `Keys` folder are generat
 
 - This lesson rebuilds Math Nation 3.1 (SE pp. 99–105) as front-taught notes and individual boards. The book's version is four partner Explorations in a row; every table in them survives here, worked from the front, because a single student can complete each one.
 - The mathematics in the book's lesson is clean — every value on its pages checks. The defect is in its practice key: the Additional Practice answer for (−3·6)⁴ is printed 104,796 and is 104,976. That item is on the Additional bank here with the right value.
-- Two things the state guide expects that the book never asks: working backwards to an unknown exponent (2³·2ⁿ = 2⁸), and the sum-inside-the-parentheses trap ((10 + (−2))³). Both are in the round and in the bank.
+- Two things the state guide expects that the book never asks: working backwards to an unknown exponent (2³·2ⁿ = 2⁸), and the sum-inside-the-parentheses trap ((10 + (−2))³). The unknown exponent is bank question 12 and independent question 6; the trap is worked in Notes III with those numbers and asked again on whiteboard 9 with a sum of its own, (9 + (−3))³.
 
 **What the audit against Math Nation found.**
 
@@ -159,8 +159,8 @@ the unit is planned. The printed keys in each lesson's `Keys` folder are generat
 **Read this once, when you plan the unit.**
 
 - This lesson rebuilds Math Nation 3.5 (SE pp. 124–129). The book's guided instruction (the (2/5) pattern table) is Notes I; its Fernanda/Junior collaboration is Notes III; its equivalence table and matching activity are bank questions 5 and 10. Every value on the book's pages checks.
-- Whiteboard 5 uses (−7/8)⁻³ rather than the book's (−7/8)⁻². With an even power, (−8/7)² and (8/7)² are the same number (64/49), so a multiple-choice item cannot separate the student who kept the sign from the one who dropped it. The odd power keeps the sign, every option is a different number, and the discussion about the reciprocal's sign still happens.
-- The B1G-M task for this benchmark — the difference between −b and b⁻¹; here, (−2/3)⁻⁵ misread as (2/3)⁵ — is warm-up 4, Notes II, whiteboard 2, 5 and 9, and bank question 11.
+- Whiteboard 5 asks about an odd power, (−7/10)⁻³, where the book asks about (−7/8)⁻² — that one is Example 1. With an even power, (−8/7)² and (8/7)² are the same number (64/49), so a multiple-choice item cannot separate the student who kept the sign from the one who dropped it. The odd power keeps the sign, every option is a different number, and the discussion about the reciprocal's sign still happens.
+- The B1G-M task for this benchmark — the difference between −b and b⁻¹; in Notes II's terms, (−2/3)⁻⁵ misread as (2/3)⁵ — is warm-up 4, Notes II, whiteboard 2, 5 and 9, and bank question 11.
 
 **What the audit against Math Nation found.**
 
@@ -203,7 +203,7 @@ the unit is planned. The printed keys in each lesson's `Keys` folder are generat
 - Math Nation 3.7 pages verified: 1/16, 25/4, 1024 three ways, 2¹⁵, 3⁸, 2⁹, 3⁵·2³, 2⁻⁷ vs 2⁻⁶, the partner table (3⁷, 2²·7, 4³, 3³/2², 2·5²).
 - Practice L6 and L7 keys check; Homework L6 and L7 keys check.
 - The book's 3.6.1 warm-up (place digits in boxes to make a true statement) is sound; replaced by spaced retrieval because it previews the lesson instead of retrieving.
-- The book's 3.7.5 partner table is in the round as questions 7–8 and in the bank as question 11.
+- The book's 3.7.5 partner table is in the round as questions 7–8 and in the bank as question 11; question 7 has numbers of its own (ruling 43 — Notes III already works 2³ · 4³).
 
 **What changed from the book.**
 
@@ -212,7 +212,7 @@ the unit is planned. The printed keys in each lesson's `Keys` folder are generat
 - 3.6.5 Choose Your Own Adventure and 3.6.6 Error Analysis → whiteboard 3 and Notes II.
 - 3.7.2–3.7.4 → Notes III–IV and Example 2.
 - 3.7.5 partner collaboration → whiteboard 7–8 and bank question 11.
-- Both cool-downs → whiteboard 9, written.
+- Both cool-downs → whiteboard 9, written, on a pair of expressions of its own (ruling 43 — the pair worked in Notes IV is not asked again).
 
 **Question Bank answers.**  
 1. $\frac{0.25^{3}}{0.25^{3}} = 0.25^{0} = 1$  2. $(-3)^{3}\cdot\left(\frac{-3}{5}\right)^{4} = \frac{(-3)^{7}}{5^{4}} = -\frac{2187}{625}$  3. $3^{-9} = \frac{1}{3^{9}} = \frac{1}{19{,}683}$  4. $8^{-2} = \frac{1}{64}$  (or $\left(\frac{6}{48}\right)^{2} = \frac{36}{2304} = \frac{1}{64}$)  5. $3^{-4}\cdot 2^{4} = \frac{2^{4}}{3^{4}} = \frac{16}{81}$  6. 36 — product of powers, quotient of powers  7. −9 — zero exponent, quotient of powers  8. 25 · 4 = 100 — negative exponent  9. $(-2.5)^{3} = -15.625$ — zero exponent, quotient of powers  10. $\left(\frac{5}{7}\right)^{4} = \frac{625}{2401}$ — negative exponent, power of a quotient  11. (a) $2^{9}$  (b) $5^{6}$  (c) $8^{4}$  (d) $2^{8}$  12. (a) $2^{-9}\cdot 2^{-3} = 2^{-12}$  (b) $2^{-10}\cdot 2^{-2} = 2^{-12}$  (c) Yes — both are $2^{-12}$.  13. D D  14. (a) n = 4  (b) n = −3
@@ -231,14 +231,14 @@ the unit is planned. The printed keys in each lesson's `Keys` folder are generat
 **Read this once, when you plan the unit.**
 
 - This is the first of the two Thread A days placed inside Unit 3 under ruling 30: MA.8.AR.1.1 (Math Nation Unit 14, lessons 14.1 and 14.2) taught right after the numerical laws are complete and before scientific notation. The content is the same seven laws with variable bases, and the lesson is built to say so out loud — every law is introduced by the numerical version the class already owns.
-- Math Nation's Unit 14 pages were not part of the Unit 3 package, so the items here are original, aligned to the benchmark text, the B1G-M's example ((3x³y⁻²)³ — held for tomorrow, because of the negative exponent), its listed items (x⁵x⁸ = x¹³) and its task (Rachel and Justina, whiteboard 9). The three IXL skills for the day are the ones the Math Nation plan attaches to 14.1 and 14.2.
+- Math Nation's Unit 14 pages were not part of the Unit 3 package, so the items here are original, aligned to the benchmark text, the B1G-M's example ((3x³y⁻²)³ — held for tomorrow, because of the negative exponent), its listed items (x⁵x⁸ = x¹³) and its task (Rachel and Justina — the guide's own monomial is in Notes II, and whiteboard 9 puts the same question to a monomial of its own). The three IXL skills for the day are the ones the Math Nation plan attaches to 14.1 and 14.2.
 - Every quotient today lands on a positive or zero exponent by design; negative results are tomorrow's lesson. Do not let a student 'discover' x⁻² today — say 'tomorrow' and move on.
 - The word monomial is used on the student pages. It is defined in the vocabulary box and on the reference sheet; the benchmark's boundary is 'monomial bases', so the word earns its place.
 
 **What the audit against Math Nation found.**
 
 - Every item on the bank, additional bank, warm-up, examples, independent set and round was re-derived by sympy at build time with the variables declared as positive symbols (mathcheck: 0 findings).
-- The B1G-M items quoted: x⁵x⁸ = x¹³ (whiteboard 1, verified); the Rachel/Justina task (15xy²)³ = 3,375x³y⁶ (whiteboard 9, verified 15³ = 3,375).
+- The B1G-M items quoted: x⁵x⁸ = x¹³ (whiteboard 1, verified); the Rachel/Justina task (15xy²)³ = 3,375x³y⁶ (Notes II, verified 15³ = 3,375). Whiteboard 9 puts the same task to (14a³b)³ = 2,744a⁹b³ (verified 14³ = 2,744).
 - The B1G-M example (3x³y⁻²)³ = 27x⁹y⁻⁶ contains a negative exponent and is held for day 2.
 - No Math Nation Unit 14 pages were available for audit; nothing here is copied from them.
 
@@ -246,7 +246,7 @@ the unit is planned. The printed keys in each lesson's `Keys` folder are generat
 
 - Math Nation 14.1 and 14.2 (two book lessons) → one period under ruling 30, since the numerical laws were completed yesterday and each law needs only its variable-base restatement.
 - Book-style partner explorations → Notes I–III from the front, with expansion shown once per law.
-- Cool-downs → whiteboard round; the state guide's Rachel/Justina task → whiteboard 9, written.
+- Cool-downs → whiteboard round; the state guide's Rachel/Justina task → Notes II (the guide's monomial) and whiteboard 9, written (a monomial of its own).
 
 **Question Bank answers.**  
 1. $x^{13}$  2. $n^{30}$  3. $27y^{12}$  4. $a^{6}$  5. $-12x^{9}$  6. $4p^{3}q^{2}$  7. (a) $10x^{5}y^{5}$  (b) $16m^{4}n^{6}$  (c) $a^{7}b^{7}$  8. (a) $3m^{2}n^{2}$  (b) $y^{3}$  (c) $2k^{5}$  9. (a) n = 8  (b) n = 5  (c) n = 7  10. (a) $12x^{7}$  (b) $16y^{10}$  11. D D  12. A, C, D, F A, C, D and F
@@ -265,21 +265,21 @@ the unit is planned. The printed keys in each lesson's `Keys` folder are generat
 **Read this once, when you plan the unit.**
 
 - Second Thread A day (Math Nation 14.3 and 14.4 under ruling 30): the negative exponent law and multiple laws, with variable bases. The lesson is built on 3.04 — the same table, the same 'reciprocal, not opposite' line — and on yesterday's regrouping of coefficients and variables.
-- The items are original, aligned to the benchmark text and to the B1G-M for MA.8.AR.1.1: its example (3x³y⁻²)³ = 27x⁹y⁻⁶ is the shape of Notes III's last line and bank 7b; its items y⁻³z⁻⁴ = 1/(y³z⁴) (whiteboard 4) and (a³/(4b⁻⁷))⁵ = a¹⁵b³⁵/1,024 (Example 2 and bank 8c) are used as written; its task 2 (the m⁻⁵ … m⁵ table, here with x) is Notes I; its task 3 (x³ vs x⁻³) is whiteboard 9, as a written contrast.
+- The items are original, aligned to the benchmark text and to the B1G-M for MA.8.AR.1.1: its example (3x³y⁻²)³ = 27x⁹y⁻⁶ is the shape of Notes III's last line and bank 7b; its items y⁻³z⁻⁴ = 1/(y³z⁴) (Notes II) and (a³/(4b⁻⁷))⁵ = a¹⁵b³⁵/1,024 (Example 2 and bank 8c) are used as written; its task 2 (the m⁻⁵ … m⁵ table, here with x) is Notes I; its task 3 (x³ vs x⁻³) is whiteboard 9, as a written contrast — asked there with the exponent 5, because x³ and x⁻³ are cells of the Notes I table. Whiteboard 4 has the shape of the y⁻³z⁻⁴ item, with letters and exponents of its own.
 - The leading error today is not the sign error from 3.04 but a new one: moving the coefficient across the bar with the variable (3x⁻² written as 1/(3x²)). Whiteboards 3 and 6 and bank 11 are built to surface it. The sign error is still there (whiteboard 5, option A) and is worth a look.
 - Every answer is expected 'with positive exponents only'. A student who stops at x⁻⁵ has applied the law correctly and not finished; the key marks the finished form. Say this once, at Notes III.
 
 **What the audit against Math Nation found.**
 
 - Every item on the bank, additional bank, warm-up, examples, independent set and round was re-derived by sympy at build time with the variables declared as positive symbols (mathcheck: 0 findings).
-- B1G-M items used as written: y⁻³z⁻⁴ = 1/(y³z⁴) (whiteboard 4); (a³/(4b⁻⁷))⁵ = a¹⁵b³⁵/1,024, checked 4⁵ = 1,024 and (−7)(5) = −35 (Example 2, bank 8c).
+- B1G-M items used as written: y⁻³z⁻⁴ = 1/(y³z⁴) (Notes II); (a³/(4b⁻⁷))⁵ = a¹⁵b³⁵/1,024, checked 4⁵ = 1,024 and (−7)(5) = −35 (Example 2, bank 8c).
 - The B1G-M example (3x³y⁻²)³ = 27x⁹y⁻⁶ is stated in the guide with a negative exponent left in the result; our items always finish with positive exponents, so the shape is used with the final step added.
 - No Math Nation Unit 14 pages were available for audit; nothing here is copied from them.
 
 **What changed from the book.**
 
 - Math Nation 14.3 and 14.4 (two book lessons) → one period under ruling 30; the numerical negative-exponent law is a week old and needs restating, not reteaching.
-- The guide's partner-discussion task (x³ vs x⁻³) → whiteboard 9, written, per the no-partner-work rule.
+- The guide's partner-discussion task (x³ vs x⁻³) → whiteboard 9, written, per the no-partner-work rule — with the exponent 5 in place of 3, because x³ and x⁻³ are in the Notes I table.
 - Cool-downs → whiteboard round.
 
 **Question Bank answers.**  
@@ -298,7 +298,7 @@ the unit is planned. The printed keys in each lesson's `Keys` folder are generat
 
 **Read this once, when you plan the unit.**
 
-- This lesson rebuilds Math Nation 3.8 (SE pp. 139–145) and opens MA.8.NSO.1.4. The book's sequence — powers of ten and place value, the definition, the coefficient constraint, then 'how many times larger' in three cases — is kept as Notes I–III. Its Florida funding, painting, alligator and 8.4 × 10⁶ items are kept as the examples and whiteboard 7.
+- This lesson rebuilds Math Nation 3.8 (SE pp. 139–145) and opens MA.8.NSO.1.4. The book's sequence — powers of ten and place value, the definition, the coefficient constraint, then 'how many times larger' in three cases — is kept as Notes I–III. Its Florida funding, painting and alligator items are kept as the examples, and its 8.4 × 10⁶ comparison is the last line of Notes III; whiteboard 7 is the same kind of comparison with numbers of its own.
 - Two things the state guide expects that the book does not ask are added: calculator E notation (whiteboard 8, bank 7c) and the '10³ times is not 3 times' misconception as a diagnostic (whiteboard 6). The guide's own items — the blue whale and elephant, Florida and Lake Okeechobee, China and Mexico — are bank 9 and Additional 9.
 - Two book items were not reused. The Additional Practice key gives 10⁶ + 10⁴ = 101000 (it is 1,010,000). Homework 2 scaffolds 8.1 ÷ 2.7 = 3 and 10⁸ ÷ 10⁶ = 100 and then asks about 8.1 × 10⁸ versus 5.4 × 10⁷ = 15, so the scaffold does not lead to the question; bank 8 uses a scaffold that does.
 - Coefficient constraint: every scientific-notation coefficient in this lesson is in [1, 10) except where an item is ABOUT the constraint (whiteboards 1, 3, 5, 9; bank 11–13). Those items are tagged in the spec and were checked by hand.
@@ -317,7 +317,7 @@ the unit is planned. The printed keys in each lesson's `Keys` folder are generat
 
 - 3.8.1 grains-of-sand warm-up → spaced retrieval; the sand number kept in Notes I and Additional 7a.
 - 3.8.2–3.8.3 partner explorations (powers of ten, patterns) → Notes I–II from the front.
-- 3.8.4 Guided Instruction → Notes II and Example 1; its item 3 (Marcus and the coefficient rule) → whiteboard 9, written.
+- 3.8.4 Guided Instruction → Notes II and Example 1; its item 3 (Marcus and the coefficient rule) → whiteboard 9, written, with new numbers (the book's are in Notes II).
 - 3.8.5 partner collaboration (comparing) → Notes III, Example 2 and whiteboards 6–7.
 - 3.8.6 Cool Down ('explain in your own words') → replaced by whiteboard 9, which asks the same thing about a specific case.
 

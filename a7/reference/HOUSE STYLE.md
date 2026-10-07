@@ -1692,6 +1692,42 @@ all I was saying."*
    replacements all read correctly and stand; **they are not a rule**. New specs use arrows
    wherever an arrow is the right mark.
 
+**Ruling 43 — Croix, 6 October (evening): a practice problem never repeats what the lesson already
+showed.** *"There are instances of the exact problem showing up in notes and in your turn or
+whiteboards."* He was right, and it was not an accident: the specs were written notes-first and the
+boards were then built on the notes' own lines ("that contrast is whiteboard 9", "the state guide's
+own item"). About ninety Your Turns, boards and independent questions across M7 Units 4–5 and A7
+Units 3–4 re-asked a notes line, a worked example or the warm-up — the same numbers, sometimes the
+same words (A7 3.T2: boards 4, 5 and 7 were Notes II and III; M7 4.08: Notes II worked
+3.14 × 5² = 78.5 and board 1 was r = 5 cm; M7 5.03: boards 1, 2 and 4 were Examples 1 and 2).
+A student with the notes open copies the answer, and the board measures handwriting.
+
+1. **What the class has been shown** by the time practice starts is the warm-up (its answers are
+   revealed), every notes slide and every worked example. **Practice** is each Your Turn, each
+   whiteboard question and each independent question. A practice item is a problem the class has
+   NOT seen: the same kind, the same difficulty, the same misconception to catch — numbers of its
+   own. Renaming the letter is not a new problem; swapping the order is not; putting an example's
+   numbers in a new sentence is not.
+2. **An error-analysis or "who is right" board gets its own expression too.** The notes may carry
+   the book's or the state guide's item; the board asks the same question of another one, and the
+   teacher's edition says where the guide's item lives.
+3. **Where one notes line fed a whole run of boards, the notes got a circle of their own** and the
+   run was left alone (M7 4.07 Notes II–III, 4.08 Notes II–III, 4.09 Notes II).
+4. **A board may build on an earlier BOARD on purpose** — the same figure by the other method, a
+   prediction followed by "what do you write down?" — and says so with `repeat_ok=True` and a
+   comment. Nothing else carries the tag except a coincidence of values between two different
+   problems.
+5. **The build refuses a repeat like a wrong answer** (`rulingcheck`, `lib/repeatcheck.py`; the
+   rules A, B, C, D, P and Q are in `SPEC SCHEMA.md`). It compares what is written — expressions
+   with their typography and letter names taken away, the numbers given and the numbers answered —
+   so it does not see a problem re-asked in other words with other numbers.
+6. **The question banks are not in this ruling.** They are the quiz source, not class work, and
+   many bank items are still copies of a board or an example. Reported to Croix; not changed.
+7. **Every replaced item had every dependent value re-derived** — answer, steps, check, each
+   distractor from its named error, the `wrong` list, the notes to the teacher, and the
+   teacher's-edition prose that quoted the old numbers. The gates re-ran on all four units at 0
+   findings before anything was built.
+
 ## 13b(xviii). Ruling 38 — 4 October (night): a figure's labels can be read, and are true [both courses; M7's ruling 38]
 
 Found on the eve of 4.04, reading its rebuilt deck: the barn of Example 1 had its roof drawn

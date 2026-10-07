@@ -117,11 +117,11 @@ L = dict(
              gloss="(−4)³ over 1", answer="−64",
              note="Same base throughout. Three negative factors: negative. A board with 64 dropped the sign; a board reading 'undefined' read (−4)⁰ as 0 and divided by it — a good error to name aloud.", check=("eq", "(-4)**2*(-4)**1/(-4)**0", "-64"),
              wrong="64 — dropped the sign; 'undefined' — (−4)⁰ in the denominator read as 0, so a division by 0 [8.NSO.1.3: zero exponent law, a⁰ = 1]"),
-        dict(kind="written", text=["Winston writes  $\\left(\\frac{2^{6}}{2^{4}}\\right)^{3} = (2^{2})^{3}$.   Yvette writes  $\\left(\\frac{2^{6}}{2^{4}}\\right)^{3} = \\frac{2^{18}}{2^{12}}$.", "Do they get the same value? Explain."], qtext="Winston writes (2⁶/2⁴)³ = (2²)³. Yvette writes (2⁶/2⁴)³ = 2¹⁸/2¹². Do they get the same value? Explain.",
-             hint="Name the law each one used first, and give the value.", steps=["Winston:  $(2^{2})^{3} = 2^{2 \\cdot 3} = 2^{6}$", "Yvette:  $\\frac{2^{18}}{2^{12}} = 2^{18-12} = 2^{6}$", "$2^{6} = 64$"],
-             gloss="both plans end at 2⁶", answer="Yes — both give 2⁶ = 64",
+        dict(kind="written", text=["Winston writes  $\\left(\\frac{4^{7}}{4^{4}}\\right)^{2} = (4^{3})^{2}$.   Yvette writes  $\\left(\\frac{4^{7}}{4^{4}}\\right)^{2} = \\frac{4^{14}}{4^{8}}$.", "Do they get the same value? Explain."], qtext="Winston writes (4⁷/4⁴)² = (4³)². Yvette writes (4⁷/4⁴)² = 4¹⁴/4⁸. Do they get the same value? Explain.",
+             hint="Name the law each one used first, and give the value.", steps=["Winston:  $(4^{3})^{2} = 4^{3 \\cdot 2} = 4^{6}$", "Yvette:  $\\frac{4^{14}}{4^{8}} = 4^{14-8} = 4^{6}$", "$4^{6} = 4{,}096$"],
+             gloss="both plans end at 4⁶", answer="Yes — both give 4⁶ = 4,096",
              note="Written. Full credit needs the two law names (Winston: quotient of powers; Yvette: power of a quotient / power of a power) and the value. A student who says 'no, because the expressions look different' has not yet accepted that equivalent means same value.",
-             check=("many", ("eq", "(2**6/2**4)**3", "64"), ("eq", "2**18/2**12", "64")),
+             check=("many", ("eq", "(4**7/4**4)**2", "4096"), ("eq", "4**14/4**8", "4096")),
              wrong="'No' — judged equivalence by appearance instead of value [7.NSO.1.1: generate equivalent expressions]"),
     ],
 
@@ -177,7 +177,7 @@ L = dict(
         dict(stem="Kim says that $\\frac{(-18)^{3}}{6^{3}}$ can be rewritten as $\\left(\\frac{-18}{6}\\right)^{3}$ before evaluating. Is she right? Name the law, and give the value.", answer="Yes — power of a quotient, read from right to left; $(-3)^{3} = -27$.", why="", check=("eq", "(-18)**3/6**3", "-27"), space=1.0),
     ],
 
-    mtr=[("MTR.2.1", "Notes II and board 9 — the same expression is carried to the end by two different plans, written side by side, and the two answers are compared."),
+    mtr=[("MTR.2.1", "Notes II and board 9 — one expression is carried to the end by two different plans, written side by side, and the two answers are compared."),
          ("MTR.3.1", "Boards 1 through 4 — four multi-law expressions, one each, written without a reference sheet."),
          ("MTR.6.1", "Board 5 — a sixth power over 2¹⁰ lands on 4; students say why an answer that small is reasonable before they trust it.")],
 
@@ -195,7 +195,7 @@ L = dict(
     independent=[
         dict(stem="Find the value.  $\\frac{4^{2}\\cdot 4^{0}}{4^{1}}$", answer="$4^{1} = 4$", why="4⁰ is 1; then 4² ÷ 4¹.", check=("eq", "F(4)**2*F(4)**0/F(4)**1", "4"), space=0.8),
         dict(stem="Find the value.  $\\left(2^{0}\\cdot 2^{3}\\right)^{2}$", answer="$\\left(2^{3}\\right)^{2} = 2^{6} = 64$", why="", check=("eq", "(F(2)**0*F(2)**3)**2", "64"), space=0.8),
-        dict(stem="Write as one power.  $\\left(\\frac{5^{6}}{5^{4}}\\right)^{3}$", answer="$5^{6}$", why="Inside first gives 5²; then (5²)³.", check=("eq", "(F(5)**6/F(5)**4)**3", "5**6"), space=0.8),
+        dict(stem="Write as one power.  $\\left(\\frac{5^{8}}{5^{5}}\\right)^{3}$", answer="$5^{9}$", why="Inside first gives 5³; then (5³)³.", check=("eq", "(F(5)**8/F(5)**5)**3", "5**9"), space=0.8),
         dict(stem="Find the value.  $0.2^{2}\\cdot\\left(0.2^{1}\\right)^{2}$", answer="$0.2^{4} = 0.0016$", why="", check=("eq", "F(2,10)**2*(F(2,10)**1)**2", "F(16,10000)"), space=0.8),
         dict(stem="Find the value.  $\\frac{(-3)^{3}\\cdot(-3)^{0}}{(-3)^{2}}$", answer="$(-3)^{1} = -3$", why="", check=("eq", "F(-3)**3*F(-3)**0/F(-3)**2", "-3"), space=0.8),
         dict(stem="Show that  $\\left(\\frac{10^{4}}{10^{2}}\\right)^{2}$  and  $\\frac{10^{8}}{10^{4}}$  have the same value.", answer="Both are $10^{4} = 10{,}000$.", why="Two plans, one value — the point of the lesson.", check=("many", ("eq", "(F(10)**4/F(10)**2)**2", "10**4"), ("eq", "F(10)**8/F(10)**4", "10**4")), space=1.0),

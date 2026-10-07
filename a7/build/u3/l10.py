@@ -74,10 +74,10 @@ L = dict(
     ],
 
     whiteboard=[
-        dict(latex="10^{-4}", hint="Write it as a decimal.", steps=["$10^{-4} = \\frac{1}{10^{4}} = \\frac{1}{10{,}000} = 0.0001$"],
-             gloss="a 1 in the fourth decimal place", answer="0.0001",
-             note="The law with base 10. A board with 0.00001 counted four zeros and then wrote the 1; a board with −10,000 read the exponent's sign as the number's sign.", check=("eq", "F(10)**-4", "F(1,10000)"),
-             wrong="0.00001 — four zeros written, then the 1 (five places) [8.NSO.1.4: the exponent counts places]; −10,000 — negative exponent read as a negative value [B1G-M 8.NSO.1.3 misconception]"),
+        dict(latex="10^{-7}", hint="Write it as a decimal.", steps=["$10^{-7} = \\frac{1}{10^{7}} = \\frac{1}{10{,}000{,}000} = 0.0000001$"],
+             gloss="a 1 in the seventh decimal place", answer="0.0000001",
+             note="The law with base 10, on a power the Notes I table does not reach. A board with 0.00000001 counted seven zeros and then wrote the 1; a board with −10,000,000 read the exponent's sign as the number's sign.", check=("eq", "F(10)**-7", "F(1,10000000)"),
+             wrong="0.00000001 — seven zeros written, then the 1 (eight places) [8.NSO.1.4: the exponent counts places]; −10,000,000 — negative exponent read as a negative value [B1G-M 8.NSO.1.3 misconception]"),
         dict(text=["Write  0.003  in scientific notation."], hint="Which place is the 3 in?", steps=["The 3 is in the thousandths place:  $0.001 = 10^{-3}$", "$3 \\times 10^{-3} = 0.003$"],
              gloss="3 thousandths", answer="3 × 10⁻³",
              note="One digit. 3 × 10³ has the sign wrong (that is 3,000); 3 × 10⁻² counted the zeros.", check=("eq", "3*F(10)**-3", "F(3,1000)"),
@@ -103,10 +103,10 @@ L = dict(
              errors={"B": "10² read as 10 [B1G-M 8.NSO.1.4 misconception: comparing two numbers in scientific notation incorrectly]", "C": "coefficients only — the powers were ignored [8.NSO.1.4: both factors are compared]", "D": "the exponents were subtracted the wrong way, −5 − (−3) = −2 [8.NSO.1.3: quotient law, top minus bottom]"},
              note="Diagnostic for the comparison. D is the integer-subtraction slip — the one that says the powers were handled, just backwards.",
              check=("eq", "(6*F(10)**-3)/(2*F(10)**-5)", "300")),
-        dict(text=["Which is greater,  $3.9 \\times 10^{-5}$  or  $7.4 \\times 10^{-8}$ ?"], hint="Compare the exponents first.", steps=["$3.9 \\times 10^{-5} = 0.000039$", "$7.4 \\times 10^{-8} = 0.000000074$"],
-             gloss="−5 > −8, so 10⁻⁵ is the larger power", answer="3.9 × 10⁻⁵",
-             note="Powers first. 7.4 is the bigger coefficient, but 10⁻⁸ is a much smaller power. A board with 7.4 × 10⁻⁸ compared the coefficients or thought 8 beats 5.", check=("true", "F(39,10)*F(10)**-5 > F(74,10)*F(10)**-8"),
-             wrong="7.4 × 10⁻⁸ — coefficients compared first, or −8 read as larger than −5 [8.NSO.1.4: compare the powers of 10 first, and −8 < −5]"),
+        dict(text=["Which is greater,  $5.3 \\times 10^{-4}$  or  $8.9 \\times 10^{-6}$ ?"], hint="Compare the exponents first.", steps=["$5.3 \\times 10^{-4} = 0.00053$", "$8.9 \\times 10^{-6} = 0.0000089$"],
+             gloss="−4 > −6, so 10⁻⁴ is the larger power", answer="5.3 × 10⁻⁴",
+             note="Powers first. 8.9 is the bigger coefficient, but 10⁻⁶ is a much smaller power. A board with 8.9 × 10⁻⁶ compared the coefficients or thought 6 beats 4.", check=("true", "F(53,10)*F(10)**-4 > F(89,10)*F(10)**-6"),
+             wrong="8.9 × 10⁻⁶ — coefficients compared first, or −6 read as larger than −4 [8.NSO.1.4: compare the powers of 10 first, and −6 < −4]"),
         dict(text=["A computer displays a number as  4.2E−6.", "Write the number in standard form."], hint="E−6 means × 10⁻⁶.", steps=["4.2E−6 means  $4.2 \\times 10^{-6}$", "$4.2 \\times 10^{-6} = 0.0000042$"],
              gloss="4.2 × 10⁻⁶", answer="0.0000042",
              note="The state guide's E-notation shape, small side. A board with −4,200,000 read the minus as the number's sign; a board with 0.00000042 moved seven places.", check=("eq", "F(42,10)*F(10)**-6", "F(42,10**7)"),
@@ -213,7 +213,7 @@ L = dict(
 
     independent=[
         dict(stem="Write  0.00047  in scientific notation.", answer="4.7 × 10⁻⁴", why="", check=("eq", "F(47,100000)", "F(47,10)*F(10)**-4"), space=0.7),
-        dict(stem="Write  $5.2 \\times 10^{-3}$  in standard form.", answer="0.0052", why="", check=("eq", "F(52,10)*F(10)**-3", "F(52,10000)"), space=0.7),
+        dict(stem="Write  $9.4 \\times 10^{-3}$  in standard form.", answer="0.0094", why="", check=("eq", "F(94,10)*F(10)**-3", "F(94,10000)"), space=0.7),
         dict(stem="Write  0.0000061  in scientific notation.", answer="6.1 × 10⁻⁶", why="The 6 is in the millionths place.", check=("eq", "F(61,10000000)", "F(61,10)*F(10)**-6"), space=0.7),
         dict(stem="Which is greater,  $2.4 \\times 10^{-6}$  or  $8.1 \\times 10^{-9}$ ?", answer="$2.4 \\times 10^{-6}$", why="−6 is greater than −9.", check=("true", "F(24,10)*F(10)**-6 > F(81,10)*F(10)**-9"), space=0.8),
         dict(stem="How many times larger is  $8 \\times 10^{-2}$  than  $4 \\times 10^{-5}$ ?", answer="2,000", why="8 ÷ 4 = 2, and 10⁻² ÷ 10⁻⁵ = 10³.", check=("eq", "8*F(10)**-2/(4*F(10)**-5)", "2000"), space=0.8),

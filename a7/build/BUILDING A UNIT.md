@@ -223,6 +223,19 @@ Do not batch lessons before the first push. One lesson, checked, viewed, pushed;
 > calculation to its result. The eleven replacements made that evening in Units 3 and 4 read
 > correctly and stand, but they are not a rule. `SPEC SCHEMA.md` has the cases.
 
+> **Ruling 43 (6 October 2026): a practice problem never repeats what the lesson already showed.**
+> Croix: *"There are instances of the exact problem showing up in notes and in your turn or
+> whiteboards."* The warm-up, the notes and the worked examples are what the class has been shown;
+> every Your Turn, whiteboard and independent question after them is a problem with numbers of its
+> own — not a notes line asked back, not an example's story with the example's numbers, not the
+> same expression with the letter renamed. **Write the notes and examples first, then give every
+> practice item numbers that appear nowhere above it.** An error-analysis board gets a fresh
+> expression; the book's or the guide's own item lives in the notes and the teacher's edition says
+> so. `rulingcheck` (`lib/repeatcheck.py`) refuses a repeat like a wrong answer —
+> `python3 /root/windmill/tools/dry_run.py <build dir> <unit>` shows one in seconds. Where a board
+> builds on an earlier board on purpose, tag it `repeat_ok=True` with a comment. The question
+> banks are not read. (HOUSE STYLE, ruling 43; `SPEC SCHEMA.md` has the rules A–D, P, Q.)
+
 **The whole-unit deck.** `build_unit.py` also writes `A7 Unit <u> <Title> - All Slides.pptx` (+ PDF): a cover,
 a contents slide whose rows jump to each lesson, then every lesson's slides in the manifest's
 teaching order, each lesson numbered from 1 exactly as its own deck and its Teacher Edition number
