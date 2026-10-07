@@ -129,15 +129,15 @@ L = dict(
              note="Working backwards. The powers of ten already check out, so the whole question lives in the coefficients — the student who sees that answers in five seconds. A board with 4.2 subtracted the coefficients; a board with 0.5 divided them the wrong way round.",
              check=("eq", "F(84,10)*10**7/(2*10**2)", "F(42,10)*10**5"),
              wrong="4.2 — the coefficients were subtracted, 8.4 − 4.2 [8.NSO.1.5: the coefficients divide]; 0.5 — 4.2 ÷ 8.4 instead of 8.4 ÷ 4.2"),
-        dict(kind="written", text=["For  $\\frac{7.2 \\times 10^{9}}{2.4 \\times 10^{4}}$  Marcus writes  $4.8 \\times 10^{5}$", "and Sara writes  $3 \\times 10^{13}$", "Name what each one did wrong, and give the correct quotient."],
-             qtext="For (7.2 × 10⁹) ÷ (2.4 × 10⁴), Marcus writes 4.8 × 10⁵ and Sara writes 3 × 10¹³. Name what each one did wrong, and give the correct quotient.",
-             hint="Each one got exactly one half right.", steps=["Marcus subtracted the fronts. Sara added the exponents.", "$7.2 \\div 2.4 = 3$   and   $10^{9} \\div 10^{4} = 10^{5}$", "$3 \\times 10^{5}$"],
-             gloss="one wrong in front, one wrong behind", answer="3 × 10⁵",
-             note="Written, and it is the exit evidence. Marcus subtracted the coefficients instead of dividing them, and his power of ten is right. Sara divided the coefficients correctly and then added the exponents instead of subtracting. Full credit names both errors and gives 3 × 10⁵. A student who writes 'they both got it wrong' has named nothing.",
-             check=("many", ("eq", "F(72,10)*10**9/(F(24,10)*10**4)", "3*10**5"),
+        dict(kind="written", text=["For  $\\frac{7.2 \\times 10^{11}}{2.4 \\times 10^{3}}$  Marcus writes  $4.8 \\times 10^{8}$", "and Sara writes  $3 \\times 10^{14}$", "Name what each one did wrong, and give the correct quotient."],
+             qtext="For (7.2 × 10¹¹) ÷ (2.4 × 10³), Marcus writes 4.8 × 10⁸ and Sara writes 3 × 10¹⁴. Name what each one did wrong, and give the correct quotient.",
+             hint="Each one got exactly one half right.", steps=["Marcus subtracted the fronts. Sara added the exponents.", "$7.2 \\div 2.4 = 3$   and   $10^{11} \\div 10^{3} = 10^{8}$", "$3 \\times 10^{8}$"],
+             gloss="one wrong in front, one wrong behind", answer="3 × 10⁸",
+             note="Written, and it is the exit evidence. Marcus subtracted the coefficients instead of dividing them, and his power of ten is right. Sara divided the coefficients correctly and then added the exponents instead of subtracting. Full credit names both errors and gives 3 × 10⁸. A student who writes 'they both got it wrong' has named nothing.",
+             check=("many", ("eq", "F(72,10)*10**11/(F(24,10)*10**3)", "3*10**8"),
                     ("eq", "F(72,10)-F(24,10)", "F(48,10)"),
-                    ("true", "F(72,10)*10**9/(F(24,10)*10**4) != 3*10**13")),
-             wrong="'they both got it wrong' — neither error is named [the item asks what each one did]; 4.8 × 10⁵ — Marcus's error repeated"),
+                    ("true", "F(72,10)*10**11/(F(24,10)*10**3) != 3*10**14")),
+             wrong="'they both got it wrong' — neither error is named [the item asks what each one did]; 4.8 × 10⁸ — Marcus's error repeated"),
     ],
 
     bank=[
@@ -233,7 +233,7 @@ L = dict(
         ell="Product and quotient are the two nouns, multiply and divide the two verbs. Write them in pairs on the board — PRODUCT goes with MULTIPLY and ADD the exponents, QUOTIENT goes with DIVIDE and SUBTRACT the exponents — and read each board's operation aloud before the boards go up.",
         enrichment="Ask for (4 × 10⁵)² without a calculator (1.6 × 10¹¹), then for the two numbers in scientific notation whose product is 1.2 × 10⁷ and whose quotient is 1.2 × 10¹ (1.2 × 10⁴ and 1 × 10³)."),
 
-    closure="Board 9 is written work and it is the exit evidence: the student has to name Marcus's error and Sara's error separately and give 3 × 10⁵. Read the boards, not the papers.",
+    closure="Board 9 is written work and it is the exit evidence: the student has to name Marcus's error and Sara's error separately and give 3 × 10⁸. Read the boards, not the papers.",
 
     independent=[
         dict(stem="$(2 \\times 10^{5})(4 \\times 10^{3})$", answer="$8 \\times 10^{8}$", why="", check=("eq", "2*10**5*4*10**3", "8*10**8"), space=0.7),
