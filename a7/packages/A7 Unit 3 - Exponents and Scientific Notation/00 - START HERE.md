@@ -40,12 +40,12 @@ Nothing exists until it is committed. This folder is generated from `a7/build/u3
 | 3.04 | Mon 28 Sep | Negative Exponent Law | MA.8.NSO.1.3 | Reciprocal, not opposite. |
 | 3.05 | Tue 29 Sep | Applying Exponent Laws | MA.8.NSO.1.3 | Flip the numbers, not the sign. |
 | 3.06–07 | Wed 30 Sep | Evaluating and Equivalent Expressions | MA.8.NSO.1.3 | Rewrite the base to compare. |
-| T-A1 | — | Exponent Laws with Variable Bases | MA.8.AR.1.1 | Everything inside the parentheses gets the exponent — the number included. |
-| T-A2 | — | Negative Exponents with Variable Bases | MA.8.AR.1.1 | Only the factor wearing the negative exponent moves. |
+| T-A1 | Mon 5 Oct | Exponent Laws with Variable Bases | MA.8.AR.1.1 | Everything inside the parentheses gets the exponent — the number included. |
+| T-A2 | Tue 6 Oct | Negative Exponents with Variable Bases | MA.8.AR.1.1 | Only the factor wearing the negative exponent moves. |
 | 3.08 | Wed 7 Oct | Writing Large Numbers in Scientific Notation | MA.8.NSO.1.4 | One nonzero digit in front of the decimal point. |
 | 3.09 | Fri 9 Oct | Writing Small Numbers in Scientific Notation | MA.8.NSO.1.4 | The exponent counts places, not zeros. |
 | — | — | Unit Review | all four | unscored, sent home as practice (ruling 27a); the SSDD block is named on the key only |
-| — | Thu 15 Oct and Fri 16 Oct | Unit Assessment — two periods, one paper | all four benchmarks, sections by benchmark | 40 points |
+| — | Thu 15 Oct and Fri 16 Oct | Unit Assessment — two periods, one paper | all four benchmarks, sections by benchmark | 36 points |
 
 Book order with Thread A woven in after 3.07 (ruling 30): the laws are complete on numbers before they are restated on letters, and both are complete before scientific notation. Math Nation's 3.6 and 3.7 are one period here (3.06–07). MA.7.NSO.1.1 is grade 7 content the Grade 8 FAST assumes; the other three benchmarks report under Number Sense and Operations (8.NSO.1.3, 8.NSO.1.4) and Algebraic Reasoning (8.AR.1.1).
 
@@ -95,8 +95,8 @@ The whiteboard round is the remainder — 10–14 minutes across the unit — an
 ## Before the unit starts
 
 - **Seven defects in the Math Nation package are not reproduced here.** Practice L1 #7 (key 104,796 → 104,976), Additional Practice L8 #2 (10⁶ + 10⁴ keyed 101000 → 1,010,000), Additional Practice L9 #3 (malformed item, wrong key), Homework L3 #7 (4,046 → 4,096), Homework L9 #4b (3 → 1,000), Homework L9 #4c (item unsound; keyed 3,000, true ratio ≈ 527), Homework L9 #5 (two matching rows equal). `Reference/UNIT 3 AUDIT - Math Nation package.md` has the page numbers.
-- **Three things the state guide expects that the book never asks are in every relevant bank and on the assessment:** unknown-exponent items (7ⁿ ÷ 7² = 343), the −b versus b⁻¹ contrast in writing, and calculator E notation with comparisons that cross from very large to very small.
-- **The assessment is one paper over two periods, 40 points** (ruling 27). Students stop when the first period ends and continue from where they stopped — it is not two papers, and nothing on it says 'Day 1'. Four sections by benchmark, numbered 1–20 straight through. **Question 10 is a transfer item** (ruling 18): the same benchmark, on a surface that appears on no review and in no question bank. The paper had a second, the old question 21 (between which two consecutive powers of 10 a number lies); Croix sat the paper on 7 October, did not know it, and cut it, so the paper carries one. The key names it and the Score Tracker maps every question to its benchmark.
+- **Three things the state guide expects that the book never asks are in every relevant bank and on the assessment:** unknown-exponent items (7ⁿ ÷ 7² = 343), the −b versus b⁻¹ contrast in writing, and calculator E notation with comparisons that cross from very large to very small. (On the assessment since 7 October the −b versus b⁻¹ contrast is carried by the wrong options of questions 7 and 8, not by a written explanation, and the E-notation item is a conversion with no comparison: Croix cut every question answered in a sentence.)
+- **The assessment is one paper over two periods, 36 points** (ruling 27). Students stop when the first period ends and continue from where they stopped — it is not two papers, and nothing on it says 'Day 1'. Four sections by benchmark, numbered 1–16 straight through. **Croix sat the paper himself on 7 October (17 minutes 27 seconds) and cut five questions:** the last one, which he did not know (between which two consecutive powers of 10 a number lies), and the four answered in a sentence — he does not want to read explanations. Every answer is now a number, an expression or a letter. Both transfer items (ruling 18) were among the five, so the paper carries none; the key says so, and the Score Tracker maps every question to its benchmark.
 - **The Reference Sheet is the only handout.** Give it out at 3.04 or earlier; it is the document students study from. It does not go into the test.
 
 Installed: 192 files from the build, plus this page and the Reference folder.

@@ -146,13 +146,18 @@ U = dict(
 
     # ------------------------------------------------------------------ unit assessment (two periods)
     assessment=dict(
-        total=40,
+        total=36,
         # Croix, 7 October 2026, having sat this paper himself (17:27, 40 of 41): "I didnt know the last question. Axe it."
         # Question 21 — "Between which two consecutive powers of 10 does 4.7 × 10⁻⁵ lie?" — was the second transfer item.
         # It is gone, the paper is 40 points and 20 questions, and nothing was re-labelled or added in its place.
-        transfer_cut="Croix, 7 October 2026 — the old question 21 (between which two consecutive powers of 10 a number lies) needed a step the unit does not teach.",
+        # The same evening: "remove all the answer with a sentence questions. I don't want to read explanations."
+        # Four went: the old 9 (Marco says 3⁻² is −9 — explain), 10 (which is greater, 2⁻³ or 3⁻² — show how you know; the
+        # other transfer item), 14 (how are x² and x⁻² related — explain) and 19 (which is greater, 8.9 × 10⁻⁴ or 2.1 × 10⁻³ —
+        # explain). The paper is 36 points and 16 questions, every answer a number, an expression or a letter.
+        transfer_cut=["Croix, 7 October 2026 — the old question 21 (between which two consecutive powers of 10 a number lies) needed a step the unit does not teach.",
+                      "Croix, 7 October 2026 — the old question 10 (which is greater, 2⁻³ or 3⁻²: show how you know) went with every question answered in a sentence; he does not want to read explanations on this paper."],
         tracker_order=["MA.7.NSO.1.1", "MA.8.NSO.1.3", "MA.8.AR.1.1", "MA.8.NSO.1.4"],
-        tracker={"MA.7.NSO.1.1": 9, "MA.8.NSO.1.3": 11, "MA.8.AR.1.1": 9, "MA.8.NSO.1.4": 11},
+        tracker={"MA.7.NSO.1.1": 9, "MA.8.NSO.1.3": 9, "MA.8.AR.1.1": 8, "MA.8.NSO.1.4": 10},
         follow_through="Follow-through (ruling 19).  A later part is correct when the right operation is applied to the student's own earlier value. Look at what they wrote for the earlier part, do this part's operation to it, and tick if that is what they wrote. It applies only where the work is on the page.",
         sections=[
                 dict(title="Laws of Exponents", benchmark="MA.7.NSO.1.1", items=[
@@ -186,8 +191,6 @@ U = dict(
                     dict(stem="Select ALL of the expressions whose value is  $\\frac{1}{64}$.", choices=["$2^{-6}$", "$4^{-3}$", "$-8^{2}$", "$2^{-8}$", "$\\left(\\frac{1}{4}\\right)^{3}$"], correct=[0, 1, 4], answer="A, B and E",
                          errors={"C": "−8² = −64 — the opposite, not the reciprocal [B1G-M 8.NSO.1.3 misconception]", "D": "2⁻⁸ = 1/256 — the exponent was not checked against 64 = 2⁶ [8.NSO.1.3]"},
                          why="All three correct and nothing else for the point.", check=("many", ("eq", "F(2)**-6", "F(1,64)"), ("eq", "F(4)**-3", "F(1,64)"), ("eq", "F(1,4)**3", "F(1,64)"), ("true", "-8**2 != F(1,64)"), ("true", "F(2)**-8 != F(1,64)"))),
-                    dict(stem="Marco says the value of  $3^{-2}$  is  $-9$.  Explain why he is wrong, and give the correct value.", answer="A negative exponent means the reciprocal of the power, not a negative number. $3^{-2} = \\frac{1}{3^{2}} = \\frac{1}{9}$.", why="The point needs the correct value AND the reason (reciprocal, not opposite). 'He forgot parentheses' is about (−3)², a different expression.", check=("many", ("eq", "F(3)**-2", "F(1,9)"), ("true", "F(3)**-2 != -9")), space=1.2),
-                    dict(transfer=True, stem="Which is greater,  $2^{-3}$  or  $3^{-2}$ ?  Show how you know.", answer="$2^{-3}$ is greater.  $2^{-3} = \\frac{1}{8}$ and $3^{-2} = \\frac{1}{9}$, and $\\frac{1}{8} > \\frac{1}{9}$.", why="Both values must be found; a guess does not earn the point. The reciprocals put the bigger denominator on the smaller number: $3^{2} = 9$ is bigger than $2^{3} = 8$, so $3^{-2}$ is the smaller of the two.", check=("many", ("eq", "F(2)**-3", "F(1,8)"), ("eq", "F(3)**-2", "F(1,9)"), ("true", "F(2)**-3 > F(3)**-2")), space=1.0),
                 ]),
 
                 dict(title="Variable Bases", benchmark="MA.8.AR.1.1", items=[
@@ -203,7 +206,6 @@ U = dict(
                     dict(stem="Which expression is equivalent to  $(4x^{3})^{2}$ ?", choices=["$16x^{5}$", "$8x^{6}$", "$4x^{6}$", "$16x^{6}$"], correct=3, answer="D",
                          errors={"A": "3 + 2 instead of 3 · 2 [power of a power confused with a product]", "B": "4 · 2 instead of 4² [B1G-M 8.AR.1.1 misconception: multiplying the exponent into the base]", "C": "the coefficient was not raised [8.AR.1.1: power of a product]"},
                          why="", check=("eq", "(4*x**3)**2", "16*x**6")),
-                    dict(stem="How are  $x^{2}$  and  $x^{-2}$  related? Explain, and give the value of each when  $x = 5$.", answer="They are reciprocals: $x^{-2} = \\frac{1}{x^{2}}$. When x = 5, $x^{2} = 25$ and $x^{-2} = \\frac{1}{25}$.", why="The point needs the word reciprocal (or 1 over x²) and both values. −25 for x⁻² is the misconception.", check=("many", ("eq", "x**2*x**-2", "1"), ("eq", "F(5)**2", "25"), ("eq", "F(5)**-2", "F(1,25)")), space=1.2),
                 ]),
                 dict(title="Scientific Notation", benchmark="MA.8.NSO.1.4", items=[
                     dict(stem="Write each number in scientific notation.", parts=[
@@ -220,7 +222,6 @@ U = dict(
                     dict(stem="Answer each question.", parts=[
                         dict(label="a", stem="How many times larger is  $9 \\times 10^{9}$  than  $3 \\times 10^{6}$ ?", answer="$3 \\times 10^{3} = 3{,}000$ times", why="9 ÷ 3 = 3 and 10⁹ ÷ 10⁶ = 10³. '3 times' ignored the powers; '30' read 10³ as 10.", check=("eq", "(9*10**9)/(3*10**6)", "3000"), space=0.7),
                         dict(label="b", stem="How many times larger is  $4.8 \\times 10^{-3}$  than  $1.6 \\times 10^{-7}$ ?", answer="$3 \\times 10^{4} = 30{,}000$ times", why="4.8 ÷ 1.6 = 3 and −3 − (−7) = 4.", check=("eq", "(F(48,10)*F(10)**-3)/(F(16,10)*F(10)**-7)", "30000"), space=0.7)]),
-                    dict(stem="Which is greater,  $8.9 \\times 10^{-4}$  or  $2.1 \\times 10^{-3}$ ?  Explain how you know.", answer="$2.1 \\times 10^{-3}$ — the exponent −3 is greater than −4, so its power of 10 is larger; 0.0021 > 0.00089.", why="The point needs the choice and the reason. 8.9 × 10⁻⁴ compared the coefficients.", check=("true", "F(21,10)*F(10)**-3 > F(89,10)*F(10)**-4"), space=0.8),
                     dict(stem="A computer displays a number as  5.6E8.  Write the number in standard form.", answer="560,000,000", why="E8 means × 10⁸.", check=("eq", "F(56,10)*10**8", "560000000"), space=0.6),
                 ]),
         ],

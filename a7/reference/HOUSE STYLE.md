@@ -1344,14 +1344,20 @@ surface nobody rehearsed.* A transfer item is not harder, not longer, not a chai
 one-operation question wearing different clothes. If it needs a step the unit did not teach, it
 is a new question, not a transfer item, and it goes back.
 
-*Amended 7 October 2026 — a transfer item the teacher cuts is not replaced by re-labelling.* Croix sat
-the A7 Unit 3 test himself (17 minutes 27 seconds, 40 of 41) and said of its last question —
-"Between which two consecutive powers of 10 does 4.7 × 10⁻⁵ lie?", the second transfer item —
-*"I didnt know the last question. Axe it."* That is this ruling's own last line: it needed a step the
-unit does not teach, so it went back. The paper is now 40 points and 20 questions with ONE transfer
-item; no other question was re-labelled and none was added. The spec says so
-(`assessment["transfer_cut"] = "who, when, why"`), the build then asks for exactly one, and the key
-prints the sentence. A unit with no such line still needs exactly two.
+*Amended 7 October 2026 [both courses; it happened in A7] — a transfer item the teacher cuts is not
+replaced by re-labelling.* Croix sat the A7 Unit 3 test himself (17 minutes 27 seconds, 40 of 41)
+and said of its last question — "Between which two consecutive powers of 10 does 4.7 × 10⁻⁵ lie?",
+a transfer item — *"I didnt know the last question. Axe it."* That is this ruling's own last line: it
+needed a step the unit does not teach, so it went back. The same evening: *"remove all the answer
+with a sentence questions. I don't want to read explanations."* Four more went (explain why Marco is
+wrong; which is greater, 2⁻³ or 3⁻², show how you know; how are x² and x⁻² related; which is greater,
+8.9 × 10⁻⁴ or 2.1 × 10⁻³, explain) — and the second of them was the other transfer item. **That
+paper is now 36 points and 16 questions, every answer a number, an expression or a letter, and it
+carries no transfer item.** Nothing was re-labelled and nothing was added. A spec says so with
+`assessment["transfer_cut"] = ["who, when, why", …]` — one sentence per item cut; the build then
+asks for two fewer than that many, and the key prints the sentences. A unit with no such line
+still needs exactly two. **Not yet ruled:** whether "no answers in a sentence" is for every test
+in both courses or for this paper only — he has been asked. Until he says, other tests keep theirs.
 
 **Ruling 19 — follow-through credit, mechanically.** One point per part, no partial credit,
 stays. A later part is correct when the right operation is applied to the student's own earlier
