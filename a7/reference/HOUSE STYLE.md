@@ -1344,6 +1344,15 @@ surface nobody rehearsed.* A transfer item is not harder, not longer, not a chai
 one-operation question wearing different clothes. If it needs a step the unit did not teach, it
 is a new question, not a transfer item, and it goes back.
 
+*Amended 7 October 2026 — a transfer item the teacher cuts is not replaced by re-labelling.* Croix sat
+the A7 Unit 3 test himself (17 minutes 27 seconds, 40 of 41) and said of its last question —
+"Between which two consecutive powers of 10 does 4.7 × 10⁻⁵ lie?", the second transfer item —
+*"I didnt know the last question. Axe it."* That is this ruling's own last line: it needed a step the
+unit does not teach, so it went back. The paper is now 40 points and 20 questions with ONE transfer
+item; no other question was re-labelled and none was added. The spec says so
+(`assessment["transfer_cut"] = "who, when, why"`), the build then asks for exactly one, and the key
+prints the sentence. A unit with no such line still needs exactly two.
+
 **Ruling 19 — follow-through credit, mechanically.** One point per part, no partial credit,
 stays. A later part is correct when the right operation is applied to the student's own earlier
 value. The marker looks at the student's number for part a, does part b's operation to it, and

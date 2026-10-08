@@ -146,9 +146,13 @@ U = dict(
 
     # ------------------------------------------------------------------ unit assessment (two periods)
     assessment=dict(
-        total=41,
+        total=40,
+        # Croix, 7 October 2026, having sat this paper himself (17:27, 40 of 41): "I didnt know the last question. Axe it."
+        # Question 21 — "Between which two consecutive powers of 10 does 4.7 × 10⁻⁵ lie?" — was the second transfer item.
+        # It is gone, the paper is 40 points and 20 questions, and nothing was re-labelled or added in its place.
+        transfer_cut="Croix, 7 October 2026 — the old question 21 (between which two consecutive powers of 10 a number lies) needed a step the unit does not teach.",
         tracker_order=["MA.7.NSO.1.1", "MA.8.NSO.1.3", "MA.8.AR.1.1", "MA.8.NSO.1.4"],
-        tracker={"MA.7.NSO.1.1": 9, "MA.8.NSO.1.3": 11, "MA.8.AR.1.1": 9, "MA.8.NSO.1.4": 12},
+        tracker={"MA.7.NSO.1.1": 9, "MA.8.NSO.1.3": 11, "MA.8.AR.1.1": 9, "MA.8.NSO.1.4": 11},
         follow_through="Follow-through (ruling 19).  A later part is correct when the right operation is applied to the student's own earlier value. Look at what they wrote for the earlier part, do this part's operation to it, and tick if that is what they wrote. It applies only where the work is on the page.",
         sections=[
                 dict(title="Laws of Exponents", benchmark="MA.7.NSO.1.1", items=[
@@ -218,7 +222,6 @@ U = dict(
                         dict(label="b", stem="How many times larger is  $4.8 \\times 10^{-3}$  than  $1.6 \\times 10^{-7}$ ?", answer="$3 \\times 10^{4} = 30{,}000$ times", why="4.8 ÷ 1.6 = 3 and −3 − (−7) = 4.", check=("eq", "(F(48,10)*F(10)**-3)/(F(16,10)*F(10)**-7)", "30000"), space=0.7)]),
                     dict(stem="Which is greater,  $8.9 \\times 10^{-4}$  or  $2.1 \\times 10^{-3}$ ?  Explain how you know.", answer="$2.1 \\times 10^{-3}$ — the exponent −3 is greater than −4, so its power of 10 is larger; 0.0021 > 0.00089.", why="The point needs the choice and the reason. 8.9 × 10⁻⁴ compared the coefficients.", check=("true", "F(21,10)*F(10)**-3 > F(89,10)*F(10)**-4"), space=0.8),
                     dict(stem="A computer displays a number as  5.6E8.  Write the number in standard form.", answer="560,000,000", why="E8 means × 10⁸.", check=("eq", "F(56,10)*10**8", "560000000"), space=0.6),
-                    dict(transfer=True, stem="Between which two consecutive powers of 10 does  $4.7 \\times 10^{-5}$  lie?", answer="Between $10^{-5}$ and $10^{-4}$.", why="4.7 is between 1 and 10, so the number is between 1×10⁻⁵ and 1×10⁻⁴. Both powers are needed for the point.", check=("many", ("true", "F(10)**-5 < F(47,10)*F(10)**-5"), ("true", "F(47,10)*F(10)**-5 < F(10)**-4")), space=0.8),
                 ]),
         ],
     ),
