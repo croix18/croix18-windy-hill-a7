@@ -102,7 +102,7 @@ R('power', Pw(4, 8), '4^8', 'right', { base: 4 }); R('power', Pw(4, 8), '4⁸', 
 R('power', Pw(4, 8), '4^15', 'wrong', { base: 4 }); R('power', Pw(4, 8), '4**8', 'right', { base: 4 }); R('power', Pw(4, 8), '4^(8)', 'right', { base: 4 });
 R('value', Fr(1, 16), '1/16', 'right'); R('value', Fr(1, 16), '0.0625', 'right'); R('value', Fr(1, 16), '2/32', 'form'); R('value', Fr(1, 16), '4^-2', 'form'); R('value', Fr(1, 16), '1/4^2', 'form');
 R('value', Fr(1, 16), '-1/16', 'wrong'); R('value', Neg(Fr(1, 27)), '-1/27', 'right'); R('value', Neg(Fr(1, 27)), '−1/27', 'right'); R('value', Neg(Fr(1, 27)), '1/-27', 'right'); R('value', Neg(Fr(1, 27)), '-(1/27)', 'right');
-R('value', N(8), '8', 'right'); R('value', N(8), '8/1', 'form'); R('value', N(8), '2*4', 'form'); R('value', N(1), '1', 'right'); R('value', N(1), '0', 'wrong'); R('value', N(1), 'x', 'wrong');
+R('value', N(8), '8', 'right'); R('value', N(8), '8/1', 'form'); R('value', N(8), '2*4', 'form'); R('value', N(1), '1', 'right'); R('value', N(1), '0', 'wrong'); R('value', N(1), 'x', 'unread'); R('value', N(1), 'y', 'wrong');
 R('value', Fr(1, 4), '2^-2 = 1/4', 'right'); R('value', Fr(1, 4), '.25', 'right');
 R('posexp', Fr(1, Pw(6, 3)), '1/6^3', 'right'); R('posexp', Fr(1, Pw(6, 3)), '1/(6^3)', 'right'); R('posexp', Fr(1, Pw(6, 3)), '1/216', 'form'); R('posexp', Fr(1, Pw(6, 3)), '6^-3', 'form'); R('posexp', Fr(1, Pw(6, 3)), '-6^3', 'wrong');
 R('posexp', Pw(Par(Neg(2)), 5), '(-2)^5', 'right'); R('posexp', Pw(Par(Neg(2)), 5), '-2^5', 'form'); R('posexp', Pw(Par(Neg(2)), 4), '-2^4', 'wrong'); R('posexp', Pw(Par(Neg(2)), 4), '(-2)^4', 'right');

@@ -53,6 +53,7 @@ const Neg = x => ({ t: 'neg', x: typeof x === 'object' ? x : N(x) });
 const Par = x => ({ t: 'par', x });
 const Eq = (l, r) => ({ t: 'eq', l, r });
 const Sci = (c, k) => Mul('×', N(c), P(10, k));
+const Ar = (a, op, b) => ({ t: 'ar', op, a: typeof a === 'object' ? a : (a < 0 ? Par(Neg(N(-a))) : N(a)), b: typeof b === 'object' ? b : (b < 0 ? Par(Neg(N(-b))) : N(b)) });   // arithmetic shown in an exponent: 4 + 5, 2 × 3, 9 − (−2)
 
 function evalA(a, env) {
   switch (a.t) {
@@ -67,6 +68,7 @@ function evalA(a, env) {
     case 'neg': return qmul(Q(-1), evalA(a.x, env));
     case 'par': return evalA(a.x, env);
     case 'add': return a.op === '+' ? qadd(evalA(a.a, env), evalA(a.b, env)) : qsub(evalA(a.a, env), evalA(a.b, env));
+    case 'ar': { const x = evalA(a.a, env), y = evalA(a.b, env); return a.op === '+' ? qadd(x, y) : a.op === '−' ? qsub(x, y) : a.op === '×' ? qmul(x, y) : (() => { throw new Error('op'); })(); }
     default: throw new Error('cannot evaluate ' + a.t);
   }
 }
@@ -87,6 +89,7 @@ function html(a) {
     case 'neg': return '−' + (a.x.t === 'add' ? html(Par(a.x)) : html(a.x));
     case 'par': return hasFrac(a.x) ? '<span class="bp">(</span>' + html(a.x) + '<span class="bp">)</span>' : '(' + html(a.x) + ')';
     case 'eq': return html(a.l) + '<span class="rel">=</span>' + html(a.r);
+    case 'ar': return html(a.a) + '<span class="op">' + a.op + '</span>' + html(a.b);
     default: throw new Error('cannot draw ' + a.t);
   }
 }
@@ -101,6 +104,7 @@ function plain(a) {               // for the independent check in Python (sympy 
     case 'neg': return '(-(' + plain(a.x) + '))';
     case 'par': return '(' + plain(a.x) + ')';
     case 'eq': return 'Eq(' + plain(a.l) + ', ' + plain(a.r) + ')';
+    case 'ar': return '((' + plain(a.a) + ')' + ({ '+': '+', '−': '-', '×': '*' })[a.op] + '(' + plain(a.b) + '))';
     default: throw new Error('cannot write ' + a.t);
   }
 }
@@ -233,7 +237,8 @@ function valueProblem(a) {
     const n = strip(u.a), d = strip(u.b);
     if (n.t !== 'n' || d.t !== 'n') return 'finish';
     if (n.q.d !== 1n || d.q.d !== 1n) return 'finish';
-    if (d.q.n === 1n || gcd(n.q.n, d.q.n) !== 1n) return 'lowest';
+    if (d.q.n === 1n) return 'over1';
+    if (gcd(n.q.n, d.q.n) !== 1n) return 'lowest';
     return null;
   }
   return 'finish';
@@ -261,7 +266,7 @@ function markInner(part, text) {
   const raw = String(text || '').trim();
   if (!raw) return { v: 'blank' };
   if (raw.length > 60) return { v: 'unread', msg: 'That is too long to read. Type just your answer.' };
-  const xT = part.kind === 'sci' || part.kind === 'std' || part.kind === 'times';
+  const xT = part.kind === 'sci' || part.kind === 'std' || part.kind === 'times' || !vars(part.ans).length;   // no letters in the answer: x can only mean times
   let segs = raw.split('=').map(x => x.trim());
   if (part.kind === 'n') segs = segs.filter(x => !/^n$/i.test(x));
   if (!segs.length || segs.some(x => !x)) return { v: 'unread', msg: UNREAD };
@@ -292,6 +297,7 @@ function markInner(part, text) {
       if (hasPow(a)) return { v: 'form', msg: 'Right so far. Now work out its value — no exponents in the answer.' };
       const vp = valueProblem(a);
       if (vp === 'lowest') return { v: 'form', msg: 'Right value. Write the fraction in lowest terms.' };
+      if (vp === 'over1') return { v: 'form', msg: 'Right value. A number over 1 is just that number: leave off the /1.' };
       if (vp) return { v: 'form', msg: 'Right so far. Finish working it out to a single number or fraction.' };
       return { v: 'right' };
     }
@@ -311,7 +317,7 @@ function markInner(part, text) {
     if (k === 'mono') {
       const p = monoProblem(a, part.posOnly);
       if (!p) return { v: 'right' };
-      const say = { combine: 'Right value. Combine the powers of each letter into one.', number: 'Right value. Multiply out the numbers so there is just one.', distribute: 'Right value, but simplify it: apply the exponent to each factor.',
+      const say = { combine: 'Right value. Combine the powers of each letter into one.', number: 'Right value. Simplify the numbers into a single number.', distribute: 'Right value, but simplify it: apply the exponent to each factor.',
         negative: 'Right value. Now rewrite it so every exponent is positive.', exponent: 'Right value. Work out each exponent to a single whole number.', read: 'Right value. Write it as a single monomial.',
         fraction: 'Right value. Write it as one fraction — no fraction inside a fraction.', zero: 'Right value. A letter to the zero power is 1, so leave it out.', one: 'Right value. Leave out the 1 in front.' };
       return { v: 'form', msg: say[p] };
@@ -522,7 +528,7 @@ function generateOnce(seed) {
       miss: [miss(Fr(Mul('', N(v10c.k), P(V(v10c.w), v10c.q)), P(V(v10c.v), v10c.p * v10c.q)), 'The ' + v10c.k + ' gets the exponent too: ' + v10c.k + '<sup>' + v10c.q + '</sup> = ' + pw(v10c.k, v10c.q) + '.')] }),
   ] };
   const v11 = until(() => ({ c: pick([2, 3, 5, 6]), v: pick(LET), p: ri(2, 5), q: pick([2, 3]) }), x => same(x, { c: 4, v: 'x', p: 3, q: 2 }) || x.c ** x.q === x.c * x.q || x.p + x.q === x.p * x.q);
-  const o11 = shuffle([[Mul('', N(pw(v11.c, v11.q)), P(V(v11.v), v11.p + v11.q)), 'The exponents were added. For a power of a power, multiply them.'], [Mul('', N(v11.c * v11.q), P(V(v11.v), v11.p * v11.q)), v11.c + '<sup>' + v11.q + '</sup> means ' + v11.c + ' times itself, not ' + v11.c + ' × ' + v11.q + '.'],
+  const o11 = shuffle([[Mul('', N(pw(v11.c, v11.q)), P(V(v11.v), v11.p + v11.q)), 'The exponents were added. For a power of a power, multiply them.'], [Mul('', N(v11.c * v11.q), P(V(v11.v), v11.p * v11.q)), v11.c + '<sup>' + v11.q + '</sup> means ' + Array(v11.q).fill(v11.c).join(' · ') + ', not ' + v11.c + ' × ' + v11.q + '.'],
     [Mul('', N(v11.c), P(V(v11.v), v11.p * v11.q)), 'The number inside the parentheses gets the exponent too.'], [Mul('', N(pw(v11.c, v11.q)), P(V(v11.v), v11.p * v11.q)), null]]);
   const Q11 = mc('Which expression is equivalent to ' + M(P(Par(Mul('', N(v11.c), P(V(v11.v), v11.p))), v11.q)) + ' ?', o11.map(o => o[0]), o11.findIndex(o => o[1] === null), o11.map(o => o[1]));
   Q11.q = P(Par(Mul('', N(v11.c), P(V(v11.v), v11.p))), v11.q); Q11.steps = ['Everything inside the parentheses gets the exponent: ' + v11.c + '<sup>' + v11.q + '</sup> = ' + pw(v11.c, v11.q) + ', and ' + v11.p + ' × ' + v11.q + ' = ' + (v11.p * v11.q) + '.'];
@@ -577,9 +583,25 @@ function generateOnce(seed) {
     part: part('', Sci(s16.c, s16.k), N(decStr(v16), { commas: true }), 'std', { steps: ['E' + s16.k + ' means × 10<sup>' + s16.k + '</sup>: move the decimal point ' + s16.k + ' places to the right.'],
       miss: [miss(N(decStr(qmul(qdec(s16.c), qpow(Q(10), BigInt(s16.k - 1))))), 'Count again: E' + s16.k + ' moves the decimal point ' + s16.k + ' places.'), miss(N(decStr(qmul(qdec(s16.c), qpow(Q(10), BigInt(s16.k + 1))))), 'Count again: E' + s16.k + ' moves the decimal point ' + s16.k + ' places.')] }) };
   S.push({ title: 'Scientific Notation', items: [Q12, Q13, Q14, Q15, Q16] });
+  /* what kind of question each one is, and its numbers: the coach (coach.js) explains mistakes and works solutions from these */
+  const tag = (x, fam, prm) => Object.assign(x, { fam, prm });
+  tag(Q1.parts[0], 'prod', q1a); tag(Q1.parts[1], 'powpow', q1b); tag(Q1.parts[2], 'quot', q1c); tag(Q1.parts[3], 'zero', q1d);
+  tag(Q2.parts[0], 'fracpow', q2a); tag(Q2.parts[1], 'zeroMix', q2b); tag(Q2.parts[2], 'powquot', q2c); tag(Q3, 'prod', q3); tag(Q4.part, 'solveN', q4);
+  tag(Q5.parts[0], 'negToFrac', q5a); tag(Q5.parts[1], 'negDen', q5b); tag(Q5.parts[2], 'coefNeg', q5c);
+  tag(Q6.parts[0], 'negVal', q6a); tag(Q6.parts[1], 'negNegBase', q6b); tag(Q6.parts[2], 'fracNeg', q6c); tag(Q6.parts[3], 'mixedProd', q6d);
+  tag(Q7, 'negVal', { b: q7.b, n: 2 }); tag(Q8, 'select', { N: T8.N });
+  tag(Q9.parts[0], 'monoProd', v9a); tag(Q9.parts[1], 'monoPow', v9b); tag(Q9.parts[2], 'monoCoefPow', v9c); tag(Q9.parts[3], 'monoQuot', v9d);
+  tag(Q10.parts[0], 'varNeg', v10a); tag(Q10.parts[1], 'coefVarNeg', v10b); tag(Q10.parts[2], 'monoNegPow', v10c); tag(Q11, 'monoCoefPow', v11);
+  [s12.a, s12.b, s12.c, s12.d].forEach((x, i) => tag(Q12.parts[i], 'toSci', { c: x[0], k: x[1] }));
+  [s13.a, s13.b].forEach((x, i) => tag(Q13.parts[i], 'toStd', { c: x[0], k: x[1] }));
+  tag(Q14, 'toSci', { c: c14, k: -s14.k });
+  tag(Q15.parts[0], 'ratio', { A: String(s15.A), B: String(s15.B), t: String(s15.t), p: s15.p, q: s15.q });
+  tag(Q15.parts[1], 'ratio', { A: A2s, B: B2s, t: String(s15.t2), p: -s15.p2, q: -s15.q2 });
+  tag(Q16.part, 'eNote', { c: s16.c, k: s16.k });
   return { seed, sections: S };
 }
 
-const api = { Q, qeq, qdec, decStr, commas, N, V, P, Mul, Fr, Neg, Par, Eq, Sci, evalA, html, M, plain, parse, tidy, mark, generate, monoProblem, isSci, hasPow, hasNegExp };
+const api = { Q, qeq, qdec, decStr, commas, N, V, P, Mul, Fr, Neg, Par, Eq, Sci, Ar, evalA, html, M, plain, parse, tidy, mark, generate, monoProblem, isSci, hasPow, hasNegExp,
+  qadd, qsub, qmul, qdiv, qpow, qlt, gcd, unwrap, literalInt, sameValue, vars, valueProblem, esc };
 if (typeof module !== 'undefined' && module.exports) module.exports = api; else root.Practice = api;
 })(this);

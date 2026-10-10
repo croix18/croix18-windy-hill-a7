@@ -20,6 +20,31 @@ open it only after he shares it (Share → link; a public link if students have 
   (no feedback until "Finish & mark"). Score = right on the first try; time on a stopwatch.
 - Answers stay in the student's browser (localStorage, per set). No names, nothing sent anywhere.
 
+## The coach (version 2, 10 Oct 2026)
+
+Croix: *"strengthen that some more both in terms of the explanation and show mes. I want it to adapt perfectly to whatever they
+submit and explain exactly where they went wrong and how to solve it next time."*
+
+`coach.js` turns a wrong or nearly-right answer into feedback, in this order:
+1. **Typing slips** (missing ^ as in `h3`, `10 5` for 10^5, calculator `E`, two ^ in a row, an equation for n not yet solved) —
+   explained and **not counted** as a try.
+2. **Exact mistakes**: each question family has mistake models (multiplied the exponents, multiplied the bases, raised only the
+   top, dropped the minus sign, moved the 8 to the bottom too, counted the zeros, subtracted the numbers in "how many times", …).
+   One fires only when the typed answer has that mistake's exact value AND its shape (a single power must have the same base and
+   exponent; whole-number fractions must match as written; negative exponents present in both or neither). The sentence is
+   "That is what you get if you …", with the student's numbers.
+3. **Piece by piece**: base vs exponent; number part vs each letter's exponent (monomials); first number vs exponent (scientific
+   notation); digits vs decimal place (standard form); number vs power of 10 ("how many times"). Each piece is called right or
+   explained.
+4. **Facts**: wrong sign (with "nothing here is negative" when true), upside down, both top and bottom negative, "check it: if
+   n = 4 then …".
+Every wrong answer also shows **Next time:** the family's rule. **Hint** reveals the worked solution one step at a time;
+**Show me how** reveals it all and marks the step where the student's answer went off. A hint used before the first check
+means that question can't count as right on the first try.
+
+Worked solutions (`solution(part)`) are chains: every step's expression equals the question (the n-equation: true at the
+answer), the last is the answer. Saved state moved to `v2` (the per-question record changed shape).
+
 ## Marking
 
 `mark(part, typed)` in engine.js reads what was typed (^ powers, / fractions, × or x for times in
@@ -37,6 +62,10 @@ node test_engine.js 20000     # 20,000 sets: every key typed back is marked righ
 python3 verify.py             # independent sympy re-check of 4,000 sets from dump.json (exact rationals)
 node steps_check.js           # every "a + b = c", "b^k = v" claim in steps/messages recomputed (20,000 sets)
 node look3.js                 # Playwright: types every key into the page for 4 sets → 36/36
+node coach_check.js 1500      # coach: every solution step = the question; every mistake model typed back gets its own words;
+                              # ~670,000 near-miss answers fuzzed; every arithmetic chain in any sentence recomputed; no
+                              # hyphen-as-minus; plus pinned cases for every defect from the coach review
+python3 verify_coach.py       # independent sympy check of 52,500 worked solutions
 python3 build.py              # → unit-3-practice-test.html (artifact body) and preview.html
 ```
 

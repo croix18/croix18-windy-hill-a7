@@ -1,6 +1,6 @@
 (function(){
 'use strict';
-var E = window.Practice, VER = 'v1', PRE = 'a7u3prac.' + VER + '.';
+var E = window.Practice, VER = 'v2', PRE = 'a7u3prac.' + VER + '.';
 var $ = function(id){ return document.getElementById(id); };
 var LET = 'ABCDE';
 function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
@@ -61,43 +61,52 @@ function render(){
   $('setin').value = seed;
 }
 
-/* ------------------------------------------------ marking */
+/* ------------------------------------------------ marking and coaching */
+var C = window.Coach;
 function byId(id){ for (var i = 0; i < ITEMS.length; i++) if (ITEMS[i].id === id) return ITEMS[i]; return null; }
 function answered(it){ var a = S.ans[it.id]; return it.type === 'multi' ? !!(a && a.length) : a != null && String(a).trim() !== ''; }
-function judge(it){                       /* → {v, msg} without touching the state */
+function judge(it, triesSoFar){            /* → {v, what[], rule, step} without touching the state */
   var a = S.ans[it.id];
-  if (!answered(it)) return {v:'blank'};
-  if (it.type === 'text'){ try { return E.mark(it.part, a); } catch(e){ return {v:'unread', msg:'I can’t read that.'}; } }
-  if (it.type === 'mc'){ var k = +a; return k === it.item.correct ? {v:'right'} : {v:'wrong', msg: it.item.why[k]}; }
-  var want = it.item.correct, got = a.map(Number);
-  var extra = got.filter(function(k){ return want.indexOf(k) < 0; }).length, missing = want.filter(function(k){ return got.indexOf(k) < 0; }).length;
-  if (!extra && !missing) return {v:'right'};
-  var m = [];
-  if (extra) m.push(extra === 1 ? 'One of your picks is not equal to it.' : extra + ' of your picks are not equal to it.');
-  if (missing) m.push(missing === 1 ? 'One more choice is equal to it.' : missing + ' more choices are equal to it.');
-  return {v:'wrong', msg: m.join(' ')};
+  if (!answered(it)) return {v:'blank', what:[]};
+  try {
+    if (it.type === 'text') return C.feedback(it.part, a);
+    if (it.type === 'mc') return C.mcFeedback(it.item, +a);
+    return C.selectFeedback(it.item, a, (triesSoFar || 0) + 1);
+  } catch(e){ return {v:'unread', what:['I can’t read that. Type a power with ^ and a fraction with /.']}; }
 }
-function record(it, r){                   /* a counted attempt */
-  var R = S.res[it.id] || (S.res[it.id] = {tries:0, first:null, v:null, shown:false});
+function res(it){ return S.res[it.id] || (S.res[it.id] = {tries:0, first:null, v:null, shown:false, hinted:false, steps:0, fb:null}); }
+function record(it, f){                    /* a counted attempt */
+  var R = res(it);
   if (R.v === 'right') return R;
-  R.tries++; R.v = r.v; R.msg = r.msg || '';
-  if (R.first === null) R.first = (r.v === 'right');
+  R.tries++; R.v = f.v; R.fb = {what: f.what || [], rule: f.rule || '', step: f.step == null ? null : f.step};
+  if (R.first === null) R.first = (f.v === 'right') && !R.hinted;
   return R;
 }
 function check(id){
   var it = byId(id); if (!it) return;
-  var r = judge(it);
-  if (r.v === 'blank'){ showFb(it, {v:'blank'}); return; }
-  if (r.v === 'unread'){ showFb(it, r); return; }       /* a typo is not an attempt */
+  var R0 = S.res[it.id], f = judge(it, R0 ? R0.tries : 0);
+  if (f.v === 'blank' || f.v === 'unread'){ flash(it, f); return; }      /* a typo is not an attempt */
   if (!S.running && !S.done) start();
-  record(it, r); save(); paintItem(it); paintScore();
+  record(it, f); save(); paintItem(it); paintScore();
 }
-var TAG = {right:'<span class="tag ok">✓ Correct</span>', form:'<span class="tag fm">Almost</span>', wrong:'<span class="tag no">✗ Not yet</span>', unread:'<span class="tag fm">?</span>'};
-function showFb(it, r){
+var TAG = {right:'<span class="tag ok">✓ Correct</span>', form:'<span class="tag fm">Almost</span>', wrong:'<span class="tag no">✗ Not yet</span>', unread:'<span class="tag fm">Not counted yet</span>'};
+function flash(it, f){
   var fb = $('fb' + it.id);
-  if (r.v === 'blank'){ fb.innerHTML = '<span class="msg">' + (it.type === 'text' ? 'Type an answer first.' : 'Pick an answer first.') + '</span>'; fb.hidden = false; return; }
-  fb.innerHTML = TAG[r.v] + (r.msg ? '<span class="msg">' + r.msg + '</span>' : '');
+  fb.innerHTML = f.v === 'blank' ? '<div class="fbx"><p>' + (it.type === 'text' ? 'Type an answer first.' : 'Pick an answer first.') + '</p></div>'
+    : TAG.unread + '<div class="fbx"><p>' + (f.what[0] || '') + '</p></div>';
   fb.hidden = false;
+}
+function cardHtml(it, R){
+  var v = R.v, fb = R.fb || {what:[]}, h = TAG[v] || '';
+  if (v === 'right'){
+    var note = R.first ? '' : R.shown ? 'after seeing the steps' : R.hinted && R.tries === 1 ? 'with a hint' : 'on try ' + R.tries;
+    return h + (note ? '<span class="msg">' + note + '</span>' : '');
+  }
+  var w = fb.what || [];
+  var body = w.length > 1 ? '<ul>' + w.map(function(x){ return '<li>' + x + '</li>'; }).join('') + '</ul>' : (w.length ? '<p>' + w[0] + '</p>' : '');
+  if (v === 'wrong' && fb.rule) body += '<p class="rule"><b>Next time:</b> ' + fb.rule + '</p>';
+  if (v === 'wrong' && fb.step != null && R.steps <= fb.step) body += '<p class="where">Tap <b>Show me how</b> to see the step where it went off.</p>';
+  return h + '<div class="fbx">' + body + '</div>';
 }
 function keyHtml(it){
   if (it.type === 'mc') return '<b>' + LET[it.item.correct] + '.</b> ' + E.M(it.item.opts[it.item.correct]);
@@ -105,26 +114,46 @@ function keyHtml(it){
   var p = it.part;
   return (p.kind === 'n' ? '<span class="m"><i>n</i> = </span>' : '') + E.M(p.shownAns || p.ans) + (p.tail ? esc(p.tail) : '');
 }
-function stepsHtml(it){
-  var src = it.type === 'text' ? it.part.steps : it.item.steps, li;
-  if (it.type === 'multi') li = src.map(function(s, k){ return '<li><b>' + LET[k] + '.</b> ' + E.M(s.e) + ' <span class="m">= </span>' + E.M(s.v) + ' &nbsp;' + (s.ok ? '<span class="ok">✓ equal</span>' : '<span class="no">✗</span>') + '</li>'; });
-  else li = src.map(function(s){ return '<li>' + s + '</li>'; });
-  var list = li.length === 1 && it.type !== 'multi' ? '<p class="one">' + src[0] + '</p>' : '<ol>' + li.join('') + '</ol>';
-  return list + '<div class="key"><span class="kl">Answer</span><span class="kv">' + keyHtml(it) + '</span></div>';
+function solOf(it){
+  try { return it.type === 'text' ? C.solution(it.part) : C.mcSolution(it.item); } catch(e){ return null; }
+}
+function stepsHtml(it, R){
+  var sol = solOf(it), n = sol ? sol.length : 0, shown = Math.min(R.steps || 0, n);
+  if (!sol){                                                     /* fallback: the plain steps */
+    var src = it.type === 'text' ? it.part.steps : it.item.steps || [];
+    return '<ol class="sol">' + src.map(function(s){ return '<li><div class="say">' + (typeof s === 'string' ? s : '') + '</div></li>'; }).join('') + '</ol><div class="key"><span class="kl">Answer</span><span class="kv">' + keyHtml(it) + '</span></div>';
+  }
+  var q = it.type === 'text' ? it.part.q : it.item.q, eq = it.type === 'text' && it.part.fam === 'solveN';
+  var off = (R.v !== 'right' && R.fb && R.fb.step != null) ? R.fb.step : -1;
+  var h = q && it.type !== 'multi' ? '<div class="solhead"><span class="kl">Start</span> ' + E.M(q) + '</div>' : '';
+  h += '<ol class="sol">' + sol.slice(0, shown).map(function(s, i){
+    return '<li class="' + (i === off ? 'off' : '') + '"><div class="say">' + s.say + '</div>' +
+      (s.ex ? '<div class="ex">' + (eq ? '' : '<span class="m">= </span>') + E.M(s.ex) + '</div>' : '') +
+      (i === off ? '<div class="offnote">⟵ This is the step where your answer went off.</div>' : '') + '</li>';
+  }).join('') + '</ol>';
+  if (shown >= n) h += '<div class="key"><span class="kl">Answer</span><span class="kv">' + keyHtml(it) + '</span></div>';
+  return h;
 }
 function paintItem(it){
   var R = S.res[it.id], host = it.type === 'text' ? document.querySelector('.prt[data-id="' + it.id + '"]') : document.querySelector('.q[data-q="' + it.id + '"]');
   var testHidden = S.mode === 'test' && !S.done;
   ['is-right','is-wrong','is-form'].forEach(function(c){ host.classList.remove(c); });
   var fb = $('fb' + it.id), mo = $('mo' + it.id), st = $('st' + it.id);
-  if (!R || testHidden){ fb.hidden = true; mo.hidden = true; st.hidden = true; paintChoices(it, null); return; }
+  if (testHidden){ fb.hidden = true; mo.hidden = true; st.hidden = true; paintChoices(it, null); return; }
+  var sol = solOf(it), n = sol ? sol.length : 1;
+  R = R || {tries:0, v:null, steps:0};
   if (R.v) host.classList.add(R.v === 'right' ? 'is-right' : R.v === 'form' ? 'is-form' : 'is-wrong');
-  if (R.v){ showFb(it, {v:R.v, msg: R.v === 'right' ? (R.first ? '' : R.shown ? 'after seeing the steps' : 'on try ' + R.tries) : R.msg}); } else fb.hidden = true;
-  var canSteps = R.v === 'right' || R.tries > 0 || S.done;
-  mo.innerHTML = canSteps && !R.open ? '<button type="button" data-steps="' + it.id + '">' + (R.v === 'right' ? 'Show the steps' : 'Show me how') + '</button>' : '';
-  mo.hidden = !mo.innerHTML;
-  st.hidden = !R.open; if (R.open) st.innerHTML = stepsHtml(it);
-  paintChoices(it, R);
+  if (R.v){ fb.innerHTML = cardHtml(it, R); fb.hidden = false; } else fb.hidden = true;
+  var b = [];
+  var all = (R.steps || 0) >= n;
+  if (R.v === 'right'){ if (!all) b.push('<button type="button" data-all="' + it.id + '">See the steps</button>'); }
+  else if (!all){
+    b.push('<button type="button" data-hint="' + it.id + '">' + ((R.steps || 0) === 0 ? 'Hint' : 'Next step') + ' <span class="cnt">' + Math.min((R.steps || 0) + 1, n) + ' of ' + n + '</span></button>');
+    if (R.tries > 0 || S.done) b.push('<button type="button" data-all="' + it.id + '">Show me how</button>');
+  }
+  mo.innerHTML = b.join(''); mo.hidden = !b.length;
+  st.hidden = !(R.steps > 0); if (R.steps > 0) st.innerHTML = stepsHtml(it, R);
+  paintChoices(it, R.v ? R : null);
   var input = $('a' + it.id); if (input) input.readOnly = R.v === 'right';
   var btn = host.querySelector('[data-check="' + it.id + '"]'); if (btn) btn.disabled = R.v === 'right';
   if (it.type !== 'text') Array.prototype.forEach.call(host.querySelectorAll('.ch input'), function(x){ x.disabled = R.v === 'right'; });
@@ -134,18 +163,27 @@ function paintChoices(it, R){
   it.item.opts.forEach(function(o, k){
     var ch = $('ch' + it.id + LET[k]); ch.classList.remove('picked-no','is-key');
     if (!R) return;
+    var sol = solOf(it), all = sol && R.steps >= sol.length;
     var picked = it.type === 'mc' ? String(S.ans[it.id]) === String(k) : (S.ans[it.id] || []).map(Number).indexOf(k) >= 0;
     var isKey = it.type === 'mc' ? k === it.item.correct : it.item.correct.indexOf(k) >= 0;
-    if (R.v === 'right' || R.open){ if (isKey) ch.classList.add('is-key'); }
+    if (R.v === 'right' || all){ if (isKey) ch.classList.add('is-key'); }
     else if (picked && it.type === 'mc' && R.v === 'wrong') ch.classList.add('picked-no');
   });
 }
 document.addEventListener('click', function(e){
   var b = e.target.closest && e.target.closest('[data-check]'); if (b){ check(b.dataset.check); return; }
-  var s = e.target.closest && e.target.closest('[data-steps]');
-  if (s){ var it = byId(s.dataset.steps), R = S.res[it.id];
-    if (R.v !== 'right'){ R.shown = true; if (R.first === null) R.first = false; }
-    R.open = true; save(); paintItem(it); paintScore(); }
+  var h = e.target.closest && e.target.closest('[data-hint]');
+  if (h){ var it = byId(h.dataset.hint), R = res(it);
+    if (R.tries === 0 && !S.done) R.hinted = true;               /* a hint before the first check: that question can't count as first try */
+    R.steps = (R.steps || 0) + 1;
+    var sol = solOf(it); if (sol && R.steps >= sol.length && R.v !== 'right'){ R.shown = true; if (R.first === null) R.first = false; }
+    if (!S.running && !S.done) start();
+    save(); paintItem(it); paintScore(); return; }
+  var a = e.target.closest && e.target.closest('[data-all]');
+  if (a){ var it2 = byId(a.dataset.all), R2 = res(it2), sol2 = solOf(it2);
+    R2.steps = sol2 ? sol2.length : 1;
+    if (R2.v !== 'right'){ R2.shown = true; if (R2.first === null) R2.first = false; }
+    save(); paintItem(it2); paintScore(); }
 });
 
 /* ------------------------------------------------ typing */
@@ -175,8 +213,6 @@ document.addEventListener('input', function(e){
   var t = e.target; if (!t.id || t.id.charAt(0) !== 'a' || !t.closest('#paper')) return;
   if (!S.running && !S.done) start();
   S.ans[t.id.slice(1)] = t.value; setPreview(t);
-  var it = byId(t.id.slice(1)), R = S.res[it.id];
-  if (R && R.v && R.v !== 'right' && S.mode === 'practice'){ $('fb' + it.id).hidden = true; }
   save(); paintProgress();
 });
 document.addEventListener('keydown', function(e){
@@ -233,10 +269,10 @@ function paintResult(t){
 }
 function finish(){
   if (S.running) S.acc = elapsed(); S.running = false; S.startedAt = null; S.done = true;
-  if (S.mode === 'test'){ ITEMS.forEach(function(it){ var r = judge(it); var R = S.res[it.id] || (S.res[it.id] = {tries:0, first:null, v:null, shown:false});
-      if (r.v === 'blank' || r.v === 'unread'){ R.first = false; R.v = 'wrong'; R.msg = r.v === 'blank' ? 'Left blank.' : r.msg; R.tries = 1; }
-      else record(it, r); }); }
-  else ITEMS.forEach(function(it){ var R = S.res[it.id]; if (!R){ S.res[it.id] = {tries:0, first:false, v:null, shown:false}; } else if (R.first === null) R.first = false; });
+  if (S.mode === 'test'){ ITEMS.forEach(function(it){ var R = res(it), f = judge(it, R.tries);
+      if (f.v === 'blank' || f.v === 'unread'){ R.first = false; R.v = 'wrong'; R.tries = 1; R.fb = {what: [f.v === 'blank' ? 'Left blank.' : (f.what[0] || 'Could not read the answer.')], rule: '', step: null}; }
+      else record(it, f); }); }
+  else ITEMS.forEach(function(it){ var R = res(it); if (R.first === null) R.first = false; });
   save(); paintAll(); window.scrollTo(0, 0);
 }
 
