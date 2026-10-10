@@ -273,7 +273,7 @@ function markInner(part, text) {
   const letters = vars(part.ans);
   const read = [];
   for (const sg of segs) {
-    const r = readOne(sg, xT); if (r.err) return { v: 'unread', msg: r.err };
+    const r = readOne(!xT && letters.indexOf('x') < 0 ? sg.replace(/\s+[xX]\s+/g, ' * ') : sg, xT); if (r.err) return { v: 'unread', msg: r.err };
     if (vars(r.a).some(l => letters.indexOf(l) < 0)) return { v: 'wrong', msg: letters.length ? 'That uses a letter that isn’t in the question.' : 'This answer is a number — no letters.' };
     read.push(r.a);
   }

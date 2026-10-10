@@ -13,17 +13,19 @@ body = f"""<title>Unit 3 Practice Test</title>
 </div><div class="bar"><i id="prog"></i></div></div>
 <div class="result" id="result" hidden></div>
 <main class="sheet">
-  <div class="head"><div><div class="eyebrow">Grade 7 Accelerated &nbsp;·&nbsp; Unit 3 &nbsp;·&nbsp; Practice</div><h1>Exponents and Scientific Notation</h1><div class="total">36 points &nbsp;·&nbsp; set <span id="setno"></span></div></div></div>
+  <div class="head"><div><div class="eyebrow">Grade 7 Accelerated &nbsp;·&nbsp; Unit 3 &nbsp;·&nbsp; Practice</div><h1>Exponents and Scientific Notation</h1><div class="total"><span id="total">36 points</span> &nbsp;·&nbsp; set <span id="setno"></span></div></div></div>
   <div class="rules"></div>
   <p class="how">Same kinds of questions as the unit test, with different numbers. Every new set has new numbers.</p>
   <div class="mode" role="group" aria-label="How to practice"><button type="button" data-mode="practice" aria-pressed="true">Check as I go</button><button type="button" data-mode="test" aria-pressed="false">Like the real test</button></div>
+  <div class="setrow"><label for="scope">Practice</label><select id="scope" aria-label="What to practice"></select></div>
   <div class="setrow"><label for="setin">Set</label><input type="text" inputmode="numeric" id="setin" aria-label="Set number" autocomplete="off"><button type="button" id="setgo">Go</button><button type="button" class="go" data-new="1">New set</button><button type="button" id="bAgain">Start this set over</button></div>
-  <p class="tip">Type a power with <kbd>^</kbd> and a fraction with <kbd>/</kbd> — <kbd>4^8</kbd>, <kbd>1/6^3</kbd>, <kbd>27a^6</kbd>, <kbd>8.3 x 10^6</kbd>. If the bottom of a fraction has more than one thing, use parentheses: <kbd>5/(3x^2)</kbd>. The keys appear under the box you are typing in. Press <kbd>Check</kbd> (or Enter) to see if you’re right. Stuck? <kbd>Hint</kbd> shows one step at a time.</p>
+  <p class="tip">Type a power with <kbd>^</kbd> and a fraction with <kbd>/</kbd> — <kbd>4^8</kbd>, <kbd>1/6^3</kbd>, <kbd>27a^6</kbd>, <kbd>8.3 x 10^6</kbd>. If the bottom of a fraction has more than one thing, use parentheses: <kbd>5/(3x^2)</kbd>. The keys appear under the box you are typing in. Press <kbd>Check</kbd> (or Enter) to see if you’re right. Stuck? <kbd>Hint</kbd> shows one step at a time, and <kbd>Help me solve this</kbd> checks your work line by line.</p>
   <div id="paper"></div>
 </main>
 <p class="foot">Your answers stay on this device only. Nothing is sent anywhere.</p>
 <script>{r('engine.js')}</script>
 <script>{r('coach.js')}</script>
+<script>{r('visual.js')}</script>
 <script>{r('ui.js')}</script>
 """
 open(os.path.join(D, "unit-3-practice-test.html"), "w", encoding="utf-8").write(body)

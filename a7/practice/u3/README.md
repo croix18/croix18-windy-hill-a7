@@ -45,6 +45,24 @@ means that question can't count as right on the first try.
 Worked solutions (`solution(part)`) are chains: every step's expression equals the question (the n-equation: true at the
 answer), the last is the answer. Saved state moved to `v2` (the per-question record changed shape).
 
+## Version 3 (10 Oct 2026): help me solve, try another, one part, pictures
+
+Croix picked four upgrades and said Help-me-solve must be *"an option or like a help me solve this type thing"*, not the default.
+- **Help me solve this** (button on every typed question): the student types work one step per line; `checkWork` marks each
+  line ✓ if it equals the question (equations: true at the right n and not at other values — `n^2 = 36` is refused). The first
+  unequal line gets: for the very first step, the exact mistake list; after that, only true comparisons with the line before
+  ("this is 3^2, what comes before it equals 3^3"; number part / each letter's exponent) plus the step to take. "Use my last
+  line as my answer" fills the box. Using it before the first check counts as help (no first-try point).
+- **Try another like this**: after a miss, a fresh question of the same kind at the same position from another generated set
+  (never the same question again); two right first-try in a row clears it from "misses".
+- **Practice menu**: whole test; one part (two rounds, round 2 never repeats a round-1 question); my misses (positions missed
+  on the first try, saved on the device, with new numbers in two rounds).
+- **Pictures** (`visual.js`, "See why it works", shown with the full solution or once right — they state the answer):
+  factor tiles, copies grid, cancelling factors, the ladder of powers (÷ base each step), pairs of negatives, copies of a
+  product, and the decimal-point hop. Every count/value is re-derived by `coach_check.js`, which also proves it catches planted
+  picture errors.
+- Saved state `v3` (keys per set and practice choice). Third adversarial review: 10 defects + low items, all fixed and pinned.
+
 ## Marking
 
 `mark(part, typed)` in engine.js reads what was typed (^ powers, / fractions, × or x for times in

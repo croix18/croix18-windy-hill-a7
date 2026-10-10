@@ -4,7 +4,7 @@
    C. fuzz: thousands of near-miss answers per set never crash, and every sentence shown is checked for arithmetic
    D. multiple choice / select-all feedback */
 'use strict';
-const P = require('./engine.js'), C = require('./coach.js'), fs = require('fs');
+const P = require('./engine.js'), C = require('./coach.js'), Vz = require('./visual.js'), fs = require('fs');
 const SEEDS = +(process.argv[2] || 3000);
 const fails = []; const fail = (s, w, m) => { if (fails.length < 80) fails.push(s + ' ' + w + ': ' + m); else fails.length++; };
 const { N, V, P: Pw, Mul, Fr, Neg, Par, Sci } = P;
@@ -63,6 +63,65 @@ function evalSide(sd) {
 (function () { const before = fails.length; claimCheck(0, 'plant', '4 + 5 = 10'); claimCheck(0, 'plant', '2 + (−5) = 2 − 5 = −2'); claimCheck(0, 'plant', '3 · 3 · 3 = 26'); claimCheck(0, 'plant', '6.6 ÷ 3.3 = 3');
   claimCheck(0, 'ok', '2 + (−5) = 2 − 5 = −3'); claimCheck(0, 'ok', '(−4) · (−4) · (−4) = −64');
   const caught = fails.length - before; fails.length = before; if (caught !== 4) { console.log('CHECKER BROKEN: caught', caught, 'of 4 planted'); process.exit(2); } })();
+
+/* ---- pictures: every count and value in a picture is re-derived here ---- */
+const VQ = (n, d) => P.Q(BigInt(n), BigInt(d === undefined ? 1 : d));
+function ansExp(p) { const m = C.mono(p.ans); if (!m) return null; const ks = Object.keys(m.x); if (ks.length === 1) return Number(m.x[ks[0]]);
+  const sp = C.single(p.ans); if (sp) return Number(sp.e); return null; }
+function checkVis(seed, w, p, s) {
+  const x = p.prm, bad = m => fail(seed, w, 'picture: ' + m);
+  if (s.kind === 'row') { if (s.groups[0] + s.groups[1] !== s.total) bad('row sum'); const e = ansExp(p); if (e !== null && e !== s.total) bad('row total ' + s.total + ' ≠ answer exponent ' + e); }
+  if (s.kind === 'grid') { if (s.rows * s.cols !== s.total) bad('grid'); const e = ansExp(p); if (e !== null && e !== s.total) bad('grid total ≠ answer exponent'); }
+  if (s.kind === 'cancel') {
+    if (s.zero) { if (s.top !== s.bottom) bad('zero picture'); return; }
+    if (s.solve) { if (s.top !== s.solve.k + s.solve.c || s.top - s.bottom !== s.solve.c || !P.qeq(P.evalA(p.ans, {}), VQ(s.top))) bad('solve picture'); if (!P.qeq(P.qpow(VQ(x.b), BigInt(s.solve.c)), VQ(s.solve.V))) bad('solve V'); return; }
+    let want;
+    if (p.fam === 'ratio') { want = x.p - x.q; if (!P.qeq(P.qdiv(P.qdec(x.A), P.qdec(x.B)), P.qdec(x.t))) bad('ratio numbers'); }
+    else if (p.fam === 'monoQuot') { want = x.p - x.q; if (x.k / x.j !== x.t) bad('monoQuot numbers'); }
+    else if (p.fam === 'powquot') want = x.e; else if (p.fam === 'mixedProd') want = x.m - x.n; else want = ansExp(p);
+    if (s.top - s.bottom !== want) bad('cancel leaves ' + (s.top - s.bottom) + ', answer exponent ' + want);
+    if (p.fam === 'powquot' && s.top !== s.fromPow[0] * s.fromPow[1]) bad('powquot top');
+  }
+  if (s.kind === 'ladder') {
+    const b = s.base;
+    const wantBase = { negToFrac: x.b, negVal: x.b, coefNeg: 10, negDen: -x.c, zeroMix: x.a, varNeg: { letter: x.v }, coefVarNeg: { letter: x.v }, fracNeg: { frac: x.d } }[p.fam];
+    if (JSON.stringify(wantBase) !== JSON.stringify(b)) bad('ladder base ' + JSON.stringify(b) + ' ≠ ' + JSON.stringify(wantBase));
+    const wantLow = { negToFrac: -x.n, negVal: -x.n, coefNeg: -x.m, negDen: -x.m, zeroMix: 0, varNeg: -x.n, coefVarNeg: -x.n, fracNeg: -x.n }[p.fam];
+    if (s.low !== wantLow) bad('ladder does not reach the question exponent');
+    if (b && b.letter) return;
+    const bq = b && b.frac ? VQ(1, b.frac) : VQ(b);
+    /* walk up from b^0 = 1 multiplying, down dividing: an independent derivation of every row */
+    let up = VQ(1), dn = VQ(1);
+    for (let j = 1; j <= (s.high != null ? s.high : 3); j++) up = P.qmul(up, bq);
+    for (let j = 1; j <= -Math.min(s.low, -1); j++) dn = P.qdiv(dn, bq);
+    if (!P.qeq(up, P.qpow(bq, BigInt(s.high != null ? s.high : 3))) || !P.qeq(dn, P.qpow(bq, BigInt(Math.min(s.low, -1))))) bad('ladder values');
+    const h = Vz.html(s); const rows = (h.match(/<tr/g) || []).length; if (rows !== (s.high != null ? s.high : 3) - Math.min(s.low, -1) + 1) bad('ladder rows');
+  }
+  if (s.kind === 'signs') { if (s.c !== x.c || s.e !== x.e) bad('signs'); const neg = s.e % 2 === 1; if (neg !== (P.evalA(p.ans, {}).n < 0n)) bad('signs result'); }
+  if (s.kind === 'copies') {
+    const m = C.mono(p.ans);
+    if (s.frac) { const v = P.evalA(p.ans, {}); if (!P.qeq(v, P.qdiv(P.qpow(VQ(s.parts[0].n), BigInt(s.copies)), P.qpow(VQ(s.parts[1].n), BigInt(s.copies))))) bad('fracpow copies'); }
+    else { s.parts.forEach(pt => { if (pt.letter) { if ((m.x[pt.letter] || 0n) !== BigInt(pt.e * s.copies)) bad('copies exponent ' + pt.letter); } else if (!P.qeq(m.c, P.qpow(VQ(pt.n), BigInt(s.copies)))) bad('copies number'); }); }
+  }
+  if (s.kind === 'hop') {
+    const val = pos => { const ds = s.cells; const intPart = ds.slice(0, pos) || '0', fr = ds.slice(pos); return P.qdec((intPart.replace(/^0+(?=\d)/, '') || '0') + (fr ? '.' + fr : '')); };
+    if (!P.qeq(val(s.cpos), P.qdec(x.c))) bad('hop: digits at c position are not ' + x.c);
+    if (!P.qeq(val(s.spos), P.qmul(P.qdec(x.c), P.qpow(VQ(10), BigInt(x.k))))) bad('hop: digits at standard position are not the number');
+    if (Math.abs(s.spos - s.cpos) !== Math.abs(x.k)) bad('hop count');
+    if ((s.spos > s.cpos) !== (x.k > 0)) bad('hop direction');
+  }
+}
+
+/* the picture checker must catch planted errors */
+(function () { const G = P.generate(1), before = fails.length; let planted = 0;
+  G.sections.forEach(sec => sec.items.forEach(it => (it.type === 'parts' ? it.parts : it.type === 'solo' ? [it.part] : []).forEach(p => {
+    const s = Vz.spec(p); if (!s) return; const t = JSON.parse(JSON.stringify(s));
+    if (t.kind === 'row' || t.kind === 'grid') t.total += 1; else if (t.kind === 'cancel') t.top += 1; else if (t.kind === 'ladder') { if (t.base && t.base.letter) return; t.base = (typeof t.base === 'number' ? t.base + 1 : t.base); if (typeof s.base !== 'number') return; }
+    else if (t.kind === 'signs') t.e += 1; else if (t.kind === 'copies') t.copies += 1; else if (t.kind === 'hop') t.cpos += 1; else return;
+    planted++; const b0 = fails.length; checkVis(0, 'plant', p, t); if (fails.length === b0) console.log('PLANT NOT CAUGHT', p.fam, t.kind);
+  })));
+  const caught = fails.length - before; fails.length = before; console.log('picture checker caught', caught, 'of', planted, 'planted errors'); })();
+
 const dump = []; const stat = { models: 0, modelHits: 0, collide: 0, fuzz: 0, fuzzSaid: {}, steps: 0 };
 const FUZZ = ['0', '1', '-1', '2', '10', 'x', '1/2', '-1/2'];
 for (let seed = 1; seed <= SEEDS; seed++) {
@@ -93,6 +152,12 @@ for (let seed = 1; seed <= SEEDS; seed++) {
       if (p.fam === 'solveN') { if (!P.qeq(P.evalA(last.r, {}), P.evalA(p.ans, {}))) fail(seed, w, 'last step is not n = answer'); }
       else { const r = P.mark(p, typed(last)); if (r.v !== 'right' && p.kind !== 'times') fail(seed, w, 'last step "' + typed(last) + '" is not marked right: ' + r.v); }
       D.sols.push({ w, fam: p.fam, q: P.plain(p.q), ans: P.plain(p.ans), eq: p.fam === 'solveN', steps: exs.map(s => p.fam === 'solveN' ? [P.plain(s.ex.l), P.plain(s.ex.r)] : P.plain(s.ex)) });
+      { const vs = Vz.spec(p); if (vs) { stat.pics = (stat.pics || 0) + 1; try { checkVis(seed, w, p, vs); claimCheck(seed, w + ' picture', Vz.html(vs)); } catch (e) { fail(seed, w, 'picture crashed: ' + e.message); } } }
+      /* A2. help me solve: the worked solution typed line by line is all ✓ and finished; a mistake line is caught */
+      { const lines = sol.filter(st => st.ex).map(st => p.fam === 'solveN' ? C.typedOf(st.ex) : C.typedOf(st.ex)); const r = C.checkWork(p, lines.join('\n'));
+        if (r.lines.some(l => l.ok !== true)) fail(seed, w, 'work: a correct line was flagged: ' + JSON.stringify(r.lines.filter(l => l.ok !== true).map(l => [l.raw, strip(l.msg)])).slice(0, 200));
+        if (!r.done && p.kind !== 'times') fail(seed, w, 'work: the full solution is not recognised as finished: ' + strip(r.finalMsg || ''));
+        const ms0 = C.models(p); if (ms0.length) { const bad = C.checkWork(p, lines[0] + '\n' + C.typedOf(ms0[0].ex)); const fl = bad.lines.find(l => l.ok === false); if (!fl && !bad.lines.some(l => l.ok === null)) fail(seed, w, 'work: a mistake line was not caught: ' + C.typedOf(ms0[0].ex)); if (fl) claimCheck(seed, w + ' work', fl.msg); } }
       /* B. every mistake model */
       const ms = C.models(p);
       ms.forEach(md => {
@@ -129,6 +194,7 @@ for (let seed = 1; seed <= SEEDS; seed++) {
     /* D. multiple choice */
     if (it.type === 'mc') {
       it.opts.forEach((o, k) => { const f = C.mcFeedback(it, k); if ((k === it.correct) !== (f.v === 'right')) fail(seed, w0, 'mc feedback key'); f.what.forEach(s => claimCheck(seed, w0, s)); });
+      { const vs = Vz.spec({ fam: it.fam, prm: it.prm, ans: it.opts[it.correct] }); if (vs) { try { checkVis(seed, w0, { fam: it.fam, prm: it.prm, ans: it.opts[it.correct] }, vs); claimCheck(seed, w0 + ' picture', Vz.html(vs)); } catch (e) { fail(seed, w0, 'MC picture crashed: ' + e.message); } } }
       const sol = C.mcSolution(it); if (!sol) fail(seed, w0, 'no MC solution');
       else sol.forEach(s => { claimCheck(seed, w0, s.say); if (s.ex) { let ok; try { ok = P.sameValue(s.ex, it.q, P.vars(it.q)); } catch (e) { ok = false; } if (!ok) fail(seed, w0, 'MC step ≠ question'); } });
       if (sol) D.sols.push({ w: w0, fam: it.fam, q: P.plain(it.q), ans: P.plain(it.opts[it.correct]), eq: false, steps: sol.filter(s => s.ex).map(s => P.plain(s.ex)) });
@@ -186,8 +252,26 @@ for (let seed = 1; seed <= SEEDS; seed++) {
   q = find('monoProd'); x = q.prm; PIN('11k', q, (x.m + x.n) + x.v, 'wrong', /Did you mean/);
 })();
 
+/* ---- pinned: review 3 (Help me solve this) ---- */
+(function () {
+  const find = (fam, pred) => { for (let sd = 1; sd < 3000; sd++) { const G = P.generate(sd); for (const sec of G.sections) for (const it of sec.items) for (const p of (it.type === 'parts' ? it.parts : it.type === 'solo' ? [it.part] : [])) if (p.fam === fam && (!pred || pred(p.prm))) return p; } throw new Error('no ' + fam); };
+  const W = (name, p, text, test) => { const r = C.checkWork(p, text); const msg = r.lines.map(l => strip(l.msg)).join(' | '); const why = test(r, msg); if (why) fails.push('work pin ' + name + ': ' + why + ' — ' + JSON.stringify(r.lines.map(l => [l.raw, l.ok])) + ' ' + msg.slice(0, 160) + ' fin=' + strip(r.finalMsg || '')); };
+  let q, x;
+  q = find('eNote'); x = q.prm; W('E line', q, x.c + 'E' + x.k, r => r.lines[0].ok === true ? null : 'E-notation question line rejected');
+  q = find('prod'); x = q.prm; W('? stops', q, x.b + '^' + x.m + '*' + x.b + '^' + x.n + '\n' + x.b + '^(' + (x.m + x.n), r => r.finalMsg ? 'summary after an unreadable line' : null);
+  q = find('fracpow', y => y.p === 1); x = q.prm; W('mid fracpow', q, '(1/' + x.q + ')^' + x.k + '\n' + x.k + '^' + x.k + '/' + x.q + '^' + x.k, (r, m) => /raise only the top/.test(m) ? 'contradicts the line' : null);
+  q = find('powquot'); x = q.prm; W('mid powquot', q, '(' + x.B + '^' + x.p + ')^' + x.q + '/' + x.B + '^' + x.r + '\n' + x.B + '^' + x.p * x.q + '/' + x.B + '^' + x.r + '\n' + x.B + '^' + (x.e + 1), (r, m) => /add the exponents inside/.test(m) ? 'blames a step the student did right' : r.lines[2] && r.lines[2].ok === false ? null : 'wrong last line not caught');
+  q = find('monoCoefPow'); x = q.prm; W('paren caret', q, '(' + x.c + x.v + '^' + x.p + ')^' + x.q + '\n' + (x.c + 1) + '^' + x.q + '*(' + x.v + '^' + x.p + ')^' + x.q, (r, m) => /Two \^/.test(m) ? 'false caret warning' : null);
+  q = find('solveN'); x = q.prm; const nA = x.k + x.c;
+  W('n then wrong', q, 'n=' + nA + '\nn=' + (nA + 1), r => r.done ? 'says solved under a ✗' : null);
+  W('reversed', q, nA + ' = n', r => r.done ? null : 'not recognised as solved');
+  W('not equivalent', q, 'n^2=' + nA * nA, r => r.lines[0].ok === true ? 'n^2 = ' + nA * nA + ' accepted' : null);
+  q = find('monoProd', y => y.v !== 'x'); x = q.prm; W('x times', q, x.v + '^' + x.m + ' x ' + x.v + '^' + x.n, r => r.lines[0].ok === true ? null : 'x as times rejected');
+  q = find('quot'); x = q.prm; W('next order', q, x.b + '^' + x.m + '/' + x.b + '^' + x.n, r => r.next && r.next.i === 0 ? null : 'next step is not the first step: ' + JSON.stringify(r.next));
+})();
+
 fs.writeFileSync(__dirname + '/coach_dump.json', JSON.stringify(dump));
-console.log('seeds', SEEDS, '| solution steps', stat.steps, '| models', stat.models, 'explained by their own words', stat.modelHits, '| two explanations shown together', stat.collide, '| fuzz answers', stat.fuzz, '| arithmetic claims', claims);
+console.log('seeds', SEEDS, '| solution steps', stat.steps, '| models', stat.models, 'explained by their own words', stat.modelHits, '| two explanations shown together', stat.collide, '| fuzz answers', stat.fuzz, '| arithmetic claims', claims, '| pictures', stat.pics);
 const top = Object.entries(stat.fuzzSaid).sort((a, b) => b[1] - a[1]);
 console.log('distinct fuzz messages', top.length);
 console.log(fails.length ? fails.length + ' FAILURES\n' + fails.slice(0, 80).join('\n') : 'all coach checks pass');

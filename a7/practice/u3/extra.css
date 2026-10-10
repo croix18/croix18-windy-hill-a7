@@ -57,3 +57,56 @@ ol.sol .say{font-size:15px;line-height:1.45}
 ol.sol .ex{margin-top:3px;font-size:16px}
 ol.sol li.off{background:color-mix(in srgb,var(--no) 9%,transparent);outline:1px dashed var(--no)}
 ol.sol .offnote{font:600 12.5px/1.3 var(--ui);color:var(--no);margin-top:4px}
+
+/* ---- v3: practice one part, try another, help me solve, pictures ---- */
+.setrow select{font:600 14px/1.2 var(--ui);color:var(--ink);background:var(--field);border:1px solid var(--rule);border-radius:8px;padding:8px 10px;max-width:100%;flex:1 1 14rem}
+.again{margin-top:10px}
+.xq{border:1.5px dashed var(--pen);border-radius:10px;padding:10px 12px 12px;margin:0;background:color-mix(in srgb,var(--pen) 4%,transparent)}
+.xq .prt,.xq .choices,.xq>.ckrow,.xq>.fb,.xq>.more,.xq>.steps{margin-left:0}
+.xq .prt:not(.solo) .ans,.xq .prt:not(.solo) .fb,.xq .prt:not(.solo) .more,.xq .prt:not(.solo) .steps,.xq .prt:not(.solo) .work{margin-left:0}
+.xhead{font:700 12.5px/1.3 var(--ui);color:var(--pen);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.streak{text-transform:none;letter-spacing:0;color:var(--ok);margin-left:6px}
+.work{margin-top:8px;border:1px solid var(--rule);border-radius:10px;padding:10px 12px;background:var(--field)}
+.prt:not(.solo) .work{margin-left:calc(1.4em + 10px)}
+.wkhead{display:flex;flex-direction:column;gap:2px;font:14px/1.4 var(--ui);margin-bottom:8px} .wkhead span{color:var(--mut);font-size:13px}
+textarea.wta{width:100%;min-height:5.2em;font:17px/1.5 var(--serif);color:var(--pen);background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:8px 9px}
+.wbtn{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.wnote{font:12.5px/1.4 var(--ui);color:var(--mut);margin:8px 0 0}
+ol.wlines{list-style:none;margin:10px 0 0;padding:0;font:15px/1.45 var(--ui)}
+ol.wlines li{padding:6px 8px;border-radius:6px;margin-bottom:4px;background:var(--paper)}
+ol.wlines li.no{outline:1px dashed var(--no)}
+.wok,.wno,.wq{display:inline-block;width:1.4em;font-weight:700} .wok{color:var(--ok)} .wno{color:var(--no)} .wq{color:var(--warn)}
+.wl{font-family:var(--serif);color:var(--pen)}
+.wm{margin:3px 0 0 1.4em;font-size:14px}
+.wfin,.wnext{font:14.5px/1.45 var(--ui);margin:8px 0 0} .wfin.done{color:var(--ok);font-weight:600}
+details.why{margin:0 0 10px;border:1px solid var(--rule);border-radius:8px;padding:6px 10px;background:var(--paper)}
+details.why summary{cursor:pointer;font:600 13.5px/1.4 var(--ui);color:var(--pen)}
+.vis{margin-top:8px}
+.vrow{display:flex;flex-wrap:wrap;gap:4px;align-items:center;margin:4px 0}
+.vgrp{display:inline-flex;flex-wrap:wrap;gap:4px;align-items:center;position:relative;padding-bottom:16px}
+.vlab{position:absolute;left:0;right:0;bottom:0;text-align:center;font:600 11px/1 var(--ui);color:var(--mut)}
+.vop{font-size:20px;margin:0 4px}
+.vrl{font:600 11px/1 var(--ui);color:var(--mut);width:3.6em}
+.tile{display:inline-grid;place-items:center;min-width:26px;height:26px;padding:0 4px;border-radius:6px;font:600 14px/1 var(--serif);border:1.5px solid}
+.tile.a{border-color:var(--pen);color:var(--pen);background:color-mix(in srgb,var(--pen) 10%,transparent)}
+.tile.b{border-color:var(--ok);color:var(--ok);background:color-mix(in srgb,var(--ok) 10%,transparent)}
+.tile.x{border-color:var(--rule);color:var(--mut);text-decoration:line-through;opacity:.7}
+.tdots{font:12px/1 var(--ui);color:var(--mut);margin:0 4px}
+.vcancel .vbar{height:0;border-top:2px solid var(--ink);margin:2px 0;max-width:100%}
+.vcap{font:14px/1.5 var(--ui);margin:8px 0 2px}
+.vpair{display:inline-flex;gap:3px;position:relative;padding:3px 3px 17px;border:1px dashed var(--rule);border-radius:8px}
+.vpair.odd{border-color:var(--no)}
+table.ladder{border-collapse:collapse;font-size:16px;width:auto}
+table.ladder td{border:0;padding:3px 8px 3px 0;vertical-align:middle}
+table.ladder td.ld{font:12px/1 var(--ui);color:var(--mut);padding-left:10px}
+table.ladder tr.hl td{background:color-mix(in srgb,var(--pen) 12%,transparent)}
+table.ladder tr.hl td:first-child{border-radius:6px 0 0 6px} table.ladder tr.hl td:nth-child(3){border-radius:0 6px 6px 0}
+.vcopy{display:inline-block;padding:2px 4px}
+ul.vlist{margin:6px 0 0;padding-left:1.2em;font:14px/1.5 var(--ui)}
+.hopwrap{overflow-x:auto;max-width:100%}
+svg.hop .hcell{fill:var(--paper);stroke:var(--ink);stroke-width:1.2}
+svg.hop .hpad{fill:var(--field);stroke:var(--rule);stroke-width:1.2;stroke-dasharray:3 2}
+svg.hop .ht{font:600 16px var(--serif);fill:var(--ink)}
+svg.hop .harc{fill:none;stroke:var(--pen);stroke-width:1.5}
+svg.hop .hk{font:600 10px var(--ui);fill:var(--pen)}
+svg.hop .hfrom{fill:var(--mut)} svg.hop .hto{fill:var(--pen)}

@@ -595,8 +595,8 @@ function simpleFrac(a) {
 }
 /* a mistake explains an answer only if the answer has that mistake's SHAPE as well as its value:
    1/b^-n is not "dropped the sign", 8^16 is not "multiplied the bases", 2/8 is not "raised only the top" */
-function shapeOK(md, c) {
-  if (E.hasNegExp(c.a) !== E.hasNegExp(md.ex)) return false;
+function shapeOK(md, c, loose) {
+  if (!loose && E.hasNegExp(c.a) !== E.hasNegExp(md.ex)) return false;   /* in worked lines (loose) a negative exponent may still be on its way out */
   const st = single(c.a), sx = single(md.ex);
   if (st && sx) return qeq(st.b, sx.b) && st.e === sx.e;
   if (st && !sx && !vars(md.ex).length) return false;
@@ -604,10 +604,10 @@ function shapeOK(md, c) {
   if (ft && fx) return ft.n === fx.n && ft.d === fx.d;
   return true;
 }
-function matches(md, c) {
+function matches(md, c, loose) {
   if (!c.a) return false;
   try { if (!sameValue(c.a, md.ex, c.letters)) return false; } catch (e) { return false; }
-  if (!shapeOK(md, c)) return false;
+  if (!shapeOK(md, c, loose)) return false;
   return md.test ? !!md.test(c) : true;
 }
 /* where the negative exponents sit in an answer: on top, or on the bottom of a fraction */
@@ -625,7 +625,7 @@ function negPlaces(a) {
 /* typing slips that are not math mistakes: not counted as a try */
 function notation(part, raw) {
   const kindSci = part.kind === 'sci' || part.kind === 'std' || part.kind === 'times';
-  if (/\^\s*\(?\s*-?\s*[\w.]+\s*\)?\s*\^/.test(raw)) return 'Two ^ in a row is hard to read. For a power of a power, multiply the exponents and write one ^: ' + m(Eq(P(Par(P(a_, 4)), 7), P(a_, 28))) + '.';
+  if (/\^\s*-?\s*\d+(?:\.\d+)?\s*\^/.test(raw)) return 'Two ^ in a row is hard to read. For a power of a power, multiply the exponents and write one ^: ' + m(Eq(P(Par(P(a_, 4)), 7), P(a_, 28))) + '.';
   if (vars(part.ans).length) { const mm = /([a-zA-Z])(\d+)/.exec(raw); if (mm && !/\^/.test(raw.slice(mm.index - 1, mm.index))) return 'It looks like the ^ is missing in “' + esc(mm[0]) + '”. Type ' + esc(mm[1]) + '^' + mm[2] + ' for ' + m(P(V(mm[1].toLowerCase()), +mm[2])) + '.'; }
   if (/(?:[x×*]\s*)10(\d+)\s*$/i.test(raw) && !/10\s*\^/.test(raw)) { const mm = /10(\d+)\s*$/.exec(raw); return 'Put ^ before the exponent: type 10^' + mm[1] + ', not 10' + mm[1] + '.'; }
   if (/\d\s*[eE]\s*[-+−]?\s*\d/.test(raw) && !vars(part.ans).length) return 'E is calculator shorthand. Write it with × 10 and ^, like 5.6 x 10^8.';
@@ -635,7 +635,8 @@ function notation(part, raw) {
 const POWER_FAMS = { prod: 1, powpow: 1, quot: 1 };
 const NEG_FAMS = { negToFrac: 1, negDen: 1, coefNeg: 1, varNeg: 1, coefVarNeg: 1, monoNegPow: 1 };
 function hasNegIn(a) { return E.plain(a).indexOf('-') >= 0; }
-function feedback(part, text) {
+function feedback(part, text, opts) {
+  const loose = !!(opts && opts.loose) && !NEG_FAMS[part.fam];   /* where negative exponents are the point, their presence always matters */
   const raw = String(text || '').trim();
   const base = { what: [], rule: RULE[part.fam] ? RULE[part.fam]() : '', step: null };
   /* a. typing slips: not a math mistake, not counted */
@@ -673,7 +674,7 @@ function feedback(part, text) {
     }
   }
   /* e. exact mistakes, matched by value AND shape */
-  let hit = models(part).filter(md => matches(md, c));
+  let hit = models(part).filter(md => matches(md, c, loose));
   if (hit.some(h => h.test)) hit = hit.filter(h => h.test);
   if (hit.length) {
     const uniq = []; hit.forEach(h => { if (!uniq.some(u => u.if === h.if)) uniq.push(h); });
@@ -683,9 +684,9 @@ function feedback(part, text) {
   if (c.a && (NEG_FAMS[f] || part.kind === 'posexp') && E.hasNegExp(c.a)) {
     const np = negPlaces(c.a), w = [];
     if (np.bottom) w.push('A power with a negative exponent is on the bottom of your fraction. Moving a power across the fraction bar is what turns its exponent positive, so once it is on the bottom its exponent should be positive.');
-    if (np.top) w.push('Your answer still has a negative exponent on top. A negative exponent means one over the power: move that power to the bottom and make its exponent positive.');
-    if (unwrap(c.a).t === 'neg') w.push('Also, the minus sign in front makes the value negative. A negative exponent never does that.');
-    return say('wrong', w, NEG_FAMS[f] ? 0 : null);
+    if (np.top && !(opts && opts.loose)) w.push('Your answer still has a negative exponent on top. A negative exponent means one over the power: move that power to the bottom and make its exponent positive.');
+    if (unwrap(c.a).t === 'neg') w.push((w.length ? 'Also, the' : 'The') + ' minus sign in front makes the value negative. A negative exponent never does that.');
+    if (w.length) return say('wrong', w, NEG_FAMS[f] ? 0 : null);
   }
   /* g. piece by piece */
   const pf = partsFindings(part, c);
@@ -757,11 +758,157 @@ function mcSolution(item) {
 const minus = s => typeof s === 'string' ? s.replace(/(^|[\s(>=])-(\d)/g, '$1−$2') : s;
 function tidyOut(f) { if (f && f.what) f.what = f.what.map(minus); return f; }
 function tidySol(sol) { if (sol) sol.forEach(s => { s.say = minus(s.say); }); return sol; }
+/* ------------------------------------------------------------------ "Help me solve this": checking a student's own work, line by line */
+function atomish(a) { return a.t === 'n' || a.t === 'v' || a.t === 'pow' || a.t === 'par'; }
+function typedOf(a) {                                       /* an expression as a student would type it */
+  switch (a.t) {
+    case 'n': return a.s;
+    case 'v': return a.s;
+    case 'pow': { const b = a.b.t === 'n' || a.b.t === 'v' ? typedOf(a.b) : '(' + typedOf(a.b.t === 'par' ? a.b.x : a.b) + ')';
+      const e = a.e.t === 'n' ? a.e.s : a.e.t === 'neg' && a.e.x.t === 'n' ? '-' + a.e.x.s : '(' + typedOf(a.e) + ')'; return b + '^' + e; }
+    case 'mul': return a.xs.map(x => x.t === 'neg' || x.t === 'frac' || x.t === 'ar' ? '(' + typedOf(x) + ')' : typedOf(x)).join(a.op === '' ? '' : a.op === '×' ? ' x ' : '*');
+    case 'frac': case 'div': { const nn = a.t === 'frac' ? a.n : a.a, dd = a.t === 'frac' ? a.d : a.b;
+      return (atomish(nn) ? typedOf(nn) : '(' + typedOf(nn) + ')') + '/' + (atomish(dd) ? typedOf(dd) : '(' + typedOf(dd) + ')'); }
+    case 'neg': return '-' + (atomish(a.x) ? typedOf(a.x) : '(' + typedOf(a.x) + ')');
+    case 'par': return '(' + typedOf(a.x) + ')';
+    case 'ar': return typedOf(a.a) + ({ '+': '+', '−': '-', '×': '*' })[a.op] + (a.b.t === 'par' ? typedOf(a.b) : typedOf(a.b));
+    case 'eq': return typedOf(a.l) + ' = ' + typedOf(a.r);
+  }
+  return '';
+}
+/* a canonical spelling of a parsed expression, for "which worked step is this line?" */
+function canon(a) {
+  a = unwrap(a);
+  switch (a.t) {
+    case 'n': return decStr(a.q);
+    case 'v': return a.s;
+    case 'pow': return '(' + canon(a.b) + ')^(' + canon(a.e) + ')';
+    case 'mul': return a.xs.map(canon).join('*');
+    case 'div': return '(' + canon(a.a) + ')/(' + canon(a.b) + ')';
+    case 'frac': return '(' + canon(a.n) + ')/(' + canon(a.d) + ')';
+    case 'neg': return '-(' + canon(a.x) + ')';
+    case 'add': return '(' + canon(a.a) + a.op + canon(a.b) + ')';
+    case 'ar': return '(' + canon(a.a) + ({ '+': '+', '−': '-', '×': '*' })[a.op] + canon(a.b) + ')';
+    default: return '?';
+  }
+}
+function keyOf(a) { try { return canon(a); } catch (e) { return null; } }
+/* plain facts comparing a wrong line with the line before it — always true, never a guess about why */
+function relFacts(prev, line, letters, part) {
+  const out = [];
+  if (!letters.length) {
+    const pv = val(prev), lv = val(line); if (!pv || !lv) return out;
+    if (qeq(lv, qmul(Q(-1), pv))) { out.push('This line has the opposite sign of the line before it.'); return out; }
+    if (pv.n !== 0n && qeq(lv, qdiv(Q(1), pv))) { out.push('This line is upside down compared with the line before it: it is the reciprocal.'); return out; }
+    const B = part.prm && (part.prm.b || part.prm.B);
+    const sp = single(line);
+    if (B && sp && qeq(sp.b, Q(B))) { const j = logB(pv, Q(B)); if (j !== null) { out.push('This line is ' + m(P(B, Number(sp.e))) + ', but the line before it equals ' + m(P(B, j)) + '.'); return out; } }
+    const small = q => (q.n < 0n ? -q.n : q.n) < 10n ** 12n && q.d < 10n ** 12n;
+    if (small(lv) && small(pv)) out.push('This line equals ' + mv(lv, { dec: true }) + ', but the line before it equals ' + mv(pv, { dec: true }) + '.');
+    return out;
+  }
+  const a = mono(prev), b = mono(line); if (!a || !b) return out;
+  if (!qeq(a.c, b.c)) out.push('The number part: this line has ' + mv(b.c) + ', the line before it has ' + mv(a.c) + '.');
+  Object.keys(Object.assign({}, a.x, b.x)).sort().forEach(l => {
+    const ea = a.x[l] || 0n, eb = b.x[l] || 0n;
+    if (ea !== eb) out.push('The exponent on <i>' + l + '</i>: this line has ' + String(eb).replace('-', '−') + ', the line before it has ' + String(ea).replace('-', '−') + ' (a letter on the bottom counts as a negative exponent).');
+  });
+  return out;
+}
+function prepLine(raw, part) {
+  let s = raw.replace(/\.\s*$/, '');
+  if (!vars(part.ans).length) s = s.replace(/(\d(?:\.\d+)?)\s*[eE]\s*([+-]?\d+)/g, '$1 x 10^$2');     /* 1.88E6 is the question's own way of writing it */
+  else if (vars(part.ans).indexOf('x') < 0) s = s.replace(/\s+[xX]\s+/g, ' * ');                      /* "k^4 x k^7": x as times when x is not a letter here */
+  return s;
+}
+function checkWork(part, text) {
+  const out = { lines: [], next: null, done: false, finalMsg: null };
+  if (!part.fam) return out;
+  const xT = part.kind === 'sci' || part.kind === 'std' || part.kind === 'times' || !vars(part.ans).length;
+  const letters = vars(part.ans), eqFam = part.fam === 'solveN';
+  const nAns = eqFam ? evalA(part.ans, {}) : null;
+  const sol = solution(part) || [];
+  const solKeys = sol.map(st => { if (!st.ex) return null;
+    try { return eqFam ? keyOf(E.parse(typedOf(st.ex.l), true)) + '=' + keyOf(E.parse(typedOf(st.ex.r), true)) : keyOf(E.parse(typedOf(st.ex), xT)); } catch (e) { return null; } });
+  const raws = String(text || '').split(/\n/).map(x => x.trim()).filter(Boolean).slice(0, 12);
+  let stop = false, reached = -1, lastGood = null, lastGoodText = '', lastEq = null;
+  const nextSay = () => { const nx = sol.findIndex((st, i) => i > reached && st.ex); return nx >= 0 ? sol[nx].say : null; };
+  for (const raw0 of raws) {
+    if (stop) { out.lines.push({ raw: raw0, ok: null, msg: 'Fix the line above first.' }); continue; }
+    const raw = prepLine(raw0, part);
+    const row = { raw: raw0, ok: true, msg: '' };
+    if (eqFam) {
+      const sides = raw.split('=').map(x => x.trim());
+      if (sides.length !== 2 || !sides[0] || !sides[1]) { row.ok = null; row.msg = 'Write each line as one equation, like n − 3 = 4.'; }
+      else {
+        let L, R; try { L = E.parse(sides[0], true); R = E.parse(sides[1], true); } catch (e) { L = null; }
+        if (!L) { row.ok = null; row.msg = 'I can’t read that line. Use ^ for powers.'; }
+        else if (vars(L).concat(vars(R)).some(l => l !== 'n')) { row.ok = null; row.msg = 'The only letter here is <i>n</i>.'; }
+        else if (vars(L).concat(vars(R)).indexOf('n') < 0) { row.ok = null; row.msg = 'Keep <i>n</i> in each line until you find it.'; }
+        else {
+          const holds = v => { try { return qeq(evalA(L, { n: v }), evalA(R, { n: v })); } catch (e) { return false; } };
+          if (!holds(nAns)) { row.ok = false; row.msg = 'This equation is not true for the right value of <i>n</i>, so this step changed the equation. ' + (lastEq ? '' : RULE.solveN()); }
+          else {
+            const others = [qmul(nAns, Q(-1)), E.qadd(nAns, Q(1)), E.qsub(nAns, Q(1)), E.qadd(nAns, Q(2)), Q(0)].filter(v => !qeq(v, nAns));
+            const also = others.find(holds);
+            if (also) { row.ok = null; row.msg = 'This is true for the right <i>n</i>, but also for <i>n</i> = ' + mv(also) + ', so it no longer pins <i>n</i> down. Keep each line equivalent to the one before.'; }
+            else { lastEq = [L, R]; const k = keyOf(L) + '=' + keyOf(R), j = solKeys.indexOf(k); if (j > reached) reached = j; }
+          }
+        }
+      }
+      if (row.ok !== true) stop = true;
+      out.lines.push(row); continue;
+    }
+    const pieces = raw.split('=').map(x => x.trim()).filter(Boolean);
+    for (let pi = 0; pi < pieces.length; pi++) {
+      const pc = pieces[pi];
+      if (pc.length > 60) { row.ok = null; row.msg = 'That line is too long to read.'; break; }
+      let a; try { a = E.parse(pc, xT); } catch (e) { row.ok = null; row.msg = e.message === 'ambiguous' ? 'Use parentheses to show what is on the bottom of a fraction.' : 'I can’t read “' + esc(pc) + '”. Use ^ for powers and / for fractions.'; break; }
+      if (vars(a).some(l => letters.indexOf(l) < 0)) { row.ok = null; row.msg = letters.length ? 'That uses a letter that is not in the question.' : 'There are no letters in this question.'; break; }
+      let same; try { same = sameValue(a, part.q, letters); } catch (e) { row.ok = null; row.msg = /exponent not whole/.test(e.message) ? 'Exponents in this unit are whole numbers.' : 'I can’t work that out — check for 0 to the power 0, or dividing by 0.'; break; }
+      if (!same) {
+        row.ok = false;
+        const before = pi > 0 || lastGood ? 'what comes before it' : 'the question';
+        let why = [];
+        if (!lastGood && pi === 0) {                       /* the first step from the question: the mistake list applies */
+          const fb = feedback(part, pc, { loose: true });
+          why = (fb.what || []).filter(w => /^That is what you get if/.test(w)).map(w => w.replace(/^That is what you get if/, 'This line equals what you get if'));
+          row.step = fb.step == null ? null : fb.step;
+        }
+        if (!why.length) why = relFacts(lastGood || part.q, a, letters, part);
+        const nx = nextSay();
+        row.msg = 'This is not equal to ' + before + '.' + (why.length ? ' ' + why.join(' ') : '') + (nx ? ' <span class="wstep">The step to take here: ' + nx + '</span>' : '');
+        break;
+      }
+      const j = solKeys.indexOf(keyOf(a)); if (j > reached) reached = j;
+      lastGood = a; lastGoodText = pc;
+    }
+    if (row.ok !== true) stop = true;
+    out.lines.push(row);
+  }
+  if (!stop && out.lines.length) {
+    if (eqFam) {
+      const [L, R] = lastEq || [];
+      const num = x => unwrap(x).t === 'n' || (unwrap(x).t === 'neg' && unwrap(unwrap(x).x).t === 'n');
+      if (L && ((unwrap(L).t === 'v' && num(R)) || (unwrap(R).t === 'v' && num(L)))) { out.done = true; out.finalMsg = 'Solved: <i>n</i> = ' + mv(evalA(unwrap(L).t === 'v' ? R : L, {})) + '. Type that number in the answer box.'; }
+    } else if (lastGood) {
+      const r = E.mark(part, lastGoodText);
+      if (r.v === 'right') { out.done = true; out.finalMsg = 'Every line is equal to the question, and the last one is finished. Put it in the answer box.'; }
+      else out.finalMsg = 'Every line so far is equal to the question. ' + (r.v === 'form' ? formFix(part, ctxOf(part, lastGoodText), r.msg).replace(/^Right (value|so far)\.\s*/, 'Not finished yet. ') : '');
+    }
+    if (!out.done) { const nx = sol.findIndex((st, i) => i > reached && st.ex); if (nx >= 0) out.next = { i: nx, say: minus(sol[nx].say) }; }
+  }
+  out.lines.forEach(l => { l.msg = minus(l.msg); });
+  if (out.finalMsg) out.finalMsg = minus(out.finalMsg);
+  return out;
+}
+
 function safeFeedback(p, t) {
   try { return feedback(p, t); }
   catch (e) { return { v: E.mark(p, t).v, what: ['Check each step and try again.'], rule: RULE[p.fam] ? RULE[p.fam]() : '', step: null }; }
 }
-const api = { feedback: (p, t) => tidyOut(safeFeedback(p, t)), solution: p => tidySol(solution(p)), models,
+const api = { checkWork: (p, t) => { try { return checkWork(p, t); } catch (e) { return { lines: [], next: null, done: false, finalMsg: 'I could not check that work.' }; } }, typedOf,
+  feedback: (p, t) => tidyOut(safeFeedback(p, t)), solution: p => tidySol(solution(p)), models,
   mcFeedback: (i, k) => tidyOut(mcFeedback(i, k)), selectFeedback: (i, p, t) => tidyOut(selectFeedback(i, p, t)), mcSolution: i => tidySol(mcSolution(i)), RULE, mono, single, sciOf, partsFindings };
 if (typeof module !== 'undefined' && module.exports) module.exports = api; else root.Coach = api;
 })(this);
