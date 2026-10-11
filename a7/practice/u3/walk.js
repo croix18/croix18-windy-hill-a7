@@ -200,6 +200,15 @@ function finalHtml(part) {
 }
 const minus = s => typeof s === 'string' ? s.replace(/(^|[\s(>=])-(\d)/g, '$1−$2') : s;
 function tidy(st) { if (st) st.forEach(x => { x.ask = minus(x.ask); if (x.hint) x.hint = minus(x.hint); if (x.opts) x.opts.forEach(o => { o.label = minus(o.label); o.why = minus(o.why); }); }); return st; }
-const api = { steps: p => tidy(steps(p)), stepsMC: i => tidy(stepsMC(i)), readNum, finalHtml };
+/* the step whose idea the picture (visual.js) shows: when a student gets that step wrong, the picture comes up with the reason */
+const PIC = { prod: 0, monoProd: 0, powpow: 0, monoPow: 0, quot: 0, zero: 0, fracpow: 0, zeroMix: 0, powquot: 2, solveN: 1, negToFrac: 0, varNeg: 0, negVal: 0,
+  negDen: 0, coefNeg: 0, coefVarNeg: 0, negNegBase: 2, fracNeg: 0, mixedProd: 2, monoCoefPow: 0, monoQuot: 1, monoNegPow: 0, toSci: 1, toStd: 'places', eNote: 'places', ratio: 2 };
+function markPic(st, fam) {
+  if (!st || PIC[fam] == null) return st;
+  const i = PIC[fam] === 'places' ? st.findIndex(x => x.places) : PIC[fam];
+  if (st[i]) st[i].pic = true;
+  return st;
+}
+const api = { steps: p => markPic(tidy(steps(p)), p.fam), stepsMC: i => markPic(tidy(stepsMC(i)), i.fam), readNum, finalHtml };
 if (typeof module !== 'undefined' && module.exports) module.exports = api; else root.Walk = api;
 })(this);

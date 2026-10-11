@@ -128,3 +128,4 @@ ol.wsteps li.cur .wask{font-weight:600}
 .wgot{margin-top:3px;color:var(--mut)}
 .walk .wkhead{flex-direction:row;align-items:center;justify-content:space-between;gap:8px}
 .walk .wclose{padding:5px 10px;font-size:12.5px;width:auto;flex:0 0 auto}
+.wpic{margin-top:8px;border:1px solid var(--rule);border-radius:8px;padding:6px 10px;background:var(--paper)} .wpl{font:600 13px/1.4 var(--ui);color:var(--pen)}

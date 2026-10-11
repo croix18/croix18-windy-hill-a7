@@ -157,14 +157,14 @@ function record(it, f){
   var R = res(it);
   if (R.v === 'right') return R;
   R.tries++; R.v = f.v; R.fb = {what: f.what || [], rule: f.rule || '', step: f.step == null ? null : f.step};
-  if (R.first === null) R.first = (f.v === 'right') && !R.hinted;
+  if (R.first === null){ R.first = (f.v === 'right'); R.helped = R.first && !!R.hinted; }   /* right on the first check counts, help or not; help is tallied separately */
   if (it.extra){
     var M0 = S.more[it.base];
-    if (f.v === 'right'){ M0.streak = R.first ? M0.streak + 1 : 0; if (M0.streak >= 2){ var ms = misses(); delete ms[it.pos]; store('misses', ms); } }
+    if (f.v === 'right'){ M0.streak = (R.first && !R.hinted) ? M0.streak + 1 : 0;   /* the streak is on your own */ if (M0.streak >= 2){ var ms = misses(); delete ms[it.pos]; store('misses', ms); } }
     else if (R.tries === 1) M0.streak = 0;
   } else if (R.tries === 1){                       /* only the first try decides a miss: fixing it later doesn't re-add a cleared one */
     var ms2 = misses(), fam = it.type === 'text' ? it.part.fam : it.item.fam;
-    if (R.first === true) delete ms2[it.pos]; else if (R.first === false) ms2[it.pos] = fam || 1;
+    if (R.first === true && !R.hinted) delete ms2[it.pos]; else ms2[it.pos] = fam || 1;   /* needed help: still worth practising */
     store('misses', ms2);
   }
   return R;
@@ -188,7 +188,7 @@ function flash(it, f){
 function cardHtml(it, R){
   var v = R.v, fb = R.fb || {what:[]}, h = TAG[v] || '';
   if (v === 'right'){
-    var note = R.first ? '' : R.shown ? 'after seeing the steps' : R.hinted && R.tries === 1 ? 'with help' : 'on try ' + R.tries;
+    var note = R.first ? (R.hinted ? 'with help' : '') : R.shown ? 'after seeing the steps' : 'on try ' + R.tries;
     return h + (note ? '<span class="msg">' + note + '</span>' : '');
   }
   var w = fb.what || [];
@@ -238,9 +238,8 @@ function paintItem(it){
   var b = [], all = (R.steps || 0) >= n;
   if (R.v === 'right'){ if (!all) b.push('<button type="button" data-all="' + it.id + '">See the steps</button>'); }
   else {
-    if (!all) b.push('<button type="button" data-hint="' + it.id + '">' + ((R.steps || 0) === 0 ? 'Hint' : 'Next step') + ' <span class="cnt">' + Math.min((R.steps || 0) + 1, n) + ' of ' + n + '</span></button>');
     if (!all && (R.tries > 0 || S.done)) b.push('<button type="button" data-all="' + it.id + '">Show me how</button>');
-    if (walkOf(it) && !(S.walkOpen && S.walkOpen[it.id])) b.push('<button type="button" data-walk="' + it.id + '">' + (S.walk && S.walk[it.id] ? 'Open the walkthrough' : 'Walk me through it') + '</button>');
+    if (walkOf(it) && !(S.walkOpen && S.walkOpen[it.id])) b.push('<button type="button" data-walk="' + it.id + '">Hint</button>');
     if (false && it.type === 'text' && wk) b.push('<button type="button" data-work="' + it.id + '" aria-expanded="' + (!!(S.work && S.work[it.id] != null && S.workOpen && S.workOpen[it.id])) + '">Help me solve this</button>');
   }
   var missed = (R.v && R.v !== 'right') || R.shown || (R.v === 'right' && R.first === false);
@@ -270,13 +269,14 @@ function paintChoices(it, R){
 }
 
 /* ------------------------------------------------ "Walk me through it": the question as a few small questions, one at a time */
+function walkPic(it, lead){ var p = picOf(it); return p ? '<div class="wpic"><div class="wpl">' + lead + '</div>' + p + '</div>' : ''; }
 function walkOf(it){ try { return it.type === 'text' ? WK.steps(it.part) : WK.stepsMC(it.item); } catch(e){ return null; } }
 function wstate(it){ S.walk = S.walk || {}; return S.walk[it.id] || (S.walk[it.id] = {i: 0, wrong: {}, typed: {}, bad: {}}); }
 function walkHtml(it){
   var st = walkOf(it); if (!st) return '';
   var W = wstate(it), q = it.type === 'text' ? it.part.q : it.item.q, eq = it.type === 'text' && it.part.fam === 'solveN';
   var R0 = S.res[it.id] || {};
-  var h = '<div class="wkhead"><b>Walk me through it</b><button type="button" class="wclose" data-wclose="' + it.id + '" aria-label="Close the walkthrough">Close</button></div>';
+  var h = '<div class="wkhead"><b>Step by step</b><button type="button" class="wclose" data-wclose="' + it.id + '" aria-label="Close the walkthrough">Close</button></div>';
   if (q && it.type !== 'multi') h += '<div class="solhead"><span class="kl">Start</span> ' + E.M(q) + '</div>';
   h += '<ol class="wsteps">';
   st.forEach(function(s, k){
@@ -290,15 +290,16 @@ function walkHtml(it){
     } else if (s.type === 'choice'){
       h += '<div class="wopts">' + s.opts.map(function(o, j){ var bad = W.wrong[k + '.' + j];
         return '<button type="button" class="wopt' + (bad ? ' bad' : '') + '" data-wopt="' + it.id + '|' + k + '|' + j + '"' + (bad ? ' disabled' : '') + '>' + o.label + '</button>'; }).join('') + '</div>';
-      if (W.bad[k] != null) h += '<div class="wwhy"><span class="wno">✗</span> ' + s.opts[W.bad[k]].why + '</div>';
+      if (W.bad[k] != null) h += '<div class="wwhy"><span class="wno">✗</span> ' + s.opts[W.bad[k]].why + '</div>' + (s.pic ? walkPic(it, 'Here is a picture of why:') : '');
     } else {
       h += '<div class="wnum"><input type="text" id="wn' + it.id + '" autocomplete="off" autocapitalize="off" spellcheck="false" value="' + esc(W.typed[k] || '') + '" aria-label="Your answer"><button type="button" class="go" data-wnum="' + it.id + '">Check</button></div>';
       if (W.bad[k] === 'read') h += '<div class="wwhy"><span class="wq">?</span> Type just a number, like 12, −3 or 1/4.</div>';
-      else if (W.bad[k] != null) h += '<div class="wwhy"><span class="wno">✗</span> Not quite. ' + s.hint + '</div>';
+      else if (W.bad[k] != null) h += '<div class="wwhy"><span class="wno">✗</span> Not quite. ' + s.hint + '</div>' + (s.pic ? walkPic(it, 'Here is a picture that shows it:') : '');
     }
     h += '</li>';
   });
   h += '</ol>';
+  if (W.i >= st.length && picOf(it)) h += '<details class="why" open><summary>Why it works</summary>' + picOf(it) + '</details>';
   if (W.i >= st.length){
     h += '<p class="wfin done">' + (it.type === 'text' ? 'That’s it: ' + WK.finalHtml(it.part) + '. Now type it in the answer box above and press Check.' : it.type === 'mc' ? 'Now find the choice that matches and pick it above.' : 'Now pick every choice you said yes to, above.') + '</p>';
   }
@@ -430,15 +431,15 @@ function fmt(s){ s = Math.max(0, Math.round(s)); var m = Math.floor(s/60), r = s
 function start(){ if (S.running || S.done) return; S.running = true; S.startedAt = now(); save(); paintBar(); }
 function pause(){ if (!S.running) return; S.acc = elapsed(); S.running = false; S.startedAt = null; save(); paintBar(); }
 function tally(){
-  var first = 0, done = 0, bySec = DS.map(function(){ return {got:0, of:0}; });
-  ITEMS.forEach(function(it){ var R = S.res[it.id]; bySec[it.sec].of++; if (R && R.first === true){ first++; bySec[it.sec].got++; } if (R && R.v === 'right') done++; });
-  return {first:first, done:done, bySec:bySec};
+  var first = 0, helped = 0, done = 0, bySec = DS.map(function(){ return {got:0, of:0, help:0}; });
+  ITEMS.forEach(function(it){ var R = S.res[it.id]; bySec[it.sec].of++; if (R && R.first === true){ first++; bySec[it.sec].got++; if (R.helped){ helped++; bySec[it.sec].help++; } } if (R && R.v === 'right') done++; });
+  return {first:first, helped:helped, done:done, bySec:bySec};
 }
 function paintProgress(){ var n = ITEMS.filter(answered).length; $('prog').style.width = (ITEMS.length ? 100*n/ITEMS.length : 0) + '%'; return n; }
 function paintScore(){
   var t = tally(), sc = $('score');
   if (S.mode === 'test' && !S.done) sc.innerHTML = '<b>' + ITEMS.filter(answered).length + ' of ' + ITEMS.length + '</b> answered · marked when you finish';
-  else sc.innerHTML = 'First try <b>' + t.first + ' / ' + ITEMS.length + '</b> · solved <b>' + t.done + '</b>';
+  else sc.innerHTML = 'First try <b>' + t.first + ' / ' + ITEMS.length + '</b> · with help <b>' + t.helped + '</b> · solved <b>' + t.done + '</b>';
   paintResult(t); paintScopes();
 }
 function paintBar(){
@@ -453,15 +454,15 @@ function paintBar(){
 function paintResult(t){
   var box = $('result');
   if (!S.done){ box.hidden = true; return; }
-  var rows = DS.map(function(s, k){ return '<tr><td>' + s.title + '</td><td class="r">' + t.bySec[k].got + ' / ' + t.bySec[k].of + '</td></tr>'; }).join('');
+  var rows = DS.map(function(s, k){ return '<tr><td>' + s.title + '</td><td class="r">' + t.bySec[k].got + ' / ' + t.bySec[k].of + '</td><td class="r">' + t.bySec[k].help + '</td></tr>'; }).join('');
   var weakParts = {};
   ITEMS.forEach(function(it){ var R = S.res[it.id]; if (!R || R.first !== true) weakParts[+it.pos.split('.')[0]] = (weakParts[+it.pos.split('.')[0]] || 0) + 1; });
   var nm = Object.keys(misses()).length;
   var btns = Object.keys(weakParts).sort().map(function(k){ return '<button type="button" data-new="1" data-scope="p' + (+k + 1) + '">Practice Part ' + (+k + 1) + '</button>'; }).join('') +
     (nm ? '<button type="button" data-new="1" data-scope="miss">My misses (' + nm + ')</button>' : '') + '<button type="button" class="go" data-new="1" data-scope="all">New whole test</button>';
   box.innerHTML = '<h2>Set ' + seed + ' · ' + esc(SCOPES[scope]) + ' · ' + (S.mode === 'test' ? 'test style' : 'checked as you went') + '</h2>' +
-    '<div class="big"><div><b>' + t.first + '<small> / ' + ITEMS.length + '</small></b><span>right on the first try</span></div><div><b>' + fmt(S.acc) + '</b><span>time on the clock</span></div></div>' +
-    '<div class="tw"><table><thead><tr><th>Part</th><th class="r">First try</th></tr></thead><tbody>' + rows + '</tbody></table></div>' +
+    '<div class="big"><div><b>' + t.first + '<small> / ' + ITEMS.length + '</small></b><span>right on the first try' + (t.helped ? ' (' + t.helped + ' with help)' : '') + '</span></div><div><b>' + fmt(S.acc) + '</b><span>time on the clock</span></div></div>' +
+    '<div class="tw"><table><thead><tr><th>Part</th><th class="r">First try</th><th class="r">With help</th></tr></thead><tbody>' + rows + '</tbody></table></div>' +
     '<p class="note">Fix the ones that aren’t right yet — <b>Show me how</b> has the steps and a picture of why, and <b>Try another like this</b> gives you a fresh one. Or practice just what you need:</p>' +
     '<div class="btns">' + btns + '</div>';
   box.hidden = false;

@@ -78,6 +78,20 @@ question text ("What is 9 + 8?" → 17), every shown line equal to the question,
 87/87 planted errors caught and pins for the fourth review's findings (e.g. negDen no longer offers "a negative number", which
 is true for odd powers).
 
+## One Hint, and "with help" counts (11 Oct 2026, Version 7)
+
+Croix: *"Make the with help count as a point but also keep tallying with help so they get a with help count at the top. Can you
+merge the hint and walk me through it into one? … the visuals on the hint are pretty good. Overall, pick what's best for each
+question."*
+- **Scoring:** right on the first check is a point whether or not help was used; `R.helped` marks the ones with help. Top bar:
+  "First try X / N · with help Y · solved Z"; the results table has a With help column. Help still keeps a question on the
+  misses list, and the Try-another streak still has to be on your own.
+- **One button, Hint**: the step-by-step walkthrough (its questions were the better part) titled "Step by step", with the
+  picture placed where it teaches: when a student gets the step the picture explains wrong (`PIC` in walk.js: the rule step for
+  the laws, the "what does a negative exponent mean" step for the ladder, the sign step for (−c)^odd, the places step for
+  scientific notation), and again under "Why it works" at the end. The old step-reveal Hint button is gone; Show me how
+  (after a try) still shows the full worked solution with its picture.
+
 ## Marking
 
 `mark(part, typed)` in engine.js reads what was typed (^ powers, / fractions, × or x for times in

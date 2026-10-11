@@ -152,6 +152,7 @@ function checkWalk(seed, w, st, ctx) {
       lastThen = s.then;
     }
   });
+  if (st.filter(x => x.pic).length > 1) fail(seed, w, 'more than one picture step');
   if (ctx.select) return;
   if (!lastThen) { fail(seed, w, 'walkthrough never reaches the answer'); return; }
   if (ctx.fam === 'solveN') { if (!P.qeq(P.evalA(lastThen.r, {}), P.evalA(ctx.ans, {})) || lastThen.l.t !== 'v') fail(seed, w, 'walk does not end at n = answer'); }
