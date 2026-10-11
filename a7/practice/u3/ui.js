@@ -1,6 +1,6 @@
 (function(){
 'use strict';
-var E = window.Practice, C = window.Coach, VZ = window.Visual, VER = 'v3',   /* "Help me solve this" was taken out on 11 Oct at Croix's word; its code stays but no button opens it */ PRE = 'a7u3prac.' + VER + '.';
+var E = window.Practice, C = window.Coach, VZ = window.Visual, WK = window.Walk, VER = 'v3',   /* "Help me solve this" was taken out on 11 Oct at Croix's word; its code stays but no button opens it */ PRE = 'a7u3prac.' + VER + '.';
 var $ = function(id){ return document.getElementById(id); };
 var LET = 'ABCDE';
 function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
@@ -65,7 +65,7 @@ function partHtml(p, id, solo){
 }
 function tailHtml(id, text){
   return '<div class="fb" id="fb' + id + '" aria-live="polite" hidden></div><div class="more" id="mo' + id + '" hidden></div>' +
-    (text ? '<div class="work" id="wk' + id + '" hidden></div>' : '') + '<div class="steps" id="st' + id + '" hidden></div><div class="again" id="ag' + id + '" hidden></div>';
+    (text ? '<div class="work" id="wk' + id + '" hidden></div>' : '') + '<div class="walk" id="wl' + id + '" hidden></div><div class="steps" id="st' + id + '" hidden></div><div class="again" id="ag' + id + '" hidden></div>';
 }
 function choicesHtml(it, id){
   var multi = it.type === 'multi', q = ['<div class="choices" role="' + (multi ? 'group' : 'radiogroup') + '" data-id="' + id + '">'];
@@ -240,6 +240,7 @@ function paintItem(it){
   else {
     if (!all) b.push('<button type="button" data-hint="' + it.id + '">' + ((R.steps || 0) === 0 ? 'Hint' : 'Next step') + ' <span class="cnt">' + Math.min((R.steps || 0) + 1, n) + ' of ' + n + '</span></button>');
     if (!all && (R.tries > 0 || S.done)) b.push('<button type="button" data-all="' + it.id + '">Show me how</button>');
+    if (walkOf(it) && !(S.walkOpen && S.walkOpen[it.id])) b.push('<button type="button" data-walk="' + it.id + '">' + (S.walk && S.walk[it.id] ? 'Open the walkthrough' : 'Walk me through it') + '</button>');
     if (false && it.type === 'text' && wk) b.push('<button type="button" data-work="' + it.id + '" aria-expanded="' + (!!(S.work && S.work[it.id] != null && S.workOpen && S.workOpen[it.id])) + '">Help me solve this</button>');
   }
   var missed = (R.v && R.v !== 'right') || R.shown || (R.v === 'right' && R.first === false);
@@ -248,6 +249,7 @@ function paintItem(it){
   if (!it.extra && S.more && S.more[it.id]) { /* the extra question is already showing below */ }
   mo.innerHTML = b.join(''); mo.hidden = !b.length;
   st.hidden = !(R.steps > 0); if (R.steps > 0) st.innerHTML = stepsHtml(it, R);
+  var wl = $('wl' + it.id); if (wl){ var wo = S.walkOpen && S.walkOpen[it.id] && R.v !== 'right'; wl.hidden = !wo; if (wo) wl.innerHTML = walkHtml(it); }
   if (wk){ var open = S.workOpen && S.workOpen[it.id]; wk.hidden = !open || R.v === 'right'; if (open && !wk.innerHTML) wk.innerHTML = workHtml(it); }
   paintChoices(it, R.v ? R : null);
   var input = $('a' + it.id); if (input) input.readOnly = R.v === 'right';
@@ -266,6 +268,51 @@ function paintChoices(it, R){
     else if (picked && it.type === 'mc' && R.v === 'wrong') ch.classList.add('picked-no');
   });
 }
+
+/* ------------------------------------------------ "Walk me through it": the question as a few small questions, one at a time */
+function walkOf(it){ try { return it.type === 'text' ? WK.steps(it.part) : WK.stepsMC(it.item); } catch(e){ return null; } }
+function wstate(it){ S.walk = S.walk || {}; return S.walk[it.id] || (S.walk[it.id] = {i: 0, wrong: {}, typed: {}, bad: {}}); }
+function walkHtml(it){
+  var st = walkOf(it); if (!st) return '';
+  var W = wstate(it), q = it.type === 'text' ? it.part.q : it.item.q, eq = it.type === 'text' && it.part.fam === 'solveN';
+  var R0 = S.res[it.id] || {};
+  var h = '<div class="wkhead"><b>Walk me through it</b><button type="button" class="wclose" data-wclose="' + it.id + '" aria-label="Close the walkthrough">Close</button><span>One small question at a time. Tap an answer, or type a number.</span>' + (R0.hinted && !R0.tries ? '<span class="wnote">Using this before you check your answer means this question won’t count as right on the first try.</span>' : '') + '</div>';
+  if (q && it.type !== 'multi') h += '<div class="solhead"><span class="kl">Start</span> ' + E.M(q) + '</div>';
+  h += '<ol class="wsteps">';
+  st.forEach(function(s, k){
+    if (k > W.i) return;
+    var cur = k === W.i;
+    h += '<li class="' + (cur ? 'cur' : 'done') + '"><div class="wask">' + s.ask + '</div>';
+    if (!cur){
+      var got = s.type === 'choice' ? s.opts.filter(function(o){ return o.ok; })[0].label : E.M(numAst(s.ans));
+      h += '<div class="wgot"><span class="wok">✓</span> ' + got + '</div>';
+      if (s.then) h += '<div class="ex">' + (eq ? '' : '<span class="m">= </span>') + E.M(s.then) + '</div>';
+    } else if (s.type === 'choice'){
+      h += '<div class="wopts">' + s.opts.map(function(o, j){ var bad = W.wrong[k + '.' + j];
+        return '<button type="button" class="wopt' + (bad ? ' bad' : '') + '" data-wopt="' + it.id + '|' + k + '|' + j + '"' + (bad ? ' disabled' : '') + '>' + o.label + '</button>'; }).join('') + '</div>';
+      if (W.bad[k] != null) h += '<div class="wwhy"><span class="wno">✗</span> ' + s.opts[W.bad[k]].why + '</div>';
+    } else {
+      h += '<div class="wnum"><input type="text" id="wn' + it.id + '" autocomplete="off" autocapitalize="off" spellcheck="false" value="' + esc(W.typed[k] || '') + '" aria-label="Your answer"><button type="button" class="go" data-wnum="' + it.id + '">Check</button></div>';
+      if (W.bad[k] === 'read') h += '<div class="wwhy"><span class="wq">?</span> Type just a number, like 12, −3 or 1/4.</div>';
+      else if (W.bad[k] != null) h += '<div class="wwhy"><span class="wno">✗</span> Not quite. ' + s.hint + '</div>';
+    }
+    h += '</li>';
+  });
+  h += '</ol>';
+  if (W.i >= st.length){
+    h += '<p class="wfin done">' + (it.type === 'text' ? 'That’s it: ' + WK.finalHtml(it.part) + '. Now type it in the answer box above and press Check.' : it.type === 'mc' ? 'Now find the choice that matches and pick it above.' : 'Now pick every choice you said yes to, above.') + '</p>';
+  }
+  return h;
+}
+function numAst(q){ var neg = q.n < 0n, n = neg ? -q.n : q.n; var a; if (q.d === 1n) a = E.N(n.toString(), {commas: true}); else { try { a = E.N(E.decStr(E.Q(n, q.d)), {commas: true}); } catch(e){ a = E.Fr(E.N(n.toString()), E.N(q.d.toString())); } } return neg ? E.Neg(a) : a; }
+function walkStart(it){ var R = res(it); if (R.tries === 0 && R.v !== 'right' && (!S.done || it.extra)) R.hinted = true; S.walkOpen = S.walkOpen || {}; S.walkOpen[it.id] = true; wstate(it); if (!S.running && !S.done && !it.extra) start(); save(); paintItem(it); paintScore(); }
+function walkPick(id, k, j){ var it = byId(id), st = walkOf(it), W = wstate(it), s = st[k]; if (k !== W.i) return;
+  if (s.opts[j].ok){ W.i++; delete W.bad[k]; } else { W.wrong[k + '.' + j] = 1; W.bad[k] = j; }
+  save(); paintItem(it); }
+function walkNum(id){ var it = byId(id), st = walkOf(it), W = wstate(it), s = st[W.i]; if (!s || s.type !== 'num') return;
+  var el = $('wn' + id), v = WK.readNum(el.value); W.typed[W.i] = el.value;
+  if (v && (E.qeq(v, s.ans) || (s.places && E.qeq(v, E.qmul(s.ans, E.Q(-1n)))))){ delete W.bad[W.i]; W.i++; } else W.bad[W.i] = v ? 1 : 'read';
+  save(); paintItem(it); var nx = $('wn' + id); if (nx) nx.focus(); }
 
 /* ------------------------------------------------ "Help me solve this": the student's own work, checked line by line */
 function workHtml(it){
@@ -321,6 +368,10 @@ document.addEventListener('click', function(e){
     if (it5.part.fam === 'solveN' && lastL.length === 2 && /^n$/i.test(lastL[1])) v = lastL[0];
     var inp = $('a' + it5.id); inp.value = v; inp.dispatchEvent(new Event('input', {bubbles: true})); inp.focus(); return; }
   var an = t.closest('[data-another]'); if (an){ another(an.dataset.another); return; }
+  var wa = t.closest('[data-walk]'); if (wa){ walkStart(byId(wa.dataset.walk)); var wl = $('wl' + wa.dataset.walk); if (wl && wl.scrollIntoView) wl.scrollIntoView({block: 'nearest'}); return; }
+  var wo = t.closest('[data-wopt]'); if (wo){ var pr = wo.dataset.wopt.split('|'); walkPick(pr[0], +pr[1], +pr[2]); return; }
+  var wn = t.closest('[data-wnum]'); if (wn){ walkNum(wn.dataset.wnum); return; }
+  var wc2 = t.closest('[data-wclose]'); if (wc2){ var itc = byId(wc2.dataset.wclose); S.walkOpen[itc.id] = false; save(); paintItem(itc); return; }
   var nw = t.closest('[data-new]'); if (nw){ var sc = nw.dataset.scope || scope;
     if (started() && !S.done) ask('Leave this set? It stays saved on this device.', 'New set', function(){ openSet(randomSeed(), sc); }); else openSet(randomSeed(), sc); return; }
 });
@@ -347,7 +398,7 @@ function pretty(s, kind){
 function setPreview(el){ var pv = el.parentNode.querySelector('.pv'); if (!pv) return; var p = pretty(el.value, el.dataset.kind); pv.innerHTML = (p !== esc(el.value)) ? p : ''; }
 document.addEventListener('focusin', function(e){
   var t = e.target;
-  if (t.matches && t.matches('#paper input[type=text], #paper textarea.wta') && !t.readOnly){ keys.target = t; (t.tagName === 'TEXTAREA' ? t.parentNode.insertBefore(keys, t.nextSibling) : t.parentNode.appendChild(keys)); keys.hidden = false; }
+  if (t.matches && t.matches('#paper input[type=text], #paper textarea.wta') && !t.readOnly && !(t.id && t.id.indexOf('wn') === 0)){ keys.target = t; (t.tagName === 'TEXTAREA' ? t.parentNode.insertBefore(keys, t.nextSibling) : t.parentNode.appendChild(keys)); keys.hidden = false; }
   else if (!(t.closest && t.closest('.keys'))) keys.hidden = true;
 });
 document.addEventListener('input', function(e){
@@ -360,6 +411,7 @@ document.addEventListener('input', function(e){
   save(); paintProgress();
 });
 document.addEventListener('keydown', function(e){
+  if (e.key === 'Enter' && e.target.id && e.target.id.indexOf('wn') === 0){ e.preventDefault(); walkNum(e.target.id.slice(2)); return; }
   if (e.key === 'Enter' && e.target.matches && e.target.matches('#paper input[type=text]')){ e.preventDefault(); var it = byId(e.target.id.slice(1)); if (it && (S.mode === 'practice' || S.done || it.extra)) check(it.id); }
 });
 document.addEventListener('change', function(e){

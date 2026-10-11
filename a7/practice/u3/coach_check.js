@@ -4,7 +4,7 @@
    C. fuzz: thousands of near-miss answers per set never crash, and every sentence shown is checked for arithmetic
    D. multiple choice / select-all feedback */
 'use strict';
-const P = require('./engine.js'), C = require('./coach.js'), Vz = require('./visual.js'), fs = require('fs');
+const P = require('./engine.js'), C = require('./coach.js'), Vz = require('./visual.js'), Wk = require('./walk.js'), fs = require('fs');
 const SEEDS = +(process.argv[2] || 3000);
 const fails = []; const fail = (s, w, m) => { if (fails.length < 80) fails.push(s + ' ' + w + ': ' + m); else fails.length++; };
 const { N, V, P: Pw, Mul, Fr, Neg, Par, Sci } = P;
@@ -122,8 +122,59 @@ function checkVis(seed, w, p, s) {
   })));
   const caught = fails.length - before; fails.length = before; console.log('picture checker caught', caught, 'of', planted, 'planted errors'); })();
 
+/* ---- the walkthrough: one right option per tap, every typed number re-derived from its own question text, every "then" = the question ---- */
+const supTxt = h => String(h).replace(/<sup>([^<]*)<\/sup>/g, '^$1').replace(/<[^>]+>/g, '');
+function checkWalk(seed, w, st, ctx) {
+  if (!st || !st.length) { fail(seed, w, 'no walkthrough'); return; }
+  stat.walks = (stat.walks || 0) + 1;
+  let lastThen = null;
+  st.forEach((s, k) => {
+    const wk = w + ' walk' + k;
+    claimCheck(seed, wk, s.ask);
+    if (s.type === 'choice') {
+      if (s.opts.filter(o => o.ok).length !== 1) fail(seed, wk, 'choice has ' + s.opts.filter(o => o.ok).length + ' right options');
+      if (new Set(s.opts.map(o => strip(o.label))).size !== s.opts.length) fail(seed, wk, 'two options read the same');
+      s.opts.forEach(o => { if (!o.ok && !o.why) fail(seed, wk, 'wrong option without a reason'); claimCheck(seed, wk, o.why); claimCheck(seed, wk, o.label); });
+    } else {
+      if (!P.qeq(P.evalA(s.of, {}), s.ans)) fail(seed, wk, 'num answer ≠ its expression');
+      claimCheck(seed, wk, s.hint);
+      const t = supTxt(s.ask), mm = /[Ww]hat is (.+)\?$/.exec(t), sn = /n − (\d+) = (\d+)\. What is n\?$/.exec(t);
+      if (sn) { if (!P.qeq(s.ans, P.Q(BigInt(+sn[1] + +sn[2])))) fail(seed, wk, 'n step'); stat.walkNums = (stat.walkNums || 0) + 1; }
+      else if (mm) { let v = null; try { v = P.evalA(P.parse(mm[1].replace(/[×·]/g, '*').replace(/÷/g, '/').replace(/−/g, '-'), true), {}); } catch (e) { }
+        if (!v || !P.qeq(v, s.ans)) fail(seed, wk, 'the question "' + t + '" does not have the answer ' + P.decStr(s.ans)); stat.walkNums = (stat.walkNums || 0) + 1; }
+      else if (/to what power\?$/.test(t) && ctx.fam === 'solveN') { if (!P.qeq(P.qpow(P.Q(BigInt(ctx.prm.b)), s.ans.n), P.Q(BigInt(ctx.prm.V)))) fail(seed, wk, 'power of b'); }
+      else if (/how many places/i.test(t)) { if (!P.qeq(s.ans, P.Q(BigInt(Math.abs(ctx.prm.k))))) fail(seed, wk, 'places'); }
+      else fail(seed, wk, 'a typed step whose question is not checked: ' + t);
+    }
+    if (s.then) {
+      if (ctx.fam === 'solveN') { const env = { n: P.evalA(ctx.ans, {}) }; let ok; try { ok = s.then.t === 'eq' && P.qeq(P.evalA(s.then.l, env), P.evalA(s.then.r, env)); } catch (e) { ok = false; } if (!ok) fail(seed, wk, 'equation false at the answer'); }
+      else if (ctx.q) { let ok; try { ok = P.sameValue(s.then, ctx.q, P.vars(ctx.q)); } catch (e) { ok = false; } if (!ok) fail(seed, wk, 'then ' + P.plain(s.then) + ' ≠ question'); }
+      lastThen = s.then;
+    }
+  });
+  if (ctx.select) return;
+  if (!lastThen) { fail(seed, w, 'walkthrough never reaches the answer'); return; }
+  if (ctx.fam === 'solveN') { if (!P.qeq(P.evalA(lastThen.r, {}), P.evalA(ctx.ans, {})) || lastThen.l.t !== 'v') fail(seed, w, 'walk does not end at n = answer'); }
+  else { let ok; try { ok = P.sameValue(lastThen, ctx.ans, P.vars(ctx.ans)); } catch (e) { ok = false; } if (!ok) fail(seed, w, 'walk ends at ' + P.plain(lastThen) + ', not the answer');
+    if (ctx.part && ctx.part.kind !== 'times' && ctx.part.kind !== 'std') { const r = P.mark(ctx.part, C.typedOf(lastThen)); if (r.v !== 'right') fail(seed, w, 'walk ends at an unfinished answer: ' + C.typedOf(lastThen) + ' ' + r.v); } }
+}
+
+
+
 const dump = []; const stat = { models: 0, modelHits: 0, collide: 0, fuzz: 0, fuzzSaid: {}, steps: 0 };
 const FUZZ = ['0', '1', '-1', '2', '10', 'x', '1/2', '-1/2'];
+/* the walkthrough checker must catch planted errors */
+(function () { const G = P.generate(2), before = fails.length; let planted = 0, caught = 0;
+  G.sections.forEach(sec => sec.items.forEach(it => (it.type === 'parts' ? it.parts : it.type === 'solo' ? [it.part] : []).forEach(p => {
+    const ctx = { fam: p.fam, prm: p.prm, q: p.q, ans: p.ans, part: p };
+    for (const mut of ['ans', 'twoOk', 'then']) {
+      const st = Wk.steps(p); const i = mut === 'ans' ? st.findIndex(x => x.type === 'num') : mut === 'twoOk' ? st.findIndex(x => x.type === 'choice' && x.opts.length > 1) : st.findIndex(x => x.then);
+      if (i < 0) continue;
+      if (mut === 'ans') st[i].ans = P.qadd(st[i].ans, P.Q(1n)); else if (mut === 'twoOk') st[i].opts.forEach(o => { o.ok = true; }); else st[i].then = P.N(999983);
+      planted++; const b0 = fails.length; checkWalk(0, 'plant', st, ctx); if (fails.length > b0) caught++; else console.log('WALK PLANT NOT CAUGHT', p.fam, mut);
+    }
+  })));
+  fails.length = before; console.log('walk checker caught', caught, 'of', planted, 'planted errors'); })();
 for (let seed = 1; seed <= SEEDS; seed++) {
   const G = P.generate(seed); const D = { seed, sols: [] };
   G.sections.forEach((sec, si) => sec.items.forEach((it, ii) => {
@@ -158,6 +209,7 @@ for (let seed = 1; seed <= SEEDS; seed++) {
         if (r.lines.some(l => l.ok !== true)) fail(seed, w, 'work: a correct line was flagged: ' + JSON.stringify(r.lines.filter(l => l.ok !== true).map(l => [l.raw, strip(l.msg)])).slice(0, 200));
         if (!r.done && p.kind !== 'times') fail(seed, w, 'work: the full solution is not recognised as finished: ' + strip(r.finalMsg || ''));
         const ms0 = C.models(p); if (ms0.length) { const bad = C.checkWork(p, lines[0] + '\n' + C.typedOf(ms0[0].ex)); const fl = bad.lines.find(l => l.ok === false); if (!fl && !bad.lines.some(l => l.ok === null)) fail(seed, w, 'work: a mistake line was not caught: ' + C.typedOf(ms0[0].ex)); if (fl) claimCheck(seed, w + ' work', fl.msg); } }
+      try { checkWalk(seed, w, Wk.steps(p), { fam: p.fam, prm: p.prm, q: p.q, ans: p.ans, part: p }); } catch (e) { fail(seed, w, 'walk crashed: ' + e.message); }
       /* B. every mistake model */
       const ms = C.models(p);
       ms.forEach(md => {
@@ -195,6 +247,7 @@ for (let seed = 1; seed <= SEEDS; seed++) {
     if (it.type === 'mc') {
       it.opts.forEach((o, k) => { const f = C.mcFeedback(it, k); if ((k === it.correct) !== (f.v === 'right')) fail(seed, w0, 'mc feedback key'); f.what.forEach(s => claimCheck(seed, w0, s)); });
       { const vs = Vz.spec({ fam: it.fam, prm: it.prm, ans: it.opts[it.correct] }); if (vs) { try { checkVis(seed, w0, { fam: it.fam, prm: it.prm, ans: it.opts[it.correct] }, vs); claimCheck(seed, w0 + ' picture', Vz.html(vs)); } catch (e) { fail(seed, w0, 'MC picture crashed: ' + e.message); } } }
+      try { checkWalk(seed, w0, Wk.stepsMC(it), { fam: it.fam, prm: it.prm, q: it.q, ans: it.opts[it.correct] }); } catch (e) { fail(seed, w0, 'MC walk crashed: ' + e.message); }
       const sol = C.mcSolution(it); if (!sol) fail(seed, w0, 'no MC solution');
       else sol.forEach(s => { claimCheck(seed, w0, s.say); if (s.ex) { let ok; try { ok = P.sameValue(s.ex, it.q, P.vars(it.q)); } catch (e) { ok = false; } if (!ok) fail(seed, w0, 'MC step ≠ question'); } });
       if (sol) D.sols.push({ w: w0, fam: it.fam, q: P.plain(it.q), ans: P.plain(it.opts[it.correct]), eq: false, steps: sol.filter(s => s.ex).map(s => P.plain(s.ex)) });
@@ -204,6 +257,7 @@ for (let seed = 1; seed <= SEEDS; seed++) {
       [[it.correct], [all], [it.correct.slice(1)], [all.filter(k => it.correct.indexOf(k) < 0)]].forEach(([pick]) => [1, 2].forEach(tr => {
         const f = C.selectFeedback(it, pick, tr); const ok = pick.length === it.correct.length && pick.every(k => it.correct.indexOf(k) >= 0);
         if ((f.v === 'right') !== ok) fail(seed, w0, 'select feedback'); }));
+      try { const ws = Wk.stepsMC(it); checkWalk(seed, w0, ws, { select: true }); ws.forEach((s, k) => { const yes = s.opts.findIndex(o => o.ok) === 0; if (yes !== it.correct.includes(k)) fail(seed, w0, 'select walk: choice ' + k + ' yes/no is wrong'); }); } catch (e) { fail(seed, w0, 'select walk crashed: ' + e.message); }
       C.mcSolution(it).forEach((s, k) => { const v = P.evalA(it.opts[k], {}); const txt = strip(s.say);
         if ((it.correct.indexOf(k) >= 0) !== /✓/.test(txt)) fail(seed, w0, 'select solution marks'); });
     }
@@ -270,8 +324,20 @@ for (let seed = 1; seed <= SEEDS; seed++) {
   q = find('quot'); x = q.prm; W('next order', q, x.b + '^' + x.m + '/' + x.b + '^' + x.n, r => r.next && r.next.i === 0 ? null : 'next step is not the first step: ' + JSON.stringify(r.next));
 })();
 
+/* ---- pinned: review 4 (walkthrough) ---- */
+(function () {
+  const find = (fam, pred) => { for (let sd = 1; sd < 4000; sd++) { const G = P.generate(sd); for (const sec of G.sections) for (const it of sec.items) for (const p of (it.type === 'parts' ? it.parts : it.type === 'solo' ? [it.part] : [])) if (p.fam === fam && (!pred || pred(p.prm))) return p; } return null; };
+  const labels = st => st.map(x => x.opts ? x.opts.map(o => strip(o.label)).join('|') : '').join(' / ');
+  let q = find('negDen', y => y.m % 2 === 1); if (q && /A negative number/.test(labels(Wk.steps(q)))) fails.push('walk pin: negDen offers "A negative number" when the answer is negative');
+  q = find('powquot', y => y.p === 2 && y.q === 2); if (q && /Add them/.test(labels(Wk.steps(q)).split(' / ')[0])) fails.push('walk pin: powquot 2,2 offers Add (same result)');
+  q = find('fracpow', y => y.p === 1); if (q && /Only the bottom/.test(labels(Wk.steps(q)))) fails.push('walk pin: fracpow p=1 offers Only the bottom');
+  q = find('quot', y => y.m % y.n === 0 && y.m / y.n === y.m - y.n); if (q && /Divide them/.test(labels(Wk.steps(q)))) fails.push('walk pin: quot offers Divide when it gives the same number');
+  for (const [t, ok] of [['4^2', false], ['9-5', false], ['6x3', false], ['17', true], ['n = 6', true], ['(−3)', true], ['1/16', true], ['-2', true]]) if ((Wk.readNum(t) !== null) !== ok) fails.push('walk pin: readNum("' + t + '")');
+  q = find('toStd', y => y.k < 0); const st = Wk.steps(q).find(x => x.places); if (!st) fails.push('walk pin: places step not marked');
+})();
+
 fs.writeFileSync(__dirname + '/coach_dump.json', JSON.stringify(dump));
-console.log('seeds', SEEDS, '| solution steps', stat.steps, '| models', stat.models, 'explained by their own words', stat.modelHits, '| two explanations shown together', stat.collide, '| fuzz answers', stat.fuzz, '| arithmetic claims', claims, '| pictures', stat.pics);
+console.log('seeds', SEEDS, '| solution steps', stat.steps, '| models', stat.models, 'explained by their own words', stat.modelHits, '| two explanations shown together', stat.collide, '| fuzz answers', stat.fuzz, '| arithmetic claims', claims, '| pictures', stat.pics, '| walkthroughs', stat.walks, '(typed steps re-derived:', stat.walkNums + ')');
 const top = Object.entries(stat.fuzzSaid).sort((a, b) => b[1] - a[1]);
 console.log('distinct fuzz messages', top.length);
 console.log(fails.length ? fails.length + ' FAILURES\n' + fails.slice(0, 80).join('\n') : 'all coach checks pass');

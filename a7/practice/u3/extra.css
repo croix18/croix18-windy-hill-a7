@@ -110,3 +110,19 @@ svg.hop .ht{font:600 16px var(--serif);fill:var(--ink)}
 svg.hop .harc{fill:none;stroke:var(--pen);stroke-width:1.5}
 svg.hop .hk{font:600 10px var(--ui);fill:var(--pen)}
 svg.hop .hfrom{fill:var(--mut)} svg.hop .hto{fill:var(--pen)}
+
+/* ---- walk me through it ---- */
+.walk{margin-top:8px;border:1px solid var(--rule);border-radius:10px;padding:10px 12px;background:var(--field)}
+.prt:not(.solo) .walk{margin-left:calc(1.4em + 10px)} .q>.walk{margin-left:calc(1.9em + 10px)}
+@media (max-width:480px){ .prt:not(.solo) .walk,.q>.walk{margin-left:0} }
+ol.wsteps{margin:4px 0 0;padding-left:1.3em;font:15px/1.45 var(--ui)}
+ol.wsteps li{margin:0 0 10px}
+ol.wsteps li.cur .wask{font-weight:600}
+.wask .m{font-size:1.05em}
+.wopts{display:flex;flex-direction:column;gap:6px;margin-top:6px}
+.wopt{text-align:left;font:500 14.5px/1.35 var(--ui);background:var(--paper);padding:9px 12px}
+.wopt.bad{text-decoration:line-through;text-decoration-color:var(--no);opacity:.6}
+.wnum{display:flex;gap:8px;margin-top:6px;align-items:center}
+.wnum input{font:17px/1.3 var(--serif);color:var(--pen);background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:7px 9px;width:9rem}
+.wwhy{margin-top:6px;font-size:14px}
+.wgot{margin-top:3px;color:var(--mut)}

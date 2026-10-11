@@ -65,6 +65,19 @@ Croix picked four upgrades and said Help-me-solve must be *"an option or like a 
   picture errors.
 - Saved state `v3` (keys per set and practice choice). Third adversarial review: 10 defects + low items, all fixed and pinned.
 
+## Walk me through it (11 Oct 2026)
+
+Croix asked for a guided walkthrough in place of Help me solve. `walk.js`: each question becomes 1–5 small steps — tap an
+option (a wrong tap says why and stays crossed out) or type one plain number (`readNum` takes only a number or fraction, so
+typing the question back doesn't count; "how many places" accepts the size with or without the sign). After each step the
+work so far is shown; the walk ends at the answer with "Now type it in the answer box". A Close button; opening it before the
+first check counts as help (the panel says so). Options that would give the same number for particular values (2 + 2 = 2 × 2,
+(1/4)^2 with "only the bottom", 4 ÷ 2 = 4 − 2) are left out for those values.
+Checked by coach_check.js: one right option per tap, a reason on every wrong option, every typed answer re-derived from its own
+question text ("What is 9 + 8?" → 17), every shown line equal to the question, the walk ending at the finished answer, plus
+87/87 planted errors caught and pins for the fourth review's findings (e.g. negDen no longer offers "a negative number", which
+is true for odd powers).
+
 ## Marking
 
 `mark(part, typed)` in engine.js reads what was typed (^ powers, / fractions, × or x for times in
