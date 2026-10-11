@@ -18,14 +18,7 @@ const P = require('./engine.js'), C = require('./coach.js');
     if (r === 0) await clickSel('#ag1a [data-another="1a"]');
   }
   await (await p.$('.q[data-q="1"]')).screenshot({ path: 'v_another.png' });
-  // 2. help me solve on 2c
-  await clickSel('[data-work="2c"]');
-  await p.fill('#wt2c', '10^9/10^7\n10^2\n100'); await clickSel('[data-wcheck="2c"]');
-  console.log('work 2c:', (await p.innerText('#wr2c')).replace(/\s+/g, ' '));
-  await clickSel('[data-wuse="2c"]'); console.log('answer box now:', await p.inputValue('#a2c'));
-  await p.fill('#wt2c', '10^6/10^7'); await clickSel('[data-wcheck="2c"]');
-  console.log('work 2c wrong:', (await p.innerText('#wr2c')).replace(/\s+/g, ' '));
-  await (await p.$('.prt[data-id="2c"]')).screenshot({ path: 'v_work.png' });
+  console.log('help-me-solve buttons on the page:', await p.evaluate(() => document.querySelectorAll('[data-work]').length));
   // 3. pictures
   for (const [id, wrong] of [['1b', '3^9'], ['6a', '-512'], ['6b', '1/8'], ['9c', '3m^10'], ['12a', '9.1 x 10^6'], ['13b', '0.000075'], ['1c', '10^17'], ['2a', '4/49']]) {
     await p.fill('#a' + id, wrong); await clickSel('[data-check="' + id + '"]'); await clickSel('[data-all="' + id + '"]');

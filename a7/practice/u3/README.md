@@ -48,7 +48,9 @@ answer), the last is the answer. Saved state moved to `v2` (the per-question rec
 ## Version 3 (10 Oct 2026): help me solve, try another, one part, pictures
 
 Croix picked four upgrades and said Help-me-solve must be *"an option or like a help me solve this type thing"*, not the default.
-- **Help me solve this** (button on every typed question): the student types work one step per line; `checkWork` marks each
+- **Help me solve this — REMOVED from the page 11 Oct 2026.** Croix: *"I don't like the help me solve this. It doesn't really make
+  sense."* The button is gone (ui.js `if (false && …)`); `checkWork` and its tests stay in coach.js in case it comes back in
+  another form. Don't re-add it without asking him. What it was (button on every typed question): the student types work one step per line; `checkWork` marks each
   line ✓ if it equals the question (equations: true at the right n and not at other values — `n^2 = 36` is refused). The first
   unequal line gets: for the very first step, the exact mistake list; after that, only true comparisons with the line before
   ("this is 3^2, what comes before it equals 3^3"; number part / each letter's exponent) plus the step to take. "Use my last

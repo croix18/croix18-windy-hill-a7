@@ -1,6 +1,6 @@
 (function(){
 'use strict';
-var E = window.Practice, C = window.Coach, VZ = window.Visual, VER = 'v3', PRE = 'a7u3prac.' + VER + '.';
+var E = window.Practice, C = window.Coach, VZ = window.Visual, VER = 'v3',   /* "Help me solve this" was taken out on 11 Oct at Croix's word; its code stays but no button opens it */ PRE = 'a7u3prac.' + VER + '.';
 var $ = function(id){ return document.getElementById(id); };
 var LET = 'ABCDE';
 function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
@@ -240,7 +240,7 @@ function paintItem(it){
   else {
     if (!all) b.push('<button type="button" data-hint="' + it.id + '">' + ((R.steps || 0) === 0 ? 'Hint' : 'Next step') + ' <span class="cnt">' + Math.min((R.steps || 0) + 1, n) + ' of ' + n + '</span></button>');
     if (!all && (R.tries > 0 || S.done)) b.push('<button type="button" data-all="' + it.id + '">Show me how</button>');
-    if (it.type === 'text' && wk) b.push('<button type="button" data-work="' + it.id + '" aria-expanded="' + (!!(S.work && S.work[it.id] != null && S.workOpen && S.workOpen[it.id])) + '">Help me solve this</button>');
+    if (false && it.type === 'text' && wk) b.push('<button type="button" data-work="' + it.id + '" aria-expanded="' + (!!(S.work && S.work[it.id] != null && S.workOpen && S.workOpen[it.id])) + '">Help me solve this</button>');
   }
   var missed = (R.v && R.v !== 'right') || R.shown || (R.v === 'right' && R.first === false);
   if (!it.extra && missed && !(S.more && S.more[it.id])) b.push('<button type="button" class="go" data-another="' + it.id + '">Try another like this</button>');
