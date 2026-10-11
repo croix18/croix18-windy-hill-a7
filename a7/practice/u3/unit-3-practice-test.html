@@ -231,6 +231,8 @@ ol.wsteps li.cur .wask{font-weight:600}
 .wnum input{font:17px/1.3 var(--serif);color:var(--pen);background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:7px 9px;width:9rem}
 .wwhy{margin-top:6px;font-size:14px}
 .wgot{margin-top:3px;color:var(--mut)}
+.walk .wkhead{flex-direction:row;align-items:center;justify-content:space-between;gap:8px}
+.walk .wclose{padding:5px 10px;font-size:12.5px;width:auto;flex:0 0 auto}
 </style>
 <div class="watch" role="region" aria-label="Stopwatch and score"><div class="in">
   <div class="time" id="time" aria-live="off">0:00</div>
@@ -2408,7 +2410,7 @@ function walkHtml(it){
   var st = walkOf(it); if (!st) return '';
   var W = wstate(it), q = it.type === 'text' ? it.part.q : it.item.q, eq = it.type === 'text' && it.part.fam === 'solveN';
   var R0 = S.res[it.id] || {};
-  var h = '<div class="wkhead"><b>Walk me through it</b><button type="button" class="wclose" data-wclose="' + it.id + '" aria-label="Close the walkthrough">Close</button><span>One small question at a time. Tap an answer, or type a number.</span>' + (R0.hinted && !R0.tries ? '<span class="wnote">Using this before you check your answer means this question won’t count as right on the first try.</span>' : '') + '</div>';
+  var h = '<div class="wkhead"><b>Walk me through it</b><button type="button" class="wclose" data-wclose="' + it.id + '" aria-label="Close the walkthrough">Close</button></div>';
   if (q && it.type !== 'multi') h += '<div class="solhead"><span class="kl">Start</span> ' + E.M(q) + '</div>';
   h += '<ol class="wsteps">';
   st.forEach(function(s, k){

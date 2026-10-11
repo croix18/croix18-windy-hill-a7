@@ -276,7 +276,7 @@ function walkHtml(it){
   var st = walkOf(it); if (!st) return '';
   var W = wstate(it), q = it.type === 'text' ? it.part.q : it.item.q, eq = it.type === 'text' && it.part.fam === 'solveN';
   var R0 = S.res[it.id] || {};
-  var h = '<div class="wkhead"><b>Walk me through it</b><button type="button" class="wclose" data-wclose="' + it.id + '" aria-label="Close the walkthrough">Close</button><span>One small question at a time. Tap an answer, or type a number.</span>' + (R0.hinted && !R0.tries ? '<span class="wnote">Using this before you check your answer means this question won’t count as right on the first try.</span>' : '') + '</div>';
+  var h = '<div class="wkhead"><b>Walk me through it</b><button type="button" class="wclose" data-wclose="' + it.id + '" aria-label="Close the walkthrough">Close</button></div>';
   if (q && it.type !== 'multi') h += '<div class="solhead"><span class="kl">Start</span> ' + E.M(q) + '</div>';
   h += '<ol class="wsteps">';
   st.forEach(function(s, k){
