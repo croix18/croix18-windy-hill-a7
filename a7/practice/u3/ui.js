@@ -301,7 +301,7 @@ function walkHtml(it){
   h += '</ol>';
   if (W.i >= st.length && picOf(it)) h += '<details class="why" open><summary>Why it works</summary>' + picOf(it) + '</details>';
   if (W.i >= st.length){
-    h += '<p class="wfin done">' + (it.type === 'text' ? 'That’s it: ' + WK.finalHtml(it.part) + '. Now type it in the answer box above and press Check.' : it.type === 'mc' ? 'Now find the choice that matches and pick it above.' : 'Now pick every choice you said yes to, above.') + '</p>';
+    h += '<p class="wfin done">' + keyHtml(it) + '</p>';
   }
   return h;
 }
