@@ -251,7 +251,6 @@ ol.wsteps li.cur .wask{font-weight:600}
   <div class="setrow"><label for="setin">Set</label><input type="text" inputmode="numeric" id="setin" aria-label="Set number" autocomplete="off"><button type="button" id="setgo">Go</button><button type="button" class="go" data-new="1">New set</button><button type="button" id="bAgain">Start this set over</button></div>
   <div id="paper"></div>
 </main>
-<p class="foot">Your answers stay on this device only. Nothing is sent anywhere.</p>
 <script>/* A7 Unit 3 practice test engine: question generators, exact arithmetic, a reader for typed answers,
    and the marking rules. Runs in the page and under Node (the checks in test_engine.js and verify.py). */
 (function (root) {
@@ -2672,6 +2671,7 @@ $('bAgain').addEventListener('click', function(){ ask('Clear your answers to thi
 window.addEventListener('hashchange', function(){ var h = fromHash(); if (h && (h.seed !== seed || h.scope !== scope)) openSet(h.seed, h.scope); });
 setInterval(function(){ if (S && S.running) $('time').textContent = fmt(elapsed()); }, 500);
 window.addEventListener('pagehide', function(){ if (S && S.running){ S.acc = elapsed(); S.startedAt = now(); save(); } });
+document.addEventListener('visibilitychange', function(){ if (document.hidden && S && S.running) pause(); });   /* the clock stops when the page is put away, so time away doesn't count */
 
 openSet(seed, scope);
 })();

@@ -529,6 +529,7 @@ $('bAgain').addEventListener('click', function(){ ask('Clear your answers to thi
 window.addEventListener('hashchange', function(){ var h = fromHash(); if (h && (h.seed !== seed || h.scope !== scope)) openSet(h.seed, h.scope); });
 setInterval(function(){ if (S && S.running) $('time').textContent = fmt(elapsed()); }, 500);
 window.addEventListener('pagehide', function(){ if (S && S.running){ S.acc = elapsed(); S.startedAt = now(); save(); } });
+document.addEventListener('visibilitychange', function(){ if (document.hidden && S && S.running) pause(); });   /* the clock stops when the page is put away, so time away doesn't count */
 
 openSet(seed, scope);
 })();

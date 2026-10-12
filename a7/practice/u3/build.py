@@ -21,7 +21,6 @@ body = f"""<title>Unit 3 Practice Test</title>
   <div class="setrow"><label for="setin">Set</label><input type="text" inputmode="numeric" id="setin" aria-label="Set number" autocomplete="off"><button type="button" id="setgo">Go</button><button type="button" class="go" data-new="1">New set</button><button type="button" id="bAgain">Start this set over</button></div>
   <div id="paper"></div>
 </main>
-<p class="foot">Your answers stay on this device only. Nothing is sent anywhere.</p>
 <script>{r('engine.js')}</script>
 <script>{r('coach.js')}</script>
 <script>{r('visual.js')}</script>
