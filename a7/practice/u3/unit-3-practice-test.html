@@ -133,9 +133,9 @@ td.r,th.r{text-align:right;padding-right:0}
 .steps ol{margin:0;padding-left:1.25em} .steps li{margin:2px 0}
 .steps .key{margin:8px 0 0;font-size:15.5px}
 .steps .ok{color:var(--ok);font-weight:700} .steps .no{color:var(--no);font-weight:700}
-.is-right input[type=text]{border-bottom-color:var(--ok)}
-.is-wrong input[type=text]{border-bottom-color:var(--no)}
-.is-form input[type=text]{border-bottom-color:var(--warn)}
+.is-right>.ans input[type=text]{border-bottom-color:var(--ok)}
+.is-wrong>.ans input[type=text]{border-bottom-color:var(--no)}
+.is-form>.ans input[type=text]{border-bottom-color:var(--warn)}
 .choices .ch.picked-no .cv{text-decoration:line-through;text-decoration-color:var(--no)}
 .choices .ch.is-key{outline:1.5px solid var(--ok);outline-offset:-1px}
 .q>.ckrow{margin:8px 0 0 calc(1.9em + 10px)}
@@ -2662,8 +2662,9 @@ Array.prototype.forEach.call(document.querySelectorAll('.mode button'), function
   });
 });
 $('scope').addEventListener('change', function(){ var v = this.value; if (v === scope) return;
-  if (started() && !S.done) ask('Switch to “' + SCOPES[v] + '”? This set stays saved on this device.', 'Switch', function(){ openSet(seed, v); }, function(){});
-  else openSet(seed, v);
+  var to = v === 'miss' ? randomSeed() : seed;   /* misses always come back with new numbers (found in the M7 review, 15 Oct) */
+  if (started() && !S.done) ask('Switch to “' + SCOPES[v] + '”? This set stays saved on this device.', 'Switch', function(){ openSet(to, v); }, function(){});
+  else openSet(to, v);
   $('scope').value = scope; });
 $('setgo').addEventListener('click', function(){ var v = Math.floor(+$('setin').value); if (v >= 1 && v <= 99999) openSet(v, scope); else { $('setin').value = seed; } });
 $('setin').addEventListener('keydown', function(e){ if (e.key === 'Enter'){ e.preventDefault(); $('setgo').click(); } });

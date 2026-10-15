@@ -121,3 +121,9 @@ some small numbers (7.8 × 10⁻⁸ shown as 0.000000039). Fixed and brute-force
 
 To republish: `python3 build.py`, then publish `unit-3-practice-test.html` to the same artifact URL
 (see the Windmill HANDOFF for it). Bump `VER` in ui.js if generators change, so old saved sets reset.
+
+## Version 11 (15 Oct 2026): two fixes found while building the M7 Unit 4 page
+- Choosing "My misses" from the Practice menu reopened the same set, so round 1 had the same numbers that were just
+  missed. It now opens a new random set, as the Finish panel's button already did.
+- An answer box inside "Try another like this" showed the base question's red or green underline. The colors now
+  apply only to a question's own box (`.is-wrong>.ans input`).

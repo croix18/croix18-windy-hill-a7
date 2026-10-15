@@ -520,8 +520,9 @@ Array.prototype.forEach.call(document.querySelectorAll('.mode button'), function
   });
 });
 $('scope').addEventListener('change', function(){ var v = this.value; if (v === scope) return;
-  if (started() && !S.done) ask('Switch to “' + SCOPES[v] + '”? This set stays saved on this device.', 'Switch', function(){ openSet(seed, v); }, function(){});
-  else openSet(seed, v);
+  var to = v === 'miss' ? randomSeed() : seed;   /* misses always come back with new numbers (found in the M7 review, 15 Oct) */
+  if (started() && !S.done) ask('Switch to “' + SCOPES[v] + '”? This set stays saved on this device.', 'Switch', function(){ openSet(to, v); }, function(){});
+  else openSet(to, v);
   $('scope').value = scope; });
 $('setgo').addEventListener('click', function(){ var v = Math.floor(+$('setin').value); if (v >= 1 && v <= 99999) openSet(v, scope); else { $('setin').value = seed; } });
 $('setin').addEventListener('keydown', function(e){ if (e.key === 'Enter'){ e.preventDefault(); $('setgo').click(); } });
