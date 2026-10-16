@@ -1,0 +1,28 @@
+/* A7 Unit 3: the counting pictures (visual.js) */
+.vrow{display:flex;flex-wrap:wrap;gap:4px;align-items:center;margin:4px 0}
+.vgrp{display:inline-flex;flex-wrap:wrap;gap:4px;align-items:center;position:relative;padding-bottom:16px}
+.vlab{position:absolute;left:0;right:0;bottom:0;text-align:center;font:600 11px/1 var(--ui);color:var(--mut)}
+.vop{font-size:20px;margin:0 4px}
+.vrl{font:600 11px/1 var(--ui);color:var(--mut);width:3.6em}
+.tile{display:inline-grid;place-items:center;min-width:26px;height:26px;padding:0 4px;border-radius:6px;font:600 14px/1 var(--serif);border:1.5px solid}
+.tile.a{border-color:var(--pen);color:var(--pen);background:color-mix(in srgb,var(--pen) 10%,transparent)}
+.tile.b{border-color:var(--ok);color:var(--ok);background:color-mix(in srgb,var(--ok) 10%,transparent)}
+.tile.x{border-color:var(--rule);color:var(--mut);text-decoration:line-through;opacity:.7}
+.tdots{font:12px/1 var(--ui);color:var(--mut);margin:0 4px}
+.vcancel .vbar{height:0;border-top:2px solid var(--ink);margin:2px 0;max-width:100%}
+.vpair{display:inline-flex;gap:3px;position:relative;padding:3px 3px 17px;border:1px dashed var(--rule);border-radius:8px}
+.vpair.odd{border-color:var(--no)}
+table.ladder{border-collapse:collapse;font-size:16px;width:auto}
+table.ladder td{border:0;padding:3px 8px 3px 0;vertical-align:middle}
+table.ladder td.ld{font:12px/1 var(--ui);color:var(--mut);padding-left:10px}
+table.ladder tr.hl td{background:color-mix(in srgb,var(--pen) 12%,transparent)}
+table.ladder tr.hl td:first-child{border-radius:6px 0 0 6px} table.ladder tr.hl td:nth-child(3){border-radius:0 6px 6px 0}
+.vcopy{display:inline-block;padding:2px 4px}
+ul.vlist{margin:6px 0 0;padding-left:1.2em;font:14px/1.5 var(--ui)}
+.hopwrap{overflow-x:auto;max-width:100%}
+svg.hop .hcell{fill:var(--paper);stroke:var(--ink);stroke-width:1.2}
+svg.hop .hpad{fill:var(--field);stroke:var(--rule);stroke-width:1.2;stroke-dasharray:3 2}
+svg.hop .ht{font:600 16px var(--serif);fill:var(--ink)}
+svg.hop .harc{fill:none;stroke:var(--pen);stroke-width:1.5}
+svg.hop .hk{font:600 10px var(--ui);fill:var(--pen)}
+svg.hop .hfrom{fill:var(--mut)} svg.hop .hto{fill:var(--pen)}

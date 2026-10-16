@@ -113,14 +113,14 @@ function checkVis(seed, w, p, s) {
 }
 
 /* the picture checker must catch planted errors */
-(function () { const G = P.generate(1), before = fails.length; let planted = 0;
+(function () { const G = P.generate(1), before = fails.length; let planted = 0, caughtN = 0;   /* counted per plant (Apple review W-9) */
   G.sections.forEach(sec => sec.items.forEach(it => (it.type === 'parts' ? it.parts : it.type === 'solo' ? [it.part] : []).forEach(p => {
     const s = Vz.spec(p); if (!s) return; const t = JSON.parse(JSON.stringify(s));
     if (t.kind === 'row' || t.kind === 'grid') t.total += 1; else if (t.kind === 'cancel') t.top += 1; else if (t.kind === 'ladder') { if (t.base && t.base.letter) return; t.base = (typeof t.base === 'number' ? t.base + 1 : t.base); if (typeof s.base !== 'number') return; }
     else if (t.kind === 'signs') t.e += 1; else if (t.kind === 'copies') t.copies += 1; else if (t.kind === 'hop') t.cpos += 1; else return;
-    planted++; const b0 = fails.length; checkVis(0, 'plant', p, t); if (fails.length === b0) console.log('PLANT NOT CAUGHT', p.fam, t.kind);
+    planted++; const b0 = fails.length; checkVis(0, 'plant', p, t); if (fails.length === b0) console.log('PLANT NOT CAUGHT', p.fam, t.kind); else caughtN++;
   })));
-  const caught = fails.length - before; fails.length = before; console.log('picture checker caught', caught, 'of', planted, 'planted errors'); })();
+  fails.length = before; console.log('picture checker caught', caughtN, 'of', planted, 'planted errors'); if (caughtN !== planted) { console.log('CHECKER BROKEN'); process.exit(2); } })();
 
 /* ---- the walkthrough: one right option per tap, every typed number re-derived from its own question text, every "then" = the question ---- */
 const supTxt = h => String(h).replace(/<sup>([^<]*)<\/sup>/g, '^$1').replace(/<[^>]+>/g, '');
@@ -205,11 +205,6 @@ for (let seed = 1; seed <= SEEDS; seed++) {
       else { const r = P.mark(p, typed(last)); if (r.v !== 'right' && p.kind !== 'times') fail(seed, w, 'last step "' + typed(last) + '" is not marked right: ' + r.v); }
       D.sols.push({ w, fam: p.fam, q: P.plain(p.q), ans: P.plain(p.ans), eq: p.fam === 'solveN', steps: exs.map(s => p.fam === 'solveN' ? [P.plain(s.ex.l), P.plain(s.ex.r)] : P.plain(s.ex)) });
       { const vs = Vz.spec(p); if (vs) { stat.pics = (stat.pics || 0) + 1; try { checkVis(seed, w, p, vs); claimCheck(seed, w + ' picture', Vz.html(vs)); } catch (e) { fail(seed, w, 'picture crashed: ' + e.message); } } }
-      /* A2. help me solve: the worked solution typed line by line is all ✓ and finished; a mistake line is caught */
-      { const lines = sol.filter(st => st.ex).map(st => p.fam === 'solveN' ? C.typedOf(st.ex) : C.typedOf(st.ex)); const r = C.checkWork(p, lines.join('\n'));
-        if (r.lines.some(l => l.ok !== true)) fail(seed, w, 'work: a correct line was flagged: ' + JSON.stringify(r.lines.filter(l => l.ok !== true).map(l => [l.raw, strip(l.msg)])).slice(0, 200));
-        if (!r.done && p.kind !== 'times') fail(seed, w, 'work: the full solution is not recognised as finished: ' + strip(r.finalMsg || ''));
-        const ms0 = C.models(p); if (ms0.length) { const bad = C.checkWork(p, lines[0] + '\n' + C.typedOf(ms0[0].ex)); const fl = bad.lines.find(l => l.ok === false); if (!fl && !bad.lines.some(l => l.ok === null)) fail(seed, w, 'work: a mistake line was not caught: ' + C.typedOf(ms0[0].ex)); if (fl) claimCheck(seed, w + ' work', fl.msg); } }
       try { checkWalk(seed, w, Wk.steps(p), { fam: p.fam, prm: p.prm, q: p.q, ans: p.ans, part: p }); } catch (e) { fail(seed, w, 'walk crashed: ' + e.message); }
       /* B. every mistake model */
       const ms = C.models(p);
@@ -287,7 +282,9 @@ for (let seed = 1; seed <= SEEDS; seed++) {
   q = find('varNeg'); x = q.prm; PIN('neg-neg var', q, '-' + x.v + '^-' + x.n, 'wrong', /still has a negative exponent/, /one over the power but also/);
   q = find('prod'); x = q.prm; PIN('8^16', q, x.b + '^' + 2 * (x.m + x.n), 'wrong', null, /multiply the bases/);
   q = find('monoQuot'); x = q.prm; PIN('no caret', q, x.t + x.v + (x.p - x.q), 'unread', /\^ is missing/);
-  q = find('fracpow', y => y.p === 1); x = q.prm; PIN('2/8', q, x.k + '/' + x.q * x.k, 'wrong', null, /raise only the top/); PIN('2/16', q, x.k + '/' + pw(x.q, x.k), 'wrong', null, /multiply the bottom/);
+  /* p = 1 in (p/q)^k no longer occurs: raising only the bottom gives the right answer there, so the clean rule (15 Oct)
+     draws other numbers. The pin stays as a check that it never comes back. */
+  { let found = null; try { found = find('fracpow', y => y.p === 1); } catch (e) { found = null; } if (found) fails.push('clean rule: (1/q)^k is back in a set'); }
   q = find('mixedProd'); x = q.prm; PIN('right size', q, String(pw(x.B, x.n - x.m)), 'wrong', /one over/, /right size/);
   q = find('monoCoefPow'); x = q.prm; PIN('mono sign', q, '-' + pw(x.c, x.q) + x.v + '^' + x.p * x.q, 'wrong', /wrong sign/);
   q = find('toSci', y => y.k > 0); x = q.prm; PIN('sci plain', q, P.decStr(P.qdec(x.c)).replace('.', '') + '0'.repeat(x.k + 1), 'wrong', /needs to be in scientific notation/, /zeros|one place/);
@@ -307,23 +304,7 @@ for (let seed = 1; seed <= SEEDS; seed++) {
   q = find('monoProd'); x = q.prm; PIN('11k', q, (x.m + x.n) + x.v, 'wrong', /Did you mean/);
 })();
 
-/* ---- pinned: review 3 (Help me solve this) ---- */
-(function () {
-  const find = (fam, pred) => { for (let sd = 1; sd < 3000; sd++) { const G = P.generate(sd); for (const sec of G.sections) for (const it of sec.items) for (const p of (it.type === 'parts' ? it.parts : it.type === 'solo' ? [it.part] : [])) if (p.fam === fam && (!pred || pred(p.prm))) return p; } throw new Error('no ' + fam); };
-  const W = (name, p, text, test) => { const r = C.checkWork(p, text); const msg = r.lines.map(l => strip(l.msg)).join(' | '); const why = test(r, msg); if (why) fails.push('work pin ' + name + ': ' + why + ' — ' + JSON.stringify(r.lines.map(l => [l.raw, l.ok])) + ' ' + msg.slice(0, 160) + ' fin=' + strip(r.finalMsg || '')); };
-  let q, x;
-  q = find('eNote'); x = q.prm; W('E line', q, x.c + 'E' + x.k, r => r.lines[0].ok === true ? null : 'E-notation question line rejected');
-  q = find('prod'); x = q.prm; W('? stops', q, x.b + '^' + x.m + '*' + x.b + '^' + x.n + '\n' + x.b + '^(' + (x.m + x.n), r => r.finalMsg ? 'summary after an unreadable line' : null);
-  q = find('fracpow', y => y.p === 1); x = q.prm; W('mid fracpow', q, '(1/' + x.q + ')^' + x.k + '\n' + x.k + '^' + x.k + '/' + x.q + '^' + x.k, (r, m) => /raise only the top/.test(m) ? 'contradicts the line' : null);
-  q = find('powquot'); x = q.prm; W('mid powquot', q, '(' + x.B + '^' + x.p + ')^' + x.q + '/' + x.B + '^' + x.r + '\n' + x.B + '^' + x.p * x.q + '/' + x.B + '^' + x.r + '\n' + x.B + '^' + (x.e + 1), (r, m) => /add the exponents inside/.test(m) ? 'blames a step the student did right' : r.lines[2] && r.lines[2].ok === false ? null : 'wrong last line not caught');
-  q = find('monoCoefPow'); x = q.prm; W('paren caret', q, '(' + x.c + x.v + '^' + x.p + ')^' + x.q + '\n' + (x.c + 1) + '^' + x.q + '*(' + x.v + '^' + x.p + ')^' + x.q, (r, m) => /Two \^/.test(m) ? 'false caret warning' : null);
-  q = find('solveN'); x = q.prm; const nA = x.k + x.c;
-  W('n then wrong', q, 'n=' + nA + '\nn=' + (nA + 1), r => r.done ? 'says solved under a ✗' : null);
-  W('reversed', q, nA + ' = n', r => r.done ? null : 'not recognised as solved');
-  W('not equivalent', q, 'n^2=' + nA * nA, r => r.lines[0].ok === true ? 'n^2 = ' + nA * nA + ' accepted' : null);
-  q = find('monoProd', y => y.v !== 'x'); x = q.prm; W('x times', q, x.v + '^' + x.m + ' x ' + x.v + '^' + x.n, r => r.lines[0].ok === true ? null : 'x as times rejected');
-  q = find('quot'); x = q.prm; W('next order', q, x.b + '^' + x.m + '/' + x.b + '^' + x.n, r => r.next && r.next.i === 0 ? null : 'next step is not the first step: ' + JSON.stringify(r.next));
-})();
+/* (review 3's pins tested "Help me solve this", which Croix took out on 11 Oct; its code was deleted on 15 Oct.) */
 
 /* ---- pinned: review 4 (walkthrough) ---- */
 (function () {

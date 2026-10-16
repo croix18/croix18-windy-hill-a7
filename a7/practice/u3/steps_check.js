@@ -1,5 +1,5 @@
 /* Every arithmetic claim written in the steps and messages ("4 + 5 = 9", "3<sup>2</sup> = 9", "6.6 ÷ 3.3 = 2") is recomputed exactly. */
-const P = require('./engine.js');
+const P = require('./engine.js'); require('./coach.js');   /* generate() needs the coach's clean rule */
 const n = s => P.qdec(s.replace(/,/g, ''));
 const num = s => { s = s.replace(/−/g, '-'); const neg = s.startsWith('-') || s.startsWith('(-'); const t = s.replace(/[()\-]/g, ''); const q = n(t); return neg ? P.Q(-q.n, q.d) : q; };
 let claims = 0; const bad = [];

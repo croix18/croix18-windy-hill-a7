@@ -1,6 +1,6 @@
 /* Checks the practice engine over many seeds. Writes dump.json for the independent check in verify.py. */
 'use strict';
-const P = require('./engine.js');
+const P = require('./engine.js'); require('./coach.js');   /* generate() needs the coach's clean rule */
 const fs = require('fs');
 const SEEDS = +(process.argv[2] || 20000);
 const fails = [];
@@ -40,8 +40,15 @@ const TEST = [
   Mul('·', Pw(V('x'), 4), Pw(V('x'), 6)), Pw(Par(Pw(V('y'), 3)), 5), Pw(Par(Mul('', N(3), Pw(V('a'), 2))), 3), Fr(Mul('', N(15), Pw(V('m'), 7)), Mul('', N(5), Pw(V('m'), 2))),
   Pw(V('b'), -4), Mul('', N(5), Pw(V('x'), -2)), Pw(Par(Mul('', N(2), Pw(V('m'), -3), V('n'))), 2), Pw(Par(Mul('', N(4), Pw(V('x'), 3))), 2),
   N('8300000'), N('0.00047'), N('60500000000'), N('0.0000000092'), Sci('2.9', 5), Sci('7.1', -6), N('0.0036'),
-  Fr(Sci('9', 9), Sci('3', 6)), Fr(Sci('4.8', -3), Sci('1.6', -7)), Sci('5.6', 8)].map(P.plain);
+  Fr(Sci('9', 9), Sci('3', 6)), Fr(Sci('4.8', -3), Sci('1.6', -7)), Sci('5.6', 8)].map(t => P.plain(canonT(t)));
 const TESTSET = new Set(TEST);
+/* canonical form, written here independently of engine.canon: the factors of a product in sorted order (2³·2⁴ = 2⁴·2³) */
+function canonT(a) {
+  if (!a || typeof a !== 'object') return a;
+  const c = {}; for (const k of Object.keys(a)) c[k] = Array.isArray(a[k]) ? a[k].map(canonT) : (a[k] && typeof a[k] === 'object' ? canonT(a[k]) : a[k]);
+  if (c.t === 'mul') c.xs = c.xs.slice().sort((x, y) => { const px = P.plain(x), py = P.plain(y); return px < py ? -1 : px > py ? 1 : 0; });
+  return c;
+}
 
 const dump = [];
 const counts = {};
@@ -59,7 +66,7 @@ for (let seed = 1; seed <= SEEDS; seed++) {
       parts.forEach(p => {
         const w = where + p.label;
         try { P.html(p.q); P.html(p.ans); (p.miss || []).forEach(m => P.html(m.ans)); } catch (e) { fail(seed, w, 'draw ' + e.message); }
-        if (TESTSET.has(P.plain(p.q))) fail(seed, w, 'same as the test: ' + P.plain(p.q));
+        if (TESTSET.has(P.plain(canonT(p.q)))) fail(seed, w, 'same as the test: ' + P.plain(p.q));
         const forms = [typed(p.ans)];
         if (p.kind === 'std') forms.push(typed(p.ans, { commas: true }));
         if (p.kind === 'times') { forms.push(P.decStr(val(p.ans))); forms.push(P.commas(P.decStr(val(p.ans)))); }
@@ -78,7 +85,7 @@ for (let seed = 1; seed <= SEEDS; seed++) {
           miss: (p.miss || []).map(m => P.plain(m.ans)), tail: p.tail || null, stem: it.type === 'solo' ? it.stem : null, base: p.base || null });
       });
     } else if (it.type === 'mc') {
-      if (TESTSET.has(P.plain(it.q))) fail(seed, where, 'same as the test');
+      if (TESTSET.has(P.plain(canonT(it.q)))) fail(seed, where, 'same as the test');
       const vs = it.opts.map(valE);
       if (it.why.filter(x => x === null).length !== 1 || it.why[it.correct] !== null) fail(seed, where, 'key');
       if (new Set(it.opts.map(P.plain)).size !== it.opts.length) fail(seed, where, 'two choices are written the same');
@@ -141,5 +148,14 @@ R('times', Sci('3', 3), '2999+1', 'form'); R('times', Sci('3', 3), '6000/2', 'fo
 
 fs.writeFileSync(__dirname + '/dump.json', JSON.stringify(dump));
 console.log('seeds', SEEDS, 'marks', JSON.stringify(counts));
+/* planted errors (Apple review W-9): the checks above must catch each of these */
+{ const C = require('./coach.js'); let planted = 0, caught = 0;
+  const plant = (name, isCaught) => { planted++; if (isCaught) caught++; else fails.push('PLANT NOT CAUGHT: ' + name); };
+  plant('a reordered test question', TESTSET.has(P.plain(canonT(Mul('·', Pw(2, 3), Pw(2, 4))))));
+  plant('a test question with its factors swapped, in the engine', P.onTest(Mul('·', Pw(4, 5), Pw(4, 3))));
+  const pq = P.generate(1).sections[0].items[1].parts[2]; const bad = Object.assign({}, pq, { prm: { B: 2, p: 2, q: 2, e: 1, r: 3 }, q: Fr(Pw(Par(Pw(2, 2)), 2), Pw(2, 3)), ans: N(2) });
+  plant('a mistake that gives the answer ((2²)² ÷ 2³)', !C.clean({ type: 'solo', part: bad }));
+  const key = P.generate(1).sections[0].items[0].parts[0]; plant('a wrong key', P.mark(key, '99^99').v !== 'right');
+  console.log('planted errors caught:', caught + '/' + planted); }
 console.log(fails.length ? fails.length + ' FAILURES\n' + fails.slice(0, 60).join('\n') : 'all checks pass');
 process.exit(fails.length ? 1 : 0);

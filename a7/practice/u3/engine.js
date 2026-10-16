@@ -2,6 +2,7 @@
    and the marking rules. Runs in the page and under Node (the checks in test_engine.js and verify.py). */
 (function (root) {
 'use strict';
+const KIT = (typeof module !== 'undefined' && module.exports) ? require('../kit/core.js') : root.Kit;
 
 /* ------------------------------------------------------------------ exact rationals */
 function gcd(a, b) { a = a < 0n ? -a : a; b = b < 0n ? -b : b; while (b) { const t = a % b; a = b; b = t; } return a; }
@@ -93,7 +94,23 @@ function html(a) {
     default: throw new Error('cannot draw ' + a.t);
   }
 }
-const M = a => '<span class="m">' + html(a) + '</span>';
+/* what a screen reader says (Apple review R1-8) */
+function speak(a) {
+  switch (a.t) {
+    case 'n': return String(a.commas ? commas(a.s) : a.s).replace(/,/g, '');
+    case 'v': return a.s;
+    case 'pow': { const e = a.e.t === 'n' ? a.e.s : null; return speak(a.b) + (e === '2' ? ' squared' : e === '3' ? ' cubed' : ' to the power ' + speak(a.e)); }
+    case 'mul': return a.xs.map(speak).join(' times ');
+    case 'frac': return speak(a.n) + ' over ' + speak(a.d);
+    case 'neg': return 'negative ' + speak(a.x);
+    case 'par': return 'open paren ' + speak(a.x) + ' close paren';
+    case 'eq': return speak(a.l) + ' equals ' + speak(a.r);
+    case 'ar': return speak(a.a) + ({ '+': ' plus ', '−': ' minus ', '×': ' times ' })[a.op] + speak(a.b);
+    case 'add': return speak(a.a) + (a.op === '+' ? ' plus ' : ' minus ') + speak(a.b);
+  }
+  return '';
+}
+const M = a => { let sp = ''; try { sp = speak(a); } catch (e) {} return '<span class="m"' + (sp ? ' role="img" aria-label="' + esc(sp) + '"' : '') + '>' + html(a) + '</span>'; };
 function plain(a) {               // for the independent check in Python (sympy syntax)
   switch (a.t) {
     case 'n': return a.s;
@@ -279,7 +296,7 @@ function markInner(part, text) {
   }
   const a = read[read.length - 1];
   let same;
-  try { same = sameValue(a, part.ans, letters); } catch (e) { return { v: 'unread', msg: 'I can’t work that out. Check the exponents are whole numbers and nothing is 0 to the power 0 or divided by 0.' }; }
+  try { same = sameValue(a, part.ans, letters); } catch (e) { return { v: 'unread', msg: /too large/.test(e.message) ? 'That number is too big to check. Write it with smaller exponents.' : 'I can’t work that out. Check the exponents are whole numbers and nothing is 0 to the power 0 or divided by 0.' }; }
   if (same && read.length > 1) {         // work written before the answer: every step joined by "=" must really be equal
     for (const w of read.slice(0, -1)) {
       let ok; try { ok = sameValue(w, part.ans, letters); } catch (e) { ok = false; }
@@ -335,7 +352,7 @@ function markInner(part, text) {
     if (k === 'times') {
       const s = isSci(a);
       if (unwrap(a).t === 'n' || (s && !qlt(s.c, Q(1)) && qlt(s.c, Q(10)))) return { v: 'right' };
-      return { v: 'form', msg: 'Right value. Write it as one number, like 3,000, or in scientific notation, like 3 × 10^3.' };
+      return { v: 'form', msg: 'Right value. Write it as one number, like 3,000, or in scientific notation, like ' + M(Sci('3', 3)) + '.' };
     }
     return { v: 'right' };
   }
@@ -363,10 +380,9 @@ function mc(stem, opts, correct, why) { return { type: 'mc', stem, opts, correct
 
 /* every question on the real test, written out: a practice set may not contain any of them, anywhere */
 let TESTSET = null;
-function testSet() {
-  if (TESTSET) return TESTSET;
+function testList() {
   const n = V('n');
-  TESTSET = new Set([
+  return [
     Mul('·', P(4, 3), P(4, 5)), P(Par(P(2, 3)), 4), Fr(P(7, 9), P(7, 4)), P(9, 0),
     P(Par(Fr(2, 3)), 3), Mul('·', P(6, 0), P(5, 2)), Fr(P(Par(P(10, 2)), 2), P(10, 3)),
     Mul('·', P(2, 4), P(2, 3)), Eq(Fr(P(5, n), P(5, 2)), N(125)),
@@ -375,166 +391,29 @@ function testSet() {
     Mul('·', P(V('x'), 4), P(V('x'), 6)), P(Par(P(V('y'), 3)), 5), P(Par(Mul('', N(3), P(V('a'), 2))), 3), Fr(Mul('', N(15), P(V('m'), 7)), Mul('', N(5), P(V('m'), 2))),
     P(V('b'), -4), Mul('', N(5), P(V('x'), -2)), P(Par(Mul('', N(2), P(V('m'), -3), V('n'))), 2), P(Par(Mul('', N(4), P(V('x'), 3))), 2),
     N('8300000'), N('0.00047'), N('60500000000'), N('0.0000000092'), Sci('2.9', 5), Sci('7.1', -6), N('0.0036'),
-    Fr(Sci('9', 9), Sci('3', 6)), Fr(Sci('4.8', -3), Sci('1.6', -7)), Sci('5.6', 8)].map(plain));
-  return TESTSET;
+    Fr(Sci('9', 9), Sci('3', 6)), Fr(Sci('4.8', -3), Sci('1.6', -7)), Sci('5.6', 8)];
 }
-function questionsOf(G) {
-  const qs = [];
-  G.sections.forEach(s => s.items.forEach(it => {
-    if (it.type === 'parts') it.parts.forEach(p => qs.push(p.q)); else if (it.type === 'solo') qs.push(it.part.q); else if (it.q) qs.push(it.q);
-  }));
-  return qs;
+function testSet() { if (!TESTSET) TESTSET = new Set(testList().map(plain)); return TESTSET; }
+/* each question slot draws from its own stream (kit/core.js), and is drawn again until it is not on the real test (compared
+   in a canonical form: 2³ · 2⁴ is the test's 2⁴ · 2³) and no modelled mistake gives its answer (coach.js registers that
+   check: the clean rule, Apple review W-1). Set 4821's Q6 depends only on (a7u3, 4821, q6) and Q6's code. */
+const UNIT_ID = 'a7u3';
+let CLEAN = null;
+function setClean(fn) { CLEAN = fn; }
+function canon(a) {                         // products in a fixed order, so the order of the factors never hides a test question
+  if (!a || typeof a !== 'object') return a;
+  const c = Array.isArray(a) ? a.map(canon) : Object.fromEntries(Object.entries(a).map(([k, v]) => [k, typeof v === 'object' ? canon(v) : v]));
+  if (c.t === 'mul') c.xs = c.xs.slice().sort((x, y) => plain(x) < plain(y) ? -1 : plain(x) > plain(y) ? 1 : 0);
+  return c;
 }
-/* a mistake whose value IS the answer (1/q^k when p = 1, say) is not a mistake: drop it so it can never be shown */
-function dropFalseMistakes(G) {
-  G.sections.forEach(s => s.items.forEach(it => {
-    const parts = it.type === 'parts' ? it.parts : it.type === 'solo' ? [it.part] : [];
-    parts.forEach(p => { const L = vars(p.ans); p.miss = (p.miss || []).filter(m => { try { return !sameValue(m.ans, p.ans, L); } catch (e) { return false; } }); });
-  }));
-}
+let TESTCANON = null;
+function onTest(q) { if (!TESTCANON) TESTCANON = new Set(testList().map(x => plain(canon(x)))); try { return TESTCANON.has(plain(canon(q))); } catch (e) { return false; } }
+function itemQuestions(it) { return it.type === 'parts' ? it.parts.map(p => p.q) : it.type === 'solo' ? [it.part.q] : it.q ? [it.q] : []; }
 function generate(seed) {
-  for (let k = 0; k < 50; k++) {
-    const G = generateOnce(k === 0 ? seed : (seed ^ Math.imul(k, 0x9E3779B9)) >>> 0);
-    if (questionsOf(G).some(q => testSet().has(plain(q)))) continue;
-    dropFalseMistakes(G);
-    G.seed = seed;
-    return G;
-  }
-  throw new Error('no practice set without a test question');
-}
-function generateOnce(seed) {
-  const T = tools(rng(seed)), { ri, pick, shuffle, until } = T;
-  const S = [];
-
-  /* 1. Laws of Exponents */
-  const q1a = until(() => ({ b: pick([2, 3, 5, 6, 7, 8, 9, 10]), m: ri(2, 9), n: ri(2, 9) }), x => same(x, { b: 4, m: 3, n: 5 }) || x.m === x.n || x.m * x.n === 2 * (x.m + x.n));   // {3,6}: b^(mn) = (b²)^(m+n), two mistakes would look alike
-  const q1b = until(() => ({ b: pick([2, 3, 5, 6, 7, 10]), m: ri(2, 6), n: ri(2, 6) }), x => same(x, { b: 2, m: 3, n: 4 }) || x.m + x.n === x.m * x.n);
-  const q1c = until(() => { const n = ri(2, 6); return { b: pick([2, 3, 5, 6, 8, 9, 10, 11]), m: n + ri(2, 7), n }; }, x => same(x, { b: 7, m: 9, n: 4 }));
-  const q1d = until(() => ({ b: ri(2, 25) }), x => x.b === 9);
-  const Q1 = { type: 'parts', stem: 'Write each expression as a single power.', parts: [
-    part('a', Mul('·', P(q1a.b, q1a.m), P(q1a.b, q1a.n)), P(q1a.b, q1a.m + q1a.n), 'power', { base: q1a.b,
-      steps: ['Same base, so add the exponents: ' + q1a.m + ' + ' + q1a.n + ' = ' + (q1a.m + q1a.n) + '.'],
-      miss: [miss(P(q1a.b, q1a.m * q1a.n), 'For a product of powers with the same base, add the exponents. Multiplying them is the rule for a power of a power.'),
-             miss(P(q1a.b * q1a.b, q1a.m + q1a.n), 'Keep the base the same. Only the exponents combine.')] }),
-    part('b', P(Par(P(q1b.b, q1b.m)), q1b.n), P(q1b.b, q1b.m * q1b.n), 'power', { base: q1b.b,
-      steps: ['A power of a power: multiply the exponents: ' + q1b.m + ' × ' + q1b.n + ' = ' + (q1b.m * q1b.n) + '.'],
-      miss: [miss(P(q1b.b, q1b.m + q1b.n), 'For a power of a power, multiply the exponents.')] }),
-    part('c', Fr(P(q1c.b, q1c.m), P(q1c.b, q1c.n)), P(q1c.b, q1c.m - q1c.n), 'power', { base: q1c.b,
-      steps: ['Same base, dividing: subtract the exponents: ' + q1c.m + ' − ' + q1c.n + ' = ' + (q1c.m - q1c.n) + '.'],
-      miss: [miss(P(q1c.b, q1c.m + q1c.n), 'When you divide powers with the same base, subtract the exponents.')] }),
-    part('d', P(q1d.b, 0), N(1), 'value', { after: ' (give its value)',
-      steps: ['Any number except 0 raised to the zero power is 1.'],
-      miss: [miss(N(0), 'A zero exponent does not make the value 0. Any number except 0 to the zero power is 1.'), miss(N(q1d.b), 'A zero exponent gives 1, not the base.')] }),
-  ] };
-  const q2a = until(() => { const [p, q] = pick([[1, 3], [3, 4], [2, 5], [3, 5], [4, 5], [1, 4], [5, 6], [2, 7], [3, 7], [1, 2], [4, 7]]); return { p, q, k: pick([2, 3]) }; }, x => same(x, { p: 2, q: 3, k: 3 }));
-  const q2b = until(() => ({ a: ri(2, 12), c: ri(2, 9) }), x => same(x, { a: 6, c: 5 }) || x.a === x.c);
-  const q2c = until(() => { const B = pick([2, 3, 10]), p = pick([2, 3]), q = pick([2, 3]), e = ri(1, 3); return { B, p, q, e, r: p * q - e }; }, x => same(x, { B: 10, p: 2, q: 2, e: 1, r: 3 }) || x.B ** x.e > 1000 || x.r < 1);
-  const Q2 = { type: 'parts', stem: 'Find the value of each expression.', parts: [
-    part('a', P(Par(Fr(q2a.p, q2a.q)), q2a.k), Fr(pw(q2a.p, q2a.k), pw(q2a.q, q2a.k)), 'value', {
-      steps: ['Raise the top and the bottom to the power ' + q2a.k + ': ' + q2a.p + '<sup>' + q2a.k + '</sup> = ' + pw(q2a.p, q2a.k) + ' and ' + q2a.q + '<sup>' + q2a.k + '</sup> = ' + pw(q2a.q, q2a.k) + '.'],
-      miss: [miss(Fr(q2a.p, pw(q2a.q, q2a.k)), 'The exponent applies to the numerator too.'), miss(Fr(pw(q2a.p, q2a.k), q2a.q), 'The exponent applies to the denominator too.')] }),
-    part('b', Mul('·', P(q2b.a, 0), P(q2b.c, 2)), N(q2b.c * q2b.c), 'value', {
-      steps: [q2b.a + '<sup>0</sup> = 1, and ' + q2b.c + '<sup>2</sup> = ' + (q2b.c * q2b.c) + ', so the value is 1 · ' + (q2b.c * q2b.c) + ' = ' + (q2b.c * q2b.c) + '.'],
-      miss: [miss(N(0), q2b.a + '<sup>0</sup> is 1, not 0.'), miss(N(q2b.a * q2b.c * q2b.c), q2b.a + '<sup>0</sup> is 1, not ' + q2b.a + '.')] }),
-    part('c', Fr(P(Par(P(q2c.B, q2c.p)), q2c.q), P(q2c.B, q2c.r)), N(pw(q2c.B, q2c.e)), 'value', {
-      steps: ['Power of a power: ' + q2c.p + ' × ' + q2c.q + ' = ' + (q2c.p * q2c.q) + '. Divide: ' + (q2c.p * q2c.q) + ' − ' + q2c.r + ' = ' + q2c.e + '. So the value is ' + q2c.B + '<sup>' + q2c.e + '</sup> = ' + pw(q2c.B, q2c.e) + '.'],
-      miss: [miss(P(q2c.B, q2c.p + q2c.q - q2c.r), 'A power of a power: multiply the exponents first, then subtract.')] }),
-  ] };
-  const q3 = until(() => ({ b: pick([2, 3]), m: ri(2, 7), n: ri(2, 7) }), x => same(x, { b: 2, m: 4, n: 3 }) || x.m === x.n ||
-    new Set([2 * (x.m + x.n), x.m * x.n, 2 * x.m * x.n, x.m + x.n]).size < 4);
-  const o3 = shuffle([[P(q3.b * q3.b, q3.m + q3.n), 'The bases were multiplied too. Keep the base; add the exponents.'], [P(q3.b, q3.m * q3.n), 'The exponents were multiplied. For a product of powers, add them.'],
-    [P(q3.b * q3.b, q3.m * q3.n), 'Both mistakes: the bases were multiplied and so were the exponents.'], [P(q3.b, q3.m + q3.n), null]]);
-  const Q3 = mc('Which expression is equivalent to ' + M(Mul('·', P(q3.b, q3.m), P(q3.b, q3.n))) + ' ?', o3.map(o => o[0]), o3.findIndex(o => o[1] === null), o3.map(o => o[1]));
-  Q3.q = Mul('·', P(q3.b, q3.m), P(q3.b, q3.n)); Q3.steps = ['Same base, so add the exponents: ' + q3.m + ' + ' + q3.n + ' = ' + (q3.m + q3.n) + '.'];
-  const q4 = until(() => { const b = pick([2, 3, 4, 5, 10]), k = ri(1, 4), c = ri(2, 4); return { b, k, c, V: b ** c }; }, x => (x.b === 5 && x.c === 3) || x.V > 10000);     // the test's 125 = 5^3 is never used
-  const Q4 = { type: 'solo', stem: 'Find the value of ' + M(V('n')) + ' that makes the statement true:  ' + M(Eq(Fr(P(q4.b, V('n')), P(q4.b, q4.k)), N(q4.V, { commas: true }))),
-    part: part('', Eq(Fr(P(q4.b, V('n')), P(q4.b, q4.k)), N(q4.V)), N(q4.k + q4.c), 'n', {
-      steps: [commas(String(q4.V)) + ' = ' + q4.b + '<sup>' + q4.c + '</sup>.', 'Dividing subtracts the exponents, so <i>n</i> − ' + q4.k + ' = ' + q4.c + '.', '<i>n</i> = ' + (q4.k + q4.c)],
-      miss: [miss(N(q4.c), 'That is the exponent of ' + commas(String(q4.V)) + '. The division already took away ' + q4.k + ', so <i>n</i> is ' + q4.k + ' more.')] }) };
-  S.push({ title: 'Laws of Exponents', items: [Q1, Q2, Q3, Q4] });
-
-  /* 2. Integer Exponents */
-  const q5a = until(() => ({ b: ri(2, 9), n: ri(2, 6) }), x => same(x, { b: 6, n: 3 }));
-  const q5b = until(() => ({ c: ri(2, 5), m: ri(2, 7) }), x => same(x, { c: 2, m: 5 }));
-  const q5c = until(() => ({ k: ri(2, 9), m: ri(2, 6) }), x => same(x, { k: 3, m: 4 }));
-  const Q5 = { type: 'parts', stem: 'Rewrite each expression with positive exponents. Do not evaluate.', parts: [
-    part('a', P(q5a.b, -q5a.n), Fr(1, P(q5a.b, q5a.n)), 'posexp', { base: q5a.b, steps: ['A negative exponent means the reciprocal: 1 over ' + q5a.b + '<sup>' + q5a.n + '</sup>.'],
-      miss: [miss(Neg(P(q5a.b, q5a.n)), 'A negative exponent means the reciprocal, not a negative number.')] }),
-    part('b', Fr(1, P(Neg(q5b.c), -q5b.m)), P(Par(Neg(q5b.c)), q5b.m), 'posexp', { base: -q5b.c, steps: ['Dividing by a power with a negative exponent moves it to the top with a positive exponent. The base keeps its sign and its parentheses.'],
-      miss: [miss(Fr(1, P(Neg(q5b.c), q5b.m)), 'The power moves to the numerator. It doesn’t stay in the denominator.'),
-             miss(Neg(P(q5b.c, q5b.m)), 'Keep the parentheses: the base is −' + q5b.c + ', so write (−' + q5b.c + ')<sup>' + q5b.m + '</sup>.')] }),
-    part('c', Mul('·', N(q5c.k), P(10, -q5c.m)), Fr(q5c.k, P(10, q5c.m)), 'posexp', { base: 10, steps: ['Only the 10 has the negative exponent. It moves down; the ' + q5c.k + ' stays on top.'],
-      miss: [miss(Fr(1, Mul('·', N(q5c.k), P(10, q5c.m))), 'Only the 10 has the negative exponent. The ' + q5c.k + ' stays in the numerator.')] }),
-  ] };
-  const q6a = until(() => ({ b: pick([3, 5, 6, 7, 8, 9, 10]), n: pick([2, 3]) }), x => same(x, { b: 4, n: 2 }) || x.b ** x.n > 1000);
-  const q6b = until(() => { const [c, e] = pick([[2, 3], [2, 5], [4, 3], [5, 3]]); return { c, e }; }, x => same(x, { c: 3, e: 3 }));
-  const q6c = until(() => ({ d: pick([3, 4, 5, 6, 10]), n: pick([2, 3]) }), x => same(x, { d: 2, n: 3 }));
-  const q6d = until(() => { const B = pick([2, 3, 5]), m = ri(2, 6); return { B, m, n: m + ri(1, 3) }; }, x => same(x, { B: 2, m: 5, n: 7 }) || x.B ** (x.n - x.m) > 125);
-  const Q6 = { type: 'parts', stem: 'Find the value of each expression.', parts: [
-    part('a', P(q6a.b, -q6a.n), Fr(1, pw(q6a.b, q6a.n)), 'value', { steps: ['Reciprocal of ' + q6a.b + '<sup>' + q6a.n + '</sup>: 1 over ' + pw(q6a.b, q6a.n) + '.'],
-      miss: [miss(Neg(N(pw(q6a.b, q6a.n))), 'A negative exponent means the reciprocal, not a negative number.'), miss(Neg(N(q6a.b * q6a.n)), 'The exponent is not a factor. Raise ' + q6a.b + ' to the power ' + q6a.n + ', then take the reciprocal.')] }),
-    part('b', P(Par(Neg(q6b.c)), -q6b.e), Neg(Fr(1, pw(q6b.c, q6b.e))), 'value', { steps: ['Reciprocal: 1 over (−' + q6b.c + ')<sup>' + q6b.e + '</sup>. An odd power of a negative number is negative: (−' + q6b.c + ')<sup>' + q6b.e + '</sup> = −' + pw(q6b.c, q6b.e) + '.'],
-      miss: [miss(Fr(1, pw(q6b.c, q6b.e)), 'Check the sign: an odd power of a negative number is negative.'), miss(Neg(N(pw(q6b.c, q6b.e))), 'Take the reciprocal: the negative exponent means 1 over the power.')] }),
-    part('c', P(Par(Fr(1, q6c.d)), -q6c.n), N(pw(q6c.d, q6c.n)), 'value', { steps: ['The negative exponent flips the fraction: 1/' + q6c.d + ' becomes ' + q6c.d + '. Then ' + q6c.d + '<sup>' + q6c.n + '</sup> = ' + pw(q6c.d, q6c.n) + '.'],
-      miss: [miss(Fr(1, pw(q6c.d, q6c.n)), 'The negative exponent flips the fraction, so the answer is a whole number.')] }),
-    part('d', Mul('·', P(q6d.B, q6d.m), P(q6d.B, -q6d.n)), Fr(1, pw(q6d.B, q6d.n - q6d.m)), 'value', { steps: ['Same base: add the exponents: ' + q6d.m + ' + (−' + q6d.n + ') = −' + (q6d.n - q6d.m) + '.', q6d.B + '<sup>−' + (q6d.n - q6d.m) + '</sup> = 1 over ' + pw(q6d.B, q6d.n - q6d.m) + '.'],
-      miss: [miss(N(pw(q6d.B, q6d.n - q6d.m)), 'The exponent comes out negative, so the value is a reciprocal.')] }),
-  ] };
-  const q7 = until(() => ({ b: pick([3, 4, 6, 7, 8, 9]) }), x => x.b === 5);
-  const o7 = shuffle([[Fr(1, 2 * q7.b), 'The reciprocal is right, but ' + q7.b + '<sup>2</sup> is ' + q7.b * q7.b + ', not ' + 2 * q7.b + '.'], [Neg(N(q7.b * q7.b)), 'A negative exponent means the reciprocal, not a negative number.'],
-    [Fr(1, q7.b * q7.b), null], [Neg(N(2 * q7.b)), 'The exponent isn’t a factor, and a negative exponent doesn’t make the value negative.']]);
-  const Q7 = mc('Which is the value of ' + M(P(q7.b, -2)) + ' ?', o7.map(o => o[0]), o7.findIndex(o => o[1] === null), o7.map(o => o[1]));
-  Q7.q = P(q7.b, -2); Q7.steps = [q7.b + '<sup>−2</sup> = 1 over ' + q7.b + '<sup>2</sup> = 1 over ' + q7.b * q7.b + '.'];
-  const T8 = pick([
-    { N: 16, o: [P(2, -4), P(4, -2), P(Par(Fr(1, 2)), 4), Neg(P(4, 2)), P(2, -3)] },
-    { N: 81, o: [P(3, -4), P(9, -2), P(Par(Fr(1, 3)), 4), Neg(P(9, 2)), P(3, -3)] },
-    { N: 100, o: [P(10, -2), P(Par(Fr(1, 10)), 2), P(100, -1), Neg(P(10, 2)), P(10, -3)] },
-    { N: 27, o: [P(3, -3), P(Par(Fr(1, 3)), 3), P(27, -1), Neg(P(3, 3)), P(9, -3)] },
-    { N: 125, o: [P(5, -3), P(Par(Fr(1, 5)), 3), P(125, -1), Neg(P(5, 3)), P(5, -2)] }]);
-  const o8 = shuffle(T8.o);
-  const want8 = Q(1, T8.N);
-  const Q8 = { type: 'multi', stem: 'Select ALL of the expressions whose value is ' + M(Fr(1, T8.N)) + '.', opts: o8, correct: o8.map((o, i) => qeq(evalA(o, {}), want8) ? i : -1).filter(i => i >= 0), target: Fr(1, T8.N),
-    steps: o8.map(o => { const v = evalA(o, {}); return { e: o, v: v.d === 1n ? (v.n < 0n ? Neg(N(Number(-v.n))) : N(Number(v.n))) : (v.n < 0n ? Neg(Fr(Number(-v.n), Number(v.d))) : Fr(Number(v.n), Number(v.d))), ok: qeq(v, want8) }; }) };
-  S.push({ title: 'Integer Exponents', items: [Q5, Q6, Q7, Q8] });
-
-  /* 3. Variable Bases */
-  const v9a = until(() => ({ v: pick(LET), m: ri(2, 9), n: ri(2, 9) }), x => same(x, { v: 'x', m: 4, n: 6 }) || x.m === x.n);
-  const v9b = until(() => ({ v: pick(LET), m: ri(2, 6), n: ri(2, 6) }), x => same(x, { v: 'y', m: 3, n: 5 }) || x.m + x.n === x.m * x.n);
-  const v9c = until(() => ({ c: pick([2, 3, 4, 5]), v: pick(LET), p: ri(2, 5), q: pick([2, 3]) }), x => same(x, { c: 3, v: 'a', p: 2, q: 3 }) || x.c * x.q === x.c ** x.q);
-  const v9d = until(() => { const j = ri(2, 6), t = ri(2, 6), q = ri(2, 4); return { j, t, k: j * t, v: pick(LET), q, p: q + ri(2, 5) }; }, x => same(x, { j: 5, t: 3, k: 15, v: 'm', q: 2, p: 7 }));
-  const Q9 = { type: 'parts', stem: 'Write each expression as a single monomial.', parts: [
-    part('a', Mul('·', P(V(v9a.v), v9a.m), P(V(v9a.v), v9a.n)), P(V(v9a.v), v9a.m + v9a.n), 'mono', { steps: ['Same base, so add the exponents: ' + v9a.m + ' + ' + v9a.n + ' = ' + (v9a.m + v9a.n) + '.'],
-      miss: [miss(P(V(v9a.v), v9a.m * v9a.n), 'For a product of powers, add the exponents.')] }),
-    part('b', P(Par(P(V(v9b.v), v9b.m)), v9b.n), P(V(v9b.v), v9b.m * v9b.n), 'mono', { steps: ['A power of a power: multiply the exponents: ' + v9b.m + ' × ' + v9b.n + ' = ' + (v9b.m * v9b.n) + '.'],
-      miss: [miss(P(V(v9b.v), v9b.m + v9b.n), 'For a power of a power, multiply the exponents.')] }),
-    part('c', P(Par(Mul('', N(v9c.c), P(V(v9c.v), v9c.p))), v9c.q), Mul('', N(pw(v9c.c, v9c.q)), P(V(v9c.v), v9c.p * v9c.q)), 'mono', {
-      steps: ['Everything inside the parentheses gets the exponent: ' + v9c.c + '<sup>' + v9c.q + '</sup> = ' + pw(v9c.c, v9c.q) + ', and ' + v9c.p + ' × ' + v9c.q + ' = ' + (v9c.p * v9c.q) + '.'],
-      miss: [miss(Mul('', N(v9c.c), P(V(v9c.v), v9c.p * v9c.q)), 'Raise the ' + v9c.c + ' to the power too: ' + v9c.c + '<sup>' + v9c.q + '</sup> = ' + pw(v9c.c, v9c.q) + '.'),
-             miss(Mul('', N(v9c.c * v9c.q), P(V(v9c.v), v9c.p * v9c.q)), v9c.c + '<sup>' + v9c.q + '</sup> means ' + v9c.c + ' multiplied by itself ' + v9c.q + ' times, not ' + v9c.c + ' × ' + v9c.q + '.')] }),
-    part('d', Fr(Mul('', N(v9d.k), P(V(v9d.v), v9d.p)), Mul('', N(v9d.j), P(V(v9d.v), v9d.q))), Mul('', N(v9d.t), P(V(v9d.v), v9d.p - v9d.q)), 'mono', {
-      steps: ['Divide the numbers: ' + v9d.k + ' ÷ ' + v9d.j + ' = ' + v9d.t + '. Subtract the exponents: ' + v9d.p + ' − ' + v9d.q + ' = ' + (v9d.p - v9d.q) + '.'],
-      miss: [miss(Mul('', N(v9d.t), P(V(v9d.v), v9d.p + v9d.q)), 'When dividing, subtract the exponents.')] }),
-  ] };
-  const v10a = until(() => ({ v: pick(LET), n: ri(2, 7) }), x => same(x, { v: 'b', n: 4 }));
-  const v10b = until(() => ({ c: ri(2, 9), v: pick(LET), n: ri(2, 6) }), x => same(x, { c: 5, v: 'x', n: 2 }));
-  const v10c = until(() => { const v = pick(LET); let w = pick(LET); return { k: pick([2, 3]), v, p: ri(2, 4), w, q: pick([2, 3]) }; }, x => x.v === x.w || same(x, { k: 2, v: 'm', p: 3, w: 'n', q: 2 }));
-  const Q10 = { type: 'parts', stem: 'Rewrite each expression using only positive exponents.', parts: [
-    part('a', P(V(v10a.v), -v10a.n), Fr(1, P(V(v10a.v), v10a.n)), 'mono', { posOnly: true, steps: ['A negative exponent means the reciprocal: 1 over ' + v10a.v + '<sup>' + v10a.n + '</sup>.'],
-      miss: [miss(Neg(P(V(v10a.v), v10a.n)), 'A negative exponent means the reciprocal, not a negative.')] }),
-    part('b', Mul('', N(v10b.c), P(V(v10b.v), -v10b.n)), Fr(v10b.c, P(V(v10b.v), v10b.n)), 'mono', { posOnly: true, steps: ['Only the <i>' + v10b.v + '</i> has the negative exponent, so only it moves down. The ' + v10b.c + ' stays on top.'],
-      miss: [miss(Fr(1, Mul('', N(v10b.c), P(V(v10b.v), v10b.n))), 'Only the <i>' + v10b.v + '</i> has the negative exponent, so the ' + v10b.c + ' stays in the numerator.')] }),
-    part('c', P(Par(Mul('', N(v10c.k), P(V(v10c.v), -v10c.p), V(v10c.w))), v10c.q), Fr(Mul('', N(pw(v10c.k, v10c.q)), P(V(v10c.w), v10c.q)), P(V(v10c.v), v10c.p * v10c.q)), 'mono', { posOnly: true,
-      steps: ['Apply the exponent ' + v10c.q + ' to every factor: ' + v10c.k + '<sup>' + v10c.q + '</sup> = ' + pw(v10c.k, v10c.q) + ', <i>' + v10c.v + '</i><sup>−' + (v10c.p * v10c.q) + '</sup>, <i>' + v10c.w + '</i><sup>' + v10c.q + '</sup>.', 'Then move <i>' + v10c.v + '</i><sup>−' + (v10c.p * v10c.q) + '</sup> to the denominator.'],
-      miss: [miss(Fr(Mul('', N(v10c.k), P(V(v10c.w), v10c.q)), P(V(v10c.v), v10c.p * v10c.q)), 'The ' + v10c.k + ' gets the exponent too: ' + v10c.k + '<sup>' + v10c.q + '</sup> = ' + pw(v10c.k, v10c.q) + '.')] }),
-  ] };
-  const v11 = until(() => ({ c: pick([2, 3, 5, 6]), v: pick(LET), p: ri(2, 5), q: pick([2, 3]) }), x => same(x, { c: 4, v: 'x', p: 3, q: 2 }) || x.c ** x.q === x.c * x.q || x.p + x.q === x.p * x.q);
-  const o11 = shuffle([[Mul('', N(pw(v11.c, v11.q)), P(V(v11.v), v11.p + v11.q)), 'The exponents were added. For a power of a power, multiply them.'], [Mul('', N(v11.c * v11.q), P(V(v11.v), v11.p * v11.q)), v11.c + '<sup>' + v11.q + '</sup> means ' + Array(v11.q).fill(v11.c).join(' · ') + ', not ' + v11.c + ' × ' + v11.q + '.'],
-    [Mul('', N(v11.c), P(V(v11.v), v11.p * v11.q)), 'The number inside the parentheses gets the exponent too.'], [Mul('', N(pw(v11.c, v11.q)), P(V(v11.v), v11.p * v11.q)), null]]);
-  const Q11 = mc('Which expression is equivalent to ' + M(P(Par(Mul('', N(v11.c), P(V(v11.v), v11.p))), v11.q)) + ' ?', o11.map(o => o[0]), o11.findIndex(o => o[1] === null), o11.map(o => o[1]));
-  Q11.q = P(Par(Mul('', N(v11.c), P(V(v11.v), v11.p))), v11.q); Q11.steps = ['Everything inside the parentheses gets the exponent: ' + v11.c + '<sup>' + v11.q + '</sup> = ' + pw(v11.c, v11.q) + ', and ' + v11.p + ' × ' + v11.q + ' = ' + (v11.p * v11.q) + '.'];
-  S.push({ title: 'Variable Bases', items: [Q9, Q10, Q11] });
-
-  /* 4. Scientific Notation */
+  if (!CLEAN) throw new Error('coach.js must be loaded before generating');
+  const ok = it => !itemQuestions(it).some(onTest) && CLEAN(it);
+  const tag = (x, fam, prm) => Object.assign(x, { fam, prm });
+  const A7 = T => ({ ri: T.ri, pick: T.pick, shuffle: T.shuffle, until: (f, bad) => T.until(f, x => !bad(x)) });
   const sciPart = (label, c, k, opt) => {
     const value = qmul(qdec(c), qpow(Q(10), BigInt(k)));
     const shown = decStr(value);
@@ -543,10 +422,6 @@ function generateOnce(seed) {
       miss: [miss(Sci(c, -k), k > 0 ? 'A large number has a positive exponent.' : 'A number less than 1 has a negative exponent.'),
              miss(Sci(c, k > 0 ? k - 1 : k + 1), 'Count the places the decimal point moves, not the zeros.'), miss(Sci(c, k > 0 ? k + 1 : k - 1), 'That is one place too many. Count the places the decimal point moves.')] }, opt || {}));
   };
-  const d2 = () => ri(1, 9) + '.' + ri(1, 9);
-  const s12 = until(() => ({ a: [d2(), ri(5, 9)], b: [d2(), -ri(3, 6)], c: [ri(1, 9) + '.0' + ri(1, 9), ri(8, 11)], d: [d2(), -ri(7, 10)] }),
-    x => same(x.a, ['8.3', 6]) || same(x.b, ['4.7', -4]) || same(x.c, ['6.05', 10]) || same(x.d, ['9.2', -9]));
-  const Q12 = { type: 'parts', stem: 'Write each number in scientific notation.', parts: [sciPart('a', ...s12.a), sciPart('b', ...s12.b), sciPart('c', ...s12.c), sciPart('d', ...s12.d)] };
   const stdPart = (label, c, k) => {
     const value = qmul(qdec(c), qpow(Q(10), BigInt(k)));
     return part(label, Sci(c, k), N(decStr(value), { commas: true }), 'std', {
@@ -555,53 +430,242 @@ function generateOnce(seed) {
              miss(N(decStr(qmul(qdec(c), qpow(Q(10), BigInt(k > 0 ? k + 1 : k - 1))))), 'One place too many: the exponent says how many places the decimal point moves.'),
              miss(N(decStr(qmul(qdec(c), qpow(Q(10), BigInt(-k))))), k > 0 ? 'A positive exponent makes the number large.' : 'A negative exponent makes the number small.')] });
   };
+  const Q1 = KIT.draw(UNIT_ID, seed, 'q1', T0 => { const { ri, pick, shuffle, until } = A7(T0);
+  const q1a = until(() => ({ b: pick([2, 3, 5, 6, 7, 8, 9, 10]), m: ri(2, 9), n: ri(2, 9) }), x => same(x, { b: 4, m: 3, n: 5 }) || x.m === x.n || x.m * x.n === 2 * (x.m + x.n));   // {3,6}: b^(mn) = (b²)^(m+n), two mistakes would look alike
+    const q1b = until(() => ({ b: pick([2, 3, 5, 6, 7, 10]), m: ri(2, 6), n: ri(2, 6) }), x => same(x, { b: 2, m: 3, n: 4 }) || x.m + x.n === x.m * x.n);
+    const q1c = until(() => { const n = ri(2, 6); return { b: pick([2, 3, 5, 6, 8, 9, 10, 11]), m: n + ri(2, 7), n }; }, x => same(x, { b: 7, m: 9, n: 4 }));
+    const q1d = until(() => ({ b: ri(2, 25) }), x => x.b === 9);
+    const Q1 = { type: 'parts', stem: 'Write each expression as a single power.', parts: [
+      part('a', Mul('·', P(q1a.b, q1a.m), P(q1a.b, q1a.n)), P(q1a.b, q1a.m + q1a.n), 'power', { base: q1a.b,
+        steps: ['Same base, so add the exponents: ' + q1a.m + ' + ' + q1a.n + ' = ' + (q1a.m + q1a.n) + '.'],
+        miss: [miss(P(q1a.b, q1a.m * q1a.n), 'For a product of powers with the same base, add the exponents. Multiplying them is the rule for a power of a power.'),
+               miss(P(q1a.b * q1a.b, q1a.m + q1a.n), 'Keep the base the same. Only the exponents combine.')] }),
+      part('b', P(Par(P(q1b.b, q1b.m)), q1b.n), P(q1b.b, q1b.m * q1b.n), 'power', { base: q1b.b,
+        steps: ['A power of a power: multiply the exponents: ' + q1b.m + ' × ' + q1b.n + ' = ' + (q1b.m * q1b.n) + '.'],
+        miss: [miss(P(q1b.b, q1b.m + q1b.n), 'For a power of a power, multiply the exponents.')] }),
+      part('c', Fr(P(q1c.b, q1c.m), P(q1c.b, q1c.n)), P(q1c.b, q1c.m - q1c.n), 'power', { base: q1c.b,
+        steps: ['Same base, dividing: subtract the exponents: ' + q1c.m + ' − ' + q1c.n + ' = ' + (q1c.m - q1c.n) + '.'],
+        miss: [miss(P(q1c.b, q1c.m + q1c.n), 'When you divide powers with the same base, subtract the exponents.')] }),
+      part('d', P(q1d.b, 0), N(1), 'value', { after: ' (give its value)',
+        steps: ['Any number except 0 raised to the zero power is 1.'],
+        miss: [miss(N(0), 'A zero exponent does not make the value 0. Any number except 0 to the zero power is 1.'), miss(N(q1d.b), 'A zero exponent gives 1, not the base.')] }),
+    ] };
+    tag(Q1.parts[0], 'prod', q1a); tag(Q1.parts[1], 'powpow', q1b); tag(Q1.parts[2], 'quot', q1c); tag(Q1.parts[3], 'zero', q1d);
+    return Q1;
+  }, ok);
+  const Q2 = KIT.draw(UNIT_ID, seed, 'q2', T0 => { const { ri, pick, shuffle, until } = A7(T0);
+  const q2a = until(() => { const [p, q] = pick([[1, 3], [3, 4], [2, 5], [3, 5], [4, 5], [1, 4], [5, 6], [2, 7], [3, 7], [1, 2], [4, 7]]); return { p, q, k: pick([2, 3]) }; }, x => same(x, { p: 2, q: 3, k: 3 }));
+    const q2b = until(() => ({ a: ri(2, 12), c: ri(2, 9) }), x => same(x, { a: 6, c: 5 }) || x.a === x.c);
+    const q2c = until(() => { const B = pick([2, 3, 10]), p = pick([2, 3]), q = pick([2, 3]), e = ri(1, 3); return { B, p, q, e, r: p * q - e }; }, x => same(x, { B: 10, p: 2, q: 2, e: 1, r: 3 }) || x.B ** x.e > 1000 || x.r < 1);
+    const Q2 = { type: 'parts', stem: 'Find the value of each expression.', parts: [
+      part('a', P(Par(Fr(q2a.p, q2a.q)), q2a.k), Fr(pw(q2a.p, q2a.k), pw(q2a.q, q2a.k)), 'value', {
+        steps: ['Raise the top and the bottom to the power ' + q2a.k + ': ' + q2a.p + '<sup>' + q2a.k + '</sup> = ' + pw(q2a.p, q2a.k) + ' and ' + q2a.q + '<sup>' + q2a.k + '</sup> = ' + pw(q2a.q, q2a.k) + '.'],
+        miss: [miss(Fr(q2a.p, pw(q2a.q, q2a.k)), 'The exponent applies to the numerator too.'), miss(Fr(pw(q2a.p, q2a.k), q2a.q), 'The exponent applies to the denominator too.')] }),
+      part('b', Mul('·', P(q2b.a, 0), P(q2b.c, 2)), N(q2b.c * q2b.c), 'value', {
+        steps: [q2b.a + '<sup>0</sup> = 1, and ' + q2b.c + '<sup>2</sup> = ' + (q2b.c * q2b.c) + ', so the value is 1 · ' + (q2b.c * q2b.c) + ' = ' + (q2b.c * q2b.c) + '.'],
+        miss: [miss(N(0), q2b.a + '<sup>0</sup> is 1, not 0.'), miss(N(q2b.a * q2b.c * q2b.c), q2b.a + '<sup>0</sup> is 1, not ' + q2b.a + '.')] }),
+      part('c', Fr(P(Par(P(q2c.B, q2c.p)), q2c.q), P(q2c.B, q2c.r)), N(pw(q2c.B, q2c.e)), 'value', {
+        steps: ['Power of a power: ' + q2c.p + ' × ' + q2c.q + ' = ' + (q2c.p * q2c.q) + '. Divide: ' + (q2c.p * q2c.q) + ' − ' + q2c.r + ' = ' + q2c.e + '. So the value is ' + q2c.B + '<sup>' + q2c.e + '</sup> = ' + pw(q2c.B, q2c.e) + '.'],
+        miss: [miss(P(q2c.B, q2c.p + q2c.q - q2c.r), 'A power of a power: multiply the exponents first, then subtract.')] }),
+    ] };
+    tag(Q2.parts[0], 'fracpow', q2a); tag(Q2.parts[1], 'zeroMix', q2b); tag(Q2.parts[2], 'powquot', q2c);
+    return Q2;
+  }, ok);
+  const Q3 = KIT.draw(UNIT_ID, seed, 'q3', T0 => { const { ri, pick, shuffle, until } = A7(T0);
+  const q3 = until(() => ({ b: pick([2, 3]), m: ri(2, 7), n: ri(2, 7) }), x => same(x, { b: 2, m: 4, n: 3 }) || x.m === x.n ||
+      new Set([2 * (x.m + x.n), x.m * x.n, 2 * x.m * x.n, x.m + x.n]).size < 4);
+    const o3 = shuffle([[P(q3.b * q3.b, q3.m + q3.n), 'The bases were multiplied too. Keep the base; add the exponents.'], [P(q3.b, q3.m * q3.n), 'The exponents were multiplied. For a product of powers, add them.'],
+      [P(q3.b * q3.b, q3.m * q3.n), 'Both mistakes: the bases were multiplied and so were the exponents.'], [P(q3.b, q3.m + q3.n), null]]);
+    const Q3 = mc('Which expression is equivalent to ' + M(Mul('·', P(q3.b, q3.m), P(q3.b, q3.n))) + '?', o3.map(o => o[0]), o3.findIndex(o => o[1] === null), o3.map(o => o[1]));
+    Q3.q = Mul('·', P(q3.b, q3.m), P(q3.b, q3.n)); Q3.steps = ['Same base, so add the exponents: ' + q3.m + ' + ' + q3.n + ' = ' + (q3.m + q3.n) + '.'];
+    tag(Q3, 'prod', q3);
+    return Q3;
+  }, ok);
+  const Q4 = KIT.draw(UNIT_ID, seed, 'q4', T0 => { const { ri, pick, shuffle, until } = A7(T0);
+  const q4 = until(() => { const b = pick([2, 3, 4, 5, 10]), k = ri(1, 4), c = ri(2, 4); return { b, k, c, V: b ** c }; }, x => (x.b === 5 && x.c === 3) || x.V > 10000);     // the test's 125 = 5^3 is never used
+    const Q4 = { type: 'solo', stem: 'Find the value of ' + M(V('n')) + ' that makes the statement true:  ' + M(Eq(Fr(P(q4.b, V('n')), P(q4.b, q4.k)), N(q4.V, { commas: true }))),
+      part: part('', Eq(Fr(P(q4.b, V('n')), P(q4.b, q4.k)), N(q4.V)), N(q4.k + q4.c), 'n', {
+        steps: [commas(String(q4.V)) + ' = ' + q4.b + '<sup>' + q4.c + '</sup>.', 'Dividing subtracts the exponents, so <i>n</i> − ' + q4.k + ' = ' + q4.c + '.', '<i>n</i> = ' + (q4.k + q4.c)],
+        miss: [miss(N(q4.c), 'That is the exponent of ' + commas(String(q4.V)) + '. The division already took away ' + q4.k + ', so <i>n</i> is ' + q4.k + ' more.')] }) };
+    tag(Q4.part, 'solveN', q4);
+    return Q4;
+  }, ok);
+  const Q5 = KIT.draw(UNIT_ID, seed, 'q5', T0 => { const { ri, pick, shuffle, until } = A7(T0);
+  const q5a = until(() => ({ b: ri(2, 9), n: ri(2, 6) }), x => same(x, { b: 6, n: 3 }));
+    const q5b = until(() => ({ c: ri(2, 5), m: ri(2, 7) }), x => same(x, { c: 2, m: 5 }));
+    const q5c = until(() => ({ k: ri(2, 9), m: ri(2, 6) }), x => same(x, { k: 3, m: 4 }));
+    const Q5 = { type: 'parts', stem: 'Rewrite each expression with positive exponents. Do not evaluate.', parts: [
+      part('a', P(q5a.b, -q5a.n), Fr(1, P(q5a.b, q5a.n)), 'posexp', { base: q5a.b, steps: ['A negative exponent means the reciprocal: 1 over ' + q5a.b + '<sup>' + q5a.n + '</sup>.'],
+        miss: [miss(Neg(P(q5a.b, q5a.n)), 'A negative exponent means the reciprocal, not a negative number.')] }),
+      part('b', Fr(1, P(Neg(q5b.c), -q5b.m)), P(Par(Neg(q5b.c)), q5b.m), 'posexp', { base: -q5b.c, steps: ['Dividing by a power with a negative exponent moves it to the top with a positive exponent. The base keeps its sign and its parentheses.'],
+        miss: [miss(Fr(1, P(Neg(q5b.c), q5b.m)), 'The power moves to the numerator. It doesn’t stay in the denominator.'),
+               miss(Neg(P(q5b.c, q5b.m)), 'Keep the parentheses: the base is −' + q5b.c + ', so write (−' + q5b.c + ')<sup>' + q5b.m + '</sup>.')] }),
+      part('c', Mul('·', N(q5c.k), P(10, -q5c.m)), Fr(q5c.k, P(10, q5c.m)), 'posexp', { base: 10, steps: ['Only the 10 has the negative exponent. It moves down; the ' + q5c.k + ' stays on top.'],
+        miss: [miss(Fr(1, Mul('·', N(q5c.k), P(10, q5c.m))), 'Only the 10 has the negative exponent. The ' + q5c.k + ' stays in the numerator.')] }),
+    ] };
+    tag(Q5.parts[0], 'negToFrac', q5a); tag(Q5.parts[1], 'negDen', q5b); tag(Q5.parts[2], 'coefNeg', q5c);
+    return Q5;
+  }, ok);
+  const Q6 = KIT.draw(UNIT_ID, seed, 'q6', T0 => { const { ri, pick, shuffle, until } = A7(T0);
+  const q6a = until(() => ({ b: pick([3, 5, 6, 7, 8, 9, 10]), n: pick([2, 3]) }), x => same(x, { b: 4, n: 2 }) || x.b ** x.n > 1000);
+    const q6b = until(() => { const [c, e] = pick([[2, 3], [2, 5], [4, 3], [5, 3]]); return { c, e }; }, x => same(x, { c: 3, e: 3 }));
+    const q6c = until(() => ({ d: pick([3, 4, 5, 6, 10]), n: pick([2, 3]) }), x => same(x, { d: 2, n: 3 }));
+    const q6d = until(() => { const B = pick([2, 3, 5]), m = ri(2, 6); return { B, m, n: m + ri(1, 3) }; }, x => same(x, { B: 2, m: 5, n: 7 }) || x.B ** (x.n - x.m) > 125);
+    const Q6 = { type: 'parts', stem: 'Find the value of each expression.', parts: [
+      part('a', P(q6a.b, -q6a.n), Fr(1, pw(q6a.b, q6a.n)), 'value', { steps: ['Reciprocal of ' + q6a.b + '<sup>' + q6a.n + '</sup>: 1 over ' + pw(q6a.b, q6a.n) + '.'],
+        miss: [miss(Neg(N(pw(q6a.b, q6a.n))), 'A negative exponent means the reciprocal, not a negative number.'), miss(Neg(N(q6a.b * q6a.n)), 'The exponent is not a factor. Raise ' + q6a.b + ' to the power ' + q6a.n + ', then take the reciprocal.')] }),
+      part('b', P(Par(Neg(q6b.c)), -q6b.e), Neg(Fr(1, pw(q6b.c, q6b.e))), 'value', { steps: ['Reciprocal: 1 over (−' + q6b.c + ')<sup>' + q6b.e + '</sup>. An odd power of a negative number is negative: (−' + q6b.c + ')<sup>' + q6b.e + '</sup> = −' + pw(q6b.c, q6b.e) + '.'],
+        miss: [miss(Fr(1, pw(q6b.c, q6b.e)), 'Check the sign: an odd power of a negative number is negative.'), miss(Neg(N(pw(q6b.c, q6b.e))), 'Take the reciprocal: the negative exponent means 1 over the power.')] }),
+      part('c', P(Par(Fr(1, q6c.d)), -q6c.n), N(pw(q6c.d, q6c.n)), 'value', { steps: ['The negative exponent flips the fraction: 1/' + q6c.d + ' becomes ' + q6c.d + '. Then ' + q6c.d + '<sup>' + q6c.n + '</sup> = ' + pw(q6c.d, q6c.n) + '.'],
+        miss: [miss(Fr(1, pw(q6c.d, q6c.n)), 'The negative exponent flips the fraction, so the answer is a whole number.')] }),
+      part('d', Mul('·', P(q6d.B, q6d.m), P(q6d.B, -q6d.n)), Fr(1, pw(q6d.B, q6d.n - q6d.m)), 'value', { steps: ['Same base: add the exponents: ' + q6d.m + ' + (−' + q6d.n + ') = −' + (q6d.n - q6d.m) + '.', q6d.B + '<sup>−' + (q6d.n - q6d.m) + '</sup> = 1 over ' + pw(q6d.B, q6d.n - q6d.m) + '.'],
+        miss: [miss(N(pw(q6d.B, q6d.n - q6d.m)), 'The exponent comes out negative, so the value is a reciprocal.')] }),
+    ] };
+    tag(Q6.parts[0], 'negVal', q6a); tag(Q6.parts[1], 'negNegBase', q6b); tag(Q6.parts[2], 'fracNeg', q6c); tag(Q6.parts[3], 'mixedProd', q6d);
+    return Q6;
+  }, ok);
+  const Q7 = KIT.draw(UNIT_ID, seed, 'q7', T0 => { const { ri, pick, shuffle, until } = A7(T0);
+  const q7 = until(() => ({ b: pick([3, 4, 6, 7, 8, 9]) }), x => x.b === 5);
+    const o7 = shuffle([[Fr(1, 2 * q7.b), 'The reciprocal is right, but ' + q7.b + '<sup>2</sup> is ' + q7.b * q7.b + ', not ' + 2 * q7.b + '.'], [Neg(N(q7.b * q7.b)), 'A negative exponent means the reciprocal, not a negative number.'],
+      [Fr(1, q7.b * q7.b), null], [Neg(N(2 * q7.b)), 'The exponent isn’t a factor, and a negative exponent doesn’t make the value negative.']]);
+    const Q7 = mc('Which is the value of ' + M(P(q7.b, -2)) + '?', o7.map(o => o[0]), o7.findIndex(o => o[1] === null), o7.map(o => o[1]));
+    Q7.q = P(q7.b, -2); Q7.steps = [q7.b + '<sup>−2</sup> = 1 over ' + q7.b + '<sup>2</sup> = 1 over ' + q7.b * q7.b + '.'];
+    tag(Q7, 'negVal', { b: q7.b, n: 2 });
+    return Q7;
+  }, ok);
+  const Q8 = KIT.draw(UNIT_ID, seed, 'q8', T0 => { const { ri, pick, shuffle, until } = A7(T0);
+  const T8 = pick([
+      { N: 16, o: [P(2, -4), P(4, -2), P(Par(Fr(1, 2)), 4), Neg(P(4, 2)), P(2, -3)] },
+      { N: 81, o: [P(3, -4), P(9, -2), P(Par(Fr(1, 3)), 4), Neg(P(9, 2)), P(3, -3)] },
+      { N: 100, o: [P(10, -2), P(Par(Fr(1, 10)), 2), P(100, -1), Neg(P(10, 2)), P(10, -3)] },
+      { N: 27, o: [P(3, -3), P(Par(Fr(1, 3)), 3), P(27, -1), Neg(P(3, 3)), P(9, -3)] },
+      { N: 125, o: [P(5, -3), P(Par(Fr(1, 5)), 3), P(125, -1), Neg(P(5, 3)), P(5, -2)] }]);
+    const o8 = shuffle(T8.o);
+    const want8 = Q(1, T8.N);
+    const Q8 = { type: 'multi', stem: 'Select ALL of the expressions whose value is ' + M(Fr(1, T8.N)) + '.', opts: o8, correct: o8.map((o, i) => qeq(evalA(o, {}), want8) ? i : -1).filter(i => i >= 0), target: Fr(1, T8.N),
+      steps: o8.map(o => { const v = evalA(o, {}); return { e: o, v: v.d === 1n ? (v.n < 0n ? Neg(N(Number(-v.n))) : N(Number(v.n))) : (v.n < 0n ? Neg(Fr(Number(-v.n), Number(v.d))) : Fr(Number(v.n), Number(v.d))), ok: qeq(v, want8) }; }) };
+    tag(Q8, 'select', { N: T8.N });
+    return Q8;
+  }, ok);
+  const Q9 = KIT.draw(UNIT_ID, seed, 'q9', T0 => { const { ri, pick, shuffle, until } = A7(T0);
+  const v9a = until(() => ({ v: pick(LET), m: ri(2, 9), n: ri(2, 9) }), x => same(x, { v: 'x', m: 4, n: 6 }) || x.m === x.n);
+    const v9b = until(() => ({ v: pick(LET), m: ri(2, 6), n: ri(2, 6) }), x => same(x, { v: 'y', m: 3, n: 5 }) || x.m + x.n === x.m * x.n);
+    const v9c = until(() => ({ c: pick([2, 3, 4, 5]), v: pick(LET), p: ri(2, 5), q: pick([2, 3]) }), x => same(x, { c: 3, v: 'a', p: 2, q: 3 }) || x.c * x.q === x.c ** x.q);
+    const v9d = until(() => { const j = ri(2, 6), t = ri(2, 6), q = ri(2, 4); return { j, t, k: j * t, v: pick(LET), q, p: q + ri(2, 5) }; }, x => same(x, { j: 5, t: 3, k: 15, v: 'm', q: 2, p: 7 }));
+    const Q9 = { type: 'parts', stem: 'Write each expression as a single monomial.', parts: [
+      part('a', Mul('·', P(V(v9a.v), v9a.m), P(V(v9a.v), v9a.n)), P(V(v9a.v), v9a.m + v9a.n), 'mono', { steps: ['Same base, so add the exponents: ' + v9a.m + ' + ' + v9a.n + ' = ' + (v9a.m + v9a.n) + '.'],
+        miss: [miss(P(V(v9a.v), v9a.m * v9a.n), 'For a product of powers, add the exponents.')] }),
+      part('b', P(Par(P(V(v9b.v), v9b.m)), v9b.n), P(V(v9b.v), v9b.m * v9b.n), 'mono', { steps: ['A power of a power: multiply the exponents: ' + v9b.m + ' × ' + v9b.n + ' = ' + (v9b.m * v9b.n) + '.'],
+        miss: [miss(P(V(v9b.v), v9b.m + v9b.n), 'For a power of a power, multiply the exponents.')] }),
+      part('c', P(Par(Mul('', N(v9c.c), P(V(v9c.v), v9c.p))), v9c.q), Mul('', N(pw(v9c.c, v9c.q)), P(V(v9c.v), v9c.p * v9c.q)), 'mono', {
+        steps: ['Everything inside the parentheses gets the exponent: ' + v9c.c + '<sup>' + v9c.q + '</sup> = ' + pw(v9c.c, v9c.q) + ', and ' + v9c.p + ' × ' + v9c.q + ' = ' + (v9c.p * v9c.q) + '.'],
+        miss: [miss(Mul('', N(v9c.c), P(V(v9c.v), v9c.p * v9c.q)), 'Raise the ' + v9c.c + ' to the power too: ' + v9c.c + '<sup>' + v9c.q + '</sup> = ' + pw(v9c.c, v9c.q) + '.'),
+               miss(Mul('', N(v9c.c * v9c.q), P(V(v9c.v), v9c.p * v9c.q)), v9c.c + '<sup>' + v9c.q + '</sup> means ' + v9c.c + ' multiplied by itself ' + v9c.q + ' times, not ' + v9c.c + ' × ' + v9c.q + '.')] }),
+      part('d', Fr(Mul('', N(v9d.k), P(V(v9d.v), v9d.p)), Mul('', N(v9d.j), P(V(v9d.v), v9d.q))), Mul('', N(v9d.t), P(V(v9d.v), v9d.p - v9d.q)), 'mono', {
+        steps: ['Divide the numbers: ' + v9d.k + ' ÷ ' + v9d.j + ' = ' + v9d.t + '. Subtract the exponents: ' + v9d.p + ' − ' + v9d.q + ' = ' + (v9d.p - v9d.q) + '.'],
+        miss: [miss(Mul('', N(v9d.t), P(V(v9d.v), v9d.p + v9d.q)), 'When dividing, subtract the exponents.')] }),
+    ] };
+    tag(Q9.parts[0], 'monoProd', v9a); tag(Q9.parts[1], 'monoPow', v9b); tag(Q9.parts[2], 'monoCoefPow', v9c); tag(Q9.parts[3], 'monoQuot', v9d);
+    return Q9;
+  }, ok);
+  const Q10 = KIT.draw(UNIT_ID, seed, 'q10', T0 => { const { ri, pick, shuffle, until } = A7(T0);
+  const v10a = until(() => ({ v: pick(LET), n: ri(2, 7) }), x => same(x, { v: 'b', n: 4 }));
+    const v10b = until(() => ({ c: ri(2, 9), v: pick(LET), n: ri(2, 6) }), x => same(x, { c: 5, v: 'x', n: 2 }));
+    const v10c = until(() => { const v = pick(LET); let w = pick(LET); return { k: pick([2, 3]), v, p: ri(2, 4), w, q: pick([2, 3]) }; }, x => x.v === x.w || same(x, { k: 2, v: 'm', p: 3, w: 'n', q: 2 }));
+    const Q10 = { type: 'parts', stem: 'Rewrite each expression using only positive exponents.', parts: [
+      part('a', P(V(v10a.v), -v10a.n), Fr(1, P(V(v10a.v), v10a.n)), 'mono', { posOnly: true, steps: ['A negative exponent means the reciprocal: 1 over ' + v10a.v + '<sup>' + v10a.n + '</sup>.'],
+        miss: [miss(Neg(P(V(v10a.v), v10a.n)), 'A negative exponent means the reciprocal, not a negative.')] }),
+      part('b', Mul('', N(v10b.c), P(V(v10b.v), -v10b.n)), Fr(v10b.c, P(V(v10b.v), v10b.n)), 'mono', { posOnly: true, steps: ['Only the <i>' + v10b.v + '</i> has the negative exponent, so only it moves down. The ' + v10b.c + ' stays on top.'],
+        miss: [miss(Fr(1, Mul('', N(v10b.c), P(V(v10b.v), v10b.n))), 'Only the <i>' + v10b.v + '</i> has the negative exponent, so the ' + v10b.c + ' stays in the numerator.')] }),
+      part('c', P(Par(Mul('', N(v10c.k), P(V(v10c.v), -v10c.p), V(v10c.w))), v10c.q), Fr(Mul('', N(pw(v10c.k, v10c.q)), P(V(v10c.w), v10c.q)), P(V(v10c.v), v10c.p * v10c.q)), 'mono', { posOnly: true,
+        steps: ['Apply the exponent ' + v10c.q + ' to every factor: ' + v10c.k + '<sup>' + v10c.q + '</sup> = ' + pw(v10c.k, v10c.q) + ', <i>' + v10c.v + '</i><sup>−' + (v10c.p * v10c.q) + '</sup>, <i>' + v10c.w + '</i><sup>' + v10c.q + '</sup>.', 'Then move <i>' + v10c.v + '</i><sup>−' + (v10c.p * v10c.q) + '</sup> to the denominator.'],
+        miss: [miss(Fr(Mul('', N(v10c.k), P(V(v10c.w), v10c.q)), P(V(v10c.v), v10c.p * v10c.q)), 'The ' + v10c.k + ' gets the exponent too: ' + v10c.k + '<sup>' + v10c.q + '</sup> = ' + pw(v10c.k, v10c.q) + '.')] }),
+    ] };
+    tag(Q10.parts[0], 'varNeg', v10a); tag(Q10.parts[1], 'coefVarNeg', v10b); tag(Q10.parts[2], 'monoNegPow', v10c);
+    return Q10;
+  }, ok);
+  const Q11 = KIT.draw(UNIT_ID, seed, 'q11', T0 => { const { ri, pick, shuffle, until } = A7(T0);
+  const v11 = until(() => ({ c: pick([2, 3, 5, 6]), v: pick(LET), p: ri(2, 5), q: pick([2, 3]) }), x => same(x, { c: 4, v: 'x', p: 3, q: 2 }) || x.c ** x.q === x.c * x.q || x.p + x.q === x.p * x.q);
+    const o11 = shuffle([[Mul('', N(pw(v11.c, v11.q)), P(V(v11.v), v11.p + v11.q)), 'The exponents were added. For a power of a power, multiply them.'], [Mul('', N(v11.c * v11.q), P(V(v11.v), v11.p * v11.q)), v11.c + '<sup>' + v11.q + '</sup> means ' + Array(v11.q).fill(v11.c).join(' · ') + ', not ' + v11.c + ' × ' + v11.q + '.'],
+      [Mul('', N(v11.c), P(V(v11.v), v11.p * v11.q)), 'The number inside the parentheses gets the exponent too.'], [Mul('', N(pw(v11.c, v11.q)), P(V(v11.v), v11.p * v11.q)), null]]);
+    const Q11 = mc('Which expression is equivalent to ' + M(P(Par(Mul('', N(v11.c), P(V(v11.v), v11.p))), v11.q)) + '?', o11.map(o => o[0]), o11.findIndex(o => o[1] === null), o11.map(o => o[1]));
+    Q11.q = P(Par(Mul('', N(v11.c), P(V(v11.v), v11.p))), v11.q); Q11.steps = ['Everything inside the parentheses gets the exponent: ' + v11.c + '<sup>' + v11.q + '</sup> = ' + pw(v11.c, v11.q) + ', and ' + v11.p + ' × ' + v11.q + ' = ' + (v11.p * v11.q) + '.'];
+    tag(Q11, 'monoCoefPow', v11);
+    return Q11;
+  }, ok);
+  const Q12 = KIT.draw(UNIT_ID, seed, 'q12', T0 => { const { ri, pick, shuffle, until } = A7(T0);
+    const d2 = () => ri(1, 9) + '.' + ri(1, 9);
+  const s12 = until(() => ({ a: [d2(), ri(5, 9)], b: [d2(), -ri(3, 6)], c: [ri(1, 9) + '.0' + ri(1, 9), ri(8, 11)], d: [d2(), -ri(7, 10)] }),
+      x => same(x.a, ['8.3', 6]) || same(x.b, ['4.7', -4]) || same(x.c, ['6.05', 10]) || same(x.d, ['9.2', -9]));
+    const Q12 = { type: 'parts', stem: 'Write each number in scientific notation.', parts: [sciPart('a', ...s12.a), sciPart('b', ...s12.b), sciPart('c', ...s12.c), sciPart('d', ...s12.d)] };
+    const stdPart = (label, c, k) => {
+      const value = qmul(qdec(c), qpow(Q(10), BigInt(k)));
+      return part(label, Sci(c, k), N(decStr(value), { commas: true }), 'std', {
+        steps: [k > 0 ? 'Move the decimal point ' + k + ' places to the right.' : 'Move the decimal point ' + (-k) + ' places to the left.'],
+        miss: [miss(N(decStr(qmul(qdec(c), qpow(Q(10), BigInt(k > 0 ? k - 1 : k + 1))))), 'Count the places carefully: the exponent says how many places the decimal point moves.'),
+               miss(N(decStr(qmul(qdec(c), qpow(Q(10), BigInt(k > 0 ? k + 1 : k - 1))))), 'One place too many: the exponent says how many places the decimal point moves.'),
+               miss(N(decStr(qmul(qdec(c), qpow(Q(10), BigInt(-k))))), k > 0 ? 'A positive exponent makes the number large.' : 'A negative exponent makes the number small.')] });
+    };
+    [s12.a, s12.b, s12.c, s12.d].forEach((x, i) => tag(Q12.parts[i], 'toSci', { c: x[0], k: x[1] }));
+    return Q12;
+  }, ok);
+  const Q13 = KIT.draw(UNIT_ID, seed, 'q13', T0 => { const { ri, pick, shuffle, until } = A7(T0);
+    const d2 = () => ri(1, 9) + '.' + ri(1, 9);
   const s13 = until(() => ({ a: [d2(), ri(4, 7)], b: [d2(), -ri(4, 7)] }), x => same(x.a, ['2.9', 5]) || same(x.b, ['7.1', -6]));
-  const Q13 = { type: 'parts', stem: 'Write each number in standard form.', parts: [stdPart('a', ...s13.a), stdPart('b', ...s13.b)] };
+    const Q13 = { type: 'parts', stem: 'Write each number in standard form.', parts: [stdPart('a', ...s13.a), stdPart('b', ...s13.b)] };
+    [s13.a, s13.b].forEach((x, i) => tag(Q13.parts[i], 'toStd', { c: x[0], k: x[1] }));
+    return Q13;
+  }, ok);
+  const Q14 = KIT.draw(UNIT_ID, seed, 'q14', T0 => { const { ri, pick, shuffle, until } = A7(T0);
   const s14 = until(() => ({ d1: ri(1, 9), d2: ri(1, 9), k: ri(3, 5) }), x => same(x, { d1: 3, d2: 6, k: 3 }));
-  const c14 = s14.d1 + '.' + s14.d2, n14 = decStr(qmul(qdec(c14), qpow(Q(10), BigInt(-s14.k))));
-  const o14 = shuffle([[Sci(c14, s14.k), 'The sign was dropped: that number is ' + commas(decStr(qmul(qdec(c14), qpow(Q(10), BigInt(s14.k))))) + '.'], [Sci(c14, -s14.k), null],
-    [Sci(c14, -(s14.k - 1)), 'That counts the zeros. The exponent counts the places the decimal point moves.'], [Sci(String(s14.d1 * 10 + s14.d2), -(s14.k + 1)), 'Equal in value, but ' + (s14.d1 * 10 + s14.d2) + ' is not less than 10, so it is not scientific notation.']]);
-  const Q14 = mc('Which is ' + M(N(n14)) + ' written in scientific notation?', o14.map(o => o[0]), o14.findIndex(o => o[1] === null), o14.map(o => o[1]));
-  Q14.q = N(n14); Q14.sci = true; Q14.steps = ['Move the decimal point ' + s14.k + ' places to the right to get ' + c14 + '. A number less than 1 has a negative exponent.'];
+    const c14 = s14.d1 + '.' + s14.d2, n14 = decStr(qmul(qdec(c14), qpow(Q(10), BigInt(-s14.k))));
+    const o14 = shuffle([[Sci(c14, s14.k), 'The sign was dropped: that number is ' + commas(decStr(qmul(qdec(c14), qpow(Q(10), BigInt(s14.k))))) + '.'], [Sci(c14, -s14.k), null],
+      [Sci(c14, -(s14.k - 1)), 'That counts the zeros. The exponent counts the places the decimal point moves.'], [Sci(String(s14.d1 * 10 + s14.d2), -(s14.k + 1)), 'Equal in value, but ' + (s14.d1 * 10 + s14.d2) + ' is not less than 10, so it is not scientific notation.']]);
+    const Q14 = mc('Which is ' + M(N(n14)) + ' written in scientific notation?', o14.map(o => o[0]), o14.findIndex(o => o[1] === null), o14.map(o => o[1]));
+    Q14.q = N(n14); Q14.sci = true; Q14.steps = ['Move the decimal point ' + s14.k + ' places to the right to get ' + c14 + '. A number less than 1 has a negative exponent.'];
+    tag(Q14, 'toSci', { c: c14, k: -s14.k });
+    return Q14;
+  }, ok);
+  const Q15 = KIT.draw(UNIT_ID, seed, 'q15', T0 => { const { ri, pick, shuffle, until } = A7(T0);
   const s15 = until(() => { const B = ri(2, 4), t = ri(2, 4), q = ri(3, 7); const B2 = ri(11, 49) / 10, t2 = ri(2, 5), p2 = ri(2, 5);
-    return { A: B * t, B, t, p: q + ri(2, 4), q, A2: Math.round(B2 * t2 * 10) / 10, B2, t2, p2, q2: p2 + ri(2, 5) }; },
-    x => x.A > 9 || x.A2 >= 10 || x.A2 < 1 || same([x.A, x.B, x.p, x.q], [9, 3, 9, 6]) || same([x.A2, x.B2, x.p2, x.q2], [4.8, 1.6, 3, 7]) || String(x.B2).length !== 3);
-  const A2s = String(s15.A2), B2s = String(s15.B2);
-  const Q15 = { type: 'parts', stem: 'Answer each question.', parts: [
-    part('a', Fr(Sci(String(s15.A), s15.p), Sci(String(s15.B), s15.q)), Sci(String(s15.t), s15.p - s15.q), 'times', { text: ['How many times larger is ', Sci(String(s15.A), s15.p), ' than ', Sci(String(s15.B), s15.q), ' ?'],
-      shownAns: Sci(String(s15.t), s15.p - s15.q), tail: ' = ' + commas(decStr(Q(s15.t * 10 ** (s15.p - s15.q)))) + ' times',
-      steps: ['Divide the numbers: ' + s15.A + ' ÷ ' + s15.B + ' = ' + s15.t + '. Divide the powers of 10: subtract the exponents, ' + s15.p + ' − ' + s15.q + ' = ' + (s15.p - s15.q) + '.'],
-      miss: [miss(N(s15.t), 'Divide the powers of 10 as well: subtract the exponents.'), miss(Sci(String(s15.t), s15.p + s15.q), 'To divide powers of 10, subtract the exponents.')] }),
-    part('b', Fr(Sci(A2s, -s15.p2), Sci(B2s, -s15.q2)), Sci(String(s15.t2), s15.q2 - s15.p2), 'times', { text: ['How many times larger is ', Sci(A2s, -s15.p2), ' than ', Sci(B2s, -s15.q2), ' ?'],
-      shownAns: Sci(String(s15.t2), s15.q2 - s15.p2), tail: ' = ' + commas(decStr(Q(s15.t2 * 10 ** (s15.q2 - s15.p2)))) + ' times',
-      steps: ['Divide the numbers: ' + A2s + ' ÷ ' + B2s + ' = ' + s15.t2 + '. Subtract the exponents: −' + s15.p2 + ' − (−' + s15.q2 + ') = ' + (s15.q2 - s15.p2) + '.'],
-      miss: [miss(N(s15.t2), 'Divide the powers of 10 as well: subtract the exponents.'), miss(Sci(String(s15.t2), -(s15.p2 + s15.q2)), 'Subtract the exponents: −' + s15.p2 + ' − (−' + s15.q2 + ') = ' + (s15.q2 - s15.p2) + '.')] }),
-  ] };
+      return { A: B * t, B, t, p: q + ri(2, 4), q, A2: Math.round(B2 * t2 * 10) / 10, B2, t2, p2, q2: p2 + ri(2, 5) }; },
+      x => x.A > 9 || x.A2 >= 10 || x.A2 < 1 || same([x.A, x.B, x.p, x.q], [9, 3, 9, 6]) || same([x.A2, x.B2, x.p2, x.q2], [4.8, 1.6, 3, 7]) || String(x.B2).length !== 3);
+    const A2s = String(s15.A2), B2s = String(s15.B2);
+    const Q15 = { type: 'parts', stem: 'Answer each question.', parts: [
+      part('a', Fr(Sci(String(s15.A), s15.p), Sci(String(s15.B), s15.q)), Sci(String(s15.t), s15.p - s15.q), 'times', { text: ['How many times larger is ', Sci(String(s15.A), s15.p), ' than ', Sci(String(s15.B), s15.q), '?'],
+        shownAns: Sci(String(s15.t), s15.p - s15.q), tail: ' = ' + commas(decStr(Q(s15.t * 10 ** (s15.p - s15.q)))) + ' times',
+        steps: ['Divide the numbers: ' + s15.A + ' ÷ ' + s15.B + ' = ' + s15.t + '. Divide the powers of 10: subtract the exponents, ' + s15.p + ' − ' + s15.q + ' = ' + (s15.p - s15.q) + '.'],
+        miss: [miss(N(s15.t), 'Divide the powers of 10 as well: subtract the exponents.'), miss(Sci(String(s15.t), s15.p + s15.q), 'To divide powers of 10, subtract the exponents.')] }),
+      part('b', Fr(Sci(A2s, -s15.p2), Sci(B2s, -s15.q2)), Sci(String(s15.t2), s15.q2 - s15.p2), 'times', { text: ['How many times larger is ', Sci(A2s, -s15.p2), ' than ', Sci(B2s, -s15.q2), '?'],
+        shownAns: Sci(String(s15.t2), s15.q2 - s15.p2), tail: ' = ' + commas(decStr(Q(s15.t2 * 10 ** (s15.q2 - s15.p2)))) + ' times',
+        steps: ['Divide the numbers: ' + A2s + ' ÷ ' + B2s + ' = ' + s15.t2 + '. Subtract the exponents: −' + s15.p2 + ' − (−' + s15.q2 + ') = ' + (s15.q2 - s15.p2) + '.'],
+        miss: [miss(N(s15.t2), 'Divide the powers of 10 as well: subtract the exponents.'), miss(Sci(String(s15.t2), -(s15.p2 + s15.q2)), 'Subtract the exponents: −' + s15.p2 + ' − (−' + s15.q2 + ') = ' + (s15.q2 - s15.p2) + '.')] }),
+    ] };
+    tag(Q15.parts[0], 'ratio', { A: String(s15.A), B: String(s15.B), t: String(s15.t), p: s15.p, q: s15.q });
+    tag(Q15.parts[1], 'ratio', { A: A2s, B: B2s, t: String(s15.t2), p: -s15.p2, q: -s15.q2 });
+    return Q15;
+  }, ok);
+  const Q16 = KIT.draw(UNIT_ID, seed, 'q16', T0 => { const { ri, pick, shuffle, until } = A7(T0);
   const s16 = until(() => ({ c: ri(1, 9) + '.' + (r16 => r16)(pick([String(ri(1, 9)), String(ri(1, 9)) + String(ri(1, 9))])), k: ri(5, 9) }), x => same(x, { c: '5.6', k: 8 }) || /0$/.test(x.c));
-  const v16 = qmul(qdec(s16.c), qpow(Q(10), BigInt(s16.k)));
-  const Q16 = { type: 'solo', stem: 'A computer displays a number as  ' + esc(s16.c + 'E' + s16.k) + '.  Write the number in standard form.',
-    part: part('', Sci(s16.c, s16.k), N(decStr(v16), { commas: true }), 'std', { steps: ['E' + s16.k + ' means × 10<sup>' + s16.k + '</sup>: move the decimal point ' + s16.k + ' places to the right.'],
-      miss: [miss(N(decStr(qmul(qdec(s16.c), qpow(Q(10), BigInt(s16.k - 1))))), 'Count again: E' + s16.k + ' moves the decimal point ' + s16.k + ' places.'), miss(N(decStr(qmul(qdec(s16.c), qpow(Q(10), BigInt(s16.k + 1))))), 'Count again: E' + s16.k + ' moves the decimal point ' + s16.k + ' places.')] }) };
-  S.push({ title: 'Scientific Notation', items: [Q12, Q13, Q14, Q15, Q16] });
-  /* what kind of question each one is, and its numbers: the coach (coach.js) explains mistakes and works solutions from these */
-  const tag = (x, fam, prm) => Object.assign(x, { fam, prm });
-  tag(Q1.parts[0], 'prod', q1a); tag(Q1.parts[1], 'powpow', q1b); tag(Q1.parts[2], 'quot', q1c); tag(Q1.parts[3], 'zero', q1d);
-  tag(Q2.parts[0], 'fracpow', q2a); tag(Q2.parts[1], 'zeroMix', q2b); tag(Q2.parts[2], 'powquot', q2c); tag(Q3, 'prod', q3); tag(Q4.part, 'solveN', q4);
-  tag(Q5.parts[0], 'negToFrac', q5a); tag(Q5.parts[1], 'negDen', q5b); tag(Q5.parts[2], 'coefNeg', q5c);
-  tag(Q6.parts[0], 'negVal', q6a); tag(Q6.parts[1], 'negNegBase', q6b); tag(Q6.parts[2], 'fracNeg', q6c); tag(Q6.parts[3], 'mixedProd', q6d);
-  tag(Q7, 'negVal', { b: q7.b, n: 2 }); tag(Q8, 'select', { N: T8.N });
-  tag(Q9.parts[0], 'monoProd', v9a); tag(Q9.parts[1], 'monoPow', v9b); tag(Q9.parts[2], 'monoCoefPow', v9c); tag(Q9.parts[3], 'monoQuot', v9d);
-  tag(Q10.parts[0], 'varNeg', v10a); tag(Q10.parts[1], 'coefVarNeg', v10b); tag(Q10.parts[2], 'monoNegPow', v10c); tag(Q11, 'monoCoefPow', v11);
-  [s12.a, s12.b, s12.c, s12.d].forEach((x, i) => tag(Q12.parts[i], 'toSci', { c: x[0], k: x[1] }));
-  [s13.a, s13.b].forEach((x, i) => tag(Q13.parts[i], 'toStd', { c: x[0], k: x[1] }));
-  tag(Q14, 'toSci', { c: c14, k: -s14.k });
-  tag(Q15.parts[0], 'ratio', { A: String(s15.A), B: String(s15.B), t: String(s15.t), p: s15.p, q: s15.q });
-  tag(Q15.parts[1], 'ratio', { A: A2s, B: B2s, t: String(s15.t2), p: -s15.p2, q: -s15.q2 });
-  tag(Q16.part, 'eNote', { c: s16.c, k: s16.k });
-  return { seed, sections: S };
+    const v16 = qmul(qdec(s16.c), qpow(Q(10), BigInt(s16.k)));
+    const Q16 = { type: 'solo', stem: 'A computer displays a number as  ' + esc(s16.c + 'E' + s16.k) + '.  Write the number in standard form.',
+      part: part('', Sci(s16.c, s16.k), N(decStr(v16), { commas: true }), 'std', { steps: ['E' + s16.k + ' means × 10<sup>' + s16.k + '</sup>: move the decimal point ' + s16.k + ' places to the right.'],
+        miss: [miss(N(decStr(qmul(qdec(s16.c), qpow(Q(10), BigInt(s16.k - 1))))), 'Count again: E' + s16.k + ' moves the decimal point ' + s16.k + ' places.'), miss(N(decStr(qmul(qdec(s16.c), qpow(Q(10), BigInt(s16.k + 1))))), 'Count again: E' + s16.k + ' moves the decimal point ' + s16.k + ' places.')] }) };
+    tag(Q16.part, 'eNote', { c: s16.c, k: s16.k });
+    return Q16;
+  }, ok);
+  /* the engine's own short mistake list (part.miss) may hold a "mistake" equal to the key — (−c)^m written −c^m when m is
+     odd, say. Those are dropped here, as before the kit: a right value never gets a mistake's words. */
+  [Q1, Q2, Q3, Q4, Q5, Q6, Q7, Q8, Q9, Q10, Q11, Q12, Q13, Q14, Q15, Q16].forEach(it => (it.type === 'parts' ? it.parts : it.type === 'solo' ? [it.part] : []).forEach(p => {
+    const L = vars(p.ans); p.miss = (p.miss || []).filter(m => { try { return !sameValue(m.ans, p.ans, L); } catch (e) { return false; } }); }));
+  return { seed, sections: [
+    { title: 'Laws of Exponents', items: [Q1, Q2, Q3, Q4] },
+    { title: 'Integer Exponents', items: [Q5, Q6, Q7, Q8] },
+    { title: 'Variable Bases', items: [Q9, Q10, Q11] },
+    { title: 'Scientific Notation', items: [Q12, Q13, Q14, Q15, Q16] }] };
 }
 
-const api = { Q, qeq, qdec, decStr, commas, N, V, P, Mul, Fr, Neg, Par, Eq, Sci, Ar, evalA, html, M, plain, parse, tidy, mark, generate, monoProblem, isSci, hasPow, hasNegExp,
+const api = { speak, UNIT_ID, setClean, canon, onTest, testList, testSet, Q, qeq, qdec, decStr, commas, N, V, P, Mul, Fr, Neg, Par, Eq, Sci, Ar, evalA, html, M, plain, parse, tidy, mark, generate, monoProblem, isSci, hasPow, hasNegExp,
   qadd, qsub, qmul, qdiv, qpow, qlt, gcd, unwrap, literalInt, sameValue, vars, valueProblem, esc };
 if (typeof module !== 'undefined' && module.exports) module.exports = api; else root.Practice = api;
 })(this);

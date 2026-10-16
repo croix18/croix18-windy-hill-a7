@@ -127,3 +127,24 @@ To republish: `python3 build.py`, then publish `unit-3-practice-test.html` to th
   missed. It now opens a new random set, as the Finish panel's button already did.
 - An answer box inside "Try another like this" showed the base question's red or green underline. The colors now
   apply only to a question's own box (`.is-wrong>.ans input`).
+
+## Version 12 (16 Oct 2026): built on the shared practice-test kit, with the Apple review's fixes
+This version follows the M7 Unit 4 page. Its README has the full list of changes, and the reports are in Windmill
+`practice/apple-review-2026-10-15.md`.
+
+- **What moved where:**
+  - The page code is now `../kit/`, vendored from Windmill.
+  - This folder keeps only the unit: engine, coach, visual, walk, `unit.js`, `unit.json`, `unit.css`, the checks,
+    `sets.lock.json` and `CHECKED`.
+  - Run everything with `python3 ../kit/check/run.py .`. The kit's `page.js` replaces the old look*.js scripts.
+- **A7-specific changes:**
+  - **The clean rule.** No modelled mistake may give the right answer; the review found that in most sets before. For
+    example, (2²)² ÷ 2³ gives the same answer whether the exponents are multiplied or added.
+  - **Questions drawn per slot.** The test forms are now compared in canonical form, so 2³·2⁴ counts as the test's 2⁴·2³.
+  - **Dead code deleted.** The Help-me-solve code (checkWork) and its pins are gone.
+  - **Wording.**
+    - The typing preview no longer runs the exponent into the following letters or brackets.
+    - New "That number is too big to check" message.
+    - The space before "?" is gone.
+    - The fallback message matches M7's.
+  - **Checks.** The picture checker now counts plant by plant, and the engine check has planted errors.

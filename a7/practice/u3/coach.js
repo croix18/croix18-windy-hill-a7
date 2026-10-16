@@ -249,7 +249,7 @@ function solution(part) {
 /* ------------------------------------------------------------------ mistake models: exact results of exact mistakes */
 /* each: { ex: the answer this mistake gives, if: 'you …' (what the mistake is, with the numbers), step: where in the solution it goes off,
            test?: a structural check that must also hold (used when two mistakes give the same value) } */
-function models(part) {
+function models(part, raw) {
   const f = part.fam, x = part.prm; if (!f || !x) return [];
   const L = [], add = (ex, iff, step, test) => L.push({ ex, if: iff, step, test });
   const negExpTyped = c => c.a && E.hasNegExp(c.a);
@@ -422,6 +422,7 @@ function models(part) {
   }
   /* a "mistake" whose value IS the answer is not a mistake */
   const L2 = vars(part.ans);
+  if (raw) return L.map(md => Object.assign(md, { if: minus(md.if) }));
   return L.filter(md => { try { return !sameValue(md.ex, part.ans, L2); } catch (e) { return false; } }).map(md => Object.assign(md, { if: minus(md.if) }));
 }
 
@@ -704,7 +705,7 @@ function feedback(part, text, opts) {
     return say('wrong', 'Check it: if <i>n</i> = ' + String(n0).replace('-', '−') + ', then ' + m(Fr(P(x.b, n0), P(x.b, x.k))) + ' = ' + m(P(x.b, n0 - x.k)) + ' = ' + mv(got) + ', not ' + commas(String(x.V)) + '.', 2);
   }
   if (c.a && E.hasPow(c.a) && part.kind === 'value') return say('wrong', 'Your answer still has a power in it, and it is not equal to the question. Work it out step by step — tap Hint for the first step.', null);
-  return say('wrong', 'That is not it, and it does not match a common slip. Tap Hint to see the first step.', null);
+  return say('wrong', 'Not one of the usual slips. Check each step against the rule below, or tap Hint to go one step at a time.', null);
 }
 
 /* ------------------------------------------------------------------ multiple choice and select-all */
@@ -758,7 +759,7 @@ function mcSolution(item) {
 const minus = s => typeof s === 'string' ? s.replace(/(^|[\s(>=])-(\d)/g, '$1−$2') : s;
 function tidyOut(f) { if (f && f.what) f.what = f.what.map(minus); return f; }
 function tidySol(sol) { if (sol) sol.forEach(s => { s.say = minus(s.say); }); return sol; }
-/* ------------------------------------------------------------------ "Help me solve this": checking a student's own work, line by line */
+/* ------------------------------------------------------------------ an expression as a student would type it (the checks use it) */
 function atomish(a) { return a.t === 'n' || a.t === 'v' || a.t === 'pow' || a.t === 'par'; }
 function typedOf(a) {                                       /* an expression as a student would type it */
   switch (a.t) {
@@ -777,137 +778,23 @@ function typedOf(a) {                                       /* an expression as 
   return '';
 }
 /* a canonical spelling of a parsed expression, for "which worked step is this line?" */
-function canon(a) {
-  a = unwrap(a);
-  switch (a.t) {
-    case 'n': return decStr(a.q);
-    case 'v': return a.s;
-    case 'pow': return '(' + canon(a.b) + ')^(' + canon(a.e) + ')';
-    case 'mul': return a.xs.map(canon).join('*');
-    case 'div': return '(' + canon(a.a) + ')/(' + canon(a.b) + ')';
-    case 'frac': return '(' + canon(a.n) + ')/(' + canon(a.d) + ')';
-    case 'neg': return '-(' + canon(a.x) + ')';
-    case 'add': return '(' + canon(a.a) + a.op + canon(a.b) + ')';
-    case 'ar': return '(' + canon(a.a) + ({ '+': '+', '−': '-', '×': '*' })[a.op] + canon(a.b) + ')';
-    default: return '?';
-  }
-}
-function keyOf(a) { try { return canon(a); } catch (e) { return null; } }
-/* plain facts comparing a wrong line with the line before it — always true, never a guess about why */
-function relFacts(prev, line, letters, part) {
-  const out = [];
-  if (!letters.length) {
-    const pv = val(prev), lv = val(line); if (!pv || !lv) return out;
-    if (qeq(lv, qmul(Q(-1), pv))) { out.push('This line has the opposite sign of the line before it.'); return out; }
-    if (pv.n !== 0n && qeq(lv, qdiv(Q(1), pv))) { out.push('This line is upside down compared with the line before it: it is the reciprocal.'); return out; }
-    const B = part.prm && (part.prm.b || part.prm.B);
-    const sp = single(line);
-    if (B && sp && qeq(sp.b, Q(B))) { const j = logB(pv, Q(B)); if (j !== null) { out.push('This line is ' + m(P(B, Number(sp.e))) + ', but the line before it equals ' + m(P(B, j)) + '.'); return out; } }
-    const small = q => (q.n < 0n ? -q.n : q.n) < 10n ** 12n && q.d < 10n ** 12n;
-    if (small(lv) && small(pv)) out.push('This line equals ' + mv(lv, { dec: true }) + ', but the line before it equals ' + mv(pv, { dec: true }) + '.');
-    return out;
-  }
-  const a = mono(prev), b = mono(line); if (!a || !b) return out;
-  if (!qeq(a.c, b.c)) out.push('The number part: this line has ' + mv(b.c) + ', the line before it has ' + mv(a.c) + '.');
-  Object.keys(Object.assign({}, a.x, b.x)).sort().forEach(l => {
-    const ea = a.x[l] || 0n, eb = b.x[l] || 0n;
-    if (ea !== eb) out.push('The exponent on <i>' + l + '</i>: this line has ' + String(eb).replace('-', '−') + ', the line before it has ' + String(ea).replace('-', '−') + ' (a letter on the bottom counts as a negative exponent).');
-  });
-  return out;
-}
-function prepLine(raw, part) {
-  let s = raw.replace(/\.\s*$/, '');
-  if (!vars(part.ans).length) s = s.replace(/(\d(?:\.\d+)?)\s*[eE]\s*([+-]?\d+)/g, '$1 x 10^$2');     /* 1.88E6 is the question's own way of writing it */
-  else if (vars(part.ans).indexOf('x') < 0) s = s.replace(/\s+[xX]\s+/g, ' * ');                      /* "k^4 x k^7": x as times when x is not a letter here */
-  return s;
-}
-function checkWork(part, text) {
-  const out = { lines: [], next: null, done: false, finalMsg: null };
-  if (!part.fam) return out;
-  const xT = part.kind === 'sci' || part.kind === 'std' || part.kind === 'times' || !vars(part.ans).length;
-  const letters = vars(part.ans), eqFam = part.fam === 'solveN';
-  const nAns = eqFam ? evalA(part.ans, {}) : null;
-  const sol = solution(part) || [];
-  const solKeys = sol.map(st => { if (!st.ex) return null;
-    try { return eqFam ? keyOf(E.parse(typedOf(st.ex.l), true)) + '=' + keyOf(E.parse(typedOf(st.ex.r), true)) : keyOf(E.parse(typedOf(st.ex), xT)); } catch (e) { return null; } });
-  const raws = String(text || '').split(/\n/).map(x => x.trim()).filter(Boolean).slice(0, 12);
-  let stop = false, reached = -1, lastGood = null, lastGoodText = '', lastEq = null;
-  const nextSay = () => { const nx = sol.findIndex((st, i) => i > reached && st.ex); return nx >= 0 ? sol[nx].say : null; };
-  for (const raw0 of raws) {
-    if (stop) { out.lines.push({ raw: raw0, ok: null, msg: 'Fix the line above first.' }); continue; }
-    const raw = prepLine(raw0, part);
-    const row = { raw: raw0, ok: true, msg: '' };
-    if (eqFam) {
-      const sides = raw.split('=').map(x => x.trim());
-      if (sides.length !== 2 || !sides[0] || !sides[1]) { row.ok = null; row.msg = 'Write each line as one equation, like n − 3 = 4.'; }
-      else {
-        let L, R; try { L = E.parse(sides[0], true); R = E.parse(sides[1], true); } catch (e) { L = null; }
-        if (!L) { row.ok = null; row.msg = 'I can’t read that line. Use ^ for powers.'; }
-        else if (vars(L).concat(vars(R)).some(l => l !== 'n')) { row.ok = null; row.msg = 'The only letter here is <i>n</i>.'; }
-        else if (vars(L).concat(vars(R)).indexOf('n') < 0) { row.ok = null; row.msg = 'Keep <i>n</i> in each line until you find it.'; }
-        else {
-          const holds = v => { try { return qeq(evalA(L, { n: v }), evalA(R, { n: v })); } catch (e) { return false; } };
-          if (!holds(nAns)) { row.ok = false; row.msg = 'This equation is not true for the right value of <i>n</i>, so this step changed the equation. ' + (lastEq ? '' : RULE.solveN()); }
-          else {
-            const others = [qmul(nAns, Q(-1)), E.qadd(nAns, Q(1)), E.qsub(nAns, Q(1)), E.qadd(nAns, Q(2)), Q(0)].filter(v => !qeq(v, nAns));
-            const also = others.find(holds);
-            if (also) { row.ok = null; row.msg = 'This is true for the right <i>n</i>, but also for <i>n</i> = ' + mv(also) + ', so it no longer pins <i>n</i> down. Keep each line equivalent to the one before.'; }
-            else { lastEq = [L, R]; const k = keyOf(L) + '=' + keyOf(R), j = solKeys.indexOf(k); if (j > reached) reached = j; }
-          }
-        }
-      }
-      if (row.ok !== true) stop = true;
-      out.lines.push(row); continue;
-    }
-    const pieces = raw.split('=').map(x => x.trim()).filter(Boolean);
-    for (let pi = 0; pi < pieces.length; pi++) {
-      const pc = pieces[pi];
-      if (pc.length > 60) { row.ok = null; row.msg = 'That line is too long to read.'; break; }
-      let a; try { a = E.parse(pc, xT); } catch (e) { row.ok = null; row.msg = e.message === 'ambiguous' ? 'Use parentheses to show what is on the bottom of a fraction.' : 'I can’t read “' + esc(pc) + '”. Use ^ for powers and / for fractions.'; break; }
-      if (vars(a).some(l => letters.indexOf(l) < 0)) { row.ok = null; row.msg = letters.length ? 'That uses a letter that is not in the question.' : 'There are no letters in this question.'; break; }
-      let same; try { same = sameValue(a, part.q, letters); } catch (e) { row.ok = null; row.msg = /exponent not whole/.test(e.message) ? 'Exponents in this unit are whole numbers.' : 'I can’t work that out — check for 0 to the power 0, or dividing by 0.'; break; }
-      if (!same) {
-        row.ok = false;
-        const before = pi > 0 || lastGood ? 'what comes before it' : 'the question';
-        let why = [];
-        if (!lastGood && pi === 0) {                       /* the first step from the question: the mistake list applies */
-          const fb = feedback(part, pc, { loose: true });
-          why = (fb.what || []).filter(w => /^That is what you get if/.test(w)).map(w => w.replace(/^That is what you get if/, 'This line equals what you get if'));
-          row.step = fb.step == null ? null : fb.step;
-        }
-        if (!why.length) why = relFacts(lastGood || part.q, a, letters, part);
-        const nx = nextSay();
-        row.msg = 'This is not equal to ' + before + '.' + (why.length ? ' ' + why.join(' ') : '') + (nx ? ' <span class="wstep">The step to take here: ' + nx + '</span>' : '');
-        break;
-      }
-      const j = solKeys.indexOf(keyOf(a)); if (j > reached) reached = j;
-      lastGood = a; lastGoodText = pc;
-    }
-    if (row.ok !== true) stop = true;
-    out.lines.push(row);
-  }
-  if (!stop && out.lines.length) {
-    if (eqFam) {
-      const [L, R] = lastEq || [];
-      const num = x => unwrap(x).t === 'n' || (unwrap(x).t === 'neg' && unwrap(unwrap(x).x).t === 'n');
-      if (L && ((unwrap(L).t === 'v' && num(R)) || (unwrap(R).t === 'v' && num(L)))) { out.done = true; out.finalMsg = 'Solved: <i>n</i> = ' + mv(evalA(unwrap(L).t === 'v' ? R : L, {})) + '. Type that number in the answer box.'; }
-    } else if (lastGood) {
-      const r = E.mark(part, lastGoodText);
-      if (r.v === 'right') { out.done = true; out.finalMsg = 'Every line is equal to the question, and the last one is finished. Put it in the answer box.'; }
-      else out.finalMsg = 'Every line so far is equal to the question. ' + (r.v === 'form' ? formFix(part, ctxOf(part, lastGoodText), r.msg).replace(/^Right (value|so far)\.\s*/, 'Not finished yet. ') : '');
-    }
-    if (!out.done) { const nx = sol.findIndex((st, i) => i > reached && st.ex); if (nx >= 0) out.next = { i: nx, say: minus(sol[nx].say) }; }
-  }
-  out.lines.forEach(l => { l.msg = minus(l.msg); });
-  if (out.finalMsg) out.finalMsg = minus(out.finalMsg);
-  return out;
-}
-
 function safeFeedback(p, t) {
   try { return feedback(p, t); }
   catch (e) { return { v: E.mark(p, t).v, what: ['Check each step and try again.'], rule: RULE[p.fam] ? RULE[p.fam]() : '', step: null }; }
 }
-const api = { checkWork: (p, t) => { try { return checkWork(p, t); } catch (e) { return { lines: [], next: null, done: false, finalMsg: 'I could not check that work.' }; } }, typedOf,
+/* the clean rule (Apple review W-1): a set never has a question where a modelled mistake gives the right answer — e.g.
+   (2²)² ÷ 2³, where adding the exponents instead of multiplying gives the same 2 — so a student who made the mistake is
+   never marked right. engine.generate draws such numbers again. */
+function clean(it) {
+  const ps = it.type === 'parts' ? it.parts : it.type === 'solo' ? [it.part] : [];
+  for (const p of ps) {
+    const L = vars(p.ans);
+    for (const md of models(p, true)) { let same = false; try { same = sameValue(md.ex, p.ans, L); } catch (e) { same = false; } if (same) return false; }
+  }
+  return true;
+}
+E.setClean(clean);
+const api = { clean, typedOf,
   feedback: (p, t) => tidyOut(safeFeedback(p, t)), solution: p => tidySol(solution(p)), models,
   mcFeedback: (i, k) => tidyOut(mcFeedback(i, k)), selectFeedback: (i, p, t) => tidyOut(selectFeedback(i, p, t)), mcSolution: i => tidySol(mcSolution(i)), RULE, mono, single, sciOf, partsFindings };
 if (typeof module !== 'undefined' && module.exports) module.exports = api; else root.Coach = api;

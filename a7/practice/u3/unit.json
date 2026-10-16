@@ -1,0 +1,22 @@
+{
+ "title": "A7 Unit 3 Practice Test",
+ "file": "unit-3-practice-test.html",
+ "download": "A7 Unit 3 Practice Test.html",
+ "css": [
+  "unit.css"
+ ],
+ "scripts": [
+  "engine.js",
+  "coach.js",
+  "visual.js",
+  "walk.js",
+  "unit.js"
+ ],
+ "checks": [
+  "node test_engine.js 20000",
+  "python3 verify.py",
+  "node steps_check.js",
+  "node coach_check.js 1500",
+  "python3 verify_coach.py"
+ ]
+}

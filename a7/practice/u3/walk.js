@@ -16,7 +16,18 @@ const m = a => M(a);
 const sg = x => x < 0 ? '(−' + (-x) + ')' : String(x);
 const times = (b, n) => n > 6 ? b + ' multiplied by itself ' + n + ' times' : Array(n).fill(String(b).replace('-', '−')).join(' · ');
 const ch = (ask, opts, then, extra) => Object.assign({ type: 'choice', ask, opts: opts.map(o => ({ label: o[0], ok: !!o[1], why: o[2] || '' })), then: then || null }, extra || {});
-const num = (ask, of, hint, then) => ({ type: 'num', ask, of, ans: evalA(of, {}), hint: hint || '', then: then || null });
+/* a hint that only names the operation gets one smaller step for the arithmetic too (Apple review R1-3) */
+const KIT = (typeof module !== 'undefined' && module.exports) ? require('../kit/core.js') : root.Kit;
+function autoArith(of) {
+  try {
+    if (of.t === 'ar') { const a = evalA(of.a, {}), b = evalA(of.b, {}); if (a.n < 0n || b.n < 0n || a.d !== 1n || b.d !== 1n) return '';
+      if (of.op === '+') return KIT.hint.add(a, b); if (of.op === '×') return KIT.hint.mul(a, b); if (of.op === '−' && a.n >= b.n) return KIT.hint.sub(a, b); }
+    if (of.t === 'frac' && of.n.t === 'n' && of.d.t === 'n') return KIT.hint.div(of.n.q, of.d.q);
+  } catch (e) { /* none */ }
+  return '';
+}
+const ECHO = /^(Add the two exponents|Multiply the exponents|Subtract|Subtract the bottom exponent from the top one|Divide [\d.]+ by [\d.]+|A power of a power multiplies the exponents)\.$/;
+const num = (ask, of, hint, then) => { const au = ECHO.test(hint || '') ? autoArith(of) : ''; return { type: 'num', ask, of, ans: evalA(of, {}), hint: (hint || '') + (au ? ' ' + au : ''), then: then || null }; };
 
 function steps(part) {
   const f = part.fam, x = part.prm; if (!f || !x) return null;
