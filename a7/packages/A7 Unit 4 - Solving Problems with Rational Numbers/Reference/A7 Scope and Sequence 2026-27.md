@@ -16,54 +16,54 @@
 | Oct 13 | Tue | 3 | spiral | *spiral* Spiral day — mixed retrieval from the unit just finished and the two before it |  |  |  |
 | Oct 14 | Wed (43 min) | 3 | spiral | *spiral* Spiral day — mixed retrieval from the unit just finished and the two before it |  |  |  |
 | Oct 15 | Thu | 3 | 3.X1 | **exam** Unit 3 exam, day 1 |  |  |  |
-| Oct 16 | Fri | 3 | 3.X2 | **exam** Unit 3 exam, day 2 |  |  |  |
-| Oct 19 | Mon | 4 | 4.01 | Add and subtract in scientific notation | 8.NSO.1.5 | Add and subtract numbers written in scientific notation — HUR | Oct 20 |
-| Oct 20 | Tue | 4 | 4.02+03 | Multiply and divide in scientific notation | 8.NSO.1.5 | Multiply numbers written in scientific notation — YZU; Divide numbers written in scientific notation — SGT | Oct 21 |
-| Oct 21 | Wed (43 min) | 4 | 4.04 | Real-world scientific notation; significant digits | 8.NSO.1.6 | Add, subtract, multiply, and divide numbers written in scientific notation: word problems — D5S | Oct 22 |
-| Oct 22 | Thu | 4 | 4.05 | Expressions with radicals (perfect squares to 225, cubes −125 to 125) | 8.NSO.1.7 | Evaluate radical expressions — D8J | Oct 26 |
-| Oct 23 | Fri | 4 | 4.06 | Order of operations with exponents and radicals | 8.NSO.1.7 | Evaluate radical expressions — D8J | Oct 26 |
-| Oct 26 | Mon | 4 | 4.07+08 | Real-world order-of-operations problems | 8.NSO.1.7 | Evaluate variable expressions: word problems — DPG | Oct 27 |
-| Oct 27 | Tue | 4 | spiral | *spiral* Spiral day — mixed retrieval from the unit just finished and the two before it |  |  |  |
-| Oct 28 | Wed (43 min) | 4 | spiral | *spiral* Spiral day — mixed retrieval from the unit just finished and the two before it |  |  |  |
-| Oct 29 | Thu | 4 | 4.X1 | **exam** Unit 4 exam, day 1 |  |  |  |
-| Oct 30 | Fri | 4 | 4.X2 | **exam** Unit 4 exam, day 2 |  |  |  |
-| Nov 02 | Mon | 5 | 5.01 | Scale drawings | 7.GR.1.5 | Scale drawings: find the scale factor, missing side, or missing angle — WEA | Nov 03 |
-| Nov 03 | Tue | 5 | 5.02+03 | Scale factor: perimeter and area (k and k²) | 7.GR.1.5 | Perimeter and area: changes in scale — ZC6; Scale drawings: find the scale factor or missing side — XHM | Nov 04 |
-| Nov 04 | Wed (43 min) | 5 | 5.04 | Real-world scale drawings | 7.GR.1.5 | Scale drawings: word problems — 84H; Scale drawings: scale factor word problems — KCM | Nov 05 |
-| Nov 05 | Thu | 5 | 5.06+07 | Converting length across systems; currency | 7.AR.3.3 | Convert between customary and metric systems — E8Z; Compare and convert customary units — 4B8; Compare and convert metric units — HW2 | Nov 09 |
-| Nov 06 | Fri | 5 | 5.08+09 | Converting mass, area and volume across systems | 7.AR.3.3 | Convert between customary and metric systems — E8Z; Compare and convert customary units — 4B8; Compare and convert metric units — HW2 | Nov 09 |
-| Nov 09 | Mon | 5 | 5.10+11 | Multi-step proportion problems | 7.AR.3.3 · 7.AR.4.5 | Compare rates: word problems — VVS; Multi-step problems with customary or metric unit conversions — UCT | Nov 10 |
-| Nov 10 | Tue | 5 | spiral | *spiral* Spiral day — mixed retrieval from the unit just finished and the two before it |  |  |  |
-| Nov 12 | Thu | 5 | 5.X1 | **exam** Unit 5 exam, day 1 |  |  |  |
-| Nov 13 | Fri | 5 | 5.X2 | **exam** Unit 5 exam, day 2 |  |  |  |
-| Nov 16 | Mon | 6 | 6.01+02 | Triangle Inequality Theorem; converse of the Pythagorean Theorem | 8.GR.1.3 | Triangle inequality — 2N5; Converse of the Pythagorean theorem: is it a right triangle? — EQZ | Nov 17 |
-| Nov 17 | Tue | 6 | 6.03 | Pythagorean Theorem (memorize) | 8.GR.1.1 | Pythagorean theorem: find the missing leg or hypotenuse length — MTM | Nov 18 |
-| Nov 18 | Wed (43 min) | 6 | 6.04 | Pythagorean Theorem in real-world problems | 8.GR.1.1 | Pythagorean theorem: word problems — 87U | Nov 19 |
-| Nov 19 | Thu | 6 | 6.05 | Distance on the coordinate plane | 8.GR.1.2 | Find the distance between two points on a horizontal or vertical line — L9V; Find the distance between two points — ZBP | Nov 20 |
-| Nov 20 | Fri | 6 | 6.06 | Real-world coordinate-plane problems; perimeter | 8.GR.1.2 | Pythagorean theorem: find the perimeter — VGE | Nov 30 |
-| Nov 30 | Mon | 6 | T-B1 | **thread** Thread B: angle pairs — supplementary, complementary, vertical, adjacent (16.1) | 8.GR.1.4 | Identify complementary, supplementary, vertical, adjacent, and congruent angles — HGV; Find measures of complementary, supplementary, vertical, and adjacent angles — R2B; Write and solve equations using angle relationships — DBV | Dec 01 |
-| Dec 01 | Tue | 6 | T-B2 | **thread** Thread B: interior and exterior angles of a triangle (16.2) | 8.GR.1.5 | Find missing angles in triangles — JFJ; Exterior Angle Theorem — FMP; Triangle Angle-Sum Theorem — 6Q6 | Dec 02 |
-| Dec 02 | Wed (43 min) | 6 | 6.07+08 | Similar triangles; indirect measurement | 8.GR.2.4 | Side lengths of similar triangles — QSK; Similar triangles and indirect measurement — 88W; Identify similar triangles — 6PD | Dec 03 |
-| Dec 03 | Thu | 6 | 6.X1 | **exam** Unit 6 exam, day 1 |  |  |  |
-| Dec 04 | Fri | 6 | 6.X2 | **exam** Unit 6 exam, day 2 |  |  |  |
-| Dec 07 | Mon | 7 | 7.01 | Graphing proportional relationships | 7.AR.4.3 | Graph a proportional relationship: word problems — FJW | Dec 08 |
-| Dec 08 | Tue | 7 | 7.02+03 | Constant of proportionality (table, graph, description) | 7.AR.4.2 | Interpret graphs of proportional relationships — RMH; Find the constant of proportionality from a table — LKZ; Find the constant of proportionality from a graph — ZUT | Dec 09 |
-| Dec 09 | Wed (43 min) | 7 | 7.04 | Is it proportional? | 7.AR.4.1 · 8.AR.3.1 | Identify proportional relationships by graphing — AAN; Identify proportional relationships in tables and graphs — VZK | Dec 10 |
-| Dec 10 | Thu | 7 | 7.05+06 | Equations of proportional relationships; translating representations | 7.AR.4.4 | Write equations for proportional relationships from tables — 6GU; Write equations for proportional relationships from graphs — JKH; Write and solve equations for proportional relationships — VKK | Dec 11 |
-| Dec 11 | Fri | 7 | 7.07 | Comparing proportional relationships | 7.AR.4.5 | Compare proportional relationships represented in different ways — 5A9 | Dec 14 |
-| Dec 14 | Mon | 7 | 7.X1 | **exam** Unit 7 exam, day 1 |  |  |  |
-| Dec 15 | Tue | 7 | 7.X2 | **exam** Unit 7 exam, day 2 |  |  |  |
-| Dec 16 | Wed (43 min) |  | PM2-R1 | **review** PM2 review 1: number system, exponents, scientific notation (whiteboards) | 8.NSO.1.1–1.7 |  |  |
-| Dec 17 | Thu |  | PM2-R2 | **review** PM2 review 2: equations, inequalities, Pythagorean, angles (whiteboards) | 8.AR.2 · 8.GR.1 |  |  |
-| Dec 18 | Fri |  | PM2-R3 | **review** PM2 review 3: proportional → linear preview; mixed FAST-shaped round | 8.AR.3 · 8.AR.1.1 |  |  |
-| Jan 06 | Wed (43 min) | 8 | 8.01+02 | Circle relationships; circumference | 7.GR.1.3 | Center, radius, and diameter of a circle — 7RY; Circumference of circles — 9FM | Jan 07 |
-| Jan 07 | Thu | 8 | 8.03 | Radius and diameter from circumference | 7.GR.1.3 | Find the radius or diameter of a circle given the circumference — 2CM | Jan 08 |
-| Jan 08 | Fri | 8 | 8.04+05 | Area of a circle | 7.GR.1.4 | Area of circles — YA8 | Jan 11 |
-| Jan 11 | Mon | 8 | 8.06 | Circumference and area problems; sectors | 7.GR.1.4 | Circles: word problems — P56 | Jan 12 |
-| Jan 12 | Tue | 8 | 8.08+09 | Sectors and circle graphs | 7.GR.1.4 · 7.DP.1.4 | Use fractions to find the measure of an angle — V76; Circle graphs and central angles — KXS; Interpret circle graphs — WNJ | Jan 13 |
-| Jan 13 | Wed (43 min) | 9 | 9.01+02 | Surface area of cylinders from nets | 7.GR.2.1 · 7.GR.2.2 | Nets of three-dimensional figures — 3R2; Surface area of cylinders — CYQ; Lateral area of cylinders — C8K | Jan 15 |
+| Oct 16 | Fri | 4 | 4.01 | Add and subtract in scientific notation | 8.NSO.1.5 | Add and subtract numbers written in scientific notation — HUR | Oct 19 |
+| Oct 19 | Mon | 4 | 4.02+03 | Multiply and divide in scientific notation | 8.NSO.1.5 | Multiply numbers written in scientific notation — YZU; Divide numbers written in scientific notation — SGT | Oct 20 |
+| Oct 20 | Tue | 4 | 4.04 | Real-world scientific notation; significant digits | 8.NSO.1.6 | Add, subtract, multiply, and divide numbers written in scientific notation: word problems — D5S | Oct 21 |
+| Oct 21 | Wed (43 min) | 4 | 4.05 | Expressions with radicals (perfect squares to 225, cubes −125 to 125) | 8.NSO.1.7 | Evaluate radical expressions — D8J | Oct 23 |
+| Oct 22 | Thu | 4 | 4.06 | Order of operations with exponents and radicals | 8.NSO.1.7 | Evaluate radical expressions — D8J | Oct 23 |
+| Oct 23 | Fri | 4 | 4.07+08 | Real-world order-of-operations problems | 8.NSO.1.7 | Evaluate variable expressions: word problems — DPG | Oct 26 |
+| Oct 26 | Mon | 4 | 4.X1 | **exam** Unit 4 exam, day 1 |  |  |  |
+| Oct 27 | Tue | 4 | 4.X2 | **exam** Unit 4 exam, day 2 |  |  |  |
+| Oct 28 | Wed (43 min) | 5 | 5.01 | Scale drawings | 7.GR.1.5 | Scale drawings: find the scale factor, missing side, or missing angle — WEA | Oct 29 |
+| Oct 29 | Thu | 5 | 5.02+03 | Scale factor: perimeter and area (k and k²) | 7.GR.1.5 | Perimeter and area: changes in scale — ZC6; Scale drawings: find the scale factor or missing side — XHM | Oct 30 |
+| Oct 30 | Fri | 5 | 5.04 | Real-world scale drawings | 7.GR.1.5 | Scale drawings: word problems — 84H; Scale drawings: scale factor word problems — KCM | Nov 02 |
+| Nov 02 | Mon | 5 | 5.06+07 | Converting length across systems; currency | 7.AR.3.3 | Convert between customary and metric systems — E8Z; Compare and convert customary units — 4B8; Compare and convert metric units — HW2 | Nov 04 |
+| Nov 03 | Tue | 5 | 5.08+09 | Converting mass, area and volume across systems | 7.AR.3.3 | Convert between customary and metric systems — E8Z; Compare and convert customary units — 4B8; Compare and convert metric units — HW2 | Nov 04 |
+| Nov 04 | Wed (43 min) | 5 | 5.10+11 | Multi-step proportion problems | 7.AR.3.3 · 7.AR.4.5 | Compare rates: word problems — VVS; Multi-step problems with customary or metric unit conversions — UCT | Nov 05 |
+| Nov 05 | Thu | 5 | 5.X1 | **exam** Unit 5 exam, day 1 |  |  |  |
+| Nov 06 | Fri | 5 | 5.X2 | **exam** Unit 5 exam, day 2 |  |  |  |
+| Nov 09 | Mon | 6 | 6.01+02 | Triangle Inequality Theorem; converse of the Pythagorean Theorem | 8.GR.1.3 | Triangle inequality — 2N5; Converse of the Pythagorean theorem: is it a right triangle? — EQZ | Nov 10 |
+| Nov 10 | Tue | 6 | 6.03 | Pythagorean Theorem (memorize) | 8.GR.1.1 | Pythagorean theorem: find the missing leg or hypotenuse length — MTM | Nov 12 |
+| Nov 12 | Thu | 6 | 6.04 | Pythagorean Theorem in real-world problems | 8.GR.1.1 | Pythagorean theorem: word problems — 87U | Nov 13 |
+| Nov 13 | Fri | 6 | 6.05 | Distance on the coordinate plane | 8.GR.1.2 | Find the distance between two points on a horizontal or vertical line — L9V; Find the distance between two points — ZBP | Nov 16 |
+| Nov 16 | Mon | 6 | 6.06 | Real-world coordinate-plane problems; perimeter | 8.GR.1.2 | Pythagorean theorem: find the perimeter — VGE | Nov 17 |
+| Nov 17 | Tue | 6 | T-B1 | **thread** Thread B: angle pairs — supplementary, complementary, vertical, adjacent (16.1) | 8.GR.1.4 | Identify complementary, supplementary, vertical, adjacent, and congruent angles — HGV; Find measures of complementary, supplementary, vertical, and adjacent angles — R2B; Write and solve equations using angle relationships — DBV | Nov 18 |
+| Nov 18 | Wed (43 min) | 6 | T-B2 | **thread** Thread B: interior and exterior angles of a triangle (16.2) | 8.GR.1.5 | Find missing angles in triangles — JFJ; Exterior Angle Theorem — FMP; Triangle Angle-Sum Theorem — 6Q6 | Nov 19 |
+| Nov 19 | Thu | 6 | 6.07+08 | Similar triangles; indirect measurement | 8.GR.2.4 | Side lengths of similar triangles — QSK; Similar triangles and indirect measurement — 88W; Identify similar triangles — 6PD | Nov 20 |
+| Nov 20 | Fri | 6 | spiral | *spiral* Spiral day — mixed retrieval from the unit just finished and the two before it |  |  |  |
+| Nov 30 | Mon | 6 | 6.X1 | **exam** Unit 6 exam, day 1 |  |  |  |
+| Dec 01 | Tue | 6 | 6.X2 | **exam** Unit 6 exam, day 2 |  |  |  |
+| Dec 02 | Wed (43 min) | 6 | flex | *flex* Flex day — reteach from exam evidence, or absorb a lost day |  |  |  |
+| Dec 03 | Thu | 7 | 7.01 | Graphing proportional relationships | 7.AR.4.3 | Graph a proportional relationship: word problems — FJW | Dec 04 |
+| Dec 04 | Fri | 7 | 7.02+03 | Constant of proportionality (table, graph, description) | 7.AR.4.2 | Interpret graphs of proportional relationships — RMH; Find the constant of proportionality from a table — LKZ; Find the constant of proportionality from a graph — ZUT | Dec 07 |
+| Dec 07 | Mon | 7 | 7.04 | Is it proportional? | 7.AR.4.1 · 8.AR.3.1 | Identify proportional relationships by graphing — AAN; Identify proportional relationships in tables and graphs — VZK | Dec 08 |
+| Dec 08 | Tue | 7 | 7.05+06 | Equations of proportional relationships; translating representations | 7.AR.4.4 | Write equations for proportional relationships from tables — 6GU; Write equations for proportional relationships from graphs — JKH; Write and solve equations for proportional relationships — VKK | Dec 09 |
+| Dec 09 | Wed (43 min) | 7 | 7.07 | Comparing proportional relationships | 7.AR.4.5 | Compare proportional relationships represented in different ways — 5A9 | Dec 10 |
+| Dec 10 | Thu | 7 | 7.X1 | **exam** Unit 7 exam, day 1 |  |  |  |
+| Dec 11 | Fri | 7 | 7.X2 | **exam** Unit 7 exam, day 2 |  |  |  |
+| Dec 14 | Mon |  | PM2-R1 | **review** PM2 review 1: number system, exponents, scientific notation (whiteboards) | 8.NSO.1.1–1.7 |  |  |
+| Dec 15 | Tue |  | PM2-R2 | **review** PM2 review 2: equations, inequalities, Pythagorean, angles (whiteboards) | 8.AR.2 · 8.GR.1 |  |  |
+| Dec 16 | Wed (43 min) |  | PM2-R3 | **review** PM2 review 3: proportional → linear preview; mixed FAST-shaped round | 8.AR.3 · 8.AR.1.1 |  |  |
+| Dec 17 | Thu | 8 | 8.01+02 | Circle relationships; circumference | 7.GR.1.3 | Center, radius, and diameter of a circle — 7RY; Circumference of circles — 9FM | Dec 18 |
+| Dec 18 | Fri | 8 | 8.03 | Radius and diameter from circumference | 7.GR.1.3 | Find the radius or diameter of a circle given the circumference — 2CM | Jan 06 |
+| Jan 06 | Wed (43 min) | 8 | 8.04+05 | Area of a circle | 7.GR.1.4 | Area of circles — YA8 | Jan 07 |
+| Jan 07 | Thu | 8 | 8.06 | Circumference and area problems; sectors | 7.GR.1.4 | Circles: word problems — P56 | Jan 08 |
+| Jan 08 | Fri | 8 | 8.08+09 | Sectors and circle graphs | 7.GR.1.4 · 7.DP.1.4 | Use fractions to find the measure of an angle — V76; Circle graphs and central angles — KXS; Interpret circle graphs — WNJ | Jan 11 |
+| Jan 11 | Mon | 9 | 9.01+02 | Surface area of cylinders from nets | 7.GR.2.1 · 7.GR.2.2 | Nets of three-dimensional figures — 3R2; Surface area of cylinders — CYQ; Lateral area of cylinders — C8K | Jan 12 |
+| Jan 12 | Tue | 9 | 9.03+04+05 | Volume of cylinders; problems | 7.GR.2.3 | Volume of cylinders — FHC | Jan 13 |
+| Jan 13 | Wed (43 min) | 9 | spiral | *spiral* Spiral day — mixed retrieval from the unit just finished and the two before it |  |  |  |
 | Jan 14 | Thu | 9 | off | *off* State test — no class |  |  |  |
-| Jan 15 | Fri | 9 | 9.03+04+05 | Volume of cylinders; problems | 7.GR.2.3 | Volume of cylinders — FHC | Jan 19 |
+| Jan 15 | Fri | 9 | spiral | *spiral* Spiral day — mixed retrieval from the unit just finished and the two before it |  |  |  |
 | Jan 19 | Tue | 9 | spiral | *spiral* Spiral day — mixed retrieval from the unit just finished and the two before it |  |  |  |
 | Jan 20 | Wed (43 min) | 9 | spiral | *spiral* Spiral day — mixed retrieval from the unit just finished and the two before it |  |  |  |
 | Jan 21 | Thu | 9 | 8/9.X1 | **exam** Units 8–9 exam, day 1 |  |  |  |
@@ -142,17 +142,16 @@ The dates above are laid out from the sequence of lessons, the school calendar a
 - Fri Oct 02 2026: Extra review day
 - Mon Oct 05 2026: the class began T-A1
 - Thu Oct 08 2026: State test — no class
+- Fri Oct 16 2026: the class began 4.01
 - Thu Jan 14 2027: State test — no class
 - Mon Mar 01 2027: State test — no class
 
 **What moved:**
 
 - Unit 3 exam: Thu Oct 08 → **Thu Oct 15** (+4 school days) — **now in Q2, was in Q1**
-- Unit 4 exam: Thu Oct 22 → **Thu Oct 29** (+5 school days)
-- Unit 5 exam: Thu Nov 05 → **Thu Nov 12** (+4 school days)
-- Unit 6 exam: Mon Nov 30 → **Thu Dec 03** (+3 school days)
-- Unit 7 exam: Thu Dec 10 → **Mon Dec 14** (+2 school days)
+- Unit 4 exam: Thu Oct 22 → **Mon Oct 26** (+2 school days)
 - Units 8–9 exam: Thu Jan 14 → **Thu Jan 21** (+4 school days)
 - Unit 10 exam: Mon Feb 01 → **Thu Feb 04** (+3 school days)
-- flex days absorbed: 5 of 7 (after Unit 3, 4, 6, 9, 10); 2 left to absorb later losses
+- covered on a day the log does not name: 3.X2, flex
+- flex days absorbed: 3 of 7 (after Unit 4, 9, 10); 4 left to absorb later losses
 - the last day of content and tests: Fri Apr 30 (content must end by Apr 30); PM3 review days before the window: 0

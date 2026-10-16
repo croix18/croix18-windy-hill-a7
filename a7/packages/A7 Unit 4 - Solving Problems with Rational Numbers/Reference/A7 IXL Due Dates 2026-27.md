@@ -20,36 +20,36 @@ The three-character code after each skill is what you type into IXL's search box
 | Tue Oct 06 | T-A2 Thread A: negative exponents and multiple laws, variable bases (14.3–14.4) | Variables with negative exponents (2NL); Multiply and divide powers: variable bases (85P) | Wed Oct 07 |
 | Wed Oct 07 | 3.08 Large numbers in scientific notation | Convert between standard and scientific notation: large numbers (2AL); Compare large numbers (WEZ); Powers of ten (LJQ) | Fri Oct 09 |
 | Fri Oct 09 | 3.09 Small numbers in scientific notation; how many times larger | Convert between standard and scientific notation: small numbers (85M); Compare small numbers (KDR); Powers of ten with negative exponents (SKD) | Tue Oct 13 |
-| Mon Oct 19 | 4.01 Add and subtract in scientific notation | Add and subtract numbers written in scientific notation (HUR) | Tue Oct 20 |
-| Tue Oct 20 | 4.02+03 Multiply and divide in scientific notation | Multiply numbers written in scientific notation (YZU); Divide numbers written in scientific notation (SGT) | Wed Oct 21 |
-| Wed Oct 21 | 4.04 Real-world scientific notation; significant digits | Add, subtract, multiply, and divide numbers written in scientific notation: word problems (D5S) | Thu Oct 22 |
-| Thu Oct 22 | 4.05–4.06 (2 lessons) Expressions with radicals (perfect squares to 225, cubes −125 to 125) | Evaluate radical expressions (D8J) | Mon Oct 26 |
-| Mon Oct 26 | 4.07+08 Real-world order-of-operations problems | Evaluate variable expressions: word problems (DPG) | Tue Oct 27 |
-| Mon Nov 02 | 5.01 Scale drawings | Scale drawings: find the scale factor, missing side, or missing angle (WEA) | Tue Nov 03 |
-| Tue Nov 03 | 5.02+03 Scale factor: perimeter and area (k and k²) | Perimeter and area: changes in scale (ZC6); Scale drawings: find the scale factor or missing side (XHM) | Wed Nov 04 |
-| Wed Nov 04 | 5.04 Real-world scale drawings | Scale drawings: word problems (84H); Scale drawings: scale factor word problems (KCM) | Thu Nov 05 |
-| Thu Nov 05 | 5.06+07–5.08+09 (2 lessons) Converting length across systems; currency | Convert between customary and metric systems (E8Z); Compare and convert customary units (4B8); Compare and convert metric units (HW2) | Mon Nov 09 |
-| Mon Nov 09 | 5.10+11 Multi-step proportion problems | Compare rates: word problems (VVS); Multi-step problems with customary or metric unit conversions (UCT) | Tue Nov 10 |
-| Mon Nov 16 | 6.01+02 Triangle Inequality Theorem; converse of the Pythagorean Theorem | Triangle inequality (2N5); Converse of the Pythagorean theorem: is it a right triangle? (EQZ) | Tue Nov 17 |
-| Tue Nov 17 | 6.03 Pythagorean Theorem (memorize) | Pythagorean theorem: find the missing leg or hypotenuse length (MTM) | Wed Nov 18 |
-| Wed Nov 18 | 6.04 Pythagorean Theorem in real-world problems | Pythagorean theorem: word problems (87U) | Thu Nov 19 |
-| Thu Nov 19 | 6.05 Distance on the coordinate plane | Find the distance between two points on a horizontal or vertical line (L9V); Find the distance between two points (ZBP) | Fri Nov 20 |
-| Fri Nov 20 | 6.06 Real-world coordinate-plane problems; perimeter | Pythagorean theorem: find the perimeter (VGE) | Mon Nov 30 |
-| Mon Nov 30 | T-B1 Thread B: angle pairs — supplementary, complementary, vertical, adjacent (16.1) | Identify complementary, supplementary, vertical, adjacent, and congruent angles (HGV); Find measures of complementary, supplementary, vertical, and adjacent angles (R2B); Write and solve equations using angle relationships (DBV) | Tue Dec 01 |
-| Tue Dec 01 | T-B2 Thread B: interior and exterior angles of a triangle (16.2) | Find missing angles in triangles (JFJ); Exterior Angle Theorem (FMP); Triangle Angle-Sum Theorem (6Q6) | Wed Dec 02 |
-| Wed Dec 02 | 6.07+08 Similar triangles; indirect measurement | Side lengths of similar triangles (QSK); Similar triangles and indirect measurement (88W); Identify similar triangles (6PD) | Thu Dec 03 |
-| Mon Dec 07 | 7.01 Graphing proportional relationships | Graph a proportional relationship: word problems (FJW) | Tue Dec 08 |
-| Tue Dec 08 | 7.02+03 Constant of proportionality (table, graph, description) | Interpret graphs of proportional relationships (RMH); Find the constant of proportionality from a table (LKZ); Find the constant of proportionality from a graph (ZUT) | Wed Dec 09 |
-| Wed Dec 09 | 7.04 Is it proportional? | Identify proportional relationships by graphing (AAN); Identify proportional relationships in tables and graphs (VZK) | Thu Dec 10 |
-| Thu Dec 10 | 7.05+06 Equations of proportional relationships; translating representations | Write equations for proportional relationships from tables (6GU); Write equations for proportional relationships from graphs (JKH); Write and solve equations for proportional relationships (VKK) | Fri Dec 11 |
-| Fri Dec 11 | 7.07 Comparing proportional relationships | Compare proportional relationships represented in different ways (5A9) | Mon Dec 14 |
-| Wed Jan 06 | 8.01+02 Circle relationships; circumference | Center, radius, and diameter of a circle (7RY); Circumference of circles (9FM) | Thu Jan 07 |
-| Thu Jan 07 | 8.03 Radius and diameter from circumference | Find the radius or diameter of a circle given the circumference (2CM) | Fri Jan 08 |
-| Fri Jan 08 | 8.04+05 Area of a circle | Area of circles (YA8) | Mon Jan 11 |
-| Mon Jan 11 | 8.06 Circumference and area problems; sectors | Circles: word problems (P56) | Tue Jan 12 |
-| Tue Jan 12 | 8.08+09 Sectors and circle graphs | Use fractions to find the measure of an angle (V76); Circle graphs and central angles (KXS); Interpret circle graphs (WNJ) | Wed Jan 13 |
-| Wed Jan 13 | 9.01+02 Surface area of cylinders from nets | Nets of three-dimensional figures (3R2); Surface area of cylinders (CYQ); Lateral area of cylinders (C8K) | Fri Jan 15 |
-| Fri Jan 15 | 9.03+04+05 Volume of cylinders; problems | Volume of cylinders (FHC) | Tue Jan 19 |
+| Fri Oct 16 | 4.01 Add and subtract in scientific notation | Add and subtract numbers written in scientific notation (HUR) | Mon Oct 19 |
+| Mon Oct 19 | 4.02+03 Multiply and divide in scientific notation | Multiply numbers written in scientific notation (YZU); Divide numbers written in scientific notation (SGT) | Tue Oct 20 |
+| Tue Oct 20 | 4.04 Real-world scientific notation; significant digits | Add, subtract, multiply, and divide numbers written in scientific notation: word problems (D5S) | Wed Oct 21 |
+| Wed Oct 21 | 4.05–4.06 (2 lessons) Expressions with radicals (perfect squares to 225, cubes −125 to 125) | Evaluate radical expressions (D8J) | Fri Oct 23 |
+| Fri Oct 23 | 4.07+08 Real-world order-of-operations problems | Evaluate variable expressions: word problems (DPG) | Mon Oct 26 |
+| Wed Oct 28 | 5.01 Scale drawings | Scale drawings: find the scale factor, missing side, or missing angle (WEA) | Thu Oct 29 |
+| Thu Oct 29 | 5.02+03 Scale factor: perimeter and area (k and k²) | Perimeter and area: changes in scale (ZC6); Scale drawings: find the scale factor or missing side (XHM) | Fri Oct 30 |
+| Fri Oct 30 | 5.04 Real-world scale drawings | Scale drawings: word problems (84H); Scale drawings: scale factor word problems (KCM) | Mon Nov 02 |
+| Mon Nov 02 | 5.06+07–5.08+09 (2 lessons) Converting length across systems; currency | Convert between customary and metric systems (E8Z); Compare and convert customary units (4B8); Compare and convert metric units (HW2) | Wed Nov 04 |
+| Wed Nov 04 | 5.10+11 Multi-step proportion problems | Compare rates: word problems (VVS); Multi-step problems with customary or metric unit conversions (UCT) | Thu Nov 05 |
+| Mon Nov 09 | 6.01+02 Triangle Inequality Theorem; converse of the Pythagorean Theorem | Triangle inequality (2N5); Converse of the Pythagorean theorem: is it a right triangle? (EQZ) | Tue Nov 10 |
+| Tue Nov 10 | 6.03 Pythagorean Theorem (memorize) | Pythagorean theorem: find the missing leg or hypotenuse length (MTM) | Thu Nov 12 |
+| Thu Nov 12 | 6.04 Pythagorean Theorem in real-world problems | Pythagorean theorem: word problems (87U) | Fri Nov 13 |
+| Fri Nov 13 | 6.05 Distance on the coordinate plane | Find the distance between two points on a horizontal or vertical line (L9V); Find the distance between two points (ZBP) | Mon Nov 16 |
+| Mon Nov 16 | 6.06 Real-world coordinate-plane problems; perimeter | Pythagorean theorem: find the perimeter (VGE) | Tue Nov 17 |
+| Tue Nov 17 | T-B1 Thread B: angle pairs — supplementary, complementary, vertical, adjacent (16.1) | Identify complementary, supplementary, vertical, adjacent, and congruent angles (HGV); Find measures of complementary, supplementary, vertical, and adjacent angles (R2B); Write and solve equations using angle relationships (DBV) | Wed Nov 18 |
+| Wed Nov 18 | T-B2 Thread B: interior and exterior angles of a triangle (16.2) | Find missing angles in triangles (JFJ); Exterior Angle Theorem (FMP); Triangle Angle-Sum Theorem (6Q6) | Thu Nov 19 |
+| Thu Nov 19 | 6.07+08 Similar triangles; indirect measurement | Side lengths of similar triangles (QSK); Similar triangles and indirect measurement (88W); Identify similar triangles (6PD) | Fri Nov 20 |
+| Thu Dec 03 | 7.01 Graphing proportional relationships | Graph a proportional relationship: word problems (FJW) | Fri Dec 04 |
+| Fri Dec 04 | 7.02+03 Constant of proportionality (table, graph, description) | Interpret graphs of proportional relationships (RMH); Find the constant of proportionality from a table (LKZ); Find the constant of proportionality from a graph (ZUT) | Mon Dec 07 |
+| Mon Dec 07 | 7.04 Is it proportional? | Identify proportional relationships by graphing (AAN); Identify proportional relationships in tables and graphs (VZK) | Tue Dec 08 |
+| Tue Dec 08 | 7.05+06 Equations of proportional relationships; translating representations | Write equations for proportional relationships from tables (6GU); Write equations for proportional relationships from graphs (JKH); Write and solve equations for proportional relationships (VKK) | Wed Dec 09 |
+| Wed Dec 09 | 7.07 Comparing proportional relationships | Compare proportional relationships represented in different ways (5A9) | Thu Dec 10 |
+| Thu Dec 17 | 8.01+02 Circle relationships; circumference | Center, radius, and diameter of a circle (7RY); Circumference of circles (9FM) | Fri Dec 18 |
+| Fri Dec 18 | 8.03 Radius and diameter from circumference | Find the radius or diameter of a circle given the circumference (2CM) | Wed Jan 06 |
+| Wed Jan 06 | 8.04+05 Area of a circle | Area of circles (YA8) | Thu Jan 07 |
+| Thu Jan 07 | 8.06 Circumference and area problems; sectors | Circles: word problems (P56) | Fri Jan 08 |
+| Fri Jan 08 | 8.08+09 Sectors and circle graphs | Use fractions to find the measure of an angle (V76); Circle graphs and central angles (KXS); Interpret circle graphs (WNJ) | Mon Jan 11 |
+| Mon Jan 11 | 9.01+02 Surface area of cylinders from nets | Nets of three-dimensional figures (3R2); Surface area of cylinders (CYQ); Lateral area of cylinders (C8K) | Tue Jan 12 |
+| Tue Jan 12 | 9.03+04+05 Volume of cylinders; problems | Volume of cylinders (FHC) | Wed Jan 13 |
 | Mon Jan 25 | 10.01 Proportional relationships revisited (linear ⇒ proportional?) | Find the constant of proportionality from a table (ZCK); Identify proportional relationships by graphing (RXD); Identify proportional relationships (Z64); Write equations for proportional relationships from tables and graphs (VXM); Interpret graphs of proportional relationships (Q96) | Tue Jan 26 |
 | Tue Jan 26 | 10.02+03 Slope from two points, graphs, tables | Find the slope from two points (ZAC); Find the slope from a table (GSB); Find the slope from a graph (Q94) | Wed Jan 27 |
 | Wed Jan 27 | 10.04 Slope in context | Rate of change of a linear function: graphs (ZPF); Rate of change of a linear function: tables (8FE) | Thu Jan 28 |
