@@ -2,7 +2,7 @@
 
 Windy Hill Middle School · course 1205050 · six teaching days (eight book lessons, merged to six), a review sent home as practice, a two-period assessment.
 
-**By the plan** (Windmill's spine as of 2026-10-04; `tools/scope_calendar.py` is its source): lessons Mon 19 Oct – Mon 26 Oct, the assessment Thu 29 Oct and Fri 30 Oct, 2026. The dates move when the as-run log does (the plan follows the class), and a day is logged from the phone view of the plan.
+**By the plan** (Windmill's spine as of 2026-10-16; `tools/scope_calendar.py` is its source): lessons Fri 16 Oct – Fri 23 Oct, the assessment Mon 26 Oct and Tue 27 Oct, 2026. The dates move when the as-run log does (the plan follows the class), and a day is logged from the phone view of the plan.
 
 Nothing exists until it is committed. This folder is generated from `a7/build/u4/` by `install_unit.py`; edit the specs and rebuild rather than editing these files by hand.
 
@@ -34,14 +34,14 @@ Nothing exists until it is committed. This folder is generated from `a7/build/u4
 
 | Day | Planned | Lesson | Benchmark | The line that carries the day |
 |---|---|---|---|---|
-| 4.01 | Mon 19 Oct | Adding and Subtracting in Scientific Notation | MA.8.NSO.1.5 | The powers of ten have to match before a single digit is added. |
-| 4.02–03 | Tue 20 Oct | Multiplying and Dividing in Scientific Notation | MA.8.NSO.1.5 | Multiply the fronts, add the backs — and nothing has to match. |
-| 4.04 | Wed 21 Oct | Real-World Problems and Significant Digits | MA.8.NSO.1.6 | Products count digits; sums count places. |
-| 4.05 | Thu 22 Oct | Evaluating Expressions with Radicals | MA.8.NSO.1.7 | The radical bar is a pair of parentheses you cannot see. |
-| 4.06 | Fri 23 Oct | Order of Operations with Radicals | MA.8.NSO.1.7 | Read the expression and ask what is holding what. |
-| 4.07–08 | Mon 26 Oct | Real-World Order of Operations | MA.8.NSO.1.7 | No word tells you which operation to use. Read the situation. |
+| 4.01 | Fri 16 Oct | Adding and Subtracting in Scientific Notation | MA.8.NSO.1.5 | The powers of ten have to match before a single digit is added. |
+| 4.02–03 | Mon 19 Oct | Multiplying and Dividing in Scientific Notation | MA.8.NSO.1.5 | Multiply the fronts, add the backs — and nothing has to match. |
+| 4.04 | Tue 20 Oct | Real-World Problems and Significant Digits | MA.8.NSO.1.6 | Products count digits; sums count places. |
+| 4.05 | Wed 21 Oct | Evaluating Expressions with Radicals | MA.8.NSO.1.7 | The radical bar is a pair of parentheses you cannot see. |
+| 4.06 | Thu 22 Oct | Order of Operations with Radicals | MA.8.NSO.1.7 | Read the expression and ask what is holding what. |
+| 4.07–08 | Fri 23 Oct | Real-World Order of Operations | MA.8.NSO.1.7 | No word tells you which operation to use. Read the situation. |
 | — | — | Unit Review | all three | unscored, sent home as practice (ruling 27a); the SSDD block is named on the key only |
-| — | Thu 29 Oct and Fri 30 Oct | Unit Assessment — two periods, one paper | all three benchmarks, sections by benchmark | 34 points |
+| — | Mon 26 Oct and Tue 27 Oct | Unit Assessment — two periods, one paper | all three benchmarks, sections by benchmark | 34 points |
 
 Book order, with 4.2 + 4.3 and 4.7 + 4.8 merged under ruling 30 — both merges were already in the scope and sequence. 4.05 and 4.06 stay separate days even though IXL gives them the same skill; under ruling 28 that is one assignment covering the run, due after the second of the two. No thread day falls inside Unit 4. All three benchmarks report under Number Sense and Operations on the Grade 8 FAST, so the review's parts split by lesson and the assessment's sections split by benchmark.
 
