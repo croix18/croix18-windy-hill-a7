@@ -636,7 +636,9 @@ def build(out):
         u = int(label.split("/")[-1])
         put(wt, r, 1, f"Unit {label}", font=BOLD)
         if dates:
-            put(wt, r, 2, dates[0], fmt="ddd d mmm"); put(wt, r, 3, dates[1], fmt="ddd d mmm")
+            put(wt, r, 2, dates[0], fmt="ddd d mmm")
+            if len(dates) > 1: put(wt, r, 3, dates[1], fmt="ddd d mmm")
+            else: put(wt, r, 3, None)          # a test the class took in one day (A7 Unit 3, 15 Oct: the as-run log has Unit 4 beginning the next day)
         else:
             put(wt, r, 2, "before 23 Sep", font=DIM); put(wt, r, 3, None)
         points_row[u] = r

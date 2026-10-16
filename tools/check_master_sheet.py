@@ -427,7 +427,7 @@ for c in cal:
 cal_rows = {r[0].value: r for r in wt.iter_rows(min_row=4, max_row=25) if isinstance(r[0].value, str) and r[0].value.startswith("Unit ")}
 for k, ds in exam_dates.items():
     r = cal_rows.get(f"Unit {k}")
-    if not r or [D(r[1].value), D(r[2].value)] != ds: bad("test dates", k, ds)
+    if not r or [x for x in (D(r[1].value), D(r[2].value)) if x is not None] != ds: bad("test dates", k, ds)   # one date when the test took one day
 units = {}
 for f in glob.glob(f"{ROOT}/a7/build/u*/unit.py"):
     s = importlib.util.spec_from_file_location("m", f); m = importlib.util.module_from_spec(s); s.loader.exec_module(m)
