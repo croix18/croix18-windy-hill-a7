@@ -57,14 +57,14 @@ Title and learning target (1 min) → warm-up, four spaced-retrieval questions (
 
 | Lesson | Teaching (title, warm-up, notes, examples) | Whiteboard round | IXL | Total |
 |---|---|---|---|---|
-| 4.01 | 35 min | 13 min | 5 min | 53 min |
-| 4.02–03 | 35 min | 13 min | 5 min | 53 min |
-| 4.04 | 36 min | 12 min | 5 min | 53 min |
-| 4.05 | 36 min | 12 min | 5 min | 53 min |
-| 4.06 | 36 min | 12 min | 5 min | 53 min |
-| 4.07–08 | 36 min | 12 min | 5 min | 53 min |
+| 4.01 | 36 min | 12 min | 5 min | 53 min |
+| 4.02–03 | 36 min | 12 min | 5 min | 53 min |
+| 4.04 | 37 min | 11 min | 5 min | 53 min |
+| 4.05 | 37 min | 11 min | 5 min | 53 min |
+| 4.06 | 37 min | 11 min | 5 min | 53 min |
+| 4.07–08 | 37 min | 11 min | 5 min | 53 min |
 
-The whiteboard round is the remainder — 12–13 minutes across the unit — and the build refuses any plan whose remainder falls outside 10–20. Every plan totals 53 exactly. There is no shortened variant; short days are absorbed by the person in the room.
+The whiteboard round is the remainder — 11–12 minutes across the unit — and the build refuses any plan whose remainder falls outside 10–20. Every plan totals 53 exactly. There is no shortened variant; short days are absorbed by the person in the room.
 
 <!-- end timing table -->
 

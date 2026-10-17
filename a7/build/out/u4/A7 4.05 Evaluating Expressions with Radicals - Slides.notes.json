@@ -27,6 +27,14 @@
   },
   {
    "n": 4,
+   "title": "Vocabulary",
+   "sub": "The new words, before they are used.",
+   "min": 1,
+   "note": "Read each word and its meaning once; the notes use them next. Students copy the words, not the definitions.",
+   "kind": "vocab"
+  },
+  {
+   "n": 5,
    "title": "Notes",
    "sub": "Copy all three lines.",
    "min": 4,
@@ -34,7 +42,7 @@
    "kind": "notes"
   },
   {
-   "n": 5,
+   "n": 6,
    "title": "Notes",
    "sub": "",
    "min": 4,
@@ -42,7 +50,7 @@
    "kind": "notes"
   },
   {
-   "n": 6,
+   "n": 7,
    "title": "Notes",
    "sub": "",
    "min": 4,
@@ -50,7 +58,7 @@
    "kind": "notes"
   },
   {
-   "n": 7,
+   "n": 8,
    "title": "Example 1",
    "sub": "A power and a radical in one expression.",
    "min": 1,
@@ -58,7 +66,7 @@
    "kind": "example"
   },
   {
-   "n": 8,
+   "n": 9,
    "title": "Example 1",
    "sub": "Worked.",
    "min": 2,
@@ -66,7 +74,7 @@
    "kind": "example"
   },
   {
-   "n": 9,
+   "n": 10,
    "title": "Your Turn",
    "sub": "Same steps, your numbers. Boards up when done.",
    "min": 2,
@@ -74,7 +82,7 @@
    "kind": "yourturn"
   },
   {
-   "n": 10,
+   "n": 11,
    "title": "Your Turn",
    "sub": "Answer.",
    "min": 1,
@@ -82,7 +90,7 @@
    "kind": "yourturn"
   },
   {
-   "n": 11,
+   "n": 12,
    "title": "Example 2",
    "sub": "A radical inside a product.",
    "min": 1,
@@ -90,7 +98,7 @@
    "kind": "example"
   },
   {
-   "n": 12,
+   "n": 13,
    "title": "Example 2",
    "sub": "Worked.",
    "min": 2,
@@ -98,7 +106,7 @@
    "kind": "example"
   },
   {
-   "n": 13,
+   "n": 14,
    "title": "Your Turn",
    "sub": "Same steps, your numbers. Boards up when done.",
    "min": 2,
@@ -106,7 +114,7 @@
    "kind": "yourturn"
   },
   {
-   "n": 14,
+   "n": 15,
    "title": "Your Turn",
    "sub": "Answer.",
    "min": 1,
@@ -114,7 +122,7 @@
    "kind": "yourturn"
   },
   {
-   "n": 15,
+   "n": 16,
    "title": "Whiteboards   \u00b7   Question 1 of 9",
    "sub": "Boards up on three.",
    "min": 0,
@@ -122,7 +130,7 @@
    "kind": "wb"
   },
   {
-   "n": 16,
+   "n": 17,
    "title": "Whiteboards   \u00b7   Question 1 of 9",
    "sub": "Answer.",
    "min": 0,
@@ -130,7 +138,7 @@
    "kind": "wb"
   },
   {
-   "n": 17,
+   "n": 18,
    "title": "Whiteboards   \u00b7   Question 2 of 9",
    "sub": "Boards up on three.",
    "min": 0,
@@ -138,7 +146,7 @@
    "kind": "wb"
   },
   {
-   "n": 18,
+   "n": 19,
    "title": "Whiteboards   \u00b7   Question 2 of 9",
    "sub": "Answer.",
    "min": 0,
@@ -146,7 +154,7 @@
    "kind": "wb"
   },
   {
-   "n": 19,
+   "n": 20,
    "title": "Whiteboards   \u00b7   Question 3 of 9",
    "sub": "Boards up on three.",
    "min": 0,
@@ -154,7 +162,7 @@
    "kind": "wb"
   },
   {
-   "n": 20,
+   "n": 21,
    "title": "Whiteboards   \u00b7   Question 3 of 9",
    "sub": "Answer.",
    "min": 0,
@@ -162,7 +170,7 @@
    "kind": "wb"
   },
   {
-   "n": 21,
+   "n": 22,
    "title": "Whiteboards   \u00b7   Question 4 of 9",
    "sub": "Boards up on three.",
    "min": 0,
@@ -170,7 +178,7 @@
    "kind": "wb"
   },
   {
-   "n": 22,
+   "n": 23,
    "title": "Whiteboards   \u00b7   Question 4 of 9",
    "sub": "Answer.",
    "min": 0,
@@ -178,7 +186,7 @@
    "kind": "wb"
   },
   {
-   "n": 23,
+   "n": 24,
    "title": "Whiteboards   \u00b7   Question 5 of 9",
    "sub": "Boards up on three.",
    "min": 0,
@@ -186,7 +194,7 @@
    "kind": "wb"
   },
   {
-   "n": 24,
+   "n": 25,
    "title": "Whiteboards   \u00b7   Question 5 of 9",
    "sub": "Answer.",
    "min": 0,
@@ -194,7 +202,7 @@
    "kind": "wb"
   },
   {
-   "n": 25,
+   "n": 26,
    "title": "Whiteboards   \u00b7   Question 6 of 9",
    "sub": "Boards up on three.",
    "min": 0,
@@ -202,7 +210,7 @@
    "kind": "wb"
   },
   {
-   "n": 26,
+   "n": 27,
    "title": "Whiteboards   \u00b7   Question 6 of 9",
    "sub": "Answer.",
    "min": 0,
@@ -210,7 +218,7 @@
    "kind": "wb"
   },
   {
-   "n": 27,
+   "n": 28,
    "title": "Whiteboards   \u00b7   Question 7 of 9",
    "sub": "Boards up on three.",
    "min": 0,
@@ -218,7 +226,7 @@
    "kind": "wb"
   },
   {
-   "n": 28,
+   "n": 29,
    "title": "Whiteboards   \u00b7   Question 7 of 9",
    "sub": "Answer.",
    "min": 0,
@@ -226,7 +234,7 @@
    "kind": "wb"
   },
   {
-   "n": 29,
+   "n": 30,
    "title": "Whiteboards   \u00b7   Question 8 of 9",
    "sub": "Boards up on three.",
    "min": 0,
@@ -234,7 +242,7 @@
    "kind": "wb"
   },
   {
-   "n": 30,
+   "n": 31,
    "title": "Whiteboards   \u00b7   Question 8 of 9",
    "sub": "Answer.",
    "min": 0,
@@ -242,7 +250,7 @@
    "kind": "wb"
   },
   {
-   "n": 31,
+   "n": 32,
    "title": "Whiteboards   \u00b7   Question 9 of 9",
    "sub": "Take your time. Boards up when you have written it.",
    "min": 0,
@@ -250,7 +258,7 @@
    "kind": "wb"
   },
   {
-   "n": 32,
+   "n": 33,
    "title": "Whiteboards   \u00b7   Question 9 of 9",
    "sub": "Answer.",
    "min": 0,
@@ -258,7 +266,7 @@
    "kind": "wb"
   },
   {
-   "n": 33,
+   "n": 34,
    "title": "Independent Set",
    "sub": "Six questions. On your own, in writing.",
    "min": 6,
@@ -266,7 +274,7 @@
    "kind": "independent"
   },
   {
-   "n": 34,
+   "n": 35,
    "title": "IXL",
    "sub": "Last five minutes.",
    "min": 5,
