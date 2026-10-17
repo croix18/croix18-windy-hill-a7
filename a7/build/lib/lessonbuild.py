@@ -541,6 +541,8 @@ def build_unit_deck(lessons, rows, U, outdir):
         for (label, title), i in zip(rows, starts):
             D.link_row(contents, y, (label, title), f"slide {i + 1}", D.slide_ref(i), pitch=pitch, title_size=tsz)
             y += pitch
+            if hasattr(D, "back_link"):
+                D.back_link(D.slide_ref(i), contents)       # each lesson's title slide jumps back to the contents
         path = os.path.join(outdir, names.unit(unit, "All Slides", ext))
         D.save(path, sidecar=False, **({"console": True} if ext == "html" else {}))
         paths.append(path)
@@ -660,7 +662,18 @@ def _fill_deck(D, L):
         D.section("Vocabulary", "The new words, before they are used.", 1,
                   L.get("vocab_note", "Read each word and its meaning once; the notes use them next. Students copy the words, not the definitions."), "vocab")
         D.no_band(); D.cursor = TOP
-        _vocab_slide(D, L["vocab"])
+        vocab = list(L["vocab"])
+        if len(vocab) > 5 and not _trial(lambda S: (setattr(S, "cursor", TOP), _vocab_body(S, vocab, 16))):
+            # more words than one slide holds (M7 9.01: six, once "linear expression" and "fewest
+            # terms" were defined before they were used, 17 Oct): a second Vocabulary slide, the
+            # list cut in half, both inside the same one-minute segment
+            half = (len(vocab) + 1) // 2
+            _vocab_slide(D, vocab[:half])
+            D.section("Vocabulary", "The new words, continued.", 0, "The rest of the words; the same minute.", "vocab")
+            D.no_band(); D.cursor = TOP
+            _vocab_slide(D, vocab[half:])
+        else:
+            _vocab_slide(D, vocab)
     # ---- notes
     for ni, note in enumerate(L["notes"]):
         D.section("Notes", note.get("sub", ""), note["min"], note["note"], "notes")

@@ -3468,3 +3468,25 @@ check is worse than no check, because the next person believes the green.** A ch
 "new lessons only" would have no denominator at all and would go stale the moment somebody forgot
 to widen it. Declaring the claim makes both halves visible at once: what is enforced, and what is
 not yet claimed.
+
+## 13b(xviii). Ruling 46 — 17 October: the assessment papers are set in Lexend; the unit ships merged PDFs [both courses]
+
+**Ruling 46 — Croix, 17 October 2026: "the tests and assessments need to be made in the lexend
+font we've been using."** Ruling 40 put the slides in Lexend and left printed pages in the body
+serif. The assessment papers now follow the slides: Form A, Form B, the practice test, their keys
+and their worked-answer copies are set in Lexend — words and typeset mathematics both (the course
+profile's `PAPER_FONT = "Lexend"`; `dockit.Doc(font=…)`; `mathimg`'s `lexdoc` surface, which is the
+slide face at page size). Lexend is a Google Font that Docs carries, so `gdoccheck` counts it as
+native. Teacher's editions, lesson plans and question banks keep the body font: he named the tests,
+and a teacher's page is read once at a desk, not from the back of a room.
+
+**The same day: "a similar all-files-in-one thing for the rest of the stuff."** Beside the whole-unit
+deck, `build_unit.py` now merges the built PDFs into one file per kind — *All Teacher Editions*,
+*All Lesson Plans*, *All Assessments* (each form's paper, key, worked answers) and *All Keys* — in
+teaching order, one bookmark per document, filed in the package's `All in One/` folder. They are
+made from the per-document PDFs and never laid out separately, so they cannot drift from them.
+
+**And the contents slide links.** Asked for the unit deck's table of contents to "hyperlink the
+correct sections": it already did (every row is a jump-to-slide action), and each lesson's title
+slide now carries a small *← Contents* link back. Google Slides keeps slide-to-slide links on
+import.
