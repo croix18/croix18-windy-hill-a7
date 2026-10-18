@@ -369,6 +369,12 @@ def unit_doc(unit, sub, tail, ext="pdf"):
     folder = pkg_folder(unit)
     if not folder:
         return None
+    if sub == "Assessment" and tail.startswith("Test"):
+        # a unit that ships parallel forms (Unit 5 on) files them under Assessment/Form A, Form B,
+        # Practice Test; the sheet's test links are Form A's paper and key
+        fa = _one(os.path.join(glob.escape(folder), sub, "Form A", f"A7 Unit {unit} * - {tail.replace('Test', 'Test Form A', 1)}.{ext}"))
+        if fa:
+            return fa
     return _one(os.path.join(glob.escape(folder), sub, f"A7 Unit {unit} * - {tail}.{ext}"))
 
 
