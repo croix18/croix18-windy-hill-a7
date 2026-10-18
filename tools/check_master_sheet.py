@@ -308,7 +308,7 @@ for i, (cells, c) in enumerate(zip(rows, cal), 2):
         if v["Learning target"] != L["target"] or v["Essential question"] != L["essential"]: bad(f"r{i} target/EQ")
         if v["Vocabulary"] != ", ".join(t for t, _ in L["vocab"]): bad(f"r{i} vocab")
         b9 = L["whiteboard"][8]
-        if v["Closure question (board 9)"] != b9["qtext"] or v["Closure answer"] != b9["answer"]: bad(f"r{i} closure")
+        if v["Closure question (board 9)"] != tex2text.text(b9["qtext"]) or v["Closure answer"] != tex2text.text(b9["answer"]): bad(f"r{i} closure")   # the sheet prints the question as words (a board with $…$ since 18 Oct)
         mt = v["MTRs (tap for where they show up)"].split("\n")
         if [x.split(" ")[0] for x in mt] != [f"MA.K12.{k}" for k, _ in L["mtr"]]: bad(f"r{i} MTR codes")
         for x in mt:
