@@ -10,7 +10,8 @@ GRADE_FAST = "Grade 8 FAST"
 # The units' titles: every unit-wide file and folder is named from here (lib/names.py), and
 # unit.py's own title must agree. Add a unit here before building it.
 UNITS = {1: "Equations and Inequalities", 2: "Real Numbers, Square Roots and Cube Roots",
-         3: "Exponents and Scientific Notation", 4: "Solving Problems with Rational Numbers"}
+         3: "Exponents and Scientific Notation", 4: "Solving Problems with Rational Numbers",
+         5: "Solving Multi-Step Problems with Proportional Relationships"}
 IXL_SMARTSCORE = 67                # ruling 28 — 67 accelerated, 60 on-level (Croix, 20 Sep)
 
 SET = "handout"                    # ruling 21: the six questions are a printed page and its key

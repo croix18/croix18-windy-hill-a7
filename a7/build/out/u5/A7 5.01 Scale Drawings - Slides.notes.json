@@ -1,0 +1,285 @@
+{
+ "deck": "A7 5.01 Scale Drawings - Slides.pptx",
+ "slides": [
+  {
+   "n": 1,
+   "title": "Scale Drawings",
+   "sub": "",
+   "min": 1,
+   "note": "Post the learning target. Say one line and nothing else yet: \u201cToday: one number every length is multiplied by \u2014 the scale factor.\u201d",
+   "kind": "title"
+  },
+  {
+   "n": 2,
+   "title": "Warm-Up",
+   "sub": "On your own. Four minutes. No notes.",
+   "min": 4,
+   "note": "Q4 is the lesson in miniature: a scale is a ratio, and the first move is always to read it per 1. Two minutes silent, then reveal; one sentence of reteach at most.",
+   "kind": "warmup"
+  },
+  {
+   "n": 3,
+   "title": "Warm-Up",
+   "sub": "Answers.",
+   "min": 1,
+   "note": "Reveal. Ask for the band each question came from only if time allows.",
+   "kind": "warmup"
+  },
+  {
+   "n": 4,
+   "title": "Vocabulary",
+   "sub": "The new words, before they are used.",
+   "min": 1,
+   "note": "Read each word and its meaning once; the notes use them next. Students copy the words, not the definitions.",
+   "kind": "vocab"
+  },
+  {
+   "n": 5,
+   "title": "Notes",
+   "sub": "Copy the figure and the line.",
+   "min": 4,
+   "note": "Two rectangles, 6 by 4 and 9 by 6. Divide each copy side by its original side: 9 \u00f7 6 = 1.5 and 6 \u00f7 4 = 1.5 \u2014 the same number both times, and that is what makes it a copy. **Say:** a scale factor is the one number every length is multiplied by; if two sides give different numbers, it is not a scale copy.",
+   "kind": "notes"
+  },
+  {
+   "n": 6,
+   "title": "Notes",
+   "sub": "",
+   "min": 3,
+   "note": "The direction is fixed all unit: copy \u00f7 original. 10 \u2192 4 is k = 0.4, and 0.4 is a perfectly good scale factor \u2014 the copy is smaller. The guide's named error is answering 2.5 here, the other way round. **Say:** k under 1 shrinks; k over 1 enlarges; k = 1 is the same size.",
+   "kind": "notes"
+  },
+  {
+   "n": 7,
+   "title": "Notes",
+   "sub": "",
+   "min": 3,
+   "note": "From the original to the copy, multiply; from the copy back to the original, divide. On a map the scale is a k with units on it \u2014 1 in : 20 mi means multiply inches by 20 to get miles, and divide miles by 20 to get inches. **Say:** multiply to go to the copy, divide to come back.",
+   "kind": "notes"
+  },
+  {
+   "n": 8,
+   "title": "Example 1",
+   "sub": "Find k from two figures.",
+   "min": 1,
+   "note": "Ask which side matches which before anyone divides: 15 matches 6, 10 matches 4.",
+   "kind": "example"
+  },
+  {
+   "n": 9,
+   "title": "Example 1",
+   "sub": "Worked.",
+   "min": 2,
+   "note": "15 \u00f7 6 = 2.5 and 10 \u00f7 4 = 2.5: the same k from both pairs, so it is a copy and k = 2.5. A board with 0.4 divided the other way; one with 9 subtracted.",
+   "kind": "example"
+  },
+  {
+   "n": 10,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "k = 1.5 from both pairs (9 \u00f7 6 and 12 \u00f7 8). Same structure, its own numbers. A board with \u2154 divided original by copy.",
+   "kind": "yourturn"
+  },
+  {
+   "n": 11,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 12,
+   "title": "Example 2",
+   "sub": "Use a scale on a map.",
+   "min": 1,
+   "note": "Ask what the scale says per 1 inch before anyone multiplies.",
+   "kind": "example"
+  },
+  {
+   "n": 13,
+   "title": "Example 2",
+   "sub": "Worked.",
+   "min": 2,
+   "note": "Every inch is 20 miles, so 3.5 inches is 3.5 \u00d7 20 = 70 miles. A board with 0.175 divided.",
+   "kind": "example"
+  },
+  {
+   "n": 14,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "63 km: 4.2 \u00d7 15. A board with 0.28 divided.",
+   "kind": "yourturn"
+  },
+  {
+   "n": 15,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 16,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The first k, over 1. Say the direction aloud once: copy divided by original.",
+   "kind": "wb"
+  },
+  {
+   "n": 17,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 18,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "k under 1 on the second board, on purpose: the guide's named error is answering 2 here.",
+   "kind": "wb"
+  },
+  {
+   "n": 19,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 20,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "A fraction k. A board with 1\u2153 divided the wrong way; one with 3 subtracted.",
+   "kind": "wb"
+  },
+  {
+   "n": 21,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 22,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic, and the one that matters today. A is the guide's named misconception (2.5, the division backwards); a room full of A means Notes II did not land. Sixty seconds and a re-vote on a split.",
+   "kind": "wb"
+  },
+  {
+   "n": 23,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 24,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The given reverses: k and the original, asked for the copy. A board with 1.7 divided.",
+   "kind": "wb"
+  },
+  {
+   "n": 25,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 26,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The boundary board: the one measurement a scale factor leaves alone. IXL's WEA asks for a missing angle, and the answer is always the angle you were given. On a split, hold up a small and a large square: four right angles each.",
+   "kind": "wb"
+  },
+  {
+   "n": 27,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 28,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The scale-copy check (Math Nation 5.4.3's shape): one pair giving a different number is enough to say no. Unit 6 leans on this board when similar triangles arrive.",
+   "kind": "wb"
+  },
+  {
+   "n": 29,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 30,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The extra-number board (ruling 22): Dev's age is bait. The scale has to be read per 1 inch (4 ft) before the 20 can be divided. A board with 80 multiplied.",
+   "kind": "wb"
+  },
+  {
+   "n": 31,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 32,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Take your time. Boards up when you have written it.",
+   "min": 0,
+   "note": "Written, and the exit evidence: the direction of the division in a sentence. Read two aloud.",
+   "kind": "wb"
+  },
+  {
+   "n": 33,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 34,
+   "title": "Independent Set",
+   "sub": "Six questions. On your own, in writing.",
+   "min": 6,
+   "note": "Hand out the Independent Set; the same six questions are on the board. Silent work. Circulate and mark what you see; do not teach. Whatever is not finished goes home.",
+   "kind": "independent"
+  },
+  {
+   "n": 35,
+   "title": "IXL",
+   "sub": "Last five minutes.",
+   "min": 5,
+   "note": "IXL: every listed skill is required, SmartScore 67. Due at the start of the next class.",
+   "kind": "ixl"
+  }
+ ]
+}
