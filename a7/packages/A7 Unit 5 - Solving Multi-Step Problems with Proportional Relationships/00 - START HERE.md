@@ -10,7 +10,7 @@ Nothing exists until it is committed. This folder is generated from `a7/build/u5
 
 ## How the files are named
 
-**Course, number, title, then what it is** — `A7 5.01 Scale Drawings - Slides.pptx`, `A7 5.01 Scale Drawings - Question Bank.docx`, `A7 5.01 Scale Drawings - Question Bank - Key.docx`. Unit-wide files carry the unit instead of a lesson: `A7 Unit 5 Solving Multi-Step Problems with Proportional Relationships - All Slides.pptx`, `A7 Unit 5 Solving Multi-Step Problems with Proportional Relationships - Test.docx`, `A7 Unit 5 Solving Multi-Step Problems with Proportional Relationships - Test - Key.docx`, `A7 Unit 5 Solving Multi-Step Problems with Proportional Relationships - Review.docx`, `A7 Unit 5 Solving Multi-Step Problems with Proportional Relationships - Reference Sheet.docx`. Single spaces, pieces joined by ` - `, two-digit lesson numbers so everything sorts in teaching order. The same pattern in both courses (Croix, 4 October 2026). 
+**Course, number, title, then what it is** — `A7 5.02 Scale Factor Perimeter and Area - Slides.pptx`, `A7 5.02 Scale Factor Perimeter and Area - Question Bank.docx`, `A7 5.02 Scale Factor Perimeter and Area - Question Bank - Key.docx`. Unit-wide files carry the unit instead of a lesson: `A7 Unit 5 Solving Multi-Step Problems with Proportional Relationships - All Slides.pptx`, `A7 Unit 5 Solving Multi-Step Problems with Proportional Relationships - Test.docx`, `A7 Unit 5 Solving Multi-Step Problems with Proportional Relationships - Test - Key.docx`, `A7 Unit 5 Solving Multi-Step Problems with Proportional Relationships - Review.docx`, `A7 Unit 5 Solving Multi-Step Problems with Proportional Relationships - Reference Sheet.docx`. Single spaces, pieces joined by ` - `, two-digit lesson numbers so everything sorts in teaching order. The same pattern in both courses (Croix, 4 October 2026). 
 
 ---
 
@@ -36,6 +36,7 @@ Nothing exists until it is committed. This folder is generated from `a7/build/u5
 | Day | Planned | Lesson | Benchmark | The line that carries the day |
 |---|---|---|---|---|
 | 5.01 | Wed 28 Oct | Scale Drawings | MA.7.GR.1.5 | A scale factor is the one number every length is multiplied by. Copy divided by original. |
+| 5.02–03 | Thu 29 Oct | Scale Factor: Perimeter and Area | MA.7.GR.1.5 | Perimeter scales by k. Area scales by k squared. |
 | — | — | Unit Review | all three | unscored, sent home as practice (ruling 27a); the SSDD block is named on the key only |
 | — | Thu 5 Nov and Fri 6 Nov | Unit Assessment — two periods, one paper | all three benchmarks, sections by benchmark | 24 points |
 
@@ -54,8 +55,9 @@ Title and learning target (1 min) → warm-up, four spaced-retrieval questions (
 | Lesson | Teaching (title, warm-up, notes, examples) | Whiteboard round | IXL | Total |
 |---|---|---|---|---|
 | 5.01 | 35 min | 13 min | 5 min | 53 min |
+| 5.02–03 | 37 min | 11 min | 5 min | 53 min |
 
-The whiteboard round is the remainder — 13–13 minutes across the unit — and the build refuses any plan whose remainder falls outside 10–20. Every plan totals 53 exactly. There is no shortened variant; short days are absorbed by the person in the room.
+The whiteboard round is the remainder — 11–13 minutes across the unit — and the build refuses any plan whose remainder falls outside 10–20. Every plan totals 53 exactly. There is no shortened variant; short days are absorbed by the person in the room.
 
 <!-- end timing table -->
 
@@ -80,4 +82,4 @@ The whiteboard round is the remainder — 13–13 minutes across the unit — an
 - **Built in the order the rulebook asks (§16):** from the benchmarks first, then read against Math Nation 5.1–5.11 and its test — the audit is in Reference.
 - **Every conversion ratio is the FAST reference sheet's** (1 in = 2.54 cm, 1 mi = 1.61 km, 1 lb = 0.454 kg, 1 kg = 2.204 lb, 1 gal = 3.785 L, 1 c = 0.24 L …) and is printed on the board or paper that uses it. Math Nation's lessons drift from the sheet (1.609, 2.2); its own assessment does not.
 
-Installed: 18 files from the build, plus this page and the Reference folder.
+Installed: 36 files from the build, plus this page and the Reference folder.

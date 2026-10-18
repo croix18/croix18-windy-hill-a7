@@ -41,3 +41,38 @@ the unit is planned. The printed keys in each lesson's `Keys` folder are generat
 1. k = 4  2. k = $\frac{1}{5}$  3. k = 1.5  4. k = ¾  5. 10.5 cm  6. 3 cm  7. 130 mi  8. 2.25 in  9. D D
 
 ---
+
+## 5.02  Scale Factor: Perimeter and Area
+
+*MA.7.GR.1.5*
+
+**Variation.**  Boards 1–2 keep k = 2 and move from perimeter to area; 3 takes k under 1; 4 asks the area as a vote; 5 makes k a decimal. The pattern breaks at 6, where k comes from perimeters and the area ratio is asked. 7 is a triangle, 8 the extra number, 9 the reason in writing. The independent set walks the same path: perimeter × k, area × k², k under 1, both on one rectangle, k from areas, the area ratio from perimeters.
+
+**Read this once, when you plan the unit.**
+
+- Two book lessons in one day (5.2 + 5.3, the plan's own merge). Built from the benchmark's clarification 2 and the B1G-M, then read against Math Nation 5.2–5.3 (the unit audit): the book's triangle and trapezoid copies are board 7; its 'some students forget to square the scale factor' (5.3.3) is boards 2, 4 and 6; its 'the perimeter is one-dimensional just as a side length is' (the Assessment Guide) is Notes I.
+- The B1G-M's named misconception for this benchmark — scaling area like length — is a distractor on both diagnostics (C on board 4, B on board 6) and the named wrong board on every area board. The boundary (board 6) hands the room a k that came from perimeters and asks for the area ratio: the whole lesson in one vote.
+- k from two areas needs a square root. Every area ratio here is a perfect square (9, 16, 25, ¼, ¹⁄₁₆) — Unit 4's radicals, one step, never an approximation (outline decision 3; the book's one such item, Practice L3 Q8, is a perfect square too).
+- The perimeter and the area of board 7's triangle are both 24 on purpose: the two answers (12 and 6) show the two rules apart on one figure.
+
+**What the audit against Math Nation found.**
+
+- Every item re-derived by sympy at build time (mathcheck: 0 findings); every square root is of a perfect square.
+- Math Nation 5.2–5.3 read against this lesson (A7 Unit 5 Audit): its Practice L2 Q10 key confuses the perimeter and area rows (294/84 = 3.5, not 12.25 — audit D1), which is exactly board 6's trap; its 5.3.4 Q1c swaps actual and drawing (D8). Neither item is reused.
+- B1G-M 7.GR.1.5 'scaling area like length' verified as the keyed error on boards 2, 3, 4, 5, 7, 8 and the bank MC.
+
+**What changed from the book.**
+
+- 5.2.1 and 5.3.1 Notice-and-Wonder warm-ups → four retrieval questions, with the grade-6 perimeter and area in the prior-grade slot.
+- 5.2.2–5.2.3 (perimeter on a grid, partner exploration) → Notes I, taught from the front with one rectangle.
+- 5.3.2–5.3.3 (area under scaling; 'forget to square') → Notes II with the four-copies grid, and boards 2, 4, 6.
+- 5.2.4 and 5.3.5 (triangle and trapezoid copies) → board 7, a triangle with its own numbers.
+- 5.2.5 and 5.3.6 Wrap-Ups → the independent set and IXL under rulings 10 and 21; board 9 is the exit evidence.
+
+**Question Bank answers.**  
+1. 44 cm  2. 80 cm²  3. 8 cm²  4. P = 40 cm, A = 84 cm²  5. k = 5  6. k = 0.4  7. 9  8. C C
+
+**Question Bank – Additional answers.**  
+1. 78 cm  2. 81 cm²  3. 25 cm²  4. P = 27 cm, A = 45 cm²  5. k = 3  6. k = ¼  7. 25  8. B B
+
+---
