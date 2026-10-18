@@ -533,7 +533,7 @@ def build(out):
             hit = links.get(col)
             if hit:
                 put(ws, r, C[col], hit[0], link=hit[1], fill=fill)
-            elif col == "Slides (PDF)" and U and not pkg_folder(U) and not code.startswith("PM"):
+            elif col == "Slides (PDF)" and U and not code.startswith("PM") and code not in NO_LESSON:   # a day with no documents yet, in a unit mid-build too
                 put(ws, r, C[col], "not built yet", font=DIM, fill=fill)
             else:
                 put(ws, r, C[col], None, fill=fill)

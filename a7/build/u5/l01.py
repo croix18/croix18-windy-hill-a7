@@ -19,6 +19,7 @@ L = dict(
            ("corresponding sides", "the side of the copy that matches a side of the original: the 6 cm side matches the 4 cm side"),
            ("scale", "a scale factor with units on it: 1 in : 20 mi means every inch on the map is 20 miles")],
     ixl=["Scale drawings: find the scale factor, missing side, or missing angle — WEA"],
+    closure="Board 9 is written work and it is the exit evidence: the student has to say which way the division goes (copy ÷ original) and give k = ½. A board that says 'yes, 6 is 2 times 3' has the direction backwards — the unit's first misconception, and tomorrow's warm-up Q1 asks it again.",
 
     mtr=[("MTR.2.1", "Notes I: the same pair of figures as a picture, two side lengths and one number k"),
          ("MTR.4.1", "boards 4 and 6 split; the sixty-second re-vote"),

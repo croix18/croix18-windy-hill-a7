@@ -283,14 +283,21 @@ for i, (cells, c) in enumerate(zip(rows, cal), 2):
         if not ev or ev["kind"] != "search" or ev["text"] != "search" or ev["url"] != DRIVE + urllib.parse.quote(f'title:"{phrase}"', safe=":"): bad(f"r{i} {code}: its search for everything named for the lesson", ev and ev["url"])
         elif any(not holds(t.rsplit("/", 1)[-1], phrase) for t in PKG_FILES if f"/Lessons/{stem(code, u)}/" in t and t.startswith(f"a7/packages/A7 Unit {u} - ")): bad(f"r{i} {code}: its search would miss one of the lesson's own files")
     elif ev or cells[H[EVERY]].value is not None: bad(f"r{i} {code}: a search for a day that is not a lesson (or in a GitHub workbook)")
+    # built = this day's documents are in the unit's package: a lesson's own folder, or the unit's
+    # Assessment / Review folder (a unit mid-build has some lessons built and the rest not — A7
+    # Unit 5, 18 Oct; the old test was "units 3 and 4", which was true for one week)
+    pkg_u = f"a7/packages/A7 Unit {u} - " if u else None
+    day_built = bool(pkg_u) and (
+        any(t.startswith(pkg_u) and f"/{'Assessment' if exam else 'Review'}/" in t for t in PKG_FILES) if (exam or code == "spiral")
+        else stem(code, u) in specs and any(t.startswith(pkg_u) and f"/Lessons/{stem(code, u)}/" in t for t in PKG_FILES))
     if exam or code == "spiral":
         t1 = OPENS.get((i, "Slides (PDF)")); t2 = OPENS.get((i, "Bank key"))
-        if u in (3, 4):
+        if day_built:
             w1, w2 = (" - Test.pdf", " - Test - Key.pdf") if exam else (" - Review.pdf", " - Review - Key.pdf")
             sub = "Assessment" if exam else "Review"
             if not (t1 and t1.endswith(w1) and t1.startswith(f"a7/packages/A7 Unit {u} - ") and f"/{sub}/A7 Unit {u} " in t1) or not (t2 and t2.endswith(w2) and f"/{sub}/A7 Unit {u} " in t2): bad(f"r{i} {code} paper/key links")
     lesson_like = not exam and code not in ("spiral", "flex", "extra", "off") and not code.startswith("PM")
-    if u in (3, 4) and lesson_like:
+    if day_built and lesson_like:
         built_rows += 1
         missing = [h for h in hdr[5:16] if not cells[H[h]].hyperlink]
         if missing: bad(f"r{i} {code} missing links", missing)
@@ -311,7 +318,7 @@ for i, (cells, c) in enumerate(zip(rows, cal), 2):
             head = pymupdf.open(f"{ROOT}/{pth}")[0].get_text().split("\n")[0].strip()
             lab = L.get("label") or f"Lesson {L['lesson_no']}"
             if head != f"GRADE 7 ACCELERATED  ·  UNIT {u}  ·  {lab.upper()}": bad(f"r{i} slide 1 reads", head)
-    if u and u >= 5 and lesson_like:
+    if u and u >= 3 and lesson_like and not day_built:
         if v["Slides (PDF)"] != "not built yet" or any(cells[H[h]].hyperlink for h in hdr[5:16]): bad(f"r{i} unbuilt row")
     # benchmark wording
     for part in (v["Benchmark wording"] or "").split("\n\n"):

@@ -12,6 +12,7 @@ M = dict(
         ("5.10", "5.10–11", "Multi-Step Proportion Problems", "MA.7.AR.4.5 · MA.7.AR.3.3", "A unit rate, used twice. Same units before you compare."),
     ],
     assessment=("all three benchmarks, sections by benchmark", 24),
+    order_note="Book order, with 5.2 + 5.3, 5.6 + 5.7, 5.8 + 5.9 and 5.10 + 5.11 merged under ruling 30 — all four merges are the plan's own; Math Nation 5.5 (Mathlandia, an invented currency) is not on the plan and its idea lives in 5.06–07. Three days of MA.7.GR.1.5, two of MA.7.AR.3.3, one of MA.7.AR.4.5 with AR.3.3 inside it. No review day (ruling 27a): the review paper goes home Tue 3 Nov, the test is Thu–Fri 5–6 Nov.",
     handouts={},
     before_unit=[
         "**Built in the order the rulebook asks (§16):** from the benchmarks first, then read against Math Nation 5.1–5.11 and its test — the audit is in Reference.",

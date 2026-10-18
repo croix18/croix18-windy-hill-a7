@@ -56,7 +56,15 @@ if M["unit"] != U:
 LESSONS = M["lessons"]                                   # (code, label, title, benchmark, the day's line), teaching order
 _by_code = {m.L["code"]: m.L for m in (load(f, "l") for f in sorted(glob.glob(os.path.join(HERE, UNITDIR, "l[0-9][0-9].py"))))}
 if set(_by_code) != {row[0] for row in LESSONS}:
-    raise SystemExit(f"lesson specs and manifest disagree about {sorted(set(_by_code) ^ {row[0] for row in LESSONS})}")
+    if set(_by_code) < {row[0] for row in LESSONS}:
+        # a unit mid-build (M7 Unit 9, 17 Oct; A7 Unit 5, 18 Oct): the manifest names every day the
+        # plan has, the specs are the days written so far, and the package is installed with those
+        # — check.sh wants a package the moment a unit has specs, and START HERE says what is missing
+        MISSING = [row for row in LESSONS if row[0] not in _by_code]
+        print(f"mid-build: {len(MISSING)} of {len(LESSONS)} lessons not written yet — {', '.join(r[1] for r in MISSING)}")
+        LESSONS = [row for row in LESSONS if row[0] in _by_code]
+    else:
+        raise SystemExit(f"lesson specs and manifest disagree about {sorted(set(_by_code) ^ {row[0] for row in LESSONS})}")
 SPECS = [_by_code[row[0]] for row in LESSONS]
 
 def reference_files():
