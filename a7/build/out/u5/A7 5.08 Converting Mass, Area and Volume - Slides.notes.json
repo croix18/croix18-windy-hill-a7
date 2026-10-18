@@ -1,0 +1,285 @@
+{
+ "deck": "A7 5.08 Converting Mass, Area and Volume - Slides.pptx",
+ "slides": [
+  {
+   "n": 1,
+   "title": "Converting Mass, Area and Volume",
+   "sub": "",
+   "min": 1,
+   "note": "Post the learning target. Say one line and nothing else yet: \u201cToday: the same move on pounds and gallons \u2014 and for area, the length ratio is used twice.\u201d",
+   "kind": "title"
+  },
+  {
+   "n": 2,
+   "title": "Warm-Up",
+   "sub": "On your own. Four minutes. No notes.",
+   "min": 4,
+   "note": "Q4 is Notes II: a square foot is 12 by 12 inches, 144 of them, not 12. A room that writes 12 in\u00b2 will write 36 for 3 ft\u00b2. Q2 is yesterday's k\u00b2 \u2014 the same structure. Two minutes silent, then reveal.",
+   "kind": "warmup"
+  },
+  {
+   "n": 3,
+   "title": "Warm-Up",
+   "sub": "Answers.",
+   "min": 1,
+   "note": "Reveal. Ask for the band each question came from only if time allows.",
+   "kind": "warmup"
+  },
+  {
+   "n": 4,
+   "title": "Vocabulary",
+   "sub": "The new words, before they are used.",
+   "min": 1,
+   "note": "Read each word and its meaning once; the notes use them next. Students copy the words, not the definitions.",
+   "kind": "vocab"
+  },
+  {
+   "n": 5,
+   "title": "Notes",
+   "sub": "Copy the two lines.",
+   "min": 3,
+   "note": "1 lb = 0.454 kg is a form of 1 like 1 in = 2.54 cm. 50 lb \u00d7 0.454 = 22.7 kg, and the estimate says fewer kilograms than pounds (a kilogram is heavier). The sheet gives 1 kg = 2.204 lb for the way back. Volume the same: 1 gal = 3.785 L, so a 2-gal bucket is 7.57 L \u2014 more litres, since a litre is smaller. **Say:** a new quantity, the same move \u2014 the sheet's ratio, the estimate first.",
+   "kind": "notes"
+  },
+  {
+   "n": 6,
+   "title": "Notes",
+   "sub": "",
+   "min": 4,
+   "note": "1 ft = 12 in, but a square foot is a 12 by 12 square: 144 in\u00b2. Area is two lengths, so the ratio is used twice \u2014 5.02\u201303's k\u00b2 again, with 12 for k. 3 ft\u00b2 = 3 \u00d7 144 = 432 in\u00b2. The grid shows it: 12 rows of 12. **Say:** square units, square the ratio.",
+   "kind": "notes"
+  },
+  {
+   "n": 7,
+   "title": "Notes",
+   "sub": "",
+   "min": 3,
+   "note": "The sheet has 1 c = 8 fl oz and 1 c = 0.24 L, and no line from fluid ounces to millilitres \u2014 so a fluid ounce reaches litres through cups: a 12-fl-oz can is 12 \u00f7 8 = 1.5 c, and 1.5 \u00d7 0.24 = 0.36 L. Two forms of 1 in a chain, like yesterday's yards. And a fluid ounce is a volume; the ounce on a scale is a weight \u2014 two units that share a word. **Say:** read the sheet for the path; it is never one guessed number.",
+   "kind": "notes"
+  },
+  {
+   "n": 8,
+   "title": "Example 1",
+   "sub": "Pounds to kilograms.",
+   "min": 1,
+   "note": "Ask which is heavier, a pound or a kilogram, before anyone multiplies.",
+   "kind": "example"
+  },
+  {
+   "n": 9,
+   "title": "Example 1",
+   "sub": "Worked.",
+   "min": 3,
+   "note": "22.7 kg. Fewer kilograms than pounds. A board with 110 multiplied by 2.204, the other ratio \u2014 the inverted-ratio error again. (50 \u00f7 2.204 = 22.69 is the sheet's other route; accept it.)",
+   "kind": "example"
+  },
+  {
+   "n": 10,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "40.86 kg \u2014 40.9 to one place. A board with 198.36 used 2.204.",
+   "kind": "yourturn"
+  },
+  {
+   "n": 11,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 12,
+   "title": "Example 2",
+   "sub": "Square feet to square inches.",
+   "min": 1,
+   "note": "Ask how many times the ratio is used before anyone multiplies.",
+   "kind": "example"
+  },
+  {
+   "n": 13,
+   "title": "Example 2",
+   "sub": "Worked.",
+   "min": 3,
+   "note": "432 in\u00b2. The ratio twice: 12\u00b2 = 144 per square foot. A board with 36 used it once \u2014 the lesson's named error.",
+   "kind": "example"
+  },
+  {
+   "n": 14,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "20,000 cm\u00b2. 100\u00b2 = 10,000 per square metre. A board with 200 used 100 once.",
+   "kind": "yourturn"
+  },
+  {
+   "n": 15,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 16,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Kilograms to pounds \u2014 more pounds, as the estimate says. (10 \u00f7 0.454 = 22.03 by the other sheet ratio; accept it.)",
+   "kind": "wb"
+  },
+  {
+   "n": 17,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 18,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Volume: the same move. A litre is smaller, so more of them.",
+   "kind": "wb"
+  },
+  {
+   "n": 19,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 20,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Back the other way. Fewer gallons. (10 \u00f7 3.785 = 2.64 as well.)",
+   "kind": "wb"
+  },
+  {
+   "n": 21,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 22,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic. D is the lesson's named error \u2014 the ratio once on a square unit \u2014 and the 3 by 3 grid of square feet inside a square yard is the picture that answers it. Sixty seconds and a re-vote on a split.",
+   "kind": "wb"
+  },
+  {
+   "n": 23,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 24,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Fluid ounces go through cups \u2014 the sheet has no fl-oz-to-millilitre line. A board with 3.84 multiplied 16 by 0.24, treating fluid ounces as cups.",
+   "kind": "wb"
+  },
+  {
+   "n": 25,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 26,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The boundary board: the familiar 100 is wrong. D is the whole lesson's trap in one vote \u2014 the metric 100 feels like it should survive squaring, and it does not. On a split, draw the 100 by 100 square.",
+   "kind": "wb"
+  },
+  {
+   "n": 27,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 28,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Two units, one question: nothing compares until the units match. A board that said 'the 5-lb bag, because 5 > 2' compared the numbers and not the weights \u2014 it happens to be right here; ask what 2 kg in pounds is before accepting it. (5 \u00d7 0.454 = 2.27 kg against 2 kg, by the other route: the same bag, by 0.27 kg.)",
+   "kind": "wb"
+  },
+  {
+   "n": 29,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 30,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The extra-number board (ruling 22): the price is bait. A board with 170.33 divided 45 by 0.264 \u2014 a number that was never asked for.",
+   "kind": "wb"
+  },
+  {
+   "n": 31,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 32,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Take your time. Boards up when you have written it.",
+   "min": 0,
+   "note": "Written, and the exit evidence: the area rule pushed one step further, by the room, with no example of a cube shown first. 'Twice' is a board that remembered today's rule and not its reason \u2014 three lengths, three ratios.",
+   "kind": "wb"
+  },
+  {
+   "n": 33,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 34,
+   "title": "Independent Set",
+   "sub": "Six questions. On your own, in writing.",
+   "min": 6,
+   "note": "Hand out the Independent Set; the same six questions are on the board. Silent work. Circulate and mark what you see; do not teach. Whatever is not finished goes home.",
+   "kind": "independent"
+  },
+  {
+   "n": 35,
+   "title": "IXL",
+   "sub": "Last five minutes.",
+   "min": 5,
+   "note": "IXL: every listed skill is required, SmartScore 67. Due at the start of the next class.",
+   "kind": "ixl"
+  }
+ ]
+}

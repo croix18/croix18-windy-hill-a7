@@ -146,3 +146,37 @@ the unit is planned. The printed keys in each lesson's `Keys` folder are generat
 1. 22.86 cm  2. 31.2 in  3. 48.3 km  4. 15.5 mi  5. 121.92 cm  6. 27.60 euros; \$75  7. 534.60 pesos  8. C C
 
 ---
+
+## 5.08  Converting Mass, Area and Volume
+
+*MA.7.AR.3.3*
+
+**Variation.**  Boards 1–3 take one ratio each direction — mass, then volume both ways; 4 asks a square unit as a vote; 5 chains fluid ounces through cups. The pattern breaks at 6, where the familiar 100 is wrong. 7 converts and then compares, 8 is the extra number, 9 the cube in writing. The independent set walks the same path: mass both ways, volume, a square unit, fluid ounces through cups, square metres.
+
+**Read this once, when you plan the unit.**
+
+- Two book lessons in one day (5.8 + 5.9). Built from the benchmark and the B1G-M, then read against Math Nation (the unit audit): the book prints 2.2 lb per kg and a fluid-ounce-to-millilitre ratio the FAST sheet does not have. This lesson uses the sheet's 0.454 and 2.204 and sends fluid ounces through cups — the audit's finding, outline decision 1.
+- The lesson's trap is 5.02–03's k² wearing different clothes: 1 ft = 12 in, so 1 ft² = 144 in². The two days are built to rhyme, and the warm-up puts them side by side (Q2 and Q4). Board 4 is the vote; board 6 is the boundary, where the metric 100 feels like it should survive squaring.
+- The sheet gives both directions for mass and volume, so a student who divides by the other ratio gets the sheet's other answer (50 ÷ 2.204 = 22.69 against 50 × 0.454 = 22.7): accept both, as FAST does, when the work shows which ratio was used.
+- Ounce and fluid ounce are two units that share a word — the vocabulary slide says so, and board 5's 453.6 is the student who used 28.35 g on a volume.
+
+**What the audit against Math Nation found.**
+
+- Every item re-derived by sympy at build time (mathcheck: 0 findings); every ratio is the FAST reference sheet's (Source of Truth, the conversions block), checked value by value; fl oz → mL is never printed.
+- Math Nation 5.8–5.9 read against this lesson (A7 Unit 5 Audit): its 2.2 lb/kg and its fl-oz-to-mL line are not used; its ounce-versus-fluid-ounce confusion (D5 in the audit) is the vocabulary slide and board 5's named wrong answer.
+- B1G-M 7.AR.3.3 'the inverted ratio' verified as the keyed error on boards 1, 2, 3, 8; 'the ratio once on a square unit' on boards 4, 6, 9 and both bank MCs.
+
+**What changed from the book.**
+
+- 5.8.1 and 5.9.1 Notice-and-Wonder warm-ups → four retrieval questions, with the grade-6 square foot in the prior-grade slot beside yesterday's k².
+- 5.8.2–5.8.4 (mass and capacity with the book's ratio table) → Notes I and III with the sheet's ratios only, and boards 1–3, 5, 7–8.
+- 5.9.2–5.9.4 (area and volume conversions) → Notes II with the 12 by 12 grid, boards 4, 6 and 9.
+- 5.8.5 and 5.9.5 Wrap-Ups → the independent set and IXL under rulings 10 and 21; board 9 is the exit evidence.
+
+**Question Bank answers.**  
+1. 9.08 kg  2. 33.06 lb  3. 30.28 L  4. 6.6 gal  5. 36 ft²  6. 0.96 L  7. 5,184 in³  8. A A
+
+**Question Bank – Additional answers.**  
+1. 18.16 kg  2. 11.02 lb  3. 45.42 L  4. 13.2 gal  5. 63 ft²  6. 1.2 L  7. 6,912 in³  8. D D
+
+---
