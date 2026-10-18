@@ -40,6 +40,7 @@ Nothing exists until it is committed. This folder is generated from `a7/build/u5
 | 5.04 | Fri 30 Oct | Real-World Scale Drawings | MA.7.GR.1.5 | A scale with two units is a rate: read it per 1 first. |
 | 5.06–07 | Mon 2 Nov | Converting Length Across Systems; Currency | MA.7.AR.3.3 | Multiply by a form of 1 so the unit you have cancels. Estimate first. |
 | 5.08–09 | Tue 3 Nov | Converting Mass, Area and Volume | MA.7.AR.3.3 | Area converts by the square of the length ratio. |
+| 5.10–11 | Wed 4 Nov | Multi-Step Proportion Problems | MA.7.AR.4.5 · MA.7.AR.3.3 | A unit rate, used twice. Same units before you compare. |
 | — | — | Unit Review | all three | unscored, sent home as practice (ruling 27a); the SSDD block is named on the key only |
 | — | Thu 5 Nov and Fri 6 Nov | Unit Assessment — two periods, one paper | all three benchmarks, sections by benchmark | 24 points |
 
@@ -62,6 +63,7 @@ Title and learning target (1 min) → warm-up, four spaced-retrieval questions (
 | 5.04 | 37 min | 11 min | 5 min | 53 min |
 | 5.06–07 | 37 min | 11 min | 5 min | 53 min |
 | 5.08–09 | 37 min | 11 min | 5 min | 53 min |
+| 5.10–11 | 37 min | 11 min | 5 min | 53 min |
 
 The whiteboard round is the remainder — 11–13 minutes across the unit — and the build refuses any plan whose remainder falls outside 10–20. Every plan totals 53 exactly. There is no shortened variant; short days are absorbed by the person in the room.
 
@@ -88,4 +90,4 @@ The whiteboard round is the remainder — 11–13 minutes across the unit — an
 - **Built in the order the rulebook asks (§16):** from the benchmarks first, then read against Math Nation 5.1–5.11 and its test — the audit is in Reference.
 - **Every conversion ratio is the FAST reference sheet's** (1 in = 2.54 cm, 1 mi = 1.61 km, 1 lb = 0.454 kg, 1 kg = 2.204 lb, 1 gal = 3.785 L, 1 c = 0.24 L …) and is printed on the board or paper that uses it. Math Nation's lessons drift from the sheet (1.609, 2.2); its own assessment does not.
 
-Installed: 90 files from the build, plus this page and the Reference folder.
+Installed: 108 files from the build, plus this page and the Reference folder.

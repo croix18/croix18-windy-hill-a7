@@ -1,0 +1,285 @@
+{
+ "deck": "A7 5.10 Multi-Step Proportion Problems - Slides.pptx",
+ "slides": [
+  {
+   "n": 1,
+   "title": "Multi-Step Proportion Problems",
+   "sub": "",
+   "min": 1,
+   "note": "Post the learning target. Say one line and nothing else yet: \u201cToday: one unit rate, used twice \u2014 and two rates put in the same unit before anyone says which is bigger.\u201d",
+   "kind": "title"
+  },
+  {
+   "n": 2,
+   "title": "Warm-Up",
+   "sub": "On your own. Four minutes. No notes.",
+   "min": 4,
+   "note": "Q4 is the unit rate every board today starts from. A room that cannot write 180 for 3 as 60 for 1 cannot use a rate twice. Two minutes silent, then reveal \u2014 43 minutes today, so no discussion on the warm-up.",
+   "kind": "warmup"
+  },
+  {
+   "n": 3,
+   "title": "Warm-Up",
+   "sub": "Answers.",
+   "min": 1,
+   "note": "Reveal. Ask for the band each question came from only if time allows.",
+   "kind": "warmup"
+  },
+  {
+   "n": 4,
+   "title": "Vocabulary",
+   "sub": "The new words, before they are used.",
+   "min": 1,
+   "note": "Read each word and its meaning once; the notes use them next. Students copy the words, not the definitions.",
+   "kind": "vocab"
+  },
+  {
+   "n": 5,
+   "title": "Notes",
+   "sub": "Copy the two lines.",
+   "min": 3,
+   "note": "A car does 23 miles per gallon and its tank holds 17.5 gal: 23 \u00d7 17.5 = 402.5 mi on a tank. A 1,207-mi trip: 1,207 \u00f7 402.5 = 2.998\u2026, so 3 tanks. The rate was used once to find the range and once more to count tanks \u2014 two steps, one proportional relationship, and the first answer is not the answer. **Say:** a multi-step problem is the same rate used again; name what each step finds.",
+   "kind": "notes"
+  },
+  {
+   "n": 6,
+   "title": "Notes",
+   "sub": "",
+   "min": 4,
+   "note": "100 km/h against 65 mi/h: nothing compares until the units match. 1 km = 0.62 mi, so 100 km/h is 62 mi/h \u2014 the second car is faster, though 100 is the bigger number. Convert one rate into the other's unit, then compare. **Say:** which is faster is a question you refuse until both speeds are in the same unit.",
+   "kind": "notes"
+  },
+  {
+   "n": 7,
+   "title": "Notes",
+   "sub": "",
+   "min": 3,
+   "note": "12 cookies take 1\u00bd cups of flour. 30 cookies is 30 \u00f7 12 = 2.5 times the recipe, so 2.5 \u00d7 1\u00bd = 3\u00be cups \u2014 and a 3-cup bag is not enough. The scale factor is a ratio of the yields, and it multiplies every ingredient; the last step compares to what is on hand. **Say:** find k from the yields, multiply the ingredient, then answer the question that was asked.",
+   "kind": "notes"
+  },
+  {
+   "n": 8,
+   "title": "Example 1",
+   "sub": "Two rates in different units.",
+   "min": 1,
+   "note": "Ask which unit the comparison will be made in before anyone computes.",
+   "kind": "example"
+  },
+  {
+   "n": 9,
+   "title": "Example 1",
+   "sub": "Worked.",
+   "min": 3,
+   "note": "A: 8.05 km in \u2154 h is 12.075 km/h; B: 9 km in \u00be h is 12 km/h. A, by a little. A board that compared 5 to 9 compared miles to kilometres.",
+   "kind": "example"
+  },
+  {
+   "n": 10,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "A: 6.44 km in \u00bd h is 12.88 km/h; B: 7 km in 7\u204412 h is 12 km/h. A is faster.",
+   "kind": "yourturn"
+  },
+  {
+   "n": 11,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 12,
+   "title": "Example 2",
+   "sub": "A recipe scaled, then checked.",
+   "min": 1,
+   "note": "Ask what k is before anyone touches the rice.",
+   "kind": "example"
+  },
+  {
+   "n": 13,
+   "title": "Example 2",
+   "sub": "Worked.",
+   "min": 3,
+   "note": "k = 2.5, so 6\u00bc cups; 5 cups is 2 recipes, 16 servings. A board with 50 servings scaled the yield by the cups.",
+   "kind": "example"
+  },
+  {
+   "n": 14,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "k = 2, 3 cups; 4 cups is 2\u2154 recipes, 16 servings. A board with 8 servings scaled the yield by the cups.",
+   "kind": "yourturn"
+  },
+  {
+   "n": 15,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 16,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "One rate, one step \u2014 the range. Board 4 asks the second step.",
+   "kind": "wb"
+  },
+  {
+   "n": 17,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 18,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The rate used backwards: pages \u00f7 pages per minute. A board with 49,000 multiplied.",
+   "kind": "wb"
+  },
+  {
+   "n": 19,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 20,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The extra-number board (ruling 22): the 2 mi is bait. Two steps: the hours, then the rate on them. A board with 87 did one day.",
+   "kind": "wb"
+  },
+  {
+   "n": 21,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 22,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic. A is the honest wrong answer \u2014 2.5 tanks is right and 2 is not, because the third tank is needed for the last 180 mi. B and C skipped the rate. Sixty seconds and a re-vote on a split.",
+   "kind": "wb"
+  },
+  {
+   "n": 23,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 24,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The unit inside the rate changes: per 100 g to per 1,000 g. A board with 12 kept the rate's own unit; one with 1,200 used 100 as the factor.",
+   "kind": "wb"
+  },
+  {
+   "n": 25,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 26,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The boundary board: 12 > 7 and A looks faster, and A is slower. Nothing can be said until both are in km/h \u2014 the comparison is refused until the units match. On a split, put the two columns on the board and fill them in order.",
+   "kind": "wb"
+  },
+  {
+   "n": 27,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 28,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The state's own shape (the Assessment Guide's part-to-whole mixture): k from one part, then the whole. A board with 32 found the grey and stopped; one with 16 scaled only the blue.",
+   "kind": "wb"
+  },
+  {
+   "n": 29,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 30,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Transfer rehearsal (ruling 30): 5.04's plan, 5.06's ratio, 5.08's square units, on one board. Two routes agree \u2014 80 ft\u00b2 \u00d7 0.305\u00b2 = 7.442 \u2014 and a board with 24.4 (80 \u00d7 0.305) used the ratio once on an area, yesterday's trap. This is the test's shape in a third context.",
+   "kind": "wb"
+  },
+  {
+   "n": 31,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 32,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Take your time. Boards up when you have written it.",
+   "min": 0,
+   "note": "Transfer rehearsal (ruling 30), and the exit evidence: a rate comparison across systems that ends in a decision. 'Car B, because 75 > 50' is the room that did not convert. The time step is the AR.4.5 part; the conversion is AR.3.3 inside it.",
+   "kind": "wb"
+  },
+  {
+   "n": 33,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 34,
+   "title": "Independent Set",
+   "sub": "Six questions. On your own, in writing.",
+   "min": 6,
+   "note": "Hand out the Independent Set; the same six questions are on the board. Silent work. Circulate and mark what you see; do not teach. Whatever is not finished goes home.",
+   "kind": "independent"
+  },
+  {
+   "n": 35,
+   "title": "IXL",
+   "sub": "Last five minutes.",
+   "min": 5,
+   "note": "IXL: every listed skill is required, SmartScore 67. Due at the start of the next class.",
+   "kind": "ixl"
+  }
+ ]
+}

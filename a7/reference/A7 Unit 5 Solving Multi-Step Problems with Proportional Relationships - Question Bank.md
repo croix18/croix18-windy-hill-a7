@@ -180,3 +180,39 @@ the unit is planned. The printed keys in each lesson's `Keys` folder are generat
 1. 18.16 kg  2. 11.02 lb  3. 45.42 L  4. 13.2 gal  5. 63 ft²  6. 1.2 L  7. 6,912 in³  8. D D
 
 ---
+
+## 5.10  Multi-Step Proportion Problems
+
+*MA.7.AR.4.5*
+
+**Variation.**  Boards 1–3 use one rate once, backwards, and on a total, the numbers growing; 4 asks the second step as a vote; 5 changes the unit inside the rate. The pattern breaks at 6, where the comparison cannot be made until the units match. 7 is part-to-whole; 8 and 9 are the test's transfer shapes rehearsed. The independent set walks the same path: a range, the tanks, a recipe, a comparison in one unit, a mixture, a plan's area in square metres.
+
+**Read this once, when you plan the unit.**
+
+- Two book lessons on a 43-minute Wednesday (5.10 + 5.11, as the plan merges them). Built from the benchmark and the B1G-M's three shapes — a car's range from mpg and a tank, a recipe scaled to a new yield, two rates compared — then read against Math Nation (the unit audit): the book's 'Mathlandia' is out; its part-to-whole paint mixture (the Assessment Guide's shape) is board 7.
+- Wednesday cut: boards 2 and 5 and the IXL block go first; boards 8 and 9 never — they are the test's two transfer shapes rehearsed in a third context (ruling 30), and the test is tomorrow.
+- The boundary (board 6) is a comparison that looks settled by the bigger number and is not: 12 km in 50 min against 7 mi in 45 min. The lesson's one sentence is 'same unit first' — Notes II says it, board 6 votes on it, board 9 writes it.
+- Board 4's honest wrong answer is 2: 2.5 tanks is the arithmetic, and the third tank is the one that finishes the trip. A room that argues for 2.5 has done the mathematics; ask what the half tank is for.
+- The Unit Review went home yesterday; its key is posted today. Tomorrow is Form A.
+
+**What the audit against Math Nation found.**
+
+- Every item re-derived by sympy at build time (mathcheck: 0 findings); every conversion ratio is the FAST reference sheet's and printed on the item.
+- Board 8 computed two ways (feet to metres then area, 7.442 m²; 80 ft² × 0.305², 7.442 m²) — the same number, as the k² lesson promises.
+- Math Nation 5.10–5.11 read against this lesson (A7 Unit 5 Audit): the Assessment Guide's part-to-whole mixture is board 7 with our numbers; its two-rate comparisons are Example 1 and board 6; nothing from Mathlandia.
+- B1G-M 7.AR.4.5's three example shapes verified as Notes I–III; 'name what each step finds' is the keyed error on boards 2, 4 and both bank MCs.
+
+**What changed from the book.**
+
+- 5.10.1 and 5.11.1 Notice-and-Wonder warm-ups → four retrieval questions, with the grade-6 unit rate in the prior-grade slot.
+- 5.10.2–5.10.4 (exploring multi-step problems in pairs) → Notes I and III, taught from the front, and boards 1–5, 7.
+- 5.11.2–5.11.4 (comparing rates; conversions inside problems) → Notes II, Example 1 and boards 6, 8, 9.
+- 5.10.5 and 5.11.5 Wrap-Ups → the independent set and IXL under rulings 10 and 21; board 9 is the exit evidence.
+
+**Question Bank answers.**  
+1. 400 mi  2. 4 tanks  3. 30 min  4. A ≈ 12.08 km/h, B = 12 km/h; A  5. 6 cups; 16 servings  6. 16 gal  7. A A
+
+**Question Bank – Additional answers.**  
+1. 360 mi  2. 4 tanks  3. 25 min  4. B: 90 km/h = 55.8 mi/h < 60  5. 4½ cups; 24 servings  6. 30 gal  7. B B
+
+---
