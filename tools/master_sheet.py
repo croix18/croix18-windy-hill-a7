@@ -46,7 +46,7 @@ from lib import unitbuild                  # the unit-test ledger (question numb
 
 UNIT_TITLES = {1: "Equations and Inequalities", 2: "Real Numbers, Square Roots and Cube Roots",
                3: "Exponents and Scientific Notation", 4: "Solving Problems with Rational Numbers",
-               5: "Solving Multi-Step Problems with Proportional Relationships", 6: "Relationships in Triangles",
+               5: "Multi-Step Proportional Relationships", 6: "Relationships in Triangles",
                7: "Representing Proportional Relationships", 8: "Relationships in Circles", 9: "Surface Area and Volume",
                10: "Linear Relationships", 11: "Solving Equations and Systems of Equations", 12: "Functions",
                13: "Representing Data", 14: "Equivalent Algebraic Expressions", 15: "Transformations",
@@ -66,6 +66,12 @@ START = SC.start                           # 23 Sep 2026
 
 
 # ---------------------------------------------------------------- sources
+def unit_sections(U):
+    """The assessment's sections: the single paper's, or Form A's when the unit ships parallel forms."""
+    A = U["assessment"]
+    return A["forms"]["A"] if "forms" in A else A["sections"]
+
+
 def date_of(s):
     """'Sep 23' or 'Wed Sep 23' -> a date in the 2026-27 school year."""
     mon, day = s.split()[-2:]
@@ -664,14 +670,18 @@ def build(out):
     item_cols = ["Question", "Parts", "Points", "Section", "Benchmark", "Format", "Transfer item"]
     for u in sorted(units):
         U = units[u]
-        total, per_bm, per_sec, transfer = unitbuild.paper_ledger(U)      # the kit renamed it on 4 Oct
+        # a unit test is one paper (`sections`, Units 3–4) or parallel forms (`forms`, Unit 5 on):
+        # the map is Form A's, and every form is parallel to it position for position (ruling 33)
+        secs = unit_sections(U)
         put(wt, r, 1, f"Unit {u} test — question map", font=SUB, border=None); r += 1
-        put(wt, r, 1, "One paper over two periods; one point per lettered part. Transfer items are not on the practice test.", font=DIM, border=None)
+        put(wt, r, 1, ("Form A, Form B and a practice test, parallel position for position; one point per lettered part. Transfer items are not on the practice test."
+                       if "forms" in U["assessment"] else
+                       "One paper over two periods; one point per lettered part. Transfer items are not on the practice test."), font=DIM, border=None)
         r += 1
         header(wt, item_cols, row=r, height=18)
         first_item = r + 1
         n = 0
-        for sec in U["assessment"]["sections"]:
+        for sec in secs:
             for it in sec["items"]:
                 if it.get("heading"):
                     continue

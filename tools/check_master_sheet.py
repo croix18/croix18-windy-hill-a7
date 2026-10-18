@@ -448,7 +448,8 @@ for u, U in sorted(units.items()):
         if not isinstance(r[0].value, int): break
         items.append(r)
     n = 0; exp = []
-    for sec in U["assessment"]["sections"]:
+    secs = U["assessment"]["forms"]["A"] if "forms" in U["assessment"] else U["assessment"]["sections"]   # Form A's map when the unit ships parallel forms
+    for sec in secs:
         for it in sec["items"]:
             if it.get("heading"): continue
             n += 1; pts = len(it["parts"]) if it.get("parts") else 1

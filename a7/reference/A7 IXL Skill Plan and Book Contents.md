@@ -43,7 +43,7 @@ course runs this year (HOUSE STYLE §10). Units 1 and 2 are built.
 4.5 Evaluating Expressions with Radicals / 4.6 Evaluating Expressions Using the Order of Operations — Evaluate radical expressions
 4.7 / 4.8 Evaluating Real-World Problems Using the Order of Operations – Parts 1, 2 — Evaluate variable expressions: word problems
 
-## Unit 5 Solving Multi-Step Problems with Proportional Relationships  (7.GR.1.5 · 7.AR.3.3)
+## Unit 5 Multi-Step Proportional Relationships  (7.GR.1.5 · 7.AR.3.3)
 5.1 Scale Drawings — Scale drawings: find the scale factor, missing side, or missing angle
 5.2 Scale Factors – Perimeter & Area — Perimeter and area: changes in scale
 5.3 Solving Problems Involving Perimeter and Area of Geometric Figures — Scale drawings: find the scale factor or missing side

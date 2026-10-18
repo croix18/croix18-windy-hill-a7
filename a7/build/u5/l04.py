@@ -6,7 +6,7 @@
 L = dict(
     code="5.04", unit=5, lesson_no=4, label="Lesson 4",
     title="Real-World Scale Drawings",
-    unit_title="Solving Multi-Step Problems with Proportional Relationships",
+    unit_title="Multi-Step Proportional Relationships",
     benchmark="MA.7.GR.1.5",
     benchmark_text="Solve mathematical and real-world problems involving dimensions and areas of geometric figures, including scale drawings and scale factors.",
     target="I can use a scale such as ¼ in : 1 ft to find real lengths and areas from a drawing, and drawing lengths from real ones.",

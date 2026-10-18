@@ -6,7 +6,7 @@
 L = dict(
     code="5.02", unit=5, lesson_no=2, label="Lessons 2–3",
     title="Scale Factor: Perimeter and Area",
-    unit_title="Solving Multi-Step Problems with Proportional Relationships",
+    unit_title="Multi-Step Proportional Relationships",
     benchmark="MA.7.GR.1.5",
     benchmark_text="Solve mathematical and real-world problems involving dimensions and areas of geometric figures, including scale drawings and scale factors.",
     target="I can find the perimeter and the area of a scale copy from the original and k, and find k from two areas.",

@@ -6,7 +6,7 @@
 L = dict(
     code="5.10", unit=5, lesson_no=7, label="Lessons 10–11",
     title="Multi-Step Proportion Problems",
-    unit_title="Solving Multi-Step Problems with Proportional Relationships",
+    unit_title="Multi-Step Proportional Relationships",
     benchmark="MA.7.AR.4.5",
     benchmark_text="Solve real-world problems involving proportional relationships.",
     target="I can solve a problem that takes two or more proportional steps, including a unit conversion, and compare two rates given in different units.",

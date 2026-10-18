@@ -8,7 +8,7 @@
 L = dict(
     code="5.06", unit=5, lesson_no=5, label="Lessons 6–7",
     title="Converting Length Across Systems; Currency",
-    unit_title="Solving Multi-Step Problems with Proportional Relationships",
+    unit_title="Multi-Step Proportional Relationships",
     benchmark="MA.7.AR.3.3",
     benchmark_text="Solve mathematical and real-world problems involving the conversion of units across different measurement systems.",
     target="I can convert a length between the customary and metric systems with a ratio from the reference sheet, and convert money with a given rate.",

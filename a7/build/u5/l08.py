@@ -7,7 +7,7 @@
 L = dict(
     code="5.08", unit=5, lesson_no=6, label="Lessons 8–9",
     title="Converting Mass, Area and Volume",
-    unit_title="Solving Multi-Step Problems with Proportional Relationships",
+    unit_title="Multi-Step Proportional Relationships",
     benchmark="MA.7.AR.3.3",
     benchmark_text="Solve mathematical and real-world problems involving the conversion of units across different measurement systems.",
     target="I can convert mass, volume and area between systems, and square the length ratio for area.",
