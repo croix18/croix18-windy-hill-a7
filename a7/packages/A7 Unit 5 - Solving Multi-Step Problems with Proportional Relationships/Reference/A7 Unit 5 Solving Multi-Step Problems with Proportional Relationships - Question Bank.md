@@ -76,3 +76,39 @@ the unit is planned. The printed keys in each lesson's `Keys` folder are generat
 1. 78 cm  2. 81 cm²  3. 25 cm²  4. P = 27 cm, A = 45 cm²  5. k = 3  6. k = ¼  7. 25  8. B B
 
 ---
+
+## 5.04  Real-World Scale Drawings
+
+*MA.7.GR.1.5*
+
+**Variation.**  Boards 1–2 take a drawing length to a real one, the scale changing once; 3 reverses the direction; 4 is a one-unit model scale as a vote; 5 is the quarter-inch scale back to the paper. The pattern breaks at 6, where area is asked and the room has to go to real dimensions before multiplying. 7 compares two models of one object, 8 is the extra number, 9 the B1G-M's wall in writing. The independent set walks the same path: two scales, both directions, a real area, a model in metres, a map distance and a time.
+
+**Read this once, when you plan the unit.**
+
+- Built from the benchmark's clarifications 1 and 3 and the B1G-M's wall example, then read against Math Nation 5.4 (the unit audit): the book's floor plans and model cars are the shape here with our numbers; its ruler-and-draw items are out (not a FAST item shape).
+- The B1G-M's misconception for this benchmark — scaling area like length — returns as board 6 and both bank MCs: 2 in by 3 in at 1 in : 4 ft is 96 ft², and 6 × 4 = 24 is the vote that says Notes II did not land.
+- A one-unit scale (1 : 50) says the model's unit: board 4's 400 is centimetres, and 400 m is distractor C — the unit is the sanity check.
+- Board 9 is the B1G-M's own 7.GR.1.5 example (3.5 in ↔ 26.25 ft, 4 in high → 30 ft, 787.5 ft²), used once with the guide's numbers and credited here; the scale is not printed — the given pair makes it.
+
+**What the audit against Math Nation found.**
+
+- Every item re-derived by sympy at build time (mathcheck: 0 findings).
+- Board 9's numbers are the B1G-M's own (MA.7.GR.1.5 example: a wall 3.5 in on the drawing and 26.25 ft real, 4 in high) — recomputed: 26.25 ÷ 3.5 = 7.5, 4 × 7.5 = 30, 26.25 × 30 = 787.5. Used once, in this lesson only.
+- Math Nation 5.4 read against this lesson (A7 Unit 5 Audit): its 5.4.4 Q1c swaps drawing and actual (D8); its draw-with-a-ruler items are out of the FAST item shapes. Neither is reused.
+- B1G-M 'scaling area like length' verified as the keyed error on board 6, both bank MCs and the written board.
+
+**What changed from the book.**
+
+- 5.4.1 Notice-and-Wonder (a floor plan) → four retrieval questions, with the grade-6 unit rate in the prior-grade slot.
+- 5.4.2–5.4.3 (reading a plan's scale; real lengths from it) → Notes I and III, taught from the front, and boards 1–5.
+- 5.4.4 (area from a plan) → Notes II and the boundary board 6.
+- 5.4.5 (draw a room to scale with a ruler) → cut: not a FAST shape; replaced by board 7's two models of one plane.
+- 5.4.6 Wrap-Up → the independent set and IXL under rulings 10 and 21; board 9 is the exit evidence.
+
+**Question Bank answers.**  
+1. 10 ft  2. 15 ft  3. 4.5 in  4. 6 ft by 10 ft; 60 ft²  5. 20 m  6. 180 km; 3 hours  7. The 1 : 60 model, by 4 in (12 in against 8 in)  8. D D
+
+**Question Bank – Additional answers.**  
+1. 14 ft  2. 12 ft  3. 4.5 in  4. 10 ft by 14 ft; 140 ft²  5. 18 m  6. 195 km; 3 hours  7. The 1 : 36 model, by 4 in (12 in against 8 in)  8. C C
+
+---

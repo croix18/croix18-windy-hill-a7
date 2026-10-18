@@ -1,0 +1,285 @@
+{
+ "deck": "A7 5.04 Real-World Scale Drawings - Slides.pptx",
+ "slides": [
+  {
+   "n": 1,
+   "title": "Real-World Scale Drawings",
+   "sub": "",
+   "min": 1,
+   "note": "Post the learning target. Say one line and nothing else yet: \u201cToday: a scale with two units is a rate \u2014 read it per 1 unit, then multiply or divide.\u201d",
+   "kind": "title"
+  },
+  {
+   "n": 2,
+   "title": "Warm-Up",
+   "sub": "On your own. Four minutes. No notes.",
+   "min": 4,
+   "note": "Q4 is the move Notes I makes on a scale: per 1 unit first. A room that cannot write 90 for 2 as 45 for 1 will not write \u00bc in : 1 ft as 1 in : 4 ft. Two minutes silent, then reveal.",
+   "kind": "warmup"
+  },
+  {
+   "n": 3,
+   "title": "Warm-Up",
+   "sub": "Answers.",
+   "min": 1,
+   "note": "Reveal. Ask for the band each question came from only if time allows.",
+   "kind": "warmup"
+  },
+  {
+   "n": 4,
+   "title": "Vocabulary",
+   "sub": "The new words, before they are used.",
+   "min": 1,
+   "note": "Read each word and its meaning once; the notes use them next. Students copy the words, not the definitions.",
+   "kind": "vocab"
+  },
+  {
+   "n": 5,
+   "title": "Notes",
+   "sub": "Copy the scale and its rewrite.",
+   "min": 3,
+   "note": "\u00bc in : 1 ft says a quarter inch of paper stands for a foot of room. Multiply both sides by 4: 1 in : 4 ft \u2014 every inch on the paper is 4 feet in the room. Now it is the warm-up's unit rate, and every question is a multiplication or a division by 4. **Say:** rewrite the scale per 1 unit of drawing before you touch a question.",
+   "kind": "notes"
+  },
+  {
+   "n": 6,
+   "title": "Notes",
+   "sub": "",
+   "min": 4,
+   "note": "A room 2 in by 2.5 in at 1 in : 4 ft is 8 ft by 10 ft, so 80 ft\u00b2. The drawing's area is 5 in\u00b2, and 5 \u00d7 4 = 20 is wrong \u2014 yesterday's lesson: area is two lengths, so the rate is used twice (5 \u00d7 16 = 80). The safe route is the real dimensions first. **Say:** find the real length and the real width, then multiply.",
+   "kind": "notes"
+  },
+  {
+   "n": 7,
+   "title": "Notes",
+   "sub": "",
+   "min": 3,
+   "note": "A 14-ft wall at 1 in : 4 ft: 14 \u00f7 4 = 3.5 in on the paper. The real length is bigger, so the drawing length is smaller \u2014 the division makes it smaller, and an estimate (14 ft is a little more than 3 inches' worth) says so. **Say:** from the room to the paper, divide by the rate.",
+   "kind": "notes"
+  },
+  {
+   "n": 8,
+   "title": "Example 1",
+   "sub": "A room's real dimensions and area.",
+   "min": 1,
+   "note": "Ask for the scale per 1 inch before anyone multiplies.",
+   "kind": "example"
+  },
+  {
+   "n": 9,
+   "title": "Example 1",
+   "sub": "Worked.",
+   "min": 3,
+   "note": "1 in : 4 ft; 10 ft by 12 ft; 120 ft\u00b2. A board with 30 scaled the drawing's area (7.5 in\u00b2) by 4 \u2014 the named error.",
+   "kind": "example"
+  },
+  {
+   "n": 10,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "6 by 16; 96 ft\u00b2. A board with 24 scaled 6 in\u00b2 by 4.",
+   "kind": "yourturn"
+  },
+  {
+   "n": 11,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 12,
+   "title": "Example 2",
+   "sub": "A map distance, then a time.",
+   "min": 1,
+   "note": "Ask what the first answer is for \u2014 nobody stops at the distance.",
+   "kind": "example"
+  },
+  {
+   "n": 13,
+   "title": "Example 2",
+   "sub": "Worked.",
+   "min": 3,
+   "note": "370 km, then 3.7 h: the scale is one rate and the speed is another. A board with 370 and nothing more stopped at the first answer.",
+   "kind": "example"
+  },
+  {
+   "n": 14,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "155 km, then 3.1 h.",
+   "kind": "yourturn"
+  },
+  {
+   "n": 15,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 16,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Rewrite first: 1 in : 2 ft. Then 4 \u00d7 2.",
+   "kind": "wb"
+  },
+  {
+   "n": 17,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 18,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The scale changes; the move does not.",
+   "kind": "wb"
+  },
+  {
+   "n": 19,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 20,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The direction reverses: the paper length is the smaller number.",
+   "kind": "wb"
+  },
+  {
+   "n": 21,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 22,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic. A 1 : 50 scale has one unit: 1 cm of model is 50 cm of car. C is right until the unit; a 400-m car is a sanity check that a room full of C skipped. Sixty seconds and a re-vote on a split.",
+   "kind": "wb"
+  },
+  {
+   "n": 23,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 24,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The quarter-inch scale, back to the paper: 15 \u00f7 4. A board with 60 multiplied; one with 3.75 ft kept the wrong unit.",
+   "kind": "wb"
+  },
+  {
+   "n": 25,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 26,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The boundary board: area is asked, and the room has to go to real units first. A is yesterday's error in today's clothes \u2014 6 \u00d7 4 uses the rate once, and area needs it twice. On a split, draw the 8 by 12 room.",
+   "kind": "wb"
+  },
+  {
+   "n": 27,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 28,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Two scales, one plane. 48 ft is 576 in; \u00f7 48 is 12 in, \u00f7 72 is 8 in. The bigger second number makes the smaller model \u2014 ask why before the numbers (each model inch stands for more plane).",
+   "kind": "wb"
+  },
+  {
+   "n": 29,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 30,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The extra-number board (ruling 22): Mia's age is bait, and it is the same 12 as a side. A board that wrote 12 \u00d7 2 = 24 for anything but the long side read the wrong 12.",
+   "kind": "wb"
+  },
+  {
+   "n": 31,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 32,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Take your time. Boards up when you have written it.",
+   "min": 0,
+   "note": "Written, and the exit evidence. This is the B1G-M's own 7.GR.1.5 example with the guide's numbers, used once. The scale is not printed \u2014 the pair 3.5 in \u2194 26.25 ft gives it. A board with 14 \u00d7 7.5 = 105 scaled the drawing's area by the length rate.",
+   "kind": "wb"
+  },
+  {
+   "n": 33,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 34,
+   "title": "Independent Set",
+   "sub": "Six questions. On your own, in writing.",
+   "min": 6,
+   "note": "Hand out the Independent Set; the same six questions are on the board. Silent work. Circulate and mark what you see; do not teach. Whatever is not finished goes home.",
+   "kind": "independent"
+  },
+  {
+   "n": 35,
+   "title": "IXL",
+   "sub": "Last five minutes.",
+   "min": 5,
+   "note": "IXL: every listed skill is required, SmartScore 67. Due at the start of the next class.",
+   "kind": "ixl"
+  }
+ ]
+}
