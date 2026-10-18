@@ -112,3 +112,37 @@ the unit is planned. The printed keys in each lesson's `Keys` folder are generat
 1. 14 ft  2. 12 ft  3. 4.5 in  4. 10 ft by 14 ft; 140 ft²  5. 18 m  6. 195 km; 3 hours  7. The 1 : 36 model, by 4 in (12 in against 8 in)  8. C C
 
 ---
+
+## 5.06  Converting Length Across Systems; Currency
+
+*MA.7.AR.3.3*
+
+**Variation.**  Boards 1–2 take one ratio both ways; 3–4 the next ratio, the second as a vote; 5 chains inside customary then across. The pattern breaks at 6, where three conversions run in a row and the estimate is the only check. 7 is a currency chain, 8 the extra number, 9 the error in writing. The independent set walks the same path: the four length ratios, a chain with an estimate, a currency round trip.
+
+**Read this once, when you plan the unit.**
+
+- Two book lessons in one day (5.6 + 5.7; the book's 5.5 Mathlandia is not on the plan and its currency idea is Notes III). Built from the benchmark and the B1G-M, then read against Math Nation (the unit audit): the book prints 1.609 and a dozen ratios the sheet does not have; its own assessment uses the sheet's. This lesson uses the sheet's values and no other — outline decision 1, taken.
+- The sheet gives both directions (1 in = 2.54 cm and 1 cm = 0.39 in), so every conversion here is a multiplication by the ratio whose 1 is the unit you have. A student who divides by the other ratio instead gets the sheet's other answer (20 ÷ 2.54 = 7.87 against 20 × 0.39 = 7.8): accept both, as FAST does, whenever the work shows which ratio was used. The keys print the multiplication; the TE says where the division lands.
+- The B1G-M's misconception for this benchmark — the ratio the wrong way round — is distractor C on the diagnostic and the named wrong board everywhere, and the remedy is the estimate: say which unit is bigger before the calculator. Board 6 is built so only the estimate catches the error.
+- Board 7 is the Assessment Guide's own shape (a two-hop currency chain with dated rates), with our rates. Every currency rate is printed on the item and dated; none is real.
+
+**What the audit against Math Nation found.**
+
+- Every item re-derived by sympy at build time (mathcheck: 0 findings); every ratio is the FAST reference sheet's (Source of Truth, the conversions block), checked value by value.
+- Math Nation 5.6–5.7 read against this lesson (A7 Unit 5 Audit): its 1.609 km, 2.2 lb and other off-sheet ratios are not used; its Mathlandia currency is replaced by printed, dated rates in the Assessment Guide's own shape.
+- B1G-M 7.AR.3.3 'the inverted ratio' verified as the keyed error on boards 2, 3, 4, 8, 9 and both bank MCs; the estimate is the remedy on Notes II, boards 6 and 9.
+
+**What changed from the book.**
+
+- 5.6.1 and 5.7.1 Notice-and-Wonder warm-ups → four retrieval questions, with the grade-6 within-system conversion in the prior-grade slot.
+- 5.6.2–5.6.4 (a conversion as multiplying by a form of 1; the book's ratio table) → Notes I and II with the sheet's ratios only, and boards 1–6.
+- 5.5 Mathlandia and 5.7.2–5.7.4 (currency) → Notes III, Example 2 and board 7, with printed dated rates.
+- 5.6.5 and 5.7.5 Wrap-Ups → the independent set and IXL under rulings 10 and 21; board 9 is the exit evidence.
+
+**Question Bank answers.**  
+1. 20.32 cm  2. 23.4 in  3. 32.2 km  4. 9.3 mi  5. 152.4 cm  6. 54 CAD; \$20  7. 1,069.20 pesos  8. A A
+
+**Question Bank – Additional answers.**  
+1. 22.86 cm  2. 31.2 in  3. 48.3 km  4. 15.5 mi  5. 121.92 cm  6. 27.60 euros; \$75  7. 534.60 pesos  8. C C
+
+---
