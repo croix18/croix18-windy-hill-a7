@@ -92,9 +92,9 @@
   {
    "n": 12,
    "title": "Example 2",
-   "sub": "A map distance, then a time.",
+   "sub": "The scale is not printed: make it from one pair.",
    "min": 1,
-   "note": "Ask what the first answer is for \u2014 nobody stops at the distance.",
+   "note": "Ask what the scale is before anyone touches the 6 \u2014 nobody multiplies until it is written per 1 inch.",
    "kind": "example"
   },
   {
@@ -102,7 +102,7 @@
    "title": "Example 2",
    "sub": "Worked.",
    "min": 3,
-   "note": "370 km, then 3.7 h: the scale is one rate and the speed is another. A board with 370 and nothing more stopped at the first answer.",
+   "note": "The pair gives the scale: 18 \u00f7 4 = 4.5 ft per inch. Then 6 \u00d7 4.5 = 27 ft. A board with 20 added 2 ft for 2 more inches \u2014 the additive error; one with 9 doubled 4.5 instead of multiplying by 6.",
    "kind": "example"
   },
   {
@@ -110,7 +110,7 @@
    "title": "Your Turn",
    "sub": "Same steps, your numbers. Boards up when done.",
    "min": 2,
-   "note": "155 km, then 3.1 h.",
+   "note": "6.5 ft per inch; 32.5 ft. A board with 16 added.",
    "kind": "yourturn"
   },
   {
@@ -222,7 +222,7 @@
    "title": "Whiteboards   \u00b7   Question 7 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "Two scales, one plane. 48 ft is 576 in; \u00f7 48 is 12 in, \u00f7 72 is 8 in. The bigger second number makes the smaller model \u2014 ask why before the numbers (each model inch stands for more plane).",
+   "note": "Two scales, one plane. 36 ft is 432 in; \u00f7 48 is 9 in, \u00f7 72 is 6 in. The bigger second number makes the smaller model \u2014 ask why before the numbers (each model inch stands for more plane).",
    "kind": "wb"
   },
   {
@@ -238,7 +238,7 @@
    "title": "Whiteboards   \u00b7   Question 8 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "The extra-number board (ruling 22): Mia's age is bait, and it is the same 12 as a side. A board that wrote 12 \u00d7 2 = 24 for anything but the long side read the wrong 12.",
+   "note": "The extra-number board (ruling 22): Mia's age is bait. A board with 26 ft used 13 as a side.",
    "kind": "wb"
   },
   {

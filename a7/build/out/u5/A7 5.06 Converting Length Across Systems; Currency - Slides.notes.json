@@ -38,7 +38,7 @@
    "title": "Notes",
    "sub": "Copy the ratio and the line.",
    "min": 3,
-   "note": "1 in = 2.54 cm, so 2.54 cm over 1 in is 1 \u2014 the top and bottom are the same length in two units. Multiplying by 1 changes nothing but the unit: 10 in \u00d7 2.54 cm per in = 25.4 cm, and the inches cancel. The ratio is on the reference sheet; nobody memorises it. **Say:** a conversion is multiplying by a form of 1 \u2014 the unit you have cancels, the unit you want is left.",
+   "note": "1 in = 2.54 cm, so 2.54 cm over 1 in is 1 \u2014 the top and bottom are the same length in two units. Multiplying by 1 changes nothing but the unit: 10 in \u00d7 2.54 cm per in = 25.4 cm, and the inches cancel. The ratio is on the reference sheet; nobody memorizes it. **Say:** a conversion is multiplying by a form of 1 \u2014 the unit you have cancels, the unit you want is left.",
    "kind": "notes"
   },
   {
@@ -46,7 +46,7 @@
    "title": "Notes",
    "sub": "",
    "min": 4,
-   "note": "The sheet gives both directions: 1 in = 2.54 cm and 1 cm = 0.39 in. Pick the one whose 1 is the unit you have, so the unit cancels. 50 cm to inches: a centimetre is shorter than an inch, so there are fewer inches than centimetres \u2014 50 \u00d7 0.39 = 19.5 in, never 127. The estimate is what catches the wrong ratio. **Say:** say which answer should be smaller before you touch the calculator.",
+   "note": "The sheet gives both directions: 1 in = 2.54 cm and 1 cm = 0.39 in. Pick the one whose 1 is the unit you have, so the unit cancels. 50 cm to inches: a centimeter is shorter than an inch, so there are fewer inches than centimeters \u2014 50 \u00d7 0.39 = 19.5 in, never 127. The estimate is what catches the wrong ratio. **Say:** say which answer should be smaller before you touch the calculator.",
    "kind": "notes"
   },
   {
@@ -54,13 +54,13 @@
    "title": "Notes",
    "sub": "",
    "min": 3,
-   "note": "An exchange rate is a conversion ratio with a date on it: 0.92 euros per dollar today, something else tomorrow, so it is printed on the problem and never on the sheet. \\$150 \u00d7 0.92 = 138 euros. Back the other way is a division: 92 euros \u00f7 0.92 = \\$100. **Say:** the rate is given; the move is the same as inches to centimetres.",
+   "note": "An exchange rate is a conversion ratio with a date on it: 0.92 euros per dollar today, something else tomorrow, so it is printed on the problem and never on the sheet. \\$150 \u00d7 0.92 = 138 euros. Back the other way is a division: 92 euros \u00f7 0.92 = \\$100. **Say:** the rate is given; the move is the same as inches to centimeters.",
    "kind": "notes"
   },
   {
    "n": 8,
    "title": "Example 1",
-   "sub": "Inches to centimetres.",
+   "sub": "Inches to centimeters.",
    "min": 1,
    "note": "Ask which unit should give the bigger number before anyone multiplies.",
    "kind": "example"
@@ -70,7 +70,7 @@
    "title": "Example 1",
    "sub": "Worked.",
    "min": 3,
-   "note": "38.1 cm. More centimetres than inches, as the estimate says. A board with 5.9 divided.",
+   "note": "38.1 cm. More centimeters than inches, as the estimate says. A board with 5.9 divided.",
    "kind": "example"
   },
   {
@@ -126,7 +126,7 @@
    "title": "Whiteboards   \u00b7   Question 1 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "Inches to centimetres, the ratio printed. More centimetres, as the estimate says.",
+   "note": "Inches to centimeters, the ratio printed. More centimeters, as the estimate says.",
    "kind": "wb"
   },
   {
@@ -158,7 +158,7 @@
    "title": "Whiteboards   \u00b7   Question 3 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "A new ratio, the same move. A kilometre is shorter, so more of them.",
+   "note": "A new ratio, the same move. A kilometer is shorter, so more of them.",
    "kind": "wb"
   },
   {
@@ -238,7 +238,7 @@
    "title": "Whiteboards   \u00b7   Question 8 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "The extra-number board (ruling 22): Theo's weight is bait \u2014 pounds are Tuesday. The arithmetic is board 4's, now with a number to ignore; a board that converted 110 lb to anything was answering a question nobody asked.",
+   "note": "The extra-number board (ruling 22): Theo's weight is bait \u2014 pounds are Tuesday. The move is board 4's with its own numbers and a number to ignore; a board that converted 110 lb to anything was answering a question nobody asked.",
    "kind": "wb"
   },
   {

@@ -78,7 +78,7 @@
    "title": "Your Turn",
    "sub": "Same steps, your numbers. Boards up when done.",
    "min": 2,
-   "note": "P 16 \u2192 64, A 15 \u2192 240. Same structure, its own numbers. A board with 60 for the area multiplied by k once.",
+   "note": "P 18 \u2192 72, A 18 \u2192 288. Same structure, its own numbers (not the warm-up's 3 by 5). A board with 72 for the area multiplied by k once.",
    "kind": "yourturn"
   },
   {
@@ -102,7 +102,7 @@
    "title": "Example 2",
    "sub": "Worked.",
    "min": 3,
-   "note": "180 \u00f7 20 = 9 is k\u00b2, so k = 3, and the side is 12. A board with 36 took the area ratio as k.",
+   "note": "240 \u00f7 15 = 16 is k\u00b2, so k = 4, and the side is 12. A board with 48 took the area ratio as k. (Notes III's 20 \u2192 180 is not reused.)",
    "kind": "example"
   },
   {

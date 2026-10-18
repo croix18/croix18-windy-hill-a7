@@ -31,7 +31,7 @@ the unit is planned. The printed keys in each lesson's `Keys` folder are generat
 - 5.1.1 Notice-and-Wonder warm-up → four retrieval questions, with the grade-6 unit rate in the prior-grade slot.
 - 5.1.2–5.1.3 Exploration with a ruler and a grid → Notes I–III, taught from the front, every length printed.
 - 5.1.4 Guided Practice → Examples 1 and 2 and the whiteboard round.
-- 5.1.5 (draw a copy to a target perimeter, k = 2.7) → not reused: its sides are not grid-drawable (audit D15); the drawing task lives on the review paper with a factor that lands on gridlines.
+- 5.1.5 (draw a copy to a target perimeter, k = 2.7) → not reused: its sides are not grid-drawable (audit D15).
 - 5.1.6 Wrap-Up reflection → the independent set and IXL under rulings 10 and 21; board 9 is the exit evidence.
 
 **Question Bank answers.**  
@@ -81,13 +81,13 @@ the unit is planned. The printed keys in each lesson's `Keys` folder are generat
 
 *MA.7.GR.1.5*
 
-**Variation.**  Boards 1–2 take a drawing length to a real one, the scale changing once; 3 reverses the direction; 4 is a one-unit model scale as a vote; 5 is the quarter-inch scale back to the paper. The pattern breaks at 6, where area is asked and the room has to go to real dimensions before multiplying. 7 compares two models of one object, 8 is the extra number, 9 the B1G-M's wall in writing. The independent set walks the same path: two scales, both directions, a real area, a model in metres, a map distance and a time.
+**Variation.**  Boards 1–2 take a drawing length to a real one, the scale changing once; 3 reverses the direction; 4 is a one-unit model scale as a vote; 5 is the quarter-inch scale back to the paper. The pattern breaks at 6, where area is asked and the room has to go to real dimensions before multiplying. 7 compares two models of one object, 8 is the extra number, 9 the B1G-M's wall in writing. The independent set walks the same path: two scales, both directions, a real area, a model in meters, a scale made from one pair.
 
 **Read this once, when you plan the unit.**
 
 - Built from the benchmark's clarifications 1 and 3 and the B1G-M's wall example, then read against Math Nation 5.4 (the unit audit): the book's floor plans and model cars are the shape here with our numbers; its ruler-and-draw items are out (not a FAST item shape).
 - The B1G-M's misconception for this benchmark — scaling area like length — returns as board 6 and both bank MCs: 2 in by 3 in at 1 in : 4 ft is 96 ft², and 6 × 4 = 24 is the vote that says Notes II did not land.
-- A one-unit scale (1 : 50) says the model's unit: board 4's 400 is centimetres, and 400 m is distractor C — the unit is the sanity check.
+- A one-unit scale (1 : 50) says the model's unit: board 4's 400 is centimeters, and 400 m is distractor C — the unit is the sanity check.
 - Board 9 is the B1G-M's own 7.GR.1.5 example (3.5 in ↔ 26.25 ft, 4 in high → 30 ft, 787.5 ft²), used once with the guide's numbers and credited here; the scale is not printed — the given pair makes it.
 
 **What the audit against Math Nation found.**
@@ -106,10 +106,10 @@ the unit is planned. The printed keys in each lesson's `Keys` folder are generat
 - 5.4.6 Wrap-Up → the independent set and IXL under rulings 10 and 21; board 9 is the exit evidence.
 
 **Question Bank answers.**  
-1. 10 ft  2. 15 ft  3. 4.5 in  4. 6 ft by 10 ft; 60 ft²  5. 20 m  6. 180 km; 3 hours  7. The 1 : 60 model, by 4 in (12 in against 8 in)  8. D D
+1. 10 ft  2. 15 ft  3. 4.5 in  4. 6 ft by 10 ft; 60 ft²  5. 20 m  6. 52.5 ft  7. The 1 : 60 model, by 4 in (12 in against 8 in)  8. D D
 
 **Question Bank – Additional answers.**  
-1. 14 ft  2. 12 ft  3. 4.5 in  4. 10 ft by 14 ft; 140 ft²  5. 18 m  6. 195 km; 3 hours  7. The 1 : 36 model, by 4 in (12 in against 8 in)  8. C C
+1. 14 ft  2. 12 ft  3. 4.5 in  4. 10 ft by 14 ft; 140 ft²  5. 18 m  6. 38.5 ft  7. The 1 : 36 model, by 4 in (12 in against 8 in)  8. C C
 
 ---
 
@@ -151,11 +151,11 @@ the unit is planned. The printed keys in each lesson's `Keys` folder are generat
 
 *MA.7.AR.3.3*
 
-**Variation.**  Boards 1–3 take one ratio each direction — mass, then volume both ways; 4 asks a square unit as a vote; 5 chains fluid ounces through cups. The pattern breaks at 6, where the familiar 100 is wrong. 7 converts and then compares, 8 is the extra number, 9 the cube in writing. The independent set walks the same path: mass both ways, volume, a square unit, fluid ounces through cups, square metres.
+**Variation.**  Boards 1–3 take one ratio each direction — mass, then volume both ways; 4 asks a square unit as a vote; 5 chains fluid ounces through cups. The pattern breaks at 6, where the familiar 100 is wrong. 7 converts and then compares, 8 is the extra number, 9 the cube in writing. The independent set walks the same path: mass both ways, volume, a square unit, fluid ounces through cups, square meters.
 
 **Read this once, when you plan the unit.**
 
-- Two book lessons in one day (5.8 + 5.9). Built from the benchmark and the B1G-M, then read against Math Nation (the unit audit): the book prints 2.2 lb per kg and a fluid-ounce-to-millilitre ratio the FAST sheet does not have. This lesson uses the sheet's 0.454 and 2.204 and sends fluid ounces through cups — the audit's finding, outline decision 1.
+- Two book lessons in one day (5.8 + 5.9). Built from the benchmark and the B1G-M, then read against Math Nation (the unit audit): the book prints 2.2 lb per kg and a fluid-ounce-to-milliliter ratio the FAST sheet does not have. This lesson uses the sheet's 0.454 and 2.204 and sends fluid ounces through cups — the audit's finding, outline decision 1.
 - The lesson's trap is 5.02–03's k² wearing different clothes: 1 ft = 12 in, so 1 ft² = 144 in². The two days are built to rhyme, and the warm-up puts them side by side (Q2 and Q4). Board 4 is the vote; board 6 is the boundary, where the metric 100 feels like it should survive squaring.
 - The sheet gives both directions for mass and volume, so a student who divides by the other ratio gets the sheet's other answer (50 ÷ 2.204 = 22.69 against 50 × 0.454 = 22.7): accept both, as FAST does, when the work shows which ratio was used.
 - Ounce and fluid ounce are two units that share a word — the vocabulary slide says so, and board 5's 453.6 is the student who used 28.35 g on a volume.
@@ -185,7 +185,7 @@ the unit is planned. The printed keys in each lesson's `Keys` folder are generat
 
 *MA.7.AR.4.5*
 
-**Variation.**  Boards 1–3 use one rate once, backwards, and on a total, the numbers growing; 4 asks the second step as a vote; 5 changes the unit inside the rate. The pattern breaks at 6, where the comparison cannot be made until the units match. 7 is part-to-whole; 8 and 9 are the test's transfer shapes rehearsed. The independent set walks the same path: a range, the tanks, a recipe, a comparison in one unit, a mixture, a plan's area in square metres.
+**Variation.**  Boards 1–3 use one rate once, backwards, and on a total, the numbers growing; 4 asks the second step as a vote; 5 changes the unit inside the rate. The pattern breaks at 6, where the comparison cannot be made until the units match. 7 is part-to-whole; 8 and 9 are the test's transfer shapes rehearsed. The independent set walks the same path: a range, the tanks, a recipe, a comparison in one unit, a mixture, a plan's area in square meters.
 
 **Read this once, when you plan the unit.**
 
@@ -198,7 +198,7 @@ the unit is planned. The printed keys in each lesson's `Keys` folder are generat
 **What the audit against Math Nation found.**
 
 - Every item re-derived by sympy at build time (mathcheck: 0 findings); every conversion ratio is the FAST reference sheet's and printed on the item.
-- Board 8 computed two ways (feet to metres then area, 7.442 m²; 80 ft² × 0.305², 7.442 m²) — the same number, as the k² lesson promises.
+- Board 8 computed two ways (feet to meters then area, 7.442 m²; 80 ft² × 0.305², 7.442 m²) — the same number, as the k² lesson promises.
 - Math Nation 5.10–5.11 read against this lesson (A7 Unit 5 Audit): the Assessment Guide's part-to-whole mixture is board 7 with our numbers; its two-rate comparisons are Example 1 and board 6; nothing from Mathlandia.
 - B1G-M 7.AR.4.5's three example shapes verified as Notes I–III; 'name what each step finds' is the keyed error on boards 2, 4 and both bank MCs.
 
@@ -210,7 +210,7 @@ the unit is planned. The printed keys in each lesson's `Keys` folder are generat
 - 5.10.5 and 5.11.5 Wrap-Ups → the independent set and IXL under rulings 10 and 21; board 9 is the exit evidence.
 
 **Question Bank answers.**  
-1. 400 mi  2. 4 tanks  3. 30 min  4. A ≈ 12.08 km/h, B = 12 km/h; A  5. 6 cups; 16 servings  6. 16 gal  7. A A
+1. 400 mi  2. 4 tanks  3. 30 min  4. A ≈ 12.08 km/h, B = 12 km/h; A  5. 6 cups; 24 servings  6. 16 gal  7. A A
 
 **Question Bank – Additional answers.**  
 1. 360 mi  2. 4 tanks  3. 25 min  4. B: 90 km/h = 55.8 mi/h < 60  5. 4½ cups; 24 servings  6. 30 gal  7. B B

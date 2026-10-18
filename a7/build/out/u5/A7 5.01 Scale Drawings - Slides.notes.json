@@ -78,7 +78,7 @@
    "title": "Your Turn",
    "sub": "Same steps, your numbers. Boards up when done.",
    "min": 2,
-   "note": "k = 1.5 from both pairs (9 \u00f7 6 and 12 \u00f7 8). Same structure, its own numbers. A board with \u2154 divided original by copy.",
+   "note": "k = 1.5 from both pairs (12 \u00f7 8 and 15 \u00f7 10). Same structure, its own numbers. A board with \u2154 divided original by copy.",
    "kind": "yourturn"
   },
   {
@@ -102,7 +102,7 @@
    "title": "Example 2",
    "sub": "Worked.",
    "min": 2,
-   "note": "Every inch is 20 miles, so 3.5 inches is 3.5 \u00d7 20 = 70 miles. A board with 0.175 divided.",
+   "note": "Every inch is 25 miles, so 2.6 inches is 2.6 \u00d7 25 = 65 miles. A board with 0.104 divided.",
    "kind": "example"
   },
   {
@@ -238,7 +238,7 @@
    "title": "Whiteboards   \u00b7   Question 8 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "The extra-number board (ruling 22): Dev's age is bait. The scale has to be read per 1 inch (4 ft) before the 20 can be divided. A board with 80 multiplied.",
+   "note": "The extra-number board (ruling 22): Dev's age is bait. The scale has to be read per 1 inch (5 ft) before the 20 can be divided. A board with 100 multiplied.",
    "kind": "wb"
   },
   {

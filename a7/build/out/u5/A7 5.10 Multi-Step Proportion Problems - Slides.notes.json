@@ -38,7 +38,7 @@
    "title": "Notes",
    "sub": "Copy the two lines.",
    "min": 3,
-   "note": "A car does 23 miles per gallon and its tank holds 17.5 gal: 23 \u00d7 17.5 = 402.5 mi on a tank. A 1,207-mi trip: 1,207 \u00f7 402.5 = 2.998\u2026, so 3 tanks. The rate was used once to find the range and once more to count tanks \u2014 two steps, one proportional relationship, and the first answer is not the answer. **Say:** a multi-step problem is the same rate used again; name what each step finds.",
+   "note": "A car gets 23 miles per gallon and its tank holds 17.5 gal: 23 \u00d7 17.5 = 402.5 mi on a tank. A 1,207-mi trip: 1,207 \u00f7 402.5 = 2.998\u2026, so it uses 3 tanks of gas (a part of a tank is still a tank). The rate was used once to find the range and once more to count tanks \u2014 two steps, one proportional relationship, and the first answer is not the answer. **Say:** a multi-step problem is the same rate used again; name what each step finds.",
    "kind": "notes"
   },
   {
@@ -54,7 +54,7 @@
    "title": "Notes",
    "sub": "",
    "min": 3,
-   "note": "12 cookies take 1\u00bd cups of flour. 30 cookies is 30 \u00f7 12 = 2.5 times the recipe, so 2.5 \u00d7 1\u00bd = 3\u00be cups \u2014 and a 3-cup bag is not enough. The scale factor is a ratio of the yields, and it multiplies every ingredient; the last step compares to what is on hand. **Say:** find k from the yields, multiply the ingredient, then answer the question that was asked.",
+   "note": "12 cookies take 1\u00bd cups of flour. 30 cookies is 30 \u00f7 12 = 2.5 times the recipe, so 2.5 \u00d7 1\u00bd = 3\u00be cups \u2014 and a 3-cup bag is not enough. The scale factor is a ratio of the yields, and it multiplies every ingredient; the last step compares to what is on hand. A mixture is the same move: paint 1 : 2 : 3 with 4 gal of the first color has k = 4, and the whole is 6 parts \u00d7 4 = 24 gal. **Say:** find k from the yields, multiply the ingredient, then answer the question that was asked.",
    "kind": "notes"
   },
   {
@@ -70,7 +70,7 @@
    "title": "Example 1",
    "sub": "Worked.",
    "min": 3,
-   "note": "A: 8.05 km in \u2154 h is 12.075 km/h; B: 9 km in \u00be h is 12 km/h. A, by a little. A board that compared 5 to 9 compared miles to kilometres.",
+   "note": "A: 8.05 km in \u2154 h is 12.075 km/h; B: 9 km in \u00be h is 12 km/h. A, by a little. A board that compared 5 to 9 compared miles to kilometers.",
    "kind": "example"
   },
   {
@@ -110,7 +110,7 @@
    "title": "Your Turn",
    "sub": "Same steps, your numbers. Boards up when done.",
    "min": 2,
-   "note": "k = 2, 3 cups; 4 cups is 2\u2154 recipes, 16 servings. A board with 8 servings scaled the yield by the cups.",
+   "note": "k = 2, 3 cups; 4\u00bd cups is 3 recipes, 18 servings. A board with 27 servings scaled the yield by the cups.",
    "kind": "yourturn"
   },
   {
@@ -174,7 +174,7 @@
    "title": "Whiteboards   \u00b7   Question 4 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "Diagnostic. A is the honest wrong answer \u2014 2.5 tanks is right and 2 is not, because the third tank is needed for the last 180 mi. B and C skipped the rate. Sixty seconds and a re-vote on a split.",
+   "note": "Diagnostic. The 2 is the honest wrong answer \u2014 2.5 tanks is the arithmetic and the third tank is the one that drives the last 180 mi; the bracket on the board says so, as the test will. The two others skipped the rate. Sixty seconds and a re-vote on a split.",
    "kind": "wb"
   },
   {
@@ -222,7 +222,7 @@
    "title": "Whiteboards   \u00b7   Question 7 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "The state's own shape (the Assessment Guide's part-to-whole mixture): k from one part, then the whole. A board with 32 found the grey and stopped; one with 16 scaled only the blue.",
+   "note": "The state's own shape (the Assessment Guide's part-to-whole mixture): k from one part, then the whole. A board with 20 found the grey and stopped; one with 32 scaled the white again (8 \u00d7 4).",
    "kind": "wb"
   },
   {
