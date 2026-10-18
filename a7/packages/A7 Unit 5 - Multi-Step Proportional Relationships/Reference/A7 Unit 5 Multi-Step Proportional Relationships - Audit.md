@@ -99,3 +99,73 @@ Outside the boundary: acres, stone, centilitres, the non-sheet ratios in §5, ru
 6. Weighting: the book gives AR.3.3 48 %, ours 33 %. Keep ours (three of six days are GR.1.5); both transfer items carry a conversion anyway.
 7. Keep angles-don't-scale, the MC diagnostics and estimate-first; the book has none, and IXL WEA asks for the angle.
 8. Mathlandia stays out; 5.6's dated real rates are the model (date it, print it, never ask for it).
+
+## 8. The build, reviewed before shipping — 18 October
+
+Six lessons, the papers (Reference Sheet, Review with an SSDD floor plan, test Forms A, B and
+practice: 19 questions, 24 points, transfer items at 8 and 19) and the master sheet were built at
+0 findings and pushed, then read by three independent reviewers who edit nothing: a Barton review
+(§16's six rules, lesson by lesson), an adversarial critic (anything false, double-keyed,
+ambiguous, off-sheet, or a transfer surface that leaked), and a Florida master educator who has
+sat FAST item committees (item shapes, the reference sheet's values, the benchmark boundary, the
+B1G-M misconceptions as selectable distractors, the standard notes, ELL/IEP register). Every
+keyed value recomputed by all three was right except one key sentence (the Form A Q19 gap, 13 →
+14 minutes). The findings acted on, and the one not:
+
+**Blockers.** Review 15(d) rehearsed the Q8 transfer surface verbatim (a plan's area in square
+metres) two days before the test, and 5.10's independent Q6 did too — the keys' "appears on no
+review" sentence was false. 15(d) is now the real perimeter in metres (17.08 m); the independent
+item is the area in square feet; the board rehearsal (5.10 board 8) stays, as ruling 30 allows.
+Form A Q19's "13 minutes" was 13.7 (14 by the 0.62 route): the key now says 14 and accepts 13–14.
+
+**The papers.** Every per-form `why` that pooled all three forms' numbers ("36, 40 and 30
+multiplied by k once") now prints only its own form's (the Q17(b) one named the right answer as
+the error on two forms). Form A Q6 was 5.04's independent Q4 word for word → 3 in by 3.5 in,
+168 ft². Q14 (yd² → ft²) was a within-system conversion tagged to AR.3.3, which is *across*
+systems → 20 ft² in square metres by the sheet's 0.305 (and 5.08's Notes II, the review's E3 and
+E5, and the Reference Sheet now carry the cross-system square: 1 ft² = 0.305² m²). Q3 and Q10 are
+FAST multiselects now — the B1G-M's "scaling area like length" and "angles scale too" are choices
+to leave alone on Q3; both sheet directions (× 0.39 and ÷ 2.54) are the keyed pair on Q10 with
+the inverted ratio as the choices to refuse — so the guide's named misconception for each
+benchmark is a selectable distractor somewhere on the paper. Q5 asks for k as a number and Q19
+asks which car and by how many minutes: every answer on the paper is a number, a letter or a
+set of letters, which is where his 7 October remark points even though it is not yet a ruling
+for every test. "Tanks of gas" was ambiguous (a car that starts full *buys* two) → "how many
+tanks does the trip use? (Part of a tank counts as a whole tank.)" on every paper and board, and
+the Reference Sheet's line matches. Keys print the sheet's other-route value wherever the two
+differ (Q8, Q9, Q11–Q13). The Reference Sheet's intro no longer says the unit test gives the
+sheet (he said it does not, 13b(vi)); its "inside one system" column carries every line the FAST
+sheet does; its plan example is no longer 5.04 board 6's vote.
+
+**The lessons (Barton).** 5.01: the angle line is on Notes I's slide, not only in the TE; Your
+Turn 1 and board 8 no longer re-run a number the warm-up or Notes showed. 5.02–03: Your Turn 1
+no longer scales the warm-up's 3 by 5; Example 2 no longer is Notes III. 5.04: the exit tested a
+move never taught (deriving the scale from one pair), so Example 2 now teaches it (4 in ↔ 18 ft,
+then 6 in) and Notes III says it; the bus-and-time example went to 5.10–11 where it belongs; the
+one-unit scale (1 : 50; 1 in : 4 ft is 1 : 48) is defined on the vocabulary slide and Notes I;
+board 9 is one sentence of setup and asks which step uses the *scale* (7.5 ft per in is a scale;
+the scale factor is 90). 5.06–07: board 8 no longer repeats board 4's numbers; Notes III's slide
+states the rate it uses. 5.08–09: Examples 1–2 have their own numbers; Your Turn 2 is customary
+so board 6's metric vote is not pre-answered on the slide before it; board 7's number-comparer
+is now wrong (2.5 kg of sugar beats 5 lb of flour). 5.10–11: part-to-whole is taught on Notes
+III before board 7 asks it; Example 1 and board 6 show the minutes-to-hours step; the recipe
+Your Turn and bank item give whole recipes; board 7's wrong list had the grey and the white
+swapped. All six teacher's editions now print the **Variation** paragraph (the kit printed it in
+the table style only).
+
+**Register.** The unit was written in British spelling; the FAST and Units 3–4 of this course
+use *meters, liters, centimeters* — changed throughout, with "a car gets 26 miles per gallon"
+and "Rate on Nov 5". Standard notes: the two AR.3.3 lessons quote Clarification 1 as the state
+writes it ("Problem types are limited to length, area, weight, mass, volume and money"); 5.10
+says the benchmark carries no clarification and gives the CPALMS purpose line; every unit-made
+boundary is labelled *Unit boundary* so nobody quotes it as FLDOE. Citations that called the
+additive error "B1G-M" now say what it is: Math Nation's named misconception; B1G-M stays on
+"scaling area like length" and "the inverted ratio", which it does name. 5.01's TE says this
+class sits the Grade 8 FAST, where GR.1.5 feeds MA.8.GR.2.2 rather than being assessed itself.
+
+**Not acted on.** 5.08–09's written board 9 still asks the cube (2 ft³ = 3,456 in³) with the rule
+stated on Notes III and no worked cube before it — the outline's own decision, kept as a DOK 3
+stretch the TE names; Barton would rather exit on area. 5.06–07's boundary stays the three-step
+chain the estimate alone can check, not a division board. The FAST reviewer's blueprint point is
+recorded: the 10/8/6 split rests on instructional time and the grade 8 feeders, not grade 7
+weights, and the item map on the master sheet says so.
