@@ -650,6 +650,14 @@
 "pt": 38.0,
 "w": 0.26
 },
+"02daf8da0d1e34b5": {
+"color": "slots-v2|lexend-v4",
+"d": 0.1,
+"h": 0.41,
+"latex": "50 \\text{ lb} \\times 0.454 = 22.7 \\text{ kg} \\qquad\\quad 2 \\text{ gal} \\times 3.785 = 7.57 \\text{ L}",
+"pt": 30.4,
+"w": 9.346666666666666
+},
 "02dd5727c22fe129": {
 "color": "1A1A1A|lexend-v4",
 "h": 0.2833333333333333,
@@ -3789,6 +3797,14 @@
 "latex": "50\\ \\text{ft}^{2}",
 "pt": 13,
 "w": 0.3933333333333333
+},
+"1097f78d90eae82b": {
+"color": "slots-v2|lexend-v4",
+"d": 0.006666666666666667,
+"h": 0.30666666666666664,
+"latex": "150 \\times 0.92 = 138 \\text{ euros} \\qquad\\quad 92 \\div 0.92 = 100",
+"pt": 30.4,
+"w": 8.126666666666667
 },
 "10a3470c7541d93f": {
 "color": "9E1B32",
@@ -14797,6 +14813,14 @@
 "pt": 40,
 "w": 1.5266666666666666
 },
+"3d90d3b02b60e6c0": {
+"color": "slots-v2|lexend-v4",
+"d": 0.38666666666666666,
+"h": 0.88,
+"latex": "k = \\dfrac{\\text{copy}}{\\text{original}} = \\dfrac{9}{6} = 1.5 \\qquad\\quad \\dfrac{6}{4} = 1.5 \\qquad\\quad \\text{every side} \\times 1.5",
+"pt": 30.4,
+"w": 10.423333333333334
+},
 "3d97c3435e5f9260": {
 "color": "slots-v2",
 "h": 0.30666666666666664,
@@ -16924,6 +16948,14 @@
 "latex": "5^{2}\\cdot\\left(\\frac{1}{4}\\right)^{-1}",
 "pt": 13,
 "w": 0.66
+},
+"4779836f7ad35def": {
+"color": "slots-v2|lexend-v4",
+"d": 0.09333333333333334,
+"h": 0.42,
+"latex": "23 \\times 17.5 = 402.5 \\text{ mi per tank} \\qquad\\quad 1{,}207 \\div 402.5 \\approx 3 \\text{ tanks}",
+"pt": 30.4,
+"w": 11.053333333333333
 },
 "477b0b7a41b22dbc": {
 "color": "1A1A1A",
@@ -20981,6 +21013,14 @@
 "pt": 13,
 "w": 0.36
 },
+"58c3ddc15ef61088": {
+"color": "slots-v2|lexend-v4",
+"d": 0.1,
+"h": 0.42333333333333334,
+"latex": "\\text{copy} = \\text{original} \\times k \\qquad\\quad \\text{original} = \\text{copy} \\div k",
+"pt": 30.4,
+"w": 8.3
+},
 "58c727b66f1c408b": {
 "color": "1A1A1A|lexend-v3",
 "h": 0.30333333333333334,
@@ -24371,6 +24411,14 @@
 "pt": 13,
 "w": 0.23666666666666666
 },
+"66d3ae8b19a23483": {
+"color": "slots-v2|lexend-v4",
+"d": 0.26666666666666666,
+"h": 0.74,
+"latex": "\\dfrac{180}{20} = 9 = k^{2} \\qquad\\quad k = \\sqrt{9} = 3 \\qquad\\quad 4 \\text{ cm} \\times 3 = 12 \\text{ cm}",
+"pt": 30.4,
+"w": 9.666666666666666
+},
 "66d6e93c866b7fc0": {
 "color": "1A1A1A",
 "h": 0.15333333333333332,
@@ -27617,6 +27665,14 @@
 "pt": 13,
 "w": 0.3433333333333333
 },
+"73de71b52ec561e8": {
+"color": "slots-v2|lexend-v4",
+"d": 0.006666666666666667,
+"h": 0.37333333333333335,
+"latex": "A: 15 \\rightarrow 60 \\qquad\\quad 60 \\div 15 = 4 = k^{2}",
+"pt": 30.4,
+"w": 6.016666666666667
+},
 "73e1160d9f1c647d": {
 "color": "slots-v2|lexend-v3",
 "h": 0.24666666666666667,
@@ -27934,6 +27990,14 @@
 "latex": "m = 55",
 "pt": 13,
 "w": 0.47333333333333333
+},
+"750a1b78c883b6ba": {
+"color": "slots-v2|lexend-v4",
+"d": 0.2633333333333333,
+"h": 0.7366666666666667,
+"latex": "k = \\dfrac{30}{12} = 2.5 \\qquad\\quad 2.5 \\times 1\\dfrac{1}{2} = 3\\dfrac{3}{4} \\text{ cups} > 3",
+"pt": 30.4,
+"w": 7.273333333333333
 },
 "750d442da50ecc56": {
 "color": "1A1A1A|lexend-v4",
@@ -34410,6 +34474,14 @@
 "pt": 30.4,
 "w": 2.9833333333333334
 },
+"91182504396a8a75": {
+"color": "slots-v2|lexend-v4",
+"d": 0.056666666666666664,
+"h": 0.38333333333333336,
+"latex": "100 \\text{ km/h} \\times 0.62 = 62 \\text{ mi/h} \\qquad\\quad 62 < 65",
+"pt": 30.4,
+"w": 7.53
+},
 "911a4e40534d0c25": {
 "color": "slots-v2|lexend-v3",
 "h": 1.09,
@@ -35993,6 +36065,14 @@
 "latex": "(2x^{3})^{3} = 2^{3} \\cdot x^{3 \\cdot 3} = 8x^{9}",
 "pt": 32,
 "w": 3.93
+},
+"974c14d3ea300a36": {
+"color": "slots-v2|lexend-v4",
+"d": 0.006666666666666667,
+"h": 0.37333333333333335,
+"latex": "1 \\text{ ft}^{2} = 12 \\times 12 = 144 \\text{ in}^{2} \\qquad\\quad 3 \\text{ ft}^{2} = 432 \\text{ in}^{2}",
+"pt": 30.4,
+"w": 7.993333333333333
 },
 "974e7173aa9ae5b6": {
 "color": "1A1A1A|lexend-v4",
@@ -41841,6 +41921,14 @@
 "latex": "\\sqrt{4^{3} - 39} = \\sqrt{25} = 5",
 "pt": 30.4,
 "w": 3.716666666666667
+},
+"af33f2f218af8f16": {
+"color": "slots-v2|lexend-v4",
+"d": 0.006666666666666667,
+"h": 0.31666666666666665,
+"latex": "12 \\text{ fl oz} \\div 8 = 1.5 \\text{ c} \\qquad\\quad 1.5 \\times 0.24 = 0.36 \\text{ L}",
+"pt": 30.4,
+"w": 7.78
 },
 "af36c3e55cedc005": {
 "color": "1A1A1A",
@@ -49009,6 +49097,14 @@
 "latex": "1\\,\\text{ft} = 12\\,\\text{in}",
 "pt": 13,
 "w": 0.72
+},
+"cc9f29a22390a24d": {
+"color": "slots-v2|lexend-v4",
+"d": 0.006666666666666667,
+"h": 0.31666666666666665,
+"latex": "P: 16 \\rightarrow 32 \\qquad\\quad 32 \\div 16 = 2 = k",
+"pt": 30.4,
+"w": 5.656666666666666
 },
 "cca6acbd5ade6812": {
 "color": "1A1A1A|lexend-v4",

@@ -60,7 +60,7 @@ L = dict(
              letters=False),
         dict(numeral="III", head="Money is a rate someone sets", min=3, sub="",
              note="An exchange rate is a conversion ratio with a date on it: 0.92 euros per dollar today, something else tomorrow, so it is printed on the problem and never on the sheet. \\$150 × 0.92 = 138 euros. Back the other way is a division: 92 euros ÷ 0.92 = \\$100. **Say:** the rate is given; the move is the same as inches to centimeters.",
-             math=["$1 \\text{ dollar} = 0.92 \\text{ euros}$", "$150 \\times 0.92 = 138 \\text{ euros} \\qquad 92 \\div 0.92 = 100$"],
+             math=["$1 \\text{ dollar} = 0.92 \\text{ euros}$", "$150 \\times 0.92 = 138 \\text{ euros} \\qquad\\quad 92 \\div 0.92 = 100$"],
              letters=False),
     ],
 
