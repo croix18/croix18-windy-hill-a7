@@ -1,10 +1,11 @@
 # A7 Unit 4 — Solving Problems with Rational Numbers: Reference Sheet, Unit Review, Unit Assessment.
 U = dict(
     unit=4, title="Solving Problems with Rational Numbers",
-    reference_intro="Everything on this page is tested from memory. The Grade 8 FAST reference sheet lists none of it; what the test gives you is an on-screen scientific calculator, which will happily give you twelve digits of an answer that deserves two.",
+    review_note="HOW TO USE THIS.   This review covers each part of the assessment, with more questions than the assessment has. Work it in parts. If you miss two or more in a part, that part is where to spend your study time. The reference sheet has everything you need for each part.",
+    reference_intro="Everything on this page is tested from memory. The Grade 8 FAST reference sheet lists none of it; what the test gives you is an on-screen scientific calculator.",
 
     reference=[
-        dict(title="1.   Operations in Scientific Notation", right="Lessons 1–3 · the powers must match to add, never to multiply",
+        dict(title="1.   Operations in Scientific Notation", right="Lessons 1–4 · the powers must match to add, never to multiply",
              blocks=["**Adding and subtracting: the powers of ten must match first.**  A power of ten is a place value, and you can only add things of the same size. Rewrite one number so both carry the same power, then add or subtract the coefficients and copy the power down.",
                      dict(table=([2300, 3530, 3530], [
                          ["", "Add or subtract", "Multiply or divide"],
@@ -17,20 +18,7 @@ U = dict(
                      "**Addition and subtraction are limited to exponents within 2 of each other.**  That is the benchmark's own rule. Multiplication and division have no such limit.",
                      ],
              not_sci=True),
-        dict(title="2.   Significant Digits", right="Lesson 4 · two rules, and it matters which one",
-             blocks=["**Significant digits are the digits of a MEASUREMENT that carry information.**  A count is not a measurement: 24 students is exactly 24, and 60 seconds in a minute is exact, so neither ever limits an answer.",
-                     dict(table=([3800, 1900, 3660], [
-                         ["Rule", "Example", "Why"],
-                         ["Every nonzero digit counts", "$4{,}207$ has 4", "they were all measured"],
-                         ["A zero between nonzero digits counts", "$0.00405$ has 3", "it is holding a measured place"],
-                         ["A leading zero never counts", "$0.0058$ has 2", "it only locates the decimal point"],
-                         ["Trailing zero, with a decimal point: counts", "$3.200$ has 4", "writing it is a claim about thousandths"],
-                         ["Trailing zero, no decimal point: does not", "$52{,}000$ has 2", "those zeros only hold places"]])),
-                     "**Two rules, and it matters which one you use.**  For a PRODUCT or a QUOTIENT, the answer takes the smaller of the two significant-digit counts. For a SUM or a DIFFERENCE, the answer stops at the leftmost place where either measurement's last digit sits.",
-                     "**The case where they disagree.**  $1{,}234 + 5.6 = 1{,}239.6$. Counting digits would give $1.2 \\times 10^{3}$ and throw away two digits that were measured; the place rule gives 1,240, which is right. Counting digits is the rule for products, and it belongs to products only.",
-                     "**Do all the arithmetic first and round once, at the end.**  Rounding in the middle moves the answer, and it keeps moving it every step afterwards.",
-                     "**In scientific notation, every digit you can see is significant.**  That is one of the reasons the notation exists: 52,000 is ambiguous, and $5.2 \\times 10^{4}$ and $5.20 \\times 10^{4}$ are not."]),
-        dict(title="3.   Radicals", right="Lesson 5 · know both lists cold",
+        dict(title="2.   Radicals", right="Lesson 5 · know both lists cold",
              blocks=["**The radical bar is a grouping symbol.**  Everything under it is finished before the root is taken. $\\sqrt{9 + 16} = \\sqrt{25} = 5$ — never $3 + 4$.",
                      dict(table=([2600, 6760], [
                          ["Perfect squares to 225", "1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169, 196, 225"],
@@ -39,7 +27,7 @@ U = dict(
                      "**A cube root keeps the sign of what is under it.**  $\\sqrt[3]{-64} = -4$. A cube root of a negative number is ordinary; a SQUARE root of a negative number is not a number you have. That difference is the one the state guide names for this benchmark.",
                      "**Roots of fractions come apart.**  $\\sqrt{\\frac{4}{25}} = \\frac{2}{5}$ and $\\sqrt[3]{\\frac{1}{125}} = \\frac{1}{5}$ — top and bottom each get the root.",
                      "**A root and a power in one expression: finish each piece, then combine.**  $\\sqrt{4^{3} - 39} \\cdot 5^{-3} = 5 \\cdot \\frac{1}{125} = \\frac{1}{25}$."]),
-        dict(title="4.   The Order of Operations", right="Lesson 6 · read the structure, not a mnemonic",
+        dict(title="3.   The Order of Operations", right="Lesson 6 · read the structure, not a mnemonic",
              blocks=["**There is no mnemonic here, and that is deliberate.**  A mnemonic has no letter for the radical bar or the fraction bar. Read the expression and ask what is holding what.",
                      dict(table=([1300, 3300, 4760], [
                          ["Level", "What", "How"],
@@ -50,17 +38,14 @@ U = dict(
                      "**Left to right means left to right.**  $12 \\div 3 \\cdot 2 = 4 \\cdot 2 = 8$, not 2. $10 - 4 + 3 = 6 + 3 = 9$, not 3. Nothing puts multiplication ahead of division or addition ahead of subtraction.",
                      "**An exponent is attached to its own base, and parentheses decide what that base is.**  $-2^{2} = -4$ but $(-2)^{2} = 4$. $2 \\cdot 3^{2} = 18$, not 36.",
                      "**A fraction bar is two grouping symbols at once.**  Finish the numerator, finish the denominator, then divide: $\\frac{2^{3} - 5}{6^{2} - 27} = \\frac{3}{9} = \\frac{1}{3}$."]),
-        dict(title="5.   Formulas and Word Problems", right="Lessons 7–8 · substitute in parentheses; round last",
+        dict(title="4.   Formulas and Word Problems", right="Lessons 7–8 · substitute in parentheses; round last",
              blocks=["**Substitute in parentheses, every time.**  With $x = -4$, $x^{2}$ is $(-4)^{2} = 16$. The parentheses keep the exponent attached to what it was attached to, and they keep a negative value negative.",
                      "**There is no key word that tells you which operation to use.**  Two problems can carry the same numbers and the same words and need different operations. 15 dollars plus 4 dollars for each of 6 gigabytes is $15 + 4(6) = 39$; 15 dollars for each of 4 lines plus 6 dollars of tax is $15(4) + 6 = 66$. Circling and boxing gives the same markings on both.",
                      "**A rate goes inside the parentheses that multiply the size; a flat fee stays outside.**  A square floor of side 9 feet at 2.89 dollars a square foot with a flat 95 dollars to install is $9^{2}(2.89) + 95$, never $9^{2}(2.89 + 95)$.",
                      "**Round once, at the end, and write the unit.**  Six sides of $\\sqrt{200}$ feet is 84.85 feet; rounding the side to 14 first gives 84. An answer with no unit is not an answer."]),
-        dict(title="6.   Vocabulary",
+        dict(title="5.   Vocabulary",
              blocks=[dict(vocab=[
                  ("coefficient", "the factor $a$ in $a \\times 10^{n}$; in a finished answer, $1 \\leq a < 10$"),
-                 ("significant digits", "the digits of a measurement that carry information — every nonzero digit, every zero between them, and trailing zeros only with a decimal point"),
-                 ("measurement", "a quantity that was measured, so its last digit is uncertain; a count is not a measurement"),
-                 ("precision", "how far out a measurement's last digit sits; a sum or difference stops at the leftmost of the two"),
                  ("radical", "a root symbol together with everything under its bar"),
                  ("radicand", "the number under the radical bar; the bar groups it, so it is finished before the root is taken"),
                  ("principal square root", "the nonnegative root that the square root sign names"),
@@ -77,7 +62,7 @@ U = dict(
             dict(stem="$(7.6 \\times 10^{-4}) - (2.9 \\times 10^{-4})$", answer="$4.7 \\times 10^{-4}$", why="", check=("eq", "F(76,10)*F(10)**-4-F(29,10)*F(10)**-4", "F(47,10)*F(10)**-4"), space=0.6),
             dict(not_sci=True, stem="$(8.2 \\times 10^{5}) + (4.9 \\times 10^{5})$", answer="$1.31 \\times 10^{6}$", why="$13.1 \\times 10^{5}$ is the value and not the finished form.", check=("eq", "F(82,10)*10**5+F(49,10)*10**5", "F(131,100)*10**6"), space=0.7),
             dict(not_sci=True, stem="$(5.4 \\times 10^{8}) + (7.1 \\times 10^{7})$", answer="$6.11 \\times 10^{8}$", why="$7.1 \\times 10^{7} = 0.71 \\times 10^{8}$.", check=("eq", "F(54,10)*10**8+F(71,10)*10**7", "F(611,100)*10**8"), space=0.7),
-            dict(not_sci=True, stem="$(6.3 \\times 10^{-2}) - (8.0 \\times 10^{-4})$", answer="$6.22 \\times 10^{-2}$", why="$8.0 \\times 10^{-4} = 0.08 \\times 10^{-2}$; the exponents are two apart, the widest gap allowed.", check=("eq", "F(63,10)*F(10)**-2-F(80,10)*F(10)**-4", "F(622,100)*F(10)**-2"), space=0.7),
+            dict(not_sci=True, stem="$(6.3 \\times 10^{-2}) - (8 \\times 10^{-4})$", answer="$6.22 \\times 10^{-2}$", why="$8 \\times 10^{-4} = 0.08 \\times 10^{-2}$; the exponents are two apart, the widest gap allowed.", check=("eq", "F(63,10)*F(10)**-2-8*F(10)**-4", "F(622,100)*F(10)**-2"), space=0.7),
             dict(not_sci=True, stem="Lena writes  $(3.2 \\times 10^{4}) + (5.5 \\times 10^{6}) = 8.7 \\times 10^{10}$.  Name her two mistakes and give the correct sum.", answer="She added the coefficients without first writing both over the same power of ten, and she added the exponents. The sum is $5.532 \\times 10^{6}$.", why="$3.2 \\times 10^{4} = 0.032 \\times 10^{6}$, and $5.5 + 0.032 = 5.532$.", check=("many", ("eq", "F(32,10)*10**4+F(55,10)*10**6", "F(5532,1000)*10**6"), ("true", "F(32,10)*10**4+F(55,10)*10**6 != F(87,10)*10**10")), space=1.0),
         ]),
         dict(letter="B", title="Multiplying and Dividing in Scientific Notation", lessons="Lessons 2–3", benchmark="MA.8.NSO.1.5", items=[
@@ -86,19 +71,15 @@ U = dict(
             dict(not_sci=True, stem="$(5 \\times 10^{6})(8 \\times 10^{-2})$", answer="$4 \\times 10^{5}$", why="$40 \\times 10^{4}$ is not finished.", check=("eq", "5*10**6*8*F(10)**-2", "4*10**5"), space=0.7),
             dict(not_sci=True, stem="$\\frac{2.4 \\times 10^{5}}{8 \\times 10^{9}}$", answer="$3 \\times 10^{-5}$", why="$0.3 \\times 10^{-4}$ is not finished either.", check=("eq", "F(24,10)*10**5/(8*10**9)", "3*F(10)**-5"), space=0.7),
             dict(stem="$\\frac{4 \\times 10^{7}}{4 \\times 10^{-3}}$", answer="$1 \\times 10^{10}$", why="$7 - (-3) = 10$. Subtracting a negative goes up.", check=("eq", "4*10**7/(4*F(10)**-3)", "1*10**10"), space=0.6),
-            dict(stem="A laser emits  $6.5 \\times 10^{14}$  photons each second. How many does it emit in  $4.0 \\times 10^{2}$  seconds?", answer="$2.6 \\times 10^{17}$ photons", why="$6.5 \\cdot 4.0 = 26$, so $26 \\times 10^{16}$ before it is finished.", check=("eq", "F(65,10)*10**14*F(40,10)*10**2", "F(26,10)*10**17"), space=0.8, not_sci=True),
+            dict(stem="A laser emits  $6.5 \\times 10^{14}$  photons each second. How many does it emit in  $4 \\times 10^{2}$  seconds?", answer="$2.6 \\times 10^{17}$ photons", why="$6.5 \\cdot 4 = 26$, so $26 \\times 10^{16}$ before it is finished.", check=("eq", "F(65,10)*10**14*4*10**2", "F(26,10)*10**17"), space=0.8, not_sci=True),
         ]),
-        dict(letter="C", title="Real-World Problems and Significant Digits", lessons="Lesson 4", benchmark="MA.8.NSO.1.6", items=[
-            dict(stem="How many significant digits are in each measurement?  6,040 g   ·   0.00920 m   ·   45.00 s", answer="3  ·  3  ·  4", why="6,040: the middle zero counts, the trailing one does not. 0.00920: leading zeros never count, the trailing one does. 45.00: all four.", check=("many", ("eq", "sig('6,040')", "3"), ("eq", "sig('0.00920')", "3"), ("eq", "sig('45.00')", "4")), space=0.8),
-            dict(stem="A rectangular panel measures  $3.2 \\times 10^{2}$  mm by  $1.45 \\times 10^{2}$  mm. Find its area, with the correct number of significant digits.", answer="$4.6 \\times 10^{4}$ square millimeters", why="46,400 exactly; 2 significant digits and 3, so the answer keeps 2.",
-                 check=("many", ("eq", "F(32,10)*10**2*F(145,100)*10**2", "46400"), ("eq", "1000*floor(F(46400)/1000+F(1,2))", "46000")), space=0.9),
-            dict(stem="A train travels  $4.80 \\times 10^{2}$  km in  6.0  hours. Find its average speed, with the correct number of significant digits.", answer="$8.0 \\times 10^{1}$ km/h", why="Exactly 80; two significant digits are justified, so it is written 80 with both digits.", check=("eq", "F(480,100)*10**2/F(60,10)", "80"), space=0.8),
-            dict(stem="Two lengths are measured:  $5.40 \\times 10^{3}$  mm and  $2.8 \\times 10^{2}$  mm. Find their sum, with the correct precision.", answer="$5.68 \\times 10^{3}$ mm", why="5,400 and 280 both stop at the tens place, so the sum, 5,680, does too.", check=("many", ("eq", "F(540,100)*10**3+F(28,10)*10**2", "5680"), ("eq", "10*floor(F(5680)/10+F(1,2))", "5680"), ("eq", "F(568,100)*10**3", "5680"), ("eq", "sig('5.68')", "3")), space=0.8),
-            dict(stem="Two masses are measured:  $7.60 \\times 10^{-2}$  g and  $3.42 \\times 10^{-3}$  g. Find their difference, with the correct precision.", answer="$7.26 \\times 10^{-2}$ g", why="0.07258 exactly; 0.0760 stops at the ten-thousandths, so the answer stops there and rounds up.",
-                 check=("many", ("eq", "F(760,100)*F(10)**-2-F(342,100)*F(10)**-3", "F(7258,100000)"),
-                        ("eq", "F(1,10000)*floor(F(7258,100000)/F(1,10000)+F(1,2))", "F(726,10000)")), space=0.9),
-            dict(stem="Micah adds two measured lengths, 2,340 m and 6.8 m, and says the sum must be written with two significant digits, as $2.3 \\times 10^{3}$ m. Is he right? Explain, and give the correct sum.", answer="He is not right. The counting rule is for products and quotients; a sum stops at the leftmost last-digit place. 2,340 stops at the tens and 6.8 at the tenths, so the sum, 2,346.8, stops at the tens: 2,350 m, or $2.35 \\times 10^{3}$ m.", why="The trailing zero of 2,340 is not significant, so its last significant digit is the 4, in the tens place.",
-                 check=("many", ("eq", "F(2340)+F(68,10)", "F(23468,10)"), ("eq", "10*floor(F(23468,10)/10+F(1,2))", "2350")), space=1.1),
+        dict(letter="C", title="Real-World Problems in Scientific Notation", lessons="Lesson 4", benchmark="MA.8.NSO.1.6", items=[
+            dict(not_sci=True, stem="A rectangular panel measures  $3.2 \\times 10^{2}$  mm by  $1.45 \\times 10^{2}$  mm. Find its area, in scientific notation. Do not round.", answer="$4.64 \\times 10^{4}$ square millimeters", why="$3.2 \\cdot 1.45 = 4.64$, and $10^{2} \\cdot 10^{2} = 10^{4}$.",
+                 check=("eq", "F(32,10)*10**2*F(145,100)*10**2", "F(464,100)*10**4"), space=0.9),
+            dict(not_sci=True, stem="A train travels  $4.8 \\times 10^{2}$  km in  6  hours. Find its average speed, in scientific notation. Do not round.", answer="$8 \\times 10^{1}$ km/h", why="$\\frac{4.8 \\times 10^{2}}{6} = 0.8 \\times 10^{2}$, which is not finished.", check=("eq", "F(48,10)*10**2/6", "8*10**1"), space=0.8),
+            dict(not_sci=True, stem="Two lengths are measured:  $5.4 \\times 10^{3}$  mm and  $2.8 \\times 10^{2}$  mm. Find their sum, in scientific notation. Do not round.", answer="$5.68 \\times 10^{3}$ mm", why="$2.8 \\times 10^{2} = 0.28 \\times 10^{3}$, and $5.4 + 0.28 = 5.68$.", check=("eq", "F(54,10)*10**3+F(28,10)*10**2", "F(568,100)*10**3"), space=0.8),
+            dict(not_sci=True, stem="Two masses are measured:  $7.6 \\times 10^{-2}$  g and  $3.42 \\times 10^{-3}$  g. Find their difference, in scientific notation. Do not round.", answer="$7.258 \\times 10^{-2}$ g", why="$3.42 \\times 10^{-3} = 0.342 \\times 10^{-2}$, and $7.6 - 0.342 = 7.258$.",
+                 check=("eq", "F(76,10)*F(10)**-2-F(342,100)*F(10)**-3", "F(7258,1000)*F(10)**-2"), space=0.9),
         ]),
         dict(letter="D", title="Evaluating Expressions with Radicals", lessons="Lesson 5", benchmark="MA.8.NSO.1.7", items=[
             dict(stem="$\\sqrt{169}$", answer="13", why="", check=("eq", "sqrt(169)", "13"), space=0.5),
@@ -140,11 +121,11 @@ U = dict(
 
     # ------------------------------------------------------------------ unit assessment (two periods)
     assessment=dict(
-        total=34,
+        total=29,
         tracker_order=["MA.8.NSO.1.5", "MA.8.NSO.1.6", "MA.8.NSO.1.7"],
-        tracker={"MA.8.NSO.1.5": 12, "MA.8.NSO.1.6": 9, "MA.8.NSO.1.7": 13},
+        tracker={"MA.8.NSO.1.5": 12, "MA.8.NSO.1.6": 4, "MA.8.NSO.1.7": 13},
         follow_through="Follow-through (ruling 19).  A later part is correct when the right operation is applied to the student's own earlier value. Look at what they wrote for the earlier part, do this part's operation to it, and tick if that is what they wrote. It applies only where the work is on the page.",
-        sections=[
+        forms={"A": [
             dict(title="Operations in Scientific Notation", benchmark="MA.8.NSO.1.5", items=[
                 dict(not_sci=True, stem="Add or subtract. Write each answer in scientific notation.", parts=[
                     dict(label="a", stem="$(3.6 \\times 10^{5}) + (2.1 \\times 10^{5})$", answer="$5.7 \\times 10^{5}$", why="Same power: add the coefficients.", check=("eq", "F(36,10)*10**5+F(21,10)*10**5", "F(57,10)*10**5"), space=0.6),
@@ -177,29 +158,17 @@ U = dict(
                      why="$\\frac{2 \\times 10^{-1}}{4 \\times 10^{3}} = 0.5 \\times 10^{-4} = 5 \\times 10^{-5}$. Working a product backwards across a sign change appears on no review and in no question bank; the point is for the finished form, so $0.5 \\times 10^{-4}$ alone does not earn it.",
                      check=("many", ("eq", "F(2,10)/(4*10**3)", "5*F(10)**-5"), ("eq", "5*F(10)**-5*4*10**3", "2*F(10)**-1")), space=1.0),
             ]),
-            dict(title="Real-World Problems and Significant Digits", benchmark="MA.8.NSO.1.6", items=[
-                dict(stem="Give the number of significant digits in each measurement.", parts=[
-                    dict(label="a", stem="3,080 grams", answer="3", why="The middle zero counts; the trailing zero does not, with no decimal point written.", check=("eq", "sig('3,080')", "3"), space=0.5),
-                    dict(label="b", stem="0.00405 meters", answer="3", why="Leading zeros never count; the zero between the 4 and the 5 does.", check=("eq", "sig('0.00405')", "3"), space=0.5),
-                    dict(label="c", stem="12.500 seconds", answer="5", why="A decimal point is written, so both trailing zeros count.", check=("eq", "sig('12.500')", "5"), space=0.5)]),
-                dict(stem="Solve. Report each answer with the correct number of significant digits.", parts=[
-                    dict(label="a", stem="A rectangular plate measures $2.4 \\times 10^{2}$ mm by $1.35 \\times 10^{2}$ mm. Find its area.", answer="$3.2 \\times 10^{4}$ square millimeters", why="32,400 exactly; 2 significant digits and 3, so the answer keeps 2.",
-                         check=("many", ("eq", "F(24,10)*10**2*F(135,100)*10**2", "32400"), ("eq", "1000*floor(F(32400)/1000+F(1,2))", "32000")), space=0.8),
-                    dict(label="b", stem="A vehicle travels $5.60 \\times 10^{2}$ km in 8.0 hours. Find its average speed.", answer="$7.0 \\times 10^{1}$ km/h", why="Exactly 70; two significant digits are justified, so the zero is written.", check=("eq", "F(560,100)*10**2/F(80,10)", "70"), space=0.8)]),
-                dict(stem="Solve. Report each answer with the correct precision.", parts=[
-                    dict(label="a", stem="Two lengths are measured: $6.25 \\times 10^{3}$ mm and $4.1 \\times 10^{2}$ mm. Find their sum.", answer="$6.66 \\times 10^{3}$ mm", why="6,250 and 410 both stop at the tens place, so the sum, 6,660, does too — and its last significant digit is the second 6, in the tens place. Writing 6.660 would claim the ones place, which neither measurement supports.",
-                         check=("many", ("eq", "F(625,100)*10**3+F(41,10)*10**2", "6660"), ("eq", "10*floor(F(6660)/10+F(1,2))", "6660"), ("eq", "F(666,100)*10**3", "6660"), ("eq", "sig('6.66')", "3")), space=0.8),
-                    dict(label="b", stem="Two masses are measured: $9.30 \\times 10^{-2}$ g and $4.72 \\times 10^{-3}$ g. Find their difference.", answer="$8.83 \\times 10^{-2}$ g", why="0.08828 exactly; 0.0930 stops at the ten-thousandths, so the answer stops there.",
-                         check=("many", ("eq", "F(930,100)*F(10)**-2-F(472,100)*F(10)**-3", "F(8828,100000)"),
-                                ("eq", "F(1,10000)*floor(F(8828,100000)/F(1,10000)+F(1,2))", "F(883,10000)")), space=0.8)]),
-                dict(stem="Jonah adds two measured lengths, 4,560 m and 3.2 m, and says the sum must be written with two significant digits, as  $4.6 \\times 10^{3}$  m. Explain why he is wrong, and give the correct sum.",
-                     answer="The counting rule is for products and quotients. A sum stops at the leftmost place where either measurement's last digit sits: 4,560 stops at the tens (its trailing zero is not significant) and 3.2 stops at the tenths, so the sum, 4,563.2, stops at the tens. It is 4,560 m, or $4.56 \\times 10^{3}$ m.",
-                     why="The point needs the rule named AND the correct sum. Saying only 'he used the wrong rule' does not earn it.",
-                     check=("many", ("eq", "F(4560)+F(32,10)", "F(45632,10)"), ("eq", "10*floor(F(45632,10)/10+F(1,2))", "4560")), space=1.2),
-                dict(form_only="BD", not_sci=True, stem="A rectangle's sides are measured as  $8.0 \\times 10^{1}$  cm and  $3.15 \\times 10^{1}$  cm. Which is the area, in scientific notation with the correct number of significant digits?",
-                     choices=["$2.5 \\times 10^{3}$ cm²", "$2.52 \\times 10^{3}$ cm²", "$2.5 \\times 10^{2}$ cm²", "$25.2 \\times 10^{2}$ cm²"], correct=0, answer="A",
-                     errors={"B": "the exact product, not reduced to the two significant digits the measurements carry [8.NSO.1.6 clarification]", "C": "the exponent was not raised when the coefficient was repaired [8.NSO.1.5]", "D": "the exact product, not reduced, and 25.2 is not less than 10 — two mistakes [B1G-M 8.NSO.1.5 misconception]"},
-                     why="", check=("many", ("eq", "F(80,10)*10**1*F(315,100)*10**1", "2520"), ("eq", "100*floor(F(2520)/100+F(1,2))", "2500"))),
+            dict(title="Real-World Problems in Scientific Notation", benchmark="MA.8.NSO.1.6", items=[
+                dict(not_sci=True, stem="Solve. Write each answer in scientific notation. Do not round.", parts=[
+                    dict(label="a", stem="A rectangular plate measures $2.4 \\times 10^{2}$ mm by $1.35 \\times 10^{2}$ mm. Find its area.", answer="$3.24 \\times 10^{4}$ square millimeters", why="Multiply the coefficients and add the exponents: $2.4 \\cdot 1.35 = 3.24$, and $10^{2} \\cdot 10^{2} = 10^{4}$.",
+                         check=("eq", "F(24,10)*10**2*F(135,100)*10**2", "F(324,100)*10**4"), space=0.8),
+                    dict(label="b", stem="A vehicle travels $5.6 \\times 10^{2}$ km in 8 hours. Find its average speed.", answer="$7 \\times 10^{1}$ km/h", why="$\\frac{5.6 \\times 10^{2}}{8} = 0.7 \\times 10^{2}$, which is not finished: 0.7 is less than 1.",
+                         check=("eq", "F(56,10)*10**2/8", "7*10**1"), space=0.8)]),
+                dict(not_sci=True, stem="Solve. Write each answer in scientific notation. Do not round.", parts=[
+                    dict(label="a", stem="Two lengths are measured: $6.25 \\times 10^{3}$ mm and $4.1 \\times 10^{2}$ mm. Find their sum.", answer="$6.66 \\times 10^{3}$ mm", why="Match the powers first: $4.1 \\times 10^{2} = 0.41 \\times 10^{3}$, and $6.25 + 0.41 = 6.66$.",
+                         check=("eq", "F(625,100)*10**3+F(41,10)*10**2", "F(666,100)*10**3"), space=0.8),
+                    dict(label="b", stem="Two masses are measured: $9.3 \\times 10^{-2}$ g and $4.72 \\times 10^{-3}$ g. Find their difference.", answer="$8.828 \\times 10^{-2}$ g", why="Match the powers first: $4.72 \\times 10^{-3} = 0.472 \\times 10^{-2}$, and $9.3 - 0.472 = 8.828$.",
+                         check=("eq", "F(93,10)*F(10)**-2-F(472,100)*F(10)**-3", "F(8828,1000)*F(10)**-2"), space=0.8)]),
             ]),
             dict(title="The Order of Operations with Exponents and Radicals", benchmark="MA.8.NSO.1.7", items=[
                 dict(stem="Evaluate each expression.", parts=[
@@ -236,5 +205,90 @@ U = dict(
                      check=("many", ("eq", "sqrt(169)", "13"), ("eq", "(2*13)**2", "676"), ("true", "(2*13)**2 != 2*169")), space=1.0),
             ]),
         ],
+        # Form B (19 October; Croix: "Can I get an a/b for the tests?"): parallel to Form A position for
+        # position, no keyed value shared (ruling 33). Section 2 has no significant digits on either form
+        # (Croix, 21 October: "anything asking how many significant digits should be removed").
+        "B": [
+            dict(title="Operations in Scientific Notation", benchmark="MA.8.NSO.1.5", items=[
+                dict(not_sci=True, stem="Add or subtract. Write each answer in scientific notation.", parts=[
+                    dict(label="a", stem="$(4.3 \\times 10^{6}) + (2.4 \\times 10^{6})$", answer="$6.7 \\times 10^{6}$", why="Same power: add the coefficients.", check=("eq", "F(43,10)*10**6+F(24,10)*10**6", "F(67,10)*10**6"), space=0.6),
+                    dict(label="b", stem="$(9.1 \\times 10^{-5}) - (3.6 \\times 10^{-5})$", answer="$5.5 \\times 10^{-5}$", why="", check=("eq", "F(91,10)*F(10)**-5-F(36,10)*F(10)**-5", "F(55,10)*F(10)**-5"), space=0.6),
+                    dict(label="c", stem="$(6.4 \\times 10^{7}) + (8.2 \\times 10^{7})$", answer="$1.46 \\times 10^{8}$", why="$14.6 \\times 10^{7}$ is the value; 14.6 is not less than 10, so it is not the answer.", check=("eq", "F(64,10)*10**7+F(82,10)*10**7", "F(146,100)*10**8"), space=0.6),
+                    dict(label="d", stem="$(5.3 \\times 10^{5}) + (2.6 \\times 10^{4})$", answer="$5.56 \\times 10^{5}$", why="$2.6 \\times 10^{4} = 0.26 \\times 10^{5}$.", check=("eq", "F(53,10)*10**5+F(26,10)*10**4", "F(556,100)*10**5"), space=0.6)]),
+                dict(not_sci=True, stem="Multiply or divide. Write each answer in scientific notation.", parts=[
+                    dict(label="a", stem="$(4 \\times 10^{3})(2 \\times 10^{5})$", answer="$8 \\times 10^{8}$", why="", check=("eq", "4*10**3*2*10**5", "8*10**8"), space=0.6),
+                    dict(label="b", stem="$\\frac{8.4 \\times 10^{8}}{2.1 \\times 10^{3}}$", answer="$4 \\times 10^{5}$", why="", check=("eq", "F(84,10)*10**8/(F(21,10)*10**3)", "4*10**5"), space=0.6),
+                    dict(label="c", stem="$(6 \\times 10^{-4})(5 \\times 10^{6})$", answer="$3 \\times 10^{3}$", why="$30 \\times 10^{2}$ is not finished.", check=("eq", "6*F(10)**-4*5*10**6", "3*10**3"), space=0.6),
+                    dict(label="d", stem="$\\frac{1.5 \\times 10^{2}}{5 \\times 10^{6}}$", answer="$3 \\times 10^{-5}$", why="$0.3 \\times 10^{-4}$ is not finished either.", check=("eq", "F(15,10)*10**2/(5*10**6)", "3*F(10)**-5"), space=0.6)]),
+                dict(not_sci=True, stem="Which is the value of  $(2.3 \\times 10^{3}) + (4.1 \\times 10^{5})$ ?",
+                     choices=["$6.4 \\times 10^{5}$", "$4.123 \\times 10^{5}$", "$4.33 \\times 10^{5}$", "$6.4 \\times 10^{8}$"], correct=1, answer="B",
+                     errors={"A": "the coefficients were added without matching the powers first [8.NSO.1.5]", "C": "$2.3 \\times 10^{3}$ was rewritten as $0.23 \\times 10^{5}$ — the point moved one place too few [8.NSO.1.5]", "D": "the coefficients were added and the exponents were added [B1G-M 8.NSO.1.5 named misconception]"},
+                     why="", check=("eq", "F(23,10)*10**3+F(41,10)*10**5", "F(4123,1000)*10**5")),
+                dict(not_sci=True, stem="Select ALL of the expressions whose value is  $4 \\times 10^{6}$.",
+                     choices=["$(2.5 \\times 10^{6}) + (1.5 \\times 10^{6})$", "$\\frac{1.2 \\times 10^{10}}{3 \\times 10^{4}}$", "$(8 \\times 10^{3})(5 \\times 10^{2})$", "$(4.3 \\times 10^{6}) - (3 \\times 10^{5})$", "$\\frac{1.2 \\times 10^{10}}{3 \\times 10^{3}}$", "$(2.5 \\times 10^{6}) + (1.5 \\times 10^{5})$"],
+                     correct=[0, 2, 3, 4], answer="A, C, D and E",
+                     errors={"B": "$4 \\times 10^{5}$ — the bottom exponent is one larger than it needs to be [8.NSO.1.5]", "F": "$2.65 \\times 10^{6}$ — the second power of ten is $10^{5}$, so its coefficient is 0.15 once matched [8.NSO.1.5]"},
+                     why="C gives $40 \\times 10^{5}$, which is $4 \\times 10^{6}$ once it is finished. All four correct and nothing else for the point.",
+                     check=("many", ("eq", "F(25,10)*10**6+F(15,10)*10**6", "4*10**6"), ("eq", "8*10**3*5*10**2", "4*10**6"),
+                            ("eq", "F(12,10)*10**10/(3*10**3)", "4*10**6"), ("eq", "F(43,10)*10**6-3*10**5", "4*10**6"),
+                            ("true", "F(25,10)*10**6+F(15,10)*10**5 != 4*10**6"), ("true", "F(12,10)*10**10/(3*10**4) != 4*10**6"))),
+                # 21 October: Devon's first term was 3.4 × 10³, a gap of 3 from 10⁶ — wider than MA.8.NSO.1.5's
+                # clarification allows. Now 3.4 × 10⁴ (a gap of 2, as Kendra's on Form A).
+                dict(not_sci=True, stem="Devon writes  $(3.4 \\times 10^{4}) + (5.2 \\times 10^{6}) = 8.6 \\times 10^{10}$.  Name the two mistakes he made, and give the correct sum.",
+                     answer="He added the coefficients without first writing both numbers over the same power of ten, and he added the exponents. The correct sum is $5.234 \\times 10^{6}$.",
+                     why="Both mistakes must be named for the point; one of the two is half the item. $3.4 \\times 10^{4} = 0.034 \\times 10^{6}$.",
+                     check=("many", ("eq", "F(34,10)*10**4+F(52,10)*10**6", "F(5234,1000)*10**6"), ("true", "F(34,10)*10**4+F(52,10)*10**6 != F(86,10)*10**10")), space=1.1),
+                dict(transfer=True, not_sci=True, stem="A number is multiplied by  $5 \\times 10^{4}$  and the product is  $3 \\times 10^{-2}$.  What was the number? Write your answer in scientific notation.",
+                     answer="$6 \\times 10^{-7}$",
+                     why="$\\frac{3 \\times 10^{-2}}{5 \\times 10^{4}} = 0.6 \\times 10^{-6} = 6 \\times 10^{-7}$. Working a product backwards across a sign change appears on no review and in no question bank; the point is for the finished form, so $0.6 \\times 10^{-6}$ alone does not earn it.",
+                     check=("many", ("eq", "F(3,100)/(5*10**4)", "6*F(10)**-7"), ("eq", "6*F(10)**-7*5*10**4", "3*F(10)**-2")), space=1.0),
+            ]),
+            dict(title="Real-World Problems in Scientific Notation", benchmark="MA.8.NSO.1.6", items=[
+                dict(not_sci=True, stem="Solve. Write each answer in scientific notation. Do not round.", parts=[
+                    dict(label="a", stem="A rectangular plate measures $3.5 \\times 10^{2}$ mm by $1.25 \\times 10^{2}$ mm. Find its area.", answer="$4.375 \\times 10^{4}$ square millimeters", why="Multiply the coefficients and add the exponents: $3.5 \\cdot 1.25 = 4.375$, and $10^{2} \\cdot 10^{2} = 10^{4}$.",
+                         check=("eq", "F(35,10)*10**2*F(125,100)*10**2", "F(4375,1000)*10**4"), space=0.8),
+                    dict(label="b", stem="A vehicle travels $7.2 \\times 10^{2}$ km in 8 hours. Find its average speed.", answer="$9 \\times 10^{1}$ km/h", why="$\\frac{7.2 \\times 10^{2}}{8} = 0.9 \\times 10^{2}$, which is not finished: 0.9 is less than 1.",
+                         check=("eq", "F(72,10)*10**2/8", "9*10**1"), space=0.8)]),
+                dict(not_sci=True, stem="Solve. Write each answer in scientific notation. Do not round.", parts=[
+                    dict(label="a", stem="Two lengths are measured: $7.35 \\times 10^{3}$ mm and $5.2 \\times 10^{2}$ mm. Find their sum.", answer="$7.87 \\times 10^{3}$ mm", why="Match the powers first: $5.2 \\times 10^{2} = 0.52 \\times 10^{3}$, and $7.35 + 0.52 = 7.87$.",
+                         check=("eq", "F(735,100)*10**3+F(52,10)*10**2", "F(787,100)*10**3"), space=0.8),
+                    dict(label="b", stem="Two masses are measured: $8.4 \\times 10^{-2}$ g and $3.61 \\times 10^{-3}$ g. Find their difference.", answer="$8.039 \\times 10^{-2}$ g", why="Match the powers first: $3.61 \\times 10^{-3} = 0.361 \\times 10^{-2}$, and $8.4 - 0.361 = 8.039$.",
+                         check=("eq", "F(84,10)*F(10)**-2-F(361,100)*F(10)**-3", "F(8039,1000)*F(10)**-2"), space=0.8)]),
+            ]),
+            dict(title="The Order of Operations with Exponents and Radicals", benchmark="MA.8.NSO.1.7", items=[
+                dict(stem="Evaluate each expression.", parts=[
+                    dict(label="a", stem="$20 - 3 \\cdot 2^{2}$", answer="8", why="The power first, then the product, then the subtraction.", check=("eq", "20-3*2**2", "8"), space=0.6),
+                    dict(label="b", stem="$\\frac{4^{2} + 9}{5}$", answer="5", why="25 over 5; the bar groups the whole numerator.", check=("many", ("eq", "4**2+9", "25"), ("eq", "F(25,5)", "5")), space=0.6),
+                    dict(label="c", stem="$45 \\div 9 \\cdot 3$", answer="15", why="One level, left to right: 5 · 3. Not 5.", check=("eq", "F(45)/9*3", "15"), space=0.6),
+                    dict(label="d", stem="$-3^{2} - (-3)^{2}$", answer="−18", why="−9 − 9. The parentheses decide what the exponent is attached to.", check=("many", ("eq", "-3**2", "-9"), ("eq", "-3**2-(-3)**2", "-18")), space=0.6)]),
+                dict(stem="Evaluate each expression.", parts=[
+                    dict(label="a", stem="$\\sqrt{8^{2} + 17}$", answer="9", why="Finish under the bar: 64 + 17 = 81.", check=("many", ("eq", "8**2+17", "81"), ("eq", "sqrt(81)", "9")), space=0.6),
+                    dict(label="b", stem="$\\sqrt[3]{-64} + 3^{-2}$", answer="$-\\frac{35}{9}$", why="$-4 + \\frac{1}{9}$.", check=("many", ("eq", "(-4)**3", "-64"), ("eq", "-4+F(3)**-2", "F(-35,9)")), space=0.7),
+                    dict(label="c", stem="$\\left(-\\frac{1}{2}\\right)^{2} + \\sqrt{\\frac{9}{16}}$", answer="1", why="$\\frac{1}{4} + \\frac{3}{4}$.", check=("many", ("eq", "sqrt(F(9,16))", "F(3,4)"), ("eq", "F(-1,2)**2+F(3,4)", "1")), space=0.7)]),
+                dict(stem="A square patio of side 12 feet is sealed at 2.60 dollars a square foot, with a flat 75 dollars for delivery.", parts=[
+                    dict(label="a", stem="Write an expression for the total cost.", answer="$12^{2}(2.60) + 75$", why="The rate multiplies the area; the flat fee does not. An expression that charges 75 on every square foot does not earn the point.", check=("eq", "12**2*F(260,100)+75", "F(44940,100)"), space=0.6),
+                    dict(label="b", stem="Find the total cost.", answer="449.40 dollars", why="$144(2.60) = 374.40$, then $+ 75$.", check=("eq", "12**2*F(260,100)+75", "F(44940,100)"), space=0.7)]),
+                dict(stem="Which is the value of  $3 + 4 \\cdot 3^{2}$ ?",
+                     choices=["27", "63", "225", "39"], correct=3, answer="D",
+                     errors={"A": "3² read as 3 · 2 [8.NSO.1.3: an exponent is not a factor]", "B": "3 + 4 was done first, then 7 · 9 [8.NSO.1.7: multiply before adding]", "C": "$(3 + 4 \\cdot 3)^{2}$ — the power applied to everything [8.NSO.1.7: an exponent belongs to its own base]"},
+                     why="", check=("eq", "3+4*3**2", "39")),
+                dict(stem="Select ALL of the expressions whose value is  8.",
+                     choices=["$\\sqrt{64}$", "$64 \\div 4 \\cdot 2$", "$\\left(\\frac{1}{8}\\right)^{-1}$", "$-\\sqrt{64}$", "$\\frac{5^{2} + 7}{4}$", "$\\sqrt{6^{2} + 28}$"],
+                     correct=[0, 2, 4, 5], answer="A, C, E and F",
+                     errors={"B": "32 — one level, left to right: 64 ÷ 4 = 16 and then 16 · 2 [8.NSO.1.7]", "D": "−8 — the minus sits outside the radical, so it is applied after the root [8.NSO.1.7]"},
+                     why="All four correct and nothing else for the point.",
+                     check=("many", ("eq", "sqrt(64)", "8"), ("eq", "F(5**2+7,4)", "8"), ("eq", "F(1,8)**-1", "8"),
+                            ("eq", "sqrt(6**2+28)", "8"), ("eq", "-sqrt(64)", "-8"), ("eq", "F(64)/4*2", "32"),
+                            ("true", "-sqrt(64) != 8"), ("true", "F(64)/4*2 != 8"))),
+                dict(stem="Tomas writes  $\\sqrt{36 + 64} = \\sqrt{36} + \\sqrt{64} = 14$.  Explain why he is wrong, and give the correct value.",
+                     answer="The radical bar is a grouping symbol, so 36 + 64 is finished before the root is taken: $\\sqrt{100} = 10$. The root of a sum is not the sum of the roots.",
+                     why="The point needs the reason AND the value. '10' alone does not earn it, and neither does 'he added wrong'.",
+                     check=("many", ("eq", "36+64", "100"), ("eq", "sqrt(100)", "10"), ("true", "sqrt(36)+sqrt(64) != sqrt(100)")), space=1.1),
+                dict(transfer=True, stem="A square tile has an area of 225 square inches. A second square tile has a side twice as long as the first. What is the area of the second tile?",
+                     answer="900 square inches",
+                     why="The side of the first is $\\sqrt{225} = 15$, so the second has side 30 and area $30^{2} = 900$. Doubling a side and asking for the new area appears on no review and in no question bank; a student who doubles the area and writes 450 has not gone through the side.",
+                     check=("many", ("eq", "sqrt(225)", "15"), ("eq", "(2*15)**2", "900"), ("true", "(2*15)**2 != 2*225")), space=1.0),
+            ]),
+        ]},
     ),
 )

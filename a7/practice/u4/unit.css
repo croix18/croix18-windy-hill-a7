@@ -1,0 +1,14 @@
+/* A7 Unit 4: radicals — a drawn radical sign (Croix, 18 Oct 2026: "Is there a way to have actual radical signs?").
+   The markup keeps the √ character (the checks and screen readers read it); on screen and paper the glyph is invisible
+   and the tick is a mask that stretches to the radicand's height, in the text colour, so the stroke meets the bar at the
+   top-right corner in light mode, dark mode and print. */
+.rad{white-space:nowrap;display:inline-flex;align-items:stretch;vertical-align:baseline;margin-inline:.04em .02em}
+.rad .rg{display:inline-block;width:.6em;flex:0 0 .6em;overflow:hidden;text-indent:-9em;user-select:none;background-color:currentColor;
+  -webkit-mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 20' preserveAspectRatio='none'><path d='M0.6 11.4 L2.8 10.4 L4.7 18.4 L9.5 1.0' fill='none' stroke='black' stroke-width='1.5' stroke-linejoin='round' stroke-linecap='round' vector-effect='non-scaling-stroke'/></svg>") center/100% 100% no-repeat;
+  mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 20' preserveAspectRatio='none'><path d='M0.6 11.4 L2.8 10.4 L4.7 18.4 L9.5 1.0' fill='none' stroke='black' stroke-width='1.5' stroke-linejoin='round' stroke-linecap='round' vector-effect='non-scaling-stroke'/></svg>") center/100% 100% no-repeat}
+.rad .rc{border-top:1.4px solid currentColor;padding:.1em .14em 0 .1em;margin-left:-.05em;display:inline-block;line-height:1.15}
+.rad .ri{font-size:.58em;align-self:flex-start;margin-right:-.22em;margin-top:-.08em;line-height:1;position:relative;z-index:1}
+.rad.tall .rc{padding-top:.12em}
+.cv .m{white-space:normal}
+.stem .m{white-space:normal}
+@media print{ .rad .rg{-webkit-print-color-adjust:exact;print-color-adjust:exact} }

@@ -98,6 +98,10 @@ def start_here(placed):
     dates, review_day, exam_days, plan_as_of = packkit.calendar(U, HERE)
     day = packkit.day
     unit_deck = names.unit(U, "All Slides", "pptx")
+    # a unit test may ship as parallel forms (ruling 33; A7 from Unit 4, Croix 19 October) — the layout is
+    # the kit's (Assessment/Form A, Form B); A7 has no paper practice form, its practice test is the web page
+    forms = [f for f in ("Form A", "Form B") if any(s == os.path.join("Assessment", f) for s, _ in placed)]
+    test = "Test Form A" if forms else "Test"
     example = SPECS[min(3, len(SPECS) - 1)]
     lines = []
     A = lines.append
@@ -122,8 +126,8 @@ def start_here(placed):
     A("")
     A(f"**Course, number, title, then what it is** — `{names.lesson(example, 'Slides', 'pptx')}`, "
       f"`{names.lesson(example, 'Question Bank', 'docx')}`, `{names.lesson(example, 'Question Bank', 'docx', key=True)}`. "
-      f"Unit-wide files carry the unit instead of a lesson: `{unit_deck}`, `{names.unit(U, 'Test', 'docx')}`, "
-      f"`{names.unit(U, 'Test', 'docx', key=True)}`, `{names.unit(U, 'Review', 'docx')}`, `{names.unit(U, 'Reference Sheet', 'docx')}`. "
+      f"Unit-wide files carry the unit instead of a lesson: `{unit_deck}`, `{names.unit(U, test, 'docx')}`, "
+      f"`{names.unit(U, test, 'docx', key=True)}`, `{names.unit(U, 'Review', 'docx')}`, `{names.unit(U, 'Reference Sheet', 'docx')}`. "
       "Single spaces, pieces joined by ` - `, two-digit lesson numbers so everything sorts in teaching order. "
       f"The same pattern in both courses (Croix, 4 October 2026). {M.get('naming_note', '')}")
     A("")
@@ -143,7 +147,12 @@ def start_here(placed):
     A("| **Lessons** | **One folder per lesson, named by its number (`3.08`; the title is in every file's name), everything for that day in it**, each document with its PDF beside it (the PDF is what gets printed and posted). *Slides* — the lesson's own deck, a `.pptx` (upload it to Drive and it opens as Google Slides; paste that link into Deckhand's Slides card). *Teacher Edition* — three or four pages, read in twenty minutes (ruling 26): page 1 is the period (benchmark with its Must and Must-not lines, the target, the MTRs, the timing table, the three sentences to say out loud), then one line per slide, each board carrying its answer, its named distractors and the split-board move, and Misconceptions to Watch at the end. *Lesson Plan* — the Florida-format plan (ruling 25): standards, the MTRs with their evidence, the sequence read from the deck, gradual release, higher-order questions with DOK, checks for understanding with the response to each, differentiation. *Independent Set* — the six questions written in silence (ruling 21). *Question Bank* and *Additional Question Bank* — retired worksheets are question banks (ruling 11): draw from them for practice, exit tickets or re-teaching. |")
     A("| **Lessons / … / Keys** | Inside each lesson's folder: that lesson's three answer keys and nothing else. |")
     A("| **Review** | The Unit Review and its key (unscored; it goes home as practice — ruling 27a, A7 has no review day). |")
-    A("| **Assessment** | The unit test (one paper, two periods) and its key. |")
+    if forms:
+        A(f"| **Assessment** | {' and '.join(forms)} — each one paper over two periods, with its key (scoring lines, the Score Tracker, "
+          "transfer items named) and its Worked Answers copy, the page that goes back to the class with nothing but the "
+          "answers on it (ruling 32). The forms are parallel and share no answer (ruling 33). |")
+    else:
+        A("| **Assessment** | The unit test (one paper, two periods) and its key. |")
     A("| **Handouts** | The Reference Sheet. Students study from it; it may NOT be used on the assessment (ruling 13). There is no study guide (ruling 11). |")
     A(f"| **Reference** | Not handouts: `{names.unit(U, 'Question Bank', 'md')}` (how each question bank varies, what the audit found, what changed from the book, and every bank answer — ruling 26 moved this out of the teacher's edition), the Math Nation package audit, the scope and sequence, the IXL due-date sheet, the Grade 8 source of truth. |")
     A("")
@@ -162,7 +171,7 @@ def start_here(placed):
     n_bm = len({l[3] for l in M["lessons"]})
     A(f"| — | — | Unit Review | all {('two', 'three', 'four', 'five', 'six')[n_bm - 2] if 2 <= n_bm <= 6 else n_bm} | unscored, sent home as practice (ruling 27a); the SSDD block is named on the key only |")
     _bms, _pts = M["assessment"]
-    A(f"| — | {' and '.join(packkit.day(d) for d in exam_days) if exam_days else '—'} | Unit Assessment — two periods, one paper | {_bms} | {_pts} points |")
+    A(f"| — | {' and '.join(packkit.day(d) for d in exam_days) if exam_days else '—'} | Unit Assessment — two periods, one paper{' (Forms A and B)' if forms else ''} | {_bms} | {_pts} points |")
     A("")
     A(M["order_note"])
     A("")

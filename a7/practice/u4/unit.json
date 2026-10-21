@@ -1,0 +1,18 @@
+{
+ "title": "A7 Unit 4 Practice Test",
+ "file": "unit-4-practice-test.html",
+ "download": "A7 Unit 4 Practice Test.html",
+ "css": [
+  "unit.css"
+ ],
+ "scripts": [
+  "engine.js",
+  "coach.js",
+  "unit.js"
+ ],
+ "checks": [
+  "node u4_check.js 3000 600",
+  "python3 verify.py",
+  "python3 plant_check.py"
+ ]
+}

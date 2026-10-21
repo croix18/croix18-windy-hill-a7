@@ -93,7 +93,7 @@ function inputHtml(p, id, lab){
   var pre = V.pre(p), unit = V.unit(p), ph = V.placeholder(p);
   return '<div class="ans">' + (pre ? '<span class="pre">' + pre + '</span>' : '') +
     '<input type="text" id="a' + id + '" data-kind="' + esc(p.kind) + '" aria-label="Answer to question ' + lab + '" aria-describedby="ln' + id + '" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done"' + (ph ? ' placeholder="' + esc(ph) + '"' : '') + '>' +
-    (unit ? '<span class="unit">' + esc(unit) + '</span>' : '') + '<button type="button" class="chk" data-check="' + id + '" aria-label="Check ' + lab + '">Check</button><span class="pv" aria-hidden="true"></span><span class="rd" id="rd' + id + '" aria-live="polite"></span></div>';
+    (unit ? '<span class="unit">' + esc(unit) + '</span>' : '') + '<button type="button" class="chk" data-check="' + id + '" aria-label="Check ' + lab + '">Check</button><span class="hslot" id="hs' + id + '"></span><span class="pv" aria-hidden="true"></span><span class="rd" id="rd' + id + '" aria-live="polite"></span></div>';
 }
 function tailHtml(id){
   return '<div class="fb" id="fb' + id + '" aria-live="polite"></div><div class="more" id="mo' + id + '"></div>' +
@@ -104,7 +104,7 @@ function choicesHtml(x, id, lab, multi){
   x.opts.forEach(function(o, k){
     q.push('<label class="ch" id="ch' + id + LET[k] + '"><input type="' + (multi ? 'checkbox' : 'radio') + '" name="q' + id + '" value="' + k + '"><span class="box' + (multi ? ' sq' : '') + '"></span><span class="cl">' + LET[k] + '.</span><span class="cv">' + V.opt(x, k) + '</span></label>');
   });
-  q.push('</div><div class="ckrow"><button type="button" class="chk" data-check="' + id + '" aria-label="Check ' + lab + '">Check</button></div>' + tailHtml(id));
+  q.push('</div><div class="ckrow"><button type="button" class="chk" data-check="' + id + '" aria-label="Check ' + lab + '">Check</button><span class="hslot" id="hs' + id + '"></span></div>' + tailHtml(id));
   return q.join('');
 }
 function partHtml(p, id, solo, lab, lone){
@@ -166,7 +166,7 @@ function mountExtra(base){
   var M0 = S.more[base.id]; if (!M0) return;
   var a = atPos(U.generate(M0.seed), base.pos), id = base.id + 'x' + M0.n, it = a.item, h;
   EX[id] = {id: id, lab: base.lab + ' (another)', type: a.type, x: a.x, item: it, base: base.id, extra: true, pos: base.pos, aShown: false};
-  var head = '<div class="xq q" data-q="' + id + '"><div class="xhead">Try another like this<span id="xs' + id + '">' + streakHtml(M0) + '</span></div><div class="stem" id="' + (it.type === 'parts' ? 'lx' : 'ln') + id + '"><span class="st">' + V.stem(it) + '</span></div>' + fig(it);
+  var head = '<div class="xq q" data-q="' + id + '"><div class="xhead"><span class="xt">Try another like this</span><span id="xs' + id + '">' + streakHtml(M0) + '</span></div><div class="stem" id="' + (it.type === 'parts' ? 'lx' : 'ln') + id + '"><span class="st">' + V.stem(it) + '</span></div>' + fig(it);
   if (it.type === 'parts') h = head + partHtml(Object.assign({}, a.x, {label: ''}), id, false, EX[id].lab, true) + '</div>';
   else if (it.type === 'solo') h = head + partHtml(a.x, id, true, EX[id].lab) + '</div>';
   else h = head + '<div class="mcp" data-host="' + id + '">' + choicesHtml(it, id, EX[id].lab, it.type === 'multi') + '</div></div>';
@@ -283,7 +283,7 @@ function paintItem(it){
   var R = S.res[it.id], fb = $('fb' + it.id), mo = $('mo' + it.id), st = $('st' + it.id), wl = $('wl' + it.id);
   var testHidden = S.mode === 'test' && !S.done && !it.extra;
   ['is-right','is-wrong','is-form'].forEach(function(c){ host.classList.remove(c); });
-  if (testHidden){ if (!FLASH[it.id]) fb.innerHTML = ''; mo.innerHTML = ''; st.hidden = true; wl.hidden = true; paintChoices(it, null); return; }
+  if (testHidden){ if (!FLASH[it.id]) fb.innerHTML = ''; mo.innerHTML = ''; var hs0 = $('hs' + it.id); if (hs0) hs0.innerHTML = ''; st.hidden = true; wl.hidden = true; paintChoices(it, null); return; }
   var sol = solOf(it), n = sol ? sol.length : 1;
   R = R || {tries: 0, v: null, steps: 0};
   if (R.v) host.classList.add(R.v === 'right' ? 'is-right' : R.v === 'form' ? 'is-form' : 'is-wrong');
@@ -300,7 +300,9 @@ function paintItem(it){
   var missed = (R.v && R.v !== 'right') || R.shown || (R.v === 'right' && R.first === false);
   if (!it.extra && missed && !S.more[it.id]) b.push('<button type="button" class="' + (R.v === 'right' || all ? 'go' : '') + '" data-another="' + it.id + '">Try another like this</button>');
   if (it.extra && R.v === 'right') b.push('<button type="button" class="go" data-another="' + it.base + '">Try another like this</button>');
-  mo.innerHTML = b.join('');
+  var hs = $('hs' + it.id), hintOnly = b.length === 1 && /data-walk=/.test(b[0]) && !R.v && !(R.tries > 0);   /* [D-8] before any try the Hint sits beside Check, not on a row of its own */
+  if (hs) hs.innerHTML = hintOnly ? b[0] : '';
+  mo.innerHTML = hintOnly ? '' : b.join('');
   st.hidden = !(R.steps > 0); if (R.steps > 0) st.innerHTML = stepsHtml(it, R);
   wl.hidden = !walkOn; if (walkOn) wl.innerHTML = walkHtml(it);
   paintChoices(it, R.v ? R : null);
@@ -353,7 +355,7 @@ function walkHtml(it){
         return '<button type="button" class="wopt' + (bad ? ' bad' : '') + '" data-wopt="' + it.id + '|' + k + '|' + j + '"' + (bad ? ' disabled' : '') + '>' + o.label + '</button>'; }).join('') + '</div>';
       if (W.bad[k] != null) h += '<div class="wwhy"><span class="wno">✗</span> ' + s.opts[W.bad[k]].why + '</div>' + (s.pic ? walkPic(it, 'Here is a picture of why:') : '');
     } else {
-      h += '<div class="wnum"><input type="text" inputmode="decimal" id="wn' + it.id + '" autocomplete="off" autocapitalize="off" spellcheck="false" value="' + esc(W.typed[k] || '') + '" aria-label="Your answer to this step"><button type="button" class="go" data-wnum="' + it.id + '">Check</button></div>';
+      h += '<div class="wnum"><input type="text" id="wn' + it.id + '" autocomplete="off" autocapitalize="off" spellcheck="false" value="' + esc(W.typed[k] || '') + '" aria-label="Your answer to this step"><button type="button" class="go" data-wnum="' + it.id + '">Check</button></div>';
       if (W.bad[k] === 'read') h += '<div class="wwhy"><span class="wq">?</span> Type just a number, like 12 or 28.26.</div>';
       else if (W.bad[k] != null) h += '<div class="wwhy"><span class="wno">✗</span> Not quite. ' + s.hint + '</div>' + (s.pic ? walkPic(it, 'Here is a picture that shows it:') : '');
       if ((W.miss[k] || 0) >= 2) h += '<div class="wgive"><button type="button" data-wgive="' + it.id + '">Show this step</button></div>';   /* [R1-3] never a dead end */
@@ -408,7 +410,7 @@ document.addEventListener('toggle', function(e){ var d = e.target; if (d && d.da
 
 /* ------------------------------------------------ typing */
 var keys = document.createElement('div'); keys.className = 'keys'; keys.hidden = true;
-(U.keypad || []).forEach(function(k){ var b = document.createElement('button'); b.type = 'button'; b.textContent = k.label; b.tabIndex = -1; b.setAttribute('aria-label', 'Insert ' + (k.say || k.label)); b.dataset.k = k.label; keys.appendChild(b); });   /* [R1-9] not a tab stop */
+(U.keypad || []).forEach(function(k){ var b = document.createElement('button'); b.type = 'button'; b.textContent = k.label; if (k.kinds) b.dataset.kinds = k.kinds.join(' '); b.tabIndex = -1; b.setAttribute('aria-label', 'Insert ' + (k.say || k.label)); b.dataset.k = k.label; keys.appendChild(b); });   /* [R1-9] not a tab stop */
 keys.addEventListener('pointerdown', function(e){ if (e.target.dataset.k) e.preventDefault(); });
 keys.addEventListener('click', function(e){
   var lab = e.target.dataset.k, el = keys.target; if (!lab || !el || el.readOnly) return;
@@ -425,6 +427,10 @@ document.addEventListener('focusin', function(e){
   var t = e.target;
   if (!(t.matches && t.matches('#paper input[type=text]') && !t.readOnly && !(t.id && t.id.indexOf('wn') === 0) && (U.keypad || []).length)) return;
   if (keys.target === t && !keys.hidden) return;
+  /* only the keys this kind of answer uses (a unit's keypad entry may name its kinds); none → no keypad */
+  var kind = t.dataset.kind || '', shown = 0;
+  Array.prototype.forEach.call(keys.children, function(b){ var ks = b.dataset.kinds; b.hidden = !!ks && ks.split(' ').indexOf(kind) < 0; if (!b.hidden) shown++; });
+  if (!shown){ hideKeys(); keys.target = null; return; }
   var y0 = t.getBoundingClientRect().top;
   var row = t.closest('.ans') || t.parentNode; keys.target = t; row.parentNode.insertBefore(keys, row); keys.hidden = false;
   var dy = t.getBoundingClientRect().top - y0; if (dy) window.scrollBy(0, dy);
@@ -443,7 +449,7 @@ document.addEventListener('input', function(e){
 document.addEventListener('change', function(e){
   var t = e.target;
   if (t.id && t.id.charAt(0) === 'a' && t.closest('#paper') && S.mode === 'test' && !S.done){       /* [W-7] test mode: say only "can't read this yet", nothing about right or wrong */
-    var it0 = byId(t.id.slice(1)); if (it0 && !it0.extra){ var f0 = judge(it0, 0), rd = $('rd' + it0.id); if (rd) rd.textContent = f0.v === 'unread' ? 'Can’t read this yet: ' + plainText(f0.what[0] || '') : ''; }
+    var it0 = byId(t.id.slice(1)); if (it0 && !it0.extra){ var f0 = judge(it0, 0), rd = $('rd' + it0.id); if (rd) rd.innerHTML = f0.v === 'unread' ? '<span class="kl">Can’t read this yet:</span> ' + esc(plainText(f0.what[0] || '')) : ''; }
   }
   if (!t.name || t.name.charAt(0) !== 'q' || !t.closest('#paper')) return;
   var id = t.name.slice(1), it = byId(id); if (!it) return;
@@ -509,7 +515,7 @@ function paintResult(t){
     lastLine +
     (alone ? '<p class="perfect">Every one on the first try.</p>' : perfect ? '<p class="perfect">Every one right on the first check (' + t.helped + ' with help).</p>' : '') +
     '<div class="tw"><table><thead><tr><th>Part</th><th class="r">' + (test ? 'Right' : 'First try') + '</th>' + (test ? '' : '<th class="r">With help</th>') + '</tr></thead><tbody>' + rows + '</tbody></table></div>' +
-    (notYet.length ? '<p class="note">Not right yet: ' + notYet.map(function(it){ return '<button type="button" class="jump" data-jump="' + it.id + '">' + it.lab + '</button>'; }).join(' ') + '</p>' +
+    (notYet.length ? '<p class="note"><span class="nry">Not right yet:</span> ' + notYet.map(function(it){ return '<button type="button" class="jump" data-jump="' + it.id + '">' + it.lab + '</button>'; }).join(' ') + '</p>' +
       '<p class="note"><b>Show me how</b> has the steps; <b>Try another like this</b> gives you a fresh one.</p>' : '') +
     '<div class="btns">' + btns + '</div>';
   box.hidden = false;
@@ -605,9 +611,124 @@ setInterval(function(){ if (S && S.running) $('time').textContent = fmt(elapsed(
 window.addEventListener('pagehide', function(){ if (S && S.running){ S.acc = elapsed(); S.startedAt = now(); save(); } });
 document.addEventListener('visibilitychange', function(){ if (document.hidden && S && S.running) pause(); });   /* the clock stops when the page is put away */
 
+/* ------------------------------------------------ print (Croix, 16 Oct 2026: "Can I get the ability to print?")
+   Print opens a choice: the set as a paper worksheet, the worksheet with its answer key, or this student's results. The
+   printout is the same set as the screen (the same items, drawn by the same view functions; the key is the same key the
+   page marks with), shown first as a preview with its own Print button. With Português on, its lines print too. */
+function pq(d, qn){
+  var it = d.it, h = '<div class="pq"><div class="pqh"><div class="stem"><b class="num">' + qn + '.</b><span class="st">' + V.stem(it) + '</span></div>' + fig(it) + '</div>';   /* the stem and its figure stay together; parts may go to the next page */
+  var line = function(p, lab){ return '<div class="line">' + (lab ? '<b class="lab">' + lab + '.</b>' : '') + '<span class="st">' + V.line(p) + '</span></div>'; };
+  var blank = function(p){ var u = V.unit(p), pre = V.pre(p); return '<div class="pans"><span class="pal bt">Answer:</span> ' + (pre ? '<span class="pre">' + pre + '</span>' : '') + (V.blank ? V.blank(p) || '<span class="pblank"></span>' : '<span class="pblank"></span>') + (u ? ' <span class="unit">' + esc(u) + '</span>' : '') + '</div><div class="pwork"></div>'; };
+  var choices = function(x){ return '<div class="pchoices">' + x.opts.map(function(o, k){ return '<div class="pch"><span class="pbox' + (it.type === 'multi' ? ' sq' : '') + '"></span><span class="cl">' + LET[k] + '.</span><span class="cv">' + V.opt(x, k) + '</span></div>'; }).join('') + '</div>'; };
+  if (it.type === 'parts') it.parts.forEach(function(p, pi){ if (d.keep && !d.keep[pi]) return; h += '<div class="ppart">' + line(p, p.label) + (p.kind === 'mc' ? choices(p) : blank(p)) + '</div>'; });
+  else if (it.type === 'solo') h += '<div class="ppart">' + blank(it.part) + '</div>';
+  else h += '<div class="ppart">' + choices(it) + '</div>';
+  return h + '</div>';
+}
+function printHead(title){
+  return '<div class="phead"><div class="pt1"><span class="bt">' + esc(U.title) + '</span></div><div class="pt2"><span class="bt">' + title + '</span></div>' +
+    '<div class="pname"><span class="bt">Name:</span><span class="pline"></span><span class="bt">Date:</span><span class="pline short"></span></div></div>';
+}
+function setLine(){ return 'Set ' + seed + ' · ' + esc(SCOPES[scope]); }
+function worksheetHtml(){
+  var h = [printHead(setLine())], qn = 0;
+  var pnotes = U.notesPrint || U.notes;                       /* paper is not a keyboard: a unit may give notes for print */
+  if (pnotes && pnotes.length) h.push('<p class="pnotes">' + pnotes.map(function(n){ return '<span class="pinote">' + n + '</span>'; }).join(' ') + '</p>');
+  DS.forEach(function(sec){ h.push('<h2 class="psec"><span class="bt">' + sec.title + '</span></h2>'); sec.items.forEach(function(d){ qn++; h.push(pq(d, qn)); }); });
+  return h.join('');
+}
+function keyListHtml(){
+  var rows = ITEMS.map(function(it){ return '<tr><td class="pk">' + esc(it.lab) + '</td><td class="kv">' + keyHtml(it) + '</td></tr>'; }).join('');
+  return '<div class="pkey"><h2 class="psec"><span class="bt">Answer key</span></h2><p class="pmeta"><span class="bt">' + setLine() + '</span></p><table class="ptab"><tbody>' + rows + '</tbody></table></div>';
+}
+function yourAnswer(it){
+  var a = S.ans[it.id];
+  if (it.type === 'text') return a == null || String(a).trim() === '' ? '' : esc(a);
+  if (it.type === 'mc') return a == null ? '' : '<b>' + LET[+a] + '.</b> ' + V.opt(it.x, +a);
+  return (a || []).map(function(k){ return '<b>' + LET[+k] + '.</b> ' + V.opt(it.x, +k); }).join('; ');
+}
+function verdict(it){
+  var R = S.res[it.id];
+  if (!R || !R.v) return answered(it) ? 'Not checked' : 'Blank';
+  if (R.v === 'right') return R.late ? '✓ Right at Finish' : R.first ? (R.helped ? '✓ First try, with help' : '✓ First try') : R.shown ? '✓ After seeing the steps' : '✓ On try ' + R.tries;
+  return R.v === 'form' ? 'Almost' : '✗ Not yet';
+}
+function resultsHtml(){
+  var t = tally(), N = ITEMS.length, test = S.mode === 'test';
+  var h = printHead('Results') + '<p class="pmeta"><span class="bt">' + setLine() + ' · ' + (test ? 'Like the real test' : 'Check as I go') + '</span></p>';
+  h += '<p class="pscore"><span class="bt"><b>' + t.first + ' / ' + N + '</b> right on the first try' + (t.helped ? ' (' + t.helped + ' with help)' : '') + '</span><span class="bt">' + t.done + ' of ' + N + ' done · time on the clock ' + fmt(elapsed()) + '</span>' +
+    (S.done ? '' : '<span class="bt">Not finished yet.</span>') + '</p>';
+  h += '<table class="ptab pres"><thead><tr><th><span class="bt">Part</span></th><th class="r"><span class="bt">' + (test ? 'Right' : 'First try') + '</span></th></tr></thead><tbody>' +
+    DS.map(function(s, k){ return '<tr><td><span class="bt">' + s.title + '</span></td><td class="r">' + t.bySec[k].got + ' / ' + t.bySec[k].of + '</td></tr>'; }).join('') + '</tbody></table>';
+  h += '<table class="ptab pans2"><thead><tr><th>#</th><th><span class="bt">Your answer</span></th><th><span class="bt">Result</span></th><th><span class="bt">Correct answer</span></th></tr></thead><tbody>' +
+    ITEMS.map(function(it){ var R = S.res[it.id], ok = R && R.v === 'right'; return '<tr class="' + (ok ? 'ok' : 'no') + '"><td class="pk">' + esc(it.lab) + '</td><td>' + yourAnswer(it) + '</td><td><span class="bt">' + verdict(it) + '</span></td><td class="kv">' + keyHtml(it) + '</td></tr>'; }).join('') + '</tbody></table>';
+  return h;
+}
+function printMenu(){
+  var test = S.mode === 'test' && !S.done;
+  ask0('What do you want to print?', [
+    ['ws', 'Worksheet'], ['wk', 'Worksheet + answer key'], ['mk', 'Make-up tests'], ['res', 'My results', test ? 'In “Like the real test” the results print after Finish.' : '']]);
+}
+/* Make-up tests (Croix, 18 Oct 2026: "print tests or make ups directly from here… I'll need it to print the answer key too"):
+   one to five forms, each a different set of the WHOLE unit, headed as a test with a name line and its form letter; every
+   form's answer key follows on its own page, labelled with the form letter and set number so the teacher keeps the keys. */
+function makeupMenu(){ ask0('How many different forms? (each is a new set; the keys print at the end)', [['mk1', '1'], ['mk2', '2'], ['mk3', '3'], ['mk4', '4'], ['mk5', '5']]); }
+function withSet(s, fn){                                   /* run fn with the page's data drawn from set s, then put everything back */
+  var o = {seed: seed, scope: scope, G: G, DS: DS, ITEMS: ITEMS, EX: EX, H: HASHV}, out;
+  seed = s; scope = 'all';
+  try { DS = build(); ITEMS = []; EX = {}; collect(); out = fn(); }
+  finally { seed = o.seed; scope = o.scope; G = o.G; DS = o.DS; ITEMS = o.ITEMS; EX = o.EX; HASHV = o.H; }
+  return out;
+}
+function collect(){                                        /* the items of DS, as render() lists them, without touching the page */
+  var qn = 0;
+  DS.forEach(function(sec, di){ sec.items.forEach(function(d){
+    var it = d.it; qn++;
+    if (it.type === 'parts'){
+      var shown = it.parts.filter(function(p, pi){ return !d.keep || d.keep[pi]; }).length, lone = shown === 1 && it.parts.length > 1;
+      it.parts.forEach(function(p, pi){ if (d.keep && !d.keep[pi]) return; var id = qn + p.label;
+        ITEMS.push({id: id, lab: lone ? String(qn) : id, sec: di, type: textType(p), x: p, item: it, pos: posKey(d.si, d.ii, pi), aShown: true}); });
+    } else if (it.type === 'solo'){ var id1 = String(qn); ITEMS.push({id: id1, lab: id1, sec: di, type: 'text', x: it.part, item: it, pos: posKey(d.si, d.ii, -1), aShown: true}); }
+    else { var id2 = String(qn); ITEMS.push({id: id2, lab: id2, sec: di, type: it.type === 'multi' ? 'multi' : 'mc', x: it, item: it, pos: posKey(d.si, d.ii, -1), aShown: true}); }
+  }); });
+}
+function makeupHtml(n){
+  var seeds = [seed], guard = 0;
+  while (seeds.length < n && guard++ < 50){ var r = randomSeed(); if (seeds.indexOf(r) < 0) seeds.push(r); }
+  var forms = seeds.map(function(s, k){ return withSet(s, function(){ return {ws: worksheetHtml(), key: keyListHtml(), form: LET[k], seed: s}; }); });
+  var h = forms.map(function(f, k){ return (k ? '<div class="pbreak"></div>' : '') + '<div class="pform" data-form="' + f.form + '">' +
+    f.ws.replace(/<div class="pt1"><span class="bt">([^<]*)<\/span>/, function(m, t){ return '<div class="pt1 ptest"><span class="bt">' + t.replace(/\s*Practice Test\b/i, ' Test') + '</span>'; })
+        .replace(/<div class="pt2"><span class="bt">[^<]*<\/span>/, '<div class="pt2"><span class="bt">Make-up · Form ' + f.form + ' · Set ' + f.seed + '</span>') + '</div>'; }).join('');
+  h += forms.map(function(f){ return '<div class="pbreak"></div><div class="pform pkeyform">' + f.key.replace('Answer key</span>', 'Answer key — Form ' + f.form + '</span>') + '</div>'; }).join('');
+  return h;
+}
+function ask0(text, opts){                                   /* the print choice, in the same bar as the other questions */
+  var c = $('confirm'); c.hidden = false; document.body.classList.add('asking');
+  c.innerHTML = '<span>' + text + '</span>' + opts.map(function(o){ return '<button type="button" class="go" data-print="' + o[0] + '"' + (o[2] ? ' disabled title="' + esc(o[2]) + '"' : '') + '>' + o[1] + '</button>'; }).join('') + '<button type="button" id="cn">Cancel</button>';
+  $('cn').onclick = function(){ closeAsk(); var b = $('bPrint'); if (b) b.focus(); };
+  var f = c.querySelector('[data-print]:not([disabled])'); if (f) f.focus();
+}
+function showPrint(kind){
+  closeAsk();
+  var pv = $('printview'); if (!pv){ pv = document.createElement('div'); pv.id = 'printview'; pv.setAttribute('role', 'dialog'); pv.setAttribute('aria-label', 'Print preview'); document.body.appendChild(pv); }
+  if (kind === 'mk'){ makeupMenu(); return; }
+  var mk = /^mk(\d)$/.exec(kind);
+  var body = mk ? makeupHtml(+mk[1]) : kind === 'res' ? resultsHtml() : worksheetHtml() + (kind === 'wk' ? '<div class="pbreak"></div>' + keyListHtml() : '');
+  pv.innerHTML = '<div class="pbar"><button type="button" class="go" id="pvPrint">Print</button><button type="button" id="pvClose">Close</button><span class="pvhint bt">If nothing happens, use your browser’s Print (Ctrl + P).</span></div><div class="ppage">' + body + '</div>';
+  pv.hidden = false; document.body.classList.add('printing'); window.scrollTo(0, 0);
+  $('pvPrint').onclick = function(){ try { window.print(); } catch(e){} };
+  $('pvClose').onclick = closePrint;
+  $('pvPrint').focus();
+}
+function closePrint(){ var pv = $('printview'); if (pv){ pv.hidden = true; pv.innerHTML = ''; } document.body.classList.remove('printing'); var b = $('bPrint'); if (b) b.focus(); }
+document.addEventListener('click', function(e){ var t = e.target && e.target.closest && e.target.closest('[data-print]'); if (t && !t.disabled) showPrint(t.dataset.print); });
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && document.body.classList.contains('printing')) closePrint(); });
+(function(){ var b = document.createElement('button'); b.type = 'button'; b.id = 'bPrint'; b.className = 'pbtn'; b.textContent = 'Print'; b.addEventListener('click', printMenu); var w = document.querySelector('.ctl'); if (w){ var tl = w.querySelector('.tools'); if (!tl){ tl = document.createElement('div'); tl.className = 'tools'; w.appendChild(tl); } tl.appendChild(b); } })();
+
 /* the page's words, from the unit */
 document.title = U.title;
 $('eyebrow').innerHTML = U.eyebrow; $('h1').innerHTML = U.h1;
-$('intro').innerHTML = U.intro + (U.notes || []).map(function(n){ return '<span class="pinote">' + n + '</span>'; }).join('');
+$('intro').innerHTML = '<span class="itx">' + U.intro + '</span>' + (U.notes || []).map(function(n){ return '<span class="pinote">' + n + '</span>'; }).join('');
 openSet(seed, scope);
+if (K.Bi && U.second) K.Bi.mount(U, (window.KitLang || {})[U.second.code]);   /* the second-language toggle (kit/bilingual.js), when the unit has one; after the first set is drawn */
 })();

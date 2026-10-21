@@ -3,8 +3,8 @@
 :root{
   --ground:#e9ecf1; --paper:#ffffff; --ink:#15171c; --mut:#5a6270; --rule:#c9ced8; --field:#f4f6fa;
   --pen:#1a3f95; --ok:#1b7a45; --no:#b3261e; --warn:#8a5200; --bar:#ffffff; --shadow:0 1px 2px rgba(20,30,60,.08),0 8px 28px rgba(20,30,60,.08);
-  --serif:"Tinos","Times New Roman",Times,"Liberation Serif",serif;
-  --ui:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --serif:"Lexend","Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;   /* ruling 46: Lexend everywhere (Croix, 17 Oct: "Can you make it in the lexend font?") — the name --serif stays so no rule moves */
+  --ui:"Lexend",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
 }
 @media screen and (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
   --ground:#0f1116; --paper:#1a1d24; --ink:#e7e9ee; --mut:#9aa2b1; --rule:#353a46; --field:#232733;
@@ -250,3 +250,117 @@ details.why summary{min-height:44px;display:flex;align-items:center}
 .walk .wkhead{display:flex;align-items:center;justify-content:space-between;gap:8px;font:14px/1.4 var(--ui);margin-bottom:8px}
 .keys{margin:8px 0 2px}                                             /* the keypad sits above the box: moving down the page it never shifts the box being tapped */
 .prt:not(.solo)>.keys{margin-left:var(--i2)}
+
+/* the second language (kit/bilingual.js): under the English, smaller, in its own colour; buttons get a second line */
+:root{--tr:#6b3fa0}
+@media screen and (prefers-color-scheme: dark){ :root:not([data-theme="light"]){--tr:#c9a8ff} }
+@media screen{ :root[data-theme="dark"]{--tr:#c9a8ff} }
+.tr{display:block;color:var(--tr);font-size:.9em;line-height:1.35;margin-top:.2em;font-weight:400;font-style:normal;letter-spacing:0}
+.tr .m,.tr i{color:inherit}
+button .trb,.tr.trb{display:block;font:500 .82em/1.2 var(--ui);margin-top:3px;opacity:.95}
+button.go .trb{color:inherit}
+.mode button .trb{font-size:.8em}
+th .tr,td .tr,.pts .tr,#score .tr,.big .tr{font-size:.8em}
+.bi-toggle{display:inline-flex;align-items:center;gap:7px;min-height:44px;font:600 14px/1 var(--ui)}
+.bi-toggle .bi-dot{width:14px;height:14px;border-radius:50%;border:2px solid var(--tr);flex:none}
+.bi-toggle[aria-pressed=true]{border-color:var(--tr);color:var(--tr)}
+.bi-toggle[aria-pressed=true] .bi-dot{background:var(--tr)}
+@media print{.tr{color:#444}}
+details.setbox summary:has(.tr){flex-wrap:wrap} details.setbox summary .tr{flex-basis:100%;margin-top:0}
+
+/* print (16 Oct 2026): a preview of the printout, then only the printout on paper — always dark ink on white */
+#printview{--ground:#fff;--paper:#fff;--ink:#000;--mut:#444;--rule:#999;--field:#f4f6fa;--pen:#1a3f95;--ok:#1b7a45;--no:#b3261e;--tr:#6b3fa0;color-scheme:light;
+  max-width:46rem;margin:0 auto;color:#000}
+body.printing>.watch,body.printing>.result,body.printing>.sheet{display:none!important}
+.pbar{position:sticky;top:0;z-index:5;display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding:10px 0;background:var(--ground);font-family:var(--ui)}
+.pbar button{min-height:44px} .pvhint{font:13px/1.3 var(--ui);color:#555;flex:1 1 12rem}
+body.printing{background:#e9ecf1}
+.ppage{background:#fff;color:#000;padding:28px clamp(14px,5vw,40px);box-shadow:0 1px 2px rgba(20,30,60,.08),0 8px 28px rgba(20,30,60,.08);font-family:var(--serif)}
+.phead .pt1{font:700 21px/1.25 var(--serif)} .phead .pt2{font:14px/1.3 var(--ui);color:#444;margin-top:2px}
+.pname{display:flex;gap:8px;align-items:flex-end;margin:14px 0 6px;font:14px/1.2 var(--ui)} .pname .pline{flex:1 1 auto;border-bottom:1px solid #000;height:1.3em} .pname .pline.short{flex:0 0 7em}
+.pnotes{font:13.5px/1.4 var(--ui);margin:8px 0 0} .pnotes .pinote{display:block}
+.psec{font:700 16px/1.3 var(--ui);border-bottom:1.5px solid #000;padding-bottom:3px;margin:20px 0 12px}
+.pq{margin:0 0 18px} .pqh{break-inside:avoid;page-break-inside:avoid;break-after:avoid;page-break-after:avoid} .ppart{break-inside:avoid;page-break-inside:avoid}
+.pq .qfig{margin-top:8px}
+.ppart{margin:8px 0 0 var(--i1)} .ppart .line{margin-bottom:4px}
+.pans{display:flex;align-items:baseline;flex-wrap:wrap;gap:6px;margin:8px 0 0 var(--i2);font:15px/1.3 var(--ui)}
+.pblank{display:inline-block;min-width:9em;border-bottom:1px solid #000;height:1.2em}
+.pwork{height:72px}
+.pchoices{margin:6px 0 4px var(--i2)} .pch{display:flex;gap:8px;align-items:baseline;margin:4px 0}
+.pbox{width:13px;height:13px;border:1.5px solid #000;border-radius:50%;flex:none;transform:translateY(1px)} .pbox.sq{border-radius:2px}
+.pch .cl{font-weight:700}
+.pbreak{break-before:page;page-break-before:always;height:1px}
+.pmeta{font:14px/1.35 var(--ui);color:#333;margin:4px 0 10px}
+.pscore{font:15px/1.45 var(--ui);margin:8px 0 14px} .pscore>span{display:block}
+.ptab{width:100%;border-collapse:collapse;font:14px/1.35 var(--ui);margin:0 0 14px}
+.ptab th,.ptab td{border-bottom:1px solid #bbb;padding:6px 8px;text-align:left;vertical-align:top} .ptab th{font-weight:700;border-bottom:1.5px solid #000}
+.ptab .r{text-align:right} .ptab .pk{font-weight:700;white-space:nowrap;width:3.2em} .ptab tr{break-inside:avoid;page-break-inside:avoid}
+.pans2 td:nth-child(3){white-space:nowrap} .pans2 tr.ok td:nth-child(3){color:#1b7a45} .pans2 tr.no td:nth-child(3){color:#b3261e}
+.ptab .kv .alt{display:block;font-size:.88em;color:#444}
+.pbtn{min-height:44px}
+@media print{
+  body.printing>*:not(#printview){display:none!important}
+  body.printing{background:#fff;padding:0}
+  #printview .pbar{display:none!important}
+  .ppage{box-shadow:none;padding:0}
+  @page{margin:14mm 13mm}
+}
+.keys button[hidden]{display:none}
+.pblank.short{min-width:4em}
+
+/* ---- design audit, 17 Oct 2026 (Croix: "make sure they are looking clean and really good and kid friendly") ---- */
+.ctl{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center}   /* [D-4] fixed rows: mode / scope + tools; nothing rearranges after a Check */
+.ctl .mode{grid-column:1/-1;justify-self:start}
+.ctl select{min-width:0;max-width:24rem;width:100%}
+.ctl .tools{display:flex;gap:10px;align-items:center}                /* Print and the language toggle move together */
+@media (max-width:480px){ .ctl:has(.bi-toggle) .tools{grid-column:1/-1} }
+.keys{gap:5px} .keys button{width:auto;min-width:42px;padding:7px 9px}   /* [D-2,3] "× 10^" fits; six keys fit a phone row */
+.mode button[aria-pressed=true] .trb{color:inherit;opacity:.85}      /* [D-5] the translation reads on the pressed button */
+details.why summary{flex-wrap:wrap} details.why summary .tr{flex-basis:100%;margin-top:0}   /* [D-6] */
+.ch:has(.fr){align-items:center} .ch:has(.fr) .box{align-self:center;margin-top:0}         /* [D-7] the circle centres on a fraction */
+.hslot:empty{display:none} .hslot button{padding:8px 14px;font-size:13.5px;min-height:44px}  /* [D-8] the first Hint beside Check */
+.result .jump{min-width:3.4em;text-align:center}                     /* [D-10] even chips */
+@media (max-width:480px){ .result .nry{display:block;margin-bottom:6px} .watch .score .tr{display:none} .more button{flex:1 1 auto} }   /* [D-10,11, nit] */
+th .tr,td .tr,.pts .tr,#score .tr,.big .tr{font-size:max(.8em,12px)}  /* [D-11] no translation under 12px */
+.steps .kv{flex:1 1 8rem}                                            /* ANSWER tag and value on one line */
+.ans .unit{min-width:2.4em}                                          /* a steadier Check column */
+.pbar{padding-inline:clamp(14px,5vw,40px)}                           /* the Print bar lines up with the sheet */
+@media print{ .hslot{display:none!important} }
+
+/* ---- Lexend (ruling 46), 17 Oct 2026: it has no italic, so nothing is set in italic; Lexend runs wide, so a notch smaller ---- */
+body{font-size:16px;line-height:1.45}
+.pts,.pt,.total,.ans .pre,.pmeta,em,i,.m i{font-style:normal}   /* variables upright too: Lexend has no italic and a faux slant is the one thing it should not do */
+.pts,.pt{font-weight:500}
+h1{font-size:22px;letter-spacing:-.01em} h2{font-size:17.5px}
+input[type=text],textarea,.wnum input{font-size:16px}
+.eyebrow{letter-spacing:.08em}
+
+/* ---- paper, 18 Oct 2026 (Croix: "Overall it looks a bit crowded") — more air between questions, parts and choices ---- */
+.ppage{line-height:1.5}
+.pq{margin:0 0 26px} .ppart{margin-top:12px} .ppart .line{margin-bottom:6px}
+.pchoices{margin:8px 0 6px var(--i2)} .pch{margin:7px 0;gap:10px}
+.pans{margin-top:10px} .psec{margin-top:26px}
+.phead{margin-bottom:18px} .pnotes{margin-bottom:16px}
+.ppage .rad{margin-inline:.1em .08em}
+/* make-up tests */
+.pform .ptest{font-size:22px} .pkeyform .psec{margin-top:0}
+
+/* ---- the teacher copy (19 Oct 2026): the bar and the real test on paper (kit/teacher.js) ---- */
+.teacherbar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;margin:0 0 14px;padding:12px 14px;border:1.5px solid #b45309;border-radius:10px;background:color-mix(in srgb,#b45309 8%,transparent);font-family:var(--ui);font-size:14px;line-height:1.4}
+.teacherbar .tbtxt{flex:1 1 20rem}
+.teacherbar .tbbtns{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.teacherbar .tblab{font-weight:600;margin-right:2px}
+.teacherbar .tbform{font-weight:600} .teacherbar select{font:600 14px var(--ui);min-height:40px;padding:6px 8px;border-radius:8px;border:1px solid var(--rule);background:var(--field);color:var(--ink)}
+.teacherbar button{min-height:40px;padding:8px 14px}
+.tpage .ppts{float:right;font-weight:500;font-size:13px}
+.tpage .pwork{margin:4px 0 0}
+.tpage .pans{margin-top:4px}
+.tpage .pft{font:italic 12.5px/1.4 var(--ui);color:#444;margin:-4px 0 10px}
+.tpage .kwhy{font-size:13px;color:#333;margin-top:3px}
+.tpage .kerr{font-size:12.5px;color:#444;margin-top:4px}
+.tpage .kflag{font-size:12px;font-weight:700;letter-spacing:.04em;color:#7a2e0e;margin-top:4px}
+.tpage .kft{font-size:12.5px;color:#333}
+.tpage .katex{font-size:1.05em} .tpage .ptab .katex{font-size:1.12em}
+.tpage .tfig{display:block;margin:8px 0 4px var(--i1);max-width:100%;height:auto}
+.tpage .ptrack td,.tpage .ptrack th{padding:5px 8px}
+@media print{ .teacherbar{display:none!important} }

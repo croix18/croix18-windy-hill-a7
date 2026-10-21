@@ -91,3 +91,74 @@ keyText(part) → what a student would type (for the checks)
 5. Run `python3 practice/kit/check/run.py practice/uN` until it passes.
 6. Run the Apple review (four reviewers), fix what it finds, and run again.
 7. Publish the artifact and send the download.
+
+
+## A second language under the English (16 Oct 2026)
+Croix: *"a Portuguese version of the question and explanation for my kids from Brazil … toggle it on and off."* He chose
+everything on the page, with both languages stacked (the English stays; the translation sits under each line).
+
+- **Turn it on for a unit:** add `"second": "pt-BR"` to `unit.json`, add the unit's table (`pt.js`) to its scripts, and give
+  `Unit.second = {code, name, table, names}`. The kit adds a **Português** button by the menus; the choice is remembered on the device.
+- **Off is exactly the English page** — nothing is added. **On**, `bilingual.js` watches the page and puts the translation
+  under every block of words (questions, choices, feedback, hints, Show me how, picture captions, buttons, scores, results).
+- **The math cannot change:** every number, math span, figure and name is lifted out of the English before the lookup and put
+  back into the Portuguese template unchanged (`#`, `§`, `@`; `#{2}` reorders). A sentence the table does not know shows
+  nothing (never a guess).
+- **Tables:** `lang/pt-BR.js` has the page's own words; the unit's `pt.js` has its questions and coaching. Keys are the
+  English with `#` for numbers; "That is what you get if you …" is looked up as its verb phrase (`vp:…`).
+- **Checks:** `check/bi.js` (called from the unit's `bi_check.js`): every sentence the unit produces is translated, the same
+  numbers appear, the "a = b" statements are the same and true, no English words left, every table entry uses exactly its
+  English's pieces. `check/page.js` part C: off adds nothing and on → off restores the English to the letter; through every flow
+  no sentence is missing, no duplicate ids, the numbers under each line match; typing still scores N / N with it on.
+- Decimals stay with a point (as on the test, and as the answer box reads them); "48 e 18" is read like "48 and 18".
+
+## Print (16 Oct 2026)
+Croix: *"Can I get the ability to print?"* A **Print** button by the menus offers: **Worksheet** (this set on paper: name and date
+lines, every question with its figure, an answer blank or choice circles, room to work), **Worksheet + answer key** (the key
+on a new page — the same key the page marks with), and **My results** (score, time, each section, and every part: the
+student's answer, how it went, the right answer; in "Like the real test" only after Finish). A preview opens first with its
+own Print button; on paper only the printout shows, dark on white. With Português on, the printout has it too.
+Checked by `check/page.js` part D (same stems as the screen, a blank or choices for every part, the key equals what the page
+marks right, results match, only the printout on paper, Close restores the page, Portuguese covered).
+
+## Small kit additions from the A7 Unit 4 review (16 Oct 2026)
+- **Keypad by kind:** a keypad entry may carry `kinds: ['sci', 'num', …]`; a box shows only the keys for its part's kind, and
+  no keypad at all when none apply (a "how many significant digits" box gets none).
+- **Hint number boxes** are plain text boxes: a phone's decimal pad has no minus and no slash, and many Hint steps need them.
+- **Print:** a unit may give `notesPrint` (paper is not a keyboard) and `view.blank(part)` (e.g. "___ × 10^__" for
+  scientific-notation answers).
+
+## Make-up tests (18 Oct 2026)
+Croix: *"I want the print function to be able to just print tests or make ups directly from here… I'll need it to print the
+answer key too."* Print → **Make-up tests** → how many forms (1–5). Each form is a different set of the whole unit (the
+current set is Form A), headed "<unit> Test" / "Make-up · Form A · Set 4821" with a name and date line; every form's answer
+key follows on its own page, "Answer key — Form A · Set 4821", so the keys stay with the teacher. The forms are drawn with
+`withSet()` (the page's own data drawn from another set, then put back) and the usual worksheet and key builders, so a form
+is exactly what a student would see on screen for that set number — a student can also be sent to `#set-4821` to practise
+the same form. page.js part D checks three forms: three different sets, one name line each, every key row recomputed from
+that form's set, and the page unchanged afterwards.
+
+## Lexend and the math in TeX (17–18 Oct 2026)
+Croix: *"Can you make it in the lexend font?"* then *"Make the math in latex."* The page is set in Lexend (ruling 46;
+no italics anywhere — Lexend has none; variables upright). The math is drawn by KaTeX: `tex.js` gives every `<span class="m">`
+a shadow root, converts the kit's math HTML inside it (fractions `.fr/.nu/.de`, radicals `.rad/.rc/.ri`, `<sup>`, `<i>`
+variables, the symbols × · ÷ − ≈ π …) to a TeX string with `toTex()`, and renders it there. **The HTML is not changed** —
+checks, keys, the Português engine and screen readers read the same markup as before; only the picture changes. KaTeX
+(0.16.11) is **inlined by the build** from `vendor/katex/` with eight woff2 faces as data URIs (~+450 KB; claude.ai artifacts and
+filtered school networks block CDNs); without it (an old browser, a string KaTeX refuses) the span shows the kit's own
+HTML through a `<slot>` — the 17 Oct look. page.js part E (no network needed) requires: every
+math span on the page drawn by KaTeX, none fallen back; and over 60 sets every stem, line, option, key and worked line
+renders with `throwOnError` and its TeX keeps the HTML's digits and letters in order (`Kit.Tex.skeleton`). Rule of thumb
+for unit authors: write math as the kit's HTML inside `M()`; TeX comes for free. Text in a math span becomes `\text{…}`;
+`<i>` is a variable; parentheses grow around a fraction or root.
+
+## The teacher copy (19 Oct 2026)
+Croix: *"I want to be able to print the test as well, not just make up tests"* — a **separate teacher page** per unit (the key
+must never sit in the student page's source). A `teacher/` folder beside the unit holds `unit.json` (the student scripts by
+`../` path, then `test.js` and `../../kit/teacher.js`), a two-line `gen_test.py` calling kit `teacher_gen.py` (the unit's
+assessment from the course's `build/<unit>/unit.py` → `test.js`: every form, stems/answers in TeX, figures as SVG from the
+paper's shape specs; `--check` re-runs every `check` tuple under sympy and refuses a stale test.js), and a `unit.js` shim for
+Node. `kit/teacher.js` adds the bar (Form A/B, Test, Test + key, Key only) and prints the paper with the kit's print classes:
+two-period line, "Show your work…" (+ the π line), follow-through note, work space per part, the key with notes, transfer
+flags and the score tracker. `check/teacher_check.js` is Rule 0 for the printout. The bar and the paper are `translate="no"`.
+Never for Google Sites; each teacher page is its own private artifact.
