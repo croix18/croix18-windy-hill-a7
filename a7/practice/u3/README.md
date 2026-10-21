@@ -6,6 +6,9 @@ test style questions. It should have different numbers than the test."*
 Published as the private artifact **"Unit 3 Practice Test"** in Croix's claude.ai gallery. Students can
 open it only after he shares it (Share → link; a public link if students have no Claude accounts).
 
+**The teacher copy** (`teacher/`, 21 Oct 2026) is a separate private artifact: this page plus the real Unit 3 test with its
+key, and Print → Make-up tests, which a student page no longer offers. It is never put on Google Sites.
+
 ## What it is
 
 - One page, 36 points, four parts in the order and weights of the real Unit 3 test (9 / 9 / 8 / 10),

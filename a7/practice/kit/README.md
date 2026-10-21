@@ -66,7 +66,7 @@ in the code; the four reports are in the Windmill HANDOFF.
 ## The unit interface (`window.Unit`, `module.exports` under Node)
 ```
 id, contentVersion, legacy: [old storage prefixes, migrated once],
-title, eyebrow, h1, intro, notes: [html],
+title, eyebrow, h1, notes: [html],
 keypad: [{label, say, ins(kind) → text}],
 generate(seed) → {sections: [{title, items}]}
    item: {type: 'parts' | 'solo' | 'mc' | 'multi', stem, fig?, parts | part | opts+correct}
@@ -127,6 +127,12 @@ marks right, results match, only the printout on paper, Close restores the page,
 - **Hint number boxes** are plain text boxes: a phone's decimal pad has no minus and no slash, and many Hint steps need them.
 - **Print:** a unit may give `notesPrint` (paper is not a keyboard) and `view.blank(part)` (e.g. "___ × 10^__" for
   scientific-notation answers).
+- **No line about the page (21 Oct 2026).** Croix: *"eliminate the little texts that you do in the menu like (Same kinds of
+  questions as the unit test, new numbers every set.)"* Under the title there is only the unit's `notes` — how to write an
+  answer ("Use 3.14 for π…") — and nothing at all when it has none; the old `intro` is not read. He added *"And this line
+  'Same kinds of questions as the unit test, new numbers every set.'"*, so the menus' asides went too: the make-up prompt is
+  just "How many different forms?", and the practice menu's "My misses, with new numbers" has no "(none yet)" (it still
+  shows how many when there are some).
 
 ## Make-up tests (18 Oct 2026)
 Croix: *"I want the print function to be able to just print tests or make ups directly from here… I'll need it to print the
@@ -166,4 +172,7 @@ paper's shape specs; `--check` re-runs every `check` tuple under sympy and refus
 Node. `kit/teacher.js` adds the bar (Form A/B, Test, Test + key, Key only) and prints the paper with the kit's print classes:
 two-period line, "Show your work…" (+ the π line), follow-through note, work space per part, the key with notes, transfer
 flags and the score tracker. `check/teacher_check.js` is Rule 0 for the printout. The bar and the paper are `translate="no"`.
-Never for Google Sites; each teacher page is its own private artifact.
+Never for Google Sites; each teacher page is its own private artifact. A unit with one `sections` (no Form A/B) prints as
+"the test". A check's variables (a, b, m, n, x, y, …) are sympy symbols declared positive, exactly as the build kit's gate
+declares them, so a check passes in `teacher_gen.py` exactly when it passes in the build (21 Oct 2026, for A7 Unit 3's
+variable bases — the first teacher copy of a test with algebra in it).

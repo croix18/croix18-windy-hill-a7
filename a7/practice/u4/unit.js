@@ -16,7 +16,6 @@ const Unit = {
   title: 'A7 Unit 4 Practice Test',
   eyebrow: 'Grade 7 Accelerated &nbsp;·&nbsp; Unit 4 &nbsp;·&nbsp; Practice',
   h1: 'Solving Problems with Rational Numbers',
-  intro: 'Same kinds of questions as the unit test, new numbers every set.',
   /* examples that appear nowhere on the test (review 2, N5) */
   notes: ['Type 7.2 × 10⁶ as 7.2 x 10^6, or tap × 10^.', 'Fractions are fine: −13/6.'],
   notesPrint: ['Write scientific notation like 7.2 × 10⁶. Fractions are fine: −13/6.'],

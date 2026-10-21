@@ -11,7 +11,6 @@ var T = {
   'Like the real test': 'Como na prova de verdade',
   'Whole test': 'Prova inteira',
   'My misses, with new numbers': 'Meus erros, com números novos',
-  'My misses, with new numbers (none yet)': 'Meus erros, com números novos (nenhum ainda)',
   'My misses, with new numbers (#)': 'Meus erros, com números novos (#)',
   'Set <b id="setno">#</b> · ¤': 'Lista <b id="setno">#</b> · ¤',
   'Change': 'Trocar',
@@ -21,7 +20,6 @@ var T = {
   'Start this set over': 'Recomeçar esta lista',
   '# points': '# pontos',
   '# point': '# ponto',
-  'Same kinds of questions as the unit test, new numbers every set.': 'Os mesmos tipos de questão da prova da unidade, com números novos em cada lista.',
   'Give exact answers — don’t round.': 'Dê respostas exatas — não arredonde.',
 
   /* the stopwatch bar */
@@ -129,7 +127,7 @@ var T = {
   'Worksheet': 'Folha de exercícios',
   'Worksheet + answer key': 'Folha + gabarito',
   'Make-up tests': 'Provas de reposição',
-  'How many different forms? (each is a new set; the keys print at the end)': 'Quantas versões diferentes? (cada uma é uma lista nova; os gabaritos saem no final)',
+  'How many different forms?': 'Quantas versões diferentes?',
   'Make-up': 'Reposição',
   'Form A': 'Versão A',
   'Form B': 'Versão B',

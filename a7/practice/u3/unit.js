@@ -15,7 +15,6 @@ const Unit = {
   title: 'A7 Unit 3 Practice Test',
   eyebrow: 'Grade 7 Accelerated &nbsp;·&nbsp; Unit 3 &nbsp;·&nbsp; Practice',
   h1: 'Exponents and Scientific Notation',
-  intro: 'Same kinds of questions as the unit test, new numbers every set.',
   notes: [],
   keypad: [{ label: '^', say: 'power' }, { label: '/', say: 'divided by' }, { label: '×', say: 'times', ins: k => sciish(k) ? ' x ' : '*' },
     { label: '−', say: 'minus', ins: () => '-' }, { label: '(', say: 'open bracket' }, { label: ')', say: 'close bracket' }],
