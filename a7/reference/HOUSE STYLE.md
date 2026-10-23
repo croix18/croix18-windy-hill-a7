@@ -3585,3 +3585,11 @@ practice tests. And the test will just pick a random set. There's like 100000 pl
   only for a shape whose natural space is small (the value of a power a student works out by hand; a Pythagorean triple to
   25). A7 Units 3–4 and M7 Unit 4 were widened that night: the same questions, more numbers. A new unit is widened inside
   its benchmarks' limits until the check passes.
+
+## 13b(xxii). Ruling 50 — 23 October: a lost day comes back inside Unit 9 [M7; in its rulebook]
+
+M7's ruling: the relationship-building day of Friday 23 October cost periods 4 and 5 a lesson, and Croix chose to teach M7
+9.06 and 9.07 in one day (Thu 29 October) so that Unit 10 is still taught and tested before Thanksgiving. For A7 the same
+day is one line in its as-run log, with no ruling: period 1 reviewed with the study guide, period 3 had no lesson, nobody
+taught 4.07+08 (the plan no longer carries it, nor its IXL skill), and the Unit 4 exam stays Monday 26 October.
+

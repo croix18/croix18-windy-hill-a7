@@ -24,7 +24,6 @@ The three-character code after each skill is what you type into IXL's search box
 | Mon Oct 19 | 4.02+03 Multiply and divide in scientific notation | Multiply numbers written in scientific notation (YZU); Divide numbers written in scientific notation (SGT) | Tue Oct 20 |
 | Tue Oct 20 | 4.04 Real-world scientific notation; significant digits | Add, subtract, multiply, and divide numbers written in scientific notation: word problems (D5S) | Wed Oct 21 |
 | Wed Oct 21 | 4.05–4.06 (2 lessons) Expressions with radicals (perfect squares to 225, cubes −125 to 125) | Evaluate radical expressions (D8J) | Fri Oct 23 |
-| Fri Oct 23 | 4.07+08 Real-world order-of-operations problems | Evaluate variable expressions: word problems (DPG) | Mon Oct 26 |
 | Tue Oct 27 | 5.01 Scale drawings | Scale drawings: find the scale factor, missing side, or missing angle (WEA) | Wed Oct 28 |
 | Wed Oct 28 | 5.02+03 Scale factor: perimeter and area (k and k²) | Perimeter and area: changes in scale (ZC6); Scale drawings: find the scale factor or missing side (XHM) | Thu Oct 29 |
 | Thu Oct 29 | 5.04 Real-world scale drawings | Scale drawings: word problems (84H); Scale drawings: scale factor word problems (KCM) | Fri Oct 30 |

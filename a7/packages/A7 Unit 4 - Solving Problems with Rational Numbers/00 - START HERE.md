@@ -2,7 +2,7 @@
 
 Windy Hill Middle School · course 1205050 · six teaching days (eight book lessons, merged to six), a review sent home as practice, an assessment built for two periods and given in one (Mon 26 Oct).
 
-**By the plan** (Windmill's spine as of 2026-10-22; `tools/scope_calendar.py` is its source): lessons Fri 16 Oct – Fri 23 Oct, the assessment Mon 26 Oct, 2026. The dates move when the as-run log does (the plan follows the class), and a day is logged from the phone view of the plan.
+**By the plan** (Windmill's spine as of 2026-10-23; `tools/scope_calendar.py` is its source): lessons Fri 16 Oct – Thu 22 Oct, the assessment Mon 26 Oct, 2026. The dates move when the as-run log does (the plan follows the class), and a day is logged from the phone view of the plan.
 
 Nothing exists until it is committed. This folder is generated from `a7/build/u4/` by `install_unit.py`; edit the specs and rebuild rather than editing these files by hand.
 
@@ -40,7 +40,7 @@ Nothing exists until it is committed. This folder is generated from `a7/build/u4
 | 4.04 | Tue 20 Oct | Real-World Problems and Significant Digits | MA.8.NSO.1.6 | Products count digits; sums count places. |
 | 4.05 | Wed 21 Oct | Evaluating Expressions with Radicals | MA.8.NSO.1.7 | The radical bar is a pair of parentheses you cannot see. |
 | 4.06 | Thu 22 Oct | Order of Operations with Radicals | MA.8.NSO.1.7 | Read the expression and ask what is holding what. |
-| 4.07–08 | Fri 23 Oct | Real-World Order of Operations | MA.8.NSO.1.7 | No word tells you which operation to use. Read the situation. |
+| 4.07–08 | — | Real-World Order of Operations | MA.8.NSO.1.7 | No word tells you which operation to use. Read the situation. |
 | — | — | Unit Review | all three | unscored, sent home as practice (ruling 27a); the SSDD block is named on the key only |
 | — | Mon 26 Oct | Unit Assessment — one period, one paper (Forms A and B) | all three benchmarks, sections by benchmark | 29 points |
 

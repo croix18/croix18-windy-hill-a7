@@ -21,7 +21,7 @@
 | Oct 20 | Tue | 4 | 4.04 | Real-world scientific notation; significant digits | 8.NSO.1.6 | Add, subtract, multiply, and divide numbers written in scientific notation: word problems — D5S | Oct 21 |
 | Oct 21 | Wed (43 min) | 4 | 4.05 | Expressions with radicals (perfect squares to 225, cubes −125 to 125) | 8.NSO.1.7 | Evaluate radical expressions — D8J | Oct 23 |
 | Oct 22 | Thu | 4 | 4.06 | Order of operations with exponents and radicals | 8.NSO.1.7 | Evaluate radical expressions — D8J | Oct 23 |
-| Oct 23 | Fri | 4 | 4.07+08 | Real-world order-of-operations problems | 8.NSO.1.7 | Evaluate variable expressions: word problems — DPG | Oct 26 |
+| Oct 23 | Fri | 4 | extra | *extra* Study guide (period 1); relationship-building day (period 3) |  |  |  |
 | Oct 26 | Mon | 4 | 4.X1 | **exam** Unit 4 exam, day 1 |  |  |  |
 | Oct 27 | Tue | 5 | 5.01 | Scale drawings | 7.GR.1.5 | Scale drawings: find the scale factor, missing side, or missing angle — WEA | Oct 28 |
 | Oct 28 | Wed (43 min) | 5 | 5.02+03 | Scale factor: perimeter and area (k and k²) | 7.GR.1.5 | Perimeter and area: changes in scale — ZC6; Scale drawings: find the scale factor or missing side — XHM | Oct 29 |
@@ -143,6 +143,8 @@ The dates above are laid out from the sequence of lessons, the school calendar a
 - Mon Oct 05 2026: the class began T-A1
 - Thu Oct 08 2026: State test — no class
 - Fri Oct 16 2026: the class began 4.01
+- Fri Oct 23 2026: Study guide (period 1); relationship-building day (period 3)
+- Mon Oct 26 2026: the class began 4.X1
 - Tue Oct 27 2026: the class began 5.01
 - Tue Dec 08 2026: FAST PM2 — no class
 - Thu Dec 17 2026: Catch-up day — make-up tests and missing work; nothing new and nothing graded
@@ -154,6 +156,6 @@ The dates above are laid out from the sequence of lessons, the school calendar a
 - Unit 4 exam: Thu Oct 22 → **Mon Oct 26** (+2 school days)
 - Units 8–9 exam: Thu Jan 14 → **Thu Jan 21** (+4 school days)
 - Unit 10 exam: Mon Feb 01 → **Thu Feb 04** (+3 school days)
-- covered on a day the log does not name: 3.X2, flex, 4.X2, flex
+- covered on a day the log does not name: 3.X2, flex, 4.07+08, 4.X2, flex
 - flex days absorbed: 2 of 6 (after Unit 9, 10); 4 left to absorb later losses
 - the last day of content and tests: Fri Apr 30 (content must end by Apr 30); PM3 review days before the window: 0

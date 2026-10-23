@@ -517,7 +517,14 @@ print(f"month calendar: {sum(seen.values())} weekday cells")
 
 # ---------------- Vocabulary
 wv = wb["Vocabulary"]; vrows = [r for r in wv.iter_rows(min_row=2) if r[3].value]
-exp = [(t, tex2text.text(df)) for code in sorted(specs, key=lambda c: min(d(x[0]) for x in cal if stem(x[3], int(x[2]) if x[2] else 0) == c)) for t, df in specs[code]["vocab"]]
+# a built lesson no class day teaches has no terms here (23 Oct 2026: 4.07+08 was not taught; the plan no longer lays it)
+firstday = {}
+for x in cal:
+    c = stem(x[3], int(x[2]) if x[2] else 0)
+    if c in specs: firstday[c] = min(firstday.get(c, d(x[0])), d(x[0]))
+untaught = sorted(c for c in specs if c not in firstday)
+if untaught: print("built, not on the plan (not taught):", ", ".join(untaught))
+exp = [(t, tex2text.text(df)) for code in sorted(firstday, key=firstday.get) for t, df in specs[code]["vocab"]]
 if [(r[3].value, r[4].value) for r in vrows] != exp: bad("vocabulary differs")
 print(f"vocabulary: {len(vrows)} terms")
 
