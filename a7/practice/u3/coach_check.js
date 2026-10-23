@@ -288,7 +288,8 @@ for (let seed = 1; seed <= SEEDS; seed++) {
   q = find('mixedProd'); x = q.prm; PIN('right size', q, String(pw(x.B, x.n - x.m)), 'wrong', /one over/, /right size/);
   q = find('monoCoefPow'); x = q.prm; PIN('mono sign', q, '-' + pw(x.c, x.q) + x.v + '^' + x.p * x.q, 'wrong', /wrong sign/);
   q = find('toSci', y => y.k > 0); x = q.prm; PIN('sci plain', q, P.decStr(P.qdec(x.c)).replace('.', '') + '0'.repeat(x.k + 1), 'wrong', /needs to be in scientific notation/, /zeros|one place/);
-  q = find('negNegBase'); x = q.prm; PIN('-1/-8', q, '-1/-' + pw(x.c, x.e), 'wrong', /both negative/, /lose the sign/);
+  q = find('negNegBase', y => y.e % 2 === 1); x = q.prm; PIN('-1/-8', q, '-1/-' + pw(x.c, x.e), 'wrong', /both negative/, /lose the sign/);
+  q = find('negNegBase', y => y.e % 2 === 0); x = q.prm; PIN('even sign', q, '-1/' + pw(x.c, x.e), 'wrong', /even number/, /odd/);   /* an even power since 22 Oct 2026: positive */
   q = find('monoPow'); x = q.prm; PIN('stacked', q, x.v + '^' + x.m + '^' + x.n, 'unread', /Two \^/);
   q = find('coefNeg'); x = q.prm; PIN('x as times', q, x.k + ' x 10^-' + x.m, 'form', null, /letter/); PIN('coef struct step', q, x.k + '/10^-' + x.m, 'wrong', /keep its exponent negative/, null, 0);
   PIN('coef base', q, x.k + '^-' + x.m, 'wrong', /still has a negative exponent|Only the 10/);

@@ -151,3 +151,28 @@ This version follows the M7 Unit 4 page. Its README has the full list of changes
     - The space before "?" is gone.
     - The fallback message matches M7's.
   - **Checks.** The picture checker now counts plant by plant, and the engine check has planted errors.
+
+## Content version 5 (22 Oct 2026): more versions of every question (ruling 49)
+Croix: *"I don't want the tests to be anything specific. Going forward. I want to build the practice tests. And the test will
+just pick a random set."* Then: *"Is there a way I can add in that variation factor? … Get the exact copy of the test and slam
+the problems til it becomes easy."* (A student who failed this unit took the practice test about ten times with the Hint and
+got 35 of 36 on the retake.)
+
+The kit's variety check counts each part's versions: the numbers a student sees, with words, letters and the order of the
+choices left out. 23 parts had fewer than 100. Each question keeps its shape and draws from wider numbers:
+- **Laws of exponents:** 1.1d b⁰ with b 2–120. 1.2a (p/q)ᵏ: any fraction in lowest terms, squares to 20², cubes to 10³, and a
+  few 4th and 5th powers. 1.2b a⁰ · c² with a to 20 and c to 15. 1.2c (Bᵖ)^q ÷ Bʳ with B 2–7 or 10 and p, q to 5. 1.3 b 2–10,
+  exponents to 9. 1.4 bⁿ ÷ bᵏ = V with k to 8 and V a power found by hand (to 1,296, or 10,000).
+- **Integer exponents:** 2.1a–c with bases to 20 (2.1c: 2–19 times a power of 10, to 10⁻⁹). 2.2d Bᵐ · B⁻ⁿ with B to 10 and
+  m to 9. 2.4, the select-all, is now drawn: a target 1/bⁿ (never the test's 1/64), three true forms from bⁿ's negative power,
+  (1/b)ⁿ, N⁻¹ and any other way to write N as a power, and two slips (a minus sign in front, an exponent one off, (b²)⁻ⁿ,
+  (1/b)⁻ⁿ). Before, it had five hand-made sets.
+- **2.2b (−c)⁻ᵉ comes with an even exponent too**, so the sign is the question. Its coach, Hint and pictures read the parity:
+  for an even power the slip is "you make it negative".
+- **Variable bases:** 3.1a exponents to 15; 3.1b (vᵐ)ⁿ to v¹⁰⁰ (the coach reads exponents to 120 now, from 60); 3.1c and 3.3
+  (c·vᵖ)^q with c² to 144, c³ to 216, 2⁴ and 3⁴; 3.2b c to 20; 3.2c k to 12.
+- **Scientific notation:** 4.4a with exponents to 15 and gaps to 6.
+- **Allowed under the floor** (`unit.json` "variety", each with its reason): 2.2a, 2.2b, 2.2c and 2.3 are values of powers,
+  one for each base and exponent. With the powers a student works out by hand (squares to 25² and of tens, cubes to 10³ and
+  20³, the small 4th to 6th powers, and 2⁷ to 2¹⁰: 57 in all) they have 44–55 versions. 3.2a v⁻ⁿ has one number, the
+  exponent: 8 versions.

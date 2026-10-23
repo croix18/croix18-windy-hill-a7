@@ -18,5 +18,14 @@
   "node steps_check.js",
   "node coach_check.js 1500",
   "python3 verify_coach.py"
- ]
+ ],
+ "variety": {
+  "allow": {
+   "2.2a": "b⁻ⁿ has one value for each base and exponent. Every power a student works out by hand is drawn: squares to 25² and of tens to 100², cubes to 10³ and 20³, the small 4th, 5th and 6th powers, and 2⁷ to 2¹⁰. That is 57, less the test's 4⁻² and 5⁻². More would test long multiplication, not exponents.",
+   "2.2b": "(−c)⁻ᵉ has one value for each base and exponent: the same hand-worked powers as 2.2a, odd and even, less the test's (−3)⁻³.",
+   "2.2c": "(1/d)⁻ⁿ has one value for each base and exponent: the same hand-worked powers as 2.2a, less the test's (1/2)⁻³.",
+   "2.3": "The value of b⁻ⁿ again, as a choice, with n to 4: the same hand-worked powers as 2.2a.",
+   "3.2a": "v⁻ⁿ = 1/vⁿ has one number, the exponent (2 to 9). A new letter is not a new version, and a longer exponent would only lengthen the ladder picture."
+  }
+ }
 }

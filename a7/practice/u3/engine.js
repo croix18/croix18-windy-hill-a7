@@ -363,6 +363,20 @@ function markInner(part, text) {
 }
 
 /* ------------------------------------------------------------------ the generators */
+/* Ruling 49 (Croix, 22 Oct 2026): the unit test is a random set of this page, and "add in that variation factor" — so every
+   question comes in many versions, with the numbers a student works by hand. FRIENDLY: the powers b^n (n ≥ 2) the value
+   questions use — squares to 25² and of tens to 100², cubes to 10³ and 20³, 2…6 and 10 to the 4th, 2…4 to the 5th, 2⁶, 3⁶
+   and 2⁷ … 2¹⁰: every value at most 10,000. SELECT_N: the select-all targets 1/bⁿ (b not itself a power; never the test's 64). */
+const FRIENDLY = (() => { const L = [], add = (b, n) => L.push([b, n]);
+  for (let b = 2; b <= 25; b++) add(b, 2); for (const b of [30, 40, 50, 60, 70, 80, 90, 100]) add(b, 2);
+  for (let b = 2; b <= 10; b++) add(b, 3); add(20, 3);
+  for (const b of [2, 3, 4, 5, 6, 10]) add(b, 4);
+  for (const b of [2, 3, 4]) add(b, 5);
+  add(2, 6); add(3, 6); for (let n = 7; n <= 10; n++) add(2, n);
+  return L; })();
+const SELECT_N = [[2, 2], [2, 3], [2, 4], [2, 5], [2, 7], [2, 8], [2, 9], [2, 10], [3, 2], [3, 3], [3, 4], [3, 5], [3, 6], [5, 2], [5, 3], [5, 4],
+  [6, 2], [6, 3], [7, 2], [7, 3], [10, 2], [10, 3], [10, 4]];
+const igcd = (a, b) => { while (b) [a, b] = [b, a % b]; return a; };
 function rng(seed) { let a = seed >>> 0; return () => { a = (a + 0x6D2B79F5) >>> 0; let t = a; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
 function tools(r) {
   const ri = (lo, hi) => lo + Math.floor(r() * (hi - lo + 1));
@@ -434,7 +448,7 @@ function generate(seed) {
   const q1a = until(() => ({ b: pick([2, 3, 5, 6, 7, 8, 9, 10]), m: ri(2, 9), n: ri(2, 9) }), x => same(x, { b: 4, m: 3, n: 5 }) || x.m === x.n || x.m * x.n === 2 * (x.m + x.n));   // {3,6}: b^(mn) = (b²)^(m+n), two mistakes would look alike
     const q1b = until(() => ({ b: pick([2, 3, 5, 6, 7, 10]), m: ri(2, 6), n: ri(2, 6) }), x => same(x, { b: 2, m: 3, n: 4 }) || x.m + x.n === x.m * x.n);
     const q1c = until(() => { const n = ri(2, 6); return { b: pick([2, 3, 5, 6, 8, 9, 10, 11]), m: n + ri(2, 7), n }; }, x => same(x, { b: 7, m: 9, n: 4 }));
-    const q1d = until(() => ({ b: ri(2, 25) }), x => x.b === 9);
+    const q1d = until(() => ({ b: ri(2, 120) }), x => x.b === 9);
     const Q1 = { type: 'parts', stem: 'Write each expression as a single power.', parts: [
       part('a', Mul('·', P(q1a.b, q1a.m), P(q1a.b, q1a.n)), P(q1a.b, q1a.m + q1a.n), 'power', { base: q1a.b,
         steps: ['Same base, so add the exponents: ' + q1a.m + ' + ' + q1a.n + ' = ' + (q1a.m + q1a.n) + '.'],
@@ -454,9 +468,11 @@ function generate(seed) {
     return Q1;
   }, ok);
   const Q2 = KIT.draw(UNIT_ID, seed, 'q2', T0 => { const { ri, pick, shuffle, until } = A7(T0);
-  const q2a = until(() => { const [p, q] = pick([[1, 3], [3, 4], [2, 5], [3, 5], [4, 5], [1, 4], [5, 6], [2, 7], [3, 7], [1, 2], [4, 7]]); return { p, q, k: pick([2, 3]) }; }, x => same(x, { p: 2, q: 3, k: 3 }));
-    const q2b = until(() => ({ a: ri(2, 12), c: ri(2, 9) }), x => same(x, { a: 6, c: 5 }) || x.a === x.c);
-    const q2c = until(() => { const B = pick([2, 3, 10]), p = pick([2, 3]), q = pick([2, 3]), e = ri(1, 3); return { B, p, q, e, r: p * q - e }; }, x => same(x, { B: 10, p: 2, q: 2, e: 1, r: 3 }) || x.B ** x.e > 1000 || x.r < 1);
+  const q2a = until(() => { const k = pick([2, 2, 2, 2, 3, 3, 3, 4, 5]), q = ri(3, { 2: 20, 3: 10, 4: 5, 5: 4 }[k]); return { p: ri(2, q - 1), q, k }; },
+      x => same(x, { p: 2, q: 3, k: 3 }) || igcd(x.p, x.q) !== 1);   /* p = 1 never: the clean rule (raising only the bottom is right there) */
+    const q2b = until(() => ({ a: ri(2, 20), c: ri(3, 15) }), x => same(x, { a: 6, c: 5 }) || x.a === x.c);
+    const q2c = until(() => { const B = pick([2, 3, 4, 5, 6, 7, 10]), p = ri(2, 5), q = ri(2, 5), e = pick([2, 3]); return { B, p, q, e, r: p * q - e }; }, x => same(x, { B: 10, p: 2, q: 2, e: 1, r: 3 }) || x.B ** x.e > 1000 || x.r < 1);
+    /* e = 1 is the test's shape but never clean (B × 1 = B¹), nor is p = q = 2 (adding the exponents gives the same) */
     const Q2 = { type: 'parts', stem: 'Find the value of each expression.', parts: [
       part('a', P(Par(Fr(q2a.p, q2a.q)), q2a.k), Fr(pw(q2a.p, q2a.k), pw(q2a.q, q2a.k)), 'value', {
         steps: ['Raise the top and the bottom to the power ' + q2a.k + ': ' + q2a.p + '<sup>' + q2a.k + '</sup> = ' + pw(q2a.p, q2a.k) + ' and ' + q2a.q + '<sup>' + q2a.k + '</sup> = ' + pw(q2a.q, q2a.k) + '.'],
@@ -472,7 +488,7 @@ function generate(seed) {
     return Q2;
   }, ok);
   const Q3 = KIT.draw(UNIT_ID, seed, 'q3', T0 => { const { ri, pick, shuffle, until } = A7(T0);
-  const q3 = until(() => ({ b: pick([2, 3]), m: ri(2, 7), n: ri(2, 7) }), x => same(x, { b: 2, m: 4, n: 3 }) || x.m === x.n ||
+  const q3 = until(() => ({ b: ri(2, 10), m: ri(2, 9), n: ri(2, 9) }), x => same(x, { b: 2, m: 4, n: 3 }) || x.m === x.n ||
       new Set([2 * (x.m + x.n), x.m * x.n, 2 * x.m * x.n, x.m + x.n]).size < 4);
     const o3 = shuffle([[P(q3.b * q3.b, q3.m + q3.n), 'The bases were multiplied too. Keep the base; add the exponents.'], [P(q3.b, q3.m * q3.n), 'The exponents were multiplied. For a product of powers, add them.'],
       [P(q3.b * q3.b, q3.m * q3.n), 'Both mistakes: the bases were multiplied and so were the exponents.'], [P(q3.b, q3.m + q3.n), null]]);
@@ -482,7 +498,7 @@ function generate(seed) {
     return Q3;
   }, ok);
   const Q4 = KIT.draw(UNIT_ID, seed, 'q4', T0 => { const { ri, pick, shuffle, until } = A7(T0);
-  const q4 = until(() => { const b = pick([2, 3, 4, 5, 10]), k = ri(1, 4), c = ri(2, 4); return { b, k, c, V: b ** c }; }, x => (x.b === 5 && x.c === 3) || x.V > 10000);     // the test's 125 = 5^3 is never used
+  const q4 = until(() => { const b = pick([2, 3, 4, 5, 6, 7, 10]), k = ri(1, 8), c = ri(2, 5); return { b, k, c, V: b ** c }; }, x => (x.b === 5 && x.c === 3) || (x.V > 1296 && x.b !== 10) || x.V > 10000);     // the test's 125 = 5^3 is never used; V a power a student finds by hand (to 1,296, or 10,000)
     const Q4 = { type: 'solo', stem: 'Find the value of ' + M(V('n')) + ' that makes the statement true:  ' + M(Eq(Fr(P(q4.b, V('n')), P(q4.b, q4.k)), N(q4.V, { commas: true }))),
       part: part('', Eq(Fr(P(q4.b, V('n')), P(q4.b, q4.k)), N(q4.V)), N(q4.k + q4.c), 'n', {
         steps: [commas(String(q4.V)) + ' = ' + q4.b + '<sup>' + q4.c + '</sup>.', 'Dividing subtracts the exponents, so <i>n</i> − ' + q4.k + ' = ' + q4.c + '.', '<i>n</i> = ' + (q4.k + q4.c)],
@@ -491,9 +507,9 @@ function generate(seed) {
     return Q4;
   }, ok);
   const Q5 = KIT.draw(UNIT_ID, seed, 'q5', T0 => { const { ri, pick, shuffle, until } = A7(T0);
-  const q5a = until(() => ({ b: ri(2, 9), n: ri(2, 6) }), x => same(x, { b: 6, n: 3 }));
-    const q5b = until(() => ({ c: ri(2, 5), m: ri(2, 7) }), x => same(x, { c: 2, m: 5 }));
-    const q5c = until(() => ({ k: ri(2, 9), m: ri(2, 6) }), x => same(x, { k: 3, m: 4 }));
+  const q5a = until(() => ({ b: ri(2, 20), n: ri(2, 7) }), x => same(x, { b: 6, n: 3 }));
+    const q5b = until(() => ({ c: ri(2, 20), m: ri(2, 7) }), x => same(x, { c: 2, m: 5 }));
+    const q5c = until(() => ({ k: ri(2, 19), m: ri(2, 9) }), x => same(x, { k: 3, m: 4 }) || x.k === 10);
     const Q5 = { type: 'parts', stem: 'Rewrite each expression with positive exponents. Do not evaluate.', parts: [
       part('a', P(q5a.b, -q5a.n), Fr(1, P(q5a.b, q5a.n)), 'posexp', { base: q5a.b, steps: ['A negative exponent means the reciprocal: 1 over ' + q5a.b + '<sup>' + q5a.n + '</sup>.'],
         miss: [miss(Neg(P(q5a.b, q5a.n)), 'A negative exponent means the reciprocal, not a negative number.')] }),
@@ -507,15 +523,17 @@ function generate(seed) {
     return Q5;
   }, ok);
   const Q6 = KIT.draw(UNIT_ID, seed, 'q6', T0 => { const { ri, pick, shuffle, until } = A7(T0);
-  const q6a = until(() => ({ b: pick([3, 5, 6, 7, 8, 9, 10]), n: pick([2, 3]) }), x => same(x, { b: 4, n: 2 }) || x.b ** x.n > 1000);
-    const q6b = until(() => { const [c, e] = pick([[2, 3], [2, 5], [4, 3], [5, 3]]); return { c, e }; }, x => same(x, { c: 3, e: 3 }));
-    const q6c = until(() => ({ d: pick([3, 4, 5, 6, 10]), n: pick([2, 3]) }), x => same(x, { d: 2, n: 3 }));
-    const q6d = until(() => { const B = pick([2, 3, 5]), m = ri(2, 6); return { B, m, n: m + ri(1, 3) }; }, x => same(x, { B: 2, m: 5, n: 7 }) || x.B ** (x.n - x.m) > 125);
+  const q6a = until(() => { const [b, n] = pick(FRIENDLY); return { b, n }; }, x => same(x, { b: 4, n: 2 }));
+    const q6b = until(() => { const odd = pick([true, true, true, false, false]), [c, e] = pick(FRIENDLY.filter(y => y[1] % 2 === (odd ? 1 : 0))); return { c, e }; }, x => same(x, { c: 3, e: 3 }));   /* an even power too: the sign is the question */
+    const q6c = until(() => { const [d, n] = pick(FRIENDLY); return { d, n }; }, x => same(x, { d: 2, n: 3 }));
+    const q6d = until(() => { const B = pick([2, 3, 4, 5, 6, 7, 10]), m = ri(2, 9); return { B, m, n: m + ri(1, 3) }; }, x => same(x, { B: 2, m: 5, n: 7 }) || x.B ** (x.n - x.m) > 1000);
     const Q6 = { type: 'parts', stem: 'Find the value of each expression.', parts: [
       part('a', P(q6a.b, -q6a.n), Fr(1, pw(q6a.b, q6a.n)), 'value', { steps: ['Reciprocal of ' + q6a.b + '<sup>' + q6a.n + '</sup>: 1 over ' + pw(q6a.b, q6a.n) + '.'],
         miss: [miss(Neg(N(pw(q6a.b, q6a.n))), 'A negative exponent means the reciprocal, not a negative number.'), miss(Neg(N(q6a.b * q6a.n)), 'The exponent is not a factor. Raise ' + q6a.b + ' to the power ' + q6a.n + ', then take the reciprocal.')] }),
-      part('b', P(Par(Neg(q6b.c)), -q6b.e), Neg(Fr(1, pw(q6b.c, q6b.e))), 'value', { steps: ['Reciprocal: 1 over (−' + q6b.c + ')<sup>' + q6b.e + '</sup>. An odd power of a negative number is negative: (−' + q6b.c + ')<sup>' + q6b.e + '</sup> = −' + pw(q6b.c, q6b.e) + '.'],
-        miss: [miss(Fr(1, pw(q6b.c, q6b.e)), 'Check the sign: an odd power of a negative number is negative.'), miss(Neg(N(pw(q6b.c, q6b.e))), 'Take the reciprocal: the negative exponent means 1 over the power.')] }),
+      q6b.e % 2 ? part('b', P(Par(Neg(q6b.c)), -q6b.e), Neg(Fr(1, pw(q6b.c, q6b.e))), 'value', { steps: ['Reciprocal: 1 over (−' + q6b.c + ')<sup>' + q6b.e + '</sup>. An odd power of a negative number is negative: (−' + q6b.c + ')<sup>' + q6b.e + '</sup> = −' + pw(q6b.c, q6b.e) + '.'],
+        miss: [miss(Fr(1, pw(q6b.c, q6b.e)), 'Check the sign: an odd power of a negative number is negative.'), miss(Neg(N(pw(q6b.c, q6b.e))), 'Take the reciprocal: the negative exponent means 1 over the power.')] })
+      : part('b', P(Par(Neg(q6b.c)), -q6b.e), Fr(1, pw(q6b.c, q6b.e)), 'value', { steps: ['Reciprocal: 1 over (−' + q6b.c + ')<sup>' + q6b.e + '</sup>. An even power of a negative number is positive: (−' + q6b.c + ')<sup>' + q6b.e + '</sup> = ' + pw(q6b.c, q6b.e) + '.'],
+        miss: [miss(Neg(Fr(1, pw(q6b.c, q6b.e))), 'Check the sign: an even power of a negative number is positive.'), miss(N(pw(q6b.c, q6b.e)), 'Take the reciprocal: the negative exponent means 1 over the power.')] }),
       part('c', P(Par(Fr(1, q6c.d)), -q6c.n), N(pw(q6c.d, q6c.n)), 'value', { steps: ['The negative exponent flips the fraction: 1/' + q6c.d + ' becomes ' + q6c.d + '. Then ' + q6c.d + '<sup>' + q6c.n + '</sup> = ' + pw(q6c.d, q6c.n) + '.'],
         miss: [miss(Fr(1, pw(q6c.d, q6c.n)), 'The negative exponent flips the fraction, so the answer is a whole number.')] }),
       part('d', Mul('·', P(q6d.B, q6d.m), P(q6d.B, -q6d.n)), Fr(1, pw(q6d.B, q6d.n - q6d.m)), 'value', { steps: ['Same base: add the exponents: ' + q6d.m + ' + (−' + q6d.n + ') = −' + (q6d.n - q6d.m) + '.', q6d.B + '<sup>−' + (q6d.n - q6d.m) + '</sup> = 1 over ' + pw(q6d.B, q6d.n - q6d.m) + '.'],
@@ -525,22 +543,25 @@ function generate(seed) {
     return Q6;
   }, ok);
   const Q7 = KIT.draw(UNIT_ID, seed, 'q7', T0 => { const { ri, pick, shuffle, until } = A7(T0);
-  const q7 = until(() => ({ b: pick([3, 4, 6, 7, 8, 9]) }), x => x.b === 5);
-    const o7 = shuffle([[Fr(1, 2 * q7.b), 'The reciprocal is right, but ' + q7.b + '<sup>2</sup> is ' + q7.b * q7.b + ', not ' + 2 * q7.b + '.'], [Neg(N(q7.b * q7.b)), 'A negative exponent means the reciprocal, not a negative number.'],
-      [Fr(1, q7.b * q7.b), null], [Neg(N(2 * q7.b)), 'The exponent isn’t a factor, and a negative exponent doesn’t make the value negative.']]);
-    const Q7 = mc('Which is the value of ' + M(P(q7.b, -2)) + '?', o7.map(o => o[0]), o7.findIndex(o => o[1] === null), o7.map(o => o[1]));
-    Q7.q = P(q7.b, -2); Q7.steps = [q7.b + '<sup>−2</sup> = 1 over ' + q7.b + '<sup>2</sup> = 1 over ' + q7.b * q7.b + '.'];
-    tag(Q7, 'negVal', { b: q7.b, n: 2 });
+  const q7 = until(() => { const [b, n] = pick(FRIENDLY.filter(y => y[1] <= 4)); return { b, n }; }, x => (x.b === 5 && x.n === 2) || (x.b === 2 && x.n === 2));   /* 2^2 = 2 · 2: two choices alike */
+    const v7 = pw(q7.b, q7.n), t7 = q7.n * q7.b;
+    const o7 = shuffle([[Fr(1, t7), 'The reciprocal is right, but ' + q7.b + '<sup>' + q7.n + '</sup> is ' + v7 + ', not ' + q7.n + ' × ' + q7.b + ' = ' + t7 + '.'], [Neg(N(v7)), 'A negative exponent means the reciprocal, not a negative number.'],
+      [Fr(1, v7), null], [Neg(N(t7)), 'The exponent isn’t a factor, and a negative exponent doesn’t make the value negative.']]);
+    const Q7 = mc('Which is the value of ' + M(P(q7.b, -q7.n)) + '?', o7.map(o => o[0]), o7.findIndex(o => o[1] === null), o7.map(o => o[1]));
+    Q7.q = P(q7.b, -q7.n); Q7.steps = [q7.b + '<sup>−' + q7.n + '</sup> = 1 over ' + q7.b + '<sup>' + q7.n + '</sup> = 1 over ' + v7 + '.'];
+    tag(Q7, 'negVal', { b: q7.b, n: q7.n });
     return Q7;
   }, ok);
   const Q8 = KIT.draw(UNIT_ID, seed, 'q8', T0 => { const { ri, pick, shuffle, until } = A7(T0);
-  const T8 = pick([
-      { N: 16, o: [P(2, -4), P(4, -2), P(Par(Fr(1, 2)), 4), Neg(P(4, 2)), P(2, -3)] },
-      { N: 81, o: [P(3, -4), P(9, -2), P(Par(Fr(1, 3)), 4), Neg(P(9, 2)), P(3, -3)] },
-      { N: 100, o: [P(10, -2), P(Par(Fr(1, 10)), 2), P(100, -1), Neg(P(10, 2)), P(10, -3)] },
-      { N: 27, o: [P(3, -3), P(Par(Fr(1, 3)), 3), P(27, -1), Neg(P(3, 3)), P(9, -3)] },
-      { N: 125, o: [P(5, -3), P(Par(Fr(1, 5)), 3), P(125, -1), Neg(P(5, 3)), P(5, -2)] }]);
-    const o8 = shuffle(T8.o);
+  /* 1/N for N = bⁿ: three choices equal to it — bⁿ's negative power, (1/b)ⁿ, N⁻¹, and the same for any other way to write N
+       as a power (16 = 4²) — and two that are not: a minus sign in front of the power, an exponent one off, (b²)⁻ⁿ, (1/b)⁻ⁿ.
+       Five hand-made sets before 22 Oct 2026 (ruling 49). */
+    const [b8, n8] = pick(SELECT_N), N8 = pw(b8, n8), reps = [];
+    for (let j = 1; j < n8; j++) if (n8 % j === 0) reps.push([pw(b8, j), n8 / j]);
+    const R8 = [P(b8, -n8), P(Par(Fr(1, b8)), n8), P(N8, -1)];
+    reps.forEach(([c, k]) => { if (c !== b8) R8.push(P(c, -k), P(Par(Fr(1, c)), k)); });
+    const W8 = reps.map(([c, k]) => Neg(P(c, k))).concat([P(b8, -(n8 + 1)), P(b8, -(n8 - 1)), P(b8 * b8, -n8), P(Par(Fr(1, b8)), -n8)]);
+    const T8 = { N: N8 }, o8 = shuffle(shuffle(R8).slice(0, 3).concat(shuffle(W8).slice(0, 2)));
     const want8 = Q(1, T8.N);
     const Q8 = { type: 'multi', stem: 'Select ALL of the expressions whose value is ' + M(Fr(1, T8.N)) + '.', opts: o8, correct: o8.map((o, i) => qeq(evalA(o, {}), want8) ? i : -1).filter(i => i >= 0), target: Fr(1, T8.N),
       steps: o8.map(o => { const v = evalA(o, {}); return { e: o, v: v.d === 1n ? (v.n < 0n ? Neg(N(Number(-v.n))) : N(Number(v.n))) : (v.n < 0n ? Neg(Fr(Number(-v.n), Number(v.d))) : Fr(Number(v.n), Number(v.d))), ok: qeq(v, want8) }; }) };
@@ -548,9 +569,9 @@ function generate(seed) {
     return Q8;
   }, ok);
   const Q9 = KIT.draw(UNIT_ID, seed, 'q9', T0 => { const { ri, pick, shuffle, until } = A7(T0);
-  const v9a = until(() => ({ v: pick(LET), m: ri(2, 9), n: ri(2, 9) }), x => same(x, { v: 'x', m: 4, n: 6 }) || x.m === x.n);
-    const v9b = until(() => ({ v: pick(LET), m: ri(2, 6), n: ri(2, 6) }), x => same(x, { v: 'y', m: 3, n: 5 }) || x.m + x.n === x.m * x.n);
-    const v9c = until(() => ({ c: pick([2, 3, 4, 5]), v: pick(LET), p: ri(2, 5), q: pick([2, 3]) }), x => same(x, { c: 3, v: 'a', p: 2, q: 3 }) || x.c * x.q === x.c ** x.q);
+  const v9a = until(() => ({ v: pick(LET), m: ri(2, 15), n: ri(2, 15) }), x => same(x, { v: 'x', m: 4, n: 6 }) || x.m === x.n);
+    const v9b = until(() => ({ v: pick(LET), m: ri(2, 12), n: ri(2, 12) }), x => same(x, { v: 'y', m: 3, n: 5 }) || x.m + x.n === x.m * x.n || x.m * x.n > 100);
+    const v9c = until(() => { const q = pick([2, 2, 3, 3, 4]); return { c: ri(2, { 2: 12, 3: 6, 4: 3 }[q]), v: pick(LET), p: ri(2, 9), q }; }, x => same(x, { c: 3, v: 'a', p: 2, q: 3 }) || x.c * x.q === x.c ** x.q);
     const v9d = until(() => { const j = ri(2, 6), t = ri(2, 6), q = ri(2, 4); return { j, t, k: j * t, v: pick(LET), q, p: q + ri(2, 5) }; }, x => same(x, { j: 5, t: 3, k: 15, v: 'm', q: 2, p: 7 }));
     const Q9 = { type: 'parts', stem: 'Write each expression as a single monomial.', parts: [
       part('a', Mul('·', P(V(v9a.v), v9a.m), P(V(v9a.v), v9a.n)), P(V(v9a.v), v9a.m + v9a.n), 'mono', { steps: ['Same base, so add the exponents: ' + v9a.m + ' + ' + v9a.n + ' = ' + (v9a.m + v9a.n) + '.'],
@@ -569,9 +590,9 @@ function generate(seed) {
     return Q9;
   }, ok);
   const Q10 = KIT.draw(UNIT_ID, seed, 'q10', T0 => { const { ri, pick, shuffle, until } = A7(T0);
-  const v10a = until(() => ({ v: pick(LET), n: ri(2, 7) }), x => same(x, { v: 'b', n: 4 }));
-    const v10b = until(() => ({ c: ri(2, 9), v: pick(LET), n: ri(2, 6) }), x => same(x, { c: 5, v: 'x', n: 2 }));
-    const v10c = until(() => { const v = pick(LET); let w = pick(LET); return { k: pick([2, 3]), v, p: ri(2, 4), w, q: pick([2, 3]) }; }, x => x.v === x.w || same(x, { k: 2, v: 'm', p: 3, w: 'n', q: 2 }));
+  const v10a = until(() => ({ v: pick(LET), n: ri(2, 9) }), x => same(x, { v: 'b', n: 4 }));
+    const v10b = until(() => ({ c: ri(2, 20), v: pick(LET), n: ri(2, 9) }), x => same(x, { c: 5, v: 'x', n: 2 }));
+    const v10c = until(() => { const v = pick(LET), w = pick(LET), q = pick([2, 2, 3, 3, 4]); return { k: ri(2, { 2: 12, 3: 5, 4: 3 }[q]), v, p: ri(2, 8), w, q }; }, x => x.v === x.w || same(x, { k: 2, v: 'm', p: 3, w: 'n', q: 2 }));
     const Q10 = { type: 'parts', stem: 'Rewrite each expression using only positive exponents.', parts: [
       part('a', P(V(v10a.v), -v10a.n), Fr(1, P(V(v10a.v), v10a.n)), 'mono', { posOnly: true, steps: ['A negative exponent means the reciprocal: 1 over ' + v10a.v + '<sup>' + v10a.n + '</sup>.'],
         miss: [miss(Neg(P(V(v10a.v), v10a.n)), 'A negative exponent means the reciprocal, not a negative.')] }),
@@ -585,7 +606,7 @@ function generate(seed) {
     return Q10;
   }, ok);
   const Q11 = KIT.draw(UNIT_ID, seed, 'q11', T0 => { const { ri, pick, shuffle, until } = A7(T0);
-  const v11 = until(() => ({ c: pick([2, 3, 5, 6]), v: pick(LET), p: ri(2, 5), q: pick([2, 3]) }), x => same(x, { c: 4, v: 'x', p: 3, q: 2 }) || x.c ** x.q === x.c * x.q || x.p + x.q === x.p * x.q);
+  const v11 = until(() => { const q = pick([2, 2, 3, 3, 4]); return { c: ri(2, { 2: 12, 3: 6, 4: 3 }[q]), v: pick(LET), p: ri(2, 9), q }; }, x => same(x, { c: 4, v: 'x', p: 3, q: 2 }) || x.c ** x.q === x.c * x.q || x.p + x.q === x.p * x.q);
     const o11 = shuffle([[Mul('', N(pw(v11.c, v11.q)), P(V(v11.v), v11.p + v11.q)), 'The exponents were added. For a power of a power, multiply them.'], [Mul('', N(v11.c * v11.q), P(V(v11.v), v11.p * v11.q)), v11.c + '<sup>' + v11.q + '</sup> means ' + Array(v11.q).fill(v11.c).join(' · ') + ', not ' + v11.c + ' × ' + v11.q + '.'],
       [Mul('', N(v11.c), P(V(v11.v), v11.p * v11.q)), 'The number inside the parentheses gets the exponent too.'], [Mul('', N(pw(v11.c, v11.q)), P(V(v11.v), v11.p * v11.q)), null]]);
     const Q11 = mc('Which expression is equivalent to ' + M(P(Par(Mul('', N(v11.c), P(V(v11.v), v11.p))), v11.q)) + '?', o11.map(o => o[0]), o11.findIndex(o => o[1] === null), o11.map(o => o[1]));
@@ -627,8 +648,8 @@ function generate(seed) {
     return Q14;
   }, ok);
   const Q15 = KIT.draw(UNIT_ID, seed, 'q15', T0 => { const { ri, pick, shuffle, until } = A7(T0);
-  const s15 = until(() => { const B = ri(2, 4), t = ri(2, 4), q = ri(3, 7); const B2 = ri(11, 49) / 10, t2 = ri(2, 5), p2 = ri(2, 5);
-      return { A: B * t, B, t, p: q + ri(2, 4), q, A2: Math.round(B2 * t2 * 10) / 10, B2, t2, p2, q2: p2 + ri(2, 5) }; },
+  const s15 = until(() => { const B = ri(2, 4), t = ri(2, 4), q = ri(2, 9); const B2 = ri(11, 49) / 10, t2 = ri(2, 5), p2 = ri(2, 5);
+      return { A: B * t, B, t, p: q + ri(1, 6), q, A2: Math.round(B2 * t2 * 10) / 10, B2, t2, p2, q2: p2 + ri(2, 5) }; },
       x => x.A > 9 || x.A2 >= 10 || x.A2 < 1 || same([x.A, x.B, x.p, x.q], [9, 3, 9, 6]) || same([x.A2, x.B2, x.p2, x.q2], [4.8, 1.6, 3, 7]) || String(x.B2).length !== 3);
     const A2s = String(s15.A2), B2s = String(s15.B2);
     const Q15 = { type: 'parts', stem: 'Answer each question.', parts: [

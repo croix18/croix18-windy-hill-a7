@@ -10,7 +10,8 @@ function numAst(q) { const neg = q.n < 0n, n = neg ? -q.n : q.n; let a; if (q.d 
 
 const Unit = {
   id: 'a7u3',
-  contentVersion: 4,                 /* bump whenever any set's questions change (the lock check says so); v3 was the page before the kit */
+  contentVersion: 5,                 /* bump whenever any set's questions change (the lock check says so); v3 was the page before the kit;
+                                        v5: every question widened, ruling 49 (22 Oct 2026) */
   legacy: ['a7u3prac.v3.', 'a7u3prac.v2.', 'a7u3prac.v1.'],
   title: 'A7 Unit 3 Practice Test',
   eyebrow: 'Grade 7 Accelerated &nbsp;·&nbsp; Unit 3 &nbsp;·&nbsp; Practice',

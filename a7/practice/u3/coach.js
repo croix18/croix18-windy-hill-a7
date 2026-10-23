@@ -45,7 +45,7 @@ function mono(a) {
       if (!t || !b || b.c.n === 0n) return null; return { c: qdiv(t.c, b.c), x: addX(t.x, b.x, -1n) };
     }
     case 'pow': {
-      const e = intOf(a.e); if (e === null || e > 60n || e < -60n) return null;
+      const e = intOf(a.e); if (e === null || e > 120n || e < -120n) return null;
       const s = mono(a.b); if (!s || (s.c.n === 0n && e <= 0n)) return null;
       const x = {}; for (const k in s.x) { x[k] = s.x[k] * e; if (x[k] === 0n) delete x[k]; }
       return { c: qpow(s.c, e), x };
@@ -189,6 +189,8 @@ function solution(part) {
     }
     case 'negNegBase': {
       const b = Par(Neg(N(x.c))), v = ipow(x.c, x.e).n;
+      if (x.e % 2 === 0) return [S('A negative exponent means one over the power.', Fr(1, P(b, x.e))),
+        S(m(P(b, x.e)) + ' = ' + times('-' + x.c, x.e) + '. That is ' + x.e + ' negative factors — an even number — so they pair up and it is positive: ' + v + '.', Fr(1, N(String(v))))];
       return [S('A negative exponent means one over the power.', Fr(1, P(b, x.e))),
         S(m(P(b, x.e)) + ' = ' + times('-' + x.c, x.e) + '. That is ' + x.e + ' negative factors — an odd number — so it is negative: −' + v + '.', Fr(1, Neg(N(String(v))))),
         S('One over a negative number is negative. Write the sign in front.', Neg(Fr(1, N(String(v)))))];
@@ -257,7 +259,7 @@ function models(part, raw) {
   switch (f) {
     case 'prod': case 'monoProd': {
       const b = f === 'prod' ? x.b : V(x.v);
-      add(P(b, x.m * x.n), 'you multiply the exponents (' + x.m + ' × ' + x.n + ' = ' + x.m * x.n + '). Multiplying exponents is the rule for a power of a power, like ' + m(P(Par(P(b, x.m)), x.n)) + ' — not for ' + m(Mul('·', P(b, x.m), P(b, x.n))), 1);
+      if (x.m * x.n <= 120) add(P(b, x.m * x.n), 'you multiply the exponents (' + x.m + ' × ' + x.n + ' = ' + x.m * x.n + '). Multiplying exponents is the rule for a power of a power, like ' + m(P(Par(P(b, x.m)), x.n)) + ' — not for ' + m(Mul('·', P(b, x.m), P(b, x.n))), 1);
       if (f === 'prod') { add(P(x.b * x.b, x.m + x.n), 'you multiply the bases (' + x.b + ' × ' + x.b + ' = ' + x.b * x.b + '). The base stays ' + x.b + '; only the exponents combine', 1);
         add(P(x.b * x.b, x.m * x.n), 'you multiply the bases (' + x.b + ' × ' + x.b + ') and also multiply the exponents (' + x.m + ' × ' + x.n + ')', 1); }
       if (f === 'monoProd') add(Mul('', N(2), P(b, x.m + x.n)), 'you add the two powers as if they were like terms. They are multiplied, not added, so there is no 2 in front', 1);
@@ -350,6 +352,14 @@ function models(part, raw) {
     }
     case 'negNegBase': {
       const v = ipow(x.c, x.e).n;
+      if (x.e % 2 === 0) {
+        add(Neg(Fr(1, N(String(v)))), 'you make it negative. ' + m(P(Par(Neg(N(x.c))), x.e)) + ' has ' + x.e + ' negative factors — an even number — so they pair up and it is positive', 1);
+        add(Neg(N(String(v))), 'you treat the negative exponent as making the number negative. It means one over the power', 0);
+        add(N(String(v)), 'you drop the minus sign from the exponent. ' + m(P(Par(Neg(N(x.c))), x.e)) + ' is ' + v + ', and the negative exponent means one over it', 0);
+        add(Fr(1, N(x.c * x.e)), 'you work out ' + m(P(x.c, x.e)) + ' as ' + x.c + ' × ' + x.e + '. It means ' + times(x.c, x.e), 1);
+        add(Neg(Fr(1, N(x.c * x.e))), 'you work out the power as ' + x.c + ' × ' + x.e + ' and make it negative', 1);
+        break;
+      }
       add(Fr(1, N(String(v))), 'you lose the sign. ' + m(P(Par(Neg(N(x.c))), x.e)) + ' has ' + x.e + ' negative factors — an odd number — so it is negative', 1);
       add(Neg(N(String(v))), 'you treat the negative exponent as making the number negative. It means one over the power', 0);
       add(N(String(v)), 'you drop the minus sign from the exponent and lose the sign of the base', 0);
@@ -724,7 +734,7 @@ function describeOption(o) {                    /* what a select-all choice equa
   let why = '';
   if (u.t === 'neg') why = ' A minus sign in front of a power makes the value negative.';
   else if (u.t === 'pow' && literalInt(u.e) !== null && literalInt(u.e) < 0n) why = ' A negative exponent means one over ' + m(P(unwrap(u.b).t === 'n' ? unwrap(u.b) : u.b, -literalInt(u.e))) + '.';
-  else if (u.t === 'pow') why = ' A fraction to a power: raise the top and the bottom.';
+  else if (u.t === 'pow' && unwrap(u.b).t === 'frac') why = ' A fraction to a power: raise the top and the bottom.';
   return m(o) + ' = ' + mv(v) + '.' + why;
 }
 function selectFeedback(item, picked, tries) {

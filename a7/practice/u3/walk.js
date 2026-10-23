@@ -112,12 +112,13 @@ function steps(part) {
     }
     case 'negNegBase': {
       const b = Par(Neg(N(x.c))), v = ip(x.c, x.e).n;
+      const odd = x.e % 2 === 1;
       return [ch('What does the negative exponent mean?',
-          [['One over the power', 1], ['It makes the answer negative', 0, 'A negative exponent means one over the power; it never makes a number negative by itself. (This answer does turn out negative — but that comes from the negative base, as you will see.)']], Fr(1, P(b, x.e))),
+          [['One over the power', 1], ['It makes the answer negative', 0, 'A negative exponent means one over the power; it never makes a number negative by itself.' + (odd ? ' (This answer does turn out negative — but that comes from the negative base, as you will see.)' : '')]], Fr(1, P(b, x.e))),
         num('First, what is ' + m(P(x.c, x.e)) + '?', P(x.c, x.e), m(P(x.c, x.e)) + ' means ' + times(x.c, x.e) + '.'),
         ch('So is ' + m(P(b, x.e)) + ' equal to ' + v + ' or −' + v + '?',
           [['−' + v, x.e % 2 === 1], [String(v), x.e % 2 === 0]].map(o => o[1] ? [o[0], 1] : [o[0], 0, x.e % 2 === 1 ? 'There are ' + x.e + ' negative factors, an odd number. Pairs of negatives make positives, and one negative is left over, so it is negative.' : 'There are ' + x.e + ' negative factors, an even number, so they pair up into positives.']),
-          Neg(Fr(1, N(String(v)))))];
+          odd ? Neg(Fr(1, N(String(v)))) : Fr(1, N(String(v))))];
     }
     case 'fracNeg':
       return [ch('What does a negative exponent do to a fraction?',
