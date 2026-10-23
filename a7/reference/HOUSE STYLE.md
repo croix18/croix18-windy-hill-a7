@@ -3557,3 +3557,23 @@ test. May something will be our pm3."*
 - **1 March is a school day**: its line is out of the log (ruling 47 had kept it). Nothing in A7 moves for it —
   Unit 12's exam still lands Mon–Tue 8–9 March by its weekday rule.
 - PM3 stays the 3–28 May window until the school sets the day.
+
+## 13b(xxi). Ruling 49 — 22 October (9:36 pm): the unit test is a random set of the practice test [both courses]
+
+**Ruling 49 — Croix, 22 October 2026: "I don't want the tests to be anything specific. Going forward. I want to build the
+practice tests. And the test will just pick a random set. There's like 100000 plus right? So I'm good with a random draw."**
+
+- **For every unit built from now on, the build is the practice test.** No hand-written Form A and Form B, no separate keys
+  or worked-answers copies for the test: the unit test is a set drawn at random from the practice test, printed from the
+  teacher copy with its key (a second form, or a make-up, is another random set). The units already built keep their
+  papers; Croix may print a random set for them instead.
+- **What this retires for new units:** the parallel forms written by hand (ruling 33), the transfer items — questions in a
+  shape the practice never shows (ruling 18) — and the worked-answers copy (ruling 32). A random draw can only ask what the
+  practice asks; he chose that.
+- **What it requires: every question has many versions.** He asked whether there are "100000 plus". Counted over every set
+  number (1–99999) on 22 October: the whole sets are all different (A7 Unit 4 99,999 of 99,999; A7 Unit 3 99,997; M7 Unit 4
+  99,999), but a test is only as fresh as its thinnest question, and some are thin — A7 Unit 3's 2.2b has 4 versions and 2.4
+  has 5; M7 Unit 4's 4.1 and 4.2 have 7 and its median question 36; A7 Unit 4's 3.2b has 18 and 3.1b 19 (its median 4,536).
+  A student who practises a dozen sets has seen those exact questions with their answers. So a practice test built under
+  this ruling gives every question part hundreds of versions, and the kit gets a check that counts them (a part under the
+  floor fails the build) — not built yet; the thin questions of the units above get widened when they are next touched.
