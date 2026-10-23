@@ -406,13 +406,14 @@ function q8(seed) {
 /* ---------- section 3: the order of operations with exponents and radicals. Each keeps its 16 Oct slot name (q12 … q18), so a
    set keeps its Part 3 questions through the 21 Oct change; the questions are numbered 9 to 15 now. */
 const pw = (b, e) => b + sup(e);
+const pm = v => v < 0 ? ' − ' + -v : ' + ' + v;   /* a signed term after a first one */
 function numPart(label, fam, prm, stem, ans, extra) { return Object.assign({ label, fam, prm, stem, kind: 'num', ans, key: fam + JSON.stringify(prm) }, extra || {}); }
 function q9(seed) {
   return D('q12', seed, T => {
     const a = (() => { for (let _g = 0; ; _g++) { if (_g > 20000) throw new Error('generator could not find numbers'); const x = T.ri(10, 30), y = T.ri(2, 5), z = T.ri(2, 4); if (x - y * z * z !== 0) return { a: x, b: y, c: z }; } })();
-    const b = (() => { for (let _g = 0; ; _g++) { if (_g > 20000) throw new Error('generator could not find numbers'); const c = T.pick([2, 3]), x = T.ri(3, 9), y = T.ri(1, 30), s = x * x + y; if (s % (c ** 3) === 0 && s / c ** 3 >= 2) return { a: x, b: y, c }; } })();
+    const b = (() => { for (let _g = 0; ; _g++) { if (_g > 20000) throw new Error('generator could not find numbers'); const c = T.pick([2, 3, 4]), x = T.ri(3, 12), y = T.ri(1, 99), s = x * x + y; if (s % (c ** 3) === 0 && s / c ** 3 >= 2) return { a: x, b: y, c }; } })();
     const c = (() => { const y = T.ri(2, 9), z = T.ri(2, 9), m = T.ri(2, 12); return { a: y * m, b: y, c: z }; })();
-    const d = (() => { for (let _g = 0; ; _g++) { if (_g > 20000) throw new Error('generator could not find numbers'); const x = T.ri(2, 9), y = T.ri(2, 9); if (x !== y) return { a: x, b: y }; } })();
+    const d = (() => { for (let _g = 0; ; _g++) { if (_g > 20000) throw new Error('generator could not find numbers'); const x = T.ri(2, 15), y = T.ri(2, 15); if (x !== y) return { a: x, b: y }; } })();
     const parts = [
       numPart('a', 'ooA', a, M(a.a + ' − ' + a.b + ' · ' + pw(a.c, 2)), Q(a.a - a.b * a.c * a.c)),
       numPart('b', 'ooB', b, M(fr(pw(b.a, 2) + ' + ' + b.b, pw(b.c, 3))), Q((b.a * b.a + b.b) / b.c ** 3)),
@@ -423,14 +424,16 @@ function q9(seed) {
 }
 function q10(seed) {
   return D('q13', seed, T => {
-    const a = (() => { for (let _g = 0; ; _g++) { if (_g > 20000) throw new Error('generator could not find numbers'); const r = T.ri(5, 13), x = T.ri(2, r - 1), y = r * r - x * x; if (Math.round(Math.sqrt(y)) ** 2 !== y) return { a: x, b: y, r }; } })();
-    const b = { n: T.ri(2, 6), k: T.ri(2, 5) };
-    const c = (() => { for (let _g = 0; ; _g++) { if (_g > 20000) throw new Error('generator could not find numbers'); const p = T.ri(2, 6), r = T.ri(2, 7), q = T.ri(1, r - 1); if (Number(gcd(BigInt(q), BigInt(r))) === 1) return { p, q, r }; } })();
+    const a = (() => { for (let _g = 0; ; _g++) { if (_g > 20000) throw new Error('generator could not find numbers'); const isSq = v => Math.round(Math.sqrt(v)) ** 2 === v;
+      if (T.r() < 0.5) { const r = T.ri(5, 15), x = T.ri(2, r - 1), y = r * r - x * x; if (!isSq(y)) return { a: x, b: y, r }; }   /* √(x² + y) */
+      else { const r = T.ri(2, 14), x = T.ri(r + 1, 15), y = x * x - r * r; if (!isSq(y)) return { a: x, b: -y, r }; } } })();   /* √(x² − y): b < 0 */
+    const b = { n: T.ri(2, 5), k: T.ri(2, 10), s: T.r() < 2 / 3 ? -1 : 1, o: T.r() < 2 / 3 ? 1 : -1 };   /* s: the sign under the root; o: plus or minus (the test's shape is s −1, o +1) */
+    const c = (() => { for (let _g = 0; ; _g++) { if (_g > 20000) throw new Error('generator could not find numbers'); const p = T.ri(2, 8), r = T.ri(2, 10), q = T.ri(1, r - 1); if (Number(gcd(BigInt(q), BigInt(r))) === 1 && p * p * r / Number(gcd(BigInt(p * p), BigInt(r))) <= 300) return { p, q, r }; } })();
     const parts = [
-      numPart('a', 'radA', a, M(sqrtH(pw(a.a, 2) + ' + ' + a.b)), Q(a.r)),
-      numPart('b', 'radB', b, M(cbrtH('−' + b.n ** 3) + ' + ' + pw(b.k, -2)), qadd(Q(-b.n), Q(1, b.k * b.k))),
+      numPart('a', 'radA', a, M(sqrtH(pw(a.a, 2) + pm(a.b))), Q(a.r)),
+      numPart('b', 'radB', b, M(cbrtH((b.s < 0 ? '−' : '') + b.n ** 3) + (b.o > 0 ? ' + ' : ' − ') + pw(b.k, -2)), qadd(Q(b.s * b.n), Q(b.o, b.k * b.k))),
       numPart('c', 'radC', c, M(pw('(−' + fr(1, c.p) + ')', 2) + ' + ' + sqrtH(fr(c.q * c.q, c.r * c.r))), qadd(Q(1, c.p * c.p), Q(c.q, c.r)))];
-    return { type: 'parts', stem: 'Evaluate each expression.', parts, onTest: onTest('radA', [a.a, a.b]) || onTest('radB', [b.n, b.k]) || onTest('radC', [c.p, c.q, c.r]) };
+    return { type: 'parts', stem: 'Evaluate each expression.', parts, onTest: onTest('radA', [a.a, a.b]) || (b.s < 0 && b.o > 0 && onTest('radB', [b.n, b.k])) || onTest('radC', [c.p, c.q, c.r]) };
   });
 }
 function q11(seed) {
@@ -484,7 +487,7 @@ function q14(seed) {
 }
 function q15(seed) {                                                            /* stand-in for the transfer item: evaluate with a negative value (Lesson 7) */
   return D('q18', seed, T => {
-    const a = T.ri(2, 9), n = T.ri(2, 9), L = T.pick(['x', 'n', 't', 'w']);
+    const a = T.ri(2, 12), n = T.ri(2, 12), L = T.pick(['x', 'n', 't', 'w']);          /* to 12 × 12²: 120 versions (ruling 49, 22 Oct 2026) */
     const part = numPart('', 'negSub', { a, n, L }, '', Q(a * n * n));
     return { type: 'solo', stem: 'Evaluate ' + M(a + '<i>' + L + '</i>' + sup(2)) + ' when ' + M('<i>' + L + '</i> = −' + n) + '.', part, onTest: onTest('negSub', [a, n]) };
   });

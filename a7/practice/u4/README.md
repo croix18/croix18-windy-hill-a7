@@ -36,6 +36,24 @@ fine but anything asking how many significant digits should be removed."*
   exclusion list carries Form B's corrected Devon question (3.4 × 10⁴, a gap of 2; the test had 10³, a gap of 3).
 - Saved answers on the old sets are cleared with a notice — the kit does that whenever `contentVersion` goes up.
 
+## Version 4 (22 Oct 2026): more versions of every question (ruling 49)
+
+Croix: *"I don't want the tests to be anything specific. Going forward. I want to build the practice tests. And the test will
+just pick a random set."* Then: *"Is there a way I can add in that variation factor? I really love the current method … Get the
+exact copy of the test and slam the problems til it becomes easy."* (A student who failed Unit 3 took the practice test about
+ten times with the Hint and got 35 of 36 on the retake.)
+
+The kit's variety check (`check/variety.js`) counts each part's versions: the numbers a student sees, words and the order of
+the choices left out. Five parts of Part 3 and one choice question had fewer than 100, so their numbers were widened. The
+questions are the same, with more numbers:
+- 3.1b (x² + y) ÷ c³: c is 2, 3 or 4; x 3–12; y 1–99. 3.1d −x² + (−y)²: x and y 2–15.
+- 3.2a also comes as √(x² − y), the test's other shape. 3.2b ∛(±n³) ± k⁻²: either sign under the cube root, plus or minus,
+  n 2–5, k 2–10. Its coach reads the signs: the "drop the minus sign" mistake is offered only for a negative cube root.
+- 3.2c (−1/p)² + √(q²/r²): p 2–8, r 2–10.
+- 3.7 a·w² with w = −n: a and n 2–12 (was 2–9).
+- **Allowed under the floor:** 3.6, √(a² + b²) = √a² + √b². A whole-number root needs a Pythagorean triple, and with the
+  roots this unit teaches (to 25) six triples are not on the test, each in both orders: 12 versions (`unit.json` "variety").
+
 ## The checks (`unit.json`; `python3 ../kit/check/run.py .` runs them all, then the lock and the browser checks)
 
 The 16–19 Oct checks were lost with the session that wrote them; these replaced them on 21 Oct.

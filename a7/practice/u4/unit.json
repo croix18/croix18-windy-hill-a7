@@ -14,5 +14,10 @@
   "node u4_check.js 3000 600",
   "python3 verify.py",
   "python3 plant_check.py"
- ]
+ ],
+ "variety": {
+  "allow": {
+   "3.6": "√(a² + b²) has a whole-number root only for a Pythagorean triple. With the roots this unit teaches (to 25) there are six triples that are not on the test, each in both orders: 12 versions."
+  }
+ }
 }

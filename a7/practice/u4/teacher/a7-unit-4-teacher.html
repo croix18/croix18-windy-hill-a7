@@ -1127,13 +1127,14 @@ function q8(seed) {
 /* ---------- section 3: the order of operations with exponents and radicals. Each keeps its 16 Oct slot name (q12 … q18), so a
    set keeps its Part 3 questions through the 21 Oct change; the questions are numbered 9 to 15 now. */
 const pw = (b, e) => b + sup(e);
+const pm = v => v < 0 ? ' − ' + -v : ' + ' + v;   /* a signed term after a first one */
 function numPart(label, fam, prm, stem, ans, extra) { return Object.assign({ label, fam, prm, stem, kind: 'num', ans, key: fam + JSON.stringify(prm) }, extra || {}); }
 function q9(seed) {
   return D('q12', seed, T => {
     const a = (() => { for (let _g = 0; ; _g++) { if (_g > 20000) throw new Error('generator could not find numbers'); const x = T.ri(10, 30), y = T.ri(2, 5), z = T.ri(2, 4); if (x - y * z * z !== 0) return { a: x, b: y, c: z }; } })();
-    const b = (() => { for (let _g = 0; ; _g++) { if (_g > 20000) throw new Error('generator could not find numbers'); const c = T.pick([2, 3]), x = T.ri(3, 9), y = T.ri(1, 30), s = x * x + y; if (s % (c ** 3) === 0 && s / c ** 3 >= 2) return { a: x, b: y, c }; } })();
+    const b = (() => { for (let _g = 0; ; _g++) { if (_g > 20000) throw new Error('generator could not find numbers'); const c = T.pick([2, 3, 4]), x = T.ri(3, 12), y = T.ri(1, 99), s = x * x + y; if (s % (c ** 3) === 0 && s / c ** 3 >= 2) return { a: x, b: y, c }; } })();
     const c = (() => { const y = T.ri(2, 9), z = T.ri(2, 9), m = T.ri(2, 12); return { a: y * m, b: y, c: z }; })();
-    const d = (() => { for (let _g = 0; ; _g++) { if (_g > 20000) throw new Error('generator could not find numbers'); const x = T.ri(2, 9), y = T.ri(2, 9); if (x !== y) return { a: x, b: y }; } })();
+    const d = (() => { for (let _g = 0; ; _g++) { if (_g > 20000) throw new Error('generator could not find numbers'); const x = T.ri(2, 15), y = T.ri(2, 15); if (x !== y) return { a: x, b: y }; } })();
     const parts = [
       numPart('a', 'ooA', a, M(a.a + ' − ' + a.b + ' · ' + pw(a.c, 2)), Q(a.a - a.b * a.c * a.c)),
       numPart('b', 'ooB', b, M(fr(pw(b.a, 2) + ' + ' + b.b, pw(b.c, 3))), Q((b.a * b.a + b.b) / b.c ** 3)),
@@ -1144,14 +1145,16 @@ function q9(seed) {
 }
 function q10(seed) {
   return D('q13', seed, T => {
-    const a = (() => { for (let _g = 0; ; _g++) { if (_g > 20000) throw new Error('generator could not find numbers'); const r = T.ri(5, 13), x = T.ri(2, r - 1), y = r * r - x * x; if (Math.round(Math.sqrt(y)) ** 2 !== y) return { a: x, b: y, r }; } })();
-    const b = { n: T.ri(2, 6), k: T.ri(2, 5) };
-    const c = (() => { for (let _g = 0; ; _g++) { if (_g > 20000) throw new Error('generator could not find numbers'); const p = T.ri(2, 6), r = T.ri(2, 7), q = T.ri(1, r - 1); if (Number(gcd(BigInt(q), BigInt(r))) === 1) return { p, q, r }; } })();
+    const a = (() => { for (let _g = 0; ; _g++) { if (_g > 20000) throw new Error('generator could not find numbers'); const isSq = v => Math.round(Math.sqrt(v)) ** 2 === v;
+      if (T.r() < 0.5) { const r = T.ri(5, 15), x = T.ri(2, r - 1), y = r * r - x * x; if (!isSq(y)) return { a: x, b: y, r }; }   /* √(x² + y) */
+      else { const r = T.ri(2, 14), x = T.ri(r + 1, 15), y = x * x - r * r; if (!isSq(y)) return { a: x, b: -y, r }; } } })();   /* √(x² − y): b < 0 */
+    const b = { n: T.ri(2, 5), k: T.ri(2, 10), s: T.r() < 2 / 3 ? -1 : 1, o: T.r() < 2 / 3 ? 1 : -1 };   /* s: the sign under the root; o: plus or minus (the test's shape is s −1, o +1) */
+    const c = (() => { for (let _g = 0; ; _g++) { if (_g > 20000) throw new Error('generator could not find numbers'); const p = T.ri(2, 8), r = T.ri(2, 10), q = T.ri(1, r - 1); if (Number(gcd(BigInt(q), BigInt(r))) === 1 && p * p * r / Number(gcd(BigInt(p * p), BigInt(r))) <= 300) return { p, q, r }; } })();
     const parts = [
-      numPart('a', 'radA', a, M(sqrtH(pw(a.a, 2) + ' + ' + a.b)), Q(a.r)),
-      numPart('b', 'radB', b, M(cbrtH('−' + b.n ** 3) + ' + ' + pw(b.k, -2)), qadd(Q(-b.n), Q(1, b.k * b.k))),
+      numPart('a', 'radA', a, M(sqrtH(pw(a.a, 2) + pm(a.b))), Q(a.r)),
+      numPart('b', 'radB', b, M(cbrtH((b.s < 0 ? '−' : '') + b.n ** 3) + (b.o > 0 ? ' + ' : ' − ') + pw(b.k, -2)), qadd(Q(b.s * b.n), Q(b.o, b.k * b.k))),
       numPart('c', 'radC', c, M(pw('(−' + fr(1, c.p) + ')', 2) + ' + ' + sqrtH(fr(c.q * c.q, c.r * c.r))), qadd(Q(1, c.p * c.p), Q(c.q, c.r)))];
-    return { type: 'parts', stem: 'Evaluate each expression.', parts, onTest: onTest('radA', [a.a, a.b]) || onTest('radB', [b.n, b.k]) || onTest('radC', [c.p, c.q, c.r]) };
+    return { type: 'parts', stem: 'Evaluate each expression.', parts, onTest: onTest('radA', [a.a, a.b]) || (b.s < 0 && b.o > 0 && onTest('radB', [b.n, b.k])) || onTest('radC', [c.p, c.q, c.r]) };
   });
 }
 function q11(seed) {
@@ -1205,7 +1208,7 @@ function q14(seed) {
 }
 function q15(seed) {                                                            /* stand-in for the transfer item: evaluate with a negative value (Lesson 7) */
   return D('q18', seed, T => {
-    const a = T.ri(2, 9), n = T.ri(2, 9), L = T.pick(['x', 'n', 't', 'w']);
+    const a = T.ri(2, 12), n = T.ri(2, 12), L = T.pick(['x', 'n', 't', 'w']);          /* to 12 × 12²: 120 versions (ruling 49, 22 Oct 2026) */
     const part = numPart('', 'negSub', { a, n, L }, '', Q(a * n * n));
     return { type: 'solo', stem: 'Evaluate ' + M(a + '<i>' + L + '</i>' + sup(2)) + ' when ' + M('<i>' + L + '</i> = −' + n) + '.', part, onTest: onTest('negSub', [a, n]) };
   });
@@ -1471,19 +1474,30 @@ F.ooD = {
     choice('What is (−' + b + ')' + sup(2) + '?', [O(String(b * b), true), O('−' + b * b, false, 'The parentheses make −' + b + ' the base: (−' + b + ')(−' + b + '), and negative × negative is positive.')], { then: X('−' + a * a + ' + ' + b * b, p.ans) }),
     num('What is −' + a * a + ' + ' + b * b + '?', p.ans, b * b > a * a ? 'Start at −' + a * a + ' and go up ' + b * b + '.' : 'Start at −' + a * a + ' and go up ' + b * b + ': you stay below zero.')]; }
 };
+/* radA and radB widened 22 Oct 2026 (ruling 49: "add in that variation factor"): radA also as √(x² − y), the test's other shape
+   (b < 0); radB with either sign under the cube root (s) and plus or minus (o). The test's own shapes are s −1, o +1, b > 0. */
+const pmc = v => v < 0 ? ' − ' + -v : ' + ' + v, addw = v => v < 0 ? 'subtract' : 'add';
 F.radA = {
-  models: p => { const { a, b } = p.prm; return [mod(Q(a * a + b), 'forget the square root. The radical is the last step.', 2), mod(Q(a + b), 'take the root of ' + a + sup(2) + ' only. The radical bar groups everything under it: add first.', 0)].concat(a === 2 ? [] : [mod(Q(a * 2 + b), 'read ' + a + sup(2) + ' as ' + a + ' × 2.', 0)]); },
-  rule: () => 'A radical bar is a grouping symbol: finish everything under it, then take the root. The root of a sum is not the sum of the roots.',
-  sol: p => { const { a, b, r } = p.prm; return [{ say: 'The bar groups everything under it. Finish inside first: ' + a + sup(2) + ' = ' + a * a + '.', ex: X(sqrtH(a * a + ' + ' + b), p.ans) }, { say: 'Add.', ex: X(sqrtH(String(a * a + b)), p.ans) }, { say: 'Take the root: ' + r + ' × ' + r + ' = ' + r * r + '.', ex: X(String(r), p.ans) }]; },
-  walk: p => { const { a, b, r } = p.prm; return [choice('What do you do first?', [O('finish ' + a + sup(2) + ' + ' + b + ' under the bar', true), O('take the root of ' + a + sup(2), false, 'The radical bar groups ' + a + sup(2) + ' + ' + b + ' together. Finish inside first.')]),
-    num('What is ' + a + sup(2) + ' + ' + b + '?', Q(a * a + b), HINT.sq(Q(a)) + ' Then add ' + b + '.', { then: X(sqrtH(String(a * a + b)), p.ans) }), num('What number times itself is ' + (a * a + b) + '?', Q(r), 'Try ' + (r - 1) + ' × ' + (r - 1) + ' = ' + (r - 1) ** 2 + ' and go up.')]; }
+  models: p => { const { a, b } = p.prm; return [mod(Q(a * a + b), 'forget the square root. The radical is the last step.', 2), mod(Q(a + b), 'take the root of ' + a + sup(2) + ' only. The radical bar groups everything under it: ' + addw(b) + ' first.', 0)].concat(a === 2 ? [] : [mod(Q(a * 2 + b), 'read ' + a + sup(2) + ' as ' + a + ' × 2.', 0)]); },
+  rule: () => 'A radical bar is a grouping symbol: finish everything under it, then take the root. The root of a sum or a difference is not the sum or difference of the roots.',
+  sol: p => { const { a, b, r } = p.prm; return [{ say: 'The bar groups everything under it. Finish inside first: ' + a + sup(2) + ' = ' + a * a + '.', ex: X(sqrtH(a * a + pmc(b)), p.ans) }, { say: b < 0 ? 'Subtract.' : 'Add.', ex: X(sqrtH(String(a * a + b)), p.ans) }, { say: 'Take the root: ' + r + ' × ' + r + ' = ' + r * r + '.', ex: X(String(r), p.ans) }]; },
+  walk: p => { const { a, b, r } = p.prm; return [choice('What do you do first?', [O('finish ' + a + sup(2) + pmc(b) + ' under the bar', true), O('take the root of ' + a + sup(2), false, 'The radical bar groups ' + a + sup(2) + pmc(b) + ' together. Finish inside first.')]),
+    num('What is ' + a + sup(2) + pmc(b) + '?', Q(a * a + b), HINT.sq(Q(a)) + ' Then ' + addw(b) + ' ' + Math.abs(b) + '.', { then: X(sqrtH(String(a * a + b)), p.ans) }), num('What number times itself is ' + (a * a + b) + '?', Q(r), 'Try ' + (r - 1) + ' × ' + (r - 1) + ' = ' + (r - 1) ** 2 + ' and go up.')]; }
 };
 F.radB = {
-  models: p => { const { n, k } = p.prm, t = Q(1, k * k); return [mod(qadd(Q(n), t), 'drop the minus sign. A cube root keeps the sign: (−' + n + ')(−' + n + ')(−' + n + ') = −' + n ** 3 + '.', 0), mod(Q(-n - k * k), 'read ' + k + sup(-2) + ' as −' + k + sup(2) + '. A negative exponent means one over: ' + fr(1, k + sup(2)) + '.', 0), mod(qsub(Q(-n), t), 'make ' + k + sup(-2) + ' negative. A negative exponent is a fraction, not a negative number: ' + fr(1, k * k) + '.', 0)].concat(k === 2 ? [] : [mod(Q(-n - 2 * k), 'read ' + k + sup(-2) + ' as ' + k + ' × (−2).', 0)]); },
+  models: p => { const { n, k, s = -1, o = 1 } = p.prm, t = Q(o, k * k), root = Q(s * n); return [].concat(
+      s < 0 ? [mod(qadd(Q(n), t), 'drop the minus sign. A cube root keeps the sign: (−' + n + ')(−' + n + ')(−' + n + ') = −' + n ** 3 + '.', 0)] : [],
+      [mod(qadd(root, Q(-o * k * k)), 'read ' + k + sup(-2) + ' as −' + k + sup(2) + '. A negative exponent means one over: ' + fr(1, k + sup(2)) + '.', 0),
+       mod(qsub(root, t), 'make ' + k + sup(-2) + ' negative. A negative exponent is a fraction, not a negative number: ' + fr(1, k * k) + '.', 0)],
+      k === 2 ? [] : [mod(qadd(root, Q(-2 * k * o)), 'read ' + k + sup(-2) + ' as ' + k + ' × (−2).', 0)]); },
   rule: () => 'A cube root keeps the sign of what is under it. A negative exponent means one over the power: ' + 'k' + sup(-2) + ' = ' + fr(1, 'k' + sup(2)) + '.',
-  sol: p => { const { n, k } = p.prm; return [{ say: '(−' + n + ')(−' + n + ')(−' + n + ') = −' + n ** 3 + ', so the cube root is −' + n + '. And ' + k + sup(-2) + ' = ' + fr(1, k + sup(2)) + ' = ' + fr(1, k * k) + '.', ex: X('−' + n + ' + ' + fr(1, k * k), p.ans) }, { say: 'Add: −' + n + ' = ' + fr('−' + n * k * k, k * k) + ', and one more ' + fr(1, k * k) + ' makes ' + qF(p.ans) + '.', ex: X(qF(p.ans), p.ans) }]; },
-  walk: p => { const { n, k } = p.prm; return [num('What is ' + cbrtH('−' + n ** 3) + '?', Q(-n), 'What number used three times makes −' + n ** 3 + '? It must be negative.'), choice('What is ' + k + sup(-2) + '?', [O(fr(1, k * k), true), O('−' + k * k, false, 'A negative exponent does not make a number negative: it means one over. ' + k + sup(-2) + ' = ' + fr(1, k + sup(2)) + '.')].concat(k === 2 ? [] : [O('−' + 2 * k, false, 'An exponent is not a factor. ' + k + sup(-2) + ' = ' + fr(1, k + ' × ' + k) + '.')]), { then: X('−' + n + ' + ' + fr(1, k * k), p.ans) }),
-    num('What is −' + n + ' + ' + fr(1, k * k) + '? (A fraction is fine.)', p.ans, '−' + n + ' = ' + fr('−' + n * k * k, k * k) + '. Add ' + fr(1, k * k) + ' to the top.')]; }
+  sol: p => { const { n, k, s = -1, o = 1 } = p.prm, rt = (s < 0 ? '−' : '') + n, op = o > 0 ? ' + ' : ' − ';
+    return [{ say: (s < 0 ? '(−' + n + ')(−' + n + ')(−' + n + ') = −' + n ** 3 + ', so the cube root is −' + n + '.' : n + ' × ' + n + ' × ' + n + ' = ' + n ** 3 + ', so the cube root is ' + n + '.') + ' And ' + k + sup(-2) + ' = ' + fr(1, k + sup(2)) + ' = ' + fr(1, k * k) + '.', ex: X(rt + op + fr(1, k * k), p.ans) },
+      { say: (o > 0 ? 'Add' : 'Subtract') + ': ' + rt + ' = ' + fr((s < 0 ? '−' : '') + n * k * k, k * k) + ', and ' + (o > 0 ? 'one more ' : 'one less ') + fr(1, k * k) + ' makes ' + qF(p.ans) + '.', ex: X(qF(p.ans), p.ans) }]; },
+  walk: p => { const { n, k, s = -1, o = 1 } = p.prm, rt = (s < 0 ? '−' : '') + n, op = o > 0 ? ' + ' : ' − ';
+    return [num('What is ' + cbrtH((s < 0 ? '−' : '') + n ** 3) + '?', Q(s * n), s < 0 ? 'What number used three times makes −' + n ** 3 + '? It must be negative.' : 'What number used three times makes ' + n ** 3 + '?'),
+      choice('What is ' + k + sup(-2) + '?', [O(fr(1, k * k), true), O('−' + k * k, false, 'A negative exponent does not make a number negative: it means one over. ' + k + sup(-2) + ' = ' + fr(1, k + sup(2)) + '.')].concat(k === 2 ? [] : [O('−' + 2 * k, false, 'An exponent is not a factor. ' + k + sup(-2) + ' = ' + fr(1, k + ' × ' + k) + '.')]), { then: X(rt + op + fr(1, k * k), p.ans) }),
+      num('What is ' + rt + op + fr(1, k * k) + '? (A fraction is fine.)', p.ans, rt + ' = ' + fr((s < 0 ? '−' : '') + n * k * k, k * k) + '. ' + (o > 0 ? 'Add ' : 'Take away ') + fr(1, k * k) + ' on the top.')]; }
 };
 F.radC = {
   models: p => { const { p: P, q, r } = p.prm, A = Q(1, P * P), B = Q(q, r); return [mod(qadd(qneg(A), B), 'keep (−' + fr(1, P) + ')' + sup(2) + ' negative. The parentheses make −' + fr(1, P) + ' the base: negative × negative is positive.', 0), mod(qadd(A, Q(q * q, r * r)), 'forget the square root of ' + fr(q * q, r * r) + '. Take the root of the top and the bottom: ' + fr(q, r) + '.', 0), mod(qadd(Q(-2, P), B), 'read the square as × 2. (−' + fr(1, P) + ')' + sup(2) + ' = (−' + fr(1, P) + ')(−' + fr(1, P) + ').', 0)]; },
@@ -1700,8 +1714,9 @@ const UNITSHORT = { rwArea: 'mm²', rwSpeed: 'km/h', rwSum: 'mm', rwDiff: 'g', p
 
 const Unit = {
   id: 'a7u4',
-  contentVersion: 3,                 /* bump whenever any set's questions change (the lock check says so). 2: Form B of the test excluded (19 Oct 2026).
-                                        3: no significant digits — Part 2 is the four real-world problems, answered exactly (21 Oct 2026) */
+  contentVersion: 4,                 /* bump whenever any set's questions change (the lock check says so). 2: Form B of the test excluded (19 Oct 2026).
+                                        3: no significant digits — Part 2 is the four real-world problems, answered exactly (21 Oct 2026).
+                                        4: Part 3's thin questions widened, ruling 49 (22 Oct 2026): 3.1b, 3.1d, 3.2a (also √(x² − y)), 3.2b (either sign, plus or minus), 3.2c, and 3.7 (to 12 × 12²) */
   legacy: [],
   title: 'A7 Unit 4 Practice Test',
   eyebrow: 'Grade 7 Accelerated &nbsp;·&nbsp; Unit 4 &nbsp;·&nbsp; Practice',
