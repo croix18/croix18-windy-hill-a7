@@ -91,9 +91,12 @@ PLAN=[
  (7,"7.07","Comparing proportional relationships","7.AR.4.5","L"),
  (7,"7.X1","Unit 7 exam, day 1","","X"),
  (7,"7.X2","Unit 7 exam, day 2","","X"),
- (0,"PM2-R1","PM2 review 1: number system, exponents, scientific notation (whiteboards)","8.NSO.1.1–1.7","R"),
- (0,"PM2-R2","PM2 review 2: equations, inequalities, Pythagorean, angles (whiteboards)","8.AR.2 · 8.GR.1","R"),
- (0,"PM2-R3","PM2 review 3: proportional → linear preview; mixed FAST-shaped round","8.AR.3 · 8.AR.1.1","R"),
+ # The three days planned as the PM2 review. PM2 is Tue 8 Dec (Croix, 22 Oct 2026: "Pm 2 is December 8"), so they come
+ # after it now: the semester review, in the week before Q2 ends that has nothing graded (ruling 47 / §13b(xix)). Their
+ # codes stay PM2-R…: the master sheet and its check know a review block by the PM prefix.
+ (0,"PM2-R1","Semester review 1: number system, exponents, scientific notation (whiteboards)","8.NSO.1.1–1.7","R"),
+ (0,"PM2-R2","Semester review 2: equations, inequalities, Pythagorean, angles (whiteboards)","8.AR.2 · 8.GR.1","R"),
+ (0,"PM2-R3","Semester review 3: proportional → linear preview; mixed FAST-shaped round","8.AR.3 · 8.AR.1.1","R"),
  (8,"8.01+02","Circle relationships; circumference","7.GR.1.3","L"),
  (8,"8.03","Radius and diameter from circumference","7.GR.1.3","L"),
  (8,"8.04+05","Area of a circle","7.GR.1.4","L"),
@@ -170,7 +173,7 @@ P2=[]
 for r in PLAN:
     P2.append(r)
     # one flex day after every exam: reteach from exam evidence, or absorb a lost day
-    if r[4]=="X" and r[1].endswith("X2") and r[0] in (3,4,6,9,10,11,12):   # not after 5 (Grade 7 unit), 7 (PM2 review follows), 13 (keeps Unit 14 whole before spring break); Q4's buffer is the PM3 review block
+    if r[4]=="X" and r[1].endswith("X2") and r[0] in (3,4,9,10,11,12):   # not after 5 (Grade 7 unit), 6 (PM2 on Tue 8 Dec takes that day, so Unit 7 is tested by 11 Dec — Croix, 22 Oct), 7 (the three review days follow), 13 (keeps Unit 14 whole before spring break); Q4's buffer is the PM3 review block
         P2.append((r[0],"flex","Flex day — reteach from exam evidence, or absorb a lost day","","F"))
 PLAN=P2
 

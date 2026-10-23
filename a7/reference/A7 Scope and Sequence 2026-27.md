@@ -43,26 +43,26 @@
 | Nov 20 | Fri | 6 | spiral | *spiral* Spiral day — mixed retrieval from the unit just finished and the two before it |  |  |  |
 | Nov 30 | Mon | 6 | 6.X1 | **exam** Unit 6 exam, day 1 |  |  |  |
 | Dec 01 | Tue | 6 | 6.X2 | **exam** Unit 6 exam, day 2 |  |  |  |
-| Dec 02 | Wed (43 min) | 6 | flex | *flex* Flex day — reteach from exam evidence, or absorb a lost day |  |  |  |
-| Dec 03 | Thu | 7 | 7.01 | Graphing proportional relationships | 7.AR.4.3 | Graph a proportional relationship: word problems — FJW | Dec 04 |
-| Dec 04 | Fri | 7 | 7.02+03 | Constant of proportionality (table, graph, description) | 7.AR.4.2 | Interpret graphs of proportional relationships — RMH; Find the constant of proportionality from a table — LKZ; Find the constant of proportionality from a graph — ZUT | Dec 07 |
-| Dec 07 | Mon | 7 | 7.04 | Is it proportional? | 7.AR.4.1 · 8.AR.3.1 | Identify proportional relationships by graphing — AAN; Identify proportional relationships in tables and graphs — VZK | Dec 08 |
-| Dec 08 | Tue | 7 | 7.05+06 | Equations of proportional relationships; translating representations | 7.AR.4.4 | Write equations for proportional relationships from tables — 6GU; Write equations for proportional relationships from graphs — JKH; Write and solve equations for proportional relationships — VKK | Dec 09 |
+| Dec 02 | Wed (43 min) | 7 | 7.01 | Graphing proportional relationships | 7.AR.4.3 | Graph a proportional relationship: word problems — FJW | Dec 03 |
+| Dec 03 | Thu | 7 | 7.02+03 | Constant of proportionality (table, graph, description) | 7.AR.4.2 | Interpret graphs of proportional relationships — RMH; Find the constant of proportionality from a table — LKZ; Find the constant of proportionality from a graph — ZUT | Dec 04 |
+| Dec 04 | Fri | 7 | 7.04 | Is it proportional? | 7.AR.4.1 · 8.AR.3.1 | Identify proportional relationships by graphing — AAN; Identify proportional relationships in tables and graphs — VZK | Dec 07 |
+| Dec 07 | Mon | 7 | 7.05+06 | Equations of proportional relationships; translating representations | 7.AR.4.4 | Write equations for proportional relationships from tables — 6GU; Write equations for proportional relationships from graphs — JKH; Write and solve equations for proportional relationships — VKK | Dec 09 |
+| Dec 08 | Tue | 7 | off | *off* FAST PM2 — no class |  |  |  |
 | Dec 09 | Wed (43 min) | 7 | 7.07 | Comparing proportional relationships | 7.AR.4.5 | Compare proportional relationships represented in different ways — 5A9 | Dec 10 |
 | Dec 10 | Thu | 7 | 7.X1 | **exam** Unit 7 exam, day 1 |  |  |  |
 | Dec 11 | Fri | 7 | 7.X2 | **exam** Unit 7 exam, day 2 |  |  |  |
-| Dec 14 | Mon |  | PM2-R1 | **review** PM2 review 1: number system, exponents, scientific notation (whiteboards) | 8.NSO.1.1–1.7 |  |  |
-| Dec 15 | Tue |  | PM2-R2 | **review** PM2 review 2: equations, inequalities, Pythagorean, angles (whiteboards) | 8.AR.2 · 8.GR.1 |  |  |
-| Dec 16 | Wed (43 min) |  | PM2-R3 | **review** PM2 review 3: proportional → linear preview; mixed FAST-shaped round | 8.AR.3 · 8.AR.1.1 |  |  |
-| Dec 17 | Thu | 8 | 8.01+02 | Circle relationships; circumference | 7.GR.1.3 | Center, radius, and diameter of a circle — 7RY; Circumference of circles — 9FM | Dec 18 |
-| Dec 18 | Fri | 8 | 8.03 | Radius and diameter from circumference | 7.GR.1.3 | Find the radius or diameter of a circle given the circumference — 2CM | Jan 06 |
-| Jan 06 | Wed (43 min) | 8 | 8.04+05 | Area of a circle | 7.GR.1.4 | Area of circles — YA8 | Jan 07 |
-| Jan 07 | Thu | 8 | 8.06 | Circumference and area problems; sectors | 7.GR.1.4 | Circles: word problems — P56 | Jan 08 |
-| Jan 08 | Fri | 8 | 8.08+09 | Sectors and circle graphs | 7.GR.1.4 · 7.DP.1.4 | Use fractions to find the measure of an angle — V76; Circle graphs and central angles — KXS; Interpret circle graphs — WNJ | Jan 11 |
-| Jan 11 | Mon | 9 | 9.01+02 | Surface area of cylinders from nets | 7.GR.2.1 · 7.GR.2.2 | Nets of three-dimensional figures — 3R2; Surface area of cylinders — CYQ; Lateral area of cylinders — C8K | Jan 12 |
-| Jan 12 | Tue | 9 | 9.03+04+05 | Volume of cylinders; problems | 7.GR.2.3 | Volume of cylinders — FHC | Jan 13 |
-| Jan 13 | Wed (43 min) | 9 | spiral | *spiral* Spiral day — mixed retrieval from the unit just finished and the two before it |  |  |  |
-| Jan 14 | Thu | 9 | off | *off* State test — no class |  |  |  |
+| Dec 14 | Mon |  | PM2-R1 | **review** Semester review 1: number system, exponents, scientific notation (whiteboards) | 8.NSO.1.1–1.7 |  |  |
+| Dec 15 | Tue |  | PM2-R2 | **review** Semester review 2: equations, inequalities, Pythagorean, angles (whiteboards) | 8.AR.2 · 8.GR.1 |  |  |
+| Dec 16 | Wed (43 min) |  | PM2-R3 | **review** Semester review 3: proportional → linear preview; mixed FAST-shaped round | 8.AR.3 · 8.AR.1.1 |  |  |
+| Dec 17 | Thu | 8 | extra | *extra* Catch-up day — make-up tests and missing work; nothing new and nothing graded |  |  |  |
+| Dec 18 | Fri | 8 | extra | *extra* Catch-up day — make-up tests and missing work; nothing new and nothing graded |  |  |  |
+| Jan 06 | Wed (43 min) | 8 | 8.01+02 | Circle relationships; circumference | 7.GR.1.3 | Center, radius, and diameter of a circle — 7RY; Circumference of circles — 9FM | Jan 07 |
+| Jan 07 | Thu | 8 | 8.03 | Radius and diameter from circumference | 7.GR.1.3 | Find the radius or diameter of a circle given the circumference — 2CM | Jan 08 |
+| Jan 08 | Fri | 8 | 8.04+05 | Area of a circle | 7.GR.1.4 | Area of circles — YA8 | Jan 11 |
+| Jan 11 | Mon | 8 | 8.06 | Circumference and area problems; sectors | 7.GR.1.4 | Circles: word problems — P56 | Jan 12 |
+| Jan 12 | Tue | 8 | 8.08+09 | Sectors and circle graphs | 7.GR.1.4 · 7.DP.1.4 | Use fractions to find the measure of an angle — V76; Circle graphs and central angles — KXS; Interpret circle graphs — WNJ | Jan 13 |
+| Jan 13 | Wed (43 min) | 9 | 9.01+02 | Surface area of cylinders from nets | 7.GR.2.1 · 7.GR.2.2 | Nets of three-dimensional figures — 3R2; Surface area of cylinders — CYQ; Lateral area of cylinders — C8K | Jan 14 |
+| Jan 14 | Thu | 9 | 9.03+04+05 | Volume of cylinders; problems | 7.GR.2.3 | Volume of cylinders — FHC | Jan 15 |
 | Jan 15 | Fri | 9 | spiral | *spiral* Spiral day — mixed retrieval from the unit just finished and the two before it |  |  |  |
 | Jan 19 | Tue | 9 | spiral | *spiral* Spiral day — mixed retrieval from the unit just finished and the two before it |  |  |  |
 | Jan 20 | Wed (43 min) | 9 | spiral | *spiral* Spiral day — mixed retrieval from the unit just finished and the two before it |  |  |  |
@@ -143,7 +143,9 @@ The dates above are laid out from the sequence of lessons, the school calendar a
 - Mon Oct 05 2026: the class began T-A1
 - Thu Oct 08 2026: State test — no class
 - Fri Oct 16 2026: the class began 4.01
-- Thu Jan 14 2027: State test — no class
+- Tue Dec 08 2026: FAST PM2 — no class
+- Thu Dec 17 2026: Catch-up day — make-up tests and missing work; nothing new and nothing graded
+- Fri Dec 18 2026: Catch-up day — make-up tests and missing work; nothing new and nothing graded
 - Mon Mar 01 2027: State test — no class
 
 **What moved:**
@@ -153,5 +155,5 @@ The dates above are laid out from the sequence of lessons, the school calendar a
 - Units 8–9 exam: Thu Jan 14 → **Thu Jan 21** (+4 school days)
 - Unit 10 exam: Mon Feb 01 → **Thu Feb 04** (+3 school days)
 - covered on a day the log does not name: 3.X2, flex
-- flex days absorbed: 3 of 7 (after Unit 4, 9, 10); 4 left to absorb later losses
+- flex days absorbed: 3 of 6 (after Unit 4, 9, 10); 3 left to absorb later losses
 - the last day of content and tests: Fri Apr 30 (content must end by Apr 30); PM3 review days before the window: 0

@@ -38,18 +38,18 @@ The three-character code after each skill is what you type into IXL's search box
 | Tue Nov 17 | T-B1 Thread B: angle pairs — supplementary, complementary, vertical, adjacent (16.1) | Identify complementary, supplementary, vertical, adjacent, and congruent angles (HGV); Find measures of complementary, supplementary, vertical, and adjacent angles (R2B); Write and solve equations using angle relationships (DBV) | Wed Nov 18 |
 | Wed Nov 18 | T-B2 Thread B: interior and exterior angles of a triangle (16.2) | Find missing angles in triangles (JFJ); Exterior Angle Theorem (FMP); Triangle Angle-Sum Theorem (6Q6) | Thu Nov 19 |
 | Thu Nov 19 | 6.07+08 Similar triangles; indirect measurement | Side lengths of similar triangles (QSK); Similar triangles and indirect measurement (88W); Identify similar triangles (6PD) | Fri Nov 20 |
-| Thu Dec 03 | 7.01 Graphing proportional relationships | Graph a proportional relationship: word problems (FJW) | Fri Dec 04 |
-| Fri Dec 04 | 7.02+03 Constant of proportionality (table, graph, description) | Interpret graphs of proportional relationships (RMH); Find the constant of proportionality from a table (LKZ); Find the constant of proportionality from a graph (ZUT) | Mon Dec 07 |
-| Mon Dec 07 | 7.04 Is it proportional? | Identify proportional relationships by graphing (AAN); Identify proportional relationships in tables and graphs (VZK) | Tue Dec 08 |
-| Tue Dec 08 | 7.05+06 Equations of proportional relationships; translating representations | Write equations for proportional relationships from tables (6GU); Write equations for proportional relationships from graphs (JKH); Write and solve equations for proportional relationships (VKK) | Wed Dec 09 |
+| Wed Dec 02 | 7.01 Graphing proportional relationships | Graph a proportional relationship: word problems (FJW) | Thu Dec 03 |
+| Thu Dec 03 | 7.02+03 Constant of proportionality (table, graph, description) | Interpret graphs of proportional relationships (RMH); Find the constant of proportionality from a table (LKZ); Find the constant of proportionality from a graph (ZUT) | Fri Dec 04 |
+| Fri Dec 04 | 7.04 Is it proportional? | Identify proportional relationships by graphing (AAN); Identify proportional relationships in tables and graphs (VZK) | Mon Dec 07 |
+| Mon Dec 07 | 7.05+06 Equations of proportional relationships; translating representations | Write equations for proportional relationships from tables (6GU); Write equations for proportional relationships from graphs (JKH); Write and solve equations for proportional relationships (VKK) | Wed Dec 09 |
 | Wed Dec 09 | 7.07 Comparing proportional relationships | Compare proportional relationships represented in different ways (5A9) | Thu Dec 10 |
-| Thu Dec 17 | 8.01+02 Circle relationships; circumference | Center, radius, and diameter of a circle (7RY); Circumference of circles (9FM) | Fri Dec 18 |
-| Fri Dec 18 | 8.03 Radius and diameter from circumference | Find the radius or diameter of a circle given the circumference (2CM) | Wed Jan 06 |
-| Wed Jan 06 | 8.04+05 Area of a circle | Area of circles (YA8) | Thu Jan 07 |
-| Thu Jan 07 | 8.06 Circumference and area problems; sectors | Circles: word problems (P56) | Fri Jan 08 |
-| Fri Jan 08 | 8.08+09 Sectors and circle graphs | Use fractions to find the measure of an angle (V76); Circle graphs and central angles (KXS); Interpret circle graphs (WNJ) | Mon Jan 11 |
-| Mon Jan 11 | 9.01+02 Surface area of cylinders from nets | Nets of three-dimensional figures (3R2); Surface area of cylinders (CYQ); Lateral area of cylinders (C8K) | Tue Jan 12 |
-| Tue Jan 12 | 9.03+04+05 Volume of cylinders; problems | Volume of cylinders (FHC) | Wed Jan 13 |
+| Wed Jan 06 | 8.01+02 Circle relationships; circumference | Center, radius, and diameter of a circle (7RY); Circumference of circles (9FM) | Thu Jan 07 |
+| Thu Jan 07 | 8.03 Radius and diameter from circumference | Find the radius or diameter of a circle given the circumference (2CM) | Fri Jan 08 |
+| Fri Jan 08 | 8.04+05 Area of a circle | Area of circles (YA8) | Mon Jan 11 |
+| Mon Jan 11 | 8.06 Circumference and area problems; sectors | Circles: word problems (P56) | Tue Jan 12 |
+| Tue Jan 12 | 8.08+09 Sectors and circle graphs | Use fractions to find the measure of an angle (V76); Circle graphs and central angles (KXS); Interpret circle graphs (WNJ) | Wed Jan 13 |
+| Wed Jan 13 | 9.01+02 Surface area of cylinders from nets | Nets of three-dimensional figures (3R2); Surface area of cylinders (CYQ); Lateral area of cylinders (C8K) | Thu Jan 14 |
+| Thu Jan 14 | 9.03+04+05 Volume of cylinders; problems | Volume of cylinders (FHC) | Fri Jan 15 |
 | Mon Jan 25 | 10.01 Proportional relationships revisited (linear ⇒ proportional?) | Find the constant of proportionality from a table (ZCK); Identify proportional relationships by graphing (RXD); Identify proportional relationships (Z64); Write equations for proportional relationships from tables and graphs (VXM); Interpret graphs of proportional relationships (Q96) | Tue Jan 26 |
 | Tue Jan 26 | 10.02+03 Slope from two points, graphs, tables | Find the slope from two points (ZAC); Find the slope from a table (GSB); Find the slope from a graph (Q94) | Wed Jan 27 |
 | Wed Jan 27 | 10.04 Slope in context | Rate of change of a linear function: graphs (ZPF); Rate of change of a linear function: tables (8FE) | Thu Jan 28 |

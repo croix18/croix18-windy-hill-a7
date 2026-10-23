@@ -3490,3 +3490,31 @@ made from the per-document PDFs and never laid out separately, so they cannot dr
 correct sections": it already did (every row is a jump-to-slide action), and each lesson's title
 slide now carries a small *← Contents* link back. Google Slides keeps slide-to-slide links on
 import.
+
+## 13b(xix). Ruling 47 — 22 October: PM2 on 8 December, and a week with nothing graded before Q2 ends [both courses; A7's half here, M7's in its rulebook]
+
+**Ruling 47 — Croix, 22 October 2026 (evening): "Pm 2 is December 8. Can you add that to the schedule
+and adjust them accordingly."** PM2 is a day with no class (the as-run log, like the state tests). Then,
+of Q2 ending at the break: *"Ideally I'd like to give myself at least a week of no grades so that I can
+catch up and take on the influx of missing work and makeup tests I will have to grade."* And of
+teaching a unit before the break and testing it after: *"They will forget everything."*
+
+For A7 he chose **"Unit 7 around PM2"**:
+
+1. **PM2 (Tue 8 Dec) takes Unit 6's flex day.** Unit 7 starts Wed 2 Dec, runs around PM2, and its
+   exam stays Thu–Fri 10–11 Dec — the last graded thing in Q2. `tools/scope_calendar.py` no longer
+   gives Unit 6 a flex day (the exception list beside the other two).
+2. **The three days planned as the PM2 review come after the test now**, Mon–Wed 14–16 Dec, as the
+   semester review: whiteboard rounds, nothing graded. Their codes stay `PM2-R1…3` because the master
+   sheet and its check know a review block by its PM prefix; their titles say what they are. There
+   is no PM2 review before the test: there is no room for one unless Unit 7's exam moves into the
+   last week. PM1 and PM2 are informational (the Source of Truth).
+3. **Thu–Fri 17–18 Dec are catch-up days** (two `review` lines in the as-run log): class meets, no
+   new lesson, nothing graded, no IXL due. Unit 8 starts Wed 6 Jan, after the break.
+4. **14 January is a school day** (Croix: "That's a normal day as far as I know"); its line is out of
+   the log. 1 March stays.
+
+What it cost and bought, laid by the engine: one flex day (3 are left to absorb later losses; there
+were 4); every exam from January on is where it was — Units 8–9 on 21–22 January — and content still
+ends 30 April. M7's half (Unit 8 before Unit 5; Units 5 and 6 without a review day; its own catch-up
+week, 14–18 December) is ruling 47 in M7's rulebook.
