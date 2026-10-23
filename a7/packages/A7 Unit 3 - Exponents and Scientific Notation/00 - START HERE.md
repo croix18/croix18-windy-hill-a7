@@ -2,7 +2,7 @@
 
 Windy Hill Middle School · course 1205050 · ten teaching days (nine book lessons, merged to eight, plus the two Thread A days), a review sent home as practice, a two-period assessment.
 
-**By the plan** (Windmill's spine as of 2026-10-04; `tools/scope_calendar.py` is its source): lessons Wed 23 Sep – Fri 9 Oct, the assessment Thu 15 Oct and Fri 16 Oct, 2026. The dates move when the as-run log does (the plan follows the class), and a day is logged from the phone view of the plan.
+**By the plan** (Windmill's spine as of 2026-10-22; `tools/scope_calendar.py` is its source): lessons Wed 23 Sep – Fri 9 Oct, the assessment Thu 15 Oct, 2026. The dates move when the as-run log does (the plan follows the class), and a day is logged from the phone view of the plan.
 
 Nothing exists until it is committed. This folder is generated from `a7/build/u3/` by `install_unit.py`; edit the specs and rebuild rather than editing these files by hand.
 
@@ -45,7 +45,7 @@ Nothing exists until it is committed. This folder is generated from `a7/build/u3
 | 3.08 | Wed 7 Oct | Writing Large Numbers in Scientific Notation | MA.8.NSO.1.4 | One nonzero digit in front of the decimal point. |
 | 3.09 | Fri 9 Oct | Writing Small Numbers in Scientific Notation | MA.8.NSO.1.4 | The exponent counts places, not zeros. |
 | — | — | Unit Review | all four | unscored, sent home as practice (ruling 27a); the SSDD block is named on the key only |
-| — | Thu 15 Oct and Fri 16 Oct | Unit Assessment — two periods, one paper | all four benchmarks, sections by benchmark | 36 points |
+| — | Thu 15 Oct | Unit Assessment — one period, one paper | all four benchmarks, sections by benchmark | 36 points |
 
 Book order with Thread A woven in after 3.07 (ruling 30): the laws are complete on numbers before they are restated on letters, and both are complete before scientific notation. Math Nation's 3.6 and 3.7 are one period here (3.06–07). MA.7.NSO.1.1 is grade 7 content the Grade 8 FAST assumes; the other three benchmarks report under Number Sense and Operations (8.NSO.1.3, 8.NSO.1.4) and Algebraic Reasoning (8.AR.1.1).
 

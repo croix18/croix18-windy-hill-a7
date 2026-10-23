@@ -2,7 +2,7 @@
 
 Windy Hill Middle School · course 1205050 · six teaching days (eleven book lessons, merged to six), a review sent home Tue 3 Nov, the test as Form A and Form B over Thu–Fri 5–6 Nov with a practice test.
 
-**By the plan** (Windmill's spine as of 2026-10-16; `tools/scope_calendar.py` is its source): lessons Wed 28 Oct – Wed 4 Nov, the assessment Thu 5 Nov and Fri 6 Nov, 2026. The dates move when the as-run log does (the plan follows the class), and a day is logged from the phone view of the plan.
+**By the plan** (Windmill's spine as of 2026-10-22; `tools/scope_calendar.py` is its source): lessons Tue 27 Oct – Tue 3 Nov, the assessment Thu 5 Nov and Fri 6 Nov, 2026. The dates move when the as-run log does (the plan follows the class), and a day is logged from the phone view of the plan.
 
 Nothing exists until it is committed. This folder is generated from `a7/build/u5/` by `install_unit.py`; edit the specs and rebuild rather than editing these files by hand.
 
@@ -35,12 +35,12 @@ Nothing exists until it is committed. This folder is generated from `a7/build/u5
 
 | Day | Planned | Lesson | Benchmark | The line that carries the day |
 |---|---|---|---|---|
-| 5.01 | Wed 28 Oct | Scale Drawings | MA.7.GR.1.5 | A scale factor is the one number every length is multiplied by. Copy divided by original. |
-| 5.02–03 | Thu 29 Oct | Scale Factor: Perimeter and Area | MA.7.GR.1.5 | Perimeter scales by k. Area scales by k squared. |
-| 5.04 | Fri 30 Oct | Real-World Scale Drawings | MA.7.GR.1.5 | A scale with two units is a rate: read it per 1 first. |
-| 5.06–07 | Mon 2 Nov | Converting Length Across Systems; Currency | MA.7.AR.3.3 | Multiply by a form of 1 so the unit you have cancels. Estimate first. |
-| 5.08–09 | Tue 3 Nov | Converting Mass, Area and Volume | MA.7.AR.3.3 | Area converts by the square of the length ratio. |
-| 5.10–11 | Wed 4 Nov | Multi-Step Proportion Problems | MA.7.AR.4.5 · MA.7.AR.3.3 | A unit rate, used twice. Same units before you compare. |
+| 5.01 | Tue 27 Oct | Scale Drawings | MA.7.GR.1.5 | A scale factor is the one number every length is multiplied by. Copy divided by original. |
+| 5.02–03 | Wed 28 Oct | Scale Factor: Perimeter and Area | MA.7.GR.1.5 | Perimeter scales by k. Area scales by k squared. |
+| 5.04 | Thu 29 Oct | Real-World Scale Drawings | MA.7.GR.1.5 | A scale with two units is a rate: read it per 1 first. |
+| 5.06–07 | Fri 30 Oct | Converting Length Across Systems; Currency | MA.7.AR.3.3 | Multiply by a form of 1 so the unit you have cancels. Estimate first. |
+| 5.08–09 | Mon 2 Nov | Converting Mass, Area and Volume | MA.7.AR.3.3 | Area converts by the square of the length ratio. |
+| 5.10–11 | Tue 3 Nov | Multi-Step Proportion Problems | MA.7.AR.4.5 · MA.7.AR.3.3 | A unit rate, used twice. Same units before you compare. |
 | — | — | Unit Review | all three | unscored, sent home as practice (ruling 27a); the SSDD block is named on the key only |
 | — | Thu 5 Nov and Fri 6 Nov | Unit Assessment — two periods, one paper (Forms A and B) | all three benchmarks, sections by benchmark; Form A, Form B and a practice test, 19 questions, two transfer items (8 and 19) | 24 points |
 

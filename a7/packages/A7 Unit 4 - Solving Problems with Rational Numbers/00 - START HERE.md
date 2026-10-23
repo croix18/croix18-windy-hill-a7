@@ -1,8 +1,8 @@
 # A7 Unit 4 — Solving Problems with Rational Numbers
 
-Windy Hill Middle School · course 1205050 · six teaching days (eight book lessons, merged to six), a review sent home as practice, a two-period assessment.
+Windy Hill Middle School · course 1205050 · six teaching days (eight book lessons, merged to six), a review sent home as practice, an assessment built for two periods and given in one (Mon 26 Oct).
 
-**By the plan** (Windmill's spine as of 2026-10-16; `tools/scope_calendar.py` is its source): lessons Fri 16 Oct – Fri 23 Oct, the assessment Mon 26 Oct and Tue 27 Oct, 2026. The dates move when the as-run log does (the plan follows the class), and a day is logged from the phone view of the plan.
+**By the plan** (Windmill's spine as of 2026-10-22; `tools/scope_calendar.py` is its source): lessons Fri 16 Oct – Fri 23 Oct, the assessment Mon 26 Oct, 2026. The dates move when the as-run log does (the plan follows the class), and a day is logged from the phone view of the plan.
 
 Nothing exists until it is committed. This folder is generated from `a7/build/u4/` by `install_unit.py`; edit the specs and rebuild rather than editing these files by hand.
 
@@ -42,7 +42,7 @@ Nothing exists until it is committed. This folder is generated from `a7/build/u4
 | 4.06 | Thu 22 Oct | Order of Operations with Radicals | MA.8.NSO.1.7 | Read the expression and ask what is holding what. |
 | 4.07–08 | Fri 23 Oct | Real-World Order of Operations | MA.8.NSO.1.7 | No word tells you which operation to use. Read the situation. |
 | — | — | Unit Review | all three | unscored, sent home as practice (ruling 27a); the SSDD block is named on the key only |
-| — | Mon 26 Oct and Tue 27 Oct | Unit Assessment — two periods, one paper (Forms A and B) | all three benchmarks, sections by benchmark | 29 points |
+| — | Mon 26 Oct | Unit Assessment — one period, one paper (Forms A and B) | all three benchmarks, sections by benchmark | 29 points |
 
 Book order, with 4.2 + 4.3 and 4.7 + 4.8 merged under ruling 30 — both merges were already in the scope and sequence. 4.05 and 4.06 stay separate days even though IXL gives them the same skill; under ruling 28 that is one assignment covering the run, due after the second of the two. No thread day falls inside Unit 4. All three benchmarks report under Number Sense and Operations on the Grade 8 FAST, so the review's parts split by lesson and the assessment's sections split by benchmark.
 
@@ -92,7 +92,7 @@ The whiteboard round is the remainder — 11–12 minutes across the unit — an
 - **Four items in the book add or subtract exponents more than 2 apart**, outside this benchmark's own clarification — and one of them is two questions away from a margin note quoting that very rule. None are reproduced. Every addition and subtraction in this unit has a gap of 0, 1 or 2, and the build refuses anything wider.
 - **The flooring item is rebuilt, not reused.** The book's version puts underlay under the Bathroom heading while its price sits inside the bedroom's area group, and prices grout per square foot in the table while adding it as a flat amount in the expression, so three of its questions have no unambiguous answer. Lesson 4.07's Example 2 and boards 4 and 6 rebuild the context with the question saying which prices are rates and which are flat.
 - **Three things the state guide expects that the book never asks are in every relevant bank and on the assessment:** a quotient crossing from very large to very small, the renormalisation misconception (12 × 10⁹ left where 1.2 × 10¹⁰ was needed) as a named wrong option, and the exponents-multiplied misconception as a named wrong option.
-- **The assessment is one paper over two periods, 29 points** (ruling 27), **in two parallel forms, A and B** (ruling 33: the same question in every position, and no question shares an answer across them). Students stop when the first period ends and continue from where they stopped — it is not two papers, and nothing on it says 'Day 1'. Three sections by benchmark, numbered 1–15 straight through. **Questions 6 and 15 are transfer items** (ruling 18): the same benchmarks, on surfaces that appear on no review and in no question bank. The key names them and the Score Tracker maps every question to its benchmark.
+- **The assessment is one paper, 29 points, built to run over two periods** (ruling 27) — **the plan gives it one, Mon 26 Oct** (Croix, 22 Oct: "A7s unit 4 test is Monday only"), as Unit 3's was on 15 Oct. It is **in two parallel forms, A and B** (ruling 33: the same question in every position, and no question shares an answer across them), and nothing on it says 'Day 1'. Three sections by benchmark, numbered 1–15 straight through. **Questions 6 and 15 are transfer items** (ruling 18): the same benchmarks, on surfaces that appear on no review and in no question bank. The key names them and the Score Tracker maps every question to its benchmark.
 - **The Reference Sheet is the only handout.** Give it out at 4.01; it is the document students study from, and its perfect-square and perfect-cube lists are what 4.05 and 4.06 assume. It does not go into the test.
 - **No mnemonic and no keyword strategy anywhere in this unit.** The state guide warns against both — PEMDAS in its instructional strategies, because it has no letter for the radical bar or the fraction bar, and circling-and-boxing as a named misconception, because two problems with the same numbers and the same words can need different operations. The word PEMDAS appears nowhere in the package.
 

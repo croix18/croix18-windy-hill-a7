@@ -23,13 +23,13 @@
 | Oct 22 | Thu | 4 | 4.06 | Order of operations with exponents and radicals | 8.NSO.1.7 | Evaluate radical expressions — D8J | Oct 23 |
 | Oct 23 | Fri | 4 | 4.07+08 | Real-world order-of-operations problems | 8.NSO.1.7 | Evaluate variable expressions: word problems — DPG | Oct 26 |
 | Oct 26 | Mon | 4 | 4.X1 | **exam** Unit 4 exam, day 1 |  |  |  |
-| Oct 27 | Tue | 4 | 4.X2 | **exam** Unit 4 exam, day 2 |  |  |  |
-| Oct 28 | Wed (43 min) | 5 | 5.01 | Scale drawings | 7.GR.1.5 | Scale drawings: find the scale factor, missing side, or missing angle — WEA | Oct 29 |
-| Oct 29 | Thu | 5 | 5.02+03 | Scale factor: perimeter and area (k and k²) | 7.GR.1.5 | Perimeter and area: changes in scale — ZC6; Scale drawings: find the scale factor or missing side — XHM | Oct 30 |
-| Oct 30 | Fri | 5 | 5.04 | Real-world scale drawings | 7.GR.1.5 | Scale drawings: word problems — 84H; Scale drawings: scale factor word problems — KCM | Nov 02 |
-| Nov 02 | Mon | 5 | 5.06+07 | Converting length across systems; currency | 7.AR.3.3 | Convert between customary and metric systems — E8Z; Compare and convert customary units — 4B8; Compare and convert metric units — HW2 | Nov 04 |
-| Nov 03 | Tue | 5 | 5.08+09 | Converting mass, area and volume across systems | 7.AR.3.3 | Convert between customary and metric systems — E8Z; Compare and convert customary units — 4B8; Compare and convert metric units — HW2 | Nov 04 |
-| Nov 04 | Wed (43 min) | 5 | 5.10+11 | Multi-step proportion problems | 7.AR.3.3 · 7.AR.4.5 | Compare rates: word problems — VVS; Multi-step problems with customary or metric unit conversions — UCT | Nov 05 |
+| Oct 27 | Tue | 5 | 5.01 | Scale drawings | 7.GR.1.5 | Scale drawings: find the scale factor, missing side, or missing angle — WEA | Oct 28 |
+| Oct 28 | Wed (43 min) | 5 | 5.02+03 | Scale factor: perimeter and area (k and k²) | 7.GR.1.5 | Perimeter and area: changes in scale — ZC6; Scale drawings: find the scale factor or missing side — XHM | Oct 29 |
+| Oct 29 | Thu | 5 | 5.04 | Real-world scale drawings | 7.GR.1.5 | Scale drawings: word problems — 84H; Scale drawings: scale factor word problems — KCM | Oct 30 |
+| Oct 30 | Fri | 5 | 5.06+07 | Converting length across systems; currency | 7.AR.3.3 | Convert between customary and metric systems — E8Z; Compare and convert customary units — 4B8; Compare and convert metric units — HW2 | Nov 03 |
+| Nov 02 | Mon | 5 | 5.08+09 | Converting mass, area and volume across systems | 7.AR.3.3 | Convert between customary and metric systems — E8Z; Compare and convert customary units — 4B8; Compare and convert metric units — HW2 | Nov 03 |
+| Nov 03 | Tue | 5 | 5.10+11 | Multi-step proportion problems | 7.AR.3.3 · 7.AR.4.5 | Compare rates: word problems — VVS; Multi-step problems with customary or metric unit conversions — UCT | Nov 04 |
+| Nov 04 | Wed (43 min) | 5 | spiral | *spiral* Spiral day — mixed retrieval from the unit just finished and the two before it |  |  |  |
 | Nov 05 | Thu | 5 | 5.X1 | **exam** Unit 5 exam, day 1 |  |  |  |
 | Nov 06 | Fri | 5 | 5.X2 | **exam** Unit 5 exam, day 2 |  |  |  |
 | Nov 09 | Mon | 6 | 6.01+02 | Triangle Inequality Theorem; converse of the Pythagorean Theorem | 8.GR.1.3 | Triangle inequality — 2N5; Converse of the Pythagorean theorem: is it a right triangle? — EQZ | Nov 10 |
@@ -90,11 +90,11 @@
 | Feb 22 | Mon | 11 | flex | *flex* Flex day — reteach from exam evidence, or absorb a lost day |  |  |  |
 | Feb 23 | Tue | 12 | 12.01+02 | Relations; domain and range | 8.F.1.1 | Relations: convert between mappings, tables, graphs, and ordered pairs — LQJ; Domain and range of relations — T7P | Feb 24 |
 | Feb 24 | Wed (43 min) | 12 | 12.03 | Is it a function? | 8.F.1.1 | Identify functions — JT2; Identify functions: graphs — AEB; Identify independent and dependent variables — FSF | Feb 25 |
-| Feb 25 | Thu | 12 | 12.04+05 | Describing graphs: increasing, decreasing, constant | 8.F.1.3 | Identify graphs: word problems — HWC | Mar 02 |
-| Feb 26 | Fri | 12 | 12.06 | Sketching graphs from descriptions | 8.F.1.3 | Identify graphs: word problems — HWC | Mar 02 |
-| Mar 01 | Mon | 12 | off | *off* State test — no class |  |  |  |
-| Mar 02 | Tue | 12 | 12.07 | Functions from equations, tables, graphs | 8.F.1.2 | Complete a function table from an equation — ESE; Complete a table for a function graph — 7EK; Find values using function graphs — 7N2 | Mar 03 |
-| Mar 03 | Wed (43 min) | 12 | 12.08+09 | Is it linear? (graphs, equations, tables) | 8.F.1.2 · 8.AR.3.1 | Identify linear and nonlinear functions: graphs and equations — XB8; Identify linear and nonlinear functions: tables — VGS | Mar 04 |
+| Feb 25 | Thu | 12 | 12.04+05 | Describing graphs: increasing, decreasing, constant | 8.F.1.3 | Identify graphs: word problems — HWC | Mar 01 |
+| Feb 26 | Fri | 12 | 12.06 | Sketching graphs from descriptions | 8.F.1.3 | Identify graphs: word problems — HWC | Mar 01 |
+| Mar 01 | Mon | 12 | 12.07 | Functions from equations, tables, graphs | 8.F.1.2 | Complete a function table from an equation — ESE; Complete a table for a function graph — 7EK; Find values using function graphs — 7N2 | Mar 02 |
+| Mar 02 | Tue | 12 | 12.08+09 | Is it linear? (graphs, equations, tables) | 8.F.1.2 · 8.AR.3.1 | Identify linear and nonlinear functions: graphs and equations — XB8; Identify linear and nonlinear functions: tables — VGS | Mar 03 |
+| Mar 03 | Wed (43 min) | 12 | spiral | *spiral* Spiral day — mixed retrieval from the unit just finished and the two before it |  |  |  |
 | Mar 04 | Thu | 12 | spiral | *spiral* Spiral day — mixed retrieval from the unit just finished and the two before it |  |  |  |
 | Mar 08 | Mon | 12 | 12.X1 | **exam** Unit 12 exam, day 1 |  |  |  |
 | Mar 09 | Tue | 12 | 12.X2 | **exam** Unit 12 exam, day 2 |  |  |  |
@@ -143,10 +143,10 @@ The dates above are laid out from the sequence of lessons, the school calendar a
 - Mon Oct 05 2026: the class began T-A1
 - Thu Oct 08 2026: State test — no class
 - Fri Oct 16 2026: the class began 4.01
+- Tue Oct 27 2026: the class began 5.01
 - Tue Dec 08 2026: FAST PM2 — no class
 - Thu Dec 17 2026: Catch-up day — make-up tests and missing work; nothing new and nothing graded
 - Fri Dec 18 2026: Catch-up day — make-up tests and missing work; nothing new and nothing graded
-- Mon Mar 01 2027: State test — no class
 
 **What moved:**
 
@@ -154,6 +154,6 @@ The dates above are laid out from the sequence of lessons, the school calendar a
 - Unit 4 exam: Thu Oct 22 → **Mon Oct 26** (+2 school days)
 - Units 8–9 exam: Thu Jan 14 → **Thu Jan 21** (+4 school days)
 - Unit 10 exam: Mon Feb 01 → **Thu Feb 04** (+3 school days)
-- covered on a day the log does not name: 3.X2, flex
-- flex days absorbed: 3 of 6 (after Unit 4, 9, 10); 3 left to absorb later losses
+- covered on a day the log does not name: 3.X2, flex, 4.X2, flex
+- flex days absorbed: 2 of 6 (after Unit 9, 10); 4 left to absorb later losses
 - the last day of content and tests: Fri Apr 30 (content must end by Apr 30); PM3 review days before the window: 0

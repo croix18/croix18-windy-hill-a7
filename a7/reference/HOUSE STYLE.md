@@ -3546,3 +3546,14 @@ M7's; the rule is for both courses.)
   them to the days right after the unit's exam. Neither unit is built yet.
 - Units 7 (before winter break), 8–9 (after it, whole) and the rest already keep the rule; content
   still ends 30 April.
+
+**Later the same evening (22 October):** *"A7s unit 4 test is Monday only. Mar 1 is definitely not a state
+test. May something will be our pm3."*
+- **The Unit 4 exam is one day, Mon 26 October**, as Unit 3's was (15 October): the as-run log says the class
+  begins 5.01 on Tue 27 October, so the exam's second day and the flex day after it are not laid. Unit 5 runs
+  27 October – 3 November, a spiral day on 4 November, and its exam stays Thu–Fri 5–6 November. Unit 4's paper
+  was built for two periods (29 points); its START HERE says it is given in one. A START HERE now says "one
+  period" for a one-day exam.
+- **1 March is a school day**: its line is out of the log (ruling 47 had kept it). Nothing in A7 moves for it —
+  Unit 12's exam still lands Mon–Tue 8–9 March by its weekday rule.
+- PM3 stays the 3–28 May window until the school sets the day.

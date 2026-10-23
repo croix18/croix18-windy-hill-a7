@@ -25,11 +25,11 @@ The three-character code after each skill is what you type into IXL's search box
 | Tue Oct 20 | 4.04 Real-world scientific notation; significant digits | Add, subtract, multiply, and divide numbers written in scientific notation: word problems (D5S) | Wed Oct 21 |
 | Wed Oct 21 | 4.05–4.06 (2 lessons) Expressions with radicals (perfect squares to 225, cubes −125 to 125) | Evaluate radical expressions (D8J) | Fri Oct 23 |
 | Fri Oct 23 | 4.07+08 Real-world order-of-operations problems | Evaluate variable expressions: word problems (DPG) | Mon Oct 26 |
-| Wed Oct 28 | 5.01 Scale drawings | Scale drawings: find the scale factor, missing side, or missing angle (WEA) | Thu Oct 29 |
-| Thu Oct 29 | 5.02+03 Scale factor: perimeter and area (k and k²) | Perimeter and area: changes in scale (ZC6); Scale drawings: find the scale factor or missing side (XHM) | Fri Oct 30 |
-| Fri Oct 30 | 5.04 Real-world scale drawings | Scale drawings: word problems (84H); Scale drawings: scale factor word problems (KCM) | Mon Nov 02 |
-| Mon Nov 02 | 5.06+07–5.08+09 (2 lessons) Converting length across systems; currency | Convert between customary and metric systems (E8Z); Compare and convert customary units (4B8); Compare and convert metric units (HW2) | Wed Nov 04 |
-| Wed Nov 04 | 5.10+11 Multi-step proportion problems | Compare rates: word problems (VVS); Multi-step problems with customary or metric unit conversions (UCT) | Thu Nov 05 |
+| Tue Oct 27 | 5.01 Scale drawings | Scale drawings: find the scale factor, missing side, or missing angle (WEA) | Wed Oct 28 |
+| Wed Oct 28 | 5.02+03 Scale factor: perimeter and area (k and k²) | Perimeter and area: changes in scale (ZC6); Scale drawings: find the scale factor or missing side (XHM) | Thu Oct 29 |
+| Thu Oct 29 | 5.04 Real-world scale drawings | Scale drawings: word problems (84H); Scale drawings: scale factor word problems (KCM) | Fri Oct 30 |
+| Fri Oct 30 | 5.06+07–5.08+09 (2 lessons) Converting length across systems; currency | Convert between customary and metric systems (E8Z); Compare and convert customary units (4B8); Compare and convert metric units (HW2) | Tue Nov 03 |
+| Tue Nov 03 | 5.10+11 Multi-step proportion problems | Compare rates: word problems (VVS); Multi-step problems with customary or metric unit conversions (UCT) | Wed Nov 04 |
 | Mon Nov 09 | 6.01+02 Triangle Inequality Theorem; converse of the Pythagorean Theorem | Triangle inequality (2N5); Converse of the Pythagorean theorem: is it a right triangle? (EQZ) | Tue Nov 10 |
 | Tue Nov 10 | 6.03 Pythagorean Theorem (memorize) | Pythagorean theorem: find the missing leg or hypotenuse length (MTM) | Thu Nov 12 |
 | Thu Nov 12 | 6.04 Pythagorean Theorem in real-world problems | Pythagorean theorem: word problems (87U) | Fri Nov 13 |
@@ -67,9 +67,9 @@ The three-character code after each skill is what you type into IXL's search box
 | Wed Feb 17 | 11.08 Systems in context (approximate solutions) | Solve a system of equations by graphing: word problems (W9J) | Thu Feb 18 |
 | Tue Feb 23 | 12.01+02 Relations; domain and range | Relations: convert between mappings, tables, graphs, and ordered pairs (LQJ); Domain and range of relations (T7P) | Wed Feb 24 |
 | Wed Feb 24 | 12.03 Is it a function? | Identify functions (JT2); Identify functions: graphs (AEB); Identify independent and dependent variables (FSF) | Thu Feb 25 |
-| Thu Feb 25 | 12.04+05–12.06 (2 lessons) Describing graphs: increasing, decreasing, constant | Identify graphs: word problems (HWC) | Tue Mar 02 |
-| Tue Mar 02 | 12.07 Functions from equations, tables, graphs | Complete a function table from an equation (ESE); Complete a table for a function graph (7EK); Find values using function graphs (7N2) | Wed Mar 03 |
-| Wed Mar 03 | 12.08+09 Is it linear? (graphs, equations, tables) | Identify linear and nonlinear functions: graphs and equations (XB8); Identify linear and nonlinear functions: tables (VGS) | Thu Mar 04 |
+| Thu Feb 25 | 12.04+05–12.06 (2 lessons) Describing graphs: increasing, decreasing, constant | Identify graphs: word problems (HWC) | Mon Mar 01 |
+| Mon Mar 01 | 12.07 Functions from equations, tables, graphs | Complete a function table from an equation (ESE); Complete a table for a function graph (7EK); Find values using function graphs (7N2) | Tue Mar 02 |
+| Tue Mar 02 | 12.08+09 Is it linear? (graphs, equations, tables) | Identify linear and nonlinear functions: graphs and equations (XB8); Identify linear and nonlinear functions: tables (VGS) | Wed Mar 03 |
 | Thu Mar 11 | 13.01+02+03 Choosing and creating displays (numerical, categorical) | Choose the best type of graph (VP6); Create dot plots (22B); Create stem-and-leaf plots (8AP); Create histograms (LGG); Box plots (SKN); Create and interpret dot plots with fractions (SHS); Create bar graphs (E76) | Fri Mar 12 |
 | Fri Mar 12 | 13.04+05 Bivariate data; line graphs | Create line graphs (ERM); Interpret line graphs (TGQ) | Mon Mar 15 |
 | Mon Mar 15 | 13.06 Scatter plots and association | Create scatter plots (AVL); Describe scatter plots (CG8); Describe associations between two variables using scatter plots (9ER) | Tue Mar 16 |
