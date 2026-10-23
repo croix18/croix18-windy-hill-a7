@@ -3518,3 +3518,31 @@ What it cost and bought, laid by the engine: one flex day (3 are left to absorb 
 were 4); every exam from January on is where it was — Units 8–9 on 21–22 January — and content still
 ends 30 April. M7's half (Unit 8 before Unit 5; Units 5 and 6 without a review day; its own catch-up
 week, 14–18 December) is ruling 47 in M7's rulebook.
+
+## 13b(xx). Ruling 48 — 22 October (later): never test after a long break [both courses]
+
+**Ruling 48 — Croix, 22 October 2026, while ruling 47 was being built: "Also, absolutely put the unit
+10 test before thanksgiving break. Do not let all my hard work go to waste testing after a break like
+that. Never test after a long break. A 3 day is fine. A week to 10 days plus is not."** (Unit 10 is
+M7's; the rule is for both courses.)
+
+- **The rule:** a unit — from its first lesson to its exam — sits on one side of a long break
+  (Thanksgiving, winter, spring; `LONG_BREAKS` in `tools/scope_calendar.py`). A three-day weekend does
+  not count. `scope_calendar.py` refuses a plan that breaks it (`straddles()`); what gives then is
+  Croix's decision. (M7 also tells its engine, with `need` on each unit's first lesson. A7 does not:
+  its flex days are measured against the plan with nothing lost, `need` moves that plan, and when it
+  was tried the flex days stopped absorbing and content ran to 14 May.)
+- **Two units broke it, and their threads moved (ruling 30's woven threads):**
+  - **Unit 6** was taught 9–20 November and tested 30 November – 1 December, after Thanksgiving. Thread B
+    (T-B1, T-B2: angle pairs; a triangle's angles) now comes after the Unit 6 exam, on Mon–Tue
+    30 November – 1 December, so Unit 6 is tested **Thu–Fri 19–20 November**. Unit 7 and December are
+    unchanged.
+  - **Unit 13** was taught 11–19 March and tested 29–30 March, after spring break. Thread C (T-C1,
+    T-C2: repeated experiments) now comes after the Unit 13 exam, on Mon–Tue 29–30 March, so Unit 13
+    is tested **Thu–Fri 18–19 March**. Unit 14 and everything after it are unchanged.
+- **What that changes for the builds:** Unit 6's exam does not carry 8.GR.1.4–1.5, and Unit 13's does
+  not carry 8.DP.2.1–2.2 — the thread lessons are taught, and first tested in Units 15–16 and 17,
+  which consolidate them (16.01+02, 17.01–03). Ruling 30 put each thread inside its unit; this moves
+  them to the days right after the unit's exam. Neither unit is built yet.
+- Units 7 (before winter break), 8–9 (after it, whole) and the rest already keep the rule; content
+  still ends 30 April.

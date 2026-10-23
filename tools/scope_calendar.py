@@ -79,11 +79,13 @@ PLAN=[
  (6,"6.04","Pythagorean Theorem in real-world problems","8.GR.1.1","L"),
  (6,"6.05","Distance on the coordinate plane","8.GR.1.2","L"),
  (6,"6.06","Real-world coordinate-plane problems; perimeter","8.GR.1.2","L"),
- (6,"T-B1","Thread B: angle pairs — supplementary, complementary, vertical, adjacent (16.1)","8.GR.1.4","T"),
- (6,"T-B2","Thread B: interior and exterior angles of a triangle (16.2)","8.GR.1.5","T"),
  (6,"6.07+08","Similar triangles; indirect measurement","8.GR.2.4","L"),
  (6,"6.X1","Unit 6 exam, day 1","","X"),
  (6,"6.X2","Unit 6 exam, day 2","","X"),
+ # Ruling 48 (Croix, 22 Oct: "Never test after a long break"): Thread B comes after the Unit 6 exam, so Unit 6 is taught
+ # and tested before Thanksgiving; its two days open the week after the break, before Unit 7.
+ (6,"T-B1","Thread B: angle pairs — supplementary, complementary, vertical, adjacent (16.1)","8.GR.1.4","T"),
+ (6,"T-B2","Thread B: interior and exterior angles of a triangle (16.2)","8.GR.1.5","T"),
  (7,"7.01","Graphing proportional relationships","7.AR.4.3","L"),
  (7,"7.02+03","Constant of proportionality (table, graph, description)","7.AR.4.2","L"),
  (7,"7.04","Is it proportional?","7.AR.4.1 · 8.AR.3.1","L"),
@@ -138,10 +140,12 @@ PLAN=[
  (13,"13.06","Scatter plots and association","8.DP.1.1 · 8.DP.1.2","L"),
  (13,"13.07+08","Lines of fit; outliers","8.DP.1.3 · 8.DP.1.2","L"),
  (13,"13.09","Interpreting the equation of a line of fit","8.DP.1.3 · 8.AR.3.5","L"),
- (13,"T-C1","Thread C: sample spaces of repeated experiments (17.1)","8.DP.2.1","T"),
- (13,"T-C2","Thread C: theoretical probability of repeated experiments (17.2–17.3)","8.DP.2.2","T"),
  (13,"13.X1","Unit 13 exam, day 1","","X"),
  (13,"13.X2","Unit 13 exam, day 2","","X"),
+ # Ruling 48: Thread C comes after the Unit 13 exam, so Unit 13 is taught and tested before spring break; its two
+ # days open the week after the break, before Unit 14 (its consolidation is 17.01–03).
+ (13,"T-C1","Thread C: sample spaces of repeated experiments (17.1)","8.DP.2.1","T"),
+ (13,"T-C2","Thread C: theoretical probability of repeated experiments (17.2–17.3)","8.DP.2.2","T"),
  (14,"14.01–04","Exponent laws with variable bases — consolidation of Thread A","8.AR.1.1","L"),
  (14,"14.05+06","Multiplying a monomial by a linear expression","8.AR.1.2","L"),
  (14,"14.07+08","Factoring a common monomial","8.AR.1.3","L"),
@@ -173,7 +177,7 @@ P2=[]
 for r in PLAN:
     P2.append(r)
     # one flex day after every exam: reteach from exam evidence, or absorb a lost day
-    if r[4]=="X" and r[1].endswith("X2") and r[0] in (3,4,9,10,11,12):   # not after 5 (Grade 7 unit), 6 (PM2 on Tue 8 Dec takes that day, so Unit 7 is tested by 11 Dec — Croix, 22 Oct), 7 (the three review days follow), 13 (keeps Unit 14 whole before spring break); Q4's buffer is the PM3 review block
+    if r[4]=="X" and r[1].endswith("X2") and r[0] in (3,4,9,10,11,12):   # not after 5 (Grade 7 unit), 6 (PM2 on Tue 8 Dec takes that day, so Unit 7 is tested by 11 Dec — Croix, 22 Oct), 7 (the three review days follow), 13 (Thread C follows its exam, after spring break — ruling 48); Q4's buffer is the PM3 review block
         P2.append((r[0],"flex","Flex day — reteach from exam evidence, or absorb a lost day","","F"))
 PLAN=P2
 
@@ -197,6 +201,12 @@ SPIRAL=("Spiral day — mixed retrieval from the unit just finished and the two 
 pm3=d.date(2027,5,3)
 cats=["NSO and probability","algebraic reasoning (expressions, equations, systems)","linear relationships, functions, data","geometric reasoning"]
 PM3_WINDOW="May 3–28: PM3 window (school date TBD). Content finishes Apr 30, so the whole window is free: PM3 review before the test — mixed FAST-shaped whiteboard rounds, one reporting category per question — and the Algebra 1 bridge after it (operations with radicals, point-slope and standard form, systems by substitution)"
+# Ruling 48 (Croix, 22 October 2026): "Never test after a long break. A 3 day is fine. A week to 10 days plus is not."
+# A unit — from its first lesson to its exam — sits on one side of a long break. Here that is held by straddles(),
+# below, which refuses a plan that breaks it; the threads after the Unit 6 and Unit 13 exams are what make this year
+# keep it. Not by the engine's `need` (M7's way): A7's flex days are measured against the plan with nothing lost, and
+# `need` moves that plan — tried on 22 October, the flex days stopped absorbing and content ran to 14 May.
+LONG_BREAKS=[d.date(2026,11,23),d.date(2026,12,21),d.date(2027,3,22)]
 def _item(r):
     u,code,title,bm,kind=r
     it={"kind":kind,"code":code,"title":title,"unit":u,"bm":bm}
@@ -217,6 +227,23 @@ LAID=flow.lay(FLOW)
 if LAID["left"]:
     raise SystemExit("A7 plan: the year does not hold the sequence — no day is left for "
                      +", ".join(FLOW["items"][k]["code"] for k in LAID["left"])+". Cut or merge something in PLAN, or free a day in the log.")
+def straddles():
+    """Ruling 48: what is taught before a long break and tested after it — [(first item, its date, exam day 1, break)]."""
+    at={r["entry"]["code"]:d.date.fromisoformat(r["date"]) for r in LAID["rows"] if r["src"]=="item"}
+    out=[]; first=None
+    for r in PLAN:
+        if r[4] in ("L","T") and first is None: first=r[1]
+        if r[4]=="X" and r[1].endswith("X1") and first is not None:
+            a,t=at.get(first),at.get(r[1])
+            b=[x for x in LONG_BREAKS if a and t and a<x<t]
+            if b: out.append((first,a,t,b[0]))
+            first=None
+    return out
+_bad=straddles()
+if _bad:
+    raise SystemExit("A7 plan: ruling 48 — never test after a long break — is broken: "+"; ".join(
+        f"{c} begins {a:%a %d %b} and its exam is {t:%a %d %b}, after the break of {b:%d %b}" for c,a,t,b in _bad)
+        +". Something has to give (a merge, a thread moved): Croix's decision.")
 BLOCKED_KIND={flow.EXTRA:"E",flow.OFF:"O"}      # an extra review / catch-up day; no class at all
 rows=[]; n=0
 for r in LAID["rows"]:

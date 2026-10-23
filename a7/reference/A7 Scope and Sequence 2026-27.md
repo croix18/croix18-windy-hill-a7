@@ -37,12 +37,12 @@
 | Nov 12 | Thu | 6 | 6.04 | Pythagorean Theorem in real-world problems | 8.GR.1.1 | Pythagorean theorem: word problems — 87U | Nov 13 |
 | Nov 13 | Fri | 6 | 6.05 | Distance on the coordinate plane | 8.GR.1.2 | Find the distance between two points on a horizontal or vertical line — L9V; Find the distance between two points — ZBP | Nov 16 |
 | Nov 16 | Mon | 6 | 6.06 | Real-world coordinate-plane problems; perimeter | 8.GR.1.2 | Pythagorean theorem: find the perimeter — VGE | Nov 17 |
-| Nov 17 | Tue | 6 | T-B1 | **thread** Thread B: angle pairs — supplementary, complementary, vertical, adjacent (16.1) | 8.GR.1.4 | Identify complementary, supplementary, vertical, adjacent, and congruent angles — HGV; Find measures of complementary, supplementary, vertical, and adjacent angles — R2B; Write and solve equations using angle relationships — DBV | Nov 18 |
-| Nov 18 | Wed (43 min) | 6 | T-B2 | **thread** Thread B: interior and exterior angles of a triangle (16.2) | 8.GR.1.5 | Find missing angles in triangles — JFJ; Exterior Angle Theorem — FMP; Triangle Angle-Sum Theorem — 6Q6 | Nov 19 |
-| Nov 19 | Thu | 6 | 6.07+08 | Similar triangles; indirect measurement | 8.GR.2.4 | Side lengths of similar triangles — QSK; Similar triangles and indirect measurement — 88W; Identify similar triangles — 6PD | Nov 20 |
-| Nov 20 | Fri | 6 | spiral | *spiral* Spiral day — mixed retrieval from the unit just finished and the two before it |  |  |  |
-| Nov 30 | Mon | 6 | 6.X1 | **exam** Unit 6 exam, day 1 |  |  |  |
-| Dec 01 | Tue | 6 | 6.X2 | **exam** Unit 6 exam, day 2 |  |  |  |
+| Nov 17 | Tue | 6 | 6.07+08 | Similar triangles; indirect measurement | 8.GR.2.4 | Side lengths of similar triangles — QSK; Similar triangles and indirect measurement — 88W; Identify similar triangles — 6PD | Nov 18 |
+| Nov 18 | Wed (43 min) | 6 | spiral | *spiral* Spiral day — mixed retrieval from the unit just finished and the two before it |  |  |  |
+| Nov 19 | Thu | 6 | 6.X1 | **exam** Unit 6 exam, day 1 |  |  |  |
+| Nov 20 | Fri | 6 | 6.X2 | **exam** Unit 6 exam, day 2 |  |  |  |
+| Nov 30 | Mon | 6 | T-B1 | **thread** Thread B: angle pairs — supplementary, complementary, vertical, adjacent (16.1) | 8.GR.1.4 | Identify complementary, supplementary, vertical, adjacent, and congruent angles — HGV; Find measures of complementary, supplementary, vertical, and adjacent angles — R2B; Write and solve equations using angle relationships — DBV | Dec 01 |
+| Dec 01 | Tue | 6 | T-B2 | **thread** Thread B: interior and exterior angles of a triangle (16.2) | 8.GR.1.5 | Find missing angles in triangles — JFJ; Exterior Angle Theorem — FMP; Triangle Angle-Sum Theorem — 6Q6 | Dec 02 |
 | Dec 02 | Wed (43 min) | 7 | 7.01 | Graphing proportional relationships | 7.AR.4.3 | Graph a proportional relationship: word problems — FJW | Dec 03 |
 | Dec 03 | Thu | 7 | 7.02+03 | Constant of proportionality (table, graph, description) | 7.AR.4.2 | Interpret graphs of proportional relationships — RMH; Find the constant of proportionality from a table — LKZ; Find the constant of proportionality from a graph — ZUT | Dec 04 |
 | Dec 04 | Fri | 7 | 7.04 | Is it proportional? | 7.AR.4.1 · 8.AR.3.1 | Identify proportional relationships by graphing — AAN; Identify proportional relationships in tables and graphs — VZK | Dec 07 |
@@ -104,10 +104,10 @@
 | Mar 15 | Mon | 13 | 13.06 | Scatter plots and association | 8.DP.1.1 · 8.DP.1.2 | Create scatter plots — AVL; Describe scatter plots — CG8; Describe associations between two variables using scatter plots — 9ER | Mar 16 |
 | Mar 16 | Tue | 13 | 13.07+08 | Lines of fit; outliers | 8.DP.1.3 · 8.DP.1.2 | Outliers in scatter plots — RP8; Identify lines of best fit — BG7; Make predictions with scatter plots — CM7 | Mar 17 |
 | Mar 17 | Wed (43 min) | 13 | 13.09 | Interpreting the equation of a line of fit | 8.DP.1.3 · 8.AR.3.5 | Interpret lines of best fit: word problems — 9DW; Write equations for lines of best fit — ZQ6 | Mar 18 |
-| Mar 18 | Thu | 13 | T-C1 | **thread** Thread C: sample spaces of repeated experiments (17.1) | 8.DP.2.1 | Compound events: find the number of outcomes — P5R; Samples spaces for repeated events — AGW | Mar 19 |
-| Mar 19 | Fri | 13 | T-C2 | **thread** Thread C: theoretical probability of repeated experiments (17.2–17.3) | 8.DP.2.2 | Probability of repeated experiments — BDZ; Probability of simple events — 5ZY; Experimental probability — FRL | Mar 29 |
-| Mar 29 | Mon | 13 | 13.X1 | **exam** Unit 13 exam, day 1 |  |  |  |
-| Mar 30 | Tue | 13 | 13.X2 | **exam** Unit 13 exam, day 2 |  |  |  |
+| Mar 18 | Thu | 13 | 13.X1 | **exam** Unit 13 exam, day 1 |  |  |  |
+| Mar 19 | Fri | 13 | 13.X2 | **exam** Unit 13 exam, day 2 |  |  |  |
+| Mar 29 | Mon | 13 | T-C1 | **thread** Thread C: sample spaces of repeated experiments (17.1) | 8.DP.2.1 | Compound events: find the number of outcomes — P5R; Samples spaces for repeated events — AGW | Mar 30 |
+| Mar 30 | Tue | 13 | T-C2 | **thread** Thread C: theoretical probability of repeated experiments (17.2–17.3) | 8.DP.2.2 | Probability of repeated experiments — BDZ; Probability of simple events — 5ZY; Experimental probability — FRL | Mar 31 |
 | Mar 31 | Wed (43 min) | 14 | 14.01–04 | Exponent laws with variable bases — consolidation of Thread A | 8.AR.1.1 | Multiply powers: variable bases — TR9; Powers of a power: variable bases — 2CU; Divide monomials with positive exponents — C8L; Variables with negative exponents — 2NL; Multiply and divide powers: variable bases — 85P | Apr 01 |
 | Apr 01 | Thu | 14 | 14.05+06 | Multiplying a monomial by a linear expression | 8.AR.1.2 | Multiply using the distributive property: area models — 8P3; Multiply linear expressions with rational coefficients — 9B9 | Apr 02 |
 | Apr 02 | Fri | 14 | 14.07+08 | Factoring a common monomial | 8.AR.1.3 | Common monomial factors — K8S; Factor out a monomial — BFZ | Apr 05 |

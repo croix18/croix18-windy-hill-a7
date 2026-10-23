@@ -35,9 +35,9 @@ The three-character code after each skill is what you type into IXL's search box
 | Thu Nov 12 | 6.04 Pythagorean Theorem in real-world problems | Pythagorean theorem: word problems (87U) | Fri Nov 13 |
 | Fri Nov 13 | 6.05 Distance on the coordinate plane | Find the distance between two points on a horizontal or vertical line (L9V); Find the distance between two points (ZBP) | Mon Nov 16 |
 | Mon Nov 16 | 6.06 Real-world coordinate-plane problems; perimeter | Pythagorean theorem: find the perimeter (VGE) | Tue Nov 17 |
-| Tue Nov 17 | T-B1 Thread B: angle pairs — supplementary, complementary, vertical, adjacent (16.1) | Identify complementary, supplementary, vertical, adjacent, and congruent angles (HGV); Find measures of complementary, supplementary, vertical, and adjacent angles (R2B); Write and solve equations using angle relationships (DBV) | Wed Nov 18 |
-| Wed Nov 18 | T-B2 Thread B: interior and exterior angles of a triangle (16.2) | Find missing angles in triangles (JFJ); Exterior Angle Theorem (FMP); Triangle Angle-Sum Theorem (6Q6) | Thu Nov 19 |
-| Thu Nov 19 | 6.07+08 Similar triangles; indirect measurement | Side lengths of similar triangles (QSK); Similar triangles and indirect measurement (88W); Identify similar triangles (6PD) | Fri Nov 20 |
+| Tue Nov 17 | 6.07+08 Similar triangles; indirect measurement | Side lengths of similar triangles (QSK); Similar triangles and indirect measurement (88W); Identify similar triangles (6PD) | Wed Nov 18 |
+| Mon Nov 30 | T-B1 Thread B: angle pairs — supplementary, complementary, vertical, adjacent (16.1) | Identify complementary, supplementary, vertical, adjacent, and congruent angles (HGV); Find measures of complementary, supplementary, vertical, and adjacent angles (R2B); Write and solve equations using angle relationships (DBV) | Tue Dec 01 |
+| Tue Dec 01 | T-B2 Thread B: interior and exterior angles of a triangle (16.2) | Find missing angles in triangles (JFJ); Exterior Angle Theorem (FMP); Triangle Angle-Sum Theorem (6Q6) | Wed Dec 02 |
 | Wed Dec 02 | 7.01 Graphing proportional relationships | Graph a proportional relationship: word problems (FJW) | Thu Dec 03 |
 | Thu Dec 03 | 7.02+03 Constant of proportionality (table, graph, description) | Interpret graphs of proportional relationships (RMH); Find the constant of proportionality from a table (LKZ); Find the constant of proportionality from a graph (ZUT) | Fri Dec 04 |
 | Fri Dec 04 | 7.04 Is it proportional? | Identify proportional relationships by graphing (AAN); Identify proportional relationships in tables and graphs (VZK) | Mon Dec 07 |
@@ -75,8 +75,8 @@ The three-character code after each skill is what you type into IXL's search box
 | Mon Mar 15 | 13.06 Scatter plots and association | Create scatter plots (AVL); Describe scatter plots (CG8); Describe associations between two variables using scatter plots (9ER) | Tue Mar 16 |
 | Tue Mar 16 | 13.07+08 Lines of fit; outliers | Outliers in scatter plots (RP8); Identify lines of best fit (BG7); Make predictions with scatter plots (CM7) | Wed Mar 17 |
 | Wed Mar 17 | 13.09 Interpreting the equation of a line of fit | Interpret lines of best fit: word problems (9DW); Write equations for lines of best fit (ZQ6) | Thu Mar 18 |
-| Thu Mar 18 | T-C1 Thread C: sample spaces of repeated experiments (17.1) | Compound events: find the number of outcomes (P5R); Samples spaces for repeated events (AGW) | Fri Mar 19 |
-| Fri Mar 19 | T-C2 Thread C: theoretical probability of repeated experiments (17.2–17.3) | Probability of repeated experiments (BDZ); Probability of simple events (5ZY); Experimental probability (FRL) | Mon Mar 29 |
+| Mon Mar 29 | T-C1 Thread C: sample spaces of repeated experiments (17.1) | Compound events: find the number of outcomes (P5R); Samples spaces for repeated events (AGW) | Tue Mar 30 |
+| Tue Mar 30 | T-C2 Thread C: theoretical probability of repeated experiments (17.2–17.3) | Probability of repeated experiments (BDZ); Probability of simple events (5ZY); Experimental probability (FRL) | Wed Mar 31 |
 | Wed Mar 31 | 14.01–04 Exponent laws with variable bases — consolidation of Thread A | Multiply powers: variable bases (TR9); Powers of a power: variable bases (2CU); Divide monomials with positive exponents (C8L); Variables with negative exponents (2NL); Multiply and divide powers: variable bases (85P) | Thu Apr 01 |
 | Thu Apr 01 | 14.05+06 Multiplying a monomial by a linear expression | Multiply using the distributive property: area models (8P3); Multiply linear expressions with rational coefficients (9B9) | Fri Apr 02 |
 | Fri Apr 02 | 14.07+08 Factoring a common monomial | Common monomial factors (K8S); Factor out a monomial (BFZ) | Mon Apr 05 |
