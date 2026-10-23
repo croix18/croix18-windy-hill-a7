@@ -3576,4 +3576,12 @@ practice tests. And the test will just pick a random set. There's like 100000 pl
   has 5; M7 Unit 4's 4.1 and 4.2 have 7 and its median question 36; A7 Unit 4's 3.2b has 18 and 3.1b 19 (its median 4,536).
   A student who practises a dozen sets has seen those exact questions with their answers. So a practice test built under
   this ruling gives every question part hundreds of versions, and the kit gets a check that counts them (a part under the
-  floor fails the build) — not built yet; the thin questions of the units above get widened when they are next touched.
+  floor fails the build).
+- **Built the same evening.** Croix: *"Is there a way I can add in that variation factor? I really love the current method …
+  Get the exact copy of the test and slam the problems til it becomes easy."* The kit's variety check (`check/variety.js`,
+  run with every unit's checks) counts each part's versions over set numbers 1–20000. A version is what the student works
+  with: the numbers and symbols the page shows, with words, letters and the order of the choices left out, so a new name or
+  object is not a new version. A part with fewer than 100 fails the build, unless `unit.json` allows it with its reason —
+  only for a shape whose natural space is small (the value of a power a student works out by hand; a Pythagorean triple to
+  25). A7 Units 3–4 and M7 Unit 4 were widened that night: the same questions, more numbers. A new unit is widened inside
+  its benchmarks' limits until the check passes.
