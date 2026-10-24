@@ -101,7 +101,8 @@ def start_here(placed):
     # a unit test may ship as parallel forms (ruling 33; A7 from Unit 4, Croix 19 October) — the layout is
     # the kit's (Assessment/Form A, Form B); A7 has no paper practice form, its practice test is the web page
     forms = [f for f in ("Form A", "Form B") if any(s == os.path.join("Assessment", f) for s, _ in placed)]
-    test = "Test Form A" if forms else "Test"
+    random_test = not forms and any(s == os.path.join("Assessment", "Practice Test") for s, _ in placed)   # ruling 49
+    test = "Test Form A" if forms else ("Practice Test" if random_test else "Test")
     example = SPECS[min(3, len(SPECS) - 1)]
     lines = []
     A = lines.append
@@ -153,6 +154,10 @@ def start_here(placed):
         A(f"| **Assessment** | {' and '.join(forms)} — each one paper over {periods}, with its key (scoring lines, the Score Tracker, "
           "transfer items named) and its Worked Answers copy, the page that goes back to the class with nothing but the "
           "answers on it (ruling 32). The forms are parallel and share no answer (ruling 33). |")
+    elif random_test:
+        A(f"| **Assessment** | The Practice Test paper and its key (scoring lines, the Score Tracker) — the blueprint of the unit test. "
+          f"**The unit test itself is a random set of the practice page** (ruling 49), {periods}: print it from the page's teacher copy "
+          "(Teacher copy bar → Print the test, 1–5 forms, each a different set with its key). No Form A/B, no transfer items, no worked-answers copy. |")
     else:
         A(f"| **Assessment** | The unit test (one paper, {periods}) and its key. |")
     A("| **Handouts** | The Reference Sheet. Students study from it; it may NOT be used on the assessment (ruling 13). There is no study guide (ruling 11). |")
@@ -206,7 +211,9 @@ def start_here(placed):
     A("- **Old-school textbook styling.** No commentary panels, no grey bars, no clip art. American spellings.")
     A("- **One point per lettered part, no partial credit**, with follow-through credit (ruling 19): a later part earns its point when the right operation is applied to the student's own earlier value, where that work is on the page. The key carries a `Scoring:` line under every question and a per-benchmark Score Tracker at the end.")
     A(("- **The assessment is one paper, one class period** (ruling 51, 24 October 2026 — every A7 unit test is one period; the practice test's random draw is sized for it, ruling 49). " if len(exam_days) == 1 else
-       "- **The assessment is one paper over two class periods** (ruling 27). Students stop when the period ends and continue from where they stopped; there is no Day 1 / Day 2 paper and no such heading. ") + "Two questions are **transfer items** (ruling 18) — same benchmark, a surface that appears on no review and in no question bank — and the key names them.")
+       "- **The assessment is one paper over two class periods** (ruling 27). Students stop when the period ends and continue from where they stopped; there is no Day 1 / Day 2 paper and no such heading. ")
+      + ("No transfer items: a random set can only ask what the practice asks (ruling 49)." if random_test else
+         "Two questions are **transfer items** (ruling 18) — same benchmark, a surface that appears on no review and in no question bank — and the key names them."))
     A("- **No benchmark codes on student pages.** The deck title slide and the keys and Teacher Editions carry them.")
     A("- **Opens cleanly in Google Docs.** Every document is a fixed-width table layout with no nested tables and a spacer after every block; fonts are Times New Roman / Georgia / Arial with FreeSerif for the bubbles only.")
     A("- **Every answer is re-derived by machine at build time.** Every item carries a `check` that sympy evaluates (variable bases as symbols); every multiple-choice distractor must name its error; every scientific-notation coefficient is scanned for the [1, 10) rule; the build refuses on any finding. The post-build suite (`checks.py`) then reads the rendered PDFs for off-page text, glyph coverage, Google-Docs layout rules and the timing plan.")

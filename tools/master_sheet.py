@@ -69,7 +69,9 @@ START = SC.start                           # 23 Sep 2026
 def unit_sections(U):
     """The assessment's sections: the single paper's, or Form A's when the unit ships parallel forms."""
     A = U["assessment"]
-    return A["forms"]["A"] if "forms" in A else A["sections"]
+    if "forms" in A:
+        return A["forms"].get("A") or A["forms"]["practice"]      # ruling 49: a unit with the practice test alone — it is the blueprint
+    return A["sections"]
 
 
 def date_of(s):
@@ -375,6 +377,10 @@ def unit_doc(unit, sub, tail, ext="pdf"):
         fa = _one(os.path.join(glob.escape(folder), sub, "Form A", f"A7 Unit {unit} * - {tail.replace('Test', 'Test Form A', 1)}.{ext}"))
         if fa:
             return fa
+        # ruling 49 (22 Oct 2026): a unit with the practice test alone — the paper and key the sheet links are the practice test's
+        pr = _one(os.path.join(glob.escape(folder), sub, "Practice Test", f"A7 Unit {unit} * - {tail.replace('Test', 'Practice Test', 1)}.{ext}"))
+        if pr:
+            return pr
     return _one(os.path.join(glob.escape(folder), sub, f"A7 Unit {unit} * - {tail}.{ext}"))
 
 
@@ -680,7 +686,9 @@ def build(out):
         # the map is Form A's, and every form is parallel to it position for position (ruling 33)
         secs = unit_sections(U)
         put(wt, r, 1, f"Unit {u} test — question map", font=SUB, border=None); r += 1
-        put(wt, r, 1, ("Form A, Form B and a practice test, parallel position for position; one point per lettered part. Transfer items are not on the practice test."
+        put(wt, r, 1, ("The practice test — the unit test is a random set of the practice page (ruling 49), these questions in this order with new numbers; one point per lettered part."
+                       if unitbuild.practice_only(U["assessment"]) else
+                       "Form A, Form B and a practice test, parallel position for position; one point per lettered part. Transfer items are not on the practice test."
                        if "forms" in U["assessment"] else
                        "One paper over two periods; one point per lettered part. Transfer items are not on the practice test."), font=DIM, border=None)
         r += 1

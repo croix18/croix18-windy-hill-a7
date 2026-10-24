@@ -298,6 +298,9 @@ for i, (cells, c) in enumerate(zip(rows, cal), 2):
             if exam and any(t.startswith(pkg_u) and "/Assessment/Form A/" in t for t in PKG_FILES):
                 w1, w2 = " - Test Form A.pdf", " - Test Form A - Key.pdf"       # parallel forms: the links are Form A's
                 sub = "Assessment/Form A"
+            elif exam and any(t.startswith(pkg_u) and "/Assessment/Practice Test/" in t for t in PKG_FILES):
+                w1, w2 = " - Practice Test.pdf", " - Practice Test - Key.pdf"   # ruling 49: the practice test alone; the test is a random set of the page
+                sub = "Assessment/Practice Test"
             if not (t1 and t1.endswith(w1) and t1.startswith(f"a7/packages/A7 Unit {u} - ") and f"/{sub}/A7 Unit {u} " in t1) or not (t2 and t2.endswith(w2) and f"/{sub}/A7 Unit {u} " in t2): bad(f"r{i} {code} paper/key links")
     lesson_like = not exam and code not in ("spiral", "flex", "extra", "off") and not code.startswith("PM")
     if day_built and lesson_like:
@@ -451,7 +454,7 @@ for u, U in sorted(units.items()):
         if not isinstance(r[0].value, int): break
         items.append(r)
     n = 0; exp = []
-    secs = U["assessment"]["forms"]["A"] if "forms" in U["assessment"] else U["assessment"]["sections"]   # Form A's map when the unit ships parallel forms
+    secs = (U["assessment"]["forms"].get("A") or U["assessment"]["forms"]["practice"]) if "forms" in U["assessment"] else U["assessment"]["sections"]   # Form A's map; the practice test's for a ruling-49 unit
     for sec in secs:
         for it in sec["items"]:
             if it.get("heading"): continue
