@@ -14,8 +14,12 @@ the clock, saved progress, Print, the keypad and the checks that run in a real b
 
 - One page, **29 points**, three parts in the order and weights of the Unit 4 test (12 / 4 / 13), the same questions in the
   same positions, new numbers every set (`#set-4821` opens set 4821).
-- **No question is one from the test** — Form A, Form B, or either written backwards. Every question carries its test
-  numbers in `TEST` (engine.js) and a set that hits one draws again.
+- **The test's numbers are not on the page** (24 Oct 2026; until then the page carried Form A's and Form B's numbers, labelled,
+  as its exclusion list — readable by any student in the page source, as a ChatGPT review of the page pointed out). They live in
+  `test_forms.js`, which only the checks load; the kit refuses to build a page that holds them. So the page excludes nothing, and
+  a practice part can print a test part's numbers: 0.7 % of parts do (240 of 34,800 compared; a third of sets hold one such part
+  of their 29 — Part 3's small number spaces). `verify.py` counts them and fails above 2 % of parts. Ruling 49 makes the test a
+  random set of this page from now on, so for later units the question does not arise.
 - **The two transfer items are replaced** (Croix, 16 Oct: "Same-skill stand-ins"): Q6 is the review's rate-times-time word
   problem, Q15 is evaluating a·x² at a negative x.
 

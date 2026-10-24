@@ -333,7 +333,7 @@ def per_part(stem_nums, parts_nums):
     return [stem_nums + pn for pn in (parts_nums or [[]])]
 COMMUTE = {(1, 0), (1, 2), (1, 3), (2, 0), (2, 2), (3, 0), (5, 0), (6, 0), (7, 0), (8, 0), (14, 0)}
 tests = {f: [per_part(seq(it["stem"], TEXNUM), [seq(p["stem"], TEXNUM) for p in it.get("parts", [])]) for it in flat(U["assessment"]["forms"][f])] for f in ("A", "B")}
-n_cmp = 0
+n_cmp = 0; hits = []
 for G in DUMP["sets"]:
     for it in G["items"]:
         try:
@@ -346,10 +346,16 @@ for G in DUMP["sets"]:
                     n_cmp += 1
                     a_, b_ = [abs(x) for x in m], [abs(x) for x in theirs[j]]
                     if a_ == b_ or ((it["q"], j) in COMMUTE and sorted(a_) == sorted(b_)):
-                        no(f"{G['seed']} Q{it['q']}", f"part {j + 1} prints the numbers of Form {f}'s question {it['q']}")
+                        hits.append(f"{G['seed']} Q{it['q']} part {j + 1} = Form {f}")   # the page excludes nothing (24 Oct 2026): counted, and capped below
         except Exception as e:
             no(f"{G['seed']} Q{it['q']}", f"could not read its numbers: {e!r}")
 
+# a part whose printed numbers are a test part's: rare by the variety floor (ruling 49), never zero now that the page carries
+# no exclusion list (P0, 24 Oct 2026). The cap is per part compared, as the floor is: above 2 % a part's numbers are too few.
+# (24 Oct, this unit: 240 of 34,800 parts, 0.7 %; a third of sets hold one such part of their 29 — Part 3's small spaces.)
+hit_sets = {h.split(" ")[0] for h in hits}
+if n_cmp and len(hits) > 0.02 * n_cmp: no("test questions", f"{len(hits)} of {n_cmp} parts compared print a test part's numbers: " + "; ".join(hits[:8]))
+print(f"{len(hits)} of {n_cmp} parts compared print a test part's numbers ({len(hit_sets)} of {len(DUMP['sets'])} sets hold one)")
 print(f"{len(DUMP['sets'])} sets: {n_parts} typed parts re-derived, {n_lines} worked lines and {n_steps} Hint steps read back, "
       f"{n_mc} choice questions re-marked; {n_test} test questions found in the exclusion list, {n_cmp} parts compared with the test: "
       + ("ALL SOUND" if not bad else f"{len(bad)} PROBLEMS"))

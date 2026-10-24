@@ -10,7 +10,7 @@ const UNITSHORT = { rwArea: 'mm²', rwSpeed: 'km/h', rwSum: 'mm', rwDiff: 'g', p
 
 const Unit = {
   id: 'a7u4',
-  contentVersion: 4,                 /* bump whenever any set's questions change (the lock check says so). 2: Form B of the test excluded (19 Oct 2026).
+  contentVersion: 5,                 /* bump whenever any set's questions change (the lock check says so). 5: the page carries no exclusion list, so the sets that drew again are different (24 Oct 2026). 2: Form B of the test excluded (19 Oct 2026).
                                         3: no significant digits — Part 2 is the four real-world problems, answered exactly (21 Oct 2026).
                                         4: Part 3's thin questions widened, ruling 49 (22 Oct 2026): 3.1b, 3.1d, 3.2a (also √(x² − y)), 3.2b (either sign, plus or minus), 3.2c, and 3.7 (to 12 × 12²) */
   legacy: [],

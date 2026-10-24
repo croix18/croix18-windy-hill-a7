@@ -6,7 +6,7 @@ import os, shutil, subprocess, sys, tempfile
 HERE = os.path.dirname(os.path.abspath(__file__))
 PRACTICE = os.path.dirname(HERE)
 A7 = os.path.dirname(PRACTICE)
-FILES = ["engine.js", "coach.js", "unit.js", "u4_check.js", "verify.py"]
+FILES = ["engine.js", "coach.js", "unit.js", "u4_check.js", "verify.py", "test_forms.js"]
 PLANTS = [
     ("the area's key ten times too big", "engine.js",
      "qmul(sciQ(L, 2), sciQ(W, 2)), { unitWord: 'square millimeters'", "qmul(sciQ(L, 2), sciQ(W, 3)), { unitWord: 'square millimeters'"),
@@ -19,7 +19,7 @@ PLANTS = [
     ("a Hint step of the sum and difference expects the wrong number", "coach.js",
      "num('What is ' + S(A) + sg + S(b) + '?', C,", "num('What is ' + S(A) + sg + S(b) + '?', qadd(C, Q(1, 10)),"),
     ("the key a student types is off by a power", "unit.js", "' x 10^' + p.want.k", "' x 10^' + (p.want.k + 1)"),
-    ("Form B's speed question dropped from the exclusion list", "engine.js",
+    ("Form B's speed question dropped from the exclusion list", "test_forms.js",
      "rwSpeed: [['5.6', 8], ['7.2', 8], ['4.8', 6]]", "rwSpeed: [['5.6', 8], ['4.8', 6]]"),
     ("the clean rule no longer looks at the mistakes", "coach.js",
      "for (const m of F[p.fam].models(p)) { if (m.v && qeq(m.v, p.ans)) return false; }", ""),
@@ -30,7 +30,7 @@ PLANTS = [
     ("a Hint choice with two right options", "coach.js", "O('time ÷ distance', false,", "O('time ÷ distance', true,"),
     ("Part 2 titled for significant digits again", "engine.js",
      "'Real-World Problems in Scientific Notation'", "'Real-World Problems and Significant Digits'"),
-    ("Devon's sum back to a gap of 3 in the exclusion list", "engine.js", "['3.4', 4, '5.2', 6]", "['3.4', 3, '5.2', 6]"),
+    ("Devon's sum back to a gap of 3 in the exclusion list", "test_forms.js", "['3.4', 4, '5.2', 6]", "['3.4', 3, '5.2', 6]"),
 ]
 
 def copy():

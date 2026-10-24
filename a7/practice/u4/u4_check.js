@@ -6,10 +6,11 @@
    each wrong one; no Hint gives its own answer away; multiple choice and select-all mark their keys; the clean rule holds; no
    question is the test's. dump.json goes to verify.py, which re-derives everything from the printed text with sympy. */
 'use strict';
+require('./test_forms.js');   /* the test's numbers, for the engine's exclusion flag — check-time only */
 const E = require('./engine.js'), C = require('./coach.js'), U = require('./unit.js'), W = C.Walk;
 const fs = require('fs'), path = require('path');
 const NSETS = +(process.argv[2] || 3000), NDUMP = Math.min(NSETS, +(process.argv[3] || 1500));
-let nfail = 0; const fails = [];
+let nfail = 0; const fails = []; let nTest = 0; const testSets = new Set();
 const fail = (seed, where, what) => { nfail++; if (fails.length < 60) fails.push(seed + ' ' + where + ': ' + what); };
 const { Q, qeq, qneg, qmul, qdiv, qlt, qabs, sciOf, decPlain, places, p10 } = E;
 const sciType = q => { const s = sciOf(q); return s.c + ' x 10^' + s.k; };
@@ -59,7 +60,7 @@ for (let seed = 1; seed <= NSETS; seed++) {
   let qn = 0;
   G.sections.forEach((sec, si) => sec.items.forEach(it => {
     qn++; const w = 'Q' + qn;
-    if (it.onTest) fail(seed, w, 'a question from the test');
+    if (it.onTest) { nTest++; if (!testSets.has(seed)) testSets.add(seed); }   /* reported below, not failed: the page has no exclusion list */
     if (!C.clean(it)) fail(seed, w, 'breaks the clean rule');
     const di = D ? { q: qn, type: it.type, fam: it.fam || null, stem: it.stem, parts: [] } : null;
     if (it.type === 'mc' || it.type === 'multi') {
@@ -144,5 +145,6 @@ fs.writeFileSync(path.join(__dirname, 'dump.json'), JSON.stringify({ TEST: E.TES
 console.log(counts.sets + ' sets: ' + counts.parts + ' typed parts, ' + counts.models + ' mistakes typed, ' + counts.forms + ' unfinished forms, ' + counts.rounded + ' keys rounded, ' +
   counts.solLines + ' worked lines, ' + counts.walkSteps + ' Hint steps, ' + counts.mc + ' multiple choice, ' + counts.multi + ' select-all; ' +
   NDUMP + ' sets written to dump.json');
+console.log(testSets.size + ' of ' + NSETS + ' sets hold a question the exclusion flag marks (' + nTest + ' questions; the flag is broad — verify.py counts exact numbers); the page excludes none (24 Oct 2026)');
 if (nfail) { console.log(nfail + ' PROBLEMS'); fails.forEach(f => console.log('  ' + f)); process.exit(1); }
 console.log('u4_check: ALL SOUND');
