@@ -11,7 +11,7 @@ THREAD_SKILLS={"T-A1":["14.1","14.2"],"T-A2":["14.3","14.4"],"T-B1":["16.1"],"T-
 def lessons_for(code):
     if code in THREAD_SKILLS: return THREAD_SKILLS[code]
     m=re.match(r'^(\d+)\.(\d+)(?:[+–-](.*))?',code)
-    if not m or code.endswith(("X1","X2","X")) : return []
+    if not m or code.endswith(".X") : return []
     u=m.group(1); first=int(m.group(2)); rest=m.group(3)
     nums=[first]
     if rest:
@@ -56,32 +56,28 @@ PLAN=[
  (3,"T-A2","Thread A: negative exponents and multiple laws, variable bases (14.3–14.4)","8.AR.1.1","T"),
  (3,"3.08","Large numbers in scientific notation","8.NSO.1.4","L"),
  (3,"3.09","Small numbers in scientific notation; how many times larger","8.NSO.1.4","L"),
- (3,"3.X1","Unit 3 exam, day 1","","X"),
- (3,"3.X2","Unit 3 exam, day 2","","X"),
+ (3,"3.X","Unit 3 exam","","X"),
  (4,"4.01","Add and subtract in scientific notation","8.NSO.1.5","L"),
  (4,"4.02+03","Multiply and divide in scientific notation","8.NSO.1.5","L"),
  (4,"4.04","Real-world scientific notation; significant digits","8.NSO.1.6","L"),
  (4,"4.05","Expressions with radicals (perfect squares to 225, cubes −125 to 125)","8.NSO.1.7","L"),
  (4,"4.06","Order of operations with exponents and radicals","8.NSO.1.7","L"),
  (4,"4.07+08","Real-world order-of-operations problems","8.NSO.1.7","L"),
- (4,"4.X1","Unit 4 exam, day 1","","X"),
- (4,"4.X2","Unit 4 exam, day 2","","X"),
+ (4,"4.X","Unit 4 exam","","X"),
  (5,"5.01","Scale drawings","7.GR.1.5","L"),
  (5,"5.02+03","Scale factor: perimeter and area (k and k²)","7.GR.1.5","L"),
  (5,"5.04","Real-world scale drawings","7.GR.1.5","L"),
  (5,"5.06+07","Converting length across systems; currency","7.AR.3.3","L"),
  (5,"5.08+09","Converting mass, area and volume across systems","7.AR.3.3","L"),
  (5,"5.10+11","Multi-step proportion problems","7.AR.3.3 · 7.AR.4.5","L"),
- (5,"5.X1","Unit 5 exam, day 1","","X"),
- (5,"5.X2","Unit 5 exam, day 2","","X"),
+ (5,"5.X","Unit 5 exam","","X"),
  (6,"6.01+02","Triangle Inequality Theorem; converse of the Pythagorean Theorem","8.GR.1.3","L"),
  (6,"6.03","Pythagorean Theorem (memorize)","8.GR.1.1","L"),
  (6,"6.04","Pythagorean Theorem in real-world problems","8.GR.1.1","L"),
  (6,"6.05","Distance on the coordinate plane","8.GR.1.2","L"),
  (6,"6.06","Real-world coordinate-plane problems; perimeter","8.GR.1.2","L"),
  (6,"6.07+08","Similar triangles; indirect measurement","8.GR.2.4","L"),
- (6,"6.X1","Unit 6 exam, day 1","","X"),
- (6,"6.X2","Unit 6 exam, day 2","","X"),
+ (6,"6.X","Unit 6 exam","","X"),
  # Ruling 48 (Croix, 22 Oct: "Never test after a long break"): Thread B comes after the Unit 6 exam, so Unit 6 is taught
  # and tested before Thanksgiving; its two days open the week after the break, before Unit 7.
  (6,"T-B1","Thread B: angle pairs — supplementary, complementary, vertical, adjacent (16.1)","8.GR.1.4","T"),
@@ -91,8 +87,7 @@ PLAN=[
  (7,"7.04","Is it proportional?","7.AR.4.1 · 8.AR.3.1","L"),
  (7,"7.05+06","Equations of proportional relationships; translating representations","7.AR.4.4","L"),
  (7,"7.07","Comparing proportional relationships","7.AR.4.5","L"),
- (7,"7.X1","Unit 7 exam, day 1","","X"),
- (7,"7.X2","Unit 7 exam, day 2","","X"),
+ (7,"7.X","Unit 7 exam","","X"),
  # The three days planned as the PM2 review. PM2 is Tue 8 Dec (Croix, 22 Oct 2026: "Pm 2 is December 8"), so they come
  # after it now: the semester review, in the week before Q2 ends that has nothing graded (ruling 47 / §13b(xix)). Their
  # codes stay PM2-R…: the master sheet and its check know a review block by the PM prefix.
@@ -106,8 +101,7 @@ PLAN=[
  (8,"8.08+09","Sectors and circle graphs","7.GR.1.4 · 7.DP.1.4","L"),
  (9,"9.01+02","Surface area of cylinders from nets","7.GR.2.1 · 7.GR.2.2","L"),
  (9,"9.03+04+05","Volume of cylinders; problems","7.GR.2.3","L"),
- (9,"8/9.X1","Units 8–9 exam, day 1","","X"),
- (9,"8/9.X2","Units 8–9 exam, day 2","","X"),
+ (9,"8/9.X","Units 8–9 exam","","X"),
  (10,"10.01","Proportional relationships revisited (linear ⇒ proportional?)","8.AR.3.1","L"),
  (10,"10.02+03","Slope from two points, graphs, tables","8.AR.3.2","L"),
  (10,"10.04","Slope in context","8.AR.3.2 · 8.AR.3.5","L"),
@@ -116,8 +110,7 @@ PLAN=[
  (10,"10.07+08","Interpreting slope and intercept (graphs, equations, tables, descriptions; F↔C)","8.AR.3.5","L"),
  (10,"10.09","Writing equations of lines","8.AR.3.3","L"),
  (10,"10.10","Writing equations for contexts; lines of fit preview","8.AR.3.3 · 8.AR.3.5","L"),
- (10,"10.X1","Unit 10 exam, day 1","","X"),
- (10,"10.X2","Unit 10 exam, day 2","","X"),
+ (10,"10.X","Unit 10 exam","","X"),
  (11,"11.01","Equations with like terms and the distributive property","8.AR.2.1","L"),
  (11,"11.02","Variables on both sides","8.AR.2.1","L"),
  (11,"11.03","One, none, infinitely many solutions","8.AR.2.1","L"),
@@ -125,23 +118,20 @@ PLAN=[
  (11,"11.05+06","Systems: which points are solutions; how many solutions","8.AR.4.1 · 8.AR.4.2","L"),
  (11,"11.07","Solving systems by graphing","8.AR.4.3","L"),
  (11,"11.08","Systems in context (approximate solutions)","8.AR.4.3","L"),
- (11,"11.X1","Unit 11 exam, day 1","","X"),
- (11,"11.X2","Unit 11 exam, day 2","","X"),
+ (11,"11.X","Unit 11 exam","","X"),
  (12,"12.01+02","Relations; domain and range","8.F.1.1","L"),
  (12,"12.03","Is it a function?","8.F.1.1","L"),
  (12,"12.04+05","Describing graphs: increasing, decreasing, constant","8.F.1.3","L"),
  (12,"12.06","Sketching graphs from descriptions","8.F.1.3","L"),
  (12,"12.07","Functions from equations, tables, graphs","8.F.1.2","L"),
  (12,"12.08+09","Is it linear? (graphs, equations, tables)","8.F.1.2 · 8.AR.3.1","L"),
- (12,"12.X1","Unit 12 exam, day 1","","X"),
- (12,"12.X2","Unit 12 exam, day 2","","X"),
+ (12,"12.X","Unit 12 exam","","X"),
  (13,"13.01+02+03","Choosing and creating displays (numerical, categorical)","7.DP.1.5","L"),
  (13,"13.04+05","Bivariate data; line graphs","8.DP.1.1","L"),
  (13,"13.06","Scatter plots and association","8.DP.1.1 · 8.DP.1.2","L"),
  (13,"13.07+08","Lines of fit; outliers","8.DP.1.3 · 8.DP.1.2","L"),
  (13,"13.09","Interpreting the equation of a line of fit","8.DP.1.3 · 8.AR.3.5","L"),
- (13,"13.X1","Unit 13 exam, day 1","","X"),
- (13,"13.X2","Unit 13 exam, day 2","","X"),
+ (13,"13.X","Unit 13 exam","","X"),
  # Ruling 48: Thread C comes after the Unit 13 exam, so Unit 13 is taught and tested before spring break; its two
  # days open the week after the break, before Unit 14 (its consolidation is 17.01–03).
  (13,"T-C1","Thread C: sample spaces of repeated experiments (17.1)","8.DP.2.1","T"),
@@ -149,8 +139,7 @@ PLAN=[
  (14,"14.01–04","Exponent laws with variable bases — consolidation of Thread A","8.AR.1.1","L"),
  (14,"14.05+06","Multiplying a monomial by a linear expression","8.AR.1.2","L"),
  (14,"14.07+08","Factoring a common monomial","8.AR.1.3","L"),
- (14,"14.X1","Unit 14 exam, day 1","","X"),
- (14,"14.X2","Unit 14 exam, day 2","","X"),
+ (14,"14.X","Unit 14 exam","","X"),
  (15,"15.01","Slides, flips, spins","8.GR.2.1","L"),
  (15,"15.02+03","Reflections, rotations, translations — identify and describe","8.GR.2.1","L"),
  (15,"15.03b","Translations on the coordinate plane","8.GR.2.3","L"),
@@ -161,23 +150,22 @@ PLAN=[
  (15,"15.08","Dilations on the coordinate plane (centered at the origin)","8.GR.2.3","L"),
  (16,"16.01+02","Angle relationships — consolidation of Thread B","8.GR.1.4 · 8.GR.1.5","L"),
  (16,"16.03+04","Interior angles of polygons","8.GR.1.6","L"),
- (16,"15/16.X1","Units 15–16 exam, day 1","","X"),
- (16,"15/16.X2","Units 15–16 exam, day 2","","X"),
+ (16,"15/16.X","Units 15–16 exam","","X"),
  (17,"17.01–03","Repeated experiments — consolidation of Thread C","8.DP.2.1 · 8.DP.2.2","L"),
  (17,"17.04–06","Predictions from theoretical probability","8.DP.2.3","L"),
- (17,"17.X1","Unit 17 exam, day 1","","X"),
- (17,"17.X2","Unit 17 exam, day 2","","X"),
+ (17,"17.X","Unit 17 exam","","X"),
 ]
 # Ruling 27, as amended for A7 by Croix on 20 September: *"No review day, keep the reteach days.
 # M7 has less content and can absorb extra days."* So A7 gets NO per-unit review day before the
 # test — the Unit Review document goes home as practice instead — and the post-exam reteach day
-# stays. The two test days still obey the rest of ruling 27 (day 1 a Monday or a Thursday, day 2
-# the next school day, never straddling a weekend or a break); a spiral day absorbs any slack.
+# stays. Ruling 51 (Croix, 24 October 2026: *"Move to all 1 day tests"*): every A7 unit test is ONE
+# period (Units 3 and 4 had already been given that way, by the log). The test day is still a Monday
+# or a Thursday (ruling 27's test days); a spiral day absorbs any slack.
 P2=[]
 for r in PLAN:
     P2.append(r)
     # one flex day after every exam: reteach from exam evidence, or absorb a lost day
-    if r[4]=="X" and r[1].endswith("X2") and r[0] in (3,4,9,10,11,12):   # not after 5 (Grade 7 unit), 6 (PM2 on Tue 8 Dec takes that day, so Unit 7 is tested by 11 Dec — Croix, 22 Oct), 7 (the three review days follow), 13 (Thread C follows its exam, after spring break — ruling 48); Q4's buffer is the PM3 review block
+    if r[4]=="X" and r[0] in (3,4,9,10,11,12):   # not after 5 (Grade 7 unit), 6 (PM2 on Tue 8 Dec takes that day, so Unit 7 is tested by 11 Dec — Croix, 22 Oct), 7 (the three review days follow), 13 (Thread C follows its exam, after spring break — ruling 48); Q4's buffer is the PM3 review block
         P2.append((r[0],"flex","Flex day — reteach from exam evidence, or absorb a lost day","","F"))
 PLAN=P2
 
@@ -188,9 +176,8 @@ PLAN=P2
 # (a7/reference/A7 As Run 2026-27.csv) has taken out the days that went to something else.
 # His rule for a class that is behind: push everything back — flex and spiral days absorb the loss
 # first, then the tests move to the next Monday or Thursday.
-#   Ruling 27 (exam rule): day 1 is a Monday or a Thursday (so day 2 is never a Wednesday) and day 2
-#   is the very next calendar day, so the two halves never straddle a weekend or a break; a spiral
-#   day fills whatever has to pass first.
+#   Ruling 27 (exam rule), as ruling 51 leaves it: the test day is a Monday or a Thursday; a spiral
+#   day fills whatever has to pass first. (rules.exam.days = 1 — M7's tests are still two days.)
 import importlib.util as _ilu
 _sp=_ilu.spec_from_file_location("flow",os.path.join(HERE,"..","a7","build","lib","flow.py"))
 flow=_ilu.module_from_spec(_sp); _sp.loader.exec_module(flow)
@@ -204,20 +191,26 @@ PM3_WINDOW="May 3–28: PM3 window (school date TBD). Content finishes Apr 30, s
 # Ruling 48 (Croix, 22 October 2026): "Never test after a long break. A 3 day is fine. A week to 10 days plus is not."
 # A unit — from its first lesson to its exam — sits on one side of a long break. Here that is held by straddles(),
 # below, which refuses a plan that breaks it; the threads after the Unit 6 and Unit 13 exams are what make this year
-# keep it. Not by the engine's `need` (M7's way): A7's flex days are measured against the plan with nothing lost, and
-# `need` moves that plan — tried on 22 October, the flex days stopped absorbing and content ran to 14 May.
+# keep it. Since 24 October (ruling 51) three items also carry the engine's `need` (see _item): with one-day tests
+# the sequence came forward, and that is what keeps the threads and Unit 8 on the far side of their breaks.
 LONG_BREAKS=[d.date(2026,11,23),d.date(2026,12,21),d.date(2027,3,22)]
 def _item(r):
     u,code,title,bm,kind=r
     it={"kind":kind,"code":code,"title":title,"unit":u,"bm":bm}
-    if kind=="X" and code.endswith("X1"): it["examIn"]=0
+    if kind=="X": it["examIn"]=0
     if kind=="F": it["absorb"]=True
+    # Ruling 48 under ruling 51: with one-day tests the year gained a dozen days, and what the sequence had put after a
+    # long break came forward onto the last days before it. These hold: a thread's two days are not begun with fewer than
+    # two teaching days before a break, and Unit 8 (circles) is not begun with fewer than three. The engine's `breaks`
+    # are the long ones, for this alone (the flex days still measure against the plan with nothing lost).
+    if code in ("T-B1","T-C1"): it["need"]=2
+    if code=="8.01+02": it["need"]=3
     return it
-FLOW={"days":[x.isoformat() for x in days],"breaks":[],
-      "rules":{"exam":{"weekdays":[0,3],"minBeforeBreak":0},
+FLOW={"days":[x.isoformat() for x in days],"breaks":[b.isoformat() for b in LONG_BREAKS],
+      "rules":{"exam":{"weekdays":[0,3],"minBeforeBreak":0,"days":1},
                "filler":{"unit":"next","entry":{"kind":SPIRAL[2],"code":"spiral","title":SPIRAL[0],"bm":SPIRAL[1]}}},
       "tail":[{"before":pm3.isoformat(),"count":True,"code":"PM3-R{n}","title":"PM3 review {n}: {t}","titles":cats,
-               "titleRest":"mixed FAST-shaped rounds, one category per whiteboard question","entry":{"kind":"R","unit":0,"bm":"all"}},
+               "titleRest":"mixed FAST-shaped rounds, one category per whiteboard question","entry":{"kind":"R","unit":0,"bm":""}},
               {"entry":{"kind":"W","code":"PM3","unit":0,"title":PM3_WINDOW,"bm":"912.NSO.1.4 · 912.AR.2.2 · 912.AR.9.1"}}],
       "items":[_item(r) for r in PLAN],"blocked":{}}
 flow.baseline(FLOW)
@@ -228,12 +221,12 @@ if LAID["left"]:
     raise SystemExit("A7 plan: the year does not hold the sequence — no day is left for "
                      +", ".join(FLOW["items"][k]["code"] for k in LAID["left"])+". Cut or merge something in PLAN, or free a day in the log.")
 def straddles():
-    """Ruling 48: what is taught before a long break and tested after it — [(first item, its date, exam day 1, break)]."""
+    """Ruling 48: what is taught before a long break and tested after it — [(first item, its date, exam day, break)]."""
     at={r["entry"]["code"]:d.date.fromisoformat(r["date"]) for r in LAID["rows"] if r["src"]=="item"}
     out=[]; first=None
     for r in PLAN:
         if r[4] in ("L","T") and first is None: first=r[1]
-        if r[4]=="X" and r[1].endswith("X1") and first is not None:
+        if r[4]=="X" and first is not None:
             a,t=at.get(first),at.get(r[1])
             b=[x for x in LONG_BREAKS if a and t and a<x<t]
             if b: out.append((first,a,t,b[0]))
@@ -285,9 +278,9 @@ def report():
     out+=["","**What moved:**",""]
     f=lambda s: d.date.fromisoformat(s).strftime('%a %b %d')
     for it,base,now,by in ch["moved"]:
-        if it["kind"]=="X" and it["code"].endswith("X1"):
+        if it["kind"]=="X":
             q0=next(q for e,q in sorted(QUARTERS.items()) if d.date.fromisoformat(base)<=e); q1=next(q for e,q in sorted(QUARTERS.items()) if d.date.fromisoformat(now)<=e)
-            out.append(f"- {it['title'].replace(', day 1','')}: {f(base)} → **{f(now)}** ({by:+d} school days)"+(f" — **now in {q1}, was in {q0}**" if q0!=q1 else ""))
+            out.append(f"- {it['title']}: {f(base)} → **{f(now)}** ({by:+d} school days)"+(f" — **now in {q1}, was in {q0}**" if q0!=q1 else ""))
     gone=[it for it in FLOW["items"] if it.get("gone")]
     if gone: out.append("- covered on a day the log does not name: "+", ".join(it["code"] for it in gone))
     flex=[it for it in FLOW["items"] if it["kind"]=="F"]
@@ -341,9 +334,6 @@ if __name__=="__main__":
             f.write(f"| {when} | {lab} | {S} | {due_} |\n")
             j=k2+1
     print(f"\nPlanned periods: {len(rows)} of {len(days)} available Sep 23–May 28; PM3 review days: {n}", file=sys.stderr)
-    for dt,u,code,title,bm,kind in rows:
-        if code.endswith("X1") or code=="17.X" or code.startswith("PM"):
-            pass
     import collections
     firsts={}
     for dt,u,code,title,bm,kind in rows:

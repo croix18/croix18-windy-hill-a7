@@ -190,7 +190,7 @@ NO_LESSON = ("spiral", "flex", "extra", "off")     # days with no lesson of thei
 
 
 def is_exam(code):
-    return bool(re.fullmatch(r"[\d/]+\.X\d", code))
+    return bool(re.fullmatch(r"[\d/]+\.X\d?", code))     # 3.X (one day, ruling 51); 3.X1 / 3.X2 in older sheets
 
 
 # ---------------------------------------------------------------- links
@@ -634,7 +634,7 @@ def build(out):
     # ------------------------------------------------------------ Unit tests
     wt = wb.create_sheet("Unit tests")
     wt.cell(row=1, column=1, value="Unit tests and progress monitoring").font = TITLE
-    tcols = ["Unit", "Exam day 1", "Exam day 2", "Points", "Paper", "Key", "Unit Review (practice)", "Review key", "Reference Sheet"]
+    tcols = ["Unit", "Exam day", "", "Points", "Paper", "Key", "Unit Review (practice)", "Review key", "Reference Sheet"]
     header(wt, tcols, row=3)
     exams = {}
     for row in cal:
@@ -650,7 +650,7 @@ def build(out):
         if dates:
             put(wt, r, 2, dates[0], fmt="ddd d mmm")
             if len(dates) > 1: put(wt, r, 3, dates[1], fmt="ddd d mmm")
-            else: put(wt, r, 3, None)          # a test the class took in one day (A7 Unit 3, 15 Oct: the as-run log has Unit 4 beginning the next day)
+            else: put(wt, r, 3, None)          # every A7 test is one day (ruling 51, 24 Oct)
         else:
             put(wt, r, 2, "before 23 Sep", font=DIM); put(wt, r, 3, None)
         points_row[u] = r

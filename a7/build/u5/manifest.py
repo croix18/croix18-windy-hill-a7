@@ -1,7 +1,7 @@
 # Unit 5 manifest — what install_unit.py needs to assemble the package and write 00 - START HERE.md.
 M = dict(
     unit=5,                                           # the title is course.py UNITS[5]
-    summary="six teaching days (eleven book lessons, merged to six), a review sent home Tue 3 Nov, the test as Form A and Form B over Thu–Fri 5–6 Nov with a practice test",
+    summary="six teaching days (eleven book lessons, merged to six), a review sent home Tue 3 Nov, the test as one period on Thu 5 Nov (a random draw of the practice test; Forms A and B as built)",
     # (file code, label as printed, title, benchmark, the line that carries the day) — in teaching order
     lessons=[
         ("5.01", "5.01", "Scale Drawings", "MA.7.GR.1.5", "A scale factor is the one number every length is multiplied by. Copy divided by original."),

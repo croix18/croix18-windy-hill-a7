@@ -1,8 +1,8 @@
 # A7 Unit 5 — Multi-Step Proportional Relationships
 
-Windy Hill Middle School · course 1205050 · six teaching days (eleven book lessons, merged to six), a review sent home Tue 3 Nov, the test as Form A and Form B over Thu–Fri 5–6 Nov with a practice test.
+Windy Hill Middle School · course 1205050 · six teaching days (eleven book lessons, merged to six), a review sent home Tue 3 Nov, the test as one period on Thu 5 Nov (a random draw of the practice test; Forms A and B as built).
 
-**By the plan** (Windmill's spine as of 2026-10-22; `tools/scope_calendar.py` is its source): lessons Tue 27 Oct – Tue 3 Nov, the assessment Thu 5 Nov and Fri 6 Nov, 2026. The dates move when the as-run log does (the plan follows the class), and a day is logged from the phone view of the plan.
+**By the plan** (Windmill's spine as of 2026-10-24; `tools/scope_calendar.py` is its source): lessons Tue 27 Oct – Tue 3 Nov, the assessment Thu 5 Nov, 2026. The dates move when the as-run log does (the plan follows the class), and a day is logged from the phone view of the plan.
 
 Nothing exists until it is committed. This folder is generated from `a7/build/u5/` by `install_unit.py`; edit the specs and rebuild rather than editing these files by hand.
 
@@ -23,7 +23,7 @@ Nothing exists until it is committed. This folder is generated from `a7/build/u5
 | **Lessons** | **One folder per lesson, named by its number (`3.08`; the title is in every file's name), everything for that day in it**, each document with its PDF beside it (the PDF is what gets printed and posted). *Slides* — the lesson's own deck, a `.pptx` (upload it to Drive and it opens as Google Slides; paste that link into Deckhand's Slides card). *Teacher Edition* — three or four pages, read in twenty minutes (ruling 26): page 1 is the period (benchmark with its Must and Must-not lines, the target, the MTRs, the timing table, the three sentences to say out loud), then one line per slide, each board carrying its answer, its named distractors and the split-board move, and Misconceptions to Watch at the end. *Lesson Plan* — the Florida-format plan (ruling 25): standards, the MTRs with their evidence, the sequence read from the deck, gradual release, higher-order questions with DOK, checks for understanding with the response to each, differentiation. *Independent Set* — the six questions written in silence (ruling 21). *Question Bank* and *Additional Question Bank* — retired worksheets are question banks (ruling 11): draw from them for practice, exit tickets or re-teaching. |
 | **Lessons / … / Keys** | Inside each lesson's folder: that lesson's three answer keys and nothing else. |
 | **Review** | The Unit Review and its key (unscored; it goes home as practice — ruling 27a, A7 has no review day). |
-| **Assessment** | Form A and Form B — each one paper over two periods, with its key (scoring lines, the Score Tracker, transfer items named) and its Worked Answers copy, the page that goes back to the class with nothing but the answers on it (ruling 32). The forms are parallel and share no answer (ruling 33). |
+| **Assessment** | Form A and Form B — each one paper over one period, with its key (scoring lines, the Score Tracker, transfer items named) and its Worked Answers copy, the page that goes back to the class with nothing but the answers on it (ruling 32). The forms are parallel and share no answer (ruling 33). |
 | **Handouts** | The Reference Sheet. Students study from it; it may NOT be used on the assessment (ruling 13). There is no study guide (ruling 11). |
 | **Reference** | Not handouts: `A7 Unit 5 Multi-Step Proportional Relationships - Question Bank.md` (how each question bank varies, what the audit found, what changed from the book, and every bank answer — ruling 26 moved this out of the teacher's edition), the Math Nation package audit, the scope and sequence, the IXL due-date sheet, the Grade 8 source of truth. |
 
@@ -42,7 +42,7 @@ Nothing exists until it is committed. This folder is generated from `a7/build/u5
 | 5.08–09 | Mon 2 Nov | Converting Mass, Area and Volume | MA.7.AR.3.3 | Area converts by the square of the length ratio. |
 | 5.10–11 | Tue 3 Nov | Multi-Step Proportion Problems | MA.7.AR.4.5 · MA.7.AR.3.3 | A unit rate, used twice. Same units before you compare. |
 | — | — | Unit Review | all three | unscored, sent home as practice (ruling 27a); the SSDD block is named on the key only |
-| — | Thu 5 Nov and Fri 6 Nov | Unit Assessment — two periods, one paper (Forms A and B) | all three benchmarks, sections by benchmark; Form A, Form B and a practice test, 19 questions, two transfer items (8 and 19) | 24 points |
+| — | Thu 5 Nov | Unit Assessment — one period, one paper (Forms A and B) | all three benchmarks, sections by benchmark; Form A, Form B and a practice test, 19 questions, two transfer items (8 and 19) | 24 points |
 
 Book order, with 5.2 + 5.3, 5.6 + 5.7, 5.8 + 5.9 and 5.10 + 5.11 merged under ruling 30 — all four merges are the plan's own; Math Nation 5.5 (Mathlandia, an invented currency) is not on the plan and its idea lives in 5.06–07. Three days of MA.7.GR.1.5, two of MA.7.AR.3.3, one of MA.7.AR.4.5 with AR.3.3 inside it. No review day (ruling 27a): the review paper goes home Tue 3 Nov, the test is Thu–Fri 5–6 Nov.
 
@@ -77,7 +77,7 @@ The whiteboard round is the remainder — 11–13 minutes across the unit — an
 - **Calculators: allowed on everything, and nothing about them is printed on any student page.** The one exception the house style allows is the Reference Sheet's description of what the FAST platform provides (an on-screen scientific calculator) — that is a description, not a permission line.
 - **Old-school textbook styling.** No commentary panels, no grey bars, no clip art. American spellings.
 - **One point per lettered part, no partial credit**, with follow-through credit (ruling 19): a later part earns its point when the right operation is applied to the student's own earlier value, where that work is on the page. The key carries a `Scoring:` line under every question and a per-benchmark Score Tracker at the end.
-- **The assessment is one paper over two class periods** (ruling 27). Students stop when the period ends and continue from where they stopped; there is no Day 1 / Day 2 paper and no such heading. Two questions are **transfer items** (ruling 18) — same benchmark, a surface that appears on no review and in no question bank — and the key names them.
+- **The assessment is one paper, one class period** (ruling 51, 24 October 2026 — every A7 unit test is one period; the practice test's random draw is sized for it, ruling 49). Two questions are **transfer items** (ruling 18) — same benchmark, a surface that appears on no review and in no question bank — and the key names them.
 - **No benchmark codes on student pages.** The deck title slide and the keys and Teacher Editions carry them.
 - **Opens cleanly in Google Docs.** Every document is a fixed-width table layout with no nested tables and a spacer after every block; fonts are Times New Roman / Georgia / Arial with FreeSerif for the bubbles only.
 - **Every answer is re-derived by machine at build time.** Every item carries a `check` that sympy evaluates (variable bases as symbols); every multiple-choice distractor must name its error; every scientific-notation coefficient is scanned for the [1, 10) rule; the build refuses on any finding. The post-build suite (`checks.py`) then reads the rendered PDFs for off-page text, glyph coverage, Google-Docs layout rules and the timing plan.
@@ -90,4 +90,4 @@ The whiteboard round is the remainder — 11–13 minutes across the unit — an
 - **Built in the order the rulebook asks (§16):** from the benchmarks first, then read against Math Nation 5.1–5.11 and its test — the audit is in Reference.
 - **Every conversion ratio is the FAST reference sheet's** (1 in = 2.54 cm, 1 mi = 1.61 km, 1 lb = 0.454 kg, 1 kg = 2.204 lb, 1 gal = 3.785 L, 1 c = 0.24 L …) and is printed on the board or paper that uses it. Math Nation's lessons drift from the sheet (1.609, 2.2); its own assessment does not.
 
-Installed: 139 files from the build, plus this page and the Reference folder.
+Installed: 168 files from the build, plus this page and the Reference folder.

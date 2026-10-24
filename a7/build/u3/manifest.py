@@ -1,7 +1,7 @@
 # Unit 3 manifest — what install_unit.py needs to assemble the package and write 00 - START HERE.md.
 M = dict(
     unit=3,                                           # the title is course.py UNITS[3]
-    summary="ten teaching days (nine book lessons, merged to eight, plus the two Thread A days), a review sent home as practice, a two-period assessment",
+    summary="ten teaching days (nine book lessons, merged to eight, plus the two Thread A days), a review sent home as practice, an assessment built for two periods and given in one (Thu 15 Oct)",
     # (file code, label as printed, title, benchmark, the line that carries the day) — in teaching order
     lessons=[
         ("3.01", "3.01", "Product Laws of Exponents", "MA.7.NSO.1.1", "Same base, add — and the base has to match."),

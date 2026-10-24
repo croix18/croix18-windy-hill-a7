@@ -245,7 +245,7 @@ for i, (cells, c) in enumerate(zip(rows, cal), 2):
     if (v["Benchmark"] or "") != c[5] or (v["IXL skills — all required, code"] or "") != c[6]: bad(f"r{i} bm/ixl")
     if (D(v["IXL due"]) if v["IXL due"] else "") != (d(c[7]) if c[7] else ""): bad(f"r{i} due")
     code, u = c[3], int(c[2]) if c[2] else None
-    exam = bool(re.fullmatch(r"[\d/]+\.X\d", code))
+    exam = bool(re.fullmatch(r"[\d/]+\.X\d?", code))
     # links
     for h in hdr[5:16]:
         cell = cells[H[h]]
@@ -433,7 +433,7 @@ wt = wb["Unit tests"]
 from lib import unitbuild
 exam_dates = collections.defaultdict(list)
 for c in cal:
-    if re.fullmatch(r"[\d/]+\.X\d", c[3]): exam_dates[c[3].split(".X")[0]].append(d(c[0]))
+    if re.fullmatch(r"[\d/]+\.X\d?", c[3]): exam_dates[c[3].split(".X")[0]].append(d(c[0]))
 cal_rows = {r[0].value: r for r in wt.iter_rows(min_row=4, max_row=25) if isinstance(r[0].value, str) and r[0].value.startswith("Unit ")}
 for k, ds in exam_dates.items():
     r = cal_rows.get(f"Unit {k}")

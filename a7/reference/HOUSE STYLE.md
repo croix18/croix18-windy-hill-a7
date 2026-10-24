@@ -3593,3 +3593,25 @@ M7's ruling: the relationship-building day of Friday 23 October cost periods 4 a
 day is one line in its as-run log, with no ruling: period 1 reviewed with the study guide, period 3 had no lesson, nobody
 taught 4.07+08 (the plan no longer carries it, nor its IXL skill), and the Unit 4 exam stays Monday 26 October.
 
+## 13b(xxiii). Ruling 51 — 24 October: every A7 unit test is one period [A7; noted in M7's rulebook]
+
+**Ruling 51 — Croix, 24 October 2026 (4:21 pm): "Now, let's talk about a7 schedule. Move to all 1 day tests."**
+
+- **Every A7 unit test takes one period.** The plan's exam rows are one per unit (`3.X`, `4.X`, … `8/9.X`, `15/16.X`), and the
+  engine's rule for this course is `rules.exam.days = 1`. Units 3 and 4 had already been tested in one day (by the as-run log);
+  from Unit 5 on it is the plan. M7's tests are still two days — this ruling is A7's.
+- **The test day is still a Monday or a Thursday** (ruling 27's test days); a spiral day fills whatever has to pass first. With a
+  one-day test that can mean two spiral days when the last lesson lands on a Tuesday. Croix has not been asked whether a one-day
+  test may fall on any day but Wednesday; if he says so, change `weekdays` to `[0,1,3,4]` — the spare days then pool at the end
+  of the year as PM3 review, and two more `need` holds are wanted (Thread B, Unit 15).
+- **Ruling 48 held by `need`.** The year gained twelve days, and what the sequence had put after a long break came forward onto
+  the last days before it: Thread B onto Fri 20 Nov, Unit 8 onto Wed 16 Dec, Thread C onto Fri 19 Mar. Three items now carry the
+  engine's `need` (a thread's two days: 2; Unit 8's first lesson: 3) and the engine is told the three long breaks for that
+  alone; the flex days still measure against the plan with nothing lost (the 22 October trial that failed had put `need` on
+  every unit).
+- **Where the gained days went:** nine more spiral days across the year (the Monday/Thursday rule) and one PM3 review day before
+  the window (content and tests end Thu 29 April; Unit 17's exam). Flex days: 2 of 6 left (after Units 11 and 12).
+- **The test dates now:** 5.X Thu 5 Nov · 6.X Thu 19 Nov · 7.X Thu 10 Dec · 8/9.X Thu 21 Jan · 10.X Thu 4 Feb · 11.X Thu 18 Feb ·
+  12.X Mon 8 Mar · 13.X Thu 18 Mar · 14.X Mon 5 Apr · 15/16.X Thu 22 Apr · 17.X Thu 29 Apr.
+- **Papers.** A one-day test is the practice test's random draw (ruling 49) sized for one period; Unit 5's Form A/B were built
+  for two periods and are kept as written — the teacher bar's draw is what is given.

@@ -1,8 +1,8 @@
 # A7 Unit 3 — Exponents and Scientific Notation
 
-Windy Hill Middle School · course 1205050 · ten teaching days (nine book lessons, merged to eight, plus the two Thread A days), a review sent home as practice, a two-period assessment.
+Windy Hill Middle School · course 1205050 · ten teaching days (nine book lessons, merged to eight, plus the two Thread A days), a review sent home as practice, an assessment built for two periods and given in one (Thu 15 Oct).
 
-**By the plan** (Windmill's spine as of 2026-10-22; `tools/scope_calendar.py` is its source): lessons Wed 23 Sep – Fri 9 Oct, the assessment Thu 15 Oct, 2026. The dates move when the as-run log does (the plan follows the class), and a day is logged from the phone view of the plan.
+**By the plan** (Windmill's spine as of 2026-10-24; `tools/scope_calendar.py` is its source): lessons Wed 23 Sep – Fri 9 Oct, the assessment Thu 15 Oct, 2026. The dates move when the as-run log does (the plan follows the class), and a day is logged from the phone view of the plan.
 
 Nothing exists until it is committed. This folder is generated from `a7/build/u3/` by `install_unit.py`; edit the specs and rebuild rather than editing these files by hand.
 
@@ -22,7 +22,7 @@ Nothing exists until it is committed. This folder is generated from `a7/build/u3
 | **Lessons** | **One folder per lesson, named by its number (`3.08`; the title is in every file's name), everything for that day in it**, each document with its PDF beside it (the PDF is what gets printed and posted). *Slides* — the lesson's own deck, a `.pptx` (upload it to Drive and it opens as Google Slides; paste that link into Deckhand's Slides card). *Teacher Edition* — three or four pages, read in twenty minutes (ruling 26): page 1 is the period (benchmark with its Must and Must-not lines, the target, the MTRs, the timing table, the three sentences to say out loud), then one line per slide, each board carrying its answer, its named distractors and the split-board move, and Misconceptions to Watch at the end. *Lesson Plan* — the Florida-format plan (ruling 25): standards, the MTRs with their evidence, the sequence read from the deck, gradual release, higher-order questions with DOK, checks for understanding with the response to each, differentiation. *Independent Set* — the six questions written in silence (ruling 21). *Question Bank* and *Additional Question Bank* — retired worksheets are question banks (ruling 11): draw from them for practice, exit tickets or re-teaching. |
 | **Lessons / … / Keys** | Inside each lesson's folder: that lesson's three answer keys and nothing else. |
 | **Review** | The Unit Review and its key (unscored; it goes home as practice — ruling 27a, A7 has no review day). |
-| **Assessment** | The unit test (one paper, two periods) and its key. |
+| **Assessment** | The unit test (one paper, one period) and its key. |
 | **Handouts** | The Reference Sheet. Students study from it; it may NOT be used on the assessment (ruling 13). There is no study guide (ruling 11). |
 | **Reference** | Not handouts: `A7 Unit 3 Exponents and Scientific Notation - Question Bank.md` (how each question bank varies, what the audit found, what changed from the book, and every bank answer — ruling 26 moved this out of the teacher's edition), the Math Nation package audit, the scope and sequence, the IXL due-date sheet, the Grade 8 source of truth. |
 
@@ -84,7 +84,7 @@ The whiteboard round is the remainder — 10–14 minutes across the unit — an
 - **Calculators: allowed on everything, and nothing about them is printed on any student page.** The one exception the house style allows is the Reference Sheet's description of what the FAST platform provides (an on-screen scientific calculator) — that is a description, not a permission line.
 - **Old-school textbook styling.** No commentary panels, no grey bars, no clip art. American spellings.
 - **One point per lettered part, no partial credit**, with follow-through credit (ruling 19): a later part earns its point when the right operation is applied to the student's own earlier value, where that work is on the page. The key carries a `Scoring:` line under every question and a per-benchmark Score Tracker at the end.
-- **The assessment is one paper over two class periods** (ruling 27). Students stop when the period ends and continue from where they stopped; there is no Day 1 / Day 2 paper and no such heading. Two questions are **transfer items** (ruling 18) — same benchmark, a surface that appears on no review and in no question bank — and the key names them.
+- **The assessment is one paper, one class period** (ruling 51, 24 October 2026 — every A7 unit test is one period; the practice test's random draw is sized for it, ruling 49). Two questions are **transfer items** (ruling 18) — same benchmark, a surface that appears on no review and in no question bank — and the key names them.
 - **No benchmark codes on student pages.** The deck title slide and the keys and Teacher Editions carry them.
 - **Opens cleanly in Google Docs.** Every document is a fixed-width table layout with no nested tables and a spacer after every block; fonts are Times New Roman / Georgia / Arial with FreeSerif for the bubbles only.
 - **Every answer is re-derived by machine at build time.** Every item carries a `check` that sympy evaluates (variable bases as symbols); every multiple-choice distractor must name its error; every scientific-notation coefficient is scanned for the [1, 10) rule; the build refuses on any finding. The post-build suite (`checks.py`) then reads the rendered PDFs for off-page text, glyph coverage, Google-Docs layout rules and the timing plan.
@@ -99,4 +99,4 @@ The whiteboard round is the remainder — 10–14 minutes across the unit — an
 - **The assessment is one paper over two periods, 36 points** (ruling 27). Students stop when the first period ends and continue from where they stopped — it is not two papers, and nothing on it says 'Day 1'. Four sections by benchmark, numbered 1–16 straight through. **Croix sat the paper himself on 7 October (17 minutes 27 seconds) and cut five questions:** the last one, which he did not know (between which two consecutive powers of 10 a number lies), and the four answered in a sentence — he does not want to read explanations. Every answer is now a number, an expression or a letter. Both transfer items (ruling 18) were among the five, so the paper carries none; the key says so, and the Score Tracker maps every question to its benchmark.
 - **The Reference Sheet is the only handout.** Give it out at 3.04 or earlier; it is the document students study from. It does not go into the test.
 
-Installed: 192 files from the build, plus this page and the Reference folder.
+Installed: 225 files from the build, plus this page and the Reference folder.
