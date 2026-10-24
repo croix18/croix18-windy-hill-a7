@@ -41,18 +41,18 @@
 | Nov 18 | Wed (43 min) | 6 | T-B1 | **thread** Thread B: angle pairs — supplementary, complementary, vertical, adjacent (16.1) | 8.GR.1.4 | Identify complementary, supplementary, vertical, adjacent, and congruent angles — HGV; Find measures of complementary, supplementary, vertical, and adjacent angles — R2B; Write and solve equations using angle relationships — DBV | Nov 19 |
 | Nov 19 | Thu | 6 | T-B2 | **thread** Thread B: interior and exterior angles of a triangle (16.2) | 8.GR.1.5 | Find missing angles in triangles — JFJ; Exterior Angle Theorem — FMP; Triangle Angle-Sum Theorem — 6Q6 | Nov 20 |
 | Nov 20 | Fri | 7 | spiral | *spiral* Spiral day — mixed retrieval from the unit just finished and the two before it |  |  |  |
-| Nov 30 | Mon | 7 | 7.01 | Graphing proportional relationships | 7.AR.4.3 | Graph a proportional relationship: word problems — FJW | Dec 01 |
-| Dec 01 | Tue | 7 | 7.02+03 | Constant of proportionality (table, graph, description) | 7.AR.4.2 | Interpret graphs of proportional relationships — RMH; Find the constant of proportionality from a table — LKZ; Find the constant of proportionality from a graph — ZUT | Dec 02 |
-| Dec 02 | Wed (43 min) | 7 | 7.04 | Is it proportional? | 7.AR.4.1 · 8.AR.3.1 | Identify proportional relationships by graphing — AAN; Identify proportional relationships in tables and graphs — VZK | Dec 03 |
-| Dec 03 | Thu | 7 | 7.05+06 | Equations of proportional relationships; translating representations | 7.AR.4.4 | Write equations for proportional relationships from tables — 6GU; Write equations for proportional relationships from graphs — JKH; Write and solve equations for proportional relationships — VKK | Dec 04 |
-| Dec 04 | Fri | 7 | 7.07 | Comparing proportional relationships | 7.AR.4.5 | Compare proportional relationships represented in different ways — 5A9 | Dec 07 |
-| Dec 07 | Mon | 7 | 7.X | **exam** Unit 7 exam |  |  |  |
-| Dec 08 | Tue |  | off | *off* FAST PM2 — no class |  |  |  |
-| Dec 09 | Wed (43 min) |  | PM2-R1 | **review** Semester review 1: number system, exponents, scientific notation (whiteboards) | 8.NSO.1.1–1.7 |  |  |
-| Dec 10 | Thu |  | PM2-R2 | **review** Semester review 2: equations, inequalities, Pythagorean, angles (whiteboards) | 8.AR.2 · 8.GR.1 |  |  |
-| Dec 11 | Fri |  | PM2-R3 | **review** Semester review 3: proportional → linear preview; mixed FAST-shaped round | 8.AR.3 · 8.AR.1.1 |  |  |
-| Dec 14 | Mon | 8 | spiral | *spiral* Spiral day — mixed retrieval from the unit just finished and the two before it |  |  |  |
-| Dec 15 | Tue | 8 | spiral | *spiral* Spiral day — mixed retrieval from the unit just finished and the two before it |  |  |  |
+| Nov 30 | Mon | 7 | 7.01 | Graphing proportional relationships | 7.AR.4.3 | Graph a proportional relationship: word problems — FJW | Dec 02 |
+| Dec 01 | Tue | 7 | off | *off* FAST PM2 (ELA) — no class |  |  |  |
+| Dec 02 | Wed (43 min) | 7 | 7.02+03 | Constant of proportionality (table, graph, description) | 7.AR.4.2 | Interpret graphs of proportional relationships — RMH; Find the constant of proportionality from a table — LKZ; Find the constant of proportionality from a graph — ZUT | Dec 03 |
+| Dec 03 | Thu | 7 | 7.04 | Is it proportional? | 7.AR.4.1 · 8.AR.3.1 | Identify proportional relationships by graphing — AAN; Identify proportional relationships in tables and graphs — VZK | Dec 04 |
+| Dec 04 | Fri | 7 | 7.05+06 | Equations of proportional relationships; translating representations | 7.AR.4.4 | Write equations for proportional relationships from tables — 6GU; Write equations for proportional relationships from graphs — JKH; Write and solve equations for proportional relationships — VKK | Dec 07 |
+| Dec 07 | Mon | 7 | 7.07 | Comparing proportional relationships | 7.AR.4.5 | Compare proportional relationships represented in different ways — 5A9 | Dec 09 |
+| Dec 08 | Tue | 7 | off | *off* FAST PM2 — no class |  |  |  |
+| Dec 09 | Wed (43 min) | 7 | spiral | *spiral* Spiral day — mixed retrieval from the unit just finished and the two before it |  |  |  |
+| Dec 10 | Thu | 7 | 7.X | **exam** Unit 7 exam |  |  |  |
+| Dec 11 | Fri |  | PM2-R1 | **review** Semester review 1: number system, exponents, scientific notation (whiteboards) | 8.NSO.1.1–1.7 |  |  |
+| Dec 14 | Mon |  | PM2-R2 | **review** Semester review 2: equations, inequalities, Pythagorean, angles (whiteboards) | 8.AR.2 · 8.GR.1 |  |  |
+| Dec 15 | Tue |  | PM2-R3 | **review** Semester review 3: proportional → linear preview; mixed FAST-shaped round | 8.AR.3 · 8.AR.1.1 |  |  |
 | Dec 16 | Wed (43 min) | 8 | spiral | *spiral* Spiral day — mixed retrieval from the unit just finished and the two before it |  |  |  |
 | Dec 17 | Thu | 8 | extra | *extra* Catch-up day — make-up tests and missing work; nothing new and nothing graded |  |  |  |
 | Dec 18 | Fri | 8 | extra | *extra* Catch-up day — make-up tests and missing work; nothing new and nothing graded |  |  |  |
@@ -149,6 +149,7 @@ The dates above are laid out from the sequence of lessons, the school calendar a
 - Fri Oct 23 2026: Study guide (period 1); relationship-building day (period 3)
 - Mon Oct 26 2026: the class began 4.X
 - Tue Oct 27 2026: the class began 5.01
+- Tue Dec 01 2026: FAST PM2 (ELA) — no class
 - Tue Dec 08 2026: FAST PM2 — no class
 - Thu Dec 17 2026: Catch-up day — make-up tests and missing work; nothing new and nothing graded
 - Fri Dec 18 2026: Catch-up day — make-up tests and missing work; nothing new and nothing graded
@@ -159,6 +160,7 @@ The dates above are laid out from the sequence of lessons, the school calendar a
 - Unit 4 exam: Thu Oct 22 → **Mon Oct 26** (+2 school days)
 - Unit 5 exam: Tue Nov 03 → **Thu Nov 05** (+2 school days)
 - Unit 6 exam: Fri Nov 13 → **Tue Nov 17** (+2 school days)
+- Unit 7 exam: Mon Dec 07 → **Thu Dec 10** (+3 school days)
 - covered on a day the log does not name: flex, 4.07+08
 - flex days absorbed: 1 of 6 (after Unit 4); 5 left to absorb later losses
 - the last day of content and tests: Thu Apr 15 (content must end by Apr 30); PM3 review days before the window: 10

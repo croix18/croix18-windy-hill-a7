@@ -37,11 +37,11 @@ The three-character code after each skill is what you type into IXL's search box
 | Mon Nov 16 | 6.07+08 Similar triangles; indirect measurement | Side lengths of similar triangles (QSK); Similar triangles and indirect measurement (88W); Identify similar triangles (6PD) | Tue Nov 17 |
 | Wed Nov 18 | T-B1 Thread B: angle pairs — supplementary, complementary, vertical, adjacent (16.1) | Identify complementary, supplementary, vertical, adjacent, and congruent angles (HGV); Find measures of complementary, supplementary, vertical, and adjacent angles (R2B); Write and solve equations using angle relationships (DBV) | Thu Nov 19 |
 | Thu Nov 19 | T-B2 Thread B: interior and exterior angles of a triangle (16.2) | Find missing angles in triangles (JFJ); Exterior Angle Theorem (FMP); Triangle Angle-Sum Theorem (6Q6) | Fri Nov 20 |
-| Mon Nov 30 | 7.01 Graphing proportional relationships | Graph a proportional relationship: word problems (FJW) | Tue Dec 01 |
-| Tue Dec 01 | 7.02+03 Constant of proportionality (table, graph, description) | Interpret graphs of proportional relationships (RMH); Find the constant of proportionality from a table (LKZ); Find the constant of proportionality from a graph (ZUT) | Wed Dec 02 |
-| Wed Dec 02 | 7.04 Is it proportional? | Identify proportional relationships by graphing (AAN); Identify proportional relationships in tables and graphs (VZK) | Thu Dec 03 |
-| Thu Dec 03 | 7.05+06 Equations of proportional relationships; translating representations | Write equations for proportional relationships from tables (6GU); Write equations for proportional relationships from graphs (JKH); Write and solve equations for proportional relationships (VKK) | Fri Dec 04 |
-| Fri Dec 04 | 7.07 Comparing proportional relationships | Compare proportional relationships represented in different ways (5A9) | Mon Dec 07 |
+| Mon Nov 30 | 7.01 Graphing proportional relationships | Graph a proportional relationship: word problems (FJW) | Wed Dec 02 |
+| Wed Dec 02 | 7.02+03 Constant of proportionality (table, graph, description) | Interpret graphs of proportional relationships (RMH); Find the constant of proportionality from a table (LKZ); Find the constant of proportionality from a graph (ZUT) | Thu Dec 03 |
+| Thu Dec 03 | 7.04 Is it proportional? | Identify proportional relationships by graphing (AAN); Identify proportional relationships in tables and graphs (VZK) | Fri Dec 04 |
+| Fri Dec 04 | 7.05+06 Equations of proportional relationships; translating representations | Write equations for proportional relationships from tables (6GU); Write equations for proportional relationships from graphs (JKH); Write and solve equations for proportional relationships (VKK) | Mon Dec 07 |
+| Mon Dec 07 | 7.07 Comparing proportional relationships | Compare proportional relationships represented in different ways (5A9) | Wed Dec 09 |
 | Wed Jan 06 | 8.01+02 Circle relationships; circumference | Center, radius, and diameter of a circle (7RY); Circumference of circles (9FM) | Thu Jan 07 |
 | Thu Jan 07 | 8.03 Radius and diameter from circumference | Find the radius or diameter of a circle given the circumference (2CM) | Fri Jan 08 |
 | Fri Jan 08 | 8.04+05 Area of a circle | Area of circles (YA8) | Mon Jan 11 |
