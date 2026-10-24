@@ -3593,25 +3593,31 @@ M7's ruling: the relationship-building day of Friday 23 October cost periods 4 a
 day is one line in its as-run log, with no ruling: period 1 reviewed with the study guide, period 3 had no lesson, nobody
 taught 4.07+08 (the plan no longer carries it, nor its IXL skill), and the Unit 4 exam stays Monday 26 October.
 
-## 13b(xxiii). Ruling 51 — 24 October: every A7 unit test is one period [A7; noted in M7's rulebook]
+## 13b(xxiii). Ruling 51 — 24 October: every A7 unit test is one period, on any day but a Wednesday [A7; noted in M7's rulebook]
 
-**Ruling 51 — Croix, 24 October 2026 (4:21 pm): "Now, let's talk about a7 schedule. Move to all 1 day tests."**
+**Ruling 51 — Croix, 24 October 2026 (4:21 pm): "Now, let's talk about a7 schedule. Move to all 1 day tests." Then (4:45 pm),
+asked whether the Monday/Thursday rule should stay: "Get rid of the Monday Thursday rule, any day not Wednesday. Pm3 review."**
 
 - **Every A7 unit test takes one period.** The plan's exam rows are one per unit (`3.X`, `4.X`, … `8/9.X`, `15/16.X`), and the
   engine's rule for this course is `rules.exam.days = 1`. Units 3 and 4 had already been tested in one day (by the as-run log);
   from Unit 5 on it is the plan. M7's tests are still two days — this ruling is A7's.
-- **The test day is still a Monday or a Thursday** (ruling 27's test days); a spiral day fills whatever has to pass first. With a
-  one-day test that can mean two spiral days when the last lesson lands on a Tuesday. Croix has not been asked whether a one-day
-  test may fall on any day but Wednesday; if he says so, change `weekdays` to `[0,1,3,4]` — the spare days then pool at the end
-  of the year as PM3 review, and two more `need` holds are wanted (Thread B, Unit 15).
-- **Ruling 48 held by `need`.** The year gained twelve days, and what the sequence had put after a long break came forward onto
-  the last days before it: Thread B onto Fri 20 Nov, Unit 8 onto Wed 16 Dec, Thread C onto Fri 19 Mar. Three items now carry the
-  engine's `need` (a thread's two days: 2; Unit 8's first lesson: 3) and the engine is told the three long breaks for that
-  alone; the flex days still measure against the plan with nothing lost (the 22 October trial that failed had put `need` on
-  every unit).
-- **Where the gained days went:** nine more spiral days across the year (the Monday/Thursday rule) and one PM3 review day before
-  the window (content and tests end Thu 29 April; Unit 17's exam). Flex days: 2 of 6 left (after Units 11 and 12).
-- **The test dates now:** 5.X Thu 5 Nov · 6.X Thu 19 Nov · 7.X Thu 10 Dec · 8/9.X Thu 21 Jan · 10.X Thu 4 Feb · 11.X Thu 18 Feb ·
-  12.X Mon 8 Mar · 13.X Thu 18 Mar · 14.X Mon 5 Apr · 15/16.X Thu 22 Apr · 17.X Thu 29 Apr.
+- **The test may fall on any day but a Wednesday** (`rules.exam.weekdays = [0,1,3,4]`; a Wednesday is 43 minutes). Ruling 27's
+  Monday/Thursday test days are A7's no longer. A spiral day fills a Wednesday that would otherwise have been the test.
+- **The days the year gains are PM3 review days** before the window — ten of them (content and tests end Thu 15 April with
+  Unit 17's exam; the PM3 window opens 3 May). Five of six flex days are left to absorb later losses.
+- **Ruling 48 held by `need`.** With the sequence come forward, a unit is not begun unless the whole of it — lessons, the
+  threads inside it, its test — fits before the next long break (its first lesson carries `need` = the unit's length), and a
+  thread's two days are not begun with fewer than two teaching days before one. The engine is told the three long breaks for
+  that alone; the flex days still measure against the plan with nothing lost. (The 22 October trial that failed had put a
+  flat three-day `need` on every unit under two-day tests, with no slack to spend.)
+- **What it does to the year:** Thread B falls on Wed–Thu 18–19 Nov, before Thanksgiving, and Unit 7 opens after it
+  (`straddles()` now reads a unit from its first lesson, so a thread before a break is its own two days); Unit 7's test is
+  Mon 7 Dec, the day before PM2; the three semester-review days follow PM2 (9–11 Dec), then three spiral days and the two
+  catch-up days — nothing graded in Q2's last week, as he asked on 22 October; Unit 8 opens 6 Jan. Thread C and Unit 14 sit
+  before spring break (10–18 Mar), Unit 15 opens after it (29 Mar).
+- **The test dates now:** 5.X Thu 5 Nov · 6.X Tue 17 Nov · 7.X Mon 7 Dec · 8/9.X Fri 15 Jan · 10.X Mon 1 Feb · 11.X Fri 12 Feb ·
+  12.X Thu 25 Feb · 13.X Tue 9 Mar · 14.X Thu 18 Mar · 15/16.X Mon 12 Apr · 17.X Thu 15 Apr.
+- **The log pins what the old rule laid:** 13–14 Oct were spiral days and the Unit 3 exam was Thu 15 Oct (three lines in the
+  as-run log), so the new rule does not re-lay a test that has been given.
 - **Papers.** A one-day test is the practice test's random draw (ruling 49) sized for one period; Unit 5's Form A/B were built
   for two periods and are kept as written — the teacher bar's draw is what is given.

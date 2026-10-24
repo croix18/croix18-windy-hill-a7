@@ -158,9 +158,10 @@ PLAN=[
 # Ruling 27, as amended for A7 by Croix on 20 September: *"No review day, keep the reteach days.
 # M7 has less content and can absorb extra days."* So A7 gets NO per-unit review day before the
 # test — the Unit Review document goes home as practice instead — and the post-exam reteach day
-# stays. Ruling 51 (Croix, 24 October 2026: *"Move to all 1 day tests"*): every A7 unit test is ONE
-# period (Units 3 and 4 had already been given that way, by the log). The test day is still a Monday
-# or a Thursday (ruling 27's test days); a spiral day absorbs any slack.
+# stays. Ruling 51 (Croix, 24 October 2026: *"Move to all 1 day tests"* … *"Get rid of the Monday
+# Thursday rule, any day not Wednesday. Pm3 review."*): every A7 unit test is ONE period (Units 3 and 4
+# had already been given that way, by the log), on any day but a Wednesday (43 minutes), and the days
+# the year gains are PM3 review days before the window.
 P2=[]
 for r in PLAN:
     P2.append(r)
@@ -175,9 +176,9 @@ PLAN=P2
 # gives when it lays PLAN, in order, onto the school days that are left after the as-run log
 # (a7/reference/A7 As Run 2026-27.csv) has taken out the days that went to something else.
 # His rule for a class that is behind: push everything back — flex and spiral days absorb the loss
-# first, then the tests move to the next Monday or Thursday.
-#   Ruling 27 (exam rule), as ruling 51 leaves it: the test day is a Monday or a Thursday; a spiral
-#   day fills whatever has to pass first. (rules.exam.days = 1 — M7's tests are still two days.)
+# first, then the test moves to the next day that is not a Wednesday (ruling 51; it was the next Monday or Thursday).
+#   Ruling 27 (exam rule), as ruling 51 leaves it for A7: one day, any weekday but Wednesday; a spiral
+#   day fills a Wednesday that would have been it. (rules.exam.days = 1 — M7's tests are still two days.)
 import importlib.util as _ilu
 _sp=_ilu.spec_from_file_location("flow",os.path.join(HERE,"..","a7","build","lib","flow.py"))
 flow=_ilu.module_from_spec(_sp); _sp.loader.exec_module(flow)
@@ -191,23 +192,30 @@ PM3_WINDOW="May 3–28: PM3 window (school date TBD). Content finishes Apr 30, s
 # Ruling 48 (Croix, 22 October 2026): "Never test after a long break. A 3 day is fine. A week to 10 days plus is not."
 # A unit — from its first lesson to its exam — sits on one side of a long break. Here that is held by straddles(),
 # below, which refuses a plan that breaks it; the threads after the Unit 6 and Unit 13 exams are what make this year
-# keep it. Since 24 October (ruling 51) three items also carry the engine's `need` (see _item): with one-day tests
-# the sequence came forward, and that is what keeps the threads and Unit 8 on the far side of their breaks.
+# keep it. Since 24 October (ruling 51) every unit's first lesson carries the engine's `need` (see NEED and _item): with
+# one-day tests the sequence came forward, and that is what keeps a unit whole on one side of a break.
 LONG_BREAKS=[d.date(2026,11,23),d.date(2026,12,21),d.date(2027,3,22)]
+NEED={}                          # a unit's first lesson → how many teaching days the unit takes, test included
+_first=None; _n=0
+for r in PLAN:
+    if r[4]=="L" and _first is None: _first=r[1]; _n=0
+    if _first is not None and r[4] in ("L","T","X"): _n+=1
+    if r[4]=="X" and _first is not None: NEED[_first]=_n; _first=None
 def _item(r):
     u,code,title,bm,kind=r
     it={"kind":kind,"code":code,"title":title,"unit":u,"bm":bm}
     if kind=="X": it["examIn"]=0
     if kind=="F": it["absorb"]=True
     # Ruling 48 under ruling 51: with one-day tests the year gained a dozen days, and what the sequence had put after a
-    # long break came forward onto the last days before it. These hold: a thread's two days are not begun with fewer than
-    # two teaching days before a break, and Unit 8 (circles) is not begun with fewer than three. The engine's `breaks`
-    # are the long ones, for this alone (the flex days still measure against the plan with nothing lost).
+    # long break came forward onto the last days before it. So a unit is not begun unless the whole of it — its lessons,
+    # the threads inside it and its test — fits before the next long break (NEED, the unit's own length), and a thread's
+    # two days are not begun with fewer than two teaching days before one. The engine's `breaks` are the long ones, for
+    # this alone (the flex days still measure against the plan with nothing lost).
     if code in ("T-B1","T-C1"): it["need"]=2
-    if code=="8.01+02": it["need"]=3
+    if kind=="L" and code in NEED: it["need"]=NEED[code]
     return it
 FLOW={"days":[x.isoformat() for x in days],"breaks":[b.isoformat() for b in LONG_BREAKS],
-      "rules":{"exam":{"weekdays":[0,3],"minBeforeBreak":0,"days":1},
+      "rules":{"exam":{"weekdays":[0,1,3,4],"minBeforeBreak":0,"days":1},
                "filler":{"unit":"next","entry":{"kind":SPIRAL[2],"code":"spiral","title":SPIRAL[0],"bm":SPIRAL[1]}}},
       "tail":[{"before":pm3.isoformat(),"count":True,"code":"PM3-R{n}","title":"PM3 review {n}: {t}","titles":cats,
                "titleRest":"mixed FAST-shaped rounds, one category per whiteboard question","entry":{"kind":"R","unit":0,"bm":""}},
@@ -225,7 +233,7 @@ def straddles():
     at={r["entry"]["code"]:d.date.fromisoformat(r["date"]) for r in LAID["rows"] if r["src"]=="item"}
     out=[]; first=None
     for r in PLAN:
-        if r[4] in ("L","T") and first is None: first=r[1]
+        if r[4]=="L" and first is None: first=r[1]        # a unit runs from its first LESSON; a thread before it is its own two days
         if r[4]=="X" and first is not None:
             a,t=at.get(first),at.get(r[1])
             b=[x for x in LONG_BREAKS if a and t and a<x<t]
@@ -269,7 +277,7 @@ def report():
     ch=flow.changes(FLOW,LAID); out=["","## The plan follows the class","",
         "The dates above are laid out from the sequence of lessons, the school calendar and the as-run log "
         "(`A7 As Run 2026-27.csv`): a lost day is one line in the log, and everything after it moves. Rule (Croix, 4 October 2026): "
-        "push everything back — flex and spiral days absorb the loss first, then tests move to the next Monday or Thursday.",""]
+        "push everything back — flex and spiral days absorb the loss first, then the test moves to the next day that is not a Wednesday (ruling 51).",""]
     out.append("**The log:**"); out.append("")
     said={e["date"]:(f"the class began {e['what']}" if e["what"] not in ("review","off") else FLOW["blocked"][e["date"]]["title"]) for e in LOG}
     for x,bl in FLOW["blocked"].items():
