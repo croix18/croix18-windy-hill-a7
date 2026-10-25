@@ -20,6 +20,10 @@ fixes changed in Unit 6: every new number right, **eight findings, all taken** (
 The page is **content version 4** (version 3 was up about an hour, on a Sunday), 35 of 35 plants caught; the page and the
 teacher copy checked and built; Unit 6 rebuilt and installed at 0 findings; master sheet regenerated.
 
+**On the website:** A7 `8ca33dce` published to site `aa603e2` with the Tally sync (174 pages, 1728 links, SITE CHECKS
+PASS; deployed, Workers Builds: success). The Google Sites embed, `a7/practice/u6/A7 Unit 6 Practice Test.html` (version
+4), went to Croix again: it replaces the one sent at 3 pm.
+
 ## 25 October, afternoon — Unit 6's second review done; Unit 6 and Thread B go back on the website
 
 Croix, 11:14 am: *"Take them down until a review chat goes over them. Then put them back up."* The second review of Unit 6
