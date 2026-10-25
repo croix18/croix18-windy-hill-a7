@@ -3662,7 +3662,8 @@ the corresponding lessons, however they are due by the unit assessment."** Amend
 - **Due by the unit's test:** every skill assigned in a unit is due on the first day of that unit's test (M7's tests run two
   periods, A7's one). The date is the test's, so it moves when the test moves — the plan follows the class.
 - **A day on no test of its own** — A7's threads, taught after a unit's exam — is due by the next unit test after it. With no
-  test after it (the end of the year), the next class.
+  test after it (the end of the year), the next class. Asked about Thread B (18–19 Nov, so due at the Unit 11 test on Fri 11
+  Dec, after Thanksgiving week), Croix, 10:16 am: *"Leave them due at the test."*
 - **Where it is written:** the due-date sheets (M7's `M7 IXL Due Dates 2026-27.csv` and the scope's table, `tools/mkscope.py`;
   A7's `A7 IXL Due Dates 2026-27.md`, `tools/scope_calendar.py`), the spine and the phone page (Windmill `plan/pagecore.js`),
   the website's schedules, both master sheets, and every lesson's IXL slide and Lesson Plan: "Due by the Unit 10 test." — the
