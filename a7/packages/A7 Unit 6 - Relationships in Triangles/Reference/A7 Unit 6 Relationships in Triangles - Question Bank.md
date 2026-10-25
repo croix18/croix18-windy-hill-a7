@@ -72,3 +72,36 @@ the unit is planned. The printed keys in each lesson's `Keys` folder are generat
 1. 15 ft  2. √109 in ≈ 10.4 in  3. √205 m ≈ 14.3 m  4. 6 cm  5. √33 in ≈ 5.7 in  6. 12 m  7. 10 cm  8. B B
 
 ---
+
+## 6.04  Pythagorean Theorem in Real-World Problems
+
+*MA.8.GR.1.1*
+
+**Variation.**  Boards 1–2: a diagonal and a ladder's height, both whole; 3 a ramp to the tenth; 4 the ladder's foot, voted. The pattern breaks at 5 — two walks and their difference — and 6, which asks only which length is c; 7 is will-it-fit by a tenth; 8 has the extra number; 9 is the reason in writing. The independent set: a diagonal, a ladder's foot, a ramp, across against around, will it fit, a kite's height.
+
+**Read this once, when you plan the unit.**
+
+- One book lesson (6.4). Built from the benchmark and the B1G-M first, then read against Math Nation (the unit audit). Its real-world shapes are all here — the ladder, the ramp, the screen, the shortcut, the kite, will-it-fit, the wire to a pole — with numbers of our own.
+- The book's 6.4.5 asks for a box's space diagonal: 3-D is beyond GR.1.1 and out of this unit. Its own ladder item (12 ft, 7 ft out) is keyed 9.8 for 9.7 (audit D13): not used.
+- The state's two named misconceptions for GR.1.1 lead today: misidentifying the hypotenuse, and failing to see the triangle in the story. Board 6 asks only which length is c, with no arithmetic, so the vote shows which one the room has.
+- Notes III is the B1G-M's own ladder item (10 ft, 3 ft out, √91 ≈ 9.5 ft), worked in the notes so that no board repeats it.
+
+**What the audit against Math Nation found.**
+
+- Every item re-derived by sympy at build time; every irrational answer checked exactly and to the tenth, every radicand a whole number up to 225 with no square factor (the unit's own check beside the kit's).
+- Math Nation 6.4 read against this lesson (A7 Unit 6 Audit): its ladder, ramp, screen, shortcut and wire shapes are here with our own numbers; its space diagonals (6.4.5) and over-225 radicands are not.
+
+**What changed from the book.**
+
+- 6.4.2 (partner field task) → Notes II, the diagonal of a garden, from the front.
+- 6.4.5 (space diagonals of a box) → out: 3-D is beyond MA.8.GR.1.1.
+- 6.4.3–6.4.6 word problems → Examples 1–2 and boards 1–8, each with its own numbers.
+- 6.04 Additional Practice and Homework → the independent set and IXL; board 9 is the exit evidence.
+
+**Question Bank answers.**  
+1. 15 in  2. About 13.7 ft  3. About 9.2 m  4. 4 m  5. Yes — the diagonal is about 12.04 in, just over 12.  6. 12 m  7. 10 m  8. B B  9. C C
+
+**Question Bank – Additional answers.**  
+1. 10 ft  2. About 10.2 ft  3. About 10.4 ft  4. 6 m  5. No — the diagonal is only about 14.2 in.  6. 15 m  7. 15 m  8. A A  9. B B
+
+---

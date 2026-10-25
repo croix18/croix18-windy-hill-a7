@@ -1,0 +1,285 @@
+{
+ "deck": "A7 6.04 Pythagorean Theorem in Real-World Problems - Slides.pptx",
+ "slides": [
+  {
+   "n": 1,
+   "title": "Pythagorean Theorem in Real-World Problems",
+   "sub": "",
+   "min": 1,
+   "note": "Post the learning target. Say one line and nothing else yet: \u201cToday the triangle is hidden in a ladder, a ramp, a screen or a field: find it first.\u201d",
+   "kind": "title"
+  },
+  {
+   "n": 2,
+   "title": "Warm-Up",
+   "sub": "On your own. Four minutes. No notes.",
+   "min": 4,
+   "note": "Q4 is today's first move: every rectangle \u2014 a screen, a lawn, a box \u2014 has four right angles, so its diagonal is a hypotenuse. Say that after the reveal. Two minutes silent, then reveal.",
+   "kind": "warmup"
+  },
+  {
+   "n": 3,
+   "title": "Warm-Up",
+   "sub": "Answers.",
+   "min": 1,
+   "note": "Reveal. Ask for the band each question came from only if time allows.",
+   "kind": "warmup"
+  },
+  {
+   "n": 4,
+   "title": "Vocabulary",
+   "sub": "The new words, before they are used.",
+   "min": 1,
+   "note": "Read each word and its meaning once; the notes use them next. Students copy the words, not the definitions.",
+   "kind": "vocab"
+  },
+  {
+   "n": 5,
+   "title": "Notes",
+   "sub": "Copy the four triangles' names.",
+   "min": 3,
+   "note": "Before any number: where is the square corner? A wall meets the ground square, so a leaning ladder is c. A rectangle's corner is square, so a screen's or a lawn's diagonal is c. A ramp's rise stands square on the ground, so the ramp's surface is c. A kite's string runs from the ground to the kite above a point on the ground, so the string is c. Sketch it, mark the corner, name c \u2014 then the theorem.\nOFF: 'Sketch it. Mark the square corner. Name c.'",
+   "kind": "notes"
+  },
+  {
+   "n": 6,
+   "title": "Notes",
+   "sub": "",
+   "min": 4,
+   "note": "A garden 5 m by 12 m with a path from corner to corner. The garden's corner is square, so the path is c: 25 + 144 = 169 and the path is 13 m. Ask the room how much shorter the path is than walking along two sides (17 m): 4 m.\nOFF: 'A rectangle's diagonal is always a hypotenuse.'",
+   "kind": "notes"
+  },
+  {
+   "n": 7,
+   "title": "Notes",
+   "sub": "",
+   "min": 4,
+   "note": "A 10-ft ladder with its foot 3 ft from the wall: the ladder is c, so the height is a leg \u2014 subtract. 100 \u2212 9 = 91, and the ladder reaches \u221a91 \u2248 9.5 ft. The state guide's own item (B1G-M, MA.8.GR.1.1), worked here so no board repeats it. (radicand within GR.1.1's whole numbers up to 225 (Clarification 3), square-free; not one of NSO.1.7's perfect squares, so not_bound.)\nOFF: 'How high is a leg. Subtract.'",
+   "kind": "notes"
+  },
+  {
+   "n": 8,
+   "title": "Example 1",
+   "sub": "A ramp's length.",
+   "min": 1,
+   "note": "Ask where the square corner is before any number: under the high end, where the rise meets the ground. So the ramp is c.",
+   "kind": "example"
+  },
+  {
+   "n": 9,
+   "title": "Example 1",
+   "sub": "Worked.",
+   "min": 3,
+   "note": "The rise and the run are the legs; the ramp is c. 4 + 169 = 173, \u221a173 = 13.15, so 13.2 ft \u2014 a little longer than the run, as a gentle ramp is. A board with 15 added the rise and the run. (radicand within GR.1.1's whole numbers up to 225 (Clarification 3), square-free; not one of NSO.1.7's perfect squares, so not_bound.)",
+   "kind": "example"
+  },
+  {
+   "n": 10,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "A screen's corner is square, so the diagonal is c: 49 + 100 = 149, \u221a149 = 12.21, so 12.2 in. A board with 17 added the sides.",
+   "kind": "yourturn"
+  },
+  {
+   "n": 11,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 12,
+   "title": "Example 2",
+   "sub": "How high a ladder reaches.",
+   "min": 1,
+   "note": "Ask which length is c before anyone squares: the ladder, 12 ft. The height is a leg \u2014 so this one subtracts.",
+   "kind": "example"
+  },
+  {
+   "n": 13,
+   "title": "Example 2",
+   "sub": "Worked.",
+   "min": 3,
+   "note": "The ladder is c: h\u00b2 = 144 \u2212 25 = 119, \u221a119 = 10.91, so 10.9 ft \u2014 less than 12, as a leg must be. A board with 13 added the squares: a 12-ft ladder cannot reach 13 ft. (radicand within GR.1.1's whole numbers up to 225 (Clarification 3), square-free; not one of NSO.1.7's perfect squares, so not_bound.)",
+   "kind": "example"
+  },
+  {
+   "n": 14,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "169 \u2212 36 = 133, \u221a133 = 11.53, so 11.5 ft. A board with 14.3 added the squares (\u221a205) \u2014 higher than the ladder is long.",
+   "kind": "yourturn"
+  },
+  {
+   "n": 15,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 16,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The screen's corner is square, so the diagonal is c. A board with 14 added the sides.",
+   "kind": "wb"
+  },
+  {
+   "n": 17,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 18,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The ladder is c, so the height is a leg: 225 \u2212 81 = 144, 12 ft. A board with 17.5 added the squares (\u221a306) \u2014 higher than the ladder is long.",
+   "kind": "wb"
+  },
+  {
+   "n": 19,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 20,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "\u221a145 = 12.04, so 12.0 ft: the tenth is written even when it is 0 \u2014 the ramp is a little longer than the run, not exactly 12. (radicand within GR.1.1's whole numbers up to 225 (Clarification 3), square-free; not one of NSO.1.7's perfect squares, so not_bound.)",
+   "kind": "wb"
+  },
+  {
+   "n": 21,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 22,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic. Option B added (the foot farther away than the ladder is long \u2014 impossible), option C subtracted the lengths, option D stopped at a\u00b2. A split goes back to the sketch: which side is c?",
+   "kind": "wb"
+  },
+  {
+   "n": 23,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 24,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Two numbers, then their difference: around 21 m, across 15 m. A board with 15 answered the walk, not the question.",
+   "kind": "wb"
+  },
+  {
+   "n": 25,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 26,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic, and no arithmetic: the state's named misconceptions for GR.1.1 are both here \u2014 misidentifying the hypotenuse and failing to see the triangle in the story. Ask where the square corner is.",
+   "kind": "wb"
+  },
+  {
+   "n": 27,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 28,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The longest straight line that lies flat in the box is its diagonal: \u221a193 = 13.89, just short of 14. A close call, on purpose: the answer is decided by the tenth. (radicand within GR.1.1's whole numbers up to 225 (Clarification 3), square-free; not one of NSO.1.7's perfect squares, so not_bound.)",
+   "kind": "wb"
+  },
+  {
+   "n": 29,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 30,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The extra-number board (ruling 22): the weight is bait. 100 \u2212 49 = 51, \u221a51 = 7.14, so 7.1 ft. (radicand within GR.1.1's whole numbers up to 225 (Clarification 3), square-free; not one of NSO.1.7's perfect squares, so not_bound.)",
+   "kind": "wb"
+  },
+  {
+   "n": 31,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 32,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Take your time. Boards up when you have written it.",
+   "min": 0,
+   "note": "Written, and the exit evidence: the reason, not a number. A board that tries a foot distance has not named the hypotenuse.",
+   "kind": "wb"
+  },
+  {
+   "n": 33,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 34,
+   "title": "Independent Set",
+   "sub": "Six questions. On your own, in writing.",
+   "min": 6,
+   "note": "Hand out the Independent Set; the same six questions are on the board. Silent work. Circulate and mark what you see; do not teach. Whatever is not finished goes home.",
+   "kind": "independent"
+  },
+  {
+   "n": 35,
+   "title": "IXL",
+   "sub": "Last five minutes.",
+   "min": 5,
+   "note": "IXL: every listed skill is required, SmartScore 67. Due at the start of the next class.",
+   "kind": "ixl"
+  }
+ ]
+}

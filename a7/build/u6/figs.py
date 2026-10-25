@@ -35,25 +35,37 @@ def slide(spec, inches=3.4, pt=18, reserve=0.45, max_h=None):
 
     def height(w):
         out["in"] = round(w, 2)
-        return figkit.draw(figkit.slide(out), out["in"])[2]
+        try:
+            return figkit.draw(figkit.slide(out), out["in"])[2]
+        except ValueError:                   # too narrow: a side runs through a label at this width
+            return None
 
-    # height grows with width, nearly in a straight line once the labels' fixed size is counted: two draws give the
-    # line, and a secant step or two lands on max_h
-    w0, h0 = inches, height(inches)
-    if h0 <= max_h:
+    # height grows with width, nearly in a straight line once the labels' fixed size is counted: a secant search
+    # lands on max_h in a few draws; a width where the labels collide is a floor, and the search goes wider
+    h0 = height(inches)
+    if h0 is not None and h0 <= max_h:
+        out["in"] = inches
         return out
-    w1 = w0 * max_h / h0
-    h1 = height(w1)
-    for _ in range(3):
-        if abs(h1 - max_h) <= max_h * 0.02 or h1 == h0:
-            break
-        w2 = max(0.4, min(inches, w1 + (max_h - h1) * (w0 - w1) / (h0 - h1)))
-        w0, h0, w1, h1 = w1, h1, w2, height(w2)
-    if h1 > max_h * 1.02:                    # still too tall: step down until it fits
-        while h1 > max_h * 1.02 and w1 > 0.5:
-            w1 *= 0.95
-            h1 = height(w1)
-    out["in"] = round(w1, 2)
+    pts = [(inches, h0)] if h0 is not None else []
+    best, floor = None, 0.0
+    guess = inches * (max_h / h0 if h0 else 0.6)
+    for _ in range(7):
+        g = round(max(floor + 0.03, min(inches, guess)), 2)
+        hg = height(g)
+        if hg is None:
+            floor = max(floor, g)
+            guess = (g + min([w for w, _ in pts] + [inches])) / 2
+            continue
+        pts.append((g, hg))
+        if hg <= max_h:
+            if best is None or g > best[0]:
+                best = (g, hg)
+            if hg >= max_h * 0.97:
+                break
+        near = sorted(pts, key=lambda p: abs(p[1] - max_h))[:2]
+        (w1, h1), (w2, h2) = near if len(near) == 2 else (near[0], near[0])
+        guess = w1 + (max_h - h1) * (w2 - w1) / (h2 - h1) if h2 != h1 else g * max_h / hg
+    out["in"] = round(best[0] if best else (min(w for w, _ in pts) if pts else inches), 2)
     return out
 
 
@@ -247,10 +259,14 @@ def strips(sets, unit="", fs=22, pt=9.5, inches=4.2):
     return dict(kind="shapes", fs=fs, pt=pt, **{"in": inches}, shapes=sh)
 
 
-def ladder(wall, foot, l_ladder=None, l_wall=None, l_foot=None, unit="ft", fs=22, pt=9.5, inches=2.0):
+def ladder(wall, foot, l_ladder=None, l_wall=None, l_foot=None, unit="ft", fs=22, pt=9.5, inches=2.0, height_out=None):
     """A ladder leaning on a wall: the wall stands up from the ground, the ladder from its foot on the ground to the
     wall. `wall` is how high the ladder's top is, `foot` how far its foot is from the wall; the ladder's own length
-    follows from them and a numeric l_ladder must agree."""
+    follows from them and a numeric l_ladder must agree. The height's label goes beside the wall inside the triangle,
+    or — for a steep ladder, where there is no room between the wall and the ladder (`height_out`, the default when
+    the ladder is steeper than 2 to 1) — on the wall's outer face."""
+    if height_out is None:
+        height_out = wall > 2 * foot
     c = math.hypot(wall, foot)
     if l_ladder is not None and _num(l_ladder) is not None:
         v = _num(l_ladder)
@@ -267,7 +283,9 @@ def ladder(wall, foot, l_ladder=None, l_wall=None, l_foot=None, unit="ft", fs=22
     for (p, q, lab) in (((0, 0), (0, wall), l_wall), ((0, 0), (foot, 0), l_foot), ((foot, 0), (0, wall), l_ladder)):
         L = _lab(lab, unit)
         if L:
-            if p == (0, 0) and q == (0, wall):          # the height goes inside, beside the wall, clear of the ladder
+            if p == (0, 0) and q == (0, wall) and height_out:   # outside the wall's face, clear of the ladder
+                sh.append(_t(-W, wall * 0.5, L, ha="right", va="center", off=(-0.35, 0)))
+            elif p == (0, 0) and q == (0, wall):          # the height goes inside, beside the wall, clear of the ladder
                 sh.append(_t(0, wall * 0.42, L, ha="left", va="center", off=(0.45, 0)))
             else:
                 sh.append(_side_label(p, q, cen, L))
