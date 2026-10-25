@@ -1,0 +1,285 @@
+{
+ "deck": "A7 6.01 Triangle Inequality Theorem; Converse of the Pythagorean Theorem - Slides.pptx",
+ "slides": [
+  {
+   "n": 1,
+   "title": "Triangle Inequality Theorem; Converse of the Pythagorean Theorem",
+   "sub": "",
+   "min": 1,
+   "note": "Post the learning target. Say one line and nothing else yet: \u201cToday: which three lengths make a triangle \u2014 and which make a right one.\u201d",
+   "kind": "title"
+  },
+  {
+   "n": 2,
+   "title": "Warm-Up",
+   "sub": "On your own. Four minutes. No notes.",
+   "min": 4,
+   "note": "Q3 and Q4 are a pair: 5\u00b2 + 12\u00b2 = 169 = 13\u00b2, today's converse before it has a name. Say that in one sentence after the reveal and no more. Two minutes silent, then reveal.",
+   "kind": "warmup"
+  },
+  {
+   "n": 3,
+   "title": "Warm-Up",
+   "sub": "Answers.",
+   "min": 1,
+   "note": "Reveal. Ask for the band each question came from only if time allows.",
+   "kind": "warmup"
+  },
+  {
+   "n": 4,
+   "title": "Vocabulary",
+   "sub": "The new words, before they are used.",
+   "min": 1,
+   "note": "Read each word and its meaning once; the notes use them next. Students copy the words, not the definitions.",
+   "kind": "vocab"
+  },
+  {
+   "n": 5,
+   "title": "Notes",
+   "sub": "Copy the rule.",
+   "min": 4,
+   "note": "Three sets of sticks on the longest one: 3 and 4 cannot reach across 9 (7 < 9); 4 and 5 reach exactly and lie flat on the 9 \u2014 no triangle (4 + 5 = 9); 5 and 6 meet above it (11 > 9). **Say:** add the two shorter sides \u2014 if that is MORE than the longest, it makes a triangle; equal lies flat. The FAST reference sheet prints all three inequalities; only the shorter pair can ever fail. It holds for every triangle, not only right ones (the state's named misconception, carried over from Pythagorean work). Real sticks or straws can fake the equal case into a 'triangle' \u2014 the rule decides, not the sticks.\nOFF: 'Equal is not enough. Equal lies flat.'",
+   "kind": "notes"
+  },
+  {
+   "n": 6,
+   "title": "Notes",
+   "sub": "",
+   "min": 3,
+   "note": "Two sides, 4 and 9. The third side has to be long enough to reach (more than 9 \u2212 4 = 5) and short enough to be covered (less than 4 + 9 = 13). 5 and 13 themselves are the flat cases. **Say:** between the difference and the sum, never equal to either.",
+   "kind": "notes"
+  },
+  {
+   "n": 7,
+   "title": "Notes",
+   "sub": "",
+   "min": 4,
+   "note": "The 3-4-5 triangle with a square on each side: 9 + 16 = 25. That is the Pythagorean Theorem \u2014 memorize it; 6.03 uses it. Turned around it is the converse, today's test: take the two shorter sides and the longest; if their squares match, the corner is square. 9, 15, 12 is right (81 + 144 = 225) even though the longest side is listed in the middle; 5, 6, 8 is not (61 is not 64). Equal squares \u21d2 right is the converse; unequal \u21d2 not right is the theorem itself, since every right triangle's squares match \u2014 say both, because the book's keys lean on the converse for the 'no'.\nOFF: 'Circle the longest side first. It is the only one that can be the hypotenuse.'",
+   "kind": "notes"
+  },
+  {
+   "n": 8,
+   "title": "Example 1",
+   "sub": "Can the three lengths make a triangle?",
+   "min": 1,
+   "note": "Ask which two sides get added before anyone adds: the two shorter, 5 and 8.",
+   "kind": "example"
+  },
+  {
+   "n": 9,
+   "title": "Example 1",
+   "sub": "Worked.",
+   "min": 3,
+   "note": "5 + 8 = 13, and 13 is less than 14: the two short sides cannot reach across. A board that added 8 + 14 and said yes tested the wrong pair \u2014 the only pair that can fail is the two shorter.",
+   "kind": "example"
+  },
+  {
+   "n": 10,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "7 + 9 = 16 > 15: yes. Catches the student who sees a big 15 and says no without adding.",
+   "kind": "yourturn"
+  },
+  {
+   "n": 11,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 12,
+   "title": "Example 2",
+   "sub": "Is it a right triangle?",
+   "min": 1,
+   "note": "Ask which side is c before anyone squares: 20, the longest, though it is listed first.",
+   "kind": "example"
+  },
+  {
+   "n": 13,
+   "title": "Example 2",
+   "sub": "Worked.",
+   "min": 3,
+   "note": "The longest side is 20, listed first. 12\u00b2 + 16\u00b2 = 144 + 256 = 400 = 20\u00b2, so the corner between the 12 and the 16 is square. A board that tested 20\u00b2 + 12\u00b2 against 16\u00b2 put the longest side among the legs.",
+   "kind": "example"
+  },
+  {
+   "n": 14,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "64 + 121 = 185, not 196: not right. Same structure, its own numbers; a board that says 'right' compared 185 with something other than 14\u00b2.",
+   "kind": "yourturn"
+  },
+  {
+   "n": 15,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 16,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The two short sides cannot reach: 9 < 10.",
+   "kind": "wb"
+  },
+  {
+   "n": 17,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 18,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Two equal sides are no problem; 12 > 11. Ask the room what the third side would have to be for the answer to change (12 or more).",
+   "kind": "wb"
+  },
+  {
+   "n": 19,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 20,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic. Option A is the equal case; options C and D are the wrong pair, listed so the first two numbers fool anyone who adds them. A split goes back to Notes I's middle set of sticks.",
+   "kind": "wb"
+  },
+  {
+   "n": 21,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 22,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Notes II with new numbers. Boards that say 'from 5 to 19' included the flat cases.",
+   "kind": "wb"
+  },
+  {
+   "n": 23,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 24,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic. Options B and D are the two flat cases \u2014 the commonest wrong answers here; option A falls short.",
+   "kind": "wb"
+  },
+  {
+   "n": 25,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 26,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The converse with a bigger set. A board that added 8 + 15 = 23 used sides, not squares.",
+   "kind": "wb"
+  },
+  {
+   "n": 27,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 28,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The diagnostic that matters today: the longest side is listed FIRST. Option C is the misidentified hypotenuse; option B is right for the wrong reason \u2014 the inequality says only that it is a triangle; option D added the sides. On a split, ask each side of the room which side they circled.",
+   "kind": "wb"
+  },
+  {
+   "n": 29,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 30,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The extra-number board (ruling 22): the 12 pounds is bait. The right angle is between the 20 ft and 21 ft sides \u2014 ask where it is.",
+   "kind": "wb"
+  },
+  {
+   "n": 31,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 32,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Take your time. Boards up when you have written it.",
+   "min": 0,
+   "note": "Written, and the exit evidence: the two tests in one sentence each. A board that answers only 'no' gets asked which test Ana used.",
+   "kind": "wb"
+  },
+  {
+   "n": 33,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 34,
+   "title": "Independent Set",
+   "sub": "Six questions. On your own, in writing.",
+   "min": 6,
+   "note": "Hand out the Independent Set; the same six questions are on the board. Silent work. Circulate and mark what you see; do not teach. Whatever is not finished goes home.",
+   "kind": "independent"
+  },
+  {
+   "n": 35,
+   "title": "IXL",
+   "sub": "Last five minutes.",
+   "min": 5,
+   "note": "IXL: every listed skill is required, SmartScore 67. Due at the start of the next class.",
+   "kind": "ixl"
+  }
+ ]
+}
