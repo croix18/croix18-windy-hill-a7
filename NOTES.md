@@ -26,13 +26,16 @@ one of those issues. I give you permission to edit and to make fixes on the webs
   Unit 3 make-up from the teacher copy, which is fixed. Its package papers still say "two class periods".
 - **The stale kit copy at the top of `a7/` is removed** (52 files, 24 Oct; nothing read it).
 - **The website** (mrshaffer-site `08741ba`, deployed — Workers Builds: success; Croix's permission at 9:36): A7
-  published from `a7302000` — every unit's package (Units 4–6 rebuilt; Unit 6 and Thread B for the first time), the
-  practice pages and teacher copies of Units 3, 4 and 6, and the web slides; the A7 course page regenerated.
+  published from `a7302000` — every unit's package, the practice pages and teacher copies, the web slides; the A7 course
+  page regenerated. **Unit 6 and Thread B were then taken down** (site `26d4820`, the head engineer's session — Croix,
+  11:14 am: *"Take them down until a review chat goes over them. Then put them back up."*) and the site's `hold.json`
+  keeps them off until a review chat publishes them (site `1da4c03`).
 - **Windmill:** `7611a99`, `02de689`; HANDOFF `76e7cf2` (M7 should vendor `02de689`).
 - **11:12 am — Croix: *"Can you get rid of one class period. I don't need that text at all."*** Windmill `ca12f9b`: a
   one-period test says nothing about its length (the papers and the teacher copy's printed test); M7's two-period papers
   keep theirs. Units 4 and 5 rebuilt and installed at 0 findings (each form's head is now "Form A · 29 points"); the
-  teacher copies of Units 3, 4 and 6 rebuilt; the site republished.
+  teacher copies of Units 3, 4 and 6 rebuilt; site `300fd5b` (deployed): Units 4 and 5 and the teacher copies of Units
+  3 and 4 republished, Unit 6 still held for its review.
 
 ## 25 October — A7 Unit 6 and Thread B are built, reviewed and installed
 
@@ -52,8 +55,8 @@ after the test and not on it). Ruling 52 moved the year mid-build (Unit 11 in De
   (`teacher/A7 Unit 6 Teacher Copy.html`), each with its CHECKED. Its checks — `u6_check.js` (3,000 sets), `verify.py` (a
   sympy oracle that reads every question back from what a student sees), 31 planted errors — the stability lock, the
   variety floor and the kit's browser check pass. The teacher copy prints the test as 1–5 random sets with the paper's
-  shape (no set number on a student's sheet; points; the key with its set number and the score tracker). Published on
-  25 Oct with Croix's permission (above).
+  shape (no set number on a student's sheet; points; the key with its set number and the score tracker). Held off the
+  website until a review chat goes over the unit (Croix, 25 Oct, 11:14 am; the site's `hold.json`).
 - **The unit's standing decisions** (audit §6): every square root a student takes has a whole radicand up to 225
   (Clarification 3, read literally), so a whole hypotenuse is 5, 10, 13 or 15; no radicand on the papers has a square
   factor; no distance formula (a slanted distance is its right triangle on the grid); every mirror and nested item says
