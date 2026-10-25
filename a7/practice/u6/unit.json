@@ -1,0 +1,26 @@
+{
+ "title": "A7 Unit 6 Practice Test",
+ "file": "unit-6-practice-test.html",
+ "download": "A7 Unit 6 Practice Test.html",
+ "css": [
+  "fig.css",
+  "unit.css"
+ ],
+ "scripts": [
+  "engine.js",
+  "fig.js",
+  "coach.js",
+  "unit.js"
+ ],
+ "checks": [
+  "node u6_check.js 3000 1500",
+  "python3 verify.py",
+  "python3 plant_check.py"
+ ],
+ "variety": {
+  "allow": {
+   "2.1a": "A whole-number hypotenuse whose radicand stays within the benchmark's whole numbers up to 225 (MA.8.GR.1.1, Clarification 3) comes from one of four triangles — 3-4-5, 6-8-10, 5-12-13, 9-12-15 — each with its legs in either order: 8 versions. Part (b), a whole leg, has 21, and every other part of the test is over 100.",
+   "2.1b": "A whole-number leg whose radicand is a whole number up to 225 (MA.8.GR.1.1, Clarification 3) is one of 21 right triangles, from 5-3 to 113-112: c² − a² must be a perfect square of 15 or less. 21 versions."
+  }
+ }
+}

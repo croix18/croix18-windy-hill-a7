@@ -19,7 +19,7 @@ M = dict(
     handouts={},
     before_unit=[
         "**Built in the order the rulebook asks (§16):** from the benchmarks first, then read against Math Nation 6.1–6.8, its test and 16.1–16.2 — the audit is in Reference.",
-        "**Every square root has a whole radicand up to 225** (GR.1.1 and GR.1.2, Clarification 3), and none has a square factor, so √n is already in simplest form; an irrational answer is also given to the nearest tenth wherever the question asks for a measurement. Math Nation's own test breaks the 225 bound on four of its five Pythagorean items.",
+        "**Every square root has a whole radicand up to 225** (GR.1.1 and GR.1.2, Clarification 3). On the papers none has a square factor, so √n is already in simplest form; an irrational answer is also given to the nearest tenth wherever the question asks for a measurement. The practice page's nearest-tenth questions may take the root of a number with a square factor (√72 ≈ 8.5) — the decimal is the answer and the page never prints that radical — which is what gives each of them a hundred versions. Math Nation's own test breaks the 225 bound on four of its five Pythagorean items.",
         "**No distance formula** (GR.1.2, Clarification 2): a slanted distance is always the right triangle drawn on the grid, its legs read from the coordinates.",
     ],
 )

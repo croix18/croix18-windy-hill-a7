@@ -1,0 +1,24 @@
+svg.fig{display:block;width:100%;height:auto;margin:6px 0;overflow:visible}
+svg.fig .ln{fill:none;stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round}
+svg.fig .thin{stroke-width:1}
+svg.fig .thin2{fill:none;stroke:var(--mut);stroke-width:1}
+svg.fig .ext{stroke:var(--mut);stroke-width:.8;stroke-dasharray:2 3}
+svg.fig .dash{fill:none;stroke:var(--mut);stroke-width:1.4;stroke-dasharray:5 4}
+svg.fig .cut{stroke:var(--pen);stroke-width:2;stroke-dasharray:6 4}
+svg.fig .hl{stroke:var(--pen);stroke-width:2.4}
+svg.fig .hl2{stroke:var(--pen);stroke-width:3;opacity:.55}
+svg.fig .ra{fill:none;stroke:var(--ink);stroke-width:1.1}
+svg.fig .sh{fill:var(--mut);fill-opacity:.16;stroke:none}
+svg.fig .sh0{fill:none;stroke:none}
+svg.fig .sh2{fill:var(--pen);fill-opacity:.16;stroke:none}
+svg.fig .pool{fill:var(--paper);stroke:none}
+svg.fig .sq{fill:var(--pen);fill-opacity:.12;stroke:var(--pen);stroke-width:1.2}
+svg.fig .dot{fill:var(--ink)}
+svg.fig .lab,svg.fig .tx{font:600 13px var(--ui,system-ui,sans-serif);fill:var(--ink);text-anchor:middle;dominant-baseline:central}
+svg.fig .mut{fill:var(--mut);font-weight:400}
+/* A7 Unit 6: the coordinate plane, the axes' numbers, the mirror on the ground */
+svg.fig .gridln{fill:none;stroke:var(--mut);stroke-opacity:.28;stroke-width:.8}
+svg.fig .axis{stroke:var(--ink);stroke-width:1.3}
+svg.fig .tick{font:500 10.5px var(--ui,system-ui,sans-serif);fill:var(--mut);text-anchor:middle;dominant-baseline:central}
+svg.fig .mirror{stroke:var(--pen);stroke-width:4;stroke-linecap:round}
+
