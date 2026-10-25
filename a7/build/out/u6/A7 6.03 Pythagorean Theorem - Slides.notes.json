@@ -1,0 +1,285 @@
+{
+ "deck": "A7 6.03 Pythagorean Theorem - Slides.pptx",
+ "slides": [
+  {
+   "n": 1,
+   "title": "Pythagorean Theorem",
+   "sub": "",
+   "min": 1,
+   "note": "Post the learning target. Say one line and nothing else yet: \u201cToday the theorem runs forward: two sides of a right triangle find the third.\u201d",
+   "kind": "title"
+  },
+  {
+   "n": 2,
+   "title": "Warm-Up",
+   "sub": "On your own. Four minutes. No notes.",
+   "min": 4,
+   "note": "Q4 is Notes III's move before it has a name: 10\u00b2 \u2212 6\u00b2 = 64 = 8\u00b2, the missing leg of the 6-8-10 triangle Notes II builds. Say that in one sentence after the reveal. Two minutes silent, then reveal.",
+   "kind": "warmup"
+  },
+  {
+   "n": 3,
+   "title": "Warm-Up",
+   "sub": "Answers.",
+   "min": 1,
+   "note": "Reveal. Ask for the band each question came from only if time allows.",
+   "kind": "warmup"
+  },
+  {
+   "n": 4,
+   "title": "Vocabulary",
+   "sub": "The new words, before they are used.",
+   "min": 1,
+   "note": "Read each word and its meaning once; the notes use them next. Students copy the words, not the definitions.",
+   "kind": "vocab"
+  },
+  {
+   "n": 5,
+   "title": "Notes",
+   "sub": "Copy the theorem and the picture.",
+   "min": 4,
+   "note": "Mark the square corner first, every time: the side across from it is c, the hypotenuse, and it is the longest side. The other two are the legs, a and b, in either order. The theorem is not on the FAST sheet \u2014 it is memorized, and today it is on the board until it is. A triangle turned on its side has the same c: find the square corner, not the bottom (the state's named misconception is misidentifying the hypotenuse).\nOFF: 'Find the square corner. The side across from it is c.'",
+   "kind": "notes"
+  },
+  {
+   "n": 6,
+   "title": "Notes",
+   "sub": "",
+   "min": 4,
+   "note": "Legs 6 and 8: 36 + 64 = 100 and c = 10 \u2014 whole, because 6, 8, 10 is a Pythagorean triple. Legs 3 and 5: 9 + 25 = 34, and 34 is not a perfect square, so c = \u221a34 exactly, between 5 and 6 (25 < 34 < 36), about 5.8. Leave \u221a34 when the question wants the exact length; round to the tenth when it asks for a measurement, and round once, at the end. (radicand within GR.1.1's whole numbers up to 225 (Clarification 3), square-free; not one of NSO.1.7's perfect squares, so not_bound.)\nOFF: 'Square, add, then the root. The root is the last step.'",
+   "kind": "notes"
+  },
+  {
+   "n": 7,
+   "title": "Notes",
+   "sub": "",
+   "min": 3,
+   "note": "Hypotenuse 17, one leg 15: the 17 is c, so 17\u00b2 stands alone and the 15 goes beside the unknown leg: a\u00b2 + 225 = 289, a\u00b2 = 64, a = 8. Check: 8 is shorter than 17, as a leg always is. A board that adds 225 + 289 gets about 22.7 \u2014 longer than the hypotenuse, impossible, and the check catches it (the book names adding as the error; the state names misidentifying the hypotenuse).\nOFF: 'A leg is shorter than the hypotenuse. Always check.'",
+   "kind": "notes"
+  },
+  {
+   "n": 8,
+   "title": "Example 1",
+   "sub": "Find the hypotenuse.",
+   "min": 1,
+   "note": "Ask where the square corner is and which side is c before anyone squares.",
+   "kind": "example"
+  },
+  {
+   "n": 9,
+   "title": "Example 1",
+   "sub": "Worked.",
+   "min": 3,
+   "note": "49 + 81 = 130, not a perfect square: c = \u221a130, between 11 and 12 (121 < 130 < 144), and 11.40 to two places, so 11.4. A board with 16 added the legs. (radicand within GR.1.1's whole numbers up to 225 (Clarification 3), square-free; not one of NSO.1.7's perfect squares, so not_bound.)",
+   "kind": "example"
+  },
+  {
+   "n": 10,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "25 + 121 = 146, and \u221a146 = 12.08, so 12.1. A board with 16 added the legs; a board with 146 stopped before the root.",
+   "kind": "yourturn"
+  },
+  {
+   "n": 11,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 12,
+   "title": "Example 2",
+   "sub": "Find a leg.",
+   "min": 1,
+   "note": "Ask which number is c before anyone squares: 26, the longest \u2014 so this time a square is subtracted.",
+   "kind": "example"
+  },
+  {
+   "n": 13,
+   "title": "Example 2",
+   "sub": "Worked.",
+   "min": 3,
+   "note": "26 is c, so 26\u00b2 stands alone: b\u00b2 + 576 = 676, b\u00b2 = 100, b = 10, and 10 is shorter than 26. A board with 35.4 added the squares (\u221a1,252) \u2014 longer than the hypotenuse.",
+   "kind": "example"
+  },
+  {
+   "n": 14,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "121 \u2212 36 = 85, and \u221a85 = 9.22, so 9.2 \u2014 its own numbers, not the book's 12-ft ladder 7 ft out, which its own key gets wrong (audit D13). A board with 12.5 added the squares (\u221a157): longer than the hypotenuse.",
+   "kind": "yourturn"
+  },
+  {
+   "n": 15,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 16,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "A whole answer: 9, 12, 15 is 3, 4, 5 tripled. A board with 21 added the legs.",
+   "kind": "wb"
+  },
+  {
+   "n": 17,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 18,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "97 is between 81 and 100, so c is between 9 and 10. \u221a97 = 9.849 \u2014 so 9.8. A board with 9.9 rounded twice (9.849 \u2192 9.85 \u2192 9.9): the error in the book's own 6.04 key (audit D13). Round once, from the full value. (radicand within GR.1.1's whole numbers up to 225 (Clarification 3), square-free; not one of NSO.1.7's perfect squares, so not_bound.)",
+   "kind": "wb"
+  },
+  {
+   "n": 19,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 20,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Subtract: the 25 is c. A board with 32.0 added the squares (\u221a1,025) \u2014 longer than the hypotenuse.",
+   "kind": "wb"
+  },
+  {
+   "n": 21,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 22,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic. Option D added (longer than the hypotenuse \u2014 impossible), option C subtracted the sides, option B stopped at b\u00b2. A split goes back to Notes III's check.",
+   "kind": "wb"
+  },
+  {
+   "n": 23,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 24,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The point is which side is c: the square corner is not at the bottom, and the side across from it is the one marked ?. A board with 4.9 subtracted (7\u00b2 \u2212 5\u00b2 = 24) \u2014 it took the 7 as the hypotenuse. (radicand within GR.1.1's whole numbers up to 225 (Clarification 3), square-free; not one of NSO.1.7's perfect squares, so not_bound.)",
+   "kind": "wb"
+  },
+  {
+   "n": 25,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 26,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic. Option B put the 20 with the legs; option A added sides; option C doubled. Ask what 20 is before anyone votes. The answer slide finishes it: x = 12.",
+   "kind": "wb"
+  },
+  {
+   "n": 27,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 28,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "196 \u2212 81 = 115; \u221a115 = 10.72, so 10.7, and 10.7 < 14. A board with 16.6 added the squares (\u221a277) \u2014 longer than the hypotenuse. (radicand within GR.1.1's whole numbers up to 225 (Clarification 3), square-free; not one of NSO.1.7's perfect squares, so not_bound.)",
+   "kind": "wb"
+  },
+  {
+   "n": 29,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 30,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The extra-number board (ruling 22): the price is bait. The longest side of a right triangle is its hypotenuse; \u221a185 = 13.60. (radicand within GR.1.1's whole numbers up to 225 (Clarification 3), square-free; not one of NSO.1.7's perfect squares, so not_bound.)",
+   "kind": "wb"
+  },
+  {
+   "n": 31,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 32,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Take your time. Boards up when you have written it.",
+   "min": 0,
+   "note": "Written, and the exit evidence: the error named, and the check that names it \u2014 a leg longer than the hypotenuse cannot be.",
+   "kind": "wb"
+  },
+  {
+   "n": 33,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 34,
+   "title": "Independent Set",
+   "sub": "Six questions. On your own, in writing.",
+   "min": 6,
+   "note": "Hand out the Independent Set; the same six questions are on the board. Silent work. Circulate and mark what you see; do not teach. Whatever is not finished goes home.",
+   "kind": "independent"
+  },
+  {
+   "n": 35,
+   "title": "IXL",
+   "sub": "Last five minutes.",
+   "min": 5,
+   "note": "IXL: every listed skill is required, SmartScore 67. Due at the start of the next class.",
+   "kind": "ixl"
+  }
+ ]
+}

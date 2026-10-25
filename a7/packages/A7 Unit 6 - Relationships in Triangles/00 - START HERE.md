@@ -10,7 +10,7 @@ Nothing exists until it is committed. This folder is generated from `a7/build/u6
 
 ## How the files are named
 
-**Course, number, title, then what it is** — `A7 6.01 Triangle Inequality Theorem; Converse of the Pythagorean Theorem - Slides.pptx`, `A7 6.01 Triangle Inequality Theorem; Converse of the Pythagorean Theorem - Question Bank.docx`, `A7 6.01 Triangle Inequality Theorem; Converse of the Pythagorean Theorem - Question Bank - Key.docx`. Unit-wide files carry the unit instead of a lesson: `A7 Unit 6 Relationships in Triangles - All Slides.pptx`, `A7 Unit 6 Relationships in Triangles - Test.docx`, `A7 Unit 6 Relationships in Triangles - Test - Key.docx`, `A7 Unit 6 Relationships in Triangles - Review.docx`, `A7 Unit 6 Relationships in Triangles - Reference Sheet.docx`. Single spaces, pieces joined by ` - `, two-digit lesson numbers so everything sorts in teaching order. The same pattern in both courses (Croix, 4 October 2026). The two Thread B days are `A7 6.T1` and `A7 6.T2` (MA.8.GR.1.4 and 1.5 — Math Nation 16.1 and 16.2, taught after the Unit 6 test so the angle facts are in play for the rest of the year) and carry no book lesson number.
+**Course, number, title, then what it is** — `A7 6.03 Pythagorean Theorem - Slides.pptx`, `A7 6.03 Pythagorean Theorem - Question Bank.docx`, `A7 6.03 Pythagorean Theorem - Question Bank - Key.docx`. Unit-wide files carry the unit instead of a lesson: `A7 Unit 6 Relationships in Triangles - All Slides.pptx`, `A7 Unit 6 Relationships in Triangles - Test.docx`, `A7 Unit 6 Relationships in Triangles - Test - Key.docx`, `A7 Unit 6 Relationships in Triangles - Review.docx`, `A7 Unit 6 Relationships in Triangles - Reference Sheet.docx`. Single spaces, pieces joined by ` - `, two-digit lesson numbers so everything sorts in teaching order. The same pattern in both courses (Croix, 4 October 2026). The two Thread B days are `A7 6.T1` and `A7 6.T2` (MA.8.GR.1.4 and 1.5 — Math Nation 16.1 and 16.2, taught after the Unit 6 test so the angle facts are in play for the rest of the year) and carry no book lesson number.
 
 ---
 
@@ -35,6 +35,7 @@ Nothing exists until it is committed. This folder is generated from `a7/build/u6
 | Day | Planned | Lesson | Benchmark | The line that carries the day |
 |---|---|---|---|---|
 | 6.01–02 | Fri 6 Nov | Triangle Inequality Theorem; Converse of the Pythagorean Theorem | MA.8.GR.1.3 | The two shorter sides add to MORE than the longest. Right exactly when their squares add to the longest side's square. |
+| 6.03 | Mon 9 Nov | Pythagorean Theorem | MA.8.GR.1.1 | a² + b² = c², and c is across from the right angle. A leg: subtract. |
 | — | — | Unit Review | all six | unscored, sent home as practice (ruling 27a); the SSDD block is named on the key only |
 | — | Tue 17 Nov | Unit Assessment — one period, one paper | all four benchmarks, sections by benchmark in the order GR.1.3 · GR.1.1 · GR.1.2 · GR.2.4; the practice test alone (ruling 49), 14 questions, one period (ruling 51) | 18 points |
 
@@ -53,6 +54,7 @@ Title and learning target (1 min) → warm-up, four spaced-retrieval questions (
 | Lesson | Teaching (title, warm-up, notes, examples) | Whiteboard round | IXL | Total |
 |---|---|---|---|---|
 | 6.01–02 | 38 min | 10 min | 5 min | 53 min |
+| 6.03 | 38 min | 10 min | 5 min | 53 min |
 
 The whiteboard round is the remainder — 10–10 minutes across the unit — and the build refuses any plan whose remainder falls outside 10–20. Every plan totals 53 exactly. There is no shortened variant; short days are absorbed by the person in the room.
 
@@ -80,4 +82,4 @@ The whiteboard round is the remainder — 10–10 minutes across the unit — an
 - **Every square root has a whole radicand up to 225** (GR.1.1 and GR.1.2, Clarification 3), and none has a square factor, so √n is already in simplest form; an irrational answer is also given to the nearest tenth wherever the question asks for a measurement. Math Nation's own test breaks the 225 bound on four of its five Pythagorean items.
 - **No distance formula** (GR.1.2, Clarification 2): a slanted distance is always the right triangle drawn on the grid, its legs read from the coordinates.
 
-Installed: 18 files from the build, plus this page and the Reference folder.
+Installed: 36 files from the build, plus this page and the Reference folder.

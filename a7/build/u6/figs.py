@@ -21,12 +21,39 @@ def _t(x, y, s, **k):
 
 def slide(spec, inches=3.4, pt=18, reserve=0.45, max_h=None):
     """The same figure sized for a slide: wider, with labels that read from the back row. `reserve` is the room left
-    under the figure for the line that follows it; `max_h` narrows a tall figure (a ladder against a wall) so that it
-    is no taller than that many inches."""
+    under the figure for the line that follows it; `max_h` narrows a tall figure (a ladder against a wall) so that the
+    whole picture, labels included, is no taller than that many inches and no wider than `inches`. The labels keep
+    their size in points while the drawing shrinks, so the width is found by drawing it (the kit's own renderer,
+    a few passes) rather than guessed from the drawing's proportions."""
     out = dict(spec)
-    out["in"] = fit_width(spec, inches, max_h) if max_h else inches
     out["pt"] = pt
     out["reserve"] = reserve
+    out["in"] = inches
+    if not max_h:
+        return out
+    from lib import figkit
+
+    def height(w):
+        out["in"] = round(w, 2)
+        return figkit.draw(figkit.slide(out), out["in"])[2]
+
+    # height grows with width, nearly in a straight line once the labels' fixed size is counted: two draws give the
+    # line, and a secant step or two lands on max_h
+    w0, h0 = inches, height(inches)
+    if h0 <= max_h:
+        return out
+    w1 = w0 * max_h / h0
+    h1 = height(w1)
+    for _ in range(3):
+        if abs(h1 - max_h) <= max_h * 0.02 or h1 == h0:
+            break
+        w2 = max(0.4, min(inches, w1 + (max_h - h1) * (w0 - w1) / (h0 - h1)))
+        w0, h0, w1, h1 = w1, h1, w2, height(w2)
+    if h1 > max_h * 1.02:                    # still too tall: step down until it fits
+        while h1 > max_h * 1.02 and w1 > 0.5:
+            w1 *= 0.95
+            h1 = height(w1)
+    out["in"] = round(w1, 2)
     return out
 
 
