@@ -213,11 +213,13 @@ answer with no rounding place.
 1. **Clarification 3 read literally:** every square root a student takes has a whole radicand ≤ 225. A hypotenuse found
    from whole legs is then at most 15, and the only whole ones are 5, 10, 13 and 15 (3-4-5, 6-8-10, 5-12-13, 9-12-15);
    8-15-17, 7-24-25, 20-21-29 and 9-40-41 appear in the converse (no root is taken) or as a missing leg whose radicand is
-   in range (17 and 15 → √64; 17 and 8 → √225; 25 and 24 → √49). The cost is the practice page's whole-hypotenuse part,
-   which mixes whole and nearest-tenth answers (the brief's own remedy for variety). Say so and the bigger hypotenuses
-   come back.
-2. **No radicand has a square factor**, so √n is already simplest form: simplifying √50 to 5√2 is Algebra 1
-   (MA.912.NSO.1.4), and the book itself names "thinking √50 must be simplified" as a misconception.
+   in range (17 and 15 → √64; 17 and 8 → √225; 25 and 24 → √49). The cost is the practice page's whole-hypotenuse part
+   (2.1a): eight versions, allowed under the variety floor in `unit.json` with this reason (2.1b, a whole leg, has 21;
+   every other part is over 100). Say so and the bigger hypotenuses come back.
+2. **No radicand on the papers has a square factor**, so √n is already simplest form: simplifying √50 to 5√2 is Algebra 1
+   (MA.912.NSO.1.4), and the book itself names "thinking √50 must be simplified" as a misconception. The practice page's
+   nearest-tenth questions may take the root of a number with a square factor (√72): the decimal is the answer and the
+   page never prints that radical.
 3. **Every mirror and nested item says the triangles are similar** (the book's test Q11 and its 6.08 mirror items rest on
    a law of reflection it never teaches); Notes III teaches the same-sun reason for shadows.
 
@@ -238,8 +240,9 @@ Applied to the outline (pushed with this audit) and to the specs as they are wri
 4. **6.06.** Board 3 is a triangle with no right angle split by its height (the book's move), and the parallelogram moves
    to the independent set.
 5. **6.07.** The mirror (the test's Q11 shape) is on a board with similarity stated; the nested board gives the whole
-   distance from the shared corner, and the independent set's nested item gives the gap (the book's "add the gap"
-   move, its named overlapping-triangles error). "Similar means equal" — the state's misconception, which the book never
+   distance from the shared corner, and the independent set's nested item gave the gap (the book's "add the gap"
+   move, its named overlapping-triangles error) — until the review pass (§8): a move no slide shows, so it now gives the
+   whole distance, with its picture. "Similar means equal" — the state's misconception, which the book never
    names — is board 5's choice to refuse.
 6. **T-B1.** Two worked examples from the book's shapes (a right angle split by a ray; a vertical pair with the variable
    on both sides) and board 6 asks for the angle, so "reported x" — the book's most-named error — is a wrong board the
@@ -248,6 +251,103 @@ Applied to the outline (pushed with this audit) and to the specs as they are wri
    state misconceptions; board 7's choices are the book's "which relationship justifies this equation".
 8. **The test.** The practice paper takes the book's test shapes listed in §5: 14 questions, 18 points, every answer a
    number, a letter or a set of letters.
+
+## 8. The review pass (kickoff step 7)
+
+Three readers, each working alone and none shown this audit or the outline, read what ships — the built PDFs, the
+speaker notes and the practice page — on 24–25 October: **an explicit-instruction reviewer** (Craig Barton's lens and
+HOUSE STYLE §16, lesson by lesson); **an adversarial critic** (every key on every paper recomputed, all 280 slides looked
+at, 5,500 page sets machine-checked); and **a Florida FAST item-writing and content-review educator** (benchmark
+boundaries, item shapes, the reference sheet, register). Between them: 8 blockers (5 different ones, four of them found
+by all three readers), 41 fixes and 31 notes. Each was checked against the specs before anything changed, and every
+number below was recomputed. Fixed unless marked otherwise.
+
+**Blockers.**
+
+1. **6.T2's warm-up slide showed "0.7" for $0.75** — the dollar sign opened math. The stem and answer now escape it
+   (all three readers).
+2. **6.04 board 9's named error was false:** "the height never passes 9 ft" — an 11-ft ladder's height nears 11 ft. It
+   now says the height grows toward 11 ft but never reaches it, and the window is at 12 (all three).
+3. **The page's mirror question never said the triangles are similar** (40% of test sets), nor did Review Q29 —
+   standing decision 4 and 6.07's own Must-not. Both now say "The two right triangles are similar." (all three)
+4. **"Adding the same amount to every side never makes a similar triangle"** (Reference Sheet §4, and a 6.07 discussion
+   question) is false for an equilateral triangle. The sheet now says similar sides are multiplied, not added (3, 4, 5 plus
+   2 is 5, 6, 7: three different ratios); the discussion question asks which triangle adding *does* work for (FAST).
+5. **Named-mistake values that were wrong**, in the teacher's editions and plans: 6.T1 board 5 "−5" (it is −10) and board
+   6 "22" (21.5); 6.T2 board 3 "245" and Notes II "240°" (295 and 300 — the state's reflex angle is 360 minus the interior
+   angle beside it); 6.T2 Example 1 "231 added 180" (231 used 360) (all three).
+
+**What students see.**
+
+6. **The compound inequality is taught where it is tested.** The page's Q3, the paper and the Review asked for
+   "6 < x < 34"; 6.01 only ever said it in words. Notes II now writes 5 < x < 13 (never ≤), board 4's answer and the
+   independent set give the inequality, and board 5 is the test's "which inequality" vote. *Judgment call:* the FAST reader
+   notes that a compound inequality is Algebra 1 notation (MA.912.AR.2.6); the state's GR.1.3 items use the range, so the
+   unit teaches it rather than drop it.
+7. **Repeats of what the class has seen (ruling 43's reason).** 6.04 board 4 and independent Q2 were 6.03's worked
+   numbers; 6.04 board 3's √145 = 12.04 rounds to the run's 12.0, so its named error could not be told from the answer
+   (bank Q5 the same); 6.05's warm-up repeated 6.04's and 6.01 board 6; Review Q3a, Q7, Q9, Q11, Q19, Q20, Q23 and Practice
+   Test Q3, Q8 (Q12 and Q14 near) repeated class items; a 6.04 extra-bank item was board 5. All have new numbers. Practice
+   Test Q4a keeps 9-12-15: decision 1 leaves four whole hypotenuses, and the class has met all four.
+8. **Moves no slide showed.** 6.06 independent Q6 asked for a rectangle's fourth corner — now all four are given. 6.07:
+   the mirror and the nested pair were first met on boards, and the test's turned pair was only voted on. Example 2 is now
+   a worked mirror with a mirror Your Turn; Your Turn 1 gives the copy's sides out of order ("28, x and 12") so the student
+   sorts to match (the kit puts no figure on a Your Turn); board 2 is a turned figure, find x; independent Q5's nested pair
+   gives the whole distance, with its picture. 6.T1: an x on both sides is new to this class (A7 11.02, 2 December) — Example
+   2, Your Turn 2 and board 6 show the step that takes x off one side on its own line, and the "(Unit 1)" claims and §9 are
+   corrected. 6.T2: the isosceles base-angle fact is said in board 2 and independent Q2.
+9. **Reasons on the wrong letters.** 6.T2 board 7 and both banks' which-equation items had A's and D's reasons swapped
+   (A pairs the exterior angle with one remote angle; D puts the exterior angle in the Triangle Sum) (critic).
+10. **Pictures.** 6.T1 board 8's 50° ray is below the right side (it read as two crossed lines whose angles disagreed);
+    6.T1 Example 1's long label stands in the wider angle (it touched its ray); 6.04 board 7's 14-in umbrella is drawn
+    under its box, to scale (ruling 44); the mirror is drawn as a dark bar, the umbrella as a bar (the kit draws every
+    segment at one weight).
+11. **The equation choice** (6.03 board 6, Practice Test Q6, page Q6): "2 · a + 2x = 2 · c" was the sum choice doubled, so
+    two choices stood or fell together, and a leg of 2 printed "2² means 2 × 2, not 2 × 2". The doubling choice is now
+    "a² + x² = 2 · c"; the page's legs are 3 or more and never a sliver.
+12. **The practice page's sizes and shapes** (critic): the path question had "a field 2 m wide and 14 m long" in 21% of
+    sets — it now crosses a garden, lawn, patio, playground or courtyard, each no smaller than such a place is, its two
+    sides "9 meters by 13 meters" in either order (106 versions); a man or woman is 5–6 ft tall, a child 4–5.5; no
+    similar pair has sides with b² = ac, whose copy could be matched two ways (a 9-12-16 copied as 18, 24, x fits k = 2 and
+    k = 1.5); every similarity choice lists its sides shortest first, so its reason divides by size, not by place.
+13. **The state's words.** Lengths are written out where "in" reads as a word ("9 inches"), on the page, the paper and
+    the lessons' questions; the page and the paper ask "Round your answer to the nearest tenth."; ∠ and m∠ appear on
+    T-B1's Notes I and boards and T-B2's Notes I; the Reference Sheet carries the state's two lines as printed (its
+    triangles are in words — the sheet has no figure block).
+14. **Small ones.** 6.01's warm-up "an area of 5 cm² scaled by k = 3" read two ways ("a figure of area 5 cm²" now);
+    6.03's independent-set slide said "drawn turned" with no drawing on the slide (the words now say it is on the paper);
+    the Review gained the test's shapes — a select-all (Part A), a which-equation (Part B), a turned pair (Part F) — and its
+    same-surface block is four parts (rule 3), b now "Is PQR a right triangle?"; idioms gone ("as the crow flies", "know
+    it cold", "worth knowing by sight", "comes up short"); the Reference Sheet's root rule says "on this unit's papers".
+
+**Teacher pages.**
+
+15. **The Your Turn line in every Teacher Edition** printed only a note's first sentence, and its "(see the note above)"
+    pointed at nothing: all 16 Your Turn notes are now one sentence that names the wrong board; 6.07 board 3 and 6.T2
+    board 6 carry named errors (explicit-instruction reviewer, FAST).
+16. **Internal language out:** "The the" on five board-8 lines; checker text "(… so not_bound.)" in 21 notes; "the
+    brief's named error"; state-named errors cited "Florida B1G-M" only where the state names them, the unit's own as
+    Notes; "=" before 29 rounded values is "≈" (§7 of the house style); 6.01's Misconceptions list both state-named
+    GR.1.3 errors; 6.07's "40°, 60°, 80° — must they be similar?" (Angle-Angle, its own Must-not) replaced.
+17. **6.T1's printed Wednesday cut** (boards 3 and 7 and two minutes of IXL) is gone from the notes, the Teacher Edition
+    and the plan: HOUSE STYLE §9 prints none, and it fell five minutes short anyway.
+
+**Judged and kept.** 6.01 board 3's C and D are different wrong pairs (the first two listed; the longest with another),
+the paper's Q1 design. The Review's same-surface block stays in Part E, whose surface — the coordinate plane — it is,
+not at the end of Part A where rule 3 places it. The page's 2.1a (8 versions) and 2.1b (21) stay allowed (decision 1).
+Nested triangles get no worked example: board 7's reveal teaches them and the test never asks them. Triangles named by
+their corners (△ABC ~ △DEF), which GR.2.4 items use, are a note for the next pass.
+
+**The kit — reported to Croix, not touched.** The page check `page.js` reads "&lt;" twice and fails a correct page (it
+blocks the page's build); the teacher copy's random test prints "Set N" on the student header (and `#set-N` on the student
+page opens that set with its worked answers), with no points, no follow-through line, no Score Tracker, and "Answer:"
+labels; `deckkit`'s fixed IXL rows overprint T-B1 slide 35 (checks.py's only four findings); `plankit` prints the
+exponents unit's "Expand once per law" in every Lesson Plan; printed figures are lettered in STIX on Lexend papers
+(ruling 46); the core Hint can give a division's answer away (the unit wraps it).
+
+**After the fixes.** `gates.py u6`: 384 items re-derived, 0 findings. `checks.py out/u6`: the four kit overlaps only. The
+page: `u6_check.js` sound on 3,000 sets, `verify.py` sound on 1,500, `plant_check.py` 31 of 31 planted errors caught, the
+lock rewritten (unpublished, content version 1), every part over the variety floor but the two allowed.
 
 ## 9. Thread B — 16.1 and 16.2 against GR.1.4 and GR.1.5
 
@@ -270,7 +370,8 @@ Applied to the outline (pushed with this audit) and to the specs as they are wri
   "Building On: N/A".
 - **Inside the boundary.** No parallel lines or transversals, no polygon sums (GR.1.6), no reflex angles (360° only as a
   wrong choice). Everything is one-variable linear; six items have the variable on both sides (a vertical pair
-  ax = x + b) — the class solved those in Unit 1 — and three have decimal solutions. 16.2 needs 16.1's vertical angles
+  ax = x + b) — new to this class, which meets them in full in A7 11.02 on 2 December (Unit 1 had two-step equations
+  only; corrected in the review pass, §8) — and three have decimal solutions. 16.2 needs 16.1's vertical angles
   and linear pairs, so the two days stay in order.
 - **What the book names.** 16.1: thinking every adjacent pair has a special sum; not knowing a straight angle is 180°;
   writing the equation for the wrong relationship; setting a linear pair equal instead of summing it to 180. 16.2:
@@ -281,4 +382,5 @@ Applied to the outline (pushed with this audit) and to the specs as they are wri
   sides; "which relationship justifies this equation"; a chained two-triangle figure (one triangle gives x, the next one's
   exterior angle uses it); one figure solved two ways.
 - **Time.** 16.1 fits the 43-minute Wednesday once its cut-and-measure Exploration is replaced by notes, which is how
-  T-B1 is built; 16.2 runs 35–45 minutes without its opener and gets the 53-minute Thursday.
+  T-B1 is built; 16.2 runs 35–45 minutes without its opener and gets the 53-minute Thursday. No cut is printed anywhere
+  (HOUSE STYLE §9).

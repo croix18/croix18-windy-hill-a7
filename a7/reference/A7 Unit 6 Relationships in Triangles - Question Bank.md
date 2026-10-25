@@ -33,10 +33,10 @@ the unit is planned. The printed keys in each lesson's `Keys` folder are generat
 - 6.1 and 6.2 Wrap-Ups → the independent set and IXL under rulings 10 and 21; board 9 is the exit evidence.
 
 **Question Bank answers.**  
-1. Yes — 3 + 9 = 12 > 11  2. No — 5 + 7 = 12 < 13  3. No — 4 + 4 = 8 lies flat  4. More than 5 cm and less than 11 cm  5. 5 cm — the only whole number more than 4 and less than 6  6. Yes — 20.25 + 36 = 56.25 = 7.5²  7. Yes — 10² + 24² = 676 = 26²  8. No — 49 + 100 = 149, not 144  9. D D
+1. Yes — 3 + 9 = 12 > 11  2. No — 5 + 7 = 12 < 13  3. No — 4 + 4 = 8 lies flat  4. 5 < x < 11 (centimeters)  5. 4 < x < 6, so x = 5 cm — the only whole number between  6. Yes — 20.25 + 36 = 56.25 = 7.5²  7. Yes — 10² + 24² = 676 = 26²  8. No — 49 + 100 = 149, not 144  9. D D
 
 **Question Bank – Additional answers.**  
-1. Yes — 4 + 10 = 14 > 12  2. No — 6 + 9 = 15 < 17  3. No — 7 + 7 = 14 lies flat  4. More than 3 cm and less than 15 cm  5. 8 in — the only whole number more than 7 and less than 9  6. Yes — 5.76 + 10.24 = 16 = 4²  7. Yes — 15² + 36² = 1,521 = 39²  8. No — 64 + 81 = 145, not 144  9. B B
+1. Yes — 4 + 10 = 14 > 12  2. No — 6 + 9 = 15 < 17  3. No — 7 + 7 = 14 lies flat  4. 3 < x < 15 (centimeters)  5. 7 < x < 9, so x = 8 in — the only whole number between  6. Yes — 5.76 + 10.24 = 16 = 4²  7. Yes — 15² + 36² = 1,521 = 39²  8. No — 64 + 81 = 145, not 144  9. B B
 
 ---
 
@@ -51,7 +51,7 @@ the unit is planned. The printed keys in each lesson's `Keys` folder are generat
 - One book lesson (6.3). Built from the benchmark and the B1G-M first, then read against Math Nation (the unit audit): its partner exploration and matching cards become Notes I–III from the front and board 6.
 - Every radicand is a whole number up to 225 with no square factor (GR.1.1, Clarification 3; the unit's standing decision): √n is already in simplest form, and simplifying √50 is Algebra 1. So the only whole hypotenuses are 5, 10, 13 and 15; bigger triples appear as a missing leg (39 and 36 → √225).
 - The square corner first, every time: Notes I's triangle and board 5 are turned, so the bottom is not where c is — the state's named misconception for GR.1.1 is misidentifying the hypotenuse.
-- Round once, at the end, from the full value: board 2's √97 = 9.849 is 9.8 — rounding twice (9.85, then 9.9) is the error in Math Nation's own 6.04 key (audit D13).
+- Round once, at the end, from the full value: board 2's √97 ≈ 9.849 is 9.8 — rounding twice (9.85, then 9.9) is the error in Math Nation's own 6.04 key (A7 Unit 6 Audit, D13).
 
 **What the audit against Math Nation found.**
 
@@ -77,12 +77,12 @@ the unit is planned. The printed keys in each lesson's `Keys` folder are generat
 
 *MA.8.GR.1.1*
 
-**Variation.**  Boards 1–2: a diagonal and a ladder's height, both whole; 3 a ramp to the tenth; 4 the ladder's foot, voted. The pattern breaks at 5 — two walks and their difference — and 6, which asks only which length is c; 7 is will-it-fit by a tenth; 8 has the extra number; 9 is the reason in writing. The independent set: a diagonal, a ladder's foot, a ramp, across against around, will it fit, a kite's height.
+**Variation.**  Boards 1–2: a diagonal and a ladder's height, both whole; 3 a ramp to the tenth; 4 the ladder's foot, voted. The pattern breaks at 5 — two walks and their difference — and 6, which asks only which length is c; 7 is will-it-fit by a tenth; 8 has the extra number; 9 is the reason in writing. The independent set: a diagonal, a ladder's foot, a ramp, along two sides against across, will it fit, a kite's height.
 
 **Read this once, when you plan the unit.**
 
 - One book lesson (6.4). Built from the benchmark and the B1G-M first, then read against Math Nation (the unit audit). Its real-world shapes are all here — the ladder, the ramp, the screen, the shortcut, the kite, will-it-fit, the wire to a pole — with numbers of our own.
-- The book's 6.4.5 asks for a box's space diagonal: 3-D is beyond GR.1.1 and out of this unit. Its own ladder item (12 ft, 7 ft out) is keyed 9.8 for 9.7 (audit D13): not used.
+- The book's 6.4.5 asks for a box's space diagonal: 3-D is beyond GR.1.1 and out of this unit. Its own ladder item (12 ft, 7 ft out) is keyed 9.8 for 9.7 (A7 Unit 6 Audit, D13): not used.
 - The state's two named misconceptions for GR.1.1 lead today: misidentifying the hypotenuse, and failing to see the triangle in the story. Board 6 asks only which length is c, with no arithmetic, so the vote shows which one the room has.
 - Notes III is the B1G-M's own ladder item (10 ft, 3 ft out, √91 ≈ 9.5 ft), worked in the notes so that no board repeats it.
 
@@ -99,10 +99,10 @@ the unit is planned. The printed keys in each lesson's `Keys` folder are generat
 - 6.04 Additional Practice and Homework → the independent set and IXL; board 9 is the exit evidence.
 
 **Question Bank answers.**  
-1. 15 in  2. About 13.7 ft  3. About 9.2 m  4. 4 m  5. Yes — the diagonal is about 12.04 in, just over 12.  6. 12 m  7. 10 m  8. B B  9. C C
+1. 15 in  2. About 13.7 ft  3. About 9.2 m  4. 4 m  5. Yes — the diagonal is about 12.5 in.  6. 12 m  7. 10 m  8. B B  9. C C
 
 **Question Bank – Additional answers.**  
-1. 10 ft  2. About 10.2 ft  3. About 10.4 ft  4. 6 m  5. No — the diagonal is only about 14.2 in.  6. 15 m  7. 15 m  8. A A  9. B B
+1. 10 ft  2. About 10.2 ft  3. About 10.4 ft  4. 2 m  5. No — the diagonal is only about 14.2 in.  6. 15 m  7. 15 m  8. A A  9. B B
 
 ---
 
@@ -175,7 +175,7 @@ the unit is planned. The printed keys in each lesson's `Keys` folder are generat
 
 *MA.8.GR.2.4*
 
-**Variation.**  Boards 1–3: similar or not by three ratios, a missing side at k = 3, then a k under 1; 4 votes on matching in a turned pair, 5 on which triangle is similar. The pattern breaks at 6 — a shadow — then a ramp's two triangles from their shared corner (7) and a mirror with an extra number (8); 9 is written. The independent set: similar or not (it is not), a missing side matched by the middle sides, a k under 1, a shadow, a nested pair with the gap given instead of the whole distance, which is similar.
+**Variation.**  Boards 1–3: similar or not by three ratios, a turned pair's missing side (k = 3), then a k under 1; 4 votes on matching in a turned pair, 5 on which triangle is similar. The pattern breaks at 6 — a shadow — then a ramp's two triangles from their shared corner (7) and a mirror with an extra number (8); 9 is written. The independent set: similar or not (it is not), a missing side matched by the middle sides, a k under 1, a shadow, a nested pair from the shared corner (with its picture), which is similar.
 
 **Read this once, when you plan the unit.**
 
@@ -193,7 +193,7 @@ the unit is planned. The printed keys in each lesson's `Keys` folder are generat
 
 - 6.7.2–6.7.3 (scale factors; the long, medium and short sides) → Notes I–II: three ratios decide, matched by size.
 - 6.7.4 (the card sort of eight triangles) → boards 1 and 5, and board 4's turned pair. 6.8.2 (corresponding angles) → Notes I: matched by angle as well as by size; AA is used, not named.
-- 6.8.3–6.8.5 (shadows; a cliff and a boat) → Notes III, Example 2 and boards 6 and 8; 6.8.6 (the river's width, nested) → board 7 and the independent set. Every one says its triangles are similar.
+- 6.8.3–6.8.5 (shadows; a cliff and a boat) → Notes III and board 6; the mirror → Example 2 and board 8; 6.8.6 (the river's width, nested) → board 7 and the independent set. Every one says its triangles are similar.
 - 6.07 and 6.08 Additional Practice and Homework → the independent set and IXL; the Unit Review goes home today.
 
 **Question Bank answers.**  
@@ -213,7 +213,6 @@ the unit is planned. The printed keys in each lesson's `Keys` folder are generat
 **Read this once, when you plan the unit.**
 
 - Thread B, day 1 of 2: Math Nation 16.1 (MA.8.GR.1.4), taught the day after the Unit 6 test so the angle facts are in play for the rest of the year. Not on the Unit 6 test.
-- The 43-minute Wednesday: cut boards 3 and 7 and two minutes of the IXL block; never board 9. The timing table totals 53 by house rule.
 - Built from the benchmark and the B1G-M first, then read against Math Nation (audit §9): its practice key answers angle DCE where the page asks angle BCE (164°, not 16°), and its practice figures are drawn up to 15° off their labels — not reproduced. Every figure here is drawn to its numbers.
 - The state's named misconception for GR.1.4 — complementary and supplementary swapped — is board 4's option A and the first wrong board on 1 and 2. The book's most-named error, x reported as the angle, is boards 6 and the bank's last question.
 
@@ -224,8 +223,8 @@ the unit is planned. The printed keys in each lesson's `Keys` folder are generat
 
 **What changed from the book.**
 
-- 16.1.1–16.1.2 (the cut-and-measure Exploration) → Notes I–II: the four names from the front, so the day fits 43 minutes.
-- 16.1.3 (angle relationships with expressions) → Notes III and Examples 1–2: a right angle split by a ray and a vertical pair with the variable on both sides, the book's own shapes.
+- 16.1.1–16.1.2 (the cut-and-measure Exploration) → Notes I–II: the four names from the front.
+- 16.1.3 (angle relationships with expressions) → Notes III and Examples 1–2: a right angle split by a ray and a vertical pair with the variable on both sides (the step that takes x off one side on its own line), the book's own shapes.
 - 16.1.4–16.1.5 (practice and the error analysis) → boards 4–9; 'reported x' is board 6's named error.
 - 16.01 Additional Practice and Homework → the independent set and IXL.
 
@@ -241,14 +240,14 @@ the unit is planned. The printed keys in each lesson's `Keys` folder are generat
 
 *MA.8.GR.1.5*
 
-**Variation.**  Boards 1–2: the third angle, then an isosceles triangle; 3 is an exterior angle; 4 votes on the angle beside the 75°. The pattern breaks at 5 — a remote angle found backwards from the exterior one — then three expressions (6), which equation fits the picture voted (7), a side length that is not an angle (8); 9 is written. The independent set: a third angle, an isosceles triangle's base angles, an exterior angle, a remote angle, three expressions, an equation from the theorem.
+**Variation.**  Boards 1–2: the third angle, then an isosceles triangle; 3 is an exterior angle; 4 votes on the angle beside the 75°. The pattern breaks at 5 — a remote angle found backwards from the exterior one — then three expressions (6), which equation fits the words voted (7), a side length that is not an angle (8); 9 is written. The independent set: a third angle, an isosceles triangle's base angles, an exterior angle, a remote angle, three expressions, an equation from the theorem.
 
 **Read this once, when you plan the unit.**
 
 - Thread B, day 2 of 2: Math Nation 16.2 (MA.8.GR.1.5), the day after T-B1's angle pairs, which it needs (the linear pair gives the theorem). Not on the Unit 6 test.
 - The Exterior Angle Theorem is named on Notes II: the book's practice uses the name its lesson never gives, and IXL FMP is called that.
 - Built from the benchmark and the B1G-M first, then read against Math Nation (audit §9): its homework key's a = 12 line (from another question) and its practice figures drawn up to 15° off are not reproduced; every figure here is drawn to its numbers.
-- The state's two named misconceptions — the reflex angle, and the two equal exterior angles at a corner — are Notes II and board 4; the brief's 'equals the adjacent interior' is board 4's option A and board 3's wrong board.
+- The state's two named misconceptions — the reflex angle, and the two equal exterior angles at a corner — are Notes II and board 4; the unit's own named error, 'equals the interior angle beside it', is board 4's option A and board 3's wrong board.
 
 **What the audit against Math Nation found.**
 
