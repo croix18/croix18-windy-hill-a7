@@ -38,7 +38,7 @@
    "title": "Notes",
    "sub": "Copy the names and the picture.",
    "min": 3,
-   "note": "Two lines cross and make four angles. Angles 1 and 2 are adjacent: one vertex, one shared side, no overlap. Angles 1 and 3 are vertical: across the crossing \u2014 and equal (each makes a straight line with angle 2, so both are 180 minus the same angle). Angles 2 and 4 are vertical too.\nOFF: 'Next to, sharing a side: adjacent. Across: vertical, and equal.'",
+   "note": "Two lines cross and make four angles. Angles 1 and 2 are adjacent: one vertex, one shared side, no overlap. Angles 1 and 3 are vertical: across the crossing \u2014 and equal (each makes a straight line with angle 2, so both are 180 minus the same angle). Angles 2 and 4 are vertical too. Read m\u22201 = m\u22203 aloud as 'the measure of angle 1 equals the measure of angle 3' \u2014 the state's notation, on the FAST and its reference sheet.\nOFF: 'Next to, sharing a side: adjacent. Across: vertical, and equal.'",
    "kind": "notes"
   },
   {
@@ -78,7 +78,7 @@
    "title": "Your Turn",
    "sub": "Same steps, your numbers. Boards up when done.",
    "min": 2,
-   "note": "4x + x + 10 = 90, 5x = 80, x = 16: 64\u00b0 and 26\u00b0. A board with 16 stopped at x; one with 34 used 180.",
+   "note": "4x + x + 10 = 90, 5x = 80 and x = 16, so 64\u00b0 and 26\u00b0 \u2014 a board with 16 stopped at x; one with 34 used 180.",
    "kind": "yourturn"
   },
   {
@@ -94,7 +94,7 @@
    "title": "Example 2",
    "sub": "Vertical angles.",
    "min": 1,
-   "note": "Ask what vertical angles do: they are equal \u2014 so the two expressions are set equal, variables on both sides (Unit 1).",
+   "note": "Ask what vertical angles do: they are equal \u2014 so the two expressions are set equal. With x on both sides, take 2x off both sides first, on its own line.",
    "kind": "example"
   },
   {
@@ -102,7 +102,7 @@
    "title": "Example 2",
    "sub": "Worked.",
    "min": 3,
-   "note": "Vertical, so equal: 5x \u2212 12 = 2x + 18, 3x = 30, x = 10. Each angle is 5(10) \u2212 12 = 38\u00b0, and 2(10) + 18 = 38\u00b0 checks it. A board with 10 reported x; one with 180 added them as if supplementary.",
+   "note": "Vertical, so equal: 5x \u2212 12 = 2x + 18; take 2x off both sides, 3x \u2212 12 = 18, so 3x = 30 and x = 10. Each angle is 5(10) \u2212 12 = 38\u00b0, and 2(10) + 18 = 38\u00b0 checks it. A board with 10 reported x.",
    "kind": "example"
   },
   {
@@ -110,7 +110,7 @@
    "title": "Your Turn",
    "sub": "Same steps, your numbers. Boards up when done.",
    "min": 2,
-   "note": "4x + 3 = x + 39, 3x = 36, x = 12: each angle 51\u00b0. A board with 12 reported x.",
+   "note": "4x + 3 = x + 39, and taking x off both sides gives 3x + 3 = 39, so x = 12 and each angle is 51\u00b0 \u2014 a board with 12 reported x.",
    "kind": "yourturn"
   },
   {
@@ -158,7 +158,7 @@
    "title": "Whiteboards   \u00b7   Question 3 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "a is across the crossing from 47\u00b0: vertical, so 47\u00b0. b is next to it on a straight line: 180 \u2212 47 = 133\u00b0. (The 43-minute cut drops this board.)",
+   "note": "a is across the crossing from 47\u00b0: vertical, so 47\u00b0. b is next to it on a straight line: 180 \u2212 47 = 133\u00b0.",
    "kind": "wb"
   },
   {
@@ -222,7 +222,7 @@
    "title": "Whiteboards   \u00b7   Question 7 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "Diagnostic. Option A is vertical, option B overlaps, option D shares only a vertex. (The 43-minute cut drops this board.)",
+   "note": "Diagnostic. Option A is vertical, option B overlaps, option D shares only a vertex. Split? Sixty seconds, convince your neighbour, re-vote.",
    "kind": "wb"
   },
   {

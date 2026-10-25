@@ -54,7 +54,7 @@
    "title": "Notes",
    "sub": "",
    "min": 4,
-   "note": "(\u22123, 4) to (2, \u22122): across from \u22123 to 2 is 5, down from 4 to \u22122 is 6 \u2014 both across zero, both by subtracting. 25 + 36 = 61, and 61 is not a perfect square: \u221a61 \u2248 7.8 units. The legs can be read off the coordinates without counting. (radicand within GR.1.2's whole numbers up to 225 (Clarification 3), square-free; not one of NSO.1.7's perfect squares, so not_bound.)\nOFF: 'Across: the x's. Up or down: the y's. Then the theorem.'",
+   "note": "(\u22123, 4) to (2, \u22122): across from \u22123 to 2 is 5, down from 4 to \u22122 is 6 \u2014 both across zero, both by subtracting. 25 + 36 = 61, and 61 is not a perfect square: \u221a61 \u2248 7.8 units. The legs can be read off the coordinates without counting.\nOFF: 'Across: the x's. Up or down: the y's. Then the theorem.'",
    "kind": "notes"
   },
   {
@@ -78,7 +78,7 @@
    "title": "Your Turn",
    "sub": "Same steps, your numbers. Boards up when done.",
    "min": 2,
-   "note": "Same y: 8 \u2212 (\u22123) = 11. A board with 5 subtracted 8 \u2212 3.",
+   "note": "Same y: 8 \u2212 (\u22123) = 11 \u2014 a board with 5 subtracted 8 \u2212 3.",
    "kind": "yourturn"
   },
   {
@@ -110,7 +110,7 @@
    "title": "Your Turn",
    "sub": "Same steps, your numbers. Boards up when done.",
    "min": 2,
-   "note": "Across 2 \u2212 (\u22125) = 7, up 1 \u2212 (\u22123) = 4; 49 + 16 = 65, \u221a65 = 8.06, so 8.1. A board with 11 added the legs.",
+   "note": "Across 2 \u2212 (\u22125) = 7, up 1 \u2212 (\u22123) = 4; 49 + 16 = 65 and \u221a65 \u2248 8.06, so 8.1 \u2014 a board with 11 added the legs.",
    "kind": "yourturn"
   },
   {
@@ -190,7 +190,7 @@
    "title": "Whiteboards   \u00b7   Question 5 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "Across 5, up 8; 89 is between 81 and 100, \u221a89 = 9.43, so 9.4. (radicand within GR.1.2's whole numbers up to 225 (Clarification 3), square-free; not one of NSO.1.7's perfect squares, so not_bound.)",
+   "note": "Across 5, up 8; 89 is between 81 and 100, \u221a89 \u2248 9.43, so 9.4.",
    "kind": "wb"
   },
   {
@@ -206,7 +206,7 @@
    "title": "Whiteboards   \u00b7   Question 6 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "Diagnostic. Option D added, option A dropped a sign across the axis, option B used one point's coordinates. (\u221a85: radicand within GR.1.2's whole numbers up to 225 (Clarification 3), square-free; not one of NSO.1.7's perfect squares, so not_bound.)",
+   "note": "Diagnostic. Option D added, option A dropped a sign across the axis, option B used one point's coordinates.",
    "kind": "wb"
   },
   {

@@ -54,7 +54,7 @@
    "title": "Notes",
    "sub": "",
    "min": 4,
-   "note": "This triangle has no square corner, but its height \u2014 from the top corner straight down to the base \u2014 makes two, each with legs 3 and 5: each slanted side is \u221a34. Keep the root (or the calculator's whole value) to the last step: 6 + 5.831 + 5.831 = 17.662, so 17.7. Rounding each side first gives 6 + 5.8 + 5.8 = 17.6 \u2014 a different answer. (radicand within GR.1.2's whole numbers up to 225 (Clarification 3), square-free; not one of NSO.1.7's perfect squares, so not_bound.)\nOFF: 'No square corner? Make two. Round once, at the end.'",
+   "note": "This triangle has no square corner, but its height \u2014 from the top corner straight down to the base \u2014 makes two, each with legs 3 and 5: each slanted side is \u221a34. Keep the root (or the calculator's whole value) to the last step: 6 + 5.831 + 5.831 = 17.662, so 17.7. Rounding each side first gives 6 + 5.8 + 5.8 = 17.6 \u2014 a different answer.\nOFF: 'No square corner? Make two. Round once, at the end.'",
    "kind": "notes"
   },
   {
@@ -78,7 +78,7 @@
    "title": "Your Turn",
    "sub": "Same steps, your numbers. Boards up when done.",
    "min": 2,
-   "note": "Across 4 \u2212 (\u22125) = 9, up 5 \u2212 (\u22127) = 12; the slanted side 81 + 144 = 225, 15. P = 36. A board with 21 left the slanted side out.",
+   "note": "Across 4 \u2212 (\u22125) = 9 and up 5 \u2212 (\u22127) = 12, so the slanted side is \u221a225 = 15 and P = 9 + 12 + 15 = 36 \u2014 a board with 21 left the slanted side out.",
    "kind": "yourturn"
   },
   {
@@ -102,7 +102,7 @@
    "title": "Example 2",
    "sub": "Worked.",
    "min": 3,
-   "note": "Across 4 \u2212 (\u22123) = 7, up 3 \u2212 (\u22122) = 5. The streets add them: 12 blocks. The straight line: 49 + 25 = 74, \u221a74 = 8.60, so 8.6 blocks \u2014 3.4 blocks shorter. A board with 12 for both answered the streets twice. (radicand within GR.1.2's whole numbers up to 225 (Clarification 3), square-free; not one of NSO.1.7's perfect squares, so not_bound.)",
+   "note": "Across 4 \u2212 (\u22123) = 7, up 3 \u2212 (\u22122) = 5. The streets add them: 12 blocks. The straight line: 49 + 25 = 74, \u221a74 \u2248 8.60, so 8.6 blocks \u2014 3.4 blocks shorter. A board with 12 for both answered the streets twice.",
    "kind": "example"
   },
   {
@@ -110,7 +110,7 @@
    "title": "Your Turn",
    "sub": "Same steps, your numbers. Boards up when done.",
    "min": 2,
-   "note": "Across \u22122 \u2212 (\u22125) = 3, down 4 \u2212 (\u22124) = 8. Streets 11 blocks; straight 9 + 64 = 73, \u221a73 = 8.54, so 8.5. A board with 11 for the straight line added the legs.",
+   "note": "Across \u22122 \u2212 (\u22125) = 3 and down 4 \u2212 (\u22124) = 8: by the streets 11 blocks, straight \u221a73 \u2248 8.54, so 8.5 \u2014 a board with 11 for the straight line added the legs.",
    "kind": "yourturn"
   },
   {
@@ -142,7 +142,7 @@
    "title": "Whiteboards   \u00b7   Question 2 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "4 and 9 on grid lines; the slanted side \u221a97 = 9.849. P = 22.849, so 22.8 \u2014 one rounding, at the end. (radicand within GR.1.2's whole numbers up to 225 (Clarification 3), square-free; not one of NSO.1.7's perfect squares, so not_bound.)",
+   "note": "4 and 9 on grid lines; the slanted side \u221a97 \u2248 9.849. P \u2248 22.849, so 22.8 \u2014 one rounding, at the end.",
    "kind": "wb"
   },
   {
@@ -174,7 +174,7 @@
    "title": "Whiteboards   \u00b7   Question 4 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "Diagnostic. Option A left the slanted side out, option B added the legs for it, option C forgot the square root. Split (no option near two-thirds)? Sixty seconds, convince your neighbour, re-vote. (\u221a65: radicand within GR.1.2's whole numbers up to 225 (Clarification 3), square-free; not one of NSO.1.7's perfect squares, so not_bound.)",
+   "note": "Diagnostic. Option A left the slanted side out, option B added the legs for it, option C forgot the square root. Split (no option near two-thirds)? Sixty seconds, convince your neighbour, re-vote.",
    "kind": "wb"
   },
   {
@@ -222,7 +222,7 @@
    "title": "Whiteboards   \u00b7   Question 7 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "Across 9, down 5 \u2014 both across zero. 81 + 25 = 106, \u221a106 = 10.30, so 10.3 m. (radicand within GR.1.2's whole numbers up to 225 (Clarification 3), square-free; not one of NSO.1.7's perfect squares, so not_bound.)",
+   "note": "Across 9, down 5 \u2014 both across zero. 81 + 25 = 106, \u221a106 \u2248 10.30, so 10.3 m.",
    "kind": "wb"
   },
   {
@@ -254,7 +254,7 @@
    "title": "Whiteboards   \u00b7   Question 9 of 9",
    "sub": "Take your time. Boards up when you have written it.",
    "min": 0,
-   "note": "Written, and the exit evidence: the error named and the length found. (radicand within GR.1.2's whole numbers up to 225 (Clarification 3), square-free; not one of NSO.1.7's perfect squares, so not_bound.)",
+   "note": "Written, and the exit evidence: the error named and the length found.",
    "kind": "wb"
   },
   {

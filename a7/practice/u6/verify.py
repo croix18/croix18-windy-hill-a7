@@ -75,6 +75,11 @@ def whole_root(n, where, what):
     return sqrt(n)
 UNITS = {"cm": "centimeter", "in": "inch", "m": "meter", "ft": "foot", "yd": "yard"}
 PLURAL = {"cm": "centimeters", "in": "inches", "m": "meters", "ft": "feet", "yd": "yards"}
+ABBR = {v: k for k, v in PLURAL.items()}          # the words write a length out ("9 inches"); the answer box and key abbreviate it
+ROUND = "Round your answer to the nearest tenth."
+def unit_of(word, where):
+    if word not in ABBR: raise ValueError(f"a length in the words is not written out: {word}")
+    return ABBR[word]
 def article(w): return "an" if w[0] in "aeiou" else "a"
 
 # ---------------------------------------------------------------- arithmetic in a sentence (written again here, not shared)
@@ -141,34 +146,40 @@ def expect(where, it, p):
     if fam == "hypWhole":
         m = re.fullmatch(r"Its legs are (\d+) (\w+) and (\d+) \2\. How long is the hypotenuse\?", ps)
         if not m: raise ValueError("hypWhole: " + ps)
-        a, u, b = int(m.group(1)), m.group(2), int(m.group(3)); c = whole_root(a * a + b * b, where, "the hypotenuse")
+        a, u, b = int(m.group(1)), unit_of(m.group(2), where), int(m.group(3)); c = whole_root(a * a + b * b, where, "the hypotenuse")
         if c not in (5, 10, 13, 15): no(where, f"a whole hypotenuse of {c}")
         return c, u, False
     if fam == "legWhole":
         m = re.fullmatch(r"Its hypotenuse is (\d+) (\w+) and one leg is (\d+) \2\. How long is the other leg\?", ps)
         if not m: raise ValueError("legWhole: " + ps)
-        c, u, a = int(m.group(1)), m.group(2), int(m.group(3)); b = whole_root(c * c - a * a, where, "the other leg")
+        c, u, a = int(m.group(1)), unit_of(m.group(2), where), int(m.group(3)); b = whole_root(c * c - a * a, where, "the other leg")
         if not b.is_integer: no(where, f"the other leg is {b}, not whole")
         return b, u, False
     if fam == "hypTenth":
-        m = re.fullmatch(r"A right triangle has legs of (\d+) (\w+) and (\d+) \2\. Find the length of the hypotenuse to the nearest tenth of (an?) (\w+)\.", st)
+        m = re.fullmatch(r"A right triangle has legs of (\d+) (\w+) and (\d+) \2\. How long is the hypotenuse, in \2\? " + re.escape(ROUND), st)
         if not m: raise ValueError("hypTenth: " + st)
-        a, u, b = int(m.group(1)), m.group(2), int(m.group(3))
-        if m.group(5) != UNITS[u] or m.group(4) != article(UNITS[u]): no(where, f"'{m.group(4)} {m.group(5)}' for {u}")
+        a, u, b = int(m.group(1)), unit_of(m.group(2), where), int(m.group(3))
         c = whole_root(a * a + b * b, where, "the hypotenuse")
         if c.is_integer: no(where, "a tenth question with a whole answer")
         return c, u, True
     if fam in ("diag", "shorter"):
-        m = re.fullmatch(r"A rectangular (field|lawn|garden|playground|courtyard|patio) is (\d+) (\w+) wide and (\d+) \3 long\. A path runs straight across it from one corner to the opposite corner\.", st)
-        if not m: raise ValueError("field: " + st)
-        place, w, u, l = m.group(1), int(m.group(2)), m.group(3), int(m.group(4))
+        m = re.fullmatch(r"A rectangular (lawn|garden|playground|courtyard|patio) measures (\d+) (\w+) by (\d+) \3\. A path runs straight across it from one corner to the opposite corner\.", st)
+        if not m: raise ValueError("place: " + st)
+        place, u = m.group(1), unit_of(m.group(3), where)
+        w, l = sorted((int(m.group(2)), int(m.group(4))))
         if u == "ft" and place not in ("garden", "patio"): no(where, f"a {place} {w} ft by {l} ft")
+        # a real place at a real size: the width the shorter side, no more than three times as long, and no smaller than such a place is
+        least = {("garden", "m"): 2, ("garden", "ft"): 5, ("garden", "yd"): 3, ("lawn", "m"): 4, ("lawn", "yd"): 4, ("patio", "ft"): 8, ("patio", "m"): 3,
+                 ("playground", "m"): 6, ("playground", "yd"): 6, ("courtyard", "m"): 5, ("courtyard", "yd"): 5}.get((place, u))
+        if least is None: no(where, f"a {place} measured in {u}")
+        elif w < least: no(where, f"a {place} only {w} {u} wide")
+        if not w < l <= 5 * w: no(where, f"a {place} {w} by {l}")
         path = whole_root(w * w + l * l, where, "the path")
         if fam == "diag":
-            m2 = re.fullmatch(r"How long is the path, to the nearest tenth of (an?) (\w+)\?", ps)
-            if not m2 or m2.group(2) != UNITS[u] or m2.group(1) != article(UNITS[u]): raise ValueError("diag: " + ps)
+            m2 = re.fullmatch(r"How long is the path, in (\w+)\? " + re.escape(ROUND), ps)
+            if not m2 or m2.group(1) != PLURAL[u]: raise ValueError("diag: " + ps)
             return path, u, True
-        if ps != f"How much shorter is the path than walking along two sides of the {place}?": raise ValueError("shorter: " + ps)
+        if ps != f"How much shorter is the path than walking along two sides of the {place}? {ROUND}": raise ValueError("shorter: " + ps)
         return w + l - path, u, True
     if fam == "gridWhole":
         m = re.fullmatch(r"Find the distance between points ([A-Z]) and ([A-Z])\.", st)
@@ -180,7 +191,7 @@ def expect(where, it, p):
         if not d.is_integer: no(where, f"a whole-number distance question with the answer {d}")
         return d, "units", False
     if fam == "coordTenth":
-        m = re.fullmatch(r"Find the distance between \((" + NUM + r"), (" + NUM + r")\) and \((" + NUM + r"), (" + NUM + r")\) to the nearest tenth\.", st)
+        m = re.fullmatch(r"Find the distance between \((" + NUM + r"), (" + NUM + r")\) and \((" + NUM + r"), (" + NUM + r")\)\. " + re.escape(ROUND), st)
         if not m: raise ValueError("coordTenth: " + st)
         A, B = (q(m.group(1)), q(m.group(2))), (q(m.group(3)), q(m.group(4)))
         on_grid(where, [A, B])
@@ -200,7 +211,7 @@ def expect(where, it, p):
             i = 0 if J[1] == K[1] else 1
             if not crosses(J[i], K[i]): no(where, "the side does not cross an axis")
             return abs(K[i] - J[i]), "units", False
-        if ps != f"Find the perimeter of triangle {''.join(names)} to the nearest tenth.": raise ValueError("perim: " + ps)
+        if ps != f"Find the perimeter of triangle {''.join(names)}. {ROUND}": raise ValueError("perim: " + ps)
         side = lambda A, B: whole_root((B[0] - A[0]) ** 2 + (B[1] - A[1]) ** 2, where, "a side")
         per = side(J, K) + side(K, L) + side(J, L)
         if per.is_rational: no(where, "a tenth perimeter that is whole")
@@ -226,6 +237,7 @@ def expect(where, it, p):
         if any(v is not None and abs(R(str(d)) - v) > R(1, 10 ** 9) for v, d in zip(lb, f["b"])): no(where, "the copy is not drawn to its labels")
         if lb.count(None) != 1: raise ValueError("simSide: not one x")
         ra, rb = sorted(la), sorted(range(3), key=lambda i: f["b"][i])     # the copy's sides by the lengths drawn
+        if ra[1] ** 2 == ra[0] * ra[2]: no(where, f"sides {ra}: b² = ac, so two of the copy's sides can be matched two ways")
         known = [(lb[i], ra[r]) for r, i in enumerate(rb) if lb[i] is not None]
         ks = {c / o for c, o in known}
         if len(ks) != 1: no(where, f"the copy's known sides give two scale factors {ks}"); return None
@@ -238,9 +250,10 @@ def expect(where, it, p):
         if not m: raise ValueError("shadow: " + st)
         h1, s1, s2 = q(m.group(2)), q(m.group(3)), q(m.group(5))
         if [l["s"] for l in it["figLabels"]][:3] != [m.group(2) + " ft", m.group(3) + " ft", m.group(5) + " ft"]: no(where, "the figure's lengths are not the words'")
+        if m.group(1) in ("man", "woman") and h1 < 5: no(where, f"a {m.group(1)} {h1} ft tall")
         return h1 * s2 / s1, "ft", False
     if fam == "mirror":
-        m = re.fullmatch(r"([A-Z][a-z]+)’s eyes are (" + NUM + r") ft above the ground\. Standing (" + NUM + r") ft from a mirror on the ground, \1 sees in it the top of a ([a-z ]+) that stands (" + NUM + r") ft beyond the mirror\. How tall is the \4\?", st)
+        m = re.fullmatch(r"([A-Z][a-z]+)’s eyes are (" + NUM + r") ft above the ground\. Standing (" + NUM + r") ft from a mirror on the ground, \1 sees in it the top of a ([a-z ]+) that stands (" + NUM + r") ft beyond the mirror\. The two right triangles are similar\. How tall is the \4\?", st)
         if not m: raise ValueError("mirror: " + st)
         h1, d1, d2 = q(m.group(2)), q(m.group(3)), q(m.group(5))
         if [l["s"] for l in it["figLabels"]][:3] != [m.group(2) + " ft", m.group(3) + " ft", m.group(5) + " ft"]: no(where, "the figure's lengths are not the words'")
@@ -313,7 +326,7 @@ def hint_value(where, it, p, ask):
     if m:
         P, _ = corners(st); A, B = P[m.group(1)], P[m.group(2)]
         return tenth(whole_root((A[0] - B[0]) ** 2 + (A[1] - B[1]) ** 2, where, "a Hint step"))
-    fm = re.fullmatch(r"A rectangular [a-z ]+ is (\d+) \w+ wide and (\d+) \w+ long\..*", st)
+    fm = re.fullmatch(r"A rectangular [a-z ]+ measures (\d+) \w+ by (\d+) \w+\..*", st)
     if a.startswith("How far is it along two sides of the"):
         return int(fm.group(1)) + int(fm.group(2))
     if a == "How long is the path straight across, to the nearest tenth?":
@@ -367,7 +380,7 @@ def check_mc(where, it):
         if not any(sorted(s)[0] + sorted(s)[1] == sorted(s)[2] for s in opts_nums(it)): no(where, "no set lies flat")
     elif fam == "range":
         m = re.fullmatch(r"Two sides of a triangle are (\d+) (\w+) and (\d+) \2 long\. Which inequality shows every possible length x, in (\w+), of the third side\?", st)
-        if not m or m.group(4) != PLURAL[m.group(2)]: raise ValueError("range: " + st)
+        if not m or m.group(2) not in ABBR or m.group(4) != m.group(2): raise ValueError("range: " + st)
         a, b = int(m.group(1)), int(m.group(3)); good = []
         for i, o in enumerate(it["opts"]):
             mo = re.fullmatch(r"(\d+) (<|≤) x (<|≤) (\d+)", words(o))
@@ -392,6 +405,7 @@ def check_mc(where, it):
         if not m: raise ValueError("simChoice: " + st)
         t = sorted(int(g) for g in m.groups()); good = []
         for i, s in enumerate(opts_nums(it)):
+            if s != sorted(s): no(where, f"choice {'ABCD'[i]} lists its sides out of order: {s}")
             r = {v / o for v, o in zip(sorted(s), t)}
             if len(r) == 1 and r != {1}: good.append(i)
         if good != [corr]: no(where, f"the similar choice is {good}, the key {corr}")

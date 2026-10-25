@@ -46,7 +46,7 @@
    "title": "Notes",
    "sub": "",
    "min": 4,
-   "note": "Extend one side: the exterior angle and the interior angle beside it are a linear pair, 180\u00b0. The interior angle is 180 minus the two remote ones, so the exterior angle IS the two remote ones: 50 + 70 = 120 (the state guide's item). Two named mistakes: the exterior angle is not the interior angle beside it (60\u00b0), and it is not the angle around the outside (240\u00b0). Each corner has two exterior angles, vertical to each other, so equal.\nOFF: 'Outside equals the two far ones added.'",
+   "note": "Extend one side: the exterior angle and the interior angle beside it are a linear pair, 180\u00b0. The interior angle is 180 minus the two remote ones, so the exterior angle IS the two remote ones: 50 + 70 = 120 (the state guide's item). Two named mistakes: the exterior angle is not the interior angle beside it (60\u00b0), and it is not the angle around the outside (300\u00b0). Each corner has two exterior angles, vertical to each other, so equal.\nOFF: 'Outside equals the two far ones added.'",
    "kind": "notes"
   },
   {
@@ -70,7 +70,7 @@
    "title": "Example 1",
    "sub": "Worked.",
    "min": 2,
-   "note": "58 + 71 = 129, and 180 \u2212 129 = 51\u00b0. A board with 231 added 180; one with 129 stopped at the sum.",
+   "note": "58 + 71 = 129, and 180 \u2212 129 = 51\u00b0 \u2014 a board with 231 used 360; one with 129 stopped at the sum.",
    "kind": "example"
   },
   {
@@ -78,7 +78,7 @@
    "title": "Your Turn",
    "sub": "Same steps, your numbers. Boards up when done.",
    "min": 2,
-   "note": "39 + 84 = 123, so 180 \u2212 123 = 57\u00b0. A board with 123 stopped at the sum.",
+   "note": "39 + 84 = 123, so 180 \u2212 123 = 57\u00b0 \u2014 a board with 123 stopped at the sum.",
    "kind": "yourturn"
   },
   {
@@ -110,7 +110,7 @@
    "title": "Your Turn",
    "sub": "Same steps, your numbers. Boards up when done.",
    "min": 2,
-   "note": "72 + 35 = 107\u00b0. A board with 73 found the interior angle beside it.",
+   "note": "72 + 35 = 107\u00b0 \u2014 a board with 73 found the interior angle beside it.",
    "kind": "yourturn"
   },
   {
@@ -206,7 +206,7 @@
    "title": "Whiteboards   \u00b7   Question 6 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "6x + 12 = 180, 6x = 168, x = 28: the angles are 28\u00b0, 84\u00b0 and 68\u00b0 (they add to 180). A board with only 28 reported x \u2014 and here x is one of the angles, so it has one of three.",
+   "note": "6x + 12 = 180, 6x = 168 and x = 28, so the angles are 28\u00b0, 84\u00b0 and 68\u00b0 (they add to 180) \u2014 a board with only 28 reported x, one angle of three.",
    "kind": "wb"
   },
   {
@@ -222,7 +222,7 @@
    "title": "Whiteboards   \u00b7   Question 7 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "Diagnostic \u2014 the book's 'which relationship justifies this equation' shape. Option A puts the exterior angle in the Triangle Sum, option B uses one remote angle, option D adds all four. Split? Sixty seconds, convince your neighbour, re-vote.",
+   "note": "Diagnostic \u2014 the book's 'which relationship justifies this equation' shape. Option A pairs the exterior angle with a remote one as if a linear pair, option B uses one remote angle, option D puts the exterior angle in the Triangle Sum. Split? Sixty seconds, convince your neighbour, re-vote.",
    "kind": "wb"
   },
   {

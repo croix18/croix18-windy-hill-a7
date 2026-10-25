@@ -46,7 +46,7 @@
    "title": "Notes",
    "sub": "",
    "min": 4,
-   "note": "Legs 6 and 8: 36 + 64 = 100 and c = 10 \u2014 whole, because 6, 8, 10 is a Pythagorean triple. Legs 3 and 5: 9 + 25 = 34, and 34 is not a perfect square, so c = \u221a34 exactly, between 5 and 6 (25 < 34 < 36), about 5.8. Leave \u221a34 when the question wants the exact length; round to the tenth when it asks for a measurement, and round once, at the end. (radicand within GR.1.1's whole numbers up to 225 (Clarification 3), square-free; not one of NSO.1.7's perfect squares, so not_bound.)\nOFF: 'Square, add, then the root. The root is the last step.'",
+   "note": "Legs 6 and 8: 36 + 64 = 100 and c = 10 \u2014 whole, because 6, 8, 10 is a Pythagorean triple. Legs 3 and 5: 9 + 25 = 34, and 34 is not a perfect square, so c = \u221a34 exactly, between 5 and 6 (25 < 34 < 36), about 5.8. Leave \u221a34 when the question wants the exact length; round to the tenth when it asks for a measurement, and round once, at the end.\nOFF: 'Square, add, then the root. The root is the last step.'",
    "kind": "notes"
   },
   {
@@ -70,7 +70,7 @@
    "title": "Example 1",
    "sub": "Worked.",
    "min": 3,
-   "note": "49 + 81 = 130, not a perfect square: c = \u221a130, between 11 and 12 (121 < 130 < 144), and 11.40 to two places, so 11.4. A board with 16 added the legs. (radicand within GR.1.1's whole numbers up to 225 (Clarification 3), square-free; not one of NSO.1.7's perfect squares, so not_bound.)",
+   "note": "49 + 81 = 130, not a perfect square: c = \u221a130, between 11 and 12 (121 < 130 < 144), and 11.40 to two places, so 11.4. A board with 16 added the legs.",
    "kind": "example"
   },
   {
@@ -78,7 +78,7 @@
    "title": "Your Turn",
    "sub": "Same steps, your numbers. Boards up when done.",
    "min": 2,
-   "note": "25 + 121 = 146, and \u221a146 = 12.08, so 12.1. A board with 16 added the legs; a board with 146 stopped before the root.",
+   "note": "25 + 121 = 146 and \u221a146 \u2248 12.08, so 12.1 \u2014 a board with 16 added the legs; a board with 146 stopped before the root.",
    "kind": "yourturn"
   },
   {
@@ -94,7 +94,7 @@
    "title": "Example 2",
    "sub": "Find a leg.",
    "min": 1,
-   "note": "Ask which number is c before anyone squares: 26, the longest \u2014 so this time a square is subtracted.",
+   "note": "Ask which number is c before anyone squares: 15, the longest \u2014 so this time a square is subtracted.",
    "kind": "example"
   },
   {
@@ -102,7 +102,7 @@
    "title": "Example 2",
    "sub": "Worked.",
    "min": 3,
-   "note": "26 is c, so 26\u00b2 stands alone: b\u00b2 + 576 = 676, b\u00b2 = 100, b = 10, and 10 is shorter than 26. A board with 35.4 added the squares (\u221a1,252) \u2014 longer than the hypotenuse.",
+   "note": "15 is c, so 15\u00b2 stands alone: b\u00b2 + 64 = 225, b\u00b2 = 161, b = \u221a161 \u2248 12.69, so 12.7 \u2014 and 12.7 is shorter than 15, as a leg must be. A board with 17 added the squares (\u221a289): a whole number, and longer than the hypotenuse.",
    "kind": "example"
   },
   {
@@ -110,7 +110,7 @@
    "title": "Your Turn",
    "sub": "Same steps, your numbers. Boards up when done.",
    "min": 2,
-   "note": "121 \u2212 36 = 85, and \u221a85 = 9.22, so 9.2 \u2014 its own numbers, not the book's 12-ft ladder 7 ft out, which its own key gets wrong (audit D13). A board with 12.5 added the squares (\u221a157): longer than the hypotenuse.",
+   "note": "121 \u2212 36 = 85 and \u221a85 \u2248 9.22, so 9.2 \u2014 a board with 12.5 added the squares (\u221a157), longer than the hypotenuse.",
    "kind": "yourturn"
   },
   {
@@ -142,7 +142,7 @@
    "title": "Whiteboards   \u00b7   Question 2 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "97 is between 81 and 100, so c is between 9 and 10. \u221a97 = 9.849 \u2014 so 9.8. A board with 9.9 rounded twice (9.849 \u2192 9.85 \u2192 9.9): the error in the book's own 6.04 key (audit D13). Round once, from the full value. (radicand within GR.1.1's whole numbers up to 225 (Clarification 3), square-free; not one of NSO.1.7's perfect squares, so not_bound.)",
+   "note": "97 is between 81 and 100, so c is between 9 and 10. \u221a97 \u2248 9.849 \u2014 so 9.8. A board with 9.9 rounded twice (9.849 \u2192 9.85 \u2192 9.9) \u2014 the error in the book's own 6.04 key. Round once, from the full value.",
    "kind": "wb"
   },
   {
@@ -190,7 +190,7 @@
    "title": "Whiteboards   \u00b7   Question 5 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "The point is which side is c: the square corner is not at the bottom, and the side across from it is the one marked ?. A board with 4.9 subtracted (7\u00b2 \u2212 5\u00b2 = 24) \u2014 it took the 7 as the hypotenuse. (radicand within GR.1.1's whole numbers up to 225 (Clarification 3), square-free; not one of NSO.1.7's perfect squares, so not_bound.)",
+   "note": "The point is which side is c: the square corner is not at the bottom, and the side across from it is the one marked ?. A board with 4.9 subtracted (7\u00b2 \u2212 5\u00b2 = 24) \u2014 it took the 7 as the hypotenuse.",
    "kind": "wb"
   },
   {
@@ -206,7 +206,7 @@
    "title": "Whiteboards   \u00b7   Question 6 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "Diagnostic. Option B put the 20 with the legs; option A added sides; option C doubled. Ask what 20 is before anyone votes. The answer slide finishes it: x = 12.",
+   "note": "Diagnostic. Option B put the 20 with the legs; option A added sides; option C squared the legs but doubled the hypotenuse. Ask what 20 is before anyone votes. The answer slide finishes it: x = 12.",
    "kind": "wb"
   },
   {
@@ -222,7 +222,7 @@
    "title": "Whiteboards   \u00b7   Question 7 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "196 \u2212 81 = 115; \u221a115 = 10.72, so 10.7, and 10.7 < 14. A board with 16.6 added the squares (\u221a277) \u2014 longer than the hypotenuse. (radicand within GR.1.1's whole numbers up to 225 (Clarification 3), square-free; not one of NSO.1.7's perfect squares, so not_bound.)",
+   "note": "196 \u2212 81 = 115; \u221a115 \u2248 10.72, so 10.7, and 10.7 < 14. A board with 16.6 added the squares (\u221a277) \u2014 longer than the hypotenuse.",
    "kind": "wb"
   },
   {
@@ -238,7 +238,7 @@
    "title": "Whiteboards   \u00b7   Question 8 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "The extra-number board (ruling 22): the price is bait. The longest side of a right triangle is its hypotenuse; \u221a185 = 13.60. (radicand within GR.1.1's whole numbers up to 225 (Clarification 3), square-free; not one of NSO.1.7's perfect squares, so not_bound.)",
+   "note": "The extra-number board (ruling 22): the price is bait. The longest side of a right triangle is its hypotenuse; \u221a185 \u2248 13.60.",
    "kind": "wb"
   },
   {

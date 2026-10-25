@@ -24,14 +24,20 @@ progress, Print, and the checks that run in a real browser.
      the wrong third side, a triangle that is not right, and one that lies flat.
   3. The range of the third side — the right inequality, "between the two sides", ≤ for <, and 0 for the lower end.
   4. (a) a whole hypotenuse, (b) a whole leg.  5. A hypotenuse to the nearest tenth.  6. Which equation finds x (a right
-     triangle drawn to scale, turned and flipped).  7. A rectangle's diagonal path to the nearest tenth, and how much shorter it
-     is than two sides (follow-through from part a, ruling 19).
+     triangle drawn to scale, turned and flipped; its doubling choice is a² + x² = 2 · c, and no leg is a sliver or under 3).
+     7. A path across a garden, lawn, patio, playground or courtyard, its two sides in either order ("9 meters by 13 meters"),
+     each place at a real size: the path to the nearest tenth, and how much shorter it is than two sides (follow-through from
+     part a, ruling 19).
   8. A distance read from two points on a grid (whole).  9. A distance from two coordinates to the nearest tenth.  10. A right
      triangle on the grid: (a) the side that crosses an axis, (b) the perimeter to the nearest tenth (follow-through).
      11. A town map: along the streets, and in a straight line.
-  12. A pair of similar triangles, the copy turned or flipped: find x.  13. A shadow (most sets) or a mirror on the ground (the
-     lesson's second setting): how tall?  14. Which triangle is similar — the scale copy, every side plus one number, two sides
-     scaled and the third off, and two of the first triangle's own sides.
+  12. A pair of similar triangles, the copy turned or flipped: find x (never sides a, b, c with b² = ac, whose copy's two
+     sides could be matched two ways).  13. A shadow (most sets; a man or woman 5 to 6 ft tall, a child 4 to 5.5 ft) or a
+     mirror on the ground (the lesson's second setting, and the words say "The two right triangles are similar."): how tall?
+     14. Which triangle is similar — the scale copy, every side plus one number, two sides scaled and the third off, and two of
+     the first triangle's own sides; every choice lists its sides from shortest to longest.
+- **The words are the state's.** A length is written out in the words ("9 inches", never "9 in", which reads as a word); a
+  rounded answer is asked with the state's own sentence, "Round your answer to the nearest tenth."; select-all says "Select ALL".
 - **The unit's bounds on every question** (the lesson outlines' standing decisions): a square root a student takes is of a whole
   number up to 225 (MA.8.GR.1.1/1.2 Clarification 3), so a whole hypotenuse is 5, 10, 13 or 15; no distance formula — a slanted
   distance is the right triangle on the grid, and every grid segment crosses an axis; the converse tests the longest side;
@@ -53,8 +59,9 @@ progress, Print, and the checks that run in a real browser.
 
 Every part has at least 100 versions over set numbers 1–20,000 except two, allowed in `unit.json` with their reasons: **2.1a**,
 a whole hypotenuse — four triangles within the radicand bound, legs either way round: 8 versions; **2.1b**, a whole leg — the
-21 right triangles with c² − a² a square of 15 or less. (2.3, the equation choice, has 128 (leg, hypotenuse) pairs; 3.1's
-answer is one of the four whole distances, but its two points come in 2,219 placements.)
+21 right triangles with c² − a² a square of 15 or less. (2.3, the equation choice, has 110 versions; 2.4, the path across a
+place at a real size, 106 — its sides in either order; 3.1's answer is one of the four whole distances, but its two points
+come in 2,219 placements.)
 
 ## The checks (`unit.json`; `python3 ../kit/check/run.py .` runs them all, then the lock, the variety floor and the browser checks)
 
@@ -62,4 +69,4 @@ answer is one of the four whole distances, but its two points come in 2,219 plac
 |---|---|
 | `u6_check.js` | 3,000 sets: the shape of the test (titles read from `build/u6/unit.py`); every key typed back is right, with its unit and with "about"; every modelled mistake typed is wrong and named (a mistake that ends on a root, typed to the tenth or the hundredth); the exact root and the longer decimal are "Almost", the cut-off decimal wrong; the clean rule, checked on its own; follow-through from a wrong part (a), its value worked out here and not taken from the coach; every worked line and Hint step carries the answer; no Hint asks for a number no one can type or gives its own answer away; every Hint choice has one right option and a reason for each wrong one; every arithmetic claim in every sentence is true, chains, √ and cut-off decimals ("√218 = 14.764…") included, and no fraction is printed; every figure and picture: each label states the length drawn, sits nearest its own segment, crosses no line, covers no point or number and touches no other label. Writes `dump.json`. |
 | `verify.py` | The independent check: every question read back from what a student sees — words, choices, the figure's labels — and worked again exactly in sympy; every key, worked line, rounding sentence ("the hundredths digit is 4, so the tenths digit stays") and Hint step compared; the unit's bounds checked from the words; the test's sections, kinds of question and points matched. |
-| `plant_check.py` | 26 planted errors (a key off by one, a tenth cut off, a side left out of the perimeter, a mislabelled figure, a copy drawn to the wrong size, a wrong hundredths digit, a wrong cut-off decimal, a Hint across zero off by one, a fraction in a reason, the clean rule weakened, "Almost" marked right, a follow-through gone wrong, …): the checks must catch every one. |
+| `plant_check.py` | 31 planted errors (a key off by one, a tenth cut off, a side left out of the perimeter, a mislabelled figure, a copy drawn to the wrong size, a wrong hundredths digit, a wrong cut-off decimal, a Hint across zero off by one, a fraction in a reason, the clean rule weakened, "Almost" marked right, a follow-through gone wrong, a garden 1 m wide, a grown-up 4 ft tall, a mirror whose words drop "similar", …): the checks must catch every one. |

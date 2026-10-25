@@ -3,7 +3,7 @@
 # exterior angle (one side extended) and its adjacent interior angle are a linear pair, so the exterior angle equals
 # the two REMOTE interior angles: the Exterior Angle Theorem, by name (the book's practice uses the name its lesson
 # never gives). The state's two named misconceptions — the exterior angle taken as the reflex angle, and not knowing a
-# corner has two exterior angles, equal — and the brief's named error, "equals the adjacent interior", are Notes II
+# corner has two exterior angles, equal — and the unit's own named error, "equals the adjacent interior", are Notes II
 # and board 4's options. Angle measures as expressions (Clarification 1). Built from the benchmark and the B1G-M first
 # (the unit outline), then read against Math Nation 16.2 (audit §9).
 import sys, os
@@ -44,9 +44,9 @@ L = dict(
     warmup=[
         dict(stem="What is the supplement of 83°?", answer="97°", band="yesterday",
              source="T-B1 — supplementary: the two make 180", check=("eq", "180 - 83", "97")),
-        dict(stem="A 10-ft ladder's foot is 6 ft from a wall. How high does it reach?", answer="8 ft", band="last week",
-             source="6.04 — a ladder: the ladder is c, so subtract", check=("eq", "sqrt(10**2 - 6**2)", "8")),
-        dict(stem="12 pens cost $9. What does one pen cost?", answer="$0.75", band="last unit",
+        dict(stem="How far apart are $(-4, -1)$ and $(4, 5)$?", answer="10 units", band="last week",
+             source="6.05 — a slanted distance by its triangle", check=("eq", "sqrt((4 - (-4))**2 + (5 - (-1))**2)", "10")),
+        dict(stem="12 pens cost \\$9. What does one pen cost?", answer="\\$0.75", band="last unit",
              source="5.10–11 — a unit rate", check=("eq", "Rational(9,12)", "Rational(3,4)")),
         dict(stem="A straight angle is split into 50°, 60° and x°. Find x.", answer="70",
              band="prior grade — the prerequisite this lesson needs",
@@ -59,10 +59,10 @@ L = dict(
              note="Tear the three corners off a paper triangle and set them side by side: they fill a straight line, 180°. So the third angle is 180 minus the other two: 180 − 65 − 40 = 75. Every triangle, any shape or size.\nOFF: 'Inside a triangle, the three make 180.'",
              fig=S(figs.triangle_exterior(40, 75, l_A="40°", l_B="x°", l_C="65°", extend=False, inches=4.0, pt=16), inches=4.0, pt=16, reserve=0.3),
              math=["$x + 65 + 40 = 180$,   $x = 75$"],
-             items2=["**The three interior angles of a triangle add to 180°.**"],
+             items2=["**A triangle's three angles add to 180°:  $m\\angle A + m\\angle B + m\\angle C = 180°$**"],
              letters=False),
         dict(numeral="II", head="The Exterior Angle Theorem: outside = the two remote angles", min=4, sub="",
-             note="Extend one side: the exterior angle and the interior angle beside it are a linear pair, 180°. The interior angle is 180 minus the two remote ones, so the exterior angle IS the two remote ones: 50 + 70 = 120 (the state guide's item). Two named mistakes: the exterior angle is not the interior angle beside it (60°), and it is not the angle around the outside (240°). Each corner has two exterior angles, vertical to each other, so equal.\nOFF: 'Outside equals the two far ones added.'",
+             note="Extend one side: the exterior angle and the interior angle beside it are a linear pair, 180°. The interior angle is 180 minus the two remote ones, so the exterior angle IS the two remote ones: 50 + 70 = 120 (the state guide's item). Two named mistakes: the exterior angle is not the interior angle beside it (60°), and it is not the angle around the outside (300°). Each corner has two exterior angles, vertical to each other, so equal.\nOFF: 'Outside equals the two far ones added.'",
              fig=S(figs.triangle_exterior(50, 70, l_A="50°", l_B="70°", l_ext="x°", inches=4.1, pt=16), inches=4.1, pt=16, reserve=0.3),
              math=["$x = 50 + 70 = 120$     check:  $60 + 120 = 180$"],
              items2=["**Not the angle beside it, and not the angle around the outside.**"],
@@ -82,12 +82,12 @@ L = dict(
              ask="Find the third angle.",
              fig=S(figs.triangle_exterior(58, 71, l_A="58°", l_B="71°", l_C="x°", extend=False, inches=4.4, pt=16), inches=4.4, pt=16),
              worked=[dict(sub="Worked.", min=2,
-                          note="58 + 71 = 129, and 180 − 129 = 51°. A board with 231 added 180; one with 129 stopped at the sum.",
+                          note="58 + 71 = 129, and 180 − 129 = 51° — a board with 231 used 360; one with 129 stopped at the sum.",
                           rows=[("58 + 71 = 129", "the two given angles"),
                                 ("x = 180 - 129 = 51", "the three make 180")],
                           answer="The third angle is 51°.")],
              check=("eq", "180 - 58 - 71", "51"),
-             your_turn=dict(min=2, note="39 + 84 = 123, so 180 − 123 = 57°. A board with 123 stopped at the sum.",
+             your_turn=dict(min=2, note="39 + 84 = 123, so 180 − 123 = 57° — a board with 123 stopped at the sum.",
                             prompt=["Two angles of a triangle are $39°$ and $84°$.", "Find the third angle."],
                             steps=["$39 + 84 = 123$", "$180 - 123 = 57$"],
                             gloss="the three make 180", answer="57°"),
@@ -103,7 +103,7 @@ L = dict(
                                 ("180 - 113 = 67, \\quad 64 + 49 + 67 = 180", "check: the interior angle beside it")],
                           answer="The exterior angle is 113°.")],
              check=("many", ("eq", "64 + 49", "113"), ("eq", "64 + 49 + (180 - 113)", "180")),
-             your_turn=dict(min=2, note="72 + 35 = 107°. A board with 73 found the interior angle beside it.",
+             your_turn=dict(min=2, note="72 + 35 = 107° — a board with 73 found the interior angle beside it.",
                             prompt=["A triangle's remote interior angles are $72°$ and $35°$.", "Find the exterior angle."],
                             steps=["$72 + 35 = 107$"],
                             gloss="the two remote angles added", answer="107°"),
@@ -112,7 +112,7 @@ L = dict(
 
     # The round: the third angle (1); an isosceles triangle (2); an exterior angle (3); the exterior angle beside the
     # 75° voted — adjacent interior, reflex, one remote angle (4); a remote angle from the exterior one (5); three
-    # expressions (6); which equation fits the picture, voted (7); an extra number (8); why an exterior angle is
+    # expressions (6); which equation fits the words, voted (7); an extra number (8); why an exterior angle is
     # bigger than either remote one, in writing (9).
     whiteboard=[
         dict(text=["**Two angles of a triangle are 47° and 68°. Find the third angle."],
@@ -121,9 +121,9 @@ L = dict(
              note="47 + 68 = 115; 180 − 115 = 65°. A board with 115 stopped at the sum.",
              check=("eq", "180 - 47 - 68", "65"),
              wrong="115 — stopped at the sum [Math Nation names misremembering the sum]; 245 — used 360 [the Triangle Sum is 180]"),
-        dict(text=["An isosceles triangle has two base angles of 52°.", "**Find the third angle."],
+        dict(text=["An isosceles triangle's two base angles are equal. Each is 52°.", "**Find the third angle."],
              hint="Both base angles count.", steps=["$52 + 52 = 104$", "$180 - 104 = 76$"],
-             gloss="two equal base angles, then the sum", answer="76°",
+             gloss="an isosceles triangle's two base angles are equal", answer="76°",
              note="Both base angles are 52°: 180 − 104 = 76°. A board with 128 used only one 52.",
              check=("eq", "180 - 2*52", "76"),
              wrong="128 — used one 52 [the two base angles are equal: both count]; 52 — took all three as equal [isosceles: two equal, not three]"),
@@ -133,12 +133,12 @@ L = dict(
              gloss="the Exterior Angle Theorem", answer="115°",
              note="x = 38 + 77 = 115°. A board with 65 found the interior angle beside it.",
              check=("eq", "38 + 77", "115"),
-             wrong="65 — the interior angle beside it, 180 − 115 [Source of Truth, GR.1.5: the exterior angle confused with its neighbour]; 245 — the angle around the outside [Source of Truth, GR.1.5: the reflex angle]"),
+             wrong="65 — the interior angle beside it, 180 − 115 [Notes II: the exterior angle is not the interior angle beside it]; 295 — the angle around the outside, 360 − 65 [Florida B1G-M, GR.1.5: the reflex angle]"),
         dict(kind="mc", text=["A triangle's angles are 45°, 60° and 75°.", "**What is the exterior angle beside the 75°?"],
              qtext="A triangle's angles are 45°, 60° and 75°. What is the exterior angle beside the 75°?",
              hint="Beside the 75°, so the other two are remote.", steps=["$45 + 60 = 105$", "check:  $105 + 75 = 180$"],
              choices=["75°", "105°", "285°", "60°"], correct=1, answer="B — 105°",
-             errors={"A": "equals the adjacent interior angle [the brief's named error: the exterior angle is not the interior angle beside it]", "C": "the angle around the outside, 360 − 75 [Source of Truth, GR.1.5: the exterior angle taken as the reflex angle]", "D": "only one remote angle [the Exterior Angle Theorem adds both]"},
+             errors={"A": "equals the adjacent interior angle [Notes II: the exterior angle is not the interior angle beside it]", "C": "the angle around the outside, 360 − 75 [Florida B1G-M, GR.1.5: the exterior angle taken as the reflex angle]", "D": "only one remote angle [the Exterior Angle Theorem adds both]"},
              note="Diagnostic. Option A is the angle beside it, option C the reflex angle (the state's named misconception), option D one remote angle. Split? Sixty seconds, convince your neighbour, re-vote.",
              check=("many", ("eq", "45 + 60", "105"), ("eq", "105 + 75", "180"), ("eq", "360 - 75", "285"))),
         dict(text=["An exterior angle of a triangle is 130°. One remote interior angle is 55°.", "**Find the other remote interior angle."],
@@ -146,21 +146,22 @@ L = dict(
              gloss="the theorem, working backwards", answer="75°",
              note="The two remote angles add to 130: 130 − 55 = 75°. A board with 185 added the exterior angle and the remote one; a board with 50 found the interior angle beside the exterior one.",
              check=("eq", "130 - 55", "75"),
-             wrong="185 — added the exterior and the remote angle [the theorem: the remote angles add TO the exterior one]; 50 — the interior angle beside the exterior one [Source of Truth, GR.1.5]"),
+             wrong="185 — added the exterior and the remote angle [the theorem: the remote angles add TO the exterior one]; 50 — the interior angle beside the exterior one [Notes II: the exterior angle is not the interior angle beside it]"),
         dict(text=["A triangle's angles are $x°$, $3x°$ and $(2x + 12)°$.", "**Find each angle."],
              hint="Sum, solve, put x back.", steps=["$x + 3x + 2x + 12 = 180$,   $6x = 168$,   $x = 28$", "$3(28) = 84$,   $2(28) + 12 = 68$"],
              gloss="the Triangle Sum as an equation", answer="28°, 84° and 68°",
-             note="6x + 12 = 180, 6x = 168, x = 28: the angles are 28°, 84° and 68° (they add to 180). A board with only 28 reported x — and here x is one of the angles, so it has one of three.",
-             check=("many", ("eq", "Rational(168,6)", "28"), ("eq", "3*28", "84"), ("eq", "2*28 + 12", "68"), ("eq", "28 + 84 + 68", "180"))),
+             note="6x + 12 = 180, 6x = 168 and x = 28, so the angles are 28°, 84° and 68° (they add to 180) — a board with only 28 reported x, one angle of three.",
+             check=("many", ("eq", "Rational(168,6)", "28"), ("eq", "3*28", "84"), ("eq", "2*28 + 12", "68"), ("eq", "28 + 84 + 68", "180")),
+             wrong="28 alone — reported x, one angle of three [Math Nation names reporting x]"),
         dict(kind="mc", text=["An exterior angle measures $(5x + 4)°$.", "Its remote interior angles measure $52°$ and $(3x)°$.", "**Which equation finds x?"],
              qtext="An exterior angle measures (5x + 4)°; its remote interior angles measure 52° and (3x)°. Which equation finds x?",
              hint="Outside equals the two far ones.", steps=["outside = the two far ones:  5x + 4 = 52 + 3x", "$2x = 48$,   $x = 24$"],
              choices=["$5x + 4 + 3x = 180$", "$5x + 4 = 3x$", "$5x + 4 = 52 + 3x$", "$5x + 4 + 52 + 3x = 180$"], correct=2, answer="C — 5x + 4 = 52 + 3x",
-             errors={"A": "the exterior angle used as an interior angle in the Triangle Sum [Math Nation names writing the equation for the wrong relationship]", "B": "one remote angle only [the theorem adds both]", "D": "all four angles summed to 180 [the exterior angle is outside the triangle's sum]"},
-             note="Diagnostic — the book's 'which relationship justifies this equation' shape. Option A puts the exterior angle in the Triangle Sum, option B uses one remote angle, option D adds all four. Split? Sixty seconds, convince your neighbour, re-vote.",
+             errors={"A": "the exterior angle and one remote angle taken as a linear pair [Notes II: the exterior angle's linear pair is the interior angle beside it]", "B": "one remote angle only [the theorem adds both]", "D": "the exterior angle used as an interior angle in the Triangle Sum [Math Nation names writing the equation for the wrong relationship]"},
+             note="Diagnostic — the book's 'which relationship justifies this equation' shape. Option A pairs the exterior angle with a remote one as if a linear pair, option B uses one remote angle, option D puts the exterior angle in the Triangle Sum. Split? Sixty seconds, convince your neighbour, re-vote.",
              check=("many", ("eq", "5*24 + 4", "52 + 3*24"), ("true", "5*24 + 4 + 3*24 != 180"), ("true", "5*24 + 4 != 3*24"), ("true", "5*24 + 4 + 52 + 3*24 != 180"))),
         dict(text=["A triangle has angles of 41° and 66°, and its longest side is 9 cm.", "**Find its third angle."],
-             unneeded="the 9-cm side",
+             unneeded="9-cm side",
              hint="Which numbers are angles?", steps=["$41 + 66 = 107$", "$180 - 107 = 73$"],
              gloss="the Triangle Sum; a side length is not an angle", answer="73°",
              note="The extra-number board (ruling 22): the 9 cm is a length, not an angle. 180 − 41 − 66 = 73°.",
@@ -178,7 +179,7 @@ L = dict(
 
     independent=[
         dict(stem="Two angles of a triangle are 63° and 79°. Find the third angle.", answer="38°", why="180 − 142.", check=("eq", "180 - 63 - 79", "38"), space=0.5),
-        dict(stem="The angle between the two equal sides of an isosceles triangle is 40°. Find each base angle.", answer="70°", why="(180 − 40) ÷ 2.", check=("eq", "Rational(180 - 40, 2)", "70"), space=0.55),
+        dict(stem="An isosceles triangle's two base angles are equal. The angle between its two equal sides is 40°. Find each base angle.", answer="70°", why="(180 − 40) ÷ 2.", check=("eq", "Rational(180 - 40, 2)", "70"), space=0.55),
         dict(stem="A triangle's remote interior angles are 46° and 58°. Find the exterior angle.", answer="104°", why="46 + 58.", check=("eq", "46 + 58", "104"), space=0.5),
         dict(stem="An exterior angle of a triangle is 140°. One remote interior angle is 62°. Find the other.", answer="78°", why="140 − 62.", check=("eq", "140 - 62", "78"), space=0.5),
         dict(stem="A triangle's angles are $(2x)°$, $(3x)°$ and $(4x)°$. Find each angle.", answer="40°, 60° and 80°", why="9x = 180, x = 20.", check=("many", ("eq", "Rational(180,9)", "20"), ("eq", "2*20 + 3*20 + 4*20", "180")), space=0.6),
@@ -199,11 +200,11 @@ L = dict(
         dict(stem="A triangle's angles are 30°, 70° and 80°. What is the exterior angle beside the 80°?",
              choices=["80°", "280°", "100°", "70°"], correct=2, answer="C", why="30 + 70.",
              check=("many", ("eq", "30 + 70", "100"), ("eq", "360 - 80", "280"), ("eq", "100 + 80", "180")),
-             errors={"A": "equals the adjacent interior angle [the brief's named error]", "B": "the angle around the outside [Source of Truth, GR.1.5: the reflex angle]", "D": "only one remote angle [the theorem adds both]"}),
+             errors={"A": "equals the adjacent interior angle [Notes II: not the interior angle beside it]", "B": "the angle around the outside [Florida B1G-M, GR.1.5: the reflex angle]", "D": "only one remote angle [the theorem adds both]"}),
         dict(stem="Which equation finds x when an exterior angle is $(4x)°$ and its remote interior angles are $45°$ and $(x + 15)°$?",
              choices=["$4x + x + 15 = 180$", "$4x = 45 + x + 15$", "$4x = x + 15$", "$4x + 45 + x + 15 = 180$"], correct=1, answer="B", why="Outside equals the two far ones: x = 20.",
              check=("many", ("eq", "4*20", "45 + 20 + 15"), ("true", "4*20 + 20 + 15 != 180"), ("true", "4*20 != 20 + 15"), ("true", "4*20 + 45 + 20 + 15 != 180")),
-             errors={"A": "the exterior angle used in the Triangle Sum [Math Nation names the wrong relationship]", "C": "one remote angle only [the theorem adds both]", "D": "all four angles summed to 180 [the exterior angle is outside the Triangle Sum]"}),
+             errors={"A": "the exterior angle and one remote angle taken as a linear pair [Notes II: the exterior angle's linear pair is the interior angle beside it]", "C": "one remote angle only [the theorem adds both]", "D": "the exterior angle used as an interior angle in the Triangle Sum [Math Nation names the wrong relationship]"}),
     ],
 
     additional=[
@@ -220,11 +221,11 @@ L = dict(
         dict(stem="A triangle's angles are 25°, 65° and 90°. What is the exterior angle beside the 65°?",
              choices=["115°", "65°", "295°", "25°"], correct=0, answer="A", why="25 + 90.",
              check=("many", ("eq", "25 + 90", "115"), ("eq", "360 - 65", "295"), ("eq", "115 + 65", "180")),
-             errors={"B": "equals the adjacent interior angle [the brief's named error]", "C": "the angle around the outside [Source of Truth, GR.1.5: the reflex angle]", "D": "only one remote angle [the theorem adds both]"}),
+             errors={"B": "equals the adjacent interior angle [Notes II: not the interior angle beside it]", "C": "the angle around the outside [Florida B1G-M, GR.1.5: the reflex angle]", "D": "only one remote angle [the theorem adds both]"}),
         dict(stem="Which equation finds x when an exterior angle is $(3x + 6)°$ and its remote interior angles are $54°$ and $(x)°$?",
              choices=["$3x + 6 = x$", "$3x + 6 + x = 180$", "$3x + 6 + 54 + x = 180$", "$3x + 6 = 54 + x$"], correct=3, answer="D", why="Outside equals the two far ones: x = 24.",
              check=("many", ("eq", "3*24 + 6", "54 + 24"), ("true", "3*24 + 6 != 24"), ("true", "3*24 + 6 + 24 != 180"), ("true", "3*24 + 6 + 54 + 24 != 180")),
-             errors={"A": "one remote angle only [the theorem adds both]", "B": "the exterior angle used in the Triangle Sum [Math Nation names the wrong relationship]", "C": "all four angles summed to 180 [the exterior angle is outside the Triangle Sum]"}),
+             errors={"A": "one remote angle only [the theorem adds both]", "B": "the exterior angle and one remote angle taken as a linear pair [Notes II: the exterior angle's linear pair is the interior angle beside it]", "C": "the exterior angle used as an interior angle in the Triangle Sum [Math Nation names the wrong relationship]"}),
     ],
 
     te=dict(
@@ -237,13 +238,13 @@ L = dict(
             "Thread B, day 2 of 2: Math Nation 16.2 (MA.8.GR.1.5), the day after T-B1's angle pairs, which it needs (the linear pair gives the theorem). Not on the Unit 6 test.",
             "The Exterior Angle Theorem is named on Notes II: the book's practice uses the name its lesson never gives, and IXL FMP is called that.",
             "Built from the benchmark and the B1G-M first, then read against Math Nation (audit §9): its homework key's a = 12 line (from another question) and its practice figures drawn up to 15° off are not reproduced; every figure here is drawn to its numbers.",
-            "The state's two named misconceptions — the reflex angle, and the two equal exterior angles at a corner — are Notes II and board 4; the brief's 'equals the adjacent interior' is board 4's option A and board 3's wrong board."],
+            "The state's two named misconceptions — the reflex angle, and the two equal exterior angles at a corner — are Notes II and board 4; the unit's own named error, 'equals the interior angle beside it', is board 4's option A and board 3's wrong board."],
         standard_notes=[("Benchmark", "MA.8.GR.1.5: solve problems involving the relationships of interior and exterior angles of a triangle. Clarification: includes the Triangle Sum Theorem and angle measures as algebraic expressions (Source of Truth §GR.1.5)."),
                         ("Boundary", "One-variable linear equations; no polygon sums (GR.1.6); no reflex angles.")],
         sits="Thread B's second day and the last before Thanksgiving week; Unit 11 opens 30 Nov. IXL's JFJ, FMP and 6Q6 are due tomorrow.",
         lives="Notes I's 180 and Notes II's theorem. Board 4 is the exterior-angle diagnostic (adjacent, reflex, one remote), board 7 the which-equation diagnostic, board 9 the theorem as a reason in writing.",
         materials="Whiteboards and markers; one paper triangle to tear for Notes I, if there is time. Calculators allowed, printed nowhere.",
-        variation="Boards 1–2: the third angle, then an isosceles triangle; 3 is an exterior angle; 4 votes on the angle beside the 75°. The pattern breaks at 5 — a remote angle found backwards from the exterior one — then three expressions (6), which equation fits the picture voted (7), a side length that is not an angle (8); 9 is written. The independent set: a third angle, an isosceles triangle's base angles, an exterior angle, a remote angle, three expressions, an equation from the theorem.",
+        variation="Boards 1–2: the third angle, then an isosceles triangle; 3 is an exterior angle; 4 votes on the angle beside the 75°. The pattern breaks at 5 — a remote angle found backwards from the exterior one — then three expressions (6), which equation fits the words voted (7), a side length that is not an angle (8); 9 is written. The independent set: a third angle, an isosceles triangle's base angles, an exterior angle, a remote angle, three expressions, an equation from the theorem.",
         audit=["Every item re-derived by sympy at build time; every figure drawn to its numbers (a labelled angle that is not its true measure is refused).",
                "Math Nation 16.2 read against this lesson (audit §9): its HW 16.02 Q10 line (a = 12 from Q4 written into a line that equals 70), its 'extending one leg of a triangle' and its missing degree signs are not reproduced."],
         changes=["16.2.1–16.2.2 (the tear-off exploration) → Notes I, with the paper triangle as an option, not the lesson.",

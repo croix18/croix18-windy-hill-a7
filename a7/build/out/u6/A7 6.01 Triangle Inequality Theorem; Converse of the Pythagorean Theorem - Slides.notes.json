@@ -46,7 +46,7 @@
    "title": "Notes",
    "sub": "",
    "min": 3,
-   "note": "Two sides, 4 and 9. The third side has to be long enough to reach (more than 9 \u2212 4 = 5) and short enough to be covered (less than 4 + 9 = 13). 5 and 13 themselves are the flat cases. **Say:** between the difference and the sum, never equal to either.",
+   "note": "Two sides, 4 and 9. The third side has to be long enough to reach (more than 9 \u2212 4 = 5) and short enough to be covered (less than 4 + 9 = 13). 5 and 13 themselves are the flat cases. Call the third side x and write it as one inequality, 5 < x < 13 \u2014 read it 'x is between 5 and 13'; the signs are <, never \u2264, because 5 and 13 lie flat. **Say:** between the difference and the sum, never equal to either.",
    "kind": "notes"
   },
   {
@@ -78,7 +78,7 @@
    "title": "Your Turn",
    "sub": "Same steps, your numbers. Boards up when done.",
    "min": 2,
-   "note": "7 + 9 = 16 > 15: yes. Catches the student who sees a big 15 and says no without adding.",
+   "note": "7 + 9 = 16 > 15, so yes \u2014 a board that says no saw the big 15 and did not add.",
    "kind": "yourturn"
   },
   {
@@ -110,7 +110,7 @@
    "title": "Your Turn",
    "sub": "Same steps, your numbers. Boards up when done.",
    "min": 2,
-   "note": "64 + 121 = 185, not 196: not right. Same structure, its own numbers; a board that says 'right' compared 185 with something other than 14\u00b2.",
+   "note": "64 + 121 = 185, not 196, so not right \u2014 a board that says 'right' compared 185 with something other than 14\u00b2.",
    "kind": "yourturn"
   },
   {
@@ -174,7 +174,7 @@
    "title": "Whiteboards   \u00b7   Question 4 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "Notes II with new numbers. Boards that say 'from 5 to 19' included the flat cases.",
+   "note": "Notes II with new numbers, written as one inequality. Boards with 5 \u2264 x \u2264 19 included the flat cases; boards with only x < 19 have no bottom end.",
    "kind": "wb"
   },
   {
@@ -190,7 +190,7 @@
    "title": "Whiteboards   \u00b7   Question 5 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "Diagnostic. Options B and D are the two flat cases \u2014 the commonest wrong answers here; option A falls short.",
+   "note": "Diagnostic, in the unit test's shape. Option B is the two flat cases \u2014 the commonest wrong answer; option A keeps x between the two sides it was given; option D forgets the bottom end. Split? Sixty seconds, convince your neighbour, re-vote.",
    "kind": "wb"
   },
   {

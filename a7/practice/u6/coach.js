@@ -127,7 +127,7 @@ F.shorter = {
       { say: 'Straight across, the path is ' + (rootOK(n) ? M(sqrtH(n)) + ' = ' : rootH(n) + ', ') + cut3(0, n, 1) + ' — about ' + S(path) + ' to the nearest tenth (part a).' },
       { say: 'Subtract: ' + M((w + l) + ' − ' + S(path) + ' = ' + S(p.ans)) + '. (With every digit, ' + (w + l) + ' − ' + cut3(0, n, 1) + ' = ' + cut3(w + l, n, -1) + ', the same to the nearest tenth.)', ex: EX(S(p.ans), p.ans, { approx: true }) }]; },
   walk: p => { const { w, l } = p.prm, n = w * w + l * l, path = sqrtTenth(n);
-    return [num('How far is it along two sides of the ' + p.prm.place + '?', Q(w + l), 'Add the width and the length.'),
+    return [num('How far is it along two sides of the ' + p.prm.place + '?', Q(w + l), 'Add its two sides.'),
       num('How long is the path straight across, to the nearest tenth?', path, tenthHint(n)),
       num('What is ' + (w + l) + ' − ' + S(path) + '?', p.ans, 'Take away the path from the walk along two sides. Line up the decimal points.')]; }
 };
@@ -234,6 +234,7 @@ const kFine = k => E.places(k) >= 0 ? ' A decimal is fine.' : ' A fraction is fi
 const mulHint = (a, k) => E.places(k) >= 0 ? HINT.mul(a, k) : 'Times ' + kOut(k) + ': divide ' + S(a) + ' by ' + k.d + ', then multiply by ' + k.n + '.';
 /* adding a number to every side, or taking one away (a copy smaller than the first triangle) */
 const addSay = (d, what) => qlt(d, Q(0)) ? 'took ' + S(qabs(d)) + ' off ' + what : 'added ' + S(d) + ' to ' + what;
+const turnedSay = p => p.prm.turn === 'flip' ? 'flipped over' : 'turned';
 function simParts(p) {
   const { p: a, q: b, r: c, which } = p.prm, k = qk(p.prm.k), side = { p: a, q: b, r: c }[which];
   const known = ['p', 'q', 'r'].filter(s => s !== which), o1 = { p: a, q: b, r: c }[known[0]], c1 = qmul(Q(o1), k);
@@ -243,7 +244,7 @@ F.simSide = {
   models: p => { const t = simParts(p), out = [mod(Q(t.side), 'took the triangles to be equal. Similar means the second is a scale copy: every side times one k.', 1),
     mod(qdiv(Q(t.side), t.k), 'divided by the scale factor. The copy is ' + (qlt(t.k, Q(1)) ? 'smaller' : 'bigger') + ', so multiply by k = ' + kOut(t.k) + '.', 2)];
     const d = qsub(t.c1, Q(t.o1)); if (d.n !== 0n) out.push(mod(qadd(Q(t.side), d), addSay(d, 'the side') + '. Similar means multiplied, not added.', 1));
-    if (t.which === 'r') { const kq = qmul(Q(t.b), t.k); out.push(mod(qdiv(qmul(Q(t.c), kq), Q(t.a)), 'matched the sides by where they sit on the page. The copy is turned: match them by size, shortest with shortest.', 0)); }
+    if (t.which === 'r') { const kq = qmul(Q(t.b), t.k); out.push(mod(qdiv(qmul(Q(t.c), kq), Q(t.a)), 'matched the sides by where they sit on the page. The copy is ' + turnedSay(p) + ': match them by size, shortest with shortest.', 0)); }
     return out; },
   rule: () => 'Match the sides by size — shortest with shortest, longest with longest. Find k = copy ÷ original from a pair you know, then multiply.',
   sol: p => { const t = simParts(p);
@@ -251,7 +252,7 @@ F.simSide = {
       { say: 'The scale factor from a pair you know: ' + M('k = ' + S(t.c1) + ' ÷ ' + t.o1 + ' = ' + kIn(t.k)) + '.' },
       { say: 'Multiply the matching side by k.', ex: EX(t.side + ' × ' + kIn(t.k) + ' = ' + S(p.ans), p.ans) }]; },
   walk: p => { const t = simParts(p), others = ['p', 'q', 'r'].filter(s => s !== t.which).map(s => ({ p: t.a, q: t.b, r: t.c }[s]));
-    return [choice('The copy is turned. Which side of the first triangle does x match?', [O(String(t.side) + ' — the ' + t.size[t.which] + ' side', true),
+    return [choice('The copy is ' + turnedSay(p) + '. Which side of the first triangle does x match?', [O(String(t.side) + ' — the ' + t.size[t.which] + ' side', true),
       O(String(others[0]), false, 'Match by size: x is on the copy\'s ' + t.size[t.which] + ' side, and ' + others[0] + ' is not the first triangle\'s ' + t.size[t.which] + '.'),
       O(String(others[1]), false, 'Match by size: x is on the copy\'s ' + t.size[t.which] + ' side, and ' + others[1] + ' is not the first triangle\'s ' + t.size[t.which] + '.')]),
       num('What is the scale factor, k = ' + S(t.c1) + ' ÷ ' + t.o1 + '?', t.k, 'The copy\'s side over its match in the first triangle: ' + S(t.c1) + ' ÷ ' + t.o1 + '.' + kFine(t.k)),
@@ -339,7 +340,7 @@ const MCW = {
   eqChoice: (x, k) => { const { a, c } = x.prm, tag = x.tags[k];
     if (tag === 'sumSides') return 'That adds the sides. The theorem adds the SQUARES of the legs.';
     if (tag === 'hypLeg') return 'That puts ' + c + ', the hypotenuse, with the legs. It is across from the right angle, so it stands alone: ' + c + sup(2) + '.';
-    return 'That doubles instead of squaring: ' + a + sup(2) + ' means ' + a + ' × ' + a + ', not 2 × ' + a + '.'; },
+    return 'That doubles ' + c + ' instead of squaring it: ' + c + sup(2) + ' means ' + c + ' × ' + c + ', not 2 × ' + c + '.'; },
   simChoice: (x, k) => { const tag = x.tags[k], s = x.sides[k], t = x.prm.t;
     if (tag === 'add') { const d = qsub(s[0], Q(t[0])); return 'That ' + (qlt(d, Q(0)) ? 'takes ' + S(qabs(d)) + ' from' : 'adds ' + S(d) + ' to') + ' every side. Similar means every side is MULTIPLIED by one number.'; }
     if (tag === 'twoRatios') return 'Check all three ratios: ' + M(S(s[0]) + ' ÷ ' + t[0] + ' = ' + kIn(qdiv(s[0], Q(t[0])))) + ' and ' + M(S(s[1]) + ' ÷ ' + t[1] + ' = ' + kIn(qdiv(s[1], Q(t[1])))) + ', but ' + S(s[2]) + ' ÷ ' + t[2] + ' is not ' + kOut(qdiv(s[0], Q(t[0]))) + '.';
@@ -410,7 +411,7 @@ function stepsMC0(x) {
       if (tag === 'add') { const d = qsub(s[0], Q(t[0])); return 'Its second side is ' + S(s[1]) + ', not ' + S(ok[1]) + ': it ' + (qlt(d, Q(0)) ? 'takes ' + S(qabs(d)) + ' from' : 'adds ' + S(d) + ' to') + ' each side instead of multiplying.'; }
       if (tag === 'twoRatios') return 'Its third side is ' + S(s[2]) + ', not ' + S(ok[2]) + '.';
       return 'It begins with ' + t[0] + ', the first triangle\'s own side: then k would be 1, and every side would stay the same.'; };
-    return [choice('Similar triangles: every side is …', [O('multiplied by the same number', true), O('increased by the same number', false, 'Adding the same amount to each side changes the shape. Similar means a scale copy: multiply.')]),
+    return [choice('Similar triangles: every side is …', [O('multiplied by the same number', true), O('increased by the same number', false, 'Adding the same amount to each side changes this triangle\'s shape. Similar means a scale copy: multiply.')]),
       num('Three of the choices begin with ' + S(first) + ', the match for ' + t[0] + '. What is k = ' + S(first) + ' ÷ ' + t[0] + '?', k, divHint(first, Q(t[0])) + kFine(k)),
       num('Then ' + t[1] + ' becomes ' + t[1] + ' × ' + kOut(k) + '. What is ' + t[1] + ' × ' + kOut(k) + '?', ok[1], mulHint(Q(t[1]), k)),
       num('And ' + t[2] + ' becomes ' + t[2] + ' × ' + kOut(k) + '. What is ' + t[2] + ' × ' + kOut(k) + '?', ok[2], mulHint(Q(t[2]), k)),

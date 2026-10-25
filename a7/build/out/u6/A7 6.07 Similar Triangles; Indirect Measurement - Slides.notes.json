@@ -78,7 +78,7 @@
    "title": "Your Turn",
    "sub": "Same steps, your numbers. Boards up when done.",
    "min": 2,
-   "note": "k = 12 \u00f7 3 = 4; 5 \u00d7 4 = 20, 7 \u00d7 4 = 28. A board with 14 and 16 added 9.",
+   "note": "Sorted, the copy is 12, x, 28, so x matches the 5: k = 12 \u00f7 3 = 4 and x = 20 \u2014 a board with about 46.7 matched by the order in the list (3 with 28).",
    "kind": "yourturn"
   },
   {
@@ -92,9 +92,9 @@
   {
    "n": 12,
    "title": "Example 2",
-   "sub": "A shadow.",
+   "sub": "A mirror on the ground.",
    "min": 1,
-   "note": "Ask why the two triangles are similar: the same sun at the same moment \u2014 one angle for both rays.",
+   "note": "Ask which lengths match: Omar's eye height with the tree's height, and his 4 ft to the mirror with the tree's 18 ft \u2014 the words say the two right triangles are similar.",
    "kind": "example"
   },
   {
@@ -102,7 +102,7 @@
    "title": "Example 2",
    "sub": "Worked.",
    "min": 3,
-   "note": "Shadow to shadow: k = 15 \u00f7 3 = 5, so the pole is 5 \u00d7 5 = 25 ft. A board with 9 set the ratio up crosswise (15 \u00d7 3 \u00f7 5); one with 17 added 12.",
+   "note": "Ground to ground: k = 18 \u00f7 4 = 4.5, so the tree is 5 \u00d7 4.5 = 22.5 ft \u2014 a board with about 1.1 used k upside down (4 \u00f7 18), one with 19 added 14.",
    "kind": "example"
   },
   {
@@ -110,7 +110,7 @@
    "title": "Your Turn",
    "sub": "Same steps, your numbers. Boards up when done.",
    "min": 2,
-   "note": "k = 12 \u00f7 1.5 = 8; 2 \u00d7 8 = 16 m. A board with 9 set it up crosswise.",
+   "note": "k = 12 \u00f7 1.5 = 8, so the flagpole is 4 \u00d7 8 = 32 ft \u2014 a board with 0.5 used k upside down (1.5 \u00f7 12).",
    "kind": "yourturn"
   },
   {
@@ -142,7 +142,7 @@
    "title": "Whiteboards   \u00b7   Question 2 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "k = 18 \u00f7 6 = 3; 24 cm and 33 cm. A board with 20 and 23 added 12 to every side.",
+   "note": "Sorted, 18 matches 6 and 33 matches 11, so x matches the 8: k = 18 \u00f7 6 = 3 and x = 24 \u2014 a board with 13.5 matched the 8 with the 18 by place on the page.",
    "kind": "wb"
   },
   {
@@ -158,7 +158,7 @@
    "title": "Whiteboards   \u00b7   Question 3 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "The copy is smaller, so k is under 1: 5 \u00f7 20 = 0.25. 12 \u00d7 0.25 = 3 and 16 \u00d7 0.25 = 4. A board with 48 and 64 divided the other way.",
+   "note": "The copy is smaller, so k is under 1: 5 \u00f7 20 = 0.25, and 12 \u00d7 0.25 = 3, 16 \u00d7 0.25 = 4 \u2014 a board with 48 and 64 turned k upside down.",
    "kind": "wb"
   },
   {
@@ -238,7 +238,7 @@
    "title": "Whiteboards   \u00b7   Question 8 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "The extra-number board (ruling 22): the 45 years is bait. Ground to ground, k = 16 \u00f7 4 = 4; the pole is 5 \u00d7 4 = 20 ft. The words say the triangles are similar, as every mirror item here does (the book's test mirror never says, audit D47).",
+   "note": "The extra-number board (ruling 22): the 45 years is bait. Ground to ground, k = 16 \u00f7 4 = 4; the pole is 5 \u00d7 4 = 20 ft. The words say the triangles are similar, as every mirror item here does.",
    "kind": "wb"
   },
   {

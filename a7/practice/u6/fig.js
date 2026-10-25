@@ -225,7 +225,7 @@ function altOf(f) {
     case 'rtri': return 'A right triangle. The legs are labeled ' + f.labs[0] + ' and ' + f.labs[1] + '; the side across from the right angle is labeled ' + f.labs[2] + '.';
     case 'grid2': return 'A coordinate plane with ' + f.pts.map(p => 'point ' + ptName(p[0], p[1], p[2])).join(' and ') + '.';
     case 'gridTri': return 'A coordinate plane with triangle ' + f.pts.map(p => p[2]).join('') + ': ' + f.pts.map(p => ptName(p[0], p[1], p[2])).join(', ') + '.';
-    case 'simPair': return 'Two similar triangles. The first has sides ' + f.la.join(', ') + '. The second, turned, has sides ' + f.lb.join(', ') + '.';
+    case 'simPair': return 'Two similar triangles. The first has sides ' + f.la.join(', ') + '. The second, ' + (f.turn === 'flip' ? 'flipped over' : 'turned') + ', has sides ' + f.lb.join(', ') + '.';
     case 'shadow': return 'The ' + f.what[0] + ', ' + f.lab[0] + ' tall, and a ' + f.lab[1] + ' shadow; the ' + f.what[1] + ', h tall, and a ' + f.lab[2] + ' shadow. The sun\'s rays are dashed.';
     case 'mirror': return f.what[0] + '\'s eyes, ' + f.lab[0] + ' up, ' + f.lab[1] + ' from a mirror on the ground; the ' + f.what[1] + ', h tall, ' + f.lab[2] + ' beyond the mirror. The light\'s path is dashed.';
   }

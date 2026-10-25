@@ -35,6 +35,11 @@ PLANTS = [
      "B.lab(P[0], P[1], f.labs[0], f.vals[0], cen, { tol: 1e-6 });", "B.lab(P[0], P[2], f.labs[0], f.vals[0], cen, { tol: 1e-6 });"),
     ("the similar copy drawn too long", "engine.js",
      "b: [qnum(cp), qnum(cq), qnum(cr)]", "b: [qnum(cp), qnum(cq), qnum(cr) + 1]"),
+    # the words: a real place, a grown-up's height, and the mirror's similar triangles said
+    ("a garden 1 m wide", "engine.js", "garden: [['m', 2], ['ft', 5], ['yd', 3]]", "garden: [['m', 1], ['ft', 1], ['yd', 1]]"),
+    ("a man 4 ft tall", "engine.js", "man: ['5.5', '6'], woman: ['5', '5.5', '6']", "man: ['4', '4.5'], woman: ['4', '4.5']"),
+    ("the mirror's words stop saying the triangles are similar", "engine.js",
+     "' ft beyond the mirror. The two right triangles are similar. How tall is the '", "' ft beyond the mirror. How tall is the '"),
     ("the shadow figure labels the girl's shadow with her height", "engine.js",
      "lab: [N(h1) + ' ft', N(s1) + ' ft', numStr(S2) + ' ft', 'h']", "lab: [N(h1) + ' ft', N(h1) + ' ft', numStr(S2) + ' ft', 'h']"),
     # the coach's words and numbers

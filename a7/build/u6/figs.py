@@ -292,8 +292,10 @@ def ladder(wall, foot, l_ladder=None, l_wall=None, l_foot=None, unit="ft", fs=22
     return dict(kind="shapes", fs=fs, pt=pt, **{"in": inches}, shapes=sh)
 
 
-def rect_diagonal(w, h, lw=None, lh=None, ld=None, unit="", fs=22, pt=9.5, inches=2.2):
-    """A w-by-h rectangle with one diagonal drawn; a numeric ld must be the diagonal's true length."""
+def rect_diagonal(w, h, lw=None, lh=None, ld=None, unit="", fs=22, pt=9.5, inches=2.2, rod=None):
+    """A w-by-h rectangle with one diagonal drawn; a numeric ld must be the diagonal's true length. `rod` =
+    (length, label) draws the thing the words hold up against the diagonal (an umbrella) to scale under the rectangle,
+    so every length the words give is on the picture (ruling 44)."""
     d = math.hypot(w, h)
     if ld is not None and _num(ld) is not None:
         v = _num(ld)
@@ -310,6 +312,14 @@ def rect_diagonal(w, h, lw=None, lh=None, ld=None, unit="", fs=22, pt=9.5, inche
     if _lab(ld, unit):
         # above the diagonal's middle, on the upper-left triangle's side of it
         sh.append(_t(w / 2, h / 2, _lab(ld, unit), ha="right", va="bottom", off=(-0.2, 0.25)))
+    if rod:
+        L, lab = rod
+        m = re.search(r"\d+(?:\.\d+)?", lab)
+        if not m or abs(float(m.group(0)) - L) > 1e-9:
+            raise ValueError(f"rect_diagonal: the rod is {L}, not {lab}")
+        y, t = -max(h * 0.6, w * 0.22), max(w, h) * 0.022          # a bar, not a rule: the kit draws every segment one weight
+        sh.append(dict(t="poly", pts=[(0, y - t), (L, y - t), (L, y + t), (0, y + t)], fill="#7A8699"))
+        sh.append(_t(L / 2, y - t, lab, ha="center", va="top", off=(0, -0.3)))
     return dict(kind="shapes", fs=fs, pt=pt, **{"in": inches}, shapes=sh)
 
 
@@ -608,7 +618,7 @@ def mirror(h1, d1, h2, d2, l=(None, None, None, None), unit="ft", what=("person"
           dict(t="poly", pts=[(0, 0), M, (0, h1)], fill=SHADE),
           dict(t="poly", pts=[M, (X2, 0), (X2, h2)], fill=SHADE),
           dict(t="seg", a=(0, 0), b=(0, h1)), dict(t="seg", a=(X2, 0), b=(X2, h2)),
-          dict(t="seg", a=(d1 - w, 0), b=(d1 + w, 0), lw=4.0),
+          dict(t="poly", pts=[(d1 - w, 0), (d1 + w, 0), (d1 + w, -w * 0.35), (d1 - w, -w * 0.35)], fill="#1A1A1A"),   # the mirror, a dark bar on the ground
           dict(t="ra", xy=(0, 0), u=(1, 0), v=(0, 1), s=min(d1, h1) * 0.14),
           dict(t="ra", xy=(X2, 0), u=(-1, 0), v=(0, 1), s=min(d2, h2) * 0.1)]
     labs = [_lab(x, unit) for x in l]
