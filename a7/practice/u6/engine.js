@@ -234,7 +234,9 @@ const LEGS = [[3, 4], [4, 3], [6, 8], [8, 6], [5, 12], [12, 5], [9, 12], [12, 9]
    the class), so the test's whole hypotenuse is 13 or 15. The legs, and the hypotenuse-and-leg pairs, the lessons show: */
 const TRIPLE_TEST = [[5, 12, 13], [9, 12, 15]];
 const SHOWN_LEGS = new Set(['3,4', '6,8', '9,12', '7,9', '5,11', '2,13', '7,10', '5,6', '4,7', '2,7', '3,5', '5,7', '3,8', '2,3']);
-const SHOWN_CL = new Set(['17/15', '15/8', '11/6', '10/6', '25/24', '10/3', '12/5', '13/6', '25/20']);
+const SHOWN_CL = new Set(['17/15', '15/8', '11/6', '17/8', '25/24', '10/3', '8/3', '13/6', '25/20']);
+/* a story a lesson's independent set asks word for word (6.04, question 6): practice, not shown, but never the test's */
+const ASKED = new Set(['kite 19/12']);
 const SHOWN_TRI = new Set(['3,4,5', '6,8,10', '8,15,17', '7,24,25', '15,20,25', '12,16,20']);   /* a whole leg's triangle, shown */
 /* the right triangles a lesson shows whole (6.01 Notes III and Example 2, 6.03 Notes II–III, the 6.04, 6.05 and 6.07 warm-ups,
    6.06 Your Turn 1, 6.07 Notes I): question 2 never offers one as its right set */
@@ -314,7 +316,7 @@ function q4(seed) {
 const STORIES = {
   ladder: { u: 'ft', c: [8, 16], a: [2, 6], stem: (c, a) => (/^(8|11|18)/.test(String(c)) ? 'An ' : 'A ') + c + '-foot ladder leans against a wall. Its foot is ' + a + ' feet from the wall. How high up the wall does the ladder reach, in feet? ' + ROUND, what: 'ladder', ground: 'from the wall' },
   ramp: { u: 'ft', c: [6, 16], a: [5, 15], stem: (c, a) => 'A ramp is ' + c + ' feet long. It runs ' + a + ' feet along the ground. How high does the ramp rise, in feet? ' + ROUND, what: 'ramp', ground: 'along the ground' },
-  kite: { u: 'm', c: [10, 20], a: [6, 16], stem: (c, a) => 'A kite flies on ' + c + ' meters of tight string. It is straight above a spot ' + a + ' meters across from the hand that holds the string, level with the hand. How high above the hand is the kite, in meters? ' + ROUND, what: 'string', ground: 'across' }
+  kite: { u: 'm', c: [10, 20], a: [6, 16], stem: (c, a) => 'A kite flies on ' + c + ' meters of tight string. Straight below the kite, level with the hand that holds the string, is a point ' + a + ' meters from the hand. How high is the kite above that point, in meters? ' + ROUND, what: 'string', ground: 'across' }
 };
 function q5(seed) {
   return D('q5', seed, T => {
@@ -323,7 +325,7 @@ function q5(seed) {
       /* the ramp rises less than it runs; the ladder reaches higher than its foot is out; a kite flies above at least a third
          of the string's length */
       const [c, a] = T.until(() => [T.ri(S0.c[0], S0.c[1]), T.ri(S0.a[0], S0.a[1])], ([c, a]) => { const m = c * c - a * a, b = Math.sqrt(m);
-        return a < c && m > 0 && m <= 225 && !isSquare(m) && !shownLeg(c, a) && (ctx !== 'ramp' || b < a / 2) && (ctx !== 'ladder' || b > 2 * a) && (ctx !== 'kite' || b >= c / 3); });
+        return a < c && m > 0 && m <= 225 && !isSquare(m) && !shownLeg(c, a) && !ASKED.has(ctx + ' ' + c + '/' + a) && (ctx !== 'ramp' || b < a / 2) && (ctx !== 'ladder' || b > 2 * a) && (ctx !== 'kite' || b >= c / 3); });
       const m = c * c - a * a;
       return { type: 'solo', stem: S0.stem(c, a), part: numPart('', 'legTenth', { c, a, u: S0.u, ctx }, '', sqrtTenth(m), { unit: S0.u, tenth: true, exact: Math.sqrt(m), rad: m }) };
     }
@@ -517,6 +519,6 @@ function ansHtml(p) { return M(numStr(p.ans)) + (p.unit ? ' ' + esc(p.unit) : ''
 const api = { UNIT_ID, TITLES, NAMES, UNITS, Q, qadd, qsub, qmul, qdiv, qneg, qabs, qeq, qlt, qnum, qpow, qdec, qv, places, decPlain, numStr, N, commas,
   isqrt, isSquare, squareFree, roundSqrt, sqrtTenth, sqrtCut, plusSqrtTenth, rootOK, qk, kIn, kOut, esc, M, speakH, fr, sqrtH, sup, sq, minus, pt, X,
   tidy, parse, evalA, readAns, readNum, setClean, generate, partsOf, ansHtml, isRight, isTri, sorted, setKey, crosses, TRIPLE15, LEGWHOLE, CONVERSE, LEGS,
-  TRIPLE_TEST, SHOWN_LEGS, SHOWN_CL, SHOWN_TRI, SHOWN_CONV, legKey, shownLeg };
+  TRIPLE_TEST, SHOWN_LEGS, SHOWN_CL, SHOWN_TRI, SHOWN_CONV, ASKED, legKey, shownLeg };
 if (typeof module !== 'undefined' && module.exports) module.exports = api; else root.Practice = api;
 })(this);

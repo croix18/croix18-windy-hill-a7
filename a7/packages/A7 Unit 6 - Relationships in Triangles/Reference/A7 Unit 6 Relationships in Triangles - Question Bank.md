@@ -16,7 +16,7 @@ the unit is planned. The printed keys in each lesson's `Keys` folder are generat
 **Read this once, when you plan the unit.**
 
 - Two book lessons in one day (6.1 + 6.2, the plan's own merge: 6.2 is 6.1's practice). Built from the benchmark and the B1G-M first, then read against Math Nation (the unit audit).
-- The Pythagorean Theorem itself is taught on Notes III as the fact the converse turns around — the 3-4-5 squares — and is not yet used to find a side (6.03). The warm-up's Q3–Q4 (√169, 5² + 12²) preload the first converse before it has a name.
+- The Pythagorean Theorem itself is taught on Notes III as the fact the converse turns around — the 3-4-5 squares — and is not yet used to find a side (6.03). The warm-up's Q3–Q4 (√100, 6² + 8²) preload the first converse before it has a name.
 - Every converse board names its sides in an order that is not 'leg, leg, hypotenuse' at least once (Example 2, board 7, the independent set's Q5, bank Q7): the test is on the LONGEST side wherever it is listed — the Source of Truth's named misconception for GR.1.1, misidentifying the hypotenuse.
 - The equal case (4 + 5 = 9) is the triangle inequality's whole trap and the Florida reference sheet's '>' is strict: Notes I draws it lying flat, and boards 3 and 5 make it a choice to refuse.
 
@@ -99,7 +99,7 @@ the unit is planned. The printed keys in each lesson's `Keys` folder are generat
 - 6.04 Additional Practice and Homework → the independent set and IXL; board 9 is the exit evidence.
 
 **Question Bank answers.**  
-1. 15 in  2. About 13.7 ft  3. About 9.2 m  4. 4 m  5. Yes — the diagonal is about 12.5 in.  6. 12 m  7. 10 m  8. B B  9. C C
+1. 15 in  2. About 13.7 ft  3. About 9.2 m  4. About 4.1 m  5. Yes — the diagonal is about 12.5 in.  6. 12 m  7. 10 m  8. B B  9. C C
 
 **Question Bank – Additional answers.**  
 1. 10 ft  2. About 10.2 ft  3. About 10.4 ft  4. 2 m  5. No — the diagonal is only about 14.2 in.  6. 15 m  7. 15 m  8. A A  9. B B
@@ -164,7 +164,7 @@ the unit is planned. The printed keys in each lesson's `Keys` folder are generat
 - 6.6.3 (a partner guessing game) and 6.6.5 (Ellena's error) → the whiteboard round; board 9 is a written error of its own. 6.06 Additional Practice and Homework → the independent set and IXL.
 
 **Question Bank answers.**  
-1. 36 units  2. 30 units  3. 22.2 units  4. 36 units  5. 6 blocks  6. √73 ≈ 8.5 m  7. 13 units  8. B B  9. C C
+1. 36 units  2. 30 units  3. 22.2 units  4. 32 units  5. 6 blocks  6. √73 ≈ 8.5 m  7. 13 units  8. B B  9. C C
 
 **Question Bank – Additional answers.**  
 1. 30 units  2. 36 units  3. 19.5 units  4. 48 units  5. 4 blocks  6. √89 ≈ 9.4 m  7. 15 units  8. C C  9. A A

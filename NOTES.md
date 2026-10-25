@@ -1,5 +1,25 @@
 # State of the work — 25 October 2026 (read this first)
 
+## 25 October, 4 pm — Unit 6 checked again after its fixes (content version 4); the website brought up to date
+
+Croix, 3:11 pm: *"Is everything else pushed to the site and updated?"* Both courses' published units and every app were
+current on the site except **Tally** (the site's copy was older than Tally `7e135ab`; Tally's own tests passed, 46 suites,
+1461 checks, and it is synced). A fourth reader, who had seen none of the work, then read only what the second review's
+fixes changed in Unit 6: every new number right, **eight findings, all taken** (audit §8, "The check after the fixes"):
+- **6.07's warm-up** is a 17-ft ladder 8 ft out (15 ft up): the 10/6 ladder was the Review's Q11 word for word.
+- **The Reference Sheet's converse example** is 24, 40, 32, as 6.01's Notes III (the old 9, 15, 12 was the test's 9-12-15).
+- **T-B1 board 7** asks its question beside a larger figure; the edition says what the slide says.
+- **6.04 Example 2** is an 8-ft ladder 3 ft out (√55 ≈ 7.4): the old 12/5 was board 1's pool.
+- **The kite** (the page's question 5 and 6.04's independent question 6): "Straight below the kite, level with the hand
+  that holds the string, is a point 12 meters from the hand." The Hint no longer says that leg lies along the ground, and
+  the page never draws 6.04's own kite (19 m, 12 m) — `engine.js` `ASKED`, enforced by `u6_check.js`.
+- **Repeats inside the lessons:** 6.06's bank question 4 (now (−6, −3), (6, −3), (0, 5): 32), 6.04's bank courtyard (now
+  5 m by 13 m: about 4.1 m shorter), 6.05's independent question 6 (now the park at (8, 8): √221 ≈ 14.9 km).
+- Two words: "The the mirror's size" in 6.07's edition; 6.01's note to the teacher named the old warm-up.
+
+The page is **content version 4** (version 3 was up about an hour, on a Sunday), 35 of 35 plants caught; the page and the
+teacher copy checked and built; Unit 6 rebuilt and installed at 0 findings; master sheet regenerated.
+
 ## 25 October, afternoon — Unit 6's second review done; Unit 6 and Thread B go back on the website
 
 Croix, 11:14 am: *"Take them down until a review chat goes over them. Then put them back up."* The second review of Unit 6

@@ -8,11 +8,13 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;',
 
 const Unit = {
   id: 'a7u6',
-  contentVersion: 3,                 /* bump whenever any set's questions change (the lock check says so). 2: half of Q12's sets name the
+  contentVersion: 4,                 /* bump whenever any set's questions change (the lock check says so). 2: half of Q12's sets name the
                                         triangles by their corners (25 Oct 2026), before the page was published. 3: the second review
                                         (25 Oct 2026; the page was up 10:35–11:14 that morning, a Sunday, then taken down) — Q1 and Q2's
                                         orders, Q4 and Q5 and Q7 off the lessons' shown numbers, Q5's leg in a story, Q6's fourth choice,
-                                        Q12's lure refused, Q13's sizes and words */
+                                        Q12's lure refused, Q13's sizes and words. 4: the check after it (25 Oct, 3 pm; v3 was up from
+                                        about 2 pm) — the kite's words, 6.04 Example 2's (8 ft, 3 ft out) and 6.07's warm-up ladders as shown pairs, and
+                                        6.04's own kite question kept off Q5 */
   legacy: [],
   title: 'A7 Unit 6 Practice Test',
   eyebrow: 'Grade 7 Accelerated &nbsp;·&nbsp; Unit 6 &nbsp;·&nbsp; Practice',

@@ -196,7 +196,7 @@ L = dict(
         dict(stem="$(-1, -2)$, $(8, -2)$, $(8, 10)$", answer="36 units", why="9, 12 and 15.", check=("eq", "9 + 12 + sqrt(9**2 + 12**2)", "36"), space=0.6),
         dict(stem="$(-3, 6)$, $(2, 6)$, $(-3, -6)$", answer="30 units", why="5, 12 and 13.", check=("eq", "5 + 12 + sqrt(5**2 + 12**2)", "30"), space=0.6),
         dict(not_bound=True, stem="$(-2, -3)$, $(4, -3)$, $(4, 4)$", answer="22.2 units", why="6 + 7 + √85 ≈ 22.22.", check=("many", ("eq", "6 + 7 + sqrt(6**2 + 7**2)", "13 + sqrt(85)"), ("approx", "13 + sqrt(85)", "22.2", "0.05")), space=0.6),
-        dict(stem="$(-5, -2)$, $(5, -2)$, $(0, 10)$ — a triangle with no right angle", answer="36 units", why="Base 10; the height 12 splits it 5 and 5, so each slanted side is 13.", check=("eq", "10 + 2*sqrt(5**2 + 12**2)", "36"), space=0.6),
+        dict(stem="$(-6, -3)$, $(6, -3)$, $(0, 5)$ — a triangle with no right angle", answer="32 units", why="Base 12; the height 8 splits it 6 and 6, so each slanted side is 10.", check=("eq", "12 + 2*sqrt(6**2 + 8**2)", "32"), space=0.6),
         dict(heading="For questions 5 through 7, each grid unit is one block or one meter."),
         dict(stem="Home is at $(-6, 2)$ and school at $(3, -10)$. How much shorter is the straight line than the streets?", answer="6 blocks", why="Streets 21; straight 15.", check=("eq", "(9 + 12) - sqrt(9**2 + 12**2)", "6"), space=0.6),
         dict(not_bound=True, stem="On a park map in meters, a bench is at $(-2, -4)$ and a slide at $(6, -1)$. How far apart are they, to the nearest tenth?", answer="√73 ≈ 8.5 m", why="Across 8, up 3.", check=("many", ("eq", "sqrt(8**2 + 3**2)", "sqrt(73)"), ("approx", "sqrt(73)", "8.5", "0.05")), space=0.6),

@@ -94,7 +94,7 @@
    "title": "Example 2",
    "sub": "How high a ladder reaches.",
    "min": 1,
-   "note": "Ask which length is c before anyone squares: the ladder, 12 ft. The height is a leg \u2014 so this one subtracts.",
+   "note": "Ask which length is c before anyone squares: the ladder, 8 ft. The height is a leg \u2014 so this one subtracts.",
    "kind": "example"
   },
   {
@@ -102,7 +102,7 @@
    "title": "Example 2",
    "sub": "Worked.",
    "min": 3,
-   "note": "The ladder is c: h\u00b2 = 144 \u2212 25 = 119, \u221a119 \u2248 10.91, so 10.9 ft \u2014 less than 12, as a leg must be. A board with 13 added the squares: a 12-ft ladder cannot reach 13 ft.",
+   "note": "The ladder is c: h\u00b2 = 64 \u2212 9 = 55, \u221a55 \u2248 7.42, so 7.4 ft \u2014 less than 8, as a leg must be. A board with 8.5 added the squares (\u221a73): an 8-ft ladder cannot reach 8.5 ft.",
    "kind": "example"
   },
   {
@@ -126,7 +126,7 @@
    "title": "Whiteboards   \u00b7   Question 1 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "The pool's corner is square, so both sides are legs and the diagonal is c. A board with 17 added the sides; a board with 10.9 subtracted, as Example 2 did \u2014 there the 12 was the ladder, c; here it is a side.",
+   "note": "The pool's corner is square, so both sides are legs and the diagonal is c. A board with 17 added the sides; a board with 10.9 subtracted, 144 \u2212 25, as if the 12 were c \u2014 here it is a side.",
    "kind": "wb"
   },
   {

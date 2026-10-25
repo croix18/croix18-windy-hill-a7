@@ -27,7 +27,8 @@ progress, Print, and the checks that run in a real browser.
   3. The range of the third side — the right inequality, "between the two sides", ≤ for <, and 0 for the lower end.
   4. (a) a whole hypotenuse — 5-12-13 or 9-12-15 (ruling 43), (b) a whole leg.  5. Half the sets a hypotenuse to the nearest
      tenth; half a leg in a story, to the nearest tenth — a ladder's height up a wall, a ramp's rise, a kite's height above the
-     hand — the hypotenuse given (the second review: the test had asked a leg in a story in no set).  6. Which equation finds x
+     point under it, level with the hand — the hypotenuse given (the second review: the test had asked a leg in a story in no
+     set).  6. Which equation finds x
      (a right triangle drawn to scale, turned and flipped; the choice that leaves the hypotenuse unsquared, a² + x² = c, in place
      of the old doubled one, which no student writes; no leg is a sliver or under 3).
      7. A path across a garden, lawn, patio, playground or courtyard, its two sides in either order ("9 meters by 13 meters"),
@@ -70,8 +71,8 @@ A lesson's warm-up, notes, worked examples and Your Turns are what the class has
 225 bound only four right triangles have a whole hypotenuse, and the lessons had shown all four; they now show 3-4-5 and
 6-8-10, so 4(a) is 5-12-13 or 9-12-15 (9-12-15 is 6.06's Your Turn 1 and 6.07's similar pair, kept so that 4(a) has two
 triangles). 4(b), 5 and 7 use no legs and no hypotenuse-and-leg pair a lesson worked, and question 2 offers no triangle a
-lesson showed whole as a right set. `u6_check.js` fails a set that breaks any of it. When a lesson's shown numbers change,
-these lists change with them.
+lesson showed whole as a right set; and no story is a lesson's own independent question word for word (`ASKED`: 6.04's
+kite). `u6_check.js` fails a set that breaks any of it. When a lesson's shown numbers change, these lists change with them.
 
 ## Variety (ruling 49)
 

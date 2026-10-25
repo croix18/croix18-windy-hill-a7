@@ -99,9 +99,9 @@ F.legWhole = {
       num('What number times itself is ' + S(Q(m)) + '?', p.ans, rootHint(m))]; }
 };
 /* a leg in a story, to the nearest tenth: the ladder, the ramp or the kite string is the hypotenuse (6.04) */
-const STORY = { ladder: { c: 'the ladder', a: 'the distance from the wall to its foot', along: 'out from the wall', b: 'the height up the wall' },
-  ramp: { c: 'the ramp', a: 'the distance it runs along the ground', along: 'along the ground', b: 'how high it rises' },
-  kite: { c: 'the string', a: 'the distance across to the spot below the kite', along: 'across', b: 'how high the kite is' } };
+const STORY = { ladder: { c: 'the ladder', a: 'the distance from the wall to its foot', along: 'out from the wall', b: 'the height up the wall', lies: 'lies along the ground' },
+  ramp: { c: 'the ramp', a: 'the distance it runs along the ground', along: 'along the ground', b: 'how high it rises', lies: 'lies along the ground' },
+  kite: { c: 'the string', a: 'the distance from the hand to the point below the kite', along: 'from the hand, level with it', b: 'how high the kite is above that point', lies: 'runs level from the hand' } };
 F.legTenth = {
   models: p => { const { c, a, ctx } = p.prm, m = c * c - a * a, W = STORY[ctx];
     return [near(Math.sqrt(c * c + a * a), 'added the squares. ' + W.c[0].toUpperCase() + W.c.slice(1) + ' is the hypotenuse, so this leg is found by subtracting: ' + sq(c) + ' − ' + sq(a) + '.', 1),
@@ -114,7 +114,7 @@ F.legTenth = {
       { say: 'Take the square root: b = ' + (rootOK(m) ? M(sqrtH(m)) + ' = ' : rootH(m) + ', ') + cut3(0, m, 1) },
       { say: roundSay(0, m, 1, p.ans), ex: EX(S(p.ans), p.ans, { approx: true }) }]; },
   walk: p => { const { c, a, ctx } = p.prm, m = c * c - a * a, W = STORY[ctx];
-    return [choice('Which length is the hypotenuse, c?', [O(W.c + ', ' + c, true), O(W.a + ', ' + a, false, 'That one lies along the ground: it makes the right angle, so it is a leg.')]),
+    return [choice('Which length is the hypotenuse, c?', [O(W.c + ', ' + c, true), O(W.a + ', ' + a, false, 'That one ' + W.lies + ': it makes the right angle, so it is a leg.')]),
       choice('So to find ' + W.b + ', you …', [O('subtract: ' + sq(c) + ' − ' + sq(a), true),
         O('add: ' + sq(a) + ' + ' + sq(c), false, 'Adding makes a side longer than the hypotenuse, ' + c + ' — but a leg is shorter than it.')]),
       num('What is ' + sq(c) + ' − ' + sq(a) + '?', Q(m), sqHint(c, a, '-')),

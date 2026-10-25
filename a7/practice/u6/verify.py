@@ -165,7 +165,7 @@ def expect(where, it, p):
     if fam == "legTenth":
         stories = [(r"An? (\d+)-foot ladder leans against a wall\. Its foot is (\d+) feet from the wall\. How high up the wall does the ladder reach, in feet\? ", "ft", "ladder"),
                    (r"A ramp is (\d+) feet long\. It runs (\d+) feet along the ground\. How high does the ramp rise, in feet\? ", "ft", "ramp"),
-                   (r"A kite flies on (\d+) meters of tight string\. It is straight above a spot (\d+) meters across from the hand that holds the string, level with the hand\. How high above the hand is the kite, in meters\? ", "m", "kite")]
+                   (r"A kite flies on (\d+) meters of tight string\. Straight below the kite, level with the hand that holds the string, is a point (\d+) meters from the hand\. How high is the kite above that point, in meters\? ", "m", "kite")]
         for pat, u, ctx in stories:
             m = re.fullmatch(pat + re.escape(ROUND), st)
             if m: break

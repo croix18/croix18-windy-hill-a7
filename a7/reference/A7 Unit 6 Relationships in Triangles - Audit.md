@@ -485,6 +485,28 @@ sound on 1,500, `plant_check.py` 35 of 35 (two new: a Hint choice with two right
 disagree); content version 3, the lock rewritten; every part over the variety floor but 2.1a (4 versions), 2.1b (9) and
 2.4a–b (86), allowed in `unit.json` with their reasons. The teacher copy rebuilt and checked.
 
+**The check after the fixes** (3 pm). A fourth reader, who had seen none of the work, read only what the fixes changed.
+Every new number was right; eight findings, all taken:
+1. 6.07's new warm-up ladder (10 ft, its foot 6 ft out) was the Review's Q11 word for word, and flat (53°): it is a 17-ft
+   ladder 8 ft out, 15 ft up.
+2. The Reference Sheet's converse example was still the old Notes III's 9, 15, 12 — the test's own 9-12-15, worked in
+   full. It is 24, 40, 32, as 6.01's notes now are.
+3. T-B1 board 7's new sentence squeezed its figure: the slide asks the question beside a larger figure, and the edition
+   says what the slide says.
+4. 6.04 board 1's pool (12 m by 5 m) used Example 2's 12 and 5 (a 12-ft ladder 5 ft out): Example 2 is an 8-ft ladder 3 ft
+   out, √55 ≈ 7.4.
+5. The kite's words could put "level with the hand" on the kite. Now: "Straight below the kite, level with the hand that
+   holds the string, is a point 12 meters from the hand" — on the page and in 6.04's independent question; the Hint no
+   longer says that leg lies along the ground; and the page never draws 6.04's own kite (19 m and 12 m).
+6. "The the mirror's size" in 6.07's edition. 7. 6.01's note to the teacher named the old warm-up.
+8. Three repeats: 6.06's bank question 4 was the new independent question 1 moved (now base 12, height 8, 32); 6.04's
+   bank courtyard was board 1's pool (now 5 m by 13 m, 4.1 m shorter); 6.05's independent question 6 was 6.06 board 7's √106
+   the next day (now √221 ≈ 14.9).
+
+The page's content version is 4 (version 3 had been up about an hour, on a Sunday); `u6_check.js` also refuses a lesson's
+own independent question on the test (`ASKED`). Gates, the page's checks (35 of 35 plants) and the teacher copy's pass; the
+unit rebuilt and installed at 0 findings.
+
 ## 9. Thread B — 16.1 and 16.2 against GR.1.4 and GR.1.5
 
 **16.1–16.2 recomputed: 151 checks, 149 agree** (TE 16.01 44/44, AP 16/17, HW 15/15; TE 16.02 43/43, AP 18/18, HW 13/14

@@ -183,7 +183,7 @@ L = dict(
         dict(stem="Find the distance between $(-7, 1)$ and $(5, -4)$.", answer="13 units", why="Across 12, down 5; 144 + 25 = 169.", check=("eq", "sqrt((5 - (-7))**2 + (1 - (-4))**2)", "13"), space=0.7),
         dict(not_bound=True, stem="Find the distance between $(-2, 5)$ and $(1, -2)$, to the nearest tenth.", answer="√58 ≈ 7.6 units", why="Across 3, down 7; 9 + 49 = 58.", check=("many", ("eq", "sqrt(3**2 + 7**2)", "sqrt(58)"), ("approx", "sqrt(58)", "7.6", "0.05")), space=0.7),
         dict(not_bound=True, stem="How far is $(-4, 9)$ from the origin, to the nearest tenth?", answer="√97 ≈ 9.8 units", why="Legs 4 and 9; 16 + 81 = 97.", check=("many", ("eq", "sqrt(4**2 + 9**2)", "sqrt(97)"), ("approx", "sqrt(97)", "9.8", "0.05")), space=0.7),
-        dict(not_bound=True, stem="On a map in kilometers, a pool is at $(-2, -3)$ and a park at $(3, 6)$. How far apart are they in a straight line, to the nearest tenth of a kilometer?", answer="√106 ≈ 10.3 km", why="Across 5, up 9; 25 + 81 = 106.", check=("many", ("eq", "sqrt((3 - (-2))**2 + (6 - (-3))**2)", "sqrt(106)"), ("approx", "sqrt(106)", "10.3", "0.05")), space=0.7),
+        dict(not_bound=True, stem="On a map in kilometers, a pool is at $(-2, -3)$ and a park at $(8, 8)$. How far apart are they in a straight line, to the nearest tenth of a kilometer?", answer="√221 ≈ 14.9 km", why="Across 10, up 11; 100 + 121 = 221.", check=("many", ("eq", "sqrt((8 - (-2))**2 + (8 - (-3))**2)", "sqrt(221)"), ("approx", "sqrt(221)", "14.9", "0.05")), space=0.7),
     ],
 
     bank=[

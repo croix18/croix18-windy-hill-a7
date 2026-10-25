@@ -166,6 +166,7 @@ for (let seed = 1; seed <= NSETS; seed++) {
     if (E.shownLeg(pb.prm.c, pb.prm.a)) fail(seed, 'Q4b', 'a hypotenuse and leg a lesson showed: ' + pb.prm.c + ', ' + pb.prm.a);
     const p5 = s2[1].part;
     if (p5.prm.ctx ? E.shownLeg(p5.prm.c, p5.prm.a) : E.SHOWN_LEGS.has(E.legKey(p5.prm.a, p5.prm.b))) fail(seed, 'Q5', 'numbers a lesson showed: ' + JSON.stringify(p5.prm));
+    if (p5.prm.ctx && E.ASKED.has(p5.prm.ctx + ' ' + p5.prm.c + '/' + p5.prm.a)) fail(seed, 'Q5', 'a lesson\'s own independent question: ' + JSON.stringify(p5.prm));
     const p7 = s2[3].parts[0];
     if (E.SHOWN_LEGS.has(E.legKey(p7.prm.w, p7.prm.l))) fail(seed, 'Q7', 'legs a lesson showed: ' + p7.prm.w + ', ' + p7.prm.l);
     counts.ruling43 = (counts.ruling43 || 0) + 1; }

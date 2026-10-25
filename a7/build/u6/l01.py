@@ -227,7 +227,7 @@ L = dict(
         must_not="Acute or obtuse by comparing squares (Geometry); sides as expressions; finding a missing side (6.03).",
         read_first=[
             "Two book lessons in one day (6.1 + 6.2, the plan's own merge: 6.2 is 6.1's practice). Built from the benchmark and the B1G-M first, then read against Math Nation (the unit audit).",
-            "The Pythagorean Theorem itself is taught on Notes III as the fact the converse turns around — the 3-4-5 squares — and is not yet used to find a side (6.03). The warm-up's Q3–Q4 (√169, 5² + 12²) preload the first converse before it has a name.",
+            "The Pythagorean Theorem itself is taught on Notes III as the fact the converse turns around — the 3-4-5 squares — and is not yet used to find a side (6.03). The warm-up's Q3–Q4 (√100, 6² + 8²) preload the first converse before it has a name.",
             "Every converse board names its sides in an order that is not 'leg, leg, hypotenuse' at least once (Example 2, board 7, the independent set's Q5, bank Q7): the test is on the LONGEST side wherever it is listed — the Source of Truth's named misconception for GR.1.1, misidentifying the hypotenuse.",
             "The equal case (4 + 5 = 9) is the triangle inequality's whole trap and the Florida reference sheet's '>' is strict: Notes I draws it lying flat, and boards 3 and 5 make it a choice to refuse."],
         standard_notes=[("Clarification", "The benchmark carries no clarifications. The FAST reference sheet prints the Triangle Inequality Theorem (a + b > c, a + c > b, b + c > a); the converse of the Pythagorean Theorem is not on it and is memorized."),
