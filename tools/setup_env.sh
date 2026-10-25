@@ -17,7 +17,9 @@ sudo_ apt-get install -y -qq --no-install-recommends \
 fc-cache -f >/dev/null || true
 
 echo "== python packages"
-pip install -q --break-system-packages python-docx python-pptx matplotlib sympy fonttools pymupdf pillow
+# matplotlib < 3.11: 3.11's mathtext glyphs carry a sixth field and the kit's mathimg._paint unpacks five
+# ("too many values to unpack (expected 5)" in checks.py slotgeometry; Windmill HANDOFF, 24 Oct 2026)
+pip install -q --break-system-packages python-docx python-pptx "matplotlib<3.11" sympy fonttools pymupdf pillow
 
 echo "== verify"
 python3 - <<'EOF'
