@@ -236,3 +236,36 @@ the unit is planned. The printed keys in each lesson's `Keys` folder are generat
 1. 47°  2. 29°  3. 66°  4. 63°  5. x = 18; 54° and 36°  6. x = 23; 119° and 61°  7. x = 9; each 66°  8. D D  9. A A
 
 ---
+
+## 6.T2  Interior and Exterior Angles of a Triangle
+
+*MA.8.GR.1.5*
+
+**Variation.**  Boards 1–2: the third angle, then an isosceles triangle; 3 is an exterior angle; 4 votes on the angle beside the 75°. The pattern breaks at 5 — a remote angle found backwards from the exterior one — then three expressions (6), which equation fits the picture voted (7), a side length that is not an angle (8); 9 is written. The independent set: a third angle, an isosceles triangle's base angles, an exterior angle, a remote angle, three expressions, an equation from the theorem.
+
+**Read this once, when you plan the unit.**
+
+- Thread B, day 2 of 2: Math Nation 16.2 (MA.8.GR.1.5), the day after T-B1's angle pairs, which it needs (the linear pair gives the theorem). Not on the Unit 6 test.
+- The Exterior Angle Theorem is named on Notes II: the book's practice uses the name its lesson never gives, and IXL FMP is called that.
+- Built from the benchmark and the B1G-M first, then read against Math Nation (audit §9): its homework key's a = 12 line (from another question) and its practice figures drawn up to 15° off are not reproduced; every figure here is drawn to its numbers.
+- The state's two named misconceptions — the reflex angle, and the two equal exterior angles at a corner — are Notes II and board 4; the brief's 'equals the adjacent interior' is board 4's option A and board 3's wrong board.
+
+**What the audit against Math Nation found.**
+
+- Every item re-derived by sympy at build time; every figure drawn to its numbers (a labelled angle that is not its true measure is refused).
+- Math Nation 16.2 read against this lesson (audit §9): its HW 16.02 Q10 line (a = 12 from Q4 written into a line that equals 70), its 'extending one leg of a triangle' and its missing degree signs are not reproduced.
+
+**What changed from the book.**
+
+- 16.2.1–16.2.2 (the tear-off exploration) → Notes I, with the paper triangle as an option, not the lesson.
+- 16.2.3 (exterior angles) → Notes II: the Exterior Angle Theorem by name, with the two state misconceptions said out loud.
+- 16.2.4 (expressions) → Notes III and boards 6–7; the book's 'which relationship justifies this equation' is board 7.
+- 16.02 Additional Practice and Homework → the independent set and IXL.
+
+**Question Bank answers.**  
+1. 45°  2. 63°  3. 113°  4. 71°  5. x = 40; 40°, 70° and 70°  6. x = 20; 65° and 65°  7. x = 13; the exterior angle is 74°  8. C C  9. B B
+
+**Question Bank – Additional answers.**  
+1. 63°  2. 46°  3. 112°  4. 57°  5. x = 35; 35°, 85° and 60°  6. x = 15; 58° and 58°  7. x = 22; the exterior angle is 112°  8. A A  9. D D
+
+---

@@ -672,37 +672,108 @@ def crossing(a_deg, labels, R=3.0, fs=22, pt=9.5, inches=2.6, names=None, far=()
     return dict(kind="shapes", fs=fs, pt=pt, **{"in": inches}, shapes=sh)
 
 
-def triangle_exterior(A, B, l_A=None, l_B=None, l_C=None, l_ext=None, fs=22, pt=9.5, inches=3.0, base=6.0):
+_EM = {"(": 0.33, ")": 0.33, " ": 0.27, "°": 0.42, "+": 0.62, "−": 0.62, "-": 0.62, "?": 0.52, "x": 0.56}
+
+
+def _label_half(text, pt, unit_in):
+    """Half the width and half the height, in the figure's units, of a label set at `pt` points on a figure whose
+    units are `unit_in` inches each (a Lexend digit is about 0.58 em; the box is a little generous on purpose)."""
+    w = sum(_EM.get(ch, 0.58) for ch in str(text)) * pt / 72.0 / unit_in
+    h = 0.95 * pt / 72.0 / unit_in
+    return w / 2 + 0.04 / unit_in, h / 2
+
+
+def _in_angle(V, U, W, hw, hh, arc_r, gap):
+    """The centre of a label of half-size (hw, hh) inside the angle UVW, on its bisector, as close to V as it can
+    stand without touching either side or the angle's arc."""
+    def unit(p, q):
+        dx, dy = q[0] - p[0], q[1] - p[1]
+        L = math.hypot(dx, dy)
+        return dx / L, dy / L
+    a, b = unit(V, U), unit(V, W)
+    bx, by = a[0] + b[0], a[1] + b[1]
+    L = math.hypot(bx, by)
+    bx, by = bx / L, by / L
+    half = math.acos(max(-1.0, min(1.0, a[0] * b[0] + a[1] * b[1]))) / 2
+    need = [arc_r + hw * abs(bx) + hh * abs(by) + gap]
+    for s_ in (a, b):
+        n = (-s_[1], s_[0])
+        e = hw * abs(n[0]) + hh * abs(n[1])
+        need.append((e + gap) / math.sin(half))
+    d = max(need)
+    return (V[0] + d * bx, V[1] + d * by)
+
+
+def triangle_exterior(A, B, l_A=None, l_B=None, l_C=None, l_ext=None, fs=22, pt=9.5, inches=3.0, base=6.0,
+                      extend=True, far=()):
     """A triangle with interior angles A (bottom left) and B (top), the third angle C at the bottom right, and the
-    bottom side extended past C to show the exterior angle at C (= A + B). Numeric labels must be the true measures."""
+    bottom side extended past C to show the exterior angle at C (= A + B). Numeric labels must be the true measures.
+    `extend=False` draws the triangle alone (the Triangle Sum, before any exterior angle).
+
+    Each label stands inside its own angle, on the bisector, as close to the corner as its size allows — the size is
+    worked out from `pt` and `inches`, so give the helper the same two numbers the slide uses (as `grid` takes them),
+    and size the slide with `max_h=None`: a figure drawn narrower than planned has bigger labels than its corners
+    were measured for. Two labels that would overlap, or a label that would leave its triangle, are refused here
+    (the kit refuses a line through a label, not a label on a label). `far` is accepted and no longer needed."""
     Cdeg = 180 - A - B
     if not (A > 0 and B > 0 and Cdeg > 0):
         raise ValueError(f"triangle_exterior({A}, {B}): not a triangle")
     for lab, m in ((l_A, A), (l_B, B), (l_C, Cdeg), (l_ext, A + B)):
         if lab is not None and _num(lab) is not None and "x" not in str(lab) and abs(_num(lab) - m) > 1e-9:
             raise ValueError(f"triangle_exterior({A}, {B}): an angle is {m}°, not {lab}")
+    if not extend and l_ext is not None:
+        raise ValueError("triangle_exterior: an exterior label with no extended side")
     # bottom side from P (angle A) to Q (angle C); apex T from the law of sines
     P, Q = (0.0, 0.0), (base, 0.0)
     side_PT = base * math.sin(math.radians(Cdeg)) / math.sin(math.radians(B))
     T = (side_PT * math.cos(math.radians(A)), side_PT * math.sin(math.radians(A)))
     ext = (base * 1.45, 0.0)
-    sh = [dict(t="poly", pts=[P, Q, T]), dict(t="seg", a=Q, b=ext)]
-    r = base * 0.12
-    # arcs: A at P from 0 to A; C at Q from (180 - C) to 180; exterior at Q from 0 to (180 - C); B at T
+    sh = [dict(t="poly", pts=[P, Q, T])] + ([dict(t="seg", a=Q, b=ext)] if extend else [])
+    r = base * 0.09
+    # the figure's units in inches, as figkit sets its limits (the shapes' span, 16% and 0.4 units each side)
+    xs = [P[0], Q[0], T[0], ext[0] if extend else Q[0], -r]
+    ys = [P[1], Q[1], T[1], -r]
+    span = max(max(xs) - min(xs), (max(ys) - min(ys)) * 1.0)
+    unit_in = inches / ((max(xs) - min(xs)) * 1.32 + 0.8)
+    gap = 0.06 / unit_in
     angTP = math.degrees(math.atan2(P[1] - T[1], P[0] - T[0])) % 360
     angTQ = math.degrees(math.atan2(Q[1] - T[1], Q[0] - T[0])) % 360
     lo, hi = sorted((angTP, angTQ))
-    arcs = [(P, 0, A, l_A), (Q, 180 - Cdeg, 180, l_C), (Q, 0, 180 - Cdeg, l_ext), (T, lo, hi, l_B)]
-    for (cpt, a0, a1, lab) in arcs:
+    # (corner, arc from, arc to, label, the two points the angle opens toward)
+    arcs = [(P, 0, A, l_A, Q, T), (Q, 180 - Cdeg, 180, l_C, P, T), (Q, 0, 180 - Cdeg, l_ext, ext, T), (T, lo, hi, l_B, P, Q)]
+    boxes = []
+    for (cpt, a0, a1, lab, U, W) in arcs:
         if lab is None:
             continue
-        rr = r * (1.35 if (cpt == Q and a0 == 0) else 1.0)
-        if cpt == T:                       # the top angle is the narrowest: a bigger arc, the label well inside it
-            rr = r * 1.6
+        rr = r * (1.3 if U == ext else 1.0)
         sh.append(dict(t="circle", c=cpt, r=rr, a=(a0, a1), fill="none"))
-        sh.append(_arc_label(a0, a1, rr * (1.25 if cpt == T else 1.1), lab, centre=cpt,
-                             push=0.9 if cpt == T else 0.55))
+        hw, hh = _label_half(lab, pt, unit_in)
+        cx, cy = _in_angle(cpt, U, W, hw, hh, rr, gap)
+        if U != ext and not _in_poly_pt((cx, cy), [P, Q, T], hw, hh):
+            raise ValueError(f"triangle_exterior({A}, {B}): the label {lab!r} does not fit inside its corner — draw it larger")
+        boxes.append((cx - hw, cy - hh, cx + hw, cy + hh, lab))
+        sh.append(_t(cx, cy, lab, ha="center", va="center"))
+    pad = 0.08 / unit_in                   # two labels need clear air between them, not just no overlap
+    for i in range(len(boxes)):
+        for j in range(i + 1, len(boxes)):
+            a_, b_ = boxes[i], boxes[j]
+            if a_[0] - pad < b_[2] and b_[0] - pad < a_[2] and a_[1] - pad < b_[3] and b_[1] - pad < a_[3]:
+                raise ValueError(f"triangle_exterior({A}, {B}): the labels {a_[4]!r} and {b_[4]!r} would overlap — draw it larger")
     return dict(kind="shapes", fs=fs, pt=pt, **{"in": inches}, shapes=sh)
+
+
+def _in_poly_pt(c, poly, hw, hh):
+    """Is the whole box (centre c, half-size hw × hh) inside the convex polygon?"""
+    corners = [(c[0] + sx * hw, c[1] + sy * hh) for sx in (-1, 1) for sy in (-1, 1)]
+    n = len(poly)
+    area = sum(poly[i][0] * poly[(i + 1) % n][1] - poly[(i + 1) % n][0] * poly[i][1] for i in range(n))
+    for (x, y) in corners:
+        for i in range(n):
+            (x0, y0), (x1, y1) = poly[i], poly[(i + 1) % n]
+            cross = (x1 - x0) * (y - y0) - (y1 - y0) * (x - x0)
+            if cross * area < 0:
+                return False
+    return True
 
 
 def rays(dirs, arcs, R=3.0, fs=22, pt=9.5, inches=2.6, line=None, names=None, vertex=None, far=()):
