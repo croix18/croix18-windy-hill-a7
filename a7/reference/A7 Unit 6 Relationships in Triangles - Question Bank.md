@@ -105,3 +105,36 @@ the unit is planned. The printed keys in each lesson's `Keys` folder are generat
 1. 10 ft  2. About 10.2 ft  3. About 10.4 ft  4. 6 m  5. No — the diagonal is only about 14.2 in.  6. 15 m  7. 15 m  8. A A  9. B B
 
 ---
+
+## 6.05  Distance on the Coordinate Plane
+
+*MA.8.GR.1.2*
+
+**Variation.**  Boards 1–2: one line, vertical then horizontal, both across zero; 3 votes on the axis error. The pattern breaks at 4 — slanted, with only the points on the grid — whole, then to the tenth (5), then only the expression (6), then from the origin (7); 8 carries an extra point; 9 is written. The independent set: horizontal, vertical, slanted whole, slanted to the tenth, from the origin, a map.
+
+**Read this once, when you plan the unit.**
+
+- One book lesson (6.5). Built from the benchmark and the B1G-M first, then read against Math Nation (the unit audit): the book teaches no distance formula, and neither do we — the dashed legs are the method.
+- The state's named misconception for GR.1.2 is the axis crossing — (−2, 0) to (3, 0) taken as 1, not 5. Notes I teaches it, board 3 votes on it, and board 9 asks for it in writing with new points.
+- From board 4 on the grid shows the two points and nothing else, as the book's own test does; the book's 6.5 names 'no triangle drawn' as where students stall. Notes II–III and Example 2 draw the legs; the boards ask the student to.
+- Every radicand is a whole number up to 225 with no square factor (GR.1.2, Clarification 3), so coordinates stay inside about ±10 and the legs stay small.
+
+**What the audit against Math Nation found.**
+
+- Every item re-derived by sympy at build time; every irrational answer checked exactly and to the tenth, every radicand a whole number up to 225 with no square factor (the unit's own check beside the kit's).
+- Math Nation 6.5 read against this lesson (A7 Unit 6 Audit): its homework key's '−7 or 7' (D31) and its 'non-vertical or non-horizontal' (D34) are not reproduced; its named errors — gridlines for spaces, straddling an axis, no triangle drawn — are boards 3, 9 and 4–5.
+
+**What changed from the book.**
+
+- 6.5.1–6.5.2 (the three-graph scaffold) → Notes I–III, the same three steps, from the front.
+- 6.5.3 (partner exploration) → Notes II, the triangle drawn on the grid.
+- 6.5.5 (the converse on a grid triangle) → left to the review: 6.01's test on a new surface.
+- 6.05 Additional Practice and Homework → the independent set and IXL; board 9 is the exit evidence.
+
+**Question Bank answers.**  
+1. 10 units  2. 11 units  3. 5 units  4. 13 units  5. √58 ≈ 7.6 units  6. √74 ≈ 8.6 units  7. √109 ≈ 10.4 units  8. D D  9. A A
+
+**Question Bank – Additional answers.**  
+1. 9 units  2. 13 units  3. 10 units  4. 15 units  5. √61 ≈ 7.8 units  6. √73 ≈ 8.5 units  7. √130 ≈ 11.4 units  8. D D  9. B B
+
+---

@@ -375,12 +375,23 @@ def grid(xr, yr, points=(), segs=(), legs=None, step=None, fs=22, pt=9.5, inches
         below = by > ay
         if (below and 0 < ay - 0 <= 1.5) or (not below and 0 < 0 - ay <= 1.5):
             below = not below
-        sh.append(_t((ax + bx) / 2, ay, str(dx), ha="center", va="top" if below else "bottom",
+
+        def off_axis(m, a, b, axis_on):
+            # a leg that crosses the other axis keeps its number off that axis: a "5" printed against the y-axis
+            # reads as the axis's own 5 (6.05 Notes III, 24 Oct) — so the number goes to the middle of the
+            # longer piece of the leg instead
+            lo, hi = sorted((a, b))
+            if axis_on and lo < 0 < hi and abs(m) < 0.8:
+                return lo / 2 if -lo >= hi else hi / 2
+            return m
+        mx = off_axis((ax + bx) / 2, ax, bx, x0 <= 0 <= x1)
+        sh.append(_t(mx, ay, str(dx), ha="center", va="top" if below else "bottom",
                      off=(0, -0.4 if below else 0.4)))
         right = bx > ax
         if (right and 0 < 0 - bx <= 1.5) or (not right and 0 < bx - 0 <= 1.5):
             right = not right
-        sh.append(_t(bx, (ay + by) / 2, str(dy), ha="left" if right else "right", va="center",
+        my = off_axis((ay + by) / 2, ay, by, y0 <= 0 <= y1)
+        sh.append(_t(bx, my, str(dy), ha="left" if right else "right", va="center",
                      off=(0.45 if right else -0.45, 0)))
     for item in points:
         px, py, name = item[0], item[1], item[2]
