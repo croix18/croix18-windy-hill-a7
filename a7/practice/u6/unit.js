@@ -8,7 +8,8 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;',
 
 const Unit = {
   id: 'a7u6',
-  contentVersion: 1,                 /* bump whenever any set's questions change (the lock check says so) */
+  contentVersion: 2,                 /* bump whenever any set's questions change (the lock check says so). 2: half of Q12's sets name the
+                                        triangles by their corners (25 Oct 2026), before the page was published */
   legacy: [],
   title: 'A7 Unit 6 Practice Test',
   eyebrow: 'Grade 7 Accelerated &nbsp;·&nbsp; Unit 6 &nbsp;·&nbsp; Practice',

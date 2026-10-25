@@ -404,18 +404,24 @@ function sidesFor(T, ks, plain, ok) {
 }
 /* sides a, b, c with b/a = c/b: two of a copy's sides could then be matched two ways, each with its own k */
 const oneRatio = s => { const [a, b, c] = sorted(s); return b * b === a * c; };
+/* corner names (25 Oct 2026: the state's GR.2.4 items name similar triangles by their corners, "triangle ABC is similar to
+   triangle DEF", and the order of the letters is the matching): half the sets say it and letter the corners. The first three
+   letters are the first triangle's corners — between its p and r sides, between q and r, between p and q — and the last three
+   the copy's matching corners. Drawn after every number, so a set keeps its numbers. */
+const CORNERS = [['A', 'B', 'C', 'D', 'E', 'F'], ['P', 'Q', 'R', 'X', 'Y', 'Z'], ['J', 'K', 'L', 'M', 'N', 'P'], ['R', 'S', 'T', 'U', 'V', 'W']];
 function q12(seed) {
   return D('q12', seed, T => {
     const ks = T.pick(KS), k = qk(ks), tri = sidesFor(T, ks, () => [T.ri(3, 10), T.ri(4, 13), T.ri(5, 16)], s => roundTri(s) && !oneRatio(s)), [p, q, r] = sorted(tri);
     const cp = qmul(Q(p), k), cq = qmul(Q(q), k), cr = qmul(Q(r), k);
     const which = T.pick(['r', 'r', 'p', 'q']), turn = T.pick(['180', 'flip']);
     const copy = { p: cp, q: cq, r: cr }, ans = copy[which];
-    const prm = { p, q, r, k: ks, which, turn };
+    const nm = T.r() < 0.5 ? T.pick(CORNERS) : null;
+    const prm = nm ? { p, q, r, k: ks, which, turn, nm } : { p, q, r, k: ks, which, turn };
     const part = numPart('', 'simSide', prm, '', ans, { exact: qnum(ans) });
     /* the original: p up the left, q up the right, r along the bottom; the copy turned so that no side sits where its match does */
     const fig = { kind: 'simPair', a: [p, q, r], b: [qnum(cp), qnum(cq), qnum(cr)], la: [String(p), String(q), String(r)],
-      lb: ['p', 'q', 'r'].map(s => s === which ? 'x' : N(copy[s])), turn };
-    return { type: 'solo', stem: 'The two triangles are similar. Find ' + X + '.', part, fig };
+      lb: ['p', 'q', 'r'].map(s => s === which ? 'x' : N(copy[s])), turn, na: nm ? nm.slice(0, 3) : null, nb: nm ? nm.slice(3) : null };
+    return { type: 'solo', stem: (nm ? 'Triangle ' + nm.slice(0, 3).join('') + ' is similar to triangle ' + nm.slice(3).join('') + '.' : 'The two triangles are similar.') + ' Find ' + X + '.', part, fig };
   });
 }
 const SUNLIT = [['girl', 'tree'], ['boy', 'flagpole'], ['man', 'building'], ['woman', 'light pole'], ['student', 'tree'], ['girl', 'statue']];

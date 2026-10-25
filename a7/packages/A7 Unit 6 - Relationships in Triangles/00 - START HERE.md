@@ -2,7 +2,7 @@
 
 Windy Hill Middle School · course 1205050 · six teaching days (eight book lessons, merged to six) and the two Thread B days after the test, a review sent home Mon 16 Nov, the test as one period on Tue 17 Nov (a random set of the practice page).
 
-**By the plan** (Windmill's spine as of 2026-10-24; `tools/scope_calendar.py` is its source): lessons Fri 6 Nov – Thu 19 Nov, the assessment Tue 17 Nov, 2026. The dates move when the as-run log does (the plan follows the class), and a day is logged from the phone view of the plan.
+**By the plan** (Windmill's spine as of 2026-10-25; `tools/scope_calendar.py` is its source): lessons Fri 6 Nov – Thu 19 Nov, the assessment Tue 17 Nov, 2026. The dates move when the as-run log does (the plan follows the class), and a day is logged from the phone view of the plan.
 
 Nothing exists until it is committed. This folder is generated from `a7/build/u6/` by `install_unit.py`; edit the specs and rebuild rather than editing these files by hand.
 
@@ -65,7 +65,7 @@ Title and learning target (1 min) → warm-up, four spaced-retrieval questions (
 | 6.04 | 38 min | 10 min | 5 min | 53 min |
 | 6.05 | 37 min | 11 min | 5 min | 53 min |
 | 6.06 | 37 min | 11 min | 5 min | 53 min |
-| 6.07–08 | 37 min | 11 min | 5 min | 53 min |
+| 6.07–08 | 38 min | 10 min | 5 min | 53 min |
 | T-B1 | 36 min | 12 min | 5 min | 53 min |
 | T-B2 | 36 min | 12 min | 5 min | 53 min |
 

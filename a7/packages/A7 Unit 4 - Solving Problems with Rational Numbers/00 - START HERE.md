@@ -2,7 +2,7 @@
 
 Windy Hill Middle School · course 1205050 · six teaching days (eight book lessons, merged to six), a review sent home as practice, an assessment built for two periods and given in one (Mon 26 Oct).
 
-**By the plan** (Windmill's spine as of 2026-10-24; `tools/scope_calendar.py` is its source): lessons Fri 16 Oct – Thu 22 Oct, the assessment Mon 26 Oct, 2026. The dates move when the as-run log does (the plan follows the class), and a day is logged from the phone view of the plan.
+**By the plan** (Windmill's spine as of 2026-10-25; `tools/scope_calendar.py` is its source): lessons Fri 16 Oct – Thu 22 Oct, the assessment Mon 26 Oct, 2026. The dates move when the as-run log does (the plan follows the class), and a day is logged from the phone view of the plan.
 
 Nothing exists until it is committed. This folder is generated from `a7/build/u4/` by `install_unit.py`; edit the specs and rebuild rather than editing these files by hand.
 
@@ -96,4 +96,4 @@ The whiteboard round is the remainder — 11–12 minutes across the unit — an
 - **The Reference Sheet is the only handout.** Give it out at 4.01; it is the document students study from, and its perfect-square and perfect-cube lists are what 4.05 and 4.06 assume. It does not go into the test.
 - **No mnemonic and no keyword strategy anywhere in this unit.** The state guide warns against both — PEMDAS in its instructional strategies, because it has no letter for the radical bar or the fraction bar, and circling-and-boxing as a named misconception, because two problems with the same numbers and the same words can need different operations. The word PEMDAS appears nowhere in the package.
 
-Installed: 161 files from the build, plus this page and the Reference folder.
+Installed: 133 files from the build, plus this page and the Reference folder.

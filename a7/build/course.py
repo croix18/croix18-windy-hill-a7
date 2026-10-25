@@ -18,6 +18,7 @@ SET = "handout"                    # ruling 21: the six questions are a printed 
 STEPS = "required"                 # ruling 39: every answer slide shows its steps (all of Units 3 and 4 written, 5 October)
 HTML = False                       # ruling 41 (Croix, 5 October): a deck is its Slides file — he runs the PowerPoint as Google Slides in Deckhand. No HTML deck, no console.
 PAPER_FONT = "Lexend"     # ruling 46 (Croix, 17 Oct): the assessment papers — forms, practice, keys — are set in Lexend, mathematics included
+EXAM_PERIODS = 1                   # ruling 51 (23 Oct): every A7 unit test is one period. The plan's test days decide first; this is for a unit the plan has no test day for
 CLOSE = False
 BANK = "docx"                      # Question Bank and Question Bank - Additional, each with a key
 TE_STYLE = "lines"

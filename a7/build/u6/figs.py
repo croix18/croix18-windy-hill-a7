@@ -510,7 +510,11 @@ def similar_pair(t1, t2, l1=(None, None, None), l2=(None, None, None), unit="", 
                  inches=4.0, names=None, angles=None, gap=0.8):
     """Two triangles side by side, each from its three sides (p, q, r as `triangle3` reads them). The second may be
     turned (`turn2`, degrees) or mirrored (`flip2`) so its matching sides are not where the first one's are. Every
-    numeric label must be its side's true length (the picture is to scale)."""
+    numeric label must be its side's true length (the picture is to scale). `names` = (("A", "B", "C"), ("D", "E", "F"))
+    letters each triangle's corners — the corner between p and r, the corner between q and r, then the one between p
+    and q — so the statement "triangle ABC is similar to triangle DEF" is the drawing's own matching: AB is r, BC is q,
+    AC is p, and DE, EF, DF are the copy's (A7 Unit 6, 25 Oct 2026: GR.2.4's items name similar triangles by their
+    corners)."""
     def tri(t, turn, flip):
         p, q, r = t
         if not (p + q > r and p + r > q and q + r > p):
@@ -530,7 +534,9 @@ def similar_pair(t1, t2, l1=(None, None, None), l2=(None, None, None), unit="", 
     ylift = min(Y for _, Y in A) - min(Y for _, Y in B)
     B = [(X + shift, Y + ylift) for (X, Y) in B]
     sh = [dict(t="poly", pts=A), dict(t="poly", pts=B)]
-    for pts, t, labs in ((A, t1, l1), (B, t2, l2)):
+    if names is not None and (len(names) != 2 or any(len(n) != 3 for n in names) or len({x for n in names for x in n}) != 6):
+        raise ValueError(f"similar_pair: names must be two sets of three different letters, not {names}")
+    for j, (pts, t, labs) in enumerate(((A, t1, l1), (B, t2, l2))):
         cen = _centre(pts)
         P0, P1, P2 = pts
         for (p_, q_, lab, true) in ((P0, P2, labs[0], t[0]), (P1, P2, labs[1], t[1]), (P0, P1, labs[2], t[2])):
@@ -539,6 +545,13 @@ def similar_pair(t1, t2, l1=(None, None, None), l2=(None, None, None), unit="", 
             L = _lab(lab, unit)
             if L:
                 sh.append(_side_label(p_, q_, cen, L))
+        if names is not None:                     # each corner's letter outside it, away from the middle — far enough
+            for p, nm in zip(pts, names[j]):      # that a flat triangle's apex letter clears the side lengths beside it
+                dx, dy = p[0] - cen[0], p[1] - cen[1]
+                d = math.hypot(dx, dy) or 1.0
+                sh.append(_t(p[0], p[1], nm, ha="left" if dx > 0.05 * d else ("right" if dx < -0.05 * d else "center"),
+                             va="bottom" if dy > 0.05 * d else ("top" if dy < -0.05 * d else "center"),
+                             off=(0.3 * dx / d, 0.6 * dy / d)))
     return dict(kind="shapes", fs=fs, pt=pt, **{"in": inches}, shapes=sh)
 
 

@@ -20,7 +20,7 @@ window.TEACHER_TEST = {
  "notes": [
   "Show your work. One point for each lettered part."
  ],
- "two_day": "This assessment runs over two class periods. Stop when the period ends; you will continue from where you stopped.",
+ "two_day": "",
  "follow_through_student": "If an earlier part is wrong, a later part still earns its point when the right operation is applied to your own earlier answer — but only if that work is on the page.",
  "follow_through_key": "Follow-through (ruling 19).  A later part is correct when the right operation is applied to the student's own earlier value: question 7(b) from their own 7(a), question 10(b) from their own 10(a). Look at what they wrote for the earlier part, do this part's operation to it, and tick if that is what they wrote.",
  "transfer_flag": "TRANSFER ITEM — not on the practice test. Same benchmark, a surface nobody rehearsed.",

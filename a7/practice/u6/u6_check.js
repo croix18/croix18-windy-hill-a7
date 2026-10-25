@@ -91,7 +91,20 @@ function checkFig(seed, w, it) {
   /* ruling 44: a number the words give with a unit is on the figure; a number on the figure is in the words or is the figure's own */
   if (f.kind === 'rtri') { if (B.labels.filter(l => l.v != null).length !== 2 || labs.filter(s => s === 'x').length !== 1) fail(seed, w, 'the right triangle does not show two lengths and x'); }
   if (f.kind === 'simPair') { if (labs.filter(s => s === 'x').length !== 1 || B.labels.filter(l => l.v != null).length !== 5) fail(seed, w, 'the similar pair does not show five lengths and x');
-    const ra = E.sorted(f.a), rb = E.sorted(f.b), k = rb[0] / ra[0]; if (rb.some((v, i) => Math.abs(v - ra[i] * k) > 1e-9)) fail(seed, w, 'the two triangles drawn are not similar'); }
+    const ra = E.sorted(f.a), rb = E.sorted(f.b), k = rb[0] / ra[0]; if (rb.some((v, i) => Math.abs(v - ra[i] * k) > 1e-9)) fail(seed, w, 'the two triangles drawn are not similar');
+    /* named (25 Oct 2026): the words name the corners the figure letters, in its order, and each letter stands at its own corner */
+    const m = /^Triangle ([A-Z]{3}) is similar to triangle ([A-Z]{3})\./.exec(plain(it.stem));
+    if (!!m !== !!f.na) fail(seed, w, m ? 'the words name the triangles and the figure does not' : 'the figure letters corners the words do not name');
+    if (m && f.na) {
+      if (m[1] !== f.na.join('') || m[2] !== f.nb.join('')) fail(seed, w, 'the words name ' + m[1] + ' and ' + m[2] + ', the figure ' + f.na.join('') + ' and ' + f.nb.join(''));
+      if (new Set(f.na.concat(f.nb)).size !== 6) fail(seed, w, 'a letter names two corners');
+      [[f.na, B.meta.A], [f.nb, B.meta.C]].forEach(([nm, T]) => nm.forEach((c, i) => {
+        const l = B.labels.find(x => x.pt && plain(x.s) === c), at = B.px(T[i]);
+        if (!l) fail(seed, w, 'corner ' + c + ' is not lettered');
+        else if (Math.hypot(l.pt[0] - at[0], l.pt[1] - at[1]) > 0.01) fail(seed, w, 'the letter ' + c + ' is not at its corner');
+        else if (T.some((P, j) => j !== i && Math.hypot(l.x - B.px(P)[0], l.y - B.px(P)[1]) < Math.hypot(l.x - at[0], l.y - at[1]))) fail(seed, w, 'the letter ' + c + ' stands nearer another corner');
+      }));
+    } }
   if (f.kind === 'shadow' || f.kind === 'mirror') {
     const words = plain(it.stem); f.lab.slice(0, 3).forEach(s => { if (words.indexOf(s.replace(' ft', '')) < 0) fail(seed, w, 'the figure\'s ' + s + ' is not in the words'); });
     const r1 = f.h1 / (f.s1 || f.d1), r2 = f.h2 / (f.s2 || f.d2); if (Math.abs(r1 - r2) > 1e-9) fail(seed, w, 'the two triangles are not similar');

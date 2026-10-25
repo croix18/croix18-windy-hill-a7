@@ -182,6 +182,11 @@ function simPair(f) {
     B.lab(T[1], T[2], labs[1], num(labs[1], 1), cen, { tol: 1e-6 });
     B.lab(T[0], T[1], labs[2], num(labs[2], 2), cen, { tol: 1e-6 });
   });
+  /* the corners' letters, after every length so they stand clear of them: T[0] between p and r, T[1] between q and r, T[2]
+     between p and q, and the copy's matching corners in the same order */
+  [A, C].forEach((T, j) => { const nm = j ? f.nb : f.na; if (!nm) return;
+    const cen = [(T[0][0] + T[1][0] + T[2][0]) / 3, (T[0][1] + T[1][1] + T[2][1]) / 3];
+    T.forEach((p, i) => B.ptLab(p, nm[i], cen)); });
   B.meta = { A, C };
   return B;
 }
@@ -225,7 +230,7 @@ function altOf(f) {
     case 'rtri': return 'A right triangle. The legs are labeled ' + f.labs[0] + ' and ' + f.labs[1] + '; the side across from the right angle is labeled ' + f.labs[2] + '.';
     case 'grid2': return 'A coordinate plane with ' + f.pts.map(p => 'point ' + ptName(p[0], p[1], p[2])).join(' and ') + '.';
     case 'gridTri': return 'A coordinate plane with triangle ' + f.pts.map(p => p[2]).join('') + ': ' + f.pts.map(p => ptName(p[0], p[1], p[2])).join(', ') + '.';
-    case 'simPair': return 'Two similar triangles. The first has sides ' + f.la.join(', ') + '. The second, ' + (f.turn === 'flip' ? 'flipped over' : 'turned') + ', has sides ' + f.lb.join(', ') + '.';
+    case 'simPair': return 'Two similar triangles' + (f.na ? ', ' + f.na.join('') + ' and ' + f.nb.join('') : '') + '. The first has sides ' + f.la.join(', ') + '. The second, ' + (f.turn === 'flip' ? 'flipped over' : 'turned') + ', has sides ' + f.lb.join(', ') + '.';
     case 'shadow': return 'The ' + f.what[0] + ', ' + f.lab[0] + ' tall, and a ' + f.lab[1] + ' shadow; the ' + f.what[1] + ', h tall, and a ' + f.lab[2] + ' shadow. The sun\'s rays are dashed.';
     case 'mirror': return f.what[0] + '\'s eyes, ' + f.lab[0] + ' up, ' + f.lab[1] + ' from a mirror on the ground; the ' + f.what[1] + ', h tall, ' + f.lab[2] + ' beyond the mirror. The light\'s path is dashed.';
   }

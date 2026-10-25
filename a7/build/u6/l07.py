@@ -1,7 +1,9 @@
 # A7 6.07–08  Similar Triangles; Indirect Measurement — MA.8.GR.2.4 (MN 6.7 + 6.8, merged by the plan: 6.8 is 6.7 put
 # to work). Similar triangles have equal matching angles and every side multiplied by one number k; three ratios decide
 # whether two triangles are similar, and matching goes by size or by angle, never by where a side sits on the page. A
-# missing side is k times its partner, k = copy ÷ original from one matching pair. The same sun makes a person and a
+# missing side is k times its partner, k = copy ÷ original from one matching pair; when the triangles are named,
+# "triangle ABC is similar to triangle DEF", the order of the letters is the matching (the state's GR.2.4 items name them so —
+# Notes II, board 2 and independent question 2, added 25 Oct 2026). The same sun makes a person and a
 # tree similar triangles; so do a mirror on the ground and a ramp's two uprights — and every one of those items here
 # says so in its words (the book's test mirror never does, audit D47). The state's two named misconceptions — similar
 # means equal, and mismatched sides in a turned figure — are boards 5, 9 and 4. Thread B's angle sum comes after the
@@ -63,11 +65,11 @@ L = dict(
              math=["$\\frac{9}{6} = 1.5$,   $\\frac{12}{8} = 1.5$,   $\\frac{15}{10} = 1.5$"],
              items2=["**Three ratios, all equal: similar. Match shortest to shortest, longest to longest.**"],
              letters=False),
-        dict(numeral="II", head="A missing side: find k, then multiply", min=3, sub="",
-             note="The two triangles are similar, and the 4-side matches the 10-side (both shortest). k = copy ÷ original = 10 ÷ 4 = 2.5, and every other side is multiplied by it: 6 × 2.5 = 15, 7 × 2.5 = 17.5. A proportion (4/10 = 6/x) is the same thing written as fractions.\nOFF: 'One matching pair gives k. Every side times k.'",
-             fig=S(figs.similar_pair((4, 6, 7), (10, 15, 17.5), l1=("4", "6", "7"), l2=("10", "x", "y"), gap=0.8), inches=7.5, pt=16, max_h=2.6, reserve=0.3),
-             math=["$k = \\frac{10}{4} = 2.5$", "$x = 6 \\times 2.5 = 15$,   $y = 7 \\times 2.5 = 17.5$"],
-             items2=[],
+        dict(numeral="II", head="A missing side: find k, then multiply", min=4, sub="",
+             note="Triangle ABC is similar to triangle DEF (the symbols on the slide): the order of the letters is the matching, A with D, B with E, C with F — the same pairs as by size. k = 10 ÷ 4 = 2.5, and every other side is multiplied by it: 6 × 2.5 = 15, 7 × 2.5 = 17.5. A proportion (4/10 = 6/x) is the same thing written as fractions.\nOFF: 'The names say the matching. One matching pair gives k.'",
+             fig=S(figs.similar_pair((4, 6, 7), (10, 15, 17.5), l1=("4", "6", "7"), l2=("10", "x", "y"), gap=0.8, names=(("A", "B", "C"), ("D", "E", "F"))), inches=7.5, pt=16, max_h=2.0, reserve=0.3),
+             math=["$\\triangle\\!ABC \\sim \\triangle\\!DEF$,   $k = \\frac{10}{4} = 2.5$", "$x = 6 \\times 2.5 = 15$,   $y = 7 \\times 2.5 = 17.5$"],
+             items2=["**The order of the letters is the matching: A with D, B with E, C with F.**"],
              letters=False),
         dict(numeral="III", head="Same sun, same angle: shadows", min=4, sub="",
              note="At the same moment the sun's rays come in at one angle, so a person and a tree with their shadows make two similar right triangles (the state guide's task). The tree's shadow is 20 ÷ 4 = 5 times the person's, so the tree is 5 × 6 = 30 ft. Is 30 ft a realistic tree? Yes.\nOFF: 'Same sun, same angle: similar triangles.'",
@@ -123,12 +125,12 @@ L = dict(
              note="Sorted, the pairs are 8 and 12, 12 and 18, 14 and 21: each ratio 1.5, so similar. A board that checked only two ratios has the right verdict by luck.",
              check=("many", ("eq", "Rational(12,8)", "Rational(3,2)"), ("eq", "Rational(18,12)", "Rational(3,2)"), ("eq", "Rational(21,14)", "Rational(3,2)")),
              wrong="'No — the sides are different' [Florida B1G-M, GR.2.4: similar triangles assumed to have equal sides]; 'yes' from two ratios only [Notes I: all three]"),
-        dict(text=["The two triangles are similar.", "**Find x."],
-             fig=S(figs.similar_pair((6, 8, 11), (18, 24, 33), l1=("6", "8", "11"), l2=("18", "x", "33"), turn2=180, gap=1.0), inches=7.0, pt=16, max_h=2.6, reserve=0.95),
-             hint="Sort both.", steps=["sorted:  6, 8, 11  and  18, x, 33", "$k = \\frac{18}{6} = 3$", "$x = 8 \\times 3 = 24$"],
-             gloss="match by size, then k", answer="x = 24",
-             note="Sorted, 18 matches 6 and 33 matches 11, so x matches the 8: k = 18 ÷ 6 = 3 and x = 24 — a board with 13.5 matched the 8 with the 18 by place on the page.",
-             check=("many", ("eq", "Rational(18,6)", "3"), ("eq", "8*3", "24"), ("eq", "11*3", "33"), ("eq", "6*Rational(18,8)", "Rational(27,2)")),
+        dict(text=["Triangle ABC is similar to triangle DEF.", "**Find x."],
+             fig=S(figs.similar_pair((6, 8, 9), (18, 24, 27), l1=("6", "8", "9"), l2=("18", "x", "27"), turn2=180, gap=1.0, names=(("A", "B", "C"), ("D", "E", "F"))), inches=7.0, pt=16, max_h=2.6, reserve=0.95),
+             hint="The names say the matching.", steps=["the names:  AC with DF,  BC with EF,  AB with DE", "$k = \\frac{18}{6} = 3$", "$x = 8 \\times 3 = 24$"],
+             gloss="the order of the letters is the matching", answer="x = 24",
+             note="The names match AC (6) with DF (18): k = 3, and x is on EF, which matches BC: 8 × 3 = 24 — the same pairs as by size. A board with 13.5 matched the 8 with the 18 by place on the page.",
+             check=("many", ("eq", "Rational(18,6)", "3"), ("eq", "8*3", "24"), ("eq", "9*3", "27"), ("eq", "6*Rational(18,8)", "Rational(27,2)")),
              wrong="13.5 — matched the 8 with the 18 by place on the page, k = 18 ÷ 8 [Florida B1G-M, GR.2.4: mismatching corresponding sides]; 20 — added 12 to the 8 [Notes I: similar means multiplied by one k]"),
         dict(text=["A triangle has sides of 12, 16 and 20 inches.", "A similar triangle's longest side is 5 inches.", "**Find its other two sides."],
              hint="Copy ÷ original.", steps=["$k = \\frac{5}{20} = 0.25$", "$12 \\times 0.25 = 3$,   $16 \\times 0.25 = 4$"],
@@ -185,7 +187,7 @@ L = dict(
 
     independent=[
         dict(stem="Are triangles with sides 4, 10, 12 and 6, 15, 20 similar? Show the three ratios.", answer="No — 6/4 = 15/10 = 1.5, but 20/12 ≈ 1.67", why="Two ratios agree and the third does not.", check=("many", ("eq", "Rational(6,4)", "Rational(3,2)"), ("eq", "Rational(15,10)", "Rational(3,2)"), ("true", "Rational(20,12) != Rational(3,2)")), space=0.55),
-        dict(stem="A triangle has sides 8, 10 and 13. A similar triangle's 10-side is 25. Find its other two sides.", answer="20 and 32.5", why="k = 25 ÷ 10 = 2.5.", check=("many", ("eq", "Rational(25,10)", "Rational(5,2)"), ("eq", "8*Rational(5,2)", "20"), ("eq", "13*Rational(5,2)", "Rational(65,2)")), space=0.55),
+        dict(stem="Triangle PQR is similar to triangle XYZ. PQ is 8, QR is 10 and PR is 13, and XY is 20. Find YZ and XZ.", answer="YZ = 25 and XZ = 32.5", why="The names match PQ with XY: k = 20 ÷ 8 = 2.5; YZ matches QR and XZ matches PR.", check=("many", ("eq", "Rational(20,8)", "Rational(5,2)"), ("eq", "10*Rational(5,2)", "25"), ("eq", "13*Rational(5,2)", "Rational(65,2)")), space=0.55),
         dict(stem="A triangle has sides 15, 25 and 30. A similar triangle's longest side is 6. Find its other two sides.", answer="3 and 5", why="k = 6 ÷ 30 = 0.2.", check=("many", ("eq", "Rational(6,30)", "Rational(1,5)"), ("eq", "15*Rational(1,5)", "3"), ("eq", "25*Rational(1,5)", "5")), space=0.55),
         dict(stem="A 1.5-m child casts a 2-m shadow. At the same moment a tree casts a 14-m shadow. How tall is the tree?", answer="10.5 m", why="k = 14 ÷ 2 = 7; 1.5 × 7.", check=("many", ("eq", "Rational(14,2)", "7"), ("eq", "Rational(3,2)*7", "Rational(21,2)")), space=0.55),
         dict(stem="The two right triangles are similar and share corner A. The small one runs 3 m along the ground from A and stands 1.2 m high. The big one runs 12 m along the ground from A. How high is it?", answer="4.8 m", why="Both from A: k = 12 ÷ 3 = 4, and 1.2 × 4 = 4.8.", check=("many", ("eq", "Rational(12, 3)", "4"), ("eq", "Rational(12,10)*4", "Rational(24,5)")), space=0.55,
@@ -241,7 +243,7 @@ L = dict(
         say=["Similar triangles have equal angles, and every side is multiplied by the same k.",
              "Match by size or by angle, never by place on the page; k = copy ÷ original.",
              "Same sun, same angle: shadows, mirrors and ramps make similar triangles."],
-        must="Decide similarity from all three side ratios; match the sides of a turned pair; find missing sides with k = copy ÷ original; measure with a shadow, a mirror or a ramp when the words say the triangles are similar.",
+        must="Decide similarity from all three side ratios; match the sides of a turned pair (by size, or by a name's letters); find missing sides with k = copy ÷ original; measure with a shadow, a mirror or a ramp when the words say the triangles are similar.",
         must_not="AA named or proved (Geometry); angle sums (Thread B); a mirror or ramp item that does not say its triangles are similar.",
         read_first=[
             "Two book lessons (6.7 and 6.8), merged by the plan. Built from the benchmark and the B1G-M first, then read against Math Nation (the unit audit): its sample PKR/XWZ pair is drawn not similar (D42), its constant flips between X/Y and Y/X (D44) and its homework keys a balloon problem from the wrong leg (D38) — none of it is reproduced.",
@@ -252,12 +254,13 @@ L = dict(
                         ("Misconceptions", "Assuming similar triangles have equal sides and angles; mismatching corresponding sides when setting up the proportion (Source of Truth §GR.2.4)."),
                         ("Unit boundary", "Three ratios decide similarity; k from one matching pair; the guide's 'is this realistic' check on every height.")],
         sits="The one MA.8.GR.2.4 day (book lessons 6.7 and 6.8) and the last lesson before the test. IXL's QSK, 88W and 6PD, like every Unit 6 skill, are due by tomorrow's test; the Unit Review goes home today.",
-        lives="Notes I — one k on every side, matched by size or angle — and Notes II's k = copy ÷ original. Board 4 is the turned-pair diagnostic, board 5 the which-is-similar diagnostic (added, two ratios, equal), board 9 the add-2 error in writing.",
+        lives="Notes I — one k on every side, matched by size or angle — and Notes II's k = copy ÷ original, with named triangles. Board 4 is the turned-pair diagnostic, board 5 the which-is-similar diagnostic (added, two ratios, equal), board 9 the add-2 error in writing.",
         materials="Whiteboards and markers. Calculators allowed, printed nowhere. The Unit Review, one per student, goes home today.",
-        variation="Boards 1–3: similar or not by three ratios, a turned pair's missing side (k = 3), then a k under 1; 4 votes on matching in a turned pair, 5 on which triangle is similar. The pattern breaks at 6 — a shadow — then a ramp's two triangles from their shared corner (7) and a mirror with an extra number (8); 9 is written. The independent set: similar or not (it is not), a missing side matched by the middle sides, a k under 1, a shadow, a nested pair from the shared corner (with its picture), which is similar.",
+        variation="Boards 1–3: similar or not by three ratios, a named turned pair's missing side (k = 3), then a k under 1; 4 votes on matching in a turned pair, 5 on which triangle is similar. The pattern breaks at 6 — a shadow — then a ramp's two triangles from their shared corner (7) and a mirror with an extra number (8); 9 is written. The independent set: similar or not (it is not), named triangles with no picture (the letters say the matching), a k under 1, a shadow, a nested pair from the shared corner (with its picture), which is similar.",
         audit=["Every item re-derived by sympy at build time; every figure drawn to scale from its own numbers, and a shadow, mirror or ramp pair that is not similar is refused by the drawing.",
                "Math Nation 6.7–6.8 read against this lesson (A7 Unit 6 Audit): its PKR/XWZ 'similar' pair (D42), its names out of order (D43), its X/Y-then-Y/X constant (D44), its 5.5-ft man with a 1.25-ft shadow (D45) and its balloon key (D38) are not reproduced."],
         changes=["6.7.2–6.7.3 (scale factors; the long, medium and short sides) → Notes I–II: three ratios decide, matched by size.",
+                 "Triangles named by their corners, as GR.2.4 items name them (the book's homework gets the order wrong, D43) → Notes II, board 2, independent question 2 (25 Oct 2026; audit §8).",
                  "6.7.4 (the card sort of eight triangles) → boards 1 and 5, and board 4's turned pair. 6.8.2 (corresponding angles) → Notes I: matched by angle as well as by size; AA is used, not named.",
                  "6.8.3–6.8.5 (shadows; a cliff and a boat) → Notes III and board 6; the mirror → Example 2 and board 8; 6.8.6 (the river's width, nested) → board 7 and the independent set. Every one says its triangles are similar.",
                  "6.07 and 6.08 Additional Practice and Homework → the independent set and IXL; the Unit Review goes home today."],

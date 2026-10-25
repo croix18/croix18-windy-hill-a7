@@ -227,7 +227,8 @@ U = dict(
                      "**A part-to-whole mixture: k from the part you know, then the whole.**  Paint 2 : 4 : 5 with 8 gal of white has k = 4 and 11 parts, so 44 gal."]),
         dict(title="5.   Vocabulary",
              blocks=[dict(vocab=[
-                 ("scale factor ($k$)", "the one number every length of a figure is multiplied by to make its scale copy; copy ÷ original"),
+                 # a term prints underlined, where math does not render: "($k$)" printed its dollar signs (25 Oct 2026); plain k, as this sheet writes it above
+                 ("scale factor (k)", "the one number every length of a figure is multiplied by to make its scale copy; copy ÷ original"),
                  ("scale drawing", "a drawing whose lengths are all the real lengths × one scale factor"),
                  ("corresponding sides", "a side of the original and the side of the copy that matches it"),
                  ("scale (two units)", "a ratio such as $\\frac{1}{4}\\,\\text{in} : 1\\,\\text{ft}$ — a drawing length and the real length it stands for; read it per 1 unit of drawing"),

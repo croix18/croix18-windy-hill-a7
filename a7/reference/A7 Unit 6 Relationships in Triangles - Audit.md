@@ -349,6 +349,20 @@ exponents unit's "Expand once per law" in every Lesson Plan; printed figures are
 page: `u6_check.js` sound on 3,000 sets, `verify.py` sound on 1,500, `plant_check.py` 31 of 31 planted errors caught, the
 lock rewritten (unpublished, content version 1), every part over the variety floor but the two allowed.
 
+**25 October, later — the open items closed** (Croix, 9:36 am: *"Yes please see to each one of those issues."*)
+- **The kit**, all fixed in Windmill: the IXL rows, the page check's "&lt;" and the printed test (`c9c3e8a`); the papers'
+  "two class periods" and the Lesson Plan's "Expand once per law" (`7611a99`); figures on a Lexend paper lettered in
+  Lexend and a division Hint that never states its answer (`02de689`).
+- **Triangles named by their corners**, the note above: 6.07's Notes II teaches "triangle ABC is similar to triangle DEF"
+  ($\triangle ABC \sim \triangle DEF$ on the slide) — the order of the letters is the matching, A with D, B with E, C with
+  F — beside matching by size; board 2 is a named turned pair (its 13.5 is still the place-on-the-page error); independent
+  question 2 gives only names and lengths, no picture. The practice paper's question 12, the Review's Part F question and
+  the Reference Sheet's section 4 name their triangles; half the practice page's question-12 sets do, each corner
+  lettered, and Show me how and the Hint use the letters. The oracle works x out from the letters and from the sizes, and
+  they must agree; two new planted errors (a copy's corners lettered out of order, words naming them out of order) are
+  caught — 33 of 33. The page's content version is 2 (171 of the first 300 sets changed; it was not yet published). The
+  book's own homework puts the names out of order (D43); nothing here reproduces it.
+
 ## 9. Thread B — 16.1 and 16.2 against GR.1.4 and GR.1.5
 
 **16.1–16.2 recomputed: 151 checks, 149 agree** (TE 16.01 44/44, AP 16/17, HW 15/15; TE 16.02 43/43, AP 18/18, HW 13/14

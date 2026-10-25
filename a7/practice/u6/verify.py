@@ -231,7 +231,8 @@ def expect(where, it, p):
         if not d.is_integer: no(where, "the straight line is not whole")
         return d, "blocks", False
     if fam == "simSide":
-        if st != "The two triangles are similar. Find x.": raise ValueError("simSide: " + st)
+        named = re.fullmatch(r"Triangle ([A-Z])([A-Z])([A-Z]) is similar to triangle ([A-Z])([A-Z])([A-Z])\. Find x\.", st)
+        if not named and st != "The two triangles are similar. Find x.": raise ValueError("simSide: " + st)
         f = it["fig"]; la = [q(s) for s in f["la"]]; lb = [None if s == "x" else q(s) for s in f["lb"]]
         if [R(v) for v in f["a"]] != la: no(where, "the first triangle is not drawn to its labels")
         if any(v is not None and abs(R(str(d)) - v) > R(1, 10 ** 9) for v, d in zip(lb, f["b"])): no(where, "the copy is not drawn to its labels")
@@ -244,6 +245,25 @@ def expect(where, it, p):
         k = ks.pop(); ix = lb.index(None); x = ra[rb.index(ix)] * k
         if abs(R(str(f["b"][ix])) - x) > R(1, 10 ** 6): no(where, f"x is drawn {f['b'][ix]} long, not {x}")
         if k == 1: no(where, "a scale factor of 1")
+        if named:
+            # the statement's matching, read off the letters the figure prints at each corner (side i runs between the corners
+            # ENDS[i]), must give the same x as matching by size
+            n1, n2 = list(named.group(1, 2, 3)), list(named.group(4, 5, 6))
+            if f.get("na") is None or f.get("nb") is None: no(where, "the words name the triangles and the figure does not"); return x, None, False
+            at1, at2 = {c: i for i, c in enumerate(f["na"])}, {c: i for i, c in enumerate(f["nb"])}
+            if set(at1) != set(n1) or set(at2) != set(n2): no(where, f"the words name {n1} and {n2}, the figure {f['na']} and {f['nb']}"); return x, None, False
+            ENDS = [(0, 2), (1, 2), (0, 1)]
+            def side(at, corners):                      # the side between two lettered corners
+                c = {at[corners[0]], at[corners[1]]}
+                return next(i for i, e in enumerate(ENDS) if set(e) == c)
+            match = {}
+            for i, e in enumerate(ENDS):                # the copy's side i, between two letters, matches the original's side between theirs
+                u, v = f["nb"][e[0]], f["nb"][e[1]]
+                match[i] = side(at1, (n1[n2.index(u)], n1[n2.index(v)]))
+            kn = {lb[i] / la[match[i]] for i in range(3) if lb[i] is not None}
+            if len(kn) != 1: no(where, f"by the names the known sides give two scale factors {kn}"); return x, None, False
+            xn = la[match[ix]] * kn.pop()
+            if xn != x: no(where, f"by the names x is {xn}, by size {x}")
         return x, None, False
     if fam == "shadow":
         m = re.fullmatch(r"A ([a-z ]+) (" + NUM + r") ft tall casts a shadow (" + NUM + r") ft long\. At the same moment, a ([a-z ]+) casts a shadow (" + NUM + r") ft long\. How tall is the \4\?", st)

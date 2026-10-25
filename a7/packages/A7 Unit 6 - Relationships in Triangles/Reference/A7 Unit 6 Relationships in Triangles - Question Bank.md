@@ -175,7 +175,7 @@ the unit is planned. The printed keys in each lesson's `Keys` folder are generat
 
 *MA.8.GR.2.4*
 
-**Variation.**  Boards 1–3: similar or not by three ratios, a turned pair's missing side (k = 3), then a k under 1; 4 votes on matching in a turned pair, 5 on which triangle is similar. The pattern breaks at 6 — a shadow — then a ramp's two triangles from their shared corner (7) and a mirror with an extra number (8); 9 is written. The independent set: similar or not (it is not), a missing side matched by the middle sides, a k under 1, a shadow, a nested pair from the shared corner (with its picture), which is similar.
+**Variation.**  Boards 1–3: similar or not by three ratios, a named turned pair's missing side (k = 3), then a k under 1; 4 votes on matching in a turned pair, 5 on which triangle is similar. The pattern breaks at 6 — a shadow — then a ramp's two triangles from their shared corner (7) and a mirror with an extra number (8); 9 is written. The independent set: similar or not (it is not), named triangles with no picture (the letters say the matching), a k under 1, a shadow, a nested pair from the shared corner (with its picture), which is similar.
 
 **Read this once, when you plan the unit.**
 
@@ -192,6 +192,7 @@ the unit is planned. The printed keys in each lesson's `Keys` folder are generat
 **What changed from the book.**
 
 - 6.7.2–6.7.3 (scale factors; the long, medium and short sides) → Notes I–II: three ratios decide, matched by size.
+- Triangles named by their corners, as GR.2.4 items name them (the book's homework gets the order wrong, D43) → Notes II, board 2, independent question 2 (25 Oct 2026; audit §8).
 - 6.7.4 (the card sort of eight triangles) → boards 1 and 5, and board 4's turned pair. 6.8.2 (corresponding angles) → Notes I: matched by angle as well as by size; AA is used, not named.
 - 6.8.3–6.8.5 (shadows; a cliff and a boat) → Notes III and board 6; the mirror → Example 2 and board 8; 6.8.6 (the river's width, nested) → board 7 and the independent set. Every one says its triangles are similar.
 - 6.07 and 6.08 Additional Practice and Homework → the independent set and IXL; the Unit Review goes home today.

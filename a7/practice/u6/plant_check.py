@@ -35,6 +35,10 @@ PLANTS = [
      "B.lab(P[0], P[1], f.labs[0], f.vals[0], cen, { tol: 1e-6 });", "B.lab(P[0], P[2], f.labs[0], f.vals[0], cen, { tol: 1e-6 });"),
     ("the similar copy drawn too long", "engine.js",
      "b: [qnum(cp), qnum(cq), qnum(cr)]", "b: [qnum(cp), qnum(cq), qnum(cr) + 1]"),
+    ("the copy's corners lettered in another order", "fig.js",
+     "T.forEach((p, i) => B.ptLab(p, nm[i], cen)); });", "T.forEach((p, i) => B.ptLab(p, nm[(i + j) % 3], cen)); });"),
+    ("the words name the copy's corners in another order", "engine.js",
+     "' is similar to triangle ' + nm.slice(3).join('') + '.'", "' is similar to triangle ' + [nm[4], nm[3], nm[5]].join('') + '.'"),
     # the words: a real place, a grown-up's height, and the mirror's similar triangles said
     ("a garden 1 m wide", "engine.js", "garden: [['m', 2], ['ft', 5], ['yd', 3]]", "garden: [['m', 1], ['ft', 1], ['yd', 1]]"),
     ("a man 4 ft tall", "engine.js", "man: ['5.5', '6'], woman: ['5', '5.5', '6']", "man: ['4', '4.5'], woman: ['4', '4.5']"),

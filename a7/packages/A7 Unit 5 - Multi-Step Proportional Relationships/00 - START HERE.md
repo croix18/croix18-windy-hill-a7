@@ -2,7 +2,7 @@
 
 Windy Hill Middle School · course 1205050 · six teaching days (eleven book lessons, merged to six), a review sent home Tue 3 Nov, the test as one period on Thu 5 Nov (a random draw of the practice test; Forms A and B as built).
 
-**By the plan** (Windmill's spine as of 2026-10-24; `tools/scope_calendar.py` is its source): lessons Tue 27 Oct – Tue 3 Nov, the assessment Thu 5 Nov, 2026. The dates move when the as-run log does (the plan follows the class), and a day is logged from the phone view of the plan.
+**By the plan** (Windmill's spine as of 2026-10-25; `tools/scope_calendar.py` is its source): lessons Tue 27 Oct – Tue 3 Nov, the assessment Thu 5 Nov, 2026. The dates move when the as-run log does (the plan follows the class), and a day is logged from the phone view of the plan.
 
 Nothing exists until it is committed. This folder is generated from `a7/build/u5/` by `install_unit.py`; edit the specs and rebuild rather than editing these files by hand.
 
@@ -90,4 +90,4 @@ The whiteboard round is the remainder — 11–13 minutes across the unit — an
 - **Built in the order the rulebook asks (§16):** from the benchmarks first, then read against Math Nation 5.1–5.11 and its test — the audit is in Reference.
 - **Every conversion ratio is the FAST reference sheet's** (1 in = 2.54 cm, 1 mi = 1.61 km, 1 lb = 0.454 kg, 1 kg = 2.204 lb, 1 gal = 3.785 L, 1 c = 0.24 L …) and is printed on the board or paper that uses it. Math Nation's lessons drift from the sheet (1.609, 2.2); its own assessment does not.
 
-Installed: 168 files from the build, plus this page and the Reference folder.
+Installed: 139 files from the build, plus this page and the Reference folder.

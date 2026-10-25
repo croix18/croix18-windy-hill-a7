@@ -76,7 +76,7 @@ are forms), `Handouts/`, `Reference/`; the zips are named the same way.
 | `building_on`, `working_toward` | str | vertical alignment lines (TE) |
 | `vocab` | list of (term, definition) | the terms this lesson introduces; definition may carry `$…$`. **Since 17 October 2026 the deck carries one Vocabulary slide of them, after the warm-up and before the notes** (Croix: "the notes use words like coefficient and constant but don't ever define them"), 1 minute (a lesson's whiteboard remainder gives it up); `vocab_slide=False` leaves it out of a lesson whose vocab is only carried over, `vocab_note` is its TE note |
 | `ixl` | list of str | `"Skill name — CODE"` or `"Skill name (CODE)"` (each course keeps the spelling its slides have always shown). **The skills and their codes are the course's IXL plan's**, and `rulingcheck` holds them to it (`lib/ixlplan.py`, reading the spine vendored into `assets/windmill/`): a code the plan does not have, a name that is not the plan's name for that code, or — for a lesson the plan lists skills for — any skill more or fewer than the plan's, refuses the build. A lesson the plan lists nothing for (a carry-over day, a thread day, the review) may show any skills the plan knows. Ruling 28: every skill listed is required, so nothing is prefixed "Optional" or "Also consider" |
-| `ixl_due` | str | only for a lesson whose skills continue into the next lesson (ruling 28: one assignment covering the run, due after its last lesson). Replaces the slide's and plan's "Due at the start of the next class." — e.g. 4.05: `"This skill continues tomorrow: one assignment, due at the start of the class after 4.06."` |
+| `ixl_due` | str | rarely: a lesson whose IXL slide must say something the plan cannot (a day that assigns nothing new and asks for earlier skills to be finished). Replaces the slide's and plan's due line, which is otherwise the plan's own — ruling 53 (25 Oct 2026): done as the lessons go, due by the unit's test, "Due by the Unit 10 test." (`ixlplan.due_line`). Before ruling 53 it carried runs ("This skill continues tomorrow: one assignment, due at the start of the class after 4.06."); the due date no longer depends on a run. |
 | `warmup` | list of 4 dicts | see below — bands: yesterday / last week (or "this week") / last unit / prior grade |
 | `warmup_note` | str | TE note for the warm-up slide |
 | `title_note` | str, optional | TE note for the title slide |
@@ -282,9 +282,11 @@ forms. `reference` and `review` are optional (M7 builds its review day as a less
   learning target; a unit whose review leaves one out gives its own note as `review_note` (A7 Unit 4: significant
   digits, taught and not assessed).
 - `assessment.sections`: `[dict(title, benchmark, items=[…])]` — **one paper, numbered straight
-  through, with no Day 1 / Day 2 division anywhere** (ruling 27). The paper's front line says it
-  runs over two periods and that students continue from where they stopped; the student line for
-  follow-through credit (ruling 19) sits under it. Every lettered part is one point; every
+  through, with no Day 1 / Day 2 division anywhere** (ruling 27). The paper's head says how many
+  class periods the test runs — the plan's test days for the unit, else the course's `EXAM_PERIODS`
+  (`unitbuild.exam_periods`; ruling 51, 23 Oct 2026: every A7 test is one period). A two-period
+  paper's front line says students continue from where they stopped; a one-period paper has no
+  such line. The student line for follow-through credit (ruling 19) sits under it. Every lettered part is one point; every
   single-part item is one point. `total` and `tracker` (benchmark → points) are asserted against
   the items at build time; `tracker_order` fixes the Score Tracker's row order.
 - **Exactly two items carry `transfer=True`** (ruling 18) and the build refuses any other count —

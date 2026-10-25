@@ -504,8 +504,14 @@ function hintMul(a, b) {
   const other = which === 0 ? b : a, term = p => which === 0 ? S(p) + ' × ' + S(other) : S(other) + ' × ' + S(p);
   return 'Break it up: ' + S(a) + ' × ' + S(b) + ' = ' + parts.map(term).join(' + ') + ' = ' + parts.map(p => S(qmul(p, other))).join(' + ') + '. Now add.';
 }
-/* a ÷ b: a nearby multiple of b as a stepping stone */
+/* a ÷ b: a nearby multiple of b as a stepping stone — never one that states the quotient. 14.4 ÷ 1.2 began "Start with
+   1.2 × 10 = 12", and 12 is the answer; when the hint would say "= <the answer>" it asks the plain question instead
+   (A7 Unit 6 guarded this in its own coach; in the kit since 25 Oct 2026, check/hints.js) */
 function hintDiv(a, b) {
+  const h = hintDivStep(a, b), q = S(qdiv(a, b)).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return new RegExp('= ' + q + '(?![\\d.])').test(h) ? 'Think: ' + S(b) + ' × ? = ' + S(a) + '.' : h;
+}
+function hintDivStep(a, b) {
   const qq = qdiv(a, b);
   if (b.d === 1n && b.n === 2n) {
     let parts = split(a);
@@ -1156,18 +1162,24 @@ function sidesFor(T, ks, plain, ok) {
 }
 /* sides a, b, c with b/a = c/b: two of a copy's sides could then be matched two ways, each with its own k */
 const oneRatio = s => { const [a, b, c] = sorted(s); return b * b === a * c; };
+/* corner names (25 Oct 2026: the state's GR.2.4 items name similar triangles by their corners, "triangle ABC is similar to
+   triangle DEF", and the order of the letters is the matching): half the sets say it and letter the corners. The first three
+   letters are the first triangle's corners — between its p and r sides, between q and r, between p and q — and the last three
+   the copy's matching corners. Drawn after every number, so a set keeps its numbers. */
+const CORNERS = [['A', 'B', 'C', 'D', 'E', 'F'], ['P', 'Q', 'R', 'X', 'Y', 'Z'], ['J', 'K', 'L', 'M', 'N', 'P'], ['R', 'S', 'T', 'U', 'V', 'W']];
 function q12(seed) {
   return D('q12', seed, T => {
     const ks = T.pick(KS), k = qk(ks), tri = sidesFor(T, ks, () => [T.ri(3, 10), T.ri(4, 13), T.ri(5, 16)], s => roundTri(s) && !oneRatio(s)), [p, q, r] = sorted(tri);
     const cp = qmul(Q(p), k), cq = qmul(Q(q), k), cr = qmul(Q(r), k);
     const which = T.pick(['r', 'r', 'p', 'q']), turn = T.pick(['180', 'flip']);
     const copy = { p: cp, q: cq, r: cr }, ans = copy[which];
-    const prm = { p, q, r, k: ks, which, turn };
+    const nm = T.r() < 0.5 ? T.pick(CORNERS) : null;
+    const prm = nm ? { p, q, r, k: ks, which, turn, nm } : { p, q, r, k: ks, which, turn };
     const part = numPart('', 'simSide', prm, '', ans, { exact: qnum(ans) });
     /* the original: p up the left, q up the right, r along the bottom; the copy turned so that no side sits where its match does */
     const fig = { kind: 'simPair', a: [p, q, r], b: [qnum(cp), qnum(cq), qnum(cr)], la: [String(p), String(q), String(r)],
-      lb: ['p', 'q', 'r'].map(s => s === which ? 'x' : N(copy[s])), turn };
-    return { type: 'solo', stem: 'The two triangles are similar. Find ' + X + '.', part, fig };
+      lb: ['p', 'q', 'r'].map(s => s === which ? 'x' : N(copy[s])), turn, na: nm ? nm.slice(0, 3) : null, nb: nm ? nm.slice(3) : null };
+    return { type: 'solo', stem: (nm ? 'Triangle ' + nm.slice(0, 3).join('') + ' is similar to triangle ' + nm.slice(3).join('') + '.' : 'The two triangles are similar.') + ' Find ' + X + '.', part, fig };
   });
 }
 const SUNLIT = [['girl', 'tree'], ['boy', 'flagpole'], ['man', 'building'], ['woman', 'light pole'], ['student', 'tree'], ['girl', 'statue']];
@@ -1412,6 +1424,11 @@ function simPair(f) {
     B.lab(T[1], T[2], labs[1], num(labs[1], 1), cen, { tol: 1e-6 });
     B.lab(T[0], T[1], labs[2], num(labs[2], 2), cen, { tol: 1e-6 });
   });
+  /* the corners' letters, after every length so they stand clear of them: T[0] between p and r, T[1] between q and r, T[2]
+     between p and q, and the copy's matching corners in the same order */
+  [A, C].forEach((T, j) => { const nm = j ? f.nb : f.na; if (!nm) return;
+    const cen = [(T[0][0] + T[1][0] + T[2][0]) / 3, (T[0][1] + T[1][1] + T[2][1]) / 3];
+    T.forEach((p, i) => B.ptLab(p, nm[i], cen)); });
   B.meta = { A, C };
   return B;
 }
@@ -1455,7 +1472,7 @@ function altOf(f) {
     case 'rtri': return 'A right triangle. The legs are labeled ' + f.labs[0] + ' and ' + f.labs[1] + '; the side across from the right angle is labeled ' + f.labs[2] + '.';
     case 'grid2': return 'A coordinate plane with ' + f.pts.map(p => 'point ' + ptName(p[0], p[1], p[2])).join(' and ') + '.';
     case 'gridTri': return 'A coordinate plane with triangle ' + f.pts.map(p => p[2]).join('') + ': ' + f.pts.map(p => ptName(p[0], p[1], p[2])).join(', ') + '.';
-    case 'simPair': return 'Two similar triangles. The first has sides ' + f.la.join(', ') + '. The second, ' + (f.turn === 'flip' ? 'flipped over' : 'turned') + ', has sides ' + f.lb.join(', ') + '.';
+    case 'simPair': return 'Two similar triangles' + (f.na ? ', ' + f.na.join('') + ' and ' + f.nb.join('') : '') + '. The first has sides ' + f.la.join(', ') + '. The second, ' + (f.turn === 'flip' ? 'flipped over' : 'turned') + ', has sides ' + f.lb.join(', ') + '.';
     case 'shadow': return 'The ' + f.what[0] + ', ' + f.lab[0] + ' tall, and a ' + f.lab[1] + ' shadow; the ' + f.what[1] + ', h tall, and a ' + f.lab[2] + ' shadow. The sun\'s rays are dashed.';
     case 'mirror': return f.what[0] + '\'s eyes, ' + f.lab[0] + ' up, ' + f.lab[1] + ' from a mirror on the ground; the ' + f.what[1] + ', h tall, ' + f.lab[2] + ' beyond the mirror. The light\'s path is dashed.';
   }
@@ -1735,7 +1752,11 @@ const turnedSay = p => p.prm.turn === 'flip' ? 'flipped over' : 'turned';
 function simParts(p) {
   const { p: a, q: b, r: c, which } = p.prm, k = qk(p.prm.k), side = { p: a, q: b, r: c }[which];
   const known = ['p', 'q', 'r'].filter(s => s !== which), o1 = { p: a, q: b, r: c }[known[0]], c1 = qmul(Q(o1), k);
-  return { a, b, c, k, which, side, known, o1, c1, size: { p: 'shortest', q: 'middle', r: 'longest' } };
+  /* named triangles (engine CORNERS): side p runs between corners 0 and 2, q between 1 and 2, r between 0 and 1 */
+  const nm = p.prm.nm, ends = { p: [0, 2], q: [1, 2], r: [0, 1] }, seg = (off, s) => nm[off + ends[s][0]] + nm[off + ends[s][1]];
+  const names = nm ? { first: nm.slice(0, 3).join(''), copy: nm.slice(3).join(''), xOn: seg(3, which), xMatch: seg(0, which),
+    pairs: nm[0] + ' with ' + nm[3] + ', ' + nm[1] + ' with ' + nm[4] + ' and ' + nm[2] + ' with ' + nm[5] } : null;
+  return { a, b, c, k, which, side, known, o1, c1, names, size: { p: 'shortest', q: 'middle', r: 'longest' } };
 }
 F.simSide = {
   models: p => { const t = simParts(p), out = [mod(Q(t.side), 'took the triangles to be equal. Similar means the second is a scale copy: every side times one k.', 1),
@@ -1745,11 +1766,13 @@ F.simSide = {
     return out; },
   rule: () => 'Match the sides by size — shortest with shortest, longest with longest. Find k = copy ÷ original from a pair you know, then multiply.',
   sol: p => { const t = simParts(p);
-    return [{ say: 'Match by size. The first triangle\'s sides are ' + t.a + ', ' + t.b + ' and ' + t.c + '; x is on the copy\'s ' + t.size[t.which] + ' side, so it matches the ' + t.side + '.' },
+    return (t.names ? [{ say: 'The names give the matching: in "triangle ' + t.names.first + ' is similar to triangle ' + t.names.copy + '" the order of the letters is the matching, ' + t.names.pairs + '. x is on ' + t.names.xOn + ', so it matches ' + t.names.xMatch + ', the ' + t.side + '.' }] : []).concat([
+      { say: 'Match by size' + (t.names ? ', and it agrees' : '') + '. The first triangle\'s sides are ' + t.a + ', ' + t.b + ' and ' + t.c + '; x is on the copy\'s ' + t.size[t.which] + ' side, so it matches the ' + t.side + '.' },
       { say: 'The scale factor from a pair you know: ' + M('k = ' + S(t.c1) + ' ÷ ' + t.o1 + ' = ' + kIn(t.k)) + '.' },
-      { say: 'Multiply the matching side by k.', ex: EX(t.side + ' × ' + kIn(t.k) + ' = ' + S(p.ans), p.ans) }]; },
+      { say: 'Multiply the matching side by k.', ex: EX(t.side + ' × ' + kIn(t.k) + ' = ' + S(p.ans), p.ans) }]); },
   walk: p => { const t = simParts(p), others = ['p', 'q', 'r'].filter(s => s !== t.which).map(s => ({ p: t.a, q: t.b, r: t.c }[s]));
-    return [choice('The copy is ' + turnedSay(p) + '. Which side of the first triangle does x match?', [O(String(t.side) + ' — the ' + t.size[t.which] + ' side', true),
+    return [choice(t.names ? 'x is on ' + t.names.xOn + '. In "triangle ' + t.names.first + ' is similar to triangle ' + t.names.copy + '" the order of the letters is the matching. Which side of triangle ' + t.names.first + ' does x match?'
+      : 'The copy is ' + turnedSay(p) + '. Which side of the first triangle does x match?', [O(String(t.side) + (t.names ? ' — ' + t.names.xMatch + ', the ' + t.size[t.which] + ' side' : ' — the ' + t.size[t.which] + ' side'), true),
       O(String(others[0]), false, 'Match by size: x is on the copy\'s ' + t.size[t.which] + ' side, and ' + others[0] + ' is not the first triangle\'s ' + t.size[t.which] + '.'),
       O(String(others[1]), false, 'Match by size: x is on the copy\'s ' + t.size[t.which] + ' side, and ' + others[1] + ' is not the first triangle\'s ' + t.size[t.which] + '.')]),
       num('What is the scale factor, k = ' + S(t.c1) + ' ÷ ' + t.o1 + '?', t.k, 'The copy\'s side over its match in the first triangle: ' + S(t.c1) + ' ÷ ' + t.o1 + '.' + kFine(t.k)),
@@ -1973,7 +1996,8 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;',
 
 const Unit = {
   id: 'a7u6',
-  contentVersion: 1,                 /* bump whenever any set's questions change (the lock check says so) */
+  contentVersion: 2,                 /* bump whenever any set's questions change (the lock check says so). 2: half of Q12's sets name the
+                                        triangles by their corners (25 Oct 2026), before the page was published */
   legacy: [],
   title: 'A7 Unit 6 Practice Test',
   eyebrow: 'Grade 7 Accelerated &nbsp;·&nbsp; Unit 6 &nbsp;·&nbsp; Practice',
@@ -2037,7 +2061,7 @@ window.TEACHER_TEST = {
  "notes": [
   "Show your work. One point for each lettered part."
  ],
- "two_day": "This assessment runs over two class periods. Stop when the period ends; you will continue from where you stopped.",
+ "two_day": "",
  "follow_through_student": "If an earlier part is wrong, a later part still earns its point when the right operation is applied to your own earlier answer — but only if that work is on the page.",
  "follow_through_key": "Follow-through (ruling 19).  A later part is correct when the right operation is applied to the student's own earlier value: question 7(b) from their own 7(a), question 10(b) from their own 10(a). Look at what they wrote for the earlier part, do this part's operation to it, and tick if that is what they wrote.",
  "transfer_flag": "TRANSFER ITEM — not on the practice test. Same benchmark, a surface nobody rehearsed.",
@@ -2051,14 +2075,15 @@ window.TEACHER_TEST = {
    REAL UNIT TEST — window.TEACHER_TEST, written by teacher_gen.py from the course's unit.py — as the paper: Form A / Form B
    (ruling 33) where the unit has them, the test, the test with its key, or the key alone. Stems and answers are TeX,
    drawn by KaTeX (inlined by the build); figures are the paper's own shape specs drawn as SVG. A teacher page carries
-   the answer key in its source, so it is never linked for students — Google Sites gets the student page only. */
+   the answer key in its source, so it is never linked for students — they get the student page (the class website, or
+   Google Sites); on the website a teacher copy is behind the teacher password (/teacher/). */
 (function boot(tries){
   var T = window.TEACHER_TEST; if (!T) return;
   if (T.random){                                          /* ruling 49 (22 Oct 2026): the unit test IS a random set of this page */
     if (!window.PracticePrint){ if ((tries || 0) < 200) setTimeout(function(){ boot((tries || 0) + 1); }, 25); return; }
     var rbar = document.createElement('div'); rbar.className = 'teacherbar'; rbar.setAttribute('translate', 'no'); rbar.setAttribute('role', 'region'); rbar.setAttribute('aria-label', 'Teacher copy');
     rbar.innerHTML = '<div class="tbtxt"><b>Teacher copy.</b> The Unit ' + T.unit + ' test is a random set of this page: every form below is a different set, headed as a test, ' +
-      'with its answer key on its own page. Do not share this link or file with students — the student page is the one on Google Sites.</div>' +
+      'with its answer key on its own page. Do not share this link or file with students — they use the student page, on the class website or Google Sites.</div>' +
       '<div class="tbbtns"><span class="tblab">Print the test:</span>' + [1, 2, 3, 4, 5].map(function(n){ return '<button type="button"' + (n === 1 ? ' class="go"' : '') + ' data-tforms="' + n + '">' + n + (n === 1 ? ' form' : ' forms') + '</button>'; }).join('') + '</div>';
     var rsheet = document.querySelector('.sheet'); if (rsheet) rsheet.insertBefore(rbar, rsheet.firstChild);
     rbar.addEventListener('click', function(e){ var b = e.target.closest('[data-tforms]'); if (b) window.PracticePrint.forms(+b.dataset.tforms, 'Test'); });
@@ -2079,27 +2104,27 @@ window.TEACHER_TEST = {
   }
   function formWord(f){ return f === 'test' ? '' : 'Form ' + f; }
   function head(f, key){
-    var sub = [formWord(f), T.total + ' points', key ? 'ANSWER KEY' : 'two class periods'].filter(Boolean).join(' · ');
+    var sub = [formWord(f), T.total + ' points', key ? 'ANSWER KEY' : T.two_day ? 'two class periods' : 'one class period'].filter(Boolean).join(' · ');   /* ruling 51: an empty two_day is a one-period test */
     return '<div class="phead"><div class="pt1 ptest">' + esc(T.course + ' Unit ' + T.unit + ' Test') + '</div><div class="pt2">' + esc(T.title) + ' · ' + esc(sub) + '</div>' +
       (key ? '' : '<div class="pname">Name:<span class="pline"></span>Date:<span class="pline short"></span></div>') + '</div>';
   }
   function work(inches){ return '<div class="pwork" style="height:' + (Math.max(0.4, +inches || 0.6) * 0.9).toFixed(2) + 'in"></div>'; }
-  function blank(){ return '<div class="pans"><span class="pal">Answer:</span><span class="pblank"></span></div>'; }
   function choices(it){
     return '<div class="pchoices">' + it.choices.map(function(c, k){ return '<div class="pch"><span class="pbox' + (it.multi ? ' sq' : '') + '"></span><span class="cl">' + LET[k] + '.</span><span class="cv">' + tex(c) + '</span></div>'; }).join('') + '</div>';
   }
   function testHtml(f){
     var secs = T.forms[f], h = [head(f, false)], qn = 0;
-    h.push('<p class="pnotes"><span class="pinote">' + esc(T.two_day) + '</span>' + (T.notes || []).map(function(n){ return '<span class="pinote">' + esc(n) + '</span>'; }).join('') + '</p>');
+    h.push('<p class="pnotes">' + (T.two_day ? '<span class="pinote">' + esc(T.two_day) + '</span>' : '') + (T.notes || []).map(function(n){ return '<span class="pinote">' + esc(n) + '</span>'; }).join('') + '</p>');
     secs.forEach(function(sec, si){
       h.push('<h2 class="psec">' + (si + 1) + '.&nbsp; ' + esc(sec.title) + '<span class="ppts">' + sec.points + ' points</span></h2>');
       if (sec.items.some(function(it){ return it.parts; })) h.push('<p class="pft">' + esc(T.follow_through_student) + '</p>');
       sec.items.forEach(function(it){
         qn++;
         var q = '<div class="pq"><div class="pqh"><div class="stem"><b class="num">' + qn + '.</b><span class="st">' + tex(it.stem) + '</span>' + (it.parts ? '' : '<span class="pt">1 pt</span>') + '</div>' + (it.fig || '') + '</div>';
-        if (it.parts) it.parts.forEach(function(p){ q += '<div class="ppart"><div class="line"><b class="lab">' + esc(p.label) + '.</b><span class="st">' + tex(p.stem) + '</span><span class="pt">1 pt</span></div>' + work(p.space) + blank() + '</div>'; });
+        /* work space and no answer line, as the paper (house rule 2; the docx test has none — 25 Oct 2026) */
+        if (it.parts) it.parts.forEach(function(p){ q += '<div class="ppart"><div class="line"><b class="lab">' + esc(p.label) + '.</b><span class="st">' + tex(p.stem) + '</span><span class="pt">1 pt</span></div>' + work(p.space) + '</div>'; });
         else if (it.choices) q += '<div class="ppart">' + choices(it) + '</div>';
-        else q += '<div class="ppart">' + work(it.space) + blank() + '</div>';
+        else q += '<div class="ppart">' + work(it.space) + '</div>';
         h.push(q + '</div>');
       });
     });
@@ -2137,7 +2162,7 @@ window.TEACHER_TEST = {
   var bar = document.createElement('div'); bar.className = 'teacherbar'; bar.setAttribute('translate', 'no'); bar.setAttribute('role', 'region'); bar.setAttribute('aria-label', 'Teacher copy');
   var pick = FORMS.length > 1 ? '<label class="tbform">Form <select id="tform" aria-label="Which form">' + FORMS.map(function(f){ return '<option value="' + f + '">' + f + '</option>'; }).join('') + '</select></label>' : '';
   bar.innerHTML = '<div class="tbtxt"><b>Teacher copy.</b> This page holds the real Unit ' + T.unit + ' test' + (FORMS.length > 1 ? ' (Forms ' + FORMS.join(' and ') + ')' : '') + ' and its answer key — do not share this link or file with students. ' +
-    'The student page is the one on Google Sites.</div><div class="tbbtns"><span class="tblab">Print the real test:</span>' + pick +
+    'Students use the student page, on the class website or Google Sites.</div><div class="tbbtns"><span class="tblab">Print the real test:</span>' + pick +
     '<button type="button" class="go" data-tprint="test">Test</button><button type="button" class="go" data-tprint="tk">Test + key</button><button type="button" data-tprint="key">Key only</button></div>';
   var sheet = document.querySelector('.sheet'); if (sheet) sheet.insertBefore(bar, sheet.firstChild);
   bar.addEventListener('click', function(e){ var b = e.target.closest('[data-tprint]'); if (b) show(b.dataset.tprint); });

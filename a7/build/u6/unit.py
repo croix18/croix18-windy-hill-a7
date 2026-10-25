@@ -111,10 +111,11 @@ def _gr12():
 
 
 def _gr24():
-    # question 12 — the copy is turned, so its sides are matched by size, not by place on the page
-    q12 = dict(stem="The two triangles are similar. Find x.",
-               fig=similar_pair((6, 9, 13), (12, 18, 26), l1=("6", "9", "13"), l2=("12", "18", "x"), turn2=180, gap=0.9, inches=4.2),
-               answer="x = 26", why="Match by size: 12 with 6 and 18 with 9, so k = 2 and x = 13 × 2. 39 matched by place on the page (18 with the 6); 13 took similar as equal; 19 added the difference 12 − 6.",
+    # question 12 — the copy is turned, so its sides are matched by the names (the state's GR.2.4 items name similar triangles
+    # by their corners; half the page's sets do) or by size, never by place on the page
+    q12 = dict(stem="Triangle ABC is similar to triangle DEF. Find x.",
+               fig=similar_pair((6, 9, 13), (12, 18, 26), l1=("6", "9", "13"), l2=("12", "18", "x"), turn2=180, gap=0.9, inches=4.2, names=(("A", "B", "C"), ("D", "E", "F"))),
+               answer="x = 26", why="The names match AC with DF and BC with EF — 12 with 6 and 18 with 9, as by size — so k = 2, and x is on DE, which matches AB: 13 × 2. 39 matched by place on the page (18 with the 6); 13 took similar as equal; 19 added the difference 12 − 6.",
                check=("many", ("eq", "F(12,6)", "2"), ("eq", "F(18,9)", "2"), ("eq", "13*2", "26"), ("eq", "13*F(18,6)", "39")), space=0.6)
     q13 = dict(stem="A boy 4 ft tall casts a shadow 5 ft long. At the same moment, a tree casts a shadow 30 ft long. How tall is the tree?",
                fig=shadow(4, 5, 24, 30, l=("4", "5", "h", "30"), unit="ft", what=("boy", "tree"), inches=3.2),
@@ -175,6 +176,7 @@ U = dict(
         dict(title="4.   Similar Triangles", right="Lessons 7–8 · one scale factor on every side",
              blocks=["**Similar triangles: matching angles are equal, and matching sides are in one ratio, the scale factor k.**  6, 8, 10 and 9, 12, 15: $\\frac{9}{6} = \\frac{12}{8} = \\frac{15}{10} = 1.5$. Check all three ratios — two equal ratios are not enough. Similar sides are multiplied by one k, not added to: 3, 4, 5 with 2 added to every side is 5, 6, 7, and 5 ÷ 3, 6 ÷ 4 and 7 ÷ 5 are three different numbers.",
                      "**Match the sides by size, not by where they sit on the page.**  Sort each triangle's sides: shortest with shortest, longest with longest. A turned or flipped copy is matched the same way, or by its equal angles.",
+                     "**Named triangles: the order of the letters is the matching.**  Triangle ABC is similar to triangle DEF, written $\\triangle\\!ABC \\sim \\triangle\\!DEF$: A goes with D, B with E and C with F, so AB matches DE, BC matches EF and AC matches DF — even when the picture is turned.",
                      "**A missing side: k = copy ÷ original, then multiply.**  A triangle 4, 6, 7 and a similar copy whose 4-side is 10: $k = \\frac{10}{4} = 2.5$, so its other sides are $6 \\times 2.5 = 15$ and $7 \\times 2.5 = 17.5$. A smaller copy has k less than 1.",
                      "**Indirect measurement: the same sun makes the same angle.**  A 6-ft person casts a 4-ft shadow as a tree casts a 20-ft shadow: $k = \\frac{20}{4} = 5$, so the tree is $6 \\times 5 = 30$ ft. A mirror on the ground works the same way — light leaves it at the angle it arrived — so the two right triangles are similar (the question says so), and the heights and the distances from the mirror are in one ratio."]),
         dict(title="5.   Angle Facts", right="Thread B · after the unit test, and all year",
@@ -315,9 +317,9 @@ U = dict(
                      check=("many", ("eq", "F(15,5)", "3"), ("eq", "F(21,7)", "3"), ("eq", "F(24,8)", "3")), space=0.4),
                 dict(label="b", stem="Sides 5, 8, 10 and sides 10, 16, 18", answer="No — 10/5 = 16/8 = 2, but 18/10 = 1.8.", why="two equal ratios are not enough",
                      check=("many", ("eq", "F(10,5)", "2"), ("eq", "F(16,8)", "2"), ("true", "F(18,10) != 2")), space=0.4)]),
-            dict(stem="The two triangles are similar. Find x.",
-                 fig=similar_pair((6, 10, 12), (9, 15, 18), l1=("6", "10", "12"), l2=("9", "x", "18"), turn2=180, gap=0.9, inches=3.6),
-                 answer="x = 15", why="Match by size: 9 with 6 and 18 with 12, so k = 1.5 and x = 10 × 1.5.",
+            dict(stem="Triangle ABC is similar to triangle DEF. Find x.",
+                 fig=similar_pair((6, 10, 12), (9, 15, 18), l1=("6", "10", "12"), l2=("9", "x", "18"), turn2=180, gap=0.9, inches=3.6, names=(("A", "B", "C"), ("D", "E", "F"))),
+                 answer="x = 15", why="The names match AC with DF (6 with 9) and BC with EF, where x is: k = 1.5 and x = 10 × 1.5.",
                  check=("many", ("eq", "F(9,6)", "F(3,2)"), ("eq", "F(18,12)", "F(3,2)"), ("eq", "10*F(3,2)", "15")), space=0.6),
             dict(stem="A triangle has sides 15, 20 and 30. A similar triangle's middle side is 8. Find its other two sides.", answer="6 and 12", why="k = 8 ÷ 20 = 0.4 — the copy is smaller",
                  check=("many", ("eq", "F(8,20)", "F(2,5)"), ("eq", "15*F(2,5)", "6"), ("eq", "30*F(2,5)", "12")), space=0.5),

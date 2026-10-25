@@ -45,8 +45,8 @@
    "n": 6,
    "title": "Notes",
    "sub": "",
-   "min": 3,
-   "note": "The two triangles are similar, and the 4-side matches the 10-side (both shortest). k = copy \u00f7 original = 10 \u00f7 4 = 2.5, and every other side is multiplied by it: 6 \u00d7 2.5 = 15, 7 \u00d7 2.5 = 17.5. A proportion (4/10 = 6/x) is the same thing written as fractions.\nOFF: 'One matching pair gives k. Every side times k.'",
+   "min": 4,
+   "note": "Triangle ABC is similar to triangle DEF (the symbols on the slide): the order of the letters is the matching, A with D, B with E, C with F \u2014 the same pairs as by size. k = 10 \u00f7 4 = 2.5, and every other side is multiplied by it: 6 \u00d7 2.5 = 15, 7 \u00d7 2.5 = 17.5. A proportion (4/10 = 6/x) is the same thing written as fractions.\nOFF: 'The names say the matching. One matching pair gives k.'",
    "kind": "notes"
   },
   {
@@ -142,7 +142,7 @@
    "title": "Whiteboards   \u00b7   Question 2 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "Sorted, 18 matches 6 and 33 matches 11, so x matches the 8: k = 18 \u00f7 6 = 3 and x = 24 \u2014 a board with 13.5 matched the 8 with the 18 by place on the page.",
+   "note": "The names match AC (6) with DF (18): k = 3, and x is on EF, which matches BC: 8 \u00d7 3 = 24 \u2014 the same pairs as by size. A board with 13.5 matched the 8 with the 18 by place on the page.",
    "kind": "wb"
   },
   {
@@ -278,7 +278,7 @@
    "title": "IXL",
    "sub": "Last five minutes.",
    "min": 5,
-   "note": "IXL: every listed skill is required, SmartScore 67. Due at the start of the next class.",
+   "note": "IXL: every listed skill is required, SmartScore 67. Due by the Unit 6 test.",
    "kind": "ixl"
   }
  ]

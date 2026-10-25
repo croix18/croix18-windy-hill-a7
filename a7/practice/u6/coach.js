@@ -238,7 +238,11 @@ const turnedSay = p => p.prm.turn === 'flip' ? 'flipped over' : 'turned';
 function simParts(p) {
   const { p: a, q: b, r: c, which } = p.prm, k = qk(p.prm.k), side = { p: a, q: b, r: c }[which];
   const known = ['p', 'q', 'r'].filter(s => s !== which), o1 = { p: a, q: b, r: c }[known[0]], c1 = qmul(Q(o1), k);
-  return { a, b, c, k, which, side, known, o1, c1, size: { p: 'shortest', q: 'middle', r: 'longest' } };
+  /* named triangles (engine CORNERS): side p runs between corners 0 and 2, q between 1 and 2, r between 0 and 1 */
+  const nm = p.prm.nm, ends = { p: [0, 2], q: [1, 2], r: [0, 1] }, seg = (off, s) => nm[off + ends[s][0]] + nm[off + ends[s][1]];
+  const names = nm ? { first: nm.slice(0, 3).join(''), copy: nm.slice(3).join(''), xOn: seg(3, which), xMatch: seg(0, which),
+    pairs: nm[0] + ' with ' + nm[3] + ', ' + nm[1] + ' with ' + nm[4] + ' and ' + nm[2] + ' with ' + nm[5] } : null;
+  return { a, b, c, k, which, side, known, o1, c1, names, size: { p: 'shortest', q: 'middle', r: 'longest' } };
 }
 F.simSide = {
   models: p => { const t = simParts(p), out = [mod(Q(t.side), 'took the triangles to be equal. Similar means the second is a scale copy: every side times one k.', 1),
@@ -248,11 +252,13 @@ F.simSide = {
     return out; },
   rule: () => 'Match the sides by size — shortest with shortest, longest with longest. Find k = copy ÷ original from a pair you know, then multiply.',
   sol: p => { const t = simParts(p);
-    return [{ say: 'Match by size. The first triangle\'s sides are ' + t.a + ', ' + t.b + ' and ' + t.c + '; x is on the copy\'s ' + t.size[t.which] + ' side, so it matches the ' + t.side + '.' },
+    return (t.names ? [{ say: 'The names give the matching: in "triangle ' + t.names.first + ' is similar to triangle ' + t.names.copy + '" the order of the letters is the matching, ' + t.names.pairs + '. x is on ' + t.names.xOn + ', so it matches ' + t.names.xMatch + ', the ' + t.side + '.' }] : []).concat([
+      { say: 'Match by size' + (t.names ? ', and it agrees' : '') + '. The first triangle\'s sides are ' + t.a + ', ' + t.b + ' and ' + t.c + '; x is on the copy\'s ' + t.size[t.which] + ' side, so it matches the ' + t.side + '.' },
       { say: 'The scale factor from a pair you know: ' + M('k = ' + S(t.c1) + ' ÷ ' + t.o1 + ' = ' + kIn(t.k)) + '.' },
-      { say: 'Multiply the matching side by k.', ex: EX(t.side + ' × ' + kIn(t.k) + ' = ' + S(p.ans), p.ans) }]; },
+      { say: 'Multiply the matching side by k.', ex: EX(t.side + ' × ' + kIn(t.k) + ' = ' + S(p.ans), p.ans) }]); },
   walk: p => { const t = simParts(p), others = ['p', 'q', 'r'].filter(s => s !== t.which).map(s => ({ p: t.a, q: t.b, r: t.c }[s]));
-    return [choice('The copy is ' + turnedSay(p) + '. Which side of the first triangle does x match?', [O(String(t.side) + ' — the ' + t.size[t.which] + ' side', true),
+    return [choice(t.names ? 'x is on ' + t.names.xOn + '. In "triangle ' + t.names.first + ' is similar to triangle ' + t.names.copy + '" the order of the letters is the matching. Which side of triangle ' + t.names.first + ' does x match?'
+      : 'The copy is ' + turnedSay(p) + '. Which side of the first triangle does x match?', [O(String(t.side) + (t.names ? ' — ' + t.names.xMatch + ', the ' + t.size[t.which] + ' side' : ' — the ' + t.size[t.which] + ' side'), true),
       O(String(others[0]), false, 'Match by size: x is on the copy\'s ' + t.size[t.which] + ' side, and ' + others[0] + ' is not the first triangle\'s ' + t.size[t.which] + '.'),
       O(String(others[1]), false, 'Match by size: x is on the copy\'s ' + t.size[t.which] + ' side, and ' + others[1] + ' is not the first triangle\'s ' + t.size[t.which] + '.')]),
       num('What is the scale factor, k = ' + S(t.c1) + ' ÷ ' + t.o1 + '?', t.k, 'The copy\'s side over its match in the first triangle: ' + S(t.c1) + ' ÷ ' + t.o1 + '.' + kFine(t.k)),
