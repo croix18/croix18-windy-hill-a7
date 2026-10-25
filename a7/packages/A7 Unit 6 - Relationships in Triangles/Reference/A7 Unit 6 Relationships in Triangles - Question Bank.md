@@ -170,3 +170,36 @@ the unit is planned. The printed keys in each lesson's `Keys` folder are generat
 1. 30 units  2. 36 units  3. 19.5 units  4. 48 units  5. 4 blocks  6. √89 ≈ 9.4 m  7. 15 units  8. C C  9. A A
 
 ---
+
+## 6.07  Similar Triangles; Indirect Measurement
+
+*MA.8.GR.2.4*
+
+**Variation.**  Boards 1–3: similar or not by three ratios, a missing side at k = 3, then a k under 1; 4 votes on matching in a turned pair, 5 on which triangle is similar. The pattern breaks at 6 — a shadow — then a ramp's two triangles from their shared corner (7) and a mirror with an extra number (8); 9 is written. The independent set: similar or not (it is not), a missing side matched by the middle sides, a k under 1, a shadow, a nested pair with the gap given instead of the whole distance, which is similar.
+
+**Read this once, when you plan the unit.**
+
+- Two book lessons (6.7 and 6.8), merged by the plan. Built from the benchmark and the B1G-M first, then read against Math Nation (the unit audit): its sample PKR/XWZ pair is drawn not similar (D42), its constant flips between X/Y and Y/X (D44) and its homework keys a balloon problem from the wrong leg (D38) — none of it is reproduced.
+- The state's two named misconceptions are both boards: 'similar means equal' is board 5's option D and board 9 (adding 2 is the same mistake); mismatched sides in a turned figure is board 4. The book names orientation only.
+- Every mirror and nested item says its triangles are similar (the book's test mirror never does, D47). The angle sum is Thread B, after the test, so no item needs 'the third angle is 180 minus'.
+- The Unit Review goes home today; the test is tomorrow.
+
+**What the audit against Math Nation found.**
+
+- Every item re-derived by sympy at build time; every figure drawn to scale from its own numbers, and a shadow, mirror or ramp pair that is not similar is refused by the drawing.
+- Math Nation 6.7–6.8 read against this lesson (A7 Unit 6 Audit): its PKR/XWZ 'similar' pair (D42), its names out of order (D43), its X/Y-then-Y/X constant (D44), its 5.5-ft man with a 1.25-ft shadow (D45) and its balloon key (D38) are not reproduced.
+
+**What changed from the book.**
+
+- 6.7.2–6.7.3 (scale factors; the long, medium and short sides) → Notes I–II: three ratios decide, matched by size.
+- 6.7.4 (the card sort of eight triangles) → boards 1 and 5, and board 4's turned pair. 6.8.2 (corresponding angles) → Notes I: matched by angle as well as by size; AA is used, not named.
+- 6.8.3–6.8.5 (shadows; a cliff and a boat) → Notes III, Example 2 and boards 6 and 8; 6.8.6 (the river's width, nested) → board 7 and the independent set. Every one says its triangles are similar.
+- 6.07 and 6.08 Additional Practice and Homework → the independent set and IXL; the Unit Review goes home today.
+
+**Question Bank answers.**  
+1. Similar — every ratio is 3  2. Not similar — 8/6 = 12/9, but 15/10 = 1.5  3. 22.5 and 27.5  4. 3 and 4  5. 12 and 32  6. 15 ft  7. 30 ft  8. B B  9. B B
+
+**Question Bank – Additional answers.**  
+1. Similar — every ratio is 2.5  2. Not similar — 6/4 = 1.5, but 8/5 = 1.6  3. 18 and 24  4. 6 and 7  5. 7 and 17.5  6. 24 m  7. 75 ft  8. A A  9. D D
+
+---

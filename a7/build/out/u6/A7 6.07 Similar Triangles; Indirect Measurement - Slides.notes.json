@@ -1,0 +1,285 @@
+{
+ "deck": "A7 6.07 Similar Triangles; Indirect Measurement - Slides.pptx",
+ "slides": [
+  {
+   "n": 1,
+   "title": "Similar Triangles; Indirect Measurement",
+   "sub": "",
+   "min": 1,
+   "note": "Post the learning target. Say one line and nothing else yet: \u201cToday: triangles of the same shape and different sizes \u2014 and a tree measured by its shadow.\u201d",
+   "kind": "title"
+  },
+  {
+   "n": 2,
+   "title": "Warm-Up",
+   "sub": "On your own. Four minutes. No notes.",
+   "min": 4,
+   "note": "Q3 is today's k: copy \u00f7 original, 4 \u00f7 10 = 0.4 \u2014 a copy smaller than the original. Q4 is the same multiplying on a drawing. Two minutes silent, then reveal.",
+   "kind": "warmup"
+  },
+  {
+   "n": 3,
+   "title": "Warm-Up",
+   "sub": "Answers.",
+   "min": 1,
+   "note": "Reveal. Ask for the band each question came from only if time allows.",
+   "kind": "warmup"
+  },
+  {
+   "n": 4,
+   "title": "Vocabulary",
+   "sub": "The new words, before they are used.",
+   "min": 1,
+   "note": "Read each word and its meaning once; the notes use them next. Students copy the words, not the definitions.",
+   "kind": "vocab"
+  },
+  {
+   "n": 5,
+   "title": "Notes",
+   "sub": "Copy the rule and the example.",
+   "min": 4,
+   "note": "The state guide's pair: 6, 8, 10 and 9, 12, 15 (the second drawn turned over). Match shortest to shortest, middle to middle, longest to longest \u2014 or angle to angle \u2014 never by where a side sits on the page. 9 \u00f7 6, 12 \u00f7 8 and 15 \u00f7 10 are all 1.5: similar. Equal angles, sides in one ratio; the same shape, not the same size.\nOFF: 'Similar: one k on every side. Match by size, not by place.'",
+   "kind": "notes"
+  },
+  {
+   "n": 6,
+   "title": "Notes",
+   "sub": "",
+   "min": 3,
+   "note": "The two triangles are similar, and the 4-side matches the 10-side (both shortest). k = copy \u00f7 original = 10 \u00f7 4 = 2.5, and every other side is multiplied by it: 6 \u00d7 2.5 = 15, 7 \u00d7 2.5 = 17.5. A proportion (4/10 = 6/x) is the same thing written as fractions.\nOFF: 'One matching pair gives k. Every side times k.'",
+   "kind": "notes"
+  },
+  {
+   "n": 7,
+   "title": "Notes",
+   "sub": "",
+   "min": 4,
+   "note": "At the same moment the sun's rays come in at one angle, so a person and a tree with their shadows make two similar right triangles (the state guide's task). The tree's shadow is 20 \u00f7 4 = 5 times the person's, so the tree is 5 \u00d7 6 = 30 ft. Is 30 ft a realistic tree? Yes.\nOFF: 'Same sun, same angle: similar triangles.'",
+   "kind": "notes"
+  },
+  {
+   "n": 8,
+   "title": "Example 1",
+   "sub": "A turned pair.",
+   "min": 1,
+   "note": "Ask which side of the second triangle matches the 5 before anyone divides: the shortest, 15 \u2014 wherever it sits.",
+   "kind": "example"
+  },
+  {
+   "n": 9,
+   "title": "Example 1",
+   "sub": "Worked.",
+   "min": 2,
+   "note": "Sorted: 5, 7, 9 and 15, x, y \u2014 the 5 and the 15 are both shortest. k = 15 \u00f7 5 = 3; x = 7 \u00d7 3 = 21, y = 9 \u00d7 3 = 27. A board with 17 and 19 added 10 to every side.",
+   "kind": "example"
+  },
+  {
+   "n": 10,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "k = 12 \u00f7 3 = 4; 5 \u00d7 4 = 20, 7 \u00d7 4 = 28. A board with 14 and 16 added 9.",
+   "kind": "yourturn"
+  },
+  {
+   "n": 11,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 12,
+   "title": "Example 2",
+   "sub": "A shadow.",
+   "min": 1,
+   "note": "Ask why the two triangles are similar: the same sun at the same moment \u2014 one angle for both rays.",
+   "kind": "example"
+  },
+  {
+   "n": 13,
+   "title": "Example 2",
+   "sub": "Worked.",
+   "min": 3,
+   "note": "Shadow to shadow: k = 15 \u00f7 3 = 5, so the pole is 5 \u00d7 5 = 25 ft. A board with 9 set the ratio up crosswise (15 \u00d7 3 \u00f7 5); one with 17 added 12.",
+   "kind": "example"
+  },
+  {
+   "n": 14,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "k = 12 \u00f7 1.5 = 8; 2 \u00d7 8 = 16 m. A board with 9 set it up crosswise.",
+   "kind": "yourturn"
+  },
+  {
+   "n": 15,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 16,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Sorted, the pairs are 8 and 12, 12 and 18, 14 and 21: each ratio 1.5, so similar. A board that checked only two ratios has the right verdict by luck.",
+   "kind": "wb"
+  },
+  {
+   "n": 17,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 18,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "k = 18 \u00f7 6 = 3; 24 cm and 33 cm. A board with 20 and 23 added 12 to every side.",
+   "kind": "wb"
+  },
+  {
+   "n": 19,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 20,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The copy is smaller, so k is under 1: 5 \u00f7 20 = 0.25. 12 \u00d7 0.25 = 3 and 16 \u00d7 0.25 = 4. A board with 48 and 64 divided the other way.",
+   "kind": "wb"
+  },
+  {
+   "n": 21,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 22,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic. Option A matched by position (the 8 sits where the 9 sat before the turn), option B matched the middle side to the longest, option D looked for an equal side. Split? Sixty seconds, convince your neighbour, re-vote.",
+   "kind": "wb"
+  },
+  {
+   "n": 23,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 24,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic. Option A added 2, option C passes two ratios and fails the third, option D kept two sides equal. Split? Sixty seconds, convince your neighbour, re-vote.",
+   "kind": "wb"
+  },
+  {
+   "n": 25,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 26,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "k = 15 \u00f7 2.5 = 6, so the tree is 4 \u00d7 6 = 24 ft. A board with about 9.4 set the ratio up crosswise (15 \u00d7 2.5 \u00f7 4).",
+   "kind": "wb"
+  },
+  {
+   "n": 27,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 28,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Both triangles start at A, so the big one's base is the whole 8 m: k = 8 \u00f7 2 = 4, h = 2.4 m. A board with 1.8 used the 6 m between the uprights.",
+   "kind": "wb"
+  },
+  {
+   "n": 29,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 30,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The extra-number board (ruling 22): the 45 years is bait. Ground to ground, k = 16 \u00f7 4 = 4; the pole is 5 \u00d7 4 = 20 ft. The words say the triangles are similar, as every mirror item here does (the book's test mirror never says, audit D47).",
+   "kind": "wb"
+  },
+  {
+   "n": 31,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 32,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Take your time. Boards up when you have written it.",
+   "min": 0,
+   "note": "Written, and the exit evidence: adding the same amount is the state's 'similar means equal' error in another form.",
+   "kind": "wb"
+  },
+  {
+   "n": 33,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 34,
+   "title": "Independent Set",
+   "sub": "Six questions. On your own, in writing.",
+   "min": 6,
+   "note": "Hand out the Independent Set; the same six questions are on the board. Silent work. Circulate and mark what you see; do not teach. Whatever is not finished goes home.",
+   "kind": "independent"
+  },
+  {
+   "n": 35,
+   "title": "IXL",
+   "sub": "Last five minutes.",
+   "min": 5,
+   "note": "IXL: every listed skill is required, SmartScore 67. Due at the start of the next class.",
+   "kind": "ixl"
+  }
+ ]
+}

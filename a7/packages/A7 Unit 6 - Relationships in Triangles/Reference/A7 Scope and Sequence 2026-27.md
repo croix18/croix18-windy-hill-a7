@@ -40,71 +40,71 @@
 | Nov 17 | Tue | 6 | 6.X | **exam** Unit 6 exam |  |  |  |
 | Nov 18 | Wed (43 min) | 6 | T-B1 | **thread** Thread B: angle pairs — supplementary, complementary, vertical, adjacent (16.1) | 8.GR.1.4 | Identify complementary, supplementary, vertical, adjacent, and congruent angles — HGV; Find measures of complementary, supplementary, vertical, and adjacent angles — R2B; Write and solve equations using angle relationships — DBV | Nov 19 |
 | Nov 19 | Thu | 6 | T-B2 | **thread** Thread B: interior and exterior angles of a triangle (16.2) | 8.GR.1.5 | Find missing angles in triangles — JFJ; Exterior Angle Theorem — FMP; Triangle Angle-Sum Theorem — 6Q6 | Nov 20 |
-| Nov 20 | Fri | 7 | spiral | *spiral* Spiral day — mixed retrieval from the unit just finished and the two before it |  |  |  |
-| Nov 30 | Mon | 7 | 7.01 | Graphing proportional relationships | 7.AR.4.3 | Graph a proportional relationship: word problems — FJW | Dec 02 |
-| Dec 01 | Tue | 7 | off | *off* FAST PM2 (ELA) — no class |  |  |  |
-| Dec 02 | Wed (43 min) | 7 | 7.02+03 | Constant of proportionality (table, graph, description) | 7.AR.4.2 | Interpret graphs of proportional relationships — RMH; Find the constant of proportionality from a table — LKZ; Find the constant of proportionality from a graph — ZUT | Dec 03 |
-| Dec 03 | Thu | 7 | 7.04 | Is it proportional? | 7.AR.4.1 · 8.AR.3.1 | Identify proportional relationships by graphing — AAN; Identify proportional relationships in tables and graphs — VZK | Dec 04 |
-| Dec 04 | Fri | 7 | 7.05+06 | Equations of proportional relationships; translating representations | 7.AR.4.4 | Write equations for proportional relationships from tables — 6GU; Write equations for proportional relationships from graphs — JKH; Write and solve equations for proportional relationships — VKK | Dec 07 |
-| Dec 07 | Mon | 7 | 7.07 | Comparing proportional relationships | 7.AR.4.5 | Compare proportional relationships represented in different ways — 5A9 | Dec 09 |
-| Dec 08 | Tue | 7 | off | *off* FAST PM2 — no class |  |  |  |
-| Dec 09 | Wed (43 min) | 7 | spiral | *spiral* Spiral day — mixed retrieval from the unit just finished and the two before it |  |  |  |
-| Dec 10 | Thu | 7 | 7.X | **exam** Unit 7 exam |  |  |  |
-| Dec 11 | Fri |  | PM2-R1 | **review** Semester review 1: number system, exponents, scientific notation (whiteboards) | 8.NSO.1.1–1.7 |  |  |
-| Dec 14 | Mon |  | PM2-R2 | **review** Semester review 2: equations, inequalities, Pythagorean, angles (whiteboards) | 8.AR.2 · 8.GR.1 |  |  |
-| Dec 15 | Tue |  | PM2-R3 | **review** Semester review 3: proportional → linear preview; mixed FAST-shaped round | 8.AR.3 · 8.AR.1.1 |  |  |
-| Dec 16 | Wed (43 min) | 8 | spiral | *spiral* Spiral day — mixed retrieval from the unit just finished and the two before it |  |  |  |
-| Dec 17 | Thu | 8 | extra | *extra* Catch-up day — make-up tests and missing work; nothing new and nothing graded |  |  |  |
-| Dec 18 | Fri | 8 | extra | *extra* Catch-up day — make-up tests and missing work; nothing new and nothing graded |  |  |  |
-| Jan 06 | Wed (43 min) | 8 | 8.01+02 | Circle relationships; circumference | 7.GR.1.3 | Center, radius, and diameter of a circle — 7RY; Circumference of circles — 9FM | Jan 07 |
-| Jan 07 | Thu | 8 | 8.03 | Radius and diameter from circumference | 7.GR.1.3 | Find the radius or diameter of a circle given the circumference — 2CM | Jan 08 |
-| Jan 08 | Fri | 8 | 8.04+05 | Area of a circle | 7.GR.1.4 | Area of circles — YA8 | Jan 11 |
-| Jan 11 | Mon | 8 | 8.06 | Circumference and area problems; sectors | 7.GR.1.4 | Circles: word problems — P56 | Jan 12 |
-| Jan 12 | Tue | 8 | 8.08+09 | Sectors and circle graphs | 7.GR.1.4 · 7.DP.1.4 | Use fractions to find the measure of an angle — V76; Circle graphs and central angles — KXS; Interpret circle graphs — WNJ | Jan 13 |
-| Jan 13 | Wed (43 min) | 9 | 9.01+02 | Surface area of cylinders from nets | 7.GR.2.1 · 7.GR.2.2 | Nets of three-dimensional figures — 3R2; Surface area of cylinders — CYQ; Lateral area of cylinders — C8K | Jan 14 |
-| Jan 14 | Thu | 9 | 9.03+04+05 | Volume of cylinders; problems | 7.GR.2.3 | Volume of cylinders — FHC | Jan 15 |
-| Jan 15 | Fri | 9 | 8/9.X | **exam** Units 8–9 exam |  |  |  |
-| Jan 19 | Tue | 9 | flex | *flex* Flex day — reteach from exam evidence, or absorb a lost day |  |  |  |
-| Jan 20 | Wed (43 min) | 10 | 10.01 | Proportional relationships revisited (linear ⇒ proportional?) | 8.AR.3.1 | Find the constant of proportionality from a table — ZCK; Identify proportional relationships by graphing — RXD; Identify proportional relationships — Z64; Write equations for proportional relationships from tables and graphs — VXM; Interpret graphs of proportional relationships — Q96 | Jan 21 |
-| Jan 21 | Thu | 10 | 10.02+03 | Slope from two points, graphs, tables | 8.AR.3.2 | Find the slope from two points — ZAC; Find the slope from a table — GSB; Find the slope from a graph — Q94 | Jan 22 |
-| Jan 22 | Fri | 10 | 10.04 | Slope in context | 8.AR.3.2 · 8.AR.3.5 | Rate of change of a linear function: graphs — ZPF; Rate of change of a linear function: tables — 8FE | Jan 25 |
-| Jan 25 | Mon | 10 | 10.05 | Slope-intercept form; graph a line | 8.AR.3.4 | Slope-intercept form: find the slope and y-intercept — U55; Graph a line using slope — FSV; Graph a line from an equation in slope-intercept form — W5E; Write a linear equation from a slope and y-intercept — WHP; Compare linear functions: tables, graphs, and equations — N7D | Jan 26 |
-| Jan 26 | Tue | 10 | 10.06 | Graphing from tables and contexts | 8.AR.3.4 | Complete a table and graph a linear function — DC2; Complete a table and make a graph: word problems — T7R; Complete a table for a linear function — D9B; Graph a line from an equation in standard form — 7MZ | Jan 27 |
-| Jan 27 | Wed (43 min) | 10 | 10.07+08 | Interpreting slope and intercept (graphs, equations, tables, descriptions; F↔C) | 8.AR.3.5 | Interpret the slope and y-intercept of a linear function — H5B; Interpret points on the graph of a linear function — 9E8 | Jan 28 |
-| Jan 28 | Thu | 10 | 10.09 | Writing equations of lines | 8.AR.3.3 | Write a linear equation from a graph — WHM; Write a linear function from a table — UYY; Write a linear equation from a slope and a point — VKP; Write a linear equation from two points — 2R9 | Jan 29 |
-| Jan 29 | Fri | 10 | 10.10 | Writing equations for contexts; lines of fit preview | 8.AR.3.3 · 8.AR.3.5 | Write linear functions: word problems — YK6 | Feb 01 |
-| Feb 01 | Mon | 10 | 10.X | **exam** Unit 10 exam |  |  |  |
-| Feb 02 | Tue | 10 | flex | *flex* Flex day — reteach from exam evidence, or absorb a lost day |  |  |  |
-| Feb 03 | Wed (43 min) | 11 | 11.01 | Equations with like terms and the distributive property | 8.AR.2.1 | Solve equations involving like terms — Q2B; Solve equations using the distributive property — QWE; Solve two-step equations: word problems — 8CZ | Feb 04 |
-| Feb 04 | Thu | 11 | 11.02 | Variables on both sides | 8.AR.2.1 | Solve equations with variables on both sides — ZYL | Feb 05 |
-| Feb 05 | Fri | 11 | 11.03 | One, none, infinitely many solutions | 8.AR.2.1 | Find the number of solutions — XDE; Create equations with no solutions or infinitely many solutions — 7TY | Feb 08 |
-| Feb 08 | Mon | 11 | 11.04 | Multi-step equations | 8.AR.2.1 | Solve multi-step equations — 55K; Solve multi-step equations: complete the solution — PGH; Solve equations: mixed review — HZZ | Feb 09 |
-| Feb 09 | Tue | 11 | 11.05+06 | Systems: which points are solutions; how many solutions | 8.AR.4.1 · 8.AR.4.2 | Is (x, y) a solution to the system of equations? — N46; Find the number of solutions to a system of equations by graphing — AGZ; Solve a system of equations in slope-intercept form — 9Z8 | Feb 10 |
-| Feb 10 | Wed (43 min) | 11 | 11.07 | Solving systems by graphing | 8.AR.4.3 | Solve a system of equations by graphing — C8X; Write a system of equations given a graph — TS7 | Feb 11 |
-| Feb 11 | Thu | 11 | 11.08 | Systems in context (approximate solutions) | 8.AR.4.3 | Solve a system of equations by graphing: word problems — W9J | Feb 12 |
-| Feb 12 | Fri | 11 | 11.X | **exam** Unit 11 exam |  |  |  |
-| Feb 16 | Tue | 11 | flex | *flex* Flex day — reteach from exam evidence, or absorb a lost day |  |  |  |
-| Feb 17 | Wed (43 min) | 12 | 12.01+02 | Relations; domain and range | 8.F.1.1 | Relations: convert between mappings, tables, graphs, and ordered pairs — LQJ; Domain and range of relations — T7P | Feb 18 |
-| Feb 18 | Thu | 12 | 12.03 | Is it a function? | 8.F.1.1 | Identify functions — JT2; Identify functions: graphs — AEB; Identify independent and dependent variables — FSF | Feb 19 |
-| Feb 19 | Fri | 12 | 12.04+05 | Describing graphs: increasing, decreasing, constant | 8.F.1.3 | Identify graphs: word problems — HWC | Feb 23 |
-| Feb 22 | Mon | 12 | 12.06 | Sketching graphs from descriptions | 8.F.1.3 | Identify graphs: word problems — HWC | Feb 23 |
-| Feb 23 | Tue | 12 | 12.07 | Functions from equations, tables, graphs | 8.F.1.2 | Complete a function table from an equation — ESE; Complete a table for a function graph — 7EK; Find values using function graphs — 7N2 | Feb 24 |
-| Feb 24 | Wed (43 min) | 12 | 12.08+09 | Is it linear? (graphs, equations, tables) | 8.F.1.2 · 8.AR.3.1 | Identify linear and nonlinear functions: graphs and equations — XB8; Identify linear and nonlinear functions: tables — VGS | Feb 25 |
-| Feb 25 | Thu | 12 | 12.X | **exam** Unit 12 exam |  |  |  |
-| Feb 26 | Fri | 12 | flex | *flex* Flex day — reteach from exam evidence, or absorb a lost day |  |  |  |
-| Mar 01 | Mon | 13 | 13.01+02+03 | Choosing and creating displays (numerical, categorical) | 7.DP.1.5 | Choose the best type of graph — VP6; Create dot plots — 22B; Create stem-and-leaf plots — 8AP; Create histograms — LGG; Box plots — SKN; Create and interpret dot plots with fractions — SHS; Create bar graphs — E76 | Mar 02 |
-| Mar 02 | Tue | 13 | 13.04+05 | Bivariate data; line graphs | 8.DP.1.1 | Create line graphs — ERM; Interpret line graphs — TGQ | Mar 03 |
-| Mar 03 | Wed (43 min) | 13 | 13.06 | Scatter plots and association | 8.DP.1.1 · 8.DP.1.2 | Create scatter plots — AVL; Describe scatter plots — CG8; Describe associations between two variables using scatter plots — 9ER | Mar 04 |
-| Mar 04 | Thu | 13 | 13.07+08 | Lines of fit; outliers | 8.DP.1.3 · 8.DP.1.2 | Outliers in scatter plots — RP8; Identify lines of best fit — BG7; Make predictions with scatter plots — CM7 | Mar 08 |
-| Mar 08 | Mon | 13 | 13.09 | Interpreting the equation of a line of fit | 8.DP.1.3 · 8.AR.3.5 | Interpret lines of best fit: word problems — 9DW; Write equations for lines of best fit — ZQ6 | Mar 09 |
-| Mar 09 | Tue | 13 | 13.X | **exam** Unit 13 exam |  |  |  |
-| Mar 10 | Wed (43 min) | 13 | T-C1 | **thread** Thread C: sample spaces of repeated experiments (17.1) | 8.DP.2.1 | Compound events: find the number of outcomes — P5R; Samples spaces for repeated events — AGW | Mar 11 |
-| Mar 11 | Thu | 13 | T-C2 | **thread** Thread C: theoretical probability of repeated experiments (17.2–17.3) | 8.DP.2.2 | Probability of repeated experiments — BDZ; Probability of simple events — 5ZY; Experimental probability — FRL | Mar 12 |
-| Mar 12 | Fri | 14 | 14.01–04 | Exponent laws with variable bases — consolidation of Thread A | 8.AR.1.1 | Multiply powers: variable bases — TR9; Powers of a power: variable bases — 2CU; Divide monomials with positive exponents — C8L; Variables with negative exponents — 2NL; Multiply and divide powers: variable bases — 85P | Mar 15 |
-| Mar 15 | Mon | 14 | 14.05+06 | Multiplying a monomial by a linear expression | 8.AR.1.2 | Multiply using the distributive property: area models — 8P3; Multiply linear expressions with rational coefficients — 9B9 | Mar 16 |
-| Mar 16 | Tue | 14 | 14.07+08 | Factoring a common monomial | 8.AR.1.3 | Common monomial factors — K8S; Factor out a monomial — BFZ | Mar 17 |
-| Mar 17 | Wed (43 min) | 14 | spiral | *spiral* Spiral day — mixed retrieval from the unit just finished and the two before it |  |  |  |
-| Mar 18 | Thu | 14 | 14.X | **exam** Unit 14 exam |  |  |  |
+| Nov 20 | Fri | 11 | spiral | *spiral* Spiral day — mixed retrieval from the unit just finished and the two before it |  |  |  |
+| Nov 30 | Mon | 11 | 11.01 | Equations with like terms and the distributive property | 8.AR.2.1 | Solve equations involving like terms — Q2B; Solve equations using the distributive property — QWE; Solve two-step equations: word problems — 8CZ | Dec 02 |
+| Dec 01 | Tue | 11 | off | *off* FAST PM2 (ELA) — no class |  |  |  |
+| Dec 02 | Wed (43 min) | 11 | 11.02 | Variables on both sides | 8.AR.2.1 | Solve equations with variables on both sides — ZYL | Dec 03 |
+| Dec 03 | Thu | 11 | 11.03 | One, none, infinitely many solutions | 8.AR.2.1 | Find the number of solutions — XDE; Create equations with no solutions or infinitely many solutions — 7TY | Dec 04 |
+| Dec 04 | Fri | 11 | 11.04 | Multi-step equations | 8.AR.2.1 | Solve multi-step equations — 55K; Solve multi-step equations: complete the solution — PGH; Solve equations: mixed review — HZZ | Dec 07 |
+| Dec 07 | Mon | 11 | 11.05+06 | Systems: which points are solutions; how many solutions | 8.AR.4.1 · 8.AR.4.2 | Is (x, y) a solution to the system of equations? — N46; Find the number of solutions to a system of equations by graphing — AGZ; Solve a system of equations in slope-intercept form — 9Z8 | Dec 09 |
+| Dec 08 | Tue | 11 | off | *off* FAST PM2 — no class |  |  |  |
+| Dec 09 | Wed (43 min) | 11 | 11.07 | Solving systems by graphing | 8.AR.4.3 | Solve a system of equations by graphing — C8X; Write a system of equations given a graph — TS7 | Dec 10 |
+| Dec 10 | Thu | 11 | 11.08 | Systems in context (approximate solutions) | 8.AR.4.3 | Solve a system of equations by graphing: word problems — W9J | Dec 11 |
+| Dec 11 | Fri | 11 | 11.X | **exam** Unit 11 exam |  |  |  |
+| Dec 14 | Mon |  | PM2-R1 | **review** Semester review 1: number system, exponents, scientific notation (whiteboards) | 8.NSO.1.1–1.7 |  |  |
+| Dec 15 | Tue |  | PM2-R2 | **review** Semester review 2: equations, inequalities, Pythagorean, angles (whiteboards) | 8.AR.2 · 8.GR.1 |  |  |
+| Dec 16 | Wed (43 min) |  | PM2-R3 | **review** Semester review 3: proportional → linear preview; mixed FAST-shaped round | 8.AR.3 · 8.AR.1.1 |  |  |
+| Dec 17 | Thu | 7 | extra | *extra* Catch-up day — make-up tests and missing work; nothing new and nothing graded |  |  |  |
+| Dec 18 | Fri | 7 | extra | *extra* Catch-up day — make-up tests and missing work; nothing new and nothing graded |  |  |  |
+| Jan 06 | Wed (43 min) | 7 | 7.01 | Graphing proportional relationships | 7.AR.4.3 | Graph a proportional relationship: word problems — FJW | Jan 07 |
+| Jan 07 | Thu | 7 | 7.02+03 | Constant of proportionality (table, graph, description) | 7.AR.4.2 | Interpret graphs of proportional relationships — RMH; Find the constant of proportionality from a table — LKZ; Find the constant of proportionality from a graph — ZUT | Jan 08 |
+| Jan 08 | Fri | 7 | 7.04 | Is it proportional? | 7.AR.4.1 · 8.AR.3.1 | Identify proportional relationships by graphing — AAN; Identify proportional relationships in tables and graphs — VZK | Jan 11 |
+| Jan 11 | Mon | 7 | 7.05+06 | Equations of proportional relationships; translating representations | 7.AR.4.4 | Write equations for proportional relationships from tables — 6GU; Write equations for proportional relationships from graphs — JKH; Write and solve equations for proportional relationships — VKK | Jan 12 |
+| Jan 12 | Tue | 7 | 7.07 | Comparing proportional relationships | 7.AR.4.5 | Compare proportional relationships represented in different ways — 5A9 | Jan 13 |
+| Jan 13 | Wed (43 min) | 7 | spiral | *spiral* Spiral day — mixed retrieval from the unit just finished and the two before it |  |  |  |
+| Jan 14 | Thu | 7 | 7.X | **exam** Unit 7 exam |  |  |  |
+| Jan 15 | Fri | 10 | 10.01 | Proportional relationships revisited (linear ⇒ proportional?) | 8.AR.3.1 | Find the constant of proportionality from a table — ZCK; Identify proportional relationships by graphing — RXD; Identify proportional relationships — Z64; Write equations for proportional relationships from tables and graphs — VXM; Interpret graphs of proportional relationships — Q96 | Jan 19 |
+| Jan 19 | Tue | 10 | 10.02+03 | Slope from two points, graphs, tables | 8.AR.3.2 | Find the slope from two points — ZAC; Find the slope from a table — GSB; Find the slope from a graph — Q94 | Jan 20 |
+| Jan 20 | Wed (43 min) | 10 | 10.04 | Slope in context | 8.AR.3.2 · 8.AR.3.5 | Rate of change of a linear function: graphs — ZPF; Rate of change of a linear function: tables — 8FE | Jan 21 |
+| Jan 21 | Thu | 10 | 10.05 | Slope-intercept form; graph a line | 8.AR.3.4 | Slope-intercept form: find the slope and y-intercept — U55; Graph a line using slope — FSV; Graph a line from an equation in slope-intercept form — W5E; Write a linear equation from a slope and y-intercept — WHP; Compare linear functions: tables, graphs, and equations — N7D | Jan 22 |
+| Jan 22 | Fri | 10 | 10.06 | Graphing from tables and contexts | 8.AR.3.4 | Complete a table and graph a linear function — DC2; Complete a table and make a graph: word problems — T7R; Complete a table for a linear function — D9B; Graph a line from an equation in standard form — 7MZ | Jan 25 |
+| Jan 25 | Mon | 10 | 10.07+08 | Interpreting slope and intercept (graphs, equations, tables, descriptions; F↔C) | 8.AR.3.5 | Interpret the slope and y-intercept of a linear function — H5B; Interpret points on the graph of a linear function — 9E8 | Jan 26 |
+| Jan 26 | Tue | 10 | 10.09 | Writing equations of lines | 8.AR.3.3 | Write a linear equation from a graph — WHM; Write a linear function from a table — UYY; Write a linear equation from a slope and a point — VKP; Write a linear equation from two points — 2R9 | Jan 27 |
+| Jan 27 | Wed (43 min) | 10 | 10.10 | Writing equations for contexts; lines of fit preview | 8.AR.3.3 · 8.AR.3.5 | Write linear functions: word problems — YK6 | Jan 28 |
+| Jan 28 | Thu | 10 | 10.X | **exam** Unit 10 exam |  |  |  |
+| Jan 29 | Fri | 10 | flex | *flex* Flex day — reteach from exam evidence, or absorb a lost day |  |  |  |
+| Feb 01 | Mon | 12 | 12.01+02 | Relations; domain and range | 8.F.1.1 | Relations: convert between mappings, tables, graphs, and ordered pairs — LQJ; Domain and range of relations — T7P | Feb 02 |
+| Feb 02 | Tue | 12 | 12.03 | Is it a function? | 8.F.1.1 | Identify functions — JT2; Identify functions: graphs — AEB; Identify independent and dependent variables — FSF | Feb 03 |
+| Feb 03 | Wed (43 min) | 12 | 12.04+05 | Describing graphs: increasing, decreasing, constant | 8.F.1.3 | Identify graphs: word problems — HWC | Feb 05 |
+| Feb 04 | Thu | 12 | 12.06 | Sketching graphs from descriptions | 8.F.1.3 | Identify graphs: word problems — HWC | Feb 05 |
+| Feb 05 | Fri | 12 | 12.07 | Functions from equations, tables, graphs | 8.F.1.2 | Complete a function table from an equation — ESE; Complete a table for a function graph — 7EK; Find values using function graphs — 7N2 | Feb 08 |
+| Feb 08 | Mon | 12 | 12.08+09 | Is it linear? (graphs, equations, tables) | 8.F.1.2 · 8.AR.3.1 | Identify linear and nonlinear functions: graphs and equations — XB8; Identify linear and nonlinear functions: tables — VGS | Feb 09 |
+| Feb 09 | Tue | 12 | 12.X | **exam** Unit 12 exam |  |  |  |
+| Feb 10 | Wed (43 min) | 12 | flex | *flex* Flex day — reteach from exam evidence, or absorb a lost day |  |  |  |
+| Feb 11 | Thu | 8 | 8.01+02+03 | Circumference; radius and diameter from it | 7.GR.1.3 | Center, radius, and diameter of a circle — 7RY; Circumference of circles — 9FM; Find the radius or diameter of a circle given the circumference — 2CM | Feb 12 |
+| Feb 12 | Fri | 8 | 8.04+05+06 | Area of a circle; circumference and area problems | 7.GR.1.4 | Area of circles — YA8; Circles: word problems — P56 | Feb 16 |
+| Feb 16 | Tue | 9 | 9.01+02 | Surface area of cylinders from nets | 7.GR.2.1 · 7.GR.2.2 | Nets of three-dimensional figures — 3R2; Surface area of cylinders — CYQ; Lateral area of cylinders — C8K | Feb 17 |
+| Feb 17 | Wed (43 min) | 9 | 9.03+04+05 | Volume of cylinders; problems | 7.GR.2.3 | Volume of cylinders — FHC | Feb 18 |
+| Feb 18 | Thu | 9 | 8/9.X | **exam** Units 8–9 exam |  |  |  |
+| Feb 19 | Fri | 9 | flex | *flex* Flex day — reteach from exam evidence, or absorb a lost day |  |  |  |
+| Feb 22 | Mon | 13 | 13.01+02+03 | Choosing and creating displays (numerical, categorical) | 7.DP.1.5 | Choose the best type of graph — VP6; Create dot plots — 22B; Create stem-and-leaf plots — 8AP; Create histograms — LGG; Box plots — SKN; Create and interpret dot plots with fractions — SHS; Create bar graphs — E76 | Feb 23 |
+| Feb 23 | Tue | 13 | 13.04+05 | Bivariate data; line graphs | 8.DP.1.1 | Create line graphs — ERM; Interpret line graphs — TGQ | Feb 24 |
+| Feb 24 | Wed (43 min) | 13 | 13.06 | Scatter plots and association | 8.DP.1.1 · 8.DP.1.2 | Create scatter plots — AVL; Describe scatter plots — CG8; Describe associations between two variables using scatter plots — 9ER | Feb 25 |
+| Feb 25 | Thu | 13 | 13.07+08 | Lines of fit; outliers | 8.DP.1.3 · 8.DP.1.2 | Outliers in scatter plots — RP8; Identify lines of best fit — BG7; Make predictions with scatter plots — CM7 | Feb 26 |
+| Feb 26 | Fri | 13 | 13.09 | Interpreting the equation of a line of fit | 8.DP.1.3 · 8.AR.3.5 | Interpret lines of best fit: word problems — 9DW; Write equations for lines of best fit — ZQ6 | Mar 01 |
+| Mar 01 | Mon | 13 | 13.X | **exam** Unit 13 exam |  |  |  |
+| Mar 02 | Tue | 13 | T-C1 | **thread** Thread C: sample spaces of repeated experiments (17.1) | 8.DP.2.1 | Compound events: find the number of outcomes — P5R; Samples spaces for repeated events — AGW | Mar 03 |
+| Mar 03 | Wed (43 min) | 13 | T-C2 | **thread** Thread C: theoretical probability of repeated experiments (17.2–17.3) | 8.DP.2.2 | Probability of repeated experiments — BDZ; Probability of simple events — 5ZY; Experimental probability — FRL | Mar 04 |
+| Mar 04 | Thu | 14 | 14.01–04 | Exponent laws with variable bases — consolidation of Thread A | 8.AR.1.1 | Multiply powers: variable bases — TR9; Powers of a power: variable bases — 2CU; Divide monomials with positive exponents — C8L; Variables with negative exponents — 2NL; Multiply and divide powers: variable bases — 85P | Mar 08 |
+| Mar 08 | Mon | 14 | 14.05+06 | Multiplying a monomial by a linear expression | 8.AR.1.2 | Multiply using the distributive property: area models — 8P3; Multiply linear expressions with rational coefficients — 9B9 | Mar 09 |
+| Mar 09 | Tue | 14 | 14.07+08 | Factoring a common monomial | 8.AR.1.3 | Common monomial factors — K8S; Factor out a monomial — BFZ | Mar 10 |
+| Mar 10 | Wed (43 min) | 14 | spiral | *spiral* Spiral day — mixed retrieval from the unit just finished and the two before it |  |  |  |
+| Mar 11 | Thu | 14 | 14.X | **exam** Unit 14 exam |  |  |  |
+| Mar 12 | Fri | 15 | spiral | *spiral* Spiral day — mixed retrieval from the unit just finished and the two before it |  |  |  |
+| Mar 15 | Mon | 15 | spiral | *spiral* Spiral day — mixed retrieval from the unit just finished and the two before it |  |  |  |
+| Mar 16 | Tue | 15 | spiral | *spiral* Spiral day — mixed retrieval from the unit just finished and the two before it |  |  |  |
+| Mar 17 | Wed (43 min) | 15 | spiral | *spiral* Spiral day — mixed retrieval from the unit just finished and the two before it |  |  |  |
+| Mar 18 | Thu | 15 | spiral | *spiral* Spiral day — mixed retrieval from the unit just finished and the two before it |  |  |  |
 | Mar 19 | Fri | 15 | spiral | *spiral* Spiral day — mixed retrieval from the unit just finished and the two before it |  |  |  |
 | Mar 29 | Mon | 15 | 15.01 | Slides, flips, spins | 8.GR.2.1 | Describe how a figure moves — WER; Congruence statements and corresponding parts — LPP | Mar 30 |
 | Mar 30 | Tue | 15 | 15.02+03 | Reflections, rotations, translations — identify and describe | 8.GR.2.1 | Identify reflections and rotations — S8S; Rotate polygons about a point — A5K; Identify translations — HJ9; Translations: graph the image — XUS; Translations: find the coordinates — RUP | Mar 31 |
@@ -160,7 +160,7 @@ The dates above are laid out from the sequence of lessons, the school calendar a
 - Unit 4 exam: Thu Oct 22 → **Mon Oct 26** (+2 school days)
 - Unit 5 exam: Tue Nov 03 → **Thu Nov 05** (+2 school days)
 - Unit 6 exam: Fri Nov 13 → **Tue Nov 17** (+2 school days)
-- Unit 7 exam: Mon Dec 07 → **Thu Dec 10** (+3 school days)
+- Unit 11 exam: Thu Dec 10 → **Fri Dec 11** (+1 school days)
 - covered on a day the log does not name: flex, 4.07+08
-- flex days absorbed: 1 of 6 (after Unit 4); 5 left to absorb later losses
+- flex days absorbed: 2 of 6 (after Unit 4, 11); 4 left to absorb later losses
 - the last day of content and tests: Thu Apr 15 (content must end by Apr 30); PM3 review days before the window: 10
