@@ -3703,3 +3703,24 @@ reference sheet), the practice page on screen and printed, and the teacher copy 
 by its name in the headings, the "only" choices and the results; the printed test's head as the paper's). `check/page.js`
 fails a printed section with a number; two kit tests. Units built before this ruling keep their old headings until they are
 rebuilt.
+
+## 13b(xxvii). Ruling 55 — 25 October: every unit has an interactive practice page [both courses]
+
+**Ruling 55 — Croix, 25 October 2026, 4:52 pm, told that M7 Unit 9 (no review day) has its printed practice test on the
+website but no interactive page: "Yes I still want the interactive practice page on all the units regardless of review day or
+not."**
+
+- **Every unit of both courses has an interactive practice page** (`<course>/practice/uN`, on the kit), with its teacher copy,
+  published with the unit on mrshaffer.org — whether or not the unit has a review day. A unit built under ruling 49 has one
+  already, since its test is a random set of the page. **A unit built before ruling 49, with printed Forms A and B, gets one
+  too:** practice for its printed test, in the practice form's shapes and order (transfer items stay off it, rulings 18 and
+  33), never its forms' numbers (they stay in `test_forms.js`, which only a check loads — the kit's rule of 24 October) and
+  never a number a lesson showed (ruling 43). Its teacher copy prints the unit's own forms.
+- **Every page meets the kit's standard before it is published:** the unit's exhaustive check and its sympy oracle, planted
+  errors all caught, the lock, the variety floor of ruling 49 (100 versions a part, or a reason in `unit.json`), the browser
+  checks — and a review by fresh readers (Croix, 24 October: "I'd like for a fable chat to run over it before it gets
+  pushed"); `hold.json` keeps it off the site until then.
+- **The order** (25 October, by test date): M7 Unit 9 (test Mon–Tue 2–3 November; up before Fri 30 October, when its practice
+  goes home), A7 Unit 5 (Thu 5 November), M7 Unit 5 (21–22 January), then every unit as it is built. **The units already
+  tested are skipped for now** (Croix, 5:00 pm: "Skip past units for now"): M7 Units 2–3 and A7 Units 1–2 get no page
+  unless he asks.
