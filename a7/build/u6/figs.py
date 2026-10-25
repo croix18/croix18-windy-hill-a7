@@ -405,6 +405,61 @@ def grid(xr, yr, points=(), segs=(), legs=None, step=None, fs=22, pt=9.5, inches
     return dict(kind="shapes", fs=fs, pt=pt, **{"in": inches}, shapes=sh)
 
 
+def grid_poly(xr, yr, verts, names=None, coords=False, sides=None, height=None, step=None, fs=22, pt=9.5,
+              inches=3.0, where=None):
+    """A polygon on the coordinate plane — the figure of a perimeter question: its sides solid, its inside lightly
+    shaded, its corners named (`names`, one letter each, with their coordinates when `coords`). `sides` = {i: text}
+    prints a length over the middle of side i (verts[i] to verts[i + 1]), outside the polygon; a number there must be
+    that side's true length. `height` = (top, foot, text, (left, right)) draws the dashed height that splits a
+    triangle with no right angle — its length beside it, a square mark at its foot, and the two pieces of the base
+    named under them (either may be None). `where` = {i: 'ur'|'ul'|'dl'|'dr'} places a corner's name by hand."""
+    vs = [tuple(v) for v in verts]
+    n = len(vs)
+    cen = _centre(vs)
+    where = where or {}
+    pts = []
+    for i, (vx, vy) in enumerate(vs):
+        nm = names[i] if names else ""
+        if i in where:
+            pts.append((vx, vy, nm, where[i]))
+        else:
+            # a corner's name goes outside the polygon: the diagonal nearest the direction away from the middle
+            dx, dy = vx - cen[0], vy - cen[1]
+            pts.append((vx, vy, nm, ("u" if dy >= 0 else "d") + ("r" if dx >= 0 else "l")))
+    segs = [(vs[i], vs[(i + 1) % n], False) for i in range(n)]
+    spec = grid(xr, yr, points=pts if (names or coords) else (), segs=segs, step=step, fs=fs, pt=pt, inches=inches,
+                labels=coords, polys=[vs])
+    sh = spec["shapes"]
+    for i, text in (sides or {}).items():
+        p, q = vs[i], vs[(i + 1) % n]
+        v = _num(text)
+        if v is not None and abs(v - math.hypot(q[0] - p[0], q[1] - p[1])) > 1e-9:
+            raise ValueError(f"grid_poly: side {i} is {math.hypot(q[0] - p[0], q[1] - p[1]):.4f} long, not {text}")
+        sh.append(_side_label(p, q, cen, str(text)))
+    if height:
+        top, foot, text, parts = height
+        sh.append(dict(t="seg", a=top, b=foot, dash=True))
+        up = 1 if top[1] > foot[1] else -1
+        if text:
+            if _num(text) is not None and abs(_num(text) - abs(top[1] - foot[1])) > 1e-9:
+                raise ValueError(f"grid_poly: the height is {abs(top[1] - foot[1])}, not {text}")
+            # the length on the left of the height, the square mark on its right: a short height has no room
+            # for both on one side (6.06 Notes III, a height of 1)
+            sh.append(_t(foot[0], (top[1] + foot[1]) / 2, str(text), ha="right", va="center", off=(-0.4, 0)))
+        sh.append(dict(t="ra", xy=foot, u=(1, 0), v=(0, up), s=0.45))
+        base = [v for v in vs if abs(v[1] - foot[1]) < 1e-9]
+        if parts and len(base) == 2:
+            lo, hi = sorted(b[0] for b in base)
+            for (a, b), text in (((lo, foot[0]), parts[0]), ((foot[0], hi), parts[1])):
+                if text is None:
+                    continue
+                if _num(text) is not None and abs(_num(text) - (b - a)) > 1e-9:
+                    raise ValueError(f"grid_poly: a piece of the base is {b - a}, not {text}")
+                sh.append(_t((a + b) / 2, foot[1], str(text), ha="center", va="top" if up > 0 else "bottom",
+                             off=(0, -0.4 if up > 0 else 0.4)))
+    return spec
+
+
 def _clear_corner(pt, lines, box=None):
     """Which diagonal ('ur', 'ul', 'dl', 'dr') beside a point is farthest, in angle, from every line leaving it —
     never toward an edge of the plane within three units (the axes' numbers live outside those edges, and a label

@@ -205,7 +205,7 @@ IXL: Pythagorean theorem: find the perimeter — VGE (due Mon 16 Nov).
 **Target.** I can find the perimeter of a figure on the coordinate plane, and a straight-line distance on a map.
 
 **Warm-up.** (yesterday, 6.05) a slanted distance · (last week, 6.03) a hypotenuse · (last unit, 5.04) a map scale ·
-(prior grade, MA.6.GR.2.1) the perimeter of a rectangle.
+(prior grade, MA.6.GR.1.3) the perimeter of a rectangle on the coordinate plane.
 
 **Notes.** I — *Perimeter: every side, slanted ones by their triangles*: (1, 1), (4, 1), (4, 5): 3 + 4 + 5 = 12.
 II — *Straight vs along the streets*: (−4, −3) to (2, 5): streets 6 + 8 = 14 blocks, straight 10. III — *Round at the

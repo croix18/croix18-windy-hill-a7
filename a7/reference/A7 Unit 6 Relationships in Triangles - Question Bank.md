@@ -138,3 +138,35 @@ the unit is planned. The printed keys in each lesson's `Keys` folder are generat
 1. 9 units  2. 13 units  3. 10 units  4. 15 units  5. √61 ≈ 7.8 units  6. √73 ≈ 8.5 units  7. √130 ≈ 11.4 units  8. D D  9. B B
 
 ---
+
+## 6.06  Real-World Coordinate-Plane Problems; Perimeter
+
+*MA.8.GR.1.2*
+
+**Variation.**  Boards 1–2: a right triangle's perimeter, whole then to the tenth; 3 has no right angle and is split by its height, not in half; 4 votes on the perimeter errors. The pattern breaks at 5 — a map, and how much shorter the straight line is — then a rectangle's diagonal voted (6), a park map to the tenth (7), a map with an extra point (8); 9 is written. The independent set: a perimeter whole, a perimeter to the tenth, a parallelogram, straight against the streets, a map to the tenth, a rectangle's missing corner and its diagonal.
+
+**Read this once, when you plan the unit.**
+
+- One book lesson (6.6). Built from the benchmark and the B1G-M first, then read against Math Nation (the unit audit): its homework calls a triangle on grid points 'equilateral' (no such triangle exists, D25), keys 4 + 2√13 (combining radicals is Algebra 1) and leaves its tenths unrounded (D29) — none of it is reproduced.
+- Notes III is the one new move: a triangle with no right angle gets two from its height (the book's own 6.6.4 figure does this), and an irrational total is rounded once, at the end — 17.6 against 17.7 is the reason.
+- Every radicand is a whole number up to 225 with no square factor, so a whole slanted side is 5, 10, 13 or 15. The warm-up, the notes and the examples use 3-4-5 and 6-8-10; the practice uses 5-12-13 and 9-12-15, so no board repeats a computation the class was shown (ruling 43).
+
+**What the audit against Math Nation found.**
+
+- Every item re-derived by sympy at build time; every irrational answer checked exactly and to the tenth, every radicand a whole number up to 225 with no square factor (the unit's own check beside the kit's).
+- Math Nation 6.6 read against this lesson (A7 Unit 6 Audit): its 'equilateral' TED (D25), its √31 for √37 (D27), its false equalities (D28), its unrounded tenths and 'm/hr' (D29) and its 'square mile' grid unit (D30) are not reproduced; its unkeyed homework Q4 is keyed in the audit (√173 ≈ 13.2 mi, D26).
+
+**What changed from the book.**
+
+- 6.6.1 (an exact slanted length) → the warm-up's Q1 and Notes I: a slanted side by its triangle.
+- 6.6.2 (two ways to pass a ball) → Notes II and Example 2: the straight line against the path along the grid; the speeds and times are left out.
+- 6.6.4 (a perimeter at radicand 400; a walkway at 7,400) → Notes I–III and boards 1–4, radicands within 225; its triangle with no right angle, split by its height, is Notes III and board 3.
+- 6.6.3 (a partner guessing game) and 6.6.5 (Ellena's error) → the whiteboard round; board 9 is a written error of its own. 6.06 Additional Practice and Homework → the independent set and IXL.
+
+**Question Bank answers.**  
+1. 36 units  2. 30 units  3. 22.2 units  4. 36 units  5. 6 blocks  6. √73 ≈ 8.5 m  7. 13 units  8. B B  9. C C
+
+**Question Bank – Additional answers.**  
+1. 30 units  2. 36 units  3. 19.5 units  4. 48 units  5. 4 blocks  6. √89 ≈ 9.4 m  7. 15 units  8. C C  9. A A
+
+---

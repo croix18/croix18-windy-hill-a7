@@ -38,6 +38,7 @@ Nothing exists until it is committed. This folder is generated from `a7/build/u6
 | 6.03 | Mon 9 Nov | Pythagorean Theorem | MA.8.GR.1.1 | a² + b² = c², and c is across from the right angle. A leg: subtract. |
 | 6.04 | Tue 10 Nov | Pythagorean Theorem in Real-World Problems | MA.8.GR.1.1 | Find the right angle first; the side across from it is c. |
 | 6.05 | Thu 12 Nov | Distance on the Coordinate Plane | MA.8.GR.1.2 | A slanted distance is a hypotenuse, and the legs come from the coordinates. |
+| 6.06 | Fri 13 Nov | Real-World Coordinate-Plane Problems; Perimeter | MA.8.GR.1.2 | A perimeter adds every side; a slanted side is found by its own triangle. |
 | — | — | Unit Review | all six | unscored, sent home as practice (ruling 27a); the SSDD block is named on the key only |
 | — | Tue 17 Nov | Unit Assessment — one period, one paper | all four benchmarks, sections by benchmark in the order GR.1.3 · GR.1.1 · GR.1.2 · GR.2.4; the practice test alone (ruling 49), 14 questions, one period (ruling 51) | 18 points |
 
@@ -59,6 +60,7 @@ Title and learning target (1 min) → warm-up, four spaced-retrieval questions (
 | 6.03 | 38 min | 10 min | 5 min | 53 min |
 | 6.04 | 38 min | 10 min | 5 min | 53 min |
 | 6.05 | 37 min | 11 min | 5 min | 53 min |
+| 6.06 | 37 min | 11 min | 5 min | 53 min |
 
 The whiteboard round is the remainder — 10–11 minutes across the unit — and the build refuses any plan whose remainder falls outside 10–20. Every plan totals 53 exactly. There is no shortened variant; short days are absorbed by the person in the room.
 
@@ -86,4 +88,4 @@ The whiteboard round is the remainder — 10–11 minutes across the unit — an
 - **Every square root has a whole radicand up to 225** (GR.1.1 and GR.1.2, Clarification 3), and none has a square factor, so √n is already in simplest form; an irrational answer is also given to the nearest tenth wherever the question asks for a measurement. Math Nation's own test breaks the 225 bound on four of its five Pythagorean items.
 - **No distance formula** (GR.1.2, Clarification 2): a slanted distance is always the right triangle drawn on the grid, its legs read from the coordinates.
 
-Installed: 72 files from the build, plus this page and the Reference folder.
+Installed: 90 files from the build, plus this page and the Reference folder.

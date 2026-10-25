@@ -1,0 +1,285 @@
+{
+ "deck": "A7 6.06 Real-World Coordinate-Plane Problems; Perimeter - Slides.pptx",
+ "slides": [
+  {
+   "n": 1,
+   "title": "Real-World Coordinate-Plane Problems; Perimeter",
+   "sub": "",
+   "min": 1,
+   "note": "Post the learning target. Say one line and nothing else yet: \u201cToday: every side of a figure on the grid, and the two ways across a map.\u201d",
+   "kind": "title"
+  },
+  {
+   "n": 2,
+   "title": "Warm-Up",
+   "sub": "On your own. Four minutes. No notes.",
+   "min": 4,
+   "note": "Q4 is today's idea with only straight sides: a perimeter adds every side \u2014 7, 3, 7 and 3, across zero for both. Today some sides are slanted. Two minutes silent, then reveal.",
+   "kind": "warmup"
+  },
+  {
+   "n": 3,
+   "title": "Warm-Up",
+   "sub": "Answers.",
+   "min": 1,
+   "note": "Reveal. Ask for the band each question came from only if time allows.",
+   "kind": "warmup"
+  },
+  {
+   "n": 4,
+   "title": "Vocabulary",
+   "sub": "The new words, before they are used.",
+   "min": 1,
+   "note": "Read each word and its meaning once; the notes use them next. Students copy the words, not the definitions.",
+   "kind": "vocab"
+  },
+  {
+   "n": 5,
+   "title": "Notes",
+   "sub": "Copy the rule and the example.",
+   "min": 4,
+   "note": "(3, 2), (6, 2) and (6, 6): two sides lie on grid lines, 3 across and 4 up; the third is slanted, and the other two are its legs: 9 + 16 = 25, 5. The perimeter adds all three: 12 units. Counting the squares a slanted side crosses does not measure it (board 9).\nOFF: 'Every side counts. A slanted side gets its triangle.'",
+   "kind": "notes"
+  },
+  {
+   "n": 6,
+   "title": "Notes",
+   "sub": "",
+   "min": 3,
+   "note": "On a map whose streets are the grid lines, the walk from A to B goes 6 blocks across and 8 up \u2014 14 blocks \u2014 and the straight line (a bird, a zip line, a tunnel) is the hypotenuse, 10. The straight path is 4 blocks shorter; it is shorter whenever the points share neither an x nor a y.\nOFF: 'The streets add the legs. The straight line is the hypotenuse.'",
+   "kind": "notes"
+  },
+  {
+   "n": 7,
+   "title": "Notes",
+   "sub": "",
+   "min": 4,
+   "note": "This triangle has no square corner, but its height \u2014 from the top corner straight down to the base \u2014 makes two, each with legs 3 and 5: each slanted side is \u221a34. Keep the root (or the calculator's whole value) to the last step: 6 + 5.831 + 5.831 = 17.662, so 17.7. Rounding each side first gives 6 + 5.8 + 5.8 = 17.6 \u2014 a different answer. (radicand within GR.1.2's whole numbers up to 225 (Clarification 3), square-free; not one of NSO.1.7's perfect squares, so not_bound.)\nOFF: 'No square corner? Make two. Round once, at the end.'",
+   "kind": "notes"
+  },
+  {
+   "n": 8,
+   "title": "Example 1",
+   "sub": "A perimeter on the grid.",
+   "min": 1,
+   "note": "Ask which sides lie on grid lines before anyone measures: DE and EF. DF is slanted \u2014 it gets its own triangle, and DE and EF are its legs.",
+   "kind": "example"
+  },
+  {
+   "n": 9,
+   "title": "Example 1",
+   "sub": "Worked.",
+   "min": 2,
+   "note": "DE: 3 \u2212 (\u22123) = 6; EF: 6 \u2212 (\u22122) = 8; DF: 36 + 64 = 100, 10. P = 24 units. A board with 14 left DF out; one with 28 took DF as 6 + 8.",
+   "kind": "example"
+  },
+  {
+   "n": 10,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "Across 4 \u2212 (\u22125) = 9, up 5 \u2212 (\u22127) = 12; the slanted side 81 + 144 = 225, 15. P = 36. A board with 21 left the slanted side out.",
+   "kind": "yourturn"
+  },
+  {
+   "n": 11,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 12,
+   "title": "Example 2",
+   "sub": "A map: the streets and the straight line.",
+   "min": 1,
+   "note": "Ask what 'along the streets' means on this map: on the grid lines \u2014 across, then up. The straight line is the slanted segment.",
+   "kind": "example"
+  },
+  {
+   "n": 13,
+   "title": "Example 2",
+   "sub": "Worked.",
+   "min": 3,
+   "note": "Across 4 \u2212 (\u22123) = 7, up 3 \u2212 (\u22122) = 5. The streets add them: 12 blocks. The straight line: 49 + 25 = 74, \u221a74 = 8.60, so 8.6 blocks \u2014 3.4 blocks shorter. A board with 12 for both answered the streets twice. (radicand within GR.1.2's whole numbers up to 225 (Clarification 3), square-free; not one of NSO.1.7's perfect squares, so not_bound.)",
+   "kind": "example"
+  },
+  {
+   "n": 14,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "Across \u22122 \u2212 (\u22125) = 3, down 4 \u2212 (\u22124) = 8. Streets 11 blocks; straight 9 + 64 = 73, \u221a73 = 8.54, so 8.5. A board with 11 for the straight line added the legs.",
+   "kind": "yourturn"
+  },
+  {
+   "n": 15,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 16,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "AB = 12 across zero, BC = 5, AC: 144 + 25 = 169, 13. P = 30. A board with 17 left AC out; one with 34 took AC as 12 + 5.",
+   "kind": "wb"
+  },
+  {
+   "n": 17,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 18,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "4 and 9 on grid lines; the slanted side \u221a97 = 9.849. P = 22.849, so 22.8 \u2014 one rounding, at the end. (radicand within GR.1.2's whole numbers up to 225 (Clarification 3), square-free; not one of NSO.1.7's perfect squares, so not_bound.)",
+   "kind": "wb"
+  },
+  {
+   "n": 19,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 20,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The height from C lands at (1, \u22126) and splits the base 5 and 9 \u2014 not in half. AC: 25 + 144 = 169, 13; BC: 81 + 144 = 225, 15. P = 14 + 13 + 15 = 42. A board with 40 took both slanted sides as 13.",
+   "kind": "wb"
+  },
+  {
+   "n": 21,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 22,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic. Option A left the slanted side out, option B added the legs for it, option C forgot the square root. Split (no option near two-thirds)? Sixty seconds, convince your neighbour, re-vote. (\u221a65: radicand within GR.1.2's whole numbers up to 225 (Clarification 3), square-free; not one of NSO.1.7's perfect squares, so not_bound.)",
+   "kind": "wb"
+  },
+  {
+   "n": 23,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 24,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Across 12, up 5: the streets are 17 blocks, the straight line 13 \u2014 4 blocks shorter. A board with 13 or 17 answered one path; the question asks the difference.",
+   "kind": "wb"
+  },
+  {
+   "n": 25,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 26,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic. Option B added two sides, option C gave the perimeter, option D read one corner's coordinates as the legs (and 6-8-10 is a triple, so it looks right). Split? Sixty seconds, convince your neighbour, re-vote.",
+   "kind": "wb"
+  },
+  {
+   "n": 27,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 28,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Across 9, down 5 \u2014 both across zero. 81 + 25 = 106, \u221a106 = 10.30, so 10.3 m. (radicand within GR.1.2's whole numbers up to 225 (Clarification 3), square-free; not one of NSO.1.7's perfect squares, so not_bound.)",
+   "kind": "wb"
+  },
+  {
+   "n": 29,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 30,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The extra-number board (ruling 22): the trailhead is bait. Camp to lake: across 5, up 12, 169, 13 miles.",
+   "kind": "wb"
+  },
+  {
+   "n": 31,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 32,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Take your time. Boards up when you have written it.",
+   "min": 0,
+   "note": "Written, and the exit evidence: the error named and the length found. (radicand within GR.1.2's whole numbers up to 225 (Clarification 3), square-free; not one of NSO.1.7's perfect squares, so not_bound.)",
+   "kind": "wb"
+  },
+  {
+   "n": 33,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 34,
+   "title": "Independent Set",
+   "sub": "Six questions. On your own, in writing.",
+   "min": 6,
+   "note": "Hand out the Independent Set; the same six questions are on the board. Silent work. Circulate and mark what you see; do not teach. Whatever is not finished goes home.",
+   "kind": "independent"
+  },
+  {
+   "n": 35,
+   "title": "IXL",
+   "sub": "Last five minutes.",
+   "min": 5,
+   "note": "IXL: every listed skill is required, SmartScore 67. Due at the start of the next class.",
+   "kind": "ixl"
+  }
+ ]
+}
