@@ -256,12 +256,14 @@ function legsPic(x, what) {
   B.lab(Cn, P2, String(dy), dy, mid, { tol: 1e-9, both: true, ts: offAxis(Cn[1], P2[1]) });
   });
   const n = dx * dx + dy * dy, r = E.isSquare(n) ? String(E.isqrt(n)) : (E.rootOK(n) ? '√' + n : 'the square root of ' + n) + ' ≈ ' + E.numStr(E.sqrtTenth(n));
-  return pic(B, 'The legs of the right triangle are the distance across, ' + dx + ', and the distance ' + (x.y2 > x.y1 ? 'up' : 'down') + ', ' + dy + '. ' + (what || 'The distance') + ' is its hypotenuse: ' + dx + '² + ' + dy + '² = ' + n + ', so it is ' + r + '.', 'The right triangle under the segment, legs ' + dx + ' and ' + dy);
+  /* the caption stops at what the picture shows: the Hint draws it after a wrong first step, and the steps after it are the
+     student's (the second review: it ended "… so it is the square root of 20 ≈ 4.5", the question's own answer) */
+  return pic(B, 'The legs of the right triangle are the distance across, ' + dx + ', and the distance ' + (x.y2 > x.y1 ? 'up' : 'down') + ', ' + dy + '. ' + (what || 'The distance') + ' is its hypotenuse: square the legs, add, and take the square root.', 'The right triangle under the segment, legs ' + dx + ' and ' + dy);
 }
 const WHY = {
   gridWhole: x => legsPic(x.prm), coordTenth: x => legsPic(x.prm), straight: x => legsPic(x.prm, 'The straight line'),
   streets: x => { const w = legsPic(x.prm, 'The straight line'), dx = Math.abs(x.prm.x2 - x.prm.x1), dy = Math.abs(x.prm.y2 - x.prm.y1);
-    const cap = 'Along the streets you walk the two dashed legs: ' + dx + ' across and ' + dy + ' ' + (x.prm.y2 > x.prm.y1 ? 'up' : 'down') + ', ' + (dx + dy) + ' blocks. The straight line, the hypotenuse, is shorter.';
+    const cap = 'Along the streets you walk the two dashed legs: ' + dx + ' across and then ' + dy + ' ' + (x.prm.y2 > x.prm.y1 ? 'up' : 'down') + '. The straight line, the hypotenuse, is shorter.';
     w.html = w.html.replace(w.cap, cap); w.cap = cap; return w; }
 };
 function why(x) { try { const f = WHY[x.fam]; return f ? f(x) : null; } catch (e) { return null; } }

@@ -264,7 +264,9 @@ def ladder(wall, foot, l_ladder=None, l_wall=None, l_foot=None, unit="ft", fs=22
     wall. `wall` is how high the ladder's top is, `foot` how far its foot is from the wall; the ladder's own length
     follows from them and a numeric l_ladder must agree. The height's label goes beside the wall inside the triangle,
     or — for a steep ladder, where there is no room between the wall and the ladder (`height_out`, the default when
-    the ladder is steeper than 2 to 1) — on the wall's outer face."""
+    the ladder is steeper than 2 to 1) — on the wall's outer face. A letter or "?" on a steep ladder still goes inside,
+    low down where the triangle is widest, beside the leg it names: on the wall's outer face it read as the whole
+    wall's height (second review of Unit 6, 25 October)."""
     if height_out is None:
         height_out = wall > 2 * foot
     c = math.hypot(wall, foot)
@@ -283,7 +285,9 @@ def ladder(wall, foot, l_ladder=None, l_wall=None, l_foot=None, unit="ft", fs=22
     for (p, q, lab) in (((0, 0), (0, wall), l_wall), ((0, 0), (foot, 0), l_foot), ((foot, 0), (0, wall), l_ladder)):
         L = _lab(lab, unit)
         if L:
-            if p == (0, 0) and q == (0, wall) and height_out:   # outside the wall's face, clear of the ladder
+            if p == (0, 0) and q == (0, wall) and height_out and len(L) <= 1:   # a letter: inside, low, beside the leg
+                sh.append(_t(0, wall * 0.24, L, ha="left", va="center", off=(0.25, 0)))
+            elif p == (0, 0) and q == (0, wall) and height_out:   # outside the wall's face, clear of the ladder
                 sh.append(_t(-W, wall * 0.5, L, ha="right", va="center", off=(-0.35, 0)))
             elif p == (0, 0) and q == (0, wall):          # the height goes inside, beside the wall, clear of the ladder
                 sh.append(_t(0, wall * 0.42, L, ha="left", va="center", off=(0.45, 0)))
@@ -416,13 +420,16 @@ def grid(xr, yr, points=(), segs=(), legs=None, step=None, fs=22, pt=9.5, inches
 
 
 def grid_poly(xr, yr, verts, names=None, coords=False, sides=None, height=None, step=None, fs=22, pt=9.5,
-              inches=3.0, where=None):
+              inches=3.0, where=None, height_at=None):
     """A polygon on the coordinate plane — the figure of a perimeter question: its sides solid, its inside lightly
     shaded, its corners named (`names`, one letter each, with their coordinates when `coords`). `sides` = {i: text}
     prints a length over the middle of side i (verts[i] to verts[i + 1]), outside the polygon; a number there must be
     that side's true length. `height` = (top, foot, text, (left, right)) draws the dashed height that splits a
     triangle with no right angle — its length beside it, a square mark at its foot, and the two pieces of the base
-    named under them (either may be None). `where` = {i: 'ur'|'ul'|'dl'|'dr'} places a corner's name by hand."""
+    named under them (either may be None). `where` = {i: 'ur'|'ul'|'dl'|'dr'} places a corner's name by hand.
+    `height_at` = (y, 'left'|'right'[, 'in']) sets the height's length by hand where the middle of the height is on
+    an axis or the triangle is narrow, and 'in' sets the base's two pieces just inside the triangle, clear of the axis
+    numbers under a base on the grid's edge (6.06 board 3's reveal: a height from y = −6 to 6)."""
     vs = [tuple(v) for v in verts]
     n = len(vs)
     cen = _centre(vs)
@@ -455,7 +462,12 @@ def grid_poly(xr, yr, verts, names=None, coords=False, sides=None, height=None, 
                 raise ValueError(f"grid_poly: the height is {abs(top[1] - foot[1])}, not {text}")
             # the length on the left of the height, the square mark on its right: a short height has no room
             # for both on one side (6.06 Notes III, a height of 1)
-            sh.append(_t(foot[0], (top[1] + foot[1]) / 2, str(text), ha="right", va="center", off=(-0.4, 0)))
+            if height_at:
+                hy, hside = height_at[0], height_at[1]
+                sh.append(_t(foot[0], hy, str(text), ha="left" if hside == "right" else "right", va="center",
+                             off=(0.4 if hside == "right" else -0.4, 0)))
+            else:
+                sh.append(_t(foot[0], (top[1] + foot[1]) / 2, str(text), ha="right", va="center", off=(-0.4, 0)))
         sh.append(dict(t="ra", xy=foot, u=(1, 0), v=(0, up), s=0.45))
         base = [v for v in vs if abs(v[1] - foot[1]) < 1e-9]
         if parts and len(base) == 2:
@@ -465,8 +477,10 @@ def grid_poly(xr, yr, verts, names=None, coords=False, sides=None, height=None, 
                     continue
                 if _num(text) is not None and abs(_num(text) - (b - a)) > 1e-9:
                     raise ValueError(f"grid_poly: a piece of the base is {b - a}, not {text}")
-                sh.append(_t((a + b) / 2, foot[1], str(text), ha="center", va="top" if up > 0 else "bottom",
-                             off=(0, -0.4 if up > 0 else 0.4)))
+                inside = bool(height_at and len(height_at) > 2 and height_at[2] == "in")
+                sh.append(_t((a + b) / 2, foot[1], str(text), ha="center",
+                             va=("bottom" if up > 0 else "top") if inside else ("top" if up > 0 else "bottom"),
+                             off=(0, (0.4 if up > 0 else -0.4) * (1 if inside else -1))))
     return spec
 
 
@@ -616,10 +630,11 @@ def nested(b1, h1, b2, l=(None, None, None, None), unit="m", fs=22, pt=9.5, inch
 
 
 def mirror(h1, d1, h2, d2, l=(None, None, None, None), unit="ft", what=("person", "tree"), fs=22, pt=9.5,
-           inches=4.2):
+           inches=4.2, mirror_label="mirror"):
     """The mirror on the ground: a person whose eyes are h1 above the ground stands d1 from a mirror and sees the top
     of something h2 tall standing d2 beyond it. The light (dashed) comes down to the mirror and up to the eyes at
-    equal angles, so the two right triangles are similar — refused unless h1/d1 = h2/d2. l = (h1, d1, d2, h2)."""
+    equal angles, so the two right triangles are similar — refused unless h1/d1 = h2/d2. l = (h1, d1, d2, h2).
+    `mirror_label` is the word under the mirror: "6-in mirror" puts a board's extra number on the picture (ruling 44)."""
     if abs(h1 * d2 - h2 * d1) > 1e-9:
         raise ValueError(f"mirror: {h1}/{d1} and {h2}/{d2} are not equal angles at the mirror")
     for lab, true in ((l[0], h1), (l[1], d1), (l[2], d2), (l[3], h2)):
@@ -643,7 +658,7 @@ def mirror(h1, d1, h2, d2, l=(None, None, None, None), unit="ft", what=("person"
         sh.append(_t(d1 + d2 / 2, 0, labs[2], ha="center", va="top", off=(0, -0.35)))
     if labs[3]:
         sh.append(_t(X2, h2 / 2, labs[3], ha="left", va="center", off=(0.4, 0)))
-    sh.append(_t(d1, 0, "mirror", ha="center", va="top", off=(0, -1.5)))
+    sh.append(_t(d1, 0, mirror_label, ha="center", va="top", off=(0, -1.5)))
     if what:
         sh.append(_t(0, h1, what[0], ha="center", va="bottom", off=(0, 0.3)))
         sh.append(_t(X2, h2, what[1], ha="center", va="bottom", off=(0, 0.3)))
@@ -665,13 +680,15 @@ def _arc_label(deg0, deg1, r, text, centre=(0.0, 0.0), push=0.55):
     return _t(x, y, text, ha=ha, va=va, off=(push * c, push * s))
 
 
-def crossing(a_deg, labels, R=3.0, fs=22, pt=9.5, inches=2.6, names=None, far=()):
+def crossing(a_deg, labels, R=3.0, fs=22, pt=9.5, inches=2.6, names=None, far=(), far_at=(0.74, 0.5)):
     """Two lines crossing at the origin: one along 0°–180°, the other at `a_deg` (0 < a < 180). The four angles,
     counterclockwise from the right: a, 180 − a, a, 180 − a. `labels` names what each prints (a measure, a letter,
     an expression, or None); a numeric label must be that angle's measure. An arc marks only an angle that prints
     something; `names` puts a letter (1, 2, 3, 4 or A, B …) inside the angle instead of a measure. `far` lists the
     angles whose label is long (an expression): it stands well inside its angle, where the angle is wide enough for it,
-    instead of beside the arc."""
+    instead of beside the arc — `far_at` = (how far out, as a part of R; how far round the angle, 0.5 its bisector).
+    In a steep angle a long label on the bisector meets the steep line: 6.T1 board 6's "(6x − 20)°" at 52° did (the
+    second review, 25 October), and sits lower, (0.78, 0.38)."""
     meas = [a_deg, 180 - a_deg, a_deg, 180 - a_deg]
     starts = [0, a_deg, 180, 180 + a_deg]
     for lab, m in zip(labels, meas):
@@ -684,8 +701,8 @@ def crossing(a_deg, labels, R=3.0, fs=22, pt=9.5, inches=2.6, names=None, far=()
             rr = r * (1.0 if i % 2 == 0 else 1.25)
             sh.append(dict(t="circle", c=(0, 0), r=rr, a=(starts[i], starts[i] + meas[i]), fill="none"))
             if i in far:
-                mid = math.radians(starts[i] + meas[i] / 2)
-                sh.append(_t(R * 0.74 * math.cos(mid), R * 0.74 * math.sin(mid), lab, ha="center", va="center"))
+                mid = math.radians(starts[i] + meas[i] * far_at[1])
+                sh.append(_t(R * far_at[0] * math.cos(mid), R * far_at[0] * math.sin(mid), lab, ha="center", va="center"))
             else:
                 sh.append(_arc_label(starts[i], starts[i] + meas[i], rr * 1.15, lab))
     if names:

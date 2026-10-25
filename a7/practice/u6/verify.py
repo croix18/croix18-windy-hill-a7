@@ -162,6 +162,23 @@ def expect(where, it, p):
         c = whole_root(a * a + b * b, where, "the hypotenuse")
         if c.is_integer: no(where, "a tenth question with a whole answer")
         return c, u, True
+    if fam == "legTenth":
+        stories = [(r"An? (\d+)-foot ladder leans against a wall\. Its foot is (\d+) feet from the wall\. How high up the wall does the ladder reach, in feet\? ", "ft", "ladder"),
+                   (r"A ramp is (\d+) feet long\. It runs (\d+) feet along the ground\. How high does the ramp rise, in feet\? ", "ft", "ramp"),
+                   (r"A kite flies on (\d+) meters of tight string\. It is straight above a spot (\d+) meters across from the hand that holds the string, level with the hand\. How high above the hand is the kite, in meters\? ", "m", "kite")]
+        for pat, u, ctx in stories:
+            m = re.fullmatch(pat + re.escape(ROUND), st)
+            if m: break
+        else: raise ValueError("legTenth: " + st)
+        c, a = int(m.group(1)), int(m.group(2))
+        if ctx == "ladder" and st.startswith("An ") != bool(re.match(r"An? (8|11|18)\b", st)): no(where, "a ladder's article: " + st[:20])
+        if not a < c: no(where, f"the leg along the ground, {a}, is not shorter than the {ctx}, {c}")
+        b = whole_root(c * c - a * a, where, "the leg")
+        if b.is_integer: no(where, "a tenth question with a whole answer")
+        if ctx == "ramp" and not b < R(a, 2): no(where, f"a ramp {c} long rising {float(b):.1f} over {a}")
+        if ctx == "ladder" and not b > 2 * a: no(where, f"a ladder {c} long with its foot {a} out")
+        if ctx == "kite" and not b >= R(c, 3): no(where, f"a kite on {c} of string only {float(b):.1f} up")
+        return b, u, True
     if fam in ("diag", "shorter"):
         m = re.fullmatch(r"A rectangular (lawn|garden|playground|courtyard|patio) measures (\d+) (\w+) by (\d+) \3\. A path runs straight across it from one corner to the opposite corner\.", st)
         if not m: raise ValueError("place: " + st)
@@ -266,15 +283,16 @@ def expect(where, it, p):
             if xn != x: no(where, f"by the names x is {xn}, by size {x}")
         return x, None, False
     if fam == "shadow":
-        m = re.fullmatch(r"A ([a-z ]+) (" + NUM + r") ft tall casts a shadow (" + NUM + r") ft long\. At the same moment, a ([a-z ]+) casts a shadow (" + NUM + r") ft long\. How tall is the \4\?", st)
+        m = re.fullmatch(r"A ([a-z ]+) (" + NUM + r") feet tall casts a shadow (" + NUM + r") feet long\. At the same moment, a ([a-z ]+) casts a shadow (" + NUM + r") feet long\. How tall is the \4\?", st)
         if not m: raise ValueError("shadow: " + st)
         h1, s1, s2 = q(m.group(2)), q(m.group(3)), q(m.group(5))
         if [l["s"] for l in it["figLabels"]][:3] != [m.group(2) + " ft", m.group(3) + " ft", m.group(5) + " ft"]: no(where, "the figure's lengths are not the words'")
         if m.group(1) in ("man", "woman") and h1 < 5: no(where, f"a {m.group(1)} {h1} ft tall")
         return h1 * s2 / s1, "ft", False
     if fam == "mirror":
-        m = re.fullmatch(r"([A-Z][a-z]+)’s eyes are (" + NUM + r") ft above the ground\. Standing (" + NUM + r") ft from a mirror on the ground, \1 sees in it the top of a ([a-z ]+) that stands (" + NUM + r") ft beyond the mirror\. The two right triangles are similar\. How tall is the \4\?", st)
+        m = re.fullmatch(r"([A-Z][a-z]+)’s eyes are (" + NUM + r") feet above the ground\. Standing (" + NUM + r") feet from a mirror on the ground, \1 sees in it the top of a ([a-z ]+) that stands (" + NUM + r") feet beyond the mirror\. The two right triangles are similar\. How tall is the \4\?", st)
         if not m: raise ValueError("mirror: " + st)
+        if q(m.group(2)) > R(11, 2): no(where, f"a student's eyes {m.group(2)} feet above the ground")
         h1, d1, d2 = q(m.group(2)), q(m.group(3)), q(m.group(5))
         if [l["s"] for l in it["figLabels"]][:3] != [m.group(2) + " ft", m.group(3) + " ft", m.group(5) + " ft"]: no(where, "the figure's lengths are not the words'")
         return h1 * d2 / d1, "ft", False
@@ -330,6 +348,16 @@ def hint_value(where, it, p, ask):
         return r
     m = re.fullmatch(r"What is (?:√\((\d+)\)|the square root of (\d+)), to the nearest tenth\?", a)
     if m: return tenth(whole_root(int(m.group(1) or m.group(2)), where, "a Hint step"))
+    m = re.fullmatch(r"What is (.+), to the nearest tenth\?", a)
+    if m: return tenth(value(m.group(1)))
+    def three(n): return R(int(floor(1000 * sqrt(n) + R(1, 2))), 1000)
+    m = re.fullmatch(r"How long is the slanted side ([A-Z])([A-Z])\? Keep three decimal places\.", a)
+    if m:
+        P, _ = corners(st); A, B = P[m.group(1)], P[m.group(2)]
+        return three((A[0] - B[0]) ** 2 + (A[1] - B[1]) ** 2)
+    if a == "How long is the path straight across? Keep three decimal places.":
+        fm3 = re.fullmatch(r"A rectangular [a-z ]+ measures (\d+) \w+ by (\d+) \w+\..*", st)
+        return three(int(fm3.group(1)) ** 2 + int(fm3.group(2)) ** 2)
     m = re.fullmatch(r"How far (across|up|down) is it, from ([xy]) = (" + NUM + r") to \2 = (" + NUM + r")\?", a)
     if m:
         u, v = q(m.group(3)), q(m.group(4))

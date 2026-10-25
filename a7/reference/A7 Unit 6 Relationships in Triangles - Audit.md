@@ -363,6 +363,128 @@ lock rewritten (unpublished, content version 1), every part over the variety flo
   caught — 33 of 33. The page's content version is 2 (171 of the first 300 sets changed; it was not yet published). The
   book's own homework puts the names out of order (D43); nothing here reproduces it.
 
+### The second review — 25 October
+
+Croix, 11:14 am, of this unit and Thread B, which had just gone on the website: *"Take them down until a review chat goes
+over them. Then put them back up."* The site's `hold.json` kept them off until this review published them. Three readers
+again, each alone, none shown this audit or the first review, on the unit as rebuilt that morning: an explicit-instruction
+reviewer, an adversarial critic (3,500 page sets through its own evaluator, 20,000 for counts, all 280 slides looked at,
+374 lesson items re-derived) and a FAST item-writing reviewer. Croix had asked that a Fable chat do this; the three Fable
+readers were refused for rate (HTTP 429), and the same three readers, with the same brief, ran on Claude Opus 5.5.
+Between them: no blocker and no wrong key anywhere; 9 major findings and about 50 minor. Fixed unless marked otherwise;
+every new number was re-derived, and the readers' scripts and reports are kept with the review's scratch files.
+
+**The test — the practice page, its printed forms and the unit papers.**
+
+1. **Ruling 43 on the test** (critic, in every set). Under the 225 bound only four right triangles have a whole
+   hypotenuse — 3-4-5, 6-8-10, 5-12-13, 9-12-15 — and the lessons' warm-ups, notes and examples had shown all four, so
+   question 4(a) was always a slide's answer; 4(b), 5 and 7 repeated a shown pair in 8–17% of sets. The lessons now show
+   3-4-5 and 6-8-10 only: 6.01's warm-up is √100 and 6² + 8²; 6.01 Notes III's converse example is 24, 40, 32 (3-4-5 times
+   eight, the longest in the middle — the critic's 8, 15, 17 is 6.01's own board 6); 6.04 Notes II's garden is 6 m by 8 m
+   (still 4 m shorter); 6.07's warm-up ladder is 10 ft with its foot 6 ft out. The page draws 4(a) from 5-12-13 and 9-12-15;
+   4(b), 5 and 7 use no leg pair and no hypotenuse-and-leg pair a warm-up, notes slide, example or Your Turn worked; and no
+   right set in question 2 is a triangle a lesson showed whole. `u6_check.js` fails a set that breaks any of it. 9-12-15 is
+   6.06's Your Turn 1 and 6.07 Notes I's similar pair: kept, or 4(a) would have one triangle. The Review's Q5 (5-12-13,
+   once Notes II's) repeats nothing shown; the Practice Test's Q4(a) is 9-12-15, the exception.
+2. **No leg in a story** (FAST): the test asked a ladder, a ramp or a kite in no set, and a leg to the tenth never. Half of
+   question 5 is now a ladder's height up a wall, a ramp's rise or a kite's height above the hand, to the tenth, with the
+   hypotenuse given; 6.04's independent question 6 asks the kite in the test's words.
+3. **The order of the numbers gave the key away** (FAST): in question 1 only the key had its longest side in the middle
+   (40% of sets); in question 2 the wrong sets were always printed smallest to largest ("select every set not in increasing
+   order" scored in 17.6%). Every set is now printed in its own order, the "first two listed" trap kept.
+4. **A printed question split across a page** (FAST: question 11 on both printed forms): the kit keeps a whole question on
+   one page (Windmill `95c6fb0`).
+5. **Hints that stated their own answers** (explicit-instruction reviewer): the picture offered at Hint step 1 ended on the
+   answer (Q8, Q9, Q11a); in Q12, Q2 step 3 and Q3 step 3 only the right option carried a reason (critic, FAST too); Q2 step
+   4 could be guessed. A picture's caption now stops at the method, every option of a step has one form ("7 — AB"), and Q2's
+   last step asks of each set in turn.
+6. **"2² means 2 × 2, not 2 × 2"** (explicit-instruction reviewer, 21% of sets): with a leg of 2 the coach contrasts the
+   other number.
+7. **"Like the real test" marked follow-through wrong** (critic): a later part done right on the student's own wrong (a)
+   now earns its point there, as the printed test says (ruling 19; the kit passes the mode, `d4d2048`). Answers the page
+   could not read — "13.3 yds", "60'", "perimeter = 27.7", "10 u" — are read.
+8. **Hints that rounded first** (explicit-instruction reviewer, critic): 7(b) and 10(b) keep three decimals and round
+   once, at the end, as 6.06 Notes III says.
+9. **A distractor no student writes**, the doubled hypotenuse "a² + x² = 2 · c" (FAST, explicit-instruction reviewer —
+   it put "16² + x² = 2 · 20" on 6.03 board 6, x² = −216): it is "a² + x² = c", the hypotenuse left unsquared, on the page,
+   6.03 board 6, the Practice Test's Q6 and the Review's Q9.
+10. **Sizes and words** (FAST, critic): a light pole or a statue keeps a height its kind has; a named student's eyes are
+    4–5.5 ft up (6 ft in 8.5% of sets); question 13 says "feet"; question 12 never gives a copy a side equal to
+    an original side it does not match (20.7% of sets did); the Question Bank's 6 m by 8 m "field" is a 5 m by 12 m
+    courtyard (6 by 8 is Notes II now).
+11. **The Reference Sheet's roots** (all three): "with no square factor" was false for the test (√180, √208, √136). It now
+    says every root in the unit is of a whole number up to 225 and, where a question asks for the nearest tenth, the
+    decimal is the answer; 6.03–6.06's boundary lines and Must-nots say no radical is simplified.
+12. **Coordinates** (critic): a second coordinate's minus is set as a sign, "(5, −7)", in every math string (`d4d2048`),
+    and a point never breaks across a line on the page.
+13. **Question 1's fourth option** (explicit-instruction reviewer, critic): "the longest added to another" passes every
+    set, so no option came from it. The page's fourth set and the Practice Test's D are now sets whose two shorter sides
+    cannot meet across the longest (Florida's named GR.1.3 error); 6.01 board 3's D lists its longest side last (4, 6, 12),
+    so its C and D are no longer one mistake. This reverses the first review's "judged and kept".
+14. **The Practice Test key** names the error behind every wrong option of questions 3, 6 and 14 too (FAST).
+
+**The lessons.**
+
+15. **6.01:** Notes III is titled "The Pythagorean Theorem, and its converse" (the converse needs the statement it turns
+    around); the Your Turn's note names the error a "right" board made — the inequality, 8 + 11 > 14, taken for the converse.
+16. **6.03:** board 5 gives two sides without saying which are legs, so taking the 7 as the hypotenuse can happen; board
+    6's reveal names its equation; board 2's named error cites no notes line that is not there; independent question 5's
+    aside is in its sentence (ruling 37).
+17. **6.04** (critic's cross-lesson repeats): board 1 was 6.03 Notes II's 6 by 8 and now its own Notes II — a 12 m by 5 m
+    pool (the note names subtracting as Example 2 did, 10.9); board 4 was 6.01 Example 2's 12-16-20 — a 26-ft ladder 24 ft up
+    (35.4, 2 and 100 its named errors); independent question 6 was 6.03 board 3's 25 and 20 — a kite on 19 m of string, 14.7.
+    Board 6's kite string was on Notes I's list of hypotenuses, so the vote could be read off the list — a drone (explicit-
+    instruction reviewer). Board 7's "Yes, 12 < 14" is no error anyone makes — "Yes, 193 > 14", the root forgotten. The h of
+    Notes III and Example 2 stood on the wall's far face; it stands beside the leg it names.
+18. **6.05:** independent question 6 was board 4 moved two to the right — new legs, to the tenth.
+19. **6.06 board 3** (major): the only split modelled was isosceles, and the reveal skipped where 5, 9 and 12 come from.
+    The reveal draws the height with its length and the two pieces, and its first step finds the height from the
+    coordinates; the named error is 41.8, the base halved (7 and 7) as Notes III's triangle allowed — the 40 the edition named
+    was AC copied onto BC; Notes III's note says where the foot comes from. Independent question 1 was board 1's 12, 5 and 30:
+    it is a triangle with no right angle, split by its height. The variation describes the set as it is (no missing corner).
+20. **6.07:** Your Turn 1's reveal (major) shows why x is the middle side — 12 ÷ 3 = 4 = 28 ÷ 7, so x matches the 5. Board 8
+    had Example 2's 5 ft and 4 ft and a 45-year-old flagpole the picture did not show: Lena's eyes are 5.5 ft up, 6 ft from a
+    10-inch mirror, the pole 24 ft past it (22 ft) — the mirror's size is the extra number, and it is on the picture.
+21. **The deciding step on the worked slide** (explicit-instruction reviewer): the remark beside a worked row is not on a
+    slide (ruling 37), so 6.01 Example 2 ("the longest, though listed first: 20² = 400"), 6.03 Example 2 ("a leg, shorter
+    than 15") and 6.07 Example 1 ("the shortest sides match") carry the label in the row itself.
+22. **Thread B:** no parenthetical remark on a slide — T-B1's vocabulary, Notes I and board 5's steps (ruling 37); T-B1
+    board 7's slide says what its edition says ("lines AD and BE cross at O, and ray OC is drawn"), its figure larger; board
+    6's two labels stand clear of the line, its figure larger on the question slide; T-B2 board 9's slide and edition agree.
+
+**Teacher pages and the kit.** The Lesson Plan's IXL row is due by the unit test (`ee0544b`); "OFF line" is "the off-slide
+sentence"; the edition's warm-up line is "On your own. No notes." — its "Four minutes" sat beside the note's "two minutes
+silent" and START HERE's five — and the plan's row "Silent, then reveal" (`74dbaab`). Ruling 54 (`9aac4a9`; Croix, 11:28
+am, of this unit's printed test) names sections and prints Period on the test. The Practice Test key's Score Tracker printed
+its heading and first row at the foot of page 5 (critic): every tracker now stays whole, and a unit's single paper names
+its sections too (`71f5138`). The Reference Sheet's fourth page held one vocabulary entry (FAST): two entries are shorter
+and the sheet is three pages.
+
+**Judged and kept.**
+- **New worked slides** — a Your Turn that changes more than its example's numbers, an example for 6.01 Notes II's
+  third-side range, a scalene split in 6.06, a nested pair in 6.07, the reverse steps in T-B2, and Thread B's second
+  exterior angle and a split angle (explicit-instruction reviewer; FAST): each is a new slide in a lesson already at its
+  minutes. 6.06's reveal now teaches the scalene split, and the test asks no nested pair. Recorded for the next build of
+  these lessons.
+- **The same triples across lessons** (explicit-instruction reviewer): the 225 bound leaves four, and the test is now kept
+  off the ones a lesson shows.
+- **Bank items that copy a shown problem** (FAST, explicit-instruction reviewer): ruling 43(6) leaves the banks alone.
+- **"Select ALL"** (FAST): the house's wording on every select-all in both courses. **"Vertices"** (FAST): the unit says
+  "corners" for a triangle on the grid; "vertex" is taught in T-B1 for an angle.
+- **6.06's parallelogram** (explicit-instruction reviewer): Notes I's rule — every side, a slanted one by its triangle — is
+  all it asks.
+- **Thread B's angle labels** (explicit-instruction reviewer): drawn as large as each slide's room allows.
+- **The Reference Sheet's points** (FAST): the sheet is a handout and unscored.
+- **START HERE's timing column** (critic): the kit's; reported. **The Finish prompt** (critic): it counts blanks only, but
+  "Like the real test" already says "Can't read this yet" beside an answer as it is typed.
+- **Two-line answers on a reveal** (explicit-instruction reviewer): nothing is cut off.
+
+**After the fixes.** `gates.py u6`: 384 items re-derived, 0 findings; the dry run, 0 findings; the build installed at 0
+findings, on Windmill `71f5138`. The page: `u6_check.js` sound on 3,000 sets (ruling 43 held in every one), `verify.py`
+sound on 1,500, `plant_check.py` 35 of 35 (two new: a Hint choice with two right options, a ladder whose words and key
+disagree); content version 3, the lock rewritten; every part over the variety floor but 2.1a (4 versions), 2.1b (9) and
+2.4a–b (86), allowed in `unit.json` with their reasons. The teacher copy rebuilt and checked.
+
 ## 9. Thread B — 16.1 and 16.2 against GR.1.4 and GR.1.5
 
 **16.1–16.2 recomputed: 151 checks, 149 agree** (TE 16.01 44/44, AP 16/17, HW 15/15; TE 16.02 43/43, AP 18/18, HW 13/14

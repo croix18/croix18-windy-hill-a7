@@ -43,7 +43,11 @@ PLANTS = [
     ("a garden 1 m wide", "engine.js", "garden: [['m', 2], ['ft', 5], ['yd', 3]]", "garden: [['m', 1], ['ft', 1], ['yd', 1]]"),
     ("a man 4 ft tall", "engine.js", "man: ['5.5', '6'], woman: ['5', '5.5', '6']", "man: ['4', '4.5'], woman: ['4', '4.5']"),
     ("the mirror's words stop saying the triangles are similar", "engine.js",
-     "' ft beyond the mirror. The two right triangles are similar. How tall is the '", "' ft beyond the mirror. How tall is the '"),
+     "' beyond the mirror. The two right triangles are similar. How tall is the '", "' beyond the mirror. How tall is the '"),
+    # (a ladder keyed by adding the squares cannot be planted: the clean rule redraws any set whose key is a modelled mistake)
+    ("a ladder's words give a length its key does not use", "engine.js",
+     "+ c + '-foot ladder leans against a wall. Its foot is ' + a + ' feet from the wall.", "+ (c + 1) + '-foot ladder leans against a wall. Its foot is ' + a + ' feet from the wall."),
+    ("a student's eyes 6 ft up", "engine.js", "h1 = T.pick(['4', '4.5', '5', '5.5']), d1", "h1 = T.pick(['6']), d1"),
     ("the shadow figure labels the girl's shadow with her height", "engine.js",
      "lab: [N(h1) + ' ft', N(s1) + ' ft', numStr(S2) + ' ft', 'h']", "lab: [N(h1) + ' ft', N(h1) + ' ft', numStr(S2) + ' ft', 'h']"),
     # the coach's words and numbers
@@ -71,7 +75,7 @@ PLANTS = [
      "if (r.form === 'root') return { v: 'form', what: ['That is right — and '", "if (r.form === 'root') return { v: 'right', what: ['That is right — and '"),
     ("mistakes no longer named", "coach.js", "  const h = hits(p, r);\n", "  const h = [];\n"),
     ("a Hint choice with two right options", "coach.js",
-     "O('the longer leg, ' + Math.max(a, b), false,", "O('the longer leg, ' + Math.max(a, b), true,"),
+     "O('the longer of the two sides given, ' + Math.max(a, b), false,", "O('the longer of the two sides given, ' + Math.max(a, b), true,"),
     ("follow-through from part (a) adds instead of subtracting", "coach.js",
      "follow: (p, prev) => p.prm.w + p.prm.l - prev,", "follow: (p, prev) => p.prm.w + p.prm.l + prev,"),
     ("the key a student types is not the key", "unit.js", "keyText: p => E.decPlain(p.ans)", "keyText: p => E.decPlain(E.qadd(p.ans, E.Q(1, 10)))"),

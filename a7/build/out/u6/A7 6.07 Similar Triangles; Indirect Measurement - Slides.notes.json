@@ -12,7 +12,7 @@
   {
    "n": 2,
    "title": "Warm-Up",
-   "sub": "On your own. Four minutes. No notes.",
+   "sub": "On your own. No notes.",
    "min": 4,
    "note": "Q3 is today's k: copy \u00f7 original, 4 \u00f7 10 = 0.4 \u2014 a copy smaller than the original. Q4 is the same multiplying on a drawing. Two minutes silent, then reveal.",
    "kind": "warmup"
@@ -78,7 +78,7 @@
    "title": "Your Turn",
    "sub": "Same steps, your numbers. Boards up when done.",
    "min": 2,
-   "note": "Sorted, the copy is 12, x, 28, so x matches the 5: k = 12 \u00f7 3 = 4 and x = 20 \u2014 a board with about 46.7 matched by the order in the list (3 with 28).",
+   "note": "The copy's two known sides, 12 and 28, match 3 and 7 with one k: 12 \u00f7 3 = 4 = 28 \u00f7 7. So x matches the 5, the side left over, and x = 5 \u00d7 4 = 20 \u2014 with x anywhere else the two ratios disagree (12 \u00f7 5 = 2.4). A board with about 46.7 matched by the order in the list (3 with 28).",
    "kind": "yourturn"
   },
   {
@@ -238,7 +238,7 @@
    "title": "Whiteboards   \u00b7   Question 8 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "The extra-number board (ruling 22): the 45 years is bait. Ground to ground, k = 16 \u00f7 4 = 4; the pole is 5 \u00d7 4 = 20 ft. The words say the triangles are similar, as every mirror item here does.",
+   "note": "The extra-number board (ruling 22): the mirror's 10 inches is bait \u2014 the light meets the mirror at one point, whatever its size. Ground to ground, k = 24 \u00f7 6 = 4; the pole is 5.5 \u00d7 4 = 22 ft. The words say the triangles are similar, as every mirror item here does.",
    "kind": "wb"
   },
   {

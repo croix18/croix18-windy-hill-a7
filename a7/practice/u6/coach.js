@@ -39,7 +39,10 @@ function roundSay(A, n, s, ans) {
 }
 /* between which two whole numbers √n lies: the Hint's stepping stone (never the answer) */
 const between = n => { const r = isqrt(n); return 'The root of ' + n + ' is between ' + r + ' and ' + (r + 1) + ', because ' + r + sup(2) + ' = ' + r * r + ' and ' + (r + 1) + sup(2) + ' = ' + (r + 1) * (r + 1) + '.'; };
-const sqHint = (a, b, op) => 'Square each number first — ' + a + sup(2) + ' means ' + a + ' × ' + a + ', not ' + a + ' × 2 — then ' + (op === '-' ? 'subtract' : 'add') + '.';
+const sqHint = (a, b, op) => { const v = String(a) !== '2' ? a : String(b) !== '2' ? b : null, then = 'then ' + (op === '-' ? 'subtract' : 'add') + '.';
+  return v == null ? 'Square each number first, ' + then : 'Square each number first — ' + v + sup(2) + ' means ' + v + ' × ' + v + ', not ' + v + ' × 2 — ' + then; };
+/* a root kept to three decimal places, exactly (rounded): the Hint's stepping stone before rounding once, at the end */
+const sqrt3 = n => { const k = isqrt(n * 1000000), up = 4 * n * 1000000 >= (2 * k + 1) * (2 * k + 1); return Q(up ? k + 1 : k, 1000); };
 const rootHint = m => { const r = isqrt(m); return 'Try ' + (r - 1) + ' × ' + (r - 1) + ' = ' + (r - 1) * (r - 1) + ' and go up one at a time.'; };
 const tenthHint = n => between(n) + ' Use the square-root key, then keep one decimal place, rounding with the next digit.';
 
@@ -72,7 +75,7 @@ F.hypWhole = {
       { say: 'c is the number whose square is ' + n + '.', ex: EX(sqrtH(n) + ' = ' + S(p.ans), p.ans) }]; },
   walk: p => { const { a, b } = p.prm, n = a * a + b * b;
     return [choice('Which side is the hypotenuse, c?', [O('the side you are finding: it is across from the right angle', true),
-      O('the longer leg, ' + Math.max(a, b), false, 'A leg makes the right angle. The hypotenuse is across from it, and it is longer than either leg.')]),
+      O('the longer of the two sides given, ' + Math.max(a, b), false, 'A leg makes the right angle. The hypotenuse is across from it, and it is longer than either leg.')]),
       num('What is ' + sq(a) + ' + ' + sq(b) + '?', Q(n), sqHint(a, b, '+')),
       num('What number times itself is ' + n + '?', p.ans, rootHint(n))]; }
 };
@@ -94,6 +97,28 @@ F.legWhole = {
         O('add: ' + S(Q(a)) + sup(2) + ' + ' + S(Q(c)) + sup(2), false, 'Adding makes a side longer than the hypotenuse — but a leg is shorter than it.')]),
       num('What is ' + S(Q(c)) + sup(2) + ' − ' + S(Q(a)) + sup(2) + '?', Q(m), sqHint(S(Q(c)), S(Q(a)), '-')),
       num('What number times itself is ' + S(Q(m)) + '?', p.ans, rootHint(m))]; }
+};
+/* a leg in a story, to the nearest tenth: the ladder, the ramp or the kite string is the hypotenuse (6.04) */
+const STORY = { ladder: { c: 'the ladder', a: 'the distance from the wall to its foot', along: 'out from the wall', b: 'the height up the wall' },
+  ramp: { c: 'the ramp', a: 'the distance it runs along the ground', along: 'along the ground', b: 'how high it rises' },
+  kite: { c: 'the string', a: 'the distance across to the spot below the kite', along: 'across', b: 'how high the kite is' } };
+F.legTenth = {
+  models: p => { const { c, a, ctx } = p.prm, m = c * c - a * a, W = STORY[ctx];
+    return [near(Math.sqrt(c * c + a * a), 'added the squares. ' + W.c[0].toUpperCase() + W.c.slice(1) + ' is the hypotenuse, so this leg is found by subtracting: ' + sq(c) + ' − ' + sq(a) + '.', 1),
+      mod(Q(c - a), 'subtracted the lengths. The theorem is about their squares: ' + sq(c) + ' − ' + sq(a) + '.', 2),
+      mod(Q(m), 'stopped at ' + m + ' and forgot the square root.', 3)].concat(roundingModels(p, 0, m, 1, 3)); },
+  rule: p => STORY[p.prm.ctx].c[0].toUpperCase() + STORY[p.prm.ctx].c.slice(1) + ' is the hypotenuse, across from the right angle. For a leg, subtract: b' + sup(2) + ' = c' + sup(2) + ' − a' + sup(2) + ', take the square root, then round to one decimal place.',
+  sol: p => { const { c, a, ctx } = p.prm, m = c * c - a * a, W = STORY[ctx];
+    return [{ say: W.c[0].toUpperCase() + W.c.slice(1) + ', ' + c + ', is the hypotenuse: it is across from the right angle. The other two sides are the legs — ' + a + ' ' + W.along + ', and ' + W.b + ', the one you want.' },
+      { say: 'Subtract to find the leg squared: ' + M('b' + sup(2) + ' = ' + sq(c) + ' − ' + sq(a) + ' = ' + c * c + ' − ' + a * a + ' = ' + m) + '.' },
+      { say: 'Take the square root: b = ' + (rootOK(m) ? M(sqrtH(m)) + ' = ' : rootH(m) + ', ') + cut3(0, m, 1) },
+      { say: roundSay(0, m, 1, p.ans), ex: EX(S(p.ans), p.ans, { approx: true }) }]; },
+  walk: p => { const { c, a, ctx } = p.prm, m = c * c - a * a, W = STORY[ctx];
+    return [choice('Which length is the hypotenuse, c?', [O(W.c + ', ' + c, true), O(W.a + ', ' + a, false, 'That one lies along the ground: it makes the right angle, so it is a leg.')]),
+      choice('So to find ' + W.b + ', you …', [O('subtract: ' + sq(c) + ' − ' + sq(a), true),
+        O('add: ' + sq(a) + ' + ' + sq(c), false, 'Adding makes a side longer than the hypotenuse, ' + c + ' — but a leg is shorter than it.')]),
+      num('What is ' + sq(c) + ' − ' + sq(a) + '?', Q(m), sqHint(c, a, '-')),
+      num('What is ' + (rootOK(m) ? sqrtH(m) : 'the square root of ' + m) + ', to the nearest tenth?', p.ans, tenthHint(m))]; }
 };
 /* a hypotenuse to the nearest tenth (also the field's path, part a) */
 function hypTenthFam(lead) {
@@ -127,9 +152,10 @@ F.shorter = {
       { say: 'Straight across, the path is ' + (rootOK(n) ? M(sqrtH(n)) + ' = ' : rootH(n) + ', ') + cut3(0, n, 1) + ' — about ' + S(path) + ' to the nearest tenth (part a).' },
       { say: 'Subtract: ' + M((w + l) + ' − ' + S(path) + ' = ' + S(p.ans)) + '. (With every digit, ' + (w + l) + ' − ' + cut3(0, n, 1) + ' = ' + cut3(w + l, n, -1) + ', the same to the nearest tenth.)', ex: EX(S(p.ans), p.ans, { approx: true }) }]; },
   walk: p => { const { w, l } = p.prm, n = w * w + l * l, path = sqrtTenth(n);
+    const p3 = sqrt3(n);
     return [num('How far is it along two sides of the ' + p.prm.place + '?', Q(w + l), 'Add its two sides.'),
-      num('How long is the path straight across, to the nearest tenth?', path, tenthHint(n)),
-      num('What is ' + (w + l) + ' − ' + S(path) + '?', p.ans, 'Take away the path from the walk along two sides. Line up the decimal points.')]; }
+      num('How long is the path straight across? Keep three decimal places.', p3, between(n) + ' Use the square-root key and keep three decimal places: round once, at the end.'),
+      num('What is ' + (w + l) + ' − ' + S(p3) + ', to the nearest tenth?', p.ans, 'Take away the path from the walk along two sides, lining up the decimal points; then round to one decimal place.')]; }
 };
 
 /* ---------- distance on the coordinate plane */
@@ -140,18 +166,19 @@ function legWalk(p) { const x = p.prm, { dx, dy } = legsOf(p);
   const h = (u, v, axis) => E.crosses(u, v) ? 'One point is on each side of the ' + axis + '-axis: add the two distances to the axis, ' + Math.abs(u) + ' and ' + Math.abs(v) + '.' : 'Subtract the smaller from the larger.';
   return [num('How far across is it, from x = ' + E.minus(String(x.x1)) + ' to x = ' + E.minus(String(x.x2)) + '?', Q(dx), h(x.x1, x.x2, 'y'), { pic: true }),
     num('How far ' + (x.y2 > x.y1 ? 'up' : 'down') + ' is it, from y = ' + E.minus(String(x.y1)) + ' to y = ' + E.minus(String(x.y2)) + '?', Q(dy), h(x.y1, x.y2, 'x'), { pic: true })]; }
-function slipModels(p, whole) {
+function slipModels(p, whole, grid) {
   const x = p.prm, { dx, dy } = legsOf(p), out = [], put = (ax, ay, say) => { const m = ax * ax + ay * ay; out.push(isSquare(m) ? mod(Q(isqrt(m)), say, 0) : near(Math.sqrt(m), say, 0)); };
   const sx = signSlip(x.x1, x.x2), sy = signSlip(x.y1, x.y2);
   if (sx) put(sx, dy, 'subtracted across zero: from x = ' + E.minus(String(x.x1)) + ' to x = ' + E.minus(String(x.x2)) + ' is ' + Math.abs(x.x1) + ' + ' + Math.abs(x.x2) + ' = ' + dx + ' across, not ' + sx + '.');
   if (sy) put(dx, sy, 'subtracted across zero: from y = ' + E.minus(String(x.y1)) + ' to y = ' + E.minus(String(x.y2)) + ' is ' + Math.abs(x.y1) + ' + ' + Math.abs(x.y2) + ' = ' + dy + ', not ' + sy + '.');
-  put(dx + 1, dy + 1, 'counted the grid lines, not the spaces between them: the legs are ' + dx + ' and ' + dy + '.');
+  put(dx + 1, dy + 1, grid ? 'counted the grid lines, not the spaces between them: the legs are ' + dx + ' and ' + dy + '.'
+    : 'counted one too many on each leg — the numbers from one coordinate to the other, not the steps between them: the legs are ' + dx + ' and ' + dy + '.');
   return out;
 }
 F.gridWhole = {
   models: p => { const { dx, dy } = legsOf(p);
     return [mod(Q(dx + dy), 'added the legs. That is the trip along the grid lines; the straight distance is the hypotenuse.', 2),
-      mod(Q(dx * dx + dy * dy), 'stopped at ' + (dx * dx + dy * dy) + ' and forgot the square root.', 3)].concat(slipModels(p, true)); },
+      mod(Q(dx * dx + dy * dy), 'stopped at ' + (dx * dx + dy * dy) + ' and forgot the square root.', 3)].concat(slipModels(p, true, true)); },
   rule: () => 'Draw the right triangle under the segment. Its legs are the across and the up-or-down distances, read from the coordinates; the distance is the hypotenuse.',
   sol: p => { const { dx, dy } = legsOf(p), n = dx * dx + dy * dy;
     return legSay(p).concat([{ say: 'The distance is the hypotenuse: ' + M('c' + sup(2) + ' = ' + sq(dx) + ' + ' + sq(dy) + ' = ' + dx * dx + ' + ' + dy * dy + ' = ' + n) + '.' },
@@ -162,7 +189,7 @@ F.gridWhole = {
 F.coordTenth = {
   models: p => { const { dx, dy } = legsOf(p), n = dx * dx + dy * dy;
     return [mod(Q(dx + dy), 'added the legs. That is the trip along the grid lines; the straight distance is the hypotenuse.', 2),
-      mod(Q(n), 'stopped at ' + n + ' and forgot the square root.', 3)].concat(roundingModels(p, 0, n, 1, 4), slipModels(p, false)); },
+      mod(Q(n), 'stopped at ' + n + ' and forgot the square root.', 3)].concat(roundingModels(p, 0, n, 1, 4), slipModels(p, false, false)); },
   rule: () => 'Picture the right triangle under the segment: the legs come from the coordinates, the distance is the hypotenuse, then round to one decimal place.',
   sol: p => { const { dx, dy } = legsOf(p), n = dx * dx + dy * dy;
     return legSay(p).concat([{ say: 'The distance is the hypotenuse: ' + M('c' + sup(2) + ' = ' + sq(dx) + ' + ' + sq(dy) + ' = ' + dx * dx + ' + ' + dy * dy + ' = ' + n) + '.' },
@@ -202,9 +229,10 @@ F.perim = {
       { say: 'The slanted side ' + t.JL + ' is the hypotenuse of those two: ' + M(t.JL + sup(2) + ' = ' + sq(t.s) + ' + ' + sq(t.h) + ' = ' + n) + ', so ' + t.JL + ' = ' + (rootOK(n) ? M(sqrtH(n)) + ' = ' : rootH(n) + ', ') + cut3(0, n, 1) },
       { say: 'Add the three sides, and round once, at the end: ' + t.s + ' + ' + t.h + ' + ' + cut3(0, n, 1) + ' = ' + cut3(t.s + t.h, n, 1) + ' ' + roundSay(t.s + t.h, n, 1, p.ans).replace(/^Round/, '— round'), ex: EX(S(p.ans), p.ans, { approx: true }) }]; },
   walk: p => { const t = triParts(p), n = t.s * t.s + t.h * t.h, js = sqrtTenth(n);
+    const j3 = sqrt3(n);
     return [num('How long is ' + t.KL + '?', Q(t.h), 'It lies along a grid line: subtract the coordinates that change.'),
-      num('How long is the slanted side ' + t.JL + ', to the nearest tenth?', js, 'It is the hypotenuse of a right triangle with legs ' + t.s + ' and ' + t.h + '. ' + tenthHint(n)),
-      num('What is ' + t.s + ' + ' + t.h + ' + ' + S(js) + '?', p.ans, 'Add the three sides.')]; }
+      num('How long is the slanted side ' + t.JL + '? Keep three decimal places.', j3, 'It is the hypotenuse of a right triangle with legs ' + t.s + ' and ' + t.h + '. ' + between(n) + ' Keep three decimal places: round once, at the end.'),
+      num('What is ' + t.s + ' + ' + t.h + ' + ' + S(j3) + ', to the nearest tenth?', p.ans, 'Add the three sides, then round to one decimal place.')]; }
 };
 /* the town map: along the streets, and straight */
 F.streets = {
@@ -219,7 +247,7 @@ F.streets = {
 };
 F.straight = {
   models: p => { const { dx, dy } = legsOf(p); return [mod(Q(dx + dy), 'gave the trip along the streets. The straight line is the hypotenuse.', 1),
-    mod(Q(dx * dx + dy * dy), 'stopped at ' + (dx * dx + dy * dy) + ' and forgot the square root.', 1)].concat(slipModels(p, true)); },
+    mod(Q(dx * dx + dy * dy), 'stopped at ' + (dx * dx + dy * dy) + ' and forgot the square root.', 1)].concat(slipModels(p, true, false)); },
   rule: () => 'The straight line is the hypotenuse of the right triangle whose legs are the trip across and the trip up or down.',
   sol: p => { const { dx, dy } = legsOf(p), n = dx * dx + dy * dy;
     return [{ say: 'The legs are ' + dx + ' across and ' + dy + (p.prm.y2 > p.prm.y1 ? ' up' : ' down') + ' (part a).' },
@@ -256,11 +284,12 @@ F.simSide = {
       { say: 'Match by size' + (t.names ? ', and it agrees' : '') + '. The first triangle\'s sides are ' + t.a + ', ' + t.b + ' and ' + t.c + '; x is on the copy\'s ' + t.size[t.which] + ' side, so it matches the ' + t.side + '.' },
       { say: 'The scale factor from a pair you know: ' + M('k = ' + S(t.c1) + ' ÷ ' + t.o1 + ' = ' + kIn(t.k)) + '.' },
       { say: 'Multiply the matching side by k.', ex: EX(t.side + ' × ' + kIn(t.k) + ' = ' + S(p.ans), p.ans) }]); },
-  walk: p => { const t = simParts(p), others = ['p', 'q', 'r'].filter(s => s !== t.which).map(s => ({ p: t.a, q: t.b, r: t.c }[s]));
+  walk: p => { const t = simParts(p), val = { p: t.a, q: t.b, r: t.c }, nm = p.prm.nm, ends = { p: [0, 2], q: [1, 2], r: [0, 1] };
+    const segOf = s => nm[ends[s][0]] + nm[ends[s][1]], lab = s => String(val[s]) + (nm ? ' — ' + segOf(s) : '');
+    const whyNot = s => nm ? 'The letters match in order: ' + t.names.xOn + ' matches ' + t.names.xMatch + ', not ' + segOf(s) + '.'
+      : 'Match by size: x is on the copy\'s ' + t.size[t.which] + ' side, and ' + val[s] + ' is the first triangle\'s ' + t.size[s] + ' side.';
     return [choice(t.names ? 'x is on ' + t.names.xOn + '. In "triangle ' + t.names.first + ' is similar to triangle ' + t.names.copy + '" the order of the letters is the matching. Which side of triangle ' + t.names.first + ' does x match?'
-      : 'The copy is ' + turnedSay(p) + '. Which side of the first triangle does x match?', [O(String(t.side) + (t.names ? ' — ' + t.names.xMatch + ', the ' + t.size[t.which] + ' side' : ' — the ' + t.size[t.which] + ' side'), true),
-      O(String(others[0]), false, 'Match by size: x is on the copy\'s ' + t.size[t.which] + ' side, and ' + others[0] + ' is not the first triangle\'s ' + t.size[t.which] + '.'),
-      O(String(others[1]), false, 'Match by size: x is on the copy\'s ' + t.size[t.which] + ' side, and ' + others[1] + ' is not the first triangle\'s ' + t.size[t.which] + '.')]),
+      : 'The copy is ' + turnedSay(p) + '. Which side of the first triangle does x match?', ['p', 'q', 'r'].map(s => O(lab(s), s === t.which, s === t.which ? '' : whyNot(s)))),
       num('What is the scale factor, k = ' + S(t.c1) + ' ÷ ' + t.o1 + '?', t.k, 'The copy\'s side over its match in the first triangle: ' + S(t.c1) + ' ÷ ' + t.o1 + '.' + kFine(t.k)),
       num('What is ' + t.side + ' × ' + kOut(t.k) + '?', p.ans, mulHint(Q(t.side), t.k))]; }
 };
@@ -323,8 +352,12 @@ function feedback(p, typed, ctx) {
   }
   if (F[p.fam].follow && ctx && ctx.prev != null && ctx.prevPart) {
     const pr = E.readAns(ctx.prev);
-    if (pr.ok && !(pr.val && qeq(pr.val, ctx.prevPart.ans)) && Math.abs(F[p.fam].follow(p, pr.f) - r.f) < TOL)
-      return { v: 'wrong', what: ['Your method for this part is right: it uses your part (a), ' + S(pr.val || Q(Math.round(pr.f * 1000), 1000)) + '. But part (a) isn’t right yet, so this comes out wrong too. Fix part (a) first.'], rule: '', step: null };
+    if (pr.ok && !(pr.val && qeq(pr.val, ctx.prevPart.ans)) && Math.abs(F[p.fam].follow(p, pr.f) - r.f) < TOL) {
+      const yours = S(pr.val || Q(Math.round(pr.f * 1000), 1000));
+      /* "Like the real test": the point, as the printed test's follow-through line gives it (the second review, 25 Oct 2026) */
+      if (ctx.mode === 'test') return { v: 'right', follow: true, what: ['Part (a) isn’t right, but this part does the right step with your own part (a), ' + yours + ' — so on the test it still earns its point.'], rule: '' };
+      return { v: 'wrong', what: ['Your method for this part is right: it uses your part (a), ' + yours + '. But part (a) isn’t right yet, so this comes out wrong too. Fix part (a) first.'], rule: '', step: null };
+    }
   }
   const h = hits(p, r);
   if (h.length) return { v: 'wrong', what: [joinSays(h)], rule, step: h[0].step };
@@ -338,7 +371,7 @@ const MCW = {
   triSet: (x, k) => { const s = x.sets[k], t = sorted(s), tag = x.tags[k];
     if (tag === 'flat') return 'Those lie flat: ' + sumSay(s) + ' is exactly the longest side. A triangle needs the two shorter sides to add to MORE than the longest.';
     if (tag === 'firstTwo') return 'That adds the first two listed. Add the two SHORTER sides: ' + sumSay(s) + ', less than ' + t[2] + ' — they cannot meet.';
-    return 'That adds the longest side to another, and that sum always beats the third. Add the two shorter sides: ' + sumSay(s) + ', less than ' + t[2] + '.'; },
+    return 'The two shorter sides, ' + sumSay(s) + ', fall short of ' + t[2] + ': they cannot meet. A triangle needs MORE than the longest side.'; },
   range: (x, k) => { const { a, b } = x.prm, tag = x.tags[k];
     if (tag === 'between') return 'That keeps the third side between the two you were given. It can be shorter than both: anything more than ' + (b - a) + ' reaches.';
     if (tag === 'leq') return 'A third side of exactly ' + (b - a) + ' or ' + (a + b) + ' would lie flat. Use &lt;, not ≤.';
@@ -346,7 +379,7 @@ const MCW = {
   eqChoice: (x, k) => { const { a, c } = x.prm, tag = x.tags[k];
     if (tag === 'sumSides') return 'That adds the sides. The theorem adds the SQUARES of the legs.';
     if (tag === 'hypLeg') return 'That puts ' + c + ', the hypotenuse, with the legs. It is across from the right angle, so it stands alone: ' + c + sup(2) + '.';
-    return 'That doubles ' + c + ' instead of squaring it: ' + c + sup(2) + ' means ' + c + ' × ' + c + ', not 2 × ' + c + '.'; },
+    return 'That squares the legs but not the hypotenuse. ' + c + ' is a side too: square it, ' + c + sup(2) + '.'; },
   simChoice: (x, k) => { const tag = x.tags[k], s = x.sides[k], t = x.prm.t;
     if (tag === 'add') { const d = qsub(s[0], Q(t[0])); return 'That ' + (qlt(d, Q(0)) ? 'takes ' + S(qabs(d)) + ' from' : 'adds ' + S(d) + ' to') + ' every side. Similar means every side is MULTIPLIED by one number.'; }
     if (tag === 'twoRatios') return 'Check all three ratios: ' + M(S(s[0]) + ' ÷ ' + t[0] + ' = ' + kIn(qdiv(s[0], Q(t[0])))) + ' and ' + M(S(s[1]) + ' ÷ ' + t[1] + ' = ' + kIn(qdiv(s[1], Q(t[1])))) + ', but ' + S(s[2]) + ' ÷ ' + t[2] + ' is not ' + kOut(qdiv(s[0], Q(t[0]))) + '.';
@@ -406,7 +439,7 @@ function stepsMC0(x) {
   if (x.fam === 'range') { const { a, b } = x.prm;
     return [num('How long must the third side be, at least, to reach? What is ' + b + ' − ' + a + '?', Q(b - a), HINT.sub(Q(b), Q(a))),
       num('How long can it be, at most, to be covered? What is ' + a + ' + ' + b + '?', Q(a + b), HINT.add(Q(a), Q(b))),
-      choice('Can the third side be exactly ' + (b - a) + ' or ' + (a + b) + '?', [O('No — it would lie flat', true), O('Yes', false, 'At exactly ' + (b - a) + ' or ' + (a + b) + ' the sides lie flat: no triangle. So the signs are &lt;, not ≤.')])]; }
+      choice('Can the third side be exactly ' + (b - a) + ' or ' + (a + b) + '?', [O('No — it would lie flat', true), O('Yes — it would still make a triangle', false, 'At exactly ' + (b - a) + ' or ' + (a + b) + ' the sides lie flat: no triangle. So the signs are &lt;, not ≤.')])]; }
   if (x.fam === 'eqChoice') { const { a, c } = x.prm;
     return [choice('Which side is across from the right angle?', [O(String(c), true), O(String(a), false, 'That side makes the right angle: it is a leg.'), O(X, false, X + ' makes the right angle with ' + a + ': it is a leg.')]),
       choice('So the equation is …', [O(M(sq(a) + ' + ' + X + sup(2) + ' = ' + sq(c)), true), O(M(sq(a) + ' + ' + sq(c) + ' = ' + X + sup(2)), false, 'The hypotenuse stands alone on one side; ' + c + ' is the hypotenuse.')])]; }
@@ -426,8 +459,11 @@ function stepsMC0(x) {
     return [choice('In the converse, which side do you test as c?', [O('the longest side', true), O('the last one listed', false, 'Where a side is listed does not matter: c is the longest.'), O('the first one listed', false, 'Where a side is listed does not matter: c is the longest.')]),
       num('Choice A: what is ' + sq(t[0]) + ' + ' + sq(t[1]) + '?', Q(t[0] * t[0] + t[1] * t[1]), sqHint(t[0], t[1], '+')),
       choice('Is that equal to ' + sq(t[2]) + ' = ' + t[2] * t[2] + '?', [O(isRightSet(t) ? 'Yes — choice A is a right triangle' : 'No — choice A is not a right triangle', true),
-        O(isRightSet(t) ? 'No' : 'Yes', false, 'Compare the two numbers: ' + (t[0] * t[0] + t[1] * t[1]) + ' and ' + t[2] * t[2] + '.')]),
-      choice('Now test B to E the same way. How many of the five are right triangles?', [1, 2, 3].map(n => O(String(n), n === x.correct.length, n === x.correct.length ? '' : 'Test each one: square all three, then check the two shorter against the longest.')), { keep: true })]; }
+        O(isRightSet(t) ? 'No — choice A is not a right triangle' : 'Yes — choice A is a right triangle', false, 'Compare the two numbers: ' + (t[0] * t[0] + t[1] * t[1]) + ' and ' + t[2] * t[2] + '.')]),
+      ...x.sets.slice(1).map((s0, j) => { const i = j + 1, u = sorted(s0), r = isRightSet(u), L = LET[i];
+        return choice('Choice ' + L + ': is ' + sq(u[0]) + ' + ' + sq(u[1]) + ' = ' + (u[0] * u[0] + u[1] * u[1]) + ' equal to ' + sq(u[2]) + ' = ' + u[2] * u[2] + '?',
+          [O('Yes — choice ' + L + ' is a right triangle', r, r ? '' : (u[0] * u[0] + u[1] * u[1]) + ' and ' + u[2] * u[2] + ' are not equal.'),
+           O('No — choice ' + L + ' is not a right triangle', !r, r ? 'They are equal: ' + (u[0] * u[0] + u[1] * u[1]) + ' = ' + u[2] * u[2] + '.' : '')]); })]; }
   return null;
 }
 const isRightSet = t => t[0] * t[0] + t[1] * t[1] === t[2] * t[2];
@@ -463,6 +499,10 @@ function clean(it) {
     }
     if (p.tenth && qnum(p.ans) === Math.round(qnum(p.ans))) return false;              /* a tenth that is .0 reads as a whole number */
   }
+  /* similar triangles: no number on the copy is also on a side of the first triangle it does not match (the second review: an
+     original 6, 9, 12 and a copy 6, x, 8 lure "same number, same side", the state's GR.2.4 misconception, on one form and not the next) */
+  if (it.fig && it.fig.kind === 'simPair') { const la = it.fig.la.map(v => Number(String(v).replace(/,/g, ''))), lb = it.fig.lb;
+    for (let i = 0; i < 3; i++) if (lb[i] !== 'x') for (let j = 0; j < 3; j++) if (j !== i && Number(String(lb[i]).replace(/,/g, '')) === la[j]) return false; }
   return true;
 }
 E.setClean(clean);

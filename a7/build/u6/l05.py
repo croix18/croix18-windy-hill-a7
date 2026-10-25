@@ -183,7 +183,7 @@ L = dict(
         dict(stem="Find the distance between $(-7, 1)$ and $(5, -4)$.", answer="13 units", why="Across 12, down 5; 144 + 25 = 169.", check=("eq", "sqrt((5 - (-7))**2 + (1 - (-4))**2)", "13"), space=0.7),
         dict(not_bound=True, stem="Find the distance between $(-2, 5)$ and $(1, -2)$, to the nearest tenth.", answer="√58 ≈ 7.6 units", why="Across 3, down 7; 9 + 49 = 58.", check=("many", ("eq", "sqrt(3**2 + 7**2)", "sqrt(58)"), ("approx", "sqrt(58)", "7.6", "0.05")), space=0.7),
         dict(not_bound=True, stem="How far is $(-4, 9)$ from the origin, to the nearest tenth?", answer="√97 ≈ 9.8 units", why="Legs 4 and 9; 16 + 81 = 97.", check=("many", ("eq", "sqrt(4**2 + 9**2)", "sqrt(97)"), ("approx", "sqrt(97)", "9.8", "0.05")), space=0.7),
-        dict(stem="On a map in kilometers, a pool is at $(-2, -3)$ and a park at $(7, 9)$. How far apart are they in a straight line?", answer="15 km", why="Across 9, up 12; 81 + 144 = 225.", check=("eq", "sqrt((7 - (-2))**2 + (9 - (-3))**2)", "15"), space=0.7),
+        dict(not_bound=True, stem="On a map in kilometers, a pool is at $(-2, -3)$ and a park at $(3, 6)$. How far apart are they in a straight line, to the nearest tenth of a kilometer?", answer="√106 ≈ 10.3 km", why="Across 5, up 9; 25 + 81 = 106.", check=("many", ("eq", "sqrt((3 - (-2))**2 + (6 - (-3))**2)", "sqrt(106)"), ("approx", "sqrt(106)", "10.3", "0.05")), space=0.7),
     ],
 
     bank=[
@@ -238,11 +238,11 @@ L = dict(
             "From board 4 on the grid shows the two points and nothing else, as the book's own test does; the book's 6.5 names 'no triangle drawn' as where students stall. Notes II–III and Example 2 draw the legs; the boards ask the student to.",
             "Every radicand is a whole number up to 225 with no square factor (GR.1.2, Clarification 3), so coordinates stay inside about ±10 and the legs stay small."],
         standard_notes=[("Clarification", "Clarification 1: the distance is connected to a right triangle drawn on the plane. Clarification 2: the theorem is memorized, and it is not the expectation to use the distance formula. Clarification 3: radicands are whole numbers up to 225 (Source of Truth §GR.1.2)."),
-                        ("Unit boundary", "Coordinates within about −10 to 10; no radicand with a square factor; one rounding, at the end.")],
+                        ("Unit boundary", "Coordinates within about −10 to 10; no radical simplified (a root's decimal is the answer); one rounding, at the end.")],
         sits="The first MA.8.GR.1.2 day. IXL's L9V and ZBP are due by the Unit 6 test; 6.06 adds perimeters and maps on the same grid.",
         lives="Notes I — across zero, the pieces add — and Notes II's triangle on the grid. Board 3 is the on-a-line diagnostic (the axis error, a negative, gridlines), board 6 the expression vote, board 9 the axis error in writing.",
         materials="Whiteboards and markers; a printed grid for any student whose board has none. Calculators allowed, printed nowhere.",
-        variation="Boards 1–2: one line, vertical then horizontal, both across zero; 3 votes on the axis error. The pattern breaks at 4 — slanted, with only the points on the grid — whole, then to the tenth (5), then only the expression (6), then from the origin (7); 8 carries an extra point; 9 is written. The independent set: horizontal, vertical, slanted whole, slanted to the tenth, from the origin, a map.",
+        variation="Boards 1–2: one line, vertical then horizontal, both across zero; 3 votes on the axis error. The pattern breaks at 4 — slanted, with only the points on the grid — whole, then to the tenth (5), then only the expression (6), then from the origin (7); 8 carries an extra point; 9 is written. The independent set: horizontal, vertical, slanted whole, slanted to the tenth, from the origin, a map to the tenth.",
         audit=["Every item re-derived by sympy at build time; every irrational answer checked exactly and to the tenth, every radicand a whole number up to 225 with no square factor (the unit's own check beside the kit's).",
                "Math Nation 6.5 read against this lesson (A7 Unit 6 Audit): its homework key's '−7 or 7' (D31) and its 'non-vertical or non-horizontal' (D34) are not reproduced; its named errors — gridlines for spaces, straddling an axis, no triangle drawn — are boards 3, 9 and 4–5."],
         changes=["6.5.1–6.5.2 (the three-graph scaffold) → Notes I–III, the same three steps, from the front.",

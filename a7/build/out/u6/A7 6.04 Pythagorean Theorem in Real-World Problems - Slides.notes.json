@@ -6,13 +6,13 @@
    "title": "Pythagorean Theorem in Real-World Problems",
    "sub": "",
    "min": 1,
-   "note": "Post the learning target. Say one line and nothing else yet: \u201cToday the triangle is hidden in a ladder, a ramp, a screen or a field: find it first.\u201d",
+   "note": "Post the learning target. Say one line and nothing else yet: \u201cToday the triangle is hidden in a ladder, a ramp, a screen or a garden: find it first.\u201d",
    "kind": "title"
   },
   {
    "n": 2,
    "title": "Warm-Up",
-   "sub": "On your own. Four minutes. No notes.",
+   "sub": "On your own. No notes.",
    "min": 4,
    "note": "Q4 is today's first move: every rectangle \u2014 a screen, a lawn, a box \u2014 has four right angles, so its diagonal is a hypotenuse. Say that after the reveal. Two minutes silent, then reveal.",
    "kind": "warmup"
@@ -44,9 +44,9 @@
   {
    "n": 6,
    "title": "Notes",
-   "sub": "A garden 5 m by 12 m, and a path from corner to corner.",
+   "sub": "A garden 6 m by 8 m, and a path from corner to corner.",
    "min": 4,
-   "note": "A garden 5 m by 12 m with a path from corner to corner. The garden's corner is square, so the path is c: 25 + 144 = 169 and the path is 13 m. Walking along two sides is 5 + 12 = 17 m, so the path is 4 m shorter \u2014 the question boards 5 and the test ask.\nOFF: 'A rectangle's diagonal is always a hypotenuse.'",
+   "note": "A garden 6 m by 8 m with a path from corner to corner. The garden's corner is square, so the path is c: 36 + 64 = 100 and the path is 10 m. Walking along two sides is 6 + 8 = 14 m, so the path is 4 m shorter \u2014 the question board 5 and the test ask.\nOFF: 'A rectangle's diagonal is always a hypotenuse.'",
    "kind": "notes"
   },
   {
@@ -126,7 +126,7 @@
    "title": "Whiteboards   \u00b7   Question 1 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "The screen's corner is square, so the diagonal is c. A board with 14 added the sides.",
+   "note": "The pool's corner is square, so both sides are legs and the diagonal is c. A board with 17 added the sides; a board with 10.9 subtracted, as Example 2 did \u2014 there the 12 was the ladder, c; here it is a side.",
    "kind": "wb"
   },
   {
@@ -206,7 +206,7 @@
    "title": "Whiteboards   \u00b7   Question 6 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "Diagnostic, and no arithmetic: the state's named misconceptions for GR.1.1 are both here \u2014 misidentifying the hypotenuse and failing to see the triangle in the story. Ask where the square corner is.",
+   "note": "Diagnostic, and no arithmetic: the state's named misconceptions for GR.1.1 are both here \u2014 misidentifying the hypotenuse and failing to see the triangle in the story. A drone is on no list in the notes, so the corner has to be found, not remembered. Ask where the square corner is.",
    "kind": "wb"
   },
   {

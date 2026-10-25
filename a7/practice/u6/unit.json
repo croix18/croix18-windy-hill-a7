@@ -19,8 +19,10 @@
  ],
  "variety": {
   "allow": {
-   "2.1a": "A whole-number hypotenuse whose radicand stays within the benchmark's whole numbers up to 225 (MA.8.GR.1.1, Clarification 3) comes from one of four triangles — 3-4-5, 6-8-10, 5-12-13, 9-12-15 — each with its legs in either order: 8 versions. Part (b), a whole leg, has 21, and every other part of the test is over 100.",
-   "2.1b": "A whole-number leg whose radicand is a whole number up to 225 (MA.8.GR.1.1, Clarification 3) is one of 21 right triangles, from 5-3 to 113-112: c² − a² must be a perfect square of 15 or less. 21 versions."
+   "2.1a": "A whole-number hypotenuse whose radicand stays within the benchmark's whole numbers up to 225 (MA.8.GR.1.1) comes from one of four triangles — 3-4-5, 6-8-10, 5-12-13, 9-12-15 — and ruling 43 keeps the test off the two the lessons' warm-ups, notes and examples show (3-4-5 and 6-8-10; the second review, 25 Oct 2026): 5-12-13 or 9-12-15, the legs in either order, 4 versions. Part (b), a whole leg, has 9; the garden path, 7(a) and (b), has 86; every other part of the test is over 100.",
+   "2.1b": "A whole-number leg whose radicand is a whole number up to 225 (MA.8.GR.1.1) is one of 21 right triangles, from 5-3 to 113-112; ruling 43 takes off the nine whose triangle a lesson's warm-up, notes or example shows (3-4-5, 6-8-10, 8-15-17, 7-24-25, 15-20-25, 12-16-20), and a leg of 12 can never be asked beside part (a), which always prints a 12: 9 versions.",
+   "2.4a": "A rectangle's diagonal to the tenth (MA.8.GR.1.1): whole sides from 2 to 14, the longer at most five times the shorter, a radicand that is a whole number up to 225 and not a square — the page can draw 53 such rectangles; ruling 43 takes off the ten whose legs a lesson's warm-up, notes, example or Your Turn worked (2-3, 2-7, 3-5, 3-8, 4-7, 5-6, 5-7, 5-11, 7-9, 7-10; the second review, 25 Oct 2026). 43 rectangles, the sides given either way round: 86 versions.",
+   "2.4b": "The same rectangle as 7(a), and how much shorter its path is than the two sides: 86 versions, for the reason under 2.4a."
   }
  }
 }

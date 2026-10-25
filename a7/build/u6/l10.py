@@ -167,7 +167,7 @@ L = dict(
              note="The extra-number board (ruling 22): the 9 cm is a length, not an angle. 180 − 41 − 66 = 73°.",
              check=("eq", "180 - 41 - 66", "73"),
              wrong="64 — subtracted the 9 as well [the extra number]; 107 — stopped at the sum"),
-        dict(kind="written", text=["**Why is an exterior angle always bigger than either remote interior angle?"],
+        dict(kind="written", text=["**Why is an exterior angle of a triangle always bigger than either of its remote interior angles? Explain."],
              qtext="Why is an exterior angle of a triangle always bigger than either of its remote interior angles? Explain.",
              hint="What does it equal?", steps=["for example:  $40 + 65 = 105$,  more than 40 and more than 65"],
              gloss="the sum of two positive angles", answer="It is the two remote angles added, each more than 0°.",

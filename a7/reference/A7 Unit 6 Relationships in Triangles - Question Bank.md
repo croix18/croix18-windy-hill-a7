@@ -110,7 +110,7 @@ the unit is planned. The printed keys in each lesson's `Keys` folder are generat
 
 *MA.8.GR.1.2*
 
-**Variation.**  Boards 1–2: one line, vertical then horizontal, both across zero; 3 votes on the axis error. The pattern breaks at 4 — slanted, with only the points on the grid — whole, then to the tenth (5), then only the expression (6), then from the origin (7); 8 carries an extra point; 9 is written. The independent set: horizontal, vertical, slanted whole, slanted to the tenth, from the origin, a map.
+**Variation.**  Boards 1–2: one line, vertical then horizontal, both across zero; 3 votes on the axis error. The pattern breaks at 4 — slanted, with only the points on the grid — whole, then to the tenth (5), then only the expression (6), then from the origin (7); 8 carries an extra point; 9 is written. The independent set: horizontal, vertical, slanted whole, slanted to the tenth, from the origin, a map to the tenth.
 
 **Read this once, when you plan the unit.**
 
@@ -143,7 +143,7 @@ the unit is planned. The printed keys in each lesson's `Keys` folder are generat
 
 *MA.8.GR.1.2*
 
-**Variation.**  Boards 1–2: a right triangle's perimeter, whole then to the tenth; 3 has no right angle and is split by its height, not in half; 4 votes on the perimeter errors. The pattern breaks at 5 — a map, and how much shorter the straight line is — then a rectangle's diagonal voted (6), a park map to the tenth (7), a map with an extra point (8); 9 is written. The independent set: a perimeter whole, a perimeter to the tenth, a parallelogram, straight against the streets, a map to the tenth, a rectangle's missing corner and its diagonal.
+**Variation.**  Boards 1–2: a right triangle's perimeter, whole then to the tenth; 3 has no right angle and is split by its height, not in half; 4 votes on the perimeter errors. The pattern breaks at 5 — a map, and how much shorter the straight line is — then a rectangle's diagonal voted (6), a park map to the tenth (7), a map with an extra point (8); 9 is written. The independent set: a triangle with no right angle, split by its height; a perimeter to the tenth; a parallelogram, every side by Notes I's rule; straight against the streets; a map to the tenth; a rectangle's diagonal.
 
 **Read this once, when you plan the unit.**
 

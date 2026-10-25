@@ -12,9 +12,9 @@
   {
    "n": 2,
    "title": "Warm-Up",
-   "sub": "On your own. Four minutes. No notes.",
+   "sub": "On your own. No notes.",
    "min": 4,
-   "note": "Q3 and Q4 are a pair: 5\u00b2 + 12\u00b2 = 169 = 13\u00b2, today's converse before it has a name. Say that in one sentence after the reveal and no more. Two minutes silent, then reveal.",
+   "note": "Q3 and Q4 are a pair: 6\u00b2 + 8\u00b2 = 100 = 10\u00b2, today's converse before it has a name. Say that in one sentence after the reveal and no more. Silent, then reveal.",
    "kind": "warmup"
   },
   {
@@ -54,7 +54,7 @@
    "title": "Notes",
    "sub": "",
    "min": 4,
-   "note": "The 3-4-5 triangle with a square on each side: 9 + 16 = 25. That is the Pythagorean Theorem \u2014 memorize it; 6.03 uses it. Turned around it is the converse, today's test: take the two shorter sides and the longest; if their squares match, the corner is square. 9, 15, 12 is right (81 + 144 = 225) even though the longest side is listed in the middle; 5, 6, 8 is not (61 is not 64). Equal squares \u21d2 right is the converse; unequal \u21d2 not right is the theorem itself, since every right triangle's squares match \u2014 say both, because the book's keys lean on the converse for the 'no'.\nOFF: 'Circle the longest side first. It is the only one that can be the hypotenuse.'",
+   "note": "The 3-4-5 triangle with a square on each side: 9 + 16 = 25. That is the Pythagorean Theorem \u2014 memorize it; 6.03 uses it. Turned around it is the converse, today's test: take the two shorter sides and the longest; if their squares match, the corner is square. 24, 40, 32 is right (576 + 1,024 = 1,600) even though the longest side is listed in the middle; 5, 6, 8 is not (61 is not 64). Equal squares \u21d2 right is the converse; unequal \u21d2 not right is the theorem itself, since every right triangle's squares match \u2014 say both, because the book's keys lean on the converse for the 'no'.\nOFF: 'Circle the longest side first. It is the only one that can be the hypotenuse.'",
    "kind": "notes"
   },
   {
@@ -110,7 +110,7 @@
    "title": "Your Turn",
    "sub": "Same steps, your numbers. Boards up when done.",
    "min": 2,
-   "note": "64 + 121 = 185, not 196, so not right \u2014 a board that says 'right' compared 185 with something other than 14\u00b2.",
+   "note": "64 + 121 = 185, not 196, so not right \u2014 a board that says 'right' added the sides, 8 + 11 = 19 > 14: the Triangle Inequality, not the converse (board 9).",
    "kind": "yourturn"
   },
   {
@@ -158,7 +158,7 @@
    "title": "Whiteboards   \u00b7   Question 3 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "Diagnostic. Option A is the equal case; options C and D are the wrong pair, listed so the first two numbers fool anyone who adds them. A split goes back to Notes I's middle set of sticks.",
+   "note": "Diagnostic. Option A is the equal case; option C is listed so its first two numbers fool anyone who adds them; option D's sides never meet. A split goes back to Notes I's three sets of sticks.",
    "kind": "wb"
   },
   {

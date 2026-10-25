@@ -6,8 +6,8 @@
    Hint choice has one right option and a reason for each wrong one; no Hint gives its own answer away; multiple choice and
    select-all mark their keys and name every wrong option; follow-through from a wrong part (a) is recognised; every arithmetic
    claim in a sentence is true; every figure and picture is drawn to its own numbers, each label nearest its own segment, crossing
-   no line and touching no other label (ruling 44). dump.json goes to verify.py, which works everything out again from the
-   printed text with Python's own arithmetic. */
+   no line and touching no other label (ruling 44); no question asks numbers a lesson showed (ruling 43). dump.json goes to
+   verify.py, which works everything out again from the printed text with Python's own arithmetic. */
 'use strict';
 const E = require('./engine.js'), C = require('./coach.js'), U = require('./unit.js'), FG = require('./fig.js'), W = C.Walk;
 const fs = require('fs'), path = require('path');
@@ -15,7 +15,7 @@ const NSETS = +(process.argv[2] || 3000), NDUMP = Math.min(NSETS, +(process.argv
 let nfail = 0; const fails = [];
 const fail = (seed, where, what) => { nfail++; if (fails.length < 60) fails.push(seed + ' ' + where + ': ' + what); };
 const { Q, qeq, qnum, qabs, decPlain, places } = E;
-const plain = h => String(h).replace(/<span class="fr"><span class="nu">([^<]*)<\/span><span class="de">([^<]*)<\/span><\/span>/g, '($1÷$2)').replace(/<sup[^>]*>(.*?)<\/sup>/g, '^$1').replace(/<[^>]+>/g, ' ').replace(/&nbsp;/g, ' ').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&').replace(/\s+/g, ' ').trim();
+const plain = h => String(h).replace(/\u00a0/g, ' ').replace(/<span class="fr"><span class="nu">([^<]*)<\/span><span class="de">([^<]*)<\/span><\/span>/g, '($1÷$2)').replace(/<sup[^>]*>(.*?)<\/sup>/g, '^$1').replace(/<[^>]+>/g, ' ').replace(/&nbsp;/g, ' ').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&').replace(/\s+/g, ' ').trim();
 const numType = q => places(q) >= 0 ? decPlain(q) : q.n + '/' + q.d;                        /* what a student types: 14.8, or 4/3 */
 /* the test's own section titles, read from its spec, and the shape of its practice paper */
 const SPEC = fs.readFileSync(path.join(__dirname, '..', '..', 'build', 'u6', 'unit.py'), 'utf8');
@@ -156,6 +156,19 @@ for (let seed = 1; seed <= NSETS; seed++) {
   if (G.sections.map(s => s.items.length).join() !== WANT.items) fail(seed, 'questions', G.sections.map(s => s.items.length).join());
   if (G.sections.map(s => s.items.reduce((t, it) => t + E.partsOf(it).length, 0)).join() !== WANT.parts) fail(seed, 'points', 'not 3, 6, 6, 3');
   if (G.sections.map(s => s.items.map(it => it.type).join()).join('|') !== WANT.types) fail(seed, 'types', G.sections.map(s => s.items.map(it => it.type).join()).join('|'));
+  /* ruling 43 on the test (the second review, 25 Oct 2026): no question asks numbers a lesson showed — question 2 offers no
+     right triangle a lesson showed whole as a right set, 4(a) is 5-12-13 or 9-12-15, and 4(b), 5 and 7 use no legs and no
+     hypotenuse-and-leg pair a warm-up, the notes, an example or a Your Turn worked */
+  { const [s1, s2] = [G.sections[0].items, G.sections[1].items];
+    s1[1].sets.forEach((s, i) => { if (s1[1].correct.indexOf(i) >= 0 && E.SHOWN_CONV.has(E.setKey(s))) fail(seed, 'Q2', 'a right set a lesson showed: ' + s.join(', ')); });
+    const [pa, pb] = s2[0].parts;
+    if (!E.TRIPLE_TEST.some(t => E.legKey(t[0], t[1]) === E.legKey(pa.prm.a, pa.prm.b))) fail(seed, 'Q4a', 'legs ' + pa.prm.a + ' and ' + pa.prm.b + ' are not a test triangle');
+    if (E.shownLeg(pb.prm.c, pb.prm.a)) fail(seed, 'Q4b', 'a hypotenuse and leg a lesson showed: ' + pb.prm.c + ', ' + pb.prm.a);
+    const p5 = s2[1].part;
+    if (p5.prm.ctx ? E.shownLeg(p5.prm.c, p5.prm.a) : E.SHOWN_LEGS.has(E.legKey(p5.prm.a, p5.prm.b))) fail(seed, 'Q5', 'numbers a lesson showed: ' + JSON.stringify(p5.prm));
+    const p7 = s2[3].parts[0];
+    if (E.SHOWN_LEGS.has(E.legKey(p7.prm.w, p7.prm.l))) fail(seed, 'Q7', 'legs a lesson showed: ' + p7.prm.w + ', ' + p7.prm.l);
+    counts.ruling43 = (counts.ruling43 || 0) + 1; }
   const D = seed <= NDUMP ? { seed, items: [] } : null;
   let qn = 0;
   G.sections.forEach((sec, si) => sec.items.forEach(it => {
@@ -253,6 +266,6 @@ for (let seed = 1; seed <= NSETS; seed++) {
 fs.writeFileSync(path.join(__dirname, 'dump.json'), JSON.stringify({ TITLES: E.TITLES, sets: dump }));
 console.log(counts.sets + ' sets: ' + counts.parts + ' typed parts, ' + counts.models + ' mistakes typed, ' + counts.forms + ' "Almost" forms, ' + counts.follow + ' follow-throughs, ' +
   counts.solLines + ' worked lines, ' + counts.walkSteps + ' Hint steps, ' + counts.mc + ' multiple choice, ' + counts.multi + ' select-all, ' + counts.labels + ' figure labels, ' +
-  counts.pictures + ' pictures, ' + counts.claims + ' arithmetic claims; ' + NDUMP + ' sets written to dump.json');
+  counts.pictures + ' pictures, ' + counts.claims + ' arithmetic claims; ruling 43 held in ' + (counts.ruling43 || 0) + ' sets; ' + NDUMP + ' sets written to dump.json');
 if (nfail) { console.log(nfail + ' PROBLEMS'); fails.forEach(f => console.log('  ' + f)); process.exit(1); }
 console.log('u6_check: ALL SOUND');

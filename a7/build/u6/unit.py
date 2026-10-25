@@ -7,8 +7,9 @@
 # teaching days. No transfer items and no Form A/B (both retired for new units by ruling 49).
 #
 # The unit's standing decisions (outline §"standing decisions") hold on every page: every square root a
-# student takes has a whole radicand up to 225 with no square factor (GR.1.1/1.2 Clarification 3, read
-# strictly), so a whole hypotenuse is 5, 10, 13 or 15 and the bigger triples appear only as the converse
+# student takes has a whole radicand up to 225 (GR.1.1/1.2's boundary; the lessons and papers take none with a
+# square factor, the page — the test — may, and its decimal is the answer), so a whole hypotenuse is 5, 10, 13 or
+# 15 (the lessons show 3-4-5 and 6-8-10; ruling 43 keeps the test to 5-12-13 and 9-12-15) and the bigger triples appear only as the converse
 # or as a missing leg; an irrational length is given exactly and to the nearest tenth when the words ask
 # for a measurement; no distance formula (a slanted distance is always the right triangle on the grid);
 # the converse tests the longest side; similar triangles by the scale factor k from Unit 5. Every answer
@@ -27,14 +28,14 @@ from figs import right_triangle, grid, grid_poly, similar_pair, shadow
 
 
 def _gr13():
-    # question 1 — the three named ways to test the wrong thing: the equal case, the first two listed,
-    # and the longest with another; only the two shorter sides can fail
+    # question 1 — the named ways to judge three lengths wrongly: the equal case, the first two listed, and
+    # sides that need not meet (Florida's own); only the two shorter sides can fail
     q1 = dict(stem="Which set of side lengths can form a triangle?",
               choices=["4 cm, 7 cm, 11 cm", "12 cm, 5 cm, 6 cm", "6 cm, 8 cm, 13 cm", "3 cm, 10 cm, 15 cm"], correct=2, answer="C", space=0.5,
               errors={"A": "4 + 7 = 11 counted — equal lies flat [6.01 Notes I]",
                       "B": "added the first two listed, 12 + 5 > 6 — but 5 + 6 = 11 is less than 12 [MA.8.GR.1.3: test the two shorter]",
-                      "D": "added the longest with another, 15 + 3 > 10 — but 3 + 10 = 13 is less than 15 [MA.8.GR.1.3: test the two shorter]"},
-              why="The two shorter sides against the longest: 6 + 8 = 14, more than 13. A lies flat; B and D pass only when the wrong pair is added.",
+                      "D": "3 + 10 = 13 is less than 15: those sides cannot meet [Florida B1G-M, GR.1.3: believing the sides need not meet at the vertices]"},
+              why="The two shorter sides against the longest: 6 + 8 = 14, more than 13. A lies flat; B passes only when the first two listed are added; D's two shorter sides cannot reach across 15.",
               check=("many", ("true", "6 + 8 > 13"), ("true", "4 + 7 == 11"), ("true", "5 + 6 < 12"), ("true", "3 + 10 < 15")))
     # question 2 — FAST's multiselect, which never says how many: one right set with its longest side
     # listed first, one the class has not met, a near miss, and two that pass only the Triangle Inequality
@@ -52,7 +53,7 @@ def _gr13():
               errors={"A": "between the two given sides [6.01 Notes II: between the difference and the sum]",
                       "C": "≤ counts the flat cases: a side of exactly 9 or 21 lies flat [6.01 Notes I: equal is not a triangle]",
                       "D": "only the sum: a side of 9 inches or less cannot reach across [6.01 Notes II: long enough to reach]"},
-              why="15 − 6 = 9 and 15 + 6 = 21, never equal to either.",
+              why="15 − 6 = 9 and 15 + 6 = 21, never equal to either. A stays between the two given sides; C counts the flat cases, 9 and 21; D has only the sum.",
               check=("many", ("eq", "15 - 6", "9"), ("eq", "15 + 6", "21")))
     return [q1, q2, q3]
 
@@ -70,13 +71,13 @@ def _gr11():
     # question 6 — the hypotenuse is the side across from the square corner, whatever way the triangle is turned
     q6 = dict(stem="Which equation can be used to find x?",
               fig=right_triangle(4, 65 ** 0.5, la="4", lb="x", lc="9", turn=200, inches=1.7),
-              choices=["$4 + x = 9$", "$4^{2} + 9^{2} = x^{2}$", "$4^{2} + x^{2} = 2 \\cdot 9$", "$4^{2} + x^{2} = 9^{2}$"], correct=3, answer="D", space=0.4,
+              choices=["$4 + x = 9$", "$4^{2} + 9^{2} = x^{2}$", "$4^{2} + x^{2} = 9$", "$4^{2} + x^{2} = 9^{2}$"], correct=3, answer="D", space=0.4,
               errors={"A": "the sides added, not their squares [MA.8.GR.1.1: the theorem is about squares]",
                       "B": "the hypotenuse put with the legs [Florida B1G-M, GR.1.1: misidentifying the hypotenuse]",
-                      "C": "doubled the 9 instead of squaring it — 9² means 9 × 9 [Florida B1G-M, GR.1.1: doubling versus squaring]"},
-              why="The 9 is across from the right angle, so it is c and stands alone: x² = 81 − 16 = 65.",
+                      "C": "squared the legs but not the hypotenuse — the 9 is a side too: 9² [Florida B1G-M, GR.1.1: calculation errors with the theorem]"},
+              why="The 9 is across from the right angle, so it is c and stands alone: x² = 81 − 16 = 65. A adds the sides, not their squares; B puts the hypotenuse with the legs; C leaves the 9 unsquared.",
               check=("many", ("eq", "sqrt(9**2 - 4**2)", "sqrt(65)"), ("true", "sqrt(4**2 + 9**2) != sqrt(65)"),
-                     ("true", "9 - 4 != sqrt(65)"), ("true", "4**2 + 65 != 2*9")))
+                     ("true", "9 - 4 != sqrt(65)"), ("true", "4**2 + 65 != 9")))
     q7 = dict(not_bound=True, stem="A rectangular garden measures 9 meters by 10 meters. A path runs straight across it from one corner to the opposite corner.",
               parts=[dict(label="a", stem="How long is the path, in meters? Round your answer to the nearest tenth.", answer="13.5 m  (exactly √181 m)",
                           why="the path is the hypotenuse: 81 + 100 = 181", check=("many", ("eq", "9**2 + 10**2", "181"), ("approx", "sqrt(181)", "13.5", "0.05")), space=0.6),
@@ -126,7 +127,7 @@ def _gr24():
                errors={"B": "added 4 to every side [6.07 Notes I: similar means multiplied by one k, not added]",
                        "C": "checked two ratios, not three: 18 ÷ 10 is not 2 [6.07 Notes I: all three ratios]",
                        "D": "kept two sides the same [Florida B1G-M, GR.2.4: similar triangles assumed to have equal sides]"},
-               why="Every side × 2: 12/6 = 14/7 = 20/10.",
+               why="Every side × 2: 12/6 = 14/7 = 20/10. B adds 4 to every side; C passes two ratios but not the third, 18 ÷ 10; D keeps two sides the same.",
                check=("many", ("eq", "F(12,6)", "2"), ("eq", "F(14,7)", "2"), ("eq", "F(20,10)", "2"),
                       ("true", "F(10,6) != F(11,7)"), ("true", "F(18,10) != 2"), ("true", "F(12,10) != 1")))
     return [q12, q13, q14]
@@ -165,7 +166,7 @@ U = dict(
                          ["the hypotenuse", "square the legs, add, take the root", "legs 6 and 8: 36 + 64 = 100, c = 10"],
                          ["a leg", "square, subtract from c², take the root", "c = 17 and a leg 15: 289 − 225 = 64, the leg is 8"],
                          ["a length that is not whole", "the same, then the root to the nearest tenth", "legs 3 and 5: 9 + 25 = 34, c = √34 ≈ 5.8"]])),
-                     "**Exact, or to the nearest tenth.**  $\\sqrt{34}$ is the exact length; 5.8 is that length to the nearest tenth, the one to give when a question asks for a measurement. Every root on this unit's papers is of a whole number up to 225 with no square factor, so $\\sqrt{34}$ is already as simple as it gets. When a question asks for the nearest tenth, the decimal is the answer.",
+                     "**Exact, or to the nearest tenth.**  $\\sqrt{34}$ is the exact length; 5.8 is that length to the nearest tenth, the one to give when a question asks for a measurement. Every root in this unit is of a whole number up to 225. When a question asks for the nearest tenth, the decimal is the answer — a root is never simplified here.",
                      "**Check the size.**  A leg is shorter than the hypotenuse. A leg that comes out longer than c was found by adding the squares — a leg is found by subtracting.",
                      "**In a story: find the right angle first; the side across from it is c.**  A ladder against a wall (the wall meets the ground square, so the ladder is c), the diagonal of a rectangle, a ramp over its run, the size of a screen (its diagonal). A 10-ft ladder with its foot 3 ft from the wall reaches $\\sqrt{100 - 9} = \\sqrt{91} \\approx 9.5$ ft up the wall. Round once, at the end."]),
         dict(title="3.   Distance on the Coordinate Plane", right="Lessons 5–6 · a slanted distance is a hypotenuse",
@@ -195,11 +196,11 @@ U = dict(
                  ("Triangle Inequality Theorem", "the two shorter sides of a triangle add to more than the longest side"),
                  ("right triangle, legs, hypotenuse", "a triangle with a right angle; the two sides that make the right angle; the side across from it, always the longest"),
                  ("Pythagorean Theorem", "in a right triangle, $a^{2} + b^{2} = c^{2}$"),
-                 ("converse of the Pythagorean Theorem", "if the two shorter sides' squares add to the longest side's square, the triangle is a right triangle"),
+                 ("converse of the Pythagorean Theorem", "if $a^{2} + b^{2} = c^{2}$, c the longest side, the triangle is right"),
                  ("Pythagorean triple", "three whole numbers that are the sides of a right triangle, such as 5, 12, 13"),
                  ("distance", "the length of the segment between two points; never negative"),
                  ("perimeter", "the distance around a figure: every side added"),
-                 ("similar triangles", "triangles whose matching angles are equal and whose matching sides are in one ratio"),
+                 ("similar triangles", "matching angles are equal and matching sides are in one ratio"),
                  ("corresponding sides", "a side of one triangle and the side of a similar triangle that matches it"),
                  ("scale factor (k)", "copy ÷ original: every side of the copy is k times the side it matches"),
                  ("indirect measurement", "finding a length you cannot reach from similar triangles you can measure"),
@@ -245,12 +246,12 @@ U = dict(
                  check=("many", ("eq", "11**2 - 8**2", "57"), ("approx", "sqrt(57)", "7.5", "0.05")), space=0.5),
             dict(stem="Which equation can be used to find x?",
                  fig=right_triangle(7, 95 ** 0.5, la="7", lb="x", lc="12", turn=150, inches=1.7),
-                 choices=["$7^{2} + 12^{2} = x^{2}$", "$7 + x = 12$", "$7^{2} + x^{2} = 12^{2}$", "$7^{2} + x^{2} = 2 \\cdot 12$"], correct=2, answer="C", space=0.4,
+                 choices=["$7^{2} + 12^{2} = x^{2}$", "$7 + x = 12$", "$7^{2} + x^{2} = 12^{2}$", "$7^{2} + x^{2} = 12$"], correct=2, answer="C", space=0.4,
                  errors={"A": "the hypotenuse put with the legs [Florida B1G-M, GR.1.1: misidentifying the hypotenuse]",
                          "B": "the sides added, not their squares [MA.8.GR.1.1: the theorem is about squares]",
-                         "D": "doubled the 12 instead of squaring it — 12² means 12 × 12 [Florida B1G-M, GR.1.1: doubling versus squaring]"},
+                         "D": "squared the legs but not the hypotenuse — the 12 is a side too: 12² [Florida B1G-M, GR.1.1: calculation errors with the theorem]"},
                  why="The 12 is across from the right angle, so it is c and stands alone: x² = 144 − 49 = 95.",
-                 check=("many", ("eq", "12**2 - 7**2", "95"), ("true", "7**2 + 12**2 != 95"), ("true", "12 - 7 != sqrt(95)"), ("true", "7**2 + 95 != 2*12"))),
+                 check=("many", ("eq", "12**2 - 7**2", "95"), ("true", "7**2 + 12**2 != 95"), ("true", "12 - 7 != sqrt(95)"), ("true", "7**2 + 95 != 12"))),
             dict(stem="Ana finds the missing leg of a right triangle whose hypotenuse is 5 cm and whose other leg is 3 cm. She writes $3^{2} + 5^{2} = 34$, so the leg is about 5.8 cm. What did she do wrong? Find the leg.",
                  answer="She added the squares, and a leg cannot be longer than the 5-cm hypotenuse. Subtract: 25 − 9 = 16, so the leg is 4 cm.",
                  why="the error named and the leg found", check=("eq", "sqrt(5**2 - 3**2)", "4"), space=0.9),

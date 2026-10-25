@@ -85,7 +85,7 @@ const M = h => '<span class="m" role="img" aria-label="' + esc(speakH(h)) + '">'
 const fr = (n, d) => '<span class="fr"><span class="nu">' + n + '</span><span class="de">' + d + '</span></span>';
 const sqrtH = h => '<span class="rad"><span class="rg">√</span><span class="rc">' + h + '</span></span>';
 const X = '<i>x</i>';
-const pt = (x, y) => '(' + minus(String(x)) + ', ' + minus(String(y)) + ')';         /* a point: (−6, 1) */
+const pt = (x, y) => '(' + minus(String(x)) + ',\u00a0' + minus(String(y)) + ')';         /* a point: (−6, 1), its two numbers held together by a no-break space (the second review: "(2, / 9)") */
 /* the exact length √n as printed: the radical when n has no square factor; otherwise no radical is printed at all */
 const rootOK = n => squareFree(n) && !isSquare(n);
 /* a scale factor, written "1.5" or "4/3", exactly; and as printed: a decimal when it ends, else a fraction — inside a math
@@ -98,14 +98,15 @@ const kOut = k => places(k) >= 0 ? numStr(k) : M(fr(String(k.n), String(k.d)));
 /* returns {ok, val (exact, or null), f (its value as a number), form: 'num' | 'root' | 'expr', n (a lone root's radicand), text}
    or {ok: false, msg} or {ok: false, blank: true} */
 const UNITW = ['square units?', 'units?', 'blocks?', 'centimeters?', 'cm', 'millimeters?', 'mm', 'meters?', 'm', 'kilometers?', 'km', 'inch(?:es)?', 'in\\.?',
-  'feet', 'foot', 'ft\\.?', 'yards?', 'yd\\.?', 'miles?', 'mi', 'long', 'tall', 'high', 'shorter', 'away'];
+  'feet', 'foot', 'ft\\.?', 'yards?', 'yds\\.?', 'yd\\.?', 'miles?', 'mi', 'u', 'long', 'tall', 'high', 'shorter', 'away'];
 const UNITRE = new RegExp('(\\d|\\))\\s*(?:(?:' + UNITW.join('|') + ')(?![a-z])\\s*)+$', 'i');
 function tidy(text) {
   let t = String(text == null ? '' : text).trim();
   t = t.replace(/\.\s*$/, '').trim();                                              /* a sentence's full stop */
+  t = t.replace(/([\d)])\s*(?:'|′|’)\s*$/, '$1');                                     /* a foot mark: 60' */
   t = t.replace(UNITRE, '$1').trim().replace(/\.\s*$/, '');
   t = t.replace(/^\s*(?:about|approximately|approx\.?|around|it is|it's|the answer is)\s+/i, '');
-  t = t.replace(/^\s*(?:[a-z]{1,2}\s*)?[=≈~]\s*/i, '');                          /* "x = 21", "h ≈ 14.8", "≈ 9.2" */
+  t = t.replace(/^\s*(?:[a-z]{1,2}|perimeter|distance|height|length|path|side|answer)?\s*[=≈~]\s*/i, '');   /* "x = 21", "h ≈ 14.8", "≈ 9.2", "perimeter = 27.7" */
   t = t.replace(/[−–—]/g, '-').replace(/[×✕✖·•⋅]/g, '*').replace(/÷/g, '/').replace(/\s+/g, ' ');
   t = t.replace(/²/g, '^2').replace(/sqrt/gi, '√').replace(/\bsq\.?\s*rt\b/gi, '√').replace(/\broot\b/gi, '√');
   return t.trim();
@@ -227,6 +228,19 @@ const CONVERSE = [[3, 4, 5], [6, 8, 10], [9, 12, 15], [12, 16, 20], [15, 20, 25]
   [7, 24, 25], [14, 48, 50], [20, 21, 29], [12, 35, 37], [9, 40, 41], [28, 45, 53], [11, 60, 61], [33, 56, 65], [16, 63, 65]];
 /* legs of a slanted segment on the grid with a whole length (the four triples to 15, either way round) */
 const LEGS = [[3, 4], [4, 3], [6, 8], [8, 6], [5, 12], [12, 5], [9, 12], [12, 9]];
+/* Ruling 43 on the test (the second review, 25 Oct 2026): the page never asks numbers a lesson SHOWED — a warm-up, the notes,
+   a worked example or its Your Turn. Under the 225 cap only four right triangles have a whole hypotenuse; the lessons show 3-4-5
+   and 6-8-10 and keep 5-12-13 and 9-12-15 out of their warm-ups, notes and examples (9-12-15 is 6.06's Your Turn 1, worked by
+   the class), so the test's whole hypotenuse is 13 or 15. The legs, and the hypotenuse-and-leg pairs, the lessons show: */
+const TRIPLE_TEST = [[5, 12, 13], [9, 12, 15]];
+const SHOWN_LEGS = new Set(['3,4', '6,8', '9,12', '7,9', '5,11', '2,13', '7,10', '5,6', '4,7', '2,7', '3,5', '5,7', '3,8', '2,3']);
+const SHOWN_CL = new Set(['17/15', '15/8', '11/6', '10/6', '25/24', '10/3', '12/5', '13/6', '25/20']);
+const SHOWN_TRI = new Set(['3,4,5', '6,8,10', '8,15,17', '7,24,25', '15,20,25', '12,16,20']);   /* a whole leg's triangle, shown */
+/* the right triangles a lesson shows whole (6.01 Notes III and Example 2, 6.03 Notes II–III, the 6.04, 6.05 and 6.07 warm-ups,
+   6.06 Your Turn 1, 6.07 Notes I): question 2 never offers one as its right set */
+const SHOWN_CONV = new Set(['3,4,5', '6,8,10', '7,24,25', '8,15,17', '9,12,15', '9,40,41', '12,16,20', '12,35,37', '15,20,25']);
+const legKey = (a, b) => [a, b].sort((x, y) => x - y).join(',');
+const shownLeg = (c, a) => { const b = isqrt(c * c - a * a); return SHOWN_CL.has(c + '/' + a) || (b * b === c * c - a * a && SHOWN_TRI.has([a, b, c].sort((x, y) => x - y).join(','))); };
 const isRight = s => { const t = s.slice().sort((a, b) => a - b); return t[0] * t[0] + t[1] * t[1] === t[2] * t[2]; };
 const isTri = s => { const t = s.slice().sort((a, b) => a - b); return t[0] + t[1] > t[2]; };
 const sorted = s => s.slice().sort((a, b) => a - b);
@@ -240,10 +254,13 @@ function q1(seed) {
     const flat = T.until(() => { const c = T.ri(8, 20), a = T.ri(2, c - 2); return [a, c - a, c]; }, s => s[0] < s[1]);
     const first = T.until(() => { const L = T.ri(9, 20), s1 = T.ri(2, L - 4), s2 = T.ri(s1 + 1, L - 1); return [L, s1, s2]; }, s => s[1] + s[2] < s[0]);
     const lng = T.until(() => { const L = T.ri(9, 20), s1 = T.ri(2, L - 4), s2 = T.ri(s1 + 1, L - 1); return [s1, s2, L]; }, s => s[0] + s[1] < s[2]);
-    const okOrder = T.pick([[0, 1, 2], [2, 0, 1], [0, 2, 1], [1, 2, 0], [2, 1, 0]]), shownOk = okOrder.map(i => ok[i]);
-    const flatShown = T.r() < 0.5 ? flat : [flat[1], flat[0], flat[2]];
-    const firstShown = T.r() < 0.5 ? first : [first[0], first[2], first[1]];
-    const sets = [{ s: shownOk, tag: 'ok' }, { s: flatShown, tag: 'flat' }, { s: firstShown, tag: 'firstTwo' }, { s: lng, tag: 'longPlus' }];
+    /* the order a set is listed in gives nothing away (the second review: the key was the only set with its longest side in the
+       middle in 40% of sets): the right one and the flat one in any order; the first-two set with its longest side first or
+       second, so adding the first two listed passes it; the short set with its longest side last, so that error passes no other */
+    const shownOk = T.shuffle(ok.slice()), flatShown = T.shuffle(flat.slice());
+    const rest = T.shuffle([first[1], first[2]]), firstShown = T.r() < 0.5 ? [first[0], rest[0], rest[1]] : [rest[0], first[0], rest[1]];
+    const shortShown = T.shuffle([lng[0], lng[1]]).concat([lng[2]]);
+    const sets = [{ s: shownOk, tag: 'ok' }, { s: flatShown, tag: 'flat' }, { s: firstShown, tag: 'firstTwo' }, { s: shortShown, tag: 'short' }];
     const order = T.shuffle([0, 1, 2, 3]), shown = order.map(i => sets[i]);
     return { type: 'mc', fam: 'triSet', prm: { u, sets: shown.map(x => x.s), tags: shown.map(x => x.tag) }, stem: 'Which set of side lengths can form a triangle?',
       opts: shown.map(x => x.s.map(v => v + ' ' + u).join(', ')), sets: shown.map(x => x.s), tags: shown.map(x => x.tag), correct: order.indexOf(0),
@@ -253,17 +270,17 @@ function q1(seed) {
 function q2(seed) {
   return D('q2', seed, T => {
     const R = T.pick([1, 2, 2, 2, 3]);
-    const trips = T.shuffle(CONVERSE.slice()).slice(0, R);
+    const trips = T.shuffle(CONVERSE.filter(t => !SHOWN_CONV.has(t.join(',')))).slice(0, R);
     /* one right set always lists its longest side first: the set a student who tests the last number misses */
     const rights = trips.map((t, i) => ({ s: i === 0 ? [t[2], ...T.shuffle([t[0], t[1]])] : T.shuffle(t.slice()), tag: 'right' }));
     const kinds = T.shuffle(['near', 'consec', 'remember', 'triOnly', 'flat']).slice(0, 5 - R);
     const pool = CONVERSE.filter(t => !trips.includes(t));
     const make = {
       near: () => { const t = T.pick(pool); return T.shuffle([t[0], t[1], t[2] + 1]); },
-      consec: () => { const n = T.ri(4, 12); return [n, n + 1, n + 2]; },
-      remember: () => { const t = T.pick(pool); const d = t[2] + T.ri(2, 4); return [t[0], t[1], d]; },
+      consec: () => { const n = T.ri(4, 12); return T.shuffle([n, n + 1, n + 2]); },
+      remember: () => { const t = T.pick(pool); const d = t[2] + T.ri(2, 4); return T.shuffle([t[0], t[1], d]); },
       triOnly: () => T.until(() => { const c = T.ri(6, 20), a = T.ri(3, c - 1), b = T.ri(a + 1, c); return T.shuffle([a, b, c]); }, s => new Set(s).size === 3 && isTri(s) && !isRight(s)),
-      flat: () => { const a = T.ri(3, 12), b = T.ri(a + 1, 16); return [a, b, a + b]; }
+      flat: () => { const a = T.ri(3, 12), b = T.ri(a + 1, 16); return T.shuffle([a, b, a + b]); }
     };
     const wrongs = kinds.map(k => ({ s: T.until(make[k], s => !isRight(s) && (k === 'flat' || isTri(s))), tag: k }));
     const all = rights.concat(wrongs), order = T.shuffle([0, 1, 2, 3, 4]), shown = order.map(i => all[i]);
@@ -286,17 +303,32 @@ function q3(seed) {
 /* ---------- section 2: the Pythagorean Theorem */
 function q4(seed) {
   return D('q4', seed, T => {
-    const t = T.pick(TRIPLE15), sw = T.r() < 0.5, a = sw ? t[1] : t[0], b = sw ? t[0] : t[1], ua = T.pick(['in', 'cm', 'm', 'ft']);
-    const [c2, g] = T.pick(LEGWHOLE), ub = T.pick(['m', 'ft', 'cm', 'in']), bb = isqrt(c2 * c2 - g * g);
+    const t = T.pick(TRIPLE_TEST), sw = T.r() < 0.5, a = sw ? t[1] : t[0], b = sw ? t[0] : t[1], ua = T.pick(['in', 'cm', 'm', 'ft']);
+    const [c2, g] = T.pick(LEGWHOLE.filter(([c, a]) => !shownLeg(c, a))), ub = T.pick(['m', 'ft', 'cm', 'in']), bb = isqrt(c2 * c2 - g * g);
     const pa = numPart('a', 'hypWhole', { a, b, u: ua }, 'Its legs are ' + a + ' ' + PL(ua) + ' and ' + b + ' ' + PL(ua) + '. How long is the hypotenuse?', Q(t[2]), { unit: ua, exact: t[2] });
     const pb = numPart('b', 'legWhole', { c: c2, a: g, u: ub }, 'Its hypotenuse is ' + N(c2) + ' ' + PL(ub) + ' and one leg is ' + N(g) + ' ' + PL(ub) + '. How long is the other leg?', Q(bb), { unit: ub, exact: bb });
     return { type: 'parts', stem: 'Find the missing side of each right triangle.', parts: [pa, pb] };
   });
 }
+/* a leg in a story (6.04): the ladder, the ramp or the kite string is the hypotenuse, and one leg lies along the ground */
+const STORIES = {
+  ladder: { u: 'ft', c: [8, 16], a: [2, 6], stem: (c, a) => (/^(8|11|18)/.test(String(c)) ? 'An ' : 'A ') + c + '-foot ladder leans against a wall. Its foot is ' + a + ' feet from the wall. How high up the wall does the ladder reach, in feet? ' + ROUND, what: 'ladder', ground: 'from the wall' },
+  ramp: { u: 'ft', c: [6, 16], a: [5, 15], stem: (c, a) => 'A ramp is ' + c + ' feet long. It runs ' + a + ' feet along the ground. How high does the ramp rise, in feet? ' + ROUND, what: 'ramp', ground: 'along the ground' },
+  kite: { u: 'm', c: [10, 20], a: [6, 16], stem: (c, a) => 'A kite flies on ' + c + ' meters of tight string. It is straight above a spot ' + a + ' meters across from the hand that holds the string, level with the hand. How high above the hand is the kite, in meters? ' + ROUND, what: 'string', ground: 'across' }
+};
 function q5(seed) {
   return D('q5', seed, T => {
+    if (T.r() < 0.5) {
+      const ctx = T.pick(Object.keys(STORIES)), S0 = STORIES[ctx];
+      /* the ramp rises less than it runs; the ladder reaches higher than its foot is out; a kite flies above at least a third
+         of the string's length */
+      const [c, a] = T.until(() => [T.ri(S0.c[0], S0.c[1]), T.ri(S0.a[0], S0.a[1])], ([c, a]) => { const m = c * c - a * a, b = Math.sqrt(m);
+        return a < c && m > 0 && m <= 225 && !isSquare(m) && !shownLeg(c, a) && (ctx !== 'ramp' || b < a / 2) && (ctx !== 'ladder' || b > 2 * a) && (ctx !== 'kite' || b >= c / 3); });
+      const m = c * c - a * a;
+      return { type: 'solo', stem: S0.stem(c, a), part: numPart('', 'legTenth', { c, a, u: S0.u, ctx }, '', sqrtTenth(m), { unit: S0.u, tenth: true, exact: Math.sqrt(m), rad: m }) };
+    }
     const u = T.pick(['cm', 'in', 'm', 'ft']);
-    const [a, b] = T.until(() => [T.ri(2, 14), T.ri(2, 14)], ([a, b]) => a * a + b * b <= 225 && !isSquare(a * a + b * b));
+    const [a, b] = T.until(() => [T.ri(2, 14), T.ri(2, 14)], ([a, b]) => a * a + b * b <= 225 && !isSquare(a * a + b * b) && !SHOWN_LEGS.has(legKey(a, b)));
     const n = a * a + b * b;
     const part = numPart('', 'hypTenth', { a, b, u }, '', sqrtTenth(n), { unit: u, tenth: true, exact: Math.sqrt(n), rad: n });
     return { type: 'solo', stem: 'A right triangle has legs of ' + a + ' ' + PL(u) + ' and ' + b + ' ' + PL(u) + '. How long is the hypotenuse, in ' + PL(u) + '? ' + ROUND, part };
@@ -308,7 +340,7 @@ function q6(seed) {
     const [a, c] = T.until(() => { const c = T.ri(5, 20); return [T.ri(3, c - 1), c]; }, ([a, c]) => { const x = Math.sqrt(c * c - a * a); return c * c - a * a <= 225 && Math.min(a, x) >= 0.3 * Math.max(a, x); });
     const x = Math.sqrt(c * c - a * a), xFirst = T.r() < 0.5, turn = T.pick([0, 90, 180, 270]), flip = T.r() < 0.5;
     const opts = [{ h: a + ' + ' + X + ' = ' + c, tag: 'sumSides' }, { h: sq(a) + ' + ' + sq(c) + ' = ' + X + sup(2), tag: 'hypLeg' },
-      { h: sq(a) + ' + ' + X + sup(2) + ' = 2 · ' + c, tag: 'doubled' }, { h: sq(a) + ' + ' + X + sup(2) + ' = ' + sq(c), tag: 'ok' }];
+      { h: sq(a) + ' + ' + X + sup(2) + ' = ' + c, tag: 'cBare' }, { h: sq(a) + ' + ' + X + sup(2) + ' = ' + sq(c), tag: 'ok' }];
     const order = T.shuffle([0, 1, 2, 3]);
     const fig = { kind: 'rtri', legs: xFirst ? [x, a] : [a, x], labs: xFirst ? ['x', String(a), String(c)] : [String(a), 'x', String(c)], vals: xFirst ? [null, a, c] : [a, null, c], turn, flip };
     return { type: 'mc', fam: 'eqChoice', prm: { a, c, xFirst, turn, flip }, stem: 'Which equation can be used to find ' + X + '?', fig,
@@ -323,7 +355,7 @@ function q7(seed) {
   return D('q7', seed, T => {
     const place = T.pick(Object.keys(PLACES)), [u, lo] = T.pick(PLACES[place]);
     /* w the shorter side, the longer no more than five times it; the words give the two sides in either order ("9 by 13") */
-    const [w, l] = T.until(() => [T.ri(lo, 13), T.ri(lo + 1, 14)], ([w, l]) => w < l && l <= 5 * w && w * w + l * l <= 225 && !isSquare(w * w + l * l));
+    const [w, l] = T.until(() => [T.ri(lo, 13), T.ri(lo + 1, 14)], ([w, l]) => w < l && l <= 5 * w && w * w + l * l <= 225 && !isSquare(w * w + l * l) && !SHOWN_LEGS.has(legKey(w, l)));
     const n = w * w + l * l, prm = { w, l, u, place }, [s1, s2] = T.r() < 0.5 ? [w, l] : [l, w];
     const pa = numPart('a', 'diag', prm, 'How long is the path, in ' + PL(u) + '? ' + ROUND, sqrtTenth(n), { unit: u, tenth: true, exact: Math.sqrt(n), rad: n });
     const pb = numPart('b', 'shorter', prm, 'How much shorter is the path than walking along two sides of the ' + place + '? ' + ROUND, plusSqrtTenth(w + l, n, -1), { unit: u, tenth: true, exact: w + l - Math.sqrt(n) });
@@ -425,21 +457,27 @@ function q12(seed) {
   });
 }
 const SUNLIT = [['girl', 'tree'], ['boy', 'flagpole'], ['man', 'building'], ['woman', 'light pole'], ['student', 'tree'], ['girl', 'statue']];
-/* a grown-up 5 to 6 ft tall; a girl, a boy or a student 4 to 5.5 ft */
+/* a grown-up 5 to 6 ft tall; a girl, a boy or a student 4 to 5.5 ft; and how tall each thing can be (the second review: light
+   poles up to 72 ft, statues of 66 ft) */
 const HEIGHTS = { man: ['5.5', '6'], woman: ['5', '5.5', '6'], girl: ['4', '4.5', '5', '5.5'], boy: ['4', '4.5', '5', '5.5'], student: ['4.5', '5', '5.5'] };
+const TALLEST = { tree: 60, flagpole: 50, building: 90, 'light pole': 40, statue: 30, pole: 40 };
+const ftw = v => N(v) + ' ' + (String(v) === '1' ? 'foot' : 'feet');
 function q13(seed) {
   return D('q13', seed, T => {
     if (T.r() < 0.6) {
-      const [who, what] = T.pick(SUNLIT), h1 = T.pick(HEIGHTS[who]), s1 = T.pick(['2', '2.5', '3', '4', '5', '6', '8']), k = T.ri(3, 12);
+      const [who, what] = T.pick(SUNLIT), h1 = T.pick(HEIGHTS[who]), s1 = T.pick(['2', '2.5', '3', '4', '5', '6', '8']);
+      const k = T.until(() => T.ri(3, 12), k => qnum(qdec(h1)) * k <= TALLEST[what] && qnum(qdec(h1)) * k >= 12);
       const S2 = qmul(qdec(s1), Q(k)), H2 = qmul(qdec(h1), Q(k));
       const prm = { mode: 'shadow', who, what, h1, s1, s2: decPlain(S2) };
-      return { type: 'solo', stem: 'A ' + who + ' ' + N(h1) + ' ft tall casts a shadow ' + N(s1) + ' ft long. At the same moment, a ' + what + ' casts a shadow ' + numStr(S2) + ' ft long. How tall is the ' + what + '?',
+      return { type: 'solo', stem: 'A ' + who + ' ' + ftw(h1) + ' tall casts a shadow ' + ftw(s1) + ' long. At the same moment, a ' + what + ' casts a shadow ' + ftw(numStr(S2)) + ' long. How tall is the ' + what + '?',
         part: numPart('', 'shadow', prm, '', H2, { unit: 'ft', exact: qnum(H2) }), fig: { kind: 'shadow', h1: +h1, s1: +s1, s2: qnum(S2), h2: qnum(H2), lab: [N(h1) + ' ft', N(s1) + ' ft', numStr(S2) + ' ft', 'h'], what: [who, what] } };
     }
-    const name = T.pick(NAMES), what = T.pick(['tree', 'flagpole', 'pole', 'building']), h1 = T.pick(['4', '4.5', '5', '5.5', '6']), d1 = T.pick(['2', '2.5', '3', '4', '5']), k = T.ri(3, 10);
+    /* a student's eyes: 4 to 5.5 ft above the ground (6 ft is a man of 6 ft 4 in) */
+    const name = T.pick(NAMES), what = T.pick(['tree', 'flagpole', 'pole', 'building']), h1 = T.pick(['4', '4.5', '5', '5.5']), d1 = T.pick(['2', '2.5', '3', '4', '5']);
+    const k = T.until(() => T.ri(3, 10), k => qnum(qdec(h1)) * k <= TALLEST[what] && qnum(qdec(h1)) * k >= 12);
     const D2 = qmul(qdec(d1), Q(k)), H2 = qmul(qdec(h1), Q(k));
     const prm = { mode: 'mirror', name, what, h1, d1, d2: decPlain(D2) };
-    return { type: 'solo', stem: name + '’s eyes are ' + N(h1) + ' ft above the ground. Standing ' + N(d1) + ' ft from a mirror on the ground, ' + name + ' sees in it the top of a ' + what + ' that stands ' + numStr(D2) + ' ft beyond the mirror. The two right triangles are similar. How tall is the ' + what + '?',
+    return { type: 'solo', stem: name + '’s eyes are ' + ftw(h1) + ' above the ground. Standing ' + ftw(d1) + ' from a mirror on the ground, ' + name + ' sees in it the top of a ' + what + ' that stands ' + ftw(numStr(D2)) + ' beyond the mirror. The two right triangles are similar. How tall is the ' + what + '?',
       part: numPart('', 'mirror', prm, '', H2, { unit: 'ft', exact: qnum(H2) }), fig: { kind: 'mirror', h1: +h1, d1: +d1, d2: qnum(D2), h2: qnum(H2), lab: [N(h1) + ' ft', N(d1) + ' ft', numStr(D2) + ' ft', 'h'], what: [name, what] } };
   });
 }
@@ -478,6 +516,7 @@ function ansHtml(p) { return M(numStr(p.ans)) + (p.unit ? ' ' + esc(p.unit) : ''
 
 const api = { UNIT_ID, TITLES, NAMES, UNITS, Q, qadd, qsub, qmul, qdiv, qneg, qabs, qeq, qlt, qnum, qpow, qdec, qv, places, decPlain, numStr, N, commas,
   isqrt, isSquare, squareFree, roundSqrt, sqrtTenth, sqrtCut, plusSqrtTenth, rootOK, qk, kIn, kOut, esc, M, speakH, fr, sqrtH, sup, sq, minus, pt, X,
-  tidy, parse, evalA, readAns, readNum, setClean, generate, partsOf, ansHtml, isRight, isTri, sorted, setKey, crosses, TRIPLE15, LEGWHOLE, CONVERSE, LEGS };
+  tidy, parse, evalA, readAns, readNum, setClean, generate, partsOf, ansHtml, isRight, isTri, sorted, setKey, crosses, TRIPLE15, LEGWHOLE, CONVERSE, LEGS,
+  TRIPLE_TEST, SHOWN_LEGS, SHOWN_CL, SHOWN_TRI, SHOWN_CONV, legKey, shownLeg };
 if (typeof module !== 'undefined' && module.exports) module.exports = api; else root.Practice = api;
 })(this);

@@ -12,7 +12,7 @@
   {
    "n": 2,
    "title": "Warm-Up",
-   "sub": "On your own. Four minutes. No notes.",
+   "sub": "On your own. No notes.",
    "min": 4,
    "note": "Q4 is today's idea with only straight sides: a perimeter adds every side \u2014 7, 3, 7 and 3, across zero for both. Today some sides are slanted. Two minutes silent, then reveal.",
    "kind": "warmup"
@@ -54,7 +54,7 @@
    "title": "Notes",
    "sub": "",
    "min": 4,
-   "note": "This triangle has no square corner, but its height \u2014 from the top corner straight down to the base \u2014 makes two, each with legs 3 and 5: each slanted side is \u221a34. Keep the root (or the calculator's whole value) to the last step: 6 + 5.831 + 5.831 = 17.662, so 17.7. Rounding each side first gives 6 + 5.8 + 5.8 = 17.6 \u2014 a different answer.\nOFF: 'No square corner? Make two. Round once, at the end.'",
+   "note": "This triangle has no square corner, but its height \u2014 from the top corner straight down to the base \u2014 makes two, each with legs 3 and 5: each slanted side is \u221a34. Keep the root (or the calculator's whole value) to the last step: 6 + 5.831 + 5.831 = 17.662, so 17.7. Rounding each side first gives 6 + 5.8 + 5.8 = 17.6 \u2014 a different answer. Where the height lands comes from the coordinates \u2014 straight below the top corner, the same x \u2014 and it halves the base only when the two slanted sides match; board 3's does not.\nOFF: 'No square corner? Make two. Round once, at the end.'",
    "kind": "notes"
   },
   {
@@ -158,7 +158,7 @@
    "title": "Whiteboards   \u00b7   Question 3 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "The height from C lands at (1, \u22126) and splits the base 5 and 9 \u2014 not in half. AC: 25 + 144 = 169, 13; BC: 81 + 144 = 225, 15. P = 14 + 13 + 15 = 42. A board with 40 took both slanted sides as 13.",
+   "note": "The height from C goes straight down, the same x, to (1, \u22126), and splits the base 5 and 9 \u2014 not in half, as Notes III's did. AC: 25 + 144 = 169, 13; BC: 81 + 144 = 225, 15. P = 14 + 13 + 15 = 42. A board with 41.8 halved the base (7 and 7, so 14 + 2\u221a193); one with 40 copied AC's 13 onto BC.",
    "kind": "wb"
   },
   {

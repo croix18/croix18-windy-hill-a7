@@ -8,8 +8,11 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;',
 
 const Unit = {
   id: 'a7u6',
-  contentVersion: 2,                 /* bump whenever any set's questions change (the lock check says so). 2: half of Q12's sets name the
-                                        triangles by their corners (25 Oct 2026), before the page was published */
+  contentVersion: 3,                 /* bump whenever any set's questions change (the lock check says so). 2: half of Q12's sets name the
+                                        triangles by their corners (25 Oct 2026), before the page was published. 3: the second review
+                                        (25 Oct 2026; the page was up 10:35–11:14 that morning, a Sunday, then taken down) — Q1 and Q2's
+                                        orders, Q4 and Q5 and Q7 off the lessons' shown numbers, Q5's leg in a story, Q6's fourth choice,
+                                        Q12's lure refused, Q13's sizes and words */
   legacy: [],
   title: 'A7 Unit 6 Practice Test',
   eyebrow: 'Grade 7 Accelerated &nbsp;·&nbsp; Unit 6 &nbsp;·&nbsp; Practice',
