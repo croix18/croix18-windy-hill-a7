@@ -29,6 +29,10 @@ one of those issues. I give you permission to edit and to make fixes on the webs
   published from `a7302000` — every unit's package (Units 4–6 rebuilt; Unit 6 and Thread B for the first time), the
   practice pages and teacher copies of Units 3, 4 and 6, and the web slides; the A7 course page regenerated.
 - **Windmill:** `7611a99`, `02de689`; HANDOFF `76e7cf2` (M7 should vendor `02de689`).
+- **11:12 am — Croix: *"Can you get rid of one class period. I don't need that text at all."*** Windmill `ca12f9b`: a
+  one-period test says nothing about its length (the papers and the teacher copy's printed test); M7's two-period papers
+  keep theirs. Units 4 and 5 rebuilt and installed at 0 findings (each form's head is now "Form A · 29 points"); the
+  teacher copies of Units 3, 4 and 6 rebuilt; the site republished.
 
 ## 25 October — A7 Unit 6 and Thread B are built, reviewed and installed
 
