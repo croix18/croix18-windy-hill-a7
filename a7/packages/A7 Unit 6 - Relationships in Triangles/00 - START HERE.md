@@ -88,4 +88,4 @@ The whiteboard round is the remainder — 10–11 minutes across the unit — an
 - **Every square root has a whole radicand up to 225** (GR.1.1 and GR.1.2, Clarification 3), and none has a square factor, so √n is already in simplest form; an irrational answer is also given to the nearest tenth wherever the question asks for a measurement. Math Nation's own test breaks the 225 bound on four of its five Pythagorean items.
 - **No distance formula** (GR.1.2, Clarification 2): a slanted distance is always the right triangle drawn on the grid, its legs read from the coordinates.
 
-Installed: 90 files from the build, plus this page and the Reference folder.
+Installed: 109 files from the build, plus this page and the Reference folder.
