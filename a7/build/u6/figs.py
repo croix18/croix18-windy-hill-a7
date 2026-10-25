@@ -642,11 +642,13 @@ def _arc_label(deg0, deg1, r, text, centre=(0.0, 0.0), push=0.55):
     return _t(x, y, text, ha=ha, va=va, off=(push * c, push * s))
 
 
-def crossing(a_deg, labels, R=3.0, fs=22, pt=9.5, inches=2.6, names=None):
+def crossing(a_deg, labels, R=3.0, fs=22, pt=9.5, inches=2.6, names=None, far=()):
     """Two lines crossing at the origin: one along 0°–180°, the other at `a_deg` (0 < a < 180). The four angles,
     counterclockwise from the right: a, 180 − a, a, 180 − a. `labels` names what each prints (a measure, a letter,
     an expression, or None); a numeric label must be that angle's measure. An arc marks only an angle that prints
-    something; `names` puts a letter (1, 2, 3, 4 or A, B …) inside the angle instead of a measure."""
+    something; `names` puts a letter (1, 2, 3, 4 or A, B …) inside the angle instead of a measure. `far` lists the
+    angles whose label is long (an expression): it stands well inside its angle, where the angle is wide enough for it,
+    instead of beside the arc."""
     meas = [a_deg, 180 - a_deg, a_deg, 180 - a_deg]
     starts = [0, a_deg, 180, 180 + a_deg]
     for lab, m in zip(labels, meas):
@@ -658,7 +660,11 @@ def crossing(a_deg, labels, R=3.0, fs=22, pt=9.5, inches=2.6, names=None):
         if lab:
             rr = r * (1.0 if i % 2 == 0 else 1.25)
             sh.append(dict(t="circle", c=(0, 0), r=rr, a=(starts[i], starts[i] + meas[i]), fill="none"))
-            sh.append(_arc_label(starts[i], starts[i] + meas[i], rr * 1.15, lab))
+            if i in far:
+                mid = math.radians(starts[i] + meas[i] / 2)
+                sh.append(_t(R * 0.74 * math.cos(mid), R * 0.74 * math.sin(mid), lab, ha="center", va="center"))
+            else:
+                sh.append(_arc_label(starts[i], starts[i] + meas[i], rr * 1.15, lab))
     if names:
         for i, nm in enumerate(names):
             if nm:
@@ -699,11 +705,13 @@ def triangle_exterior(A, B, l_A=None, l_B=None, l_C=None, l_ext=None, fs=22, pt=
     return dict(kind="shapes", fs=fs, pt=pt, **{"in": inches}, shapes=sh)
 
 
-def rays(dirs, arcs, R=3.0, fs=22, pt=9.5, inches=2.6, line=None):
+def rays(dirs, arcs, R=3.0, fs=22, pt=9.5, inches=2.6, line=None, names=None, vertex=None, far=()):
     """Rays from one vertex at the origin, at the directions `dirs` (degrees, counterclockwise from the right).
     `arcs` is a list of (i, j, label) — the angle from ray i to ray j, counterclockwise; a numeric label must be its
     true measure, and a label of "ra" draws the square mark of a right angle instead of an arc. `line` = (i, j) draws
-    rays i and j as one straight line through the vertex (a linear pair)."""
+    rays i and j as one straight line through the vertex (a linear pair). `names` puts a letter past the end of each
+    ray (angles named ∠AOB) and `vertex` a letter at the vertex, under it. `far` lists the arcs (by their place in
+    `arcs`) whose label is long — an expression — and stands well inside its angle instead of beside the arc."""
     for (i, j, lab) in arcs:
         m = (dirs[j] - dirs[i]) % 360
         if lab == "ra":
@@ -721,6 +729,15 @@ def rays(dirs, arcs, R=3.0, fs=22, pt=9.5, inches=2.6, line=None):
             continue
         rr = r * (1.0 + 0.22 * (k % 2))
         sh.append(dict(t="circle", c=(0, 0), r=rr, a=(a0, a1), fill="none"))
-        if lab:
+        if lab and k in far:
+            mid = math.radians((a0 + a1) / 2)
+            sh.append(_t(R * 0.78 * math.cos(mid), R * 0.78 * math.sin(mid), lab, ha="center", va="center"))
+        elif lab:
             sh.append(_arc_label(a0, a1, rr * 1.15, lab))
+    for d, nm in zip(dirs, names or []):
+        if nm:
+            sh.append(_arc_label(d, d, R, nm, push=0.45))
+    if vertex:
+        # under the vertex, in the widest gap below it
+        sh.append(_t(0.0, 0.0, vertex, ha="center", va="top", off=(0, -0.45)))
     return dict(kind="shapes", fs=fs, pt=pt, **{"in": inches}, shapes=sh)

@@ -1,0 +1,285 @@
+{
+ "deck": "A7 6.T1 Angle Pairs Supplementary, Complementary, Vertical, Adjacent - Slides.pptx",
+ "slides": [
+  {
+   "n": 1,
+   "title": "Angle Pairs: Supplementary, Complementary, Vertical, Adjacent",
+   "sub": "",
+   "min": 1,
+   "note": "Post the learning target. Say one line and nothing else yet: \u201cToday: four names for pairs of angles, and what each name tells you about their sizes.\u201d",
+   "kind": "title"
+  },
+  {
+   "n": 2,
+   "title": "Warm-Up",
+   "sub": "On your own. Four minutes. No notes.",
+   "min": 4,
+   "note": "Q4 is today's 'supplementary' before it has a name: a straight angle is 180\u00b0, so the other is 50\u00b0. Two minutes silent, then reveal.",
+   "kind": "warmup"
+  },
+  {
+   "n": 3,
+   "title": "Warm-Up",
+   "sub": "Answers.",
+   "min": 1,
+   "note": "Reveal. Ask for the band each question came from only if time allows.",
+   "kind": "warmup"
+  },
+  {
+   "n": 4,
+   "title": "Vocabulary",
+   "sub": "The new words, before they are used.",
+   "min": 1,
+   "note": "Read each word and its meaning once; the notes use them next. Students copy the words, not the definitions.",
+   "kind": "vocab"
+  },
+  {
+   "n": 5,
+   "title": "Notes",
+   "sub": "Copy the names and the picture.",
+   "min": 3,
+   "note": "Two lines cross and make four angles. Angles 1 and 2 are adjacent: one vertex, one shared side, no overlap. Angles 1 and 3 are vertical: across the crossing \u2014 and equal (each makes a straight line with angle 2, so both are 180 minus the same angle). Angles 2 and 4 are vertical too.\nOFF: 'Next to, sharing a side: adjacent. Across: vertical, and equal.'",
+   "kind": "notes"
+  },
+  {
+   "n": 6,
+   "title": "Notes",
+   "sub": "",
+   "min": 3,
+   "note": "Complementary angles make 90\u00b0 \u2014 a corner; supplementary angles make 180\u00b0 \u2014 a straight line. A linear pair (adjacent, on a straight line) is supplementary: 60\u00b0 and 120\u00b0. A square corner mark is a 90 nobody printed. The state's named mistake is swapping the two: complementary is the Corner, supplementary the Straight line.\nOFF: 'Complementary: corner, 90. Supplementary: straight, 180.'",
+   "kind": "notes"
+  },
+  {
+   "n": 7,
+   "title": "Notes",
+   "sub": "",
+   "min": 4,
+   "note": "With expressions, the name gives the equation: a linear pair sums to 180, so 2x + 10 + 50 = 180, 2x = 120, x = 60 \u2014 and the angle is 2(60) + 10 = 130\u00b0, not 60. Vertical angles are equal: 3x \u2212 5 = 70, x = 25. The book names 'reported x as the angle' three times: read what the question asks.\nOFF: 'Name it, write it, solve it, put x back.'",
+   "kind": "notes"
+  },
+  {
+   "n": 8,
+   "title": "Example 1",
+   "sub": "A right angle, split.",
+   "min": 1,
+   "note": "Ask what the square mark says before anyone writes: the two angles make 90 \u2014 complementary.",
+   "kind": "example"
+  },
+  {
+   "n": 9,
+   "title": "Example 1",
+   "sub": "Worked.",
+   "min": 2,
+   "note": "Complementary: 3x \u2212 1 + 2x + 6 = 90, so 5x + 5 = 90, x = 17. Put it back: 3(17) \u2212 1 = 50\u00b0 and 2(17) + 6 = 40\u00b0; check 50 + 40 = 90. A board with 17 stopped at x.",
+   "kind": "example"
+  },
+  {
+   "n": 10,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "4x + x + 10 = 90, 5x = 80, x = 16: 64\u00b0 and 26\u00b0. A board with 16 stopped at x; one with 34 used 180.",
+   "kind": "yourturn"
+  },
+  {
+   "n": 11,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 12,
+   "title": "Example 2",
+   "sub": "Vertical angles.",
+   "min": 1,
+   "note": "Ask what vertical angles do: they are equal \u2014 so the two expressions are set equal, variables on both sides (Unit 1).",
+   "kind": "example"
+  },
+  {
+   "n": 13,
+   "title": "Example 2",
+   "sub": "Worked.",
+   "min": 3,
+   "note": "Vertical, so equal: 5x \u2212 12 = 2x + 18, 3x = 30, x = 10. Each angle is 5(10) \u2212 12 = 38\u00b0, and 2(10) + 18 = 38\u00b0 checks it. A board with 10 reported x; one with 180 added them as if supplementary.",
+   "kind": "example"
+  },
+  {
+   "n": 14,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "4x + 3 = x + 39, 3x = 36, x = 12: each angle 51\u00b0. A board with 12 reported x.",
+   "kind": "yourturn"
+  },
+  {
+   "n": 15,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 16,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "90 \u2212 34 = 56\u00b0. A board with 146 used 180 \u2014 supplementary.",
+   "kind": "wb"
+  },
+  {
+   "n": 17,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 18,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "180 \u2212 112 = 68\u00b0. A board with \u221222 used 90.",
+   "kind": "wb"
+  },
+  {
+   "n": 19,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 20,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "a is across the crossing from 47\u00b0: vertical, so 47\u00b0. b is next to it on a straight line: 180 \u2212 47 = 133\u00b0. (The 43-minute cut drops this board.)",
+   "kind": "wb"
+  },
+  {
+   "n": 21,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 22,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic. Option A is the state's named swap, option C treats the pair as vertical, option D added. Split? Sixty seconds, convince your neighbour, re-vote.",
+   "kind": "wb"
+  },
+  {
+   "n": 23,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 24,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Supplementary: 3x + 120 = 180, 3x = 60, x = 20 (and the angle is 75\u00b0). A board with 30 set 3x + 15 = 105 \u2014 a linear pair is not equal.",
+   "kind": "wb"
+  },
+  {
+   "n": 25,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 26,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Equal: 6x \u2212 20 = 2x + 28, 4x = 48, x = 12, so each angle is 52\u00b0. A board with 12 reported x \u2014 the question asks for the angle.",
+   "kind": "wb"
+  },
+  {
+   "n": 27,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 28,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic. Option A is vertical, option B overlaps, option D shares only a vertex. (The 43-minute cut drops this board.)",
+   "kind": "wb"
+  },
+  {
+   "n": 29,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 30,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The extra-number board (ruling 22): the 50\u00b0 below the line is bait. 38\u00b0 and x\u00b0 make the straight line above it: x = 142.",
+   "kind": "wb"
+  },
+  {
+   "n": 31,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 32,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Take your time. Boards up when you have written it.",
+   "min": 0,
+   "note": "Written, and the exit evidence: two facts put together \u2014 equal, and adding to 90.",
+   "kind": "wb"
+  },
+  {
+   "n": 33,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 34,
+   "title": "Independent Set",
+   "sub": "Six questions. On your own, in writing.",
+   "min": 6,
+   "note": "Hand out the Independent Set; the same six questions are on the board. Silent work. Circulate and mark what you see; do not teach. Whatever is not finished goes home.",
+   "kind": "independent"
+  },
+  {
+   "n": 35,
+   "title": "IXL",
+   "sub": "Last five minutes.",
+   "min": 5,
+   "note": "IXL: every listed skill is required, SmartScore 67. Due at the start of the next class.",
+   "kind": "ixl"
+  }
+ ]
+}

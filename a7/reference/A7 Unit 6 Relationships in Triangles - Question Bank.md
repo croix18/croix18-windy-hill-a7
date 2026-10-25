@@ -203,3 +203,36 @@ the unit is planned. The printed keys in each lesson's `Keys` folder are generat
 1. Similar — every ratio is 2.5  2. Not similar — 6/4 = 1.5, but 8/5 = 1.6  3. 18 and 24  4. 6 and 7  5. 7 and 17.5  6. 24 m  7. 75 ft  8. A A  9. D D
 
 ---
+
+## 6.T1  Angle Pairs: Supplementary, Complementary, Vertical, Adjacent
+
+*MA.8.GR.1.4*
+
+**Variation.**  Boards 1–2: a complement, then a supplement; 3 reads a crossing (vertical and a linear pair at once); 4 votes on 90 against 180. The pattern breaks at 5 — a linear pair with x — then vertical angles with x where the angle is asked (6), which pair is adjacent voted (7), and a picture with one angle too many (8); 9 is written. The independent set: a complement, a supplement, a crossing, a linear pair with x, vertical angles with x, a pair named and used.
+
+**Read this once, when you plan the unit.**
+
+- Thread B, day 1 of 2: Math Nation 16.1 (MA.8.GR.1.4), taught the day after the Unit 6 test so the angle facts are in play for the rest of the year. Not on the Unit 6 test.
+- The 43-minute Wednesday: cut boards 3 and 7 and two minutes of the IXL block; never board 9. The timing table totals 53 by house rule.
+- Built from the benchmark and the B1G-M first, then read against Math Nation (audit §9): its practice key answers angle DCE where the page asks angle BCE (164°, not 16°), and its practice figures are drawn up to 15° off their labels — not reproduced. Every figure here is drawn to its numbers.
+- The state's named misconception for GR.1.4 — complementary and supplementary swapped — is board 4's option A and the first wrong board on 1 and 2. The book's most-named error, x reported as the angle, is boards 6 and the bank's last question.
+
+**What the audit against Math Nation found.**
+
+- Every item re-derived by sympy at build time; every figure drawn to its numbers (a labelled angle that is not its true measure is refused).
+- Math Nation 16.1 read against this lesson (audit §9): its AP 16.01 Q7 key (angle DCE for angle BCE), its figures drawn up to 15° off, 'value if x' and the missing degree signs are not reproduced.
+
+**What changed from the book.**
+
+- 16.1.1–16.1.2 (the cut-and-measure Exploration) → Notes I–II: the four names from the front, so the day fits 43 minutes.
+- 16.1.3 (angle relationships with expressions) → Notes III and Examples 1–2: a right angle split by a ray and a vertical pair with the variable on both sides, the book's own shapes.
+- 16.1.4–16.1.5 (practice and the error analysis) → boards 4–9; 'reported x' is board 6's named error.
+- 16.01 Additional Practice and Homework → the independent set and IXL.
+
+**Question Bank answers.**  
+1. 73°  2. 85°  3. 128°  4. 139°  5. x = 26; 38° and 52°  6. x = 28; 106° and 74°  7. x = 9; each 65°  8. B B  9. B B
+
+**Question Bank – Additional answers.**  
+1. 47°  2. 29°  3. 66°  4. 63°  5. x = 18; 54° and 36°  6. x = 23; 119° and 61°  7. x = 9; each 66°  8. D D  9. A A
+
+---
