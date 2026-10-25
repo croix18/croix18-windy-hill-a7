@@ -239,7 +239,7 @@ L = dict(
             "Every radicand is a whole number up to 225 with no square factor (GR.1.2, Clarification 3), so coordinates stay inside about ±10 and the legs stay small."],
         standard_notes=[("Clarification", "Clarification 1: the distance is connected to a right triangle drawn on the plane. Clarification 2: the theorem is memorized, and it is not the expectation to use the distance formula. Clarification 3: radicands are whole numbers up to 225 (Source of Truth §GR.1.2)."),
                         ("Unit boundary", "Coordinates within about −10 to 10; no radicand with a square factor; one rounding, at the end.")],
-        sits="The first MA.8.GR.1.2 day. IXL's L9V and ZBP are due Friday; 6.06 adds perimeters and maps on the same grid.",
+        sits="The first MA.8.GR.1.2 day. IXL's L9V and ZBP are due by the Unit 6 test; 6.06 adds perimeters and maps on the same grid.",
         lives="Notes I — across zero, the pieces add — and Notes II's triangle on the grid. Board 3 is the on-a-line diagnostic (the axis error, a negative, gridlines), board 6 the expression vote, board 9 the axis error in writing.",
         materials="Whiteboards and markers; a printed grid for any student whose board has none. Calculators allowed, printed nowhere.",
         variation="Boards 1–2: one line, vertical then horizontal, both across zero; 3 votes on the axis error. The pattern breaks at 4 — slanted, with only the points on the grid — whole, then to the tenth (5), then only the expression (6), then from the origin (7); 8 carries an extra point; 9 is written. The independent set: horizontal, vertical, slanted whole, slanted to the tenth, from the origin, a map.",

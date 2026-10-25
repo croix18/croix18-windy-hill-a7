@@ -237,7 +237,7 @@ L = dict(
             "Round once, at the end, from the full value: board 2's √97 ≈ 9.849 is 9.8 — rounding twice (9.85, then 9.9) is the error in Math Nation's own 6.04 key (A7 Unit 6 Audit, D13)."],
         standard_notes=[("Clarification", "Clarification 1: explore right triangles with natural-number side lengths. Clarification 2: the theorem is memorized — it is not on the FAST reference sheet. Clarification 3: radicands are whole numbers up to 225 (Source of Truth §GR.1.1)."),
                         ("Unit boundary", "No radicand with a square factor (simplifying √50 is Algebra 1); no 3-D; no stories until 6.04.")],
-        sits="The first MA.8.GR.1.1 day: Friday's converse turned forward. IXL's MTM is due Tuesday; 6.04 puts the same two moves inside real situations.",
+        sits="The first MA.8.GR.1.1 day: Friday's converse turned forward. IXL's MTM is due by the Unit 6 test; 6.04 puts the same two moves inside real situations.",
         lives="Notes I — the square corner first — and Notes III's check. Board 4 is the missing-leg diagnostic (added, the sides, no root); board 5 the turned triangle; board 6 the equation; board 9 the check in writing.",
         materials="Whiteboards and markers. a² + b² = c² on the board for the period (memorized by the test). Calculators allowed, printed nowhere.",
         variation="Boards 1–2: the hypotenuse, whole then to the tenth; 3–4 a leg, whole then the vote. The pattern breaks at 5 — the triangle turned — and 6 asks only for the equation; 7 is a leg to the tenth; 8 has the extra number; 9 is the check in writing. The independent set: a whole hypotenuse, one to the tenth, a whole leg from a big hypotenuse, a leg to the tenth, a turned triangle, the equation and its value.",

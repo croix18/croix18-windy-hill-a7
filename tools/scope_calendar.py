@@ -271,9 +271,14 @@ def run_end(i):
     while sk and _seq(end)<len(rows) and ixl(rows[_seq(end)][2])==sk: end=_seq(end)
     return end
 def due(i):
-    """The date the skills assigned on row i are due: the first day the class meets after the run."""
+    """The date the skills assigned on row i are due. Ruling 53 (Croix, 25 Oct 2026): "The students should be doing the ixls
+    as we do the corresponding lessons, however they are due by the unit assessment." → the first exam day after the run
+    (a thread, taught after its unit's exam, is due by the next one); with no exam after it, the first day the class meets."""
     if not ixl(rows[i][2]): return None
-    nxt=[r[0] for r in rows[run_end(i)+1:] if r[5] not in ("W","O")]
+    after=rows[run_end(i)+1:]
+    exam=[r[0] for r in after if r[5]=="X"]
+    if exam: return exam[0]
+    nxt=[r[0] for r in after if r[5] not in ("W","O")]
     return nxt[0] if nxt else None
 def report():
     """What the log moved, in words (the end of the scope document, and stderr)."""
@@ -311,8 +316,8 @@ if __name__=="__main__":
         flag=" (43 min)" if wd=="Wed" else ""
         mark={"T":"**thread** ","X":"**exam** ","R":"**review** ","F":"*flex* ","S":"*spiral* ","W":"","E":"*extra* ","O":"*off* "}.get(kind,"")
         sk=ixl(code)
-        # ruling 28: lessons in a row with the same skills are one assignment, due after the last
-        # of them (run_end and due above — the due-date sheet below and the spine use the same two)
+        # ruling 28: lessons in a row with the same skills are one assignment; ruling 53: due by the unit's exam
+        # (run_end and due above — the due-date sheet below and the spine use the same two)
         dd=due(i).strftime('%b %d') if due(i) else ""
         M="; ".join(f"{n} — {c}" for n,c in sk)
         TABLE.append(f"| {dt.strftime('%b %d')} | {wd}{flag} | {u if u else ''} | {code} | {mark}{title} | {bm} | {M} | {dd} |")
@@ -327,8 +332,9 @@ if __name__=="__main__":
                 f"whatever is not finished in class is that night's practice.\n\n"
                 f"**Every skill listed for a lesson is required. Nothing on this sheet is optional.** "
                 f"Done means a **SmartScore of {SMARTSCORE}** on every listed skill.\n\n"
-                f"Assigned the day of the lesson, **due at the start of the next class**. When two or more lessons in a row use the "
-                f"same skills, they are one assignment covering the run, due after the last lesson in it.\n\n"
+                f"Assigned the day of the lesson and done as we go — each lesson's skills while the lesson is fresh — and "
+                f"**due by the unit test** (the date in the last column; a thread day's skills are due by the next unit test). "
+                f"When two or more lessons in a row use the same skills, they are one assignment covering the run.\n\n"
                 f"The three-character code after each skill is what you type into IXL's search box.\n\n"
                 f"| Assigned | Lesson(s) | Skills — all required, to SmartScore {SMARTSCORE} | Due |\n|---|---|---|---|\n")
         teach=[(i,r) for i,r in enumerate(rows) if ixl(r[2])]

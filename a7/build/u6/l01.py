@@ -232,7 +232,7 @@ L = dict(
             "The equal case (4 + 5 = 9) is the triangle inequality's whole trap and the Florida reference sheet's '>' is strict: Notes I draws it lying flat, and boards 3 and 5 make it a choice to refuse."],
         standard_notes=[("Clarification", "The benchmark carries no clarifications. The FAST reference sheet prints the Triangle Inequality Theorem (a + b > c, a + c > b, b + c > a); the converse of the Pythagorean Theorem is not on it and is memorized."),
                         ("Unit boundary", "Whole-number and one-decimal side lengths; no acute/obtuse classification; no algebraic side lengths.")],
-        sits="The unit's first day and its only MA.8.GR.1.3 day. IXL's 2N5 and EQZ are due Monday; 6.03 turns Notes III's fact into a tool for finding a side.",
+        sits="The unit's first day and its only MA.8.GR.1.3 day. IXL's 2N5 and EQZ are due by the Unit 6 test; 6.03 turns Notes III's fact into a tool for finding a side.",
         lives="Notes I — the three sets of sticks, and the equal case lying flat. Board 3 is the inequality's diagnostic, board 5 the third side's, board 7 the converse's (the longest side listed first); board 9 asks for the two tests in writing.",
         materials="Whiteboards and markers. Optional: strips cut to 3, 4, 5, 6 and 9 units for Notes I. Calculators allowed, printed nowhere.",
         variation="Boards 1–2: a triangle? (no, then yes with two equal sides); 3 votes with the equal case and the wrong pair; 4–5 the third side's range, written then voted. The pattern breaks at 6 — a RIGHT triangle?, squares not sums — and 7 lists the longest side first; 8 has the extra number; 9 is written. The independent set walks the same path.",

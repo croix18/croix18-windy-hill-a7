@@ -3651,3 +3651,27 @@ and 9."**
   November for Q3, DP.1.3 in early March for Q4; AR.2.2 in August for Q2) are **spiralled in bellwork the week before each EBA**.
   The EBA dates are not known yet; they go on the plan when the district sets them.
 - The year-plan page (claude.ai artifact *Windy Hill Year Plan*) shows both courses with the options he chose from.
+
+## 13b(xxv). Ruling 53 — 25 October: IXL is done with each lesson and due by the unit test [both courses]
+
+**Ruling 53 — Croix, 25 October 2026: "fix the ixl due dates across the board. The students should be doing the ixls as we do
+the corresponding lessons, however they are due by the unit assessment."** Amends ruling 28's "due next class".
+
+- **Done as the lessons go:** each lesson's skills are assigned the day it is taught and started in the five-minute block
+  (ruling 10); students work them while the lesson is fresh.
+- **Due by the unit's test:** every skill assigned in a unit is due on the first day of that unit's test (M7's tests run two
+  periods, A7's one). The date is the test's, so it moves when the test moves — the plan follows the class.
+- **A day on no test of its own** — A7's threads, taught after a unit's exam — is due by the next unit test after it. With no
+  test after it (the end of the year), the next class.
+- **Where it is written:** the due-date sheets (M7's `M7 IXL Due Dates 2026-27.csv` and the scope's table, `tools/mkscope.py`;
+  A7's `A7 IXL Due Dates 2026-27.md`, `tools/scope_calendar.py`), the spine and the phone page (Windmill `plan/pagecore.js`),
+  the website's schedules, both master sheets, and every lesson's IXL slide and Lesson Plan: "Due by the Unit 10 test." — the
+  kit reads the test from the plan (`ixlplan.due_line`) and prints no date, because a slide outlives a moved test.
+- Ruling 28 otherwise stands: every listed skill is required, to SmartScore 60 (67 accelerated).
+- Decks built before this ruling say "due at the start of the next class" until they are rebuilt. Rebuilt the same day: M7
+  Units 9 and 10. A7 Units 5 and 6 and M7 Unit 8 take it at their next build (A7's plan lines are already changed; M7 Unit 8's
+  chat builds under this ruling).
+
+**The same message, on M7 Unit 10's open items:** "A little bit of exposure to stories is ok. Follow the learning plan." — the
+inequality stories stay in the 10.02–10.04 lessons (the test keeps to the benchmark's mathematical context), and Q16's percent
+story stays, as the AR.2.2 learning plan's LT6 asks.

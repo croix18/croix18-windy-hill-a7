@@ -242,7 +242,7 @@ L = dict(
             "Notes III is the B1G-M's own ladder item (10 ft, 3 ft out, √91 ≈ 9.5 ft), worked in the notes so that no board repeats it."],
         standard_notes=[("Clarification", "Clarification 1: explore right triangles with natural-number side lengths. Clarification 2: the theorem is memorized. Clarification 3: radicands are whole numbers up to 225 (Source of Truth §GR.1.1)."),
                         ("Unit boundary", "Two dimensions only (no space diagonals); no radicand with a square factor; one rounding, at the end.")],
-        sits="The second MA.8.GR.1.1 day. IXL's 87U is due Thursday; 6.05 draws the same right triangle on a grid between two points.",
+        sits="The second MA.8.GR.1.1 day. IXL's 87U is due by the Unit 6 test; 6.05 draws the same right triangle on a grid between two points.",
         lives="Notes I — sketch, mark the square corner, name c. Board 4 is the ladder diagnostic (added, the lengths, no root), board 6 the which-is-c vote, board 7 the close call decided by a tenth, board 9 the reason in writing.",
         materials="Whiteboards and markers. A meter stick or a ladder picture for Notes I if the room needs it. Calculators allowed, printed nowhere.",
         variation="Boards 1–2: a diagonal and a ladder's height, both whole; 3 a ramp to the tenth; 4 the ladder's foot, voted. The pattern breaks at 5 — two walks and their difference — and 6, which asks only which length is c; 7 is will-it-fit by a tenth; 8 has the extra number; 9 is the reason in writing. The independent set: a diagonal, a ladder's foot, a ramp, along two sides against across, will it fit, a kite's height.",
