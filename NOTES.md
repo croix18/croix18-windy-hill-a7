@@ -25,10 +25,10 @@ one of those issues. I give you permission to edit and to make fixes on the webs
   9 minutes (the floor is 10), so a rebuild means re-timing lessons already taught. Its test (15 Oct) is over; print a
   Unit 3 make-up from the teacher copy, which is fixed. Its package papers still say "two class periods".
 - **The stale kit copy at the top of `a7/` is removed** (52 files, 24 Oct; nothing read it).
-- **The website** (mrshaffer-site, Croix's permission at 9:36): A7 published from this commit — every unit's package
-  (Units 4–6 rebuilt; Unit 6 for the first time), the practice pages and teacher copies of Units 3, 4 and 6, and the
-  web slides. The site's commit and its deploy are in the Windmill HANDOFF.
-- **Windmill:** `7611a99`, `02de689`; the HANDOFF entry after the site.
+- **The website** (mrshaffer-site `08741ba`, deployed — Workers Builds: success; Croix's permission at 9:36): A7
+  published from `a7302000` — every unit's package (Units 4–6 rebuilt; Unit 6 and Thread B for the first time), the
+  practice pages and teacher copies of Units 3, 4 and 6, and the web slides; the A7 course page regenerated.
+- **Windmill:** `7611a99`, `02de689`; HANDOFF `76e7cf2` (M7 should vendor `02de689`).
 
 ## 25 October — A7 Unit 6 and Thread B are built, reviewed and installed
 
