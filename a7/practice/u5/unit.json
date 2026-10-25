@@ -1,0 +1,23 @@
+{
+ "title": "A7 Unit 5 Practice Test",
+ "file": "unit-5-practice-test.html",
+ "download": "A7 Unit 5 Practice Test.html",
+ "css": [
+  "unit.css"
+ ],
+ "scripts": [
+  "engine.js",
+  "coach.js",
+  "unit.js"
+ ],
+ "checks": [
+  "node u5_check.js 3000 1500",
+  "python3 verify.py",
+  "python3 plant_check.py"
+ ],
+ "variety": {
+  "allow": {
+   "1.3": "Question 3 is the test's select-all about a scale factor alone: five statements about k, k² and the angles, with no other number in it, so a version is a value of k. Ruling 43 takes off the scale factors the lessons and the reference sheet work these facts with (1.5, 2, 2.5, 3, 4, 5 and 0.4), and the forms take 3 and 4: 11 values of k — 6 to 10, 3.5, 4.5, and 0.5, 0.8, 1.2, 1.6. Every other part of the page has more than 100 versions."
+  }
+ }
+}

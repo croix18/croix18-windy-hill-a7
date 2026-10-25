@@ -1,0 +1,8 @@
+{
+ "title": "A7 Unit 5 — Teacher copy",
+ "file": "a7-unit-5-teacher.html",
+ "download": "A7 Unit 5 Teacher Copy.html",
+ "css": ["../unit.css"],
+ "scripts": ["../engine.js", "../coach.js", "../unit.js", "test.js", "../../kit/teacher.js"],
+ "checks": ["python3 gen_test.py --check", "node ../../kit/check/teacher_check.js ."]
+}

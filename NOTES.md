@@ -1,5 +1,31 @@
 # State of the work — 25 October 2026 (read this first)
 
+## 25 October, evening — Unit 5's practice page built (ruling 55); in review, not on the website yet
+
+Croix, 4:52 pm: *"Yes I still want the interactive practice page on all the units regardless of review day or not."* (ruling
+55, HOUSE STYLE 13b(xxvii)). A7 Unit 5 is next after M7 Unit 9: its test is the printed Form A and Form B on Thu 5 Nov, so
+the page (`a7/practice/u5`, README) is practice for them — the practice form's nineteen questions, 24 points, in the test's
+three sections, new numbers every set, never the forms' numbers (hashes only; `test_forms.js` for the checks) and never a
+lesson's (ruling 43), nor a question of the practice test or the review that go home.
+- **Its checks:** `u5_check.js` (3,000 sets read back from the printed words with its own reader), `verify.py` (sympy: the
+  forms, the practice test and the review read out of `unit.py`, every ratio the FAST sheet's, and **what the lessons showed
+  read out of the lesson specs themselves** — not the engine's list, which the M7 Unit 9 review found circular there), 36 of
+  36 planted errors caught, the lock, the variety floor (question 3, a value of k alone, allowed at 11 with its reason) and
+  the browser checks. The teacher copy prints Form A and Form B.
+- **Croix, 7:02 pm:** *"Finish the unit you are working on but don't move on to anew one"* — the pages under way (M7 Unit 9,
+  A7 Unit 5) are finished; **M7 Unit 5's page, next in ruling 55's order, waits for his word.**
+- **Held for its review:** three fresh readers go over it before it is published (Croix, 24 Oct: "I'd like for a fable chat to
+  run over it before it gets pushed"). `hold.json` holds whole units and Unit 5's lessons are live, so the page is held by
+  leaving out its two download files — `A7 Unit 5 Practice Test.html` and `teacher/A7 Unit 5 Teacher Copy.html`, the files
+  `publish_web.py` copies to the website. When the review is done: fix, `python3 a7/practice/kit/check/run.py u5` and
+  `u5/teacher` (they write both files), then publish.
+- **Backed up as it stands** (Croix, 7:03 pm: *"Make sure everything is backed up to GitHub so we don't lose anything if we
+  run out of usage limit."*). `practice/u5/show_set.js` prints one set's questions with all their help, for reading it.
+- **For Croix, about the printed test** (found by the page's lesson check; not changed): Form A question 14's answer is on
+  the unit's reference sheet (*20 ft² = 1.86 m²*); Form A question 1 (4 cm → 10 cm) is 5.01 Example 1's second pair of sides
+  and Form B question 1 (6 → 9) is 5.01 Notes I's; Form A 6(a) (the 3 in wall at ¼ in : 1 ft) is 5.04 Example 1's; Form A
+  question 17 works 5.10 Notes III's 2.5 × 1½ = 3¾.
+
 ## 25 October, 4 pm — Unit 6 checked again after its fixes (content version 4); the website brought up to date
 
 Croix, 3:11 pm: *"Is everything else pushed to the site and updated?"* Both courses' published units and every app were
