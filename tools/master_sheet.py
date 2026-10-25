@@ -941,7 +941,7 @@ def build(out):
               ("Vocabulary", f'=IF({idx}>{N},"",{at("Vocabulary")}&"")'),
               ("Benchmark", f'=IF({idx}>{N},"",{at("Benchmark")}&"")'),
               ("IXL assigned", f'=IF({idx}>{N},"",IF({at("IXL skills — all required, code")}&""="","none",{at("IXL skills — all required, code")}&"   — due "&TEXT({at("IXL due")},"ddd d mmm")))'),
-              ("IXL due at the start of class", f"=IF({idx}>{N},\"\",IFERROR(INDEX('IXL tracker'!$D$5:$D${ilast},MATCH({at('Date')},'IXL tracker'!$G$5:$G${ilast},0)),\"nothing due\"))"),
+              ("IXL due today", f"=IF({idx}>{N},\"\",IF(COUNTIF('IXL tracker'!$G$5:$G${ilast},{at('Date')})=0,\"nothing due\",IF(COUNTIF('IXL tracker'!$G$5:$G${ilast},{at('Date')})=1,INDEX('IXL tracker'!$D$5:$D${ilast},MATCH({at('Date')},'IXL tracker'!$G$5:$G${ilast},0)),\"every skill of the unit — \"&COUNTIF('IXL tracker'!$G$5:$G${ilast},{at('Date')})&\" assignments (IXL tracker)\")))"),   # ruling 53: a test day has the whole unit's IXL due
               ("Closure question", f'=IF({idx}>{N},"",{at("Closure question (board 9)")}&"")')]
     r = 5
     for lab, f in fields:
@@ -1006,7 +1006,7 @@ def build(out):
         ("'not built yet' means the unit's documents do not exist yet. Units 5 onward fill in as they are built; this file is regenerated from the plan each time.", BODY),
         ('The yellow cells in the IXL tracker are yours. In the live Google Sheet they stay: when a new edition of this sheet is published, the script puts the new contents into the same Google Sheet, so its address and your bookmark stay (should Google ever refuse, it makes a new sheet, and the Status tab of the Windy Hill Drive Index links to it), and it writes your ticks and notes back, lesson by lesson (a copy of them is kept on the Kept tab of the Windy Hill Drive Index). Anything typed anywhere else in this sheet is replaced by the next edition. An Excel copy (.xlsx) carries no ticks.' if LINKS == "drive" else
          'The yellow cells in the IXL tracker live in your copy only. A new copy of this file — after the plan moves, or a unit is built — arrives with them empty, so keep working in one copy and use a new one for its dates and links.', BODY),
-        ("IXL: every skill listed is required, to a SmartScore of 67, due at the start of the next class (ruling 28). Lessons in a row that use the same skills are one assignment, due after the last of them — the IXL due column already shows that date.", BODY),
+        ("IXL: every skill listed is required, to a SmartScore of 67 (ruling 28); done as the lessons go, and due by the unit's exam (ruling 53, 25 Oct 2026; a thread day's by the next exam). The IXL due column shows that date.", BODY),
         ("'No school' days are the holidays in the plan (tools/scope_calendar.py), taken from the board-approved calendar — check them against the school's copy.", BODY),
         ("", BODY),
         ("Where it comes from", BOLD),
