@@ -1,5 +1,23 @@
 # State of the work — 25 October 2026 (read this first)
 
+## 25 October, 1 pm — ruling 54 (one title and numbering hierarchy); Units 3–5 rebuilt; Unit 6 in its second review
+
+Croix, 11:28 am, of a printed Unit 6 test whose section "1. Triangle Inequality and the Converse" sat over question "1.":
+*"Look at this numbering. It's confusing. 1.1. can you get a logical common sense title and numbering heirarchy across both
+courses so we can avoid this."* **Ruling 54** (HOUSE STYLE 13b(xxvi)): a section is named, never numbered, on any page that
+numbers its questions; questions run 1, 2, 3 … through the page; parts a, b, c; choices A–D; a lesson is called by its code
+("Lessons 6.01–6.02", never "Lessons 1–2"). Windmill `9aac4a9`, `ee0544b`, `74dbaab`, `95c6fb0` vendored: the test forms,
+practice test, keys, review and reference sheet by section name and lesson code; the page's sections, "only" choices and
+results by name; the printed test headed as the paper with Name, Date and Period and never a question split across a page;
+the Lesson Plan's IXL row "Start the skills; due by the Unit N test." (ruling 53), its warm-up and notes rows in the
+Teacher's Edition's words. Rebuilt at 0 findings and installed: **Units 4 and 5**; the pages and teacher copies of **Units 3
+and 4**. **Unit 4's Forms A and B (Mon 26 Oct) were sent to Croix again** with the new headings. Unit 3's package is not
+rebuilt (re-timing taught lessons, as before).
+
+**Unit 6 and Thread B are off the website** until the review chat's second review is done (Croix, 11:14 am: *"Take them
+down until a review chat goes over them. Then put them back up."*; the site's `hold.json`). The review chat is fixing what
+its three readers found; do not publish Unit 6 from here.
+
 ## 25 October, late morning — the kit's open items closed; Units 4–6 reinstalled; the website up to date
 
 Croix, 9:15 am: *"Fix the kit, fix units 4 and 5 … Don't move on yet to unit 11."* Then 9:36: *"Yes please see to each

@@ -3676,3 +3676,30 @@ the corresponding lessons, however they are due by the unit assessment."** Amend
 **The same message, on M7 Unit 10's open items:** "A little bit of exposure to stories is ok. Follow the learning plan." — the
 inequality stories stay in the 10.02–10.04 lessons (the test keeps to the benchmark's mathematical context), and Q16's percent
 story stays, as the AR.2.2 learning plan's LT6 asks.
+
+## 13b(xxvi). Ruling 54 — 25 October: one title and numbering hierarchy on every page [both courses]
+
+**Ruling 54 — Croix, 25 October 2026, of a printed A7 Unit 6 test whose section heading "1. Triangle Inequality and the
+Converse" sat directly over question "1.": "Look at this numbering. It's confusing. 1.1. can you get a logical common sense
+title and numbering heirarchy across both courses so we can avoid this."** The papers said "Part 1." over question 1 (and
+"part" also meant a lettered part), the reviews "PART A.", the practice page and its printed tests "1.", and the reviews and
+reference sheets "Lessons 1–2" for 6.01–6.02. One hierarchy, from the top:
+
+- **The title says what the page is:** the course, the unit and the kind — "A7 Unit 6 Test", "M7 Unit 10 Practice Test",
+  "Unit 6 Review". Under it the unit's name; then the form and the points ("Form A · 18 points"), and "two class periods" on
+  a test that runs two (a one-period test says nothing about its length — Croix, 25 Oct: "I don't need that text at all").
+- **A section is named, never numbered,** on any page that numbers its questions: "Triangle Inequality and the Converse ·
+  3 points" — never "1.", "Part 1." or "PART A.". A page that points at a section names it. (A handout that numbers no
+  question — the Reference Sheet — may number its sections.)
+- **Questions are numbered 1, 2, 3 …** straight through the page; the numbering never restarts in a section.
+- **A question's parts are a, b, c** ("part b", "7b"). "One point for each lettered part" means these, and "part" means
+  nothing else on a student's page.
+- **Answer choices are A, B, C, D** (E on a select-all).
+- **A lesson is called by its code** — 6.01, 6.07–08, 10.09–10 — never "Lesson 1"; a thread day by its own name.
+
+Where it is written: the kit's papers (`unitbuild.py` — the test forms, the single paper and the practice test, their keys
+and worked answers, the review; `lesson_codes()` turns a spec's "Lessons 1–2" into "Lessons 6.01–6.02" on the review and the
+reference sheet), the practice page on screen and printed, and the teacher copy (`practice/kit/ui.js`, `teacher.js`: a section
+by its name in the headings, the "only" choices and the results; the printed test's head as the paper's). `check/page.js`
+fails a printed section with a number; two kit tests. Units built before this ruling keep their old headings until they are
+rebuilt.
