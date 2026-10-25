@@ -3621,3 +3621,33 @@ asked whether the Monday/Thursday rule should stay: "Get rid of the Monday Thurs
   as-run log), so the new rule does not re-lay a test that has been given.
 - **Papers.** A one-day test is the practice test's random draw (ruling 49) sized for one period; Unit 5's Form A/B were built
   for two periods and are kept as written — the teacher bar's draw is what is given.
+
+## 13b(xxiv). Ruling 52 — 24 October (evening): the year follows the district's essential benchmarks where it can [both courses]
+
+**Ruling 52 — Croix, 24 October 2026, on the "2026-27 Lake Essential Benchmarks Math Secondary" one-pager: "Here's what we are
+pivoting in the classes to follow. Can we game plan the rest of the year." Then: "those are just the essential standards. They
+will be tested on them. However, that's district data which is not nearly as important as fast data, so I still have to teach
+the other standards." Then, of the options laid out on the year-plan page: "Planned path." And: "let's merge it to 4 days for 8
+and 9."**
+
+- **Nothing is cut.** The district's Essential Benchmark Assessment (EBA, once a quarter, around the PM dates) tests the
+  essentials only; FAST in May tests the whole grade. The order moves so each quarter's essentials are taught before its EBA
+  where the calendar allows; every other unit is still taught.
+- **A7 (Grade 8 essentials):** after Unit 6 and Thread B, **Unit 11 takes December** (30 Nov – 10 Dec, test Fri 11 Dec): its
+  equations are Q2's MA.8.AR.2.1; its systems by graphing are taught from tables of values, and Unit 10's slope-intercept
+  form sharpens them in January. Then the semester review (14–16 Dec), the catch-up days, and in January **Unit 7 → Unit 10 →
+  Unit 12 → Units 8–9 → Unit 13 → Thread C → 14 → 15–16 → 17** (Unit 7, grade-7 proportional relationships, is the on-ramp to
+  slope and stays before Unit 10). Q2's MA.8.F.1.1 (Unit 12) lands early February: one essential cannot make Q2, and
+  equations was chosen over functions because everything in Q3 stands on it.
+- **Units 8–9 are four days and a test:** circumference with radius and diameter from it (8.1–8.3), area and circle problems
+  (8.4–8.6), surface area of cylinders (9.1–9.2), volume (9.3–9.5). 8.8–8.9 (sectors, circle graphs, 7.DP.1.4) are not taught.
+  Grade-7 benchmarks, not on the Grade 8 FAST; required course content. The days gained sit before spring break (12–19 Mar) as
+  spiral days — the Q3 EBA's rehearsal and the year's cushion.
+- **M7 (Grade 7 essentials):** December keeps Unit 8 (the only unit that fits its eight days); from January **Unit 5 → Unit 7 →
+  Unit 11 → Unit 6 → Unit 12 → Unit 13** — Q2's MA.7.AR.3.1 (percent) and MA.7.AR.4.3 (graphing proportional relationships) a
+  month earlier than before, both still Q3. Unit 11 in December was tried and refused by the engine (rulings 47 and 48: it
+  slides to January and the year runs to 14 May).
+- **Essentials taught before their quarter** (M7: GR.1.1 and GR.1.4 in October for Q3, DP.2.4 in August for Q4; A7: GR.1.1 in
+  November for Q3, DP.1.3 in early March for Q4; AR.2.2 in August for Q2) are **spiralled in bellwork the week before each EBA**.
+  The EBA dates are not known yet; they go on the plan when the district sets them.
+- The year-plan page (claude.ai artifact *Windy Hill Year Plan*) shows both courses with the options he chose from.
