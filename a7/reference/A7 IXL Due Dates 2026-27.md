@@ -38,8 +38,8 @@ The three-character code after each skill is what you type into IXL's search box
 | Wed Nov 18 | T-B1 Thread B: angle pairs — supplementary, complementary, vertical, adjacent (16.1) | Identify complementary, supplementary, vertical, adjacent, and congruent angles (HGV); Find measures of complementary, supplementary, vertical, and adjacent angles (R2B); Write and solve equations using angle relationships (DBV) | Fri Dec 11 |
 | Thu Nov 19 | T-B2 Thread B: interior and exterior angles of a triangle (16.2) | Find missing angles in triangles (JFJ); Exterior Angle Theorem (FMP); Triangle Angle-Sum Theorem (6Q6) | Fri Dec 11 |
 | Mon Nov 30 | 11.01 Equations with like terms and the distributive property | Solve equations involving like terms (Q2B); Solve equations using the distributive property (QWE); Solve two-step equations: word problems (8CZ) | Fri Dec 11 |
-| Wed Dec 02 | 11.02 Variables on both sides | Solve equations with variables on both sides (ZYL) | Fri Dec 11 |
-| Thu Dec 03 | 11.03 One, none, infinitely many solutions | Find the number of solutions (XDE); Create equations with no solutions or infinitely many solutions (7TY) | Fri Dec 11 |
+| Tue Dec 01 | 11.02 Variables on both sides | Solve equations with variables on both sides (ZYL) | Fri Dec 11 |
+| Wed Dec 02 | 11.03 One, none, infinitely many solutions | Find the number of solutions (XDE); Create equations with no solutions or infinitely many solutions (7TY) | Fri Dec 11 |
 | Fri Dec 04 | 11.04 Multi-step equations | Solve multi-step equations (55K); Solve multi-step equations: complete the solution (PGH); Solve equations: mixed review (HZZ) | Fri Dec 11 |
 | Mon Dec 07 | 11.05+06 Systems: which points are solutions; how many solutions | Is (x, y) a solution to the system of equations? (N46); Find the number of solutions to a system of equations by graphing (AGZ); Solve a system of equations in slope-intercept form (9Z8) | Fri Dec 11 |
 | Wed Dec 09 | 11.07 Solving systems by graphing | Solve a system of equations by graphing (C8X); Write a system of equations given a graph (TS7) | Fri Dec 11 |

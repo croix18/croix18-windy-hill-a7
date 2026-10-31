@@ -28,7 +28,8 @@ date,what,note
 # Croix 24 Oct 2026, 5:26 pm: "The pm2 for ela will probably be scheduled for the week before, probably Tuesday as well,
 # the math test so we'll lose that day. So bump the unit 7 test to the 10th." ELA's PM2, Tue 1 Dec: no class, like the
 # math one. Probable, not yet on the school's calendar — take the line out if the day turns out to be a class day.
-2026-12-01,off,FAST PM2 (ELA) — no class
+# Croix 31 Oct 2026, 8:13 am: "Pm2 for ela is on December 3rd." — the ELA day is Thu 3 Dec, not the probable Tue 1 Dec.
+2026-12-03,off,FAST PM2 (ELA) — no class
 2026-12-08,off,FAST PM2 — no class
 # Croix 22 Oct 2026, on Q2 ending at the break: "Ideally I'd like to give myself at least a week of no grades so that I can
 # catch up and take on the influx of missing work and makeup tests I will have to grade." Asked how A7 runs around PM2: "Yes,
