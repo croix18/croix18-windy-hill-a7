@@ -29,8 +29,8 @@ PLANTS = [
     # the test and the lessons
     ("the test's numbers no longer kept off", "engine.js", "const fresh = fk => fk.every(([s, k]) => !isForm(s, k) && !isShown(s, k));", "const fresh = fk => fk.every(([s, k]) => !isShown(s, k));"),
     ("the lessons' numbers no longer kept off (ruling 43)", "engine.js", "const fresh = fk => fk.every(([s, k]) => !isForm(s, k) && !isShown(s, k));", "const fresh = fk => fk.every(([s, k]) => !isForm(s, k));"),
-    ("a form hash drifted", "engine.js", "4239484767", "4239484768"),
-    ("test_forms.js drifted from the form", "test_forms.js", "sf: ['4>10', '15>6']", "sf: ['4>11', '15>6']"),
+    ("a form hash drifted", "engine.js", "431147488", "4311474881"),
+    ("test_forms.js drifted from the form", "test_forms.js", "sf: ['8>20', '15>6']", "sf: ['8>21', '15>6']"),
     # the coach's marking
     ("the clean rule lets a printed number be the answer", "coach.js", "    if (printed.some(x => qeq(x, p.ans))) return false;\n", ""),
     ("mistakes no longer named", "coach.js", "  const h = hits(p, r);\n", "  const h = [];\n"),

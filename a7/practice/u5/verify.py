@@ -78,7 +78,7 @@ def read(qn, st, P, opts):
         if not m: raise ValueError("cannot read %s: %s | %s" % (what, st, " | ".join(P)))
         return m
     if qn in (1, 2):
-        m = need(re.match(r"^A (\d+) (cm|m|ft) side of a figure is (\d+) \2 in its scale copy\. Find the scale factor\.$", st), "the sides")
+        m = need(re.match(r"^An? (\d+) (cm|m|ft) side of a figure is (\d+) \2 in its scale copy\. Find the scale factor\.$", st), "the sides")
         a, b = int(m.group(1)), int(m.group(3)); keys.append(("sf", "%d>%d" % (a, b))); ans.append(R(b, a))
     elif qn == 3:
         m = need(re.match(r"^A figure is scaled by a scale factor of ([\d.]+)\. Select ALL of the statements that are true about the copy\.$", st), "k")

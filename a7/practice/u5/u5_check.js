@@ -90,7 +90,7 @@ function read(qn, it) {
   let m;
   switch (qn) {
     case 1: case 2: {
-      m = need(/^A (\d+) (cm|m|ft) side of a figure is (\d+) \2 in its scale copy\. Find the scale factor\.$/.exec(st), 'the sides');
+      m = need(/^An? (\d+) (cm|m|ft) side of a figure is (\d+) \2 in its scale copy\. Find the scale factor\.$/.exec(st), 'the sides');
       const a = +m[1], b = +m[3]; out.keys.push(['sf', a + '>' + b]); out.ans.push(Q(b, a));
       if (qn === 1 ? !(b > a) : !(b < a)) throw new Error('question ' + qn + ' ' + (qn === 1 ? 'does not enlarge' : 'does not shrink'));
       break; }

@@ -17,11 +17,11 @@ def pick(form, a, b, p):
 
 def _gr15(form):
     P = lambda a, b, p: pick(form, a, b, p)
-    q1 = dict(stem=P("A 4 cm side of a figure is 10 cm in its scale copy. Find the scale factor.",
-                     "A 6 cm side of a figure is 9 cm in its scale copy. Find the scale factor.",
+    q1 = dict(stem=P("An 8 cm side of a figure is 20 cm in its scale copy. Find the scale factor.",
+                     "A 12 cm side of a figure is 18 cm in its scale copy. Find the scale factor.",
                      "A 4 cm side of a figure is 12 cm in its scale copy. Find the scale factor."),
               answer=P("k = 2.5", "k = 1.5", "k = 3"), why="copy ÷ original",
-              check=P(("eq", "F(10,4)", "F(5,2)"), ("eq", "F(9,6)", "F(3,2)"), ("eq", "F(12,4)", "3")), space=0.6)
+              check=P(("eq", "F(20,8)", "F(5,2)"), ("eq", "F(18,12)", "F(3,2)"), ("eq", "F(12,4)", "3")), space=0.6)
     q2 = dict(stem=P("A 15 cm side of a figure is 6 cm in its scale copy. Find the scale factor.",
                      "A 20 cm side of a figure is 5 cm in its scale copy. Find the scale factor.",
                      "A 12 cm side of a figure is 6 cm in its scale copy. Find the scale factor."),
@@ -51,14 +51,14 @@ def _gr15(form):
               answer=P("k = 3", "k = 4", "k = 5"),
               why=P("72 ÷ 8 = 9 is k², so k = √9. A board with 9 handed in the area ratio as k.", "80 ÷ 5 = 16 is k², so k = √16. A board with 16 handed in the area ratio as k.", "150 ÷ 6 = 25 is k², so k = √25. A board with 25 handed in the area ratio as k."),
               check=P(("eq", "sqrt(F(72,8))", "3"), ("eq", "sqrt(F(80,5))", "4"), ("eq", "sqrt(F(150,6))", "5")), space=1.0)
-    q6 = dict(stem=P("A floor plan is drawn at $\\frac{1}{4}\\,\\text{in} : 1\\,\\text{ft}$. A room is 3 in by 3.5 in on the plan.",
+    q6 = dict(stem=P("A floor plan is drawn at $\\frac{1}{4}\\,\\text{in} : 1\\,\\text{ft}$. A room is 4.5 in by 3.5 in on the plan.",
                      "A floor plan is drawn at $\\frac{1}{2}\\,\\text{in} : 1\\,\\text{ft}$. A room is 3 in by 5 in on the plan.",
                      "A floor plan is drawn at $1\\,\\text{in} : 5\\,\\text{ft}$. A room is 2 in by 3 in on the plan."),
-              parts=[dict(label="a", stem=P("Find the real length of the wall drawn 3 in long.", "Find the real length of the wall drawn 3 in long.", "Find the real length of the wall drawn 2 in long."),
-                          answer=P("12 ft", "6 ft", "10 ft"), why=P("the scale per 1 inch, then ×: 1 in : 4 ft", "the scale per 1 inch, then ×: 1 in : 2 ft", "the scale per 1 inch, then ×: 1 in : 5 ft"),
-                          check=P(("eq", "3*4", "12"), ("eq", "3*2", "6"), ("eq", "2*5", "10")), space=0.6),
-                     dict(label="b", stem="Find the room's real area.", answer=P("168 ft²", "60 ft²", "150 ft²"), why=P("real dimensions first: 12 by 14 — 10.5 in² × 4 = 42 is the named error", "real dimensions first: 6 by 10 — 15 in² × 2 = 30 is the named error", "real dimensions first: 10 by 15 — 6 in² × 5 = 30 is the named error"),
-                          check=P(("eq", "12*14", "168"), ("eq", "6*10", "60"), ("eq", "10*15", "150")), space=0.6)])
+              parts=[dict(label="a", stem=P("Find the real length of the wall drawn 4.5 in long.", "Find the real length of the wall drawn 3 in long.", "Find the real length of the wall drawn 2 in long."),
+                          answer=P("18 ft", "6 ft", "10 ft"), why=P("the scale per 1 inch, then ×: 1 in : 4 ft", "the scale per 1 inch, then ×: 1 in : 2 ft", "the scale per 1 inch, then ×: 1 in : 5 ft"),
+                          check=P(("eq", "4.5*4", "18"), ("eq", "3*2", "6"), ("eq", "2*5", "10")), space=0.6),
+                     dict(label="b", stem="Find the room's real area.", answer=P("252 ft²", "60 ft²", "150 ft²"), why=P("real dimensions first: 18 by 14 — 15.75 in² × 4 = 63 is the named error", "real dimensions first: 6 by 10 — 15 in² × 2 = 30 is the named error", "real dimensions first: 10 by 15 — 6 in² × 5 = 30 is the named error"),
+                          check=P(("eq", "18*14", "252"), ("eq", "6*10", "60"), ("eq", "10*15", "150")), space=0.6)])
     q7 = dict(stem=P("A plan is drawn at $1\\,\\text{in} : 4\\,\\text{ft}$. A real wall is 18 ft long. How long is it on the plan?",
                      "A plan is drawn at $\\frac{1}{4}\\,\\text{in} : 1\\,\\text{ft}$. A real wall is 22 ft long. How long is it on the plan?",
                      "A plan is drawn at $1\\,\\text{in} : 3\\,\\text{ft}$. A real wall is 15 ft long. How long is it on the plan?"),
@@ -114,15 +114,15 @@ def _ar33(form):
                answer=P("18.925 L (18.94 by ÷ 0.264)", "34.065 L (34.09 by ÷ 0.264)", "11.355 L (11.36 by ÷ 0.264)"), why="more liters than gallons; the sheet's other ratio earns the point too when the work shows it",
                check=P(("eq", "5*F(3785,1000)", "F(18925,1000)"), ("eq", "9*F(3785,1000)", "F(34065,1000)"), ("eq", "3*F(3785,1000)", "F(11355,1000)")), space=0.6)
     # question 14 — a square unit ACROSS systems (7.AR.3.3 is across systems; yd² → ft² is grade 6)
-    q14 = dict(stem=P("$1\\,\\text{ft} = 0.305\\,\\text{m}$. A patio is $20\\,\\text{ft}^{2}$ in area. Which is closest to its area in square meters?",
+    q14 = dict(stem=P("$1\\,\\text{ft} = 0.305\\,\\text{m}$. A patio is $30\\,\\text{ft}^{2}$ in area. Which is closest to its area in square meters?",
                       "$1\\,\\text{m} = 3.28\\,\\text{ft}$. A floor is $5\\,\\text{m}^{2}$ in area. Which is closest to its area in square feet?",
                       "$1\\,\\text{in} = 2.54\\,\\text{cm}$. A tile is $10\\,\\text{in}^{2}$ in area. Which is closest to its area in square centimeters?"),
-               choices=P(["$6.1\\,\\text{m}^{2}$", "$0.093\\,\\text{m}^{2}$", "$1.86\\,\\text{m}^{2}$", "$12.2\\,\\text{m}^{2}$"], ["$53.8\\,\\text{ft}^{2}$", "$16.4\\,\\text{ft}^{2}$", "$10.8\\,\\text{ft}^{2}$", "$32.8\\,\\text{ft}^{2}$"], ["$25.4\\,\\text{cm}^{2}$", "$64.5\\,\\text{cm}^{2}$", "$6.45\\,\\text{cm}^{2}$", "$50.8\\,\\text{cm}^{2}$"]), correct=P(2, 0, 1), answer=P("C", "A", "B"),
-               errors=P({"A": "20 × 0.305: the ratio once on a square unit [7.AR.3.3: square units square the ratio — the unit's own]", "B": "0.305² alone: the 20 ft² forgotten [4.06: finish the computation]", "D": "20 × 2 × 0.305: the ratio doubled [5.02–03 Notes II: k × k, not 2k]"},
+               choices=P(["$9.15\\,\\text{m}^{2}$", "$0.093\\,\\text{m}^{2}$", "$2.79\\,\\text{m}^{2}$", "$18.3\\,\\text{m}^{2}$"], ["$53.8\\,\\text{ft}^{2}$", "$16.4\\,\\text{ft}^{2}$", "$10.8\\,\\text{ft}^{2}$", "$32.8\\,\\text{ft}^{2}$"], ["$25.4\\,\\text{cm}^{2}$", "$64.5\\,\\text{cm}^{2}$", "$6.45\\,\\text{cm}^{2}$", "$50.8\\,\\text{cm}^{2}$"]), correct=P(2, 0, 1), answer=P("C", "A", "B"),
+               errors=P({"A": "30 × 0.305: the ratio once on a square unit [7.AR.3.3: square units square the ratio — the unit's own]", "B": "0.305² alone: the 30 ft² forgotten [4.06: finish the computation]", "D": "30 × 2 × 0.305: the ratio doubled [5.02–03 Notes II: k × k, not 2k]"},
                         {"B": "5 × 3.28: the ratio once on a square unit [7.AR.3.3: square units square the ratio — the unit's own]", "C": "3.28² alone: the 5 m² forgotten [4.06: finish the computation]", "D": "5 × 2 × 3.28: the ratio doubled [5.02–03 Notes II: k × k, not 2k]"},
                         {"A": "10 × 2.54: the ratio once on a square unit [7.AR.3.3: square units square the ratio — the unit's own]", "C": "2.54² alone: the 10 in² forgotten [4.06: finish the computation]", "D": "10 × 2 × 2.54: the ratio doubled [5.02–03 Notes II: k × k, not 2k]"}),
-               why=P("20 × 0.305² = 1.8605 (or 20 ÷ 3.28² = 1.86).", "5 × 3.28² = 53.79 (or 5 ÷ 0.305² = 53.75).", "10 × 2.54² = 64.52 (or 10 ÷ 0.39² = 65.7 — the sheet's two routes differ here; either picks B)."),
-               check=P(("eq", "20*F(305,1000)**2", "F(18605,10000)"), ("eq", "5*F(328,100)**2", "F(53792,1000)"), ("eq", "10*F(254,100)**2", "F(64516,1000)")))
+               why=P("30 × 0.305² = 2.79075 (or 30 ÷ 3.28² = 2.79).", "5 × 3.28² = 53.79 (or 5 ÷ 0.305² = 53.75).", "10 × 2.54² = 64.52 (or 10 ÷ 0.39² = 65.7 — the sheet's two routes differ here; either picks B)."),
+               check=P(("eq", "30*F(305,1000)**2", "F(279075,100000)"), ("eq", "5*F(328,100)**2", "F(53792,1000)"), ("eq", "10*F(254,100)**2", "F(64516,1000)")))
     q15 = dict(stem=P("Rate on Nov 5: $1\\,\\text{US dollar} = 0.92\\,\\text{euros}$.", "Rate on Nov 5: $1\\,\\text{US dollar} = 1.35\\,\\text{Canadian dollars}$.", "Rate on Nov 5: $1\\,\\text{US dollar} = 1.32\\,\\text{Canadian dollars}$."),
                parts=[dict(label="a", stem=P("How many euros is \\$60?", "How many Canadian dollars is \\$70?", "How many Canadian dollars is \\$90?"),
                            answer=P("55.20 euros", "94.50 Canadian dollars", "118.80 Canadian dollars"), why="× the rate",
@@ -145,9 +145,9 @@ def _ar45(form):
                            why="the bracket on the paper settles the rounding; follow-through on part (a)",
                            check=P(("eq", "sp.ceiling(F(1000,390))", "3"), ("eq", "sp.ceiling(F(1500,440))", "4"), ("eq", "sp.ceiling(F(1200,270))", "5")), space=0.7)])
     q17 = dict(stem=P("A recipe for 4 servings uses $1\\frac{1}{2}$ cups of rice.", "A recipe for 6 servings uses 2 cups of rice.", "A recipe for 5 servings uses 2 cups of rice."),
-               parts=[dict(label="a", stem=P("How much rice for 10 servings?", "How much rice for 9 servings?", "How much rice for 15 servings?"),
-                           answer=P("3¾ cups", "3 cups", "6 cups"), why=P("k = 2.5 from the yields, then the ingredient", "k = 1.5 from the yields, then the ingredient", "k = 3 from the yields, then the ingredient"),
-                           check=P(("eq", "F(10,4)*F(3,2)", "F(15,4)"), ("eq", "F(9,6)*2", "3"), ("eq", "F(15,5)*2", "6")), space=0.6),
+               parts=[dict(label="a", stem=P("How much rice for 14 servings?", "How much rice for 9 servings?", "How much rice for 15 servings?"),
+                           answer=P("5¼ cups", "3 cups", "6 cups"), why=P("k = 3.5 from the yields, then the ingredient", "k = 1.5 from the yields, then the ingredient", "k = 3 from the yields, then the ingredient"),
+                           check=P(("eq", "F(14,4)*F(3,2)", "F(21,4)"), ("eq", "F(9,6)*2", "3"), ("eq", "F(15,5)*2", "6")), space=0.6),
                       dict(label="b", stem=P("With 6 cups on hand, how many servings can be made?", "With 8 cups on hand, how many servings can be made?", "With 10 cups on hand, how many servings can be made?"),
                            answer=P("16 servings", "24 servings", "25 servings"), why=P("4 recipes × the yield; 24 scaled the yield by the cups", "4 recipes × the yield; 48 scaled the yield by the cups", "5 recipes × the yield; 50 scaled the yield by the cups"),
                            check=P(("eq", "6/F(3,2)*4", "16"), ("eq", "F(8,2)*6", "24"), ("eq", "F(10,2)*5", "25")), space=0.6)])

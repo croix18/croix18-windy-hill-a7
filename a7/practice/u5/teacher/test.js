@@ -22,7 +22,7 @@ window.TEACHER_TEST = {
     "points": 10,
     "items": [
      {
-      "stem": "A 4 cm side of a figure is 10 cm in its scale copy. Find the scale factor.",
+      "stem": "An 8 cm side of a figure is 20 cm in its scale copy. Find the scale factor.",
       "answer": "k = 2.5",
       "why": "copy ÷ original",
       "space": 0.6
@@ -81,20 +81,20 @@ window.TEACHER_TEST = {
       "space": 1.0
      },
      {
-      "stem": "A floor plan is drawn at $\\frac{1}{4}\\,\\text{in} : 1\\,\\text{ft}$. A room is 3 in by 3.5 in on the plan.",
+      "stem": "A floor plan is drawn at $\\frac{1}{4}\\,\\text{in} : 1\\,\\text{ft}$. A room is 4.5 in by 3.5 in on the plan.",
       "parts": [
        {
         "label": "a",
-        "stem": "Find the real length of the wall drawn 3 in long.",
-        "answer": "12 ft",
+        "stem": "Find the real length of the wall drawn 4.5 in long.",
+        "answer": "18 ft",
         "why": "the scale per 1 inch, then ×: 1 in : 4 ft",
         "space": 0.6
        },
        {
         "label": "b",
         "stem": "Find the room's real area.",
-        "answer": "168 ft²",
-        "why": "real dimensions first: 12 by 14 — 10.5 in² × 4 = 42 is the named error",
+        "answer": "252 ft²",
+        "why": "real dimensions first: 18 by 14 — 15.75 in² × 4 = 63 is the named error",
         "space": 0.6
        }
       ]
@@ -164,23 +164,23 @@ window.TEACHER_TEST = {
       "space": 0.6
      },
      {
-      "stem": "$1\\,\\text{ft} = 0.305\\,\\text{m}$. A patio is $20\\,\\text{ft}^{2}$ in area. Which is closest to its area in square meters?",
+      "stem": "$1\\,\\text{ft} = 0.305\\,\\text{m}$. A patio is $30\\,\\text{ft}^{2}$ in area. Which is closest to its area in square meters?",
       "choices": [
-       "$6.1\\,\\text{m}^{2}$",
+       "$9.15\\,\\text{m}^{2}$",
        "$0.093\\,\\text{m}^{2}$",
-       "$1.86\\,\\text{m}^{2}$",
-       "$12.2\\,\\text{m}^{2}$"
+       "$2.79\\,\\text{m}^{2}$",
+       "$18.3\\,\\text{m}^{2}$"
       ],
       "correct": [
        2
       ],
       "multi": false,
       "answer": "C",
-      "why": "20 × 0.305² = 1.8605 (or 20 ÷ 3.28² = 1.86).",
+      "why": "30 × 0.305² = 2.79075 (or 30 ÷ 3.28² = 2.79).",
       "errors": {
-       "A": "20 × 0.305: the ratio once on a square unit [7.AR.3.3: square units square the ratio — the unit's own]",
-       "B": "0.305² alone: the 20 ft² forgotten [4.06: finish the computation]",
-       "D": "20 × 2 × 0.305: the ratio doubled [5.02–03 Notes II: k × k, not 2k]"
+       "A": "30 × 0.305: the ratio once on a square unit [7.AR.3.3: square units square the ratio — the unit's own]",
+       "B": "0.305² alone: the 30 ft² forgotten [4.06: finish the computation]",
+       "D": "30 × 2 × 0.305: the ratio doubled [5.02–03 Notes II: k × k, not 2k]"
       }
      },
      {
@@ -233,9 +233,9 @@ window.TEACHER_TEST = {
       "parts": [
        {
         "label": "a",
-        "stem": "How much rice for 10 servings?",
-        "answer": "3¾ cups",
-        "why": "k = 2.5 from the yields, then the ingredient",
+        "stem": "How much rice for 14 servings?",
+        "answer": "5¼ cups",
+        "why": "k = 3.5 from the yields, then the ingredient",
         "space": 0.6
        },
        {
@@ -270,7 +270,7 @@ window.TEACHER_TEST = {
     "points": 10,
     "items": [
      {
-      "stem": "A 6 cm side of a figure is 9 cm in its scale copy. Find the scale factor.",
+      "stem": "A 12 cm side of a figure is 18 cm in its scale copy. Find the scale factor.",
       "answer": "k = 1.5",
       "why": "copy ÷ original",
       "space": 0.6

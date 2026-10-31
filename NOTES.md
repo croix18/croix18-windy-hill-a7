@@ -1,5 +1,13 @@
 # State of the work — 25 October 2026 (read this first)
 
+## 30 October, late — Unit 5's printed test: the repeats of the lessons changed (Croix: "Yeah change them")
+
+Form A question 1 is now 8 cm → 20 cm and Form B's 12 cm → 18 cm (5.01's Example 1 and Notes I); Form A 6(a) is the wall
+drawn 4.5 in (18 ft; the room 4.5 in by 3.5 in, 252 ft²); Form A question 14 is a 30 ft² patio (2.79 m²; the sheet's own
+20 ft² = 1.86 m² is gone); Form A 17(a) asks for 14 servings (k = 3.5, 5¼ cups). `a7/build/u5/unit.py`; the unit rebuilt and
+installed; the practice page's form list and hashes follow (and "An 8 cm side"), every check passing again. **Print the new
+Form A and Form B for Thu 5 Nov.**
+
 ## 30 October, late evening — Unit 5's practice page reviewed, fixed and published (test Thu 5 Nov)
 
 Three fresh readers (Claude Fable 5.1) read the page built on 25 Oct — the 25 Oct readers had been cut off by the usage limit.
