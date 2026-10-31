@@ -72,8 +72,8 @@ const SPEC = fs.readFileSync(path.join(__dirname, '..', '..', 'build', 'u5', 'un
 const TEST_TITLES = [...SPEC.matchAll(/dict\(title="([^"]+)", benchmark="MA\.7\.[A-Z]+\.\d\.\d", items=_\w+\(f\)\)/g)].map(m => m[1]);
 if (TEST_TITLES.length !== 3) { console.log('could not read the test\'s three section titles from unit.py'); process.exit(1); }
 const WANT = { titles: TEST_TITLES.join('|'), items: '8,7,4', parts: '10,8,6',
-  types: 'solo,solo,multi,parts,solo,parts,solo,solo|solo,multi,solo,solo,solo,mc,parts|parts,parts,solo,mc' };
-const shape = { mixKnownOne: 0, mixSets: 0 };
+  types: 'solo,solo,multi,parts,solo,parts,solo,solo|solo,multi,solo,solo,solo,mc,parts|parts,parts,solo,solo' };
+const shape = { mixKnownOne: 0, mixSets: 0, lastFirst: 0, lastN: 0 };
 const counts = { sets: 0, parts: 0, typedRight: 0, forms: 0, models: 0, near: 0, alt: 0, follow: 0, didMean: 0, solLines: 0, walkSteps: 0, mc: 0, multi: 0, subsets: 0, claims: 0, keysRead: 0, cleanChecked: 0 };
 const dump = [];
 
@@ -131,30 +131,31 @@ function read(qn, it) {
       out.keys.push(['room', ks(r) + '|' + ks(lo) + ',' + ks(hi)]); out.ans.push(qmul(qmul(p, r), qmul(q, r))); break; }
     case 9: {
       m = need(/^1 in = 2\.54 cm\. How many centimeters is (\d+) in\?$/.exec(st), 'the inches');
-      out.keys.push(['conv', 'in>cm|' + m[1]]); out.ans.push(qmul(Q(+m[1]), qdec('2.54'))); out.alt = qdiv(Q(+m[1]), qdec('0.39')); break; }
+      out.keys.push(['conv', 'in>cm|' + m[1]], ['amount', 'in/cm|' + m[1]]); out.ans.push(qmul(Q(+m[1]), qdec('2.54'))); out.alt = qdiv(Q(+m[1]), qdec('0.39')); break; }
     case 10: {
       m = need(/^1 (\w+) = ([\d.]+) (\w+) and 1 \3 = ([\d.]+) \1\. Select ALL of the expressions that give the number of (\w+) in (\d+) (\w+)\.$/.exec(st), 'the ratios');
       const one = { [m[1]]: m[2], [m[3]]: m[4] }, to = need(UNIT_OF[m[5]], 'the unit wanted'), n = +m[6], from = m[7];
       need((from === m[1] && to === m[3]) || (from === m[3] && to === m[1]), 'the two units');
-      out.keys.push(['conv', from + '>' + to + '|' + n]);
+      const PAIR_OF = { in: 'in/cm', cm: 'in/cm', mi: 'mi/km', km: 'mi/km', lb: 'lb/kg', kg: 'lb/kg', gal: 'gal/L', L: 'gal/L', ft: 'ft/m', m: 'ft/m', c: 'c/L', oz: 'oz/g', g: 'oz/g' };
+      out.keys.push(['conv', from + '>' + to + '|' + n], ['amount', PAIR_OF[from] + '|' + n]);
       out.correct = it.opts.map(plain).map((o, i) => { const x = need(/^(\d+) (×|÷) ([\d.]+)$/.exec(o), 'an expression'); need(+x[1] === n, 'the amount in a choice');
         const unitOne = Object.keys(one).find(u => one[u] === x[3]); need(unitOne, 'a ratio in a choice');
         return (x[2] === '×' && unitOne === from) || (x[2] === '÷' && unitOne === to) ? i : -1; }).filter(i => i >= 0);
       break; }
     case 11: {
       m = need(/^1 yd = 3 ft, 1 ft = 12 in, 1 in = 2\.54 cm\. How many centimeters is ([\d.]+) yd\?$/.exec(st), 'the yards');
-      const n = qdec(m[1]); out.keys.push(['chain', 'yd>cm|' + ks(n)]); out.ans.push(qmul(qmul(n, Q(36)), qdec('2.54'))); out.alt = qdiv(qmul(n, Q(36)), qdec('0.39')); break; }
+      const n = qdec(m[1]); out.keys.push(['chain', 'yd>cm|' + ks(n)], ['amount', 'in/cm|' + ks(qmul(n, Q(36)))]); out.ans.push(qmul(qmul(n, Q(36)), qdec('2.54'))); out.alt = qdiv(qmul(n, Q(36)), qdec('0.39')); break; }
     case 12: {
-      if ((m = /^1 kg = 2\.204 lb\. How many pounds is (\d+) kg\?$/.exec(st))) { out.keys.push(['conv', 'kg>lb|' + m[1]]); out.ans.push(qmul(Q(+m[1]), qdec('2.204'))); out.alt = qdiv(Q(+m[1]), qdec('0.454')); }
-      else { m = need(/^1 lb = 0\.454 kg\. How many kilograms is (\d+) lb\?$/.exec(st), 'the mass'); out.keys.push(['conv', 'lb>kg|' + m[1]]); out.ans.push(qmul(Q(+m[1]), qdec('0.454'))); out.alt = qdiv(Q(+m[1]), qdec('2.204')); }
+      if ((m = /^1 kg = 2\.204 lb\. How many pounds is (\d+) kg\?$/.exec(st))) { out.keys.push(['conv', 'kg>lb|' + m[1]], ['amount', 'lb/kg|' + m[1]]); out.ans.push(qmul(Q(+m[1]), qdec('2.204'))); out.alt = qdiv(Q(+m[1]), qdec('0.454')); }
+      else { m = need(/^1 lb = 0\.454 kg\. How many kilograms is (\d+) lb\?$/.exec(st), 'the mass'); out.keys.push(['conv', 'lb>kg|' + m[1]], ['amount', 'lb/kg|' + m[1]]); out.ans.push(qmul(Q(+m[1]), qdec('0.454'))); out.alt = qdiv(Q(+m[1]), qdec('2.204')); }
       break; }
     case 13: {
       m = need(/^1 gal = 3\.785 L\. How many liters is (\d+) gal\?$/.exec(st), 'the gallons');
-      out.keys.push(['conv', 'gal>L|' + m[1]]); out.ans.push(qmul(Q(+m[1]), qdec('3.785'))); out.alt = qdiv(Q(+m[1]), qdec('0.264')); break; }
+      out.keys.push(['conv', 'gal>L|' + m[1]], ['amount', 'gal/L|' + m[1]]); out.ans.push(qmul(Q(+m[1]), qdec('3.785'))); out.alt = qdiv(Q(+m[1]), qdec('0.264')); break; }
     case 14: {
       m = need(/^1 (in|ft|m|cm|mi|km) = ([\d.]+) (in|ft|m|cm|mi|km)\. An? ([a-z ]+) is ([\d,]+) \1\^2 in area\. Which is closest to its area in square (\w+)\?$/.exec(st), 'the area');
       const r = qdec(m[2]), A = +m[5].replace(/,/g, ''); need(UNIT_OF[m[6]] === m[3], 'the square unit wanted');
-      out.keys.push(['sqconv', m[1] + '2>' + m[3] + '2|' + A]);
+      out.keys.push(['sqconv', m[1] + '2>' + m[3] + '2|' + A], ['amount', m[1] + '2|' + A]);
       const exact = qmul(Q(A), qmul(r, r)), OTHER = { in: '0.39', cm: '2.54', ft: '3.28', m: '0.305', mi: '0.62', km: '1.61' };
       const o = qdec(OTHER[m[1]]), alt = qdiv(Q(A), qmul(o, o));
       const vals = it.opts.map(plain).map(s => { const x = need(new RegExp('^([\\d,.]+) ' + m[3] + '\\^2$').exec(s), 'a choice'); return qdec(x[1].replace(/,/g, '')); });
@@ -170,10 +171,10 @@ function read(qn, it) {
       if (!isInt(qdiv(c, r))) throw new Error('part (b) is not a whole number of dollars');
       break; }
     case 16: {
-      m = need(/^A (car|truck|van|pickup) gets (\d+) miles per gallon and its tank holds (\d+) gal\.$/.exec(st), 'the car');
+      m = need(/^A ([a-z ]+) gets (\d+) miles per gallon and its tank holds (\d+) gal\.$/.exec(st), 'the car');
       const mm = +m[2], g = +m[3], b = need(/^It makes a ([\d,]+)-mi trip\. How many tanks of gas does the trip use\? \(Part of a tank counts as a whole tank\.\)$/.exec(P[1]), 'part b');
       need(P[0] === 'How far does it go on a full tank?', 'part a');
-      const D = +b[1].replace(/,/g, ''); out.keys.push(['tank', mm + '|' + g], ['trip', mm + '|' + g + '|' + D]);
+      const D = +b[1].replace(/,/g, ''); out.keys.push(['tank', mm + '|' + g], ['trip', mm + '|' + g + '|' + D], ['range', String(mm * g)], ['tripD', String(D)]);
       out.ans.push(Q(mm * g), E.qceil(Q(D, mm * g))); out.follow = a => E.qceil(qdiv(Q(D), a)); break; }
     case 17: {
       m = need(new RegExp('^A recipe for (\\d+) servings uses (' + NUM + ') cups of (\\w+)\\.$').exec(st), 'the recipe');
@@ -189,20 +190,12 @@ function read(qn, it) {
       else { m = need(/^(\w+) is mixed ([a-z ]+) : ([a-z ]+) : ([a-z ]+) = (\d+) : (\d+) : (\d+)\. A batch uses (\d+) (\w+) of ([a-z ]+)\. How many \9 is the whole batch\?$/.exec(st), 'the mixture');
         parts = [+m[5], +m[6], +m[7]]; which = [m[2], m[3], m[4]].indexOf(m[10]); n = +m[8]; need(which >= 0, 'the part named'); }
       need(n % parts[which] === 0, 'a whole part');
-      out.keys.push(['mix', parts.join(':') + '|' + which + '|' + n]); out.ans.push(Q(n / parts[which] * (parts[0] + parts[1] + parts[2]))); break; }
+      out.keys.push(['mix', parts.slice().sort((a, b) => a - b).join(':') + '|' + parts[which] + '|' + n]); out.ans.push(Q(n / parts[which] * (parts[0] + parts[1] + parts[2]))); break; }
     case 19: {
-      m = need(/^1 mi = 1\.61 km\. A (\w+) does (\d+) km\/h; a (\w+) does (\d+) mi\/h\. Which is faster\? Choose the answer that shows both speeds in one unit\.$/.exec(st), 'the speeds');
-      const A = m[1], kmh = +m[2], B = m[3], mph = +m[4], conv = qmul(Q(mph), qdec('1.61')), fast = qlt(conv, Q(kmh)) ? A : B;
-      out.keys.push(['speed', kmh + '|' + mph]);
-      out.correct = it.opts.map(plain).map((o, i) => { let x;
-        if ((x = /^The (\w+): (\d+) mi\/h = ([\d.]+) km\/h, and ([\d.]+) > ([\d.]+)\.$/.exec(o))) {
-          const said = qdec(x[3]), hi = qdec(x[4]), lo = qdec(x[5]);
-          const set = [Q(kmh), said]; const okConv = +x[2] === mph && qeq(said, conv);
-          const okCmp = qlt(lo, hi) && set.some(v => qeq(v, hi)) && set.some(v => qeq(v, lo));
-          return okConv && okCmp && x[1] === fast ? i : -1; }
-        return -1; }).filter(i => i >= 0);
-      if (out.correct.length !== 1) throw new Error('question 19 has ' + out.correct.length + ' right choices');
-      out.correct = out.correct[0];
+      m = need(/^1 mi = 1\.61 km\. A (\w+) does (\d+) km\/h; a (\w+) does (\d+) mi\/h\. Which is faster\? Type its name, and the \3’s speed in km\/h\.$/.exec(st), 'the speeds');
+      const A = m[1], kmh = +m[2], B = m[3], mph = +m[4], conv = qmul(Q(mph), qdec('1.61'));
+      out.keys.push(['speed', kmh + '|' + mph], ['speedM', String(mph)]);
+      out.ans.push(conv); out.alt = qdiv(Q(mph), qdec('0.62')); out.fast = qlt(conv, Q(kmh)) ? A : B; out.slow = out.fast === A ? B : A;
       break; }
   }
   return out;
@@ -210,6 +203,7 @@ function read(qn, it) {
 
 /* ---------- Hints */
 function checkWalk(seed, w, steps, ans, aAns) {
+  const lastCh = steps.filter(x => x.type === 'choice').pop(); if (lastCh && lastCh.opts.length > 1) { shape.lastN++; if (lastCh.opts[0].ok) shape.lastFirst++; }
   if (!steps || !steps.length) { fail(seed, w, 'no Hint steps'); return; }
   steps.forEach((s, i) => {
     counts.walkSteps++;
@@ -253,7 +247,7 @@ for (let seed = 1; seed <= NSETS; seed++) {
     qn++; const w = 'Q' + qn;
     let R; try { R = read(qn, it); counts.keysRead++; } catch (e) { fail(seed, w, e.message); return; }
     R.keys.forEach(([s, k]) => { const f = formKey(s, k); if (f.length) fail(seed, w, 'Form ' + f.join(' and ') + '\'s numbers: ' + s + ' ' + k); });
-    if (qn === 18) { shape.mixSets++; const [pp, wh] = R.keys[0][1].split('|'); if (+pp.split(':')[+wh] === 1) shape.mixKnownOne++; }
+    if (qn === 18) { shape.mixSets++; const [pp, wh] = R.keys[0][1].split('|'); if (+wh === 1) shape.mixKnownOne++; }   /* the key's middle field is now the known part's share */
     /* the estimate (5.06 Notes II) says the right way: more of the smaller unit, fewer of the bigger */
     if (qn === 9 || qn === 12 || qn === 13) { const p0 = it.part, f = qdec(p0.prm.f), more = qlt(Q(1), f), say = plain(C.F[p0.fam].rule(p0)) + ' ' + C.solution(p0).map(l => plain(l.say)).join(' ');
       if (/is more than/.test(say) !== more || /is fewer than/.test(say) === more) fail(seed, w, 'the estimate says the wrong way: ' + say.slice(0, 160));
@@ -303,23 +297,31 @@ for (let seed = 1; seed <= NSETS; seed++) {
       if (places(a) >= 0 && qnum(a) >= 1000) ways.push(numStr(a));
       if (p.money && places(a) < 2) ways.push(E.money(a));
       if (p.cups && !isInt(a)) ways.push(E.mixedText(a).replace(/ (\d+)\/(\d+)$/, (m0, n, d) => ({ '1/2': '½', '1/4': '¼', '3/4': '¾' })[n + '/' + d] || m0));
-      ways.forEach(t => { counts.typedRight++; const r0 = C.feedback(p, t, {}); if (r0.v !== 'right') fail(seed, pw, 'the key typed as "' + t + '" is marked ' + r0.v + ': ' + plain((r0.what || [])[0] || '')); });
+      const nm = p.name ? R.fast + ' ' : '';
+      ways.forEach((t, i) => { if (p.name && i > 0) t = nm + t; counts.typedRight++; const r0 = C.feedback(p, t, {}); if (r0.v !== 'right') fail(seed, pw, 'the key typed as "' + t + '" is marked ' + r0.v + ': ' + plain((r0.what || [])[0] || '')); });
+      /* question 19: the name decides — the right conversion with the slower one's name is wrong, the number alone or the name alone is Almost, two names are not read */
+      if (p.name) { counts.names = (counts.names || 0) + 1;
+        if (p.prm.fast !== R.fast) fail(seed, pw, 'the faster one is ' + R.fast + ', not ' + p.prm.fast);
+        const tries = [[R.slow + ' ' + decPlain(a), 'wrong'], [decPlain(a), 'form'], [R.fast, 'form'], [R.slow, 'wrong'], [R.fast + ' and ' + R.slow + ' ' + decPlain(a), 'unread'], [R.fast + ' ' + p.prm.kmh, 'wrong'], [R.fast + ' ' + p.prm.mph, 'wrong'], ['the ' + R.fast + ': ' + decPlain(a) + ' km/h', 'right'], [decPlain(a) + ' ' + R.fast, 'right']];
+        tries.forEach(([t, v]) => { const r0 = C.feedback(p, t, {}); if (r0.v !== v) fail(seed, pw, '"' + t + '" is marked ' + r0.v + ', not ' + v + ': ' + plain((r0.what || [])[0] || '')); if (r0.v !== 'right' && /the \w+ is faster/.test(plain((r0.what || [])[0] || '')) && t !== R.slow + ' ' + decPlain(a)) fail(seed, pw, '"' + t + '" is told who is faster'); }); }
       /* not finished: the key rounded, a fraction not in simplest form, the arithmetic left undone */
       const forms = [];
-      for (let dp = 0; dp < places(a); dp++) { const t = qround(a, dp); if (!qeq(t, a) && qnum(t) > 0) forms.push(decPlain(t)); }
+      for (let dp = 0; dp < places(a); dp++) { const t = qround(a, dp); if (!qeq(t, a) && qnum(t) > 0 && !(p.alt && qeq(t, p.alt))) forms.push(decPlain(t)); }   /* the key rounded — unless that is exactly the other ratio's answer, which earns the point */
       forms.push((2n * a.n) + '/' + (2n * a.d), (places(a) >= 0 ? decPlain(a) : a.n + '/' + a.d) + ' + 0');
       forms.forEach(t => { counts.forms++; const r = C.feedback(p, t, {}); if (r.v !== 'form') fail(seed, pw, '"' + t + '" (right, not finished) is marked ' + r.v + ': ' + plain((r.what || [])[0] || '')); });
       /* a mixed number with no space between its whole number and its fraction */
       if (p.cups && !isInt(a)) { counts.didMean++; const w0 = a.n / a.d, n0 = a.n % a.d, t = w0 + '' + n0 + '/' + a.d, r = C.feedback(p, t, {});
-        if (r.v !== 'unread' || !/Did you mean/.test((r.what || [])[0] || '')) fail(seed, pw, '"' + t + '" is marked ' + r.v); }
+        if (r.v !== 'unread' || !/If that is a mixed number/.test((r.what || [])[0] || '')) fail(seed, pw, '"' + t + '" is marked ' + r.v); }
       /* the sheet's other ratio, rounded to one, two or three places: right, with a note */
       if (p.alt) { if (!R.alt || !qeq(R.alt, p.alt)) fail(seed, pw, 'the other ratio\'s answer is not the question\'s');
+        /* the other ratio's answer exactly, when it ends (the critic of 30 Oct 2026: 66 ÷ 0.264 = 250 was "the answer rounded") */
+        if (places(p.alt) >= 0 && !qeq(p.alt, a)) { counts.alt++; const r = C.feedback(p, nm + decPlain(p.alt), {}); if (r.v !== 'right' || !/other ratio/.test(plain((r.what || [])[0] || ''))) fail(seed, pw, 'the other ratio\'s exact ' + decPlain(p.alt) + ' is marked ' + r.v + ': ' + plain((r.what || [])[0] || '')); }
         for (let dp = 1; dp <= 3; dp++) { const t = qround(p.alt, dp); let shadow = qeq(t, a); for (let d2 = 0; d2 < places(a); d2++) if (qeq(t, qround(a, d2))) shadow = true;
-          if (shadow) continue; counts.alt++; const ty = E.fixed(p.alt, dp), r = C.feedback(p, ty, {});
+          if (shadow) continue; counts.alt++; const ty = nm + E.fixed(p.alt, dp), r = C.feedback(p, ty, {});
           if (r.v !== 'right' || !/other ratio/.test(plain((r.what || [])[0] || ''))) fail(seed, pw, 'the other ratio\'s ' + ty + ' is marked ' + r.v); } }
       /* near misses and the minus sign */
       [qadd(a, Q(1)), qsub(a, Q(1)), qadd(a, Q(1, 10)), qsub(a, Q(1, 10)), qadd(a, Q(1, 100))].filter(t => qnum(t) > 0).forEach(t => {
-        if (p.alt && [1, 2, 3].some(dp => qeq(t, qround(p.alt, dp)))) return;
+        if (p.alt && (qeq(t, p.alt) || [1, 2, 3].some(dp => qeq(t, qround(p.alt, dp))))) return;
         counts.near++; const r = C.feedback(p, typedOf(t), {}); if (r.v === 'right') fail(seed, pw, 'a near miss ' + typedOf(t) + ' is marked right'); });
       { const r = C.feedback(p, '-' + kt, {}); if (r.v !== 'wrong') fail(seed, pw, 'the key with a minus sign is marked ' + r.v); }
       /* the clean rule, here and not through C.clean: no mistake is worth the answer, no printed number is the answer */
@@ -359,6 +361,16 @@ for (let seed = 1; seed <= NSETS; seed++) {
       /* the Hint; a part (b) never asks for part (a)'s number */
       const st = W.steps(p); checkWalk(seed, pw, st, a, pi > 0 ? parts[0].ans : null);
       const lastNum = st.filter(x => x.type === 'num').pop(); if (!lastNum || !qeq(lastNum.ans, a)) fail(seed, pw, 'the Hint does not end on the answer');
+      /* the reviews of 30 Oct 2026: a part (b)'s Show me how never prints part (a)'s number while part (a) is wrong; a fresh one
+         ("Try another", no part (a)) gets a Hint and Show me how that never say "part (a)"; every Hint number ends */
+      if (pi > 0 && C.F[p.fam].follow) { const aStr = plain(E.ansHtml(parts[0])).replace(/[^\d.,]/g, ''), held = C.solution(p, { prevOk: false, mode: 'practice' }) || [];
+        held.forEach(l => { counts.heldLines = (counts.heldLines || 0) + 1; const t = plain(l.say + ' ' + (l.ex ? l.ex.h : '')).replace(/,/g, ''); if (new RegExp('(^|[^\\d./])' + aStr.replace(/,/g, '').replace('.', '\\.') + '(?![\\d./])').test(t) && !qeq(parts[0].ans, Q(1))) fail(seed, pw, 'Show me how prints part (a)\'s ' + aStr + ' before part (a) is right: ' + t.slice(0, 120)); });
+        if (!held.some(l => l.ex)) fail(seed, pw, 'the held Show me how never reaches the answer');
+        const fresh = W.steps(p, { extra: true, mode: 'practice' }) || []; checkWalk(seed, pw + ' fresh', fresh, a, null);
+        fresh.forEach(x => { const t = plain(x.ask + ' ' + (x.hint || '') + ' ' + (x.opts || []).map(o => o.label + ' ' + o.why).join(' ')); if (/part \(a\)/i.test(t)) fail(seed, pw, 'a fresh one\'s Hint says part (a): ' + t.slice(0, 100)); });
+        (C.solution(p, { extra: true, mode: 'practice' }) || []).forEach(l => { if (/part \(?a\)?/i.test(plain(l.say))) fail(seed, pw, 'a fresh one\'s Show me how says part (a): ' + plain(l.say).slice(0, 100)); }); }
+      st.filter(x => x.type === 'num').forEach((x, i) => { if (places(x.ans) < 0) fail(seed, pw, 'Hint step ' + (i + 1) + ' asks for a number that never ends: ' + x.ans.n + '/' + x.ans.d); });
+      if (/class="m"/.test(it.stem) && /US dollar/.test(plain(it.stem))) { const ms = it.stem.match(/<span class="m"[^>]*>.*?<\/span>/g) || []; if (ms.some(z => /[A-Za-z]{4,}/.test(plain(z).replace(/US dollar/, '')))) fail(seed, w, 'the rate\'s currency is inside the math span (it cannot wrap on a phone)'); }
       if (di) di.parts.push({ label: p.label || '', fam: p.fam, stem: plain(p.stem), unit: p.unit || null, pre: p.pre || null, key: plain(E.ansHtml(p)), keyText: kt, ans: a.n + '/' + a.d,
         alt: p.alt ? p.alt.n + '/' + p.alt.d : null, sol: sol.map(l => ({ say: plain(l.say), h: l.ex ? plain(l.ex.h) : null })),
         walk: st.filter(x => x.type === 'num').map(x => ({ ask: plain(x.ask), ans: x.ans.n + '/' + x.ans.d })), rule: plain(C.F[p.fam].rule(p)),
@@ -369,6 +381,7 @@ for (let seed = 1; seed <= NSETS; seed++) {
   if (Dm) dump.push(Dm);
 }
 if (shape.mixSets && shape.mixKnownOne > 0.6 * shape.mixSets) fail(0, 'Q18', 'the known part is 1 in ' + shape.mixKnownOne + ' of ' + shape.mixSets + ' sets: the clean rule is hiding a key that is right only then');
+if (shape.lastN && shape.lastFirst > 0.6 * shape.lastN) fail(0, 'Hint', 'the right option is first in the Hint\'s last choice in ' + shape.lastFirst + ' of ' + shape.lastN + ' Hints (the student review of 30 Oct 2026)');
 fs.writeFileSync(path.join(__dirname, 'dump.json'), JSON.stringify({ TITLES: E.TITLES, fixed: FIXED.map(plain), sets: dump }));
 console.log(counts.sets + ' sets: ' + counts.keysRead + ' questions read back, ' + counts.parts + ' typed parts, ' + counts.typedRight + ' keys typed, ' + counts.forms + ' "Almost" forms, ' + counts.didMean + ' mixed numbers run together, ' +
   counts.alt + ' other-ratio answers, ' + counts.models + ' mistakes typed, ' + counts.near + ' near misses, ' + counts.follow + ' follow-throughs, ' + counts.solLines + ' worked lines, ' + counts.walkSteps + ' Hint steps, ' +

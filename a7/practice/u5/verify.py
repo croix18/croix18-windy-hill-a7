@@ -112,31 +112,34 @@ def read(qn, st, P, opts):
     elif qn == 8:
         m = need(re.match(r"^A plan is drawn at 1 in : (\d+) ft\. A room is ([\d.]+) in by ([\d.]+) in on the plan\.(?: 1 ft = 0\.305 m\.)? Find the room[’']s real area(?: in square meters)?\.$", st), "the room")
         r, p, q = Integer(m.group(1)), R(m.group(2)), R(m.group(3)); keys.append(("room", "%s|%s,%s" % (ks(r), ks(min(p, q)), ks(max(p, q))))); ans.append(p * r * q * r)
+        if "square meters" in st: keys.append(("amount", "ft2|" + ks(p * r * q * r)))   # the transfer item's area in ft², an amount the page's Q14 could print
     elif qn == 9:
         m = need(re.match(r"^1 in = 2\.54 cm\. How many centimeters is (\d+) in\?$", st), "the inches")
-        keys.append(("conv", "in>cm|" + m.group(1))); ans.append(int(m.group(1)) * R("2.54"))
+        keys.append(("conv", "in>cm|" + m.group(1))); keys.append(("amount", "in/cm|" + m.group(1))); ans.append(int(m.group(1)) * R("2.54"))
     elif qn == 10:
         m = need(re.match(r"^1 (\w+) = ([\d.]+) (\w+) and 1 \3 = ([\d.]+) \1\. Select ALL of the expressions that give the number of (\w+) in (\d+) (\w+)\.$", st), "the ratios")
         one = {m.group(1): m.group(2), m.group(3): m.group(4)}; to = UNIT_OF[m.group(5)]; n = int(m.group(6)); frm = m.group(7)
         need({frm, to} == {m.group(1), m.group(3)}, "the units"); keys.append(("conv", "%s>%s|%d" % (frm, to, n))); correct = []
+        keys.append(("amount", "%s|%d" % (PAIR_OF[frm], n)))
         for i, o in enumerate(opts):
             x = need(re.match(r"^(\d+) (×|÷) ([\d.]+)$", o), "a choice"); u1 = [u for u in one if one[u] == x.group(3)]
             need(int(x.group(1)) == n and len(u1) == 1, "a choice's ratio")
             if (x.group(2) == "×" and u1[0] == frm) or (x.group(2) == "÷" and u1[0] == to): correct.append(i)
     elif qn == 11:
         m = need(re.match(r"^1 yd = 3 ft, 1 ft = 12 in, 1 in = 2\.54 cm\. How many centimeters is ([\d.]+) yd\?$", st), "the yards")
-        n = R(m.group(1)); keys.append(("chain", "yd>cm|" + ks(n))); ans.append(n * 36 * R("2.54"))
+        n = R(m.group(1)); keys.append(("chain", "yd>cm|" + ks(n))); keys.append(("amount", "in/cm|" + ks(n * 36))); ans.append(n * 36 * R("2.54"))
     elif qn == 12:
         m = re.match(r"^1 kg = 2\.204 lb\. How many pounds is (\d+) kg\?$", st)
         if m: keys.append(("conv", "kg>lb|" + m.group(1))); ans.append(int(m.group(1)) * R("2.204"))
         else:
             m = need(re.match(r"^1 lb = 0\.454 kg\. How many kilograms is (\d+) lb\?$", st), "the mass"); keys.append(("conv", "lb>kg|" + m.group(1))); ans.append(int(m.group(1)) * R("0.454"))
+        keys.append(("amount", "lb/kg|" + m.group(1)))
     elif qn == 13:
         m = need(re.match(r"^1 gal = 3\.785 L\. How many liters is (\d+) gal\?$", st), "the gallons")
-        keys.append(("conv", "gal>L|" + m.group(1))); ans.append(int(m.group(1)) * R("3.785"))
+        keys.append(("conv", "gal>L|" + m.group(1))); keys.append(("amount", "gal/L|" + m.group(1))); ans.append(int(m.group(1)) * R("3.785"))
     elif qn == 14:
         m = need(re.match(r"^1 (in|ft|m|cm|mi|km) = ([\d.]+) (in|ft|m|cm|mi|km)\. An? ([a-z ]+) is ([\d,]+) \1\^2 in area\. Which is closest to its area in square (\w+)\?$", st), "the area")
-        need(UNIT_OF[m.group(6)] == m.group(3), "the unit asked"); A, r = num(m.group(5)), R(m.group(2)); keys.append(("sqconv", "%s2>%s2|%s" % (m.group(1), m.group(3), A)))
+        need(UNIT_OF[m.group(6)] == m.group(3), "the unit asked"); A, r = num(m.group(5)), R(m.group(2)); keys.append(("sqconv", "%s2>%s2|%s" % (m.group(1), m.group(3), A))); keys.append(("amount", "%s2|%s" % (m.group(1), A)))
         if opts:
             vals = [num(need(re.match(r"^([\d,.]+) %s\^2$" % m.group(3), o), "a choice").group(1)) for o in opts]
             OTHER = {"in": "0.39", "cm": "2.54", "ft": "3.28", "m": "0.305", "mi": "0.62", "km": "1.61"}
@@ -149,9 +152,9 @@ def read(qn, st, P, opts):
         a = need(re.match(r"^How many %s is \$(\d+)\?$" % cur, P[0]), "part a"); b = need(re.match(r"^How many US dollars is ([\d.,]+) %s\?$" % cur, P[1]), "part b")
         d, c = int(a.group(1)), num(b.group(1)); keys += [("curA", "%s|%d" % (ks(r), d)), ("curB", "%s|%s" % (ks(r), ks(c)))]; ans += [d * r, c / r]
     elif qn == 16:
-        m = need(re.match(r"^A (car|truck|van|pickup) gets (\d+) miles per gallon and its tank holds (\d+) gal\.$", st), "the car")
+        m = need(re.match(r"^A ([a-z ]+) gets (\d+) miles per gallon and its tank holds (\d+) gal\.$", st), "the car")
         mm, g = int(m.group(2)), int(m.group(3)); b = need(re.match(r"^It makes a ([\d,]+)-mi trip\. How many tanks of gas does the trip use\? \(Part of a tank counts as a whole tank\.\)$", P[1]), "part b")
-        D = num(b.group(1)); keys += [("tank", "%d|%d" % (mm, g)), ("trip", "%d|%d|%s" % (mm, g, D))]; ans += [Integer(mm * g), ceiling(D / (mm * g))]
+        D = num(b.group(1)); keys += [("tank", "%d|%d" % (mm, g)), ("trip", "%d|%d|%s" % (mm, g, D)), ("range", str(mm * g)), ("tripD", str(D))]; ans += [Integer(mm * g), ceiling(D / (mm * g))]
     elif qn == 17:
         m = need(re.match(r"^A recipe for (\d+) servings uses (%s) cups of (\w+)\.$" % NUMRE, st), "the recipe"); s, c, food = int(m.group(1)), num(m.group(2)), m.group(3)
         a = need(re.match(r"^How much %s for (\d+) servings\?$" % food, P[0]), "part a"); b = need(re.match(r"^With (%s) cups on hand, how many servings can be made\?$" % NUMRE, P[1]), "part b")
@@ -163,14 +166,16 @@ def read(qn, st, P, opts):
         else:
             m = need(re.match(r"^(\w+) is mixed ([a-z ]+) : ([a-z ]+) : ([a-z ]+) = (\d+) : (\d+) : (\d+)\. A batch uses (\d+) (\w+) of ([a-z ]+)\. How many \9 is the whole batch\?$", st), "the mixture")
             parts, n = [int(m.group(i)) for i in (5, 6, 7)], int(m.group(8)); which = [m.group(2), m.group(3), m.group(4)].index(m.group(10))
-        keys.append(("mix", "%s|%d|%d" % (":".join(map(str, parts)), which, n))); ans.append(R(n, parts[which]) * sum(parts))
+        keys.append(("mix", "%s|%d|%d" % (":".join(map(str, sorted(parts))), parts[which], n))); ans.append(R(n, parts[which]) * sum(parts))
     elif qn == 19:
         m = re.match(r"^1 mi = 1\.61 km\. A (\w+) does (\d+) km/h; a (\w+) does (\d+) mi/h\. Which is faster\?", st)
         if m: kmh, mph, A, B = int(m.group(2)), int(m.group(4)), m.group(1), m.group(3)
         else:                                       # the forms' transfer item: a drive, two cars or trucks, two speeds
             m = need(re.match(r"^1 mi = 1\.61 km\. A drive is (\d+) km long\. (\w+) A averages (\d+) mi/h; \w+ B averages (\d+) km/h\.", st), "the speeds")
             kmh, mph = int(m.group(4)), int(m.group(3)); A = B = None
-        keys.append(("speed", "%d|%d" % (kmh, mph)))
+        keys.append(("speed", "%d|%d" % (kmh, mph))); keys.append(("speedM", str(mph)))
+        if A and "Type its name" in st:              # the page: the faster one's name and the mi/h speed in km/h
+            conv = mph * R("1.61"); ans.append(conv)
         if opts:
             conv = mph * R("1.61"); fast = A if conv < kmh else B; correct = []
             for i, o in enumerate(opts):
@@ -192,6 +197,7 @@ def form_items(secs):
             qn += 1
             out.append((qn, tex_plain(it.get("stem", "")), [tex_plain(p.get("stem", "")) for p in it.get("parts", [])], [tex_plain(c) for c in it.get("choices", [])], it))
     return out
+PAIR_OF = {"in": "in/cm", "cm": "in/cm", "mi": "mi/km", "km": "mi/km", "lb": "lb/kg", "kg": "lb/kg", "gal": "gal/L", "L": "gal/L", "ft": "ft/m", "m": "ft/m", "c": "c/L", "oz": "oz/g", "g": "oz/g"}
 FORM_KEYS = {}
 for f in ("A", "B", "practice"):
     FORM_KEYS[f] = set()
@@ -241,7 +247,7 @@ for sec in U["review"]:
             (r"converts (\d+) cm to inches", lambda m: [("conv", "cm>in|" + m.group(1))]),
             (r"^A car gets (\d+) miles per gallon and its tank holds (\d+) gal", lambda m: [("tank", "%s|%s" % (m.group(1), m.group(2)))]),
             (r"A train does (\d+) km/h; a bus does (\d+) mi/h", lambda m: [("speed", "%s|%s" % (m.group(1), m.group(2)))]),
-            (r"^Paint is mixed (\d+) : (\d+) : (\d+)\. A batch uses (\d+) gal of the (first|second|third) color", lambda m: [("mix", "%s:%s:%s|%d|%s" % (m.group(1), m.group(2), m.group(3), ["first", "second", "third"].index(m.group(5)), m.group(4)))]),
+            (r"^Paint is mixed (\d+) : (\d+) : (\d+)\. A batch uses (\d+) gal of the (first|second|third) color", lambda m: [("mix", "%s|%s|%s" % (":".join(map(str, sorted(int(m.group(i)) for i in (1, 2, 3)))), m.group(1 + ["first", "second", "third"].index(m.group(5))), m.group(4)))]),
         ]:
             m = re.search(pat, st)
             if m: REVIEW.update(f(m))
@@ -287,6 +293,8 @@ def lesson_keys(t, chk=None, fig=None):
     for (a1, a2), (b1, b2) in rects:
         K.update([("sf", "%d>%d" % (a1, b1)), ("sf", "%d>%d" % (a2, b2))])
         if R(b1, a1) == R(b2, a2): K.add(("rect", "%d,%d|%s" % (min(a1, a2), max(a1, a2), ks(R(b1, a1)))))   # the copy's sides are on the board: its perimeter and area are one step away
+    for m in re.finditer(r"k = \{?\d+\}? = (\d+) (\d+) × \1 = (\d+)", t): K.update([("sf", "%s>%s" % (m.group(2), m.group(3))), ("sf", "%s>%s" % (m.group(3), m.group(2)))])   # k = √16 = 4, then 3 × 4 = 12 (5.02 Example 2): the pair, both ways
+    for m in re.finditer(r"A = (\d+) × (\d+)\^2 = \d+ × \d+ = (\d+)", t): K.add(("areaK", "%s>%s" % (m.group(1), m.group(3))))   # A = 18 × 4² = 288 (5.02's Your Turn), the area ratio run backwards
     if copyctx and not re.search(r"area", t):
         for m in re.finditer(r"k = ([^.;|]*)", t):
             for f in re.finditer(r"(?<![\d.])(\d+)/(\d+)(?![\d.])", m.group(1)): K.add(("sf", "%s>%s" % (f.group(2), f.group(1))))
@@ -314,7 +322,7 @@ def lesson_keys(t, chk=None, fig=None):
         r = scale(fig["names"][0]); p, q = R(str(fig["a"][0])), R(str(fig["a"][1]))
         if r: K.update([("room", "%s|%s,%s" % (ks(r), ks(min(p, q)), ks(max(p, q)))), ("wall", "%s|%s" % (ks(r), ks(p))), ("wall", "%s|%s" % (ks(r), ks(q)))])
     if re.search(r"plan|drawing", t):
-        for m in re.finditer(r"(?<![\d.])(\d+) ÷ (\d+) = ([\d.]+) in", t): K.add(("plan", "%s|%s" % (m.group(2), m.group(1))))
+        for m in re.finditer(r"(?<![\d.])(\d+) ÷ (\d+) = ([\d.]+) in", t): K.update([("plan", "%s|%s" % (m.group(2), m.group(1))), ("wall", "%s|%s" % (m.group(2), ks(R(m.group(3)))))])
     for m in re.finditer(r"At ((?:1/\d+|1) in : \d+ ft), how long is a (\d+)-ft wall", t): K.add(("plan", "%s|%s" % (ks(scale(m.group(1))), m.group(2))))
     # conversions: n × ratio, n ÷ ratio, "How many … is n u?"
     for m in re.finditer(r"(?<![\d.])(\d+(?:\.\d+)?) ?(?:in|cm|lb|kg|gal|L|mi|km|ft|m|c|oz|g|km/h|mi/h)? ?([×÷]) ?(%s)(?![\d])" % RATS, t):
@@ -331,8 +339,12 @@ def lesson_keys(t, chk=None, fig=None):
     if re.search(r"1 ft = 0\.305 m, so 1 ft\^2", t): K.add(("sqconv", "ft2>m2|1"))
     # money
     if re.search(r"dollar|euro|CAD", t):
-        for m in re.finditer(r"(?<![\d.])(\d+) × ([01]\.\d+)", t): K.add(("curA", "%s|%s" % (ks(R(m.group(2))), m.group(1))))
-        for m in re.finditer(r"(?<![\d.])(\d+) ÷ ([01]\.\d+)", t): K.add(("curB", "%s|%s" % (ks(R(m.group(2))), m.group(1))))
+        for m in re.finditer(r"(?<![\d.])(\d+) × ([01]\.\d+)(?: = \$?([\d.]+))?", t):
+            K.add(("curA", "%s|%s" % (ks(R(m.group(2))), m.group(1))))
+            if m.group(3): K.add(("curB", "%s|%s" % (ks(R(m.group(2))), ks(R(m.group(3))))))
+        for m in re.finditer(r"(?<![\d.])(\d+(?:\.\d+)?) ÷ ([01]\.\d+)(?: = \$?(\d+))?", t):
+            K.add(("curB", "%s|%s" % (ks(R(m.group(2))), ks(R(m.group(1))))))
+            if m.group(3): K.add(("curA", "%s|%s" % (ks(R(m.group(2))), m.group(3))))
     # a tank, a trip
     for m in re.finditer(r"(?<![\d.])(\d+) × ([\d.]+) = [\d.]+ mi per tank", t):
         K.add(("tank", "%s|%s" % (m.group(1), ks(R(m.group(2))))))
@@ -434,7 +446,7 @@ for S in D["sets"]:
         for pi, (p, a) in enumerate(zip(it["parts"], ans)):
             n["parts"] += 1; where = "set %d Q%d%s" % (S["seed"], qn, p["label"])
             if frac(p["ans"]) != a: bad("%s: the key is %s, worked out here %s" % (where, p["ans"], a))
-            kt = p["keyText"].replace(",", "")
+            kt = re.sub(r"^[a-z ]+ ", "", p["keyText"]).replace(",", "")
             if num(kt) != a: bad("%s: what a student types for the key, %s, is not %s" % (where, kt, a))
             for l in p["sol"]:
                 if l["h"]:

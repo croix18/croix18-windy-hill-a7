@@ -21,7 +21,6 @@ PLANTS = [
     ("the tanks rounded down", "engine.js", "qceil(Q(Dm, R)), { unit: 'tanks' })", "qfloor(Q(Dm, R)), { unit: 'tanks' })"),
     ("the recipe never divided by its servings", "engine.js", "const A = qdiv(qmul(c, Q(t)), Q(s)), Bs", "const A = qmul(c, Q(t)), Bs"),
     ("the mixture's whole without finding one part", "engine.js", "numPart('', 'mixWhole', prm, '', Q(k * sum), { unit: X.unit })", "numPart('', 'mixWhole', prm, '', Q(n * sum), { unit: X.unit })"),
-    ("the speeds keyed to comparing the numbers as they stand", "engine.js", "correct: order.indexOf(0), key: 'speeds'", "correct: order.indexOf(1), key: 'speeds'"),
     ("the area × k statement keyed true", "engine.js", "{ h: 'The area is ' + kS + ' times as large.', tag: 'areaK', ok: false }", "{ h: 'The area is ' + kS + ' times as large.', tag: 'areaK', ok: true }"),
     ("a select-all ratio printed the wrong way", "engine.js", "' and ' + M(ratioH(P.b, P.ba, P.a)) + '. Select ALL", "' and ' + M(ratioH(P.b, P.ab, P.a)) + '. Select ALL"),
     ("a ratio that is not the sheet's", "engine.js", "stem: M(ratioH('gal', '3.785', 'L'))", "stem: M(ratioH('gal', '3.79', 'L'))"),
@@ -35,8 +34,14 @@ PLANTS = [
     # the coach's marking
     ("the clean rule lets a printed number be the answer", "coach.js", "    if (printed.some(x => qeq(x, p.ans))) return false;\n", ""),
     ("mistakes no longer named", "coach.js", "  const h = hits(p, r);\n", "  const h = [];\n"),
-    ("the key rounded marked right", "coach.js", "      return { v: 'form', what: [p.money ? 'Almost — give money", "      return { v: 'right', what: [p.money ? 'Almost — give money"),
-    ("the sheet's other ratio no longer right", "coach.js", "    if (p.alt && r.dp >= 1 && qeq(qround(p.alt, r.dp), r.val)) {", "    if (false) {"),
+    ("the key rounded marked right", "coach.js", "      return { v: 'form', what: [p.money ? 'Give money to the cent", "      return { v: 'right', what: [p.money ? 'Give money to the cent"),
+    ("the sheet's other ratio no longer right", "coach.js", "    if (p.alt && r.dp >= 1 && qeq(qround(p.alt, r.dp), r.val))\n", "    if (false)\n"),
+    ("the sheet's other ratio, exact, called rounded", "coach.js", "  if (p.alt && r.form === 'num' && qlt(Q(0), r.val) && qeq(p.alt, r.val))\n", "  if (false)\n"),
+    ("a part (b)'s worked lines hand over part (a)", "coach.js", "if (follow && ctx && ctx.prevOk === false) return", "if (false) return"),
+    ("a fresh one's Hint says part (a)", "coach.js", "if (follow && !(ctx && ctx.extra)) return", "if (follow) return"),
+    ("the mixture's key in its printed order", "engine.js", "const mixKey = (parts, which, n) => parts.slice().sort((a, b) => a - b).join(':') + '|' + parts[which] + '|' + n;", "const mixKey = (parts, which, n) => parts.join(':') + '|' + parts[which] + '|' + n;"),
+    ("the faster one keyed by the raw numbers", "engine.js", "fast = qlt(conv, Q(kmh)) ? V.a : V.b;", "fast = kmh > mph ? V.a : V.b;"),
+    ("the rate's currency back inside the math", "engine.js", "M('1 US dollar = ' + N(r)) + ' ' + C0.name + '.'", "M('1 US dollar = ' + N(r) + ' ' + C0.name) + '.'"),
     ("an unsimplified fraction marked right", "coach.js", "    if (r.form === 'num' && r.frac !== 'unreduced') return { v: 'right', what: [] };", "    if (r.form === 'num') return { v: 'right', what: [] };"),
     ("a mixed number run together read as a fraction", "coach.js", "  const meant = didMean(typed, A); if (meant && !qeq(r.val, A))", "  const meant = null; if (meant && !qeq(r.val, A))"),
     ("follow-through from the wrong wall", "coach.js", "follow: follow ? (p, a) => qmul(a, qmul(qv(p.prm.q), Q(p.prm.r))) : null,", "follow: follow ? (p, a) => qmul(a, qv(p.prm.q)) : null,"),
@@ -47,7 +52,7 @@ PLANTS = [
     ("a worked line one off", "coach.js", "{ say: 'Inches to centimeters:', ex: EX(S(i) + ' × 2.54 = ' + S(p.ans), p.ans) }", "{ say: 'Inches to centimeters:', ex: EX(S(i) + ' × 2.54 = ' + S(qadd(p.ans, Q(1))), p.ans) }"),
     ("a Hint gives its answer away", "coach.js", "num('What is ' + b + ' ÷ ' + a + '?', p.ans, HINT.div(Q(b), Q(a)) + ' A decimal is fine.')", "num('What is ' + b + ' ÷ ' + a + '?', p.ans, 'It is ' + b + ' ÷ ' + a + ' = ' + S(p.ans) + '.')"),
     ("an estimate that says the wrong way", "coach.js", "+ (more ? 'more' : 'fewer') + ' than ' + N(n) + ' ' + UW[to][1] + '.';", "+ (more ? 'fewer' : 'more') + ' than ' + N(n) + ' ' + UW[to][1] + '.';"),
-    ("the key a student types is not the key", "unit.js", "keyText: p => p.cups ? E.mixedText(p.ans) : p.money ? E.money(p.ans) : E.decPlain(p.ans)", "keyText: p => p.cups ? E.mixedText(p.ans) : p.money ? E.money(p.ans) : E.decPlain(E.qadd(p.ans, E.Q(1, 100)))"),
+    ("the key a student types is not the key", "unit.js", "(p.cups ? E.mixedText(p.ans) : p.money ? E.money(p.ans) : E.decPlain(p.ans))", "(p.cups ? E.mixedText(p.ans) : p.money ? E.money(p.ans) : E.decPlain(E.qadd(p.ans, E.Q(1, 100))))"),
 ]
 
 def copy():

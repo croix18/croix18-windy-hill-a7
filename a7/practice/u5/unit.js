@@ -27,7 +27,7 @@ const Unit = {
     line: p => p.stem,
     pre: p => p.pre === '$' ? '$' : p.pre ? E.M(E.K + ' =') : '',
     unit: p => p.kind === 'mc' ? '' : p.unit || '',
-    placeholder: () => '',
+    placeholder: p => p.name ? 'name, speed' : '',
     opt: (x, k) => x.opts[k],
     key: p => E.ansHtml(p),
     start: () => '',
@@ -43,12 +43,12 @@ const Unit = {
     mc: (x, k) => C.mcFeedback(x, k),
     multi: (x, ks, tries) => C.selectFeedback(x, ks, tries)
   },
-  solution: (x, type) => type === 'text' ? C.solution(x) : C.mcSolution(x),
-  walk: (x, type) => type === 'text' ? W.steps(x) : W.stepsMC(x),
+  solution: (x, type, ctx) => type === 'text' ? C.solution(x, ctx) : C.mcSolution(x),
+  walk: (x, type, ctx) => type === 'text' ? W.steps(x, ctx) : W.stepsMC(x),
   readNum: W.readNum,
   numOk: (s, v) => E.qeq(v, s.ans),
   /* for the checks: what a student would type for the key */
-  keyText: p => p.cups ? E.mixedText(p.ans) : p.money ? E.money(p.ans) : E.decPlain(p.ans)
+  keyText: p => (p.name ? p.prm.fast + ' ' : '') + (p.cups ? E.mixedText(p.ans) : p.money ? E.money(p.ans) : E.decPlain(p.ans))
 };
 if (node) module.exports = Unit; else root.Unit = Unit;
 })(this);

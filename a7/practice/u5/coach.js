@@ -120,7 +120,7 @@ F.kArea = {
   walk: p => { const { A, B } = p.prm, k2 = Q(B, A);
     return [choice('The copy’s area is the original’s area × …', [O('k², the scale factor squared', true), O('k, the scale factor', false, 'Area is two lengths multiplied, and each is × k: the area is × k × k.')]),
       num('What is ' + N(B) + ' ÷ ' + A + '? That is k².', k2, HINT.div(Q(B), Q(A))),
-      num('k × k = ' + S(k2) + '. What is k?', p.ans, 'Which whole number times itself makes ' + S(k2) + '? Try a few: 2 × 2, then 3 × 3, and so on.')]; }
+      num('k × k = ' + S(k2) + '. What is k?', p.ans, 'Which whole number times itself makes ' + S(k2) + '? Try the whole numbers in turn until one works.')]; }
 };
 
 /* ---- 6, 7 and 8: plans (5.04: "A scale with two units is a rate: read it per 1 first.") */
@@ -154,14 +154,19 @@ function areaFam(follow) {
         mod(qmul(Q(2), qadd(qmul(pp, r), qmul(qq, r))), 'found the room’s perimeter. Area is length × width.', off + 1)]; },
     follow: follow ? (p, a) => qmul(a, qmul(qv(p.prm.q), Q(p.prm.r))) : null,
     rule: () => 'Real dimensions first — each plan length × the feet per inch — then length × width.',
-    sol: p => { const x = p.prm, A = qmul(qv(x.p), Q(x.r)), B = qmul(qv(x.q), Q(x.r));
+    sol: (p, ctx) => { const x = p.prm, A = qmul(qv(x.p), Q(x.r)), B = qmul(qv(x.q), Q(x.r));
+      /* part (b) of question 6 builds on part (a): until part (a) is right, its worked lines say "your part (a)" and never
+         its number (the educator of 30 Oct 2026: the lines handed over part (a), which then earned its point "on your own") */
+      if (follow && ctx && ctx.prevOk === false) return (x.den > 1 ? [{ say: perOneSay(x) }] : []).concat([
+        { say: 'The room for real: the wall from part (a), by ' + M(N(x.q) + ' × ' + x.r + ' = ' + S(B)) + ' ft.' },
+        { say: 'Its area is length × width — your part (a) × ' + S(B) + ':', ex: EX(S(p.ans) + ' ft²', p.ans) }]);
       return (x.den > 1 ? [{ say: perOneSay(x) }] : []).concat([
         { say: 'The room for real: ' + M(N(x.p) + ' × ' + x.r + ' = ' + S(A)) + ' ft by ' + M(N(x.q) + ' × ' + x.r + ' = ' + S(B)) + ' ft.' },
         { say: 'Its area is length × width:', ex: EX(S(A) + ' × ' + S(B) + ' = ' + S(p.ans), p.ans) }]); },
-    walk: p => { const x = p.prm, A = qmul(qv(x.p), Q(x.r)), B = qmul(qv(x.q), Q(x.r));
+    walk: (p, ctx) => { const x = p.prm, A = qmul(qv(x.p), Q(x.r)), B = qmul(qv(x.q), Q(x.r));
       /* part (b) of question 6 builds on part (a): its Hint asks for the other wall and uses "your part (a)", so it never
-         hands over part (a)'s number */
-      if (follow) return (x.den > 1 ? [perOneStep(x)] : []).concat([
+         hands over part (a)'s number. A fresh one ("Try another") has no part (a), so it gets the whole walk. */
+      if (follow && !(ctx && ctx.extra)) return (x.den > 1 ? [perOneStep(x)] : []).concat([
         num('Part (a) found the real length of the wall drawn ' + N(x.p) + ' in long. How long is the other wall, drawn ' + N(x.q) + ' in long, for real?', B, HINT.mul(qv(x.q), Q(x.r))),
         choice('So the room’s area is …', [O('the real length from part (a) × ' + S(B), true), O(N(x.p) + ' × ' + N(x.q) + ' × ' + x.r, false, 'That uses the rate once, but each of the two sides is × ' + x.r + '.')]),
         num('What is the room’s real area?', p.ans, 'Multiply the real length from part (a) by ' + S(B) + '.')]);
@@ -191,8 +196,9 @@ F.toPlan = {
 /* ---- 9, 12 and 13: one ratio (5.06 Notes I–II, 5.08 Notes I) */
 function convFam() {
   return {
-    models: p => { const x = p.prm, f = qdec(x.f);
-      return [mod(qdiv(Q(x.n), f), 'divided by ' + x.f + '. The ratio is for 1 ' + UW[x.from][0] + ', the unit you have, so multiply by it. ' + cap(estSay(x.n, x.from, x.to, f)), 1)]; },
+    models: p => { const x = p.prm, f = qdec(x.f), o = qdec(x.o);
+      return [mod(qdiv(Q(x.n), f), 'divided by ' + x.f + '. The ratio is for 1 ' + UW[x.from][0] + ', the unit you have, so multiply by it. ' + cap(estSay(x.n, x.from, x.to, f)), 1),
+        mod(qmul(Q(x.n), o), 'multiplied by the sheet’s other ratio, ' + x.o + ' — the one for 1 ' + UW[x.to][0] + ', the unit you want. That ratio divides; the one printed here, for 1 ' + UW[x.from][0] + ', multiplies. ' + cap(estSay(x.n, x.from, x.to, f)), 1)]; },
     rule: p => { const x = p.prm; return 'Multiply by the ratio whose 1 is the unit you have. Estimate first: ' + estSay(x.n, x.from, x.to, qdec(x.f)); },
     sol: p => { const x = p.prm, f = qdec(x.f), more = qlt(Q(1), f);
       return [{ say: 'The ratio ' + M(ratioH(x.from, x.f, x.to)) + ' is for 1 ' + UW[x.from][0] + ', the unit you have, so multiply by it:', ex: EX(x.n + ' × ' + x.f + ' = ' + S(p.ans), p.ans) },
@@ -212,7 +218,8 @@ F.chain = {
       mod(qmul(n, r), 'used only the last ratio. Yards go to feet first (× 3), then to inches (× 12), then to centimeters (× 2.54).', 0),
       mod(qmul(qmul(n, Q(3)), r), 'skipped the inches. Feet to inches is × 12, before the × 2.54.', 1),
       mod(qmul(qmul(n, Q(12)), r), 'skipped the feet. Yards to feet is × 3 first.', 0),
-      mod(qdiv(i, r), 'divided by 2.54 at the last step. An inch is longer than a centimeter, so there are more centimeters than inches: × 2.54.', 2)]; },
+      mod(qdiv(i, r), 'divided by 2.54 at the last step. An inch is longer than a centimeter, so there are more centimeters than inches: × 2.54.', 2),
+      mod(qmul(i, qdec('0.39')), 'multiplied the inches by the sheet’s other ratio, 0.39 — the one for 1 cm. That ratio divides; 1 in = 2.54 cm multiplies.', 2)]; },
   rule: () => 'One ratio at a time, each for the unit you have: yards × 3 = feet, feet × 12 = inches, inches × 2.54 = centimeters.',
   sol: p => { const n = qv(p.prm.n), f3 = qmul(n, Q(3)), i = qmul(n, Q(36));
     return [{ say: 'Yards to feet: ' + M(N(n) + ' × 3 = ' + S(f3)) + ' ft.' }, { say: 'Feet to inches: ' + M(S(f3) + ' × 12 = ' + S(i)) + ' in.' },
@@ -262,11 +269,22 @@ F.tanks = {
       mod(gal, 'found the gallons the trip uses, ' + N(x.D) + ' ÷ ' + x.m + (places(gal) >= 0 ? ' = ' + S(gal) : ' ≈ ' + fixed(gal, 1)) + '. A tank holds ' + x.g + ' of them.', 1)]; },
   follow: (p, a) => (qlt(Q(0), a) ? E.qceil(qdiv(Q(p.prm.D), a)) : null),
   rule: () => 'Miles on one tank first (part a); then the trip ÷ the miles on one tank, rounded UP — part of a tank is still a tank.',
-  sol: p => { const x = p.prm, R = Q(x.m * x.g), q = Q(x.D, x.m * x.g);
-    return [{ say: 'One full tank goes ' + M(x.m + ' × ' + x.g + ' = ' + N(R)) + ' mi (part a).' },
+  sol: (p, ctx) => { const x = p.prm, R = Q(x.m * x.g), q = Q(x.D, x.m * x.g);
+    /* until part (a) is right, the lines say "your part (a)" and never its number (the educator of 30 Oct 2026) */
+    if (ctx && ctx.prevOk === false) return [{ say: 'One full tank goes ' + x.m + ' × ' + x.g + ' miles — your part (a).' },
+      { say: 'The trip in tanks is ' + N(x.D) + ' ÷ the miles on one tank. It is not a whole number.' },
+      { say: 'Part of a tank counts as a whole tank, so round up:', ex: EX(S(p.ans) + ' tanks', p.ans) }];
+    return [{ say: 'One full tank goes ' + M(x.m + ' × ' + x.g + ' = ' + N(R)) + ' mi' + (ctx && ctx.extra ? '' : ' (part a)') + '.' },
       { say: 'The trip in tanks: ' + M(N(x.D) + ' ÷ ' + N(R) + (places(q) >= 0 ? ' = ' + S(q) : ' ≈ ' + fixed(q, 2))) + '.' },
       { say: 'Part of a tank counts as a whole tank, so round up:', ex: EX(S(p.ans) + ' tanks', p.ans) }]; },
-  walk: p => { const x = p.prm, fl = qfloor(Q(x.D, x.m * x.g)), f = Number(fl.n);
+  walk: (p, ctx) => { const x = p.prm, fl = qfloor(Q(x.D, x.m * x.g)), f = Number(fl.n), R = Q(x.m * x.g);
+    /* a fresh one ("Try another") has no part (a): its Hint finds the miles on one tank first */
+    if (ctx && ctx.extra) return [num('How far does one full tank go? (' + x.m + ' miles per gallon, ' + x.g + ' gallons)', R, HINT.mul(Q(x.m), Q(x.g))),
+      choice('To find the tanks for the ' + N(x.D) + '-mi trip, divide the trip by …', [O('the miles one full tank goes, ' + N(R), true),
+        O('the miles per gallon, ' + x.m, false, 'The trip ÷ ' + x.m + ' is the gallons the trip uses, not the tanks.'),
+        O('the gallons in a tank, ' + x.g, false, 'Miles ÷ gallons is not a number of tanks: divide the trip by the miles one tank goes.')]),
+      choice(N(x.D) + ' ÷ ' + N(R) + ' is between …', [O(f + ' and ' + (f + 1), true), O((f + 1) + ' and ' + (f + 2), false, (f + 1) + ' full tanks go farther than ' + N(x.D) + ' mi.')].concat(f >= 1 ? [O((f - 1) + ' and ' + f, false, f + ' full ' + plural(fl, 'tank', 'tanks') + ' still fall short of ' + N(x.D) + ' mi.')] : [])),
+      num('Part of a tank counts as a whole tank. How many tanks does the trip use?', p.ans, 'Round the division up to the next whole number of tanks.')];
     const span = (a, b) => a + ' and ' + b, opts = [O(span(f, f + 1), true), O(span(f + 1, f + 2), false, f + 1 + ' full tanks of your part (a) go farther than ' + N(x.D) + ' mi: the trip is less than that.')];
     if (f >= 1) opts.push(O(span(f - 1, f), false, f + ' full ' + plural(fl, 'tank', 'tanks') + ' of your part (a) still fall short of ' + N(x.D) + ' mi: the trip is more than that.'));
     /* part (b) builds on part (a): the Hint divides the trip by "your part (a)" and never asks for part (a)'s number */
@@ -323,6 +341,36 @@ F.mixWhole = {
       num('What is ' + sum + ' × ' + S(k) + '?', p.ans, HINT.mul(Q(sum), k))]; }
 };
 
+/* ---- 19: two speeds in two units (5.10 Notes II: "Two rates in different units cannot be compared until they are in one
+   unit.") — the answer is the faster one's name and the mi/h speed in km/h */
+const spd = x => ({ K0: Q(x.kmh), conv: qmul(Q(x.mph), qdec('1.61')), slow: x.fast === x.a ? x.b : x.a, mover: x.b });
+F.faster = {
+  models: p => { const x = p.prm, { K0, conv } = spd(x);
+    return [mod(K0, 'typed the ' + x.a + '’s ' + x.kmh + ' — that is already km/h. The ' + x.b + '’s ' + x.mph + ' mi/h is the speed to change: × 1.61.', 1),
+      mod(Q(x.mph), 'typed the ' + x.b + '’s ' + x.mph + ' as it stands — that is mi/h. A mile is 1.61 km, so in km/h it is ' + x.mph + ' × 1.61.', 1),
+      mod(qdiv(Q(x.mph), qdec('1.61')), 'divided by 1.61. A mile is longer than a kilometer, so ' + x.mph + ' mi/h is MORE than ' + x.mph + ' km/h: multiply.', 1),
+      mod(qmul(K0, qdec('1.61')), 'multiplied the ' + x.a + '’s km/h by 1.61. The km/h needs no change; change the ' + x.b + '’s mi/h: ' + x.mph + ' × 1.61.', 1),
+      mod(qmul(K0, qdec('0.62')), 'changed the ' + x.a + '’s speed to mi/h. That compares them too — but the box asks for the ' + x.b + '’s speed in km/h: ' + x.mph + ' × 1.61.', 1)]; },
+  rule: p => 'Same unit first: a mile is 1.61 km, so ' + p.prm.mph + ' mi/h × 1.61 is km/h. Then compare the two km/h speeds — the bigger is faster.',
+  sol: p => { const x = p.prm, { K0, conv } = spd(x), [hi, lo] = qlt(conv, K0) ? [K0, conv] : [conv, K0];
+    return [{ say: 'Put both speeds in km/h. A mile is 1.61 km, so the ' + x.b + ' does ' + M(x.mph + ' × 1.61 = ' + S(conv)) + ' km/h.' },
+      { say: 'Compare in one unit: ' + M(S(hi) + ' &gt; ' + S(lo)) + ', so the ' + x.fast + ' is faster.', ex: EX(x.mph + ' × 1.61 = ' + S(conv), p.ans) }]; },
+  walk: p => { const x = p.prm, { K0, conv, slow } = spd(x);
+    return [choice('Can you compare ' + x.kmh + ' km/h with ' + x.mph + ' mi/h as they are?', [O('No — put them in the same unit first', true),
+        O('Yes — the bigger number is faster', false, 'A kilometer and a mile are different lengths, so ' + x.kmh + ' and ' + x.mph + ' count different things.')]),
+      choice('A mile is 1.61 km. So ' + x.mph + ' mi/h in km/h is …', [O(M(x.mph + ' × 1.61'), true), O(M(x.mph + ' ÷ 1.61'), false, 'A mile is longer than a kilometer, so there are more kilometers than miles: multiply.')]),
+      num('What is ' + M(x.mph + ' × 1.61') + '?', conv, HINT.mul(Q(x.mph), qdec('1.61'))),
+      choice('So which is faster?', [O('The ' + x.fast, true), O('The ' + slow, false, 'Compare ' + x.kmh + ' km/h with ' + S(conv) + ' km/h: the bigger one is faster.')])]; }
+};
+/* what was typed for question 19: the names in it, and the rest */
+function namesIn(p, typed) {
+  const x = p.prm, t0 = ' ' + String(typed == null ? '' : typed).toLowerCase().replace(/[’']/g, '') + ' ';
+  const has = w => new RegExp('(^|[^a-z])' + w + 's?([^a-z]|$)').test(t0);
+  const names = [x.a, x.b].filter(has);
+  const rest = t0.replace(new RegExp('(^|[^a-z])(' + x.a + '|' + x.b + ')s?(?=[^a-z]|$)', 'g'), '$1').replace(/\b(the|is|was|faster|fastest|at|does|goes|and|by|km\/?h|kmh|kph)\b/g, ' ').replace(/[:;,]/g, ' ').replace(/\s+/g, ' ').trim();
+  return { names, rest };
+}
+
 /* ------------------------------------------------------------------ marking a typed answer */
 const RULE = p => F[p.fam].rule(p);
 const joinSays = hs => hs.map((h, i) => (i ? ' — or if you ' : 'That is what you get if you ') + h.say.replace(/\.$/, '')).join('') + '.';
@@ -336,8 +384,8 @@ function rounds(v, r, minDp) {
 function hits(p, r) {
   const ms = F[p.fam].models(p) || [], seen = [];
   const keep = list => list.filter(m => { if (seen.indexOf(m.say) >= 0) return false; seen.push(m.say); return true; });
-  const exact = keep(ms.filter(m => qeq(m.v, r.val) && !qeq(m.v, p.ans)));
-  return exact.length ? exact : keep(ms.filter(m => rounds(m.v, r, m.minDp) && !qeq(m.v, p.ans)));
+  /* a typed number may be one mistake exactly and another rounded (5 ÷ 2.204 and 5 × 0.454 are both 2.27): both are named */
+  return keep(ms.filter(m => (qeq(m.v, r.val) || rounds(m.v, r, m.minDp)) && !qeq(m.v, p.ans)));
 }
 /* "33/4" or "3-3/4" typed for 3 3/4: the whole number and the fraction with no space between them */
 function didMean(typed, A) {
@@ -355,27 +403,56 @@ const plainKey = p => p.money ? money(p.ans) : p.cups ? mixedOut(p.ans) : S(p.an
 /* the working a student did, as the sentence about it: "7 × 2.54" */
 const workSay = p => { const x = p.prm; return p.fam === 'chain' ? N(x.n) + ' × 3 × 12 × 2.54' : x.n + ' × ' + x.f; };
 function feedback(p, typed, ctx) {
+  if (p.name) return nameFeedback(p, typed, ctx);
+  return numFeedback(p, typed, ctx);
+}
+/* question 19: the name decides, the number proves it */
+function nameFeedback(p, typed, ctx) {
+  const x = p.prm, { names, rest } = namesIn(p, typed);
+  if (names.length === 2) return { v: 'unread', what: ['Name just one: which is faster?'] };
+  const r = numFeedback(p, rest, ctx), name = names[0] || null, mover = x.b;
+  if (!name && r.v === 'unread' && /[a-z]{3,}/.test(String(typed).toLowerCase().replace(/km\/?h|kmh|kph|mi\/?h|mph/g, ''))) return { v: 'unread', what: ['Which is it, the ' + x.a + ' or the ' + x.b + '? Type its name, and the ' + x.b + '’s speed in km/h.'] };
+  if (r.v === 'blank') {
+    if (!name) return r;
+    if (name === x.fast) return { v: 'form', what: ['Yes — now show it: the ' + mover + '’s speed in km/h, beside the name.'], rule: '' };
+    return { v: 'wrong', what: ['The ' + x.a + '’s speed is in km/h and the ' + x.b + '’s in mi/h: compare them in one unit first. Change ' + x.mph + ' mi/h to km/h (× 1.61), then decide.'], rule: RULE(p), step: 0 };
+  }
+  if (r.v === 'right' || r.v === 'form') {
+    if (!name) return r.v === 'right' ? { v: 'form', what: ['That is the ' + mover + '’s speed in km/h. Now say which is faster: its name goes with the speed.'], rule: '' } : r;
+    if (name === x.fast) return r;
+    const { K0, conv } = spd(x), [hi, lo] = qlt(conv, K0) ? [K0, conv] : [conv, K0];
+    return { v: 'wrong', what: ['The conversion is right — but compare the two km/h speeds: ' + M(S(hi) + ' &gt; ' + S(lo)) + ', so the ' + x.fast + ' is faster.'], rule: RULE(p), step: null };
+  }
+  return r;
+}
+function numFeedback(p, typed, ctx) {
   const r = E.readAns(typed);
   if (r.blank) return { v: 'blank', what: [] };
   if (!r.ok) return { v: 'unread', what: [r.msg] };
   const rule = RULE(p), A = p.ans;
-  const meant = didMean(typed, A); if (meant && !qeq(r.val, A)) return { v: 'unread', what: ['Did you mean ' + meant + '? Put a space between the whole number and the fraction.'] };
+  /* a mixed number typed without its space, or with a hyphen, when the mixed number would be right: asked about, counted as
+     nothing, and never told the number (the M7 Unit 9 re-read of 30 Oct 2026: a wrong 11/2 was told "Did you mean 1 1/2?") */
+  const meant = didMean(typed, A); if (meant && !qeq(r.val, A)) return { v: 'unread', what: ['If that is a mixed number, put a space between the whole number and the fraction, like 1 1/3.'] };
   if (qeq(r.val, A)) {
     if (r.form === 'num' && r.frac !== 'unreduced') return { v: 'right', what: [] };
-    if (r.form === 'num') return { v: 'form', what: ['That is the right amount. Write the fraction in its simplest form: ' + plainKey(p) + (p.cups ? '' : places(A) >= 0 && !isInt(A) ? ' (or the decimal)' : '') + '.'], rule: '' };
+    if (r.form === 'num') return { v: 'form', what: [p.cups || places(A) < 0 || isInt(A) ? 'That is the right amount. Write the fraction in its simplest form: ' + plainKey(p) + '.'
+      : 'That is the right amount. Write the fraction in its simplest form, ' + A.n + '/' + A.d + ' — or as the decimal, ' + plainKey(p) + '.'], rule: '' };
     return { v: 'form', what: ['That works out to the right number. Finish the arithmetic: write it as one number.'], rule: '' };
   }
+  /* the sheet's other ratio (the reference sheet: both directions are accepted): exactly, when it comes out so (the critic of
+     30 Oct 2026: 66 ÷ 0.264 = 250 was called "the answer rounded"), or rounded to the places typed */
+  const via = p.fam === 'chain' ? N(qmul(qv(p.prm.n), Q(36))) + ' ÷ 0.39' : p.fam === 'faster' ? p.prm.mph + ' ÷ 0.62' : p.prm.n + ' ÷ ' + p.prm.o;
+  if (p.alt && r.form === 'num' && qlt(Q(0), r.val) && qeq(p.alt, r.val))
+    return { v: 'right', what: ['Right — by the sheet’s other ratio, ' + M(p.altRatio) + ': ' + M(via + ' = ' + numStr(r.val)) + '. With the ratio printed here the answer is ' + plainKey(p) + '.'] };
   if (r.form === 'num' && r.dp != null && qlt(Q(0), r.val)) {
     /* the key rounded: every answer here comes out exactly, so a rounded one is not finished */
     if (places(A) > 0 && r.dp < places(A) && qeq(qround(A, r.dp), r.val))
-      return { v: 'form', what: [p.money ? 'Almost — give money to the cent: two decimal places.' : 'Almost — that is the answer rounded. ' + (p.alt ? M(workSay(p)) + ' comes out exactly: give every digit.' : 'It comes out exactly: give every digit.')], rule: '' };
-    /* the sheet's other ratio (the reference sheet: both directions are accepted) */
-    if (p.alt && r.dp >= 1 && qeq(qround(p.alt, r.dp), r.val)) {
-      const via = p.fam === 'chain' ? N(qmul(qv(p.prm.n), Q(36))) + ' ÷ 0.39' : p.prm.n + ' ÷ ' + p.prm.o;
+      return { v: 'form', what: [p.money ? 'Give money to the cent: two decimal places.' : 'That is the answer rounded. ' + (p.alt ? M(workSay(p)) + ' comes out exactly: give every digit.' : 'It comes out exactly: give every digit.')], rule: '' };
+    /* the sheet's other ratio, rounded to the places typed */
+    if (p.alt && r.dp >= 1 && qeq(qround(p.alt, r.dp), r.val))
       return { v: 'right', what: ['Right — by the sheet’s other ratio, ' + M(p.altRatio) + ': ' + M(via + ' ≈ ' + numStr(r.val)) + '. With the ratio printed here the answer is exact.'] };
-    }
     if (p.alt && r.dp === 0 && qeq(qround(p.alt, 0), r.val))
-      return { v: 'form', what: ['Almost — that is the sheet’s other ratio rounded to a whole number. Keep the decimals, or use the ratio printed here: it comes out exactly.'], rule: '' };
+      return { v: 'form', what: ['That is the sheet’s other ratio rounded to a whole number. Keep the decimals, or use the ratio printed here: it comes out exactly.'], rule: '' };
   }
   /* follow-through (ruling 19; the test's 6(b) and 16(b)): the right step done to the student's own part (a) */
   if (F[p.fam].follow && ctx && ctx.prev != null && ctx.prevPart) {
@@ -391,6 +468,10 @@ function feedback(p, typed, ctx) {
   }
   const h = hits(p, r);
   if (h.length) return { v: 'wrong', what: [joinSays(h)], rule, step: h[0].step };
+  /* the key cut off after some places, not rounded (the readers of 30 Oct 2026: 5.7 for 5.75, 215 for 215.9) — when it is
+     not a named mistake */
+  if (r.form === 'num' && r.dp != null && qlt(Q(0), r.val) && places(A) > 0 && r.dp < places(A) && qeq(qfloor(qmul(A, Q(10n ** BigInt(r.dp)))), qmul(r.val, Q(10n ** BigInt(r.dp)))))
+    return { v: 'form', what: ['That is the answer cut off after ' + (r.dp === 0 ? 'the whole number' : r.dp === 1 ? 'one decimal place' : r.dp + ' decimal places') + ', not rounded. It comes out exactly: give every digit.'], rule: '' };
   if (qlt(r.val, Q(0))) return { v: 'wrong', what: ['An amount here is never negative. Drop the minus sign and check the steps again.'], rule };
   return { v: 'wrong', what: [generic()], rule };
 }
@@ -403,14 +484,9 @@ const MCW = {
     if (tag === 'once') return 'That uses the ratio once: ' + M(N(pr.A) + ' × ' + pr.r) + '. A square ' + from[0] + ' is ' + pr.r + ' ' + to[1] + ' on each side, so use the ratio twice: × ' + M(pr.r + sup(2)) + '.';
     if (tag === 'alone') return 'That is ' + M(pr.r + sup(2) + ' = ' + S(r2)) + ', the square ' + to[1] + ' in ONE square ' + from[0] + '. Multiply by the ' + M(N(pr.A) + ' ' + sqU(pr.from)) + '.';
     return 'That multiplies by 2 × ' + pr.r + '. Squaring is ' + pr.r + ' × ' + pr.r + ', not 2 × ' + pr.r + '.'; },
-  speeds: (x, k) => { const pr = x.prm, tag = x.tags[k];
-    if (tag === 'raw') return 'That compares ' + pr.kmh + ' and ' + pr.mph + ' as they stand — but one is km/h and the other mi/h, and a mile is longer than a kilometer. Same unit first: ' + M(pr.mph + ' × 1.61') + '.';
-    if (tag === 'divided') return 'That divides by 1.61. A mile is longer than a kilometer, so ' + pr.mph + ' mi/h is MORE kilometers an hour: multiply.';
-    return 'That multiplies the km/h by 1.61. A kilometer is shorter than a mile, so ' + pr.kmh + ' km/h is FEWER miles an hour — and the simplest way is to change the mi/h to km/h: × 1.61.'; }
 };
 const MCRULE = {
   sqConv: () => 'A square unit uses the length ratio twice: the area × the ratio².',
-  speeds: () => 'Same unit first: change the mi/h to km/h (× 1.61, since a mile is 1.61 km), then compare.',
   kFacts: () => 'A scale copy: every length × k, the perimeter × k, the area × k², and every angle stays the same.',
   convSel: () => 'Two ways give the answer: × the ratio whose 1 is the unit you have, or ÷ the ratio whose 1 is the unit you want.'
 };
@@ -454,18 +530,13 @@ function mcSolution(x) {
     return [{ say: 'One square ' + from[0] + ' is ' + pr.r + ' ' + to[1] + ' by ' + pr.r + ' ' + to[1] + ': ' + M(pr.r + ' × ' + pr.r + ' = ' + S(r2)) + ' square ' + to[1] + '.' },
       { say: 'So ' + M(N(pr.A) + ' ' + sqU(pr.from)) + ' is ' + M(N(pr.A) + ' × ' + S(r2) + ' = ' + S(x.exact)) + ' square ' + to[1] + '.' },
       { say: 'The closest choice is ' + ok + '.' }]; }
-  if (x.fam === 'speeds') { const pr = x.prm, conv = qmul(Q(pr.mph), qdec('1.61')), K0 = Q(pr.kmh), fast = qlt(conv, K0) ? pr.a : pr.b;
-    const [hi, lo] = qlt(conv, K0) ? [K0, conv] : [conv, K0];
-    return [{ say: 'Put both speeds in km/h. A mile is 1.61 km, so ' + M(pr.mph + ' × 1.61 = ' + S(conv)) + ' km/h.' },
-      { say: 'Compare in one unit: ' + M(S(hi) + ' &gt; ' + S(lo)) + ', so the ' + fast + ' is faster.' },
-      { say: 'The answer is ' + ok + '.' }]; }
   return [{ say: 'The answer is ' + ok + '.' }];
 }
-function solution(p) { return F[p.fam].sol(p); }
+function solution(p, ctx) { return F[p.fam].sol(p, ctx || null); }
 function KIT_shuffle(a, key) { const T = KIT.slot('a7u5', 1, 'walk|' + key); return T.shuffle(a); }      /* option order fixed per question */
-/* a choice step's options are shuffled (fixed per question), except letters, which keep their order */
+/* a choice step's options are shuffled (fixed per question), except a step that says to keep them (none now: the student of 30 Oct 2026 found Q3's and Q10's letter sets always right-first) */
 const mixed = (st, key) => st && st.map((x, i) => x.type === 'choice' && !x.keep ? Object.assign({}, x, { opts: KIT_shuffle(x.opts, key + '|' + i) }) : x);
-function steps(p) { return mixed(F[p.fam].walk(p), p.key); }
+function steps(p, ctx) { return mixed(F[p.fam].walk(p, ctx || null), p.key); }
 function stepsMC(x) { return mixed(stepsMC0(x), x.key); }
 function stepsMC0(x) {
   if (x.fam === 'sqConv') { const { pr, r, r2, from, to } = sqParts(x);
@@ -474,13 +545,6 @@ function stepsMC0(x) {
       num('What is ' + M(pr.r + ' × ' + pr.r) + '?', r2, HINT.mul(r, r)),
       num('What is ' + M(N(pr.A) + ' × ' + S(r2)) + '? That is the area in square ' + to[1] + '.', x.exact, HINT.mul(Q(pr.A), r2)),
       choice('Which choice is closest to ' + S(x.exact) + '?', x.vals.map((v, i) => O(LET[i], i === x.correct, i === x.correct ? '' : S(v) + ' is far from ' + S(x.exact) + '.')), { keep: true })]; }
-  if (x.fam === 'speeds') { const pr = x.prm, conv = qmul(Q(pr.mph), qdec('1.61')), K0 = Q(pr.kmh), fast = qlt(conv, K0) ? pr.a : pr.b, slow = fast === pr.a ? pr.b : pr.a;
-    return [choice('Can you compare ' + pr.kmh + ' km/h with ' + pr.mph + ' mi/h as they are?', [O('No — put them in the same unit first', true),
-        O('Yes — the bigger number is faster', false, 'A kilometer and a mile are different lengths, so ' + pr.kmh + ' and ' + pr.mph + ' count different things.')]),
-      choice('A mile is 1.61 km. So ' + pr.mph + ' mi/h in km/h is …', [O(M(pr.mph + ' × 1.61'), true), O(M(pr.mph + ' ÷ 1.61'), false, 'A mile is longer than a kilometer, so there are more kilometers than miles: multiply.')]),
-      num('What is ' + M(pr.mph + ' × 1.61') + '?', conv, HINT.mul(Q(pr.mph), qdec('1.61'))),
-      choice('So which is faster?', [O('The ' + fast, true), O('The ' + slow, false, 'Compare ' + pr.kmh + ' km/h with ' + S(conv) + ' km/h: the bigger one is faster.')]),
-      choice('Which choice says that, with both speeds in km/h?', x.tags.map((t, i) => O(LET[i], i === x.correct, i === x.correct ? '' : MCW.speeds(x, i))), { keep: true })]; }
   if (x.fam === 'kFacts') { const k = qdec(x.prm.k), k2 = qmul(k, k), at = t => x.tags.indexOf(t);
     const right = x.correct, noK2 = [at('side'), at('perim'), at('areaK')], plusAngle = right.concat([at('angle')]), sideOnly = [at('side'), at('perim')];
     return [choice('A scale copy multiplies every length by k. What happens to each angle?', [O('It stays the same — an angle is not a length', true),
@@ -488,7 +552,7 @@ function stepsMC0(x) {
       choice('The perimeter is the sides added. It is …', [O('× ' + S(k), true), O('× ' + S(k2), false, 'Each side is × ' + S(k) + ', so their sum is × ' + S(k) + '. Squaring is for area.')]),
       num('Area is length × width, each × ' + S(k) + '. What is ' + S(k) + ' × ' + S(k) + '?', k2, HINT.mul(k, k)),
       choice('So the true statements are …', [O(lettersSay(right), true), O(lettersSay(noK2), false, 'The area is × ' + S(k2) + ', not × ' + S(k) + '.'),
-        O(lettersSay(plusAngle), false, 'The angles do not change.'), O(lettersSay(sideOnly), false, 'The area changes too: × ' + S(k2) + '.')], { keep: true })]; }
+        O(lettersSay(plusAngle), false, 'The angles do not change.'), O(lettersSay(sideOnly), false, 'The area changes too: × ' + S(k2) + '.')])]; }
   if (x.fam === 'convSel') { const pr = x.prm, P = E.PAIRS[pr.pair], have = UW[pr.from][0], want = UW[pr.to][0];
     const forHave = pr.from === P.a ? P.ab : P.ba, forWant = pr.from === P.a ? P.ba : P.ab;
     const at = (op, v) => pr.ops.indexOf(op + v), right = x.correct;
@@ -496,7 +560,7 @@ function stepsMC0(x) {
       choice('With the ratio for 1 ' + have + ', you …', [O('multiply: ' + M(pr.n + ' × ' + forHave), true), O('divide: ' + M(pr.n + ' ÷ ' + forHave), false, 'Each ' + have + ' is ' + forHave + ' ' + UW[pr.to][1] + ', so ' + pr.n + ' of them is a multiplication.')]),
       choice('With the ratio for 1 ' + want + ', you …', [O('divide: ' + M(pr.n + ' ÷ ' + forWant), true), O('multiply: ' + M(pr.n + ' × ' + forWant), false, 'Each ' + want + ' is ' + forWant + ' ' + UW[pr.from][1] + ', so count how many ' + forWant + 's fit in ' + pr.n + ': divide.')]),
       choice('So the two that give the ' + pr.toW + ' are …', [O(lettersSay(right), true), O(lettersSay([at('×', forHave), at('×', forWant)]), false, 'Only one ratio is multiplied; the other is divided.'),
-        O(lettersSay([at('÷', forHave), at('×', forWant)]), false, 'Those are the two ways round the wrong way.'), O(lettersSay([at('×', forHave), at('÷', forHave)]), false, 'Those use one ratio both ways; only one of them is right.')], { keep: true })]; }
+        O(lettersSay([at('÷', forHave), at('×', forWant)]), false, 'Those are the two ways round the wrong way.'), O(lettersSay([at('×', forHave), at('÷', forHave)]), false, 'Those use one ratio both ways; only one of them is right.')])]; }
   return null;
 }
 
@@ -520,7 +584,6 @@ function clean(it) {
       if (best(near(ex)) !== it.correct || best(near(alt)) !== it.correct) return false;
       if (vals.some((v, i) => i !== it.correct && Math.abs(v - ex) < 0.15 * ex)) return false;
     }
-    if (it.fam === 'speeds' && it.tags.filter(t => t === 'ok').length !== 1) return false;
     if (it.fam === 'convSel' && it.correct.length !== 2) return false;
     return true;
   }
@@ -546,7 +609,7 @@ function clean(it) {
 }
 E.setClean(clean);
 
-const api = { F, feedback, mcFeedback, selectFeedback, mcSolution, solution, clean, joinSays, printedNumbers, SELWHY, MCW, MCRULE, UW, estSay, lettersSay, hits, rounds };
+const api = { F, feedback, numFeedback, nameFeedback, namesIn, mcFeedback, selectFeedback, mcSolution, solution, clean, joinSays, printedNumbers, SELWHY, MCW, MCRULE, UW, estSay, lettersSay, hits, rounds };
 const walkApi = { steps, stepsMC, readNum: E.readNum };
 if (node) module.exports = Object.assign({}, api, { Walk: walkApi }); else { root.Coach = api; root.Walk = walkApi; }
 })(this);

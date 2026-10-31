@@ -1,6 +1,21 @@
 # State of the work — 25 October 2026 (read this first)
 
-## 25 October, evening — Unit 5's practice page built (ruling 55); in review, not on the website yet
+## 30 October, late evening — Unit 5's practice page reviewed, fixed and published (test Thu 5 Nov)
+
+Three fresh readers (Claude Fable 5.1) read the page built on 25 Oct — the 25 Oct readers had been cut off by the usage limit.
+No wrong key and nothing wrong marked right; nine majors in the shape of the questions and the help, about a dozen minors,
+all in **`a7/practice/u5/REVIEW.md`** with what was done about each. The large ones: **question 19 is now typed** (the
+faster one's name and the mi/h speed in km/h — as a choice question the vehicle named in the right option gave it away in
+nine sets of ten); the rate line of question 15 wraps on a phone; a mixture is the same question in any order of its colors;
+part (b)'s Show me how keeps part (a)'s number back until (a) is right, and a fresh "Try another" on 6(b)/16(b) has a walk
+of its own (both through the practice kit, Windmill `4d8e093`: the coach gets a context; Try another never repeats an
+answer; a box may ask for the phone's decimal keypad); the forms' numbers kept off through every slot (`amount`, `range`,
+`tripD`, `speedM`); the sheet's other ratio landing on a whole number is right, not "rounded"; ruling 43's misses added to
+the engine and to `verify.py`'s own reader of the lesson specs. Every check passes for the page and the teacher copy
+(u5_check on 3,000 sets, verify.py, 41 of 41 planted errors, the lock, the variety floor, the browser checks); content
+version 1 (never published before). Published with `publish_web.py --site ../mrshaffer-site u5`; the embed sent to Croix.
+
+## 25 October, evening — Unit 5's practice page built (ruling 55); reviewed and published 30 Oct (above)
 
 Croix, 4:52 pm: *"Yes I still want the interactive practice page on all the units regardless of review day or not."* (ruling
 55, HOUSE STYLE 13b(xxvii)). A7 Unit 5 is next after M7 Unit 9: its test is the printed Form A and Form B on Thu 5 Nov, so

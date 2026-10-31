@@ -929,10 +929,12 @@ const UNIT_ID = 'a7u5';
 const TITLES = ['Scale Drawings and Scale Factors', 'Converting Across Systems', 'Multi-Step Proportion Problems'];
 /* Form A's and Form B's questions, as hashes of their keys (test_forms.js holds the keys, for the checks alone) */
 const FORMS_H = new Set([4239484767, 2837177830, 139044301, 2184204111, 1302914821, 290696692, 2152079203, 739448613, 1688744384, 2570190403, 3966846063,
-  2792902225, 3375333261, 688616626, 3368556427, 1113695078, 1664065641, 3556870265, 1121612771, 2168955169, 3648731241, 3720681723,
-  1210306353, 1177114329, 362610366, 638670231, 4268681763, 21600968, 3150095142, 3744964789, 1639281084, 2849559658, 965266746,
-  1594133106, 287992934, 73586690, 2591276607, 3330629757, 755727102, 3351778808, 3772581963, 1441647554, 3134299049, 3853315571,
-  4008987314, 1296383387, 2379650209, 2642502206, 1838059279, 1197494877]);
+  2792902225, 3375333261, 688616626, 3368556427, 1113695078, 1664065641, 3556870265, 1121612771, 2168955169, 715148050, 3962122403,
+  3648731241, 3720681723, 1210306353, 1817762460, 362610366, 2248392557, 3278486234, 1968082080, 1349065794, 1044563842, 2204907025,
+  1010241049, 1380089430, 638670231, 4268681763, 21600968, 3150095142, 3744964789, 1639281084, 2849559658, 965266746, 1594133106,
+  287992934, 73586690, 2591276607, 3330629757, 755727102, 3351778808, 3772581963, 1441647554, 3134299049, 3853315571, 4008987314,
+  3554712862, 1222423396, 1296383387, 2379650209, 2642502206, 1090810885, 1197494877, 4244678955, 2052955913, 2305900126, 3832741786,
+  3058466502, 2137796549, 2677546399, 1212558215]);
 const formHash = (slot, key) => KIT.fnv1a(UNIT_ID + '|' + slot + '|' + key);
 /* Ruling 43: what the class has been shown — a lesson's warm-up (its answers revealed), its notes, its worked examples and
    their Your Turns, and the worked numbers on the unit's reference sheet. The keys are the slots' (test_forms.js says how a
@@ -944,7 +946,9 @@ const SHOWN_SRC = {
        '10>4',                    /* 5.01 Notes II */
        '20>8', '5>2', '5>3', '14>7', '2>1',   /* the 5.02, 5.04 and 5.06 warm-ups, and their k (2/5, ½) */
        '5>10', '3>6',             /* 5.02 Notes I: 5 by 3 at 10 by 6 */
-       '12>30'],                  /* 5.10 Notes III: k = 30/12 */
+       '12>30',                   /* 5.10 Notes III: k = 30/12 */
+       '3>12', '2>10', '6>24', '2>6',   /* 5.02 Example 2 (k = 4: 3 × 4 = 12), its Your Turn (k = 5: 2 × 5 = 10), Example 1's sides at k = 4 and its Your Turn's at k = 3 */
+       '12>3', '10>2', '24>6', '6>2'],   /* the same pairs run backwards, a reduction (the critic of 30 Oct 2026: question 2 drew 12 → 3) */
   sel3: ['1.5',                   /* 5.01 Notes I and the Your Turn of Example 1: k = 1.5, every angle still 90° */
          '2.5',                   /* 5.01 Example 1 */
          '2', '3', '4', '5',      /* 5.02 Notes I–III and Examples 2: k = 2, 3, 4 and 5 with the perimeter and the area */
@@ -955,10 +959,13 @@ const SHOWN_SRC = {
            '2,4', '3,6'],         /* 5.02 Example 1 and its Your Turn work the original's perimeter and area first */
   areaK: ['20>180', '15>240', '12>300',   /* 5.02 Notes III (and the reference sheet), Example 2, its Your Turn */
           '15>60',                /* 5.02 Notes II: A: 15 → 60 */
-          '9>36', '7>63'],        /* the 5.04 and 5.08 warm-ups: 9 cm² at k = 2, 7 cm² at k = 3 */
+          '9>36', '7>63',         /* the 5.04 and 5.08 warm-ups: 9 cm² at k = 2, 7 cm² at k = 3 */
+          '18>288',               /* 5.02 Example 1's Your Turn: 3 by 6 at k = 4 is 18 cm² → 288 cm² */
+          '25>100'],              /* 5.02's higher-order question: areas 25 and 100 */
   room: ['4|2,2.5', '4|2.5,3', '4|1.5,4',   /* 5.04 Notes II, Example 1, its Your Turn (¼ in : 1 ft is 1 in : 4 ft) */
          '6|1.5,2'],              /* the reference sheet: 1.5 in by 2 in at 1 in : 6 ft */
-  wall: ['4|2', '4|2.5', '4|3', '4|1.5', '4|4', '6|1.5', '6|2'],   /* the same rooms' walls */
+  wall: ['4|2', '4|2.5', '4|3', '4|1.5', '4|4', '6|1.5', '6|2',   /* the same rooms' walls */
+         '4|3.5'],                /* 5.04 Notes III: 14 ft is 3.5 in at ¼ in : 1 ft, run backwards */
   plan: ['4|14',                  /* 5.04 Notes III: 14 ÷ 4 = 3.5 in */
          '4|10'],                 /* the 5.06 warm-up: a 10-ft wall at ¼ in : 1 ft */
   conv: ['in>cm|10', 'in>cm|15', 'in>cm|25',   /* 5.06 Notes I, Example 1, its Your Turn */
@@ -972,14 +979,16 @@ const SHOWN_SRC = {
   chain: [],
   sqconv: ['ft2>m2|1',            /* 5.08 Notes II: 1 ft² ≈ 0.093 m² */
            'ft2>m2|20'],          /* the reference sheet: 20 ft² = 1.86 m² */
-  curA: ['0.92|150', '0.92|80', '1.35|120'],   /* 5.06 Notes III, Example 2, its Your Turn */
-  curB: ['0.92|92', '0.92|46', '1.35|81'],
+  curA: ['0.92|150', '0.92|80', '1.35|120',   /* 5.06 Notes III, Example 2, its Your Turn */
+         '0.92|100', '0.92|50', '1.35|60'],   /* the same lines run backwards (92 euros ÷ 0.92 = $100; 46 euros = $50; 81 CAD = $60) */
+  curB: ['0.92|92', '0.92|46', '1.35|81',
+         '0.92|138', '0.92|73.6', '1.35|162'],   /* $150, $80 and $120 changed into the currency, run backwards */
   tank: ['23|17.5'], trip: ['23|17.5|1207'],   /* 5.10 Notes I (and the reference sheet) */
   recA: ['12|3/2|30', '8|5/2|20', '6|3/2|12'],   /* 5.10 Notes III, Example 2, its Your Turn */
   recB: ['8|5/2|5', '6|3/2|9/2'],
   recK: ['2.5|3/2', '2.5|5/2', '2|3/2'],   /* the same three: k × the cups (2.5 × 1½, 2.5 × 2½, 2 × 1½) */
-  mix: ['1:2:3|0|4',              /* 5.10 Notes III: 1 : 2 : 3 with 4 gal of the first */
-        '2:4:5|0|8'],             /* the reference sheet: 2 : 4 : 5 with 8 gal of white */
+  mix: ['1:2:3|1|4',              /* 5.10 Notes III: 1 : 2 : 3 with 4 gal of the first (the key: sorted parts | the known part's share | the amount) */
+        '2:4:5|2|8'],             /* the reference sheet: 2 : 4 : 5 with 8 gal of white */
   speed: ['100|65']               /* 5.10 Notes II (and the reference sheet) */
 };
 /* the two papers that go home — the practice test, and the review (Tue 3 Nov, key Wed): a set never repeats one of their
@@ -989,8 +998,9 @@ const HOME_SRC = {
   room: ['5|2,3', '6|1.5,2.5', '4|3,4'], wall: ['5|2', '4|3', '2|7.5'], plan: ['3|15', '6|21'],
   conv: ['in>cm|7', 'cm>in|110', 'kg>lb|35', 'gal>L|3', 'in>cm|14', 'cm>in|120', 'cm>in|40', 'km>mi|30', 'lb>kg|80', 'L>gal|40'],
   chain: ['yd>cm|1.5', 'yd>cm|6'], sqconv: ['in2>cm2|10', 'ft2>m2|8', 'm2>ft2|1.5'], curA: ['1.32|90', '0.92|150'], curB: ['1.32|66', '0.92|69'],
-  tank: ['27|10', '29|12'], trip: ['27|10|1200', '29|12|800'], recA: ['5|2|15', '3|5/4|12'], recB: ['5|2|10', '3|5/4|10'], recK: ['3|2', '4|5/4'],
-  mix: ['3:1:2|1|4', '1:2:5|2|10'], speed: ['80|45', '110|65']
+  tank: ['27|10', '29|12'], trip: ['27|10|1200', '29|12|800'], range: ['270', '348'], tripD: ['1200', '800'],
+  amount: ['in/cm|7', 'in/cm|110', 'in/cm|14', 'in/cm|120', 'in/cm|40', 'in/cm|54', 'in/cm|216', 'lb/kg|35', 'lb/kg|80', 'gal/L|3', 'gal/L|40', 'mi/km|30', 'in2|10', 'ft2|8', 'm2|1.5'], speedM: ['45'], recA: ['5|2|15', '3|5/4|12'], recB: ['5|2|10', '3|5/4|10'], recK: ['3|2', '4|5/4'],
+  mix: ['1:2:3|1|4', '1:2:5|5|10'], speed: ['80|45', '110|65']
 };
 const SHOWN = new Set([].concat(...[SHOWN_SRC, HOME_SRC].map(src => [].concat(...Object.keys(src).map(s => src[s].map(k => s + '|' + k))))));
 const isForm = (slot, key) => FORMS_H.has(formHash(slot, key));
@@ -999,7 +1009,7 @@ const fresh = fk => fk.every(([s, k]) => !isForm(s, k) && !isShown(s, k));
 
 /* ------------------------------------------------------------------ building the questions */
 const SECT = (title, items) => ({ title, items });
-function numPart(label, fam, prm, stem, ans, extra) { return Object.assign({ label, fam, prm, stem, kind: 'num', ans, key: fam + JSON.stringify(prm) }, extra || {}); }
+function numPart(label, fam, prm, stem, ans, extra) { return Object.assign({ label, fam, prm, stem, kind: 'num', ans, key: fam + JSON.stringify(prm), imode: extra && (extra.kind === 'frac' || extra.name) ? undefined : 'decimal' }, extra || {}); }
 let CLEAN = null, FILL = null;
 function setClean(fn, fill) { CLEAN = fn; FILL = fill || null; }
 function D(slot, seed, build) {
@@ -1063,7 +1073,7 @@ function q5(seed) {
 /* a plan's scale: per 1 inch (1 in : 5 ft) or a fraction of an inch for some feet (¼ in : 1 ft, ½ in : 3 ft) — the
    rate r is the feet in 1 inch. 5.04: "A scale with two units is a rate: read it per 1 first." */
 const PER1 = [2, 3, 4, 5, 6, 8, 10];
-const PART = [[2, 1], [2, 3], [2, 5], [4, 1], [8, 1]];                                /* [the inch's denominator, the feet]: ½ in : 1 ft … */
+const PART = [[2, 1], [4, 1]];                                                        /* [the inch's denominator, the feet]: ½ in : 1 ft and ¼ in : 1 ft, the lessons' and the forms' (the educator of 30 Oct 2026: ½ in : 3 ft is on no paper) */
 function scaleOf(T, fracShare) {
   if (T.r() < fracShare) { const [den, s] = T.pick(PART); return { den, s, r: den * s, h: fr('1', String(den)) + ' in : ' + s + ' ft' }; }
   const r = T.pick(PER1); return { den: 1, s: r, r, h: '1 in : ' + r + ' ft' };
@@ -1124,7 +1134,7 @@ function convPart(n, P, toMetric, fam) {
 function q9(seed) {
   return D('q9', seed, T => {
     const n = T.ri(2, 150), P = PAIRS['in/cm'];
-    return { type: 'solo', fk: [['conv', 'in>cm|' + n]], stem: M(ratioH('in', '2.54', 'cm')) + '. How many centimeters is ' + n + ' in?', part: convPart(n, P, true, 'convIn') };
+    return { type: 'solo', fk: [['conv', 'in>cm|' + n], ['amount', 'in/cm|' + n]], stem: M(ratioH('in', '2.54', 'cm')) + '. How many centimeters is ' + n + ' in?', part: convPart(n, P, true, 'convIn') };
   });
 }
 function q10(seed) {
@@ -1138,7 +1148,7 @@ function q10(seed) {
       { op: '÷', v: P.ab, tag: toCust ? 'divRight' : 'divWrong' }, { op: '÷', v: P.ba, tag: toCust ? 'divWrong' : 'divRight' }];
     const order = T.shuffle([0, 1, 2, 3]), shown = order.map(i => ways[i]);
     const prm = { n, pair: pk, from, to, toW, ab: P.ab, ba: P.ba, ops: shown.map(w => w.op + w.v) };
-    return { type: 'multi', fam: 'convSel', prm, fk: [['conv', from + '>' + to + '|' + n]],
+    return { type: 'multi', fam: 'convSel', prm, fk: [['conv', from + '>' + to + '|' + n], ['amount', pk + '|' + n]],
       stem: M(ratioH(P.a, P.ab, P.b)) + ' and ' + M(ratioH(P.b, P.ba, P.a)) + '. Select ALL of the expressions that give the number of ' + toW + ' in ' + n + ' ' + from + '.',
       opts: shown.map(w => M(n + ' ' + w.op + ' ' + w.v)), tags: shown.map(w => w.tag), correct: shown.map((w, i) => /Right/.test(w.tag) ? i : -1).filter(i => i >= 0),
       key: 'convSel' + JSON.stringify([pk, toCust, n]) + '|' + order.join('') };
@@ -1150,7 +1160,7 @@ function q11(seed) {
   return D('q11', seed, T => {
     const u = T.r(), n = u < 0.5 ? Q(T.ri(2, 80)) : u < 0.8 ? Q(2 * T.ri(1, 30) + 1, 2) : Q(4 * T.ri(1, 10) + T.pick([1, 3]), 4);   /* never 1 yd or ½ yd: the chain's first step would be the ratio itself */
     const prm = { n: N(n) }, inches = qmul(n, Q(36));
-    return { type: 'solo', fk: [['chain', 'yd>cm|' + ks(n)]],
+    return { type: 'solo', fk: [['chain', 'yd>cm|' + ks(n)], ['amount', 'in/cm|' + ks(inches)]],
       stem: M(ratioH('yd', '3', 'ft')) + ', ' + M(ratioH('ft', '12', 'in')) + ', ' + M(ratioH('in', '2.54', 'cm')) + '. How many centimeters is ' + N(n) + ' yd?',
       part: numPart('', 'chain', prm, '', qmul(inches, qdec('2.54')), { unit: 'cm', alt: qdiv(inches, qdec('0.39')), altRatio: ratioH('cm', '0.39', 'in') }) };
   });
@@ -1159,14 +1169,14 @@ function q12(seed) {
   return D('q12', seed, T => {
     const n = T.ri(2, 150), P = PAIRS['lb/kg'], toKg = T.r() < 0.4;                    /* Form A asks pounds, Form B kilograms */
     const part = convPart(n, P, toKg, 'convMass');
-    return { type: 'solo', fk: [['conv', (toKg ? 'lb>kg|' : 'kg>lb|') + n]],
+    return { type: 'solo', fk: [['conv', (toKg ? 'lb>kg|' : 'kg>lb|') + n], ['amount', 'lb/kg|' + n]],
       stem: (toKg ? M(ratioH('lb', '0.454', 'kg')) + '. How many kilograms is ' + n + ' lb?' : M(ratioH('kg', '2.204', 'lb')) + '. How many pounds is ' + n + ' kg?'), part };
   });
 }
 function q13(seed) {
   return D('q13', seed, T => {
     const n = T.ri(2, 150), P = PAIRS['gal/L'];
-    return { type: 'solo', fk: [['conv', 'gal>L|' + n]], stem: M(ratioH('gal', '3.785', 'L')) + '. How many liters is ' + n + ' gal?', part: convPart(n, P, true, 'convVol') };
+    return { type: 'solo', fk: [['conv', 'gal>L|' + n], ['amount', 'gal/L|' + n]], stem: M(ratioH('gal', '3.785', 'L')) + '. How many liters is ' + n + ' gal?', part: convPart(n, P, true, 'convVol') };
   });
 }
 /* question 14 — a square unit across systems: the length ratio used twice */
@@ -1186,7 +1196,7 @@ function q14(seed) {
     const order = T.shuffle([0, 1, 2, 3]), shown = order.map(i => all[i]);
     const prm = { from: S0.from, to: S0.to, r: S0.r, o: S0.o, A, thing, vals: shown.map(x => decPlain(x.v)) };
     const art = /^[aeiou]/.test(thing) ? 'An ' : 'A ';
-    return { type: 'mc', fam: 'sqConv', prm, fk: [['sqconv', S0.from + '2>' + S0.to + '2|' + A]],
+    return { type: 'mc', fam: 'sqConv', prm, fk: [['sqconv', S0.from + '2>' + S0.to + '2|' + A], ['amount', S0.from + '2|' + A]],
       stem: M(ratioH(S0.from, S0.r, S0.to)) + '. ' + art + thing + ' is ' + M(N(Q(A)) + ' ' + sqU(S0.from)) + ' in area. Which is closest to its area in ' + S0.words + '?',
       opts: shown.map(x => M(numStr(x.v) + ' ' + sqU(S0.to))), tags: shown.map(x => x.tag), vals: shown.map(x => x.v), exact, correct: order.indexOf(0),
       key: 'sqConv' + JSON.stringify([S0.from, A]) + '|' + order.join('') };
@@ -1204,7 +1214,7 @@ function q15(seed) {
     const Dl = T.until(() => T.ri(10, 150), Dl => places(qmul(r, Q(Dl))) <= 1);
     const c = qmul(r, Q(Dl)), prm = { cur: C0.name, r: decPlain(r), d, c: decPlain(c) };
     return { type: 'parts', fk: [['curA', decPlain(r) + '|' + d], ['curB', decPlain(r) + '|' + decPlain(c)]],
-      stem: 'Rate on Nov 5: ' + M('1 US dollar = ' + N(r) + ' ' + C0.name) + '.',
+      stem: 'Rate on Nov 5: ' + M('1 US dollar = ' + N(r)) + ' ' + C0.name + '.',   /* the name outside the math, so the line wraps on a phone (the reviews of 30 Oct 2026) */
       parts: [numPart('a', 'toCur', prm, 'How many ' + C0.name + ' is $' + d + '?', qmul(Q(d), r), { unit: C0.name, money: places(r) > 0 }),
         numPart('b', 'toUsd', prm, 'How many US dollars is ' + (isInt(c) ? N(c) : money(c)) + ' ' + C0.name + '?', Q(Dl), { pre: '$' })] };
   });
@@ -1213,12 +1223,12 @@ function q15(seed) {
 /* ---------- section 3: multi-step proportion problems (MA.7.AR.4.5) */
 function q16(seed) {
   return D('q16', seed, T => {
-    const veh = T.pick(['car', 'truck', 'van', 'pickup']);
-    const m = T.ri(15, 40), g = T.ri(10, 25), R = m * g;
+    const veh = m => m <= 22 ? T.pick(['truck', 'pickup', 'van']) : m <= 32 ? T.pick(['car', 'van', 'minivan']) : T.pick(['car', 'hybrid', 'compact car']);
+    const m = T.ri(15, 40), g = m <= 22 ? T.ri(18, 26) : m <= 32 ? T.ri(13, 20) : T.ri(10, 14), R = m * g;   /* a big tank with low mileage, a small one with high (the educator of 30 Oct 2026) */
     const Dm = T.until(() => 50 * T.ri(6, 60), Dm => { const x = Dm / R, f = x - Math.floor(x); return x >= 1.15 && x <= 6.85 && f >= 0.15 && f <= 0.85; });
-    const prm = { veh, m, g, D: Dm };
-    return { type: 'parts', fk: [['tank', m + '|' + g], ['trip', m + '|' + g + '|' + Dm]],
-      stem: 'A ' + veh + ' gets ' + m + ' miles per gallon and its tank holds ' + g + ' gal.',
+    const prm = { veh: veh(m), m, g, D: Dm };
+    return { type: 'parts', fk: [['tank', m + '|' + g], ['trip', m + '|' + g + '|' + Dm], ['range', String(R)], ['tripD', String(Dm)]],   /* never a form's range or trip either (the critic of 30 Oct 2026) */
+      stem: 'A ' + prm.veh + ' gets ' + m + ' miles per gallon and its tank holds ' + g + ' gal.',
       parts: [numPart('a', 'range', prm, 'How far does it go on a full tank?', Q(R), { unit: 'mi' }),
         numPart('b', 'tanks', prm, 'It makes a ' + N(Q(Dm)) + '-mi trip. How many tanks of gas does the trip use? (Part of a tank counts as a whole tank.)', qceil(Q(Dm, R)), { unit: 'tanks' })] };
   });
@@ -1230,7 +1240,7 @@ function q17(seed) {
     const s = T.ri(2, 12), c = qv(T.pick(CUPS));
     /* k = t ÷ s a decimal that ends, as the forms' 2.5, 1.5 and 3 */
     const t = T.until(() => T.ri(2, 40), t => { const a = qdiv(qmul(c, Q(t)), Q(s)); return t !== s && places(Q(t, s)) >= 0 && places(Q(t, s)) <= 2 && isInt(qmul(a, Q(4))) && qnum(a) <= 20 && qnum(a) >= 1; });
-    const h = T.until(() => Q(T.ri(4, 40), 2), h => { const sv = qmul(qdiv(h, c), Q(s)); return isInt(sv) && qnum(sv) >= 2 && qnum(sv) <= 60 && !qeq(sv, Q(s)) && qnum(h) > qnum(c); });
+    const h = T.until(() => Q(T.ri(4, 40), 2), h => { const sv = qmul(qdiv(h, c), Q(s)), rc = qdiv(h, c); return isInt(sv) && qnum(sv) >= 2 && qnum(sv) <= 60 && !qeq(sv, Q(s)) && qnum(h) > qnum(c) && places(rc) >= 0 && places(rc) <= 2; });
     const A = qdiv(qmul(c, Q(t)), Q(s)), Bs = qmul(qdiv(h, c), Q(s));
     const prm = { food, s, c: c.n + '/' + c.d, t, h: h.n + '/' + h.d };
     /* recK: part (a)'s computation, k × the cups — 5.10 Notes III's 2.5 × 1½ is the same problem at any yields */
@@ -1248,6 +1258,10 @@ const MIX = [
   { what: 'Concrete', names: ['cement', 'sand', 'gravel'], unit: 'buckets', words: 'buckets' }
 ];
 const ORD = ['first', 'second', 'third'];
+/* a mixture's key: its parts sorted, the share of the part that is known, and the amount — so the same mixture with its
+   colors in another order is the same question (the educator review of 30 Oct 2026: Form A's 3 : 2 : 4 with 9 cups of the
+   3-part came up as 3 : 4 : 2 with 9 buckets of cement) */
+const mixKey = (parts, which, n) => parts.slice().sort((a, b) => a - b).join(':') + '|' + parts[which] + '|' + n;
 function q18(seed) {
   return D('q18', seed, T => {
     const X = T.pick(MIX);
@@ -1258,32 +1272,24 @@ function q18(seed) {
     const stem = X.names
       ? X.what + ' is mixed ' + X.names.join(' : ') + ' = ' + rat + '. A batch uses ' + n + ' ' + X.unit + ' of ' + X.names[which] + '. How many ' + X.words + ' is the whole batch?'
       : X.what + ' is mixed ' + rat + '. A batch uses ' + n + ' ' + X.unit + ' of the ' + ORD[which] + ' color. How many ' + X.words + ' is the whole batch?';
-    return { type: 'solo', fk: [['mix', parts.join(':') + '|' + which + '|' + n]], stem, part: numPart('', 'mixWhole', prm, '', Q(k * sum), { unit: X.unit }) };
+    return { type: 'solo', fk: [['mix', mixKey(parts, which, n)]], stem, part: numPart('', 'mixWhole', prm, '', Q(k * sum), { unit: X.unit }) };
   });
 }
 /* question 19 — the practice form's bare version of transfer item 2: two speeds, one in km/h and one in mi/h, compared in one
-   unit. On paper it is written; here it is a choice, each choice a sentence with its own conversion — the right one, and the
-   unit's three mistakes (comparing the two numbers as they stand, dividing by 1.61, and converting the km/h the wrong way). */
+   unit. On paper it is written; here the student types the faster one's name and the mi/h speed changed to km/h — the
+   decision and the conversion that proves it (the educator of 30 Oct 2026: as a choice question, the vehicle named in the
+   right option gave it away in nine sets of ten). The mi/h speed is never a form's (speedM). */
 const MOVERS = [{ a: 'train', b: 'bus', ka: [60, 130], mb: [35, 75] }, { a: 'car', b: 'truck', ka: [50, 120], mb: [30, 75] }, { a: 'cyclist', b: 'scooter', ka: [15, 35], mb: [10, 22] }];
 function q19(seed) {
   return D('q19', seed, T => {
     const V = T.pick(MOVERS), trap = T.r() < 0.5;                                     /* half the sets: the bigger number is the slower one */
     const [kmh, mph] = T.until(() => [T.ri(V.ka[0], V.ka[1]), T.ri(V.mb[0], V.mb[1])], ([k, m]) => { const c = m * 1.61;
       return Math.abs(k - c) >= 2 && k !== m && ((k > m) !== (k > c)) === trap; });
-    const conv = qmul(Q(mph), qdec('1.61')), div = qdiv(Q(mph), qdec('1.61')), wrongK = qmul(Q(kmh), qdec('1.61')), K0 = Q(kmh), M0 = Q(mph);
-    const fast = qlt(conv, K0) ? V.a : V.b;
-    const big = (x, y) => qlt(y, x) ? [x, y] : [y, x];
-    const say = (who, line, x, y) => 'The ' + who + ': ' + line + ', and ' + numStr(big(x, y)[0]) + ' &gt; ' + numStr(big(x, y)[1]) + '.';
-    const opts = [
-      { h: say(fast, mph + ' mi/h = ' + numStr(conv) + ' km/h', K0, conv), tag: 'ok' },
-      { h: 'The ' + (kmh > mph ? V.a : V.b) + ', because ' + Math.max(kmh, mph) + ' &gt; ' + Math.min(kmh, mph) + '.', tag: 'raw' },
-      { h: say(qlt(qround(div, 2), K0) ? V.a : V.b, mph + ' mi/h ≈ ' + fixed(div, 2) + ' km/h', K0, qround(div, 2)), tag: 'divided' },
-      { h: say(qlt(M0, wrongK) ? V.a : V.b, kmh + ' km/h = ' + numStr(wrongK) + ' mi/h', wrongK, M0), tag: 'flipped' }];
-    const order = T.shuffle([0, 1, 2, 3]), shown = order.map(i => opts[i]);
-    const prm = { a: V.a, b: V.b, kmh, mph, trap };
-    return { type: 'mc', fam: 'speeds', prm, fk: [['speed', kmh + '|' + mph]],
-      stem: M(ratioH('mi', '1.61', 'km')) + '. A ' + V.a + ' does ' + kmh + ' km/h; a ' + V.b + ' does ' + mph + ' mi/h. Which is faster? Choose the answer that shows both speeds in one unit.',
-      opts: shown.map(x => x.h), tags: shown.map(x => x.tag), correct: order.indexOf(0), key: 'speeds' + JSON.stringify([V.a, kmh, mph]) + '|' + order.join('') };
+    const conv = qmul(Q(mph), qdec('1.61')), fast = qlt(conv, Q(kmh)) ? V.a : V.b;
+    const prm = { a: V.a, b: V.b, kmh, mph, trap, fast };
+    return { type: 'solo', fk: [['speed', kmh + '|' + mph], ['speedM', String(mph)]],
+      stem: M(ratioH('mi', '1.61', 'km')) + '. A ' + V.a + ' does ' + kmh + ' km/h; a ' + V.b + ' does ' + mph + ' mi/h. Which is faster? Type its name, and the ' + V.b + '’s speed in km/h.',
+      part: numPart('', 'faster', prm, '', conv, { unit: 'km/h', name: true, alt: qdiv(Q(mph), qdec('0.62')), altRatio: ratioH('km', '0.62', 'mi') }) };
   });
 }
 
@@ -1299,12 +1305,12 @@ function partsOf(it) { return it.type === 'parts' ? it.parts : it.type === 'solo
 function ansStr(p) { return p.money ? money(p.ans) : p.cups ? null : numStr(p.ans); }
 function ansHtml(p) {
   const v = p.cups ? M(mixedH(p.ans)) : M(ansStr(p));
-  return (p.pre === '$' ? '$' : p.pre ? M(K + ' =') + ' ' : '') + v + (p.unit ? ' ' + esc(p.unit) : '');
+  return (p.name ? 'the ' + esc(p.prm.fast) + ', ' : '') + (p.pre === '$' ? '$' : p.pre ? M(K + ' =') + ' ' : '') + v + (p.unit ? ' ' + esc(p.unit) : '');
 }
 
 const api = { UNIT_ID, TITLES, Q, qadd, qsub, qmul, qdiv, qneg, qabs, qeq, qlt, qnum, qdec, qv, qfloor, qceil, qround, isInt, places, decPlain, numStr, N, commas, money, fixed, sig3,
   esc, M, speakH, fr, sup, minus, K, mixedH, mixedOut, mixedText, sqU, tidy, parse, evalA, readAns, readNum, setClean, generate, partsOf, ansStr, ansHtml,
-  PAIRS, SQ, CUR, MIX, ORD, MOVERS, PER1, PART, K3, K4, CUPS, SHOWN_SRC, HOME_SRC, SHOWN, FORMS_H, formHash, isForm, isShown, fresh, ratioH };
+  PAIRS, SQ, CUR, MIX, ORD, MOVERS, PER1, PART, K3, K4, CUPS, mixKey, SHOWN_SRC, HOME_SRC, SHOWN, FORMS_H, formHash, isForm, isShown, fresh, ratioH };
 if (node) module.exports = api; else root.Practice = api;
 })(this);
 </script>
@@ -1430,7 +1436,7 @@ F.kArea = {
   walk: p => { const { A, B } = p.prm, k2 = Q(B, A);
     return [choice('The copy’s area is the original’s area × …', [O('k², the scale factor squared', true), O('k, the scale factor', false, 'Area is two lengths multiplied, and each is × k: the area is × k × k.')]),
       num('What is ' + N(B) + ' ÷ ' + A + '? That is k².', k2, HINT.div(Q(B), Q(A))),
-      num('k × k = ' + S(k2) + '. What is k?', p.ans, 'Which whole number times itself makes ' + S(k2) + '? Try a few: 2 × 2, then 3 × 3, and so on.')]; }
+      num('k × k = ' + S(k2) + '. What is k?', p.ans, 'Which whole number times itself makes ' + S(k2) + '? Try the whole numbers in turn until one works.')]; }
 };
 
 /* ---- 6, 7 and 8: plans (5.04: "A scale with two units is a rate: read it per 1 first.") */
@@ -1464,14 +1470,19 @@ function areaFam(follow) {
         mod(qmul(Q(2), qadd(qmul(pp, r), qmul(qq, r))), 'found the room’s perimeter. Area is length × width.', off + 1)]; },
     follow: follow ? (p, a) => qmul(a, qmul(qv(p.prm.q), Q(p.prm.r))) : null,
     rule: () => 'Real dimensions first — each plan length × the feet per inch — then length × width.',
-    sol: p => { const x = p.prm, A = qmul(qv(x.p), Q(x.r)), B = qmul(qv(x.q), Q(x.r));
+    sol: (p, ctx) => { const x = p.prm, A = qmul(qv(x.p), Q(x.r)), B = qmul(qv(x.q), Q(x.r));
+      /* part (b) of question 6 builds on part (a): until part (a) is right, its worked lines say "your part (a)" and never
+         its number (the educator of 30 Oct 2026: the lines handed over part (a), which then earned its point "on your own") */
+      if (follow && ctx && ctx.prevOk === false) return (x.den > 1 ? [{ say: perOneSay(x) }] : []).concat([
+        { say: 'The room for real: the wall from part (a), by ' + M(N(x.q) + ' × ' + x.r + ' = ' + S(B)) + ' ft.' },
+        { say: 'Its area is length × width — your part (a) × ' + S(B) + ':', ex: EX(S(p.ans) + ' ft²', p.ans) }]);
       return (x.den > 1 ? [{ say: perOneSay(x) }] : []).concat([
         { say: 'The room for real: ' + M(N(x.p) + ' × ' + x.r + ' = ' + S(A)) + ' ft by ' + M(N(x.q) + ' × ' + x.r + ' = ' + S(B)) + ' ft.' },
         { say: 'Its area is length × width:', ex: EX(S(A) + ' × ' + S(B) + ' = ' + S(p.ans), p.ans) }]); },
-    walk: p => { const x = p.prm, A = qmul(qv(x.p), Q(x.r)), B = qmul(qv(x.q), Q(x.r));
+    walk: (p, ctx) => { const x = p.prm, A = qmul(qv(x.p), Q(x.r)), B = qmul(qv(x.q), Q(x.r));
       /* part (b) of question 6 builds on part (a): its Hint asks for the other wall and uses "your part (a)", so it never
-         hands over part (a)'s number */
-      if (follow) return (x.den > 1 ? [perOneStep(x)] : []).concat([
+         hands over part (a)'s number. A fresh one ("Try another") has no part (a), so it gets the whole walk. */
+      if (follow && !(ctx && ctx.extra)) return (x.den > 1 ? [perOneStep(x)] : []).concat([
         num('Part (a) found the real length of the wall drawn ' + N(x.p) + ' in long. How long is the other wall, drawn ' + N(x.q) + ' in long, for real?', B, HINT.mul(qv(x.q), Q(x.r))),
         choice('So the room’s area is …', [O('the real length from part (a) × ' + S(B), true), O(N(x.p) + ' × ' + N(x.q) + ' × ' + x.r, false, 'That uses the rate once, but each of the two sides is × ' + x.r + '.')]),
         num('What is the room’s real area?', p.ans, 'Multiply the real length from part (a) by ' + S(B) + '.')]);
@@ -1501,8 +1512,9 @@ F.toPlan = {
 /* ---- 9, 12 and 13: one ratio (5.06 Notes I–II, 5.08 Notes I) */
 function convFam() {
   return {
-    models: p => { const x = p.prm, f = qdec(x.f);
-      return [mod(qdiv(Q(x.n), f), 'divided by ' + x.f + '. The ratio is for 1 ' + UW[x.from][0] + ', the unit you have, so multiply by it. ' + cap(estSay(x.n, x.from, x.to, f)), 1)]; },
+    models: p => { const x = p.prm, f = qdec(x.f), o = qdec(x.o);
+      return [mod(qdiv(Q(x.n), f), 'divided by ' + x.f + '. The ratio is for 1 ' + UW[x.from][0] + ', the unit you have, so multiply by it. ' + cap(estSay(x.n, x.from, x.to, f)), 1),
+        mod(qmul(Q(x.n), o), 'multiplied by the sheet’s other ratio, ' + x.o + ' — the one for 1 ' + UW[x.to][0] + ', the unit you want. That ratio divides; the one printed here, for 1 ' + UW[x.from][0] + ', multiplies. ' + cap(estSay(x.n, x.from, x.to, f)), 1)]; },
     rule: p => { const x = p.prm; return 'Multiply by the ratio whose 1 is the unit you have. Estimate first: ' + estSay(x.n, x.from, x.to, qdec(x.f)); },
     sol: p => { const x = p.prm, f = qdec(x.f), more = qlt(Q(1), f);
       return [{ say: 'The ratio ' + M(ratioH(x.from, x.f, x.to)) + ' is for 1 ' + UW[x.from][0] + ', the unit you have, so multiply by it:', ex: EX(x.n + ' × ' + x.f + ' = ' + S(p.ans), p.ans) },
@@ -1522,7 +1534,8 @@ F.chain = {
       mod(qmul(n, r), 'used only the last ratio. Yards go to feet first (× 3), then to inches (× 12), then to centimeters (× 2.54).', 0),
       mod(qmul(qmul(n, Q(3)), r), 'skipped the inches. Feet to inches is × 12, before the × 2.54.', 1),
       mod(qmul(qmul(n, Q(12)), r), 'skipped the feet. Yards to feet is × 3 first.', 0),
-      mod(qdiv(i, r), 'divided by 2.54 at the last step. An inch is longer than a centimeter, so there are more centimeters than inches: × 2.54.', 2)]; },
+      mod(qdiv(i, r), 'divided by 2.54 at the last step. An inch is longer than a centimeter, so there are more centimeters than inches: × 2.54.', 2),
+      mod(qmul(i, qdec('0.39')), 'multiplied the inches by the sheet’s other ratio, 0.39 — the one for 1 cm. That ratio divides; 1 in = 2.54 cm multiplies.', 2)]; },
   rule: () => 'One ratio at a time, each for the unit you have: yards × 3 = feet, feet × 12 = inches, inches × 2.54 = centimeters.',
   sol: p => { const n = qv(p.prm.n), f3 = qmul(n, Q(3)), i = qmul(n, Q(36));
     return [{ say: 'Yards to feet: ' + M(N(n) + ' × 3 = ' + S(f3)) + ' ft.' }, { say: 'Feet to inches: ' + M(S(f3) + ' × 12 = ' + S(i)) + ' in.' },
@@ -1572,11 +1585,22 @@ F.tanks = {
       mod(gal, 'found the gallons the trip uses, ' + N(x.D) + ' ÷ ' + x.m + (places(gal) >= 0 ? ' = ' + S(gal) : ' ≈ ' + fixed(gal, 1)) + '. A tank holds ' + x.g + ' of them.', 1)]; },
   follow: (p, a) => (qlt(Q(0), a) ? E.qceil(qdiv(Q(p.prm.D), a)) : null),
   rule: () => 'Miles on one tank first (part a); then the trip ÷ the miles on one tank, rounded UP — part of a tank is still a tank.',
-  sol: p => { const x = p.prm, R = Q(x.m * x.g), q = Q(x.D, x.m * x.g);
-    return [{ say: 'One full tank goes ' + M(x.m + ' × ' + x.g + ' = ' + N(R)) + ' mi (part a).' },
+  sol: (p, ctx) => { const x = p.prm, R = Q(x.m * x.g), q = Q(x.D, x.m * x.g);
+    /* until part (a) is right, the lines say "your part (a)" and never its number (the educator of 30 Oct 2026) */
+    if (ctx && ctx.prevOk === false) return [{ say: 'One full tank goes ' + x.m + ' × ' + x.g + ' miles — your part (a).' },
+      { say: 'The trip in tanks is ' + N(x.D) + ' ÷ the miles on one tank. It is not a whole number.' },
+      { say: 'Part of a tank counts as a whole tank, so round up:', ex: EX(S(p.ans) + ' tanks', p.ans) }];
+    return [{ say: 'One full tank goes ' + M(x.m + ' × ' + x.g + ' = ' + N(R)) + ' mi' + (ctx && ctx.extra ? '' : ' (part a)') + '.' },
       { say: 'The trip in tanks: ' + M(N(x.D) + ' ÷ ' + N(R) + (places(q) >= 0 ? ' = ' + S(q) : ' ≈ ' + fixed(q, 2))) + '.' },
       { say: 'Part of a tank counts as a whole tank, so round up:', ex: EX(S(p.ans) + ' tanks', p.ans) }]; },
-  walk: p => { const x = p.prm, fl = qfloor(Q(x.D, x.m * x.g)), f = Number(fl.n);
+  walk: (p, ctx) => { const x = p.prm, fl = qfloor(Q(x.D, x.m * x.g)), f = Number(fl.n), R = Q(x.m * x.g);
+    /* a fresh one ("Try another") has no part (a): its Hint finds the miles on one tank first */
+    if (ctx && ctx.extra) return [num('How far does one full tank go? (' + x.m + ' miles per gallon, ' + x.g + ' gallons)', R, HINT.mul(Q(x.m), Q(x.g))),
+      choice('To find the tanks for the ' + N(x.D) + '-mi trip, divide the trip by …', [O('the miles one full tank goes, ' + N(R), true),
+        O('the miles per gallon, ' + x.m, false, 'The trip ÷ ' + x.m + ' is the gallons the trip uses, not the tanks.'),
+        O('the gallons in a tank, ' + x.g, false, 'Miles ÷ gallons is not a number of tanks: divide the trip by the miles one tank goes.')]),
+      choice(N(x.D) + ' ÷ ' + N(R) + ' is between …', [O(f + ' and ' + (f + 1), true), O((f + 1) + ' and ' + (f + 2), false, (f + 1) + ' full tanks go farther than ' + N(x.D) + ' mi.')].concat(f >= 1 ? [O((f - 1) + ' and ' + f, false, f + ' full ' + plural(fl, 'tank', 'tanks') + ' still fall short of ' + N(x.D) + ' mi.')] : [])),
+      num('Part of a tank counts as a whole tank. How many tanks does the trip use?', p.ans, 'Round the division up to the next whole number of tanks.')];
     const span = (a, b) => a + ' and ' + b, opts = [O(span(f, f + 1), true), O(span(f + 1, f + 2), false, f + 1 + ' full tanks of your part (a) go farther than ' + N(x.D) + ' mi: the trip is less than that.')];
     if (f >= 1) opts.push(O(span(f - 1, f), false, f + ' full ' + plural(fl, 'tank', 'tanks') + ' of your part (a) still fall short of ' + N(x.D) + ' mi: the trip is more than that.'));
     /* part (b) builds on part (a): the Hint divides the trip by "your part (a)" and never asks for part (a)'s number */
@@ -1633,6 +1657,36 @@ F.mixWhole = {
       num('What is ' + sum + ' × ' + S(k) + '?', p.ans, HINT.mul(Q(sum), k))]; }
 };
 
+/* ---- 19: two speeds in two units (5.10 Notes II: "Two rates in different units cannot be compared until they are in one
+   unit.") — the answer is the faster one's name and the mi/h speed in km/h */
+const spd = x => ({ K0: Q(x.kmh), conv: qmul(Q(x.mph), qdec('1.61')), slow: x.fast === x.a ? x.b : x.a, mover: x.b });
+F.faster = {
+  models: p => { const x = p.prm, { K0, conv } = spd(x);
+    return [mod(K0, 'typed the ' + x.a + '’s ' + x.kmh + ' — that is already km/h. The ' + x.b + '’s ' + x.mph + ' mi/h is the speed to change: × 1.61.', 1),
+      mod(Q(x.mph), 'typed the ' + x.b + '’s ' + x.mph + ' as it stands — that is mi/h. A mile is 1.61 km, so in km/h it is ' + x.mph + ' × 1.61.', 1),
+      mod(qdiv(Q(x.mph), qdec('1.61')), 'divided by 1.61. A mile is longer than a kilometer, so ' + x.mph + ' mi/h is MORE than ' + x.mph + ' km/h: multiply.', 1),
+      mod(qmul(K0, qdec('1.61')), 'multiplied the ' + x.a + '’s km/h by 1.61. The km/h needs no change; change the ' + x.b + '’s mi/h: ' + x.mph + ' × 1.61.', 1),
+      mod(qmul(K0, qdec('0.62')), 'changed the ' + x.a + '’s speed to mi/h. That compares them too — but the box asks for the ' + x.b + '’s speed in km/h: ' + x.mph + ' × 1.61.', 1)]; },
+  rule: p => 'Same unit first: a mile is 1.61 km, so ' + p.prm.mph + ' mi/h × 1.61 is km/h. Then compare the two km/h speeds — the bigger is faster.',
+  sol: p => { const x = p.prm, { K0, conv } = spd(x), [hi, lo] = qlt(conv, K0) ? [K0, conv] : [conv, K0];
+    return [{ say: 'Put both speeds in km/h. A mile is 1.61 km, so the ' + x.b + ' does ' + M(x.mph + ' × 1.61 = ' + S(conv)) + ' km/h.' },
+      { say: 'Compare in one unit: ' + M(S(hi) + ' &gt; ' + S(lo)) + ', so the ' + x.fast + ' is faster.', ex: EX(x.mph + ' × 1.61 = ' + S(conv), p.ans) }]; },
+  walk: p => { const x = p.prm, { K0, conv, slow } = spd(x);
+    return [choice('Can you compare ' + x.kmh + ' km/h with ' + x.mph + ' mi/h as they are?', [O('No — put them in the same unit first', true),
+        O('Yes — the bigger number is faster', false, 'A kilometer and a mile are different lengths, so ' + x.kmh + ' and ' + x.mph + ' count different things.')]),
+      choice('A mile is 1.61 km. So ' + x.mph + ' mi/h in km/h is …', [O(M(x.mph + ' × 1.61'), true), O(M(x.mph + ' ÷ 1.61'), false, 'A mile is longer than a kilometer, so there are more kilometers than miles: multiply.')]),
+      num('What is ' + M(x.mph + ' × 1.61') + '?', conv, HINT.mul(Q(x.mph), qdec('1.61'))),
+      choice('So which is faster?', [O('The ' + x.fast, true), O('The ' + slow, false, 'Compare ' + x.kmh + ' km/h with ' + S(conv) + ' km/h: the bigger one is faster.')])]; }
+};
+/* what was typed for question 19: the names in it, and the rest */
+function namesIn(p, typed) {
+  const x = p.prm, t0 = ' ' + String(typed == null ? '' : typed).toLowerCase().replace(/[’']/g, '') + ' ';
+  const has = w => new RegExp('(^|[^a-z])' + w + 's?([^a-z]|$)').test(t0);
+  const names = [x.a, x.b].filter(has);
+  const rest = t0.replace(new RegExp('(^|[^a-z])(' + x.a + '|' + x.b + ')s?(?=[^a-z]|$)', 'g'), '$1').replace(/\b(the|is|was|faster|fastest|at|does|goes|and|by|km\/?h|kmh|kph)\b/g, ' ').replace(/[:;,]/g, ' ').replace(/\s+/g, ' ').trim();
+  return { names, rest };
+}
+
 /* ------------------------------------------------------------------ marking a typed answer */
 const RULE = p => F[p.fam].rule(p);
 const joinSays = hs => hs.map((h, i) => (i ? ' — or if you ' : 'That is what you get if you ') + h.say.replace(/\.$/, '')).join('') + '.';
@@ -1646,8 +1700,8 @@ function rounds(v, r, minDp) {
 function hits(p, r) {
   const ms = F[p.fam].models(p) || [], seen = [];
   const keep = list => list.filter(m => { if (seen.indexOf(m.say) >= 0) return false; seen.push(m.say); return true; });
-  const exact = keep(ms.filter(m => qeq(m.v, r.val) && !qeq(m.v, p.ans)));
-  return exact.length ? exact : keep(ms.filter(m => rounds(m.v, r, m.minDp) && !qeq(m.v, p.ans)));
+  /* a typed number may be one mistake exactly and another rounded (5 ÷ 2.204 and 5 × 0.454 are both 2.27): both are named */
+  return keep(ms.filter(m => (qeq(m.v, r.val) || rounds(m.v, r, m.minDp)) && !qeq(m.v, p.ans)));
 }
 /* "33/4" or "3-3/4" typed for 3 3/4: the whole number and the fraction with no space between them */
 function didMean(typed, A) {
@@ -1665,27 +1719,56 @@ const plainKey = p => p.money ? money(p.ans) : p.cups ? mixedOut(p.ans) : S(p.an
 /* the working a student did, as the sentence about it: "7 × 2.54" */
 const workSay = p => { const x = p.prm; return p.fam === 'chain' ? N(x.n) + ' × 3 × 12 × 2.54' : x.n + ' × ' + x.f; };
 function feedback(p, typed, ctx) {
+  if (p.name) return nameFeedback(p, typed, ctx);
+  return numFeedback(p, typed, ctx);
+}
+/* question 19: the name decides, the number proves it */
+function nameFeedback(p, typed, ctx) {
+  const x = p.prm, { names, rest } = namesIn(p, typed);
+  if (names.length === 2) return { v: 'unread', what: ['Name just one: which is faster?'] };
+  const r = numFeedback(p, rest, ctx), name = names[0] || null, mover = x.b;
+  if (!name && r.v === 'unread' && /[a-z]{3,}/.test(String(typed).toLowerCase().replace(/km\/?h|kmh|kph|mi\/?h|mph/g, ''))) return { v: 'unread', what: ['Which is it, the ' + x.a + ' or the ' + x.b + '? Type its name, and the ' + x.b + '’s speed in km/h.'] };
+  if (r.v === 'blank') {
+    if (!name) return r;
+    if (name === x.fast) return { v: 'form', what: ['Yes — now show it: the ' + mover + '’s speed in km/h, beside the name.'], rule: '' };
+    return { v: 'wrong', what: ['The ' + x.a + '’s speed is in km/h and the ' + x.b + '’s in mi/h: compare them in one unit first. Change ' + x.mph + ' mi/h to km/h (× 1.61), then decide.'], rule: RULE(p), step: 0 };
+  }
+  if (r.v === 'right' || r.v === 'form') {
+    if (!name) return r.v === 'right' ? { v: 'form', what: ['That is the ' + mover + '’s speed in km/h. Now say which is faster: its name goes with the speed.'], rule: '' } : r;
+    if (name === x.fast) return r;
+    const { K0, conv } = spd(x), [hi, lo] = qlt(conv, K0) ? [K0, conv] : [conv, K0];
+    return { v: 'wrong', what: ['The conversion is right — but compare the two km/h speeds: ' + M(S(hi) + ' &gt; ' + S(lo)) + ', so the ' + x.fast + ' is faster.'], rule: RULE(p), step: null };
+  }
+  return r;
+}
+function numFeedback(p, typed, ctx) {
   const r = E.readAns(typed);
   if (r.blank) return { v: 'blank', what: [] };
   if (!r.ok) return { v: 'unread', what: [r.msg] };
   const rule = RULE(p), A = p.ans;
-  const meant = didMean(typed, A); if (meant && !qeq(r.val, A)) return { v: 'unread', what: ['Did you mean ' + meant + '? Put a space between the whole number and the fraction.'] };
+  /* a mixed number typed without its space, or with a hyphen, when the mixed number would be right: asked about, counted as
+     nothing, and never told the number (the M7 Unit 9 re-read of 30 Oct 2026: a wrong 11/2 was told "Did you mean 1 1/2?") */
+  const meant = didMean(typed, A); if (meant && !qeq(r.val, A)) return { v: 'unread', what: ['If that is a mixed number, put a space between the whole number and the fraction, like 1 1/3.'] };
   if (qeq(r.val, A)) {
     if (r.form === 'num' && r.frac !== 'unreduced') return { v: 'right', what: [] };
-    if (r.form === 'num') return { v: 'form', what: ['That is the right amount. Write the fraction in its simplest form: ' + plainKey(p) + (p.cups ? '' : places(A) >= 0 && !isInt(A) ? ' (or the decimal)' : '') + '.'], rule: '' };
+    if (r.form === 'num') return { v: 'form', what: [p.cups || places(A) < 0 || isInt(A) ? 'That is the right amount. Write the fraction in its simplest form: ' + plainKey(p) + '.'
+      : 'That is the right amount. Write the fraction in its simplest form, ' + A.n + '/' + A.d + ' — or as the decimal, ' + plainKey(p) + '.'], rule: '' };
     return { v: 'form', what: ['That works out to the right number. Finish the arithmetic: write it as one number.'], rule: '' };
   }
+  /* the sheet's other ratio (the reference sheet: both directions are accepted): exactly, when it comes out so (the critic of
+     30 Oct 2026: 66 ÷ 0.264 = 250 was called "the answer rounded"), or rounded to the places typed */
+  const via = p.fam === 'chain' ? N(qmul(qv(p.prm.n), Q(36))) + ' ÷ 0.39' : p.fam === 'faster' ? p.prm.mph + ' ÷ 0.62' : p.prm.n + ' ÷ ' + p.prm.o;
+  if (p.alt && r.form === 'num' && qlt(Q(0), r.val) && qeq(p.alt, r.val))
+    return { v: 'right', what: ['Right — by the sheet’s other ratio, ' + M(p.altRatio) + ': ' + M(via + ' = ' + numStr(r.val)) + '. With the ratio printed here the answer is ' + plainKey(p) + '.'] };
   if (r.form === 'num' && r.dp != null && qlt(Q(0), r.val)) {
     /* the key rounded: every answer here comes out exactly, so a rounded one is not finished */
     if (places(A) > 0 && r.dp < places(A) && qeq(qround(A, r.dp), r.val))
-      return { v: 'form', what: [p.money ? 'Almost — give money to the cent: two decimal places.' : 'Almost — that is the answer rounded. ' + (p.alt ? M(workSay(p)) + ' comes out exactly: give every digit.' : 'It comes out exactly: give every digit.')], rule: '' };
-    /* the sheet's other ratio (the reference sheet: both directions are accepted) */
-    if (p.alt && r.dp >= 1 && qeq(qround(p.alt, r.dp), r.val)) {
-      const via = p.fam === 'chain' ? N(qmul(qv(p.prm.n), Q(36))) + ' ÷ 0.39' : p.prm.n + ' ÷ ' + p.prm.o;
+      return { v: 'form', what: [p.money ? 'Give money to the cent: two decimal places.' : 'That is the answer rounded. ' + (p.alt ? M(workSay(p)) + ' comes out exactly: give every digit.' : 'It comes out exactly: give every digit.')], rule: '' };
+    /* the sheet's other ratio, rounded to the places typed */
+    if (p.alt && r.dp >= 1 && qeq(qround(p.alt, r.dp), r.val))
       return { v: 'right', what: ['Right — by the sheet’s other ratio, ' + M(p.altRatio) + ': ' + M(via + ' ≈ ' + numStr(r.val)) + '. With the ratio printed here the answer is exact.'] };
-    }
     if (p.alt && r.dp === 0 && qeq(qround(p.alt, 0), r.val))
-      return { v: 'form', what: ['Almost — that is the sheet’s other ratio rounded to a whole number. Keep the decimals, or use the ratio printed here: it comes out exactly.'], rule: '' };
+      return { v: 'form', what: ['That is the sheet’s other ratio rounded to a whole number. Keep the decimals, or use the ratio printed here: it comes out exactly.'], rule: '' };
   }
   /* follow-through (ruling 19; the test's 6(b) and 16(b)): the right step done to the student's own part (a) */
   if (F[p.fam].follow && ctx && ctx.prev != null && ctx.prevPart) {
@@ -1701,6 +1784,10 @@ function feedback(p, typed, ctx) {
   }
   const h = hits(p, r);
   if (h.length) return { v: 'wrong', what: [joinSays(h)], rule, step: h[0].step };
+  /* the key cut off after some places, not rounded (the readers of 30 Oct 2026: 5.7 for 5.75, 215 for 215.9) — when it is
+     not a named mistake */
+  if (r.form === 'num' && r.dp != null && qlt(Q(0), r.val) && places(A) > 0 && r.dp < places(A) && qeq(qfloor(qmul(A, Q(10n ** BigInt(r.dp)))), qmul(r.val, Q(10n ** BigInt(r.dp)))))
+    return { v: 'form', what: ['That is the answer cut off after ' + (r.dp === 0 ? 'the whole number' : r.dp === 1 ? 'one decimal place' : r.dp + ' decimal places') + ', not rounded. It comes out exactly: give every digit.'], rule: '' };
   if (qlt(r.val, Q(0))) return { v: 'wrong', what: ['An amount here is never negative. Drop the minus sign and check the steps again.'], rule };
   return { v: 'wrong', what: [generic()], rule };
 }
@@ -1713,14 +1800,9 @@ const MCW = {
     if (tag === 'once') return 'That uses the ratio once: ' + M(N(pr.A) + ' × ' + pr.r) + '. A square ' + from[0] + ' is ' + pr.r + ' ' + to[1] + ' on each side, so use the ratio twice: × ' + M(pr.r + sup(2)) + '.';
     if (tag === 'alone') return 'That is ' + M(pr.r + sup(2) + ' = ' + S(r2)) + ', the square ' + to[1] + ' in ONE square ' + from[0] + '. Multiply by the ' + M(N(pr.A) + ' ' + sqU(pr.from)) + '.';
     return 'That multiplies by 2 × ' + pr.r + '. Squaring is ' + pr.r + ' × ' + pr.r + ', not 2 × ' + pr.r + '.'; },
-  speeds: (x, k) => { const pr = x.prm, tag = x.tags[k];
-    if (tag === 'raw') return 'That compares ' + pr.kmh + ' and ' + pr.mph + ' as they stand — but one is km/h and the other mi/h, and a mile is longer than a kilometer. Same unit first: ' + M(pr.mph + ' × 1.61') + '.';
-    if (tag === 'divided') return 'That divides by 1.61. A mile is longer than a kilometer, so ' + pr.mph + ' mi/h is MORE kilometers an hour: multiply.';
-    return 'That multiplies the km/h by 1.61. A kilometer is shorter than a mile, so ' + pr.kmh + ' km/h is FEWER miles an hour — and the simplest way is to change the mi/h to km/h: × 1.61.'; }
 };
 const MCRULE = {
   sqConv: () => 'A square unit uses the length ratio twice: the area × the ratio².',
-  speeds: () => 'Same unit first: change the mi/h to km/h (× 1.61, since a mile is 1.61 km), then compare.',
   kFacts: () => 'A scale copy: every length × k, the perimeter × k, the area × k², and every angle stays the same.',
   convSel: () => 'Two ways give the answer: × the ratio whose 1 is the unit you have, or ÷ the ratio whose 1 is the unit you want.'
 };
@@ -1764,18 +1846,13 @@ function mcSolution(x) {
     return [{ say: 'One square ' + from[0] + ' is ' + pr.r + ' ' + to[1] + ' by ' + pr.r + ' ' + to[1] + ': ' + M(pr.r + ' × ' + pr.r + ' = ' + S(r2)) + ' square ' + to[1] + '.' },
       { say: 'So ' + M(N(pr.A) + ' ' + sqU(pr.from)) + ' is ' + M(N(pr.A) + ' × ' + S(r2) + ' = ' + S(x.exact)) + ' square ' + to[1] + '.' },
       { say: 'The closest choice is ' + ok + '.' }]; }
-  if (x.fam === 'speeds') { const pr = x.prm, conv = qmul(Q(pr.mph), qdec('1.61')), K0 = Q(pr.kmh), fast = qlt(conv, K0) ? pr.a : pr.b;
-    const [hi, lo] = qlt(conv, K0) ? [K0, conv] : [conv, K0];
-    return [{ say: 'Put both speeds in km/h. A mile is 1.61 km, so ' + M(pr.mph + ' × 1.61 = ' + S(conv)) + ' km/h.' },
-      { say: 'Compare in one unit: ' + M(S(hi) + ' &gt; ' + S(lo)) + ', so the ' + fast + ' is faster.' },
-      { say: 'The answer is ' + ok + '.' }]; }
   return [{ say: 'The answer is ' + ok + '.' }];
 }
-function solution(p) { return F[p.fam].sol(p); }
+function solution(p, ctx) { return F[p.fam].sol(p, ctx || null); }
 function KIT_shuffle(a, key) { const T = KIT.slot('a7u5', 1, 'walk|' + key); return T.shuffle(a); }      /* option order fixed per question */
-/* a choice step's options are shuffled (fixed per question), except letters, which keep their order */
+/* a choice step's options are shuffled (fixed per question), except a step that says to keep them (none now: the student of 30 Oct 2026 found Q3's and Q10's letter sets always right-first) */
 const mixed = (st, key) => st && st.map((x, i) => x.type === 'choice' && !x.keep ? Object.assign({}, x, { opts: KIT_shuffle(x.opts, key + '|' + i) }) : x);
-function steps(p) { return mixed(F[p.fam].walk(p), p.key); }
+function steps(p, ctx) { return mixed(F[p.fam].walk(p, ctx || null), p.key); }
 function stepsMC(x) { return mixed(stepsMC0(x), x.key); }
 function stepsMC0(x) {
   if (x.fam === 'sqConv') { const { pr, r, r2, from, to } = sqParts(x);
@@ -1784,13 +1861,6 @@ function stepsMC0(x) {
       num('What is ' + M(pr.r + ' × ' + pr.r) + '?', r2, HINT.mul(r, r)),
       num('What is ' + M(N(pr.A) + ' × ' + S(r2)) + '? That is the area in square ' + to[1] + '.', x.exact, HINT.mul(Q(pr.A), r2)),
       choice('Which choice is closest to ' + S(x.exact) + '?', x.vals.map((v, i) => O(LET[i], i === x.correct, i === x.correct ? '' : S(v) + ' is far from ' + S(x.exact) + '.')), { keep: true })]; }
-  if (x.fam === 'speeds') { const pr = x.prm, conv = qmul(Q(pr.mph), qdec('1.61')), K0 = Q(pr.kmh), fast = qlt(conv, K0) ? pr.a : pr.b, slow = fast === pr.a ? pr.b : pr.a;
-    return [choice('Can you compare ' + pr.kmh + ' km/h with ' + pr.mph + ' mi/h as they are?', [O('No — put them in the same unit first', true),
-        O('Yes — the bigger number is faster', false, 'A kilometer and a mile are different lengths, so ' + pr.kmh + ' and ' + pr.mph + ' count different things.')]),
-      choice('A mile is 1.61 km. So ' + pr.mph + ' mi/h in km/h is …', [O(M(pr.mph + ' × 1.61'), true), O(M(pr.mph + ' ÷ 1.61'), false, 'A mile is longer than a kilometer, so there are more kilometers than miles: multiply.')]),
-      num('What is ' + M(pr.mph + ' × 1.61') + '?', conv, HINT.mul(Q(pr.mph), qdec('1.61'))),
-      choice('So which is faster?', [O('The ' + fast, true), O('The ' + slow, false, 'Compare ' + pr.kmh + ' km/h with ' + S(conv) + ' km/h: the bigger one is faster.')]),
-      choice('Which choice says that, with both speeds in km/h?', x.tags.map((t, i) => O(LET[i], i === x.correct, i === x.correct ? '' : MCW.speeds(x, i))), { keep: true })]; }
   if (x.fam === 'kFacts') { const k = qdec(x.prm.k), k2 = qmul(k, k), at = t => x.tags.indexOf(t);
     const right = x.correct, noK2 = [at('side'), at('perim'), at('areaK')], plusAngle = right.concat([at('angle')]), sideOnly = [at('side'), at('perim')];
     return [choice('A scale copy multiplies every length by k. What happens to each angle?', [O('It stays the same — an angle is not a length', true),
@@ -1798,7 +1868,7 @@ function stepsMC0(x) {
       choice('The perimeter is the sides added. It is …', [O('× ' + S(k), true), O('× ' + S(k2), false, 'Each side is × ' + S(k) + ', so their sum is × ' + S(k) + '. Squaring is for area.')]),
       num('Area is length × width, each × ' + S(k) + '. What is ' + S(k) + ' × ' + S(k) + '?', k2, HINT.mul(k, k)),
       choice('So the true statements are …', [O(lettersSay(right), true), O(lettersSay(noK2), false, 'The area is × ' + S(k2) + ', not × ' + S(k) + '.'),
-        O(lettersSay(plusAngle), false, 'The angles do not change.'), O(lettersSay(sideOnly), false, 'The area changes too: × ' + S(k2) + '.')], { keep: true })]; }
+        O(lettersSay(plusAngle), false, 'The angles do not change.'), O(lettersSay(sideOnly), false, 'The area changes too: × ' + S(k2) + '.')])]; }
   if (x.fam === 'convSel') { const pr = x.prm, P = E.PAIRS[pr.pair], have = UW[pr.from][0], want = UW[pr.to][0];
     const forHave = pr.from === P.a ? P.ab : P.ba, forWant = pr.from === P.a ? P.ba : P.ab;
     const at = (op, v) => pr.ops.indexOf(op + v), right = x.correct;
@@ -1806,7 +1876,7 @@ function stepsMC0(x) {
       choice('With the ratio for 1 ' + have + ', you …', [O('multiply: ' + M(pr.n + ' × ' + forHave), true), O('divide: ' + M(pr.n + ' ÷ ' + forHave), false, 'Each ' + have + ' is ' + forHave + ' ' + UW[pr.to][1] + ', so ' + pr.n + ' of them is a multiplication.')]),
       choice('With the ratio for 1 ' + want + ', you …', [O('divide: ' + M(pr.n + ' ÷ ' + forWant), true), O('multiply: ' + M(pr.n + ' × ' + forWant), false, 'Each ' + want + ' is ' + forWant + ' ' + UW[pr.from][1] + ', so count how many ' + forWant + 's fit in ' + pr.n + ': divide.')]),
       choice('So the two that give the ' + pr.toW + ' are …', [O(lettersSay(right), true), O(lettersSay([at('×', forHave), at('×', forWant)]), false, 'Only one ratio is multiplied; the other is divided.'),
-        O(lettersSay([at('÷', forHave), at('×', forWant)]), false, 'Those are the two ways round the wrong way.'), O(lettersSay([at('×', forHave), at('÷', forHave)]), false, 'Those use one ratio both ways; only one of them is right.')], { keep: true })]; }
+        O(lettersSay([at('÷', forHave), at('×', forWant)]), false, 'Those are the two ways round the wrong way.'), O(lettersSay([at('×', forHave), at('÷', forHave)]), false, 'Those use one ratio both ways; only one of them is right.')])]; }
   return null;
 }
 
@@ -1830,7 +1900,6 @@ function clean(it) {
       if (best(near(ex)) !== it.correct || best(near(alt)) !== it.correct) return false;
       if (vals.some((v, i) => i !== it.correct && Math.abs(v - ex) < 0.15 * ex)) return false;
     }
-    if (it.fam === 'speeds' && it.tags.filter(t => t === 'ok').length !== 1) return false;
     if (it.fam === 'convSel' && it.correct.length !== 2) return false;
     return true;
   }
@@ -1856,7 +1925,7 @@ function clean(it) {
 }
 E.setClean(clean);
 
-const api = { F, feedback, mcFeedback, selectFeedback, mcSolution, solution, clean, joinSays, printedNumbers, SELWHY, MCW, MCRULE, UW, estSay, lettersSay, hits, rounds };
+const api = { F, feedback, numFeedback, nameFeedback, namesIn, mcFeedback, selectFeedback, mcSolution, solution, clean, joinSays, printedNumbers, SELWHY, MCW, MCRULE, UW, estSay, lettersSay, hits, rounds };
 const walkApi = { steps, stepsMC, readNum: E.readNum };
 if (node) module.exports = Object.assign({}, api, { Walk: walkApi }); else { root.Coach = api; root.Walk = walkApi; }
 })(this);
@@ -1890,7 +1959,7 @@ const Unit = {
     line: p => p.stem,
     pre: p => p.pre === '$' ? '$' : p.pre ? E.M(E.K + ' =') : '',
     unit: p => p.kind === 'mc' ? '' : p.unit || '',
-    placeholder: () => '',
+    placeholder: p => p.name ? 'name, speed' : '',
     opt: (x, k) => x.opts[k],
     key: p => E.ansHtml(p),
     start: () => '',
@@ -1906,12 +1975,12 @@ const Unit = {
     mc: (x, k) => C.mcFeedback(x, k),
     multi: (x, ks, tries) => C.selectFeedback(x, ks, tries)
   },
-  solution: (x, type) => type === 'text' ? C.solution(x) : C.mcSolution(x),
-  walk: (x, type) => type === 'text' ? W.steps(x) : W.stepsMC(x),
+  solution: (x, type, ctx) => type === 'text' ? C.solution(x, ctx) : C.mcSolution(x),
+  walk: (x, type, ctx) => type === 'text' ? W.steps(x, ctx) : W.stepsMC(x),
   readNum: W.readNum,
   numOk: (s, v) => E.qeq(v, s.ans),
   /* for the checks: what a student would type for the key */
-  keyText: p => p.cups ? E.mixedText(p.ans) : p.money ? E.money(p.ans) : E.decPlain(p.ans)
+  keyText: p => (p.name ? p.prm.fast + ' ' : '') + (p.cups ? E.mixedText(p.ans) : p.money ? E.money(p.ans) : E.decPlain(p.ans))
 };
 if (node) module.exports = Unit; else root.Unit = Unit;
 })(this);
@@ -2652,7 +2721,7 @@ function fig(it){ try { return V.figure(it) || ''; } catch(e){ return ''; } }
 function inputHtml(p, id, lab){
   var pre = V.pre(p), unit = V.unit(p), ph = V.placeholder(p);
   return '<div class="ans">' + (pre ? '<span class="pre">' + pre + '</span>' : '') +
-    '<input type="text" id="a' + id + '" data-kind="' + esc(p.kind) + '" aria-label="Answer to question ' + lab + '" aria-describedby="ln' + id + '" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done"' + (ph ? ' placeholder="' + esc(ph) + '"' : '') + '>' +
+    '<input type="text" id="a' + id + '" data-kind="' + esc(p.kind) + '" aria-label="Answer to question ' + lab + '" aria-describedby="ln' + id + '" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done"' + (p.imode ? ' inputmode="' + esc(p.imode) + '"' : '') + (ph ? ' placeholder="' + esc(ph) + '"' : '') + '>' +
     (unit ? '<span class="unit">' + esc(unit) + '</span>' : '') + '<button type="button" class="chk" data-check="' + id + '" aria-label="Check ' + lab + '">Check</button><span class="hslot" id="hs' + id + '"></span><span class="pv" aria-hidden="true"></span><span class="rd" id="rd' + id + '" aria-live="polite"></span></div>';
 }
 function tailHtml(id){
@@ -2743,7 +2812,8 @@ function runHtml(){ return S.mode === 'test' || !(S.run >= 2) ? '' : ' · <span 
 function another(baseId){
   var b0 = byId(baseId), M0 = S.more[baseId] || (S.more[baseId] = {n: 0, seed: 0, streak: streaks()[b0.pos] || 0, earned: !!res(b0).earned});
   M0.n++; var s, was = M0.seed ? U.key(atPos(U.generate(M0.seed), b0.pos).x) : null, base = U.key(b0.x), tries = 0, k;
-  do { s = randomSeed(); tries++; k = U.key(atPos(U.generate(s), b0.pos).x); } while ((s === seed || k === base || k === was) && tries < 60);   /* never the same question again */
+  var ansOf = function(x){ try { return U.keyText && x && x.kind !== 'mc' ? String(U.keyText(x)) : null; } catch(e){ return null; } }, baseAns = ansOf(b0.x), k2;
+  do { s = randomSeed(); tries++; k2 = atPos(U.generate(s), b0.pos).x; k = U.key(k2); } while ((s === seed || k === base || k === was || (baseAns != null && ansOf(k2) === baseAns)) && tries < 60);   /* never the same question again — nor the same answer (30 Oct 2026: a Hint that ended "5 tanks" was followed by a fresh one whose answer was 5) */
   M0.seed = s; save();
   mountExtra(b0); paintItem(b0);
   var nid = baseId + 'x' + M0.n, inp = $('a' + nid) || document.querySelector('input[name="q' + nid + '"]');
@@ -2757,7 +2827,13 @@ function byId(id){ return byIdBase(id) || EX[id] || null; }
 function answered(it){ var a = S.ans[it.id]; return it.type === 'multi' ? !!(a && a.length) : a != null && String(a).trim() !== ''; }
 /* the mode rides along (25 Oct 2026): on "Like the real test" a part done right from a wrong part (a) earns its point, as the
    printed test's follow-through line says (ruling 19); in practice the coach says fix part (a) first */
-function ctxOf(it){ return it.sib ? {prev: S.ans[it.sib], prevPart: it.sibPart, aShown: it.aShown, mode: S.mode} : {aShown: it.aShown, mode: S.mode}; }
+/* what the coach may know about a part: the student's part (a) and whether it is right yet, whether this is a fresh one
+   ("Try another": no part (a) of its own), what has been shown, and the mode (30 Oct 2026: a fresh 16(b)'s Hint said
+   "your part (a)", and 16(b)'s Show me how printed part (a)'s answer before (a) was right) */
+function ctxOf(it){
+  var sib = it.sib ? byId(it.sib) : null, prevOk = sib ? !!(S.res[sib.id] && S.res[sib.id].v === 'right') : null;   /* false until part (a) is checked right — unanswered counts as not right */
+  return it.sib ? {prev: S.ans[it.sib], prevPart: it.sibPart, prevOk: prevOk, aShown: it.aShown, extra: !!it.extra, mode: S.mode} : {aShown: it.aShown, extra: !!it.extra, mode: S.mode};
+}
 function judgeAns(it, a, tries){
   if (it.type === 'multi' ? !(a && a.length) : (a == null || String(a).trim() === '')) return {v: 'blank', what: []};
   try {
@@ -2823,7 +2899,7 @@ function keyHtml(it){
   if (it.type === 'multi') return it.x.correct.map(function(k){ return '<b>' + LET[k] + '.</b> ' + V.opt(it.x, k); }).join('&nbsp;&nbsp; ');
   return V.key(it.x);
 }
-function solOf(it){ try { return U.solution(it.x, it.type); } catch(e){ return null; } }
+function solOf(it){ try { return U.solution(it.x, it.type, ctxOf(it)); } catch(e){ return null; } }
 function picOf(it){ try { return V.picture(it.x, it.type) || ''; } catch(e){ return ''; } }
 function stepsHtml(it, R){
   var sol = solOf(it), n = sol ? sol.length : 0, shown = Math.min(R.steps || 0, n);
@@ -2905,7 +2981,7 @@ function paintSections(){                                  /* [J-5] each section
 
 /* ------------------------------------------------ the Hint: the question as a few small questions, one at a time */
 function walkPic(it, lead){ var p = picOf(it); return p ? '<div class="wpic"><div class="wpl">' + lead + '</div>' + p + '</div>' : ''; }
-function walkOf(it){ try { return U.walk(it.x, it.type); } catch(e){ return null; } }
+function walkOf(it){ try { return U.walk(it.x, it.type, ctxOf(it)); } catch(e){ return null; } }
 function wstate(it){ return S.walk[it.id] || (S.walk[it.id] = {i: 0, wrong: {}, typed: {}, bad: {}, miss: {}, gave: {}}); }
 function walkHtml(it){
   var st = walkOf(it); if (!st) return '';
