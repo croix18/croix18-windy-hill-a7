@@ -42,9 +42,9 @@
 | Nov 19 | Thu | 6 | T-B2 | **thread** Thread B: interior and exterior angles of a triangle (16.2) | 8.GR.1.5 | Find missing angles in triangles — JFJ; Exterior Angle Theorem — FMP; Triangle Angle-Sum Theorem — 6Q6 | Dec 11 |
 | Nov 20 | Fri | 11 | spiral | *spiral* Spiral day — mixed retrieval from the unit just finished and the two before it |  |  |  |
 | Nov 30 | Mon | 11 | 11.01 | Equations with like terms and the distributive property | 8.AR.2.1 | Solve equations involving like terms — Q2B; Solve equations using the distributive property — QWE; Solve two-step equations: word problems — 8CZ | Dec 11 |
-| Dec 01 | Tue | 11 | off | *off* FAST PM2 (ELA) — no class |  |  |  |
-| Dec 02 | Wed (43 min) | 11 | 11.02 | Variables on both sides | 8.AR.2.1 | Solve equations with variables on both sides — ZYL | Dec 11 |
-| Dec 03 | Thu | 11 | 11.03 | One, none, infinitely many solutions | 8.AR.2.1 | Find the number of solutions — XDE; Create equations with no solutions or infinitely many solutions — 7TY | Dec 11 |
+| Dec 01 | Tue | 11 | 11.02 | Variables on both sides | 8.AR.2.1 | Solve equations with variables on both sides — ZYL | Dec 11 |
+| Dec 02 | Wed (43 min) | 11 | 11.03 | One, none, infinitely many solutions | 8.AR.2.1 | Find the number of solutions — XDE; Create equations with no solutions or infinitely many solutions — 7TY | Dec 11 |
+| Dec 03 | Thu | 11 | off | *off* FAST PM2 (ELA) — no class |  |  |  |
 | Dec 04 | Fri | 11 | 11.04 | Multi-step equations | 8.AR.2.1 | Solve multi-step equations — 55K; Solve multi-step equations: complete the solution — PGH; Solve equations: mixed review — HZZ | Dec 11 |
 | Dec 07 | Mon | 11 | 11.05+06 | Systems: which points are solutions; how many solutions | 8.AR.4.1 · 8.AR.4.2 | Is (x, y) a solution to the system of equations? — N46; Find the number of solutions to a system of equations by graphing — AGZ; Solve a system of equations in slope-intercept form — 9Z8 | Dec 11 |
 | Dec 08 | Tue | 11 | off | *off* FAST PM2 — no class |  |  |  |
@@ -149,7 +149,7 @@ The dates above are laid out from the sequence of lessons, the school calendar a
 - Fri Oct 23 2026: Study guide (period 1); relationship-building day (period 3)
 - Mon Oct 26 2026: the class began 4.X
 - Tue Oct 27 2026: the class began 5.01
-- Tue Dec 01 2026: FAST PM2 (ELA) — no class
+- Thu Dec 03 2026: FAST PM2 (ELA) — no class
 - Tue Dec 08 2026: FAST PM2 — no class
 - Thu Dec 17 2026: Catch-up day — make-up tests and missing work; nothing new and nothing graded
 - Fri Dec 18 2026: Catch-up day — make-up tests and missing work; nothing new and nothing graded

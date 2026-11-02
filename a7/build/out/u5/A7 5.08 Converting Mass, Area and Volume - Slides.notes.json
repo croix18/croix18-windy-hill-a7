@@ -36,9 +36,9 @@
   {
    "n": 5,
    "title": "Notes",
-   "sub": "Copy the two lines.",
+   "sub": "Copy the steps and the two lines.",
    "min": 3,
-   "note": "1 lb = 0.454 kg is a form of 1 like 1 in = 2.54 cm. 50 lb \u00d7 0.454 = 22.7 kg, and the estimate says fewer kilograms than pounds (a kilogram is heavier). The sheet gives 1 kg = 2.204 lb for the way back. Volume the same: 1 gal = 3.785 L, so a 2-gal bucket is 7.57 L \u2014 more liters, since a liter is smaller. **Say:** a new quantity, the same move \u2014 the sheet's ratio, the estimate first.",
+   "note": "Yesterday's move, on a new kind of quantity. 1 lb = 0.454 kg is a form of 1 like 1 in = 2.54 cm: find the sheet's ratio whose 1 is the unit you have, estimate which way the number goes, multiply. 50 lb \u00d7 0.454 = 22.7 kg, and the estimate says fewer kilograms than pounds, because a kilogram is heavier. The sheet gives 1 kg = 2.204 lb for the way back. Volume the same: 1 gal = 3.785 L, so a 2-gal bucket is 7.57 L \u2014 more liters, since a liter is smaller. **Say:** a new quantity, the same move \u2014 the sheet's ratio, the estimate first.",
    "kind": "notes"
   },
   {
@@ -46,7 +46,7 @@
    "title": "Notes",
    "sub": "",
    "min": 4,
-   "note": "1 ft = 12 in, but a square foot is a 12 by 12 square: 144 in\u00b2. Area is two lengths, so the ratio is used twice \u2014 5.02\u201303's k\u00b2 again, with 12 for k. 3 ft\u00b2 = 3 \u00d7 144 = 432 in\u00b2. The grid shows it: 12 rows of 12. Across systems the same: 1 ft = 0.305 m, so a square foot is 0.305 \u00d7 0.305 = 0.093 m\u00b2 \u2014 the sheet's length ratio, squared, is the only area ratio there is. **Say:** square units, square the ratio.",
+   "note": "1 ft = 12 in, but a square foot is a 12 by 12 square: 144 in\u00b2, not 12. Area is two lengths, so the length ratio is used twice \u2014 5.02\u201303's k\u00b2 again, with 12 for k. 3 ft\u00b2 = 3 \u00d7 144 = 432 in\u00b2. The grid shows it: 12 rows of 12. Across systems the same: 1 ft = 0.305 m, so a square foot is 0.305 \u00d7 0.305 \u2248 0.093 m\u00b2 \u2014 the sheet's length ratio, squared, is the only area ratio there is. **Say:** square units, square the ratio.",
    "kind": "notes"
   },
   {
@@ -54,7 +54,7 @@
    "title": "Notes",
    "sub": "",
    "min": 3,
-   "note": "The sheet has 1 c = 8 fl oz and 1 c = 0.24 L, and no line from fluid ounces to milliliters \u2014 so a fluid ounce reaches liters through cups: a 12-fl-oz can is 12 \u00f7 8 = 1.5 c, and 1.5 \u00d7 0.24 = 0.36 L. Two forms of 1 in a chain, like yesterday's yards. And a fluid ounce is a volume; the ounce on a scale is a weight \u2014 two units that share a word. **Say:** read the sheet for the path; it is never one guessed number.",
+   "note": "The sheet has 1 c = 8 fl oz and 1 c = 0.24 L, and no line from fluid ounces to liters or milliliters \u2014 so a fluid ounce reaches liters through cups, in two steps: a 12-fl-oz can is 12 \u00f7 8 = 1.5 c, and 1.5 \u00d7 0.24 = 0.36 L. Two forms of 1 in a chain, like yesterday's yards. And a fluid ounce is a volume; the ounce on a scale is a weight \u2014 two units that share a word. **Say:** read the sheet for the path; it is never one guessed number.",
    "kind": "notes"
   },
   {
