@@ -1,0 +1,182 @@
+{
+ "v": 1,
+ "course": "a7",
+ "code": "A7",
+ "tier": "Grade 7 Accelerated",
+ "unit": 4,
+ "cadence": "fc26d3a29ad0b08346e1c8a5e93a6da4b77deede",
+ "spine": "2026-10-31T15:20:11-04:00",
+ "lessons": {
+  "4.01": {
+   "title": "Add and subtract in scientific notation",
+   "kind": "lesson",
+   "dates": [
+    "2026-10-16"
+   ],
+   "benchmarks": [
+    "MA.8.NSO.1.5"
+   ],
+   "match": [
+    {
+     "cadence": "4.1",
+     "cadenceTitle": "Adding and Subtracting Numbers Expressed in Scientific Notation",
+     "cadenceUnit": 4,
+     "planTitle": "Add and subtract in scientific notation",
+     "similarity": 1.0,
+     "benchmarksAgree": true
+    }
+   ],
+   "status": "cadence",
+   "cadence": [
+    "4.1"
+   ],
+   "items": 60
+  },
+  "4.02+03": {
+   "title": "Multiply and divide in scientific notation",
+   "kind": "lesson",
+   "dates": [
+    "2026-10-19"
+   ],
+   "benchmarks": [
+    "MA.8.NSO.1.5"
+   ],
+   "match": [
+    {
+     "cadence": "4.2",
+     "cadenceTitle": "Multiplying Numbers Expressed in Scientific Notation",
+     "cadenceUnit": 4,
+     "planTitle": "Multiply and divide in scientific notation",
+     "similarity": 0.75,
+     "benchmarksAgree": true
+    },
+    {
+     "cadence": "4.3",
+     "cadenceTitle": "Dividing Numbers Expressed in Scientific Notation",
+     "cadenceUnit": 4,
+     "planTitle": "Multiply and divide in scientific notation",
+     "similarity": 0.5,
+     "benchmarksAgree": true
+    }
+   ],
+   "status": "cadence",
+   "cadence": [
+    "4.2",
+    "4.3"
+   ],
+   "items": 120
+  },
+  "4.04": {
+   "title": "Real-world scientific notation; significant digits",
+   "kind": "lesson",
+   "dates": [
+    "2026-10-20"
+   ],
+   "benchmarks": [
+    "MA.8.NSO.1.6"
+   ],
+   "match": [
+    {
+     "cadence": "4.4",
+     "cadenceTitle": "Solving Real-World Problems Involving Numbers Expressed in Scientific Notation",
+     "cadenceUnit": 4,
+     "planTitle": "Real-world scientific notation; significant digits",
+     "similarity": 0.67,
+     "benchmarksAgree": true
+    }
+   ],
+   "status": "cadence",
+   "cadence": [
+    "4.4"
+   ],
+   "items": 60
+  },
+  "4.05": {
+   "title": "Expressions with radicals (perfect squares to 225, cubes −125 to 125)",
+   "kind": "lesson",
+   "dates": [
+    "2026-10-21"
+   ],
+   "benchmarks": [
+    "MA.8.NSO.1.7"
+   ],
+   "match": [
+    {
+     "cadence": "4.5",
+     "cadenceTitle": "Evaluating Expressions with Radicals",
+     "cadenceUnit": 4,
+     "planTitle": "Expressions with radicals (perfect squares to 225, cubes −125 to 125)",
+     "similarity": 1.0,
+     "benchmarksAgree": true
+    }
+   ],
+   "status": "cadence",
+   "cadence": [
+    "4.5"
+   ],
+   "items": 60
+  },
+  "4.06": {
+   "title": "Order of operations with exponents and radicals",
+   "kind": "lesson",
+   "dates": [
+    "2026-10-22"
+   ],
+   "benchmarks": [
+    "MA.8.NSO.1.7"
+   ],
+   "match": [
+    {
+     "cadence": "4.6",
+     "cadenceTitle": "Evaluating Expressions Using the Order of Operations",
+     "cadenceUnit": 4,
+     "planTitle": "Order of operations with exponents and radicals",
+     "similarity": 0.5,
+     "benchmarksAgree": true
+    }
+   ],
+   "status": "cadence",
+   "cadence": [
+    "4.6"
+   ],
+   "items": 60
+  },
+  "4.X": {
+   "title": "Unit 4 exam",
+   "kind": "exam",
+   "dates": [
+    "2026-10-26"
+   ],
+   "benchmarks": [],
+   "status": "whole-unit",
+   "reason": "a test day: the whole practice test"
+  }
+ },
+ "order": [
+  "4.01",
+  "4.02+03",
+  "4.04",
+  "4.05",
+  "4.06",
+  "4.X"
+ ],
+ "otherDays": [
+  {
+   "date": "2026-10-23",
+   "kind": "extra",
+   "title": "Study guide (period 1); relationship-building day (period 3)",
+   "status": "whole-unit",
+   "reason": "a day off the plan or a review and catch-up day: no lesson"
+  }
+ ],
+ "cadenceUnused": [
+  {
+   "cadence": "4.7",
+   "title": "Evaluating Real-World Problems Using the Order of Operations - Part 1"
+  },
+  {
+   "cadence": "4.8",
+   "title": "Evaluating Real-World Problems Using the Order of Operations - Part 2"
+  }
+ ]
+}

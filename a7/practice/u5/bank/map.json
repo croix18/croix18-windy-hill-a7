@@ -1,0 +1,232 @@
+{
+ "v": 1,
+ "course": "a7",
+ "code": "A7",
+ "tier": "Grade 7 Accelerated",
+ "unit": 5,
+ "cadence": "fc26d3a29ad0b08346e1c8a5e93a6da4b77deede",
+ "spine": "2026-10-31T15:20:11-04:00",
+ "lessons": {
+  "5.01": {
+   "title": "Scale drawings",
+   "kind": "lesson",
+   "dates": [
+    "2026-10-27"
+   ],
+   "benchmarks": [
+    "MA.7.GR.1.5"
+   ],
+   "match": [
+    {
+     "cadence": "5.1",
+     "cadenceTitle": "Scale Drawings",
+     "cadenceUnit": 5,
+     "planTitle": "Scale drawings",
+     "similarity": 1.0,
+     "benchmarksAgree": true
+    }
+   ],
+   "status": "cadence",
+   "cadence": [
+    "5.1"
+   ],
+   "items": 60
+  },
+  "5.02+03": {
+   "title": "Scale factor: perimeter and area (k and k²)",
+   "kind": "lesson",
+   "dates": [
+    "2026-10-28"
+   ],
+   "benchmarks": [
+    "MA.7.GR.1.5"
+   ],
+   "match": [
+    {
+     "cadence": "5.2",
+     "cadenceTitle": "Scale Factors - Perimeter & Area",
+     "cadenceUnit": 5,
+     "planTitle": "Scale factor: perimeter and area (k and k²)",
+     "similarity": 1.0,
+     "benchmarksAgree": true
+    },
+    {
+     "cadence": "5.3",
+     "cadenceTitle": "Solving Problems Involving Perimeter and Area of Geometric Figures",
+     "cadenceUnit": 5,
+     "planTitle": "Scale factor: perimeter and area (k and k²)",
+     "similarity": 0.5,
+     "benchmarksAgree": true
+    }
+   ],
+   "status": "cadence",
+   "cadence": [
+    "5.2",
+    "5.3"
+   ],
+   "items": 120
+  },
+  "5.04": {
+   "title": "Real-world scale drawings",
+   "kind": "lesson",
+   "dates": [
+    "2026-10-29"
+   ],
+   "benchmarks": [
+    "MA.7.GR.1.5"
+   ],
+   "match": [
+    {
+     "cadence": "5.4",
+     "cadenceTitle": "Solving Problems Involving Real-World Scale Drawings",
+     "cadenceUnit": 5,
+     "planTitle": "Real-world scale drawings",
+     "similarity": 1.0,
+     "benchmarksAgree": true
+    }
+   ],
+   "status": "cadence",
+   "cadence": [
+    "5.4"
+   ],
+   "items": 60
+  },
+  "5.06+07": {
+   "title": "Converting length across systems; currency",
+   "kind": "lesson",
+   "dates": [
+    "2026-10-30"
+   ],
+   "benchmarks": [
+    "MA.7.AR.3.3"
+   ],
+   "match": [
+    {
+     "cadence": "5.6",
+     "cadenceTitle": "Currency Conversions",
+     "cadenceUnit": 5,
+     "planTitle": "Converting length across systems",
+     "similarity": 0.5,
+     "benchmarksAgree": true
+    },
+    {
+     "cadence": "5.7",
+     "cadenceTitle": "Converting Units of Length",
+     "cadenceUnit": 5,
+     "planTitle": "currency",
+     "similarity": 0.67,
+     "benchmarksAgree": true
+    }
+   ],
+   "status": "cadence",
+   "cadence": [
+    "5.6",
+    "5.7"
+   ],
+   "items": 120
+  },
+  "5.08+09": {
+   "title": "Converting mass, area and volume across systems",
+   "kind": "lesson",
+   "dates": [
+    "2026-11-02"
+   ],
+   "benchmarks": [
+    "MA.7.AR.3.3"
+   ],
+   "match": [
+    {
+     "cadence": "5.8",
+     "cadenceTitle": "Converting Mass and Area",
+     "cadenceUnit": 5,
+     "planTitle": "Converting mass, area and volume across systems",
+     "similarity": 1.0,
+     "benchmarksAgree": true
+    },
+    {
+     "cadence": "5.9",
+     "cadenceTitle": "Converting Units of Volume",
+     "cadenceUnit": 5,
+     "planTitle": "Converting mass, area and volume across systems",
+     "similarity": 0.67,
+     "benchmarksAgree": true
+    }
+   ],
+   "status": "cadence",
+   "cadence": [
+    "5.8",
+    "5.9"
+   ],
+   "items": 120
+  },
+  "5.10+11": {
+   "title": "Multi-step proportion problems",
+   "kind": "lesson",
+   "dates": [
+    "2026-11-03"
+   ],
+   "benchmarks": [
+    "MA.7.AR.3.3",
+    "MA.7.AR.4.5"
+   ],
+   "match": [
+    {
+     "cadence": "5.10",
+     "cadenceTitle": "Exploring Multi-Step Proportion Problems",
+     "cadenceUnit": 5,
+     "planTitle": "Multi-step proportion problems",
+     "similarity": 1.0,
+     "benchmarksAgree": true
+    },
+    {
+     "cadence": "5.11",
+     "cadenceTitle": "Solving Multi-Step Proportion Problems",
+     "cadenceUnit": 5,
+     "planTitle": "Multi-step proportion problems",
+     "similarity": 1.0,
+     "benchmarksAgree": true
+    }
+   ],
+   "status": "cadence",
+   "cadence": [
+    "5.10",
+    "5.11"
+   ],
+   "items": 120
+  },
+  "5.X": {
+   "title": "Unit 5 exam",
+   "kind": "exam",
+   "dates": [
+    "2026-11-05"
+   ],
+   "benchmarks": [],
+   "status": "whole-unit",
+   "reason": "a test day: the whole practice test"
+  }
+ },
+ "order": [
+  "5.01",
+  "5.02+03",
+  "5.04",
+  "5.06+07",
+  "5.08+09",
+  "5.10+11",
+  "5.X"
+ ],
+ "otherDays": [
+  {
+   "date": "2026-11-04",
+   "kind": "spiral",
+   "title": "Spiral day — mixed retrieval from the unit just finished and the two before it",
+   "status": "whole-unit",
+   "reason": "a spiral day: no lesson of its own"
+  }
+ ],
+ "cadenceUnused": [
+  {
+   "cadence": "5.5",
+   "title": "Paying Your Way in Mathlandia"
+  }
+ ]
+}

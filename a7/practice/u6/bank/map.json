@@ -1,0 +1,255 @@
+{
+ "v": 1,
+ "course": "a7",
+ "code": "A7",
+ "tier": "Grade 7 Accelerated",
+ "unit": 6,
+ "cadence": "fc26d3a29ad0b08346e1c8a5e93a6da4b77deede",
+ "spine": "2026-10-31T15:20:11-04:00",
+ "lessons": {
+  "6.01+02": {
+   "title": "Triangle Inequality Theorem; converse of the Pythagorean Theorem",
+   "kind": "lesson",
+   "dates": [
+    "2026-11-06"
+   ],
+   "benchmarks": [
+    "MA.8.GR.1.3"
+   ],
+   "match": [
+    {
+     "cadence": "6.1",
+     "cadenceTitle": "The Triangle Inequality Theorem and the Converse of the Pythagorean Theorem",
+     "cadenceUnit": 6,
+     "planTitle": "Triangle Inequality Theorem",
+     "similarity": 1.0,
+     "benchmarksAgree": true
+    },
+    {
+     "cadence": "6.2",
+     "cadenceTitle": "Applying the Triangle Inequality Theorem",
+     "cadenceUnit": 6,
+     "planTitle": "converse of the Pythagorean Theorem",
+     "similarity": 0.75,
+     "benchmarksAgree": true
+    }
+   ],
+   "status": "cadence",
+   "cadence": [
+    "6.1",
+    "6.2"
+   ],
+   "items": 120
+  },
+  "6.03": {
+   "title": "Pythagorean Theorem (memorize)",
+   "kind": "lesson",
+   "dates": [
+    "2026-11-09"
+   ],
+   "benchmarks": [
+    "MA.8.GR.1.1"
+   ],
+   "match": [
+    {
+     "cadence": "6.3",
+     "cadenceTitle": "Pythagorean Theorem",
+     "cadenceUnit": 6,
+     "planTitle": "Pythagorean Theorem (memorize)",
+     "similarity": 1.0,
+     "benchmarksAgree": true
+    }
+   ],
+   "status": "cadence",
+   "cadence": [
+    "6.3"
+   ],
+   "items": 60
+  },
+  "6.04": {
+   "title": "Pythagorean Theorem in real-world problems",
+   "kind": "lesson",
+   "dates": [
+    "2026-11-10"
+   ],
+   "benchmarks": [
+    "MA.8.GR.1.1"
+   ],
+   "match": [
+    {
+     "cadence": "6.4",
+     "cadenceTitle": "Using the Pythagorean Theorem to Solve Real-World Problems",
+     "cadenceUnit": 6,
+     "planTitle": "Pythagorean Theorem in real-world problems",
+     "similarity": 1.0,
+     "benchmarksAgree": true
+    }
+   ],
+   "status": "cadence",
+   "cadence": [
+    "6.4"
+   ],
+   "items": 60
+  },
+  "6.05": {
+   "title": "Distance on the coordinate plane",
+   "kind": "lesson",
+   "dates": [
+    "2026-11-12"
+   ],
+   "benchmarks": [
+    "MA.8.GR.1.2"
+   ],
+   "match": [
+    {
+     "cadence": "6.5",
+     "cadenceTitle": "Finding Distances on the Coordinate Plane",
+     "cadenceUnit": 6,
+     "planTitle": "Distance on the coordinate plane",
+     "similarity": 0.67,
+     "benchmarksAgree": true
+    }
+   ],
+   "status": "cadence",
+   "cadence": [
+    "6.5"
+   ],
+   "items": 60
+  },
+  "6.06": {
+   "title": "Real-world coordinate-plane problems; perimeter",
+   "kind": "lesson",
+   "dates": [
+    "2026-11-13"
+   ],
+   "benchmarks": [
+    "MA.8.GR.1.2"
+   ],
+   "match": [
+    {
+     "cadence": "6.6",
+     "cadenceTitle": "Solving Real-World Problems on a Coordinate Plane with the Pythagorean Theorem",
+     "cadenceUnit": 6,
+     "planTitle": "Real-world coordinate-plane problems; perimeter",
+     "similarity": 0.83,
+     "benchmarksAgree": true
+    }
+   ],
+   "status": "cadence",
+   "cadence": [
+    "6.6"
+   ],
+   "items": 60
+  },
+  "6.07+08": {
+   "title": "Similar triangles; indirect measurement",
+   "kind": "lesson",
+   "dates": [
+    "2026-11-16"
+   ],
+   "benchmarks": [
+    "MA.8.GR.2.4"
+   ],
+   "match": [
+    {
+     "cadence": "6.7",
+     "cadenceTitle": "Proportional Relationships and Similar Triangles",
+     "cadenceUnit": 6,
+     "planTitle": "Similar triangles",
+     "similarity": 1.0,
+     "benchmarksAgree": true
+    },
+    {
+     "cadence": "6.8",
+     "cadenceTitle": "Solving Real-World Problems Using Similar Triangles",
+     "cadenceUnit": 6,
+     "planTitle": "indirect measurement",
+     "similarity": 0.5,
+     "benchmarksAgree": true
+    }
+   ],
+   "status": "cadence",
+   "cadence": [
+    "6.7",
+    "6.8"
+   ],
+   "items": 120
+  },
+  "6.X": {
+   "title": "Unit 6 exam",
+   "kind": "exam",
+   "dates": [
+    "2026-11-17"
+   ],
+   "benchmarks": [],
+   "status": "whole-unit",
+   "reason": "a test day: the whole practice test"
+  },
+  "T-B1": {
+   "title": "Thread B: angle pairs — supplementary, complementary, vertical, adjacent (16.1)",
+   "kind": "thread",
+   "dates": [
+    "2026-11-18"
+   ],
+   "benchmarks": [
+    "MA.8.GR.1.4"
+   ],
+   "match": [
+    {
+     "cadence": "16.1",
+     "cadenceTitle": "Angle Relationships",
+     "cadenceUnit": 16,
+     "planTitle": "Thread B: angle pairs — supplementary, complementary, vertical, adjacent (16.1)",
+     "similarity": 0.5,
+     "benchmarksAgree": true
+    }
+   ],
+   "status": "cadence",
+   "cadence": [
+    "16.1"
+   ],
+   "note": "a thread day: the title names Math Nation lessons 16.1",
+   "items": 60
+  },
+  "T-B2": {
+   "title": "Thread B: interior and exterior angles of a triangle (16.2)",
+   "kind": "thread",
+   "dates": [
+    "2026-11-19"
+   ],
+   "benchmarks": [
+    "MA.8.GR.1.5"
+   ],
+   "match": [
+    {
+     "cadence": "16.2",
+     "cadenceTitle": "Angle Relationships in Triangles",
+     "cadenceUnit": 16,
+     "planTitle": "Thread B: interior and exterior angles of a triangle (16.2)",
+     "similarity": 0.0,
+     "benchmarksAgree": true
+    }
+   ],
+   "status": "cadence",
+   "cadence": [
+    "16.2"
+   ],
+   "note": "a thread day: the title names Math Nation lessons 16.2",
+   "disagree": "'Thread B: interior and exterior angles of a triangle (16.2)' vs Cadence 16.2 'Angle Relationships in Triangles' (title 0.0, benchmarks agree)",
+   "items": 60
+  }
+ },
+ "order": [
+  "6.01+02",
+  "6.03",
+  "6.04",
+  "6.05",
+  "6.06",
+  "6.07+08",
+  "6.X",
+  "T-B1",
+  "T-B2"
+ ],
+ "otherDays": [],
+ "cadenceUnused": []
+}
