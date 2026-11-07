@@ -91,6 +91,49 @@ var T = {
   'Not quite.': 'Não exatamente.',
   'Type just a number, like # or #.': 'Digite só um número, como # ou #.',
 
+  /* the help ladder (7 Nov 2026, the practice-test deepening, item 1) */
+  'Hint #': 'Dica #',                                 /* "Hint 1 · What to notice": the number is carried over */
+  'What to notice': 'O que observar',
+  'The first step': 'O primeiro passo',
+  'The worked solution': 'A solução passo a passo',
+  'Hint #: the first step': 'Dica #: o primeiro passo',
+  'Hint #: the whole solution': 'Dica #: a solução inteira',
+  'See the worked solution': 'Ver a solução passo a passo',
+  'Step by step with me': 'Passo a passo comigo',
+  'Read the question again: what does it ask for, and what do you know already?': 'Leia a questão de novo: o que ela pede, e o que você já sabe?',
+  'Solved without help: <b>#</b>': 'Resolvidas sem ajuda: <b>#</b>',
+  'With a hint: <b>#</b>': 'Com uma dica: <b>#</b>',
+  'Saw the solution: <b>#</b>': 'Viu a solução: <b>#</b>',
+  '<b>Hint</b> goes one step at a time, up to the worked solution; <b>Try a similar one</b> gives you a fresh one.': '<b>Dica</b> vai um passo de cada vez, até a solução passo a passo; <b>Tentar uma parecida</b> dá uma nova para você.',
+  /* after a wrong answer: two buttons (item 2) */
+  'Try a similar one': 'Tentar uma parecida',
+  'Move on': 'Seguir em frente',
+  'A similar one': 'Uma parecida',
+  'Look at:': 'Observe:',
+  /* progress (item 5) */
+  'Question # of #': 'Questão # de #',
+  'Secure': 'Seguro',
+  'Getting there': 'Quase lá',
+  'Not yet': 'Ainda não',
+  'Since last time: <b>up</b> — # / # then, # / # today.': 'Desde a última vez: <b>subiu</b> — # / # antes, # / # hoje.',
+  'Since last time: <b>down</b> — # / # then, # / # today.': 'Desde a última vez: <b>caiu</b> — # / # antes, # / # hoje.',
+  'Since last time: <b>the same</b> — # / # then, # / # today.': 'Desde a última vez: <b>igual</b> — # / # antes, # / # hoje.',
+  /* phone math hygiene (item 7) */
+  'Larger text': 'Letra maior',
+  /* the form a box expects (item 3) */
+  'In scientific notation': 'Em notação científica',
+  'As an inequality': 'Como uma desigualdade',
+  'As a power': 'Como uma potência',
+  'To the nearest tenth': 'Arredondado ao décimo mais próximo',
+  'To the nearest hundredth': 'Arredondado ao centésimo mais próximo',
+  'To the nearest whole number': 'Arredondado ao número inteiro mais próximo',
+  'Simplify: #/# = #/#.': 'Simplifique: #/# = #/#.',
+  'Round to the nearest tenth: #.': 'Arredonde ao décimo mais próximo: #.',
+  'Round to the nearest hundredth: #.': 'Arredonde ao centésimo mais próximo: #.',
+  /* a select-all's wrong pick, named (item 4) */
+  'One more choice is right too.': 'Mais uma escolha também está certa.',
+  '# more choices are right too.': 'Mais # escolhas também estão certas.',
+
   /* asking before a change */
   'Leave': 'Sair',
   'Keep working': 'Continuar trabalhando',

@@ -17,18 +17,26 @@ in the code; the four reports are in the Windmill HANDOFF.
     Saved answers on a changed set are then cleared, with a notice.
 - **Two modes:** *Check as I go*, or *Like the real test*. In test mode nothing is marked until Finish. The only thing said
   before then is "Can't read this yet".
-- **The coach.** It names the exact mistake ("That is what you get if you…"), gives a *Next time* rule, and says *Almost* when
-  the value is right but the form isn't.
+- **The coach.** It names the exact mistake ("That is what you get if you…") and says *Almost* when the value is right but the
+  form isn't (and, since 7 Nov 2026, *right* when the form is only another way of writing the key). Its *Next time* rule is
+  Hint 1 now.
   - **The clean rule:** no modelled mistake, printed number or other part's answer may equal an answer. The generator
     draws such numbers again, so a wrong method is never marked right.
-- **Hint:** one button opens a step-by-step walkthrough ("Hint · step 2 of 5").
-  - Tap-a-choice steps give a reason for every wrong choice.
-  - Type-a-number steps give a smaller step after a miss, and after two misses offer *Show this step*.
-  - The picture appears at the step it explains. The walkthrough ends with the answer, as Croix chose.
+- **Help is a ladder of three rungs** (7 Nov 2026; see "The help ladder" below): **Hint** beside Check opens *Hint 1 · What to
+  notice*; under it *Hint 2: the first step*, then *Hint 3: the whole solution* — the worked solution that "Show me how" was
+  (every step, the step where the student's answer went off, "See why it works", the answer). The rungs opened stay open.
+  - Hint 2 also offers **Step by step with me**: the walkthrough as before ("Hint · step 2 of 5"). Tap-a-choice steps give a
+    reason for every wrong choice; type-a-number steps give a smaller step after a miss, and after two misses offer *Show this
+    step*; the picture appears at the step it explains; it ends with the answer, as Croix chose.
 - **After an answer:**
-  - **Show me how** (after a try): every step, the step where the student's answer went off, and "See why it works".
-  - **Try another like this:** the same kind of question with new numbers, never a repeat. It is offered after a miss and
-    whenever the question's point is not earned yet (then as the primary button), and on a fresh one after any check.
+  - **See the worked solution** after a right answer (rung 3 in one tap).
+  - **After a miss — explain, then two buttons** (7 Nov 2026, item 2): the card names that wrong answer ("That is what you get
+    if you…", a choice's own misconception), or, when nothing names it, says *Look at:* with Hint 1; then exactly **Try a
+    similar one** (the primary) and **Move on** (to the next question not right yet, else Finish). The ladder stays beside
+    Check for a second try. No penalty questions, ever: nothing is added to the set for a miss.
+  - **Try a similar one** (was "Try another like this"): the same kind of question with new numbers, never a repeat, in the
+    question's own box ("A similar one"), replacing the last. It is offered after a miss and whenever the question's point is
+    not earned yet (then as the primary button), and on a fresh one after any check.
   - **Next ↓** after a right answer. Focus never jumps by itself.
 - **Scoring — the point comes from one on your own (24 Oct 2026).** A question's point is earned by a right answer on the
   first check with no Hint and no Show me how — on the question itself, or on a fresh one of the same kind ("Try another like
@@ -59,12 +67,18 @@ in the code; the four reports are in the Windmill HANDOFF.
     record" or "· your record: 12" (the device keeps the unit's record run). Not in test mode before Finish: nothing there
     says right or wrong until then.
   - One primary button at a time: when the point is still owed, "Try another like this" is the primary and "Next ↓" is not.
+- **Where you are, and how it went** (7 Nov 2026, item 5): the bar says *"Question 4 of 16"* over a thin navy line (the question
+  holding the focus, else the first on the screen; questions, not parts). The end panel keeps the first-try score and adds a
+  chip per skill (the unit's sections) — **● Secure** (80% or more right on the first check with no help), **◐ Getting there**
+  (50% or more), **○ Not yet** — a word and an icon, never colour alone; and *"Since last time: up — 12 / 36 then, 18 / 36
+  today."* (down, the same) from this device's history of the same practice choice and mode, as a share when the sizes differ.
+  Calm: no confetti, nothing that nags.
 - **Practice menu:** whole test, one part (two rounds with new numbers), or my misses (new numbers; one round if there
   are more than 8).
 - **The end:**
   - "Every one on the first try." when it's perfect; "Every point earned." when every point came, some from a fresh one.
   - Otherwise, jump links to the parts not right yet, "Practice my misses", and the parts under 80%.
-  - "Last time: … Today: … (+6)".
+  - "Since last time: up — … then, … today." (it was "Last time: … Today: … (+6)").
 - **The clock:** it starts with the first answer and pauses when the page is hidden (Resume brings it back). It is shown only in
   *Like the real test* (7 Nov 2026); in *Check as I go* it runs unseen, so the end panel still has the time.
 - **Progress:** each device keeps its last 25 sets in its own browser storage. Nothing is sent anywhere.
@@ -96,16 +110,99 @@ Proceed."* The page is a practice test on mrshaffer.org, so it now looks like th
   `../../unit-N/`, with N from `Unit.id`. As an artifact or a Google Sites download it is hidden.
 `check/page.js` part F checks all of this; the flows that use Print, the practice menu or the set box open ⋯ first.
 
+## The help ladder (7 Nov 2026, the practice-test deepening, item 1)
+From the survey (Khan: *"a hint for each step … viewing all the hints gives a worked example"*): one ladder in place of Hint
+and Show me how. **Hint 1 · What to notice** is the coach's rule for the kind of question (what "Next time:" said after a
+miss); **Hint 2 · The first step** is the worked solution's first line (with "Step by step with me", the walkthrough);
+**Hint 3 · The worked solution** is every line, one per line with a thin rule between them, never a paragraph.
+- **The authoring API:** `Unit.rungs(x, type, ctx) → {notice, first: {say, ex}, steps: [{say, ex}]}`, any of the three. What a
+  unit leaves out is derived: `notice` from the coach's `rule` (else the walkthrough's first question), `first` from
+  `solution()[0]` (a one-line solution takes the walkthrough's first step and its answer instead), `steps` is `solution()`.
+- **Kept per attempt:** `R.rung`, the deepest rung opened (the question and each fresh one has its own), and `R.rungFirst`, the
+  rung open at the first check. A set saved before the ladder reads its Show me how as rung 3 and its Hint as rung 1.
+- **Scoring is unchanged:** the point is earned only by a first check with no rung open, on the question or a fresh one; a
+  rung opened before the first check is the bulb; rung 3 before any check makes the first try "not first" (as Show me how
+  did). The first-try store is never rewritten. A rung opened after a right answer changes nothing.
+- **Effort, beside correctness:** the end panel says *"Solved without help: 7 · With a hint: 2 · Saw the solution: 1"* — each
+  question counted once, by the most help opened before it was right (its fresh ones too); in *Check as I go* only.
+
+## Named distractors (7 Nov 2026, the practice-test deepening, item 4)
+From the survey (Diagnostic Questions: *"the three distractors are designed to expose specific misconceptions"*): each wrong
+choice may carry its misconception line, and picking it shows that line on the card — *"✗ Not yet That adds the exponents.
+(13⁵)³ is 3 factors of 13⁵ … multiply, 5 × 3."* The authoring field is **`view.why(x, k)`** (a function of the item and the
+choice) or **`whys: [line per choice]`** on the item (`''` for the right one); with neither, the coach's own words stand. On a
+select-all, the wrong picks are named on the first check, and missed ones are counted ("One more choice is right too.").
+- **Already named before 7 Nov** (the coach's `mcFeedback` names every wrong choice): every single-answer choice question of
+  M7 Units 4, 8, 9 and 10 and A7 Units 3–6, and M7 Unit 8's, 9's and 10's select-alls.
+- **Named from 7 Nov:** the select-alls that waited for the second try — A7 Unit 3 Q8, Unit 4 Q4 and Q13, Unit 5 Q3 and Q10,
+  Unit 6 Q2 — by `view.why` returning the coach's own second-try line for that choice (no new sentence).
+- `check/page.js` part G picks two wrong choices of every choice question on a set and each select-all's first wrong choice,
+  and fails a card that does not show that choice's line, or two choices of one question that say the same thing.
+
+## Speakable IDs (7 Nov 2026, the practice-test deepening, item 6)
+From the survey's don't-do table (badge codes that need a legend): every question card has a short stable ID, quiet at its
+top right — **U9·3**, the unit and the question's place in the whole test — then the generator's skill code
+(`view.skill(item)` if the unit gives one, else the item's family codes: "U9·4 · sumDec/diffDec"). A teacher can say "look at
+U9·3": the ID is the same in every set, practice choice and round, on the printed worksheet (top right of each question), in
+every answer key's last column (the worksheet's, the make-ups', the ruling-49 test's) and on the teacher copy's real test and
+its key (`teacher.js`, ID only — the paper has no generator). A question left out of the real test keeps its ID; only the
+printed numbers close up. The print styles keep them (`.qid`, `.pqid`, `td.pid`). `page.js` part D checks the cards, the
+worksheet, the keys, the test forms and the real paper.
+
+## On a phone (7 Nov 2026, the practice-test deepening, item 7)
+- **Mathematics never widens the page:** a worked line, a Start line, a key and a long choice scroll sideways inside
+  themselves (`overflow-x: auto`), and the choices' grid cannot grow past the sheet. KaTeX stays inlined.
+- **Worked steps one per line,** a thin rule between them (rung 3).
+- **The keypad only on a touch screen** (`pointer: coarse`; a mouse and keyboard get none): the unit's keys for the box's
+  kind, and beside a fraction bar the **fraction template**, which writes `()/()` with the caret in the top (the page reads
+  `(3)/(4)` as `3/4` before the coach sees it, and `(4)/(7)^8` as `(4/7)^8`). Keys are 44 px, insert at the caret, are not
+  tab stops, and sit above the box in the page's flow, so they never cover it or its Check row. A unit with no `keypad` at
+  all gets the kit's: − / a/b ^ ( ) π ×.
+- **Larger text** in the ⋯ menu: two sizes (the sheet and the end panel at 116%), remembered on the device for every unit
+  (`practice.textsize`, every read and write in try/catch: with storage refused it lasts the visit).
+- `check/page.js` part H, in a touch context and a mouse one: the keypad's presence, its key sizes, insertion at the caret,
+  the template, nothing covered or moved; Larger text in the menu, larger, remembered, off again, and safe without storage;
+  no sideways scroll at either size with every worked solution of a set open. Part F already fails any request off the page.
+
+## Equivalent forms are right (7 Nov 2026, the practice-test deepening, item 3)
+From the 170-site survey (its items 14–19, which Croix approved): the most concrete failure it found was *"x=3 was not
+accepted unless written as 3=x"*. The unit's coach still judges first — its mistake models, its "Almost" — and then, when it
+says not yet, `core.js` **`Kit.Ans`** asks whether the typed answer *is* the key (`keyText`) written another way. If it is,
+it is right (and counts as right on the first check), with a quiet nudge under ✓ where the form could be tidier.
+- **The same:** `3 = x` and `x = 3`; `0.5`, `1/2` and `2/4` (nudge *"Simplify: 2/4 = 1/2."* when the key is in lowest terms
+  and the box does not say `simplest: false`); `1 1/2` and `3/2`; trailing zeros, spaces, a leading `+`, `.5`; the unicode
+  minus and dashes; `×`, `*`, `·` and `x` between two numbers; `÷` and `/`; `^` and superscript digits; `pi` and `π`; thousands
+  commas; `$` in a money box and `%` in a percent box; the box's own unit typed after the number; `x*2`, `2x` and `2·x`;
+  the terms of a sum and the factors of a product in any order; one sign for a term (`−(2x)`, `(−2)x`, `−2x`); `x/2` and
+  `½x`; the sides of an inequality turned round with its sign (`3 < x` is `x > 3`, chains too); an ordered pair `(2, 3)`, or
+  `98, 24` for `98 and 24`; `n = 9` (or `9 = n`) in a box that already says `n =`; a template's `(3)/(4)`.
+- **Never the same** (the question asks for these, so the coach marks them): like terms combined (`3x + 2x` is not `5x`),
+  products worked out (`7 × 3` is not `21`), a power and its value (`9^5`, `59049`), `(−3)^2` and `−3^2`, the grouping of a
+  sum (`(a + b) + c` is not `a + (b + c)`), one scientific notation and another, a negative exponent for a positive one,
+  distributing, a rounded decimal for a fraction (`0.33`, `1/3`), words, two numbers side by side, a number after a letter.
+- **Rounding:** a box that declares a precision (or whose placeholder says "nearest tenth") takes any answer within half of
+  it; more places than asked is right with *"Round to the nearest tenth: 9.2."*
+- **The form label:** every box may carry a quiet line over it — *"To the nearest tenth"*, *"In scientific notation"*, *"As an
+  inequality"*, *"As a power"*. A unit declares it with **`view.form(part) → {label, expect, precision, simplest, money,
+  percent, v, equiv}`** (or `part.form`); with no declaration the label is read from the key only where it cannot be wrong, and
+  a box with a placeholder gets none. `expect: 'fraction'` with `label: 'as a fraction a/b'` also nudges a decimal; `equiv:
+  false` leaves a box to its coach alone (M7 Unit 9's associative-property question, where the grouping is the answer).
+- **Checked:** `check/norm.js` (run by `run.py`) — 101 cases, 28 of them answers that must *not* be the same.
+- **Known limits:** it reads one-letter variables only (a word, "bus 85.33", is the unit's reader's); it does not combine
+  numbers (`2·3x` is not `6x`); `x` is "times" only between two numbers; a fraction bar binds left to right (`1/2x` is `½x`,
+  as the units write it); `|x|` and roots are not read.
+
 ## Files
 | Kit (`practice/kit/`) | |
 |---|---|
-| `core.js` | `slot(unit, seed, slotName)`, `draw(unit, seed, slot, build, ok)`, `fnv1a`, and `hint.mul/div/add/sub/sq` (one smaller step of arithmetic, never the final answer) |
+| `core.js` | `slot(unit, seed, slotName)`, `draw(unit, seed, slot, build, ok)`, `fnv1a`, `hint.mul/div/add/sub/sq` (one smaller step of arithmetic, never the final answer), and `Ans` (the answer normaliser: `parse`, `canon`, `form`, `equiv`) |
 | `ui.js` | the whole page: sets, scopes, the coach card, Hint, Show me how, Try another, scoring, the clock, saved state, focus, keypad |
 | `kit.css` | the sheet: light and dark mode (the site's palette), 44px tap targets, print |
 | `vendor/fonts/` | Lexend, DM Sans, DM Serif Display as small woff2 (SIL OFL), inlined by `build.py`; `make_fonts.py` cuts them |
 | `build.py` | `python3 kit/build.py <unit>` writes `<file>` (the claude.ai artifact body) and `preview.html` plus `<download>` (a complete page for Google Sites or Netlify Drop). It refuses to build unless the checks passed on these exact sources. |
 | `check/run.py` | `python3 kit/check/run.py <unit>`: the unit's own checks, then the lock, then the browser checks. If all pass it writes `CHECKED` and builds. |
 | `check/hints.js` | the kit's own arithmetic hints (`core.js` `hint.div`, and `hint.mul` by 0.5) never state their answer: 400,000 divisions read for "= the answer" (25 Oct 2026 — "45 ÷ 3: Start with 3 × 10 = 30; 45 − 30 = 15 is left", and 15 is the answer). `run.py` runs it first |
+| `check/norm.js` | the answer normaliser's cases (≥ 60; the ones that must not be equivalent too). `run.py` runs it second |
 | `check/lock.js` | set stability (see above) |
 | `check/variety.js` | the variety floor (ruling 49): over set numbers 1–20000 every question part comes in at least `floor` versions (unit.json `"variety"`; default 100; `--all` counts all 99,999; `--list` prints every part). A version is the question's numbers and symbols as the page shows them, words left out: a new name, object or letter, or the same choices shuffled, is not a new version. A part that cannot be wider is allowed there, with its reason |
 | `check/page.js` | **in a real browser** (Playwright): every key typed on 3 sets scores N / N; then the flows: Cancel, re-checking the same answer, focus after Hint / Show me how / Try another / Next / Close, Show this step, Finish marking typed-but-unchecked answers, test mode, tap targets, the keypad not being a tab stop, bad links |
@@ -129,12 +226,13 @@ generate(seed) → {sections: [{title, items}]}
    item: {type: 'parts' | 'solo' | 'mc' | 'multi', stem, fig?, parts | part | opts+correct}
    part: {label, kind ('mc' for a lettered multiple choice), fam, prm, …}
 key(partOrItem) → string                      // what makes two questions the same
-view: {stem(item), figure(item), line(part), pre(part), unit(part), placeholder(part), opt(x, k), key(part),
+view: {stem(item), figure(item), skill?(item), line(part), pre(part), unit(part), placeholder(part), opt(x, k), why?(x, k), key(part), form?(part),
        start(x, type), ex(x, ast, type), got(step), picture(x, type), pretty(text, kind)}
 judge: {text(part, typed, ctx), mc(item, k), multi(item, ks, tries)} → {v: right|form|wrong|unread|blank, what: [html], rule, step}
    ctx = {prev: the student's part (a) answer, prevPart, prevOk (is part (a) right yet), extra (a fresh "Try another", with no
           part (a) of its own), aShown, mode}
    part.imode: an inputmode for the phone's keyboard ('decimal' for a box that never needs a space, a slash or a minus)
+rungs?(x, type, ctx) → {notice, first, steps}   // the help ladder's three rungs, any of them (else derived)
 solution(x, type, ctx) → [{say, ex}]          // every ex equals the answer (checked); ctx as judge's — a part (b) can keep part (a)'s
                                                 // number out of its lines until part (a) is right
 walk(x, type, ctx) → steps: {type: 'choice', ask, opts: [{label, ok, why}], then?, pic} | {type: 'num', ask, ans, hint, then?}
@@ -190,7 +288,7 @@ marks right, results match, only the printout on paper, Close restores the page,
 
 ## Small kit additions from the A7 Unit 4 review (16 Oct 2026)
 - **Keypad by kind:** a keypad entry may carry `kinds: ['sci', 'num', …]`; a box shows only the keys for its part's kind, and
-  no keypad at all when none apply (a "how many significant digits" box gets none).
+  no keypad at all when none apply (a "how many significant digits" box gets none). Since 7 Nov 2026 only on a touch screen.
 - **Hint number boxes** are plain text boxes: a phone's decimal pad has no minus and no slash, and many Hint steps need them.
 - **Print:** a unit may give `notesPrint` (paper is not a keyboard) and `view.blank(part)` (e.g. "___ × 10^__" for
   scientific-notation answers).

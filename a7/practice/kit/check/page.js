@@ -31,6 +31,8 @@ const active = p => p.evaluate(() => { const a = document.activeElement; return 
 /* Print, what to practice and the set number live in the ⋯ menu (7 Nov 2026, the site review): a student opens it first, so
    the check does too — every flow below that touches them is the same flow, one tap deeper */
 async function more(p) { if (await p.isHidden('#mMenu')) await p.click('#bMore'); }
+/* the help ladder (7 Nov 2026): Hint 1, Hint 2, Hint 3 — each a button that opens the next; rungTo opens them up to n */
+async function rungTo(p, id, n) { for (let k = 1; k <= n; k++) await p.evaluate(([id, k]) => { const b = document.querySelector('[data-rung="' + id + '"][data-to="' + k + '"]'); if (b) b.click(); }, [id, k]); }
 async function fresh(p, seed) { await p.goto(url + '#set-' + seed); await p.evaluate(() => { try { localStorage.clear(); } catch (e) {} }); await p.goto(url + '#set-' + seed); await p.reload(); await p.waitForTimeout(150); }
 
 (async () => {
@@ -82,10 +84,54 @@ async function fresh(p, seed) { await p.goto(url + '#set-' + seed); await p.eval
   /* 2. the same wrong answer again is not another try */
   await p.fill('#a' + T[0].id, '987654'); for (let k = 0; k < 3; k++) await p.press('#a' + T[0].id, 'Enter');
   let S = await state(p, seed); if (!S || S.res[T[0].id].tries !== 1) fail('Enter ×3 on one answer counted ' + (S && S.res[T[0].id].tries) + ' tries');
-  /* 3. Show me how takes focus to the steps */
-  await p.click('[data-all="' + T[0].id + '"]'); if (!/^st/.test(await active(p))) fail('Show me how: focus is ' + await active(p));
+  /* 2b. after a wrong answer: the explanation, then exactly two buttons — "Try a similar one" (a fresh one, never the same
+     numbers) and "Move on"; nothing is added to the set, however many misses (7 Nov 2026, item 2) */
+  { const id = T[0].id, q0 = await p.$$eval('#paper .q[data-q]:not(.xq)', e => e.length), t0 = await p.$eval('#total', e => e.textContent);
+    const btns = await p.$$eval('#mo' + id + ' button', es => es.map(e => e.textContent.trim()));
+    if (JSON.stringify(btns) !== JSON.stringify(['Try a similar one', 'Move on'])) fail('after a wrong answer the buttons are ' + JSON.stringify(btns) + ', not exactly "Try a similar one" and "Move on"');
+    const card = await p.$eval('#fb' + id, e => e.innerText.replace(/\s+/g, ' ').trim());
+    if (!/^✗ Not yet \S/.test(card)) fail('after a wrong answer the card does not explain: "' + card.slice(0, 80) + '"');
+    if (/Next time:/.test(card)) fail('the wrong card still carries "Next time:" (it is Hint 1 now)');
+    if (/usual slips|rule below/.test(card)) fail('the wrong card says "' + card.slice(0, 80) + '" — when nothing names the mistake it is "Look at:" with Hint 1');
+    if (!(await p.$('#mo' + id + ' [data-another].go'))) fail('"Try a similar one" is not the primary after a miss');
+    const nx = T.find((x, k) => k > 0); await p.click('#mo' + id + ' [data-moveon]'); await p.waitForTimeout(60);
+    { const a = await active(p); if (a.split('|')[0] !== 'a' + nx.id && a.split('|')[0] !== '') { const firstOpen = await p.evaluate(() => { const i = document.activeElement; return i && i.id; }); if (!/^a/.test(firstOpen || '')) fail('Move on: focus is ' + a); } }
+    /* three fresh ones in a row: each new numbers, each in the question's own box, the set the same size */
+    const keys = [U.key(itemsOf(seed).find(x => x.id === id).x)];
+    for (let r = 1; r <= 3; r++) {
+      await p.click('[data-another="' + id + '"]'); await p.waitForTimeout(40);
+      const st = await state(p, seed), m = st.more[id], g = U.generate(m.seed), q = T[0].pos.split('.').map(Number), it = g.sections[q[0]].items[q[1]], pt = it.type === 'parts' ? it.parts[q[2]] : it.type === 'solo' ? it.part : it;
+      const k = U.key(pt); if (keys.indexOf(k) >= 0) fail('"Try a similar one" served the same numbers again (round ' + r + ')'); keys.push(k);
+      await p.fill('#a' + id + 'x' + m.n, '987654'); await check(p, id + 'x' + m.n);
+      const xb = await p.$$eval('#mo' + id + 'x' + m.n + ' button', es => es.map(e => e.textContent.trim())); if (JSON.stringify(xb) !== JSON.stringify(['Try a similar one', 'Move on'])) fail('a fresh one answered wrong offers ' + JSON.stringify(xb));
+      const boxes = await p.$$eval('#ag' + id + ' .xq', e => e.length); if (boxes !== 1) fail('the question\'s box holds ' + boxes + ' fresh ones after ' + r + ' (a penalty question?)');
+    }
+    const q1 = await p.$$eval('#paper .q[data-q]:not(.xq)', e => e.length), t1 = await p.$eval('#total', e => e.textContent);
+    if (q1 !== q0 || t1 !== t0) fail('wrong answers grew the set: ' + q0 + ' → ' + q1 + ' questions, "' + t0 + '" → "' + t1 + '"'); }
+  /* 3. the ladder: each rung a button that opens the next, the rungs opened stay open, focus goes to the new rung; the last
+     is the worked solution, one step per line with a rule between, ending in the answer (7 Nov 2026, item 1) */
+  { const id = T[0].id, sol = U.solution(T[0].x, 'text', {}) || [];
+    if (!(await p.$('#hs' + id + ' [data-rung][data-to="1"]'))) fail('ladder: no Hint beside Check after a wrong answer on ' + id);
+    for (let k = 1; k <= 3; k++) {
+      await p.click('[data-rung="' + id + '"][data-to="' + k + '"]');
+      const a = await active(p); if (a.split('|')[0] !== 'rg' + id + '-' + k) fail('ladder: after Hint ' + k + ' focus is ' + a);
+      const open = await p.$$eval('#st' + id + ' .rung', es => es.map(e => e.querySelector('.rung-h').textContent));
+      if (open.length !== k) fail('ladder: ' + open.length + ' rungs open after Hint ' + k + ': ' + open.join(' | '));
+      const nextB = await p.$('#st' + id + ' .rung-next [data-rung][data-to="' + (k + 1) + '"]'); if (k < 3 && !nextB) fail('ladder: no button for Hint ' + (k + 1) + ' under rung ' + k);
+      if (k === 3 && await p.$('#st' + id + ' .rung-next')) fail('ladder: a next-rung button under the last rung');
+    }
+    const heads = await p.$$eval('#st' + id + ' .rung-h', es => es.map(e => e.textContent));
+    if (JSON.stringify(heads) !== JSON.stringify(['Hint 1 · What to notice', 'Hint 2 · The first step', 'Hint 3 · The worked solution'])) fail('ladder headings: ' + heads.join(' | '));
+    const r3 = await p.evaluate(id => { const r = document.getElementById('rg' + id + '-3'), lis = r ? Array.from(r.querySelectorAll('ol.sol > li')) : [];
+      return { n: lis.length, ruled: lis.slice(1).every(li => parseFloat(getComputedStyle(li).borderTopWidth) > 0), key: !!(r && r.querySelector('.key')), notice: (document.querySelector('#rg' + id + '-1 .rung-note') || {}).textContent || '' }; }, id);
+    if (sol.length && r3.n !== sol.length) fail('ladder: rung 3 shows ' + r3.n + ' steps of ' + sol.length);
+    if (r3.n > 1 && !r3.ruled) fail('ladder: rung 3\'s steps have no rule between them');
+    if (!r3.key) fail('ladder: rung 3 does not end in the answer');
+    if (!r3.notice.trim()) fail('ladder: rung 1 is empty');
+    const S0 = await state(p, seed); if (!S0.res[id] || S0.res[id].rung !== 3 || !S0.res[id].shown) fail('ladder: the deepest rung is not kept: ' + JSON.stringify(S0.res[id]));
+    if (await p.$('[data-all]')) fail('a "Show me how" button is still on the page'); }
   /* 4. Try another: focus in the new question */
-  await p.click('[data-another="' + T[0].id + '"]'); { const a = await active(p); if (!/^a.*x1|q.*x1/.test(a) && !/x1/.test(a)) fail('Try another: focus is ' + a); }
+  await p.click('[data-another="' + T[0].id + '"]'); { const a = await active(p); if (!/^a\S*x\d+\|/.test(a)) fail('Try a similar one: focus is ' + a); }
   /* 4b. Try another after a choice question got right on a later try: the new one's choices can be ticked (23 Oct 2026:
      a select-all got right on the second try opened its "another" locked — the right answer's lock reached into the box) */
   { const C = itemsOf(seed).find(x => x.kind !== 'text'); if (!C) fail('no choice question to test Try another on');
@@ -98,15 +144,15 @@ async function fresh(p, seed) { await p.goto(url + '#set-' + seed); await p.eval
       const locked = await p.$$eval('input[name="q' + C.id + 'x1"]', xs => xs.filter(x => x.disabled).length); if (locked) fail('Try another on ' + C.id + ': ' + locked + ' of the new choices are disabled — the student cannot touch the new question');
       else { await p.click('#ch' + C.id + 'x1A'); const on = await p.$eval('input[name="q' + C.id + 'x1"][value="0"]', x => x.checked); if (!on) fail('Try another on ' + C.id + ': the new choice did not tick'); }
       const still = await p.$$eval('input[name="q' + C.id + '"]', xs => xs.filter(x => !x.disabled).length); if (still) fail('the right answer on ' + C.id + ' no longer locks its own choices'); } }
-  /* 5. Hint takes focus into the walkthrough; Close gives it back to Hint */
-  await p.click('[data-walk="' + T[1].id + '"]'); { const a = await active(p); if (!/wopt|^wn/.test(a)) fail('Hint: focus is ' + a); }
+  /* 5. Hint 2's "Step by step with me" takes focus into the walkthrough; Close gives it back to its button */
+  await rungTo(p, T[1].id, 2); await p.click('[data-walk="' + T[1].id + '"]'); { const a = await active(p); if (!/wopt|^wn/.test(a)) fail('Hint: focus is ' + a); }
   const head = await p.$eval('#wl' + T[1].id + ' .wkhead b', e => e.textContent); if (!/^Hint · step 1 of \d+$/.test(head)) fail('Hint heading "' + head + '"');
   await p.click('[data-wclose="' + T[1].id + '"]'); if (!/"walk"/.test(await active(p))) fail('Close: focus is ' + await active(p));
   /* 6. Show this step after two wrong numbers */
   { let found = false;
     for (const it of T.slice(2)) {
       const steps = U.walk(it.x, 'text') || []; const k = steps.findIndex(s => s.type === 'num'); if (k < 0) continue;
-      await p.click('[data-walk="' + it.id + '"]');
+      await rungTo(p, it.id, 2); await p.click('[data-walk="' + it.id + '"]');
       for (let j = 0; j < k; j++) { const ok = steps[j].opts.findIndex(o => o.ok); await p.click('[data-wopt="' + it.id + '|' + j + '|' + ok + '"]'); }
       for (let t = 0; t < 2; t++) { await p.fill('#wn' + it.id, '987654'); await p.click('[data-wnum="' + it.id + '"]'); }
       if (!(await p.isVisible('[data-wgive="' + it.id + '"]'))) fail('no "Show this step" after two misses on ' + it.id);
@@ -118,7 +164,7 @@ async function fresh(p, seed) { await p.goto(url + '#set-' + seed); await p.eval
     const a = await active(p); if (!/next/.test(a) && !/"next"/.test(a)) { const nx = await p.$('[data-next="' + it.id + '"]'); if (nx) fail('right answer: focus is ' + a + ', not Next'); } }
   /* 8. tap targets and the keypad */
   await p.focus('#a' + T[2].id);
-  const small = await p.evaluate(() => Array.from(document.querySelectorAll('.more button, .chk, .mode button, .keys button, .walk .wclose, #bMore')).filter(e => e.offsetParent).map(e => [e.textContent, Math.round(e.getBoundingClientRect().height)]).filter(x => x[1] < 44));
+  const small = await p.evaluate(() => Array.from(document.querySelectorAll('.more button, .chk, .mode button, .keys button, .walk .wclose, #bMore, .hslot button, .rung-next button, .rung-walk button')).filter(e => e.offsetParent).map(e => [e.textContent, Math.round(e.getBoundingClientRect().height)]).filter(x => x[1] < 44));
   if (small.length) fail('tap targets under 44px: ' + JSON.stringify(small.slice(0, 5)));
   const tabbable = await p.evaluate(() => Array.from(document.querySelectorAll('.keys button')).filter(b => b.tabIndex >= 0).length); if (tabbable) fail(tabbable + ' keypad keys are tab stops');
   /* 9. Finish marks a typed answer that was never checked */
@@ -139,10 +185,11 @@ async function fresh(p, seed) { await p.goto(url + '#set-' + seed); await p.eval
     if (!(R.earned === true && R.first === true && !R.helped)) fail('unaided first check: earned/first/helped = ' + [R.earned, R.first, R.helped]);
     if (!/^1 earned/.test(await bar())) fail('bar after one unaided point: ' + await bar());
     /* 6. Show me how after the point: still earned */
-    await p.click('[data-all="' + A.id + '"]'); R = await resOf(A.id); if (R.earned !== true || R.shown) fail('Show me how after the point revoked it');
+    await p.click('[data-rung="' + A.id + '"][data-to="3"]'); R = await resOf(A.id); if (R.earned !== true || R.shown) fail('the worked solution after the point revoked it');
     /* 2. Hint, close it, the key on the first check → not earned, the fresh one offered first */
-    await p.click('[data-walk="' + B.id + '"]'); await p.click('[data-wclose="' + B.id + '"]'); await answer(p, B); await check(p, B.id); R = await resOf(B.id);
+    await rungTo(p, B.id, 1); await answer(p, B); await check(p, B.id); R = await resOf(B.id);
     if (!(R.earned === false && R.first === true && R.helped === true)) fail('hinted first check: earned/first/helped = ' + [R.earned, R.first, R.helped]);
+    if (R.rungFirst !== 1) fail('the rung open at the first check is not kept: ' + R.rungFirst);
     if (!/^1 earned/.test(await bar())) fail('bar after a hinted point: ' + await bar());
     const fbB = await p.$eval('#fb' + B.id, e => e.textContent); if (!/One on your own earns the point/.test(fbB) || /first try/.test(fbB)) fail('hinted right card: ' + fbB);
     if (!(await p.$('[data-another="' + B.id + '"].go'))) fail('after help, Try another is not the primary button');
@@ -153,7 +200,7 @@ async function fresh(p, seed) { await p.goto(url + '#set-' + seed); await p.eval
     if (!/^2 earned/.test(await bar())) fail('bar after the fresh one: ' + await bar());
     if (!/point earned/.test(await p.$eval('#fb' + B.id, e => e.textContent))) fail('base card does not say the point is earned');
     /* 4. a fresh one wrong then right on the same one → nothing; the next fresh one right → the point */
-    await p.click('[data-walk="' + Cc.id + '"]'); await p.click('[data-wclose="' + Cc.id + '"]'); await answer(p, Cc); await check(p, Cc.id);
+    await rungTo(p, Cc.id, 2); await answer(p, Cc); await check(p, Cc.id);
     await p.click('[data-another="' + Cc.id + '"]'); await p.fill('#a' + Cc.id + 'x1', '987654'); await check(p, Cc.id + 'x1');
     await fillExtra(Cc, 1); await check(p, Cc.id + 'x1'); R = await resOf(Cc.id); if (R.earned) fail('a corrected fresh one earned the point');
     if (!(await p.$('[data-another="' + Cc.id + '"]'))) fail('after a wrong fresh one, no way to the next fresh one');
@@ -176,12 +223,21 @@ async function fresh(p, seed) { await p.goto(url + '#set-' + seed); await p.eval
     if (!/Best run this set: 2 in a row — a new record/.test(await p.$eval('#result', e => e.textContent))) fail('end panel has no best run line');
     const rec = await store('record'); if (!rec || rec.n !== 2) fail('the record run was not kept: ' + JSON.stringify(rec));
     const ft = await p.$eval('#result', e => e.textContent); if (!/Right on the first try: 3 \/ /.test(ft)) fail('end panel first-try line: ' + (ft.match(/Right on the first try.{0,12}/) || [''])[0]);
+    { const ef = await p.$eval('#result .effort', e => e.textContent).catch(() => ''); if (!/Solved without help: 2 · With a hint: 2 · Saw the solution: 0/.test(ef)) fail('end panel effort line: "' + ef + '" (A on its own, B and C with a hint, D on its own by its fresh ones)'); }
+    /* item 5: a chip per section — Secure ≥ 80% right on the first check with no help, Getting there ≥ 50%, else Not yet — as
+       a word and an icon, not colour alone */
+    { const st = await state(p, 781), its = itemsOf(781), g = U.generate(781), want = g.sections.map((sec, si) => { const mine = its.filter(i => +i.pos.split('.')[0] === si), al = mine.filter(i => { const R = st.res[i.id]; return R && R.first === true && !R.helped; }).length, pc = mine.length ? al / mine.length : 0; return pc >= 0.8 ? 'Secure' : pc >= 0.5 ? 'Getting there' : 'Not yet'; });
+      const chips = await p.$$eval('#result .skills .chip', es => es.map(e => ({ word: (e.querySelector('.cl2') || {}).textContent, icon: (e.querySelector('svg.ci') || { innerHTML: '' }).innerHTML.length, title: (e.querySelector('.cs') || {}).textContent })));
+      if (JSON.stringify(chips.map(c => c.word)) !== JSON.stringify(want)) fail('end panel chips ' + JSON.stringify(chips.map(c => c.word)) + ', expected ' + JSON.stringify(want));
+      if (chips.some(c => !c.icon || !c.title)) fail('a chip without its icon or its section: ' + JSON.stringify(chips)); }
     const nf = Object.entries((await state(p, 781)).res).filter(([k, r]) => !/x\d+$/.test(k) && r.first === true).length; if (nf !== 3) fail('first-try count ' + nf + ', expected 3 (A, B and C were right on their first check)'); }
   /* 10. test mode: only "can't read this yet"; results' buttons practise with checking */
   await fresh(p, 779); await p.click('.mode button[data-mode="test"]');
   { const i3 = itemsOf(779).filter(i => i.kind === 'text')[0]; await p.fill('#a' + i3.id, '((3'); await p.focus('#bFinish');
     const rd = await p.$eval('#rd' + i3.id, e => e.textContent); if (!/^Can’t read this yet/.test(rd)) fail('test mode: no "can’t read this yet" (' + rd + ')');
     const fb = await p.$eval('#fb' + i3.id, e => e.textContent); if (/Correct|Not yet/.test(fb)) fail('test mode shows a verdict before Finish');
+    await p.fill('#a' + i3.id, '987654'); await p.press('#a' + i3.id, 'Enter'); await p.waitForTimeout(40);
+    if (await p.$('#paper [data-another], #paper [data-moveon], #paper [data-rung]')) fail('test mode: help or "Try a similar one" before Finish');
     await p.click('#bFinish'); await p.click('#cy'); await p.waitForTimeout(100);
     await p.click('#result button[data-new]'); await p.waitForTimeout(200);
     const mode = await p.$eval('.mode button[aria-pressed="true"]', e => e.dataset.mode); if (mode !== 'practice') fail('results button opened in ' + mode + ' mode'); }
@@ -189,7 +245,7 @@ async function fresh(p, seed) { await p.goto(url + '#set-' + seed); await p.eval
   await fresh(p, 780);
   { const i5 = itemsOf(780);
     for (const it of i5) { if (it.kind === 'text') await p.fill('#a' + it.id, '987654'); else await p.evaluate(id => { const x = document.querySelector('input[name="q' + id + '"]'); if (x) x.click(); }, it.id); await check(p, it.id);
-      await p.evaluate(id => { const b = document.querySelector('[data-all="' + id + '"]'); if (b) b.click(); }, it.id); }
+      await rungTo(p, it.id, 3); }
     const txt = await p.evaluate(() => document.getElementById('paper').innerText);
     const m = /\b(null|undefined|NaN)\b/.exec(txt); if (m) fail('"' + m[1] + '" on the page: …' + txt.slice(Math.max(0, m.index - 80), m.index + 20).replace(/\s+/g, ' ')); }
   /* 13. a new set never says it "was updated" */
@@ -263,15 +319,15 @@ async function fresh(p, seed) { await p.goto(url + '#set-' + seed); await p.eval
       for (const it of its) { if (it.kind === 'text') await p.fill('#a' + it.id, '987654'); else await p.evaluate(([id, c]) => { const x = document.querySelector('input[name="q' + id + '"][value="' + ((c + 1) % 3) + '"]') || document.querySelector('input[name="q' + id + '"]'); x.click(); }, [it.id, it.x.correct]); await check(p, it.id); }
       for (const it of TT.slice(0, 6)) {
         const steps = U.walk(it.x, 'text') || []; if (!steps.length) continue;
-        await p.click('[data-walk="' + it.id + '"]');
+        await rungTo(p, it.id, 2); await p.click('[data-walk="' + it.id + '"]');
         for (let j = 0; j < steps.length; j++) {
           if (steps[j].type === 'choice') { const bad = steps[j].opts.findIndex(o => !o.ok), ok = steps[j].opts.findIndex(o => o.ok); if (bad >= 0) await p.click('[data-wopt="' + it.id + '|' + j + '|' + bad + '"]'); await p.click('[data-wopt="' + it.id + '|' + j + '|' + ok + '"]'); }
           else { for (let t = 0; t < 2; t++) { await p.fill('#wn' + it.id, '987654'); await p.click('[data-wnum="' + it.id + '"]'); } await p.fill('#wn' + it.id, 'abc'); await p.click('[data-wnum="' + it.id + '"]'); await p.click('[data-wgive="' + it.id + '"]'); }
         }
       }
       await biAudit('hints');
-      for (const it of its) await p.evaluate(id => { const b = document.querySelector('[data-all="' + id + '"]'); if (b) b.click(); }, it.id);
-      await biAudit('Show me how');
+      for (const it of its) await rungTo(p, it.id, 3);
+      await biAudit('the ladder');
       await p.click('[data-another="' + TT[0].id + '"]'); await p.waitForTimeout(80);
       for (const it of [TT[1], MM[0]].filter(Boolean)) { await answer(p, it); await check(p, it.id); }
       await p.click('#bFinish'); await biAudit('the confirm'); await p.click('#cy'); await p.waitForTimeout(100);
@@ -305,12 +361,22 @@ async function fresh(p, seed) { await p.goto(url + '#set-' + seed); await p.eval
     const txt = h => String(h).replace(/<[^>]*>/g, '').replace(/&(#x[0-9a-f]+|#\d+|[a-z]+);/gi, (m, e) => e[0] === '#' ? String.fromCodePoint(e[1] === 'x' || e[1] === 'X' ? parseInt(e.slice(2), 16) : +e.slice(1)) : (ENT[e.toLowerCase()] ?? m)).replace(/\s+/g, ' ').trim();
     await fresh(p, seedP);
     const screenStems = await p.$$eval('.sheet .stem .st', es => es.map(e => e.textContent.replace(/\s+/g, ' ').trim()));
+    /* item 6: every question card has its speakable ID, "U9·3" in the whole test's order, and it prints on paper too */
+    const UN = (/u(\d+)$/.exec(U.id) || [])[1], screenIds = await p.$$eval('#paper .q[data-q]:not(.xq) > .qid .qn', es => es.map(e => e.textContent));
+    const nQ = U.generate(seedP).sections.reduce((t, s0) => t + s0.items.length, 0);
+    if (JSON.stringify(screenIds) !== JSON.stringify(Array.from({ length: nQ }, (_, k) => 'U' + UN + '·' + (k + 1)))) fail('IDs on the cards: ' + screenIds.slice(0, 5).join(' ') + '… for ' + nQ + ' questions');
+    { const r = await p.evaluate(() => { const q = document.querySelector('#paper .q[data-q] > .qid'), b = q.getBoundingClientRect(), c = q.parentNode.getBoundingClientRect(); return { right: Math.round(c.right - b.right), top: Math.round(b.top - c.top) }; });
+      if (r.right > 2 || r.top > 4) fail('the ID is not at the top right of its card: ' + JSON.stringify(r)); }
+    await p.emulateMedia({ media: 'print' }); { const d = await p.$eval('#paper .q[data-q] > .qid', e => getComputedStyle(e).display); if (d === 'none') fail('the IDs are hidden when the page itself is printed'); } await p.emulateMedia({ media: 'screen' });
     await more(p); await p.click('#bPrint'); if (!(await p.isVisible('[data-print="wk"]'))) fail('print: no choice after Print');
     await p.click('[data-print="wk"]'); await p.waitForTimeout(100);
     const pr = await p.evaluate(() => ({ stems: Array.from(document.querySelectorAll('#printview .pq .stem .st')).map(e => e.textContent.replace(/\s+/g, ' ').trim()),
+      ids: Array.from(document.querySelectorAll('#printview .pq .pqid .qn')).map(e => e.textContent), keyIds: Array.from(document.querySelectorAll('#printview .pkey tr td.pid')).map(e => e.textContent),
       blanks: document.querySelectorAll('#printview .pans').length, groups: document.querySelectorAll('#printview .pchoices').length,
       keys: Array.from(document.querySelectorAll('#printview .pkey tr')).map(r => [r.cells[0].textContent.trim(), r.cells[1].textContent.replace(/\s+/g, ' ').trim()]) }));
     if (JSON.stringify(pr.stems) !== JSON.stringify(screenStems)) fail('print: the worksheet questions are not the screen questions');
+    if (JSON.stringify(pr.ids) !== JSON.stringify(screenIds)) fail('print: the worksheet IDs ' + pr.ids.slice(0, 4).join(' ') + '… are not the screen\'s');
+    { const want = ip.map(it => 'U' + UN + '·' + (+it.id.replace(/\D+$/, '').replace(/\D.*$/, ''))); if (JSON.stringify(pr.keyIds) !== JSON.stringify(want)) fail('print: the key\'s IDs ' + pr.keyIds.slice(0, 4).join(' ') + '… are not its questions\' (' + want.slice(0, 4).join(' ') + '…)'); }
     const nText = ip.filter(i => i.kind === 'text').length, nMc = ip.length - nText;
     if (pr.blanks !== nText || pr.groups !== nMc) fail('print: ' + pr.blanks + ' answer blanks / ' + pr.groups + ' choice lists for ' + nText + ' / ' + nMc + ' parts');
     if (pr.keys.length !== ip.length) fail('print: the key has ' + pr.keys.length + ' rows for ' + ip.length + ' parts');
@@ -345,6 +411,7 @@ async function fresh(p, seed) { await p.goto(url + '#set-' + seed); await p.eval
         heads: forms.map(f => f.querySelector('.pt2').textContent.trim()), titles: forms.map(f => f.querySelector('.pt1').textContent.trim()), khead: keys.map(k => k.querySelector('.psec').textContent.trim() + ' ' + k.querySelector('.pmeta').textContent.trim()),
         stems: forms.map(f => Array.from(f.querySelectorAll('.pq .stem .st')).map(e => e.textContent.replace(/\s+/g, ' ').trim())),
         keyrows: keys.map(k => Array.from(k.querySelectorAll('table.pkrows tr')).map(r => r.cells[1].textContent.replace(/\s+/g, ' ').trim())),
+        formIds: forms.map(f => Array.from(f.querySelectorAll('.pq .pqid .qn')).map(e => e.textContent)), keyIds: keys.map(k => Array.from(k.querySelectorAll('table.pkrows td.pid')).map(e => e.textContent)),
         names: forms.map(f => f.querySelectorAll('.pname').length),
         sets: forms.map(f => (/\bSet \d/.exec(f.textContent) || [''])[0]),
         answerLines: forms.map(f => f.querySelectorAll('.pans, .pblank').length + (/Answer:/.test(f.textContent) ? 1 : 0)),
@@ -365,6 +432,7 @@ async function fresh(p, seed) { await p.goto(url + '#set-' + seed); await p.eval
       mk.headPts.forEach((x, k) => { if (+x !== nParts[k]) fail(word + ': form ' + 'ABCDE'[k] + ' is headed ' + x + ' points for ' + nParts[k] + ' parts'); });
       if (mk.oneDay) mk.period.forEach((x, k) => { if (x) fail(word + ': form ' + 'ABCDE'[k] + ' of a one-period test (ruling 51) prints a line about its length'); });
       mk.lines.forEach((ls, k) => { ls.forEach((x, i) => { if (ls.indexOf(x) !== i || mk.ft[k].indexOf(x) >= 0) fail(word + ': form ' + 'ABCDE'[k] + ' prints "' + x.slice(0, 60) + '…" twice'); }); });
+      mk.formIds.forEach((ids, k) => { const n = mk.stems[k].length, want = Array.from({ length: n }, (_, j) => 'U' + (/u(\d+)$/.exec(U.id) || [])[1] + '·' + (j + 1)); if (JSON.stringify(ids) !== JSON.stringify(want)) fail(word + ': form ' + 'ABCDE'[k] + ' prints the IDs ' + ids.slice(0, 3).join(' ') + '…'); if (!mk.keyIds[k].length || mk.keyIds[k].some(x => want.indexOf(x) < 0)) fail(word + ': key ' + 'ABCDE'[k] + ' has the IDs ' + mk.keyIds[k].slice(0, 3).join(' ')); });
       mk.tracker.forEach((t, k) => { if (!t || t.total !== nParts[k]) fail(word + ': key ' + 'ABCDE'[k] + ' has ' + (t ? 'a score tracker totalling ' + t.total : 'no score tracker') + ' for ' + nParts[k] + ' parts'); });
     };
     const mk = await p.evaluate(formShape);
@@ -407,6 +475,15 @@ async function fresh(p, seed) { await p.goto(url + '#set-' + seed); await p.eval
       secs.forEach(s => { if (/^(\d+|[IVX]+|Part \w+)[.:]/i.test(s)) fail('ruling 54: a printed section is numbered: "' + s + '"'); });
       await p.click('#pvClose');
     } else if (await p.isVisible('.teacherbar [data-tforms]')) fail('ruling 49: a unit with fixed forms shows the random-set bar');
+    else {   /* the real test's paper (teacher.js): the same IDs as the page, on the test and on its key, a left-out question keeping its gap */
+      const tt = await p.evaluate(() => { const T = window.TEACHER; if (!T || !T.testHtml) return null; const f = T.forms[0], keep = T.pick(); const d = document.createElement('div');
+        d.innerHTML = T.testHtml(f); const ids = Array.from(d.querySelectorAll('.pqid .qn')).map(e => e.textContent); d.innerHTML = T.keyHtml(f); const kids = Array.from(d.querySelectorAll('td.pid')).map(e => e.textContent);
+        T.pick(keep.map((x, i) => i !== 1)); d.innerHTML = T.testHtml(f); const gap = Array.from(d.querySelectorAll('.pqid .qn')).map(e => e.textContent); T.pick(keep); return { ids, kids, gap, n: keep.length, unit: window.TEACHER_TEST.unit }; });
+      if (tt) { const want = Array.from({ length: tt.n }, (_, j) => 'U' + tt.unit + '·' + (j + 1));
+        if (JSON.stringify(tt.ids) !== JSON.stringify(want)) fail('the real test prints the IDs ' + tt.ids.slice(0, 4).join(' ') + '…');
+        if (!tt.kids.length || tt.kids.some(x => want.indexOf(x) < 0) || tt.kids[0] !== want[0]) fail('the real test\'s key has the IDs ' + tt.kids.slice(0, 4).join(' '));
+        if (tt.gap[1] !== want[2]) fail('a left-out question renumbered the IDs: ' + tt.gap.slice(0, 3).join(' '));
+        if ('U' + tt.unit !== 'U' + (/u(\d+)$/.exec(U.id) || [])[1]) fail('the real test\'s IDs are for unit ' + tt.unit + ', the page\'s for ' + U.id); } }
     }
     await more(p); await p.click('#bPrint'); await p.click('[data-print="wk"]'); await p.waitForTimeout(100);
     await p.emulateMedia({ media: 'print' });
@@ -455,6 +532,30 @@ async function fresh(p, seed) { await p.goto(url + '#set-' + seed); await p.eval
       return out; });
     if (w.errs.length) fail('tex: KaTeX errors on ' + JSON.stringify(w.errs)); if (w.bad.length) fail('tex: digits/letters changed on ' + JSON.stringify(w.bad));
     console.log('E. tex checked: ' + t.n + ' spans on the page, ' + w.n + ' over 60 sets'); }
+  /* G. named distractors (7 Nov 2026, item 4): picking a wrong choice shows that choice's own line — the unit's view.why(x, k),
+     the item's whys[k], or the coach's words — and two wrong choices of one question never say the same thing when the unit
+     names them; a select-all's wrong pick is named on the first check when the unit names it */
+  { await fresh(p, 795); const ig = itemsOf(795); let named = 0;
+    for (const it of ig.filter(i => i.kind === 'mc')) {
+      const wrong = it.x.opts.map((_, k) => k).filter(k => k !== it.x.correct).slice(0, 2), seen = [];
+      for (const k of wrong) {
+        await p.evaluate(([q, k]) => document.querySelector('input[name="q' + q + '"][value="' + k + '"]').click(), [it.id, k]); await check(p, it.id);
+        const r = await p.evaluate(([id, k, pos]) => { const P = pos.split('.').map(Number), g = Unit.generate(795), item = g.sections[P[0]].items[P[1]], x = item.type === 'parts' ? item.parts[P[2]] : item;
+          const w = (Unit.view.why && Unit.view.why(x, k)) || (x.whys && x.whys[k]) || ((Unit.judge.mc(x, k) || {}).what || [])[0] || '', d = document.createElement('div'); d.innerHTML = w;
+          return { want: d.textContent.replace(/\s+/g, ' ').trim(), card: document.getElementById('fb' + id).textContent.replace(/\s+/g, ' ').trim() }; }, [it.id, k, it.pos]);
+        if (r.want && r.card.indexOf(r.want) < 0) fail('named distractor: ' + it.id + ' choice ' + 'ABCDEFGH'[k] + ' shows "' + r.card.slice(0, 90) + '", not its line "' + r.want.slice(0, 90) + '"');
+        if (r.want) { named++; if (seen.indexOf(r.want) >= 0) fail('named distractor: two wrong choices of ' + it.id + ' say the same thing: "' + r.want.slice(0, 80) + '"'); seen.push(r.want); }
+      }
+    }
+    for (const it of ig.filter(i => i.kind === 'multi')) {
+      const k = it.x.opts.map((_, j) => j).find(j => it.x.correct.indexOf(j) < 0); if (k == null) continue;
+      const w = await p.evaluate(([pos, k]) => { const P = pos.split('.').map(Number), x = Unit.generate(795).sections[P[0]].items[P[1]]; const h = Unit.view.why ? Unit.view.why(x, k) : (x.whys && x.whys[k]) || ''; const d = document.createElement('div'); d.innerHTML = h || ''; return d.textContent.replace(/\s+/g, ' ').trim(); }, [it.pos, k]);
+      if (!w) continue;
+      for (const c of it.x.correct.concat([k])) await p.evaluate(([q, c]) => document.querySelector('input[name="q' + q + '"][value="' + c + '"]').click(), [it.id, c]);
+      await check(p, it.id); const card = await p.$eval('#fb' + it.id, e => e.textContent.replace(/\s+/g, ' ').trim());
+      if (card.indexOf(w) < 0) fail('named distractor: select-all ' + it.id + ' picked ' + 'ABCDEFGH'[k] + ' on the first check and shows "' + card.slice(0, 90) + '", not "' + w.slice(0, 90) + '"'); else named++;
+    }
+    console.log('G. named distractors: ' + named + ' wrong picks shown their own line'); }
   /* F. the site's family (7 Nov 2026, the site review; Croix: "Ok sounds well thought out. Proceed."): the top is quiet — the
      mode toggle and ⋯, and question 1 on a phone's first screen; ⋯ is a real button whose menu opens and closes by keyboard;
      the clock shows only in "Like the real test" and still runs in "Check as I go"; the end panel has "Try a new set"; the way
@@ -482,6 +583,15 @@ async function fresh(p, seed) { await p.goto(url + '#set-' + seed); await p.eval
     { const c = await p.evaluate(() => ({ open: !document.getElementById('mMenu').hidden, exp: document.getElementById('bMore').getAttribute('aria-expanded'), focus: document.activeElement && document.activeElement.id }));
       if (c.open || c.exp !== 'false' || c.focus !== 'bMore') fail('Escape did not close the ⋯ menu back to ⋯: ' + JSON.stringify(c)); }
     await p.click('#bMore'); await p.click('h1'); if (!(await p.isHidden('#mMenu'))) fail('a tap outside does not close the ⋯ menu');
+    /* item 5: "Question 4 of 16" — the question holding the focus, as words and a thin navy bar in the bar area (not a ring) */
+    { const N = await p.$$eval('#paper .q[data-q]:not(.xq)', e => e.length); await p.evaluate(() => window.scrollTo(0, 0)); await p.waitForTimeout(60);
+      const q1 = await p.$eval('#qof', e => e.textContent); if (q1 !== 'Question 1 of ' + N) fail('the bar says "' + q1 + '" at the top of the page, not "Question 1 of ' + N + '"');
+      await p.evaluate(() => { const q = document.querySelectorAll('#paper .q[data-q]:not(.xq)')[3]; const f = q && q.querySelector('input'); if (f) f.focus(); }); await p.waitForTimeout(60);
+      const q4 = await p.$eval('#qof', e => e.textContent); if (N >= 4 && q4 !== 'Question 4 of ' + N) fail('focus in question 4: the bar says "' + q4 + '"');
+      const bar = await p.evaluate(() => { const i = document.getElementById('prog'), b = i.parentNode.getBoundingClientRect(), r = i.getBoundingClientRect(); return { f: parseFloat(i.style.width) / 100, h: b.height, w: b.width, bg: getComputedStyle(i).backgroundColor, radius: getComputedStyle(i.parentNode).borderRadius, inBar: !!i.closest('.watch') }; });
+      if (N >= 4 && Math.abs(bar.f - 4 / N) > 0.02) fail('the bar is ' + Math.round(bar.f * 100) + '% full at question 4 of ' + N);
+      if (bar.h > 4 || bar.w < 120 || !bar.inBar) fail('the question bar is not a thin bar in the bar area: ' + JSON.stringify(bar));
+      if (bar.bg.replace(/\s/g, '') !== 'rgb(27,46,69)') fail('the question bar is ' + bar.bg + ', not navy'); }
     /* the clock: hidden but running in "Check as I go"; shown in "Like the real test" */
     const tx = itemsOf(4821).filter(i => i.kind === 'text'); await p.fill('#a' + tx[0].id, '1'); await p.waitForTimeout(1200);
     { const st = await state(p, 4821); if (!st.running) fail('the clock does not run in "Check as I go" (it is only hidden there)'); }
@@ -492,7 +602,13 @@ async function fresh(p, seed) { await p.goto(url + '#set-' + seed); await p.eval
     await fresh(p, 4821); await answer(p, itemsOf(4821)[0]); await check(p, itemsOf(4821)[0].id); await p.click('#bFinish'); await p.click('#cy'); await p.waitForTimeout(100);
     const tn = await p.$$('#result [data-newset]'); if (tn.length !== 1) fail('the end panel has ' + tn.length + ' "Try a new set" buttons');
     else { await tn[0].click(); await p.waitForTimeout(200); const h = await p.evaluate(() => location.hash); if (!/^#set-\d+$/.test(h) || h === '#set-4821') fail('"Try a new set" opened ' + h);
-      if (await p.isVisible('#result')) fail('"Try a new set" left the end panel up'); }
+      if (await p.isVisible('#result')) fail('"Try a new set" left the end panel up');
+      /* item 5: "Since last time" — two right on the new set after one on the last: up */
+      const sd = +(/\d+/.exec(h) || [0])[0], i2 = itemsOf(sd); for (const it of i2.slice(0, 2)) { await answer(p, it); await check(p, it.id); }
+      await p.click('#bFinish'); await p.click('#cy'); await p.waitForTimeout(100);
+      const since = await p.$eval('#result .since', e => e.textContent.replace(/\s+/g, ' ').trim()).catch(() => '');
+      if (!/^Since last time: up — 1 \/ \d+ then, 2 \/ \d+ today\.$/.test(since)) fail('end panel: "' + since + '", not "Since last time: up — 1 / N then, 2 / N today."');
+      if (await p.$('#result .confetti, #result canvas')) fail('the end panel celebrates'); }
     /* the way back: on /<course>/practice/unit-N/ only, to ../../unit-N/ with N the unit's own */
     const N = (/u(\d+)$/.exec(U.id) || [])[1];
     if (N) { const sub = path.join(dir, 'm7', 'practice', 'unit-' + N); fs.mkdirSync(sub, { recursive: true }); fs.copyFileSync(path.join(dir, 'preview.html'), path.join(sub, 'index.html'));
@@ -502,6 +618,70 @@ async function fresh(p, seed) { await p.goto(url + '#set-' + seed); await p.eval
         if (!bk.shown || bk.href !== '../../unit-' + N + '/' || bk.text !== 'Unit ' + N || !bk.first || bk.h < 44) fail('the way back on the site: ' + JSON.stringify(bk));
       } finally { fs.rmSync(path.join(dir, 'm7'), { recursive: true, force: true }); } }
     console.log('F. the site\'s family checked'); }
+  /* H. phone math hygiene (7 Nov 2026, item 7): the keypad only on a touch screen (pointer: coarse), 44 px keys, inserting at the
+     caret, the fraction template, never over the box or its Check row, the box not moved when it opens; "Larger text" in the ⋯
+     menu, two sizes, remembered on the device and safe without storage; no display of mathematics makes the page scroll
+     sideways, at either size. */
+  { const tc = await b.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true }), t = await tc.newPage();
+    tc.on('request', r => { const u = r.url(); if (!/^(http:\/\/127\.0\.0\.1|data:|blob:|about:)/.test(u)) netAsked.push(u); }); t.on('pageerror', e => errs.push(e.message));
+    await fresh(t, 4821);
+    if (!(await t.evaluate(() => matchMedia('(pointer: coarse)').matches))) fail('keypad check: the touch context is not pointer: coarse');
+    const KP = (U.keypad || []).length;
+    const boxes = itemsOf(4821).filter(i => i.kind === 'text');
+    let tested = false;
+    for (const it of boxes) {
+      await t.evaluate(id => { window.scrollTo(0, 0); document.getElementById('a' + id).scrollIntoView({ block: 'center' }); }, it.id); await t.waitForTimeout(30);
+      const y0 = await t.$eval('#a' + it.id, e => e.getBoundingClientRect().top);
+      await t.evaluate(id => document.getElementById('a' + id).focus(), it.id); await t.waitForTimeout(40);
+      const k = await t.evaluate(id => { const keys = document.querySelector('.keys'), inp = document.getElementById('a' + id); if (!keys || keys.hidden) return null;
+        const vis = Array.from(keys.querySelectorAll('button')).filter(b => !b.hidden && b.offsetParent);
+        const kr = keys.getBoundingClientRect(), row = inp.closest('.ans') || inp.closest('.prt'), acts = row.querySelector('.acts') || row, ar = acts.getBoundingClientRect(), ir = inp.getBoundingClientRect();
+        const hit = (a, c) => !(a.right <= c.left || c.right <= a.left || a.bottom <= c.top || c.bottom <= a.top);
+        return { n: vis.length, small: vis.filter(b => b.getBoundingClientRect().height < 44 || b.getBoundingClientRect().width < 44).map(b => b.dataset.k), coversCheck: hit(kr, ar), coversBox: hit(kr, ir), y: ir.top,
+          labels: vis.map(b => b.dataset.k), tabs: vis.filter(b => b.tabIndex >= 0).length }; }, it.id);
+      if (!k) continue;
+      tested = true;
+      if (k.small.length) fail('keypad: keys under 44 px: ' + k.small.join(' '));
+      if (k.coversCheck || k.coversBox) fail('keypad: it covers ' + (k.coversBox ? 'the box' : 'the Check row') + ' of ' + it.id);
+      if (Math.abs(k.y - y0) > 2) fail('keypad: opening it moved the box ' + it.id + ' by ' + Math.round(k.y - y0) + ' px');
+      if (k.tabs) fail('keypad: ' + k.tabs + ' keys are tab stops');
+      /* inserting at the caret: a key between "a" and "b" */
+      const lab = k.labels.find(l => l !== 'a/b');
+      if (lab) { const want = await t.evaluate(([id, lab]) => { const e = document.getElementById('a' + id), K = (Unit.keypad || []).find(x => x.label === lab) || { label: lab }; e.value = 'ab'; e.setSelectionRange(1, 1); const ins = K.ins ? K.ins(e.dataset.kind) : K.label; return 'a' + ins + 'b'; }, [it.id, lab]);
+        await t.click('.keys button[data-k="' + lab + '"]'); const got = await t.$eval('#a' + it.id, e => e.value); if (got !== want) fail('keypad: "' + lab + '" at the caret gave "' + got + '", not "' + want + '"'); }
+      if (k.labels.indexOf('a/b') >= 0) { await t.evaluate(id => { const e = document.getElementById('a' + id); e.value = ''; e.setSelectionRange(0, 0); }, it.id); await t.click('.keys button[data-k="a/b"]');
+        const r = await t.$eval('#a' + it.id, e => [e.value, e.selectionStart]); if (r[0] !== '()/()' || r[1] !== 1) fail('keypad: the fraction template wrote ' + JSON.stringify(r)); }
+      await t.fill('#a' + it.id, ''); break;
+    }
+    if (KP && !tested) fail('keypad: the unit has a keypad but no box on a touch screen showed it');
+    /* the fraction template's (3)/(4) reads as 3/4: the key of a fraction answer typed that way is right */
+    { const isFr = i => i.kind === 'text' && /^-?\d+\/\d+$/.test(String(U.keyText(i.x))); let sd = [4821, 11, 12, 13].find(x => itemsOf(x).some(isFr)), fr = sd && itemsOf(sd).find(isFr); if (fr) { await fresh(t, sd);
+      const [n0, d0] = String(U.keyText(fr.x)).split('/'); await t.fill('#a' + fr.id, '(' + n0 + ')/(' + d0 + ')'); await check(t, fr.id); const v = await t.evaluate(([pre, sd, id]) => (JSON.parse(localStorage.getItem(pre + 'set.' + sd + '.all')).res[id] || {}).v, [U.id + '.', sd, fr.id]); if (v !== 'right') fail('the template\'s (' + n0 + ')/(' + d0 + ') for ' + fr.id + ' (set ' + sd + ') was marked ' + v + ': ' + (await t.$eval('#fb' + fr.id, e => e.textContent)).slice(0, 120) + ' / typed ' + (await t.$eval('#a' + fr.id, e => e.value))); } }
+    await t.close(); await tc.close(); }
+  { /* a mouse: no keypad at all */
+    await p.setViewportSize({ width: 1280, height: 800 }); await fresh(p, 4821); const tb = itemsOf(4821).filter(i => i.kind === 'text')[0];
+    await p.focus('#a' + tb.id); await p.waitForTimeout(40); if (await p.evaluate(() => { const k = document.querySelector('.keys'); return !!(k && !k.hidden && k.offsetParent); })) fail('keypad: shown with a mouse (pointer: fine)');
+    await p.setViewportSize({ width: 390, height: 844 }); }
+  { /* Larger text: in ⋯, two sizes, remembered, and the page never scrolls sideways — with every worked solution open */
+    await fresh(p, 780); await more(p);
+    if (!(await p.$('#mMenu #bBig'))) fail('Larger text: not in the ⋯ menu');
+    const h0 = await p.$eval('#paper .stem', e => e.getBoundingClientRect().height);
+    await p.click('#bBig'); await p.waitForTimeout(60);
+    const st = await p.evaluate(() => ({ lg: document.documentElement.classList.contains('lg'), pressed: document.getElementById('bBig').getAttribute('aria-pressed'), h: document.querySelector('#paper .stem').getBoundingClientRect().height }));
+    if (!st.lg || st.pressed !== 'true' || !(st.h > h0 * 1.08)) fail('Larger text did not make the sheet larger: ' + JSON.stringify(st) + ' from ' + h0);
+    await p.reload(); await p.waitForTimeout(200); if (!(await p.evaluate(() => document.documentElement.classList.contains('lg')))) fail('Larger text is not remembered after a reload');
+    const over = async (where) => { const r = await p.evaluate(() => ({ sw: document.documentElement.scrollWidth, iw: window.innerWidth, wide: Array.from(document.querySelectorAll('#paper .ex, #paper .solhead')).filter(e => e.scrollWidth > e.clientWidth + 1 && getComputedStyle(e).overflowX === 'visible').length }));
+      if (r.sw > r.iw + 1) fail(where + ': the page scrolls sideways (' + r.sw + ' px in ' + r.iw + ')'); if (r.wide) fail(where + ': ' + r.wide + ' lines of mathematics overflow without scrolling'); };
+    for (const it of itemsOf(780)) { if (it.kind === 'text') await p.fill('#a' + it.id, '987654'); else await p.evaluate(id => { const x = document.querySelector('input[name="q' + id + '"]'); if (x) x.click(); }, it.id); await check(p, it.id); await rungTo(p, it.id, 3); }
+    await over('larger text, every worked solution open');
+    await more(p); await p.click('#bBig'); await p.waitForTimeout(60); await over('every worked solution open');
+    await p.reload(); await p.waitForTimeout(150); if (await p.evaluate(() => document.documentElement.classList.contains('lg'))) fail('Larger text came back after it was turned off');
+    /* storage refused (a private window, blocked site data): the page still opens and the toggle still works */
+    const ps = await p.context().newPage(); await ps.addInitScript(() => { const no = () => { throw new Error('blocked'); }; Storage.prototype.getItem = no; Storage.prototype.setItem = no; Storage.prototype.removeItem = no; });
+    const e2 = []; ps.on('pageerror', e => e2.push(e.message)); await ps.goto(url + '#set-12'); await ps.waitForTimeout(250);
+    await ps.click('#bMore'); await ps.click('#bBig'); const ok2 = await ps.evaluate(() => document.documentElement.classList.contains('lg') && !!document.querySelector('#paper .q'));
+    if (!ok2 || e2.length) fail('without storage: Larger text ' + (ok2 ? 'works' : 'fails') + (e2.length ? '; errors: ' + e2[0] : '')); await ps.close();
+    console.log('H. keypad, larger text and the width of the mathematics checked'); }
   if (netAsked.length) fail('the page asked the network for ' + netAsked.length + ': ' + netAsked.slice(0, 3).join(' | '));
   if (errs.length) fail('page errors: ' + errs.slice(0, 3).join(' | '));
   await b.close(); server.close();

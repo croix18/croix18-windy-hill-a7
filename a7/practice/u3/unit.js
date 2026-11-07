@@ -22,6 +22,9 @@ const Unit = {
   generate: E.generate,
   key: x => { try { if (x.type === 'mc') return E.plain(x.q) + '|' + x.opts.map(E.plain).join(','); if (x.type === 'multi') return E.plain(x.target) + '|' + x.opts.map(E.plain).sort().join(','); return E.plain(x.q); } catch (e) { return JSON.stringify([x.fam, x.prm]); } },
   view: {
+    /* a select-all's wrong pick is named on the first check (7 Nov 2026, the kit's named distractors): the coach's own line for
+       that choice — what it shows from the second try on — so no new sentence is written here */
+    why: (x, k) => x.type === 'multi' && x.correct.indexOf(k) < 0 ? (C.selectFeedback(x, x.correct.concat([k]), 2).what || [])[0] || '' : '',
     stem: it => it.type === 'parts' ? esc(it.stem) : it.stem,
     figure: () => '',
     line: p => p.text ? p.text.map(x => typeof x === 'string' ? esc(x) : E.M(x)).join('') : E.M(p.q) + (p.after ? esc(p.after) : ''),

@@ -1,6 +1,6 @@
 /* Practice-test kit: the page. One script for every unit; the unit supplies window.Unit (see kit/README.md).
-   Design decisions (Croix, Oct 2026) the kit keeps: one Hint (the step-by-step walkthrough, its picture at the step it
-   explains), Show me how after a try, Try another like this, the Practice menu (whole test / one part / my misses),
+   Design decisions (Croix, Oct 2026) the kit keeps: help as a ladder of three rungs (7 Nov 2026: what to notice, the first
+   step with the step-by-step walkthrough, its picture at the step it explains, then the worked solution), Try another like this, the Practice menu (whole test / one part / my misses),
    right on the first check is a point, Hint or not, and a question solved with the Hint gets a small gray bulb (the Hint
    button's own icon) instead of words; the clock pauses when the page is hidden, no tip box, no footer.
    Apple review (15 Oct 2026) changes are marked [R1-n], [R2-Nn], [J-n] (Jobs lens), [W-n] (Wozniak lens). */
@@ -27,6 +27,20 @@ var G0 = U.generate(1), NSEC = G0.sections.length;
 var SCOPES = { all: 'Whole test' };
 G0.sections.forEach(function(s, k){ SCOPES['p' + (k + 1)] = s.title + ' only'; });   /* ruling 54: a section is named, never numbered */
 SCOPES.miss = 'My misses, with new numbers';
+/* speakable IDs (7 Nov 2026, item 6): "U9·3" — the unit, then the question's place in the whole test — so a teacher can say "look
+   at U9·3". Stable across sets, practice choices and rounds; the same on the screen, on every printout and on the teacher
+   copy's keys (teacher.js writes them on the real test too). The generator's skill code follows on the screen and the
+   practice printouts: view.skill(item) if the unit gives one, else the item's family code(s). */
+var UNO = (/u(\d+)$/.exec(U.id || '') || [])[1] || '', QORD = [];
+(function(){ var c = 0; G0.sections.forEach(function(s, si){ QORD[si] = s.items.map(function(){ return ++c; }); }); })();
+function qidOf(si, ii, item){
+  var n = QORD[si] && QORD[si][ii]; if (!n) return null;
+  var sk = ''; try { sk = V.skill ? V.skill(item) || '' : ''; } catch(e){}
+  if (!sk && item){ var fs = []; (item.type === 'parts' ? item.parts : item.type === 'solo' ? [item.part] : [item]).forEach(function(p){ var f = p && (p.fam || (p === item.part ? item.fam : '')); if (typeof f === 'string' && f && fs.indexOf(f) < 0) fs.push(f); }); if (!fs.length && typeof item.fam === 'string') fs.push(item.fam); sk = fs.join('/'); }
+  return {id: 'U' + UNO + '·' + n, sk: typeof sk === 'string' ? sk : ''};
+}
+function qidHtml(q, cls){ return q ? '<div class="' + cls + '" translate="no"><span class="qn">' + q.id + '</span>' + (q.sk ? ' <span class="qsk">· ' + esc(q.sk) + '</span>' : '') + '</div>' : ''; }
+function qidOfItem(it){ var p = String(it.pos || '').split('.').map(Number); return qidOf(p[0], p[1], it.item); }
 var HASH = new RegExp('^#set-?(\\d{1,5})(?:-(p\\d{1,2}|miss))?$', 'i');        /* [R2-16] anchored; [W-10] any number of parts */
 function fromHash(){ var m = HASH.exec(location.hash || ''); return m && +m[1] >= 1 && (!m[2] || SCOPES[m[2].toLowerCase()]) ? {seed: +m[1], scope: (m[2] || 'all').toLowerCase()} : null; }
 function hashOf(sd, sc){ return '#set-' + sd + (sc === 'all' ? '' : '-' + sc); }
@@ -105,10 +119,11 @@ function build(){
 
 /* ------------------------------------------------ drawing the sheet */
 function fig(it){ try { return V.figure(it) || ''; } catch(e){ return ''; } }
+function flabHtml(p, id){ var fm = formOf(p); return fm.label ? '<div class="flab" id="fl' + id + '">' + esc(fm.label.charAt(0).toUpperCase() + fm.label.slice(1)) + '</div>' : ''; }
 function inputHtml(p, id, lab){
-  var pre = V.pre(p), unit = V.unit(p), ph = V.placeholder(p);
-  return '<div class="ans">' + (pre ? '<span class="pre">' + pre + '</span>' : '') +
-    '<input type="text" id="a' + id + '" data-kind="' + esc(p.kind) + '" aria-label="Answer to question ' + lab + '" aria-describedby="ln' + id + '" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done"' + (p.imode ? ' inputmode="' + esc(p.imode) + '"' : '') + (ph ? ' placeholder="' + esc(ph) + '"' : '') + '>' +
+  var pre = V.pre(p), unit = V.unit(p), ph = V.placeholder(p), fl = formOf(p).label;
+  return flabHtml(p, id) + '<div class="ans">' + (pre ? '<span class="pre">' + pre + '</span>' : '') +
+    '<input type="text" id="a' + id + '" data-kind="' + esc(p.kind) + '" aria-label="Answer to question ' + lab + '" aria-describedby="ln' + id + (fl ? ' fl' + id : '') + '" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done"' + (p.imode ? ' inputmode="' + esc(p.imode) + '"' : '') + (ph ? ' placeholder="' + esc(ph) + '"' : '') + '>' +
     (unit ? '<span class="unit">' + esc(unit) + '</span>' : '') + '<span class="acts"><button type="button" class="chk go" data-check="' + id + '" aria-label="Check ' + lab + '">Check</button><span class="hslot" id="hs' + id + '"></span></span><span class="pv" aria-hidden="true"></span><span class="rd" id="rd' + id + '" aria-live="polite"></span></div>';
 }
 function tailHtml(id){
@@ -130,14 +145,14 @@ function partHtml(p, id, solo, lab, lone){
 }
 function textType(p){ return p.kind === 'mc' ? 'mc' : 'text'; }
 function render(){
-  DS = build(); ITEMS = []; EX = {};
+  DS = build(); ITEMS = []; EX = {}; RULES = {};
   var h = [], qn = 0;
   if (!DS.length) h.push('<p class="how">No misses saved on this device yet. Finish a set first, then come back to practice the ones you missed.</p>');
   DS.forEach(function(sec, di){
     var pts = 0;
     var body = sec.items.map(function(d){
       var it = d.it; qn++;
-      var q = ['<div class="q" data-q="' + qn + '">'];
+      var q = ['<div class="q" data-q="' + qn + '">' + qidHtml(qidOf(d.si, d.ii, it), 'qid')];
       if (it.type === 'parts'){
         q.push('<div class="stem"><b class="num">' + qn + '.</b><span class="st">' + V.stem(it) + '</span></div>' + fig(it));
         var shown = it.parts.filter(function(p, pi){ return !d.keep || d.keep[pi]; }).length, lone = shown === 1 && it.parts.length > 1;
@@ -171,7 +186,7 @@ function paintScopes(){
     return '<option value="' + k + '"' + (k === scope ? ' selected' : '') + (k === 'miss' && !nm && scope !== 'miss' ? ' disabled' : '') + '>' + esc(lab) + '</option>'; }).join('');
 }
 
-/* ------------------------------------------------ "Try another like this": the same kind of question, new numbers */
+/* ------------------------------------------------ "Try a similar one" (was "Try another like this"): the same kind of question, new numbers */
 function atPos(g, pos){
   var p = pos.split('.').map(Number), sec = g.sections[p[0]], it = sec && sec.items[p[1]]; if (!it) return null;
   if (it.type === 'parts'){ var pt = it.parts[p[2]]; return pt ? {type: textType(pt), part: pt, x: pt, item: it} : null; }
@@ -181,8 +196,9 @@ function atPos(g, pos){
 function mountExtra(base){
   var M0 = S.more[base.id]; if (!M0) return;
   var a = atPos(U.generate(M0.seed), base.pos), id = base.id + 'x' + M0.n, it = a.item, h;
+  delete RULES[id];
   EX[id] = {id: id, lab: base.lab + ' (another)', type: a.type, x: a.x, item: it, base: base.id, extra: true, pos: base.pos, aShown: false};
-  var head = '<div class="xq q" data-q="' + id + '"><div class="xhead"><span class="xt">Try another like this</span><span id="xs' + id + '">' + streakHtml(M0) + '</span></div><div class="stem" id="' + (it.type === 'parts' ? 'lx' : 'ln') + id + '"><span class="st">' + V.stem(it) + '</span></div>' + fig(it);
+  var head = '<div class="xq q" data-q="' + id + '"><div class="xhead"><span class="xt">A similar one</span><span id="xs' + id + '">' + streakHtml(M0) + '</span></div><div class="stem" id="' + (it.type === 'parts' ? 'lx' : 'ln') + id + '"><span class="st">' + V.stem(it) + '</span></div>' + fig(it);
   if (it.type === 'parts') h = head + partHtml(Object.assign({}, a.x, {label: ''}), id, false, EX[id].lab, true) + '</div>';
   else if (it.type === 'solo') h = head + partHtml(a.x, id, true, EX[id].lab) + '</div>';
   else h = head + '<div class="mcp" data-host="' + id + '">' + choicesHtml(it, id, EX[id].lab, it.type === 'multi') + '</div></div>';
@@ -199,8 +215,10 @@ function runHtml(){ return S.mode === 'test' || !(S.run >= 2) ? '' : ' · <span 
 function another(baseId){
   var b0 = byId(baseId), M0 = S.more[baseId] || (S.more[baseId] = {n: 0, seed: 0, streak: streaks()[b0.pos] || 0, earned: !!res(b0).earned});
   M0.n++; var s, was = M0.seed ? U.key(atPos(U.generate(M0.seed), b0.pos).x) : null, base = U.key(b0.x), tries = 0, k;
+  var seen = M0.seen || (M0.seen = []); if (was && seen.indexOf(was) < 0) seen.push(was);          /* never numbers served before (7 Nov 2026, item 2) */
   var ansOf = function(x){ try { return U.keyText && x && x.kind !== 'mc' ? String(U.keyText(x)) : null; } catch(e){ return null; } }, baseAns = ansOf(b0.x), k2;
-  do { s = randomSeed(); tries++; k2 = atPos(U.generate(s), b0.pos).x; k = U.key(k2); } while ((s === seed || k === base || k === was || (baseAns != null && ansOf(k2) === baseAns)) && tries < 60);   /* never the same question again — nor the same answer (30 Oct 2026: a Hint that ended "5 tanks" was followed by a fresh one whose answer was 5) */
+  do { s = randomSeed(); tries++; k2 = atPos(U.generate(s), b0.pos).x; k = U.key(k2); } while ((s === seed || k === base || k === was || (seen.indexOf(k) >= 0 && tries < 40) || (baseAns != null && ansOf(k2) === baseAns)) && tries < 60);
+  seen.push(k); if (seen.length > 40) seen.shift();   /* never the same question again — nor the same answer (30 Oct 2026: a Hint that ended "5 tanks" was followed by a fresh one whose answer was 5) */
   M0.seed = s; save();
   mountExtra(b0); paintItem(b0);
   var nid = baseId + 'x' + M0.n, inp = $('a' + nid) || document.querySelector('input[name="q' + nid + '"]');
@@ -224,12 +242,41 @@ function ctxOf(it){
 function judgeAns(it, a, tries){
   if (it.type === 'multi' ? !(a && a.length) : (a == null || String(a).trim() === '')) return {v: 'blank', what: []};
   try {
-    if (it.type === 'text') return U.judge.text(it.x, a, ctxOf(it));
+    if (it.type === 'text'){ a = tidy(a); return equivUp(it, a, U.judge.text(it.x, a, ctxOf(it))); }
     if (it.type === 'mc') return U.judge.mc(it.x, +a);
     return U.judge.multi(it.x, a, (tries || 0) + 1);
   } catch(e){ return {v: 'unread', what: ['I can’t read that yet. Type just your answer.']}; }
 }
 function judge(it, tries){ return judgeAns(it, S.ans[it.id], tries); }
+/* ---- equivalent forms (7 Nov 2026, the practice-test deepening, item 3): the unit's coach judges first; when it says "not
+   yet" (or "almost", or cannot read it) and the typed answer IS the key written another way — 3 = x for x = 3, 2/4 for 1/2,
+   1 1/2 for 3/2, the terms in another order, a unicode minus, a $ in a money box (core.js Kit.Ans) — it is right, with a quiet
+   nudge where the form could be tidier. The normaliser never does the arithmetic the question asks for (3x + 2x is not 5x).
+   A unit declares a box's expected form with view.form(part) → {label, expect, precision, simplest, equiv: false, …}; with
+   none, the form is read from the key and the box, and its label shows only where it cannot be wrong. */
+var FORMS = typeof WeakMap === 'function' ? new WeakMap() : null;
+function formOf(p){
+  if (FORMS && FORMS.has(p)) return FORMS.get(p);
+  var d = null, key = '', f; try { d = V.form ? V.form(p) : null; } catch(e){}
+  try { key = U.keyText ? String(U.keyText(p)) : ''; } catch(e){}
+  try { f = K.Ans.form(key, {declared: Object.assign({}, p.form || {}, d || {}), placeholder: V.placeholder(p), pre: V.pre(p), unit: V.unit(p)}); } catch(e){ f = {label: '', equiv: false}; }
+  f.key = key; if (FORMS) FORMS.set(p, f); return f;
+}
+/* the keypad's fraction template writes ()/(); a unit's reader need not know it: (3)/(4) is 3/4 */
+function tidy(a){
+  if (typeof a !== 'string' || a.indexOf(')/(') < 0) return a;
+  return a.replace(/\(\s*(-?\d+(?:\.\d+)?)\s*\)\s*\/\s*\(\s*(-?\d+(?:\.\d+)?)\s*\)(\s*\^)?/g, function(m, n, d, pow, at, all){
+    var before = all.slice(0, at).replace(/\s+$/, ''), glued = /[\w).π]$/.test(before) && !/\s$/.test(all.slice(0, at));
+    return pow || glued ? '(' + n + '/' + d + ')' + (pow || '') : n + '/' + d; });   /* (4)/(7)^8 is (4/7)^8; 2 (3)/(4) is 2 3/4 */
+}
+function equivUp(it, a, f){
+  if (!f || f.v === 'right' || f.v === 'blank' || !K.Ans) return f;
+  var fm = formOf(it.x), r; if (!fm.key) return f;
+  try { r = K.Ans.equiv(a, fm.key, fm); } catch(e){ return f; }
+  if (!r || !r.ok) return f;
+  var nudge = r.nudge ? esc(r.nudge) : f.v === 'form' && f.what && f.what[0] ? f.what[0] : '';   /* a unit's own "almost" words become the nudge */
+  return {v: 'right', what: nudge ? [nudge] : [], equiv: true};
+}
 function res(it){ return S.res[it.id] || (S.res[it.id] = {tries: 0, first: null, v: null, shown: false, hinted: false, steps: 0}); }
 function plainText(h){ var d = document.createElement('div'); d.innerHTML = h; return d.textContent; }
 function sameAns(a, b){ return JSON.stringify(a == null ? '' : a) === JSON.stringify(b == null ? '' : b); }
@@ -238,7 +285,7 @@ function record(it, f, late){
   if (R.v === 'right') return R;
   R.tries++; R.v = f.v; R.lastAns = S.ans[it.id];
   var indep = f.v === 'right' && R.tries === 1 && !R.hinted && !R.shown;            /* right on the first check, on your own */
-  if (R.first === null){ R.first = (f.v === 'right'); R.helped = R.first && !!(R.hinted || R.shown); if (late) R.late = true; }   /* what happened on the first check: kept, never rewritten */
+  if (R.first === null){ R.first = (f.v === 'right'); R.helped = R.first && !!(R.hinted || R.shown); R.rungFirst = R.rung || 0; if (late) R.late = true; }   /* what happened on the first check: kept, never rewritten */
   if (R.tries === 1){
     var n = streakStep(it.pos, famOf(it), indep);                                    /* the one miss rule, base question or "another" */
     if (!late) runStep(indep);                                                        /* the run across the set (not a check Finish made) */
@@ -266,6 +313,21 @@ function flash(it, f){
   $('fb' + it.id).innerHTML = f.v === 'blank' ? '<div class="fbx"><p>' + (it.type === 'text' ? 'Type an answer first.' : 'Pick an answer first.') + '</p></div>'
     : '<div class="fbx"><p>' + TAG.unread + ' ' + (f.what[0] || '') + '</p></div>';
 }
+/* a choice's named misconception (7 Nov 2026, item 4; the survey after Diagnostic Questions: every distractor exposes one
+   misconception). A unit gives it with view.why(x, k), or as the item's whys[k]; picking that wrong choice shows that line
+   ("You added the exponents — for a power of a power, multiply them"). With neither, the coach's own words stand. */
+function whyOf(x, k){ var w = ''; try { w = V.why ? V.why(x, k) || '' : ''; } catch(e){} if (!w && x && x.whys && x.whys[k]) w = x.whys[k]; return w; }
+function namedWhat(it, R){
+  if (R.v !== 'wrong') return null;
+  if (it.type === 'mc'){ var w = whyOf(it.x, +R.lastAns); return w ? [w] : null; }
+  if (it.type === 'multi'){
+    var picked = (R.lastAns || []).map(Number), C = it.x.correct, bad = picked.filter(function(k){ return C.indexOf(k) < 0; }), missed = C.filter(function(k){ return picked.indexOf(k) < 0; });
+    var names = bad.map(function(k){ return whyOf(it.x, k); });
+    if (!bad.length || names.some(function(n){ return !n; })) return null;
+    return names.concat(missed.length ? [missed.length === 1 ? 'One more choice is right too.' : missed.length + ' more choices are right too.'] : []);
+  }
+  return null;
+}
 function cardHtml(it, R, f){
   var v = R.v;
   if (v === 'right'){
@@ -276,9 +338,13 @@ function cardHtml(it, R, f){
     return '<div class="fbx"><p><span class="tag ok">' + line + '</span>' + (R.first && R.helped && !R.late ? ' ' + bulb() : '') + pt + '</p>' + note + next + '</div>';
   }
   f = R.unreadMsg ? {what: [R.unreadMsg], rule: ''} : (f || {what: []});
-  var w = (f.what || []).map(function(x){ return S.walkOpen[it.id] ? String(x).replace(/,? or tap Hint to go one step at a time\./, '.').replace(/ Tap Hint[^.]*\./, '') : x; }), tag = TAG[v] || '';
-  var body = w.length > 1 ? '<p>' + tag + '</p><ul>' + w.map(function(x){ return '<li>' + x + '</li>'; }).join('') + '</ul>' : '<p>' + tag + (w.length ? ' ' + w[0] : '') + '</p>';   /* [J-4] tag and diagnosis on one line */
-  if (v === 'wrong' && f.rule) body += '<p class="rule"><b>Next time:</b> ' + f.rule + '</p>';
+  var nmd = R.unreadMsg ? null : namedWhat(it, R); if (nmd) f = {what: nmd, rule: f.rule};
+  var w = (f.what || []).map(function(x){ return S.walkOpen[it.id] || R.rung ? String(x).replace(/,? or tap Hint to go one step at a time\./, '.').replace(/ Tap Hint[^.]*\./, '') : x; }), tag = TAG[v] || '';
+  /* nothing named — no line, or the units' own "Not one of the usual slips." (which pointed to the rule paragraph that is Hint 1
+     now) — the generic line, from Hint 1: "✗ Not yet  Look at: <what to notice>" (item 2) */
+  var GEN = /^Not one of the usual slips\.\s*(?:Check each step against the rule below(?:, or tap Hint to go one step at a time)?\.|Tap Hint to go one step at a time\.)?\s*/;
+  if ((v === 'wrong' || v === 'form') && (!w.length || GEN.test(String(w[0])))){ var nt = rungsOf(it).notice, rest = w.length ? String(w[0]).replace(GEN, '') : ''; if (nt) w = ['<b>Look at:</b> ' + nt + (rest ? ' ' + rest : '')].concat(w.slice(1)); }
+  var body = w.length > 1 ? '<p>' + tag + '</p><ul>' + w.map(function(x){ return '<li>' + x + '</li>'; }).join('') + '</ul>' : '<p>' + tag + (w.length ? ' ' + w[0] : '') + '</p>';   /* [J-4] tag and diagnosis on one line; the rule is Hint 1 now (7 Nov 2026), not a second paragraph */
   return '<div class="fbx">' + body + '</div>';
 }
 function keyHtml(it){
@@ -286,12 +352,13 @@ function keyHtml(it){
   if (it.type === 'multi') return it.x.correct.map(function(k){ return '<b>' + LET[k] + '.</b> ' + V.opt(it.x, k); }).join('&nbsp;&nbsp; ');
   return V.key(it.x);
 }
-function solOf(it){ try { return U.solution(it.x, it.type, ctxOf(it)); } catch(e){ return null; } }
+function solOf(it){ try { var a = authored(it); return a && a.steps ? a.steps : U.solution(it.x, it.type, ctxOf(it)); } catch(e){ return null; } }
+function authored(it){ try { return U.rungs ? U.rungs(it.x, it.type, ctxOf(it)) || null : null; } catch(e){ return null; } }
 function picOf(it){ try { return V.picture(it.x, it.type) || ''; } catch(e){ return ''; } }
 function stepsHtml(it, R){
   var sol = solOf(it), n = sol ? sol.length : 0, shown = Math.min(R.steps || 0, n);
   var pic = (shown >= n || R.v === 'right') ? picOf(it) : '';
-  var h = '<div class="sthead">Show me how</div>' + (pic ? '<details class="why"' + (R.pic === false ? '' : ' open') + ' data-pic="' + it.id + '"><summary>See why it works</summary>' + pic + '</details>' : '');
+  var h = (pic ? '<details class="why"' + (R.pic === false ? '' : ' open') + ' data-pic="' + it.id + '"><summary>See why it works</summary>' + pic + '</details>' : '');
   if (!sol) return h + '<div class="key"><span class="kl">Answer</span><span class="kv">' + keyHtml(it) + '</span></div>';
   var f = R.v && R.v !== 'right' ? lastFeedback(it) : null, off = f && f.step != null ? f.step : -1;
   var st = V.start(it.x, it.type); if (st) h += '<div class="solhead"><span class="kl">Start</span> ' + st + '</div>';
@@ -301,6 +368,61 @@ function stepsHtml(it, R){
   }).join('') + '</ol>';
   if (shown >= n) h += '<div class="key"><span class="kl">Answer</span><span class="kv">' + keyHtml(it) + '</span></div>';
   return h;
+}
+/* ---- the help ladder (7 Nov 2026, the practice-test deepening, item 1; the survey after Khan: "a hint for each step … viewing
+   all the hints gives a worked example"). Three rungs, each a button that opens the next; the rungs opened stay open:
+     Hint 1 · What to notice — the unit's rule for this kind of question (the coach's "Next time" line),
+     Hint 2 · The first step — the worked solution's first line (and "Step by step with me": the walkthrough, as before),
+     Hint 3 · The worked solution — every line, one per line with a thin rule between them, the step where the student's answer
+       went off, the picture, the answer (what "Show me how" was).
+   A unit may write all three: Unit.rungs(x, type, ctx) → {notice, first: {say, ex}, steps: [{say, ex}]} (any of them; the rest
+   are derived). The deepest rung opened is kept per attempt (R.rung; R.rungFirst is the rung open at the first check). The
+   scoring rule is the same: a point is earned only on a first check with no rung open. */
+var RULES = {};
+function ruleOf(it){                                       /* the coach's rule for this question, as it gives it after a miss */
+  if (Object.prototype.hasOwnProperty.call(RULES, it.id)) return RULES[it.id];
+  var r = '';
+  try {
+    var probe = function(a){ var f = U.judge.text(it.x, a, ctxOf(it)); return f && f.rule || ''; };
+    if (it.type === 'text') r = probe('987654') || probe('-987654') || probe('0');
+    else if (it.type === 'mc'){ for (var k = 0; k < it.x.opts.length && !r; k++) if (k !== it.x.correct){ var f = U.judge.mc(it.x, k); r = f && f.rule || ''; } }
+    else { var g = U.judge.multi(it.x, [], 1); r = g && g.rule || ''; }
+  } catch(e){}
+  return (RULES[it.id] = r);
+}
+function rungsOf(it){
+  var a = authored(it) || {}, sol = solOf(it), w = walkOf(it), s0 = w && w[0], s1 = w && w[1];
+  var stepOf = function(s){ return s ? {say: s.ask, got: s.type === 'choice' ? ((s.opts.filter(function(o){ return o.ok; })[0] || {}).label || '') : V.got(s), ex: s.then || null} : null; };
+  var notice = a.notice || ruleOf(it) || (s0 ? s0.ask : '') || 'Read the question again: what does it ask for, and what do you know already?';
+  var first = a.first || (sol && sol.length >= 2 ? sol[0] : s0 && s0.ask !== notice ? stepOf(s0) : s1 ? stepOf(s1) : sol && sol[0] ? sol[0] : null);
+  return {notice: notice, first: first};
+}
+function rungBtn(it, to, after){
+  var lab = after ? 'See the worked solution' : to === 1 ? 'Hint' : to === 2 ? 'Hint 2: the first step' : 'Hint 3: the whole solution';
+  return '<button type="button" data-rung="' + it.id + '" data-to="' + to + '" aria-label="' + lab + ', question ' + esc(it.lab) + '">' + lab + '</button>';
+}
+var RH = ['', 'Hint 1 · What to notice', 'Hint 2 · The first step', 'Hint 3 · The worked solution'];
+function ladderHtml(it, R){
+  var g = rungsOf(it), n = Math.min(3, R.rung || 0), h = '<div class="helpl">';
+  var head = function(k){ return '<div class="rung r' + k + '" id="rg' + it.id + '-' + k + '" tabindex="-1"><div class="rung-h">' + RH[k] + '</div>'; };
+  if (n >= 1) h += head(1) + '<p class="rung-note">' + g.notice + '</p></div>';
+  if (n >= 2){ var f = g.first;
+    h += head(2) + (f ? '<div class="say">' + f.say + '</div>' + (f.got ? '<div class="wgot"><span class="wok">✓</span> ' + f.got + '</div>' : '') + (f.ex ? '<div class="ex">' + V.ex(it.x, f.ex, it.type) + '</div>' : '') : '') +
+      (n < 3 && R.v !== 'right' && walkOf(it) && !S.walkOpen[it.id] ? '<div class="rung-walk"><button type="button" data-walk="' + it.id + '" aria-label="Step by step with me, question ' + esc(it.lab) + '">Step by step with me</button></div>' : '') + '</div>'; }
+  if (n >= 3) h += head(3) + stepsHtml(it, R) + '</div>';
+  if (n >= 1 && n < 3 && R.v !== 'right') h += '<div class="rung-next">' + rungBtn(it, n + 1) + '</div>';
+  return h + '</div>';
+}
+function openRung(it, to){
+  if (!it) return; var R = res(it); to = Math.max(1, Math.min(3, to | 0));
+  if ((R.rung || 0) < to){
+    R.rung = to;
+    if (R.v !== 'right'){ R.hinted = true; if (to >= 3){ R.shown = true; if (R.first === null) R.first = false; } }   /* help before the point: the point then comes from one on your own */
+    if (to >= 3){ var sol = solOf(it); R.steps = sol ? sol.length : 1; S.walkOpen[it.id] = false; }
+    if (!S.running && !S.done && !it.extra) start();
+    save(); paintItem(it); paintScore();
+  }
+  var el = $('rg' + it.id + '-' + to); if (el){ el.focus({preventScroll: true}); if (el.scrollIntoView) el.scrollIntoView({block: 'nearest'}); }
 }
 function lastFeedback(it){ var R = S.res[it.id]; return R && R.v ? judgeAns(it, R.lastAns, R.tries - 1) : null; }   /* [W-6] recomputed, never stored */
 function hostOf(it){ return document.querySelector('[data-host="' + it.id + '"]'); }
@@ -319,23 +441,26 @@ function paintItem(it){
   R = R || {tries: 0, v: null, steps: 0};
   if (R.v) host.classList.add(R.v === 'right' ? 'is-right' : R.v === 'form' ? 'is-form' : 'is-wrong');
   if (R.v){ fb.innerHTML = cardHtml(it, R, lastFeedback(it)); delete FLASH[it.id]; } else if (!FLASH[it.id]) fb.innerHTML = '';
-  var b = [], all = (R.steps || 0) >= n, walkOn = S.walkOpen[it.id] && R.v !== 'right';
+  var b = [], rung = R.rung || ((R.steps || 0) >= n ? 3 : 0), all = rung >= 3, walkOn = S.walkOpen[it.id] && R.v !== 'right';
   var owed = S.mode !== 'test' && !R.earned && (R.v || R.shown || R.hinted);            /* the point is not earned yet: a fresh one is the way (24 Oct 2026) */
   if (R.v === 'right'){
     var nx = it.extra ? null : nextOpen(it);
     if (nx) b.push('<button type="button" class="' + (owed ? '' : 'go') + '" data-next="' + it.id + '" data-to="' + nx.id + '" aria-label="Next: question ' + nx.lab + '">Next ↓</button>');   /* one primary button: Try another when the point is owed */
-    if (!all) b.push('<button type="button" data-all="' + it.id + '" aria-label="Show me how for ' + it.lab + '">Show me how</button>');
-  } else {
-    if (!all && !walkOn && walkOf(it)) b.push('<button type="button" data-walk="' + it.id + '" aria-label="Hint for ' + it.lab + '">Hint</button>');   /* [J-3] least help first; no Hint once the steps are open */
-    if (!all && (R.tries > 0 || S.done)) b.push('<button type="button" data-all="' + it.id + '" aria-label="Show me how for ' + it.lab + '">Show me how</button>');
+    if (!all) b.push(rungBtn(it, 3, true));                                             /* after a right answer: the worked solution, one tap */
   }
   var missed = (R.v && R.v !== 'right') || R.shown || (R.v === 'right' && R.first === false);
-  if (!it.extra && (missed || owed) && !S.more[it.id]) b.push('<button type="button" class="' + (R.v === 'right' || all || owed ? 'go' : '') + '" data-another="' + it.id + '">Try another like this</button>');
-  if (it.extra && (R.v || R.shown)) b.push('<button type="button" class="' + (R.v === 'right' || !res(byId(it.base)).earned ? 'go' : '') + '" data-another="' + it.base + '">Try another like this</button>');
-  var hs = $('hs' + it.id), hintOnly = b.length === 1 && /data-walk=/.test(b[0]) && !R.v && !(R.tries > 0);   /* [D-8] before any try the Hint sits beside Check, not on a row of its own */
-  if (hs) hs.innerHTML = hintOnly ? b[0] : '';
-  mo.innerHTML = hintOnly ? '' : b.join('');
-  st.hidden = !(R.steps > 0); if (R.steps > 0) st.innerHTML = stepsHtml(it, R);
+  /* after a check that is not right (item 2; the survey after ALEKS: explain, then "Work on something else" or "Try again"):
+     the card names the mistake, and exactly two buttons follow — a fresh one of the same kind (never the same numbers) or
+     move on. No penalty question, ever: a fresh one replaces the last in the question's own box, and nothing is added to
+     the set. The ladder stays beside Check for a second try. */
+  var simB = function(base, go){ return '<button type="button"' + (go ? ' class="go"' : '') + ' data-another="' + base + '">Try a similar one</button>'; };
+  if (R.v && R.v !== 'right'){ b = [simB(it.extra ? it.base : it.id, true), '<button type="button" data-moveon="' + (it.extra ? it.base : it.id) + '">Move on</button>']; }
+  else if (!it.extra && (missed || owed) && !S.more[it.id]) b.push(simB(it.id, R.v === 'right' || all || owed));
+  else if (it.extra && (R.v || R.shown)) b.push(simB(it.base, R.v === 'right' || !res(byId(it.base)).earned));
+  /* the ladder's first rung sits beside Check ([D-8]); once open, the next rung's button is at the foot of the rungs */
+  var hs = $('hs' + it.id); if (hs) hs.innerHTML = R.v !== 'right' && !rung ? rungBtn(it, 1) : '';
+  mo.innerHTML = b.join('');
+  st.hidden = !rung; if (rung) st.innerHTML = ladderHtml(it, R);
   wl.hidden = !walkOn; if (walkOn) wl.innerHTML = walkHtml(it);
   paintChoices(it, R.v ? R : null);
   var input = $('a' + it.id); if (input){ input.readOnly = R.v === 'right'; if (R.v === 'right' && keys.target === input) hideKeys(); }
@@ -424,15 +549,14 @@ function walkGive(id){ var it = byId(id), W = wstate(it); W.gave = W.gave || {};
 document.addEventListener('click', function(e){
   var t = e.target && e.target.closest ? e.target : null; if (!t) return;
   var b = t.closest('[data-check]'); if (b){ check(b.dataset.check); return; }
-  var a = t.closest('[data-all]');
-  if (a){ var it2 = byId(a.dataset.all), R2 = res(it2), sol2 = solOf(it2);
-    R2.steps = sol2 ? sol2.length : 1; S.walkOpen[it2.id] = false;
-    if (R2.v !== 'right'){ R2.shown = true; if (R2.first === null) R2.first = false; }
-    if (!S.running && !S.done && !it2.extra) start();
-    save(); paintItem(it2); paintScore(); var stp = $('st' + it2.id); if (stp) stp.focus({preventScroll: true}); return; }
+  var rg = t.closest('[data-rung]'); if (rg){ openRung(byId(rg.dataset.rung), +rg.dataset.to); return; }
   var nx = t.closest('[data-next]'); if (nx){ var to = byId(nx.dataset.to), host = to && hostOf(to);
     if (host){ host.scrollIntoView({block: 'center', behavior: 'smooth'}); var f = $('a' + to.id) || host.querySelector('.ch input'); if (f) f.focus({preventScroll: true}); } return; }
   var an = t.closest('[data-another]'); if (an){ another(an.dataset.another); return; }
+  var mv = t.closest('[data-moveon]'); if (mv){ var mb = byId(mv.dataset.moveon), mn = mb && nextOpen(mb), mh = mn && hostOf(mn);
+    if (mh){ mh.scrollIntoView({block: 'center', behavior: 'smooth'}); var mf = $('a' + mn.id) || mh.querySelector('.ch input'); if (mf) mf.focus({preventScroll: true}); }
+    else { var bf = $('bFinish'); if (bf && !bf.hidden) bf.focus(); }
+    return; }
   var wa = t.closest('[data-walk]'); if (wa){ walkStart(byId(wa.dataset.walk)); var wl = $('wl' + wa.dataset.walk); if (wl && wl.scrollIntoView) wl.scrollIntoView({block: 'nearest'}); return; }
   var wo = t.closest('[data-wopt]'); if (wo){ var pr = wo.dataset.wopt.split('|'); walkPick(pr[0], +pr[1], +pr[2]); return; }
   var wn = t.closest('[data-wnum]'); if (wn){ walkNum(wn.dataset.wnum); return; }
@@ -446,14 +570,23 @@ document.addEventListener('click', function(e){
 document.addEventListener('toggle', function(e){ var d = e.target; if (d && d.dataset && d.dataset.pic){ var it = byId(d.dataset.pic); if (it){ res(it).pic = d.open; save(); } } }, true);
 
 /* ------------------------------------------------ typing */
+/* the keypad (7 Nov 2026, item 7; the survey after MathLive's virtual keyboard): compact, and only on a touch screen
+   (pointer: coarse) — a keyboard has these keys. The unit's keys for the box's kind (−, /, ^, ( ), π, ×·, ≤ …), and beside a
+   fraction bar the fraction template, which writes ()/() with the caret in the top; each inserts at the caret. 44 px keys,
+   above the box in the page's flow, so they never cover the box or its Check row. A unit with no keypad at all gets the
+   kit's: − / a/b ^ ( ) π ×. */
+var KEYPAD = (U.keypad == null ? [{label: '−', say: 'minus', ins: function(){ return '-'; }}, {label: '/', say: 'fraction bar'}, {label: '^', say: 'power'}, {label: '(', say: 'open parenthesis'}, {label: ')', say: 'close parenthesis'}, {label: 'π', say: 'pi'}, {label: '×', say: 'times', ins: function(){ return '*'; }}] : U.keypad).slice();
+(function(){ var fi = -1; KEYPAD.forEach(function(k, i){ if (fi < 0 && k.label === '/' && /fraction/i.test(k.say || '')) fi = i; });
+  if (fi >= 0 && !KEYPAD.some(function(k){ return k.tpl; })) KEYPAD.splice(fi + 1, 0, {label: 'a/b', say: 'a fraction', tpl: 'frac', kinds: KEYPAD[fi].kinds}); })();
+function coarse(){ try { return !!(window.matchMedia && matchMedia('(pointer: coarse)').matches); } catch(e){ return false; } }
 var keys = document.createElement('div'); keys.className = 'keys'; keys.hidden = true;
-(U.keypad || []).forEach(function(k){ var b = document.createElement('button'); b.type = 'button'; b.textContent = k.label; if (k.kinds) b.dataset.kinds = k.kinds.join(' '); b.tabIndex = -1; b.setAttribute('aria-label', 'Insert ' + (k.say || k.label)); b.dataset.k = k.label; keys.appendChild(b); });   /* [R1-9] not a tab stop */
-keys.addEventListener('pointerdown', function(e){ if (e.target.dataset.k) e.preventDefault(); });
+KEYPAD.forEach(function(k){ var b = document.createElement('button'); b.type = 'button'; if (k.tpl) { b.className = 'ktpl'; b.innerHTML = '<span class="kfr" aria-hidden="true"><i></i><i></i></span>'; } else b.textContent = k.label; if (k.kinds) b.dataset.kinds = k.kinds.join(' '); b.tabIndex = -1; b.setAttribute('aria-label', 'Insert ' + (k.say || k.label)); b.dataset.k = k.label; keys.appendChild(b); });   /* [R1-9] not a tab stop */
+keys.addEventListener('pointerdown', function(e){ var kb = e.target.closest && e.target.closest('[data-k]'); if (kb) e.preventDefault(); });
 keys.addEventListener('click', function(e){
-  var lab = e.target.dataset.k, el = keys.target; if (!lab || !el || el.readOnly) return;
-  var k = (U.keypad || []).filter(function(x){ return x.label === lab; })[0], ins = k.ins ? k.ins(el.dataset.kind) : lab, a = el.selectionStart, b = el.selectionEnd;
+  var kb = e.target.closest && e.target.closest('[data-k]'), lab = kb && kb.dataset.k, el = keys.target; if (!lab || !el || el.readOnly) return;
+  var k = KEYPAD.filter(function(x){ return x.label === lab; })[0], ins = k.tpl ? '()/()' : k.ins ? k.ins(el.dataset.kind) : lab, at = k.tpl ? 1 : ins.length, a = el.selectionStart, b = el.selectionEnd;
   if (a == null){ a = b = el.value.length; }
-  el.value = el.value.slice(0, a) + ins + el.value.slice(b); el.focus(); try { el.setSelectionRange(a + ins.length, a + ins.length); } catch(x){}
+  el.value = el.value.slice(0, a) + ins + el.value.slice(b); el.focus(); try { el.setSelectionRange(a + at, a + at); } catch(x){}
   el.dispatchEvent(new Event('input', {bubbles: true}));
 });
 function setPreview(el){ var pv = el.parentNode.querySelector('.pv'); if (!pv) return; var p = ''; try { p = V.pretty(el.value, el.dataset.kind) || ''; } catch(e){} pv.innerHTML = p; }
@@ -462,7 +595,8 @@ function setPreview(el){ var pv = el.parentNode.querySelector('.pv'); if (!pv) r
    the same amount, so the box just tapped stays put under the finger [R1-9]. */
 document.addEventListener('focusin', function(e){
   var t = e.target;
-  if (!(t.matches && t.matches('#paper input[type=text]') && !t.readOnly && !(t.id && t.id.indexOf('wn') === 0) && (U.keypad || []).length)) return;
+  if (!(t.matches && t.matches('#paper input[type=text]') && !t.readOnly && !(t.id && t.id.indexOf('wn') === 0) && KEYPAD.length)) return;
+  if (!coarse()){ hideKeys(); keys.target = null; return; }                               /* a mouse and a keyboard: no keypad (item 7) */
   if (keys.target === t && !keys.hidden) return;
   /* only the keys this kind of answer uses (a unit's keypad entry may name its kinds); none → no keypad */
   var kind = t.dataset.kind || '', shown = 0;
@@ -509,11 +643,24 @@ function fmt(s){ s = Math.max(0, Math.floor(s)); var m = Math.floor(s / 60), r =
 function start(){ if (S.running || S.done) return; S.running = true; S.startedAt = now(); save(); paintBar(); }
 function pause(){ if (!S.running) return; S.acc = elapsed(); S.running = false; S.startedAt = null; save(); paintBar(); }
 function tally(){
-  var first = 0, helped = 0, done = 0, earned = 0, bySec = DS.map(function(){ return {got: 0, of: 0, help: 0, earned: 0}; });
-  ITEMS.forEach(function(it){ var R = S.res[it.id]; bySec[it.sec].of++; if (R && R.first === true){ first++; bySec[it.sec].got++; if (R.helped){ helped++; bySec[it.sec].help++; } } if (R && R.earned){ earned++; bySec[it.sec].earned++; } if (R && R.v === 'right') done++; });
+  var first = 0, helped = 0, done = 0, earned = 0, bySec = DS.map(function(){ return {got: 0, of: 0, help: 0, earned: 0, alone: 0}; });
+  ITEMS.forEach(function(it){ var R = S.res[it.id]; bySec[it.sec].of++; if (R && R.first === true){ first++; bySec[it.sec].got++; if (R.helped){ helped++; bySec[it.sec].help++; } else bySec[it.sec].alone++; } if (R && R.earned){ earned++; bySec[it.sec].earned++; } if (R && R.v === 'right') done++; });
   return {first: first, helped: helped, done: done, earned: earned, bySec: bySec};
 }
-function paintProgress(){ var n = ITEMS.filter(answered).length; $('prog').style.width = (ITEMS.length ? 100 * n / ITEMS.length : 0) + '%'; return n; }
+/* "Question 4 of 16" (7 Nov 2026, item 5): where the student is, as words and a thin navy bar in the bar area (never a ring) —
+   the question holding the focus, else the first one on the screen. Questions, not parts; a fresh one is not counted. */
+function cards(){ return Array.prototype.slice.call(document.querySelectorAll('#paper .q[data-q]:not(.xq)')); }
+function paintProgress(){
+  var qs = cards(), N = qs.length, a = document.activeElement, cur = a && a.closest && a.closest('#paper') ? a.closest('.q[data-q]:not(.xq)') || (a.closest('.xq') && a.closest('.xq').parentNode.closest('.q[data-q]:not(.xq)')) : null;
+  var i = cur ? qs.indexOf(cur) : -1;
+  if (i < 0){ var top = document.querySelector('.watch').getBoundingClientRect().bottom + 8, lim = Math.max(top + 40, window.innerHeight * 0.35);
+    for (var k = 0; k < N; k++){ var r = qs[k].getBoundingClientRect(); if (r.bottom > lim){ i = k; break; } } if (i < 0) i = N - 1; }
+  var n = N ? i + 1 : 0, q = $('qof'); if (q) q.textContent = N ? 'Question ' + n + ' of ' + N : '';
+  $('prog').style.width = (N ? 100 * n / N : 0) + '%';
+  return ITEMS.filter(answered).length;
+}
+var progRaf = 0; window.addEventListener('scroll', function(){ if (progRaf) return; progRaf = requestAnimationFrame(function(){ progRaf = 0; if (DS) paintProgress(); }); }, {passive: true});
+document.addEventListener('focusin', function(e){ if (DS && e.target && e.target.closest && e.target.closest('#paper')) paintProgress(); });
 function paintScore(light){
   var t = tally(), sc = $('score'), N = ITEMS.length, nb = function(s){ return '<span class="nw">' + s + '</span>'; };
   if (S.mode === 'test' && !S.done) sc.innerHTML = nb('<b>' + ITEMS.filter(answered).length + ' of ' + N + '</b> answered') + ' · ' + nb('marked when you finish');
@@ -555,18 +702,42 @@ function paintResult(t){
       (twin ? newSet(!nm) : '<button type="button"' + (nm ? '' : ' class="go"') + ' data-new="1" data-scope="all">New whole test</button>' + newSet(false));
   var hk = scope + '.' + S.mode, H = hist()[hk] || [], prev = H.filter(function(x){ return !(x.seed === seed && x.at === S.finishedAt); })[0];
   var pe = prev ? (prev.earned == null ? prev.first : prev.earned) : 0;
-  var lastLine = prev ? '<p class="last">Last time: ' + pe + ' / ' + prev.of + ' in ' + fmt(prev.time) + '. Today: ' + t.earned + ' / ' + N + (prev.of === N ? ' (' + (t.earned - pe >= 0 ? '+' : '−') + Math.abs(t.earned - pe) + ')' : '') + '.</p>' : '';   /* [J-10] */
+  /* "Since last time: up / down / the same" (item 5; the survey after Khan's session summary), from this device's history of
+     the same practice choice and mode — as a share of the points when the sets differ in size */
+  var dir = prev ? (prev.of === N ? Math.sign(t.earned - pe) : Math.sign(t.earned / N - pe / prev.of)) : 0;
+  var lastLine = prev ? '<p class="last since">Since last time: <b>' + (dir > 0 ? 'up' : dir < 0 ? 'down' : 'the same') + '</b> — ' + pe + ' / ' + prev.of + ' then, ' + t.earned + ' / ' + N + ' today.</p>' : '';   /* [J-10] */
+  /* per skill — the unit's sections — as text and an icon, never colour alone (item 5; the survey after ALEKS's labelled
+     pie): Secure at 80% or more right on the first check with no help, Getting there at 50%, else Not yet */
+  var ICON = function(fill){ return '<svg class="ci" viewBox="0 0 12 12" aria-hidden="true"><circle cx="6" cy="6" r="4.6" fill="none" stroke="currentColor" stroke-width="1.6"/>' + (fill === 2 ? '<circle cx="6" cy="6" r="4.6" fill="currentColor"/>' : fill === 1 ? '<path d="M6 1.4a4.6 4.6 0 0 1 0 9.2z" fill="currentColor"/>' : '') + '</svg>'; };   /* empty, half, full: a shape as well as a word */
+  var LV = [['not', 'Not yet', 0], ['get', 'Getting there', 1], ['sec', 'Secure', 2]];
+  var chips = '<ul class="skills" aria-label="By skill">' + DS.map(function(s, k){ var b = t.bySec[k], pc = b.of ? b.alone / b.of : 0, lv = LV[pc >= 0.8 ? 2 : pc >= 0.5 ? 1 : 0];
+    return '<li class="chip ' + lv[0] + '"><span class="cpill">' + ICON(lv[2]) + '<b class="cl2">' + lv[1] + '</b></span><span class="cs">' + s.title + '</span><span class="cn">' + b.alone + ' / ' + b.of + '</span></li>'; }).join('') + '</ul>';
   var firstLine = test ? '' : '<p class="last">Right on the first try: ' + t.first + ' / ' + N + (t.helped ? ' ' + bulb(t.helped) : '') + '</p>';
+  /* effort, beside correctness and never mixed with it (item 1; the survey after Mathspace's effort stars): how each question
+     was worked — on your own, with a hint (rung 1 or 2, or the walkthrough), or after the worked solution (rung 3) — before
+     it was right. A help opened after a right answer is not counted. */
+  var ef = effort(), effortLine = test ? '' : '<p class="last effort">Solved without help: <b>' + ef.own + '</b> · With a hint: <b>' + ef.hint + '</b> · Saw the solution: <b>' + ef.saw + '</b></p>';
   var rec = record_(), runLine = test || !(S.best >= 2) ? '' : '<p class="last">Best run this set: <b>' + S.best + '</b> in a row' + (S.newRecord ? ' — a new record' : rec.n > S.best ? ' · your record: ' + rec.n : '') + '</p>';
   box.innerHTML = '<h2>Set ' + seed + ' · ' + esc(SCOPES[scope]) + ' · ' + (test ? 'Like the real test' : 'Check as I go') + '</h2>' +
     '<div class="big"><div><b>' + t.earned + '<small> / ' + N + '</small></b><span>' + (test ? 'right' : 'points earned on your own') + '</span></div><div><b>' + fmt(S.acc) + '</b><span>time on the clock</span></div></div>' +
-    firstLine + runLine + lastLine +
-    (alone ? '<p class="perfect">Every one on the first try.</p>' : perfect ? '<p class="perfect">Every point earned.</p>' : '') +
+    firstLine + effortLine + runLine + lastLine +
+    (alone ? '<p class="perfect">Every one on the first try.</p>' : perfect ? '<p class="perfect">Every point earned.</p>' : '') + chips +
     '<div class="tw"><table><thead><tr><th>Section</th><th class="r">' + (test ? 'Right' : 'Earned') + '</th>' + (test ? '' : '<th class="r">First try</th><th class="r">' + bulb() + '</th>') + '</tr></thead><tbody>' + rows + '</tbody></table></div>' +
     (notYet.length ? '<p class="note"><span class="nry">Not right yet:</span> ' + notYet.map(function(it){ return '<button type="button" class="jump" data-jump="' + it.id + '">' + it.lab + '</button>'; }).join(' ') + '</p>' +
-      '<p class="note"><b>Show me how</b> has the steps; <b>Try another like this</b> gives you a fresh one.</p>' : '') +
+      '<p class="note"><b>Hint</b> goes one step at a time, up to the worked solution; <b>Try a similar one</b> gives you a fresh one.</p>' : '') +
     '<div class="btns">' + btns + '</div>';
   box.hidden = false;
+}
+function effort(){
+  var own = 0, hint = 0, saw = 0;
+  ITEMS.forEach(function(it){
+    var Rs = Object.keys(S.res).filter(function(k){ return k === it.id || (k.indexOf(it.id + 'x') === 0 && /^\d+$/.test(k.slice(it.id.length + 1))); }).map(function(k){ return S.res[k]; });
+    var R0 = S.res[it.id];
+    if (Rs.some(function(R){ return R && R.shown; })) saw++;
+    else if (Rs.some(function(R){ return R && R.hinted; })) hint++;
+    else if (R0 && (R0.v === 'right' || R0.earned)) own++;
+  });
+  return {own: own, hint: hint, saw: saw};
 }
 function finish(){
   if (S.done) return;                                                                  /* [R2-1] */
@@ -619,7 +790,8 @@ function openSet(n, sc, mode){
   var h1 = $('h1'); if (h1 && document.activeElement && document.activeElement !== document.body && !(document.activeElement.closest && document.activeElement.closest('#paper'))) { h1.setAttribute('tabindex', '-1'); h1.focus({preventScroll: true}); }
 }
 function earnedOf(rec){                                   /* a set saved before 24 Oct 2026: the point as it was then scored, never rewritten */
-  Object.keys(rec.res || {}).forEach(function(k){ var R = rec.res[k]; if (R && R.earned === undefined && !/x\d+$/.test(k)) R.earned = R.first === true && !R.helped; });
+  Object.keys(rec.res || {}).forEach(function(k){ var R = rec.res[k]; if (R && R.earned === undefined && !/x\d+$/.test(k)) R.earned = R.first === true && !R.helped;
+    if (R && R.rung == null){ if (R.steps > 0) R.rung = 3; else if (R.hinted) R.rung = 1; } });   /* a set saved before the ladder (7 Nov 2026): Show me how was the worked solution, the Hint the first help */
   return rec;
 }
 function restoreOne(it){
@@ -675,7 +847,7 @@ document.addEventListener('visibilitychange', function(){ if (document.hidden &&
    printout is the same set as the screen (the same items, drawn by the same view functions; the key is the same key the
    page marks with), shown first as a preview with its own Print button. With Português on, its lines print too. */
 function pq(d, qn){
-  var it = d.it, h = '<div class="pq"><div class="pqh"><div class="stem"><b class="num">' + qn + '.</b><span class="st">' + V.stem(it) + '</span></div>' + fig(it) + '</div>';   /* the stem and its figure stay together; parts may go to the next page */
+  var it = d.it, h = '<div class="pq"><div class="pqh">' + qidHtml(qidOf(d.si, d.ii, it), 'pqid') + '<div class="stem"><b class="num">' + qn + '.</b><span class="st">' + V.stem(it) + '</span></div>' + fig(it) + '</div>';   /* the stem and its figure stay together; parts may go to the next page */
   var line = function(p, lab){ return '<div class="line">' + (lab ? '<b class="lab">' + lab + '.</b>' : '') + '<span class="st">' + V.line(p) + '</span></div>'; };
   var blank = function(p){ var u = V.unit(p), pre = V.pre(p); return '<div class="pans"><span class="pal bt">Answer:</span> ' + (pre ? '<span class="pre">' + pre + '</span>' : '') + (V.blank ? V.blank(p) || '<span class="pblank"></span>' : '<span class="pblank"></span>') + (u ? ' <span class="unit">' + esc(u) + '</span>' : '') + '</div><div class="pwork"></div>'; };
   var choices = function(x){ return '<div class="pchoices">' + x.opts.map(function(o, k){ return '<div class="pch"><span class="pbox' + (it.type === 'multi' ? ' sq' : '') + '"></span><span class="cl">' + LET[k] + '.</span><span class="cv">' + V.opt(x, k) + '</span></div>'; }).join('') + '</div>'; };
@@ -697,7 +869,7 @@ function worksheetHtml(){
   return h.join('');
 }
 function keyListHtml(){
-  var rows = ITEMS.map(function(it){ return '<tr><td class="pk">' + esc(it.lab) + '</td><td class="kv">' + keyHtml(it) + '</td></tr>'; }).join('');
+  var rows = ITEMS.map(function(it){ var q = qidOfItem(it); return '<tr><td class="pk">' + esc(it.lab) + '</td><td class="kv">' + keyHtml(it) + '</td><td class="pid" translate="no">' + (q ? q.id : '') + '</td></tr>'; }).join('');
   return '<div class="pkey"><h2 class="psec"><span class="bt">Answer key</span></h2><p class="pmeta"><span class="bt">' + setLine() + '</span></p><table class="ptab"><tbody>' + rows + '</tbody></table></div>';
 }
 function yourAnswer(it){
@@ -762,7 +934,7 @@ function collect(){                                        /* the items of DS, a
    the teacher's key, with a score tracker by benchmark. */
 function pqTest(d, qn){
   var it = d.it, one = '<span class="pt">1 pt</span>';
-  var h = '<div class="pq"><div class="pqh"><div class="stem"><b class="num">' + qn + '.</b><span class="st">' + V.stem(it) + '</span>' + (it.type === 'parts' ? '' : one) + '</div>' + fig(it) + '</div>';
+  var h = '<div class="pq"><div class="pqh">' + qidHtml(qidOf(d.si, d.ii, it), 'pqid') + '<div class="stem"><b class="num">' + qn + '.</b><span class="st">' + V.stem(it) + '</span>' + (it.type === 'parts' ? '' : one) + '</div>' + fig(it) + '</div>';
   var line = function(p, lab){ return '<div class="line">' + (lab ? '<b class="lab">' + lab + '.</b>' : '') + '<span class="st">' + V.line(p) + '</span>' + one + '</div>'; };
   var choices = function(x){ return '<div class="pchoices">' + x.opts.map(function(o, k){ return '<div class="pch"><span class="pbox' + (it.type === 'multi' ? ' sq' : '') + '"></span><span class="cl">' + LET[k] + '.</span><span class="cv">' + V.opt(x, k) + '</span></div>'; }).join('') + '</div>'; };
   if (it.type === 'parts') it.parts.forEach(function(p, pi){ if (d.keep && !d.keep[pi]) return; h += '<div class="ppart">' + line(p, p.label) + (p.kind === 'mc' ? choices(p) : '<div class="pwork"></div>') + '</div>'; });
@@ -796,7 +968,7 @@ function testFormHtml(label, form){
 }
 function testKeyHtml(form, s){
   var T = window.TEACHER_TEST || {};
-  var rows = ITEMS.map(function(it){ return '<tr><td class="pk">' + esc(it.lab) + '</td><td class="kv">' + keyHtml(it) + '</td></tr>'; }).join('');
+  var rows = ITEMS.map(function(it){ var q = qidOfItem(it); return '<tr><td class="pk">' + esc(it.lab) + '</td><td class="kv">' + keyHtml(it) + '</td><td class="pid" translate="no">' + (q ? q.id : '') + '</td></tr>'; }).join('');
   var bySec = DS.map(function(sec, si){ var its = ITEMS.filter(function(it){ return it.sec === si; }), qs = [];
     its.forEach(function(it){ var q = String(it.lab).replace(/[a-z]+$/, ''); if (qs.indexOf(q) < 0) qs.push(q); }); return {title: sec.title, qs: qs, pts: its.length}; });
   var order = T.tracker_order || [], tr = T.tracker || {};      /* the test's benchmarks, section by section, where the spec's tracker agrees with the page */
@@ -855,6 +1027,17 @@ if (moreBtn()){
   document.addEventListener('pointerdown', function(e){ var w = moreBtn().parentNode; if (!$('mMenu').hidden && !(e.target && e.target.closest && w.contains(e.target))) moreClose(); }, true);
   document.addEventListener('focusin', function(e){ var w = moreBtn().parentNode; if (!$('mMenu').hidden && !w.contains(e.target)) moreClose(); });
 }
+/* "Larger text" (7 Nov 2026, item 7; the survey after Desmos: one toggle, not the browser's zoom): two sizes, in the ⋯ menu,
+   remembered on this device (any unit); the sheet and the end panel grow, the bar stays. Storage may be refused: then it is
+   just this visit's. */
+var BIGKEY = 'practice.textsize';
+function setBig(on, keep){ document.documentElement.classList.toggle('lg', !!on); var b = $('bBig'); if (b) b.setAttribute('aria-pressed', String(!!on)); if (keep){ try { if (on) localStorage.setItem(BIGKEY, 'large'); else localStorage.removeItem(BIGKEY); } catch(e){} } }
+(function(){ var w = document.querySelector('#mMenu .mprint'); if (!w) return;
+  var row = document.createElement('div'); row.className = 'mtext'; row.innerHTML = '<button type="button" id="bBig" aria-pressed="false">Larger text</button>';
+  w.parentNode.insertBefore(row, w.nextSibling);
+  $('bBig').addEventListener('click', function(){ setBig(!document.documentElement.classList.contains('lg'), true); });
+  var on = false; try { on = localStorage.getItem(BIGKEY) === 'large'; } catch(e){}
+  setBig(on, false); })();
 /* the way back (7 Nov 2026, the site review): on mrshaffer.org a practice test is /<course>/practice/unit-N/, and its unit's
    page is /<course>/unit-N/ — the bar's far left gets "‹ Unit N" there, as the site's own top bar has its way back. As a
    claude.ai artifact or a Google Sites download there is no unit page to go back to, so it stays hidden. N is the unit's

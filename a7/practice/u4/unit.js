@@ -26,6 +26,9 @@ const Unit = {
   generate: E.generate,
   key: x => x.key,
   view: {
+    /* a select-all's wrong pick is named on the first check (7 Nov 2026, the kit's named distractors): the coach's own line for
+       that choice — what it shows from the second try on — so no new sentence is written here */
+    why: (x, k) => x.type === 'multi' && x.correct.indexOf(k) < 0 ? (C.selectFeedback(x, x.correct.concat([k]), 2).what || [])[0] || '' : '',
     stem: it => it.stem,
     figure: () => '',
     line: p => p.stem,
