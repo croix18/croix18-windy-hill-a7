@@ -377,38 +377,6 @@ input[type=text],textarea,.wnum input{font-size:16px}
 /* make-up tests */
 .pform .ptest{font-size:22px} .pkeyform .psec{margin-top:0}
 
-/* ---- the teacher copy (19 Oct 2026): the bar and the real test on paper (kit/teacher.js) ---- */
-.teacherbar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;margin:0 0 14px;padding:12px 14px;border:1.5px solid var(--navyLine);border-radius:10px;background:var(--field2);font-family:var(--ui);font-size:14px;line-height:1.4}
-.teacherbar .tbtxt{flex:1 1 20rem}
-.teacherbar .tbbtns{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-.teacherbar .tblab{font-weight:600;margin-right:2px}
-.teacherbar .tbform{font-weight:600} .teacherbar select{font:600 14px var(--ui);min-height:40px;padding:6px 8px;border-radius:8px;border:1px solid var(--rule);background:var(--field);color:var(--ink)}
-.teacherbar button{min-height:40px;padding:8px 14px}
-.tpage .ppts{float:right;font-weight:500;font-size:13px}
-.tpage .pwork{margin:4px 0 0}
-.tpage .pans{margin-top:4px}
-.tpage .pft{font:italic 12.5px/1.4 var(--ui);color:#444;margin:-4px 0 10px}
-.tpage .kwhy{font-size:13px;color:#333;margin-top:3px}
-.tpage .kerr{font-size:12.5px;color:#444;margin-top:4px}
-.tpage .kflag{font-size:12px;font-weight:700;letter-spacing:.04em;color:#7a2e0e;margin-top:4px}
-.tpage .kft{font-size:12.5px;color:#333}
-.tpage .katex{font-size:1.05em} .tpage .ptab .katex{font-size:1.12em}
-.tpage .tfig{display:block;margin:8px 0 4px var(--i1);max-width:100%;height:auto}
-.tpage .ptrack td,.tpage .ptrack th{padding:5px 8px}
-.ptrk{break-inside:avoid;page-break-inside:avoid}   /* the score tracker stays whole, with its heading */
-@media print{ .teacherbar{display:none!important} }
-
-/* the teacher copy's question picker (2 Nov 2026) */
-.tpick .tpsec{font:600 15px var(--ui);margin:18px 0 6px;color:var(--mut)}
-.tpick .tpq{display:flex;align-items:flex-start;gap:10px;padding:8px 10px;border-radius:8px;cursor:pointer;font-family:var(--ui);font-size:15px;line-height:1.35}
-.tpick .tpq:hover{background:color-mix(in srgb,var(--ink) 5%,transparent)}
-.tpick .tpq input{width:20px;height:20px;margin:1px 0 0;flex:none;accent-color:var(--teal)}
-.tpick .tpn{min-width:2.2em}
-.tpick .tps{flex:1}
-.tpick .tpf{color:var(--mut);font-style:normal;font-size:13px}
-.tpick .tpp{flex:none;color:var(--mut);font-size:13px;padding-top:2px}
-.tpick .tpq.off .tps, .tpick .tpq.off .tpn{text-decoration:line-through;color:var(--mut)}
-
 /* ==== the site's family, 7 Nov 2026 (the site review; Croix: "Ok sounds well thought out. Proceed.") ====
    The palette is at the top. Lexend stays on the sheet (ruling 46: the questions, the answers, the coach, the buttons); the
    title is set in the site's DM Serif Display and the bar and the eyebrow in its DM Sans, so the chrome matches the site.
@@ -671,14 +639,6 @@ svg.nlg.nl-small{width:min(100%,14rem)}
 .nlp.solo .nlsolo{margin-top:6px} .nlp.solo .nlsolo .st{font-weight:600}
 .scopechip{display:inline-flex;align-items:center;font:normal 600 12.5px/1.2 var(--ui);color:var(--ink);background:var(--field);border:1px solid var(--rule);border-radius:999px;padding:3px 10px;margin:4px 8px 2px 0;vertical-align:middle}
 @media print{ .scopechip{display:none} }
-
-/* the edits layer (edits.js, 7 Nov 2026): on the teacher copy, a question changed on the cockpit says so, quietly */
-.qed{display:inline-block;margin-left:.4em;padding:0 .45em;border-radius:999px;font:600 .72rem/1.5 "DM Sans",system-ui,sans-serif;letter-spacing:.02em;background:rgba(64,224,208,.22);color:var(--ink,#17324D);border:1px solid rgba(15,107,116,.45);vertical-align:1px}
-.qed.miss{background:rgba(255,127,106,.16);border-color:rgba(173,59,40,.55)}
-.kpts{font-weight:400;font-size:.85em;opacity:.8;white-space:nowrap}
-.ked{font-size:.78em;opacity:.75}
-.tbed{display:block;margin-top:.25em}
-@media print{.qed{border:1px solid #000;background:none;color:#000}}
 /* A7 Unit 3: the counting pictures (visual.js) */
 .vrow{display:flex;flex-wrap:wrap;gap:4px;align-items:center;margin:4px 0}
 .vgrp{display:inline-flex;flex-wrap:wrap;gap:4px;align-items:center;position:relative;padding-bottom:16px}
@@ -3519,10 +3479,13 @@ function markUsed(lid, ids){ var u = used(lid).slice(); ids.forEach(function(id)
 function resetUsed(lid, keep){ MEM['used.' + lid] = keep.slice(); st('used.' + lid, keep.slice()); }
 
 /* ------------------------------------------------ a set: 8 items, 6 regular then 2 rigor, never repeating until the bank is used */
+/* a lesson item the teacher disapproved (approvals.js, 8 Nov 2026) is left out of new sets and of "Try a similar one"; a set this
+   device already drew keeps its items (setIds) */
+function off(id){ return !!(K.Approvals && K.Approvals.bankHidden(id)); }
 function shuffled(list, seedStr){ var r = K.rng(K.fnv1a(seedStr)), a = list.slice(); for (var i = a.length - 1; i > 0; i--){ var j = Math.floor(r() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
 function quotas(n){ return n === 1 ? [[6, 2]] : n === 2 ? [[3, 1], [3, 1]] : (function(){ var q = [], left = 8; for (var i = 0; i < n; i++){ var k = Math.round(left / (n - i)); left -= k; q.push([k - Math.round(k / 4), Math.round(k / 4)]); } return q; })(); }
 function drawLesson(lid, nReg, nRig, seed){
-  var L = LES[lid], all = L.items.filter(function(b){ return !(K.Edits && K.Edits.bankHidden(b.id)); }), reg = all.filter(function(b){ return !b.rigor; }), rig = all.filter(function(b){ return b.rigor; });
+  var L = LES[lid], all = L.items.filter(function(b){ return !off(b.id); }), reg = all.filter(function(b){ return !b.rigor; }), rig = all.filter(function(b){ return b.rigor; });
   if (!rig.length){ nReg += nRig; nRig = 0; } if (!reg.length){ nRig += nReg; nReg = 0; }
   var u = used(lid), pick = [];
   var take = function(pool, n, salt){
@@ -3576,9 +3539,6 @@ function partOf(b, bp, pi, label){
 }
 function kitItem(b){
   if (CACHE[b.id]) return CACHE[b.id];
-  /* the teacher's edits from the cockpit (edits.js, 7 Nov 2026): a lesson item's stem, key or hidden; his own questions come here
-     too, as items of Cadence's shape (lesson "custom") */
-  var b0 = b; if (K.Edits && K.Edits.bankItem && !b.custom) b = K.Edits.bankItem(b); if (b !== b0) b.n = b0.n;
   /* Cadence's instruction line, unless the stem already says it ("Select all that apply." over "Select all the correct answers.") */
   var said = b.inst && /select\s*(<\/?b>)?\s*all/i.test(segPlain(b.stem).replace(/<[^>]*>/g, '')) && /select\s*(<\/?b>)?\s*all/i.test(segPlain(b.inst));
   var stem = segHtml(b.stem) + (b.inst && !said ? '<div class="rt-inst">' + segHtml(b.inst) + '</div>' : ''), A = b.answer, it;
@@ -3596,7 +3556,6 @@ function kitItem(b){
     else if (ps.length === 1){ it = Object.assign(base, {type: 'solo', part: partOf(b, ps[0], 0, '')}); it.part.flab = formLabel(ps[0], b, true); }
     else it = Object.assign(base, {type: 'parts', parts: ps.map(function(p, i){ var q = partOf(b, p, i, 'abcdefgh'.charAt(i)); q.flab = formLabel(p, b, false); return q; })});
   }
-  if (b._ed) it._ed = b._ed;
   CACHE[b.id] = it;
   return it;
 }
@@ -3653,11 +3612,9 @@ function clean(a, bp){
   return s;
 }
 function formFor(bp){ return {money: !!bp.money, percent: !!bp.percent, precision: bp.precision || null, v: bp.pre ? bp.pre.replace(/\s*=\s*$/, '') : null, expect: bp.type === 'number' ? 'number' : null, simplest: true}; }
-function wordsSame(a, b){ var n = function(x){ return String(x).toLowerCase().replace(/[’']/g, "'").replace(/\s+/g, ' ').replace(/[.!]+$/, '').trim(); }; return n(a) === n(b); }
 function judgePart(p, typed){
   var bp = p.bp, s = clean(typed, bp);
   if (!s) return {v: 'blank', what: []};
-  if (bp.type === 'text') return [bp.key].concat(bp.alts || []).some(function(k){ return wordsSame(s, k); }) ? {v: 'right', what: []} : {v: 'wrong', what: []};
   var f = formFor(bp), keys = [bp.key].concat(bp.alts || []), o = {money: f.money, percent: f.percent};
   var tt = K.Ans.parse(s, o);
   if (!tt) return {v: 'unread', what: ['I can’t read that yet. Type just your answer' + (bp.unit ? ' (the box already says ' + esc(bp.unit) + ')' : '') + '.']};
@@ -3717,7 +3674,7 @@ function hideEnd(segs){                                    /* a step that ends i
   return null;
 }
 function rungsOf(b){
-  var sol = b.solution || [], L = LES[b.lesson] || {}, sk = (L.skills || [])[b.sk] || '';
+  var sol = b.solution || [], L = LES[b.lesson], sk = (L.skills || [])[b.sk] || '';
   var fs = sol.length ? firstSentence(sol[0]) : {first: [], rest: []};
   var notice = (sk ? '<b>' + esc(sk.charAt(0).toUpperCase() + sk.slice(1)) + '.</b> ' : '') + segHtml(fs.first);
   var first = null;
@@ -3783,9 +3740,8 @@ K.Bank = {
   similar: function(baseIt, seen, inSet){
     var b = baseIt.item.bank, L = LES[b.lesson], sig = function(x){ var A = x.answer; return A.kind + ':' + (A.parts ? A.parts.map(function(p){ return p.type; }).join(',') : ''); };
     var part = baseIt.item.type === 'parts', u = used(b.lesson), want = sig(b);
-    var hid = function(x){ return !!(K.Edits && K.Edits.bankHidden(x.id)); };
-    var ok = L.items.filter(function(x){ return x.id !== b.id && !hid(x) && inSet.indexOf(x.id) < 0 && seen.indexOf(x.id) < 0 && (!part || sig(x) === want) && (part || x.answer.kind === b.answer.kind || (x.answer.kind !== 'free' && b.answer.kind !== 'free')); });
-    if (!ok.length) ok = L.items.filter(function(x){ return x.id !== b.id && !hid(x) && (!part || sig(x) === want); });
+    var ok = L.items.filter(function(x){ return x.id !== b.id && !off(x.id) && inSet.indexOf(x.id) < 0 && seen.indexOf(x.id) < 0 && (!part || sig(x) === want) && (part || x.answer.kind === b.answer.kind || (x.answer.kind !== 'free' && b.answer.kind !== 'free')); });
+    if (!ok.length) ok = L.items.filter(function(x){ return x.id !== b.id && !off(x.id) && (!part || sig(x) === want); });
     if (!ok.length) return null;
     var score = function(x){ return (x.gen === b.gen ? 4 : 0) + (x.rigor === b.rigor ? 2 : 0) + (u.indexOf(x.id) < 0 ? 1 : 0); };
     var best = Math.max.apply(null, ok.map(score)), top = ok.filter(function(x){ return score(x) === best; });
@@ -3816,478 +3772,83 @@ K.Bank = {
     {label: 'π', say: 'pi', kinds: ['bank']}, {label: '×', say: 'times', ins: function(){ return '*'; }, kinds: ['bank']}, {label: '√', say: 'square root', kinds: ['bank']},
     {label: '=', say: 'equals', kinds: ['bank']},
     {label: '<', say: 'less than', kinds: ['bank']}, {label: '≤', say: 'less than or equal to', kinds: ['bank']}, {label: '≥', say: 'greater than or equal to', kinds: ['bank']}, {label: '>', say: 'greater than', kinds: ['bank']}],
-  _judge: judgePart, _lessons: LES, _byId: BYID, _scopes: SC, _kitItem: kitItem, _texText: texText,
-  _clear: function(){ CACHE = {}; }                            /* the edits changed (edits.js): draw the items again */
+  _judge: judgePart, _lessons: LES, _byId: BYID, _scopes: SC, _kitItem: kitItem, _texText: texText
 };
 })();
 </script>
-<script>/* Practice-test kit — the edits layer (7 Nov 2026; Croix: "I also want the ability across the board to edit test questions").
+<script>/* Practice-test kit — approvals (8 Nov 2026; Croix: "I don't want to edit the practice questions that generate, I just want to
+   be able to approve or disapprove and be able to tweak tests a and b. Otherwise, I don't need that massive setup in the
+   cockpit. It was very messy in there.").
 
-   The questions are generated: a question is a FAMILY (a slot's builder, e.g. M7 Unit 10's "solveAdd/graphAdd") that draws
-   ~100,000 sets of numbers. So an edit is never to one set's numbers. The teacher edits, from the cockpit on mrshaffer.org:
-     - a family's WORDING — its stem and its parts' lines — as a template in which every generated value is a placeholder,
-       {{n1}} {{m1}} {{v1}} {{who}} …; the template is filled with each set's own values when the page draws it;
-     - whether a family is HIDDEN (left out of new sets; a set already saved on a device keeps what it had);
-     - its POINTS (per lettered part), its HINT 1 ("What to notice"), and a note only he sees;
-     - a lesson item from Cadence (its stem, its key, hidden);
-     - his own CUSTOM questions (a number, an expression, words, a choice, an inequality, a number-line graph), added to a
-       section of the practice test or to "More questions" at its end.
-   The edits live in the site's Worker (GET /api/items/<course>/<unit>); the course repositories stay the source of truth.
-   This file fetches them on the site and applies them as the page draws, so the student page, its printouts and the
-   teacher copy's tests, keys and make-ups all show the same thing. Off the site (a claude.ai artifact, a Google Sites
-   download, the checks) it does nothing at all.
-
-   How a template is made (extract) and filled (fill): the stem as the unit's view draws it is cut into the kit's own markup
-   and placeholders. Text stays text; a number, an amount of money or a percent in the text becomes {{nK}} (with the "a" or
-   "an" before it, which depends on the number); a name or a word the set drew (its parameter object's string values, e.g.
-   who: "Kai", item: "guitar") becomes {{<parameter>}}; <i>x</i> becomes {{vK}}; every other element — a math span, a
-   "shown" display line, a fraction, a power — becomes {{mK}} whole. <br> is a new line, <b> is **bold**. Filling puts the
-   set's own HTML for each placeholder back, so extract → fill is the stem exactly (check/edits.js holds that for every
-   family of every published unit). A family whose wording itself varies between sets (its stories) has one template per
-   WORDING — the variant's id is a hash of its template — and an edit names the variant it was made for; a family written
-   in more than MAXV ways, or whose stem is all generated math, is "wording not editable", and says why.
-
-   The markup of an edit (and of a custom question): words; $…$ for TeX (drawn by tex.js and the inlined KaTeX, as Cadence's
-   items are), $$…$$ for a display line; **bold**; a new line; \$ for a dollar sign; {{name}} for a value. Every character
-   typed is escaped: nothing typed becomes HTML. */
+   This replaces the edits layer of 7 Nov (kit README, "8 Nov 2026 — approve, and Tests A and B"). On a unit's teacher copy
+   (teacher.js, Approve questions) the teacher approves or disapproves each kind of question of the practice test (a family:
+   ui.js famKey, "solveAdd/graphAdd") and each lesson item from Cadence; every one is approved until he says otherwise. The
+   site keeps the disapproved ones (the Worker's items.js: table item_edits, fields.hidden). This file reads that list and
+   answers ui.js and bank.js:
+     - a disapproved kind is left out of NEW practice sets, misses rounds and "Try a similar one", and out of new random
+       test forms; a disapproved lesson item out of new lesson sets;
+     - a set already saved on a device keeps its questions (ui.js S.eh; bank.js keeps a lesson set's items).
+   On the site (/<course>/practice/unit-N/, /teacher/<course>/unit-N/practice/, or window.KIT_SITE_BASE in the checks) the page
+   waits for GET /api/items/<course>/<unit> — at most 1.5 s; offline, the copy this device kept; a failure, nothing left out.
+   Only `hidden: true` is read, from any answer and from any copy kept on a device (a copy kept on 7 Nov may still hold that
+   day's wordings and the teacher's own questions: they are not used). Off the site nothing is fetched and nothing is left out. */
 (function (root) {
 'use strict';
 var node = typeof module !== 'undefined' && module.exports;
-var MAXV = 12, MAXLEN = 1200;
 
-/* ------------------------------------------------ HTML → nodes (the kit's own, well-formed HTML) */
-var VOID = {br: 1, img: 1, input: 1, wbr: 1, hr: 1};
-var ENT = {nbsp: ' ', amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", thinsp: ' ', ensp: ' ', emsp: ' ', minus: '−', times: '×',
-  divide: '÷', le: '≤', ge: '≥', middot: '·', hellip: '…', mdash: '—', ndash: '–', rsquo: '’', lsquo: '‘', rdquo: '”', ldquo: '“', deg: '°', pi: 'π', frac12: '½', cent: '¢', ne: '≠', asymp: '≈'};
-function decode(s){
-  return String(s).replace(/&(#x[0-9a-f]+|#\d+|[a-z][a-z0-9]*);/gi, function(m, e){
-    if (e[0] === '#') { var n = e[1] === 'x' || e[1] === 'X' ? parseInt(e.slice(2), 16) : parseInt(e.slice(1), 10); return isFinite(n) ? String.fromCodePoint(n) : m; }
-    return ENT[e] != null ? ENT[e] : m;
+/* ------------------------------------------------ the list: {family: {<famKey>: 1}, bank: {<item id>: 1}} */
+var OFF = {family: {}, bank: {}};
+/* the hidden rows of any answer or kept copy, and nothing else */
+function rowsOf(d){
+  var out = [];
+  if (d && typeof d === 'object' && Array.isArray(d.edits)) d.edits.forEach(function(e){
+    if (e && e.hidden === true && (e.target_kind === 'family' || e.target_kind === 'bank') && typeof e.target === 'string' && e.target && e.target.length <= 200)
+      out.push({target_kind: e.target_kind, target: e.target, hidden: true});
   });
-}
-function esc(s){ return String(s == null ? '' : s).replace(/[&<>"]/g, function(c){ return {'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]; }); }
-function nodes(html){
-  var s = String(html == null ? '' : html), out = [], i = 0, n = s.length;
-  while (i < n){
-    var lt = s.indexOf('<', i);
-    if (lt < 0){ out.push({t: 'text', v: decode(s.slice(i))}); break; }
-    if (lt > i) out.push({t: 'text', v: decode(s.slice(i, lt))});
-    var gt = s.indexOf('>', lt); if (gt < 0){ out.push({t: 'text', v: decode(s.slice(lt))}); break; }
-    var open = s.slice(lt, gt + 1), m = /^<([a-zA-Z][a-zA-Z0-9]*)/.exec(open);
-    if (!m){ out.push({t: 'raw', v: open}); i = gt + 1; continue; }         /* a stray close or comment: kept as it is, never editable */
-    var tag = m[1].toLowerCase();
-    if (VOID[tag] || /\/>$/.test(open)){ out.push({t: 'el', tag: tag, html: open, inner: ''}); i = gt + 1; continue; }
-    var depth = 1, j = gt + 1, re = new RegExp('<(/?)' + tag + '(?=[\\s>/])[^>]*>', 'gi'), mm;
-    re.lastIndex = j;
-    while (depth && (mm = re.exec(s))){ if (mm[1]) depth--; else if (!/\/>$/.test(mm[0])) depth++; j = re.lastIndex; }
-    if (depth){ out.push({t: 'raw', v: s.slice(lt)}); break; }
-    out.push({t: 'el', tag: tag, html: s.slice(lt, j), inner: s.slice(gt + 1, j - tag.length - 3)});
-    i = j;
-  }
   return out;
 }
+function use(d){ OFF = {family: {}, bank: {}}; rowsOf(d).forEach(function(r){ OFF[r.target_kind][r.target] = 1; }); }
+function any(){ return Object.keys(OFF.family).length > 0 || Object.keys(OFF.bank).length > 0; }
+function hiddenFams(){ return Object.keys(OFF.family).sort(); }
+function famHidden(fk){ return !!(fk && OFF.family[fk]); }
+function bankHidden(id){ return !!(id && OFF.bank[id]); }
+function set(kind, target, hidden){ if (!OFF[kind]) return; if (hidden) OFF[kind][target] = 1; else delete OFF[kind][target]; }
+function rows(){ var out = []; ['family', 'bank'].forEach(function(k){ Object.keys(OFF[k]).sort().forEach(function(t){ out.push({target_kind: k, target: t, hidden: true}); }); }); return out; }
 
-/* ------------------------------------------------ extract: a stem → {tpl, vals, ph} */
-var NUMW = 'Zero|One|Two|Three|Four|Five|Six|Seven|Eight|Nine|Ten|Eleven|Twelve';
-/* text: numbers (money, percent, fractions, decimals, with commas), the article in front of them, the set's words */
-function textTok(s, words, ctr, vals){
-  var parts = [], re = new RegExp('(?:\\b(an?|An?) )?(?:(\\$\\d[\\d,]*(?:\\.\\d+)?)|([−-]?\\d[\\d,]*(?:\\.\\d+)?(?:\\/\\d+)?%?)|\\b(' + NUMW + '|' + NUMW.toLowerCase().replace(/^zero\|one\|/, '') + ')\\b' + (words.length ? '|\\b(' + words.map(function(w){ return w.v.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }).join('|') + ')\\b' : '') + ')', 'g'), m, last = 0;
-  while ((m = re.exec(s))){
-    if (!m[0]) { re.lastIndex++; continue; }
-    parts.push(lit(s.slice(last, m.index)));
-    var name;
-    if (m[5]){ var w = words.filter(function(x){ return x.v === m[5]; })[0]; name = w.k; }
-    else if (m[4]) name = 'w' + (++ctr.w);
-    else name = 'n' + (++ctr.n);
-    if (vals[name] != null && vals[name] !== esc(m[0])) name = name + '_' + (++ctr.x);      /* the same word twice with another article */
-    vals[name] = esc(m[0]); parts.push('{{' + name + '}}');
-    last = re.lastIndex;
-  }
-  parts.push(lit(s.slice(last)));
-  return parts.join('');
-}
-/* literal text in a template: the markup's own characters escaped; whitespace as the browser shows it */
-function lit(s){ return s.replace(/\s*\n\s*/g, ' ').replace(/\\/g, '\\\\').replace(/\$/g, '\\$').replace(/\{\{/g, '\\{{').replace(/\*\*/g, '\\*\\*'); }
-/* the set's words: string values of its parameters that are names (Kai) or words of four letters or more (guitar) */
-function wordsOf(prm){
-  var out = [], seen = {};
-  (function walk(o, pre){
-    if (!o || typeof o !== 'object') return;
-    Object.keys(o).sort().forEach(function(k){
-      var v = o[k];
-      if (typeof v === 'string' && (/^[A-Z][a-z]{1,}$/.test(v) || /^[a-z]{4,}$/.test(v)) && !seen[v]){ seen[v] = 1; out.push({k: /^[a-z][a-z0-9]*$/i.test(k) ? k.toLowerCase() : 'w', v: v}); }
-    });
-  })(prm);
-  /* the longest first, so "Ana" never takes the start of "Anabel" */
-  return out.sort(function(a, b){ return b.v.length - a.v.length; });
-}
-function extract(html, prm){
-  var ctr = {n: 0, m: 0, v: 0, w: 0, x: 0}, vals = {}, words = wordsOf(prm), out = [], raw = false;
-  nodes(html).forEach(function(nd){
-    if (nd.t === 'text') out.push(textTok(nd.v, words, ctr, vals));
-    else if (nd.t === 'raw'){ raw = true; var nm0 = 'm' + (++ctr.m); vals[nm0] = nd.v; out.push('{{' + nm0 + '}}'); }
-    else if (nd.tag === 'br') out.push('\n');
-    else if ((nd.tag === 'b' || nd.tag === 'strong') && nd.inner.indexOf('<') < 0 && nd.inner.trim()) out.push('**' + textTok(decode(nd.inner), words, ctr, vals) + '**');
-    else { var nm = (nd.tag === 'i' ? 'v' + (++ctr.v) : 'm' + (++ctr.m)); vals[nm] = nd.html; out.push('{{' + nm + '}}'); }
-  });
-  var tpl = out.join('').replace(/^ +| +$/g, '');
-  var ph = phOf(tpl);
-  return {tpl: tpl, vals: vals, ph: ph, vh: vhash(tpl), raw: raw};
-}
-function phOf(tpl){ var ph = []; lex(tpl).forEach(function(x){ if (x.k === 'ph' && ph.indexOf(x.v) < 0) ph.push(x.v); }); return ph.sort(); }
-function fnv(str){ var h = 0x811c9dc5; for (var i = 0; i < str.length; i++){ h ^= str.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; } return h >>> 0; }
-function vhash(tpl){ return fnv(tpl).toString(36); }
-/* is there anything to edit? (a stem that is only generated values has no wording) */
-function wordsLeft(tpl){ return tpl.replace(/\{\{[a-z0-9_]+\}\}/gi, '').replace(/[\s.,:;?!()*\\ ]+/g, '').length > 0; }
-
-/* ------------------------------------------------ the markup → HTML (a template filled, or a custom question) */
-var TT = {'\\times': '×', '\\cdot': '·', '\\div': '÷', '\\le': '≤', '\\ge': '≥', '\\ne': '≠', '\\approx': '≈', '\\pm': '±', '\\pi': 'π', '\\circ': '°', '\\%': '%', '\\$': '$', '\\,': ' ', '\\;': ' ', '\\ ': ' ', '\\left': '', '\\right': ''};
-function texText(t){
-  var s = String(t).replace(/\\[dt]?frac\{([^{}]*)\}\{([^{}]*)\}/g, '$1/$2').replace(/\\(?:text|mathrm|textbf|mathbf|operatorname)\{([^{}]*)\}/g, '$1');
-  s = s.replace(/\\[A-Za-z]+|\\./g, function(m){ return TT[m] != null ? TT[m] : ''; });
-  return s.replace(/\^\{([^{}]*)\}/g, '^$1').replace(/_\{([^{}]*)\}/g, '$1').replace(/[{}]/g, '').replace(/\s+/g, ' ').trim();
-}
-function texSpan(tex, disp){ return '<span class="m' + (disp ? ' mdisp' : '') + '" data-tex="' + esc(tex) + '"' + (disp ? ' data-disp=""' : '') + '>' + esc(texText(tex)) + '</span>'; }
-/* → a list of pieces: {k:'t', v} text, {k:'tex', v, disp}, {k:'ph', v}, {k:'b', on}, {k:'br'} */
-function lex(src){
-  var s = String(src == null ? '' : src).replace(/\r\n?/g, '\n'), out = [], buf = '', i = 0, n = s.length, bold = false;
-  var flush = function(){ if (buf){ out.push({k: 't', v: buf}); buf = ''; } };
-  while (i < n){
-    var c = s[i];
-    if (c === '\\' && i + 1 < n && '\\${*}'.indexOf(s[i + 1]) >= 0){ buf += s[i + 1]; i += 2; continue; }
-    if (c === '{' && s[i + 1] === '{'){
-      var e = s.indexOf('}}', i + 2), nm = e > 0 ? s.slice(i + 2, e) : '';
-      if (e > 0 && /^[a-z][a-z0-9_]*$/i.test(nm)){ flush(); out.push({k: 'ph', v: nm}); i = e + 2; continue; }
-    }
-    if (c === '$'){
-      var disp = s[i + 1] === '$', st = i + (disp ? 2 : 1), close = s.indexOf(disp ? '$$' : '$', st);
-      while (close > 0 && s[close - 1] === '\\') close = s.indexOf(disp ? '$$' : '$', close + 1);
-      if (close < 0){ out.push({k: 'err', v: 'A $ has no closing $. Write \\$ for a dollar sign.'}); buf += s.slice(i); break; }
-      flush(); out.push({k: 'tex', v: s.slice(st, close).trim(), disp: disp}); i = close + (disp ? 2 : 1); continue;
-    }
-    if (c === '*' && s[i + 1] === '*'){ flush(); bold = !bold; out.push({k: 'b', on: bold}); i += 2; continue; }
-    if (c === '\n'){ flush(); out.push({k: 'br'}); i++; continue; }
-    buf += c; i++;
-  }
-  flush();
-  if (bold) out.push({k: 'b', on: false, unclosed: true});
-  return out;
-}
-var BADTEX = /\\(href|url|html[A-Za-z]*|includegraphics|def|newcommand|renewcommand|let|input|include|write|class|id|data|style)\b/;
-/* what is wrong with a piece of markup, in a sentence each ([] when nothing is) — the Worker says the same (items.js) */
-function problems(src, ph, opt){
-  opt = opt || {};
-  var p = [], s = String(src == null ? '' : src);
-  if (!s.trim()) p.push(opt.what ? 'Write the ' + opt.what + '.' : 'Write something.');
-  if (s.length > (opt.max || MAXLEN)) p.push('At most ' + (opt.max || MAXLEN) + ' characters (this is ' + s.length + ').');
-  if (/<\s*\/?\s*[a-zA-Z!]/.test(s.replace(/\$[^$]*\$/g, ''))) p.push('HTML tags are not allowed: write words, $math$ and **bold**.');
-  var L = lex(s), got = [];
-  L.forEach(function(x){
-    if (x.k === 'err') p.push(x.v);
-    if (x.k === 'b' && x.unclosed) p.push('A ** has no closing **.');
-    if (x.k === 'tex' && BADTEX.test(x.v)) p.push('That TeX command is not allowed here: ' + BADTEX.exec(x.v)[0] + '.');
-    if (x.k === 'tex' && !x.v) p.push('An empty $$ math.');
-    if (x.k === 'ph' && got.indexOf(x.v) < 0) got.push(x.v);
-  });
-  if (ph){
-    var miss = ph.filter(function(k){ return got.indexOf(k) < 0; }), extra = got.filter(function(k){ return ph.indexOf(k) < 0; });
-    if (miss.length) p.push('Keep every value: ' + miss.map(function(k){ return '{{' + k + '}}'; }).join(' ') + (miss.length === 1 ? ' is' : ' are') + ' missing.');
-    if (extra.length) p.push(extra.map(function(k){ return '{{' + k + '}}'; }).join(' ') + (extra.length === 1 ? ' is not a value of this question.' : ' are not values of this question.'));
-  } else if (got.length) p.push('{{…}} values belong to the practice test’s own questions; write the numbers here.');
-  return p;
-}
-/* markup → HTML; vals fills the placeholders with the set's own (trusted, kit-made) HTML */
-function fill(src, vals){
-  var h = [];
-  lex(src).forEach(function(x){
-    if (x.k === 't') h.push(esc(x.v).replace(/ /g, '&nbsp;'));
-    else if (x.k === 'tex') h.push(texSpan(x.v, x.disp));
-    else if (x.k === 'ph') h.push(vals && vals[x.v] != null ? vals[x.v] : esc('{{' + x.v + '}}'));
-    else if (x.k === 'b') h.push(x.on ? '<b>' : '</b>');
-    else if (x.k === 'br') h.push('<br>');
-  });
-  return h.join('');
-}
-/* the same HTML as the browser shows it: entities read, whitespace as one space, attributes in order (for the round trip) */
-function canon(html){
-  return nodes(html).map(function(nd){
-    if (nd.t === 'text') return esc(nd.v).replace(/ /g, '&nbsp;').replace(/\s+/g, ' ');
-    if (nd.t === 'raw') return nd.v;
-    if (nd.tag === 'br') return '<br>';
-    return nd.html;
-  }).join('').replace(/^ +| +$/g, '');
-}
-
-/* ------------------------------------------------ a unit's families */
-function partsOf(it){ return it.type === 'parts' ? it.parts : it.type === 'solo' ? [it.part] : [it]; }
-function famKey(it){ var fs = []; partsOf(it).forEach(function(p){ var f = p && (p.fam || (p === it.part ? it.fam : '')); if (typeof f === 'string' && f && fs.indexOf(f) < 0) fs.push(f); }); if (!fs.length && typeof it.fam === 'string') fs.push(it.fam); return fs.join('/'); }
-function prmOf(it){ var o = {}; [it].concat(partsOf(it)).forEach(function(p){ var x = p && p.prm; if (x && typeof x === 'object') Object.keys(x).forEach(function(k){ if (o[k] == null) o[k] = x[k]; }); }); return o; }
-/* the fields of an item a teacher may word: its stem, and the line of each lettered part */
-function fieldsOf(it, view){
-  var f = [{f: 'stem', html: view.stem(it)}];
-  if (it.type === 'parts') it.parts.forEach(function(p){ f.push({f: 'line:' + p.label, html: view.line(p), part: p}); });
-  return f;
-}
-/* every family of a unit, by sampling its sets (the cockpit's list; check/edits.js) */
-function survey(U, view, n){
-  view = view || U.view; n = n || 600;
-  var fams = {}, order = [], g0 = U.generate(1), qord = 0, slots = [];
-  g0.sections.forEach(function(sec, si){ sec.items.forEach(function(it, ii){ slots.push({si: si, ii: ii, qn: ++qord}); }); });
-  for (var s = 1; s <= n; s++){
-    var g = U.generate(s);
-    g.sections.forEach(function(sec, si){ sec.items.forEach(function(it, ii){
-      var fk = famKey(it), F = fams[fk];
-      if (!F){ var sl = slots.filter(function(x){ return x.si === si && x.ii === ii; })[0]; F = fams[fk] = {fk: fk, si: si, ii: ii, qn: sl ? sl.qn : 0, type: it.type, parts: partsOf(it).map(function(p){ return {label: it.type === 'parts' ? p.label : '', kind: p.kind || it.type}; }), fields: {}, n: 0}; order.push(fk); }
-      F.n++;
-      var prm = prmOf(it);
-      fieldsOf(it, view).forEach(function(fd){
-        var x = extract(fd.html, prm), V = F.fields[fd.f] || (F.fields[fd.f] = {variants: {}, order: []});
-        var v = V.variants[x.vh];
-        if (!v){ v = V.variants[x.vh] = {vh: x.vh, tpl: x.tpl, ph: x.ph, count: 0, samples: [], raw: x.raw}; V.order.push(x.vh); }
-        v.count++; if (v.samples.length < 3) v.samples.push({seed: s, html: fd.html, vals: x.vals});
-      });
-    }); });
-  }
-  return order.map(function(fk){
-    var F = fams[fk];
-    Object.keys(F.fields).forEach(function(f){
-      var V = F.fields[f], vs = V.order.map(function(h){ return V.variants[h]; }).sort(function(a, b){ return b.count - a.count; });
-      V.variants = vs; delete V.order;
-      if (vs.length > MAXV) V.why = 'Its wording is put together from its numbers: ' + vs.length + ' different wordings came up in ' + n + ' sets, so there is no one sentence to edit.';
-      else if (vs.every(function(v){ return !wordsLeft(v.tpl); })) V.why = 'It is all generated mathematics: there are no words in it to change.';
-      else if (vs.some(function(v){ return v.raw; })) V.why = 'It is drawn with markup the editor cannot keep.';
-      V.editable = !V.why;
-    });
-    return F;
-  });
-}
-
-/* ------------------------------------------------ the edits, applied to a generated set */
-var DATA = {edits: [], custom: [], v: ''}, BYF = {}, BYB = {};
-function use(d){
-  DATA = d && typeof d === 'object' ? {edits: d.edits || [], custom: d.custom || [], v: d.v || ''} : {edits: [], custom: [], v: ''};
-  BYF = {}; BYB = {};
-  DATA.edits.forEach(function(e){ if (e.target_kind === 'family') BYF[e.target] = e; else if (e.target_kind === 'bank') BYB[e.target] = e; });
-  if (root.Kit && root.Kit.Bank && root.Kit.Bank._clear) root.Kit.Bank._clear();
-}
-function any(){ return DATA.edits.length > 0 || DATA.custom.length > 0; }
-function hiddenFams(){ return DATA.edits.filter(function(e){ return e.target_kind === 'family' && e.hidden; }).map(function(e){ return e.target; }).sort(); }
-function sameSet(a, b){ a = (a || []).slice().sort(); b = (b || []).slice().sort(); return a.length === b.length && a.every(function(x, i){ return x === b[i]; }); }
-/* one template of an edit for one field and wording: {t, ph} or null */
-function overrideOf(e, field, vh){
-  if (!e) return null;
-  var m = field === 'stem' ? e.stem : e.label && e.label[field.slice(5)];
-  return m && m[vh] && typeof m[vh].t === 'string' ? m[vh] : null;
-}
-/* an item, edited: _est (the stem's HTML), part._eln (a line's), _pts, _coach, _hid, _ed (what changed), _edMiss (an edit made
-   for a wording the item no longer has: not applied, and the teacher copy says so). An edit row's fields (the Worker's
-   items.js): stem {<wording id>: {t, ph}}, label {<part letter>: {<wording id>: {t, ph}}}, hidden, points {<letter or ''>: n},
-   coach (Hint 1's words), note (the teacher's own; never sent to the page). */
-function applyItem(it, view, qn){
-  var fk = famKey(it), e = BYF[fk];
-  it._fk = fk; if (qn) it._qn = qn;
-  if (!e) return it;
-  var prm = prmOf(it), ed = [];
-  fieldsOf(it, view).forEach(function(fd){
-    var x = extract(fd.html, prm), ov = overrideOf(e, fd.f, x.vh);
-    if (!ov) return;
-    if (!sameSet(ov.ph, x.ph)){ it._edMiss = (it._edMiss || 0) + 1; return; }
-    var h = fill(ov.t, x.vals);
-    if (fd.f === 'stem') it._est = h; else fd.part._eln = h;
-    ed.push(fd.f === 'stem' ? 'wording' : 'part ' + fd.f.slice(5));
-  });
-  if (e.points && typeof e.points === 'object') partsOf(it).forEach(function(p){ var k = it.type === 'parts' ? p.label : ''; var v = e.points[k]; if (Number.isInteger(v) && v >= 0 && v <= 20 && v !== 1){ p._pts = v; if (ed.indexOf('points') < 0) ed.push('points'); } });
-  if (typeof e.coach === 'string' && e.coach.trim()){ var ch = fill(e.coach, null); partsOf(it).forEach(function(p){ p._coach = ch; }); ed.push('hint'); }
-  if (e.hidden){ it._hid = true; ed.push('hidden'); }
-  if (ed.length) it._ed = ed;
-  return it;
-}
-/* a custom question as an item of Cadence's shape (bank.js draws, judges and helps with it) */
-function segsOf(src){
-  var segs = [];
-  lex(src).forEach(function(x){
-    if (x.k === 't') segs.push(esc(x.v));
-    else if (x.k === 'tex') segs.push([x.v, x.disp ? 1 : 0]);
-    else if (x.k === 'b') segs.push(x.on ? '<b>' : '</b>');
-    else if (x.k === 'br') segs.push('<br>');
-  });
-  return segs;
-}
-var TYPES = {number: 'A number', expression: 'An expression', text: 'Words', mc: 'A choice', inequality: 'An inequality', nline: 'A graph on a number line'};
-function customBank(c, n){
-  var b = {id: 'c-' + c.id, lesson: 'custom', rigor: false, gen: 0, n: n, custom: true, stem: segsOf(c.stem), solution: String(c.solution || '').split('\n').map(function(l){ return l.trim(); }).filter(Boolean).map(segsOf)};
-  var k = c.key || {};
-  if (c.type === 'mc'){ b.choices = (k.options || []).map(function(o){ return {t: segsOf(o)}; }); b.answer = {kind: 'choice', key: k.correct | 0}; }
-  else if (c.type === 'nline') b.answer = {kind: 'free', parts: [{type: 'nline', line: {lo: String(k.lo), st: String(k.st || 1), n: 10}, graph: {c: String(k.c), closed: !!k.closed, dir: k.dir === 'left' ? 'left' : 'right'}, v: k.v || 'x', label: ''}]};
-  else {
-    var P = {type: c.type === 'expression' ? 'expression' : c.type === 'inequality' ? 'inequality' : c.type === 'text' ? 'text' : 'number', key: String(k.answer == null ? '' : k.answer).trim()};
-    if (c.type === 'expression') P.equiv = 'expression';
-    if (c.type === 'inequality'){ P.equiv = 'inequality'; P.form = 'As an inequality'; }
-    if (k.alts && k.alts.length) P.alts = k.alts.map(String);
-    if (k.unit) P.unit = String(k.unit);
-    if (k.pre) P.pre = String(k.pre);
-    P.keyS = c.type === 'text' ? [esc(P.key)] : [[P.key.replace(/<=/g, '\\le ').replace(/>=/g, '\\ge ').replace(/≤/g, '\\le ').replace(/≥/g, '\\ge ').replace(/\*/g, '\\times '), 0]];
-    b.answer = {kind: 'free', parts: [P]};
-  }
-  return b;
-}
-/* the set as the page draws it: every native item annotated (its family, its place for the ID "U10·3"), and the teacher's own
-   questions after the native ones of their section, or in "More questions" at the end */
-var EXTRA_TITLE = 'More questions';
-function applySet(g, view, kitItem){
-  if (!any()) return g;
-  var qn = 0, extra = [];
-  g.sections.forEach(function(sec){ sec.items.forEach(function(it){ applyItem(it, view, ++qn); }); });
-  if (kitItem && DATA.custom.length){
-    var cs = DATA.custom.slice().sort(function(a, b){ return a.position - b.position; });
-    cs.forEach(function(c, k){
-      var it = kitItem(customBank(c, k + 1)); if (!it) return;
-      it.custom = {id: c.id, n: k + 1}; it._fk = 'custom:' + c.id;
-      var pts = Number.isInteger(c.points) && c.points >= 0 && c.points <= 20 ? c.points : 1;
-      partsOf(it).forEach(function(p){ p._pts = pts === 1 ? undefined : pts; });
-      var si = /^\d+$/.test(String(c.section)) ? +c.section : -1;
-      if (si >= 0 && si < g.sections.length) g.sections[si].items.push(it); else extra.push(it);
-    });
-    if (extra.length) g.sections.push({title: EXTRA_TITLE, items: extra, extra: true});
-  }
-  return g;
-}
-/* a lesson item from Cadence, edited: its stem, its key, hidden */
-function bankItem(b){
-  var e = BYB[b.id]; if (!e) return b;
-  var c = JSON.parse(JSON.stringify(b)); c._ed = [];
-  if (typeof e.stem === 'string' && e.stem.trim()){ c.stem = segsOf(e.stem); c._ed.push('wording'); }
-  var A = c.answer, k = e.key;
-  if (k != null){
-    if ((A.kind === 'choice') && Number.isInteger(k.correct) && c.choices && k.correct >= 0 && k.correct < c.choices.length){ A.key = k.correct; c._ed.push('key'); }
-    else if (A.kind === 'multi' && Array.isArray(k.correct) && k.correct.length){ A.key = k.correct.filter(function(x){ return Number.isInteger(x) && x >= 0 && x < c.choices.length; }); c._ed.push('key'); }
-    else if (A.parts && Array.isArray(k.answers)) A.parts.forEach(function(p, i){
-      var v = k.answers[i]; if (typeof v !== 'string' || !v.trim() || p.type === 'nline' || p.type === 'select') return;
-      if (String(p.key) === v.trim()) return;
-      p.key = v.trim(); delete p.alts; p.keyS = [esc(p.key)]; if (c._ed.indexOf('key') < 0) c._ed.push('key');
-    });
-  }
-  if (e.hidden) c._ed.push('hidden');
-  if (!c._ed.length) delete c._ed;
-  return c;
-}
-function bankHidden(id){ var e = BYB[id]; return !!(e && e.hidden); }
-/* a lesson item's stem as markup ($…$ for its TeX), or the reason it cannot be edited as words */
-function bankSource(b){
-  var out = [], why = '';
-  (b.stem || []).forEach(function(g){
-    if (typeof g !== 'string'){ out.push(g[1] ? '$$' + g[0] + '$$' : '$' + g[0] + '$'); return; }
-    nodes(g).forEach(function(nd){
-      if (nd.t === 'text') out.push(lit2(nd.v));
-      else if (nd.tag === 'br') out.push('\n');
-      else if ((nd.tag === 'b' || nd.tag === 'strong') && nd.inner.indexOf('<') < 0) out.push('**' + lit2(decode(nd.inner)) + '**');
-      else if (!why) why = 'It is laid out with ' + (nd.tag === 'table' || nd.tag === 'tr' || nd.tag === 'td' ? 'a table' : 'markup (' + (nd.tag || 'raw') + ')') + ' the editor cannot keep.';
-    });
-  });
-  return why ? {why: why} : {src: out.join('')};
-}
-function lit2(s){ return s.replace(/\\/g, '\\\\').replace(/\$/g, '\\$').replace(/\{\{/g, '\\{{').replace(/\*\*/g, '\\*\\*'); }
-
-var api = {MAXV: MAXV, MAXLEN: MAXLEN, TYPES: TYPES, EXTRA_TITLE: EXTRA_TITLE, nodes: nodes, decode: decode, esc: esc, extract: extract, fill: fill, canon: canon, lex: lex, problems: problems,
-  phOf: phOf, vhash: vhash, famKey: famKey, prmOf: prmOf, fieldsOf: fieldsOf, partsOf: partsOf, survey: survey, use: use, any: any, hiddenFams: hiddenFams,
-  applyItem: applyItem, applySet: applySet, customBank: customBank, segsOf: segsOf, bankItem: bankItem, bankHidden: bankHidden, bankSource: bankSource, texSpan: texSpan,
-  data: function(){ return DATA; }};
+var api = {rowsOf: rowsOf, use: use, any: any, hiddenFams: hiddenFams, famHidden: famHidden, bankHidden: bankHidden, set: set, rows: rows};
 if (node){ module.exports = api; return; }
 
 /* ================================================ in the page */
 var K = root.Kit = root.Kit || {}, U = root.Unit;
 if (!U) return;
-var V = U.view, O = {}; Object.keys(V).forEach(function(k){ O[k] = V[k]; });
-var OGEN = U.generate, ORUNGS = U.rungs;
 var M = /^([a-z]\d+)u(\d+)$/i.exec(U.id || ''), COURSE = M ? M[1].toLowerCase() : '', UNIT = M ? +M[2] : 0;
-var PREVIEW = /[?&]kedit=1\b/.test(location.search || '');
-var ONSITE = !!root.KIT_EDITS_BASE || /^\/(?:teacher\/)?(m7|a7)\/(?:practice\/)?unit-\d+\/(?:practice\/)?(index\.html)?$/.test(location.pathname || '');
-var CACHE_KEY = 'practice.edits.' + (U.id || '');
-var waiting = null, ready = false, DRAFT = null;
-function kitItem(b){ return K.Bank && K.Bank._kitItem ? K.Bank._kitItem(b) : null; }
-/* the unit's view, edited: the stem and lines from the template when there is one */
-V.stem = function(it){ return it && it._est != null ? it._est : O.stem(it); };
-V.line = function(p){ return p && p._eln != null ? p._eln : O.line(p); };
-U.rungs = function(x, type, ctx){
-  var r = ORUNGS ? ORUNGS(x, type, ctx) : null;
-  if (x && x._coach){ var o = {}; if (r) Object.keys(r).forEach(function(k){ o[k] = r[k]; }); o.notice = x._coach; return o; }
-  return r;
-};
-U.generate = function(seed){ var g = OGEN(seed); return DRAFT ? DRAFT(g, seed) : applySet(g, O, kitItem); };
-U.generate.original = OGEN;
-
+var BASE = typeof root.KIT_SITE_BASE === 'string' ? root.KIT_SITE_BASE.replace(/\/+$/, '') : null;
+var ONSITE = BASE != null || /^\/(?:teacher\/)?(?:m7|a7)\/(?:practice\/)?unit-\d+\/(?:practice\/)?(?:index\.html)?$/.test(location.pathname || '');
+var KEY = 'practice.edits.' + (U.id || '');               /* the name kept from 7 Nov 2026: a copy from then is read for its hidden rows only */
+var waiting = null, ready = false;
 function boot(){ ready = true; var w = waiting; waiting = null; if (w) w(); }
+function keep(r){ try { localStorage.setItem(KEY, JSON.stringify({edits: r, custom: [], v: ''})); } catch(e){} }
 function load(){
-  try { var c = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null'); if (c && c.edits) use(c); } catch(e){}
-  var base = root.KIT_EDITS_BASE || '', url = base + '/api/items/' + COURSE + '/' + UNIT, done = false;
-  var finish = function(){ if (done) return; done = true; boot(); };
-  var t = setTimeout(finish, 1500);                         /* never more than a moment's wait: offline, the cache (or nothing) */
+  try { use(JSON.parse(localStorage.getItem(KEY) || 'null')); } catch(e){}
+  var done = false, finish = function(){ if (done) return; done = true; boot(); };
+  var t = setTimeout(finish, 1500);                         /* never more than a moment's wait: offline, the device's copy (or nothing) */
   try {
-    fetch(url, {credentials: 'omit'}).then(function(r){ return r.ok ? r.json() : null; }).then(function(d){
-      if (d && Array.isArray(d.edits) && Array.isArray(d.custom)){ use(d); try { localStorage.setItem(CACHE_KEY, JSON.stringify(d)); } catch(e){} }
+    /* the teacher copy reads past the minute's cache, so a reload right after a change shows it */
+    fetch((BASE || '') + '/api/items/' + COURSE + '/' + UNIT, {credentials: 'omit', cache: root.TEACHER_TEST ? 'no-store' : 'default'}).then(function(r){ return r.ok ? r.json() : null; }).then(function(d){
+      if (d && Array.isArray(d.edits)){ use(d); keep(rowsOf(d)); }
       clearTimeout(t); finish();
     }, function(){ clearTimeout(t); finish(); });
   } catch(e){ clearTimeout(t); finish(); }
 }
-
-/* ---- the cockpit's side: the teacher copy in an iframe, ?kedit=1 (the preview pane) */
-function staticHtml(html){                                   /* a stem with its math drawn by KaTeX, for the cockpit's list */
-  var d = document.createElement('div'); d.innerHTML = html;
-  Array.prototype.forEach.call(d.querySelectorAll('.m'), function(el){
-    var tex = K.Tex ? K.Tex.toTex(el) : '', disp = el.hasAttribute('data-disp');
-    try { if (root.katex && tex) el.innerHTML = root.katex.renderToString(tex, {throwOnError: true, strict: 'ignore', output: 'html', displayMode: disp}); } catch(e){}
-  });
-  return d.innerHTML;
-}
-function famSurvey(n){
-  var F = survey({generate: OGEN, view: O}, O, n || 600), G0 = OGEN(1);
-  return {course: COURSE, unit: UNIT, id: U.id, title: U.title, h1: U.h1, sections: G0.sections.map(function(s){ return String(s.title).replace(/<[^>]*>/g, ''); }), families: F};
-}
-function bankList(){
-  if (!K.Bank || !K.Bank._lessons) return [];
-  var LES = K.Bank._lessons;
-  return Object.keys(LES).filter(function(l){ return l !== 'custom'; }).map(function(lid){
-    var L = LES[lid];
-    return {id: lid, title: L.title, items: L.items.map(function(b){ var s = bankSource(b), q = K.Bank.qid({bank: b}); return {id: b.id, n: b.n, qid: q.id, rigor: !!b.rigor, src: s.src, why: s.why, answer: b.answer, choices: (b.choices || []).map(function(c){ return c.t; }), b: b}; })};
-  });
-}
-var PV = null;
-K.Edits = {
+K.Approvals = {
   hold: function(fn){ if (ready) return false; waiting = fn; return true; },
-  get ready(){ return ready; }, preview: PREVIEW, onSite: ONSITE, course: COURSE, unit: UNIT,
-  use: use, any: any, data: function(){ return DATA; }, hiddenFams: hiddenFams, bankItem: bankItem, bankHidden: bankHidden,
-  extract: extract, fill: fill, problems: problems, lex: lex, texSpan: texSpan, survey: famSurvey, bank: bankList, staticHtml: staticHtml, TYPES: TYPES, customBank: customBank,
-  original: OGEN, view: O, famKey: famKey, prmOf: prmOf,
-  /* the cockpit starts a preview page with the saved edits (it reads them as the teacher, hidden questions too) */
-  start: function(d){ use(d); if (!ready) boot(); },
-  /* the preview pane: the questions the editor is on, drawn by the page itself with the draft applied */
-  show: function(spec){ PV = spec; if (root.PracticePreview) root.PracticePreview(); },
-  previewSections: function(){
-    if (!PV) return [];
-    var saved = DATA, out = [];
-    try {
-      if (PV.data) use(PV.data);
-      if (PV.kind === 'family'){
-        (PV.seeds || []).forEach(function(seed){
-          var g = applySet(OGEN(seed), O, kitItem), sec = g.sections[PV.si], it = sec && sec.items[PV.ii];
-          if (it) out.push({title: 'Set ' + seed, items: [{it: it, keep: null, si: PV.si, ii: PV.ii}]});
-        });
-      } else if (PV.kind === 'custom' && PV.custom){
-        var it2 = kitItem(customBank(PV.custom, PV.n || 1)); if (it2){ it2.custom = {id: PV.custom.id || 'draft', n: PV.n || 1}; var pts = PV.custom.points; partsOf(it2).forEach(function(p){ p._pts = Number.isInteger(pts) && pts !== 1 ? pts : undefined; }); out.push({title: PV.title || 'Preview', items: [{it: it2, keep: null, si: 'c', ii: 0}]}); }
-      } else if (PV.kind === 'bank' && PV.id && K.Bank){
-        var b = K.Bank._byId[PV.id]; if (b){ var it3 = kitItem(Object.assign({}, bankItem(b), {id: b.id + '~pv' + (PV.rev || 0)})); if (it3) out.push({title: PV.title || 'Preview', items: [{it: it3, keep: null, si: 'b:' + b.id, ii: 0}]}); }
-      }
-    } finally { if (PV.data) use(saved); }
-    return out;
-  },
-  _pv: function(){ return PV; }
+  get ready(){ return ready; }, onSite: ONSITE, base: BASE || '', course: COURSE, unit: UNIT,
+  any: any, hiddenFams: hiddenFams, famHidden: famHidden, bankHidden: bankHidden, rows: rows,
+  /* the teacher copy, after its approve panel saved: this page and this device's copy follow at once */
+  set: function(kind, target, hidden){ set(kind, target, hidden); keep(rows()); },
+  use: function(d){ use(d); keep(rowsOf(d)); }
 };
-if (PREVIEW){
-  var st = document.createElement('style');
-  st.textContent = 'html.kpv .watch,html.kpv .head,html.kpv .ctl,html.kpv #intro,html.kpv .teacherbar,html.kpv #result,html.kpv #notice{display:none!important}html.kpv body{padding-top:0}html.kpv .sheet{margin-top:0}';
-  document.head.appendChild(st); document.documentElement.classList.add('kpv');
-} else if (ONSITE && COURSE && UNIT) load();
-else ready = true;
+if (ONSITE && COURSE && UNIT) load(); else ready = true;
 })(this);
 </script>
 <script>/* Practice-test kit: the page. One script for every unit; the unit supplies window.Unit (see kit/README.md).
@@ -4298,10 +3859,10 @@ else ready = true;
    Apple review (15 Oct 2026) changes are marked [R1-n], [R2-Nn], [J-n] (Jobs lens), [W-n] (Wozniak lens). */
 (function kitPage(){
 'use strict';
-/* the edits layer (edits.js, 7 Nov 2026): on the site the page waits for the teacher's edits (at most a moment) before it draws */
-if (window.Kit && window.Kit.Edits && window.Kit.Edits.hold(kitPage)) return;
-var U = window.Unit, K = window.Kit, V = U.view, ED = K.Edits || null;
-var SCHEMA = 2, PRE = U.id + (ED && ED.preview ? '.kedit.' : '.');     /* the cockpit's preview pane keeps nothing of the teacher's own practice */                       /* [W-6] one prefix per unit; versions live inside each record */
+/* approvals (approvals.js, 8 Nov 2026): on the site the page waits for the list of disapproved questions (at most a moment) before it draws */
+if (window.Kit && window.Kit.Approvals && window.Kit.Approvals.hold(kitPage)) return;
+var U = window.Unit, K = window.Kit, V = U.view, AP = K.Approvals || null;
+var SCHEMA = 2, PRE = U.id + '.';                       /* [W-6] one prefix per unit; versions live inside each record */
 var $ = function(id){ return document.getElementById(id); };
 var LET = 'ABCDEFGH';
 function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
@@ -4331,28 +3892,17 @@ function lessonScope(sc){ return !!(K.Bank && K.Bank.isLesson(sc)); }
 var UNO = (/u(\d+)$/.exec(U.id || '') || [])[1] || '', QORD = [];
 (function(){ var c = 0; G0.sections.forEach(function(s, si){ QORD[si] = s.items.map(function(){ return ++c; }); }); })();
 function qidOf(si, ii, item){
-  if (item && item.custom) return {id: 'U' + UNO + '·C' + item.custom.n, sk: ''};   /* the teacher's own question (edits.js): "U10·C1" */
   if (item && item.bank && K.Bank) return K.Bank.qid(item);                          /* a lesson item: "U9·L3·7" */
-  var n = item && item._qn ? item._qn : QORD[si] && QORD[si][ii]; if (!n) return null;
+  var n = QORD[si] && QORD[si][ii]; if (!n) return null;
   var sk = ''; try { sk = V.skill ? V.skill(item) || '' : ''; } catch(e){}
-  if (!sk && item){ var fs = []; (item.type === 'parts' ? item.parts : item.type === 'solo' ? [item.part] : [item]).forEach(function(p){ var f = p && (p.fam || (p === item.part ? item.fam : '')); if (typeof f === 'string' && f && fs.indexOf(f) < 0) fs.push(f); }); if (!fs.length && typeof item.fam === 'string') fs.push(item.fam); sk = fs.join('/'); }
+  if (!sk && item) sk = famKey(item);
   return {id: 'U' + UNO + '·' + n, sk: typeof sk === 'string' ? sk : ''};
 }
-function qidHtml(q, cls, item){ return q ? '<div class="' + cls + '" translate="no"><span class="qn">' + q.id + '</span>' + (q.sk ? ' <span class="qsk">· ' + esc(q.sk) + '</span>' : '') + edMark(item) + '</div>' : ''; }
-/* "Edited" (teacher copy only): the question was changed from the cockpit — its wording, points, hint, a key; the teacher's own
-   questions say "Added". An edit made for a wording the question no longer has is not applied, and says so. */
-function edMark(item){
-  if (!item || !window.TEACHER_TEST) return '';
-  var ed = item._ed || (item.bank && item.bank._ed) || null;
-  if (item.custom) return ' <span class="qed" title="Added on the cockpit">Added</span>';
-  if (item._edMiss) return ' <span class="qed miss" title="An edit was made for wording this question no longer has; it is not applied. Open Test questions on the cockpit.">Edit not applied</span>';
-  return ed && ed.length ? ' <span class="qed" title="Edited on the cockpit: ' + esc(ed.join(', ')) + '">Edited</span>' : '';
-}
-/* points (edits.js): a lettered part is 1 point unless the teacher gave it more */
-function pwx(x){ var v = x && x._pts; return typeof v === 'number' && v >= 0 ? v : 1; }
-function pw(it){ return pwx(it.x); }
-function ptsOf(list){ var t = 0; list.forEach(function(it){ t += pw(it); }); return t; }
-function ptLab(n){ return n + ' pt' + (n === 1 ? '' : 's'); }
+/* a kind of question — a FAMILY: the family code(s) of its parts ("solveAdd/graphAdd"), what the teacher approves or disapproves
+   (approvals.js, 8 Nov 2026) and the skill code beside the ID when the unit gives none */
+function famKey(item){ var fs = []; partsOf(item).forEach(function(p){ var f = p && (p.fam || (p === item.part ? item.fam : '')); if (typeof f === 'string' && f && fs.indexOf(f) < 0) fs.push(f); }); if (!fs.length && typeof item.fam === 'string') fs.push(item.fam); return fs.join('/'); }
+function famOff(item){ return !!(AP && item && !item.bank && AP.famHidden(famKey(item))); }
+function qidHtml(q, cls){ return q ? '<div class="' + cls + '" translate="no"><span class="qn">' + q.id + '</span>' + (q.sk ? ' <span class="qsk">· ' + esc(q.sk) + '</span>' : '') + '</div>' : ''; }
 function qidOfItem(it){ var p = String(it.pos || '').split('.').map(Number); return qidOf(p[0], p[1], it.item); }
 var HASH = new RegExp('^#set-?(\\d{1,5})(?:-(p\\d{1,2}|miss|lesson-[a-z0-9.+-]+))?$', 'i');        /* [R2-16] anchored; [W-10] any number of parts; a lesson (7 Nov 2026) */
 var LHASH = /^#lesson-([a-z0-9.+-]+)$/i, LSEED = 0;            /* the site's link to a day's lesson, #lesson-9.03: a new set of it */
@@ -4367,14 +3917,14 @@ var h0 = fromHash(), last = load('last') || {};
 var seed = h0 ? h0.seed : (last.seed || randomSeed()), scope = h0 ? h0.scope : (SCOPES[last.scope] ? last.scope : 'all');
 var G, ITEMS, DS, EX = {}, S, HASHV = '', FLASH = {};
 function key(){ return 'set.' + seed + '.' + scope; }
-function fresh(mode){ var o = {schema: SCHEMA, cv: U.contentVersion, hash: HASHV, mode: mode || 'practice', ans:{}, res:{}, more:{}, walk:{}, walkOpen:{}, acc:0, startedAt:null, running:false, done:false}; if (ED && ED.any()) o.eh = compNow(); return o; }
-/* what a NEW set leaves out and adds (edits.js): the hidden families, the teacher's own questions. A set saved on a device keeps
-   the composition it was opened with (S.eh) until "Try a new set" or "Start over"; a set saved before there were any edits had
-   none. Printing (withSet) always uses the current one. */
+function fresh(mode){ var o = {schema: SCHEMA, cv: U.contentVersion, hash: HASHV, mode: mode || 'practice', ans:{}, res:{}, more:{}, walk:{}, walkOpen:{}, acc:0, startedAt:null, running:false, done:false}; if (AP && AP.any()) o.eh = compNow(); return o; }
+/* what a NEW set leaves out (approvals.js, 8 Nov 2026): the kinds of question the teacher disapproved. A set saved on a device
+   keeps the composition it was opened with (S.eh) until "Try a new set" or "Start over"; a set saved before any kind was
+   disapproved had none. Printing a make-up test (withSet) always uses the current one. */
 var CURCOMP = false;
-function compNow(){ return {h: ED ? ED.hiddenFams() : [], c: ED ? ED.data().custom.map(function(c){ return c.id; }) : []}; }
-function comp(){ return CURCOMP || !S ? compNow() : S.eh || {h: [], c: []}; }
-function keepIt(it, C){ if (it.custom) return C.c.indexOf(it.custom.id) >= 0; return !(it._fk && C.h.indexOf(it._fk) >= 0); }
+function compNow(){ return {h: AP ? AP.hiddenFams() : []}; }
+function comp(){ return CURCOMP || !S ? compNow() : S.eh || {h: []}; }
+function keepIt(it, C){ return !(C.h && C.h.length && C.h.indexOf(famKey(it)) >= 0); }
 function save(){
   if (!S) return;
   S.at = Date.now(); store(key(), S); store('last', {seed: seed, scope: scope}); if (scope === 'all') store('lastAll', seed);
@@ -4410,10 +3960,10 @@ function partsOf(it){ return it.type === 'parts' ? it.parts : it.type === 'solo'
 function posKey(si, ii, pi){ return si + '.' + ii + '.' + pi; }
 function famOf(o){ return (o.x || o.part || o.item).fam || 1; }
 function round2(){                                         /* the second round never repeats a round-1 question */
-  var mine = {}; G.sections.forEach(function(sec){ sec.items.forEach(function(it){ if (it.custom) return; partsOf(it).forEach(function(p){ mine[U.key(p)] = 1; }); }); });
+  var mine = {}; G.sections.forEach(function(sec){ sec.items.forEach(function(it){ partsOf(it).forEach(function(p){ mine[U.key(p)] = 1; }); }); });
   for (var t = 0; t < 40; t++){
     var g = U.generate(seed2(seed, t)), clash = false;
-    g.sections.forEach(function(sec){ sec.items.forEach(function(it){ if (it.custom) return; partsOf(it).forEach(function(p){ if (mine[U.key(p)]) clash = true; }); }); });
+    g.sections.forEach(function(sec){ sec.items.forEach(function(it){ partsOf(it).forEach(function(p){ if (mine[U.key(p)]) clash = true; }); }); });
     if (!clash) return g;
   }
   return U.generate(seed2(seed, 0));
@@ -4422,7 +3972,6 @@ function missRounds(){ return 1; }                        /* [R1-11][closing che
 function build(){
   G = U.generate(seed);
   var out = [], C = comp(), kept = function(list){ return list.filter(function(d){ return keepIt(d.it, C); }); };
-  if (ED && ED.preview && !CURCOMP) return ED.previewSections().map(function(s){ return {title: esc(s.title), items: s.items, si: -1}; });   /* the cockpit's preview pane */
   if (scope === 'all') G.sections.forEach(function(sec, si){ var its = kept(sec.items.map(function(it, ii){ return {it: it, keep: null, si: si, ii: ii}; })); if (its.length) out.push({title: esc(sec.title), items: its, si: si}); });
   else if (lessonScope(scope)) out = K.Bank.sections(scope, seed);                /* a lesson's set: 8 of its Cadence items */
   else if (scope === 'miss'){
@@ -4437,7 +3986,7 @@ function build(){
     });
   } else {
     var k = +scope.slice(1) - 1;
-    [G, round2()].forEach(function(R, r){ var sec = R.sections[k]; if (!sec) return; var its = kept(sec.items.map(function(it, ii){ return {it: it, keep: null, si: k, ii: ii}; })).filter(function(d){ return !(r && d.it.custom); }); if (its.length) out.push({title: esc(sec.title) + ' — round ' + (r + 1), items: its, si: k}); });
+    [G, round2()].forEach(function(R, r){ var sec = R.sections[k]; if (!sec) return; var its = kept(sec.items.map(function(it, ii){ return {it: it, keep: null, si: k, ii: ii}; })); if (its.length) out.push({title: esc(sec.title) + ' — round ' + (r + 1), items: its, si: k}); });
   }
   HASHV = K.fnv1a(out.map(function(s){ return s.items.map(function(d){ return partsOf(d.it).map(function(p, pi){ return d.keep && !d.keep[pi] ? '' : U.key(p); }).join(','); }).join(';'); }).join('|') + '#' + U.contentVersion).toString(36);
   return out;
@@ -4467,7 +4016,7 @@ function choicesHtml(x, id, lab, multi){
 function partHtml(p, id, solo, lab, lone){
   /* a lone graph to build (a Cadence item with one part) still says what to do: its line, without a second "1 pt" */
   if (solo && p.kind === 'nline') return '<div class="prt nlp solo" data-host="' + id + '"><div class="line nlsolo"><span class="st">' + V.line(p) + '</span></div>' + nlHtml(p, id, lab) + '</div>';
-  var line = solo ? '' : '<div class="line" id="ln' + id + '">' + (p.label && !lone ? '<b class="lab">' + p.label + '.</b>' : '<b class="lab" aria-hidden="true"></b>') + '<span class="st">' + V.line(p) + '</span>' + (p.label ? '<span class="pt">' + ptLab(pwx(p)) + '</span>' : '') + '</div>';
+  var line = solo ? '' : '<div class="line" id="ln' + id + '">' + (p.label && !lone ? '<b class="lab">' + p.label + '.</b>' : '<b class="lab" aria-hidden="true"></b>') + '<span class="st">' + V.line(p) + '</span>' + (p.label ? '<span class="pt">1 pt</span>' : '') + '</div>';
   if (p.kind === 'mc') return '<div class="prt mcp" data-host="' + id + '">' + line + choicesHtml(p, id, lab, false) + '</div>';
   if (p.kind === 'nline') return '<div class="prt nlp' + (solo ? ' solo' : '') + '" data-host="' + id + '">' + line + nlHtml(p, id, lab) + '</div>';
   return '<div class="prt' + (solo ? ' solo' : '') + '" data-host="' + id + '">' + line + inputHtml(p, id, lab) + tailHtml(id) + '</div>';
@@ -4543,26 +4092,26 @@ function fieldOf(host, id){ return $('a' + id) || host.querySelector('.ch input'
 function render(){
   DS = build(); ITEMS = []; EX = {}; RULES = {};
   var h = [], qn = 0;
-  if (!DS.length) h.push(ED && ED.preview ? '<p class="how">Open a question on the cockpit to see it here, as students see it.</p>' : '<p class="how">No misses saved on this device yet. Finish a set first, then come back to practice the ones you missed.</p>');
+  if (!DS.length) h.push('<p class="how">' + (scope === 'miss' ? 'No misses saved on this device yet. Finish a set first, then come back to practice the ones you missed.' : 'No questions here right now.') + '</p>');
   DS.forEach(function(sec, di){
     var pts = 0;
     var body = sec.items.map(function(d){
       var it = d.it; qn++;
-      var q = ['<div class="q" data-q="' + qn + '">' + qidHtml(qidOf(d.si, d.ii, it), 'qid', it)];
+      var q = ['<div class="q" data-q="' + qn + '">' + qidHtml(qidOf(d.si, d.ii, it), 'qid')];
       if (it.type === 'parts'){
         q.push('<div class="stem"><b class="num">' + qn + '.</b><span class="st">' + V.stem(it) + '</span></div>' + fig(it));
         var shown = it.parts.filter(function(p, pi){ return !d.keep || d.keep[pi]; }).length, lone = shown === 1 && it.parts.length > 1;
-        it.parts.forEach(function(p, pi){ if (d.keep && !d.keep[pi]) return; pts += pwx(p);
+        it.parts.forEach(function(p, pi){ if (d.keep && !d.keep[pi]) return; pts++;
           var id = qn + p.label, sib = pi > 0 && (!d.keep || d.keep[0]) ? qn + it.parts[0].label : null;
           ITEMS.push({id: id, lab: lone ? String(qn) : id, sec: di, type: textType(p), x: p, item: it, pos: posKey(d.si, d.ii, pi), sib: sib, sibPart: pi > 0 ? it.parts[0] : null, aShown: !d.keep || d.keep[0]});
           q.push(partHtml(p, id, false, lone ? String(qn) : id, lone)); });
       } else if (it.type === 'solo'){
-        pts += pwx(it.part); var id = String(qn); ITEMS.push({id: id, lab: id, sec: di, type: textType(it.part), x: it.part, item: it, pos: posKey(d.si, d.ii, -1), aShown: true});
-        q.push('<div class="stem" id="ln' + id + '"><b class="num">' + qn + '.</b><span class="st">' + V.stem(it) + '</span><span class="pt">' + ptLab(pwx(it.part)) + '</span></div>' + fig(it) + partHtml(it.part, id, true, id));
+        pts++; var id = String(qn); ITEMS.push({id: id, lab: id, sec: di, type: textType(it.part), x: it.part, item: it, pos: posKey(d.si, d.ii, -1), aShown: true});
+        q.push('<div class="stem" id="ln' + id + '"><b class="num">' + qn + '.</b><span class="st">' + V.stem(it) + '</span><span class="pt">1 pt</span></div>' + fig(it) + partHtml(it.part, id, true, id));
       } else {
-        pts += pwx(it); var id2 = String(qn), multi = it.type === 'multi';
+        pts++; var id2 = String(qn), multi = it.type === 'multi';
         ITEMS.push({id: id2, lab: id2, sec: di, type: multi ? 'multi' : 'mc', x: it, item: it, pos: posKey(d.si, d.ii, -1), aShown: true});
-        q.push('<div class="stem" id="ln' + id2 + '"><b class="num">' + qn + '.</b><span class="st">' + V.stem(it) + '</span><span class="pt">' + ptLab(pwx(it)) + '</span></div>' + fig(it) + '<div class="mcp" data-host="' + id2 + '">' + choicesHtml(it, id2, id2, multi) + '</div>');
+        q.push('<div class="stem" id="ln' + id2 + '"><b class="num">' + qn + '.</b><span class="st">' + V.stem(it) + '</span><span class="pt">1 pt</span></div>' + fig(it) + '<div class="mcp" data-host="' + id2 + '">' + choicesHtml(it, id2, id2, multi) + '</div>');
       }
       q.push('</div>'); return q.join('');
     }).join('');
@@ -4575,7 +4124,7 @@ function render(){
      that if I open a specific lesson it would open to that section. Likewise if I open the full practice test."): a chip under the
      title names the choice from What to practice, and a lesson's line says what it is — "Lesson 10.04 · 8 questions · today's
      practice" */
-  var PT = ptsOf(ITEMS); $('total').textContent = lessonScope(scope) ? qn + ' question' + (qn === 1 ? '' : 's') + ' · today’s practice' : PT + ' point' + (PT === 1 ? '' : 's');
+  $('total').textContent = lessonScope(scope) ? qn + ' question' + (qn === 1 ? '' : 's') + ' · today’s practice' : ITEMS.length + ' point' + (ITEMS.length === 1 ? '' : 's');
   paintChip();
   paintScopes();
   Object.keys(S.more || {}).forEach(function(id){ var b = byIdBase(id); if (b) mountExtra(b); });
@@ -4628,6 +4177,19 @@ function mountExtra(base){
   var box = $('ag' + base.id); box.innerHTML = h; box.hidden = false;
   restoreOne(EX[id]); paintItem(EX[id]);
 }
+/* "Try a similar one" never brings a disapproved kind (approvals.js, 8 Nov 2026). A question of a disapproved kind can still be on
+   the screen, in a set saved before (it keeps its questions): it gets a fresh one only where another kind of question at its
+   place is approved — the kinds a place draws are read once, from the first sets. */
+var KINDS = {};
+function kindsAt(pos){
+  var p = String(pos).split('.').slice(0, 2).join('.'); if (KINDS[p]) return KINDS[p];
+  var out = []; for (var s = 1; s <= 120; s++){ var a = atPos(U.generate(s), pos); if (a){ var f = famKey(a.item); if (out.indexOf(f) < 0) out.push(f); } }
+  return (KINDS[p] = out);
+}
+function similarOk(it){
+  if (!it || !AP || !AP.any() || (it.item && it.item.bank) || !famOff(it.item)) return true;
+  return kindsAt(it.pos).some(function(f){ return !AP.famHidden(f); });
+}
 function streakHtml(M0){ return M0.streak >= 3 ? ' <span class="streak">✓✓ ' + M0.streak + ' in a row</span>' : M0.streak === 2 ? ' <span class="streak">✓✓ 2 in a row — you’ve got this one</span>' : M0.streak === 1 ? ' <span class="streak">✓ one in a row</span>' : M0.earned ? ' <span class="streak">✓ point earned</span>' : ''; }
 /* The run (24 Oct 2026; "several kids loved the streak"): first checks right on your own, in a row, across the set — the
    questions and their fresh ones alike, in the order they are checked. A wrong first check, or a right one after help, ends
@@ -4636,7 +4198,8 @@ function runStep(indep){ if (S.mode === 'test') return; if (indep){ S.run = (S.r
 function record_(){ return load('record') || {n: 0}; }
 function runHtml(){ return S.mode === 'test' || !(S.run >= 2) ? '' : ' · <span class="nw streak">✓✓ ' + S.run + ' in a row</span>'; }   /* one atom for the translator: no span inside a span */   /* short: the bar is one phone line per piece; the record is told at the end */
 function another(baseId){
-  var b0 = byId(baseId), M0 = S.more[baseId] || (S.more[baseId] = {n: 0, seed: 0, streak: (load(String(b0.pos).indexOf('b:') === 0 ? 'bstreaks' : 'streaks') || {})[b0.pos] || 0, earned: !!res(b0).earned});
+  var b0 = byId(baseId); if (!b0 || !similarOk(b0)) return;
+  var M0 = S.more[baseId] || (S.more[baseId] = {n: 0, seed: 0, streak: (load(String(b0.pos).indexOf('b:') === 0 ? 'bstreaks' : 'streaks') || {})[b0.pos] || 0, earned: !!res(b0).earned});
   if (b0.item && b0.item.bank){                                /* a lesson item: another unused item of the same lesson and kind */
     var seenB = M0.seen || (M0.seen = []); if (M0.bank && seenB.indexOf(M0.bank) < 0) seenB.push(M0.bank);
     var inSet = ITEMS.map(function(x){ return x.item && x.item.bank ? x.item.bank.id : null; }).filter(Boolean), nb = K.Bank.similar(b0, seenB, inSet);
@@ -4649,8 +4212,10 @@ function another(baseId){
   }
   M0.n++; var s, was = M0.seed ? U.key(atPos(U.generate(M0.seed), b0.pos).x) : null, base = U.key(b0.x), tries = 0, k;
   var seen = M0.seen || (M0.seen = []); if (was && seen.indexOf(was) < 0) seen.push(was);          /* never numbers served before (7 Nov 2026, item 2) */
-  var ansOf = function(x){ try { return x && x.kind === 'nline' ? NL.keyText(NL.graphOf(x)) : U.keyText && x && x.kind !== 'mc' ? String(U.keyText(x)) : null; } catch(e){ return null; } }, baseAns = ansOf(b0.x), k2;
-  do { s = randomSeed(); tries++; k2 = atPos(U.generate(s), b0.pos).x; k = U.key(k2); } while ((s === seed || k === base || k === was || (seen.indexOf(k) >= 0 && tries < 40) || (baseAns != null && ansOf(k2) === baseAns)) && tries < 60);
+  var ansOf = function(x){ try { return x && x.kind === 'nline' ? NL.keyText(NL.graphOf(x)) : U.keyText && x && x.kind !== 'mc' ? String(U.keyText(x)) : null; } catch(e){ return null; } }, baseAns = ansOf(b0.x), k2, a2;
+  /* never a disapproved kind (approvals.js, 8 Nov 2026): the draw goes on until the kind is approved (similarOk said one is) */
+  do { s = randomSeed(); tries++; a2 = atPos(U.generate(s), b0.pos); k2 = a2.x; k = U.key(k2); } while ((famOff(a2.item) && tries < 400) || ((s === seed || k === base || k === was || (seen.indexOf(k) >= 0 && tries < 40) || (baseAns != null && ansOf(k2) === baseAns)) && tries < 60));
+  if (famOff(a2.item)){ M0.n--; if (!M0.n && !M0.seed) delete S.more[baseId]; return; }
   seen.push(k); if (seen.length > 40) seen.shift();   /* never the same question again — nor the same answer (30 Oct 2026: a Hint that ended "5 tanks" was followed by a fresh one whose answer was 5) */
   M0.seed = s; save();
   mountExtra(b0); paintItem(b0);
@@ -4783,9 +4348,9 @@ function cardHtml(it, R, f){
 }
 function keyHtml(it){
   if (it.type === 'nline') return NL.keyHtml(it.x);
-  if (it.type === 'mc') return '<b>' + LET[it.x.correct] + '.</b> ' + V.opt(it.x, it.x.correct);
-  if (it.type === 'multi') return it.x.correct.map(function(k){ return '<b>' + LET[k] + '.</b> ' + V.opt(it.x, k); }).join('&nbsp;&nbsp; ');
-  return V.key(it.x);
+  if (it.type === 'mc') return '<b>' + LET[it.x.correct] + '.</b> ' + vOpt(it.x, it.x.correct);
+  if (it.type === 'multi') return it.x.correct.map(function(k){ return '<b>' + LET[k] + '.</b> ' + vOpt(it.x, k); }).join('&nbsp;&nbsp; ');
+  return it.x && it.x._ekey != null ? it.x._ekey : V.key(it.x);      /* a pinned test's tweaked key (teacher.js) */
 }
 function solOf(it){ try { var a = authored(it); return a && a.steps ? a.steps : U.solution(it.x, it.type, ctxOf(it)) || (it.type === 'nline' ? NL.rungs(it.x).steps : null); } catch(e){ return it.type === 'nline' ? NL.rungs(it.x).steps : null; } }
 function authored(it){ try { var a = U.rungs ? U.rungs(it.x, it.type, ctxOf(it)) || null : null; return a || (it.type === 'nline' ? NL.rungs(it.x) : null); } catch(e){ return it.type === 'nline' ? NL.rungs(it.x) : null; } }
@@ -4890,9 +4455,9 @@ function paintItem(it){
      move on. No penalty question, ever: a fresh one replaces the last in the question's own box, and nothing is added to
      the set. The ladder stays beside Check for a second try. */
   var simB = function(base, go){ return '<button type="button"' + (go ? ' class="go"' : '') + ' data-another="' + base + '">Try a similar one</button>'; };
-  var one = !!(it.item && it.item.custom);                                              /* the teacher's own question (edits.js): no fresh one */
-  if (R.v && R.v !== 'right'){ b = one ? ['<button type="button" class="go" data-moveon="' + it.id + '">Move on</button>'] : [simB(it.extra ? it.base : it.id, true), '<button type="button" data-moveon="' + (it.extra ? it.base : it.id) + '">Move on</button>']; }
-  else if (one){}
+  var none = !similarOk(it.extra ? byId(it.base) : it);                                 /* every kind of this question is disapproved (approvals.js): no fresh one */
+  if (R.v && R.v !== 'right'){ b = none ? ['<button type="button" class="go" data-moveon="' + (it.extra ? it.base : it.id) + '">Move on</button>'] : [simB(it.extra ? it.base : it.id, true), '<button type="button" data-moveon="' + (it.extra ? it.base : it.id) + '">Move on</button>']; }
+  else if (none){}
   else if (!it.extra && (missed || owed) && !S.more[it.id]) b.push(simB(it.id, R.v === 'right' || all || owed));
   else if (it.extra && (R.v || R.shown)) b.push(simB(it.base, R.v === 'right' || !res(byId(it.base)).earned));
   /* the ladder's first rung sits beside Check ([D-8]); once open, the next rung's button is at the foot of the rungs */
@@ -4927,7 +4492,7 @@ function paintSections(){                                  /* [J-5] each section
   if (!DS) return;
   DS.forEach(function(sec, di){
     var el = $('sp' + di); if (!el) return;
-    var its = ITEMS.filter(function(x){ return x.sec === di; }), done = ptsOf(its.filter(function(x){ var R = S.res[x.id]; return R && R.v === 'right'; }));
+    var its = ITEMS.filter(function(x){ return x.sec === di; }), done = its.filter(function(x){ var R = S.res[x.id]; return R && R.v === 'right'; }).length;
     el.textContent = (S.mode === 'test' && !S.done) || (!done && !S.done) ? sec.pts + ' point' + (sec.pts === 1 ? '' : 's') : done + ' / ' + sec.pts + (done === sec.pts ? ' ✓' : '');
     el.classList.toggle('alldone', done === sec.pts);
   });
@@ -5085,7 +4650,7 @@ function start(){ if (S.running || S.done) return; S.running = true; S.startedAt
 function pause(){ if (!S.running) return; S.acc = elapsed(); S.running = false; S.startedAt = null; save(); paintBar(); }
 function tally(){
   var first = 0, helped = 0, done = 0, earned = 0, bySec = DS.map(function(){ return {got: 0, of: 0, help: 0, earned: 0, alone: 0}; });
-  ITEMS.forEach(function(it){ var R = S.res[it.id], w = pw(it); bySec[it.sec].of += w; if (R && R.first === true){ first += w; bySec[it.sec].got += w; if (R.helped){ helped += w; bySec[it.sec].help += w; } else bySec[it.sec].alone += w; } if (R && R.earned){ earned += w; bySec[it.sec].earned += w; } if (R && R.v === 'right') done += w; });
+  ITEMS.forEach(function(it){ var R = S.res[it.id]; bySec[it.sec].of++; if (R && R.first === true){ first++; bySec[it.sec].got++; if (R.helped){ helped++; bySec[it.sec].help++; } else bySec[it.sec].alone++; } if (R && R.earned){ earned++; bySec[it.sec].earned++; } if (R && R.v === 'right') done++; });
   return {first: first, helped: helped, done: done, earned: earned, bySec: bySec};
 }
 /* "Question 4 of 16" (7 Nov 2026, item 5): where the student is, as words and a thin navy bar in the bar area (never a ring) —
@@ -5103,9 +4668,9 @@ function paintProgress(){
 var progRaf = 0; window.addEventListener('scroll', function(){ if (progRaf) return; progRaf = requestAnimationFrame(function(){ progRaf = 0; if (DS) paintProgress(); }); }, {passive: true});
 document.addEventListener('focusin', function(e){ if (DS && e.target && e.target.closest && e.target.closest('#paper')) paintProgress(); });
 function paintScore(light){
-  var t = tally(), sc = $('score'), NP = ITEMS.length, N = ptsOf(ITEMS), nb = function(s){ return '<span class="nw">' + s + '</span>'; };
-  if (S.mode === 'test' && !S.done) sc.innerHTML = nb('<b>' + ITEMS.filter(answered).length + ' of ' + NP + '</b> answered') + ' · ' + nb('marked when you finish');
-  else if (!Object.keys(S.res).length && !S.done) sc.innerHTML = nb('<b>' + NP + '</b> part' + (NP === 1 ? '' : 's') + ' to answer');
+  var t = tally(), sc = $('score'), N = ITEMS.length, nb = function(s){ return '<span class="nw">' + s + '</span>'; };
+  if (S.mode === 'test' && !S.done) sc.innerHTML = nb('<b>' + ITEMS.filter(answered).length + ' of ' + N + '</b> answered') + ' · ' + nb('marked when you finish');
+  else if (!Object.keys(S.res).length && !S.done) sc.innerHTML = nb('<b>' + N + '</b> part' + (N === 1 ? '' : 's') + ' to answer');
   else sc.innerHTML = nb('<b>' + t.earned + '</b> ' + (S.mode === 'test' ? 'right' : 'earned')) + (t.helped ? bulb(t.helped) : '') + ' · ' + nb('<b>' + t.done + '</b> of ' + N + ' done') + runHtml();   /* [J-2]; the points earned on your own (24 Oct 2026) */
   if (light) return;
   paintResult(t); paintScopes(); paintSections();
@@ -5128,10 +4693,10 @@ function hist(){ return load('hist') || {}; }
 function paintResult(t){
   var box = $('result');
   if (!S.done){ box.hidden = true; return; }
-  var N = ptsOf(ITEMS), test = S.mode === 'test';
+  var N = ITEMS.length, test = S.mode === 'test';
   var rows = DS.map(function(s, k){ return '<tr><td>' + s.title + '</td><td class="r">' + (test ? t.bySec[k].got : t.bySec[k].earned) + ' / ' + t.bySec[k].of + '</td>' + (test ? '' : '<td class="r">' + t.bySec[k].got + '</td><td class="r">' + t.bySec[k].help + '</td>') + '</tr>'; }).join('');
   var notYet = ITEMS.filter(function(it){ var R = S.res[it.id]; return !R || R.v !== 'right'; });
-  var weak = {}; DS.forEach(function(s, k){ if (scope === 'all' && t.bySec[k].of && t.bySec[k].got / t.bySec[k].of < 0.8 && s.si != null && s.si >= 0 && G0.sections[s.si]) weak[s.si] = 1; });   /* by the unit's section (a section the edits empty is not drawn) */
+  var weak = {}; DS.forEach(function(s, k){ if (scope === 'all' && t.bySec[k].of && t.bySec[k].got / t.bySec[k].of < 0.8 && s.si != null && s.si >= 0 && G0.sections[s.si]) weak[s.si] = 1; });   /* by the unit's section (a section whose every kind is disapproved is not drawn) */
   var nm = Object.keys(misses()).length, perfect = t.earned === N && N > 0, alone = perfect && t.first === N && !t.helped;
   /* "Try a new set" (7 Nov 2026, the site review): what New set does behind Set · Change — a new random set, this practice
      choice and this mode (My misses opens the whole test, as New set does). In "Check as I go" on the whole test it is the
@@ -5195,7 +4760,7 @@ function finish(){
   });
   if (S.mode !== 'test' && (S.best || 0) >= 2 && S.best > record_().n){ store('record', {n: S.best, seed: seed, at: S.finishedAt}); S.newRecord = true; }   /* the device's record run for this unit */
   var t = tally(), H = hist(), hk = scope + '.' + S.mode;
-  H[hk] = [{seed: seed, first: t.first, earned: t.earned, of: ptsOf(ITEMS), time: S.acc, at: S.finishedAt}].concat(H[hk] || []).slice(0, 5); store('hist', H);
+  H[hk] = [{seed: seed, first: t.first, earned: t.earned, of: ITEMS.length, time: S.acc, at: S.finishedAt}].concat(H[hk] || []).slice(0, 5); store('hist', H);
   save(); paintAll(); window.scrollTo(0, 0); var rb = $('result'); if (rb){ rb.setAttribute('tabindex', '-1'); rb.focus({preventScroll: true}); }
 }
 
@@ -5218,14 +4783,14 @@ function openSet(n, sc, mode){
   var saved = load(key());
   if (scope === 'miss' && !(saved && saved.res)){ var pos = Object.keys(misses()); if (!pos.length){ scope = 'all'; saved = load(key()); } }
   S = fresh(keepMode);
-  var loaded = !!(saved && saved.res && saved.schema === SCHEMA); if (loaded){ S = earnedOf(saved); if (!S.eh) S.eh = {h: [], c: []}; }
+  var loaded = !!(saved && saved.res && saved.schema === SCHEMA); if (loaded){ S = earnedOf(saved); if (!S.eh) S.eh = {h: []}; }   /* a set saved before any kind was disapproved keeps all its questions */
   if (scope === 'miss' && !S.pos) S.pos = Object.keys(misses());
   S.more = S.more || {}; S.walk = S.walk || {}; S.walkOpen = S.walkOpen || {}; S.running = false; S.startedAt = null; FLASH = {};
   render(); paintHead();
   NOTICE = '';
   if (loaded && S.hash && S.hash !== HASHV){ var m0 = S.mode, p0 = S.pos; S = fresh(m0); if (p0) S.pos = p0; render(); NOTICE = 'This set was updated since you last opened it, so it starts fresh.'; }   /* [W-2] never old answers on new questions; only for a set this device saved before [B2] */
   S.hash = HASHV;
-  if (!(ED && ED.preview)) try { history.replaceState(null, '', hashOf(seed, scope)); } catch(e){}
+  try { history.replaceState(null, '', hashOf(seed, scope)); } catch(e){}
   LSEED = 0;
   restore(); save(); paintAll(); window.scrollTo(0, 0);
   $('notice').textContent = NOTICE; $('notice').hidden = !NOTICE;
@@ -5272,6 +4837,9 @@ $('bAgain').addEventListener('click', function(){ moreClose(); ask('Clear your a
    TEST as n forms — the make-up printing, headed "Test · Form A" instead of "Make-up" (the set number on the key only,
    25 Oct 2026). Teacher copies only. */
 window.PracticePrint = {forms: function(n, label){ if (teacherPage()) showPrint('mk' + Math.min(5, Math.max(1, n | 0)), label || 'Test'); }};
+/* the teacher copy's tools (teacher.js: Approve questions, Tests A and B) draw with this page: a teacher page only */
+if (teacherPage()) window.PracticeKit = {famKey: famKey, partsOf: partsOf, textType: textType, keyHtml: function(it){ return keyHtml(it); }, sample: sampleOf, form: pinnedForm,
+  qid: function(si, ii, item){ return qidOf(si, ii, item); }, plain: plainText, LET: LET, sections: G0.sections.map(function(s, si){ return {title: s.title, si: si, n: s.items.length}; })};
 window.addEventListener('hashchange', function(){ var h = fromHash(); if (h && (h.seed !== seed || h.scope !== scope)) openSet(h.seed, h.scope); });
 window.addEventListener('storage', function(e){                                       /* [R2-N4] two tabs on one set stay in step — without writing back [B1] */
   if (e.key !== PRE + key() || !e.newValue) return;
@@ -5290,7 +4858,7 @@ document.addEventListener('visibilitychange', function(){ if (document.hidden &&
    printout is the same set as the screen (the same items, drawn by the same view functions; the key is the same key the
    page marks with), shown first as a preview with its own Print button. With Português on, its lines print too. */
 function pq(d, qn){
-  var it = d.it, h = '<div class="pq"><div class="pqh">' + qidHtml(qidOf(d.si, d.ii, it), 'pqid', it) + '<div class="stem"><b class="num">' + qn + '.</b><span class="st">' + V.stem(it) + '</span></div>' + fig(it) + '</div>';   /* the stem and its figure stay together; parts may go to the next page */
+  var it = d.it, h = '<div class="pq"><div class="pqh">' + qidHtml(qidOf(d.si, d.ii, it), 'pqid') + '<div class="stem"><b class="num">' + qn + '.</b><span class="st">' + V.stem(it) + '</span></div>' + fig(it) + '</div>';   /* the stem and its figure stay together; parts may go to the next page */
   var line = function(p, lab){ return '<div class="line">' + (lab ? '<b class="lab">' + lab + '.</b>' : '') + '<span class="st">' + V.line(p) + '</span></div>'; };
   var blank = function(p){ var u = V.unit(p), pre = V.pre(p); return '<div class="pans"><span class="pal bt">Answer:</span> ' + (pre ? '<span class="pre">' + pre + '</span>' : '') + (V.blank ? V.blank(p) || '<span class="pblank"></span>' : '<span class="pblank"></span>') + (u ? ' <span class="unit">' + esc(u) + '</span>' : '') + '</div><div class="pwork"></div>'; };
   var choices = function(x){ return '<div class="pchoices">' + x.opts.map(function(o, k){ return '<div class="pch"><span class="pbox' + (it.type === 'multi' ? ' sq' : '') + '"></span><span class="cl">' + LET[k] + '.</span><span class="cv">' + V.opt(x, k) + '</span></div>'; }).join('') + '</div>'; };
@@ -5312,7 +4880,7 @@ function worksheetHtml(){
   return h.join('');
 }
 function keyListHtml(){
-  var rows = ITEMS.map(function(it){ var q = qidOfItem(it), w = pw(it), ed = edMark(it.item).replace(/<[^>]*>/g, '').trim(); return '<tr><td class="pk">' + esc(it.lab) + (w !== 1 ? ' <span class="kpts">(' + ptLab(w) + ')</span>' : '') + '</td><td class="kv">' + keyHtml(it) + '</td><td class="pid" translate="no">' + (q ? q.id : '') + (ed ? '<br><span class="ked">' + esc(ed) + '</span>' : '') + '</td></tr>'; }).join('');
+  var rows = ITEMS.map(function(it){ var q = qidOfItem(it); return '<tr><td class="pk">' + esc(it.lab) + '</td><td class="kv">' + keyHtml(it) + '</td><td class="pid" translate="no">' + (q ? q.id : '') + '</td></tr>'; }).join('');
   return '<div class="pkey"><h2 class="psec"><span class="bt">Answer key</span></h2><p class="pmeta"><span class="bt">' + setLine() + '</span></p><table class="ptab"><tbody>' + rows + '</tbody></table></div>';
 }
 function yourAnswer(it){
@@ -5329,7 +4897,7 @@ function verdict(it){
   return R.v === 'form' ? 'Almost' : '✗ Not yet';
 }
 function resultsHtml(){
-  var t = tally(), N = ptsOf(ITEMS), test = S.mode === 'test';
+  var t = tally(), N = ITEMS.length, test = S.mode === 'test';
   var h = printHead('Results') + '<p class="pmeta"><span class="bt">' + setLine() + ' · ' + (test ? 'Like the real test' : 'Check as I go') + '</span></p>';
   h += '<p class="pscore"><span class="bt"><b>' + t.earned + ' / ' + N + '</b> ' + (test ? 'right' : 'points earned on your own') + '</span>' + (test ? '' : '<span class="bt">' + t.first + ' / ' + N + ' right on the first try' + (t.helped ? ' ' + bulb(t.helped) : '') + '</span>') + '<span class="bt">' + t.done + ' of ' + N + ' done · time on the clock ' + fmt(elapsed()) + '</span>' +
     (S.done ? '' : '<span class="bt">Not finished yet.</span>') + '</p>';
@@ -5362,32 +4930,39 @@ function withSet(s, fn){                                   /* run fn with the pa
 function collect(){                                        /* the items of DS, as render() lists them, without touching the page */
   var qn = 0;
   DS.forEach(function(sec, di){ sec.items.forEach(function(d){
+    if (d.out) return;                                     /* a question the teacher left off a pinned test (teacher.js): no number, no point */
     var it = d.it; qn++;
     if (it.type === 'parts'){
       var shown = it.parts.filter(function(p, pi){ return !d.keep || d.keep[pi]; }).length, lone = shown === 1 && it.parts.length > 1;
       it.parts.forEach(function(p, pi){ if (d.keep && !d.keep[pi]) return; var id = qn + p.label;
-        ITEMS.push({id: id, lab: lone ? String(qn) : id, sec: di, type: textType(p), x: p, item: it, pos: posKey(d.si, d.ii, pi), aShown: true}); });
-    } else if (it.type === 'solo'){ var id1 = String(qn); ITEMS.push({id: id1, lab: id1, sec: di, type: textType(it.part), x: it.part, item: it, pos: posKey(d.si, d.ii, -1), aShown: true}); }
-    else { var id2 = String(qn); ITEMS.push({id: id2, lab: id2, sec: di, type: it.type === 'multi' ? 'multi' : 'mc', x: it, item: it, pos: posKey(d.si, d.ii, -1), aShown: true}); }
+        ITEMS.push({id: id, lab: lone ? String(qn) : id, sec: di, type: textType(p), x: p, item: it, pos: posKey(d.si, d.ii, pi), aShown: true, k: d.k}); });
+    } else if (it.type === 'solo'){ var id1 = String(qn); ITEMS.push({id: id1, lab: id1, sec: di, type: textType(it.part), x: it.part, item: it, pos: posKey(d.si, d.ii, -1), aShown: true, k: d.k}); }
+    else { var id2 = String(qn); ITEMS.push({id: id2, lab: id2, sec: di, type: it.type === 'multi' ? 'multi' : 'mc', x: it, item: it, pos: posKey(d.si, d.ii, -1), aShown: true, k: d.k}); }
   }); });
 }
+/* a pinned test's own words (teacher.js, Tests A and B, 8 Nov 2026): a question the teacher tweaked carries them — its words
+   (_est), a part's line (_eln), a part's key (_ekey), a choice's words (_eopt); teacher.js has cleaned them to the kit's own markup.
+   Everything else is the unit's. Only the items of a pinned form ever carry them. */
+function vStem(it){ return it && it._est != null ? it._est : V.stem(it); }
+function vLine(p){ return p && p._eln != null ? p._eln : V.line(p); }
+function vOpt(x, k){ return x && x._eopt && x._eopt[k] != null ? x._eopt[k] : V.opt(x, k); }
 /* A printed test form — a ruling-49 test or a make-up — has the paper's shape (A7 Unit 6's review, 25 Oct 2026): the points
    on the head, on every section and on every part; the show-your-work and follow-through lines the paper prints (from the
    teacher copy's TEACHER_TEST); work space and no answer line (house rule 2). The student's sheet carries NO set number: the
    student page opens any set with its worked answers (#set-N), so a set number on a test is its answer key. The number is on
    the teacher's key, with a score tracker by benchmark. */
 function pqTest(d, qn){
-  var it = d.it, one = function(x){ return '<span class="pt">' + ptLab(pwx(x)) + '</span>'; };
-  var h = '<div class="pq"><div class="pqh">' + qidHtml(qidOf(d.si, d.ii, it), 'pqid') + '<div class="stem"><b class="num">' + qn + '.</b><span class="st">' + V.stem(it) + '</span>' + (it.type === 'parts' ? '' : one(it.type === 'solo' ? it.part : it)) + '</div>' + fig(it) + '</div>';
-  var line = function(p, lab){ return '<div class="line">' + (lab ? '<b class="lab">' + lab + '.</b>' : '') + '<span class="st">' + V.line(p) + '</span>' + one(p) + '</div>'; };
-  var choices = function(x){ return '<div class="pchoices">' + x.opts.map(function(o, k){ return '<div class="pch"><span class="pbox' + (it.type === 'multi' ? ' sq' : '') + '"></span><span class="cl">' + LET[k] + '.</span><span class="cv">' + V.opt(x, k) + '</span></div>'; }).join('') + '</div>'; };
-  if (it.type === 'parts') it.parts.forEach(function(p, pi){ if (d.keep && !d.keep[pi]) return; h += '<div class="ppart">' + line(p, p.label) + (p.kind === 'mc' ? choices(p) : p.kind === 'nline' ? NL.blankHtml(p) : '<div class="pwork"></div>') + '</div>'; });
-  else if (it.type === 'solo') h += '<div class="ppart">' + (it.part.kind === 'nline' ? '<div class="line"><span class="st">' + V.line(it.part) + '</span></div>' + NL.blankHtml(it.part) : '<div class="pwork"></div>') + '</div>';
-  else h += '<div class="ppart">' + choices(it) + '</div>';
+  var it = d.it, one = '<span class="pt">1 pt</span>';
+  var h = '<div class="pq"' + (d.k != null ? ' data-k="' + d.k + '"' : '') + '><div class="pqh">' + qidHtml(qidOf(d.si, d.ii, it), 'pqid') + '<div class="stem"><b class="num">' + qn + '.</b><span class="st">' + vStem(it) + '</span>' + (it.type === 'parts' ? '' : one) + '</div>' + fig(it) + '</div>';
+  var line = function(p, lab){ return '<div class="line">' + (lab ? '<b class="lab">' + lab + '.</b>' : '') + '<span class="st">' + vLine(p) + '</span>' + one + '</div>'; };
+  var choices = function(x){ return '<div class="pchoices">' + x.opts.map(function(o, k){ return '<div class="pch"><span class="pbox' + (it.type === 'multi' ? ' sq' : '') + '"></span><span class="cl">' + LET[k] + '.</span><span class="cv">' + vOpt(x, k) + '</span></div>'; }).join('') + '</div>'; };
+  if (it.type === 'parts') it.parts.forEach(function(p, pi){ if (d.keep && !d.keep[pi]) return; h += '<div class="ppart" data-p="' + pi + '">' + line(p, p.label) + (p.kind === 'mc' ? choices(p) : p.kind === 'nline' ? NL.blankHtml(p) : '<div class="pwork"></div>') + '</div>'; });
+  else if (it.type === 'solo') h += '<div class="ppart" data-p="0">' + (it.part.kind === 'nline' ? '<div class="line"><span class="st">' + vLine(it.part) + '</span></div>' + NL.blankHtml(it.part) : '<div class="pwork"></div>') + '</div>';
+  else h += '<div class="ppart" data-p="0">' + choices(it) + '</div>';
   return h + '</div>';
 }
 function testFormHtml(label, form){
-  var T = window.TEACHER_TEST || {}, h = [], qn = 0, total = ptsOf(ITEMS);
+  var T = window.TEACHER_TEST || {}, h = [], qn = 0, total = ITEMS.length;
   /* ruling 54 (25 Oct 2026): the title says what it is ("A7 Unit 6 Test", "… Make-up Test"); the line under it, the unit's
      name, the form and the points — and "two class periods" for a two-period test; a one-period test says nothing about
      its length (Croix, 25 Oct 2026: "I don't need that text at all") — as the paper's head and teacher.js's */
@@ -5402,34 +4977,63 @@ function testFormHtml(label, form){
   (T.notes || []).map(esc).concat(U.notesPrint || U.notes || []).forEach(function(n){ var t = same(n); if (t && said.indexOf(t) < 0){ said.push(t); notes.push(n); } });
   if (notes.length) h.push('<p class="pnotes">' + notes.map(function(n){ return '<span class="pinote">' + n + '</span>'; }).join(' ') + '</p>');
   DS.forEach(function(sec, si){
-    var pts = ptsOf(ITEMS.filter(function(it){ return it.sec === si; }));
-    h.push('<h2 class="psec"><span class="bt">' + sec.title + '</span><span class="ppts">' + pts + (pts === 1 ? ' point' : ' points') + '</span></h2>');
+    var pts = ITEMS.filter(function(it){ return it.sec === si; }).length;
+    h.push('<h2 class="psec"' + (sec.si != null ? ' data-si="' + sec.si + '"' : '') + '><span class="bt">' + sec.title + '</span>' + (pts ? '<span class="ppts">' + pts + (pts === 1 ? ' point' : ' points') + '</span>' : '') + '</h2>');
     /* no follow-through line under a section, nor anywhere (7 Nov 2026, Croix: the line goes "across everything"; ruling 19's scoring stands) */
-    sec.items.forEach(function(d){ qn++; h.push(pqTest(d, qn)); });
+    sec.items.forEach(function(d){ if (d.out){ h.push('<div class="pq pqout" data-k="' + d.k + '"></div>'); return; } qn++; h.push(pqTest(d, qn)); });
   });
   return h.join('');
 }
-function testKeyHtml(form, s){
+function testKeyHtml(form, meta){
   var T = window.TEACHER_TEST || {};
-  var rows = ITEMS.map(function(it){ var q = qidOfItem(it), w = pw(it), ed = edMark(it.item).replace(/<[^>]*>/g, '').trim(); return '<tr><td class="pk">' + esc(it.lab) + (w !== 1 ? ' <span class="kpts">(' + ptLab(w) + ')</span>' : '') + '</td><td class="kv">' + keyHtml(it) + '</td><td class="pid" translate="no">' + (q ? q.id : '') + (ed ? '<br><span class="ked">' + esc(ed) + '</span>' : '') + '</td></tr>'; }).join('');
+  var rows = ITEMS.map(function(it){ var q = qidOfItem(it); return '<tr><td class="pk">' + esc(it.lab) + '</td><td class="kv">' + keyHtml(it) + '</td><td class="pid" translate="no">' + (q ? q.id : '') + '</td></tr>'; }).join('');
   var bySec = DS.map(function(sec, si){ var its = ITEMS.filter(function(it){ return it.sec === si; }), qs = [];
-    its.forEach(function(it){ var q = String(it.lab).replace(/[a-z]+$/, ''); if (qs.indexOf(q) < 0) qs.push(q); }); return {title: sec.title, qs: qs, pts: ptsOf(its)}; });
-  var order = T.tracker_order || [], tr = T.tracker || {};      /* the test's benchmarks, section by section, where the spec's tracker agrees with the page */
-  var byBm = order.length === bySec.length && order.every(function(bm, si){ return tr[bm] === bySec[si].pts; });
+    its.forEach(function(it){ var q = String(it.lab).replace(/[a-z]+$/, ''); if (qs.indexOf(q) < 0) qs.push(q); }); return {title: sec.title, si: sec.si, qs: qs, pts: its.length}; }).filter(function(b){ return b.pts; });
+  /* the test's benchmarks, section by section, where the spec's tracker agrees with the unit's own sections (their points on
+     every set): a section with a question left off (Tests A and B) or a kind disapproved keeps its benchmark, with the points
+     this form has */
+  var order = T.tracker_order || [], tr = T.tracker || {}, full = G0.sections.map(function(s){ return s.items.reduce(function(t, it){ return t + partsOf(it).length; }, 0); });
+  var byBm = order.length === full.length && order.every(function(bm, k){ return tr[bm] === full[k]; }) && bySec.every(function(b){ return b.si != null && b.si >= 0 && b.si < order.length; });
   var tracker = '<div class="ptrk"><h2 class="psec"><span class="bt">Score tracker</span></h2><table class="ptab ptrack"><thead><tr><th>' + (byBm ? 'Benchmark' : 'Section') + '</th><th>Questions</th><th>Possible</th><th>Earned</th></tr></thead><tbody>' +
-    bySec.map(function(b, si){ return '<tr><td>' + (byBm ? esc(order[si]) : b.title) + '</td><td>' + b.qs.join(', ') + '</td><td>' + b.pts + '</td><td></td></tr>'; }).join('') +
-    '<tr><td><b>Total</b></td><td></td><td><b>' + ptsOf(ITEMS) + '</b></td><td></td></tr></tbody></table></div>';
-  return '<div class="pkey"><h2 class="psec"><span class="bt">Answer key — Form ' + form + '</span></h2><p class="pmeta"><span class="bt">Set ' + s + ' · ' + esc(SCOPES[scope]) + '</span></p>' +
+    bySec.map(function(b){ return '<tr><td>' + (byBm ? esc(order[b.si]) : b.title) + '</td><td>' + b.qs.join(', ') + '</td><td>' + b.pts + '</td><td></td></tr>'; }).join('') +
+    '<tr><td><b>Total</b></td><td></td><td><b>' + ITEMS.length + '</b></td><td></td></tr></tbody></table></div>';
+  return '<div class="pkey"><h2 class="psec"><span class="bt">Answer key — Form ' + form + '</span></h2>' + (meta ? '<p class="pmeta"><span class="bt">' + meta + '</span></p>' : '') +
     (T.follow_through_key ? '<p class="pmeta kft">' + esc(T.follow_through_key) + '</p>' : '') + '<table class="ptab pkrows"><tbody>' + rows + '</tbody></table>' + tracker + '</div>';
 }
 function makeupHtml(n, label){
   label = label || 'Make-up';                              /* 'Test' on a ruling-49 teacher copy: the unit test IS a random set of this page */
   var seeds = [seed], guard = 0;
   while (seeds.length < n && guard++ < 50){ var r = randomSeed(); if (seeds.indexOf(r) < 0) seeds.push(r); }
-  var forms = seeds.map(function(s, k){ return withSet(s, function(){ return {ws: testFormHtml(label, LET[k]), key: testKeyHtml(LET[k], s), form: LET[k], seed: s}; }); });
+  var forms = seeds.map(function(s, k){ return withSet(s, function(){ return {ws: testFormHtml(label, LET[k]), key: testKeyHtml(LET[k], 'Set ' + s + ' · ' + esc(SCOPES[scope])), form: LET[k], seed: s}; }); });
   var h = forms.map(function(f, k){ return (k ? '<div class="pbreak"></div>' : '') + '<div class="pform tpage" data-form="' + f.form + '">' + f.ws + '</div>'; }).join('');
   h += forms.map(function(f){ return '<div class="pbreak"></div><div class="pform pkeyform tpage">' + f.key + '</div>'; }).join('');
   return h;
+}
+/* ---- what the teacher copy's own tools draw with (teacher.js, 8 Nov 2026: Approve questions, Tests A and B) — on a teacher page
+   only. The tools are teacher.js's; this page lends them its drawing, so a sample, a pinned form and its key are exactly what a
+   student sees and what prints. */
+/* a pinned test form: the sections teacher.js gives ([{title, si, items: [{it, si, ii, k, out}]}]) as the paper and its key, with
+   the make-ups' own builders (a left-off question, out, is an empty .pqout in its place for the editor to fill) */
+function pinnedForm(secs, o){
+  var keep = {DS: DS, ITEMS: ITEMS, EX: EX}, out;
+  try {
+    DS = secs; ITEMS = []; EX = {}; collect();
+    out = {test: testFormHtml(o.label || 'Test', o.form), key: testKeyHtml(o.form, o.meta || ''), points: ITEMS.length,
+      rows: ITEMS.map(function(it){ return {k: it.k, lab: it.lab, type: it.type, label: it.x && it.x.label || '', key: keyHtml(it)}; })};
+  } finally { DS = keep.DS; ITEMS = keep.ITEMS; EX = keep.EX; }
+  return out;
+}
+/* a question as students see it, with nothing to answer: its words, its figure, each part's line, its choices, a number line
+   to graph on; and its answer, part by part */
+function sampleOf(it){
+  var lineOf = function(p, lab){ return '<div class="line">' + (lab ? '<b class="lab">' + lab + '.</b>' : '') + '<span class="st">' + V.line(p) + '</span></div>'; };
+  var chs = function(x, multi){ return '<div class="choices">' + x.opts.map(function(o, k){ return '<div class="ch"><span class="box' + (multi ? ' sq' : '') + '"></span><span class="cl">' + LET[k] + '.</span><span class="cv">' + V.opt(x, k) + '</span></div>'; }).join('') + '</div>'; };
+  var nl = function(p){ return '<div class="nlw">' + NL.svg(p, null, {mode: 'blank'}) + '</div>'; };
+  var h = '<div class="stem"><span class="st">' + V.stem(it) + '</span></div>' + fig(it), keys = [];
+  if (it.type === 'parts') it.parts.forEach(function(p){ h += '<div class="prt' + (p.kind === 'mc' ? ' mcp' : p.kind === 'nline' ? ' nlp' : '') + '">' + lineOf(p, p.label) + (p.kind === 'mc' ? chs(p, false) : p.kind === 'nline' ? nl(p) : '') + '</div>'; keys.push({lab: p.label, key: keyHtml({type: textType(p), x: p})}); });
+  else if (it.type === 'solo'){ if (it.part.kind === 'nline') h += '<div class="prt nlp solo">' + lineOf(it.part, '') + nl(it.part) + '</div>'; keys.push({lab: '', key: keyHtml({type: textType(it.part), x: it.part})}); }
+  else { h += '<div class="mcp">' + chs(it, it.type === 'multi') + '</div>'; keys.push({lab: '', key: keyHtml({type: it.type === 'multi' ? 'multi' : 'mc', x: it})}); }
+  return {html: h, keys: keys};
 }
 function ask0(text, opts){                                   /* the print choice, in the same bar as the other questions */
   var c = $('confirm'); c.hidden = false; document.body.classList.add('asking');
@@ -5522,13 +5126,7 @@ $('eyebrow').innerHTML = U.eyebrow; $('h1').innerHTML = U.h1;   /* openSet repai
    of questions as the unit test, new numbers every set.)"): only a unit's notes — how to write an answer — and none at all hides it. */
 var notesHtml = (U.notes || []).map(function(n){ return '<span class="pinote">' + n + '</span>'; }).join('');
 $('intro').innerHTML = notesHtml; $('intro').hidden = !notesHtml;
-/* the cockpit's preview pane (edits.js, ?kedit=1): the questions the editor is on, drawn by this page as students see them */
-if (ED && ED.preview) window.PracticePreview = function(){ S = fresh('practice'); FLASH = {}; render(); restore(); paintAll(); $('notice').hidden = true; };
 openSet(seed, scope);
-/* a teacher copy whose real test is the build's fixed paper (Forms A/B from unit.py): the edits reach this page's sets, its
-   worksheets and make-ups, not that paper */
-if (teacherPage() && ED && ED.any() && window.TEACHER_TEST && !window.TEACHER_TEST.random) (function tb(n){ var t = document.querySelector('.teacherbar .tbtxt'); if (!t){ if (n < 80) setTimeout(function(){ tb(n + 1); }, 50); return; }
-  if (t.querySelector('.tbed')) return; var e = document.createElement('span'); e.className = 'tbed'; e.textContent = ' Your edits from the cockpit are on this page, its worksheets and its make-ups; the real test’s printed forms are the build’s fixed paper (Choose questions… leaves one out).'; t.appendChild(e); })(0);
 if (K.Bi && U.second) K.Bi.mount(U, (window.KitLang || {})[U.second.code]);   /* the second-language toggle (kit/bilingual.js), when the unit has one; after the first set is drawn */
 })();
 </script>
@@ -5621,7 +5219,8 @@ if (K.Bi && U.second) K.Bi.mount(U, (window.KitLang || {})[U.second.code]);   /*
   function fitLater(el){ fitQ.push(el); if (!fitRaf) fitRaf = (window.requestAnimationFrame || setTimeout)(function(){ fitRaf = 0; var q = fitQ; fitQ = []; q.forEach(fit); }); }
   window.addEventListener('resize', function(){ var all = document.querySelectorAll('.m[data-disp]'); for (var i = 0; i < all.length; i++) fitLater(all[i]); });
   var queued = false;
-  function run(){ queued = false; if (!ready) return; var all = document.querySelectorAll('.m'); for (var i = 0; i < all.length; i++) if (!all[i].shadowRoot) paint(all[i]); }
+  /* a span being edited on the teacher copy (teacher.js, Tests A and B: [data-tex-off]) keeps its own HTML in sight until it is saved */
+  function run(){ queued = false; if (!ready) return; var all = document.querySelectorAll('.m'); for (var i = 0; i < all.length; i++) if (!all[i].shadowRoot && !(all[i].closest && all[i].closest('[data-tex-off]'))) paint(all[i]); }
   function schedule(){ if (queued) return; queued = true; (window.requestAnimationFrame || setTimeout)(run); }
   function start(){
     ready = true; run();
