@@ -667,6 +667,10 @@ svg.nlg.nl-small{width:min(100%,14rem)}
 #printview svg.nlg{color:#000} #printview .nlkw{color:#333}
 .ptab .kv .nlkey{width:2.9in}
 @media print{ .nctl,.nltk,.nsay{display:none!important} svg.nlg{color:#000} .pnlband{height:10mm} .nlpt{outline:none!important} }
+/* which practice this is (7 Nov 2026, Croix: "It was the switching mechanism that confused me"): a quiet chip under the title */
+.nlp.solo .nlsolo{margin-top:6px} .nlp.solo .nlsolo .st{font-weight:600}
+.scopechip{display:inline-flex;align-items:center;font:normal 600 12.5px/1.2 var(--ui);color:var(--ink);background:var(--field);border:1px solid var(--rule);border-radius:999px;padding:3px 10px;margin:4px 8px 2px 0;vertical-align:middle}
+@media print{ .scopechip{display:none} }
 /* A7 Unit 5: the kit's sheet carries the page; a sentence with math in it may wrap between its math spans on a phone. */
 .cv .m{white-space:normal}
 .stem .m{white-space:normal}
@@ -2643,8 +2647,7 @@ const E = node ? require('./engine.js') : root.Practice, C = node ? require('./c
 const W = node ? C.Walk : root.Walk;
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 /* the lines a printed set opens with (paper is not a keyboard): the paper test's own (a7/build/lib/unitbuild.py; ruling 19) */
-const PRINT = ['Show your work. One point for each lettered part.',
-  'If an earlier part is wrong, a later part still earns its point when the right operation is applied to your own earlier answer — but only if that work is on the page.'];
+const PRINT = ['Show your work. One point for each lettered part.'];   /* no follow-through line (7 Nov 2026, Croix: it goes "across everything"); ruling 19's scoring is the coach's and stands */
 const Unit = {
   id: 'a7u5',
   contentVersion: 1,                 /* bump whenever any set's questions change after students have used the page (the lock check says so) */
@@ -3211,7 +3214,7 @@ window.TEACHER_TEST = {
   "Show your work. One point for each lettered part."
  ],
  "two_day": "",
- "follow_through_student": "If an earlier part is wrong, a later part still earns its point when the right operation is applied to your own earlier answer — but only if that work is on the page.",
+ "follow_through_student": "",
  "follow_through_key": "Follow-through (ruling 19).  A later part is correct when the right operation is applied to the student's own earlier value: question 16(b) from their own 16(a), question 6(b) from their own 6(a). Look at what they wrote for the earlier part, do this part's operation to it, and tick if that is what they wrote.",
  "transfer_flag": "TRANSFER ITEM — not on the practice test. Same benchmark, a surface nobody rehearsed."
 };
@@ -3285,7 +3288,6 @@ window.TEACHER_TEST = {
     h.push('<p class="pnotes">' + (T.two_day ? '<span class="pinote">' + esc(T.two_day) + '</span>' : '') + (T.notes || []).map(function(n){ return '<span class="pinote">' + esc(n) + '</span>'; }).join('') + '</p>');
     secs.forEach(function(sec, si){
       h.push('<h2 class="psec">' + esc(sec.title) + '<span class="ppts">' + sec.points + ' points</span></h2>');   /* ruling 54: named, never numbered */
-      if (sec.items.some(function(it){ return it.parts; })) h.push('<p class="pft">' + esc(T.follow_through_student) + '</p>');
       sec.items.forEach(function(it){
         qn++;
         var q = '<div class="pq"><div class="pqh"><div class="pqid" translate="no"><span class="qn">' + qid(f, it) + '</span></div><div class="stem"><b class="num">' + qn + '.</b><span class="st">' + tex(it.stem) + '</span>' + (it.parts ? '' : '<span class="pt">1 pt</span>') + '</div>' + (it.fig || '') + '</div>';
@@ -3314,8 +3316,7 @@ window.TEACHER_TEST = {
     }); });
     var tracker = '<h2 class="psec">Score tracker</h2><table class="ptab ptrack"><thead><tr><th>Benchmark</th><th>Questions</th><th>Possible</th><th>Earned</th></tr></thead><tbody>' +
       (T.tracker_order || Object.keys(T.tracker)).map(function(bm){ var b = byBm[bm] || {qs: [], pts: 0}; return '<tr><td>' + esc(bm) + '</td><td>' + b.qs.join(', ') + '</td><td>' + b.pts + '</td><td></td></tr>'; }).join('') +
-      '<tr><td><b>Total</b></td><td></td><td><b>' + total(f) + '</b></td><td></td></tr></tbody></table>' +
-      '<p class="pft">' + esc(T.follow_through_student) + ' Nothing is weighed and nothing is arguable: apply the part’s operation to the student’s own earlier value and tick if that is what is written.</p>';
+      '<tr><td><b>Total</b></td><td></td><td><b>' + total(f) + '</b></td><td></td></tr></tbody></table>';   /* no follow-through line (7 Nov 2026, Croix) */
     return '<div class="pkey">' + head(f, true) + (T.follow_through_key ? '<p class="pmeta kft">' + esc(T.follow_through_key) + '</p>' : '') + '<table class="ptab"><tbody>' + rows.join('') + '</tbody></table>' + tracker + '</div>';
   }
   function plainStem(s0){ return String(s0).replace(/\$[^$]*\$/g, function(m){ return m.slice(1, -1).replace(/\\(text|mathrm)\{([^}]*)\}/g, '$2').replace(/(\d)\\frac\{(\d+)\}\{(\d+)\}/g, '$1 $2/$3').replace(/\\frac\{([^}]*)\}\{([^}]*)\}/g, '$1/$2').replace(/\\left|\\right/g, '').replace(/\\(times|cdot)/g, '×').replace(/\\[a-zA-Z]+/g, ' ').replace(/[{}]/g, '').replace(/\s*,\s*/g, ', '); }).replace(/\*\*/g, '').replace(/\s+/g, ' ').replace(/\( /g, '(').replace(/ \)/g, ')').trim(); }
@@ -3916,6 +3917,8 @@ function choicesHtml(x, id, lab, multi){
   return q.join('');
 }
 function partHtml(p, id, solo, lab, lone){
+  /* a lone graph to build (a Cadence item with one part) still says what to do: its line, without a second "1 pt" */
+  if (solo && p.kind === 'nline') return '<div class="prt nlp solo" data-host="' + id + '"><div class="line nlsolo"><span class="st">' + V.line(p) + '</span></div>' + nlHtml(p, id, lab) + '</div>';
   var line = solo ? '' : '<div class="line" id="ln' + id + '">' + (p.label && !lone ? '<b class="lab">' + p.label + '.</b>' : '<b class="lab" aria-hidden="true"></b>') + '<span class="st">' + V.line(p) + '</span>' + (p.label ? '<span class="pt">1 pt</span>' : '') + '</div>';
   if (p.kind === 'mc') return '<div class="prt mcp" data-host="' + id + '">' + line + choicesHtml(p, id, lab, false) + '</div>';
   if (p.kind === 'nline') return '<div class="prt nlp' + (solo ? ' solo' : '') + '" data-host="' + id + '">' + line + nlHtml(p, id, lab) + '</div>';
@@ -4020,7 +4023,12 @@ function render(){
   });
   $('paper').innerHTML = h.join('');
   $('setno').textContent = seed; $('setin').value = seed;
-  $('total').textContent = ITEMS.length + ' point' + (ITEMS.length === 1 ? '' : 's');
+  /* which practice this is, always in sight (7 Nov 2026, Croix: "It was the switching mechanism that confused me. I would assume
+     that if I open a specific lesson it would open to that section. Likewise if I open the full practice test."): a chip under the
+     title names the choice from What to practice, and a lesson's line says what it is — "Lesson 10.04 · 8 questions · today's
+     practice" */
+  $('total').textContent = lessonScope(scope) ? qn + ' question' + (qn === 1 ? '' : 's') + ' · today’s practice' : ITEMS.length + ' point' + (ITEMS.length === 1 ? '' : 's');
+  paintChip();
   paintScopes();
   Object.keys(S.more || {}).forEach(function(id){ var b = byIdBase(id); if (b) mountExtra(b); });
 }
@@ -4032,6 +4040,19 @@ function paintScopes(){
   var ks = Object.keys(SCOPES), test = ks.filter(function(k){ return !lessonScope(k); }), les = ks.filter(function(k){ return lessonScope(k) && (K.Bank.shown(k) || k === scope); });
   /* the lessons after the test's own choices, as their own group (a two-lesson day's choice only while it is open) */
   sc.innerHTML = les.length ? '<optgroup label="Practice test">' + test.map(opt).join('') + '</optgroup><optgroup label="Lessons" translate="no">' + les.map(opt).join('') + '</optgroup>' : test.map(opt).join('');
+}
+function scopeChip(){
+  if (scope === 'all') return 'Whole practice test';
+  if (scope === 'miss') return 'My misses';
+  if (lessonScope(scope)) return String(K.Bank.name(scope) || '').split(' · ')[0];
+  var k = +String(scope).slice(1) - 1; return G0.sections[k] ? plainText(G0.sections[k].title) : String(SCOPES[scope] || '');
+}
+function paintChip(){
+  var c = $('scopechip'), h = $('h1'); if (!h) return;
+  /* on the line under the title, before the points (its own row pushed question 1 off a phone's first screen on a teacher copy) */
+  var t = $('total'), row = t && t.parentNode;
+  if (!c){ c = document.createElement('span'); c.id = 'scopechip'; c.className = 'scopechip'; c.setAttribute('translate', 'no'); if (row) row.insertBefore(c, t); else h.parentNode.insertBefore(c, h.nextSibling); }
+  c.textContent = scopeChip(); c.setAttribute('aria-label', 'Practising: ' + scopeChip());
 }
 /* the eyebrow and the title: the unit's, or in a lesson choice the lesson's ("GRADE 7 MATH · UNIT 9 · LESSON 9.03 PRACTICE") */
 function paintHead(){
@@ -4724,7 +4745,7 @@ function pq(d, qn){
   var blank = function(p){ var u = V.unit(p), pre = V.pre(p); return '<div class="pans"><span class="pal bt">Answer:</span> ' + (pre ? '<span class="pre">' + pre + '</span>' : '') + (V.blank ? V.blank(p) || '<span class="pblank"></span>' : '<span class="pblank"></span>') + (u ? ' <span class="unit">' + esc(u) + '</span>' : '') + '</div><div class="pwork"></div>'; };
   var choices = function(x){ return '<div class="pchoices">' + x.opts.map(function(o, k){ return '<div class="pch"><span class="pbox' + (it.type === 'multi' ? ' sq' : '') + '"></span><span class="cl">' + LET[k] + '.</span><span class="cv">' + V.opt(x, k) + '</span></div>'; }).join('') + '</div>'; };
   if (it.type === 'parts') it.parts.forEach(function(p, pi){ if (d.keep && !d.keep[pi]) return; h += '<div class="ppart">' + line(p, p.label) + (p.kind === 'mc' ? choices(p) : p.kind === 'nline' ? NL.blankHtml(p) : blank(p)) + '</div>'; });
-  else if (it.type === 'solo') h += '<div class="ppart">' + (it.part.kind === 'nline' ? NL.blankHtml(it.part) : blank(it.part)) + '</div>';
+  else if (it.type === 'solo') h += '<div class="ppart">' + (it.part.kind === 'nline' ? line(it.part, '') + NL.blankHtml(it.part) : blank(it.part)) + '</div>';
   else h += '<div class="ppart">' + choices(it) + '</div>';
   return h + '</div>';
 }
@@ -4811,7 +4832,7 @@ function pqTest(d, qn){
   var line = function(p, lab){ return '<div class="line">' + (lab ? '<b class="lab">' + lab + '.</b>' : '') + '<span class="st">' + V.line(p) + '</span>' + one + '</div>'; };
   var choices = function(x){ return '<div class="pchoices">' + x.opts.map(function(o, k){ return '<div class="pch"><span class="pbox' + (it.type === 'multi' ? ' sq' : '') + '"></span><span class="cl">' + LET[k] + '.</span><span class="cv">' + V.opt(x, k) + '</span></div>'; }).join('') + '</div>'; };
   if (it.type === 'parts') it.parts.forEach(function(p, pi){ if (d.keep && !d.keep[pi]) return; h += '<div class="ppart">' + line(p, p.label) + (p.kind === 'mc' ? choices(p) : p.kind === 'nline' ? NL.blankHtml(p) : '<div class="pwork"></div>') + '</div>'; });
-  else if (it.type === 'solo') h += '<div class="ppart">' + (it.part.kind === 'nline' ? NL.blankHtml(it.part) : '<div class="pwork"></div>') + '</div>';
+  else if (it.type === 'solo') h += '<div class="ppart">' + (it.part.kind === 'nline' ? '<div class="line"><span class="st">' + V.line(it.part) + '</span></div>' + NL.blankHtml(it.part) : '<div class="pwork"></div>') + '</div>';
   else h += '<div class="ppart">' + choices(it) + '</div>';
   return h + '</div>';
 }
@@ -4828,13 +4849,12 @@ function testFormHtml(label, form){
      that prints the scoring lines itself (M7 Unit 10's notesPrint) does not get them twice, and the follow-through line
      prints under its sections, as on the paper (teacher.js), not again here */
   var said = [], notes = [], same = function(x){ return plainText(x).replace(/\s+/g, ' ').trim(); };
-  if (T.follow_through_student && DS.some(function(sec){ return sec.items.some(function(d){ return d.it.type === 'parts'; }); })) said.push(same(esc(T.follow_through_student)));
   (T.notes || []).map(esc).concat(U.notesPrint || U.notes || []).forEach(function(n){ var t = same(n); if (t && said.indexOf(t) < 0){ said.push(t); notes.push(n); } });
   if (notes.length) h.push('<p class="pnotes">' + notes.map(function(n){ return '<span class="pinote">' + n + '</span>'; }).join(' ') + '</p>');
   DS.forEach(function(sec, si){
     var pts = ITEMS.filter(function(it){ return it.sec === si; }).length;
     h.push('<h2 class="psec"><span class="bt">' + sec.title + '</span><span class="ppts">' + pts + (pts === 1 ? ' point' : ' points') + '</span></h2>');
-    if (T.follow_through_student && sec.items.some(function(d){ return d.it.type === 'parts'; })) h.push('<p class="pft">' + esc(T.follow_through_student) + '</p>');
+    /* no follow-through line under a section, nor anywhere (7 Nov 2026, Croix: the line goes "across everything"; ruling 19's scoring stands) */
     sec.items.forEach(function(d){ qn++; h.push(pqTest(d, qn)); });
   });
   return h.join('');

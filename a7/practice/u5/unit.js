@@ -6,8 +6,7 @@ const E = node ? require('./engine.js') : root.Practice, C = node ? require('./c
 const W = node ? C.Walk : root.Walk;
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 /* the lines a printed set opens with (paper is not a keyboard): the paper test's own (a7/build/lib/unitbuild.py; ruling 19) */
-const PRINT = ['Show your work. One point for each lettered part.',
-  'If an earlier part is wrong, a later part still earns its point when the right operation is applied to your own earlier answer — but only if that work is on the page.'];
+const PRINT = ['Show your work. One point for each lettered part.'];   /* no follow-through line (7 Nov 2026, Croix: it goes "across everything"); ruling 19's scoring is the coach's and stands */
 const Unit = {
   id: 'a7u5',
   contentVersion: 1,                 /* bump whenever any set's questions change after students have used the page (the lock check says so) */
