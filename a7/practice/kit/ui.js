@@ -853,6 +853,7 @@ function cards(){ return Array.prototype.slice.call(document.querySelectorAll('#
 function paintProgress(){
   var qs = cards(), N = qs.length, a = document.activeElement, cur = a && a.closest && a.closest('#paper') ? a.closest('.q[data-q]:not(.xq)') || (a.closest('.xq') && a.closest('.xq').parentNode.closest('.q[data-q]:not(.xq)')) : null;
   var i = cur ? qs.indexOf(cur) : -1;
+  if (PG) i = PG.at();                                        /* one question at a time (pager.js): the one on the screen */
   if (i < 0){ var top = document.querySelector('.watch').getBoundingClientRect().bottom + 8, lim = Math.max(top + 40, window.innerHeight * 0.35);
     for (var k = 0; k < N; k++){ var r = qs[k].getBoundingClientRect(); if (r.bottom > lim){ i = k; break; } } if (i < 0) i = N - 1; }
   var n = N ? i + 1 : 0, q = $('qof'); if (q) q.textContent = N ? 'Question ' + n + ' of ' + N : '';
@@ -1003,7 +1004,7 @@ function restoreOne(it){
   else (it.type === 'mc' ? [a] : a).forEach(function(v){ var x = document.querySelector('input[name="q' + it.id + '"][value="' + v + '"]'); if (x) x.checked = true; });
 }
 function restore(){ ITEMS.forEach(restoreOne); }
-function paintAll(){ paintScopes(); paintBar(); paintProgress(); ITEMS.forEach(paintItem); Object.keys(EX).forEach(function(k){ paintItem(EX[k]); }); paintScore(); }
+function paintAll(){ paintScopes(); paintBar(); paintProgress(); ITEMS.forEach(paintItem); Object.keys(EX).forEach(function(k){ paintItem(EX[k]); }); paintScore(); if (PG) PG.paint(); }
 $('bPause').addEventListener('click', pause);
 $('bResume').addEventListener('click', start);
 $('bFinish').addEventListener('click', function(){
@@ -1215,6 +1216,10 @@ function mcChoices(p){                                      /* a part's four cho
   var m = ALLMC ? mcOf(p) : null; if (!m) return '';
   return (m.nline ? '' : '<div class="pwork pwmc"></div>') + '<div class="pchoices pmc ' + (m.nline ? 'pgr' : 'p2') + '">' + m.opts.map(function(o, k){ return '<div class="pch"><span class="pbox"></span><span class="cl">' + LET[k] + '.</span><span class="cv">' + o + '</span></div>'; }).join('') + '</div>';
 }
+/* a number line to graph that prints as four graphs asks for a choice, not a drawing (Croix, 14 Nov 2026: on the all-multiple-
+   choice paper "Graph the solution" is wrong where the student is choosing); a line the teacher edited on a pinned form is his */
+var MC_GRAPH_LINE = 'Which graph shows the solution?';
+function mcLine(p){ return p && p.kind === 'nline' && p._eln == null && mcChoices(p) ? (V.mcLine ? V.mcLine(p) : MC_GRAPH_LINE) : vLine(p); }
 function mcKey(it){                                         /* its row on the key: the letter, then the answer */
   var m = ALLMC && (it.type === 'text' || it.type === 'nline') ? mcOf(it.x) : null;
   return m ? '<b>' + LET[m.correct] + '.</b> ' + (m.nline ? NL.keyHtml(it.x) : m.opts[m.correct]) : '';
@@ -1227,10 +1232,10 @@ function mcKey(it){                                         /* its row on the ke
 function pqTest(d, qn){
   var it = d.it, one = '<span class="pt">1 pt</span>';
   var h = '<div class="pq"' + (d.k != null ? ' data-k="' + d.k + '"' : '') + '><div class="pqh">' + qidHtml(qidOf(d.si, d.ii, it), 'pqid') + '<div class="stem"><b class="num">' + qn + '.</b><span class="st">' + vStem(it) + '</span>' + (it.type === 'parts' ? '' : one) + '</div>' + fig(it) + '</div>';
-  var line = function(p, lab){ return '<div class="line">' + (lab ? '<b class="lab">' + lab + '.</b>' : '') + '<span class="st">' + vLine(p) + '</span>' + one + '</div>'; };
+  var line = function(p, lab){ return '<div class="line">' + (lab ? '<b class="lab">' + lab + '.</b>' : '') + '<span class="st">' + mcLine(p) + '</span>' + one + '</div>'; };
   var choices = function(x){ return '<div class="pchoices">' + x.opts.map(function(o, k){ return '<div class="pch"><span class="pbox' + (it.type === 'multi' ? ' sq' : '') + '"></span><span class="cl">' + LET[k] + '.</span><span class="cv">' + vOpt(x, k) + '</span></div>'; }).join('') + '</div>'; };
   if (it.type === 'parts') it.parts.forEach(function(p, pi){ if (d.keep && !d.keep[pi]) return; h += '<div class="ppart" data-p="' + pi + '">' + line(p, p.label) + (p.kind === 'mc' ? choices(p) : mcChoices(p) || (p.kind === 'nline' ? NL.blankHtml(p) : '<div class="pwork"></div>')) + '</div>'; });
-  else if (it.type === 'solo') h += '<div class="ppart" data-p="0">' + (it.part.kind === 'nline' ? '<div class="line"><span class="st">' + vLine(it.part) + '</span></div>' + (mcChoices(it.part) || NL.blankHtml(it.part)) : mcChoices(it.part) || '<div class="pwork"></div>') + '</div>';
+  else if (it.type === 'solo') h += '<div class="ppart" data-p="0">' + (it.part.kind === 'nline' ? '<div class="line"><span class="st">' + mcLine(it.part) + '</span></div>' + (mcChoices(it.part) || NL.blankHtml(it.part)) : mcChoices(it.part) || '<div class="pwork"></div>') + '</div>';
   else h += '<div class="ppart" data-p="0">' + choices(it) + '</div>';
   return h + '</div>';
 }
@@ -1405,6 +1410,9 @@ $('eyebrow').innerHTML = U.eyebrow; $('h1').innerHTML = U.h1;   /* openSet repai
    of questions as the unit test, new numbers every set.)"): only a unit's notes — how to write an answer — and none at all hides it. */
 var notesHtml = (U.notes || []).map(function(n){ return '<span class="pinote">' + n + '</span>'; }).join('');
 $('intro').innerHTML = notesHtml; $('intro').hidden = !notesHtml;
+/* one question at a time, as on the FAST (kit/pager.js, 14 Nov 2026): it is handed what it needs, told when the sheet is painted
+   (paintAll) and asked which question is on the screen (paintProgress); none on a page built without it, or with the checks' switch */
+var PG = K.Pager ? K.Pager({S: function(){ return S; }, key: key, items: function(){ return ITEMS; }, answered: answered, byId: byId, hostOf: hostOf, nextOpen: nextOpen, save: save, progress: paintProgress}) : null;
 openSet(seed, scope);
 if (K.Bi && U.second) K.Bi.mount(U, (window.KitLang || {})[U.second.code]);   /* the second-language toggle (kit/bilingual.js), when the unit has one; after the first set is drawn */
 })();

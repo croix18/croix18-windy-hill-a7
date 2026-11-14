@@ -699,6 +699,96 @@ body.printing>.kcalc,body.tview>.kcalc{display:none!important}
 .keys button{flex:0 0 auto;width:44px;min-width:44px;height:44px;min-height:44px;padding:0;display:inline-grid;place-items:center}
 .keys button.kwide{width:auto;padding:0 10px}
 .keys .krow>.kgap{margin-left:8px}
+/* Practice-test kit: one question at a time, as on the FAST (pager.js, 14 Nov 2026). The released-test page's look (the site's
+   released/kit/fast.css: .qhead, .flagb, .nav, .mapc and .map, .rlist) on the kit's own tokens (kit.css), so light and true dark
+   come with them: the question's number in the eyebrow's teal capitals, Flag for review a quiet pill (pressed: the ink's edge and
+   a filled flag), Back quiet and Next the navy primary, the map's answered questions navy, the one on screen ringed in
+   turquoise, a flag in the corner of a flagged one. The icons are masks here, so each button's words are plain text (the
+   Português line under them, bilingual.js, needs that). The screen only: in print every question is on the paper as before,
+   and none of this prints. */
+:root{--pgL:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 5l-7 7 7 7'/%3E%3C/svg%3E");--pgR:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 5l7 7-7 7'/%3E%3C/svg%3E");--pgD:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");--pgFlagO:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5.5 21V3.5'/%3E%3Cpath d='M5.5 4.5h12.5l-2.8 4.25 2.8 4.25H5.5z'/%3E%3C/svg%3E");--pgFlagF:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5.5 21V3.5'/%3E%3Cpath fill='black' d='M5.5 4.5h12.5l-2.8 4.25 2.8 4.25H5.5z'/%3E%3C/svg%3E");--pgOk:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E");--pgNo:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6.5 6.5l11 11M17.5 6.5l-11 11'/%3E%3C/svg%3E");--pgNa:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 12h10'/%3E%3C/svg%3E");--pgOkTint:color-mix(in srgb,var(--ok) 11%,transparent)}
+@media screen{
+  body.pg #paper>section.part:not(.pg-on){display:none}
+  body.pg #paper .q[data-q]:not(.xq):not(.pg-on){display:none}
+  body.pg #paper>section.part.pg-on>.sechead{margin-top:14px}
+  body.pg #paper .q.pg-on{margin-bottom:0}
+  body.pg.pg-sum #paper,body.pg.pg-sum .pghead,body.pg.pg-sum .pgnav,body.pg.pg-done .pgmap,body.pg.pg-none .pghead,body.pg.pg-none .pgnav,body.pg.pg-none .pgmap{display:none}
+  body.pg:not(.pg-sum) .pglist{display:none}
+  body.pg.pg-rev>.result{display:none}
+}
+@media print{ .pghead,.pgnav,.pgmap,.pglist{display:none!important} }
+
+/* the question's number (and, after Finish, how it came out), and Flag for review */
+.pghead{display:flex;align-items:center;justify-content:space-between;gap:8px 12px;flex-wrap:wrap;margin:22px 0 0;padding-top:16px;border-top:1px solid var(--rule);scroll-margin-top:120px}
+.pgq{margin:0;font:700 13px/1.2 var(--chrome);letter-spacing:.12em;text-transform:uppercase;color:var(--link);font-variant-numeric:tabular-nums}
+.pgq:focus{outline:none}
+.pgchip{display:inline-block;margin-left:10px;padding:4px 9px;border-radius:999px;font:700 12px/1 var(--chrome);letter-spacing:.02em;text-transform:none;vertical-align:1px}
+.pgchip.ok{color:var(--ok);background:var(--pgOkTint)} .pgchip.no,.pgchip.na{color:var(--no);background:var(--noTint)}
+.pgflag{min-height:44px;border-radius:999px;padding:9px 15px 9px 12px;font:600 13.5px/1.2 var(--chrome)}
+.pgflag::before{content:"";display:inline-block;width:17px;height:17px;margin-right:7px;vertical-align:-4px;background:currentColor;-webkit-mask:var(--pgFlagO) center/contain no-repeat;mask:var(--pgFlagO) center/contain no-repeat}
+.pgflag[aria-pressed=true]{background:var(--field2);box-shadow:inset 0 0 0 1.5px var(--navyLine)}
+.pgflag[aria-pressed=true]::before{-webkit-mask-image:var(--pgFlagF);mask-image:var(--pgFlagF)}
+
+/* Back, Next (Finish on the last question; Score summary after it) */
+.pgnav{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin-top:26px;padding-top:16px;border-top:1px solid var(--rule)}
+.pgnav button{min-height:44px;min-width:7.5rem;padding:10px 16px;border-radius:10px;font:600 15px/1.2 var(--chrome)}
+.pgnav .pgnext{margin-left:auto}
+.pgprev,.pgnext{position:relative}                                   /* the arrows stand beside the words, which keep their Português line under them */
+.pgnav .pgprev{padding-left:36px} .pgnav .pgnext{padding-right:36px} .pgnav .pgnext.pgend{padding-right:16px}
+.pgprev::before,.pgnext::after{content:"";position:absolute;top:50%;width:18px;height:18px;margin-top:-9px;background:currentColor;-webkit-mask:var(--pgL) center/contain no-repeat;mask:var(--pgL) center/contain no-repeat}
+.pgprev::before{left:12px}
+.pgnext::after{right:12px;-webkit-mask-image:var(--pgR);mask-image:var(--pgR)}
+.pgnext.pgend::after{display:none}
+@media (max-width:400px){ .pgnav button{min-width:0;flex:1 1 0;padding-inline:10px} }
+@media (max-width:600px){ .pgnav #pgBack{order:-1;flex:1 1 100%} }   /* reviewing on a phone: Score summary on its own line, over Back and Next */
+
+/* the map: every question, answered or not, flagged or not, the one on screen; on a phone a drawer, one line until opened */
+.pgmap{padding-top:22px;padding-bottom:22px}
+.pgmh{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px 16px;margin-bottom:12px}
+.pgmh h2{margin:0;font:700 16px/1.2 var(--chrome);color:var(--ink)}
+.pglg{display:flex;flex-wrap:wrap;gap:6px 14px;margin:0;padding:0;list-style:none;font:500 12.5px/1.2 var(--chrome);color:var(--mut)}
+.pglg li{display:inline-flex;align-items:center;gap:6px}
+.pglg i{display:inline-block;width:15px;height:15px;border-radius:4px;border:1.5px solid var(--rule);background:var(--paper)}
+.pglg i.a{background:var(--go);border-color:var(--go)}
+.pglg i.c{border-color:var(--hot);box-shadow:0 0 0 1.5px var(--hot)}
+.pglg i.f{border:0;border-radius:0;background:currentColor;-webkit-mask:var(--pgFlagF) center/contain no-repeat;mask:var(--pgFlagF) center/contain no-repeat}
+.pgm{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:6px}
+.pgm button{position:relative;min-height:44px;padding:0;border-radius:10px;border:1.5px solid var(--rule);background:var(--paper);font:700 15px/1 var(--chrome);color:var(--ink);font-variant-numeric:tabular-nums}
+.pgm button:hover{border-color:color-mix(in srgb,var(--ink) 45%,transparent)}
+.pgm button.a{background:var(--go);border-color:var(--go);color:var(--goInk)}
+.pgm button[aria-current=step]{box-shadow:0 0 0 2px var(--paper),0 0 0 4.5px var(--hot)}
+.pgm button.f::after{content:"";position:absolute;top:3px;right:3px;width:12px;height:12px;background:currentColor;-webkit-mask:var(--pgFlagF) center/contain no-repeat;mask:var(--pgFlagF) center/contain no-repeat}
+.pgmt{display:none}
+@media (max-width:640px){ .pgm{grid-template-columns:repeat(6,minmax(0,1fr))} }
+@media (max-width:600px){
+  .pgmap{margin-top:14px;padding:4px 14px}
+  .pgmap:not(.open) .pgmh,.pgmap:not(.open) .pgm,.pgmh h2{display:none}
+  .pgmap.open .pgmh{margin:2px 0 10px}
+  .pgmap.open .pgm{margin-bottom:14px}
+  .pgmt{display:block;position:relative;width:100%;min-height:48px;padding:12px 34px 12px 2px;border:0;border-radius:10px;background:transparent;font:600 14.5px/1.3 var(--chrome);color:var(--ink);text-align:left}
+  .pgmt:hover{background:transparent}
+  .pgmt::after{content:"";position:absolute;right:4px;top:50%;width:20px;height:20px;margin-top:-10px;background:currentColor;-webkit-mask:var(--pgD) center/contain no-repeat;mask:var(--pgD) center/contain no-repeat;transition:transform .15s}
+  .pgmap.open .pgmt::after{transform:rotate(180deg)}
+}
+
+/* after Finish: every question, right or not — a tap opens it to review */
+.pglist{margin-top:24px;padding-top:18px;border-top:1px solid var(--rule)}
+.pglist h2{margin:0 0 4px;font:700 16px/1.2 var(--chrome);color:var(--ink)}
+.pgnote{margin:0 0 10px;font:400 14px/1.4 var(--ui);color:var(--mut)}
+.pgrows{list-style:none;margin:0;padding:0}
+.pgrow{display:grid;grid-template-columns:26px 2rem minmax(0,1fr) auto 16px;align-items:center;gap:10px;width:100%;min-height:52px;padding:6px;border:0;border-bottom:1px solid var(--rule);border-radius:0;background:transparent;text-align:left;font:500 15px/1.25 var(--chrome);color:var(--ink)}
+.pgrow:hover{background:var(--field);border-color:var(--rule)}
+.pgri{display:grid;place-items:center;width:24px;height:24px;border-radius:50%}
+.pgri::before{content:"";width:15px;height:15px;background:currentColor;-webkit-mask:var(--pgNo) center/contain no-repeat;mask:var(--pgNo) center/contain no-repeat}
+.pgrow.ok .pgri{color:var(--ok);background:var(--pgOkTint)} .pgrow.no .pgri,.pgrow.na .pgri{color:var(--no);background:var(--noTint)}
+.pgrow.ok .pgri::before{-webkit-mask-image:var(--pgOk);mask-image:var(--pgOk)} .pgrow.na .pgri::before{-webkit-mask-image:var(--pgNa);mask-image:var(--pgNa)}
+.pgrn{font-weight:700;font-variant-numeric:tabular-nums}
+.pgrs{display:flex;flex-direction:column;gap:2px;min-width:0}
+.pgrt{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pgrid{font:600 11.5px/1.2 var(--chrome);letter-spacing:.03em;color:var(--link)}
+.pgrv{font:600 13.5px/1.2 var(--chrome);white-space:nowrap} .pgrow.ok .pgrv{color:var(--ok)} .pgrow.no .pgrv,.pgrow.na .pgrv{color:var(--no)}
+.pgchev{width:16px;height:16px;background:var(--mut);-webkit-mask:var(--pgR) center/contain no-repeat;mask:var(--pgR) center/contain no-repeat}
+@media (max-width:400px){ .pgrow{gap:8px;grid-template-columns:24px 1.6rem minmax(0,1fr) auto 14px} }
 svg.fig{display:block;width:100%;height:auto;margin:6px 0;overflow:visible}
 svg.fig .ln{fill:none;stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round}
 svg.fig .thin{stroke-width:1}
@@ -3048,7 +3138,7 @@ window.TEACHER_TEST = {
  ],
  "forms": {},
  "notes": [
-  "Show your work. One point for each lettered part."
+  "Show your work for problems that require calculations. Each numbered question or lettered part is worth 1 point."
  ],
  "two_day": "",
  "follow_through_student": "",
@@ -3171,7 +3261,7 @@ function qHtml(it, qn, k){
 /* the test; in the editor (editor true) a question left off keeps an empty place, .pqout, for its row */
 function testHtml(f, spec, editor){
   var h = [head(f, false, spec)], qn = 0;
-  h.push('<p class="pnotes">' + (T.two_day ? '<span class="pinote">' + esc(T.two_day) + '</span>' : '') + (T.notes || []).map(function(n){ return '<span class="pinote">' + esc(n) + '</span>'; }).join('') + '</p>');
+  h.push('<p class="pnotes">' + (T.notes || []).map(function(n){ return '<span class="pinote">' + esc(n) + '</span>'; }).join('') + (T.two_day ? '<span class="pinote">' + esc(T.two_day) + '</span>' : '') + '</p>');   /* the directions (Croix, 14 Nov 2026): "Show your work…" first, then the two-period paragraph */
   fixedSecs(f, spec, editor).forEach(function(sec){
     h.push('<div class="pkeep"><h2 class="psec" data-si="' + sec.si + '">' + esc(sec.title) + (sec.points ? '<span class="ppts">' + sec.points + ' points</span>' : '') + '</h2>');   /* ruling 54: named, never numbered */
     sec.items.forEach(function(d, i){ if (d.out) h.push('<div class="pq pqout" data-k="' + d.k + '"></div>'); else { qn++; h.push(qHtml(d.it, qn, d.k)); } if (!i) h.push('</div>'); });   /* the section's name stays with its first question (.pkeep, 14 Nov 2026) */
@@ -4293,6 +4383,180 @@ K.Approvals = {
 if (ONSITE && COURSE && UNIT) load(); else ready = true;
 })(this);
 </script>
+<script>/* Practice-test kit: one question at a time, as on the FAST (pager.js, 14 Nov 2026).
+   Croix, 14 Nov 2026: "Can you change my practice tests to be same style that the fast practice on my page is. So one question
+   per page in the same style as the actual fast test." — and the lesson sets too: the whole practice test, a section, My misses
+   and every lesson set. The look and the flow are the released-test page's (mrshaffer.org /a7/practice/fast-2025/, the site's
+   released/kit/fast.js and fast.css): the question's number with Flag for review beside it, Back and Next under it, and the
+   map of every question (answered, flagged, the one on screen) — on a phone a drawer under the question, one line until it is
+   opened. Check as I go marks on the question's own screen, as before; Like the real test says nothing until Finish. Finish —
+   the bar's, or Next on the last question — gives the score (ui.js's end panel, as before) with every question listed under
+   it, right or not; a tap opens one to review, and Score summary goes back.
+   Its own module: ui.js draws, marks and saves every question exactly as before and hands this a few of its functions
+   (Kit.Pager(api), once, at its end); paintAll tells it the sheet was painted, and paintProgress asks it which question is on
+   the screen. A coach's button that goes to another question (Next ↓, Move on, a "Not right yet" link) first opens that
+   question here. Only the screen pages: print (@media print) and the print previews have every question, as before, and the
+   teacher copy's own views are untouched. The question on the screen (S.pg.cur) and the flags (S.pg.flag) are kept in the
+   set's own saved record, so a reload or a return opens the same question; a new set, Start over or a mode switch opens
+   question 1, and so does a lesson link (#lesson-6.05), which is always a new set.
+   The checks' switch: window.KIT_PAGER_OFF, set by check/page.js and check/bank.js before a page loads (nothing on a page sets
+   it), leaves every question on one screen — the page as it was before the pager — for the parts that check everything else
+   (A–Q); part R (check/pager_page.js) checks the pager itself. */
+(function(){
+'use strict';
+var K = window.Kit = window.Kit || {};
+K.Pager = function(api){
+  if (window.KIT_PAGER_OFF) return null;
+  var $ = function(id){ return document.getElementById(id); };
+  var paper = $('paper'), sheet = paper && paper.closest ? paper.closest('.sheet') : null;
+  if (!sheet || !api) return null;
+  var make = function(tag, cls, html, attrs){ var e = document.createElement(tag); e.className = cls; e.innerHTML = html; Object.keys(attrs || {}).forEach(function(k){ e.setAttribute(k, attrs[k]); }); return e; };
+  /* the words are plain text in each button (the icons are the stylesheet's), so the Português layer translates them whole */
+  var head = make('div', 'pghead', '<h2 class="pgq" id="pgQ" tabindex="-1"><span class="bt" id="pgQt"></span><span class="pgchip" id="pgChip" hidden translate="no"></span></h2>' +
+    '<button type="button" class="pgflag" id="pgFlag" aria-pressed="false">Flag for review</button>');
+  var nav = make('nav', 'pgnav', '<button type="button" class="pgprev" id="pgPrev">Back</button><button type="button" id="pgBack" hidden>Score summary</button>' +
+    '<button type="button" class="go pgnext" id="pgNext">Next</button>', {'aria-label': 'Back and Next'});
+  var list = make('section', 'pglist', '<h2 class="bt" id="pgLh">Every question</h2><p class="pgnote bt">Tap a question to review it.</p><ol class="pgrows" id="pgRows"></ol>', {'aria-labelledby': 'pgLh'});
+  var map = make('section', 'sheet pgmap', '<button type="button" class="pgmt" id="pgMt" aria-expanded="false" aria-controls="pgGrid"></button><div class="pgmh"><h2 class="bt" id="pgMh">Questions</h2><ul class="pglg" aria-hidden="true"><li><i class="a"></i><span class="bt">Answered</span></li>' +
+    '<li><i class="f"></i><span class="bt">Flagged</span></li><li><i class="c"></i><span class="bt">On screen</span></li></ul></div>' +
+    '<nav class="pgm" id="pgGrid" aria-labelledby="pgMh"></nav>', {'aria-labelledby': 'pgMh'});
+  paper.parentNode.insertBefore(head, paper);
+  paper.parentNode.insertBefore(nav, paper.nextSibling);
+  nav.parentNode.insertBefore(list, nav.nextSibling);
+  sheet.parentNode.insertBefore(map, sheet.nextSibling);
+  document.body.classList.add('pg');
+
+  var cards = [], secs = [], ofItem = {}, first = null, cur = 0, view = 'quiz', lastS = null, lastKey = '', lastDone = false;
+  /* the questions on the paper (a fresh "A similar one" is part of its question): read again whenever the paper was drawn again */
+  function index(){
+    var qs = Array.prototype.slice.call(paper.querySelectorAll('.q[data-q]:not(.xq)'));
+    if (qs.length === cards.length && qs[0] === first) return false;
+    cards = qs; first = qs[0] || null;
+    secs = Array.prototype.slice.call(paper.querySelectorAll('section.part'));
+    ofItem = {};
+    (api.items() || []).forEach(function(it){ var h = api.hostOf(it), c = h && h.closest ? h.closest('.q[data-q]:not(.xq)') : null, i = cards.indexOf(c); if (i >= 0) (ofItem[i] = ofItem[i] || []).push(it); });
+    $('pgGrid').innerHTML = cards.map(function(c, i){ return '<button type="button" data-pgi="' + i + '">' + (i + 1) + '</button>'; }).join('');
+    return true;
+  }
+  function itemsOf(i){ return ofItem[i] || []; }
+  function qOf(i){ return cards[i] ? cards[i].getAttribute('data-q') : ''; }
+  function done(){ var S = api.S(); return !!(S && S.done); }
+  function flags(){ var S = api.S(); return S && S.pg ? S.pg.flag : {}; }
+  function answeredQ(i){ var its = itemsOf(i); return its.length > 0 && its.every(function(it){ return api.answered(it); }); }
+  /* how a question came out, after Finish: every part right, some, or none — and none typed at all is Blank */
+  function verdict(i){
+    var S = api.S(), its = itemsOf(i), right = 0, blank = 0;
+    its.forEach(function(it){ var R = S.res[it.id]; if (R && R.v === 'right') right++; else if (!api.answered(it)) blank++; });
+    var v = its.length && right === its.length ? 'ok' : its.length && blank === its.length ? 'na' : 'no';
+    return {v: v, word: v === 'ok' ? 'Right' : v === 'na' ? 'Blank' : right && its.length > 1 ? right + ' of ' + its.length + ' right' : 'Not right'};
+  }
+  function clamp(i){ return Math.max(0, Math.min(cards.length - 1, i | 0)); }
+  /* a word changed only when it changes: the Português line under it (bilingual.js) is redrawn only then */
+  function setText(el, t){ var f = el.firstChild; if (f && f.nodeType === 3 ? f.nodeValue !== t : el.textContent !== t) el.textContent = t; }
+
+  /* ---- what the screen shows: the one question, its number, the flag, Back and Next, the map; or the summary */
+  function apply(){
+    var N = cards.length, fin = done(), on = cards[cur] || null, sec = on && on.closest ? on.closest('section.part') : null, b = document.body;
+    cards.forEach(function(c){ c.classList.toggle('pg-on', c === on); });
+    secs.forEach(function(s){ s.classList.toggle('pg-on', s === sec); });
+    b.classList.toggle('pg-none', !N); b.classList.toggle('pg-done', fin);
+    b.classList.toggle('pg-sum', fin && view === 'sum'); b.classList.toggle('pg-rev', fin && view !== 'sum');
+    if (!N) return;
+    setText($('pgQt'), 'Question ' + (cur + 1) + ' of ' + N);
+    var chip = $('pgChip');
+    if (fin){ var vd = verdict(cur); chip.className = 'pgchip ' + vd.v; setText(chip, vd.word); chip.hidden = false; } else chip.hidden = true;
+    var fl = $('pgFlag'); fl.hidden = fin; fl.setAttribute('aria-pressed', String(!!flags()[qOf(cur)]));
+    $('pgPrev').disabled = cur === 0;
+    var nx = $('pgNext'), last = cur === N - 1, word = last ? (fin ? 'Score summary' : 'Finish') : 'Next';
+    setText(nx, word);
+    nx.classList.toggle('pgend', last);
+    $('pgBack').hidden = !fin || last;
+    paintMap();
+    if (fin && view === 'sum') paintList();
+    if (api.progress) api.progress();
+  }
+  function paintMap(){
+    var F = flags(), n = 0, nf = 0;
+    Array.prototype.forEach.call($('pgGrid').children, function(btn, i){
+      var an = answeredQ(i), fl = !!F[qOf(i)]; if (an) n++; if (fl) nf++;
+      btn.classList.toggle('a', an); btn.classList.toggle('f', fl);
+      if (i === cur) btn.setAttribute('aria-current', 'step'); else btn.removeAttribute('aria-current');
+      btn.setAttribute('aria-label', 'Question ' + (i + 1) + (an ? ', answered' : ', not answered') + (fl ? ', flagged' : ''));
+    });
+    setText($('pgMt'), 'Questions: ' + n + ' of ' + cards.length + ' answered' + (nf ? ', ' + nf + ' flagged' : ''));
+  }
+  function paintList(){
+    var esc = function(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]; }); };
+    $('pgRows').innerHTML = cards.map(function(c, i){
+      var vd = verdict(i), id = c.querySelector('.qid .qn'), sh = c.closest('section.part'), st = sh ? sh.querySelector('.sechead h2') : null;
+      var idt = id ? id.textContent : '', stt = st ? st.childNodes[0] && st.childNodes[0].nodeType === 3 ? st.childNodes[0].nodeValue : st.textContent : '';
+      return '<li><button type="button" class="pgrow ' + vd.v + '" data-pgr="' + i + '" translate="no" aria-label="Question ' + (i + 1) + ', ' + esc(vd.word.toLowerCase()) + (idt ? ', ' + esc(idt) : '') + '">' +
+        '<span class="pgri" aria-hidden="true"></span><span class="pgrn">' + (i + 1) + '</span><span class="pgrs"><span class="pgrt">' + esc(stt) + '</span>' + (idt ? '<span class="pgrid">' + esc(idt) + '</span>' : '') + '</span>' +
+        '<span class="pgrv">' + esc(vd.word) + '</span><span class="pgchev" aria-hidden="true"></span></button></li>';
+    }).join('');
+  }
+  /* ui.js has painted the sheet: a new set, the same set again (a reload, Start over, a mode switch, another tab), Finish */
+  function paint(){
+    var S = api.S(); if (!S) return;
+    index();
+    if (S !== lastS){
+      var k = api.key();
+      if (!S.pg || typeof S.pg !== 'object') S.pg = {cur: 0, flag: {}};             /* a new set, or this one started over */
+      else if (lastS && k === lastKey) S.pg.cur = cur;                                  /* the same set from another tab: this tab stays put */
+      if (!S.pg.flag || typeof S.pg.flag !== 'object') S.pg.flag = {};
+      cur = clamp(S.pg.cur); view = S.done ? 'sum' : 'quiz'; lastS = S; lastKey = k;
+    } else if (!!S.done !== lastDone) view = S.done ? 'sum' : 'quiz';                  /* Finish: the score, with every question under it */
+    lastDone = !!S.done; cur = clamp(cur);
+    apply();
+  }
+  /* open question i: on Back, Next, the map, a summary row, or a coach's link to another question */
+  function go(i, focus){
+    if (!cards.length) return;
+    cur = clamp(i); view = 'quiz';
+    var S = api.S(); if (S && S.pg && S.pg.cur !== cur){ S.pg.cur = cur; api.save(); }
+    apply();
+    if (focus){
+      var bar = document.querySelector('.watch'), top = bar ? bar.getBoundingClientRect().bottom : 0, r = head.getBoundingClientRect();
+      if (r.top < top + 4 || r.top > window.innerHeight * 0.6) window.scrollTo(0, Math.max(0, window.scrollY + r.top - top - 12));
+      try { $('pgQ').focus({preventScroll: true}); } catch(e){ $('pgQ').focus(); }
+    }
+  }
+  function summary(){
+    view = 'sum'; apply(); window.scrollTo(0, 0);
+    var rb = $('result'); if (rb && !rb.hidden){ rb.setAttribute('tabindex', '-1'); try { rb.focus({preventScroll: true}); } catch(e){ rb.focus(); } }
+  }
+
+  $('pgPrev').addEventListener('click', function(){ go(cur - 1, true); });
+  $('pgNext').addEventListener('click', function(){
+    if (cur < cards.length - 1) go(cur + 1, true);
+    else if (done()) summary();
+    else { var f = $('bFinish'); if (f && !f.hidden) f.click(); }                        /* ui.js asks, in the bar, as its Finish does */
+  });
+  $('pgBack').addEventListener('click', summary);
+  $('pgFlag').addEventListener('click', function(){
+    var S = api.S(), q = qOf(cur); if (!S || !S.pg || !q) return;
+    if (S.pg.flag[q]) delete S.pg.flag[q]; else S.pg.flag[q] = 1;
+    api.save(); this.setAttribute('aria-pressed', String(!!S.pg.flag[q])); paintMap();
+  });
+  $('pgGrid').addEventListener('click', function(e){ var t = e.target.closest ? e.target.closest('[data-pgi]') : null; if (t) go(+t.getAttribute('data-pgi'), true); });
+  $('pgRows').addEventListener('click', function(e){ var t = e.target.closest ? e.target.closest('[data-pgr]') : null; if (t) go(+t.getAttribute('data-pgr'), true); });
+  $('pgMt').addEventListener('click', function(){ var o = !map.classList.contains('open'); map.classList.toggle('open', o); this.setAttribute('aria-expanded', String(o)); });
+  /* a coach's button that goes to another question (ui.js: Next ↓ after a right answer, Move on after a miss, the end panel's
+     "Not right yet" links) opens that question first — in the capture phase, so ui.js then scrolls to it and puts the focus
+     in its box as it always has */
+  document.addEventListener('click', function(e){
+    var t = e.target && e.target.closest ? e.target.closest('[data-next],[data-moveon],[data-jump]') : null; if (!t || !cards.length) return;
+    var it = t.hasAttribute('data-next') ? api.byId(t.getAttribute('data-to')) : t.hasAttribute('data-jump') ? api.byId(t.getAttribute('data-jump')) : (function(b){ return b ? api.nextOpen(b) : null; })(api.byId(t.getAttribute('data-moveon')));
+    var h = it && api.hostOf(it), c = h && h.closest ? h.closest('.q[data-q]:not(.xq)') : null, i = cards.indexOf(c);
+    if (i >= 0 && (i !== cur || view !== 'quiz')) go(i, false);
+  }, true);
+  /* answered or not, as the student types, taps a choice or builds a graph */
+  var raf = 0, later = function(){ if (raf) return; raf = requestAnimationFrame(function(){ raf = 0; if (cards.length) paintMap(); }); };
+  ['input', 'change', 'click', 'keyup', 'pointerup'].forEach(function(ev){ paper.addEventListener(ev, later); });
+  return {paint: paint, at: function(){ return cards.length ? cur : -1; }};
+};
+})();
+</script>
 <script>/* Practice-test kit: the page. One script for every unit; the unit supplies window.Unit (see kit/README.md).
    Design decisions (Croix, Oct 2026) the kit keeps: help as a ladder of three rungs (7 Nov 2026: what to notice, the first
    step with the step-by-step walkthrough, its picture at the step it explains, then the worked solution), Try another like this, the Practice menu (whole test / one part / my misses),
@@ -5148,6 +5412,7 @@ function cards(){ return Array.prototype.slice.call(document.querySelectorAll('#
 function paintProgress(){
   var qs = cards(), N = qs.length, a = document.activeElement, cur = a && a.closest && a.closest('#paper') ? a.closest('.q[data-q]:not(.xq)') || (a.closest('.xq') && a.closest('.xq').parentNode.closest('.q[data-q]:not(.xq)')) : null;
   var i = cur ? qs.indexOf(cur) : -1;
+  if (PG) i = PG.at();                                        /* one question at a time (pager.js): the one on the screen */
   if (i < 0){ var top = document.querySelector('.watch').getBoundingClientRect().bottom + 8, lim = Math.max(top + 40, window.innerHeight * 0.35);
     for (var k = 0; k < N; k++){ var r = qs[k].getBoundingClientRect(); if (r.bottom > lim){ i = k; break; } } if (i < 0) i = N - 1; }
   var n = N ? i + 1 : 0, q = $('qof'); if (q) q.textContent = N ? 'Question ' + n + ' of ' + N : '';
@@ -5298,7 +5563,7 @@ function restoreOne(it){
   else (it.type === 'mc' ? [a] : a).forEach(function(v){ var x = document.querySelector('input[name="q' + it.id + '"][value="' + v + '"]'); if (x) x.checked = true; });
 }
 function restore(){ ITEMS.forEach(restoreOne); }
-function paintAll(){ paintScopes(); paintBar(); paintProgress(); ITEMS.forEach(paintItem); Object.keys(EX).forEach(function(k){ paintItem(EX[k]); }); paintScore(); }
+function paintAll(){ paintScopes(); paintBar(); paintProgress(); ITEMS.forEach(paintItem); Object.keys(EX).forEach(function(k){ paintItem(EX[k]); }); paintScore(); if (PG) PG.paint(); }
 $('bPause').addEventListener('click', pause);
 $('bResume').addEventListener('click', start);
 $('bFinish').addEventListener('click', function(){
@@ -5510,6 +5775,10 @@ function mcChoices(p){                                      /* a part's four cho
   var m = ALLMC ? mcOf(p) : null; if (!m) return '';
   return (m.nline ? '' : '<div class="pwork pwmc"></div>') + '<div class="pchoices pmc ' + (m.nline ? 'pgr' : 'p2') + '">' + m.opts.map(function(o, k){ return '<div class="pch"><span class="pbox"></span><span class="cl">' + LET[k] + '.</span><span class="cv">' + o + '</span></div>'; }).join('') + '</div>';
 }
+/* a number line to graph that prints as four graphs asks for a choice, not a drawing (Croix, 14 Nov 2026: on the all-multiple-
+   choice paper "Graph the solution" is wrong where the student is choosing); a line the teacher edited on a pinned form is his */
+var MC_GRAPH_LINE = 'Which graph shows the solution?';
+function mcLine(p){ return p && p.kind === 'nline' && p._eln == null && mcChoices(p) ? (V.mcLine ? V.mcLine(p) : MC_GRAPH_LINE) : vLine(p); }
 function mcKey(it){                                         /* its row on the key: the letter, then the answer */
   var m = ALLMC && (it.type === 'text' || it.type === 'nline') ? mcOf(it.x) : null;
   return m ? '<b>' + LET[m.correct] + '.</b> ' + (m.nline ? NL.keyHtml(it.x) : m.opts[m.correct]) : '';
@@ -5522,10 +5791,10 @@ function mcKey(it){                                         /* its row on the ke
 function pqTest(d, qn){
   var it = d.it, one = '<span class="pt">1 pt</span>';
   var h = '<div class="pq"' + (d.k != null ? ' data-k="' + d.k + '"' : '') + '><div class="pqh">' + qidHtml(qidOf(d.si, d.ii, it), 'pqid') + '<div class="stem"><b class="num">' + qn + '.</b><span class="st">' + vStem(it) + '</span>' + (it.type === 'parts' ? '' : one) + '</div>' + fig(it) + '</div>';
-  var line = function(p, lab){ return '<div class="line">' + (lab ? '<b class="lab">' + lab + '.</b>' : '') + '<span class="st">' + vLine(p) + '</span>' + one + '</div>'; };
+  var line = function(p, lab){ return '<div class="line">' + (lab ? '<b class="lab">' + lab + '.</b>' : '') + '<span class="st">' + mcLine(p) + '</span>' + one + '</div>'; };
   var choices = function(x){ return '<div class="pchoices">' + x.opts.map(function(o, k){ return '<div class="pch"><span class="pbox' + (it.type === 'multi' ? ' sq' : '') + '"></span><span class="cl">' + LET[k] + '.</span><span class="cv">' + vOpt(x, k) + '</span></div>'; }).join('') + '</div>'; };
   if (it.type === 'parts') it.parts.forEach(function(p, pi){ if (d.keep && !d.keep[pi]) return; h += '<div class="ppart" data-p="' + pi + '">' + line(p, p.label) + (p.kind === 'mc' ? choices(p) : mcChoices(p) || (p.kind === 'nline' ? NL.blankHtml(p) : '<div class="pwork"></div>')) + '</div>'; });
-  else if (it.type === 'solo') h += '<div class="ppart" data-p="0">' + (it.part.kind === 'nline' ? '<div class="line"><span class="st">' + vLine(it.part) + '</span></div>' + (mcChoices(it.part) || NL.blankHtml(it.part)) : mcChoices(it.part) || '<div class="pwork"></div>') + '</div>';
+  else if (it.type === 'solo') h += '<div class="ppart" data-p="0">' + (it.part.kind === 'nline' ? '<div class="line"><span class="st">' + mcLine(it.part) + '</span></div>' + (mcChoices(it.part) || NL.blankHtml(it.part)) : mcChoices(it.part) || '<div class="pwork"></div>') + '</div>';
   else h += '<div class="ppart" data-p="0">' + choices(it) + '</div>';
   return h + '</div>';
 }
@@ -5700,6 +5969,9 @@ $('eyebrow').innerHTML = U.eyebrow; $('h1').innerHTML = U.h1;   /* openSet repai
    of questions as the unit test, new numbers every set.)"): only a unit's notes — how to write an answer — and none at all hides it. */
 var notesHtml = (U.notes || []).map(function(n){ return '<span class="pinote">' + n + '</span>'; }).join('');
 $('intro').innerHTML = notesHtml; $('intro').hidden = !notesHtml;
+/* one question at a time, as on the FAST (kit/pager.js, 14 Nov 2026): it is handed what it needs, told when the sheet is painted
+   (paintAll) and asked which question is on the screen (paintProgress); none on a page built without it, or with the checks' switch */
+var PG = K.Pager ? K.Pager({S: function(){ return S; }, key: key, items: function(){ return ITEMS; }, answered: answered, byId: byId, hostOf: hostOf, nextOpen: nextOpen, save: save, progress: paintProgress}) : null;
 openSet(seed, scope);
 if (K.Bi && U.second) K.Bi.mount(U, (window.KitLang || {})[U.second.code]);   /* the second-language toggle (kit/bilingual.js), when the unit has one; after the first set is drawn */
 })();

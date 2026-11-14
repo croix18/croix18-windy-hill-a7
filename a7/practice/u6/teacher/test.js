@@ -18,7 +18,7 @@ window.TEACHER_TEST = {
  ],
  "forms": {},
  "notes": [
-  "Show your work. One point for each lettered part."
+  "Show your work for problems that require calculations. Each numbered question or lettered part is worth 1 point."
  ],
  "two_day": "",
  "follow_through_student": "",
