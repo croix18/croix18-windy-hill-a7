@@ -160,6 +160,8 @@ def book_lines(nums, toc):
 def load_specs():
     specs = {}
     for f in sorted(glob.glob(os.path.join(BUILD, "u*", "l*.py"))):
+        # each unit has its own figs.py (u6, u11): the spec must import ITS unit's, not one cached from another unit
+        sys.modules.pop("figs", None); sys.path.insert(0, os.path.dirname(f))
         s = importlib.util.spec_from_file_location("spec", f)
         m = importlib.util.module_from_spec(s)
         with contextlib.redirect_stdout(io.StringIO()):
@@ -171,6 +173,8 @@ def load_specs():
 def load_units():
     units = {}
     for f in sorted(glob.glob(os.path.join(BUILD, "u*", "unit.py"))):
+        # each unit has its own figs.py (u6, u11): the spec must import ITS unit's, not one cached from another unit
+        sys.modules.pop("figs", None); sys.path.insert(0, os.path.dirname(f))
         s = importlib.util.spec_from_file_location("unit", f)
         m = importlib.util.module_from_spec(s)
         with contextlib.redirect_stdout(io.StringIO()):

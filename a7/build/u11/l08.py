@@ -21,7 +21,7 @@
 import sys, os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from fractions import Fraction as Fr
-import figs
+import figs11 as figs          # its own name: every unit's gates run in one process, and a second module called figs would be Unit 6's
 S = figs.slide
 
 X = "sp.Symbol('u', real=True)"

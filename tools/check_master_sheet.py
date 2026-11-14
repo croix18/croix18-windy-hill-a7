@@ -217,6 +217,7 @@ with contextlib.redirect_stdout(io.StringIO()):
     import scope_calendar as SC
 specs = {}
 for f in glob.glob(f"{ROOT}/a7/build/u*/l*.py"):
+    sys.modules.pop("figs", None); sys.path.insert(0, os.path.dirname(f))   # each unit imports its own figs.py (u6, u11)
     s = importlib.util.spec_from_file_location("m", f); m = importlib.util.module_from_spec(s); s.loader.exec_module(m); specs[m.L["code"]] = m.L
 stem = lambda code, u: (f"{u}.T{code[-1]}" if code.startswith("T-") else re.split(r"[+–]", code)[0])
 
@@ -443,6 +444,7 @@ for k, ds in exam_dates.items():
     if not r or [x for x in (D(r[1].value), D(r[2].value)) if x is not None] != ds: bad("test dates", k, ds)   # one date when the test took one day
 units = {}
 for f in glob.glob(f"{ROOT}/a7/build/u*/unit.py"):
+    sys.modules.pop("figs", None); sys.path.insert(0, os.path.dirname(f))   # each unit imports its own figs.py (u6, u11)
     s = importlib.util.spec_from_file_location("m", f); m = importlib.util.module_from_spec(s); s.loader.exec_module(m)
     U = [v for v in vars(m).values() if isinstance(v, dict) and "assessment" in v][0]; units[U["unit"]] = U
 for u, U in sorted(units.items()):
@@ -585,7 +587,7 @@ for s in wbf:
             vals = [x.value] if isinstance(x.value, str) and not x.value.startswith("=") else []
             if x.comment: vals.append(x.comment.text)
             for t in vals:
-                if re.search(r"\$|\\[a-z]+|\{|\}", t): bad("LaTeX left in", s.title, x.coordinate, t[:60])
+                if re.search(r"\$(?![\d,.]*\d)|\\[a-z]+|\{|\}", t): bad("LaTeX left in", s.title, x.coordinate, t[:60])   # "$24" is money (A7 11.08), not a math delimiter
             if x.value is not None and x.font.name != "Arial": bad("font", s.title, x.coordinate, x.font.name)
 for s in wb:
     for row in s.iter_rows():

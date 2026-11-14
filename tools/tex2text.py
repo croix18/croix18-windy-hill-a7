@@ -91,4 +91,6 @@ def text(s):
     """Prose with $...$ spans -> plain text."""
     if s is None:
         return ""
-    return re.sub(r"\$([^$]*)\$", lambda m: math(m.group(1)), s)
+    # an escaped dollar, "\\$24", is money, not a math delimiter (A7 11.08's board 9, 14 Nov 2026)
+    s = s.replace("\\$", "\x00")
+    return re.sub(r"\$([^$]*)\$", lambda m: math(m.group(1)), s).replace("\x00", "$")
