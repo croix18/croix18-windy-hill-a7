@@ -1,0 +1,285 @@
+{
+ "deck": "A7 11.01 Equations with Like Terms and the Distributive Property - Slides.pptx",
+ "slides": [
+  {
+   "n": 1,
+   "title": "Equations with Like Terms and the Distributive Property",
+   "sub": "",
+   "min": 1,
+   "note": "Post the learning target. Say one line and nothing else yet: \u201cToday: equations with like terms to collect and parentheses to distribute.\u201d",
+   "kind": "title"
+  },
+  {
+   "n": 2,
+   "title": "Warm-Up",
+   "sub": "On your own. No notes.",
+   "min": 4,
+   "note": "Q4 is where every equation today ends: once the like terms are collected and the parentheses gone, it is 1.03's two-step equation. Say that in one sentence after the reveal. The first class after Thanksgiving \u2014 two minutes silent, then reveal, no discussion.",
+   "kind": "warmup"
+  },
+  {
+   "n": 3,
+   "title": "Warm-Up",
+   "sub": "Answers.",
+   "min": 1,
+   "note": "Reveal. Ask for the band each question came from only if time allows.",
+   "kind": "warmup"
+  },
+  {
+   "n": 4,
+   "title": "Vocabulary",
+   "sub": "The new words, before they are used.",
+   "min": 1,
+   "note": "Four words the notes use from the first line. Point at a coefficient, a constant and a pair of like terms in 8x \u2212 4 + 2x as each is read. 'Distribute' means the number outside reaches every term inside \u2014 say 'every' twice.",
+   "kind": "vocab"
+  },
+  {
+   "n": 5,
+   "title": "Notes",
+   "sub": "Copy all four lines.",
+   "min": 4,
+   "note": "3x and 5x are like terms: three x's and five more x's are eight x's. The \u22124 is a constant and is not like either. Once the x-terms are collected the equation is Unit 1's two-step equation: add 4 to both sides, divide both sides by 8. A like term has the same letter to the same power \u2014 x and x\u00b2 are not alike, and that is the only power we see this unit.\nOFF: 'Same letter, same power: they collect. A number on its own is a constant.'",
+   "kind": "notes"
+  },
+  {
+   "n": 6,
+   "title": "Notes",
+   "sub": "",
+   "min": 3,
+   "note": "The 3 multiplies the 2x AND the \u22125: 6x \u2212 15. Then \u221215 and +4 are like terms (both constants): \u221211. Then two steps. A board that writes 6x \u2212 5 has distributed to one term only \u2014 the B1G-M's first named misconception for this benchmark.\nOFF: 'The number outside multiplies every term inside.'",
+   "kind": "notes"
+  },
+  {
+   "n": 7,
+   "title": "Notes",
+   "sub": "",
+   "min": 3,
+   "note": "The 3(x \u2212 2) is subtracted, so the factor is \u22123, and it multiplies both terms: (\u22123)(x) = \u22123x and (\u22123)(\u22122) = +6. 18 + 6 = 24. Never 18 \u2212 3 first: the 3 belongs to the parentheses, not to the 18. Then the check \u2014 put 5 back in the FIRST equation, not a later line: 18 \u2212 3(5 \u2212 2) = 18 \u2212 9 = 9.\nOFF: 'The minus sign belongs to the 3. It goes in with it.'",
+   "kind": "notes"
+  },
+  {
+   "n": 8,
+   "title": "Example 1",
+   "sub": "Like terms on the left.",
+   "min": 1,
+   "note": "Ask which two terms are like terms before anyone writes: 5x and \u22122x. The 9 is a constant and waits.",
+   "kind": "example"
+  },
+  {
+   "n": 9,
+   "title": "Example 1",
+   "sub": "Worked.",
+   "min": 2,
+   "note": "5x \u2212 2x = 3x (the minus belongs to the 2x). Then two steps: subtract 9, divide by 3. Check in the first equation: 35 + 9 \u2212 14 = 30. A board with x = 3 collected 5x + 2x = 7x and then 7x = 21.",
+   "kind": "example"
+  },
+  {
+   "n": 10,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "7x \u2212 4x = 3x, then add 3 and divide by 3: x = 9. This catches a student who watched the collecting without doing it \u2014 a board with 11x \u2212 3 = 24 added the x-terms; one with x = 7 subtracted the 3.",
+   "kind": "yourturn"
+  },
+  {
+   "n": 11,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 12,
+   "title": "Example 2",
+   "sub": "Distribute, then collect.",
+   "min": 1,
+   "note": "Ask what the 5 multiplies before anyone writes: the x AND the \u22123.",
+   "kind": "example"
+  },
+  {
+   "n": 13,
+   "title": "Example 2",
+   "sub": "Worked.",
+   "min": 2,
+   "note": "5(x \u2212 3) is 5x \u2212 15. Then 5x and 2x are like terms: 7x. Two steps: add 15, divide by 7. Check: 5(8 \u2212 3) + 16 = 25 + 16 = 41. A board with 7x \u2212 3 = 41 distributed to one term.",
+   "kind": "example"
+  },
+  {
+   "n": 14,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "4x \u2212 8 + 3x = 34, so 7x \u2212 8 = 34 and x = 6. This catches the one-term distribution: a board with 7x \u2212 2 = 34 gets 36/7, and one that never collects is stuck with two x-terms.",
+   "kind": "yourturn"
+  },
+  {
+   "n": 15,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 16,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Collect, then one step. A board with x = 28 kept only the 2x; one with x \u2248 9.33 kept only the 6x. Check: 2(7) + 6(7) = 14 + 42 = 56.",
+   "kind": "wb"
+  },
+  {
+   "n": 17,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 18,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "A different letter, the same move. A board with 13y + 3 = 48 added the 4y; one with y = 9.6 never took the 3 off.",
+   "kind": "wb"
+  },
+  {
+   "n": 19,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 20,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Example 2's moves with a plus inside. A board with n = 11.6 wrote 3n + 4 (one term); one with n = 50/3 left out the 2n.",
+   "kind": "wb"
+  },
+  {
+   "n": 21,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 22,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic. Option A is the one-term distribution, option C the sign, option B the lost x. On a split: sixty seconds, convince your neighbor, re-vote \u2014 then check 6 in the first equation: 2(7) + 6 = 20.",
+   "kind": "wb"
+  },
+  {
+   "n": 23,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 24,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The pattern breaks: the group is subtracted, so the factor is \u22122 and the +1 becomes \u22122. A board with w = 6 wrote 15 \u2212 2w + 2 (the sign); one with w = 5.5 wrote 15 \u2212 2w + 1 (one term). Check: 15 \u2212 2(4 + 1) = 15 \u2212 10 = 5.",
+   "kind": "wb"
+  },
+  {
+   "n": 25,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 26,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic: three named errors, each the next line a student really writes. Option C is the sign, option D subtracts before distributing, option A distributes to one term. Ask a room that chose B to finish it: 24 \u2212 3x = 6, x = 6.",
+   "kind": "wb"
+  },
+  {
+   "n": 27,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 28,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The extra-number board (ruling 22): Dana's age, 13, is not needed. The \\$12 is paid every month \u2014 the coefficient; the \\$25 once \u2014 the constant. Check: 25 + 12(6) = 97.",
+   "kind": "wb"
+  },
+  {
+   "n": 29,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 30,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Backwards: the solution is given and a number in the equation is missing. Put 8 in for x, take off the 16, divide by 3. Check: 3(8 + 2) + 2(8) = 30 + 16 = 46.",
+   "kind": "wb"
+  },
+  {
+   "n": 31,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 32,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Take your time. Boards up when you have written it.",
+   "min": 0,
+   "note": "Written, and the exit evidence. Read two aloud. Sam's wrong move gives 5.5, not 7, so a check of his answer exposes it: 4(5.5 \u2212 2) + 3 = 17, not 23.",
+   "kind": "wb"
+  },
+  {
+   "n": 33,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 34,
+   "title": "Independent Set",
+   "sub": "Six questions. On your own, in writing.",
+   "min": 6,
+   "note": "Hand out the Independent Set; the same six questions are on the board. Silent work. Circulate and mark what you see; do not teach. Whatever is not finished goes home.",
+   "kind": "independent"
+  },
+  {
+   "n": 35,
+   "title": "IXL",
+   "sub": "Last five minutes.",
+   "min": 5,
+   "note": "IXL: every listed skill is required, SmartScore 67. Due by the Unit 11 test.",
+   "kind": "ixl"
+  }
+ ]
+}

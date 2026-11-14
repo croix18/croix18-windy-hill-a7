@@ -23,8 +23,8 @@ shown, and every practice number after them is new.*
    many), a = b (never true: no solution). x = 0 is one solution, and a board says so (the guide's named
    misconception: "a solution must look like variable = constant").
 5. **Rational coefficients carry 11.04**: a fraction distributed, both sides multiplied by a common denominator, and
-   a decimal distributed — the last is the lowest-scoring released Grade 8 skill (21%), so it has a board every day
-   from 11.01 and its own question on the test.
+   a decimal distributed — the last is the lowest-scoring released Grade 8 skill (21%), so it has a question every day
+   from 11.01 (a board, or a question of the Independent Set) and its own question on the test.
 6. **Every solution is checked by substitution** — in an equation, and in both equations of a system (AR.4.1: a
    solution satisfies both).
 7. **Approximate solutions (AR.4.3 Clar. 1)** are read between the grid lines to the nearest half or tenth and
