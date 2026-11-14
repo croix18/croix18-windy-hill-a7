@@ -125,6 +125,7 @@ td.r,th.r{text-align:right;padding-right:0}
 .mode{display:flex;gap:0;border:1px solid var(--rule);border-radius:9px;overflow:hidden;width:max-content;max-width:100%;margin:14px 0 0;font-family:var(--ui)}
 .mode button{border:0;border-radius:0;background:transparent;padding:9px 12px;font-size:13.5px;color:var(--mut)}
 .mode button[aria-pressed=true]{background:var(--hot);color:var(--hotInk)}
+.setbad{flex:1 1 100%;color:var(--no);font-weight:600} .setchk{margin:10px 0 0;font:600 12.5px/1.3 var(--ui);color:var(--mut);letter-spacing:.02em}   /* a number that is not a set; a teacher copy's check code (14 Nov 2026) */
 .setrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:12px 0 0;font:13.5px/1.3 var(--ui);color:var(--mut)}
 .setrow input{font:600 15px/1 var(--ui);width:6.5rem;color:var(--ink);padding:7px 8px}
 .chk{padding:8px 12px}
@@ -321,6 +322,7 @@ body.printing{background:var(--ground)}
 .pchoices{margin:6px 0 4px var(--i2)} .pch{display:flex;gap:8px;align-items:baseline;margin:4px 0}
 .pbox{width:13px;height:13px;border:1.5px solid #000;border-radius:50%;flex:none;transform:translateY(1px)} .pbox.sq{border-radius:2px}
 .pch .cl{font-weight:700}
+.pkeep{break-inside:avoid;page-break-inside:avoid} .psec{break-after:avoid;page-break-after:avoid}   /* a section's name is never the last line of a page: it goes over with its first question (14 Nov 2026) */
 .pbreak{break-before:page;page-break-before:always;height:1px}
 .pmeta{font:14px/1.35 var(--ui);color:#333;margin:4px 0 10px}
 .pscore{font:15px/1.45 var(--ui);margin:8px 0 14px} .pscore>span{display:block}
@@ -629,6 +631,10 @@ svg.nlg.nl-small{width:min(100%,14rem)}
 .key:has(.nlkey) .kv{flex:1 1 100%;min-width:0} .key .kv .nlkey,.wfin .nlkey{display:block;width:min(100%,24rem)}
 @media (max-width:480px){ .nlp .nlw,.nlp>.ckrow,.nltk{margin-left:0} .nseg{flex-basis:100%} }
 /* paper: the line alone with the band to graph on; the key drawn in ink */
+/* an all-multiple-choice test (14 Nov 2026): a typed part's four choices two by two under a short work space; four graphs two by two */
+.pwork.pwmc{height:40px}
+.pchoices.pmc{display:grid;grid-template-columns:1fr 1fr;column-gap:22px;max-width:6.2in;break-inside:avoid}
+.pchoices.pgr .pch{align-items:center} .pchoices.pgr .cv{flex:1 1 auto;min-width:0} .pnlc{display:block;max-width:2.7in} .pnlc svg.nlg{color:#000}
 .pnl{margin:4px 0 6px var(--i2);max-width:4.6in} .pnlband{height:10mm} .pnl svg.nlg{color:#000}
 #printview svg.nlg{color:#000} #printview .nlkw{color:#333}
 .ptab .kv .nlkey{width:2.9in}
@@ -711,6 +717,7 @@ body.printing>.kcalc,body.tview>.kcalc{display:none!important}
 .teacherbar button{min-height:44px;padding:9px 14px;font:600 14px/1 var(--chrome);border-radius:10px;background:var(--paper);border-color:var(--rule)}
 .teacherbar button.go{background:var(--go);border-color:var(--go);color:var(--goInk)}
 .teacherbar button.go:hover{background:var(--goHi);border-color:var(--goHi)}
+.teacherbar button[data-tmc][aria-pressed=true]{color:var(--ink);font-weight:700;background:var(--seg);box-shadow:inset 0 0 0 1.5px var(--navyLine)}   /* All multiple choice, on: the ✓, the weight and the edge — not colour alone */
 .tbseg,.tvtabs{display:inline-flex;gap:2px;padding:3px;border-radius:999px;background:var(--field2)}
 .teacherbar .tbseg button,.tvtabs button{min-height:44px;border:0;border-radius:999px;background:transparent;color:var(--mut);padding:8px 15px;font:600 14px/1 var(--chrome)}
 .teacherbar .tbseg button[aria-checked=true],.tvtabs button[aria-selected=true]{color:var(--ink);font-weight:700;background:var(--seg);box-shadow:inset 0 0 0 1.5px var(--navyLine)}
@@ -3416,6 +3423,11 @@ window.TEACHER_TEST = {
      - Offline, or as a downloaded file: the last copy kept on this browser (or the build's own), and one line saying changes
        are only on this computer; back on the site, changes made offline go up if the site's copy has not changed since.
 
+   ALL MULTIPLE CHOICE (Croix, 14 Nov 2026: "I'd like the retakes that I print up to be all multiple choice"): a switch in the
+   bar, on a random-test unit that gives its wrong answers (Unit.choices; ui.js mcOf). On, Print test, Test + key and Key only
+   print the pinned form with every typed part as a choice of four and every number line as four graphs; the key gives the
+   letters and says so beside its set number. It is off on every load, and the editor's paper is never changed by it.
+
    APPROVE QUESTIONS: every kind of question of the practice test (a family) and every lesson item from Cadence, Approved |
    Disapproved, saved at once (PUT /teacher/api/items/<course>/<unit>/approval/<kind>/<target>, {approved}); approvals.js reads
    the list on every page. */
@@ -3496,8 +3508,9 @@ function testHtml(f, spec, editor){
   var h = [head(f, false, spec)], qn = 0;
   h.push('<p class="pnotes">' + (T.two_day ? '<span class="pinote">' + esc(T.two_day) + '</span>' : '') + (T.notes || []).map(function(n){ return '<span class="pinote">' + esc(n) + '</span>'; }).join('') + '</p>');
   fixedSecs(f, spec, editor).forEach(function(sec){
-    h.push('<h2 class="psec" data-si="' + sec.si + '">' + esc(sec.title) + (sec.points ? '<span class="ppts">' + sec.points + ' points</span>' : '') + '</h2>');   /* ruling 54: named, never numbered */
-    sec.items.forEach(function(d){ if (d.out){ h.push('<div class="pq pqout" data-k="' + d.k + '"></div>'); return; } qn++; h.push(qHtml(d.it, qn, d.k)); });
+    h.push('<div class="pkeep"><h2 class="psec" data-si="' + sec.si + '">' + esc(sec.title) + (sec.points ? '<span class="ppts">' + sec.points + ' points</span>' : '') + '</h2>');   /* ruling 54: named, never numbered */
+    sec.items.forEach(function(d, i){ if (d.out) h.push('<div class="pq pqout" data-k="' + d.k + '"></div>'); else { qn++; h.push(qHtml(d.it, qn, d.k)); } if (!i) h.push('</div>'); });   /* the section's name stays with its first question (.pkeep, 14 Nov 2026) */
+    if (!sec.items.length) h.push('</div>');
   });
   return h.join('');
 }
@@ -3694,7 +3707,9 @@ function freshSpec(){
 }
 function changedOn(f){ var F = SPEC.forms[f], n = 0; TP.forEach(function(p){ if (SPEC.pick[p.k] === false) return; var q = F.q[p.k]; if ((q && (q.seed || q.ed)) || (!FIXED && srcOf(F, p.k) !== F.seed)) n++; }); return n; }
 /* a form drawn: the paper (editor: with the empty places of the questions left off) and its key */
+var MCON = false;                                           /* the bar's "All multiple choice" (14 Nov 2026): what prints, never the editor's paper; off on every load */
 function draw(f, editor){
+  var mc = MCON && !editor && !FIXED;
   if (FIXED) return {test: testHtml(f, SPEC, editor), key: keyHtml(f, SPEC), points: total(f, SPEC)};
   var F = SPEC.forms[f], secs = [];
   TP.forEach(function(p){
@@ -3703,7 +3718,15 @@ function draw(f, editor){
     s.items.push({it: itemOf(F, p.k), keep: null, si: p.si, ii: p.ii, k: p.k, out: !on});
   });
   var n = changedOn(f);
-  return PK.form(secs, {label: 'Test', form: f, meta: 'Set ' + F.seed + ' · Whole test' + (n ? ' · ' + n + (n === 1 ? ' question' : ' questions') + ' changed' : '')});
+  /* the key says exactly how the paper differs from its set (14 Nov 2026: a set number must be accurate): the printed number of
+     each question drawn from another set, with that set; of each one edited; and the ID of each one left off */
+  var how = [], off = [], qn = 0;
+  TP.forEach(function(p){
+    if (SPEC.pick[p.k] === false){ off.push(qidOf(p.k)); return; }
+    qn++; var q = F.q[p.k], src = srcOf(F, p.k);
+    if (src !== F.seed) how.push('Q' + qn + ' from set ' + src + (q && q.ed ? ', edited' : '')); else if (q && q.ed) how.push('Q' + qn + ' edited');
+  });
+  return PK.form(secs, {label: 'Test', form: f, meta: 'Set ' + F.seed + ' · Whole test' + (n ? ' · ' + n + (n === 1 ? ' question' : ' questions') + ' changed' + (how.length ? ' (' + how.join('; ') + ')' : '') : '') + (off.length ? ' · left off: ' + off.join(', ') : '') + (mc ? ' · All multiple choice' : ''), mc: mc});
 }
 function nOn(){ return SPEC.pick.filter(function(x){ return x !== false; }).length; }
 
@@ -3752,7 +3775,7 @@ var TESTS_LABEL = FORMS.length > 1 ? 'Tests A and B' : 'Edit test';
 bar.innerHTML = '<p class="tbtxt"><b>Teacher copy</b> · Never share this page with students.</p>' +
   '<div class="tbrow"><div class="tbgrp">' +
   (FORMS.length > 1 ? '<div class="tbseg" role="radiogroup" aria-label="Which form">' + FORMS.map(function(f, i){ return '<button type="button" role="radio" data-form="' + f + '" aria-checked="' + (i === 0) + '" tabindex="' + (i === 0 ? 0 : -1) + '">' + esc(formWord(f)) + '</button>'; }).join('') + '</div>' : '') +
-  '<button type="button" class="go" data-tprint="test">Print test</button><button type="button" data-tprint="tk">Test + key</button><button type="button" data-tprint="key">Key only</button></div>' +
+  '<button type="button" class="go" data-tprint="test">Print test</button><button type="button" data-tprint="tk">Test + key</button><button type="button" data-tprint="key">Key only</button>' + (!FIXED && PK.canMC && PK.canMC() ? '<button type="button" data-tmc aria-pressed="false">All multiple choice</button>' : '') + '</div>' +
   '<div class="tbgrp"><button type="button" data-topen="tests" aria-haspopup="dialog">' + TESTS_LABEL + '</button><button type="button" data-topen="approve" aria-haspopup="dialog">Approve questions</button></div></div>' +
   '<p class="tbnote" id="tbNote" hidden></p>';
 var sheet = document.querySelector('.sheet'); if (sheet) sheet.insertBefore(bar, sheet.firstChild);
@@ -3769,6 +3792,7 @@ function paintBar(){ var n = $('tbNote'), t = noteLine(); n.textContent = t; n.h
 bar.addEventListener('click', function(e){
   var b = e.target.closest('button'); if (!b) return;
   if (b.dataset.form){ setForm(b.dataset.form); return; }
+  if (b.hasAttribute('data-tmc')){ MCON = !MCON; b.setAttribute('aria-pressed', String(MCON)); b.textContent = (MCON ? '✓ ' : '') + 'All multiple choice'; return; }
   if (b.dataset.tprint){ var k = b.dataset.tprint; whenReady(function(){ showPrint(k, FORM, b, null); }); return; }
   if (b.dataset.topen === 'tests') whenReady(function(){ openTests(FORM, b); });
   if (b.dataset.topen === 'approve') openApprove(b);
@@ -4108,6 +4132,7 @@ API.ready = function(){ return READY; }; API.mode = function(){ return MODE; }; 
 API.print = function(kind, f){ whenReady(function(){ showPrint(kind || 'tk', f || FORM, bar.querySelector('[data-tprint]'), null); }); };
 API.open = function(which){ if (which === 'approve') openApprove(bar.querySelector('[data-topen="approve"]')); else whenReady(function(){ openTests(FORM, bar.querySelector('[data-topen="tests"]')); }); };
 API.clean = clean; API.draw = function(f){ return draw(f || FORM, false); };
+API.spec = function(){ return SPEC; };                   /* the pinned forms as held on this page, for the checks (check/set_page.js) */
 /* which questions are on the test: read, or set for this page (the checks) — the editor's On the test saves */
 API.pick = function(v){ if (v && SPEC) SPEC.pick = TP.map(function(p){ return v[p.k] !== false; }); return SPEC ? SPEC.pick.slice() : TP.map(function(){ return true; }); };
 
@@ -4664,6 +4689,7 @@ function hashOf(sd, sc){ return '#set-' + sd + (sc === 'all' ? '' : '-' + sc); }
 /* ------------------------------------------------ saved state [W-6]: one record per set and practice choice */
 migrate();
 var h0 = fromHash(), last = load('last') || {};
+var BADSET = !h0 && /^#set/i.test(location.hash || '') ? String(location.hash).slice(0, 24) : '';   /* a link that names no set (14 Nov 2026): said, not swallowed */
 var seed = h0 ? h0.seed : (last.seed || randomSeed()), scope = h0 ? h0.scope : (SCOPES[last.scope] ? last.scope : 'all');
 var G, ITEMS, DS, EX = {}, S, HASHV = '', FLASH = {};
 function key(){ return 'set.' + seed + '.' + scope; }
@@ -4870,6 +4896,8 @@ function render(){
   });
   $('paper').innerHTML = h.join('');
   $('setno').textContent = seed; $('setin').value = seed;
+  /* a teacher copy shows the open set's check code beside "Set number", to hold against a printed key (14 Nov 2026) */
+  if (teacherPage()){ var sc0 = $('setchk'); if (!sc0){ sc0 = document.createElement('p'); sc0.id = 'setchk'; sc0.className = 'setchk'; sc0.setAttribute('translate', 'no'); $('mMenu').appendChild(sc0); } sc0.textContent = scope === 'all' ? 'Set ' + seed + ' · version ' + U.contentVersion + ' · check ' + setCheck() : ''; sc0.hidden = scope !== 'all'; }   /* its own line at the foot of the ⋯ menu, never translated */
   /* which practice this is, always in sight (7 Nov 2026, Croix: "It was the switching mechanism that confused me. I would assume
      that if I open a specific lesson it would open to that section. Likewise if I open the full practice test."): a chip under the
      title names the choice from What to practice, and a lesson's line says what it is — "Lesson 10.04 · 8 questions · today's
@@ -5589,6 +5617,7 @@ function openSet(n, sc, mode){
   try { history.replaceState(null, '', hashOf(seed, scope)); } catch(e){}
   LSEED = 0;
   restore(); save(); paintAll(); window.scrollTo(0, 0);
+  if (BADSET){ NOTICE = '“' + BADSET + '” is not a set (a set number is 1 to 99999). This is set ' + seed + '.'; BADSET = ''; }
   $('notice').textContent = NOTICE; $('notice').hidden = !NOTICE;
   var h1 = $('h1'); if (h1 && document.activeElement && document.activeElement !== document.body && !(document.activeElement.closest && document.activeElement.closest('#paper'))) { h1.setAttribute('tabindex', '-1'); h1.focus({preventScroll: true}); }
 }
@@ -5623,7 +5652,9 @@ $('scope').addEventListener('change', function(){ var v = this.value; if (v === 
   var go = function(){ goSet(to, v); };
   if (started() && !S.done) ask('Switch to “' + SCOPES[v] + '”? This set stays saved on this device.', 'Switch', go); else go();
   $('scope').value = scope; });
-$('setgo').addEventListener('click', function(){ var v = Math.floor(+$('setin').value); if (v >= 1 && v <= 99999){ moreClose(); goSet(v, scope); } else { $('setin').value = seed; } });
+function setBad(t){ var b = $('setbad'); if (!b){ b = document.createElement('span'); b.id = 'setbad'; b.className = 'setbad'; b.setAttribute('role', 'alert'); $('setin').parentNode.appendChild(b); } b.textContent = t; b.hidden = !t; if (t) $('setin').setAttribute('aria-invalid', 'true'); else $('setin').removeAttribute('aria-invalid'); }
+$('setgo').addEventListener('click', function(){ var v = okSetText($('setin').value); if (v){ setBad(''); moreClose(); goSet(v, scope); } else { setBad('A set number is 1 to 99999. This is still set ' + seed + '.'); $('setin').select(); } });   /* a number that is not one says so (14 Nov 2026): "48.5" was set 48, "4.8e3" set 4800, and anything else was dropped without a word */
+$('setin').addEventListener('input', function(){ setBad(''); });
 $('setin').addEventListener('keydown', function(e){ if (e.key === 'Enter'){ e.preventDefault(); $('setgo').click(); } });
 function newSet(){ var go = function(){ goSet(randomSeed(), scope === 'miss' ? 'all' : scope); }; if (started() && !S.done) ask('Leave this set for a new one? This one stays saved on this device.', 'New set', go); else go(); }
 $('bNew').addEventListener('click', function(){ moreClose(); newSet(); });
@@ -5632,11 +5663,13 @@ $('bAgain').addEventListener('click', function(){ moreClose(); ask('Clear your a
 /* Ruling 49 (22 Oct 2026): on a unit whose test is a random set of this page, the teacher bar (teacher.js) prints the
    TEST as n forms — the make-up printing, headed "Test · Form A" instead of "Make-up" (the set number on the key only,
    25 Oct 2026). Teacher copies only. */
-window.PracticePrint = {forms: function(n, label){ if (teacherPage()) showPrint('mk' + Math.min(5, Math.max(1, n | 0)), label || 'Test'); }};
+window.PracticePrint = {forms: function(n, label, mc){ if (teacherPage()) showPrint((mc ? 'mc' : 'mk') + Math.min(5, Math.max(1, n | 0)), label || 'Test'); }};
 /* the teacher copy's tools (teacher.js: Approve questions, Tests A and B) draw with this page: a teacher page only */
-if (teacherPage()) window.PracticeKit = {famKey: famKey, partsOf: partsOf, textType: textType, keyHtml: function(it){ return keyHtml(it); }, sample: sampleOf, form: pinnedForm,
+if (teacherPage()) window.PracticeKit = {famKey: famKey, partsOf: partsOf, textType: textType, keyHtml: function(it){ return keyHtml(it); }, sample: sampleOf, form: pinnedForm, canMC: canMC, mcOf: mcOf, check: setCheck, checkCode: checkCode,
   qid: function(si, ii, item){ return qidOf(si, ii, item); }, plain: plainText, LET: LET, sections: G0.sections.map(function(s, si){ return {title: s.title, si: si, n: s.items.length}; })};
-window.addEventListener('hashchange', function(){ var h = fromHash(); if (h && (h.seed !== seed || h.scope !== scope)) openSet(h.seed, h.scope); });
+window.addEventListener('hashchange', function(){ var h = fromHash();
+  if (!h && /^#set/i.test(location.hash || '')){ BADSET = String(location.hash).slice(0, 24); openSet(seed, scope); return; }   /* a bad set link on an open page: this set stays, and says why */
+  if (h && (h.seed !== seed || h.scope !== scope)) openSet(h.seed, h.scope); });
 window.addEventListener('storage', function(e){                                       /* [R2-N4] two tabs on one set stay in step — without writing back [B1] */
   if (e.key !== PRE + key() || !e.newValue) return;
   var rec; try { rec = JSON.parse(e.newValue); } catch(x){ return; }
@@ -5672,12 +5705,13 @@ function worksheetHtml(){
   var h = [printHead(setLine())], qn = 0;
   var pnotes = U.notesPrint || U.notes;                       /* paper is not a keyboard: a unit may give notes for print */
   if (pnotes && pnotes.length) h.push('<p class="pnotes">' + pnotes.map(function(n){ return '<span class="pinote">' + n + '</span>'; }).join(' ') + '</p>');
-  DS.forEach(function(sec){ h.push('<h2 class="psec"><span class="bt">' + sec.title + '</span></h2>'); sec.items.forEach(function(d){ qn++; h.push(pq(d, qn)); }); });
+  /* a section's name never prints alone at the foot of a page: it is kept with its first question (.pkeep; Croix, 14 Nov 2026) */
+  DS.forEach(function(sec){ h.push('<div class="pkeep"><h2 class="psec"><span class="bt">' + sec.title + '</span></h2>'); sec.items.forEach(function(d, i){ qn++; h.push(pq(d, qn) + (i ? '' : '</div>')); }); if (!sec.items.length) h.push('</div>'); });
   return h.join('');
 }
 function keyListHtml(){
   var rows = ITEMS.map(function(it){ var q = qidOfItem(it); return '<tr><td class="pk">' + esc(it.lab) + '</td><td class="kv">' + keyHtml(it) + '</td><td class="pid" translate="no">' + (q ? q.id : '') + '</td></tr>'; }).join('');
-  return '<div class="pkey"><h2 class="psec"><span class="bt">Answer key</span></h2><p class="pmeta"><span class="bt">' + setLine() + '</span></p><table class="ptab"><tbody>' + rows + '</tbody></table></div>';
+  return '<div class="pkey"><h2 class="psec"><span class="bt">Answer key</span></h2><p class="pmeta"><span class="bt">' + setLine() + '</span>' + checkLine() + '</p><table class="ptab"><tbody>' + rows + '</tbody></table></div>';
 }
 function yourAnswer(it){
   var a = S.ans[it.id];
@@ -5709,13 +5743,13 @@ function teacherPage(){ return !!window.TEACHER_TEST; }
 function printMenu(){
   var test = S.mode === 'test' && !S.done;
   ask0('What do you want to print?', [
-    ['ws', 'Worksheet'], ['wk', 'Worksheet + answer key']].concat(teacherPage() ? [['mk', 'Make-up tests']] : []).concat([
+    ['ws', 'Worksheet'], ['wk', 'Worksheet + answer key']].concat(teacherPage() ? [['mk', 'Make-up tests']].concat(canMC() ? [['mc', 'Make-up tests, all multiple choice']] : []) : []).concat([
     ['res', 'My results', test ? 'In “Like the real test” the results print after Finish.' : '']]));
 }
 /* Make-up tests (Croix, 18 Oct 2026: "print tests or make ups directly from here… I'll need it to print the answer key too"):
    one to five forms, each a different set of the WHOLE unit, headed as a test with a name line and its form letter; every
    form's answer key follows on its own page, labelled with the form letter and set number so the teacher keeps the keys. */
-function makeupMenu(){ ask0('How many different forms?', [['mk1', '1'], ['mk2', '2'], ['mk3', '3'], ['mk4', '4'], ['mk5', '5']]); }
+function makeupMenu(mc){ var k = mc ? 'mc' : 'mk'; ask0('How many different forms?', [[k + '1', '1'], [k + '2', '2'], [k + '3', '3'], [k + '4', '4'], [k + '5', '5']]); }
 function withSet(s, fn){                                   /* run fn with the page's data drawn from set s, then put everything back */
   var o = {seed: seed, scope: scope, G: G, DS: DS, ITEMS: ITEMS, EX: EX, H: HASHV}, out;
   seed = s; scope = 'all'; CURCOMP = true;
@@ -5742,6 +5776,79 @@ function collect(){                                        /* the items of DS, a
 function vStem(it){ return it && it._est != null ? it._est : V.stem(it); }
 function vLine(p){ return p && p._eln != null ? p._eln : V.line(p); }
 function vOpt(x, k){ return x && x._eopt && x._eopt[k] != null ? x._eopt[k] : V.opt(x, k); }
+/* ---- a set number is a promise (Croix, 14 Nov 2026: "ensure all the test codes are valid and accurate. Harden that system
+   across the whole project" — the set numbers on the keys, which reopen a test's exact questions and answers).
+   - THE CHECK CODE: five characters worked out from the unit, its contentVersion and every question and answer of the paper
+     in ITEMS (setCheck). Every key prints it after its set number, with the version; a teacher copy shows the open set's
+     beside "Set number". The same code means the same questions and the same answers. A key whose code is not the code of
+     its set as it opens today was printed from another version of the unit, or from a form that was changed — and a
+     changed form says how on its key (teacher.js: which question came from which set, which was edited, which left off;
+     here: how many a make-up left out because their kind is disapproved).
+   - A set number is 1 to 99999, digits only: a link or a typed number that is not one says so (it used to open the last
+     set, or another, and say nothing).
+   check/lock.js holds the sets steady; check/set_page.js checks all of this in a browser. */
+var CHECK_ABC = '23456789ABCDEFGHJKLMNPQRSTUVWXYZ';       /* no 0 O 1 I: read aloud, copied by hand */
+function checkCode(s){ var n = K.fnv1a(s), o = ''; for (var i = 0; i < 5; i++){ o += CHECK_ABC.charAt(n % 32); n = Math.floor(n / 32); } return o; }
+function setCheck(){
+  return checkCode(U.id + '#' + U.contentVersion + '#' + ITEMS.map(function(it){
+    var x = it.x, a;
+    try { a = it.type === 'nline' ? NL.keyText(NL.graphOf(x)) : it.type === 'mc' ? 'c:' + vOpt(x, x.correct) : it.type === 'multi' ? 'm:' + x.correct.map(function(k){ return vOpt(x, k); }).join('|') : x._ekey != null ? x._ekey : V.key(x); }
+    catch(e){ a = '?'; }
+    return U.key(x) + '=' + a + (it.item && it.item._est != null ? '~' + it.item._est : '') + (x._eln != null ? '~' + x._eln : '');
+  }).join(';'));
+}
+function checkLine(){ return '<span class="pchk" translate="no"> · version ' + esc(String(U.contentVersion)) + ' · check ' + setCheck() + '</span>'; }   /* its own piece, never translated: a code is not words */
+function okSetText(t){ var m = /^\s*(\d{1,5})\s*$/.exec(String(t)); return m && +m[1] >= 1 ? +m[1] : 0; }
+function leftOut(){                                         /* how many of the set's questions this paper does not have (a disapproved kind) */
+  var all = 0, on = 0; try { G.sections.forEach(function(sec){ all += sec.items.length; }); DS.forEach(function(sec){ on += sec.items.filter(function(d){ return !d.out; }).length; }); } catch(e){ return ''; }
+  return all > on ? ' · ' + (all - on) + (all - on === 1 ? ' question' : ' questions') + ' left out (disapproved)' : '';
+}
+/* ---- an all-multiple-choice test (Croix, 14 Nov 2026: "I'd like the retakes that I print up to be all multiple choice").
+   A teacher copy's make-up tests and its Tests A and B can print with every part as a choice of four: a typed part's three
+   wrong answers are the unit's own mistakes (Unit.choices(part) → the wrong answers as its key would show them, the likeliest
+   first: its coach's mistake models, so every wrong choice is what a named slip gives); a number line to graph becomes four
+   graphs — the key, its arrow turned round, its dot changed, and both (Croix chose "pick from 4 graphs"). The right choice's
+   place comes from the question itself (mcOrder), so the paper and its key, printed a week apart, agree. A choice that reads
+   as the key, or as another choice, is dropped here whatever the unit gave; a part left with fewer than three wrong choices
+   prints as it was written, with its work space. A choice question, and a select-all, are untouched. Paper only: the page a
+   student answers on never offers it. */
+var ALLMC = false;
+function canMC(){ return typeof U.choices === 'function'; }
+function mcHash(s){ var h = 2166136261; for (var i = 0; i < s.length; i++){ h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
+function mcOrder(n, s){                                     /* 0..n-1 in an order fixed by the words s */
+  var a = [], h = mcHash(s), i, j, t; for (i = 0; i < n; i++) a.push(i);
+  for (i = n - 1; i > 0; i--){ h = (Math.imul(h, 1664525) + 1013904223) >>> 0; j = (h >>> 8) % (i + 1); t = a[i]; a[i] = a[j]; a[j] = t; }
+  return a;
+}
+function mcSame(h){ return plainText(h).replace(/\s+/g, '').replace(/−/g, '-'); }
+function mcOf(p){
+  if (!p || p.kind === 'mc' || !canMC()) return null;
+  var all, tag;
+  try {
+    if (p.kind === 'nline'){
+      var g = NL.graphOf(p), turn = g.dir === 'left' ? 'right' : 'left';
+      if (!NL.complete(g)) return null;
+      all = [g, {c: g.c, closed: g.closed, dir: turn}, {c: g.c, closed: !g.closed, dir: g.dir}, {c: g.c, closed: !g.closed, dir: turn}]
+        .map(function(x){ return '<span class="pnlc">' + NL.svg(p, x, {mode: 'key'}) + '</span>'; });
+      tag = 'nline:' + NL.keyText(g);
+    } else {
+      var key = p._ekey != null ? p._ekey : V.key(p), seen = [mcSame(key)], wrong = [];
+      (U.choices(p) || []).forEach(function(h){ var t = typeof h === 'string' ? mcSame(h) : ''; if (!t || seen.indexOf(t) >= 0 || wrong.length >= 3) return; seen.push(t); wrong.push(h); });
+      if (wrong.length < 3) return null;
+      all = [key].concat(wrong); tag = seen[0];
+    }
+  } catch(e){ return null; }
+  var ord = mcOrder(4, String(U.key(p)) + '|' + (p.label || '') + '|' + tag);
+  return {opts: ord.map(function(k){ return all[k]; }), correct: ord.indexOf(0), nline: p.kind === 'nline'};
+}
+function mcChoices(p){                                      /* a part's four choices on the paper, or '' when it stays as written */
+  var m = ALLMC ? mcOf(p) : null; if (!m) return '';
+  return (m.nline ? '' : '<div class="pwork pwmc"></div>') + '<div class="pchoices pmc ' + (m.nline ? 'pgr' : 'p2') + '">' + m.opts.map(function(o, k){ return '<div class="pch"><span class="pbox"></span><span class="cl">' + LET[k] + '.</span><span class="cv">' + o + '</span></div>'; }).join('') + '</div>';
+}
+function mcKey(it){                                         /* its row on the key: the letter, then the answer */
+  var m = ALLMC && (it.type === 'text' || it.type === 'nline') ? mcOf(it.x) : null;
+  return m ? '<b>' + LET[m.correct] + '.</b> ' + (m.nline ? NL.keyHtml(it.x) : m.opts[m.correct]) : '';
+}
 /* A printed test form — a ruling-49 test or a make-up — has the paper's shape (A7 Unit 6's review, 25 Oct 2026): the points
    on the head, on every section and on every part; the show-your-work and follow-through lines the paper prints (from the
    teacher copy's TEACHER_TEST); work space and no answer line (house rule 2). The student's sheet carries NO set number: the
@@ -5752,8 +5859,8 @@ function pqTest(d, qn){
   var h = '<div class="pq"' + (d.k != null ? ' data-k="' + d.k + '"' : '') + '><div class="pqh">' + qidHtml(qidOf(d.si, d.ii, it), 'pqid') + '<div class="stem"><b class="num">' + qn + '.</b><span class="st">' + vStem(it) + '</span>' + (it.type === 'parts' ? '' : one) + '</div>' + fig(it) + '</div>';
   var line = function(p, lab){ return '<div class="line">' + (lab ? '<b class="lab">' + lab + '.</b>' : '') + '<span class="st">' + vLine(p) + '</span>' + one + '</div>'; };
   var choices = function(x){ return '<div class="pchoices">' + x.opts.map(function(o, k){ return '<div class="pch"><span class="pbox' + (it.type === 'multi' ? ' sq' : '') + '"></span><span class="cl">' + LET[k] + '.</span><span class="cv">' + vOpt(x, k) + '</span></div>'; }).join('') + '</div>'; };
-  if (it.type === 'parts') it.parts.forEach(function(p, pi){ if (d.keep && !d.keep[pi]) return; h += '<div class="ppart" data-p="' + pi + '">' + line(p, p.label) + (p.kind === 'mc' ? choices(p) : p.kind === 'nline' ? NL.blankHtml(p) : '<div class="pwork"></div>') + '</div>'; });
-  else if (it.type === 'solo') h += '<div class="ppart" data-p="0">' + (it.part.kind === 'nline' ? '<div class="line"><span class="st">' + vLine(it.part) + '</span></div>' + NL.blankHtml(it.part) : '<div class="pwork"></div>') + '</div>';
+  if (it.type === 'parts') it.parts.forEach(function(p, pi){ if (d.keep && !d.keep[pi]) return; h += '<div class="ppart" data-p="' + pi + '">' + line(p, p.label) + (p.kind === 'mc' ? choices(p) : mcChoices(p) || (p.kind === 'nline' ? NL.blankHtml(p) : '<div class="pwork"></div>')) + '</div>'; });
+  else if (it.type === 'solo') h += '<div class="ppart" data-p="0">' + (it.part.kind === 'nline' ? '<div class="line"><span class="st">' + vLine(it.part) + '</span></div>' + (mcChoices(it.part) || NL.blankHtml(it.part)) : mcChoices(it.part) || '<div class="pwork"></div>') + '</div>';
   else h += '<div class="ppart" data-p="0">' + choices(it) + '</div>';
   return h + '</div>';
 }
@@ -5774,15 +5881,18 @@ function testFormHtml(label, form){
   if (notes.length) h.push('<p class="pnotes">' + notes.map(function(n){ return '<span class="pinote">' + n + '</span>'; }).join(' ') + '</p>');
   DS.forEach(function(sec, si){
     var pts = ITEMS.filter(function(it){ return it.sec === si; }).length;
-    h.push('<h2 class="psec"' + (sec.si != null ? ' data-si="' + sec.si + '"' : '') + '><span class="bt">' + sec.title + '</span>' + (pts ? '<span class="ppts">' + pts + (pts === 1 ? ' point' : ' points') + '</span>' : '') + '</h2>');
+    /* a section's name never prints alone at the foot of a page (Croix, 14 Nov 2026: "The tests are littered with that and I hate
+       it"): the name and its first question are one block (.pkeep), which moves to the next page whole */
+    h.push('<div class="pkeep"><h2 class="psec"' + (sec.si != null ? ' data-si="' + sec.si + '"' : '') + '><span class="bt">' + sec.title + '</span>' + (pts ? '<span class="ppts">' + pts + (pts === 1 ? ' point' : ' points') + '</span>' : '') + '</h2>');
     /* no follow-through line under a section, nor anywhere (7 Nov 2026, Croix: the line goes "across everything"; ruling 19's scoring stands) */
-    sec.items.forEach(function(d){ if (d.out){ h.push('<div class="pq pqout" data-k="' + d.k + '"></div>'); return; } qn++; h.push(pqTest(d, qn)); });
+    sec.items.forEach(function(d, i){ if (d.out) h.push('<div class="pq pqout" data-k="' + d.k + '"></div>'); else { qn++; h.push(pqTest(d, qn)); } if (!i) h.push('</div>'); });
+    if (!sec.items.length) h.push('</div>');
   });
   return h.join('');
 }
-function testKeyHtml(form, meta){
+function testKeyHtml(form, meta, chk){
   var T = window.TEACHER_TEST || {};
-  var rows = ITEMS.map(function(it){ var q = qidOfItem(it); return '<tr><td class="pk">' + esc(it.lab) + '</td><td class="kv">' + keyHtml(it) + '</td><td class="pid" translate="no">' + (q ? q.id : '') + '</td></tr>'; }).join('');
+  var rows = ITEMS.map(function(it){ var q = qidOfItem(it); return '<tr><td class="pk">' + esc(it.lab) + '</td><td class="kv">' + (mcKey(it) || keyHtml(it)) + '</td><td class="pid" translate="no">' + (q ? q.id : '') + '</td></tr>'; }).join('');
   var bySec = DS.map(function(sec, si){ var its = ITEMS.filter(function(it){ return it.sec === si; }), qs = [];
     its.forEach(function(it){ var q = String(it.lab).replace(/[a-z]+$/, ''); if (qs.indexOf(q) < 0) qs.push(q); }); return {title: sec.title, si: sec.si, qs: qs, pts: its.length}; }).filter(function(b){ return b.pts; });
   /* the test's benchmarks, section by section, where the spec's tracker agrees with the unit's own sections (their points on
@@ -5793,16 +5903,19 @@ function testKeyHtml(form, meta){
   var tracker = '<div class="ptrk"><h2 class="psec"><span class="bt">Score tracker</span></h2><table class="ptab ptrack"><thead><tr><th>' + (byBm ? 'Benchmark' : 'Section') + '</th><th>Questions</th><th>Possible</th><th>Earned</th></tr></thead><tbody>' +
     bySec.map(function(b){ return '<tr><td>' + (byBm ? esc(order[b.si]) : b.title) + '</td><td>' + b.qs.join(', ') + '</td><td>' + b.pts + '</td><td></td></tr>'; }).join('') +
     '<tr><td><b>Total</b></td><td></td><td><b>' + ITEMS.length + '</b></td><td></td></tr></tbody></table></div>';
-  return '<div class="pkey"><h2 class="psec"><span class="bt">Answer key — Form ' + form + '</span></h2>' + (meta ? '<p class="pmeta"><span class="bt">' + meta + '</span></p>' : '') +
+  return '<div class="pkey"><h2 class="psec"><span class="bt">Answer key — Form ' + form + '</span></h2>' + (meta ? '<p class="pmeta"><span class="bt">' + meta + '</span>' + (chk || '') + '</p>' : '') +
     (T.follow_through_key ? '<p class="pmeta kft">' + esc(T.follow_through_key) + '</p>' : '') + '<table class="ptab pkrows"><tbody>' + rows + '</tbody></table>' + tracker + '</div>';
 }
-function makeupHtml(n, label){
+function makeupHtml(n, label, mc){
   label = label || 'Make-up';                              /* 'Test' on a ruling-49 teacher copy: the unit test IS a random set of this page */
   var seeds = [seed], guard = 0;
   while (seeds.length < n && guard++ < 50){ var r = randomSeed(); if (seeds.indexOf(r) < 0) seeds.push(r); }
-  var forms = seeds.map(function(s, k){ return withSet(s, function(){ return {ws: testFormHtml(label, LET[k]), key: testKeyHtml(LET[k], 'Set ' + s + ' · ' + esc(SCOPES[scope])), form: LET[k], seed: s}; }); });
+  var forms;
+  ALLMC = !!mc && canMC();                                   /* every part a choice of four (14 Nov 2026) */
+  try { forms = seeds.map(function(s, k){ return withSet(s, function(){ return {ws: testFormHtml(label, LET[k]), key: testKeyHtml(LET[k], 'Set ' + s + ' · ' + esc(SCOPES[scope]) + leftOut() + (ALLMC ? ' · All multiple choice' : ''), checkLine()), form: LET[k], seed: s}; }); }); }
+  finally { ALLMC = false; }
   var h = forms.map(function(f, k){ return (k ? '<div class="pbreak"></div>' : '') + '<div class="pform tpage" data-form="' + f.form + '">' + f.ws + '</div>'; }).join('');
-  h += forms.map(function(f){ return '<div class="pbreak"></div><div class="pform pkeyform tpage">' + f.key + '</div>'; }).join('');
+  h += forms.map(function(f){ return '<div class="pbreak"></div><div class="pform pkeyform tpage"' + (mc && canMC() ? ' data-mc="1"' : '') + '>' + f.key + '</div>'; }).join('');
   return h;
 }
 /* ---- what the teacher copy's own tools draw with (teacher.js, 8 Nov 2026: Approve questions, Tests A and B) — on a teacher page
@@ -5813,10 +5926,10 @@ function makeupHtml(n, label){
 function pinnedForm(secs, o){
   var keep = {DS: DS, ITEMS: ITEMS, EX: EX}, out;
   try {
-    DS = secs; ITEMS = []; EX = {}; collect();
-    out = {test: testFormHtml(o.label || 'Test', o.form), key: testKeyHtml(o.form, o.meta || ''), points: ITEMS.length,
+    DS = secs; ITEMS = []; EX = {}; collect(); ALLMC = !!o.mc && canMC();
+    out = {test: testFormHtml(o.label || 'Test', o.form), key: testKeyHtml(o.form, o.meta || '', checkLine()), points: ITEMS.length, check: setCheck(),
       rows: ITEMS.map(function(it){ return {k: it.k, lab: it.lab, type: it.type, label: it.x && it.x.label || '', key: keyHtml(it)}; })};
-  } finally { DS = keep.DS; ITEMS = keep.ITEMS; EX = keep.EX; }
+  } finally { DS = keep.DS; ITEMS = keep.ITEMS; EX = keep.EX; ALLMC = false; }
   return out;
 }
 /* a question as students see it, with nothing to answer: its words, its figure, each part's line, its choices, a number line
@@ -5838,12 +5951,12 @@ function ask0(text, opts){                                   /* the print choice
   var f = c.querySelector('[data-print]:not([disabled])'); if (f) f.focus();
 }
 function showPrint(kind, label){
-  if (/^mk/.test(kind) && !teacherPage()) return;            /* no make-up tests on a student page, whatever asks */
+  if (/^m[kc]/.test(kind) && !teacherPage()) return;         /* no make-up tests on a student page, whatever asks */
   closeAsk();
   var pv = $('printview'); if (!pv){ pv = document.createElement('div'); pv.id = 'printview'; pv.setAttribute('role', 'dialog'); pv.setAttribute('aria-label', 'Print preview'); document.body.appendChild(pv); }
-  if (kind === 'mk'){ makeupMenu(); return; }
-  var mk = /^mk(\d)$/.exec(kind);
-  var body = mk ? makeupHtml(+mk[1], label) : kind === 'res' ? resultsHtml() : worksheetHtml() + (kind === 'wk' ? '<div class="pbreak"></div>' + keyListHtml() : '');
+  if (kind === 'mk' || kind === 'mc'){ makeupMenu(kind === 'mc'); return; }
+  var mk = /^m([kc])(\d)$/.exec(kind);
+  var body = mk ? makeupHtml(+mk[2], label, mk[1] === 'c') : kind === 'res' ? resultsHtml() : worksheetHtml() + (kind === 'wk' ? '<div class="pbreak"></div>' + keyListHtml() : '');
   pv.innerHTML = '<div class="pbar"><button type="button" class="go" id="pvPrint">Print</button><button type="button" id="pvClose">Close</button><span class="pvhint bt">If nothing happens, use your browser’s Print (Ctrl + P).</span></div><div class="ppage">' + body + '</div>';
   pv.hidden = false; document.body.classList.add('printing'); window.scrollTo(0, 0);
   $('pvPrint').onclick = function(){ try { window.print(); } catch(e){} };
