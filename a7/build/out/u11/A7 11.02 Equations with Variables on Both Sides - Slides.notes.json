@@ -1,0 +1,285 @@
+{
+ "deck": "A7 11.02 Equations with Variables on Both Sides - Slides.pptx",
+ "slides": [
+  {
+   "n": 1,
+   "title": "Equations with Variables on Both Sides",
+   "sub": "",
+   "min": 1,
+   "note": "Post the learning target. Say one line and nothing else yet: \u201cToday: equations with the variable on both sides.\u201d",
+   "kind": "title"
+  },
+  {
+   "n": 2,
+   "title": "Warm-Up",
+   "sub": "On your own. No notes.",
+   "min": 4,
+   "note": "Q4 is today's move in miniature: taking 5x from 2x leaves \u22123x, and taking 2x from 5x leaves 3x. Say that in one sentence after the reveal \u2014 it is why Notes II takes the smaller x-term. Two minutes silent, then reveal, no discussion.",
+   "kind": "warmup"
+  },
+  {
+   "n": 3,
+   "title": "Warm-Up",
+   "sub": "Answers.",
+   "min": 1,
+   "note": "Reveal. Ask for the band each question came from only if time allows.",
+   "kind": "warmup"
+  },
+  {
+   "n": 4,
+   "title": "Vocabulary",
+   "sub": "The new words, before they are used.",
+   "min": 1,
+   "note": "Two words, and the second is today's habit. A solution is not just the last line: it is the number that makes the two sides equal, so it is proved by putting it into BOTH sides of the first equation and getting the same number twice.",
+   "kind": "vocab"
+  },
+  {
+   "n": 5,
+   "title": "Notes",
+   "sub": "Copy all four lines.",
+   "min": 4,
+   "note": "The equation has x on both sides, so the first move is new: take 3x from BOTH sides. A balance stays level only if both pans lose the same thing \u2014 3x from one side alone would tip it. What is left, 2x + 2 = 10, is Unit 1's two-step equation. Then the check, in both sides of the first equation: 5(4) + 2 = 22 and 3(4) + 10 = 22. The same number twice is the proof.\nOFF: 'Whatever you do to one side, you do to the other \u2014 and that includes taking away x's.'",
+   "kind": "notes"
+  },
+  {
+   "n": 6,
+   "title": "Notes",
+   "sub": "",
+   "min": 3,
+   "note": "The same equation, two routes. Take 2x from both sides: 9 = 4x \u2212 11, add 11, divide by 4. Take 6x instead: \u22124x + 9 = \u221211, subtract 9, divide by \u22124. Both give 5, because each step is done to both sides. The first route is easier: taking the smaller x-term leaves a positive coefficient, so no division by a negative. Check: 2(5) + 9 = 19 and 6(5) \u2212 11 = 19.\nOFF: 'Take the smaller x-term and the coefficient stays positive.'",
+   "kind": "notes"
+  },
+  {
+   "n": 7,
+   "title": "Notes",
+   "sub": "",
+   "min": 3,
+   "note": "Parentheses are distributed before any term moves \u2014 yesterday's move first, today's second. The 3 multiplies the x AND the 4: 3x + 12. Then take 3x (the smaller) from both sides: 12 = 2x \u2212 2. Then two steps. Check: 3(7 + 4) = 33 and 5(7) \u2212 2 = 33.\nOFF: 'Clear the parentheses, then move one variable term.'",
+   "kind": "notes"
+  },
+  {
+   "n": 8,
+   "title": "Example 1",
+   "sub": "The variable on both sides.",
+   "min": 1,
+   "note": "Ask which variable term is smaller before anyone writes: 4x. Take it from both sides.",
+   "kind": "example"
+  },
+  {
+   "n": 9,
+   "title": "Example 1",
+   "sub": "Worked.",
+   "min": 2,
+   "note": "Take 4x from both sides: 3x \u2212 5 = 13. Then two steps: add 5, divide by 3. Check in both sides of the first equation: 7(6) \u2212 5 = 37 and 4(6) + 13 = 37. A board with x = 18/11 added the x-terms (11x = 18); one with x = 8/3 took the 5 the wrong way.",
+   "kind": "example"
+  },
+  {
+   "n": 10,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "Take 5x from both sides: 3x \u2212 9 = 15, so 3x = 24 and x = 8. This catches a student who watched the move without doing it \u2014 a board with 13x = 24 added the x-terms; one with x = 2 subtracted the 9 (3x = 6).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 11,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 12,
+   "title": "Example 2",
+   "sub": "Parentheses first; a solution that is not whole.",
+   "min": 1,
+   "note": "Ask what the 2 multiplies before anyone writes: the 3x AND the \u22121.",
+   "kind": "example"
+  },
+  {
+   "n": 13,
+   "title": "Example 2",
+   "sub": "Worked.",
+   "min": 2,
+   "note": "Distribute: 6x \u2212 2. Take 4x from both sides: 2x \u2212 2 = 9, so 2x = 11 and x = 5.5. A solution need not be a whole number \u2014 5.5 is checked like any other: 2(16.5 \u2212 1) = 31 and 4(5.5) + 9 = 31. A board with 2x = 10 distributed to one term (6x \u2212 1).",
+   "kind": "example"
+  },
+  {
+   "n": 14,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "8x \u2212 12 = 6x + 1, so 2x \u2212 12 = 1, 2x = 13 and x = 6.5. This catches the one-term distribution: a board with 8x \u2212 3 = 6x + 1 gets x = 2. Check: 4(13 \u2212 3) = 40 and 6(6.5) + 1 = 40.",
+   "kind": "yourturn"
+  },
+  {
+   "n": 15,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 16,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "One move, then one step. A board with x = 3.5 added the x-terms (8x = 28); one with x \u2248 4.67 dropped the 2x (6x = 28). Check in both sides: 42 = 42.",
+   "kind": "wb"
+  },
+  {
+   "n": 17,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 18,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Notes I with bigger numbers. A board with x = 11 added the 4 (4x = 44); one with x \u2248 2.57 added the x-terms (14x = 36).",
+   "kind": "wb"
+  },
+  {
+   "n": 19,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 20,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The pattern breaks: the larger n-term is on the right, so the constants end on the left and the solution is negative. A board with n = 5 lost the sign of \u221220; one with n = 1 added 12 to \u22128 (4 = 4n). Check: \u221223 = \u221223.",
+   "kind": "wb"
+  },
+  {
+   "n": 21,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 22,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic. Option D adds the x-terms, option C moves the 8 the wrong way, option A drops the sign. On a split: sixty seconds, convince your neighbor, re-vote \u2014 then check \u22126 in both sides: \u221222 and \u221222.",
+   "kind": "wb"
+  },
+  {
+   "n": 23,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 24,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Notes III's order: parentheses first, then a variable term. A board with x \u2248 3.67 wrote 2x + 7 (one term); one with x \u2248 3.33 took the 4 the wrong way (10 = 3x). Check: 2(6 + 7) = 26 and 5(6) \u2212 4 = 26.",
+   "kind": "wb"
+  },
+  {
+   "n": 25,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 26,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic: two of the three wrong options are the one-term distribution \u2014 on both sides (A) or on the right only (B). Option D adds the x-terms. Ask a room that chose C to check 9 in both sides: 28 and 28.",
+   "kind": "wb"
+  },
+  {
+   "n": 27,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 28,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The extra-number board (ruling 22): the gym's 7 days a week is not needed. Each plan's cost is an expression in v; the two plans cost the same when the expressions are equal, 30 + 5v = 8v. Take 5v (the smaller) from both sides. Check: both plans cost \\$80 at 10 visits.",
+   "kind": "wb"
+  },
+  {
+   "n": 29,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 30,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Backwards: the solution is given and a number in the equation is missing. Put 3 in for x on BOTH sides \u2014 the right side is 22, the left is 15 + \u25a1. Check: 5(3) + 7 = 22 and 2(3) + 16 = 22.",
+   "kind": "wb"
+  },
+  {
+   "n": 31,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 32,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Take your time. Boards up when you have written it.",
+   "min": 0,
+   "note": "Written, and the exit evidence. Read two aloud: one that names the reason (the same step done to both sides), one that checks 6 in both sides. Lena divides by \u22124 \u2014 the room that forgets the sign gets \u22126, and the check exposes it: 2(\u22126) + 15 = 3, 6(\u22126) \u2212 9 = \u221245.",
+   "kind": "wb"
+  },
+  {
+   "n": 33,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 34,
+   "title": "Independent Set",
+   "sub": "Six questions. On your own, in writing.",
+   "min": 6,
+   "note": "Hand out the Independent Set; the same six questions are on the board. Silent work. Circulate and mark what you see; do not teach. Whatever is not finished goes home.",
+   "kind": "independent"
+  },
+  {
+   "n": 35,
+   "title": "IXL",
+   "sub": "Last five minutes.",
+   "min": 5,
+   "note": "IXL: every listed skill is required, SmartScore 67. Due by the Unit 11 test.",
+   "kind": "ixl"
+  }
+ ]
+}
