@@ -1,0 +1,364 @@
+# A7 11.03  One Solution, No Solution, Infinitely Many Solutions — MA.8.AR.2.1 (MN 11.3). Wed 2 Dec 2026, a 43-minute
+# Wednesday: the deck is the usual 53 minutes by house rule, and nothing names a cut (HOUSE STYLE §9 — "no Wednesday
+# plan"; the teacher absorbs the short day, as A7 6.T1 and 5.10 do). Yesterday's move — take the same variable term
+# from both sides — now sometimes takes away EVERY variable term, and the equation ends in one of three ways: x = a
+# (one solution), a = a (always true: infinitely many solutions), a = b (never true: no solution). Each side is
+# simplified first, and the ending is reached by simplifying, never by a table of tried values (audit D4). x = 0 is
+# one solution, not "no solution" (Notes III; the B1G-M's named misconception "a solution must look like variable =
+# constant"; audit D5). Built from the benchmark and the B1G-M first (the unit's Lesson Outlines, §11.03), then read
+# against Math Nation 11.3 (the unit audit, Part 1).
+#
+# Every equation is solved again by sympy at build time over the REAL numbers. The answer slides' steps: stepcheck
+# holds an "=" between two expressions in the same letter to be an identity and an "=" between two numbers to be
+# true, so an identity ("$4x - 10 = 4x - 10$", "$-2 = -2$") is printed as mathematics, but a false ending ("8 = 5")
+# cannot be: on an answer slide it is written in words ("the left is $8$, the right is $5$ — never equal"). The worked
+# example rows (not step-checked) print the false ending as an equation with its words beside it.
+
+U = "sp.Symbol('u', real=True)"
+
+
+def _u(e):
+    import re
+    return re.sub(r"\bu\b", U, e)
+
+
+def solves(left, right, value):
+    """sympy solves left = right (in u) and finds exactly one solution, `value`."""
+    return ("eq", "sp.solve(sp.Eq(" + _u(left) + ", " + _u(right) + "), " + U + ")[0]", value)
+
+
+def same(e1, e2):
+    """Two expressions in u are the same expression: as an equation, true for every number (infinitely many)."""
+    return ("true", "sp.expand(" + _u(e1) + " - (" + _u(e2) + ")) == 0")
+
+
+def never(left, right):
+    """left = right is never true: left − right simplifies to a nonzero number (no solution)."""
+    d = "sp.expand(" + _u(left) + " - (" + _u(right) + "))"
+    return ("true", "(" + d + ").is_number and " + d + " != 0")
+
+
+def not_never(left, right):
+    """left = right is NOT a no-solution equation (it has one solution or infinitely many)."""
+    d = "sp.expand(" + _u(left) + " - (" + _u(right) + "))"
+    return ("true", "(" + d + ").is_number != True or " + d + " == 0")
+
+
+def not_every(left, right):
+    """left = right is NOT true for every number."""
+    return ("true", "sp.expand(" + _u(left) + " - (" + _u(right) + ")) != 0")
+
+
+ASK = "**One solution, no solution or infinitely many? If one, find it."
+
+L = dict(
+    code="11.03", unit=11, lesson_no=3,
+    title="One Solution, No Solution, Infinitely Many Solutions",
+    unit_title="Solving Equations and Systems",
+    benchmark="MA.8.AR.2.1",
+    benchmark_text="Solve multi-step linear equations in one variable, with rational number coefficients. Include equations with variables on both sides.",
+    target="I can tell whether an equation has one solution, no solution or infinitely many solutions.",
+    yesterday="Last class: equations with the variable on both sides.",
+    today="Today: equations with one solution, no solution or infinitely many.",
+    essential="When every variable term is gone, how does what is left tell us how many solutions there are?",
+    building_on="11.02 — the same variable term taken from both sides; 11.01 — like terms and the distributive property; 1.03 — two-step equations (Unit 1).",
+    working_toward="11.04 — the three endings with fraction and decimal coefficients; 11.05–11.08 — a system has one solution, none (parallel lines) or infinitely many (the same line), the same three counts.",
+    vocab=[("no solution", "the equation is never true, whatever number the variable is; it ends at a false statement, like $5 = 9$"),
+           ("infinitely many solutions", "the equation is true for every number; it ends at a true statement, like $5 = 5$")],
+    vocab_note="Two names for the two new endings. Under each, say the ending aloud: 5 = 9 is never true, whatever x was — no number works; 5 = 5 is always true, whatever x was — every number works. 'One solution' needs no definition: it is every equation of the last two days.",
+    ixl=["Find the number of solutions — XDE", "Create equations with no solutions or infinitely many solutions — 7TY"],
+    closure="Board 9 is written work and it is the exit evidence: 3(x + 4) − 12 = 3x simplifies to 3x = 3x, and 0 = 0 is true for every number — infinitely many solutions, so Mia (x = 0) and Jo (no solution) are both wrong. A board that says 'neither' without the reason has the verdict and not the ending.",
+
+    mtr=[("MTR.5.1", "Notes II, boards 1–2 and 6: the structure of each side — same x-terms, same or different constants — tells the count before the end"),
+         ("MTR.4.1", "boards 4 and 6: a split room re-votes"),
+         ("MTR.6.1", "board 3 and board 9: x = 0 checked in both sides; 0 = 0 read for what it says")],
+    hoq=[("Why does 5 = 9 mean no solution, even though we never tried a single number?", "DOK 2"),
+         ("5x + 4 = 2x + 4 and 5x + 4 = 5x + 4 both have 4 on each side. Why does one have one solution and the other infinitely many?", "DOK 3"),
+         ("Write an equation with no solution that has 7x on the left side. How do you know it has none?", "DOK 2")],
+    differentiation=[
+        ("ESE / 504", "Three lines stay on the board all period, each with its example: \"x = a: one solution\", \"a = a, always true: infinitely many\", \"a = b, never true: no solution\". Every board starts by simplifying each side and circling the two x-terms: different, or the same?"),
+        ("ELL", "**Infinitely many**: so many there is no end — every number works. **No solution**: no number works. **Always true / never true**: a sentence like 5 = 5 is always true; 5 = 9 is never true."),
+        ("Enrichment", "Board 8 finishes early for some: fill both boxes so that □(x + 2) = 3x + □ has infinitely many solutions (3 and 6); then change one box so it has none (3 and any number but 6).")],
+
+    warmup=[
+        dict(stem="Solve:  $6x - 4 = 2x + 20$", answer="x = 6", band="last lesson",
+             source="11.02 — the variable on both sides",
+             check=solves("6*u - 4", "2*u + 20", "6")),
+        dict(stem="Solve:  $2(x + 5) + 3x = 30$", answer="x = 4", band="this week",
+             source="11.01 — distribute, then collect like terms",
+             check=solves("2*(u + 5) + 3*u", "30", "4")),
+        dict(stem="Find the distance from (1, 2) to (4, 6).", answer="5", band="last unit",
+             source="6.05 — the distance between two points by the Pythagorean Theorem: legs 3 and 4",
+             check=("eq", "sqrt((4 - 1)**2 + (6 - 2)**2)", "5")),
+        dict(stem="Is  $x = 2$  a solution of  $3x + 1 = 7$?", answer="Yes: 3(2) + 1 = 7", band="the prerequisite this lesson needs",
+             source="7th grade — a solution is a number that makes the equation true; today asks how many such numbers there are",
+             check=("eq", "3*2 + 1", "7")),
+    ],
+    warmup_note="Q4 is today's question in miniature: a solution is a number that makes the equation true. Today some equations have no such number and some have every number. Two minutes silent, then reveal, no discussion — 43 minutes today.",
+
+    notes=[
+        dict(numeral="I", head="Three endings", min=4, sub="Copy all three lines.",
+             note="Three equations that differ by one number. Take 2x from both sides of each. The first leaves 5 = x + 9, so x = −4: one solution. The second leaves 5 = 9 — no x left, and 5 = 9 is never true, whatever x was: no solution. The third leaves 5 = 5 — always true, whatever x was: every number works, infinitely many solutions. The ending is a sentence about numbers; read it for what it says. We know 5 = 9 is never true without trying a single number — the x's are gone, so no number can change it.\nOFF: 'x = a: one. A false sentence: none. A true sentence: every number.'",
+             math=["$2x + 5 = 3x + 9 \\qquad x = -4 \\qquad \\text{one solution}$",
+                   "$2x + 5 = 2x + 9 \\qquad 5 = 9 \\qquad \\text{never true: no solution}$",
+                   "$2x + 5 = 2x + 5 \\qquad 5 = 5 \\qquad \\text{always true: infinitely many}$"],
+             items2=["**Take 2x from both sides. Read what is left.**"],
+             letters=False),
+        dict(numeral="II", head="See it before the end", min=3, sub="",
+             note="Simplify each side first — distribute, collect — THEN compare. 3(x + 2) is 3x + 6, so the first equation has the same thing on both sides: infinitely many. In the second, the x-terms are the same (3x) and the constants differ (6 and 2): taking 3x leaves 6 = 2, never true. Different x-terms always leave an x, so one solution. The comparison is made only after simplifying: 2x + 5 − 1 = 2x + 4 looks like different constants until the left side is collected (audit T6).\nOFF: 'Same x-terms, same constants: every number. Same x-terms, different constants: none. Different x-terms: one.'",
+             math=["$3(x + 2) = 3x + 6 \\qquad 3x + 6 = 3x + 6 \\qquad \\text{infinitely many}$",
+                   "$3(x + 2) = 3x + 2 \\qquad 3x + 6 = 3x + 2 \\qquad \\text{no solution}$"],
+             items2=["**Same x-terms, same constants: infinitely many.  Same x-terms, different constants: none.  Different x-terms: one.**"],
+             letters=False),
+        dict(numeral="III", head="Zero is a number", min=3, sub="",
+             note="Add 2x to both sides: 6x + 7 = 7. Subtract 7: 6x = 0, so x = 0. An x is still there, so this is x = a — one solution, and the solution is 0. 'No solution' is wrong: 0 works. Check: 4(0) + 7 = 7 and 7 − 2(0) = 7. The B1G-M names this one: a student who expects 'x = a number' reads 6x = 0 as 'nothing'.\nOFF: 'x = 0 is an answer. Zero is a number.'",
+             math=["$4x + 7 = 7 - 2x$", "$6x + 7 = 7$", "$6x = 0 \\qquad x = 0$"],
+             items2=["**One solution: x = 0. Zero is a number.**", "Check:  $4(0) + 7 = 7$   and   $7 - 2(0) = 7$"],
+             letters=False),
+    ],
+
+    examples=[
+        dict(title="Example 1", sub="Simplify, then compare.", min_q=1,
+             note_q="Ask what the left side is once it is simplified, before anyone takes a term away.",
+             prompt=["$4(x - 3) + 2 = 4x - 10$"], ask="How many solutions does it have?",
+             worked=[dict(sub="Worked.", min=2,
+                          note="Distribute and collect: the left side is 4x − 10, the same as the right. Taking 4x from both sides leaves −10 = −10, true whatever x was: infinitely many solutions. A board with 'x = −10' read the constant as the answer; one with 'no solution' saw the x's vanish and stopped.",
+                          rows=[("4(x - 3) + 2 = 4x - 10", "the equation"),
+                                ("4x - 12 + 2 = 4x - 10", "4 times x, 4 times −3"),
+                                ("4x - 10 = 4x - 10", "the same on both sides"),
+                                ("-10 = -10 \\qquad \\text{always true}", "take 4x from both sides")],
+                          answer="infinitely many solutions")],
+             check=same("4*(u - 3) + 2", "4*u - 10"),
+             your_turn=dict(min=2, note="6x + 3 − 5 = 6x − 2, the same as the right side; −2 = −2, infinitely many. This catches 'x = −2' (the constant read as the answer) and 'no solution' (the x's gone, so 'nothing').",
+                            prompt=["$3(2x + 1) - 5 = 6x - 2$", "How many solutions does it have?"],
+                            steps=["Distribute:  $6x + 3 - 5 = 6x - 2$",
+                                   "Collect:  $6x - 2 = 6x - 2$",
+                                   "Take 6x from both sides:  $-2 = -2$,  always true"],
+                            gloss="the same on both sides", answer="infinitely many solutions"),
+             yt_check=same("3*(2*u + 1) - 5", "6*u - 2")),
+        dict(title="Example 2", sub="The x-terms go and the constants do not match.", min_q=1,
+             note_q="Ask what the 2 multiplies, then which x-terms are on each side once it is distributed.",
+             prompt=["$2(3x + 4) = 6x + 5$"], ask="How many solutions does it have?",
+             worked=[dict(sub="Worked.", min=2,
+                          note="Distribute: 6x + 8. The x-terms match (6x and 6x) and the constants do not (8 and 5). Taking 6x from both sides leaves 8 = 5 — a false sentence with no x left in it, so no number can make it true: no solution. Write the ending as it is, 8 = 5, with its words: never true. A board with 6x + 4 distributed to one term (and still gets no solution, by luck — say so).",
+                          rows=[("2(3x + 4) = 6x + 5", "the equation"),
+                                ("6x + 8 = 6x + 5", "2 times 3x, 2 times 4"),
+                                ("8 = 5 \\qquad \\text{never true}", "take 6x from both sides")],
+                          answer="no solution")],
+             check=never("2*(3*u + 4)", "6*u + 5"),
+             your_turn=dict(min=2, note="10x − 5 against 10x + 3: the same x-terms, different constants. Taking 10x leaves −5 = 3, never true: no solution. A board with 'x = 3' or 'x = −5' read a constant as the answer.",
+                            prompt=["$5(2x - 1) = 10x + 3$", "How many solutions does it have?"],
+                            steps=["Distribute:  $5(2x - 1) = 10x - 5$",
+                                   "Take 10x from both sides:  the left is  $-5$,  the right is  $3$",
+                                   "Never equal, whatever x is"],
+                            gloss="−5 = 3, never true", answer="no solution"),
+             yt_check=never("5*(2*u - 1)", "10*u + 3")),
+    ],
+
+    # The round: the same expression on both sides (1), the same x-terms with different constants (2), one solution
+    # that is 0 (3), the diagnostic on reading an identity (4), parentheses that hide a no-solution equation (5), which
+    # of four has none (6), the two-plans story with no crossing and an extra number (7), backwards: fill a box for
+    # each ending (8), and the x = 0 / no-solution misreadings of 0 = 0 in writing (9). The pattern breaks at 3: the
+    # constants match and the x-terms do not, so it LOOKS like an ending of the new kind and is x = 0.
+    whiteboard=[
+        dict(text=["$7x + 2 = 7x + 2$", ASK],
+             hint="Compare the two sides.", steps=["Both sides are  $7x + 2$",
+                                                   "Take 7x from both sides:  $2 = 2$,  always true"],
+             gloss="2 = 2", answer="infinitely many solutions",
+             note="The same expression on both sides: every number works. A board with x = 2 read the constant as the answer; one with 'no solution' saw the x's go and stopped.",
+             check=same("7*u + 2", "7*u + 2"),
+             wrong="x = 2 — the constant in 2 = 2 read as the answer [Florida B1G-M, AR.2.1: expecting the solution to look like variable = constant]; no solution — the x's gone, so 'nothing works' [Notes I: a true sentence means every number]"),
+        dict(text=["$3x + 8 = 3x - 1$", ASK],
+             hint="Same x-terms? Same constants?", steps=["The x-terms match:  $3x$  and  $3x$",
+                                                          "Take 3x from both sides:  the left is  $8$,  the right is  $-1$",
+                                                          "Never equal: no solution"],
+             gloss="8 = −1, never true", answer="no solution",
+             note="Same x-terms, different constants: 8 = −1 is never true. A board with 'infinitely many' saw matching x-terms and stopped (Notes II: the constants must match too); one with x = −9 or x = 9 subtracted the constants and wrote an x.",
+             check=never("3*u + 8", "3*u - 1"),
+             wrong="infinitely many — the x-terms match, so 'always true' [Notes II: the constants must match too]; x = 9 or x = −9 — 8 − (−1) or −1 − 8 written as an answer [Florida B1G-M, AR.2.1: expecting the solution to look like variable = constant]"),
+        dict(text=["$5x + 4 = 2x + 4$", ASK],
+             hint="Are the x-terms the same?", steps=["Take 2x from both sides:  $3x + 4 = 4$",
+                                                      "Subtract 4:  $3x = 0$,  so  $x = 0$",
+                                                      "Check:  $5(0) + 4 = 4$  and  $2(0) + 4 = 4$"],
+             gloss="3x = 0", answer="one solution: x = 0",
+             note="The pattern breaks: the constants match and the x-terms do not, so an x is left — one solution, and it is 0 (Notes III). A board with 'no solution' read 3x = 0 as 'nothing'; one with 'infinitely many' saw the matching 4s. Check in both sides: 4 = 4.",
+             check=solves("5*u + 4", "2*u + 4", "0"),
+             wrong="no solution — 3x = 0 read as 'nothing left' [Florida B1G-M, AR.2.1: expecting the solution to look like variable = constant; Notes III: zero is a number]; infinitely many — the matching constants taken for the same sides [Notes II: the x-terms differ, so one solution]"),
+        dict(kind="mc", text=["$2(4x + 3) = 8x + 6$", "**How many solutions does it have?"],
+             qtext="How many solutions does 2(4x + 3) = 8x + 6 have?",
+             hint="Distribute, then compare.", steps=["Distribute:  $8x + 6 = 8x + 6$",
+                                                      "Take 8x from both sides:  $6 = 6$,  always true"],
+             choices=["one solution, $x = 0$", "infinitely many solutions", "no solution", "one solution, $x = 6$"], correct=1,
+             answer="B — infinitely many solutions",
+             errors={"A": "0 = 0 (taking 8x and 6) read as x = 0 [Florida B1G-M, AR.2.1: expecting the solution to look like variable = constant]", "C": "the x-terms gone, so 'nothing is left' — but 6 = 6 is left, and it is true [Notes I: a true sentence means every number]", "D": "the constant in 6 = 6 taken for the answer [Florida B1G-M, AR.2.1: expecting the solution to look like variable = constant]"},
+             note="Diagnostic. Option D reads the constant as x, option A reads 0 = 0 as x = 0, option C stops when the x's vanish. 0 and 6 do both work — and so does every other number, which is why 'one solution' is wrong. On a split: sixty seconds, convince your neighbor, re-vote.",
+             check=("many", same("2*(4*u + 3)", "8*u + 6"), not_never("2*(4*u + 3)", "8*u + 6"))),
+        dict(text=["$6x - 9 = 3(2x - 4)$", ASK],
+             hint="Distribute first.", steps=["Distribute:  $3(2x - 4) = 6x - 12$",
+                                              "Take 6x from both sides:  the left is  $-9$,  the right is  $-12$",
+                                              "Never equal: no solution"],
+             gloss="−9 = −12, never true", answer="no solution",
+             note="The parentheses hide it: distributed, the right side is 6x − 12, the same x-term as the left with a different constant. −9 = −12 is never true. A board with 'infinitely many' distributed to one term (6x − 4) and still saw different constants — ask what 3 times −4 is; one with x = 3 or x = −3 wrote −9 + 12 as an answer.",
+             check=never("6*u - 9", "3*(2*u - 4)"),
+             wrong="x = 3 — −9 + 12 written as an answer [Florida B1G-M, AR.2.1: expecting the solution to look like variable = constant]; one solution from 6x − 9 = 6x − 4 — the 3 to one term only (the verdict survives; the line does not) [Florida B1G-M, AR.2.1: distributing to only one term]"),
+        dict(kind="mc", text=["**Which equation has no solution?"],
+             qtext="Which equation has no solution?",
+             hint="Same x-terms, different constants.", steps=["$3x + 1$  and  $3x - 1$:  the same x-terms",
+                                                              "Take 3x from both sides:  the left is  $1$,  the right is  $-1$:  never equal"],
+             choices=["$3x + 1 = x + 1$", "$3x + 1 = 2x$", "$3x + 1 = 1 + 3x$", "$3x + 1 = 3x - 1$"], correct=3,
+             answer="D — 3x + 1 = 3x − 1",
+             errors={"A": "2x = 0 read as 'no solution' — it has one, x = 0 [Florida B1G-M, AR.2.1: expecting the solution to look like variable = constant]", "B": "different x-terms, so one solution, x = −1 [Notes II: different x-terms: one]", "C": "the same two terms in a different order — infinitely many [Notes II: same x-terms, same constants]"},
+             note="Diagnostic. Option A is today's named trap — the solution is 0, not 'none'; option C is the same expression written backwards. Ask a room that chose A to say the ending aloud: 1 = −1, never true.",
+             check=("many", never("3*u + 1", "3*u - 1"), solves("3*u + 1", "u + 1", "0"), same("3*u + 1", "1 + 3*u"),
+                    solves("3*u + 1", "2*u", "-1"), not_never("3*u + 1", "u + 1"), not_never("3*u + 1", "1 + 3*u"), not_never("3*u + 1", "2*u"))),
+        dict(text=["Plan A costs \\$15 a month plus \\$3 a gigabyte.", "Plan B costs \\$20 a month plus \\$3 a gigabyte.",
+                   "Each plan has an 8 GB limit.", "**For how many gigabytes do the plans cost the same?"],
+             unneeded="8",
+             hint="Write each plan's cost.", steps=["Plan A costs  $15 + 3g$.  Plan B costs  $20 + 3g$.",
+                                                    "Take 3g from both:  the left is  $15$,  the right is  $20$",
+                                                    "Never equal: B always costs \\$5 more"],
+             gloss="15 = 20, never true", answer="never: no solution",
+             note="The extra-number board (ruling 22): the 8 GB limit is not needed. Both plans add \\$3 a gigabyte, so B stays \\$5 above A at every amount of data: 15 + 3g = 20 + 3g ends 15 = 20, never true. A board with g = 5 subtracted the monthly fees and called it gigabytes.",
+             check=never("15 + 3*u", "20 + 3*u"),
+             wrong="5 GB — 20 − 15 written as gigabytes [Florida B1G-M, AR.2.1: expecting the solution to look like variable = constant]; 8 GB — the extra number used; 'every amount' — the same \\$3 taken for the same cost [Notes II: the constants differ]"),
+        dict(text=["Fill the box so  $4(x + 3) = 4x + □$  has infinitely many solutions.",
+                   "Then fill the box so  $2(3x - 5) = □x + 1$  has no solution."],
+             hint="Distribute the left side.", steps=["$4(x + 3) = 4x + 12$:  the box is 12",
+                                                      "$2(3x - 5) = 6x - 10$:  the box is 6",
+                                                      "Take 6x from both sides:  $-10$  and  $1$,  never equal"],
+             gloss="12; then 6", answer="12; then 6",
+             note="Backwards: choose the ending. Infinitely many needs the same thing on both sides — the right side must be 4x + 12. No solution needs the same x-term with a different constant — 6x, and −10 is already not +1. A board with 3 distributed to one term; one with 5 in the second box took the −5 from inside.",
+             check=("many", same("4*(u + 3)", "4*u + 12"), never("2*(3*u - 5)", "6*u + 1"), not_every("4*(u + 3)", "4*u + 3")),
+             wrong="3 — the 4 never reached the 3 [Florida B1G-M, AR.2.1: distributing to only one term]; 3 in the second box — 2(3x) read as 3x, which leaves an x: one solution [Notes II: the x-terms must match]"),
+        dict(kind="written", text=["Mia and Jo both solved  $3(x + 4) - 12 = 3x$  and ended at  $0 = 0$.",
+                                   "Mia wrote “x = 0”. Jo wrote “no solution”.", "**Who is right? Explain."],
+             qtext="Mia and Jo both solved 3(x + 4) − 12 = 3x and ended at 0 = 0. Mia wrote “x = 0”. Jo wrote “no solution”. Who is right? Explain.",
+             hint="Is 0 = 0 true? For which x?", steps=["Distribute:  $3x + 12 - 12 = 3x$,  so  $3x = 3x$",
+                                                       "Take 3x from both sides:  $0 = 0$,  always true",
+                                                       "Every number works: infinitely many solutions"],
+             gloss="3x = 3x", answer="Neither: infinitely many solutions",
+             te_answer="Full credit: 'neither' AND the reason — the equation simplifies to 3x = 3x (or 0 = 0), a true sentence with no x in it, so every number is a solution: infinitely many. Mia's 0 does work, but so does every other number, so 'x = 0' is not the solution; Jo read a true ending as a false one. 'Neither' alone, or 'infinitely many' with no reason, does not earn it.",
+             note="Written, and the exit evidence. Read two aloud: one that names the ending (0 = 0 is always true) and one that tries a second number and sees it work — then say why trying numbers alone is not proof: the simplifying is.",
+             check=("many", same("3*(u + 4) - 12", "3*u"), not_never("3*(u + 4) - 12", "3*u")),
+             wrong="Mia — 0 = 0 read as x = 0 [Florida B1G-M, AR.2.1: expecting the solution to look like variable = constant]; Jo — the x's gone, so 'nothing works' [Notes I: a true sentence means every number]"),
+    ],
+
+    independent=[
+        dict(stem="How many solutions does  $6h - 5 = 2h + 19$  have? If one, find it.", answer="One solution: h = 6",
+             why="Different h-terms. 4h − 5 = 19; 4h = 24. Check: 31 = 31.",
+             check=solves("6*u - 5", "2*u + 19", "6"), space=0.9),
+        dict(stem="How many solutions does  $4(2n - 3) = 8n - 7$  have? If one, find it.", answer="No solution",
+             why="8n − 12 = 8n − 7; take 8n: −12 = −7, never true.",
+             check=never("4*(2*u - 3)", "8*u - 7"), space=0.9),
+        dict(stem="How many solutions does  $5(k + 2) - 3 = 5k + 7$  have? If one, find it.", answer="Infinitely many solutions",
+             why="5k + 10 − 3 = 5k + 7; both sides are 5k + 7; take 5k: 7 = 7, always true.",
+             check=same("5*(u + 2) - 3", "5*u + 7"), space=0.9),
+        dict(stem="How many solutions does  $3(2v + 5) = 15 - v$  have? If one, find it.", answer="One solution: v = 0",
+             why="6v + 15 = 15 − v; add v: 7v + 15 = 15; 7v = 0. Check: 15 = 15. Zero is a solution, not 'none'.",
+             check=solves("3*(2*u + 5)", "15 - u", "0"), space=0.9),
+        dict(stem="What number goes in the box so that  $6(x - 2) + 1 = 6x - □$  has infinitely many solutions?", answer="11",
+             why="6x − 12 + 1 = 6x − 11, so the right side must be 6x − 11.",
+             check=("many", same("6*(u - 2) + 1", "6*u - 11"), not_every("6*(u - 2) + 1", "6*u - 12")), space=0.9),
+        dict(stem="What number goes in the box so that  $3(4x + 1) = □x + 7$  has no solution?", answer="12",
+             why="3(4x + 1) = 12x + 3. With 12x on the right, 12x + 3 = 12x + 7 ends 3 = 7, never true; any other number leaves an x, so one solution.",
+             check=("many", never("3*(4*u + 1)", "12*u + 7"), solves("3*(4*u + 1)", "4*u + 7", "F(1,2)")), space=0.9),
+    ],
+
+    # Bank: the three endings bare (1–3: none, infinitely many, x = 0), with parentheses (4–6: infinitely many, none,
+    # one), the decimal factor (7–8, the 21% skill: infinitely many, none), backwards (9), two plans that never cost the
+    # same (10), the diagnostic mc (11), select-all (12). The additional bank mirrors it position by position.
+    bank=[
+        dict(heading="For questions 1 through 3, tell how many solutions the equation has. If it has one, find it."),
+        dict(stem="$8p - 3 = 8p + 6$", answer="No solution", why="Take 8p: −3 = 6, never true.", check=never("8*u - 3", "8*u + 6"), space=0.7),
+        dict(stem="$2(5m + 3) = 10m + 6$", answer="Infinitely many solutions", why="10m + 6 = 10m + 6; 6 = 6, always true.", check=same("2*(5*u + 3)", "10*u + 6"), space=0.7),
+        dict(stem="$7q + 5 = 3q + 5$", answer="One solution: q = 0", why="4q + 5 = 5; 4q = 0. Check: 5 = 5.", check=solves("7*u + 5", "3*u + 5", "0"), space=0.7),
+        dict(heading="For questions 4 through 6, simplify each side, then tell how many solutions. If one, find it."),
+        dict(stem="$3(2y - 5) + 4 = 6y - 11$", answer="Infinitely many solutions", why="6y − 15 + 4 = 6y − 11; both sides are 6y − 11.", check=same("3*(2*u - 5) + 4", "6*u - 11"), space=0.8),
+        dict(stem="$4(3k + 2) = 12k - 8$", answer="No solution", why="12k + 8 = 12k − 8; 8 = −8, never true.", check=never("4*(3*u + 2)", "12*u - 8"), space=0.8),
+        dict(stem="$5(r - 2) = 2r + 11$", answer="One solution: r = 7", why="5r − 10 = 2r + 11; 3r = 21. Check: 25 = 25.", check=solves("5*(u - 2)", "2*u + 11", "7"), space=0.8),
+        dict(heading="For questions 7 and 8, the factor is a decimal. Tell how many solutions."),
+        dict(stem="$0.5(4x + 10) = 2x + 5$", answer="Infinitely many solutions", why="2x + 5 = 2x + 5; the 0.5 multiplies both terms.", check=same("F(1,2)*(4*u + 10)", "2*u + 5"), space=0.8),
+        dict(stem="$0.2(10t - 15) = 2t + 3$", answer="No solution", why="2t − 3 = 2t + 3; −3 = 3, never true.", check=never("F(1,5)*(10*u - 15)", "2*u + 3"), space=0.8),
+        dict(heading="Work backwards."),
+        dict(stem="What number goes in the box so that $5(x - 4) = 5x - □$ has infinitely many solutions?", answer="20", why="5(x − 4) = 5x − 20.",
+             check=("many", same("5*(u - 4)", "5*u - 20"), not_every("5*(u - 4)", "5*u - 4")), space=0.7),
+        dict(heading="Solve the problem."),
+        dict(stem="Gym A costs \\$25 to join and \\$10 a month. Gym B costs \\$40 to join and \\$10 a month. After how many months will the two gyms have cost the same?",
+             answer="Never: no solution", why="25 + 10m = 40 + 10m ends 25 = 40, never true; B always costs \\$15 more.",
+             check=never("25 + 10*u", "40 + 10*u"), space=0.8),
+        dict(heading="Choose one."),
+        dict(stem="How many solutions does $2(3x - 4) = 6x - 4$ have?",
+             choices=["one solution, $x = -4$", "one solution, $x = 0$", "no solution", "infinitely many solutions"], correct=2, answer="C",
+             why="6x − 8 = 6x − 4; −8 = −4, never true.",
+             check=("many", never("2*(3*u - 4)", "6*u - 4"), same("6*u - 4", "6*u - 4"), not_every("2*(3*u - 4)", "6*u - 4")),
+             errors={"A": "the constant −4 taken for the answer [Florida B1G-M, AR.2.1: expecting the solution to look like variable = constant]", "B": "the x's gone read as x = 0 [Florida B1G-M, AR.2.1: expecting the solution to look like variable = constant]", "D": "the 2 to the first term only: 6x − 4 = 6x − 4 [Florida B1G-M, AR.2.1: distributing to only one term]"}),
+        dict(heading="Select all that apply."),
+        dict(stem="Select all the equations that have no solution.",
+             choices=["$4x + 9 = 4(x + 2) + 1$", "$4x + 9 = 4x - 9$", "$2(2x + 3) = 4x + 5$", "$4x + 9 = 9 + 4x$", "$4x + 9 = 9$"], correct=[1, 2], answer="B, C",
+             why="B ends 9 = −9 and C ends 6 = 5, never true. A and D are the same on both sides (infinitely many); E has one solution, x = 0.",
+             check=("many", never("4*u + 9", "4*u - 9"), never("2*(2*u + 3)", "4*u + 5"),
+                    not_never("4*u + 9", "9 + 4*u"), not_never("4*u + 9", "9"), not_never("4*u + 9", "4*(u + 2) + 1"),
+                    solves("4*u + 9", "9", "0"), same("4*u + 9", "4*(u + 2) + 1")),
+             errors={"A": "the 4 to one term only gives 4x + 3 and looks like none; distributed fully, both sides are 4x + 9 [Florida B1G-M, AR.2.1: distributing to only one term]", "D": "the same two terms in a different order: infinitely many [Notes II: same x-terms, same constants]", "E": "4x = 0 has one solution, x = 0 [Florida B1G-M, AR.2.1: expecting the solution to look like variable = constant]"}),
+    ],
+
+    additional=[
+        dict(heading="For questions 1 through 3, tell how many solutions the equation has. If it has one, find it."),
+        dict(stem="$6d + 7 = 6d - 2$", answer="No solution", why="Take 6d: 7 = −2, never true.", check=never("6*u + 7", "6*u - 2"), space=0.7),
+        dict(stem="$3(4a - 1) = 12a - 3$", answer="Infinitely many solutions", why="12a − 3 = 12a − 3; −3 = −3, always true.", check=same("3*(4*u - 1)", "12*u - 3"), space=0.7),
+        dict(stem="$9c - 4 = 2c - 4$", answer="One solution: c = 0", why="7c − 4 = −4; 7c = 0. Check: −4 = −4.", check=solves("9*u - 4", "2*u - 4", "0"), space=0.7),
+        dict(heading="For questions 4 through 6, simplify each side, then tell how many solutions. If one, find it."),
+        dict(stem="$2(4z + 3) - 7 = 8z - 1$", answer="Infinitely many solutions", why="8z + 6 − 7 = 8z − 1; both sides are 8z − 1.", check=same("2*(4*u + 3) - 7", "8*u - 1"), space=0.8),
+        dict(stem="$6(s + 3) = 6s - 18$", answer="No solution", why="6s + 18 = 6s − 18; 18 = −18, never true.", check=never("6*(u + 3)", "6*u - 18"), space=0.8),
+        dict(stem="$4(w + 1) = w + 19$", answer="One solution: w = 5", why="4w + 4 = w + 19; 3w = 15. Check: 24 = 24.", check=solves("4*(u + 1)", "u + 19", "5"), space=0.8),
+        dict(heading="For questions 7 and 8, the factor is a decimal. Tell how many solutions."),
+        dict(stem="$0.5(6x - 8) = 3x - 4$", answer="Infinitely many solutions", why="3x − 4 = 3x − 4; the 0.5 multiplies both terms.", check=same("F(1,2)*(6*u - 8)", "3*u - 4"), space=0.8),
+        dict(stem="$0.25(8t + 12) = 2t + 5$", answer="No solution", why="2t + 3 = 2t + 5; 3 = 5, never true.", check=never("F(1,4)*(8*u + 12)", "2*u + 5"), space=0.8),
+        dict(heading="Work backwards."),
+        dict(stem="What number goes in the box so that $3(x + 6) = 3x + □$ has infinitely many solutions?", answer="18", why="3(x + 6) = 3x + 18.",
+             check=("many", same("3*(u + 6)", "3*u + 18"), not_every("3*(u + 6)", "3*u + 6")), space=0.7),
+        dict(heading="Solve the problem."),
+        dict(stem="Movie plan A costs \\$8 a month plus \\$2 a movie. Plan B costs \\$11 a month plus \\$2 a movie. For how many movies in a month do the two plans cost the same?",
+             answer="Never: no solution", why="8 + 2m = 11 + 2m ends 8 = 11, never true; B always costs \\$3 more.",
+             check=never("8 + 2*u", "11 + 2*u"), space=0.8),
+        dict(heading="Choose one."),
+        dict(stem="How many solutions does $5(x - 2) = 5x - 2$ have?",
+             choices=["no solution", "one solution, $x = 0$", "one solution, $x = 2$", "infinitely many solutions"], correct=0, answer="A",
+             why="5x − 10 = 5x − 2; −10 = −2, never true.",
+             check=("many", never("5*(u - 2)", "5*u - 2"), not_every("5*(u - 2)", "5*u - 2")),
+             errors={"B": "the x's gone read as x = 0 [Florida B1G-M, AR.2.1: expecting the solution to look like variable = constant]", "C": "the constant 2 taken for the answer [Florida B1G-M, AR.2.1: expecting the solution to look like variable = constant]", "D": "the 5 to the first term only: 5x − 2 = 5x − 2 [Florida B1G-M, AR.2.1: distributing to only one term]"}),
+        dict(heading="Select all that apply."),
+        dict(stem="Select all the equations that have infinitely many solutions.",
+             choices=["$2x + 7 = 2x - 7$", "$2x + 7 = 7 + 2x$", "$2x + 7 = 7$", "$5x + 2 = 5(x + 2)$", "$3(x + 1) = 3x + 3$"], correct=[1, 4], answer="B, E",
+             why="B and E are the same on both sides. A ends 7 = −7 and D ends 2 = 10, never true; C has one solution, x = 0.",
+             check=("many", same("2*u + 7", "7 + 2*u"), same("3*(u + 1)", "3*u + 3"),
+                    not_every("2*u + 7", "2*u - 7"), not_every("2*u + 7", "7"), not_every("5*u + 2", "5*(u + 2)"),
+                    never("2*u + 7", "2*u - 7"), solves("2*u + 7", "7", "0"), never("5*u + 2", "5*(u + 2)")),
+             errors={"A": "the x-terms match, but the constants do not: no solution [Notes II: the constants must match too]", "C": "2x = 0 read as 'always true' — it has one solution, x = 0 [Florida B1G-M, AR.2.1: expecting the solution to look like variable = constant]", "D": "the 5 to one term only gives 5x + 2 on both sides; distributed fully the right is 5x + 10: no solution [Florida B1G-M, AR.2.1: distributing to only one term]"}),
+    ],
+
+    te=dict(
+        say=["Simplify each side, then take the same variable term from both sides and read what is left.",
+             "x = a: one solution. A true sentence like 5 = 5: infinitely many. A false sentence like 5 = 9: no solution.",
+             "x = 0 is one solution. Zero is a number."],
+        must="Recognize from the simplified equation whether it has one solution (x = a), infinitely many (a = a) or none (a = b) (B1G-M solution forms).",
+        must_not="Fraction and decimal-distribution solving at length (11.04); deciding by trying a table of values (audit D4).",
+        read_first=[
+            "The unit's third day, a 43-minute Wednesday; the deck is the full lesson (no Wednesday plan) and the cut is the teacher's. Built from the benchmark and the B1G-M first (the unit's Lesson Outlines, §11.03), then read against Math Nation 11.3 (the unit audit, Part 1). The three endings are named from today on (standing decision 4).",
+            "A false ending is written as the false equation with its words — '8 = 5, never true: no solution' — never as '8 ≠ 5' (the audit's decision 1). The answer slides' steps say it in words ('the left is 8, the right is 5 — never equal') because the build's step check holds every printed equation true.",
+            "Every multiple-choice wrong option is a named AR.2.1 error — expecting the solution to look like variable = constant (a constant read as x, 0 = 0 read as x = 0, x = 0 read as 'none'), distributing to only one term — or a named slip (matching x-terms taken for the same sides).",
+            "Not reproduced from the book: the perimeter warm-up (a preview, not retrieval), the partner tasks (§1 rule 4), the 11.3.3 exploration that offers five substitutions as proof of 'no solution' or 'all values' (audit D4 — here every ending is reached by simplifying; board 9's note says why trying numbers is not proof), and the Samir key that never says a = 0 (D5 — board 3, Notes III and set question 4 each say the solution is 0)."],
+        standard_notes=[("Clarification", "Problem types include equations that generate one solution, infinitely many solutions or no solution (Clarification 1) — today's whole lesson."),
+                        ("Unit boundary", "Integer and decimal coefficients; distribution and like terms on either side. Solution forms x = a, a = a, a = b (B1G-M); one-solution answers verified by substitution.")],
+        sits="The unit's third day, after 11.02's variable on both sides. IXL XDE and 7TY are done today and due by the Unit 11 test (Fri 11 Dec), whose question 5 asks for one of each ending and question 6 fills a box. 11.04 carries the three endings into fraction and decimal coefficients; 11.05–11.06 count a system's solutions the same three ways.",
+        lives="Notes I — the three endings — and Notes III — zero is a number. Board 4 is the diagnostic on reading a = a; board 6 on recognizing no solution among look-alikes; board 9 the misreadings of 0 = 0 in writing.",
+        materials="Whiteboards and markers. The Independent Set, one per student.",
+        variation="Boards 1–2 are bare: the same expression (infinitely many), then the same x-terms with different constants (none). The pattern breaks at 3: the constants match and the x-terms do not, so the answer is x = 0. 4 votes on an identity hidden by parentheses; 5 hides a no-solution equation the same way; 6 picks the no-solution equation from four look-alikes; 7 is two plans that never cost the same, with the 8 GB limit as the extra number; 8 fills a box for each ending; 9 is written. The independent set walks the same path in six.",
+        audit=["Every equation re-derived by sympy at build time over the real numbers (mathcheck: 0 findings): each one-solution answer solved, each 'infinitely many' shown to be the same expression on both sides, each 'no solution' shown to leave a nonzero number; every multiple-choice distractor re-derived from its named error.",
+               "Math Nation 11.3 read against this lesson (A7 Unit 11 Audit, Part 1 §1, §3–§5): D4 and D5 not reproduced; the audit's §4 gaps met today — x = 0 asked for and keyed (board 3, set 4), the three solution forms named, an equation completed for a given count (board 8, set 5–6), a context with no solution (board 7)."],
+        changes=["11.3.1 perimeter warm-up → four retrieval questions, the prerequisite (is 2 a solution?) in the last slot.",
+                 "11.3.2 nine equations chosen and solved with a partner → Notes I's one-solution line and board 3, taught from the front.",
+                 "11.3.3 exploration (a grid of tried values as evidence) → Notes I–II: each ending reached by simplifying.",
+                 "11.3.4 classification grid → boards 1–6 and the Independent Set, each verdict with its ending."],
+    ),
+)

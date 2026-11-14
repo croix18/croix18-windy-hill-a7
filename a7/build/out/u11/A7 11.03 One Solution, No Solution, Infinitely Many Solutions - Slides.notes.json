@@ -1,0 +1,285 @@
+{
+ "deck": "A7 11.03 One Solution, No Solution, Infinitely Many Solutions - Slides.pptx",
+ "slides": [
+  {
+   "n": 1,
+   "title": "One Solution, No Solution, Infinitely Many Solutions",
+   "sub": "",
+   "min": 1,
+   "note": "Post the learning target. Say one line and nothing else yet: \u201cToday: equations with one solution, no solution or infinitely many.\u201d",
+   "kind": "title"
+  },
+  {
+   "n": 2,
+   "title": "Warm-Up",
+   "sub": "On your own. No notes.",
+   "min": 4,
+   "note": "Q4 is today's question in miniature: a solution is a number that makes the equation true. Today some equations have no such number and some have every number. Two minutes silent, then reveal, no discussion \u2014 43 minutes today.",
+   "kind": "warmup"
+  },
+  {
+   "n": 3,
+   "title": "Warm-Up",
+   "sub": "Answers.",
+   "min": 1,
+   "note": "Reveal. Ask for the band each question came from only if time allows.",
+   "kind": "warmup"
+  },
+  {
+   "n": 4,
+   "title": "Vocabulary",
+   "sub": "The new words, before they are used.",
+   "min": 1,
+   "note": "Two names for the two new endings. Under each, say the ending aloud: 5 = 9 is never true, whatever x was \u2014 no number works; 5 = 5 is always true, whatever x was \u2014 every number works. 'One solution' needs no definition: it is every equation of the last two days.",
+   "kind": "vocab"
+  },
+  {
+   "n": 5,
+   "title": "Notes",
+   "sub": "Copy all three lines.",
+   "min": 4,
+   "note": "Three equations that differ by one number. Take 2x from both sides of each. The first leaves 5 = x + 9, so x = \u22124: one solution. The second leaves 5 = 9 \u2014 no x left, and 5 = 9 is never true, whatever x was: no solution. The third leaves 5 = 5 \u2014 always true, whatever x was: every number works, infinitely many solutions. The ending is a sentence about numbers; read it for what it says. We know 5 = 9 is never true without trying a single number \u2014 the x's are gone, so no number can change it.\nOFF: 'x = a: one. A false sentence: none. A true sentence: every number.'",
+   "kind": "notes"
+  },
+  {
+   "n": 6,
+   "title": "Notes",
+   "sub": "",
+   "min": 3,
+   "note": "Simplify each side first \u2014 distribute, collect \u2014 THEN compare. 3(x + 2) is 3x + 6, so the first equation has the same thing on both sides: infinitely many. In the second, the x-terms are the same (3x) and the constants differ (6 and 2): taking 3x leaves 6 = 2, never true. Different x-terms always leave an x, so one solution. The comparison is made only after simplifying: 2x + 5 \u2212 1 = 2x + 4 looks like different constants until the left side is collected (audit T6).\nOFF: 'Same x-terms, same constants: every number. Same x-terms, different constants: none. Different x-terms: one.'",
+   "kind": "notes"
+  },
+  {
+   "n": 7,
+   "title": "Notes",
+   "sub": "",
+   "min": 3,
+   "note": "Add 2x to both sides: 6x + 7 = 7. Subtract 7: 6x = 0, so x = 0. An x is still there, so this is x = a \u2014 one solution, and the solution is 0. 'No solution' is wrong: 0 works. Check: 4(0) + 7 = 7 and 7 \u2212 2(0) = 7. The B1G-M names this one: a student who expects 'x = a number' reads 6x = 0 as 'nothing'.\nOFF: 'x = 0 is an answer. Zero is a number.'",
+   "kind": "notes"
+  },
+  {
+   "n": 8,
+   "title": "Example 1",
+   "sub": "Simplify, then compare.",
+   "min": 1,
+   "note": "Ask what the left side is once it is simplified, before anyone takes a term away.",
+   "kind": "example"
+  },
+  {
+   "n": 9,
+   "title": "Example 1",
+   "sub": "Worked.",
+   "min": 2,
+   "note": "Distribute and collect: the left side is 4x \u2212 10, the same as the right. Taking 4x from both sides leaves \u221210 = \u221210, true whatever x was: infinitely many solutions. A board with 'x = \u221210' read the constant as the answer; one with 'no solution' saw the x's vanish and stopped.",
+   "kind": "example"
+  },
+  {
+   "n": 10,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "6x + 3 \u2212 5 = 6x \u2212 2, the same as the right side; \u22122 = \u22122, infinitely many. This catches 'x = \u22122' (the constant read as the answer) and 'no solution' (the x's gone, so 'nothing').",
+   "kind": "yourturn"
+  },
+  {
+   "n": 11,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 12,
+   "title": "Example 2",
+   "sub": "The x-terms go and the constants do not match.",
+   "min": 1,
+   "note": "Ask what the 2 multiplies, then which x-terms are on each side once it is distributed.",
+   "kind": "example"
+  },
+  {
+   "n": 13,
+   "title": "Example 2",
+   "sub": "Worked.",
+   "min": 2,
+   "note": "Distribute: 6x + 8. The x-terms match (6x and 6x) and the constants do not (8 and 5). Taking 6x from both sides leaves 8 = 5 \u2014 a false sentence with no x left in it, so no number can make it true: no solution. Write the ending as it is, 8 = 5, with its words: never true. A board with 6x + 4 distributed to one term (and still gets no solution, by luck \u2014 say so).",
+   "kind": "example"
+  },
+  {
+   "n": 14,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "10x \u2212 5 against 10x + 3: the same x-terms, different constants. Taking 10x leaves \u22125 = 3, never true: no solution. A board with 'x = 3' or 'x = \u22125' read a constant as the answer.",
+   "kind": "yourturn"
+  },
+  {
+   "n": 15,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 16,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The same expression on both sides: every number works. A board with x = 2 read the constant as the answer; one with 'no solution' saw the x's go and stopped.",
+   "kind": "wb"
+  },
+  {
+   "n": 17,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 18,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Same x-terms, different constants: 8 = \u22121 is never true. A board with 'infinitely many' saw matching x-terms and stopped (Notes II: the constants must match too); one with x = \u22129 or x = 9 subtracted the constants and wrote an x.",
+   "kind": "wb"
+  },
+  {
+   "n": 19,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 20,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The pattern breaks: the constants match and the x-terms do not, so an x is left \u2014 one solution, and it is 0 (Notes III). A board with 'no solution' read 3x = 0 as 'nothing'; one with 'infinitely many' saw the matching 4s. Check in both sides: 4 = 4.",
+   "kind": "wb"
+  },
+  {
+   "n": 21,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 22,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic. Option D reads the constant as x, option A reads 0 = 0 as x = 0, option C stops when the x's vanish. 0 and 6 do both work \u2014 and so does every other number, which is why 'one solution' is wrong. On a split: sixty seconds, convince your neighbor, re-vote.",
+   "kind": "wb"
+  },
+  {
+   "n": 23,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 24,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The parentheses hide it: distributed, the right side is 6x \u2212 12, the same x-term as the left with a different constant. \u22129 = \u221212 is never true. A board with 'infinitely many' distributed to one term (6x \u2212 4) and still saw different constants \u2014 ask what 3 times \u22124 is; one with x = 3 or x = \u22123 wrote \u22129 + 12 as an answer.",
+   "kind": "wb"
+  },
+  {
+   "n": 25,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 26,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic. Option A is today's named trap \u2014 the solution is 0, not 'none'; option C is the same expression written backwards. Ask a room that chose A to say the ending aloud: 1 = \u22121, never true.",
+   "kind": "wb"
+  },
+  {
+   "n": 27,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 28,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The extra-number board (ruling 22): the 8 GB limit is not needed. Both plans add \\$3 a gigabyte, so B stays \\$5 above A at every amount of data: 15 + 3g = 20 + 3g ends 15 = 20, never true. A board with g = 5 subtracted the monthly fees and called it gigabytes.",
+   "kind": "wb"
+  },
+  {
+   "n": 29,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 30,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Backwards: choose the ending. Infinitely many needs the same thing on both sides \u2014 the right side must be 4x + 12. No solution needs the same x-term with a different constant \u2014 6x, and \u221210 is already not +1. A board with 3 distributed to one term; one with 5 in the second box took the \u22125 from inside.",
+   "kind": "wb"
+  },
+  {
+   "n": 31,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 32,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Take your time. Boards up when you have written it.",
+   "min": 0,
+   "note": "Written, and the exit evidence. Read two aloud: one that names the ending (0 = 0 is always true) and one that tries a second number and sees it work \u2014 then say why trying numbers alone is not proof: the simplifying is.",
+   "kind": "wb"
+  },
+  {
+   "n": 33,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 34,
+   "title": "Independent Set",
+   "sub": "Six questions. On your own, in writing.",
+   "min": 6,
+   "note": "Hand out the Independent Set; the same six questions are on the board. Silent work. Circulate and mark what you see; do not teach. Whatever is not finished goes home.",
+   "kind": "independent"
+  },
+  {
+   "n": 35,
+   "title": "IXL",
+   "sub": "Last five minutes.",
+   "min": 5,
+   "note": "IXL: every listed skill is required, SmartScore 67. Due by the Unit 11 test.",
+   "kind": "ixl"
+  }
+ ]
+}
