@@ -1,6 +1,6 @@
 # A7 11.03  One Solution, No Solution, Infinitely Many Solutions — MA.8.AR.2.1 (MN 11.3). Wed 2 Dec 2026, a 43-minute
-# Wednesday: the deck is the usual 53 minutes by house rule, and nothing names a cut (HOUSE STYLE §9 — "no Wednesday
-# plan"; the teacher absorbs the short day, as A7 6.T1 and 5.10 do). Yesterday's move — take the same variable term
+# Wednesday: the deck is the usual 53 minutes by house rule (the kit's timing table must total 53), so the TE's
+# first read-first paragraph names the 43-minute cut (as A7 5.01 does). Yesterday's move — take the same variable term
 # from both sides — now sometimes takes away EVERY variable term, and the equation ends in one of three ways: x = a
 # (one solution), a = a (always true: infinitely many solutions), a = b (never true: no solution). Each side is
 # simplified first, and the ending is reached by simplifying, never by a table of tried values (audit D4). x = 0 is
@@ -67,6 +67,7 @@ L = dict(
            ("infinitely many solutions", "the equation is true for every number; it ends at a true statement, like $5 = 5$")],
     vocab_note="Two names for the two new endings. Under each, say the ending aloud: 5 = 9 is never true, whatever x was — no number works; 5 = 5 is always true, whatever x was — every number works. 'One solution' needs no definition: it is every equation of the last two days.",
     ixl=["Find the number of solutions — XDE", "Create equations with no solutions or infinitely many solutions — 7TY"],
+    title_note="Post the learning target. Today is 43 minutes: the cut is under Materials at the end of this edition.",
     closure="Board 9 is written work and it is the exit evidence: 3(x + 4) − 12 = 3x simplifies to 3x = 3x, and 0 = 0 is true for every number — infinitely many solutions, so Mia (x = 0) and Jo (no solution) are both wrong. A board that says 'neither' without the reason has the verdict and not the ending.",
 
     mtr=[("MTR.5.1", "Notes II, boards 1–2 and 6: the structure of each side — same x-terms, same or different constants — tells the count before the end"),
@@ -84,17 +85,17 @@ L = dict(
         dict(stem="Solve:  $6x - 4 = 2x + 20$", answer="x = 6", band="last lesson",
              source="11.02 — the variable on both sides",
              check=solves("6*u - 4", "2*u + 20", "6")),
-        dict(stem="Solve:  $2(x + 5) + 3x = 30$", answer="x = 4", band="this week",
-             source="11.01 — distribute, then collect like terms",
-             check=solves("2*(u + 5) + 3*u", "30", "4")),
+        dict(stem="Exterior angle 130°, one remote interior 55°. Find the other.", answer="75°", band="last week",
+             source="T-B2 — an exterior angle equals the sum of the two remote interior angles",
+             check=("eq", "130 - 55", "75")),
         dict(stem="Find the distance from (1, 2) to (4, 6).", answer="5", band="last unit",
              source="6.05 — the distance between two points by the Pythagorean Theorem: legs 3 and 4",
              check=("eq", "sqrt((4 - 1)**2 + (6 - 2)**2)", "5")),
         dict(stem="Is  $x = 2$  a solution of  $3x + 1 = 7$?", answer="Yes: 3(2) + 1 = 7", band="the prerequisite this lesson needs",
-             source="7th grade — a solution is a number that makes the equation true; today asks how many such numbers there are",
+             source="1.03 — a solution checked by substitution (Unit 1); today asks how many such numbers there are",
              check=("eq", "3*2 + 1", "7")),
     ],
-    warmup_note="Q4 is today's question in miniature: a solution is a number that makes the equation true. Today some equations have no such number and some have every number. Two minutes silent, then reveal, no discussion — 43 minutes today.",
+    warmup_note="Q4 is today's question in miniature: a solution is a number that makes the equation true. Today some equations have no such number and some have every number. Two minutes silent, then reveal, no discussion — 43 minutes today: the cut is under Materials.",
 
     notes=[
         dict(numeral="I", head="Three endings", min=4, sub="Copy all three lines.",
@@ -112,7 +113,7 @@ L = dict(
              letters=False),
         dict(numeral="III", head="Zero is a number", min=3, sub="",
              note="Add 2x to both sides: 6x + 7 = 7. Subtract 7: 6x = 0, so x = 0. An x is still there, so this is x = a — one solution, and the solution is 0. 'No solution' is wrong: 0 works. Check: 4(0) + 7 = 7 and 7 − 2(0) = 7. The B1G-M names this one: a student who expects 'x = a number' reads 6x = 0 as 'nothing'.\nOFF: 'x = 0 is an answer. Zero is a number.'",
-             math=["$4x + 7 = 7 - 2x$", "$6x + 7 = 7$", "$6x = 0 \\qquad x = 0$"],
+             math=["$4x + 7 = 7 - 2x$", "$6x + 7 = 7$", "$6x = 0$", "$x = 0$"],
              items2=["**One solution: x = 0. Zero is a number.**", "Check:  $4(0) + 7 = 7$   and   $7 - 2(0) = 7$"],
              letters=False),
     ],
@@ -129,8 +130,8 @@ L = dict(
                                 ("-10 = -10 \\qquad \\text{always true}", "take 4x from both sides")],
                           answer="infinitely many solutions")],
              check=same("4*(u - 3) + 2", "4*u - 10"),
-             your_turn=dict(min=2, note="6x + 3 − 5 = 6x − 2, the same as the right side; −2 = −2, infinitely many. This catches 'x = −2' (the constant read as the answer) and 'no solution' (the x's gone, so 'nothing').",
-                            prompt=["$3(2x + 1) - 5 = 6x - 2$", "How many solutions does it have?"],
+             your_turn=dict(min=2, note="6x + 3 − 5 = 6x − 2, the same as the right side; −2 = −2, infinitely many. This catches 'x = −2' (the constant read as the answer) and 'no solution' (the x's gone, so 'nothing'). The verdict is Example 1's, so look for the LINE on the boards — −2 = −2 (or 6x − 2 = 6x − 2) and 'always true' — not the words.",
+                            prompt=["$3(2x + 1) - 5 = 6x - 2$", "How many solutions? Write the line you end on and what it means."],
                             steps=["Distribute:  $6x + 3 - 5 = 6x - 2$",
                                    "Collect:  $6x - 2 = 6x - 2$",
                                    "Take 6x from both sides:  $-2 = -2$,  always true"],
@@ -146,8 +147,8 @@ L = dict(
                                 ("8 = 5 \\qquad \\text{never true}", "take 6x from both sides")],
                           answer="no solution")],
              check=never("2*(3*u + 4)", "6*u + 5"),
-             your_turn=dict(min=2, note="10x − 5 against 10x + 3: the same x-terms, different constants. Taking 10x leaves −5 = 3, never true: no solution. A board with 'x = 3' or 'x = −5' read a constant as the answer.",
-                            prompt=["$5(2x - 1) = 10x + 3$", "How many solutions does it have?"],
+             your_turn=dict(min=2, note="10x − 5 against 10x + 3: the same x-terms, different constants. Taking 10x leaves −5 = 3, never true: no solution. A board with 'x = 3' or 'x = −5' read a constant as the answer. The verdict is Example 2's, so look for the LINE — −5 = 3 and 'never true' — not the words.",
+                            prompt=["$5(2x - 1) = 10x + 3$", "How many solutions? Write the line you end on and what it means."],
                             steps=["Distribute:  $5(2x - 1) = 10x - 5$",
                                    "Take 10x from both sides:  the left is  $-5$,  the right is  $3$",
                                    "Never equal, whatever x is"],
@@ -156,7 +157,7 @@ L = dict(
     ],
 
     # The round: the same expression on both sides (1), the same x-terms with different constants (2), one solution
-    # that is 0 (3), the diagnostic on reading an identity (4), parentheses that hide a no-solution equation (5), which
+    # that is 0 (3), the diagnostic on reading an identity (4), parentheses hiding an ordinary negative solution (5), which
     # of four has none (6), the two-plans story with no crossing and an extra number (7), backwards: fill a box for
     # each ending (8), and the x = 0 / no-solution misreadings of 0 = 0 in writing (9). The pattern breaks at 3: the
     # constants match and the x-terms do not, so it LOOKS like an ending of the new kind and is x = 0.
@@ -178,7 +179,8 @@ L = dict(
              wrong="infinitely many — the x-terms match, so 'always true' [Notes II: the constants must match too]; x = 9 or x = −9 — 8 − (−1) or −1 − 8 written as an answer [Florida B1G-M, AR.2.1: expecting the solution to look like variable = constant]"),
         dict(text=["$5x + 4 = 2x + 4$", ASK],
              hint="Are the x-terms the same?", steps=["Take 2x from both sides:  $3x + 4 = 4$",
-                                                      "Subtract 4:  $3x = 0$,  so  $x = 0$",
+                                                      "Subtract 4:  $3x = 0$",
+                                                      "Divide by 3:  $x = 0$",
                                                       "Check:  $5(0) + 4 = 4$  and  $2(0) + 4 = 4$"],
              gloss="3x = 0", answer="one solution: x = 0",
              note="The pattern breaks: the constants match and the x-terms do not, so an x is left — one solution, and it is 0 (Notes III). A board with 'no solution' read 3x = 0 as 'nothing'; one with 'infinitely many' saw the matching 4s. Check in both sides: 4 = 4.",
@@ -191,16 +193,19 @@ L = dict(
              choices=["one solution, $x = 0$", "infinitely many solutions", "no solution", "one solution, $x = 6$"], correct=1,
              answer="B — infinitely many solutions",
              errors={"A": "0 = 0 (taking 8x and 6) read as x = 0 [Florida B1G-M, AR.2.1: expecting the solution to look like variable = constant]", "C": "the x-terms gone, so 'nothing is left' — but 6 = 6 is left, and it is true [Notes I: a true sentence means every number]", "D": "the constant in 6 = 6 taken for the answer [Florida B1G-M, AR.2.1: expecting the solution to look like variable = constant]"},
-             note="Diagnostic. Option D reads the constant as x, option A reads 0 = 0 as x = 0, option C stops when the x's vanish. 0 and 6 do both work — and so does every other number, which is why 'one solution' is wrong. On a split: sixty seconds, convince your neighbor, re-vote.",
+             note="Diagnostic. Option D reads the constant as x, option A reads 0 = 0 as x = 0, option C stops when the x's vanish. 0 and 6 do both work — and so does every other number, which is why 'one solution' is wrong. Options A and D are the same error (an ending read as x = a number) and get the same reteach: say the ending aloud, 6 = 6, and ask for which x it is true. On a split: sixty seconds, convince your neighbor, re-vote.",
              check=("many", same("2*(4*u + 3)", "8*u + 6"), not_never("2*(4*u + 3)", "8*u + 6"))),
-        dict(text=["$6x - 9 = 3(2x - 4)$", ASK],
-             hint="Distribute first.", steps=["Distribute:  $3(2x - 4) = 6x - 12$",
-                                              "Take 6x from both sides:  the left is  $-9$,  the right is  $-12$",
-                                              "Never equal: no solution"],
-             gloss="−9 = −12, never true", answer="no solution",
-             note="The parentheses hide it: distributed, the right side is 6x − 12, the same x-term as the left with a different constant. −9 = −12 is never true. A board with 'infinitely many' distributed to one term (6x − 4) and still saw different constants — ask what 3 times −4 is; one with x = 3 or x = −3 wrote −9 + 12 as an answer.",
-             check=never("6*u - 9", "3*(2*u - 4)"),
-             wrong="x = 3 — −9 + 12 written as an answer [Florida B1G-M, AR.2.1: expecting the solution to look like variable = constant]; one solution from 6x − 9 = 6x − 4 — the 3 to one term only (the verdict survives; the line does not) [Florida B1G-M, AR.2.1: distributing to only one term]"),
+        dict(text=["$6x - 9 = 3(x - 4)$", ASK],
+             hint="Distribute first.", steps=["Distribute:  $3(x - 4) = 3x - 12$",
+                                              "Take 3x from both sides:  $3x - 9 = -12$",
+                                              "Add 9:  $3x = -3$",
+                                              "Divide by 3:  $x = -1$",
+                                              "Check:  $6(-1) - 9 = -15$  and  $3(-1 - 4) = -15$"],
+             gloss="3x − 9 = −12", answer="one solution: x = −1",
+             note="An ordinary one solution, negative, behind parentheses: it looks like Example 2's kind until the 3 is distributed — 3x on the right against 6x on the left, so an x is left. Take 3x, add 9, divide by 3. A board with 'no solution' judged before distributing; one with x = 5/3 wrote 3x − 4 (one term); one with x = 7 wrote 3x + 12 (the sign); one with x = −7 subtracted the 9. Check: −15 = −15.",
+             check=("many", solves("6*u - 9", "3*(u - 4)", "-1"), solves("6*u - 9", "3*u - 4", "F(5,3)"),
+                    solves("6*u - 9", "3*u + 12", "7"), solves("3*u", "-12 - 9", "-7")),
+             wrong="no solution — the verdict read before distributing [Notes II: simplify each side first; different x-terms: one]; x = 5/3 — 6x − 9 = 3x − 4, the 3 to one term only [Florida B1G-M, AR.2.1: distributing to only one term]; x = 7 — 6x − 9 = 3x + 12, 3(−4) taken as +12 [Florida B1G-M, AR.2.1: sign errors while distributing]; x = −7 — 3x = −12 − 9, the 9 subtracted instead of added [Notes I: undo − 9 by adding 9]"),
         dict(kind="mc", text=["**Which equation has no solution?"],
              qtext="Which equation has no solution?",
              hint="Same x-terms, different constants.", steps=["$3x + 1$  and  $3x - 1$:  the same x-terms",
@@ -247,9 +252,9 @@ L = dict(
         dict(stem="How many solutions does  $6h - 5 = 2h + 19$  have? If one, find it.", answer="One solution: h = 6",
              why="Different h-terms. 4h − 5 = 19; 4h = 24. Check: 31 = 31.",
              check=solves("6*u - 5", "2*u + 19", "6"), space=0.9),
-        dict(stem="How many solutions does  $4(2n - 3) = 8n - 7$  have? If one, find it.", answer="No solution",
-             why="8n − 12 = 8n − 7; take 8n: −12 = −7, never true.",
-             check=never("4*(2*u - 3)", "8*u - 7"), space=0.9),
+        dict(stem="How many solutions does  $0.5(6n - 4) = 3n + 2$  have? If one, find it.", answer="No solution",
+             why="The 0.5 multiplies both terms: 3n − 2 = 3n + 2; take 3n: −2 = 2, never true.",
+             check=("many", never("F(1,2)*(6*u - 4)", "3*u + 2"), same("F(1,2)*(6*u - 4)", "3*u - 2")), space=0.9),
         dict(stem="How many solutions does  $5(k + 2) - 3 = 5k + 7$  have? If one, find it.", answer="Infinitely many solutions",
              why="5k + 10 − 3 = 5k + 7; both sides are 5k + 7; take 5k: 7 = 7, always true.",
              check=same("5*(u + 2) - 3", "5*u + 7"), space=0.9),
@@ -344,7 +349,8 @@ L = dict(
         must="Recognize from the simplified equation whether it has one solution (x = a), infinitely many (a = a) or none (a = b) (B1G-M solution forms).",
         must_not="Fraction and decimal-distribution solving at length (11.04); deciding by trying a table of values (audit D4).",
         read_first=[
-            "The unit's third day, a 43-minute Wednesday; the deck is the full lesson (no Wednesday plan) and the cut is the teacher's. Built from the benchmark and the B1G-M first (the unit's Lesson Outlines, §11.03), then read against Math Nation 11.3 (the unit audit, Part 1). The three endings are named from today on (standing decision 4).",
+            "The 43-minute day (Wed 2 Dec). The kit's timing table must total 53, so the table below is the full lesson and this is the cut: warm-up 4 minutes (two silent, reveal, no discussion); skip board 1 (Example 1's twin) and board 7 (the story); board 9 answered aloud and two read, not written by all; Independent Set questions 1, 2 and 4 in class, questions 3, 5 and 6 go home; IXL starts outside class. That takes out 10 minutes. Never cut board 3 (x = 0, the boundary case), boards 4 and 6 (the two diagnostics), board 5 (the only ordinary one-solution board) or board 8 (the Unit 11 test's question 6).",
+            "The unit's third day. Built from the benchmark and the B1G-M first (the unit's Lesson Outlines, §11.03), then read against Math Nation 11.3 (the unit audit, Part 1). The three endings are named from today on (standing decision 4).",
             "A false ending is written as the false equation with its words — '8 = 5, never true: no solution' — never as '8 ≠ 5' (the audit's decision 1). The answer slides' steps say it in words ('the left is 8, the right is 5 — never equal') because the build's step check holds every printed equation true.",
             "Every multiple-choice wrong option is a named AR.2.1 error — expecting the solution to look like variable = constant (a constant read as x, 0 = 0 read as x = 0, x = 0 read as 'none'), distributing to only one term — or a named slip (matching x-terms taken for the same sides).",
             "Not reproduced from the book: the perimeter warm-up (a preview, not retrieval), the partner tasks (§1 rule 4), the 11.3.3 exploration that offers five substitutions as proof of 'no solution' or 'all values' (audit D4 — here every ending is reached by simplifying; board 9's note says why trying numbers is not proof), and the Samir key that never says a = 0 (D5 — board 3, Notes III and set question 4 each say the solution is 0)."],
@@ -352,8 +358,8 @@ L = dict(
                         ("Unit boundary", "Integer and decimal coefficients; distribution and like terms on either side. Solution forms x = a, a = a, a = b (B1G-M); one-solution answers verified by substitution.")],
         sits="The unit's third day, after 11.02's variable on both sides. IXL XDE and 7TY are done today and due by the Unit 11 test (Fri 11 Dec), whose question 5 asks for one of each ending and question 6 fills a box. 11.04 carries the three endings into fraction and decimal coefficients; 11.05–11.06 count a system's solutions the same three ways.",
         lives="Notes I — the three endings — and Notes III — zero is a number. Board 4 is the diagnostic on reading a = a; board 6 on recognizing no solution among look-alikes; board 9 the misreadings of 0 = 0 in writing.",
-        materials="Whiteboards and markers. The Independent Set, one per student.",
-        variation="Boards 1–2 are bare: the same expression (infinitely many), then the same x-terms with different constants (none). The pattern breaks at 3: the constants match and the x-terms do not, so the answer is x = 0. 4 votes on an identity hidden by parentheses; 5 hides a no-solution equation the same way; 6 picks the no-solution equation from four look-alikes; 7 is two plans that never cost the same, with the 8 GB limit as the extra number; 8 fills a box for each ending; 9 is written. The independent set walks the same path in six.",
+        materials="Whiteboards and markers. The Independent Set, one per student. THE 43-MINUTE CUT (the timing table is the full 53 — the build cannot print a 43-minute one): warm-up 4 min (two silent, reveal); skip board 1 (Example 1's twin) and board 7 (the story); board 9 answered aloud with two boards read; Independent Set questions 1, 2 and 4 in class, 3, 5 and 6 go home; IXL starts outside class — 10 minutes out. Never cut board 3 (x = 0), boards 4 and 6 (the diagnostics), board 5 (the only ordinary one-solution board) or board 8 (the test's question 6).",
+        variation="Boards 1–2 are bare: the same expression (infinitely many), then the same x-terms with different constants (none). The pattern breaks at 3: the constants match and the x-terms do not, so the answer is x = 0. 4 votes on an identity hidden by parentheses; 5 has parentheses too and an ordinary one solution, x = −1 — the one board where 'if one, find it' means a negative number; 6 picks the no-solution equation from four look-alikes; 7 is two plans that never cost the same, with the 8 GB limit as the extra number; 8 fills a box for each ending; 9 is written. The independent set walks the same path in six; question 2 is the day's decimal factor (0.5(6n − 4) = 3n + 2, no solution).",
         audit=["Every equation re-derived by sympy at build time over the real numbers (mathcheck: 0 findings): each one-solution answer solved, each 'infinitely many' shown to be the same expression on both sides, each 'no solution' shown to leave a nonzero number; every multiple-choice distractor re-derived from its named error.",
                "Math Nation 11.3 read against this lesson (A7 Unit 11 Audit, Part 1 §1, §3–§5): D4 and D5 not reproduced; the audit's §4 gaps met today — x = 0 asked for and keyed (board 3, set 4), the three solution forms named, an equation completed for a given count (board 8, set 5–6), a context with no solution (board 7)."],
         changes=["11.3.1 perimeter warm-up → four retrieval questions, the prerequisite (is 2 a solution?) in the last slot.",
