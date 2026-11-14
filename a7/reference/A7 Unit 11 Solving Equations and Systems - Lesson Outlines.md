@@ -190,10 +190,11 @@ x = 6. 2 — ¾(8x − 4) = 2x + 9: 6x − 3 = 2x + 9, x = 3. *Your Turn:* ⅔(9
 1. 5(x − 2) + 3 = 2x + 11 → x = 6.
 2. ½(10x + 8) = 3x + 14 → x = 5.
 3. 0.4(5x − 10) = x + 3 → x = 7.
-4. *MC* −2(3x − 5) = 4x − 30: x = 4 ✓ · 2 (−2 · −5 taken as −10) · 2.5 (the −2 never reached the 5) · −20 (4x
-   taken from the right but −6x left where it was).
+4. *MC* −2(3x − 5) = 4x − 30: x = 4 ✓ · 2 (−2 · −5 taken as −10) · 2.5 (the −2 never reached the 5) · −20 (the
+   −6x moved to the right without its sign changing: −2x = 40).
 5. x/3 − 1 = x/5 + 1 → x = 15.
-6. *MC* How many solutions has ½(6x − 4) = 3(x − 1) + 1? Infinitely many ✓ · none · one, x = 0 · one, x = 2.
+6. *MC* How many solutions has ½(6x − 4) = 3(x − 1) + 1? Infinitely many ✓ · none · one, x = 0 · one, x = −2 (the constant in
+   −2 = −2 read as the answer).
 7. *Extra number* Shop A rents a bike for \$12 plus \$4.50 an hour. Shop B, 3 blocks away, charges \$7.50 an hour.
    For how many hours is the cost the same? 12 + 4.5h = 7.5h, h = 4.
 8. *Backwards* x = 2 is the solution of 3(x + ▢) = 2x + 20: the box is 6.
