@@ -1,0 +1,20 @@
+/* A7 Unit 11: the coordinate plane (drawn from the two equations), its legend, and the tables of values */
+svg.fig{display:block;width:100%;height:auto;margin:6px 0;overflow:visible}
+svg.fig .gridln{fill:none;stroke:var(--mut);stroke-opacity:.34;stroke-width:.8}
+svg.fig .gridln2{fill:none;stroke:var(--mut);stroke-opacity:.3;stroke-width:.7;stroke-dasharray:3 2}
+svg.fig .axis{stroke:var(--ink);stroke-width:1.3}
+svg.fig .tick{font:500 11px var(--ui,system-ui,sans-serif);fill:var(--mut);text-anchor:middle;dominant-baseline:central}
+svg.fig .axn{font:600 12px var(--ui,system-ui,sans-serif);fill:var(--ink);text-anchor:middle;dominant-baseline:central}
+svg .ln1{fill:none;stroke:var(--ink);stroke-width:2.4;stroke-linecap:round}
+svg .ln2{fill:none;stroke:var(--teal);stroke-width:2.4;stroke-dasharray:7 5;stroke-linecap:butt}
+.qfig .lgd{display:flex;flex-wrap:wrap;gap:4px 18px;margin:2px 0 8px;font:15px/1.5 var(--ui)}
+.qfig .lk{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.qfig .lks{width:34px;height:10px;flex:0 0 34px}
+.qfig.tabs{display:flex;flex-wrap:wrap;gap:10px 22px;margin:8px 0}
+table.vt{border-collapse:collapse;font:15px/1.3 var(--ui)}
+table.vt caption{text-align:left;padding:0 0 4px;font-weight:500}
+table.vt th,table.vt td{border:1px solid var(--edge);padding:5px 8px;text-align:center;min-width:28px}
+table.vt th{background:var(--field)}
+table.vt .gap{font-weight:700}
+.line .qfig{margin-top:6px}
+@media print{ svg .ln1{stroke:#000} svg .ln2{stroke:#000} svg.fig .gridln{stroke:#888;stroke-opacity:1} svg.fig .gridln2{stroke:#bbb;stroke-opacity:1} table.vt th,table.vt td{border-color:#555} }

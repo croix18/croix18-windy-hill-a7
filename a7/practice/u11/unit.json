@@ -1,0 +1,23 @@
+{
+ "title": "A7 Unit 11 Practice Test",
+ "file": "unit-11-practice-test.html",
+ "download": "A7 Unit 11 Practice Test.html",
+ "contentVersion": 1,
+ "css": [
+  "fig.css",
+  "unit.css"
+ ],
+ "scripts": [
+  "shown.js",
+  "engine.js",
+  "fig.js",
+  "coach.js",
+  "unit.js"
+ ],
+ "checks": [
+  "node u11_check.js 3000 1500",
+  "python3 verify.py",
+  "python3 plant_check.py",
+  "node mc_check.js 3000"
+ ]
+}
