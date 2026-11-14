@@ -82,8 +82,10 @@ def estimate(r1, r2, x, y, ex, ey):
 
 # ---- the board figures: 11.07's sizes (the largest a board allows): one bold row over the figure, a window no
 # bigger than the system needs, slide(inches=4.2, pt=18, reserve=0.75). A story board carries two or three rows of
-# words, so its figure is set as 11.07's candles were (inches=5.0, pt=16). A multiple-choice board's graph drops
-# its equation labels (the words carry them) so the grid can stay large.
+# words, so its figure is set as 11.07's candles were (inches=5.0, pt=16). No multiple-choice question slide carries
+# a graph (14 Nov): its four options take 1.75 in, which left board 4's estimate a 1.6-in graph to read tenths from.
+# So board 4 is free response at full size, and the round's diagnostics are board 2 (the meaning of a point the
+# words give; its graph is on the reveal) and board 6 (a system from a story, no graph).
 def B(spec):
     return S(spec, inches=4.2, pt=18, reserve=0.75)
 
@@ -137,6 +139,8 @@ P2 = figs.plane((0, 8), (0, 60), lines=[(6, 6, "A"), (3, 18, "B")], ys=10,
 P2A = figs.plane((0, 8), (0, 60), lines=[(6, 6, "A"), (3, 18, "B")], ys=10,
                  xname="miles", yname="cost (dollars)", solution=(4, 30), points=[(4, 30, "")])
 P3 = figs.plane((0, 3), (0, 5), lines=[(1, 0, ""), (-2, 5, "")], solution=(Fr(5, 3), Fr(5, 3)))
+# board 3 at one row of words: its equations are the lines' labels (14 Nov), so the plane takes the room a second row had
+P3L = figs.plane((0, 3), (0, 5), lines=[(1, 0), (-2, 5)], solution=(Fr(5, 3), Fr(5, 3)))
 P4 = figs.plane((0, 3), (0, 5), lines=[(2, 1, ""), (-1, 5, "")], solution=(Fr(4, 3), Fr(11, 3)))
 P4A = figs.plane((-1, 4), (-1, 6), lines=[(2, 1), (-1, 5)], solution=(Fr(4, 3), Fr(11, 3)))
 P5 = figs.plane((0, 8), (0, 48), lines=[(3, 12, "A"), (6, 0, "B")], ys=6,
@@ -276,29 +280,40 @@ L = dict(
              note="Read the crossing on the grid: x = 3 games, y = \\$15 (one line every \\$5). Check: 3(3) + 6 = 15 and 5(3) = 15. A board with '15 games' swapped the coordinates; one with '6 games' took the \\$6 for shoes as the answer.",
              check=("many", crosses("3*u + 6", "5*u", "3", "15"), sat("3*u + 6", "3", "15"), sat("5*u", "3", "15")),
              wrong="15 games — x and y swapped [B1G-M, GR.1.2: x and y inverted]; 6 games — the \\$6 for shoes taken as the answer [B1G-M, AR.3.5: misinterpreting in context]"),
-        dict(text=["The graph shows what two taxis cost for x miles.", "**What does the crossing point, $(4, 30)$, mean?"],
-             fig=B(P2), fig_a=BA2(P2A),
+        # repeat_ok: rule D matches only the digits 30 and 4 (Example 1's tank starts at 30 liters, and a 4 is in its
+        # working); this point, (4, 30), and its taxi system appear nowhere above. Flagged once its graph moved to
+        # the reveal (14 Nov), when the question slide stopped carrying a figure.
+        dict(repeat_ok=True, kind="mc", text=["Taxis A and B: y dollars for x miles. Their lines cross at $(4, 30)$.",
+                              "**What does that point mean?"],
+             qtext="Taxis A and B cost y dollars for a ride of x miles. Their graphs cross at (4, 30). What does that point mean?",
+             fig_a=BA2(P2A),
              steps=["x is miles:  4", "y is dollars:  30,  on both lines"],
-             gloss="x = 4 miles, y = 30 dollars", answer="For a 4-mile ride, both taxis cost \\$30.",
-             note="A point's meaning is its x and its y in the story's words: x = 4 miles, y = \\$30 — for a 4-mile ride both taxis cost \\$30. (Taxi A is y = 6x + 6 and Taxi B is y = 3x + 18: 6(4) + 6 = 30 and 3(4) + 18 = 30.) A board that says '30 miles for \\$4' swapped; one that says 'Taxi A costs \\$30' left out that both do.",
-             check=("many", crosses("6*u + 6", "3*u + 18", "4", "30"), sat("6*u + 6", "4", "30"), sat("3*u + 18", "4", "30")),
-             wrong="'30 miles for \\$4' — x and y swapped [B1G-M, GR.1.2: x and y inverted]; 'Taxi A costs \\$30' — one line only [B1G-M, AR.4.1: a solution satisfies both]"),
-        dict(text=["$y = x$  and  $y = -2x + 5$  are graphed.", "**Between which two whole numbers is the x of the crossing?"],
-             fig=B(P3), fig_a=BA2(P3),
+             choices=["For a 30-mile ride, both taxis cost \\$4.", "Only Taxi A costs \\$30 for a 4-mile ride.",
+                      "For a 4-mile ride, both taxis cost \\$30.", "The two taxis cost the same for every ride."],
+             correct=2, answer="C — for a 4-mile ride, both cost \\$30.",
+             errors={"A": "x and y swapped: 30 read as miles and 4 as dollars [B1G-M, GR.1.2: x and y inverted]", "B": "the point read on one line only; it is on both, so both taxis cost \\$30 there [B1G-M, AR.4.1: a solution satisfies both]", "D": "one crossing read as the same line: the taxis cost the same at 4 miles only [B1G-M, AR.4.2: the same-line case]"},
+             note="Diagnostic on the meaning of a crossing; the point is in the words, so the question slide has no graph and the reveal shows it. A point's meaning is its x and its y in the story's words: x = 4 miles, y = \\$30 — for a 4-mile ride both taxis cost \\$30. (Taxi A is y = 6x + 6 and Taxi B is y = 3x + 18: 6(4) + 6 = 30 and 3(4) + 18 = 30.) Option A swaps; option B gives the point to one taxi only; option D reads one crossing as the same line — at 1 mile Taxi A costs \\$12 and Taxi B \\$21. On a split: sixty seconds, convince your neighbor, re-vote.",
+             check=("many", crosses("6*u + 6", "3*u + 18", "4", "30"), sat("6*u + 6", "4", "30"), sat("3*u + 18", "4", "30"),
+                    fails("6*u + 6", "30", "4"), fails("3*u + 18", "30", "4"),
+                    ("true", "sp.expand((" + _u("6*u + 6") + ") - (" + _u("3*u + 18") + ")) != 0"),
+                    sat("6*u + 6", "1", "12"), sat("3*u + 18", "1", "21"))),
+        # repeat_ok: with its equations moved onto the lines (14 Nov), rule D matches only the grid's axis numbers
+        # (0 to 5) and the answer's digits; this system (y = x, y = −2x + 5) appears nowhere above.
+        dict(repeat_ok=True, text=["**Between which two whole numbers is the x of the crossing?"],
+             fig=B(P3L), fig_a=BA(P3L),
              steps=["$x = 1$:   $1$ and $-2(1) + 5 = 3$", "$x = 2$:   $2$ and $-2(2) + 5 = 1$"],
              gloss="the lines change places between 1 and 2", answer="1 and 2",
              note="The crossing is between the grid lines, so the question is only where: between x = 1 and x = 2. The tables say so without a graph — at x = 1 the second line is higher, at x = 2 the first is: they changed places in between. A board with 'between 1 and 2 for y' answered for y (y is also between 1 and 2 here — read the x); one with '2' took the nearest grid line.",
              check=("many", crosses("u", "-2*u + 5", "F(5,3)", "F(5,3)"), ("true", "1 < F(5,3) < 2"),
                     sat("-2*u + 5", "1", "3"), sat("-2*u + 5", "2", "1")),
              wrong="'2' — the nearest grid line taken as the crossing [B1G-M, AR.4.3: plotting and graphing errors]; '0 and 5' — where each line meets the y-axis [B1G-M, AR.4.1: a solution satisfies both]"),
-        dict(kind="mc", text=["**The system is graphed. Which is closest to its solution?"],
-             qtext="y = 2x + 1 and y = −x + 5 are graphed. Which ordered pair is closest to the solution of the system?",
-             fig=BM(P4), fig_a=BM(P4A, 0.95),
+        dict(text=["**$y = 2x + 1$  and  $y = -x + 5$  are graphed. Estimate the solution."],
+             fig=B(P4), fig_a=BA(P4A),
              steps=["between $x = 1$ and $x = 2$, nearer 1:  about $(1.3, 3.7)$",
                     "$2(1.3) + 1 = 3.6$   and   $-1.3 + 5 = 3.7$:  close"],
-             choices=["(3.7, 1.3)", "(0, 5)", "(1.3, 3.7)", "(1, 3)"], correct=2, answer="C — about (1.3, 3.7)",
-             errors={"A": "the coordinates of the estimate swapped [B1G-M, GR.1.2: x and y inverted]", "B": "where y = −x + 5 starts, on one line only [B1G-M, AR.4.1: a solution satisfies both]", "D": "the nearest grid point, on y = 2x + 1 only: −1 + 5 = 4, not 3 [B1G-M, AR.4.3: plotting and graphing errors]"},
-             note="Diagnostic on the estimate. The keyed read is about (1.3, 3.7); the exact crossing is (4/3, 11/3). One option swaps it; one is the nearest grid point, which is on one line only; one is where a line starts. On a split: sixty seconds, convince your neighbor, re-vote — then check (1.3, 3.7) in both aloud: 3.6 and 3.7, close.",
+             gloss="between the grid lines: an estimate", answer="about (1.3, 3.7)",
+             wrong="(3.7, 1.3) — the coordinates of the estimate swapped [B1G-M, GR.1.2: x and y inverted]; (1, 3) — the nearest grid point, on y = 2x + 1 only: −1 + 5 = 4, not 3 [B1G-M, AR.4.3: plotting and graphing errors]; (0, 5) — where y = −x + 5 starts, on one line only [B1G-M, AR.4.1: a solution satisfies both]",
+             note="The estimate, read at full size. The keyed read is about (1.3, 3.7); the exact crossing is (4/3, 11/3), so any careful read within about 0.2 — (1.3, 3.6), (1.4, 3.7) — is a good estimate. Check (1.3, 3.7) in both aloud: 3.6 and 3.7, close. A board with (3.7, 1.3) swapped it; one with (1, 3) took the nearest grid point, which is on one line only; one with (0, 5) read where a line starts.",
              check=("many", estimate("2*u + 1", "-u + 5", "F(4,3)", "F(11,3)", "1.3", "3.7"),
                     fails("2*u + 1", "3.7", "1.3"), fails("-u + 5", "3.7", "1.3"),
                     sat("2*u + 1", "1", "3"), fails("-u + 5", "1", "3"),
@@ -536,9 +551,9 @@ L = dict(
         standard_notes=[("Clarification", "AR.4.3 Clar. 1: approximate non-integer solutions — to the nearest half or tenth, with 'about'."),
                         ("Unit boundary", "Every system is given solved for y, or written from a story as (amount per 1)·x + (start).")],
         sits="The unit's last teaching day. IXL W9J is due by the Unit 11 test (Fri 11 Dec), whose question 14 is today's: a story with its graph, (a) when the two are equal and what both equal, (b) a crossing between the grid lines, approximated.",
-        lives="Notes II — the crossing in the story's words — and Notes III's estimate and its close-not-equal check. Board 4 is the estimate diagnostic (swapped, nearest grid point, a start), board 6 the write-a-system diagnostic, board 9 the crossing as the reason in writing.",
+        lives="Notes II — the crossing in the story's words — and Notes III's estimate and its close-not-equal check. Board 2 is the meaning-of-a-crossing diagnostic (swapped, one taxi only, the same line), board 4 the estimate at full size, board 6 the write-a-system diagnostic, board 9 the crossing as the reason in writing.",
         materials="Whiteboards and markers; rulers. The Independent Set, one per student. The Unit Review, one per student — it goes home today.",
-        variation="Boards 1–2 read a story's crossing and say it with units; 3–4 estimate a crossing between the grid lines (where, then about what). The pattern changes at 5 — the cheaper side of the crossing — and 6 votes on the system a story makes; 7 is the plants with their price as the extra number; 8 runs backwards from a crossing; 9 is written. The independent set: a story's graph read, a crossing's meaning, an estimate drawn, a system written, the cheaper side drawn, and two savers who never meet.",
+        variation="Boards 1–2 read a story's crossing and say it with units (2 a vote); 3–4 estimate a crossing between the grid lines (where, then about what). The pattern changes at 5 — the cheaper side of the crossing — and 6 votes on the system a story makes; 7 is the plants with their price as the extra number; 8 runs backwards from a crossing; 9 is written. The independent set: a story's graph read, a crossing's meaning, an estimate drawn, a system written, the cheaper side drawn, and two savers who never meet.",
         audit=["Every crossing re-derived by sympy at build time as the system's one solution and checked in both equations; every estimate held within 0.05 of the exact crossing and shown not to be on either line exactly; every graph drawn from its equations by u11/figs.py, which refuses a stated crossing that is not on both lines.",
                "Math Nation 11.8 read against this lesson (A7 Unit 11 Audit, Part 2, E7, E8, E12, E14, E15, §3–§5): its sound shapes — a story graphed, the meaning of the crossing, an estimate — are here with our own numbers; its defects are not reproduced."],
         changes=["11.8.1 video warm-up → four retrieval questions (no video).",

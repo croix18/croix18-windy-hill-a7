@@ -85,9 +85,11 @@ H = Fr(1, 2)
 # over the figure, a square window no bigger than the system needs, and slide(inches=4.2, pt=18, reserve=0.75):
 # the slide's height is what binds (FOOT_Y − the row's foot − the ask's room), so a board's plane comes out about
 # 3.3 in tall on the question slide and 3.2 in on the reveal, its labels at 18 pt. 11.05's were 2.6 in at 16 pt.
-# A multiple-choice board gives 1.75 in more to its four options, so its graph is at most about 1.5 in tall on the
-# question slide (3.1 in on the reveal, where the working replaces the options): its lines carry no equations
-# (the words do) and its points no coordinates, which is what lets the grid itself be that large.
+# A multiple-choice board gives 1.75 in more to its four options, so a graph there would be at most about 1.5 in
+# tall on the question slide — too small to read from the back of the room (Croix, 14 Nov). So no question slide of
+# a multiple-choice board carries a graph: board 2's vote is on two tables (wide, not tall), board 6 gives its four
+# points in words and shows the graph only on its reveal, and board 4 — read a crossing — is free response at full
+# size.
 
 
 def B(spec):
@@ -136,6 +138,7 @@ T2 = figs.table([([0, 1, 2, 3, 4], [-5, -2, 1, 4, 7]), ([0, 1, 2, 3, 4], [1, 2, 
 P3 = figs.plane((-5, 2), (-4, 4), lines=[(2, 4), (-1, -2)], solution=(-2, 0), step=2)
 P3A = figs.plane((-5, 2), (-4, 4), lines=[(2, 4), (-1, -2)], solution=(-2, 0), step=2, points=[(-2, 0, "")])
 P4 = figs.plane((-1, 4), (-1, 5), lines=[(-2, 5, ""), (1, -1, "")], solution=(2, 1))
+P4A = figs.plane((-1, 4), (-1, 5), lines=[(-2, 5, ""), (1, -1, "")], solution=(2, 1), points=[(2, 1, "")])
 P5 = figs.plane((-2, 3), (-3, 4), lines=[(2, 2), (2, -3)])
 P6 = figs.plane((-1, 4), (-1, 5), lines=[(2, 1, ""), (-1, 4, "")], solution=(1, 3),
                 points=[(0, 1, ""), (1, 3, ""), (0, 4, ""), (2, 2, "")])
@@ -171,7 +174,7 @@ L = dict(
     closure="Board 9 is written work and it is the exit evidence: Tia's lines are parallel — 3 multiplies x in both, so for every x the second is 3 above the first — and they never meet, on the grid or off it: no solution. A board that says only 'no' has the verdict and not the reason.",
 
     mtr=[("MTR.2.1", "a table, a graph and an equation for one crossing"),
-         ("MTR.4.1", "boards 4 and 6: re-vote"),
+         ("MTR.4.1", "boards 2 and 6: re-vote"),
          ("MTR.6.1", "every crossing checked in both equations")],
     hoq=[("Why does a third point in each table matter before you draw the line?", "DOK 2"),
          ("Two lines with different numbers multiplying x: why must they cross somewhere, even off the grid?", "DOK 3"),
@@ -254,9 +257,9 @@ L = dict(
              yt_check=("many", crosses("F(1,2)*u + 3", "-u - 3", "-4", "1"), sat("F(1,2)*u + 3", "-4", "1"), sat("-u - 3", "-4", "1"))),
     ],
 
-    # The round: a crossing read off a graph (1) and off two tables (2); a crossing with a negative x on an axis (3);
-    # the diagnostic on the four points a graph offers (4); the pattern breaks at 5 — parallel, none; 6 votes on
-    # the system a graph shows (TS7); the candle story read at its crossing, with the price as the extra number (7);
+    # The round: a crossing read off a graph (1) and off two tables, the first diagnostic (2); a crossing with a
+    # negative x on an axis (3); a graph that offers four points, read at full size (4); the pattern breaks at 5 —
+    # parallel, none; 6 votes on the system through four points given in words (TS7); the candle story read at its crossing, with the price as the extra number (7);
     # backwards (8); and the "they must cross off the grid" claim refuted in writing (9). Every graph is read; none
     # is drawn on a whiteboard (decision 9).
     whiteboard=[
@@ -271,14 +274,18 @@ L = dict(
              wrong="(4, 2) — x and y swapped [B1G-M, GR.1.2: x and y inverted]; (0, 6) — where one line meets the y-axis, on one line only [B1G-M, AR.4.1: a solution satisfies both]"),
         # repeat_ok: rule D matches only the table's x row (0 to 4) and the answer's digits; this system appears
         # nowhere above.
-        dict(repeat_ok=True, text=["**The tables are for one system. What is its solution?"],
+        dict(repeat_ok=True, kind="mc", text=["**The tables are for one system. What is its solution?"],
+             qtext="The two tables are for one system: y = 3x − 5 and y = x + 1. What is the solution of the system?",
              fig=S(T2, inches=8.0, pt=18, reserve=0.75), fig_a=S(T2, inches=5.2, pt=14, reserve=0.95),
              hint="Same x, same y.", steps=["at $x = 3$:   $3(3) - 5 = 4$   and   $3 + 1 = 4$"],
-             gloss="the column where the two y's agree", answer="(3, 4)",
-             note="No graph needed: the solution is the column where both tables give the same y. At x = 3 both give 4, so (3, 4). A board with (4, 4) wrote the shared y for x as well; one with (4, 7) read the last column of one table only (the other gives 5 there).",
+             choices=["(4, 3)", "(2, 1)", "(3, 4)", "(4, 4)"], correct=2, answer="C — (3, 4)",
+             errors={"A": "the coordinates of (3, 4) swapped [B1G-M, GR.1.2: x and y inverted]", "B": "the column where the tables are closest but not equal, read from y = 3x − 5 only: x + 1 gives 3 there [B1G-M, AR.4.1: a solution satisfies both]", "D": "the shared y, 4, written for x too [B1G-M, GR.1.2: x and y inverted]"},
+             note="Diagnostic. No graph needed: the solution is the column where both tables give the same y. At x = 3 both give 4, so C, (3, 4). Option A swaps it; option D writes the shared y for x as well; option B is the column x = 2, where the two y's (1 and 3) are closest before they meet — near is not equal. On a split: sixty seconds, convince your neighbor, re-vote — then check (3, 4) in both aloud.",
              check=("many", crosses("3*u - 5", "u + 1", "3", "4"), table_of("3*u - 5", [0, 1, 2, 3, 4], [-5, -2, 1, 4, 7]),
-                    table_of("u + 1", [0, 1, 2, 3, 4], [1, 2, 3, 4, 5])),
-             wrong="(4, 4) — the shared y written for x too [B1G-M, GR.1.2: x and y inverted]; (4, 7) — one table's column only; the other gives 5 there [B1G-M, AR.4.1: a solution satisfies both]"),
+                    table_of("u + 1", [0, 1, 2, 3, 4], [1, 2, 3, 4, 5]),
+                    fails("3*u - 5", "4", "3"), fails("u + 1", "4", "3"),
+                    sat("3*u - 5", "2", "1"), fails("u + 1", "2", "1"),
+                    fails("3*u - 5", "4", "4"), fails("u + 1", "4", "4"))),
         # repeat_ok: rule D matches only the grid's axis numbers and the answer's digits; the system is new.
         dict(repeat_ok=True, text=["**The system is graphed. What is its solution?"],
              fig=B(P3), fig_a=BA(P3A),
@@ -288,13 +295,12 @@ L = dict(
              check=("many", crosses("2*u + 4", "-u - 2", "-2", "0"), sat("2*u + 4", "-2", "0"), sat("-u - 2", "-2", "0")),
              wrong="(0, −2) — x and y swapped, and where one line meets the y-axis [B1G-M, GR.1.2: x and y inverted]; (0, 4) — where one line meets the y-axis [B1G-M, AR.4.1: a solution satisfies both]"),
         # repeat_ok: rule D matches only the grid's axis numbers and the options' digits; the system is new.
-        dict(repeat_ok=True, kind="mc", text=["**$y = -2x + 5$  and  $y = x - 1$  are graphed. What is the solution?"],
-             qtext="y = −2x + 5 and y = x − 1 are graphed. What is the solution of the system?",
-             fig=BM(P4), fig_a=BM(P4, 0.95),
-             hint="Cross, then check.", steps=["$(2, 1)$:   $-2(2) + 5 = 1$   and   $2 - 1 = 1$"],
-             choices=["(1, 0)", "(0, 5)", "(2, 1)", "(1, 2)"], correct=2, answer="C — (2, 1)",
-             errors={"A": "where y = x − 1 meets the x-axis, on one line only [B1G-M, AR.4.1: a solution satisfies both]", "B": "where y = −2x + 5 meets the y-axis, on one line only [B1G-M, AR.4.1: a solution satisfies both]", "D": "the coordinates of the crossing swapped [B1G-M, GR.1.2: x and y inverted]"},
-             note="Diagnostic. Option C is the crossing; option D swaps it; options A and B are where a line meets an axis — points a graph offers that lie on one line only. On a split: sixty seconds, convince your neighbor, re-vote — then check (2, 1) in both aloud.",
+        dict(repeat_ok=True, text=["**$y = -2x + 5$  and  $y = x - 1$  are graphed. What is the solution?"],
+             fig=B(P4), fig_a=BA(P4A),
+             hint="Cross, then check.", steps=["the lines cross at $(2, 1)$", "$-2(2) + 5 = 1$   and   $2 - 1 = 1$"],
+             gloss="read the crossing, then check it", answer="(2, 1)",
+             wrong="(1, 2) — the coordinates of the crossing swapped [B1G-M, GR.1.2: x and y inverted]; (1, 0) — where y = x − 1 meets the x-axis, on one line only [B1G-M, AR.4.1: a solution satisfies both]; (0, 5) — where y = −2x + 5 meets the y-axis, on one line only [B1G-M, AR.4.1: a solution satisfies both]",
+             note="The four points a graph offers: the crossing (2, 1), the crossing swapped, and two places where a line meets an axis. Read the crossing on the grid lines, then check it in both: −2(2) + 5 = 1 and 2 − 1 = 1. A board with (1, 2) swapped it; one with (1, 0) or (0, 5) read a point that lies on one line only.",
              check=("many", crosses("-2*u + 5", "u - 1", "2", "1"), sat("-2*u + 5", "2", "1"), sat("u - 1", "2", "1"),
                     fails("-2*u + 5", "1", "2"), fails("u - 1", "1", "2"),
                     sat("-2*u + 5", "0", "5"), fails("u - 1", "0", "5"),
@@ -309,21 +315,22 @@ L = dict(
              check=never_meet("2*u + 2", "2*u - 3"),
              wrong="a point such as (0, 2) — a point of one line read as the answer [B1G-M, AR.4.3: plotting and graphing errors]; infinitely many — 'the lines go on forever' [B1G-M, AR.4.2: the same-line case]"),
         # repeat_ok: rule D matches the grid's axis numbers and the four marked points; the system is new.
-        dict(repeat_ok=True, kind="mc", text=["**Which system is graphed?"],
-             qtext="One line passes through (0, 1) and (1, 3); the other passes through (0, 4) and (2, 2). Which system is graphed?",
-             fig=BM(P6), fig_a=BM(P6, 0.95),
+        dict(repeat_ok=True, kind="mc", text=["Line 1 passes through $(0, 1)$ and $(1, 3)$.", "Line 2 passes through $(0, 4)$ and $(2, 2)$.",
+                                              "**Which system has these two lines?"],
+             qtext="Line 1 passes through (0, 1) and (1, 3). Line 2 passes through (0, 4) and (2, 2). Which system has these two lines?",
+             fig_a=S(P6, inches=4.2, pt=18, reserve=0.85),
              hint="Test the marked points.", steps=["first line:   $2(0) + 1 = 1$   and   $2(1) + 1 = 3$",
                                                   "second line:   $-(0) + 4 = 4$   and   $-2 + 4 = 2$"],
              choices=["y = 2x + 1 and y = −x + 4", "y = x + 2 and y = 4x − 1", "y = x + 2 and y = −x + 4", "y = 2x + 1 and y = x + 4"],
              correct=0, answer="A — y = 2x + 1 and y = −x + 4",
-             errors={"B": "the two numbers of each equation swapped [B1G-M, AR.3.3: which value is which]", "C": "a first line through the crossing (1, 3) only: x + 2 is 2 at x = 0, not 1 [B1G-M, AR.4.3: plotting and graphing errors]", "D": "the falling line written rising: x + 4 grows as x grows [B1G-M, AR.4.3: plotting and graphing errors]"},
-             note="Diagnostic, and today's second IXL skill (write a system from a graph). Each equation must pass through both marked points of its line. Option C fits the crossing only; option D makes the falling line rise; option B swaps the multiplier and the added number in both. The TE may say slope and y-intercept for B; the room says 'the number multiplying x'.",
+             errors={"B": "the two numbers of each equation swapped [B1G-M, AR.3.3: which value is which]", "C": "a first line tested at (1, 3) only: x + 2 is 2 at x = 0, not 1 [B1G-M, AR.4.3: plotting and graphing errors]", "D": "the falling line written rising: x + 4 grows as x grows [B1G-M, AR.4.3: plotting and graphing errors]"},
+             note="Diagnostic, and today's second IXL skill (write a system from a graph): the four points are given in words, and the reveal shows the two lines through them. Each equation must pass through both points of its line. Option C fits (1, 3), where the lines cross, and not (0, 1); option D makes the falling line rise; option B swaps the multiplier and the added number in both. The TE may say slope and y-intercept for B; the room says 'the number multiplying x'.",
              check=("many", sat("2*u + 1", "0", "1"), sat("2*u + 1", "1", "3"), sat("-u + 4", "0", "4"), sat("-u + 4", "2", "2"),
                     crosses("2*u + 1", "-u + 4", "1", "3"),
                     sat("u + 2", "1", "3"), fails("u + 2", "0", "1"),
                     fails("u + 4", "2", "2"), fails("u + 4", "1", "3"),
                     fails("4*u - 1", "2", "2"))),
-        dict(text=["Candle A cost \\$3. The graph shows the heights of candles A and B after x hours.",
+        dict(text=["Candle A cost \\$3. The graph shows both candles' heights.",
                    "**When are the two candles the same height?"],
              unneeded="3",
              fig=S(P7, inches=5.0, pt=16, reserve=0.75), fig_a=S(P7A, inches=5.0, pt=16, reserve=1.1),
@@ -551,9 +558,9 @@ L = dict(
         standard_notes=[("Clarification", "AR.4.3: approximate non-integer solutions (11.08); slope-intercept form only; parallel lines have the same slope (Clar. 3), said here as the same number multiplying x."),
                         ("Unit boundary", "Every system is given solved for y; every crossing today is a lattice point (estimates are 11.08).")],
         sits="The unit's second systems day, before 11.08's stories and estimates. IXL C8X and TS7 are due by the Unit 11 test (Fri 11 Dec), whose questions 12–13 are today's: a solution read from a graph and a system's two tables.",
-        lives="Notes I — the table and its third point — and Notes II's graph, read and checked. Board 4 is the crossing diagnostic (swapped, the two axis points), board 6 the write-a-system diagnostic, board 9 the 'they must meet' claim refuted in writing.",
+        lives="Notes I — the table and its third point — and Notes II's graph, read and checked. Board 2 is the two-tables diagnostic (swapped, the closest column, the shared y as x), board 6 the write-a-system diagnostic, board 9 the 'they must meet' claim refuted in writing.",
         materials="Whiteboards and markers; rulers. The Independent Set, one per student — its grids are for drawing.",
-        variation="Boards 1–3 read a crossing — a graph, two tables, then a crossing on an axis; 4 votes on four points a graph offers. The pattern breaks at 5 — parallel — and 6 votes on the system a graph shows; 7 is the candle story with its price as the extra number; 8 runs backwards; 9 is written. The independent set: three systems to graph and solve (whole, negative, ½), a parallel pair and one line twice to graph, then two tables.",
+        variation="Boards 1–4 read a crossing — a graph, two tables (a vote), a crossing on an axis, then a graph that offers four points. The pattern breaks at 5 — parallel — and 6 votes on the system through four given points; 7 is the candle story with its price as the extra number; 8 runs backwards; 9 is written. The independent set: three systems to graph and solve (whole, negative, ½), a parallel pair and one line twice to graph, then two tables.",
         audit=["Every crossing re-derived by sympy at build time as the system's one solution, and checked in both equations; every printed table checked value by value; every parallel pair checked to have no common point and every same-line pair to be one expression; every graph drawn from its equations by u11/figs.py, which refuses a stated crossing that is not on both lines.",
                "Math Nation 11.7 read against this lesson (A7 Unit 11 Audit, Part 2, E4, E5, E12, E13, §3–§5): its sound shapes — read and verify, graph and read, a parallel pair — are here with our own numbers; its defects are not reproduced."],
         changes=["11.7.1 Which One Doesn't Belong → four retrieval questions, the table of Notes I last.",

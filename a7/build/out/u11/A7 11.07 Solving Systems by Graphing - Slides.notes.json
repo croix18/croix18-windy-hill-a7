@@ -142,7 +142,7 @@
    "title": "Whiteboards   \u00b7   Question 2 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "No graph needed: the solution is the column where both tables give the same y. At x = 3 both give 4, so (3, 4). A board with (4, 4) wrote the shared y for x as well; one with (4, 7) read the last column of one table only (the other gives 5 there).",
+   "note": "Diagnostic. No graph needed: the solution is the column where both tables give the same y. At x = 3 both give 4, so C, (3, 4). Option A swaps it; option D writes the shared y for x as well; option B is the column x = 2, where the two y's (1 and 3) are closest before they meet \u2014 near is not equal. On a split: sixty seconds, convince your neighbor, re-vote \u2014 then check (3, 4) in both aloud.",
    "kind": "wb"
   },
   {
@@ -174,7 +174,7 @@
    "title": "Whiteboards   \u00b7   Question 4 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "Diagnostic. Option C is the crossing; option D swaps it; options A and B are where a line meets an axis \u2014 points a graph offers that lie on one line only. On a split: sixty seconds, convince your neighbor, re-vote \u2014 then check (2, 1) in both aloud.",
+   "note": "The four points a graph offers: the crossing (2, 1), the crossing swapped, and two places where a line meets an axis. Read the crossing on the grid lines, then check it in both: \u22122(2) + 5 = 1 and 2 \u2212 1 = 1. A board with (1, 2) swapped it; one with (1, 0) or (0, 5) read a point that lies on one line only.",
    "kind": "wb"
   },
   {
@@ -206,7 +206,7 @@
    "title": "Whiteboards   \u00b7   Question 6 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "Diagnostic, and today's second IXL skill (write a system from a graph). Each equation must pass through both marked points of its line. Option C fits the crossing only; option D makes the falling line rise; option B swaps the multiplier and the added number in both. The TE may say slope and y-intercept for B; the room says 'the number multiplying x'.",
+   "note": "Diagnostic, and today's second IXL skill (write a system from a graph): the four points are given in words, and the reveal shows the two lines through them. Each equation must pass through both points of its line. Option C fits (1, 3), where the lines cross, and not (0, 1); option D makes the falling line rise; option B swaps the multiplier and the added number in both. The TE may say slope and y-intercept for B; the room says 'the number multiplying x'.",
    "kind": "wb"
   },
   {

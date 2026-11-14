@@ -74,8 +74,10 @@ NOTES1 = S(figs.row([figs.table([([0, 1, 2], [2, 3, 4])], titles=["y = x + 2"]),
                      figs.plane((-3, 4), (-1, 6), lines=[(1, 2)],
                                 points=[(0, 2, None, "ul"), (1, 3, None, "dr"), (2, 4, None, "dr")])],
                     gap=1.6), inches=6.6, pt=17, reserve=1.05)
-NOTES2 = S(figs.plane((0, 5), (0, 8), lines=[(1, 2), (-2, 8)], solution=(2, 4),
-                      points=[(2, 4), (0, 2, None, "dr")]), inches=2.85, pt=16, reserve=1.45)
+# Notes II: one grid line every 2 up, so the window is square rather than tall and the plane fills the room the two
+# check lines leave (14 Nov: it was 2.85 in wide); the crossing is a bare dot, its coordinates in the line under it.
+NOTES2 = S(figs.plane((0, 5), (0, 8), lines=[(1, 2), (-2, 8)], solution=(2, 4), ys=2,
+                      points=[(2, 4, ""), (0, 2, None, "dr")]), inches=5.2, pt=18, reserve=1.38)
 NOTES3 = S(figs.row([figs.plane((-1, 6), (-1, 6), lines=[(1, 1, ""), (-1, 5, "")], solution=(2, 3)),
                      figs.plane((-1, 6), (-1, 6), lines=[(2, 1, ""), (2, -3, "")]),
                      figs.plane((-1, 6), (-1, 6), lines=[(H, 1, "")])],
@@ -84,8 +86,19 @@ NOTES3 = S(figs.row([figs.plane((-1, 6), (-1, 6), lines=[(1, 1, ""), (-1, 5, "")
                             [("y = 2x + 1", BLUE), ("y = 2x − 3", ORANGE)],
                             [("y = ½x + 1", BLUE), ("y = 0.5x + 1", BLUE)]],
                     captions=["one solution", "no solution", "infinitely many"]),
-           inches=10.0, pt=16, reserve=0.95)
-EX2 = S(figs.plane((-4, 6), (-3, 5), lines=[(H, 2), (H, -1)]), inches=4.2, pt=17, reserve=0.9)
+           inches=11.4, pt=16, reserve=0.95)
+EX2 = S(figs.plane((-2, 4), (-2, 4), lines=[(H, 2), (H, -1)]), inches=4.2, pt=18, reserve=0.9)
+
+
+# ---- the board figures at 11.07's sizes (14 Nov): one bold row of words over a window no bigger than the system
+# needs, slide(inches=4.2, pt=18, reserve=0.75) — about 3.3 in tall on the question slide. The story board's two
+# rows of words leave less room, so its figure is set as 11.07's candles are (inches=5.0, pt=16).
+def B(spec):
+    return S(spec, inches=4.2, pt=18, reserve=0.75)
+
+
+def BA(spec):
+    return S(spec, inches=4.2, pt=18, reserve=0.95)
 
 B3 = figs.plane((-4, 1), (0, 6), lines=[(1, 5), (-2, -1)], solution=(-2, 3))
 B3A = figs.plane((-4, 1), (0, 6), lines=[(1, 5), (-2, -1)], solution=(-2, 3), points=[(-2, 3, "")])
@@ -219,7 +232,7 @@ L = dict(
         # repeat_ok: rule D matches only the grid's axis numbers (0–6, shared by every plane today) and the
         # answer's digits; this system (y = x + 5, y = −2x − 1, crossing at (−2, 3)) appears nowhere above.
         dict(repeat_ok=True, text=["**The system is graphed. What is its solution?"],
-             fig=S(B3, inches=3.1, pt=16, reserve=1.0), fig_a=S(B3A, inches=3.1, pt=16, reserve=1.0),
+             fig=B(B3), fig_a=BA(B3A),
              hint="Where do they cross?", steps=["the lines cross once, at $(-2, 3)$", "$-2 + 5 = 3$   and   $-2(-2) - 1 = 3$"],
              gloss="read the crossing, then check it", answer="(−2, 3) — one solution",
              note="Read the crossing on the grid lines: x = −2, y = 3. Then check it in both: −2 + 5 = 3 and 4 − 1 = 3. One crossing, one solution. A board with (3, −2) swapped the coordinates; one with (0, 5) or (0, −1) read where a line meets the y-axis.",
@@ -236,7 +249,7 @@ L = dict(
                     fails("2*u - 4", "0", "5"), sat("-u + 5", "0", "5"),
                     fails("2*u - 4", "2", "3"))),
         dict(text=["**The system is graphed. How many solutions does it have?"],
-             fig=S(B5, inches=3.9, pt=16, reserve=0.85),
+             fig=B(B5), fig_a=BA(B5),
              hint="Will they ever meet?", steps=["$x + 3$ and $x - 1$:  1 multiplies x in both", "parallel: they never meet"],
              gloss="parallel: never meet", answer="None — the lines are parallel",
              note="The pattern breaks: no crossing to read. The same number (1) multiplies x in both, and the added numbers differ, so the first line is always 4 above the second and they never meet. A board with 'one' expects them to meet somewhere off the grid; with 'infinitely many', saw two lines that go on forever.",
@@ -244,7 +257,7 @@ L = dict(
              wrong="one — the lines are taken to meet off the grid [B1G-M, AR.4.2]; infinitely many — 'the lines go on forever' [B1G-M, AR.4.2]"),
         dict(kind="mc", text=["**$y = x - 1$  and  $y = -1 + x$  are this one line. How many solutions?"],
              qtext="y = x − 1 and y = −1 + x are the one line shown (two points are marked on it). How many solutions does the system have?",
-             fig=S(B6, inches=1.6, pt=15, reserve=1.0), fig_a=S(B6, inches=2.9, pt=16, reserve=1.0),
+             fig=S(B6, inches=4.2, pt=14, reserve=0.75), fig_a=BA(B6),
              hint="Which points are on both?", steps=["$x - 1$ and $-1 + x$:  one expression, so one line",
                                                      "off the grid too:  $10 - 1 = 9$  and  $-1 + 10 = 9$"],
              choices=["one", "infinitely many", "none", "two"], correct=1, answer="B — infinitely many",
@@ -252,10 +265,9 @@ L = dict(
              note="Diagnostic on the same-line case, the state's named misconception for AR.4.2. Every point of the line is on both graphs, the points nobody marked too: (10, 9) is off the grid and makes both true. Option D counts the two dots; option C looks for a crossing and finds none; option A counts the drawn line.",
              check=("many", one_line("u - 1", "-1 + u"), sat("u - 1", "1", "0"), sat("u - 1", "3", "2"),
                     sat("u - 1", "10", "9"), sat("-1 + u", "10", "9"))),
-        dict(text=["Savings: y dollars after x weeks of a 12-week term.",
-                   "**What does the crossing point, $(4, 40)$, mean?"],
+        dict(text=["**Savings over a 12-week term: what does the point $(4, 40)$ mean?"],
              unneeded="12",
-             fig=S(B7, inches=3.6, pt=15, reserve=0.85),
+             fig=S(B7, inches=5.0, pt=16, reserve=0.75), fig_a=S(B7, inches=5.0, pt=16, reserve=1.1),
              hint="x is weeks; y is dollars.", steps=["Ana:   $5(4) + 20 = 40$", "Ben:   $10(4) = 40$"],
              gloss="x = 4 weeks, y = 40 dollars", answer="After 4 weeks, each has \\$40.",
              note="The extra-number board (ruling 22): the 12-week term is not needed — it only ends the x-axis. The crossing is the one (x, y) both equations share: x = 4 weeks, y = 40 dollars, and both savings are \\$40 then. Check: 5(4) + 20 = 40 and 10(4) = 40. A board that says 'after 40 weeks, \\$4' swapped the coordinates.",
