@@ -242,3 +242,54 @@ def table(rows, head=("x", "y"), cw=1.25, rh=1.0, fs=22, pt=9.5, inches=None, ti
     if inches is None:
         inches = round(min(6.0, 0.42 * (left - 1.2)), 2)
     return dict(kind="shapes", fs=fs, pt=pt, **{"in": inches}, shapes=sh)
+
+
+def _extent(shapes):
+    """The box (x0, x1, y0, y1) of a figure's drawn anchors: segments' ends, circles, and the points labels hang from."""
+    xs, ys = [], []
+    for s in shapes:
+        if s["t"] == "seg":
+            xs += [s["a"][0], s["b"][0]]; ys += [s["a"][1], s["b"][1]]
+        elif s["t"] == "circle":
+            xs += [s["c"][0] - s["r"], s["c"][0] + s["r"]]; ys += [s["c"][1] - s["r"], s["c"][1] + s["r"]]
+        elif s["t"] == "text":
+            xs.append(s["xy"][0]); ys.append(s["xy"][1])
+    return min(xs), max(xs), min(ys), max(ys)
+
+
+def row(specs, gap=3.0, titles=None, captions=None, fs=22, pt=9.5, inches=6.0):
+    """Two or more figures of this file (each a `plane` or a `table`, already drawn and checked by its own helper —
+    a `plane` still refuses a solution that is not on its lines) set side by side as ONE picture, left to right,
+    `gap` grid units apart, centred on one another top to bottom. `titles` (one per figure, or None) print above
+    each: a string, or a list of lines, each a string or (text, colour) — the equations of a plane whose own line
+    labels were turned off (text=""), set in the colour of the line they name. `captions` (one per figure, or
+    None; a string or a list of lines) print under each, below its numbers. Added for 11.05 Notes I (a table beside its line) and Notes III
+    (three systems side by side: cross once, parallel, the same line)."""
+    boxes = [_extent(s["shapes"]) for s in specs]
+    hmax = max(b[3] - b[2] for b in boxes)
+    sh, left = [], 0.0
+    for k, (spec, (x0, x1, y0, y1)) in enumerate(zip(specs, boxes)):
+        dx = left - x0
+        dy = -(y0 + y1) / 2.0                 # every figure centred on y = 0
+        for s in spec["shapes"]:
+            s = dict(s)
+            if s["t"] == "seg":
+                s["a"] = (s["a"][0] + dx, s["a"][1] + dy); s["b"] = (s["b"][0] + dx, s["b"][1] + dy)
+            elif s["t"] == "circle":
+                s["c"] = (s["c"][0] + dx, s["c"][1] + dy)
+            elif s["t"] == "text":
+                s["xy"] = (s["xy"][0] + dx, s["xy"][1] + dy)
+            sh.append(s)
+        mid = left + (x1 - x0) / 2.0
+        top, bottom = (y1 - y0) / 2.0, -(y1 - y0) / 2.0
+        if titles and titles[k]:
+            lines = [titles[k]] if isinstance(titles[k], (str, tuple)) else list(titles[k])
+            for j, ln in enumerate(reversed(lines)):          # the last line sits lowest, just over the figure
+                text, colour = (ln, INK) if isinstance(ln, str) else ln
+                sh.append(_t(mid, top, text, va="bottom", off=(0, 1.7 + 1.25 * j), color=colour))
+        if captions and captions[k]:
+            lines = [captions[k]] if isinstance(captions[k], str) else list(captions[k])
+            for j, text in enumerate(lines):
+                sh.append(_t(mid, bottom, text, va="top", off=(0, -1.9 - 1.25 * j)))
+        left += (x1 - x0) + gap
+    return dict(kind="shapes", fs=fs, pt=pt, **{"in": inches}, shapes=sh)

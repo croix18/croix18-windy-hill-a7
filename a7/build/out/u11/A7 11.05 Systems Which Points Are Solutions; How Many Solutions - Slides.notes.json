@@ -1,0 +1,285 @@
+{
+ "deck": "A7 11.05 Systems Which Points Are Solutions; How Many Solutions - Slides.pptx",
+ "slides": [
+  {
+   "n": 1,
+   "title": "Systems: Which Points Are Solutions; How Many Solutions",
+   "sub": "",
+   "min": 1,
+   "note": "Post the learning target. Say one line and nothing else yet: \u201cToday: two equations at once \u2014 which points make both true.\u201d",
+   "kind": "title"
+  },
+  {
+   "n": 2,
+   "title": "Warm-Up",
+   "sub": "On your own. No notes.",
+   "min": 4,
+   "note": "Q4 is today's move: put the x in, get the y. (3, 7) is a point that makes y = 2x + 1 true \u2014 say that one sentence after the reveal; Notes I makes a whole line of such points. Two minutes silent, then reveal, no discussion.",
+   "kind": "warmup"
+  },
+  {
+   "n": 3,
+   "title": "Warm-Up",
+   "sub": "Answers.",
+   "min": 1,
+   "note": "Reveal. Ask for the band each question came from only if time allows.",
+   "kind": "warmup"
+  },
+  {
+   "n": 4,
+   "title": "Vocabulary",
+   "sub": "The new words, before they are used.",
+   "min": 1,
+   "note": "Three words, read once each. Say 'both' twice for the second: a pair that makes one equation true is not a solution of the system. Parallel is a picture word today \u2014 never meet \u2014 and the reason under it is the number multiplying x; Unit 10 gives that number its name.",
+   "kind": "vocab"
+  },
+  {
+   "n": 5,
+   "title": "Notes",
+   "sub": "Copy the table and the line.",
+   "min": 4,
+   "note": "An equation in two letters has many solutions, each an ordered pair. Make a table: x = 0 first, then two more \u2014 put each x in and get its y. Plot the three points; they line up, and the line through them holds every solution. Two points draw the line; the third is the check \u2014 if it misses, a y is wrong. (1, 3) is a solution because 3 = 1 + 2; (1.5, 3.5) is one too, a point between the grid lines, and so is (100, 102), off the grid. This is the first line this class has drawn from an equation (Unit 10 comes later).\nOFF: 'Pick an x, find its y, plot the point. Every point on the line makes the equation true.'",
+   "kind": "notes"
+  },
+  {
+   "n": 6,
+   "title": "Notes",
+   "sub": "",
+   "min": 3,
+   "note": "Two equations together are a system, and its solution is a pair that makes BOTH true. Put (2, 4) into each: 2 + 2 = 4 and \u22122(2) + 8 = 4 \u2014 a solution. (0, 2) makes the first true and the second not (\u22122(0) + 8 is 8, not 2) \u2014 so it is a solution of y = x + 2 only, and not of the system. On the graph the solution is the point on both lines: where they cross. One bridge, said and not tested: at the crossing both equations give the same y, so x = 2 solves x + 2 = \u22122x + 8 \u2014 the equation of 11.02.\nOFF: 'A solution of the system makes both equations true. One is not enough.'",
+   "kind": "notes"
+  },
+  {
+   "n": 7,
+   "title": "Notes",
+   "sub": "",
+   "min": 3,
+   "note": "Three pictures, three counts. Cross once: one solution, the crossing (2, 3). Parallel \u2014 they never meet: no solution; the same number, 2, multiplies x in both, so the lines rise together and stay 4 apart. The same line: \u00bd and 0.5 are one number, so y = \u00bdx + 1 and y = 0.5x + 1 are one equation written two ways, and their graphs are one line \u2014 every point of it is a solution, the ones nobody plotted too (infinitely many). These are 11.03's three endings again: one, none, every.\nOFF: 'Cross once: one. Never meet: none. The same line: infinitely many.'",
+   "kind": "notes"
+  },
+  {
+   "n": 8,
+   "title": "Example 1",
+   "sub": "Which pair makes both true?",
+   "min": 1,
+   "note": "Ask what has to be true of a solution before anyone substitutes: it makes BOTH equations true.",
+   "kind": "example"
+  },
+  {
+   "n": 9,
+   "title": "Example 1",
+   "sub": "Worked.",
+   "min": 2,
+   "note": "Each pair into each equation. (3, 8): 3(3) \u2212 1 = 8 and 3 + 5 = 8 \u2014 both true, a solution. (1, 2) makes the first true and the second not (1 + 5 is 6). (2, 7) makes the second true and the first not (3(2) \u2212 1 is 5). Each wrong pair passes one equation: a board that tested one equation only picked it.",
+   "kind": "example"
+  },
+  {
+   "n": 10,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "(2, 7): 2(2) + 3 = 7 and \u22122 + 9 = 7. (0, 3) passes the first only; (4, 5) passes the second only. A board with (0, 3) or (4, 5) tested one equation.",
+   "kind": "yourturn"
+  },
+  {
+   "n": 11,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 12,
+   "title": "Example 2",
+   "sub": "How many, from a graph.",
+   "min": 1,
+   "note": "Ask whether the two lines will ever meet if the grid went on forever, before anyone answers 'how many'.",
+   "kind": "example"
+  },
+  {
+   "n": 13,
+   "title": "Example 2",
+   "sub": "Worked.",
+   "min": 1,
+   "note": "The lines are parallel: the same number, \u00bd, multiplies x in both, so for every x the first is 3 above the second \u2014 they never meet, and no pair makes both true. Set the two expressions equal and the x-terms go: 2 = \u22121, never true (11.03's no-solution ending). A board with 'one' guessed the lines meet off the grid; with 'infinitely many', saw two lines going on forever.",
+   "kind": "example"
+  },
+  {
+   "n": 14,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "\u2212x and 2x: different numbers multiply x, so the lines cross once \u2014 one solution. The crossing is (3, 1): \u22123 + 4 = 1 and 2(3) \u2212 5 = 1. (No graph here: the kit's Your Turn slide carries none, so this one is read from the equations, by Notes III's rule; the reveal names the crossing.) A board with 'none' read two different lines as never meeting.",
+   "kind": "yourturn"
+  },
+  {
+   "n": 15,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 16,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Both true: yes. A board with 'no' most likely took \u22124 + 5 as \u22129 or 9 \u2014 ask for the second check aloud.",
+   "kind": "wb"
+  },
+  {
+   "n": 17,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 18,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The first is true and the second is not, so (2, 5) is not a solution of the system \u2014 it is a solution of y = 2x + 1 only. A board with 'yes' stopped after the first equation: today's named misconception.",
+   "kind": "wb"
+  },
+  {
+   "n": 19,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 20,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Read the crossing on the grid lines: x = \u22122, y = 3. Then check it in both: \u22122 + 5 = 3 and 4 \u2212 1 = 3. One crossing, one solution. A board with (3, \u22122) swapped the coordinates; one with (0, 5) or (0, \u22121) read where a line meets the y-axis.",
+   "kind": "wb"
+  },
+  {
+   "n": 21,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 22,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic. Option C passes the first equation only, option A the second only, and option B is the answer with x and y swapped (it happens to pass the second: \u22122 + 5 = 3, but 2(2) \u2212 4 = 0). On a split: sixty seconds, convince your neighbor, re-vote \u2014 then check (3, 2) in both aloud.",
+   "kind": "wb"
+  },
+  {
+   "n": 23,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 24,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The pattern breaks: no crossing to read. The same number (1) multiplies x in both, and the added numbers differ, so the first line is always 4 above the second and they never meet. A board with 'one' expects them to meet somewhere off the grid; with 'infinitely many', saw two lines that go on forever.",
+   "kind": "wb"
+  },
+  {
+   "n": 25,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 26,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic on the same-line case, the state's named misconception for AR.4.2. Every point of the line is on both graphs, the points nobody marked too: (10, 9) is off the grid and makes both true. Option D counts the two dots; option C looks for a crossing and finds none; option A counts the drawn line.",
+   "kind": "wb"
+  },
+  {
+   "n": 27,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 28,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The extra-number board (ruling 22): the 12-week term is not needed \u2014 it only ends the x-axis. The crossing is the one (x, y) both equations share: x = 4 weeks, y = 40 dollars, and both savings are \\$40 then. Check: 5(4) + 20 = 40 and 10(4) = 40. A board that says 'after 40 weeks, \\$4' swapped the coordinates.",
+   "kind": "wb"
+  },
+  {
+   "n": 29,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 30,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Backwards: x is given and y is missing. Put 2 into each equation; both give 7, so (2, 7) is the solution. Check both \u2014 a pair is a solution only if both equations give the same y.",
+   "kind": "wb"
+  },
+  {
+   "n": 31,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 32,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Take your time. Boards up when you have written it.",
+   "min": 0,
+   "note": "Written, and the exit evidence: today's named misconception \u2014 a pair that satisfies one equation called a solution of the system. Read two aloud.",
+   "kind": "wb"
+  },
+  {
+   "n": 33,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 34,
+   "title": "Independent Set",
+   "sub": "Six questions. On your own, in writing.",
+   "min": 6,
+   "note": "Hand out the Independent Set; the same six questions are on the board. Silent work. Circulate and mark what you see; do not teach. Whatever is not finished goes home.",
+   "kind": "independent"
+  },
+  {
+   "n": 35,
+   "title": "IXL",
+   "sub": "Last five minutes.",
+   "min": 5,
+   "note": "IXL: every listed skill is required, SmartScore 67. Due by the Unit 11 test.",
+   "kind": "ixl"
+  }
+ ]
+}
