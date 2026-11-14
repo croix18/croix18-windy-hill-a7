@@ -4,13 +4,16 @@
  "download": "A7 Unit 6 Practice Test.html",
  "css": [
   "fig.css",
-  "unit.css"
+  "unit.css",
+  "../kit/explain.css"
  ],
  "scripts": [
   "engine.js",
   "fig.js",
   "coach.js",
-  "unit.js"
+  "unit.js",
+  "../kit/explain.js",
+  "help.js"
  ],
  "checks": [
   "node u6_check.js 3000 1500",
