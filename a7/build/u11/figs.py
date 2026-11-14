@@ -82,9 +82,11 @@ def plane(xr, yr, lines=(), points=(), xs=1, ys=1, xname="x", yname="y", step=No
     """A coordinate plane from xr[0] to xr[1] and yr[0] to yr[1] (in the story's own numbers) with its pale grid, one
     grid line every `xs` across and every `ys` up, the two axes and their numbers.
 
-    `lines` are (m, b) or (m, b, text): y = mx + b drawn across the whole plane — the first solid blue, the second
+    `lines` are (m, b) or (m, b, text) or (m, b, text, (x, where)): y = mx + b drawn across the whole plane — the first solid blue, the second
     dashed orange — with `text` (default: its equation) printed where the line leaves the plane on the right or the
-    top; text="" prints nothing. `points` are (x, y) or (x, y, name) or (x, y, name, where): a dot, and its name or
+    top; text="" prints nothing. With (x, where) the text is set instead beside the line's point at that x, in
+    the corner `where` ('ur', 'dl', 'r', …) — added for 11.07's candles, two falling lines that leave the plane
+    only through its bottom edge. `points` are (x, y) or (x, y, name) or (x, y, name, where): a dot, and its name or
     coordinates when given ("" for a bare dot). `solution` = (x, y) is checked against EVERY line and refused if it
     is not on all of them — give it whenever the words name a crossing. A point whose name is "on" is checked to lie
     on at least one line. `xname`, `yname` title the axes ("x" and "y" sit at the axes' ends; a longer name is set
@@ -92,10 +94,12 @@ def plane(xr, yr, lines=(), points=(), xs=1, ys=1, xname="x", yname="y", step=No
     x0, x1 = xr
     y0, y1 = yr
     L = []
+    at = []                                     # a line's own label place, (x, where), or None
     for ln in lines:
         m, b = Fr(ln[0]).limit_denominator(1000), Fr(ln[1]).limit_denominator(1000)
         text = ln[2] if len(ln) > 2 else eq(m, b)
         L.append((m, b, text))
+        at.append(ln[3] if len(ln) > 3 else None)
     if solution is not None:
         sx, sy = Fr(solution[0]).limit_denominator(1000), Fr(solution[1]).limit_denominator(1000)
         for (m, b, _) in L:
@@ -154,7 +158,20 @@ def plane(xr, yr, lines=(), points=(), xs=1, ys=1, xname="x", yname="y", step=No
         (ax, ay), (bx, by) = c
         colour = BLUE if k == 0 else ORANGE
         sh.append(dict(t="seg", a=(X(ax), Y(ay)), b=(X(bx), Y(by)), color=colour, dash=(k == 1)))
-        if label and text:
+        if label and text and at[k] is not None:
+            # a label set beside the line's own point at x = at[0], in the corner at[1] — for a line that leaves
+            # the plane only through the bottom or the left edge (a falling line in a story that starts at x = 0)
+            lx, where = at[k]
+            lx = Fr(lx).limit_denominator(1000)
+            ly = m * lx + b
+            if not (x0 <= lx <= x1 and y0 <= ly <= y1):
+                raise ValueError(f"plane: the label place x = {lx} of {eq(m, b)} is off the plane")
+            ha = "left" if "r" in where else "right" if "l" in where else "center"
+            va = "bottom" if "u" in where else "top" if "d" in where else "center"
+            sh.append(_t(X(lx), Y(ly), text, ha=ha, va=va, color=colour,
+                         off=(0.5 if ha == "left" else -0.5 if ha == "right" else 0,
+                              0.45 if va == "bottom" else -0.45 if va == "top" else 0)))
+        elif label and text:
             # the equation sits where the line leaves the plane on the right edge or the top edge — the bottom and
             # the left edge belong to the axes' numbers. Right edge: beside it. Top edge: above it.
             cands = [(px, py) for (px, py) in ((ax, ay), (bx, by)) if px == x1 or py == y1]

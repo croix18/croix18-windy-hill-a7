@@ -1,0 +1,285 @@
+{
+ "deck": "A7 11.07 Solving Systems by Graphing - Slides.pptx",
+ "slides": [
+  {
+   "n": 1,
+   "title": "Solving Systems by Graphing",
+   "sub": "",
+   "min": 1,
+   "note": "A 43-minute Wednesday on the standard plan, as 11.03 was: the cut is yours \u2014 boards 7 and 8 first, then the vocabulary slide.",
+   "kind": "title"
+  },
+  {
+   "n": 2,
+   "title": "Warm-Up",
+   "sub": "On your own. No notes.",
+   "min": 4,
+   "note": "Q4 is Notes I's table: three x's, three y's, three points. Say that after the reveal. Two minutes silent, then reveal, no discussion \u2014 43 minutes today.",
+   "kind": "warmup"
+  },
+  {
+   "n": 3,
+   "title": "Warm-Up",
+   "sub": "Answers.",
+   "min": 1,
+   "note": "Reveal. Ask for the band each question came from only if time allows.",
+   "kind": "warmup"
+  },
+  {
+   "n": 4,
+   "title": "Vocabulary",
+   "sub": "The new words, before they are used.",
+   "min": 1,
+   "note": "Two phrases, read once each. The table is the tool all period: x = 0 first, then two more, and the third point is the check. 'Solve by graphing' ends with a check in both equations, every time.",
+   "kind": "vocab"
+  },
+  {
+   "n": 5,
+   "title": "Notes",
+   "sub": "Copy the table and the line.",
+   "min": 4,
+   "note": "The class has never drawn y = mx + b, so the line comes from a table. x = 0 first, then two more; put each x in and get its y. Plot the three points. Two points draw a line; the third is the check \u2014 three points in a row, or a y is wrong. Then draw the line through them and PAST them, to the edge of the grid: the crossing may be beyond the points you plotted.\nOFF: 'Pick three x's. Find each y. Three points in a row, then a ruler through them, edge to edge.'",
+   "kind": "notes"
+  },
+  {
+   "n": 6,
+   "title": "Notes",
+   "sub": "",
+   "min": 4,
+   "note": "A table for each equation, both lines on one grid. They cross at (2, 3), and that is the solution \u2014 the one point on both lines. Then the check, every time: 2 + 1 = 3 and \u22122(2) + 7 = 3. Point out that the tables already agree at x = 2 (both give 3): the crossing shows in the tables too.\nOFF: 'Graph both. Read the crossing. Check it in both equations.'",
+   "kind": "notes"
+  },
+  {
+   "n": 7,
+   "title": "Notes",
+   "sub": "",
+   "min": 3,
+   "note": "Left: 2 multiplies x in both, so the lines climb at the same steepness and stay 5 apart \u2014 parallel, no solution. Right: y = 3x \u2212 1 and y = \u22121 + 3x make the same table (\u22121, 2, 5), so their graphs are one line: infinitely many solutions. Then the bridge, said and not practised: where the lines of Notes II cross, both give the same y, so x + 1 = \u22122x + 7 \u2014 11.02's equation \u2014 and x = 2. It is how a graphed answer is checked; nobody is asked to do it today.\nOFF: 'Same number multiplying x, different numbers added: parallel. Same table: one line.'",
+   "kind": "notes"
+  },
+  {
+   "n": 8,
+   "title": "Example 1",
+   "sub": "Tables, graph, crossing, check.",
+   "min": 1,
+   "note": "This is the model: read the tables row by row (x = 0 first), point to each plotted point, then ask the room where the lines cross before anyone says it.",
+   "kind": "example"
+  },
+  {
+   "n": 9,
+   "title": "Example 1",
+   "sub": "Worked.",
+   "min": 2,
+   "note": "The tables: 2x \u2212 3 gives \u22123, \u22121, 1 and \u2212x + 6 gives 6, 5, 4 at x = 0, 1, 2. The lines cross beyond the tables, at (3, 3) \u2014 which is why each line is drawn past its points. Check in both: 2(3) \u2212 3 = 3 and \u22123 + 6 = 3. A board with (3, 0) or (0, 3) read a line where it meets an axis.",
+   "kind": "example"
+  },
+  {
+   "n": 10,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "Tables at x = 0, 1, 2: x \u2212 2 gives \u22122, \u22121, 0 and \u22123x + 6 gives 6, 3, 0. Both give 0 at x = 2: the lines cross at (2, 0), on the x-axis. A board with (0, 2) swapped the coordinates; with 'no solution', saw a crossing on an axis and did not count it.",
+   "kind": "yourturn"
+  },
+  {
+   "n": 11,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 12,
+   "title": "Example 2",
+   "sub": "A \u00bd multiplying x: choose even x.",
+   "min": 1,
+   "note": "Ask what x's make \u00bdx easy before anyone fills a table: the even ones, so x = 0, 2, 4.",
+   "kind": "example"
+  },
+  {
+   "n": 13,
+   "title": "Example 2",
+   "sub": "Worked.",
+   "min": 2,
+   "note": "Even x for the \u00bd: at x = 0, 2, 4, \u00bdx + 1 gives 1, 2, 3 and \u2212x + 4 gives 4, 2, 0. Both tables give 2 at x = 2, so the lines cross at (2, 2). Check: \u00bd(2) + 1 = 2 and \u22122 + 4 = 2. An odd x works too (x = 1 gives 1.5) \u2014 it is only harder to plot.",
+   "kind": "example"
+  },
+  {
+   "n": 14,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "Even x, and this crossing is to the left: at x = \u22124, \u00bd(\u22124) + 3 = 1 and \u2212(\u22124) \u2212 3 = 1, so (\u22124, 1). A table at x = 0, 2, 4 alone (3, 4, 5 and \u22123, \u22125, \u22127) never meets; the lines have to be drawn left. A board with (1, \u22124) swapped the coordinates.",
+   "kind": "yourturn"
+  },
+  {
+   "n": 15,
+   "title": "Your Turn",
+   "sub": "Answer.",
+   "min": 1,
+   "note": "Reveal; name what a wrong board most likely did (see the note above).",
+   "kind": "yourturn"
+  },
+  {
+   "n": 16,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Read the crossing on the grid lines: x = 2, y = 4. Check it in both: 2 + 2 = 4 and \u22122 + 6 = 4. A board with (4, 2) swapped the coordinates; one with (0, 6) or (0, 2) read where a line meets the y-axis.",
+   "kind": "wb"
+  },
+  {
+   "n": 17,
+   "title": "Whiteboards   \u00b7   Question 1 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 18,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "No graph needed: the solution is the column where both tables give the same y. At x = 3 both give 4, so (3, 4). A board with (4, 4) wrote the shared y for x as well; one with (4, 7) read the last column of one table only (the other gives 5 there).",
+   "kind": "wb"
+  },
+  {
+   "n": 19,
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 20,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The crossing sits on the x-axis, at x = \u22122: (\u22122, 0). Check: 2(\u22122) + 4 = 0 and 2 \u2212 2 = 0. A board with (0, \u22122) swapped the coordinates \u2014 (0, \u22122) is where the second line meets the y-axis, so it is a doubly tempting slip.",
+   "kind": "wb"
+  },
+  {
+   "n": 21,
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 22,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic. Option C is the crossing; option D swaps it; options A and B are where a line meets an axis \u2014 points a graph offers that lie on one line only. On a split: sixty seconds, convince your neighbor, re-vote \u2014 then check (2, 1) in both aloud.",
+   "kind": "wb"
+  },
+  {
+   "n": 23,
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 24,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The pattern breaks: no crossing to read. The same number, 2, multiplies x in both, so the lines climb at the same steepness and the first is always 5 above the second. A board with a point read a spot where the lines look close; one with 'infinitely many' saw two lines that go on forever.",
+   "kind": "wb"
+  },
+  {
+   "n": 25,
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 26,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic, and today's second IXL skill (write a system from a graph). Each equation must pass through both marked points of its line. Option C fits the crossing only; option D makes the falling line rise; option B swaps the multiplier and the added number in both. The TE may say slope and y-intercept for B; the room says 'the number multiplying x'.",
+   "kind": "wb"
+  },
+  {
+   "n": 27,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 28,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "The extra-number board (ruling 22): the \\$3 is not needed. The crossing is (4, 4): x = 4 hours and y = 4 cm, so after 4 hours both candles are 4 cm tall. Check: \u22122(4) + 12 = 4 and \u22124 + 8 = 4. A board with 'after 3 hours' used the price.",
+   "kind": "wb"
+  },
+  {
+   "n": 29,
+   "title": "Whiteboards   \u00b7   Question 7 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 30,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Backwards: the point is given and a number of the second equation is missing. Put x = 2 and y = 5 into it: 5 = \u22122 + \u25a1, so the box is 7. Check the first too: 2(2) + 1 = 5. A board with 3 took 5 \u2212 2 instead of 5 + 2.",
+   "kind": "wb"
+  },
+  {
+   "n": 31,
+   "title": "Whiteboards   \u00b7   Question 8 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 32,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Take your time. Boards up when you have written it.",
+   "min": 0,
+   "note": "Written, and the exit evidence: the claim that two lines must meet somewhere. Read two aloud. The TE may say 'the same slope'; the room says 'the same number multiplying x'.",
+   "kind": "wb"
+  },
+  {
+   "n": 33,
+   "title": "Whiteboards   \u00b7   Question 9 of 9",
+   "sub": "Answer.",
+   "min": 0,
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "kind": "wb"
+  },
+  {
+   "n": 34,
+   "title": "Independent Set",
+   "sub": "Six questions. On your own, in writing.",
+   "min": 6,
+   "note": "Hand out the Independent Set; the same six questions are on the board. Silent work. Circulate and mark what you see; do not teach. Whatever is not finished goes home.",
+   "kind": "independent"
+  },
+  {
+   "n": 35,
+   "title": "IXL",
+   "sub": "Last five minutes.",
+   "min": 5,
+   "note": "IXL: every listed skill is required, SmartScore 67. Due by the Unit 11 test.",
+   "kind": "ixl"
+  }
+ ]
+}
