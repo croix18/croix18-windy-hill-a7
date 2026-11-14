@@ -315,6 +315,7 @@ body.printing{background:var(--ground)}
 .pchoices{margin:6px 0 4px var(--i2)} .pch{display:flex;gap:8px;align-items:baseline;margin:4px 0}
 .pbox{width:13px;height:13px;border:1.5px solid #000;border-radius:50%;flex:none;transform:translateY(1px)} .pbox.sq{border-radius:2px}
 .pch .cl{font-weight:700}
+.pkeep{break-inside:avoid;page-break-inside:avoid} .psec{break-after:avoid;page-break-after:avoid}   /* a section's name is never the last line of a page: it goes over with its first question (14 Nov 2026) */
 .pbreak{break-before:page;page-break-before:always;height:1px}
 .pmeta{font:14px/1.35 var(--ui);color:#333;margin:4px 0 10px}
 .pscore{font:15px/1.45 var(--ui);margin:8px 0 14px} .pscore>span{display:block}
@@ -623,6 +624,10 @@ svg.nlg.nl-small{width:min(100%,14rem)}
 .key:has(.nlkey) .kv{flex:1 1 100%;min-width:0} .key .kv .nlkey,.wfin .nlkey{display:block;width:min(100%,24rem)}
 @media (max-width:480px){ .nlp .nlw,.nlp>.ckrow,.nltk{margin-left:0} .nseg{flex-basis:100%} }
 /* paper: the line alone with the band to graph on; the key drawn in ink */
+/* an all-multiple-choice test (14 Nov 2026): a typed part's four choices two by two under a short work space; four graphs two by two */
+.pwork.pwmc{height:40px}
+.pchoices.pmc{display:grid;grid-template-columns:1fr 1fr;column-gap:22px;max-width:6.2in;break-inside:avoid}
+.pchoices.pgr .pch{align-items:center} .pchoices.pgr .cv{flex:1 1 auto;min-width:0} .pnlc{display:block;max-width:2.7in} .pnlc svg.nlg{color:#000}
 .pnl{margin:4px 0 6px var(--i2);max-width:4.6in} .pnlband{height:10mm} .pnl svg.nlg{color:#000}
 #printview svg.nlg{color:#000} #printview .nlkw{color:#333}
 .ptab .kv .nlkey{width:2.9in}

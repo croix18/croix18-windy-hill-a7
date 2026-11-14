@@ -507,7 +507,23 @@ function clean(it) {
 }
 E.setClean(clean);
 
-const api = { F, feedback, mcFeedback, selectFeedback, mcSolution, solution, clean, joinSays, printedNumbers, SELWHY, MCW };
+/* ------------------------------------------------------------------ the wrong answers of a typed part, for a paper that is
+   all multiple choice (the kit's ui.js mcOf; Croix, 14 Nov 2026: "I'd like the retakes that I print up to be all multiple
+   choice"). Each is what one of the part's own mistakes gives, in the family's order, as the key would show it: a mistake that
+   ends on a root, or on a fraction that never ends, is written to the answer's own places (a tenth at least). Never one that
+   is the answer or within its rounding (TOL, as the marking), never a length of zero or less, never the same choice twice.
+   A part whose mistakes leave fewer than three (a side counted on the grid has one or two) is filled with the lengths one and
+   two units either side of the answer. */
+function choices(p) {
+  const A = qnum(p.ans), dp = Math.max(1, E.places(p.ans)), ten = Math.pow(10, dp), out = [], seen = [E.ansHtml(p)];
+  const add = v => { if (!(qnum(v) > 0) || Math.abs(qnum(v) - A) < TOL) return;
+    const h = E.ansHtml(Object.assign({}, p, { ans: v })); if (seen.indexOf(h) < 0) { seen.push(h); out.push(h); } };
+  (F[p.fam].models(p) || []).forEach(m => add(m.f != null || E.places(m.v) < 0 ? Q(Math.round((m.f != null ? m.f : qnum(m.v)) * ten), ten) : m.v));
+  [1, -1, 2, -2, 3, 4].forEach(d => { if (out.length < 3) add(qadd(p.ans, Q(d))); });
+  return out;
+}
+
+const api = { choices, F, feedback, mcFeedback, selectFeedback, mcSolution, solution, clean, joinSays, printedNumbers, SELWHY, MCW };
 const walkApi = { steps, stepsMC, readNum: E.readNum };
 if (typeof module !== 'undefined' && module.exports) module.exports = Object.assign({}, api, { Walk: walkApi }); else { root.Coach = api; root.Walk = walkApi; }
 })(this);

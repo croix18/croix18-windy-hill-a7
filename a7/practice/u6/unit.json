@@ -15,7 +15,8 @@
  "checks": [
   "node u6_check.js 3000 1500",
   "python3 verify.py",
-  "python3 plant_check.py"
+  "python3 plant_check.py",
+  "node mc_check.js 3000"
  ],
  "variety": {
   "allow": {
