@@ -6,7 +6,7 @@
    "title": "One Solution, No Solution, Infinitely Many Solutions",
    "sub": "",
    "min": 1,
-   "note": "Post the learning target. Say one line and nothing else yet: \u201cToday: equations with one solution, no solution or infinitely many.\u201d",
+   "note": "Post the learning target. Today is 43 minutes: the cut is under Materials at the end of this edition.",
    "kind": "title"
   },
   {
@@ -14,7 +14,7 @@
    "title": "Warm-Up",
    "sub": "On your own. No notes.",
    "min": 4,
-   "note": "Q4 is today's question in miniature: a solution is a number that makes the equation true. Today some equations have no such number and some have every number. Two minutes silent, then reveal, no discussion \u2014 43 minutes today.",
+   "note": "Q4 is today's question in miniature: a solution is a number that makes the equation true. Today some equations have no such number and some have every number. Two minutes silent, then reveal, no discussion \u2014 43 minutes today: the cut is under Materials.",
    "kind": "warmup"
   },
   {
@@ -78,7 +78,7 @@
    "title": "Your Turn",
    "sub": "Same steps, your numbers. Boards up when done.",
    "min": 2,
-   "note": "6x + 3 \u2212 5 = 6x \u2212 2, the same as the right side; \u22122 = \u22122, infinitely many. This catches 'x = \u22122' (the constant read as the answer) and 'no solution' (the x's gone, so 'nothing').",
+   "note": "6x + 3 \u2212 5 = 6x \u2212 2, the same as the right side; \u22122 = \u22122, infinitely many. This catches 'x = \u22122' (the constant read as the answer) and 'no solution' (the x's gone, so 'nothing'). The verdict is Example 1's, so look for the LINE on the boards \u2014 \u22122 = \u22122 (or 6x \u2212 2 = 6x \u2212 2) and 'always true' \u2014 not the words.",
    "kind": "yourturn"
   },
   {
@@ -110,7 +110,7 @@
    "title": "Your Turn",
    "sub": "Same steps, your numbers. Boards up when done.",
    "min": 2,
-   "note": "10x \u2212 5 against 10x + 3: the same x-terms, different constants. Taking 10x leaves \u22125 = 3, never true: no solution. A board with 'x = 3' or 'x = \u22125' read a constant as the answer.",
+   "note": "10x \u2212 5 against 10x + 3: the same x-terms, different constants. Taking 10x leaves \u22125 = 3, never true: no solution. A board with 'x = 3' or 'x = \u22125' read a constant as the answer. The verdict is Example 2's, so look for the LINE \u2014 \u22125 = 3 and 'never true' \u2014 not the words.",
    "kind": "yourturn"
   },
   {
@@ -174,7 +174,7 @@
    "title": "Whiteboards   \u00b7   Question 4 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "Diagnostic. Option D reads the constant as x, option A reads 0 = 0 as x = 0, option C stops when the x's vanish. 0 and 6 do both work \u2014 and so does every other number, which is why 'one solution' is wrong. On a split: sixty seconds, convince your neighbor, re-vote.",
+   "note": "Diagnostic. Option D reads the constant as x, option A reads 0 = 0 as x = 0, option C stops when the x's vanish. 0 and 6 do both work \u2014 and so does every other number, which is why 'one solution' is wrong. Options A and D are the same error (an ending read as x = a number) and get the same reteach: say the ending aloud, 6 = 6, and ask for which x it is true. On a split: sixty seconds, convince your neighbor, re-vote.",
    "kind": "wb"
   },
   {
@@ -190,7 +190,7 @@
    "title": "Whiteboards   \u00b7   Question 5 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "The parentheses hide it: distributed, the right side is 6x \u2212 12, the same x-term as the left with a different constant. \u22129 = \u221212 is never true. A board with 'infinitely many' distributed to one term (6x \u2212 4) and still saw different constants \u2014 ask what 3 times \u22124 is; one with x = 3 or x = \u22123 wrote \u22129 + 12 as an answer.",
+   "note": "An ordinary one solution, negative, behind parentheses: it looks like Example 2's kind until the 3 is distributed \u2014 3x on the right against 6x on the left, so an x is left. Take 3x, add 9, divide by 3. A board with 'no solution' judged before distributing; one with x = 5/3 wrote 3x \u2212 4 (one term); one with x = 7 wrote 3x + 12 (the sign); one with x = \u22127 subtracted the 9. Check: \u221215 = \u221215.",
    "kind": "wb"
   },
   {

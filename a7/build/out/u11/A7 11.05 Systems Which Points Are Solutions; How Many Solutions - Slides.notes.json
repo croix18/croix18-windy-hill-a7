@@ -30,7 +30,7 @@
    "title": "Vocabulary",
    "sub": "The new words, before they are used.",
    "min": 1,
-   "note": "Three words, read once each. Say 'both' twice for the second: a pair that makes one equation true is not a solution of the system. Parallel is a picture word today \u2014 never meet \u2014 and the reason under it is the number multiplying x; Unit 10 gives that number its name.",
+   "note": "Five words, read once each. Say 'both' twice for the second: a pair that makes one equation true is not a solution of the system. 'Intersect' is the state's word for cross: the point of intersection is the crossing. Parallel is a picture word today \u2014 never meet; the coefficient of x is the number that multiplies x (3 in 3x, \u22121 in \u2212x, 0 in y = 4), and Unit 10 gives it a second name.",
    "kind": "vocab"
   },
   {
@@ -46,7 +46,7 @@
    "title": "Notes",
    "sub": "",
    "min": 3,
-   "note": "Two equations together are a system, and its solution is a pair that makes BOTH true. Put (2, 4) into each: 2 + 2 = 4 and \u22122(2) + 8 = 4 \u2014 a solution. (0, 2) makes the first true and the second not (\u22122(0) + 8 is 8, not 2) \u2014 so it is a solution of y = x + 2 only, and not of the system. On the graph the solution is the point on both lines: where they cross. One bridge, said and not tested: at the crossing both equations give the same y, so x = 2 solves x + 2 = \u22122x + 8 \u2014 the equation of 11.02.\nOFF: 'A solution of the system makes both equations true. One is not enough.'",
+   "note": "Two equations together are a system, and its solution is a pair that makes BOTH true. Put (2, 4) into each: 2 + 2 = 4 and \u22122(2) + 8 = 4 \u2014 a solution. (0, 2) makes the first true and the second not (\u22122(0) + 8 is 8, not 2) \u2014 so it is a solution of y = x + 2 only, and not of the system. On the graph the solution is the point on both lines: where they cross \u2014 where they intersect, the point of intersection. (Say nothing today about setting the two expressions equal: 11.07 Notes III shows it.)\nOFF: 'A solution of the system makes both equations true. One is not enough.'",
    "kind": "notes"
   },
   {
@@ -54,7 +54,7 @@
    "title": "Notes",
    "sub": "",
    "min": 3,
-   "note": "Three pictures, three counts. Cross once: one solution, the crossing (2, 3). Parallel \u2014 they never meet: no solution; the same number, 2, multiplies x in both, so the lines rise together and stay 4 apart. The same line: \u00bd and 0.5 are one number, so y = \u00bdx + 1 and y = 0.5x + 1 are one equation written two ways, and their graphs are one line \u2014 every point of it is a solution, the ones nobody plotted too (infinitely many). These are 11.03's three endings again: one, none, every.\nOFF: 'Cross once: one. Never meet: none. The same line: infinitely many.'",
+   "note": "Three pictures, three counts \u2014 read from the picture; the reasons from the equations are 11.07's. Cross once: one solution, the crossing (2, 3). Parallel \u2014 they never meet: no solution. The same line \u2014 the orange dashes lie on the blue: every point of it is on both graphs, the ones nobody plotted too (infinitely many). These are 11.03's three endings again: one, none, every. Then the level line: y = 3 is a line too \u2014 every x gives 3 \u2014 so a level line can cross a slanted one, or run parallel to another level line.\nOFF: 'Cross once: one. Never meet: none. The same line: infinitely many.'",
    "kind": "notes"
   },
   {
@@ -102,7 +102,7 @@
    "title": "Example 2",
    "sub": "Worked.",
    "min": 1,
-   "note": "The lines are parallel: the same number, \u00bd, multiplies x in both, so for every x the first is 3 above the second \u2014 they never meet, and no pair makes both true. Set the two expressions equal and the x-terms go: 2 = \u22121, never true (11.03's no-solution ending). A board with 'one' guessed the lines meet off the grid; with 'infinitely many', saw two lines going on forever.",
+   "note": "Read the two lines on the grid at three x's: at x = 0 they are at 2 and \u22121, at x = 2 at 3 and 0, at x = 4 at 4 and 1 \u2014 always 3 apart. Lines that stay 3 apart never meet: parallel, and no pair makes both true. (No algebra today: the reason from the equations is 11.07's.) A board with 'one' guessed the lines meet off the grid; with 'infinitely many', saw two lines going on forever.",
    "kind": "example"
   },
   {
@@ -110,7 +110,7 @@
    "title": "Your Turn",
    "sub": "Same steps, your numbers. Boards up when done.",
    "min": 2,
-   "note": "\u2212x and 2x: different numbers multiply x, so the lines cross once \u2014 one solution. The crossing is (3, 1): \u22123 + 4 = 1 and 2(3) \u2212 5 = 1. (No graph here: the kit's Your Turn slide carries none, so this one is read from the equations, by Notes III's rule; the reveal names the crossing.) A board with 'none' read two different lines as never meeting.",
+   "note": "The tables, read column by column: 1 and \u22123, 5 and 1, 9 and 5 \u2014 the first is always 4 more, so the lines stay 4 apart and never meet: no solution. A board with 'one' expects them to meet past the table; with 'infinitely many', read two lines that go on forever.",
    "kind": "yourturn"
   },
   {
@@ -158,7 +158,7 @@
    "title": "Whiteboards   \u00b7   Question 3 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "Read the crossing on the grid lines: x = \u22122, y = 3. Then check it in both: \u22122 + 5 = 3 and 4 \u2212 1 = 3. One crossing, one solution. A board with (3, \u22122) swapped the coordinates; one with (0, 5) or (0, \u22121) read where a line meets the y-axis.",
+   "note": "The extra-number board (ruling 22): the grid's height, 6, is not needed. Read the crossing on the grid lines: x = \u22122, y = 3. Then check it in both: \u22122 + 5 = 3 and 4 \u2212 1 = 3. One crossing, one solution. A board with (3, \u22122) swapped the coordinates; one with (0, 5) or (0, \u22121) read where a line meets the y-axis; one with a 6 in it used the grid's height.",
    "kind": "wb"
   },
   {
@@ -206,7 +206,7 @@
    "title": "Whiteboards   \u00b7   Question 6 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "Diagnostic on the same-line case, the state's named misconception for AR.4.2. Every point of the line is on both graphs, the points nobody marked too: (10, 9) is off the grid and makes both true. Option D counts the two dots; option C looks for a crossing and finds none; option A counts the drawn line.",
+   "note": "Diagnostic on the same-line case, the state's named misconception for AR.4.2; the graph is on the reveal. Every point of the line is on both graphs, the points nobody marked too: (10, 9) is off the grid and makes both true. Option D counts the two marked points; option C looks for a crossing and finds none; option A counts the one line. A and C are the same misreading \u2014 the same line taken for something other than every point \u2014 and get the same response: point at a third point of the line and check it in both.",
    "kind": "wb"
   },
   {
@@ -222,7 +222,7 @@
    "title": "Whiteboards   \u00b7   Question 7 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "The extra-number board (ruling 22): the 12-week term is not needed \u2014 it only ends the x-axis. The crossing is the one (x, y) both equations share: x = 4 weeks, y = 40 dollars, and both savings are \\$40 then. Check: 5(4) + 20 = 40 and 10(4) = 40. A board that says 'after 40 weeks, \\$4' swapped the coordinates.",
+   "note": "A level line: y = 4 gives 4 for every x, so its graph is flat \u2014 0 multiplies x. It crosses the rising line once, at (3, 4): 3 + 1 = 4, and y = 4 there. A board with 'none' thought a line with no x cannot meet anything; with (4, 3), swapped.",
    "kind": "wb"
   },
   {

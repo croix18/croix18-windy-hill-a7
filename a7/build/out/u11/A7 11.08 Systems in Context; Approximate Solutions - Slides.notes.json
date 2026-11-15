@@ -14,7 +14,7 @@
    "title": "Warm-Up",
    "sub": "On your own. No notes.",
    "min": 4,
-   "note": "Q1 is yesterday in one line; Q4 is today's new reading \u2014 a crossing halfway between two grid lines. Two minutes silent, then reveal.",
+   "note": "Q1 is yesterday in one line; Q4 is today's move \u2014 a start plus an amount for each one: 15 + 4(5). Every line today is (the amount per 1)\u00b7x + (the start). Two minutes silent, then reveal.",
    "kind": "warmup"
   },
   {
@@ -54,22 +54,22 @@
    "title": "Notes",
    "sub": "",
    "min": 3,
-   "note": "These lines cross between x = 1 and x = 2, a little past the middle, and a little above y = 2: about (1.7, 2.3). Read to the nearest half or tenth and write 'about'. Check the estimate in both equations: 2(1.7) \u2212 1 = 2.4 and \u22121.7 + 4 = 2.3 \u2014 close, not equal, which is what an estimate gives. The exact crossing is 5/3 and 7/3; nobody is asked for it (Algebra 1). A careful read of (1.5, 2.5) is also an estimate the test accepts.\nOFF: 'Between which grid lines? Nearer which one? Then about, and check: close is right.'",
+   "note": "These lines cross between x = 1 and x = 2, a little past the middle, and a little above y = 2: about (1.7, 2.3). Read each coordinate to the nearest tenth and write 'about'. Check the estimate in both equations: 2(1.7) \u2212 1 = 2.4 and \u22121.7 + 4 = 2.3 \u2014 close, not equal, which is what an estimate gives. The exact crossing is 5/3 and 7/3; nobody is asked for it (Algebra 1). A read within 0.1 of each \u2014 (1.6, 2.3), (1.7, 2.4) \u2014 is a good estimate; a grid point such as (2, 2) is on one line only, and is not.\nOFF: 'Between which grid lines? Nearer which one? Then about, and check: close is right.'",
    "kind": "notes"
   },
   {
    "n": 8,
    "title": "Example 1",
    "sub": "A story to a system; the crossing in words.",
-   "min": 1,
-   "note": "Ask for each tank's start and amount per minute before anyone writes an equation. Then read the axes' names and scale aloud: minutes across, every 2; liters up, every 10.",
+   "min": 2,
+   "note": "The grid is empty on purpose. Ask for each tank's start and amount per minute before anyone writes an equation; write the two equations, a line each. Read the axes' names and scale aloud: minutes across, every 2; liters up, every 10. Then plot each tank at 0 and 6 minutes and draw the two lines on the projected grid; ask the room where they cross.",
    "kind": "example"
   },
   {
    "n": 9,
    "title": "Example 1",
    "sub": "Worked.",
-   "min": 2,
+   "min": 1,
    "note": "Tank A: start 30, 5 per minute, y = 5x + 30. Tank B: y = 2x + 60. The lines cross at (10, 80): x = 10 minutes, y = 80 liters. Check: 5(10) + 30 = 80 and 2(10) + 60 = 80. Say it in the story's words. A board with 'after 80 minutes' swapped the coordinates.",
    "kind": "example"
   },
@@ -78,7 +78,7 @@
    "title": "Your Turn",
    "sub": "Same steps, your numbers. Boards up when done.",
    "min": 2,
-   "note": "Mia: y = 10x + 40; Noah: y = 5x + 100. Equal at 12 weeks: 10(12) + 40 = 160 and 5(12) + 100 = 160. Graphed with weeks every 2 and dollars every 20, the crossing is on a grid line. A board with 'after 160 weeks' swapped; one with 'after 6 weeks' set 10x + 40 = 100.",
+   "note": "The tables: Mia has 40, 60, 80, 100 and Noah 70, 80, 90, 100 at 0, 2, 4, 6 weeks \u2014 both 100 at 6 weeks. As a system, Mia y = 10x + 40 and Noah y = 5x + 70: 10(6) + 40 = 100 and 5(6) + 70 = 100. A board with 'after 100 weeks' swapped; one with 'after 4 weeks' took the column where Mia is closest before she catches up (80 against 90).",
    "kind": "yourturn"
   },
   {
@@ -93,16 +93,16 @@
    "n": 12,
    "title": "Example 2",
    "sub": "A crossing halfway between grid lines.",
-   "min": 1,
-   "note": "Ask where the lines cross before anyone says a number: between which two x's? Between which two y's? Halfway, both ways.",
+   "min": 2,
+   "note": "Read the two tables first: at 2 minutes Tub A is behind (6 against 7), at 3 minutes ahead (9 against 8) \u2014 so they are equal somewhere between. Draw both lines on the projected grid from the tables, then ask where they cross: between which two x's? Between which two y's? Halfway, both ways.",
    "kind": "example"
   },
   {
    "n": 13,
    "title": "Example 2",
    "sub": "Worked.",
-   "min": 2,
-   "note": "A: y = 3x. B: y = x + 5. The lines cross halfway between x = 2 and x = 3 and halfway between the grid lines y = 6 and y = 9 (one line every 3 pages): (2.5, 7.5). This read lands exactly: 3(2.5) = 7.5 and 2.5 + 5 = 7.5. In the story: after 2.5 minutes both have printed 7.5 pages \u2014 each is halfway through its eighth page. A board with (2, 6) or (3, 9) took a nearby grid point; check it \u2014 (2, 6) is on A only: 2 + 5 = 7, not 6.",
+   "min": 1,
+   "note": "A: y = 3x. B: y = x + 5. The lines cross halfway between x = 2 and x = 3 and halfway between the grid lines y = 6 and y = 9 (one line every 3 liters): (2.5, 7.5). This read lands exactly: 3(2.5) = 7.5 and 2.5 + 5 = 7.5. In the story: after 2.5 minutes both tubs hold 7.5 liters. A board with (2, 6) or (3, 9) took a nearby grid point; check it \u2014 (2, 6) is on A only: 2 + 5 = 7, not 6.",
    "kind": "example"
   },
   {
@@ -110,7 +110,7 @@
    "title": "Your Turn",
    "sub": "Same steps, your numbers. Boards up when done.",
    "min": 2,
-   "note": "Tables at x = 0, 1, 2: 4x gives 0, 4, 8 and 2x + 3 gives 3, 5, 7. At x = 1 the first is lower, at x = 2 higher: the crossing is between, halfway \u2014 (1.5, 6). Check: 4(1.5) = 6 and 2(1.5) + 3 = 6. A board with (6, 1.5) swapped; one with (2, 8) took the grid point on one line only.",
+   "note": "Tables at x = 0, 1, 2: 4x gives 0, 4, 8 and 2x + 3 gives 3, 5, 7. At x = 1 the first is lower, at x = 2 higher: they change places between, and halfway works \u2014 (1.5, 6). Check: 4(1.5) = 6 and 2(1.5) + 3 = 6. A board with (6, 1.5) swapped; one with (2, 8) took the grid point on one line only.",
    "kind": "yourturn"
   },
   {
@@ -174,7 +174,7 @@
    "title": "Whiteboards   \u00b7   Question 4 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "The estimate, read at full size. The keyed read is about (1.3, 3.7); the exact crossing is (4/3, 11/3), so any careful read within about 0.2 \u2014 (1.3, 3.6), (1.4, 3.7) \u2014 is a good estimate. Check (1.3, 3.7) in both aloud: 3.6 and 3.7, close. A board with (3.7, 1.3) swapped it; one with (1, 3) took the nearest grid point, which is on one line only; one with (0, 5) read where a line starts.",
+   "note": "The estimate, read at full size. The keyed read is about (1.3, 3.7); the exact crossing is (4/3, 11/3), and a read within 0.1 of each \u2014 (1.3, 3.6), (1.4, 3.7) \u2014 is a good estimate. Check (1.3, 3.7) in both aloud: 3.6 and 3.7, close. A board with (3.7, 1.3) swapped it; one with (1, 3) took the nearest grid point, which is on one line only; one with (0, 5) read where a line starts.",
    "kind": "wb"
   },
   {
@@ -254,7 +254,7 @@
    "title": "Whiteboards   \u00b7   Question 9 of 9",
    "sub": "Take your time. Boards up when you have written it.",
    "min": 0,
-   "note": "Written, and the exit evidence: the crossing decides. Read two aloud \u2014 one that uses the crossing, one that uses only the two costs at 10 months; both are right, and the crossing says why it will stay that way.",
+   "note": "Written, and the exit evidence: tomorrow's question 14(b). The lines cross between x = 0 and x = 1, nearer 1, a little below y = 4. Read two aloud \u2014 one whose two checks come out close, one that took (1, 4) and whose check shows it: 4 and 3, not close.",
    "kind": "wb"
   },
   {

@@ -768,3 +768,496 @@ Log columns: lesson · source · page · item · the system or check as read · 
 | WE | WE | p1 | #3c | 3·b + 3 = 6·b + 18 | -5 |  |  | one solution | match (b = −5) |
 | WE | WE | p1 | #4 (as worked, −½) | y = 5 - x/2 ; y = 6 - x/4 | (-4, 7) | lattice | — | x = −4, y = 3 | WRONG: y = 7 (E2) |
 | WE | WE | p1 | #4 (if typed +½) | y = x/2 + 5 ; y = 6 - x/4 | (4/3, 17/3) ≈ (1.333, 5.667) | not lattice | — | — | (−4, 3) fails this reading too |
+
+
+---
+
+# The review pass (14 November 2026) — three readers who had not seen the specs
+
+After the seven lessons, the unit papers and the package were built at 0 findings, three independent readers went over
+the built unit: an adversarial critic, a Barton audit against HOUSE STYLE §16, and a Florida educator reading it
+against the benchmarks and FAST's item shapes. **None found a wrong answer, key, worked line, classification or
+graph.** Counts: critic 1 blocker, 9 major, 10 minor; Barton 0 / 11 / 13; FAST 1 / 8 / 7 — the two blockers are one
+item (the Practice Test's 14(b) accepted a half-grid point that is on one line only; it now accepts 1.6–1.8 and
+2.6–2.8, and the build checks that no printed grid point falls inside any accepted range). The lead's rulings on each
+finding follow, as given to the builders; the three reports are below them, whole. The fixes were made in a second
+pass and the unit rebuilt and reinstalled at 0 findings.
+
+## The rulings — what is taken, what is not
+
+**Taken as the reviewer proposes (or better):**
+- critic 1 = fast 1: Practice Test 14(b) accepts x from 1.6 to 1.8 and y from 2.6 to 2.8 (the range must exclude every
+  point that is on one line only). Check every other approximate item in the unit the same way (fast 15: state every
+  tolerance one way — "within 0.1 of").
+- critic 4, 5, 6, 8, 13, 14, 16, 17, 19, 20; critic 11 (11.08 Example 2 becomes liters, not pages); critic 7 (the
+  vocabulary slide's "parallel lines": lines that never meet — the same number multiplies x and the numbers added are
+  different; then "the same line" has its own line).
+- critic 12 = fast 4: the select-all with exactly one right answer goes. Practice Test question 8, the Review's
+  matching question and 11.05's independent question 3 become: **"Select all the systems that have (a, b) as a
+  solution"** — five systems, each solved for y, two or three of them right, each wrong one true in exactly one of its
+  equations; the stem never says how many. Remove "at most one can pass" from the Reference Sheet.
+- barton 3 (11.05–06 is overloaded): do what the reviewer lists — move what it says to 11.07, drop what it says.
+- barton 4, as far as Croix's ruling 37 allows: one move per line in every worked row and notes row (never two or three
+  moves on a line; 11.04 Notes I shows every move); equals signs aligned wherever the kit's layout permits. The move's
+  name stays in the spec's gloss and the Teacher Edition — ruling 37 took the grey glosses off the slides and that
+  stands, so do NOT add words beside worked rows on slides.
+- barton 5 (11.04's two example pairs go to the techniques that need them), barton 9 (writing an equation from a story
+  is modeled before it is practiced — one notes row or an example in 11.01 or 11.02 and again for systems in 11.08),
+  barton 11, barton 8 (the Review's SSDD block is replaced by the reviewer's one-context, four-structures block).
+- barton 7: each Wednesday spec (11.03, 11.07) names its 43-minute cut in the Teacher Edition — which boards go, which
+  independent questions go home — and the Lesson Plan's minutes add to 43 if the kit lets a spec say so (see how a
+  43-minute lesson in a7/build/u6 or u5 does it; if the kit has no way, say so in the TE's first slide note).
+- barton 2 and critic 3 / barton 1, within the kit: a Your Turn slide cannot carry a figure and a paper's key prints
+  the same figure as its page — both are KIT limits the lead is taking to Croix; do not hack around them. Do this
+  instead: (i) every graph-day Your Turn is answerable from what its slide shows — its two tables of values set out in
+  rows (typeset text/math), the crossing found where the tables agree — and its system crosses INSIDE the table the
+  example models (11.07 Your Turn 2 must not cross at x = −4 when the taught table is x = 0, 2, 4); no reveal states
+  a crossing nobody could have found; (ii) in 11.07 the FIRST question of the Independent Set is drawn during the
+  lesson, right after Example 1, with the teacher circulating (say so in the Teacher Edition and the Lesson Plan, and
+  give it minutes), so somebody graphs under the teacher's eye before the silent set; (iii) barton 24 / critic 10: an
+  Example's question slide shows the EMPTY grid (or the two tables), not the solved graph; the solved graph appears
+  only on a reveal or a following notes-style slide.
+- fast 2, 3 and barton 10 — rational coefficients at the state's level: a negative fraction coefficient and a negative
+  decimal factor on SLIDES (11.04 notes or example, and boards), in the Review and on the Practice Test; decimal
+  factors whose products are not all whole; one state-shaped equation in 11.04 (the reviewer's −2.4(5x − 3) = −40.8
+  or better). The Practice Test gets a fraction-coefficient equation: question 3 (parentheses on both sides) carries a
+  fraction multiplier on one side. Keep the paper at 14 questions, 18 points, the same four sections and tracker.
+- fast 5: one horizontal line (y = 4 with a slanted line) on a 11.05 or 11.07 board and in the Review; the notes' rule
+  for parallel is worded so a horizontal pair fits it.
+- fast 8: the words **intersect / point of intersection** and **coefficient of x** are taught (vocabulary slides of
+  11.05 and 11.07; used in the Practice Test's stems where natural). "Slope" and "y-intercept" stay off student pages.
+  Add to `manifest.py`'s notes the hand-off the reviewer writes: Unit 10 names the coefficient of x as the slope and
+  re-reads this unit's parallel lines with that word; the spring review asks one AR.4.3 item that says "slope".
+- fast 9: reword the Practice Test's stems to FAST's house style per the reviewer's table (short stems, "An equation is
+  shown.", "x =" answers, the direction leading on the multiselect) wherever the question's KIND, ORDER and POINTS do
+  not change. Where the table would change a kind (a matching grid, a dropdown sentence), make that change in the
+  Review or a lesson's independent set instead, not on the paper — the practice web page is being built from the
+  paper's 14 kinds right now.
+- fast 13, 14, 16; barton 12–22 (the minors) wherever the fix is a wording or number change in a spec.
+
+**Not taken (do not act on these):**
+- critic 9 = fast 7 (IXL skills 9Z8, TS7, AGZ may need slope): the plan's skills are Croix's; the build refuses any
+  other. The lead reports it to him. Do not change `ixl`.
+- critic 2 (keys with drawn graphs), critic 15, barton 6's line weight, barton 23 ("neighbour"): kit; reported.
+- fast 6's second half (question 13(a), a table value, stays — graphing from a table IS this unit's method), fast 10
+  (the weighting stays 9 / 2 / 2 / 5), fast 12.
+- The Practice Test keeps its story question 7 (fast 3's second half): two plans that cost the same is 11.02's own
+  board and the district's item shape.
+
+
+**Left as the reviewers found them, and why:** 11.07's board 4 stays free response (as multiple choice its graph is
+1.5 in tall); 11.05 keeps critic 7's definition of parallel lines over barton 3's shorter one; equals signs are not
+aligned (the kit centers notes rows); three board reveals still carry two moves on a line (the slide has no room for
+more rows).
+
+
+---
+
+# Report · The adversarial critic
+
+## A7 Unit 11 — adversarial critic's findings
+
+**Bottom line.** I found no wrong answer, no wrong worked line, no mis-classified equation, no wrong distractor and no graph whose lines, labels or marked crossing disagree with its equations — every one of those I recomputed or looked at holds.
+The defects are on the graph days and are about what a student or teacher can actually do with the page: one arguable accepted range on the Practice Test, keys with empty grids, Your Turns that ask for a graph with no grid, grids whose scale the given line misses, and estimate graphs too small for "nearest tenth".
+Counts: 1 BLOCKER (arguable key, narrow), 9 MAJOR, 10 MINOR.
+
+How I worked: read all seven specs (every stem, step, choice, named error, `wrong` line, key and `why`) and re-derived each by hand; read `unit.py` (Practice Test, Review, Reference Sheet); rendered and looked at every slide of 11.05, 11.07 and 11.08, the notes/examples/boards of 11.03 and 11.04, the Independent Sets and keys and both banks of 11.05, 11.07, 11.08, the Practice Test and the Review; checked every `figs.plane` window against its lines and crossing; ran a script for repeated equations inside each lesson. Not viewed as images: the 11.01 and 11.02 decks (text and spec only), the bank keys other than 11.07's, the Reference Sheet PDF (spec only), Teacher Editions and Lesson Plans (grep only).
+
+---
+
+### Findings
+
+#### 1. BLOCKER (arguable key) — Practice Test 14(b): the accepted range takes in the error the key itself names
+- **Where:** Practice Test and Key, question 14(b) (y = x + 1 and y = −2x + 6, "estimate to the nearest tenth").
+- **What it says:** exact (5/3, 8/3); "Accept x from 1.5 to 1.9 and y from 2.5 to 2.9"; "(2, 3) is the nearest grid point, on y = x + 1 only" is marked wrong.
+- **What is wrong:** this graph is printed with half-unit grid lines. (1.5, 2.5) is therefore a grid point, it is on y = x + 1 only (−2(1.5) + 6 = 3), and it is exactly the "nearest grid point" misreading — yet it sits inside the accepted range. The crossing is visibly off that grid point. One student is refused for (2, 3) and another credited for (1.5, 2.5), the same mistake one grid step finer.
+- **Fix:** accept x from 1.6 to 1.8 and y from 2.6 to 2.8 (±0.1 of 1.7, 2.7), and add "(1.5, 2.5) is a grid point on y = x + 1 only." If the wider band is wanted, drop the half-unit grid lines from this figure so that 1.5 is an honest estimate.
+
+#### 2. MAJOR — Every key for a "graph both lines" question prints an empty grid
+- **Where:** 11.07 Independent Set Key q1–q5; 11.07 Question Bank Key q6–q7 and Additional q6–q7; 11.08 Independent Set Key q3, q5, q6; 11.08 bank keys q6–q7; Review Key q15.
+- **What it says:** the answer in words ("(1, 4)", "No solution", "Club A: $24 against $30") under the student's blank grid.
+- **What is wrong:** the question is "solve by graphing"; the thing to be marked is the drawing, and the key does not show it. A teacher (or a substitute, or a student self-checking the Review at home) has no picture to compare against — worst for the parallel, same-line and estimate items, where the drawing is the whole answer.
+- **Fix:** on key pages draw both lines and mark the crossing (the figures already exist for the read-a-graph items: pass `lines=` and `solution=` to the key's grid).
+
+#### 3. MAJOR — Your Turns on the graph days carry no graph or grid, so they are not the same kind as their examples
+- **Where:** 11.05 Your Turn 2 (slides 14–15); 11.07 Your Turns 1 and 2 (slides 10–11, 14–15); 11.08 Your Turns 1 and 2 (slides 10–11, 14–15).
+- **What it says:** 11.05: Example 2 reads a graph of parallel lines; the Your Turn prints only "y = −x + 4 and y = 2x − 5. How many solutions?" and the reveal says "they cross at (3, 1)". 11.07: "Solve the system by graphing" on a blank slide, twice. 11.08: Example 1 reads a story graph; Your Turn 1 (Mia and Noah, equal at 12 weeks) has no graph; Example 2 is a story graph, Your Turn 2 is a bare "y = 4x and y = 2x + 3 — solve by graphing", crossing at (1.5, 6).
+- **What is wrong:** (a) not the same kind as the example (read a graph vs. no graph). (b) 11.07 and 11.08 ask the class to draw two lines on a blank whiteboard in two minutes — the unit's own standing decision 9 says a blank whiteboard is no place for two lines. (c) 11.07 Your Turn 2 crosses at (−4, 1): the taught table (x = 0, 2, 4) gives 3, 4, 5 and −3, −5, −7, lines that move apart; the spec's own note admits it. (d) 11.08 Your Turn 1 needs a table out to x = 12 or the 10x + 40 = 5x + 100 bridge, which is "taught and not tested". (e) no reveal shows a graph or a table, so a wrong board cannot see what right looks like. (f) 11.05's reveal states a crossing nobody could have found.
+- **Fix:** put the figure on the slide. 11.05: the graph of the two lines. 11.07: an empty grid on the question slide and the drawn lines on the reveal; replace Your Turn 2 with y = ½x + 3 and y = −x + 9 (tables at 0, 2, 4: 3, 4, 5 and 9, 7, 5; solution (4, 5)) so it matches Example 2. 11.08: give each Your Turn its graph (Mia/Noah on 0–16 weeks, 0–200 dollars; y = 4x and y = 2x + 3 on 0–3, 0–9). If the kit's Your Turn slide truly cannot hold a figure, make these boards instead and say so in the plan.
+
+#### 4. MAJOR — "Graph both" story grids are scaled so the given line misses the grid lines
+- **Where:** 11.08 Independent Set q5 and q6; 11.08 Question Bank q6.
+- **What it says:** q5: y = 2x + 12 on a grid numbered by 5s. q6: y = 4x + 25 and y = 4x + 40 on a grid numbered by 10s. Bank q6: y = 4x + 9 on a grid numbered by 7s.
+- **What is wrong:** the first point every student plots is x = 0. That is 12 on a 5-grid, 25 on a 10-grid (then 29, 33, 37), 9 on a 7-grid. In bank q6 the only point of y = 4x + 9 on a grid line is the crossing itself. A class that has drawn lines for three days cannot draw these accurately, and q6's "parallel" depends on an accurate drawing.
+- **Fix:** q5: `ys=4` (12, 16, 20 and 0, 20, 40 all land on lines). q6: `ys=5` (25, 45 and 40, 60 land at x = 0 and 5). Bank q6: `ys=3` (9, 21, 33 and 0, 21, 42 land).
+
+#### 5. MAJOR — 11.07 Independent Set q2: the taught table falls off the printed grid
+- **Where:** 11.07 Independent Set q2, y = x − 1 and y = −2x − 4, grid x −4 to 3, y −5 to 4.
+- **What is wrong:** the vocabulary slide defines a table as "x = 0 first, then two more" and every model uses 0, 1, 2. For y = −2x − 4 that gives −4, −6, −8: two of three points are below the grid. Only negative x works, and nothing says so (the key quietly uses x = −2, −1, 0).
+- **Fix:** grid `(-4, 3), (-8, 4)`, or add to the stem "Use x = −2, −1 and 0."
+
+#### 6. MAJOR — Estimate "to the nearest tenth" from graphs about 1.3 inches wide
+- **Where:** 11.08 Question Bank q3 and q9, Additional q3 and q9, Review q17 (figures set at `inches=2.2`–`2.8` including labels).
+- **What is wrong:** the plotted area of bank q3 is about 1.3 in for 6 units — 0.22 in per unit, so a tenth is half a millimetre. The stem asks for more than the picture can give; the key then has to accept ±0.2, which takes in (1.5, 2.5).
+- **Fix:** crop each estimate window to the crossing (0–3 by 0–5, as board 4 does) and print it at 3 in or more; or ask "to the nearest half". Keep one policy across the lessons and the test (see finding 1).
+
+#### 7. MAJOR — 11.05 vocabulary: "parallel lines … the same number multiplies x in both equations" is also true of one line written twice
+- **Where:** 11.05 slide 4 (Vocabulary); Notes III's only rule line is "Different numbers multiply x: the lines cross once."
+- **What is wrong:** Notes III's third picture (y = ½x + 1 and y = 0.5x + 1) has the same number multiplying x and infinitely many solutions. A student who learns the slide's wording answers "parallel, none" for board 6, Independent q6 and bank q9. The Reference Sheet has it right ("the same number multiplies x and different numbers are added").
+- **Fix:** slide 4: "lines that never meet: the same number multiplies x, and different numbers are added". Notes III line: "Different numbers multiply x: cross once. Same number, different number added: parallel. Same equation: one line."
+
+#### 8. MAJOR — 11.05 board 6: the figure on the question slide is about an inch wide
+- **Where:** 11.05 slide 26 (set at `pt=14`); the answer slide's copy is larger.
+- **What is wrong:** the question depends on seeing one line with two marked points (option D, "two", is those two points). On a 13-inch slide the plane is roughly 1.2 in wide; the dots are specks from the back row.
+- **Fix:** size it as boards 3 and 5 are, and shorten the stem to make room. Also smaller than they should be on reveal slides: 11.07 board 2's tables and board 6's figure.
+
+#### 9. MAJOR (unverified — needs Croix's eyes on IXL) — two IXL skills may need what the unit does not teach
+- **Where:** 11.05 slide 35, "Solve a system of equations in slope-intercept form — 9Z8"; 11.07 slide 35, "Write a system of equations given a graph — TS7".
+- **What is wrong:** (a) 9Z8 is assigned on 11.05, when the class cannot yet solve a system by any method (graphing is 11.07); if IXL expects an algebraic solve it is substitution, which this unit never teaches. (b) TS7 asks for equations written from a graph, which normally means slope and y-intercept; the unit only ever tests given options against points (board 6). (c) "slope-intercept" is printed on a student slide, against standing decision 2. I could not open IXL from here, so (a) and (b) are risks, not confirmed defects.
+- **Fix:** try five questions of each as a student. If they need algebra or slope, drop them or move them to Unit 10; if 9Z8 stays, move it to 11.07.
+
+#### 10. MAJOR — 11.07 Example 1's question slide already shows the solved graph
+- **Where:** 11.07 slide 8 (and Example 2, slide 12, with the crossing dotted).
+- **What it says:** "Solve the system by graphing" above both tables, both lines and the label "(3, 3)".
+- **What is wrong:** the lesson's one skill is building the graph; the slide gives the class nothing to build and the answer to read. Paired with finding 3, no student draws a line in 11.07 until the Independent Set.
+- **Fix:** question slide: the two equations and an empty grid; worked slide: tables, lines, crossing.
+
+#### MINOR
+
+11. **11.08 Example 2** — "After 2.5 minutes, both have printed 7.5 pages." Half a page is a strained answer for a counted thing. Fix: make it liters (Hose A fills 3 L a minute; Bucket B has 5 L and gains 1 L a minute) — same numbers, same graph.
+12. **Select-all with exactly one answer** — Practice Test q8, Review q8, 11.05 Independent q3. Mathematically forced (two crossing lines), and the key says so, but FAST multiselects normally have two or more; a careful student will hunt for a second and doubt a right answer. Fix: keep one of the three and make the test's version the same-line kind used in the 11.05 banks (three correct), or say "Select all that apply; there may be only one."
+13. **11.07 Question Bank q11** — the point labels "(1, 4)" and "(2, 3)" are struck through by the dashed line. Move them to the left of their points.
+14. **Reference Sheet §4** — "A fraction multiplying x: use even x." True for halves only (⅔x appears in 11.05 bank q3). Fix: "A half multiplying x: use even x (for thirds, multiples of 3)."
+15. **Independent Set slide (slide 34) of 11.05, 11.07, 11.08** — says "the graphs … are shown" and "the tables are for" with no figure, and 11.05 q3 shows no options. Harmless if every student holds the handout; add "on your handout".
+16. **11.08 board 4** — the reveal redraws the system in a different window (−1 to 4, −1 to 6) from the question (0 to 3, 0 to 5), smaller. Use the question's window with the crossing marked.
+17. **Handout figure sizes** — graphs on one page differ in size and weight (11.05 Independent q4/q5/q6; 11.07 Independent q5's grid is heavier than q1–q4; 11.05 Additional q8 is about 0.6 in wide). Set one size per document.
+18. **Practice Test q14** — two unrelated systems share one stem and sit side by side; the part (b) graph is beside Mia and Leo's story. The "for part (b)" caption saves it; a separate question 15, or the (b) graph placed under part (b), would be cleaner.
+19. **11.01 Lesson Plan, Enrichment** — "which box makes the solution x = 0? (3□ = 46 …)" follows a sentence about the equation with 52; it is not clear which equation is meant. Say "in the board's equation (… = 46)".
+20. **11.01 Independent q4 and banks q7–q8** — a decimal factor (0.5(4x + 6) + x = 18) on a day whose notes and boards show none. Deliberate (standing decision 5), and answerable, but untaught at that point; one line under Notes II ("a decimal outside multiplies both terms too: 0.5(4x + 6) = 2x + 3") would cover it.
+
+---
+
+### Checked and found sound (the denominator)
+
+- **Keys and worked lines, re-derived by hand:** all 7 warm-ups (28 items), 21 notes panels, 14 examples and 14 Your Turns, 63 boards with every `steps` line, 42 Independent Set questions, 14 banks (about 170 questions), Practice Test (14 questions, 18 parts), Review (18 questions, 31 parts), every worked line and example on the Reference Sheet. No error.
+- **Distractors recomputed from their named errors:** every multiple-choice option on boards and banks of 11.01–11.04 (e.g. 11.04 board 4: −20, 2.5, 2), every `wrong` value quoted for open boards, the Practice Test's quoted wrong answers. All produce the stated value.
+- **Classification (one / none / infinitely many):** every equation in 11.03, 11.04, Practice Test q5–q6, Review q4 and q6, simplified by hand. All correct, including the x = 0 cases.
+- **Fill-the-box items:** each has exactly one valid answer (11.01–11.05, 11.07, 11.08 boards and banks; PT q6; Review q4, q9, q18).
+- **Ordered-pair items:** every pair tested in both equations; each "one equation only" distractor satisfies exactly the equation named (where a "swapped" option happens to satisfy one equation, it is still not a solution). Same-line select-alls (11.05 banks) have exactly the keyed three.
+- **Select-all items in 11.01–11.04, 11.07, 11.08:** no secretly correct option; no two options with the same value.
+- **Graphs:** every crossing solved and found where the picture marks it; every line passes through the points its equation gives; every window contains its crossing; tables of values have no wrong entry (11.07 board 2, Independent q6, banks q3; PT q13; Review q14). Story graphs: axis names fit both lines, no negative time, crossings inside what the story allows (candles stop at 0 cm; tanks and phones stop at 0).
+- **Sequence:** no fraction coefficient before 11.04 (decimals only, by decision 5); no "slope" or "y-intercept" on a student page except the IXL skill name (finding 9); no substitution or elimination; no ×, "homework", "calculator" or partner work on a student page.
+- **Repeats (ruling 43):** no practice equation or system repeats one from the same lesson's warm-up, notes or examples (script over all seven specs, plus the figure-only boards by eye).
+- **Practice Test against the lessons:** every question type is taught and practiced (q13(a)'s missing table value is 11.07 warm-up 4; q14's falling line is 11.07 board 7 and the tank and phone banks); each key answers what its question asks.
+- **Keys against student pages:** 11.05, 11.07, 11.08 Independent Set keys, 11.07 bank key and the Review key print the same questions as the student pages.
+
+
+---
+
+# Report · The Barton audit
+
+## A7 Unit 11 — Barton audit (HOUSE STYLE §16, cognitive load, sequence, pacing, test mirror)
+
+**Bottom line.** The four equation days (11.01–11.04) are sound explicit instruction: real example/Your Turn pairs, declared variation with a true boundary case each day, diagnostic boards whose wrong options are the state's named errors. I found no wrong mathematics and no wrong key (0 BLOCKER).
+The three systems days are where the method breaks: every graph-based example is followed by a Your Turn with no graph, nobody draws a line while the teacher can see it, the graphs are too small to read from the back, and 11.05–06 carries more than one period holds.
+Across all seven decks the worked equations are not laid out for a student to follow (equals signs not aligned, two or three moves on one line, the move itself never written), and the Unit Review's "SSDD" block is one procedure four times, not four different structures.
+
+Counts: **BLOCKER 0 · MAJOR 11 · MINOR 13.** Every replacement number below was solved with sympy before it was written here.
+
+---
+
+### MAJOR
+
+#### 1. The systems Your Turns are not the same kind as their examples (Rule 1 is met in shape only)
+**WHERE.** 11.05 slides 12–15 (Example 2 / Your Turn); 11.07 slides 8–15 (both pairs); 11.08 slides 8–15 (both pairs).
+**WHAT IT SAYS.** Each example shows a graph (11.07 and 11.08 also show the tables). Each Your Turn slide shows two equations or a story and nothing else. The 11.05 Teacher Edition says why: "the kit's Your Turn slide carries none."
+**WHAT IS WRONG.** The example cannot be used as a model, because the thing the example read (a picture) is absent.
+- 11.05 Your Turn 2: the example reads *parallel lines from a graph* (no solution). The Your Turn asks "how many solutions" for y = −x + 4 and y = 2x − 5 from the equations alone — a different case and a different method — and the reveal announces "One solution, (3, 1)", a point no student could have produced. A student will either write "none" (copying the example's verdict) or sit still.
+- 11.07 Your Turn 1 and 2 say "Solve the system by graphing" to a class holding blank whiteboards (standing decision 9 says a whiteboard is no place for two lines). The reveal solves by tables. Your Turn 2 is a trap rather than a copy: Example 2 crosses inside its table (x = 2); the Your Turn crosses at (−4, 1), and the TE itself notes that a table at x = 0, 2, 4 "never meets". A student who follows the model exactly fails.
+- 11.08 Your Turn 1 (Mia and Noah) has no graph; the only route is 10x + 40 = 5x + 100, the bridge the unit says is "taught and not tested". Your Turn 2 asks for (1.5, 6) "by graphing" with no grid.
+**FIX.** Let a Your Turn slide carry a figure (boards already do). Then:
+- 11.05 Your Turn 2: a graph of **y = 4x + 1 and y = 4x − 3**, "How many solutions does the system have?" → none (parallel; always 4 apart). Drop the named crossing.
+- 11.07 Your Turn 1: keep y = x − 2 and y = −3x + 6, print two empty three-column tables and an empty grid on the slide and on a half-sheet (or the grid inserts in dry-erase sleeves the Source of Truth lists for AR.4.1–4.3); reveal shows the filled tables and graph.
+- 11.07 Your Turn 2: **y = ½x + 3 and y = −x + 9**, tables at x = 0, 2, 4 give 3, 4, 5 and 9, 7, 5 → **(4, 5)**, inside the table like the example. Move (−4, 1) to a board as the declared boundary case ("the crossing is left of your table").
+- 11.08 Your Turn 1 and 2: show the graph, as the examples do.
+If the kit cannot be changed before 30 November, turn each of these Your Turns into Board 1 (boards carry figures) and say so in the TE.
+
+#### 2. In 11.07 nobody graphs while the teacher is watching
+**WHERE.** 11.07 whole lesson; Independent Set 11.07 (4 pages); Lesson Plan sequence.
+**WHAT IT SAYS.** Target: "solve a system by graphing both lines." Boards 1–9 read a finished graph or table. The first time a student plots a table and rules a line is the Independent Set: five systems to graph (ten lines, thirty table values) plus one table question, in 6 silent minutes — "circulate; do not teach" — at the end of a 43-minute Wednesday. The handout prints grids but no empty tables.
+**WHAT IS WRONG.** The one new motor procedure of the unit gets no guided practice and no feedback; it will be done at home, where a wrong table produces a wrong line and nobody sees it. The state's named AR.4.3 misconception is "plotting and graphing errors producing wrong solutions" — and no board in the lesson can show the teacher a plotting error, because no board plots. Also, the Example slides (8 and 12) and Notes II show the finished product at once — both tables filled, both lines drawn, the crossing labeled — so the order of the moves (table, three points, ruler, second line, crossing, check) is never seen as a sequence.
+**FIX.** (a) Your Turn 1 is drawn on a printed grid (finding 1). (b) Stage Example 1 as three reveals: table and line 1; table and line 2; crossing and check. (c) Print two empty tables beside every grid on the Independent Set. (d) Cut the set to what 6 minutes holds: in class Q1 (whole crossing) and Q6 (two tables — the test's Q13); Q3 (the ½) and Q4 (parallel) go home; drop Q2 and Q5 to the Question Bank. (e) Add to "Misconceptions to Watch": a third point off the line means a y is wrong; a line stopped at its last plotted point misses the crossing.
+Note for the decision: the Practice Test never asks a student to draw (Q12–14 all supply the graph). If drawing is deliberately untested, say so in the TE and spend Wednesday's minutes on reading; if it matters, Review Q15 is its only assessed appearance.
+
+#### 3. 11.05–06 is overloaded for one 53-minute period — what should move or go
+**WHERE.** 11.05 slides 4–15; Lesson Plan (Notes 10 min).
+**WHAT IT SAYS.** In 10 minutes of notes, before any practice: three vocabulary terms; the first graph of a line this class has ever seen, from a table (Notes I); a system, its solution tested by substitution, and the crossing as that solution (Notes II); three cases from three graphs with the reason "the same number multiplies x" (Notes III). Then one example on substitution and one (2 minutes) on parallel lines whose worked line is (½x + 2) − (½x − 1) = 3.
+**WHAT IS WRONG.** Four new ideas and two new representations arrive before the student does anything. The reasoning-from-equations strand (same multiplier ⇒ parallel; ½ and 0.5 are one number ⇒ one line) is a second lesson stacked on top of "read the picture" — and 11.07 Notes III teaches it again two days later. The worked line of Example 2 subtracts a bracketed fraction expression, a move heavier than anything in 11.01–11.04, to justify something the graph already shows.
+**FIX — keep AR.4.1 and picture-reading; move the reasoning to 11.07; drop the story.**
+1. Vocabulary: "parallel lines — lines that never meet." Remove "the same number multiplies x in both equations" from the definition (it is a property, and it is 11.07's).
+2. Notes III: three pictures, three counts, nothing else. Replace the caption "Different numbers multiply x: the lines cross once" (which explains only one of the three) with "Cross once: one. Never meet: none. The same line: infinitely many."
+3. Example 2 worked slide: replace the subtraction line with a three-column table read off the graph — x = 0: 2 and −1; x = 2: 3 and 0; x = 4: 4 and 1 — "always 3 apart: they never meet."
+4. The bridge (x + 2 = −2x + 8) is in the Notes II speaker note: do not say it Monday; 11.07 Notes III prints it.
+5. Board 7 (the savings story) goes: reading a crossing in context is 11.08 board 2. Put the extra number (ruling 22) on another board — e.g. board 3, "The system is graphed on a grid 5 units wide. What is its solution?" — and use the freed board for a second same-line or parallel picture, the AR.4.2 case the state names.
+6. Order the practice by dependency: boards 1, 2, 4, 8, 9 need only substitution. Consider running Example 1, its Your Turn and boards 1–2 straight after Notes II, before Notes III, so the class has done something with a system before the three cases arrive (the TE can say this without a rebuild).
+
+#### 4. Worked equations are not laid out for a student to follow
+**WHERE.** Every Notes slide and worked Example in 11.01–11.04; every board reveal. Clearest cases: 11.01 slides 6, 7, 13; 11.02 slides 5, 6, 13; 11.04 slides 5, 6, 7, 9.
+**WHAT IT SAYS / WHAT IS WRONG.**
+- **Equals signs do not line up.** Notes lines are centered (3x + 5x − 4 = 28 above x = 4), example lines are flush left. Neither gives a column of "=" to track down the board.
+- **Two or three moves share a line.** "6x = 36   x = 6" (11.01 II), "−3x = −15   x = 5" (11.01 III), "7x = 56   x = 8", "2x = 11   x = 5.5", "4x = 20   x = 5". 11.02 Notes II runs each whole route across one line. 11.04 Notes II puts each fraction method on one line in three states.
+- **11.04 Notes I skips four moves at once:** 3(2x − 4) + 5 = 2(x + 6) + 1 goes straight to 6x − 7 = 2x + 13 (two distributions and two collections), then "4x = 20   x = 5" (two more). The slide titled "One order for every equation" does not show the order.
+- **The move is never written.** In 11.02 Notes I — the one new idea of the day — 5x + 2 = 3x + 10 is followed by 2x + 2 = 10 with nothing between. "Take 3x from both sides" exists only in the heading; "− 3x" under each side is not shown, and the reason (the balance) is in the teacher's voice only. The spec's per-line reasons ("take 4x from both sides", "add 5 to both sides") reach neither the slide nor the speaker notes (the decks have no notes pages and no animations), so a student's copied notes are four bare lines.
+- **Clearing fractions has no intermediate line:** x/2 + 3 = x/3 + 5 jumps to 3x + 18 = 2x + 30. The step students get wrong — 6 · x/2 = 3x and 6 · 3 = 18 — is invisible.
+- Board reveals are written as prose chains ("Collect: 7x − 8 = 34, so 7x = 42, x = 6"), and error-analysis items print the student's work as one run-on line (11.01 board 9, set Q6), so "which line has the mistake" has no lines.
+**A student will:** copy lines they cannot reconstruct; in 11.02 move a term to one side only; in 11.04 multiply only the fractions by the common denominator (the TE's own predicted error, x = 1 on board 5).
+**FIX.** One move per line, aligned on "=", in every notes block and worked example; the operation written under both sides in the accent color on the line where it happens (− 3x   − 3x); the short reason from the spec's rows printed small at the right of each line. For 11.04 Notes II add the line 6(x/2) + 6(3) = 6(x/3) + 6(5). For 11.04 Notes I show five lines: distribute, collect, take 2x, add 7, divide. Print error-analysis work line under line.
+
+#### 5. 11.04 spends its two pairs on the wrong things
+**WHERE.** 11.04 slides 5–15; Independent Set Q3, Q4.
+**WHAT IT SAYS.** Three new techniques in 11 minutes of notes: a fraction distributed, fractions cleared by a common denominator, a decimal distributed. Example 1 and its Your Turn are whole-number multi-step equations (11.02 with one more collection — review). Example 2 and its Your Turn distribute a fraction.
+**WHAT IS WRONG.** The two hardest and most important techniques have no pair: clearing fractions (one compressed line of notes, then board 5), and the decimal distribution — the 21% skill and Practice Test Q4 — (Notes III, then board 3). Independent Q4, −2.5(2k − 4) = k − 8, then changes three things at once from anything modeled (negative, decimal, variable on both sides).
+**FIX.** Example 1 becomes the decimal: **0.2(10x − 15) = x + 4** → 2x − 3 = x + 4 → x = 7 (check: 11 and 11). Your Turn: **0.6(10x − 5) = 4x + 5** → 6x − 3 = 4x + 5 → x = 4 (check: 21 and 21). Keep Example 2 (fraction distributed) or, better, make it the common-denominator pair and leave the distributed fraction to Notes II and board 2. Board 1 already carries the whole-number case. Set Q4 changes one thing, not three: give it a positive decimal like the test's, and move −2.5(2k − 4) = k − 8 to the Question Bank (or model a negative decimal on a board first).
+
+#### 6. The graphs are too small and too faint to carry the lesson from the back of the room
+**WHERE.** 11.05 slides 12, 20, 24, 26; 11.07 slides 16, 19, 20, 22, 24, 27, 28; 11.08 slides 8, 12, 16, 20, 22, 24, 28, 32.
+**WHAT IT SAYS.** On a 13.33 × 7.5 in slide the grid itself is typically about 2 in square with most of the slide empty; 11.05 board 6 is 1.5 in including its labels; 11.07 board 2's reveal shrinks both tables to a strip; 11.07 board 6's reveal graph is 1.6 in. Board graphs use hairlines while 11.05 Notes III uses bold lines. 11.08 board 4 — "Estimate the solution", described in the TE as "the estimate at full size" — has grid cells of about 0.4 in.
+**WHAT IS WRONG.** These boards ask the class to read a crossing, and one asks for tenths of a cell. From the back the answer is a guess, so a show of boards measures eyesight. The diagnostic value of the wrong answers (swapped, nearest grid point) is lost.
+**FIX.** On any slide whose question is the graph, the grid fills the available height (about 4.5 in), lines at the Notes III weight, tick labels at body-text size. On answer slides keep the graph at question size and put the two lines of working beneath it rather than beside a shrunken copy.
+
+#### 7. Pacing: the two 43-minute Wednesdays, nine boards in 13 minutes, six questions in 6
+**WHERE.** Lesson Plans and TE "The Period" tables, all lessons; 11.03 and 11.07 in particular.
+**WHAT IT SAYS.** Every plan totals 53 (house rule: one plan, the teacher absorbs short days). 11.03 names no cut. 11.07 names one: "boards 7 and 8 first, then the vocabulary slide." Boards get 12–14 minutes for nine questions including two votes with a 60-second re-vote and a written board 9 read aloud. The Independent Set gets 6 minutes for six written questions.
+**WHAT IS WRONG.** Ten minutes must come out of the two hardest days and the plan leaves it to the moment. 11.07's suggested cut removes the vocabulary slide — the opposite of Rule 6 (words before the notes use them). Ninety seconds a board is not possible for 11.04 board 5 (clear fractions) or any board 9. Six minutes is one or two questions of an Independent Set, so most independent practice happens at home with no feedback.
+**FIX.** Keep the 53-minute plan; add a "43-minute day" line to the TE of 11.03 and 11.07 that names the cut:
+- **11.03:** skip boards 5 and 7 (5 is a third copy of Example 2; 7 is the story); board 9 answered aloud, not written; IXL starts outside class. Keep board 8 — it is Practice Test Q6.
+- **11.07:** skip boards 6 and 7 (6, "which system has these lines", is a skill nothing in the lesson teaches and the test does not ask) and board 8; keep the vocabulary slide; IXL outside class.
+In every TE mark the boards that must happen — the two diagnostics, the boundary case and board 9 — and say that 7 and 8 are first to go. In every Independent Set mark the three questions to do in class.
+
+#### 8. The Unit Review's SSDD block has one deep structure, not four
+**WHERE.** Review Q6 a–d; Review Key Q6.
+**WHAT IT SAYS.** 4(x − 2) = x + 7; 4(x − 2) = 6x + 2; 4(x − 2) = 4x + 8; 4(x − 2) = 4x − 8. Stem: "Solve each equation. If it has no solution or infinitely many solutions, say so." The key: "the moves are the same every time."
+**WHAT IS WRONG.** That sentence is the finding. SSDD exists to break "match a procedure to a surface"; here one procedure answers all four parts, (a) and (b) differ only in the sign of the answer, and the stem announces the other two endings. It is a good minimally-different set (it belongs in 11.03) but it does not make a student choose what kind of problem they are in — which is the unit's real risk: an equation, a pair to test, a system to count and a story all look alike.
+**FIX.** One context, four structures (numbers checked; none repeats a lesson item):
+"Gym A costs \$36 to join and \$4 a visit. Gym B costs \$10 a visit."
+a. Dana has paid Gym A \$64 in all. How many visits? → 36 + 4v = 64, **7 visits** (11.01).
+b. After how many visits have the two gyms cost the same? → 36 + 4v = 10v, **6 visits, \$60** (11.02).
+c. Is (5, 56) a solution of the system y = 4x + 36 and y = 10x? → **No**: 4(5) + 36 = 56, but 10(5) = 50 (AR.4.1).
+d. Gym C costs \$50 to join and \$4 a visit. Will Gym A and Gym C ever have cost the same? → **Never**: 36 = 50 is never true; C is always \$14 more (11.03 / AR.4.2).
+Stem: "Answer each part." Keep the name on the key only. Move the present Q6 into the equations section as an ordinary question.
+
+#### 9. Writing an equation from a story is practiced and tested but never taught
+**WHERE.** 11.02 board 7 and set Q6; 11.03 board 7; 11.04 board 7 and set Q6; Practice Test Q7; 11.04 TE "Must not".
+**WHAT IT SAYS.** "After how many visits do the plans cost the same?" The reveal writes "Plan 1 costs 30 + 5v. Plan 2 costs 8v" and sets them equal. No notes slide or example in 11.01–11.04 models turning two plans into two expressions and an equation; the first model is 11.08 Notes I, six days later. The 11.04 TE lists "Writing the equation from a context (MA.912.AR.2.1)" under **Must not** while its own board 7 and set Q6 require it.
+**WHAT IS WRONG.** The first attempt is cold, on a board, and the predicted wrong answers (13v = 30; 30 ÷ 5) are what an untaught student does. Practice Test Q7 then depends on it.
+**FIX.** In 11.02, teach it once: use the "two plans" story as the second line of Notes III or run board 7 as a worked example (the teacher writes "cost of plan 1 = cost of plan 2" and the two expressions, the class solves), so set Q6 is its Your Turn. Remove the contradicting clause from 11.04's Must not, or reword it: "writing equations from contexts beyond 'two plans cost the same'".
+
+#### 10. The Practice Test is a fair mirror with one hole: no fraction coefficient
+**WHERE.** Practice Test Q1–Q7 against 11.04.
+**WHAT IT SAYS.** Q1–Q4 are like terms, both sides with a negative solution, parentheses on both sides, a decimal distributed. No question has a fraction coefficient or a common denominator.
+**WHAT IS WRONG.** 11.04's target is "fraction or decimal coefficients", half its notes and its only new-content pair are fractions, and the benchmark says rational coefficients. A student who rehearses the practice paper until it is easy never rehearses a fraction; either the test under-samples what was taught or Friday's fraction time is unassessed.
+**FIX.** Make Q3 carry it and keep "parentheses on both sides": **½(8m + 6) = 3(m + 2)** → 4m + 3 = 3m + 6 → **m = 3** (check: 15 and 15). If fractions are meant to stay off the test, say so in 11.04's TE and trim Notes II to the distributed fraction.
+**The rest of the mirror, for the record.** Taught and practiced but not on the paper: drawing a graph; "which plan costs less after the crossing" (11.08 boards 5 and 9, set Q5); writing a system from a story (11.08 board 6, set Q4); a system from four points (11.07 board 6). On the paper with a twist the lessons did not practice: Q6's extra "− x" before the box (11.03's box items have no collecting step); Q14's Leo "spends \$4 each week" — no 11.08 story decreases (harmless here, since the graph is given). Everything else on the paper has a same-kind board or set question.
+
+#### 11. 11.01: the hardest idea has no pair, and its first practice reverses the model
+**WHERE.** 11.01 slide 7 (Notes III), boards 5 and 6.
+**WHAT IT SAYS.** Notes III: 18 − 3(x − 2) = 9, with (−3)(−2) = +6. There is no example or Your Turn for a subtracted group; Examples 1 and 2 are collecting and a plus-distribution. The first attempt is board 5, 15 − 2(w + 1) = 5, where (−2)(+1) = −2.
+**WHAT IS WRONG.** The only model the student has shows the inside number turning positive. On board 5 they reproduce that: 15 − 2w + 2, w = 6 — the first wrong answer the TE lists. The declared "pattern break" lands before the pattern exists. Nothing on slide 7 points at the −3 (the arrows are in the ESE note only).
+**FIX.** Swap boards 5 and 6: board 6 (12 − 3(x − 4) = 6, "which is a correct next step?") has the same shape as Notes III and works as its Your Turn; 15 − 2(w + 1) = 5 then follows as the variation, and the TE's Variation note says so. On slide 7 draw the two arrows from −3 and color the −3 and the +6.
+
+---
+
+### MINOR
+
+#### 12. 11.03 boards never show an ordinary single solution
+**WHERE.** 11.03 boards 1–9. **WHAT.** Infinitely many, none, x = 0, infinitely many, none, "which has none", none, fill the box, infinitely many. The only one-solution board is the x = 0 case. **WRONG.** "If one, find it" is exercised once, and only with zero; the three-way discrimination the test's Q5 needs is practiced as a two-way one. Board 5 is also a third copy of Example 2. **FIX.** Board 5 → **6x − 9 = 3(x − 4)**: 6x − 9 = 3x − 12, 3x = −3, **x = −1** — it looks like the no-solution kind until distributed.
+
+#### 13. The decimal factor is set before it is taught
+**WHERE.** 11.01 set Q4, 0.5(4x + 6) + x = 18; 11.02 set Q5. **WRONG.** Standing decision 5 puts the 21% skill in front of the class daily, but its first two appearances are in silent independent work with no model; Notes III of 11.04 is the first teaching. A student will write 2x + 6. **FIX.** 11.01 board 3 (a near-copy of Example 2 and its Your Turn) → **0.5(6n + 4) + 2n = 22**: 3n + 2 + 2n = 22, **n = 4**. Add to Notes II: "A decimal outside works the same way."
+
+#### 14. 11.05 notes graphs point at the wrong thing
+**WHERE.** 11.05 slides 6, 7. **WHAT.** Notes II labels (0, 2) — the pair that is *not* a solution — with a large dot, and leaves the crossing (2, 4) unlabeled; its y-axis counts by 2 while x counts by 1, on the first system graph the class sees. In Notes III the "same line" picture is a single blue line. **WRONG.** Attention goes to the non-solution; and one line on a grid does not look like two equations. **FIX.** Label the crossing "(2, 4)" in bold and mark (0, 2) lightly; use equal scales; draw the second equation as orange dashes on top of the blue in the third picture.
+
+#### 15. Several diagnostic boards spend two options on one misconception
+**WHERE.** 11.02 board 6 (A and B both one-term distribution); 11.03 board 4 (A and D both "variable = constant"); 11.04 board 6 (B and D the same); 11.05 board 6 (A and C both cited to the same-line case). **WRONG.** Two options, one reteach; a named error goes untested. **FIX.** 11.02 board 6: option B → **x = 1** (4(−2) taken as +8: 4x + 8 = 2x + 10) — the state's "sign errors while distributing", absent from that board. The others are tolerable as built; note in the TE that A and D get the same response.
+
+#### 16. 11.07 board 4 lost its vote; board 6 tests what was not taught
+**WHERE.** 11.07 boards 4, 6. **WHAT.** The outline has board 4 as multiple choice (the crossing, the swap, two axis points); it was built free-response with those three errors listed. Board 6 asks which system passes through four points. **WRONG.** Board 4's errors are exactly a diagnostic set and a show of boards would sort them. Board 6 has no notes or example behind it and is not on the test. **FIX.** Restore board 4 as multiple choice: (2, 1) ✓ · (1, 2) · (0, 5) · (1, 0). Then board 6 can be skipped on the short day without dropping below two diagnostics.
+
+#### 17. Warm-up bands and sources
+**WHERE.** TE warm-up lines, 11.02, 11.03, 11.05, 11.07, 11.08. **WHAT / WRONG.**
+- Four fourth questions cite "7th grade" as the source. This class is in 7th grade; the lesson number is what the rule asks for. 11.02 Q4 (2x − 5x) is yesterday's like terms, so questions 1 and 4 retrieve the same lesson.
+- 11.03 Q1 and Q2 are 11.02 and 11.01 — one and two days old; no question reaches last week.
+- 11.08 Q4, "halfway between 2 and 3", is not what the day leans on. The day leans on turning "a start and an amount per one" into numbers.
+**FIX.** Name the lesson each fourth question retrieves, as the other three lines do (11.02 Q4 is 11.01; for the others, the Unit 1 lesson where a solution was checked or an expression evaluated). 11.03 Q2 → a T-B2 angle question. 11.08 Q4 → "A gym costs \$15 to join and \$4 a visit. What do 5 visits cost?" (\$35).
+All four questions in every lesson are retrieval; none previews new content.
+
+#### 18. 11.03 Your Turns give away their verdict
+**WHERE.** 11.03 slides 10, 14. **WRONG.** Example 1 is "infinitely many" and so is its Your Turn; Example 2 and its Your Turn are both "no solution". A board can be right without simplifying anything. **FIX.** Ask for the last line as well: "Write the line you end on, and what it means." The TE checks for −2 = −2, not the words.
+
+#### 19. 11.02 Notes II teaches two routes on the day the first is new
+**WHERE.** 11.02 slide 6. **WRONG.** Two solutions of one equation side by side, each on one line, the day the move is introduced; board 9 does the same job later, in writing. **FIX.** Notes II shows one route (take the smaller term) laid out line under line, with the sentence "Taking 6x instead also works; board 9." Leave the comparison to board 9.
+
+#### 20. 11.08's exit evidence is the untested skill
+**WHERE.** 11.08 boards 5 and 9, set Q5; Notes II. **WRONG.** "Which costs less after the crossing" gets one sentence of notes, two boards, and the written exit board — and is not on the test. The estimate (test Q14b, taught the day before the test) gets boards 3–4 only. **FIX.** Make board 9 an estimate with its check written out ("Estimate the crossing of … and show that your estimate is close in both equations"), and keep board 5 as the one "cheaper side" question.
+
+#### 21. 11.07 board 5's stem presumes a solution
+**WHERE.** 11.07 slide 24: "The system is graphed. What is its solution?" over parallel lines. **WRONG.** A fair boundary case, but 11.05 board 5 asked "How many solutions?" for the same picture; here the stem tells the class there is one. **FIX.** Keep the trap but say so in the TE's Variation note, or use "Solve the system."
+
+#### 22. Practice Test Q14 prints two unrelated graphs side by side
+**WHERE.** Practice Test page 6. **WRONG.** Part (b)'s graph (y = x + 1, y = −2x + 6) sits beside Mia and Leo's and has nothing to do with them; a student reads the wrong picture. "To the nearest tenth" from a graph about 1.3 in wide is finer than the picture supports (the key sensibly accepts 1.5–1.9 and 2.5–2.9). **FIX.** Make (b) its own question 15 with its own stem and a larger grid; word it "Estimate the solution" and let the key's range stand.
+
+#### 23. "neighbour" in the Teacher Editions
+**WHERE.** TE 11.01, 11.02, 11.03, 11.05, 11.08 (ten instances): "convince your neighbour". **WRONG.** House style is American English; the specs say "neighbor", so the string comes from the shared kit. 11.04's spec says "sixty seconds to think again" instead — inconsistent with the other six. The specs for 11.07 also contain "practised" (in read-first text; I did not find it in a printed PDF). **FIX.** "neighbor" in the kit string; "practiced" in l07.py.
+
+#### 24. Example slides in 11.07 and 11.08 show the answer before the example is worked
+**WHERE.** 11.07 slides 8, 12; 11.08 slides 8, 12. **WRONG.** The prompt slide already carries the filled tables, both lines and (11.07) the labeled crossing; the "worked" slide then drops the graph and lists numbers. There is nothing left to work. **FIX.** Prompt slide: the equations and an empty grid. Worked slide(s): the tables, then the graph with the crossing (see finding 2b).
+
+---
+
+### Checked and found sound
+
+- **Rule 1, equations.** All eight pairs in 11.01–11.04 are true pairs: same structure, new numbers, one small change (e.g. 5x + 9 − 2x = 30 → 7x − 3 − 4x = 24). 11.05 Example 1 and its Your Turn are a true pair. Every Your Turn note in the TE says what it catches.
+- **Rule 2.** Every TE carries a Variation paragraph that can be checked against the boards, and each equation day has a real boundary case in the right place: a negative solution with the larger term on the right (11.02 board 3), x = 0 (11.03 board 3, set Q4, Notes III), an identity hidden by a fraction (11.04 board 6), parallel lines (11.05 board 5, 11.07 board 5). 11.03 Notes I — three equations differing by one number — is the best slide in the unit. The independent sets follow the boards' path.
+- **Rule 4.** Every multiple-choice board has every wrong option named in the TE, and each named error is one the state lists for AR.2.1, AR.4.1, AR.4.2 or AR.4.3 or a plain slip a student makes (x-terms added, a constant moved the wrong way, coordinates swapped, one equation checked). I re-derived the distractors of 11.01 boards 4 and 6, 11.02 boards 4 and 6, 11.04 board 4 and 11.05 board 4: each follows from its stated error. The same-line board (11.05 board 6) and "only the two marked points" hit the state's AR.4.2 and AR.4.3 wording directly.
+- **Rule 5.** Four questions in every warm-up, all retrieval, none previewing; the fourth is the day's prerequisite in 11.01, 11.04, 11.05 and 11.07.
+- **Rule 6.** Every new term is on the vocabulary slide before the notes use it (checked all seven). The reasons exist and are right — why the same term comes off both sides, why 5 = 9 means no number works, why the crossing is the solution — but they sit in the speaker text; findings 3 and 4 are about getting them onto the slide.
+- **Sequence 11.01 → 11.04.** Each day's prerequisite is the day before; 11.03's endings are carried into 11.04 (board 6, set Q5) and into systems.
+- **No slope, no y-intercept, no ×, no benchmark code** on any student slide I viewed; systems are always given solved for y.
+- **Practice Test.** Q1–Q14 each match a board or set-question kind from the lessons apart from the points in finding 10; the 9 : 2 : 2 : 5 weighting matches the days.
+
+**Not audited:** the Question Banks and Additional Question Banks, the keys' arithmetic (machine-checked by the build), the Reference Sheet, and the IXL skill lists.
+
+
+---
+
+# Report · The FAST item review
+
+## A7 Unit 11 — review against the state (FAST Grade 8 / B.E.S.T. / B1G-M)
+
+**Bottom line.** The unit stays inside all four benchmarks (no standard form, no substitution or elimination demanded, no vertical line, no inequality, no third equation), teaches the three endings and the same-line case the way the B1G-M asks, and its "before slope" wording is mathematically honest. One key is arguable (Practice Test 14b accepts a printed grid point that lies on one line only).
+The real gap is level and coverage, not correctness: "rational coefficients" is taught with friendly numbers only (no negative fraction anywhere, a negative decimal in three bank/set items and never on a slide, the test or the review, never a decimal constant), and the Practice Test has no fraction-coefficient equation at all.
+The test is benchmark-shaped but not FAST-shaped: no "An equation is shown.", no "x =" response, no matching grid, no dropdown sentence, and its one multiselect always has exactly one key. Counts: 1 BLOCKER, 8 MAJOR, 7 MINOR.
+
+---
+
+### Findings
+
+#### 1. BLOCKER — Practice Test 14(b): the key's accepted range includes a grid point that is on one line only
+- **WHERE.** Assessment / Practice Test, question 14(b), and its key (`unit.py` q14, the `why` and the two range checks).
+- **WHAT IT SAYS.** "Estimate the solution of that system to the nearest tenth." Key: about (1.7, 2.7); "Accept a careful read with x from 1.5 to 1.9 and y from 2.5 to 2.9 … (2, 3) is the nearest grid point, on y = x + 1 only."
+- **WHAT IS WRONG.** The part-(b) graph is drawn with a grid line every half (I viewed it at 170 dpi). (1.5, 2.5) is a printed grid intersection, it lies exactly on y = x + 1 (1.5 + 1 = 2.5) and not on y = −2x + 6 (−3 + 6 = 3). It is the same error the key rejects for (2, 3) — snapping to the nearest grid point — yet the stated range earns it the point. The spec comment says the range is "strictly between the grid lines"; that is true of the whole-number lines only (the check tests 1 < 1.5 and 1.9 < 2), not of this figure. Two teachers will score (1.5, 2.5) differently.
+- **FIX.** Key: "Accept x from 1.6 to 1.8 and y from 2.6 to 2.8. (1.5, 2.5) and (2, 3) are grid points on y = x + 1 only; (2.7, 1.7) swaps the coordinates." (5/3 and 8/3 are inside; both rejected points are outside.) Change the range check to 8/5 ≤ 5/3 ≤ 9/5 and 13/5 ≤ 8/3 ≤ 14/5, and add `fails("-2*u + 6", "F(3,2)", "F(5,2)")`. The same rule should govern the practice page's generator: the tolerance must exclude every printed grid intersection.
+
+#### 2. MAJOR — "Rational number coefficients" is taught and practiced below the state's level
+- **WHERE.** Whole unit; sharpest in 11.04 (slides, set, both banks), the Practice Test Q4 and Review A3.
+- **WHAT IT SAYS.** Every decimal factor in the unit is chosen so the products are whole (0.5(4x + 6), 0.4(5t + 10), 0.2(10t − 5), 0.6(5v + 10), 1.5(2t + 4), 2.5(2x − 4)); every fraction factor is positive and clears to whole numbers (½, ⅓, ¼, ⅔, ¾, ⅖); no equation has a decimal constant; nearly every solution is a whole number.
+- **WHAT IS WRONG (searched the seven specs and `unit.py`).**
+  - **Negative fraction coefficient or factor: zero items in the unit.** The benchmark says rational coefficients; the B1G-M's named misconception is sign errors while distributing.
+  - **Negative decimal factor: three items only** — 11.04 set Q4 (−2.5(2k − 4) = k − 8), bank Q8 (−0.5(4k + 6) = k − 12), additional Q8 (−0.5(6k − 4) = 2k − 18). None on a slide or whiteboard, none in the Review, none on the Practice Test. The state's own item is −3.5(10x − 2) = −176.75 (x = 5.25): negative decimal factor, decimal constant, decimal answer.
+  - **Decimal constant or decimal x-coefficient left after distributing: one worked line** (Notes III of 11.04, 1.5x on the right). No practice item.
+  - **A solution that is not "nice": none.** The state's second item, 15(2x − 10) + 4x = −3(15x + 4), ends x = 138/79. Source of Truth Part 7 rule 12 says the accelerated class should meet a value that is merely tedious.
+  - The decimal-distributed skill (21% statewide) is promised "a question every day from 11.01". 11.03 has it in neither a board nor the Independent Set (bank Q7–8 only).
+- **FIX (each solved in sympy before writing).**
+  - 11.04 Notes III, add a second line or replace board 3: **−2.4(5x − 3) = −40.8** → −12x + 7.2 = −40.8 → x = 4. This is the state item's exact shape.
+  - 11.04 board 3 (now 0.4(5x − 10) = x + 3): **0.6(3x + 4) = 1.2x + 5.1** → 1.8x + 2.4 = 1.2x + 5.1 → 0.6x = 2.7 → x = 4.5.
+  - 11.04 Independent Set, swap Q1 (whole-number multi-step, already drilled for three days) for **−¾(8x − 12) = 2x − 23** → −6x + 9 = 2x − 23 → x = 4.
+  - 11.04 bank, add or swap: **⅔x + 5 = ⅙x − 1** → x = −12 (fraction coefficients on the variable itself, negative solution); **−1.5(4x − 3) = 2x − 13.5** → x = 2.25; **−⅔(6x − 9) = x − 15** → −4x + 6 = x − 15 → x = 21/5 = 4.2.
+  - 11.03 Independent Set, make one of Q2/Q3 a decimal ending, e.g. **0.4(5x − 10) = 2x − 4** is already in 11.04; use **0.5(6n − 4) = 3n + 2** (−2 = 2, no solution).
+  - One enrichment item in the 11.04 bank at the state's ugliness: **5(2x − 3) + 3x = −2(4x + 1)** → 13x − 15 = −8x − 2 → x = 13/21.
+  - Review A3: add **(d) −0.4(5x − 10) = x + 2.5** → −2x + 4 = x + 2.5 → x = 0.5.
+
+#### 3. MAJOR — The Practice Test (the test's blueprint) has no fraction-coefficient equation, and Q7 measures something AR.2.1 does not state
+- **WHERE.** Practice Test Q1–Q7 (`unit.py` `_ar21`).
+- **WHAT IT SAYS.** Q1 like terms + distribution; Q2 both sides; Q3 parentheses both sides; Q4 0.6(5v + 10) = 2v + 13; Q5 three endings; Q6 fill the box; Q7 storage companies (write 35 + 9m = 14m from a story).
+- **WHAT IS WRONG.** 11.04's target is "fraction or decimal coefficients"; the Review practices a fraction distributed and a common denominator (A3 b, c); the test never asks either. Half of 11.04 is untested. Meanwhile Q7's difficulty is writing the equation from a context, which MA.8.AR.2.1 does not state (11.04's own `working_toward` assigns it to MA.912.AR.2.1); a FAST AR.2.1 item is a bare equation. Q4 is the gentlest possible form of the 21% skill (positive factor, whole products, whole answer).
+- **FIX.** Q7 → a fraction distributed, with numbers no lesson uses: **⅔(6w + 9) = w − 3** → 4w + 6 = w − 3 → w = −3 (check: ⅔(−9) = −6 and −3 − 3 = −6). Q4 → **−1.5(4v − 6) = 2v − 15** → −6v + 9 = 2v − 15 → v = 3 (check: −1.5(6) = −9 and 6 − 15 = −9), with the key's named misses −6v − 9 (sign) and −6v − 6 (one term). Keep the two-plans story where it belongs, in 11.08 and Q14.
+
+#### 4. MAJOR — The only multiselect on the test always has exactly one correct answer
+- **WHERE.** Practice Test Q8; Review B (second item); 11.05 Independent Set Q3; Reference Sheet section 3, third bullet.
+- **WHAT IT SAYS.** "Select ALL the solutions of the system y = 3x − 2 and y = x + 6." Key: C only. The Reference Sheet: "when you test several pairs, at most one can pass."
+- **WHAT IS WRONG.** FAST's multiselect is hard because the count is unknown (Source of Truth Part 4, pattern 4: released keys of 3, 2 and 2). Here a student who notices different coefficients knows the count is one before testing anything, and the Reference Sheet teaches exactly that. The item is multiple choice wearing a multiselect's clothes, and it trains "select all = pick one". The unit already owns the right version: 11.05 bank Q12 (y = 2x + 2 and y = 2(x + 1), key A, C, D).
+- **FIX.** Practice Test Q8 → "Select all the ordered pairs that are solutions of the system **y = 2x − 6 and y = 2(x − 3)**." Options (5, 4) ✓, (3, 1) ✗, (0, −6) ✓, (−1, −8) ✓, (2, −1) ✗; key A, C, D. Have the practice page draw the crossing form and the same-line form at random so the count cannot be predicted. Reword the Reference Sheet bullet: "If the two lines cross, exactly one pair can pass. If the two equations are the same line, every pair on that line passes — so test every option." Also lowercase "ALL" to FAST's "Select all the…".
+
+#### 5. MAJOR — No horizontal line anywhere, and "the same number multiplying x" cannot describe one
+- **WHERE.** All of 11.05–11.08, the Review, the Practice Test (searched every `lines=[…]` and every equation: no line with 0 multiplying x).
+- **WHAT THE STATE EXPECTS.** The B1G-M's AR.4.2 item (reading notes): System B is two horizontal lines (no solution); System C is a slanted line and a horizontal line (one solution). Its AR.4.2 task is y = −½x and y = ⅓x, both through the origin ("no y-intercept, so no intersection" is the error). y = 3 is slope-intercept form, so it is inside AR.4.3's boundary as well.
+- **WHAT IS WRONG.** The unit's rule for parallel lines needs a number multiplying x; y = 2 and y = 5 show none. A student meets this for the first time on the state test. Likewise no system has both lines through the origin.
+- **FIX.** Add to 11.05 (a board or bank Q8–9) and to Review C: a graph of **y = 4 and y = −1** — no solution ("no x at all: 0 multiplies x in both, so each line stays level; parallel"); a graph of **y = 3 and y = x + 1** — one solution, (2, 3); and **y = 2x and y = −x** — one solution, (0, 0). One sentence in 11.05 Notes III: "y = 3 is a line too: every x gives 3."
+
+#### 6. MAJOR — The blueprint paper never shows the same-line case in a system, and spends an AR.4.3 point on evaluating an expression
+- **WHERE.** Practice Test Q10–Q13.
+- **WHAT IT SAYS.** Q10 crossing; Q11 parallel; Q12 read a crossing; Q13(a) "What number is missing from the table for y = 2x − 5?"; Q13(b) the solution from the tables.
+- **WHAT IS WRONG.** The B1G-M names exactly one misconception for AR.4.2 (the same-line case read as something other than infinitely many) and one for AR.4.3 beyond plotting (only the plotted points are solutions). The lessons teach both well; the blueprint paper tests neither (the outline says Q11 is "parallel or one line", so a given test form may never ask it). Q13(a) is substitution into one equation — not AR.4.3.
+- **FIX.** Q11 becomes two parts, 1 point each: (a) the parallel graph as printed; (b) "y = ½x − 2 and y = 0.5x − 2 both graph as the line shown, with two points marked. Which is true? A. one solution B. two solutions C. no solution D. infinitely many solutions" (key D). Replace Q13(a) with an AR.4.3 part (wording in finding 10, which also keeps the total at 18).
+
+#### 7. MAJOR — Three required IXL skills ask for what the unit deliberately withholds (verify in IXL; I could not open it)
+- **WHERE.** 11.05 IXL slide (slide 35) and 11.07 IXL slide.
+- **WHAT IT SAYS.** 11.05: "Solve a system of equations in slope-intercept form — 9Z8" and "Find the number of solutions to a system of equations by graphing — AGZ". 11.07: "Write a system of equations given a graph — TS7". All required to SmartScore 67.
+- **WHAT IS WRONG.** (a) 9Z8's printed title puts "slope-intercept" on a student slide — the one place the unit breaks its own rule (text search of every student PDF: "slope" and "intercept" occur once each, here). (b) TS7 by its title asks the student to write y = mx + b from a graph, which is MA.8.AR.3.3 (Unit 10); 11.07 does this once, as multiple choice (board 6). (c) AGZ is assigned on 11.05, two days before any student has graphed a line (11.07). (d) If 9Z8 is solved algebraically it is the "bridge taught, not tested" being required at 67.
+- **FIX.** Open each skill before Monday. Move AGZ to 11.07. Move TS7 to Unit 10, or make it optional. If 9Z8 expects algebra, drop it; if it stays, the slide can list it by code with a neutral label.
+
+#### 8. MAJOR — Teaching this before slope: the decision holds, but two Florida words are missing now and a hand-off must be written down
+- **VERDICT.** The wording is sound mathematics and prepares the concept: "3 multiplies x in both, so each line climbs 3 for every 1 across and they stay 3 apart" (11.07 board 9) is slope in everything but name. A spring FAST item on AR.4.3 that says "slope" will be read by students who have had Unit 10 since January. I would not put "slope" on a December student page. PM2 falls on Tue 8 Dec, mid-unit and before Unit 10, so its AR.3 and AR.4.3 results are not evidence about this unit.
+- **WHAT MUST BE ADDED NOW.**
+  1. **"Intersect" never appears in the unit** (0 occurrences; "cross/crossing" 387). Florida's items and guide say the lines intersect and name the point of intersection. Add to 11.05 vocabulary: "intersect — to cross; the point of intersection is where two lines cross", and use "intersect" in the Practice Test and Review stems ("The lines intersect at…").
+  2. **Say "coefficient of x"** beside "the number multiplying x" in 11.05–11.08. "Coefficient" is a Florida glossary word the class already owns from 11.01 (it is in the Reference Sheet vocabulary) and it is the word Unit 10 will rename: "the coefficient of x is the slope". It also survives y = x + 3 (coefficient 1), y = −x + 4 (−1) and y = 5 + 2x, where "the number in front" fails.
+  3. "The same steepness" is true only with direction: y = 2x and y = −2x are equally steep. The Reference Sheet covers it; say "the same steepness in the same direction" in 11.05 and 11.07.
+- **WHAT TO LEAVE TO UNIT 10 AND THE SPRING REVIEW — but write it into the plan now.** Unit 10's slope lesson reopens a Unit 11 pair (y = 3x − 2 and y = 3x + 1) and states Clarification 3 in the state's words: the same slope and different y-intercepts — parallel, no solution; the same slope and the same y-intercept — one line, infinitely many. PM3-R2 (20 Apr) carries at least three AR.4.2/4.3 items worded with "slope" and "y-intercept". Nothing in the Scope and Sequence records this yet.
+
+#### 9. MAJOR — Item shapes: the Practice Test is benchmark-shaped, not FAST-shaped
+Searched the specs: "An equation is shown." 0; "What is the value of" 0; a response prefixed "x =" 0; matching grid 0; dropdown sentence 0. "…are shown." is used only on AR.4.2 graph stems.
+
+| Q | Now | Verdict | Reword to |
+|---|---|---|---|
+| 1–4 | "Solve: 2(3n − 4) + 5n = 25" | Not FAST | "An equation is shown." / the equation on its own line / "What value of n makes the equation true?" / **n = ▢** |
+| 5 | three equations, name the ending, "if it has one, find it" | Right content, wrong shape | A **matching grid**: rows the three equations; columns No Solution · One Solution · Infinitely Many Solutions; one box per row. Keep "find it" as a separate line for (b). |
+| 6 | "What number in the box makes … have no solution?" | Close to FAST's inline blank | "Complete the equation so that it has no solution." 2(4x + 3) − x = ▢x + 1 |
+| 7 | story | Not an AR.2.1 shape | Replace (finding 3) |
+| 8 | multiselect, one key | Shape right, key count wrong | Finding 4 |
+| 9 | yes/no with reason, four options | FAST-shaped | Keep |
+| 10–11 | "The graphs of … are shown. How many solutions does the system have?" open | Stem right; response open | Add the three options, or use the dropdown below |
+| 12 | "What is its solution? Give its x and its y." | Nearly | "A system of equations is graphed. What is the solution of the system?" **x = ▢ y = ▢** (the outline already says so; the paper prints no boxes) |
+| 13 | two tables | Not a FAST stimulus for AR.4.3, but sound | Keep (b) |
+| 14(a) | story graph | FAST-shaped once shortened | Keep; two sentences |
+| 14(b) | estimate "to the nearest tenth", open | Not FAST | Multiple choice: "Which ordered pair is closest to the solution?" (1.7, 2.7) ✓ · (2.7, 1.7) · (2, 3) · (1.5, 2.5) — the unit's own 11.08 board 4 shape. Also, 14(b) has nothing to do with 14's stem; make it question 15 or give it its own stem. |
+
+**Missing from the test altogether:** a matching grid (the natural shape for one/none/infinitely many, equations or graphs); a dropdown sentence ("Complete the sentence about the system. The lines [intersect once / are parallel / are the same line], so the system has [one solution / no solution / infinitely many solutions]."); a choose-among-four-graphs item ("Which graph shows a system with no solution?" — Part 4 pattern 7: every graph is a stimulus). Each should appear at least once on a whiteboard in 11.03 and 11.05 before it appears on the test.
+
+#### 10. MINOR — Point weighting (9 / 2 / 2 / 5)
+Defensible by days taught (4 : 1 : 2) and by the district's Q2 essential benchmark; not by FAST, where each of the four benchmarks is one blueprint row. The weak point is practical: two one-point items cannot tell you anything about AR.4.1 or AR.4.2 on the Score Tracker. Recommended, keeping 18 points: delete Q1 (its skill is inside Q3 and Q5c); give Q11 its second part (finding 6); replace Q13(a) with an AR.4.3 part rather than dropping it — "The tables for y = 2x − 5 and y = 2x + 1 never show the same y for the same x. How many solutions does that system have?" (no solution). Result: **AR.2.1 8 · AR.4.1 2 · AR.4.2 3 · AR.4.3 5**.
+
+#### 11. MINOR — Systems are easier than the state's examples
+The B1G-M's AR.4.3 items: y = −¾x + 5 and y = −4x − 2 (about (−2.15, 6.62)); y = −0.5x + 2 and y = 4.5x − 5 ((1.4, 1.3)); y = 2x + 6 and y = 2x − 4.2 (parallel, decimal constant); AR.4.1 task with y = ⅗x − 9⁄5. The unit's systems use coefficients ±1, ±2, ±3, ½ (⅔ and 3⁄2 once each), whole constants, and every estimate sits in the first quadrant on thirds. Add to the 11.08 bank: "y = −0.5x + 2 and y = 4.5x − 5 are graphed. Which is closest to the solution? (1.4, 1.3) ✓ · (1.3, 1.4) · (1, 1.5) · (0, 2)"; to 11.07 "Select all the systems that have no solution" an option "y = 2x + 6 and y = 2x − 4.2"; to the 11.05 bank one check with a fractional constant, "(3, 0); y = ⅗x − 9⁄5 and y = −⅘x + 12⁄5" (yes: 9⁄5 − 9⁄5 = 0 and −12⁄5 + 12⁄5 = 0 — the state's own task).
+
+#### 12. MINOR — Items that belong to MA.8.AR.3.3, not to these four benchmarks
+11.07 board 6, bank Q11 and additional Q11 ("which system is graphed", from four points); 11.08 board 6, set Q4, bank Q5/Q10, additional Q5/Q10 ("write a system for the cost y of x …"). All are answerable without slope and are reasonable setup for a real-world AR.4.3 item, so keep them — but they are Unit 10's benchmark taught early, they should not be counted as AR.4.3 evidence, and none should reach the test.
+
+#### 13. MINOR — Florida's wording
+- **Answers written "None" / "Infinitely many"** (seven keyed answers in 11.05 and 11.07, the 11.04 and 11.05 warm-ups) where the benchmark's phrases are "no solution" and "infinitely many solutions". Use the full phrases every time; students copy the answer slide.
+- **Properties are not named.** The B1G-M asks students to verbalize the property used (Appendix D); "take 3x from both sides" is never called the subtraction property of equality (0 occurrences). One line in 11.02 Notes I is enough.
+- **Variables.** Equation lessons rotate letters well and avoid o, i, l. Every system and every story uses x and y only; the guide models contextual letters (h = 0.21m + 4.9). One 11.08 story in c and m would do.
+- No mnemonic or trick found (searched PEMDAS, FOIL and similar: 0). "Distribute, collect, move, divide, check" is an order of work, not a trick, but "move" is the word the guide's sign-error misconception grows from; "take the same term from both sides" (used elsewhere in the unit) is better.
+
+#### 14. MINOR — The decimal skill's daily promise is not met on 11.03
+Standing decision 5 promises a decimal-distributed question every day from 11.01 "(a board, or a question of the Independent Set)". 11.03 has none on a board or in the set (bank Q7–8 only). Fix in finding 2.
+
+#### 15. MINOR — Estimate tolerances are stated three ways
+Practice Test: a range (finding 1). Review D5 and 11.08 bank: "within about 0.2". 11.08 set Q3: "within about 0.2 of each, such as (1.5, 0.5)" — (1.5, 0.5) is on y = −x + 2 only. One rule everywhere: within 0.1 of the exact value rounded to the tenth, and never a printed grid intersection.
+
+#### 16. MINOR — Q14's stem
+Three sentences plus a second, unrelated system. FAST context stems are at most two sentences (Part 4 pattern 2). "Mia has $10 and saves $6 each week. Leo has $60 and spends $4 each week." then the graph, then the question.
+
+---
+
+### Checked and found sound
+- **Boundaries.** Every equation and system string in `l01–l08.py` and `unit.py`: one variable, linear, no inequality, no quadratic; every system is two equations, both solved for y; no standard form; no vertical line (the book's x = 3.5 item is correctly dropped); no item demands substitution or elimination (the mx + b = nx + c bridge is shown and never asked). Same-line pairs written y = b + mx or y = a(x + c) are within the state's own practice (its AR.4.2 item is 3y = 6x − 9).
+- **Three endings (AR.2.1 Clar. 1).** Taught as x = a, a = a, a = b with Florida's three phrases; x = 0 as one solution is taught, boarded, set, reviewed and tested (Q5b) — the guide's named misconception.
+- **Same-line case and unplotted points (AR.4.2, AR.4.3 misconceptions).** 11.05 Notes I ((100, 102), off the grid), Notes III ("the ones nobody plotted too"), board 6 (distractor "two — the marked points"), set Q6, both banks' select-all on a same-line system: taught properly. The gap is only on the test (finding 6).
+- **"A solution satisfies both" (AR.4.1).** Every wrong pair in every AR.4.1 item satisfies exactly one equation or is a swapped pair; keys name which.
+- **Approximation (AR.4.3 Clar. 1).** Taught in 11.08 (Notes III, boards 3–4, set, banks) with "about" and a check in both equations.
+- **Parallel lines (Clar. 3).** Recognized from equations and from graphs, including coefficient 1 and −1 pairs (11.05 board 5; 11.07 set Q4) and the ½ versus 0.5 trap.
+- **Practice Test keys 1–13 and 14(a).** Read against their stems; Q4, Q6, Q8, Q9 and Q12 distractor claims spot-checked by hand. All proposed replacement equations above were solved in sympy.
+- **Pictures viewed as images:** Practice Test pages 2–6 (every graph and table), Q14(b) at 170 dpi, and nine 11.08 slides (Notes III, boards 2, 3, 4, 6). I did not view every slide of 11.05 and 11.07 or the Review's figures as images; my reading of those rests on the specs.
+- **Not checked:** the practice page and its generators (`a7/practice/`, out of bounds), and IXL skill content (finding 7 is from the skill titles).
+

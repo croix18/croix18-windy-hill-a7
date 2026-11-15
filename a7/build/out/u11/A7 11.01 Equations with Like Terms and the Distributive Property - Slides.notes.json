@@ -38,7 +38,7 @@
    "title": "Notes",
    "sub": "Copy all four lines.",
    "min": 4,
-   "note": "3x and 5x are like terms: three x's and five more x's are eight x's. The \u22124 is a constant and is not like either. Once the x-terms are collected the equation is Unit 1's two-step equation: add 4 to both sides, divide both sides by 8. A like term has the same letter to the same power \u2014 x and x\u00b2 are not alike, and that is the only power we see this unit.\nOFF: 'Same letter, same power: they collect. A number on its own is a constant.'",
+   "note": "3x and 5x are like terms: three x's and five more x's are eight x's. The \u22124 is a constant and is not like either. Once the x-terms are collected the equation is Unit 1's two-step equation: add 4 to both sides, divide both sides by 8. A like term has the same letter to the same power \u2014 x and x\u00b2 are not alike, and that is the only power we see this unit. The last line writes an equation from a story before board 7 asks for one: the \\$9 is paid every week, so it multiplies w \u2014 the coefficient; the \\$20 is paid once \u2014 the constant; the \\$83 is the total. Do not solve it on the slide (w = 7); say only which number goes where and why.\nOFF: 'Same letter, same power: they collect. A number on its own is a constant.'",
    "kind": "notes"
   },
   {
@@ -46,7 +46,7 @@
    "title": "Notes",
    "sub": "",
    "min": 3,
-   "note": "The 3 multiplies the 2x AND the \u22125: 6x \u2212 15. Then \u221215 and +4 are like terms (both constants): \u221211. Then two steps. A board that writes 6x \u2212 5 has distributed to one term only \u2014 the B1G-M's first named misconception for this benchmark.\nOFF: 'The number outside multiplies every term inside.'",
+   "note": "The 3 multiplies the 2x AND the \u22125: 6x \u2212 15. Then \u221215 and +4 are like terms (both constants): \u221211. Then two steps. A board that writes 6x \u2212 5 has distributed to one term only \u2014 the B1G-M's first named misconception for this benchmark. The last line is the decimal the unit asks for every day: 0.5 of 10x is 5x and 0.5 of \u22124 is \u22122 \u2014 the decimal reaches both terms exactly as the 3 did (board 3 and set question 4 use it).\nOFF: 'The number outside multiplies every term inside.'",
    "kind": "notes"
   },
   {
@@ -54,7 +54,7 @@
    "title": "Notes",
    "sub": "",
    "min": 3,
-   "note": "The 3(x \u2212 2) is subtracted, so the factor is \u22123, and it multiplies both terms: (\u22123)(x) = \u22123x and (\u22123)(\u22122) = +6. 18 + 6 = 24. Never 18 \u2212 3 first: the 3 belongs to the parentheses, not to the 18. Then the check \u2014 put 5 back in the FIRST equation, not a later line: 18 \u2212 3(5 \u2212 2) = 18 \u2212 9 = 9.\nOFF: 'The minus sign belongs to the 3. It goes in with it.'",
+   "note": "The 3(x \u2212 2) is subtracted, so the factor is \u22123, and it multiplies both terms: (\u22123)(x) = \u22123x and (\u22123)(\u22122) = +6. 18 + 6 = 24. Never 18 \u2212 3 first: the 3 belongs to the parentheses, not to the 18. Then the check \u2014 put 5 back in the FIRST equation, not a later line: 18 \u2212 3(5 \u2212 2) = 18 \u2212 9 = 9. Draw two arrows by hand from the \u22123, one to the x and one to the \u22122, and circle the \u22123 and the +6: the slide cannot (board 5 asks for exactly this line next).\nOFF: 'The minus sign belongs to the 3. It goes in with it.'",
    "kind": "notes"
   },
   {
@@ -158,7 +158,7 @@
    "title": "Whiteboards   \u00b7   Question 3 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "Example 2's moves with a plus inside. A board with n = 11.6 wrote 3n + 4 (one term); one with n = 50/3 left out the 2n.",
+   "note": "Notes II's last line, used: 0.5 of 6n is 3n and 0.5 of 4 is 2. A board with n = 3.6 wrote 3n + 4 (the decimal to one term only \u2014 the state's most-missed skill); one with n = 20/3 left out the 2n. Check: 0.5(28) + 8 = 14 + 8 = 22.",
    "kind": "wb"
   },
   {
@@ -190,7 +190,7 @@
    "title": "Whiteboards   \u00b7   Question 5 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "The pattern breaks: the group is subtracted, so the factor is \u22122 and the +1 becomes \u22122. A board with w = 6 wrote 15 \u2212 2w + 2 (the sign); one with w = 5.5 wrote 15 \u2212 2w + 1 (one term). Check: 15 \u2212 2(4 + 1) = 15 \u2212 10 = 5.",
+   "note": "Diagnostic, and Notes III's Your Turn: the same shape \u2014 a subtracted group with a minus inside, so (\u22123)(\u22124) = +12. Three named errors, each the next line a student really writes. Option C is the sign, option D subtracts before distributing, option A distributes to one term. Ask a room that chose B to finish it: 24 \u2212 3x = 6, x = 6.",
    "kind": "wb"
   },
   {
@@ -206,7 +206,7 @@
    "title": "Whiteboards   \u00b7   Question 6 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "Diagnostic: three named errors, each the next line a student really writes. Option C is the sign, option D subtracts before distributing, option A distributes to one term. Ask a room that chose B to finish it: 24 \u2212 3x = 6, x = 6.",
+   "note": "The pattern breaks: the group is subtracted, but the inside term is +1, so (\u22122)(+1) = \u22122 \u2014 not the +6 of Notes III and +12 of board 5. A board with w = 6 wrote 15 \u2212 2w + 2 (the Notes III pattern copied: the sign); one with w = 5.5 wrote 15 \u2212 2w + 1 (one term). Check: 15 \u2212 2(4 + 1) = 15 \u2212 10 = 5.",
    "kind": "wb"
   },
   {
@@ -222,7 +222,7 @@
    "title": "Whiteboards   \u00b7   Question 7 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "The extra-number board (ruling 22): Dana's age, 13, is not needed. The \\$12 is paid every month \u2014 the coefficient; the \\$25 once \u2014 the constant. Check: 25 + 12(6) = 97.",
+   "note": "The extra-number board (ruling 22): Dana's age, 13, is not needed. Notes I's last line modeled this: the \\$12 is paid every month \u2014 the coefficient; the \\$25 once \u2014 the constant. Check: 25 + 12(6) = 97.",
    "kind": "wb"
   },
   {
@@ -254,7 +254,7 @@
    "title": "Whiteboards   \u00b7   Question 9 of 9",
    "sub": "Take your time. Boards up when you have written it.",
    "min": 0,
-   "note": "Written, and the exit evidence. Read two aloud. Sam's wrong move gives 5.5, not 7, so a check of his answer exposes it: 4(5.5 \u2212 2) + 3 = 17, not 23.",
+   "note": "Written, and the exit evidence. Sam's work is printed as numbered lines so 'which line' has an answer: line 1. Read two aloud. Sam's wrong move gives 5.5, not 7, so a check of his answer exposes it: 4(5.5 \u2212 2) + 3 = 17, not 23.",
    "kind": "wb"
   },
   {

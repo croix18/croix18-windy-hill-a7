@@ -6,7 +6,7 @@
    "title": "Solving Systems by Graphing",
    "sub": "",
    "min": 1,
-   "note": "A 43-minute Wednesday on the standard plan, as 11.03 was: the cut is yours \u2014 boards 7 and 8 first, then the vocabulary slide.",
+   "note": "Post the learning target. Today is 43 minutes: the cut is under Materials at the end of this edition.",
    "kind": "title"
   },
   {
@@ -14,7 +14,7 @@
    "title": "Warm-Up",
    "sub": "On your own. No notes.",
    "min": 4,
-   "note": "Q4 is Notes I's table: three x's, three y's, three points. Say that after the reveal. Two minutes silent, then reveal, no discussion \u2014 43 minutes today.",
+   "note": "Q4 is Notes I's table: three x's, three y's, three points. Say that after the reveal. Two minutes silent, then reveal, no discussion \u2014 43 minutes today: the cut is under Materials.",
    "kind": "warmup"
   },
   {
@@ -30,14 +30,14 @@
    "title": "Vocabulary",
    "sub": "The new words, before they are used.",
    "min": 1,
-   "note": "Two phrases, read once each. The table is the tool all period: x = 0 first, then two more, and the third point is the check. 'Solve by graphing' ends with a check in both equations, every time.",
+   "note": "Four phrases, read once each. The table is the tool all period: x = 0 first, then two more, and the third point is the check. 'Solve by graphing' ends with a check in both equations, every time. The coefficient of x is Monday's 'number multiplying x' with its proper name (Unit 10 gives it a second one); it decides parallel \u2014 2 and \u22122 are equally steep but not the same direction, so they cross.",
    "kind": "vocab"
   },
   {
    "n": 5,
    "title": "Notes",
    "sub": "Copy the table and the line.",
-   "min": 4,
+   "min": 3,
    "note": "The class has never drawn y = mx + b, so the line comes from a table. x = 0 first, then two more; put each x in and get its y. Plot the three points. Two points draw a line; the third is the check \u2014 three points in a row, or a y is wrong. Then draw the line through them and PAST them, to the edge of the grid: the crossing may be beyond the points you plotted.\nOFF: 'Pick three x's. Find each y. Three points in a row, then a ruler through them, edge to edge.'",
    "kind": "notes"
   },
@@ -45,7 +45,7 @@
    "n": 6,
    "title": "Notes",
    "sub": "",
-   "min": 4,
+   "min": 3,
    "note": "A table for each equation, both lines on one grid. They cross at (2, 3), and that is the solution \u2014 the one point on both lines. Then the check, every time: 2 + 1 = 3 and \u22122(2) + 7 = 3. Point out that the tables already agree at x = 2 (both give 3): the crossing shows in the tables too.\nOFF: 'Graph both. Read the crossing. Check it in both equations.'",
    "kind": "notes"
   },
@@ -54,22 +54,22 @@
    "title": "Notes",
    "sub": "",
    "min": 3,
-   "note": "Left: 2 multiplies x in both, so the lines climb at the same steepness and stay 5 apart \u2014 parallel, no solution. Right: y = 3x \u2212 1 and y = \u22121 + 3x make the same table (\u22121, 2, 5), so their graphs are one line: infinitely many solutions. Then the bridge, said and not practised: where the lines of Notes II cross, both give the same y, so x + 1 = \u22122x + 7 \u2014 11.02's equation \u2014 and x = 2. It is how a graphed answer is checked; nobody is asked to do it today.\nOFF: 'Same number multiplying x, different numbers added: parallel. Same table: one line.'",
+   "note": "Monday's pictures (11.05 Notes III), now with their reasons from the equations; no picture here. Parallel: y = 2x + 3 and y = 2x \u2212 2 \u2014 the coefficient of x is 2 in both, so the lines climb at the same steepness in the same direction and stay 5 apart \u2014 parallel, no solution. Two level lines, y = 4 and y = \u22121, are parallel too: 0 multiplies x in both. One line: y = 3x \u2212 1 and y = \u22121 + 3x make the same table (\u22121, 2, 5), so their graphs are one line: infinitely many solutions \u2014 and y = \u00bdx + 1 and y = 0.5x + 1 are one line too, because \u00bd and 0.5 are one number. Then the bridge, line by line, said and not practiced: where Notes II's lines cross, both give the same y, so x + 1 = \u22122x + 7 \u2014 11.02's equation; add 2x to both sides, take 1 from both sides, divide by 3: x = 2. It is how a graphed answer is checked; nobody is asked to do it today.\nOFF: 'Same coefficient of x, different numbers added: parallel. One equation written two ways: one line.'",
    "kind": "notes"
   },
   {
    "n": 8,
    "title": "Example 1",
    "sub": "Tables, graph, crossing, check.",
-   "min": 1,
-   "note": "This is the model: read the tables row by row (x = 0 first), point to each plotted point, then ask the room where the lines cross before anyone says it.",
+   "min": 2,
+   "note": "This is the model, and its question slide is empty on purpose: two tables with no y's and a grid with no lines. Work it on the projected slide in this order, saying each move: fill the first table (x = 0 first); plot its three points; rule the line through them and past them, edge to edge; the second table, its points, its line; then the crossing; then the check in both. Ask the room where the lines cross before anyone says it.",
    "kind": "example"
   },
   {
    "n": 9,
    "title": "Example 1",
    "sub": "Worked.",
-   "min": 2,
+   "min": 1,
    "note": "The tables: 2x \u2212 3 gives \u22123, \u22121, 1 and \u2212x + 6 gives 6, 5, 4 at x = 0, 1, 2. The lines cross beyond the tables, at (3, 3) \u2014 which is why each line is drawn past its points. Check in both: 2(3) \u2212 3 = 3 and \u22123 + 6 = 3. A board with (3, 0) or (0, 3) read a line where it meets an axis.",
    "kind": "example"
   },
@@ -77,8 +77,8 @@
    "n": 10,
    "title": "Your Turn",
    "sub": "Same steps, your numbers. Boards up when done.",
-   "min": 2,
-   "note": "Tables at x = 0, 1, 2: x \u2212 2 gives \u22122, \u22121, 0 and \u22123x + 6 gives 6, 3, 0. Both give 0 at x = 2: the lines cross at (2, 0), on the x-axis. A board with (0, 2) swapped the coordinates; with 'no solution', saw a crossing on an axis and did not count it.",
+   "min": 5,
+   "note": "Two parts, five minutes. (1) Boards, two minutes: the tables at x = 0, 1, 2 give \u22122, \u22121, 0 and 6, 3, 0 \u2014 both give 0 at x = 2, so the lines cross at (2, 0), on the x-axis. A board with (0, 2) swapped the coordinates; with 'no solution', saw a crossing on an axis and did not count it. (2) Hand out the Independent Set now: everyone draws question 1 on its grid, three minutes, while you circulate \u2014 the first lines this class draws are drawn where you can see them. Look for a third point off the line (a y is wrong) and a line stopped at its last point (it can miss the crossing).",
    "kind": "yourturn"
   },
   {
@@ -94,7 +94,7 @@
    "title": "Example 2",
    "sub": "A \u00bd multiplying x: choose even x.",
    "min": 1,
-   "note": "Ask what x's make \u00bdx easy before anyone fills a table: the even ones, so x = 0, 2, 4.",
+   "note": "Ask what x's make \u00bdx easy before anyone fills a table: the even ones, so x = 0, 2, 4. Then fill, plot and draw on the projected empty grid, as in Example 1.",
    "kind": "example"
   },
   {
@@ -110,7 +110,7 @@
    "title": "Your Turn",
    "sub": "Same steps, your numbers. Boards up when done.",
    "min": 2,
-   "note": "Even x, and this crossing is to the left: at x = \u22124, \u00bd(\u22124) + 3 = 1 and \u2212(\u22124) \u2212 3 = 1, so (\u22124, 1). A table at x = 0, 2, 4 alone (3, 4, 5 and \u22123, \u22125, \u22127) never meets; the lines have to be drawn left. A board with (1, \u22124) swapped the coordinates.",
+   "note": "Even x again: at x = 0, 2, 4, \u00bdx + 3 gives 3, 4, 5 and \u2212x + 9 gives 9, 7, 5. Both give 5 at x = 4: the lines cross at (4, 5). Check: \u00bd(4) + 3 = 5 and \u22124 + 9 = 5. A board with (5, 4) swapped the coordinates; one with (2, 4) or (2, 7) read one table only.",
    "kind": "yourturn"
   },
   {

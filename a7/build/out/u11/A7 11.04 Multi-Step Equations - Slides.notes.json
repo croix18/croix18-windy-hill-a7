@@ -14,7 +14,7 @@
    "title": "Warm-Up",
    "sub": "On your own. No notes.",
    "min": 4,
-   "note": "Q4 is today's move in miniature: two-thirds of 9 is 6, so two-thirds of 9x is 6x. Say that in one sentence after the reveal \u2014 Example 2's Your Turn distributes a two-thirds. Two minutes silent, then reveal, no discussion.",
+   "note": "Q4 is today's move in miniature: two-thirds of 9 is 6, so two-thirds of 9x is 6x. Say that in one sentence after the reveal \u2014 Notes II and board 2 distribute a negative fraction the same way. Two minutes silent, then reveal, no discussion.",
    "kind": "warmup"
   },
   {
@@ -36,17 +36,17 @@
   {
    "n": 5,
    "title": "Notes",
-   "sub": "Copy all four lines.",
+   "sub": "Copy all six lines.",
    "min": 4,
-   "note": "The order of the last three days, said once as a list: distribute; collect like terms on each side; move the x-terms to one side and the constants to the other; divide; check. Here the left is 6x \u2212 12 + 5 = 6x \u2212 7 and the right is 2x + 12 + 1 = 2x + 13. Take 2x from both sides and add 7: 4x = 20, so x = 5. Check in both sides of the first equation: 3(6) + 5 = 23 and 2(11) + 1 = 23.\nOFF: 'Distribute, collect, move, divide, check. Every equation, every time.'",
+   "note": "The order of the last three days, every move on its own line: distribute on both sides (6x \u2212 12 + 5 and 2x + 12 + 1); collect each side (6x \u2212 7 and 2x + 13); take 2x from both sides (4x \u2212 7 = 13); add 7 (4x = 20); divide by 4. Check in both sides of the first equation: 3(6) + 5 = 23 and 2(11) + 1 = 23.\nOFF: 'Distribute, collect, take the same term from both sides, divide, check. Every equation, every time.'",
    "kind": "notes"
   },
   {
    "n": 6,
    "title": "Notes",
    "sub": "",
-   "min": 4,
-   "note": "Two ways with a fraction. First: distribute it \u2014 one-third of 6x is 2x and one-third of 9 is 3, every term inside, just as a whole number would. Then 2x + 3 = x + 7 and x = 4. Second: multiply BOTH sides by a common denominator. Halves and thirds clear with 6, and the 6 multiplies EVERY term \u2014 the 3 and the 5 as well as the fractions: 3x + 18 = 2x + 30, so x = 12. Check: 6 + 3 = 9 and 4 + 5 = 9. A board that writes 3x + 3 = 2x + 5 multiplied only the fractions.\nOFF: 'A fraction outside the parentheses multiplies every term inside. A common denominator multiplies every term on both sides.'",
+   "min": 3,
+   "note": "The fraction multiplies every term inside, just as a whole number does \u2014 and a negative fraction carries its sign to each term, as 11.01's \u22123 did: (\u2212\u00bd)(4x) = \u22122x and (\u2212\u00bd)(\u221210) = +5. Then add 2x to both sides (the smaller x-term is \u22122x), add 1, divide by 3. Check: \u2212\u00bd(8 \u2212 10) = 1 and 2 \u2212 1 = 1. A board with \u22122x \u2212 10 sent the fraction to one term; one with \u22122x \u2212 5 lost the sign. Fractions can also be CLEARED \u2014 multiply every term by a common denominator \u2014 and that is Example 2.\nOFF: 'A fraction outside the parentheses multiplies every term inside \u2014 sign and all.'",
    "kind": "notes"
   },
   {
@@ -54,15 +54,15 @@
    "title": "Notes",
    "sub": "",
    "min": 3,
-   "note": "The 0.5 multiplies the 8x AND the \u22126: 4x \u2212 3. Then the x-terms: take 1.5x from both sides, 2.5x on the left; add 3: 2.5x = 5, so x = 2. Check: 0.5(16 \u2212 6) = 5 and 1.5(2) + 2 = 5. This is the skill the state scored lowest on its released Grade 8 test \u2014 almost four in five students missed it \u2014 and the miss is nearly always 4x \u2212 6: the decimal never reached the second term.\nOFF: 'The decimal is a number like any other. It multiplies every term inside.'",
+   "note": "The state's own shape: a negative decimal outside, a decimal left over. \u22122.4 times 5x is \u221212x; \u22122.4 times \u22123 is +7.2 \u2014 not a whole number, and that is fine. Subtract 7.2 from both sides: \u221212x = \u221248. Divide by \u221212: x = 4. Check: \u22122.4(20 \u2212 3) = \u22122.4(17) = \u221240.8. This is the skill the state scored lowest on its released Grade 8 test \u2014 almost four in five students missed it \u2014 and the miss is nearly always the decimal never reaching the second term (\u221212x \u2212 3) or its sign (\u221212x \u2212 7.2).\nOFF: 'The decimal is a number like any other. It multiplies every term inside, sign and all.'",
    "kind": "notes"
   },
   {
    "n": 8,
    "title": "Example 1",
-   "sub": "Parentheses on both sides.",
+   "sub": "A decimal outside, the variable on both sides.",
    "min": 1,
-   "note": "Ask what each side is once it is distributed and collected, before anyone moves a term.",
+   "note": "Ask what 0.2 of 10x is, and what 0.2 of \u221215 is, before anyone writes.",
    "kind": "example"
   },
   {
@@ -70,7 +70,7 @@
    "title": "Example 1",
    "sub": "Worked.",
    "min": 2,
-   "note": "Each side first: the left is 6x + 2 \u2212 4x = 2x + 2, the right 3x \u2212 6 + 1 = 3x \u2212 5. Take 2x (the smaller) from both sides: 2 = x \u2212 5, so x = 7. Check in both sides of the first equation: 2(22) \u2212 28 = 16 and 3(5) + 1 = 16. A board with x = 3 wrote 3x \u2212 2 on the right (the 3 to one term only); one with x = \u22125 wrote 3x + 6 (the sign).",
+   "note": "0.2 of 10x is 2x; 0.2 of \u221215 is \u22123 \u2014 both terms. Take x (the smaller) from both sides: x \u2212 3 = 4. Add 3: x = 7. Check in both sides of the first equation: 0.2(55) = 11 and 7 + 4 = 11. A board with x = 19 wrote 2x \u2212 15 (the decimal to one term only); one with x = 1 wrote 2x + 3 (the sign).",
    "kind": "example"
   },
   {
@@ -78,7 +78,7 @@
    "title": "Your Turn",
    "sub": "Same steps, your numbers. Boards up when done.",
    "min": 2,
-   "note": "The left is 4x + 8 \u2212 x = 3x + 8, the right 2x \u2212 6 + 20 = 2x + 14. Take 2x: x + 8 = 14, so x = 6. Check: 4(8) \u2212 6 = 26 and 2(3) + 20 = 26. This catches a student who collects across the equals sign, and the one-term distribution: 4x + 2 \u2212 x on the left gives x = 12.",
+   "note": "0.6 of 10x is 6x and 0.6 of \u22125 is \u22123: 6x \u2212 3 = 4x + 5. Take 4x: 2x \u2212 3 = 5, so 2x = 8 and x = 4. Check: 0.6(35) = 21 and 4(4) + 5 = 21. A board with x = 5 wrote 6x \u2212 5 (the decimal to one term only); one with x = 1 wrote 6x + 3 (the sign).",
    "kind": "yourturn"
   },
   {
@@ -92,29 +92,37 @@
   {
    "n": 12,
    "title": "Example 2",
-   "sub": "A fraction in front of the parentheses.",
+   "sub": "Clear the fractions with a common denominator.",
    "min": 1,
-   "note": "Ask what three-fourths of 8x is, and what three-fourths of \u22124 is, before anyone writes.",
+   "note": "Ask what number both 2 and 3 divide into, before anyone writes: 6. Then ask which terms the 6 must multiply: all four.",
    "kind": "example"
   },
   {
    "n": 13,
    "title": "Example 2",
-   "sub": "Worked.",
-   "min": 2,
-   "note": "Three-fourths of 8x is 6x; three-fourths of \u22124 is \u22123 \u2014 every term inside, as with a whole number. Then take 2x from both sides: 4x \u2212 3 = 9, so 4x = 12 and x = 3. Check: three-fourths of 20 is 15, and 2(3) + 9 = 15. A board with x = 3.25 wrote 6x \u2212 4 (the fraction to one term only); one with x = 1.5 wrote 6x + 3 (the sign).",
+   "sub": "Worked: clear the fractions.",
+   "min": 1,
+   "note": "Halves and thirds clear with 6. The second line is the one students skip: 6 multiplies EVERY term \u2014 the 3 and the 5 as well as the fractions. 6 times x/2 is 3x; 6 times 3 is 18. A board with 3x + 3 = 2x + 5 multiplied only the fractions (x = 2).",
    "kind": "example"
   },
   {
    "n": 14,
-   "title": "Your Turn",
-   "sub": "Same steps, your numbers. Boards up when done.",
+   "title": "Example 2",
+   "sub": "Worked: then solve.",
    "min": 2,
-   "note": "Two-thirds of 9x is 6x and two-thirds of \u22126 is \u22124: 6x \u2212 4 = 2x + 12. Take 2x: 4x \u2212 4 = 12, so 4x = 16 and x = 4. Check: two-thirds of 30 is 20, and 2(4) + 12 = 20. A board with x = 4.5 wrote 6x \u2212 6 (the two-thirds never reached the 6).",
-   "kind": "yourturn"
+   "note": "No fractions are left: it is 11.02's equation. Take 2x from both sides and subtract 18. Check in both sides of the first equation: 6 + 3 = 9 and 4 + 5 = 9.",
+   "kind": "example"
   },
   {
    "n": 15,
+   "title": "Your Turn",
+   "sub": "Same steps, your numbers. Boards up when done.",
+   "min": 2,
+   "note": "Quarters and sixths clear with 12: 12 times x/4 is 3x, 12 times \u22121 is \u221212, 12 times x/6 is 2x, 12 times 1 is 12. Take 2x: x \u2212 12 = 12, so x = 24. Check: 6 \u2212 1 = 5 and 4 + 1 = 5. A board with 3x \u2212 1 = 2x + 1 multiplied only the fractions (x = 2); one with 24 as the multiplier is right too, with bigger numbers.",
+   "kind": "yourturn"
+  },
+  {
+   "n": 16,
    "title": "Your Turn",
    "sub": "Answer.",
    "min": 1,
@@ -122,7 +130,7 @@
    "kind": "yourturn"
   },
   {
-   "n": 16,
+   "n": 17,
    "title": "Whiteboards   \u00b7   Question 1 of 9",
    "sub": "Boards up on three.",
    "min": 0,
@@ -130,7 +138,7 @@
    "kind": "wb"
   },
   {
-   "n": 17,
+   "n": 18,
    "title": "Whiteboards   \u00b7   Question 1 of 9",
    "sub": "Answer.",
    "min": 0,
@@ -138,87 +146,87 @@
    "kind": "wb"
   },
   {
-   "n": 18,
+   "n": 19,
    "title": "Whiteboards   \u00b7   Question 2 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "Notes II's first way: half of 10x is 5x and half of 8 is 4. A board with x = 3 wrote 5x + 8 (the half to one term only); one with x = 9 took the 4 the wrong way (2x = 18). Check: half of 58 is 29, and 3(5) + 14 = 29.",
-   "kind": "wb"
-  },
-  {
-   "n": 19,
-   "title": "Whiteboards   \u00b7   Question 2 of 9",
-   "sub": "Answer.",
-   "min": 0,
-   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "note": "Notes II with new numbers: \u2212\u2153 of 6x is \u22122x and \u2212\u2153 of \u22129 is +3. A board with x = \u22121 wrote \u22122x \u2212 9 (the fraction to one term only); one with x = 1 wrote \u22122x \u2212 3 (the sign). Check: \u2212\u2153(18 \u2212 9) = \u22123 and 3 \u2212 6 = \u22123.",
    "kind": "wb"
   },
   {
    "n": 20,
-   "title": "Whiteboards   \u00b7   Question 3 of 9",
-   "sub": "Boards up on three.",
+   "title": "Whiteboards   \u00b7   Question 2 of 9",
+   "sub": "Answer.",
    "min": 0,
-   "note": "Notes III with new numbers \u2014 the 21% skill. 0.4 of 5x is 2x and 0.4 of \u221210 is \u22124. A board with x = 13 wrote 2x \u2212 10 (the decimal to one term only \u2014 the state's most common miss); one with x = \u22121 wrote 2x + 4 (the sign). Check: 0.4(25) = 10 and 7 + 3 = 10.",
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
    "kind": "wb"
   },
   {
    "n": 21,
    "title": "Whiteboards   \u00b7   Question 3 of 9",
-   "sub": "Answer.",
+   "sub": "Boards up on three.",
    "min": 0,
-   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "note": "Notes III and Example 1 with numbers that do not come out whole \u2014 the 21% skill at the state's level. 0.6 of 3x is 1.8x and 0.6 of 4 is 2.4. A board with x \u2248 1.83 wrote 1.8x + 4 (the decimal to one term only \u2014 the state's most common miss); one with x = 12.5 added the 2.4 (0.6x = 7.5). Check: 0.6(13.5 + 4) = 10.5 and 1.2(4.5) + 5.1 = 10.5.",
    "kind": "wb"
   },
   {
    "n": 22,
-   "title": "Whiteboards   \u00b7   Question 4 of 9",
-   "sub": "Boards up on three.",
+   "title": "Whiteboards   \u00b7   Question 3 of 9",
+   "sub": "Answer.",
    "min": 0,
-   "note": "Diagnostic. Option D is the sign, option C the one-term distribution, option B a term carried across the equals sign without its sign changing. On a split: sixty seconds to think again, re-vote \u2014 then check 4 in both sides: \u22122(12 \u2212 5) = \u221214 and 16 \u2212 30 = \u221214.",
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
    "kind": "wb"
   },
   {
    "n": 23,
    "title": "Whiteboards   \u00b7   Question 4 of 9",
-   "sub": "Answer.",
+   "sub": "Boards up on three.",
    "min": 0,
-   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "note": "Diagnostic, on a negative decimal factor (Notes III's kind). Option D is the sign, option C the one-term distribution, option B a term carried across the equals sign without its sign changing. On a split: sixty seconds to think again, re-vote \u2014 then check 5 in both sides: \u22121.5(10 \u2212 6) = \u22126 and 5 \u2212 11 = \u22126.",
    "kind": "wb"
   },
   {
    "n": 24,
-   "title": "Whiteboards   \u00b7   Question 5 of 9",
-   "sub": "Boards up on three.",
+   "title": "Whiteboards   \u00b7   Question 4 of 9",
+   "sub": "Answer.",
    "min": 0,
-   "note": "Notes II's second way: thirds and fifths clear with 15, and the 15 multiplies every term \u2014 the 1s as well. A board with x = 1 multiplied only the fractions (5x \u2212 1 = 3x + 1); one stuck at 2x = 30 wrote the answer before dividing. Check: 15/3 \u2212 1 = 4 and 15/5 + 1 = 4.",
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
    "kind": "wb"
   },
   {
    "n": 25,
    "title": "Whiteboards   \u00b7   Question 5 of 9",
-   "sub": "Answer.",
+   "sub": "Boards up on three.",
    "min": 0,
-   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
+   "note": "Example 2's move with new denominators: thirds and fifths clear with 15, and the 15 multiplies every term \u2014 the 1s as well. A board with x = 1 multiplied only the fractions (5x \u2212 1 = 3x + 1); one stuck at 2x = 30 wrote the answer before dividing. Check: 15/3 \u2212 1 = 4 and 15/5 + 1 = 4.",
    "kind": "wb"
   },
   {
    "n": 26,
-   "title": "Whiteboards   \u00b7   Question 6 of 9",
-   "sub": "Boards up on three.",
+   "title": "Whiteboards   \u00b7   Question 5 of 9",
+   "sub": "Answer.",
    "min": 0,
-   "note": "Diagnostic, and 11.03's endings with a fraction. Both sides are 3x \u2212 2, so every number works. Option A distributed the 3 to one term and found 'no solution' \u2014 ask what 3 times \u22121 is. Options D and B read the true ending as an x. On a split: sixty seconds to think again, re-vote.",
+   "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
    "kind": "wb"
   },
   {
    "n": 27,
    "title": "Whiteboards   \u00b7   Question 6 of 9",
+   "sub": "Boards up on three.",
+   "min": 0,
+   "note": "Diagnostic, and 11.03's endings with a fraction. Both sides are 3x \u2212 2, so every number works. Option A distributed the 3 to one term and found 'no solution' \u2014 ask what 3 times \u22121 is. Options D and B read the true ending as an x \u2014 the same error, and the same reteach: say \u22122 = \u22122 aloud and ask for which x it is true. On a split: sixty seconds to think again, re-vote.",
+   "kind": "wb"
+  },
+  {
+   "n": 28,
+   "title": "Whiteboards   \u00b7   Question 6 of 9",
    "sub": "Answer.",
    "min": 0,
    "note": "Reveal. Scan the back row first; question the blank boards before the wrong ones.",
    "kind": "wb"
   },
   {
-   "n": 28,
+   "n": 29,
    "title": "Whiteboards   \u00b7   Question 7 of 9",
    "sub": "Boards up on three.",
    "min": 0,
@@ -226,7 +234,7 @@
    "kind": "wb"
   },
   {
-   "n": 29,
+   "n": 30,
    "title": "Whiteboards   \u00b7   Question 7 of 9",
    "sub": "Answer.",
    "min": 0,
@@ -234,7 +242,7 @@
    "kind": "wb"
   },
   {
-   "n": 30,
+   "n": 31,
    "title": "Whiteboards   \u00b7   Question 8 of 9",
    "sub": "Boards up on three.",
    "min": 0,
@@ -242,7 +250,7 @@
    "kind": "wb"
   },
   {
-   "n": 31,
+   "n": 32,
    "title": "Whiteboards   \u00b7   Question 8 of 9",
    "sub": "Answer.",
    "min": 0,
@@ -250,7 +258,7 @@
    "kind": "wb"
   },
   {
-   "n": 32,
+   "n": 33,
    "title": "Whiteboards   \u00b7   Question 9 of 9",
    "sub": "Take your time. Boards up when you have written it.",
    "min": 0,
@@ -258,7 +266,7 @@
    "kind": "wb"
   },
   {
-   "n": 33,
+   "n": 34,
    "title": "Whiteboards   \u00b7   Question 9 of 9",
    "sub": "Answer.",
    "min": 0,
@@ -266,7 +274,7 @@
    "kind": "wb"
   },
   {
-   "n": 34,
+   "n": 35,
    "title": "Independent Set",
    "sub": "Six questions. On your own, in writing.",
    "min": 6,
@@ -274,7 +282,7 @@
    "kind": "independent"
   },
   {
-   "n": 35,
+   "n": 36,
    "title": "IXL",
    "sub": "Last five minutes.",
    "min": 5,

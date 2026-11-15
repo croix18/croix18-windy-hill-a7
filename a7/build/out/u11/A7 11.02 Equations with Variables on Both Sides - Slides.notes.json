@@ -38,7 +38,7 @@
    "title": "Notes",
    "sub": "Copy all four lines.",
    "min": 4,
-   "note": "The equation has x on both sides, so the first move is new: take 3x from BOTH sides. A balance stays level only if both pans lose the same thing \u2014 3x from one side alone would tip it. What is left, 2x + 2 = 10, is Unit 1's two-step equation. Then the check, in both sides of the first equation: 5(4) + 2 = 22 and 3(4) + 10 = 22. The same number twice is the proof.\nOFF: 'Whatever you do to one side, you do to the other \u2014 and that includes taking away x's.'",
+   "note": "The equation has x on both sides, so the first move is new: take 3x from BOTH sides \u2014 the second line writes the move out, \u2212 3x under each side, and is the only line today that does; after this, the move is made in the head and the next line is written. Its name is in the heading: the subtraction property of equality (Florida asks students to name the property they used). A balance stays level only if both pans lose the same thing \u2014 3x from one side alone would tip it. What is left, 2x + 2 = 10, is Unit 1's two-step equation. Then the check, in both sides of the first equation: 5(4) + 2 = 22 and 3(4) + 10 = 22. The same number twice is the proof.\nOFF: 'Whatever you do to one side, you do to the other \u2014 and that includes taking away x's.'",
    "kind": "notes"
   },
   {
@@ -46,7 +46,7 @@
    "title": "Notes",
    "sub": "",
    "min": 3,
-   "note": "The same equation, two routes. Take 2x from both sides: 9 = 4x \u2212 11, add 11, divide by 4. Take 6x instead: \u22124x + 9 = \u221211, subtract 9, divide by \u22124. Both give 5, because each step is done to both sides. The first route is easier: taking the smaller x-term leaves a positive coefficient, so no division by a negative. Check: 2(5) + 9 = 19 and 6(5) \u2212 11 = 19.\nOFF: 'Take the smaller x-term and the coefficient stays positive.'",
+   "note": "One route on the slide, line under line: take 2x from both sides, 9 = 4x \u2212 11; add 11, 20 = 4x; divide by 4. Say the other route aloud and do not write it: taking 6x gives \u22124x + 9 = \u221211 and also ends at 5, because each step is done to both sides \u2014 board 9 has the class do both. Taking the smaller x-term leaves a positive coefficient, so no division by a negative. Check: 2(5) + 9 = 19 and 6(5) \u2212 11 = 19. The last line writes two plans as one equation before board 7 asks for it: each plan's cost is an expression \u2014 12 + 3v and 5v \u2014 and 'the same cost' is the equals sign. Do not solve it on the slide (v = 6); say which term is smaller.\nOFF: 'Take the smaller x-term and the coefficient stays positive.'",
    "kind": "notes"
   },
   {
@@ -206,7 +206,7 @@
    "title": "Whiteboards   \u00b7   Question 6 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "Diagnostic: two of the three wrong options are the one-term distribution \u2014 on both sides (A) or on the right only (B). Option D adds the x-terms. Ask a room that chose C to check 9 in both sides: 28 and 28.",
+   "note": "Diagnostic: three different named errors \u2014 option A distributes each multiplier to its first term only, option B loses the sign of 4(\u22122), option D adds the x-terms. Ask a room that chose C to check 9 in both sides: 28 and 28.",
    "kind": "wb"
   },
   {
@@ -222,7 +222,7 @@
    "title": "Whiteboards   \u00b7   Question 7 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "The extra-number board (ruling 22): the gym's 7 days a week is not needed. Each plan's cost is an expression in v; the two plans cost the same when the expressions are equal, 30 + 5v = 8v. Take 5v (the smaller) from both sides. Check: both plans cost \\$80 at 10 visits.",
+   "note": "The extra-number board (ruling 22): the gym's 7 days a week is not needed. Notes II's last line modeled the writing. Each plan's cost is an expression in v; the two plans cost the same when the expressions are equal, 30 + 5v = 8v. Take 5v (the smaller) from both sides. Check: both plans cost \\$80 at 10 visits.",
    "kind": "wb"
   },
   {
