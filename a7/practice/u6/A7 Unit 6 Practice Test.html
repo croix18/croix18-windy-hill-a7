@@ -1690,13 +1690,13 @@ const g = id => GL[id] || { word: id, def: '' };
 X.def = (id, shown) => '<b class="xterm xfirst">' + (shown || g(id).word) + '</b><span class="xdefn"> (' + g(id).def + ')</span>';
 X.term = (id, shown) => '<button type="button" class="xterm" data-xterm="' + esc(id) + '" aria-expanded="false" title="' + esc(g(id).def) + '">' + (shown || g(id).word) +
   '</button><span class="xdef" role="note" hidden> (' + g(id).def + ')</span>';
-/* [[id]] or [[id|shown words]] in a help string: mode 'def' spells out the definition at each term's first appearance (Croix,
-   14 Nov 2026: "Spell it out first time then Show on tap after") and makes later ones tappable; 'tap' makes every one
-   tappable; 'plain' (inside an option button, which can't hold a button) leaves the word, bold. seen carries the ids already
+/* [[id]] or [[id|shown words]] in a help string: 'def' and 'tap' make every term tappable (named, bold, its definition shown
+   inline only on a tap — Croix, 14 Nov 2026: "Don't spell it out first"); 'plain' (inside an option button, which can't hold a button) leaves the word, bold. seen carries the ids already
    spelled out across the strings of one rung. */
 X.teach = (html, mode, seen) => String(html == null ? '' : html).replace(/\[\[([A-Za-z0-9]+)(?:\|([^\]]+))?\]\]/g, (m0, id, shown) => {
   if (mode === 'plain') return '<b>' + (shown || g(id).word) + '</b>';
-  if (mode === 'def' && seen && !seen[id]) { seen[id] = 1; return X.def(id, shown); }
+  /* 'def' once spelled the definition out at a term's first appearance; Croix, 14 Nov 2026 (after seeing it live): "Don't spell
+     it out first." Every appearance is now tappable, the definition shown only on a tap. */
   return X.term(id, shown); });
 X.ids = html => { const out = []; String(html || '').replace(/\[\[([A-Za-z0-9]+)/g, (m0, id) => { if (out.indexOf(id) < 0) out.push(id); }); return out; };
 /* a unit's own figure, drawn at the help panel's width: its fixed max-width goes, so the labels grow with the drawing */
@@ -2681,7 +2681,7 @@ const withWhy = (old, whys) => old.map((l, i) => Object.assign({}, l, { say: fix
 /* ------------------------------------------------------------------ the families */
 const SPEC = {};
 SPEC.triSet = { mc: true, terms: ['triIneq'], pic: true,
-  notice: x => 'Use the [[triIneq]]. Checking the two shorter sides is enough: they must add to <b>more</b> than the longest side. If they add to exactly the longest side, they lie flat on it. If less, they fall short and cannot meet.' + exampleBars(),
+  notice: x => 'Use the [[triIneq]]: the two shorter sides must add to <b>more</b> than the longest side. Exactly equal lies flat; less falls short.' + exampleBars(),
   first: x => ({ say: 'Start with choice A. Put its sides in order, ' + sorted(x.sets[0]).join(', ') + ', and add the two shorter ones.', why: 'only the two shorter sides can fall short. The longest side plus any other is always more than the third.' }),
   sol: (x, old) => x.sets.map((s, i) => { const t = sorted(s), sum = t[0] + t[1];
       return { say: LET[i] + '. In order: ' + t.join(', ') + '. ' + t[0] + ' + ' + t[1] + ' = ' + sum + (sum > t[2] ? ', more than ' + t[2] + ': <b>a triangle</b>.' : sum === t[2] ? ', exactly ' + t[2] + ': it lies flat.' : ', less than ' + t[2] + ': it falls short.') }; })
@@ -2692,17 +2692,17 @@ SPEC.triSet = { mc: true, terms: ['triIneq'], pic: true,
     if (tag === 'firstTwo') return 'That adds the first two numbers listed. Order does not matter: add the two <b>shorter</b> sides. Here ' + t[0] + ' + ' + t[1] + ' = ' + sum + ', less than ' + t[2] + ', so they fall short.';
     return 'The two shorter sides add to ' + t[0] + ' + ' + t[1] + ' = ' + sum + ', less than the longest side, ' + t[2] + '. They fall short and cannot meet.'; } };
 SPEC.rightSel = { mc: true, terms: ['converse', 'pyth'],
-  notice: x => 'The [[pyth]] is true for every right triangle. Its [[converse]] lets you test a set of sides. Square all three. If the squares of the two shorter sides add to exactly the square of the longest, it is a right triangle.',
+  notice: x => 'Use the [[converse]] of the [[pyth]]: square all three sides. If the two shorter sides’ squares add to exactly the longest side’s square, it is a right triangle.',
   sol: (x, old) => [{ say: 'For each set, the longest side is c. Square the sides and compare a² + b² with c².', why: 'the hypotenuse is always the longest side, wherever it is listed.' }].concat(old.map(l => ({ say: fix(l.say) }))),
   walk: (x, old) => old.map(s => s.opts && s.opts.some(o => /^Yes/.test(o.label)) ? Object.assign({}, s, { keep: true, opts: s.opts.slice().sort((a, b) => /^Yes/.test(a.label) ? -1 : /^Yes/.test(b.label) ? 1 : 0) }) : s) };
 SPEC.range = { mc: true, terms: ['triIneq'],
-  notice: x => 'By the [[triIneq]], the third side must be more than the difference of the other two sides and less than their sum. It can never be exactly the difference or the sum: that would lie flat.',
+  notice: x => 'By the [[triIneq]], the third side is more than the difference of the other two and less than their sum. Exactly either one would lie flat.',
   sol: (x, old) => { const { a, b } = x.prm; return [{ say: 'It must be longer than the difference: ' + b + ' − ' + a + ' = ' + (b - a) + '.', why: 'the third side plus ' + a + ' must be more than ' + b + '.' },
     { say: 'It must be shorter than the sum: ' + a + ' + ' + b + ' = ' + (a + b) + '.', why: a + ' + ' + b + ' must be more than the third side.' }, { say: fix(old[2].say), why: 'a third side exactly that long would lie flat, so the signs are &lt;, not ≤.' }]; },
   walk: (x, old) => { const { a, b } = x.prm; return old.map((s, i) => i === 0 ? Object.assign({}, s, { ask: 'The third side plus ' + a + ' must be more than ' + b + '. So the third side must be more than ' + b + ' − ' + a + '. What is ' + b + ' − ' + a + '?' })
     : i === 1 ? Object.assign({}, s, { ask: a + ' + ' + b + ' must be more than the third side. What is ' + a + ' + ' + b + '?' }) : s); } };
 SPEC.eqChoice = { mc: true, terms: ['hyp', 'pyth'],
-  notice: x => 'Find the right angle first. The side across from it is c. In the [[pyth]], a² + b² = c², the [[hyp]] c is by itself on one side of the equals sign.',
+  notice: x => 'Find the right angle. The side across from it is the [[hyp]], c, and in the [[pyth]], a² + b² = c², it is by itself.',
   sol: (x, old) => { const f = x.fig, l = f && f.labs; return withWhy(old, [null, 'a² + b² = c² puts the hypotenuse by itself.']).map((s, i) => i === 1 && l ? Object.assign({}, s, { pic: tri(l[0], l[1], l[2], f.legs && f.legs[0], f.legs && f.legs[1], 'The right triangle: legs ' + l[0] + ' and ' + l[1] + ', hypotenuse ' + l[2] + '.', triCap) }) : s); },
   walk: (x, old) => old };
 SPEC.simChoice = { mc: true, terms: ['similar', 'scale', 'corr'],
@@ -2720,7 +2720,7 @@ SPEC.legWhole = { terms: ['hyp', 'leg1', 'pyth'], pic: true,
     return old.slice(0, i + 1).concat([{ type: 'choice', ask: 'Why do you subtract to find a leg?', opts: [O('c² is the sum of the two legs’ squares, so taking one square away leaves the other', true),
       O('Because the numbers are big', false, 'The size of the numbers does not matter. The hypotenuse stands alone in a² + b² = c², so a leg’s square is c² − a².'), O('Subtracting is always used with triangles', false, 'Not always: to find the hypotenuse you add. You subtract only when the hypotenuse is the one you know.')] }], old.slice(i + 1)); } };
 SPEC.legTenth = { terms: ['hyp', 'leg', 'pyth', 'tenth'], pic: true,
-  notice: p => { const W = STORY[p.prm.ctx] || STORY.ladder; return 'Name the sides first. The ' + W[1] + ' and the ' + W[2] + ' meet at a right angle, so the ' + W[0] + ' is the [[hyp]]. The other two sides are the [[leg]]. You want a leg, so use the [[pyth]] and subtract, then round to the [[tenth]].' +
+  notice: p => { const W = STORY[p.prm.ctx] || STORY.ladder; return 'The ' + W[0] + ' is the [[hyp]]: it is across from the right angle. Find the missing one of the two [[leg]] with the [[pyth]] by subtracting, then round to the [[tenth]].' +
     tri('a = ' + p.prm.a + ' (' + W[1] + ')', 'b = ?\n(' + W[2] + ')', 'c = ' + p.prm.c + '\n(' + W[0] + ')', p.prm.a, Math.sqrt(p.prm.c * p.prm.c - p.prm.a * p.prm.a), 'A right triangle: the ' + W[0] + ', ' + p.prm.c + ', is the hypotenuse; ' + p.prm.a + ' and the unknown side are the legs.', triCap); },
   sol: (p, old) => { const { c, a } = p.prm, m = c * c - a * a, r = Math.floor(Math.sqrt(m));
     return [{ say: fix(old[0].say) }, { say: 'Write the Pythagorean Theorem with the numbers: ' + sq(a) + ' + b² = ' + sq(c) + '.' },
@@ -2732,7 +2732,7 @@ SPEC.legTenth = { terms: ['hyp', 'leg', 'pyth', 'tenth'], pic: true,
     { type: 'choice', ask: 'Why do you subtract to find a leg?', opts: [O('c² is the sum of the two legs’ squares, so taking a² away leaves b²', true), O('Because the answer has to be rounded', false, 'Rounding comes at the end. You subtract because the hypotenuse stands alone in a² + b² = c².')] }].concat(old.slice(2)); } };
 ['hypTenth', 'diag'].forEach(fam => { SPEC[fam] = { terms: ['leg', 'hyp', 'sqrt', 'tenth'], pic: true,
   notice: p => { const a = p.prm.a || p.prm.w, b = p.prm.b || p.prm.l;
-    return (fam === 'diag' ? 'The corners of a rectangle are right angles, so the path and two sides make a right triangle. The path is its [[hyp]]. ' : 'You want the [[hyp]]. ') + 'Square the [[leg]], add, take the [[sqrt]], then round to the [[tenth]].' +
+    return (fam === 'diag' ? 'A rectangle’s corners are right angles, so the path is the [[hyp]] of a right triangle. ' : 'You want the [[hyp]]. ') + 'Square the [[leg]], add, take the [[sqrt]], then round to the [[tenth]].' +
       tri('a = ' + a, 'b = ' + b, (fam === 'diag' ? 'path = ?' : 'c = ?'), a, b, 'A right triangle with legs ' + a + ' and ' + b + ' and an unknown hypotenuse.', triCap); },
   sol: (p, old) => withWhy(old, ['the [[pyth]]: c² = a² + b².', 'taking the square root undoes squaring.', 'to round to the nearest tenth, look at the hundredths digit: 5 or more rounds up.']), walk: (p, old) => old }; });
 SPEC.shorter = { terms: ['hyp'],
@@ -2740,20 +2740,20 @@ SPEC.shorter = { terms: ['hyp'],
   sol: (p, old) => { const m = /= ([\d.]+…)/.exec(old[1].say), tot = /= (\d+)/.exec(old[0].say), r = /= ([\d.]+…), the same/.exec(old[2].say);
     return [Object.assign({}, old[0], { say: fix(old[0].say) }), Object.assign({}, old[1], { say: fix(old[1].say).replace(/ — about [\d.]+ to the nearest tenth \(part a\)\./, ' (from the last question).') }),
       Object.assign({}, old[2], { say: m && tot && r ? 'Subtract, keeping every digit: ' + tot[1] + ' − ' + m[1] + ' = ' + r[1] + ' Then round to the nearest tenth.' : fix(old[2].say), why: 'rounding once, at the end, keeps the answer accurate.' })]; }, walk: (p, old) => old };
-const gridNotice = (what) => 'Draw a right triangle with the straight line between the points as its slanted side. Its [[leg]] are the [[horiz]] and the [[vert]], read from the coordinates. ' + what;
+const gridNotice = (what) => 'Draw a right triangle with the line between the points as its slanted side. Its [[leg]] are the [[horiz]] and the [[vert]]. ' + what;
 const gridSol = (p, old) => old.map(l => { const s = fix(l.say).replace(/^(Horizontal distance: .*?)the axis/, '$1the y-axis').replace(/^(Vertical distance: .*?)the axis/, '$1the x-axis'); return Object.assign({}, l, { say: s }, /across zero|crosses zero/.test(s) ? { why: 'one point is on each side of the axis, so the two distances to the axis add.' } : /\(−?\d+ − \(−\d+\)\)/.test(s) ? { why: 'subtracting a negative is the same as adding.' } : /hypotenuse/.test(s) ? { why: 'the [[pyth]].' } : {}); });
 SPEC.gridWhole = { terms: ['leg', 'horiz', 'vert', 'hyp'], pic: true, notice: p => gridNotice('The distance is the [[hyp]].'), first: (p, old) => Object.assign({}, old[0], { say: fix(old[0].say) + big(p) }), sol: gridSol, walk: (p, old) => old };
-SPEC.coordTenth = { terms: ['leg', 'horiz', 'vert', 'hyp', 'tenth'], pic: true, notice: p => gridNotice('The distance is the [[hyp]]. Round it to the [[tenth]].'), first: (p, old) => Object.assign({}, old[0], { say: fix(old[0].say) + big(p) }), sol: gridSol, walk: (p, old) => old };
+SPEC.coordTenth = { terms: ['leg', 'horiz', 'vert', 'hyp', 'tenth'], pic: true, notice: p => gridNotice('The distance is the [[hyp]], rounded to the [[tenth]].'), first: (p, old) => Object.assign({}, old[0], { say: fix(old[0].say) + big(p) }), sol: gridSol, walk: (p, old) => old };
 SPEC.streets = { terms: ['leg', 'horiz', 'vert'], pic: true, notice: p => 'Along the streets, you walk the two [[leg]] of a right triangle: the [[horiz]] plus the [[vert]].', first: (p, old) => Object.assign({}, old[0], { say: fix(old[0].say) + big(p) }), sol: gridSol, walk: (p, old) => old };
 SPEC.straight = { terms: ['hyp', 'leg'], pic: true, notice: p => 'The straight line is the [[hyp]] of the right triangle whose [[leg]] are the trips across and up or down.', first: (p, old) => Object.assign({}, old[0], { say: fix(old[0].say) + big(p) }), sol: gridSol, walk: (p, old) => old };
 SPEC.crossSide = { terms: ['horiz'], notice: p => { const nm = p.prm.names; return nm[0] + ' and ' + nm[1] + ' have the same y-coordinate, so the side between them is horizontal. Its length is the [[horiz]] between the x-coordinates.'; }, sol: gridSol, walk: (p, old) => old };
 SPEC.perim = { terms: ['perimeter', 'hyp'],
-  notice: p => 'The [[perimeter]] adds all three sides. Two sides lie along grid lines. The slanted side is the [[hyp]] of its own right triangle. Round once, at the end.',
+  notice: p => 'The [[perimeter]] adds all three sides. The slanted side is the [[hyp]] of a right triangle. Round once, at the end.',
   sol: (p, old) => { const L = old[2], m = /^(.*?) — (round to the nearest tenth.*)$/.exec(L.say);
     return [Object.assign({}, old[0], { say: fix(old[0].say) }), Object.assign({}, old[1], { say: fix(old[1].say), why: 'the [[pyth]].' })].concat(m ? [{ say: m[1].replace(/, and round once, at the end:/, ':') }, Object.assign({}, L, { say: m[2].charAt(0).toUpperCase() + m[2].slice(1), why: 'rounding once, at the end, keeps the answer accurate.' })] : [L]); },
   walk: (p, old) => old };
 SPEC.simSide = { terms: ['similar', 'scale', 'corr1'], pic: true,
-  notice: p => 'The triangles are [[similar]]. Each side of the second is the [[scale]] times its [[corr1]] in the first. Find which sides correspond, get k from a pair you know, then multiply.',
+  notice: p => 'The triangles are [[similar]]: each side of the second is the [[scale]] times its [[corr1]] in the first. Get k from a pair you know, then multiply.',
   first: (p, old) => ({ say: fix(old[0].say) + simPic(p) }),
   sol: (p, old) => { const x = p.prm, k = E.qk(x.k); const L = old.length;
     return [Object.assign({}, old[0], { say: fix(old[0].say) + simPic(p) })].concat(L === 4 ? [] : []).concat([
@@ -2767,8 +2767,8 @@ SPEC.simSide = { terms: ['similar', 'scale', 'corr1'], pic: true,
     .replace(/^matched the sides by where they sit on the page\. The copy is ([\w ]+): match them by size, shortest with shortest\.?$/, 'matched sides by where they sit on the page. The second triangle is $1, so the page can mislead: ' + (p.prm.nm ? 'pair the letters in order' : 'match by size, shortest with shortest'))
     .replace('Similar means multiplied, not added.', 'Similar triangles grow by multiplying, not by adding the same amount to each side.') })) };
 ['shadow', 'mirror'].forEach(fam => { SPEC[fam] = { terms: ['similar', 'scale'], pic: true,
-  notice: p => (fam === 'shadow' ? 'The sun hits both at the same angle, so the two right triangles are [[similar]]. ' : 'The light leaves the mirror at the same angle it hits it, so the two right triangles are [[similar]]. ') +
-    'Match ' + (fam === 'shadow' ? 'shadow with shadow' : 'distance with distance') + ' and height with height. The [[scale]] is the ratio of the two ' + (fam === 'shadow' ? 'shadows' : 'distances from the mirror') + '. The height you want is k times the height you know.' + lightPic(p),
+  notice: p => (fam === 'shadow' ? 'The sun hits both at the same angle, so the two right triangles are [[similar]]. ' : 'Light leaves the mirror at the angle it arrives, so the two right triangles are [[similar]]. ') +
+    'The [[scale]] is ' + (fam === 'shadow' ? 'shadow ÷ shadow' : 'distance ÷ distance') + ', and the height you want is k times the height you know.' + lightPic(p),
   sol: (p, old) => withWhy(old, ['each has a right angle and one more equal angle, so they are the same shape.', 'matching sides of similar triangles are in the same ratio.', null]), walk: (p, old) => old }; });
 
 /* ------------------------------------------------------------------ apply to the coach */
