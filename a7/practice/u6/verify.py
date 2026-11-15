@@ -391,16 +391,17 @@ def hint_value(where, it, p, ask):
         s = sorted(q(x) for x in re.findall(NUM, words(it["opts"]["ABCDE".index(m.group(1))])))
         if [s[0], s[1]] != [q(m.group(2)), q(m.group(3))]: no(where, f"Hint: {m.group(2)} and {m.group(3)} are not choice {m.group(1)}'s two shorter sides")
         return q(m.group(2)) ** 2 + q(m.group(3)) ** 2
-    m = re.fullmatch(r"Three of the choices begin with (" + NUM + r"), the match for (\d+)\. What is k = \1 ÷ \2\?", a)
+    m = re.fullmatch(r"(?:Three of the choices begin with (" + NUM + r"), the match for (\d+)|Pair shortest with shortest: (" + NUM + r") corresponds to (\d+))\. What is k = (?:\1|\3) ÷ (?:\2|\4)\?", a)   # the help standard's wording (14 Nov 2026)
     if m:
+        g1, g2 = m.group(1) or m.group(3), m.group(2) or m.group(4)
         firsts = [re.findall(NUM, words(o))[0] for o in it["opts"]]
-        if firsts.count(m.group(1)) != 3: no(where, f"Hint: {firsts.count(m.group(1))} of the choices begin with {m.group(1)}, not three")
+        if firsts.count(g1) != 3: no(where, f"Hint: {firsts.count(g1)} of the choices begin with {g1}, not three")
         t = sorted(q(x) for x in re.findall(r"\d+", re.search(r"sides (.*)\?", st).group(1)))
-        if q(m.group(2)) != t[0]: no(where, f"Hint: {m.group(2)} is not the first triangle's shortest side")
-        return q(m.group(1)) / q(m.group(2))
-    m = re.fullmatch(r"(?:Then|And) (\d+) becomes \1 × (" + NUM + r"|\(\d+÷\d+\))\. What is \1 × \2\?", a)
+        if q(g2) != t[0]: no(where, f"Hint: {g2} is not the first triangle's shortest side")
+        return q(g1) / q(g2)
+    m = re.fullmatch(r"(?:Then|And|The first triangle’s) (\d+) becomes \1 × (" + NUM + r"|\(\d+÷\d+\))\. What is \1 × \2\?", a)
     if m: return q(m.group(1)) * value(m.group(2))
-    m = re.fullmatch(r"(?:How long must the third side be, at least, to reach\? |How long can it be, at most, to be covered\? )?What is (.+)\?", a)
+    m = re.fullmatch(r"(?:How long must the third side be, at least, to reach\? |How long can it be, at most, to be covered\? |The third side plus \d+ must be more than \d+\. So the third side must be more than \d+ − \d+\. |\d+ \+ \d+ must be more than the third side\. )?What is (.+)\?", a)
     if m: return value(m.group(1))
     raise ValueError("a Hint question this check cannot read: " + a)
 

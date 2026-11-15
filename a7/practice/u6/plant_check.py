@@ -6,7 +6,7 @@ import os, shutil, subprocess, sys, tempfile
 HERE = os.path.dirname(os.path.abspath(__file__))
 PRACTICE = os.path.dirname(HERE)
 A7 = os.path.dirname(PRACTICE)
-FILES = ["engine.js", "coach.js", "fig.js", "unit.js", "u6_check.js", "verify.py"]
+FILES = ["engine.js", "coach.js", "help.js", "fig.js", "unit.js", "u6_check.js", "verify.py"]
 PLANTS = [
     # keys
     ("the hypotenuse's key one too big", "engine.js",

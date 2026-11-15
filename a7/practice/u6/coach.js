@@ -525,5 +525,8 @@ function choices(p) {
 
 const api = { choices, F, feedback, mcFeedback, selectFeedback, mcSolution, solution, clean, joinSays, printedNumbers, SELWHY, MCW };
 const walkApi = { steps, stepsMC, readNum: E.readNum };
+/* the help's words and pictures (help.js, 14 Nov 2026): Hints 1–3, the walkthrough and the coach's lines, to the help standard */
+const HELP = (typeof module !== 'undefined' && module.exports) ? require('./help.js') : root.Help;
+if (HELP) HELP(api, walkApi);
 if (typeof module !== 'undefined' && module.exports) module.exports = Object.assign({}, api, { Walk: walkApi }); else { root.Coach = api; root.Walk = walkApi; }
 })(this);

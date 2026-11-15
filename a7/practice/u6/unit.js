@@ -48,6 +48,7 @@ const Unit = {
     multi: (x, ks, tries) => C.selectFeedback(x, ks, tries)
   },
   choices: p => C.choices(p),                                      /* a typed part's wrong answers, for an all-multiple-choice paper (14 Nov 2026) */
+  rungs: (x, type, ctx) => C.rungs ? C.rungs(x, type, ctx) : null,
   solution: (x, type) => type === 'text' ? C.solution(x) : C.mcSolution(x),
   walk: (x, type) => type === 'text' ? W.steps(x) : W.stepsMC(x),
   readNum: W.readNum,
