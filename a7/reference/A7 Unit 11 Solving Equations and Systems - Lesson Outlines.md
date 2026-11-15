@@ -7,6 +7,25 @@ equation below was solved by sympy before it was written down (126 of them, 14 N
 build time. HOUSE STYLE §16 and ruling 43: the warm-up, the notes and the worked examples are what the class has been
 shown, and every practice number after them is new.*
 
+## As built (14 November, after the review) — where the unit now differs from the plan below
+
+The plan below is what the lessons were built from. Three readers then reviewed the built unit and a second pass
+changed it (the audit's last section has every finding and ruling). The specs in `a7/build/u11/` are the truth; the
+differences that matter:
+- **Practice Test question 8** is "Select all the systems that have (a, b) as a solution" — five systems, two or three
+  right — not a select-all of ordered pairs (two crossing lines share only one point, so that had one answer every time).
+  **Question 3** carries a fraction multiplier and **question 4** a negative decimal; **14(b)** accepts within 0.1 of the
+  crossing. The stems are in FAST's house style ("An equation is shown.").
+- **Rational coefficients at the state's level**: negative fraction and decimal factors are on 11.04's slides (its
+  Notes III works −2.4(5x − 3) = −40.8), and 11.04's two examples are a decimal distributed and clearing fractions.
+- **Every worked row is one move per line**; a story equation is modeled in 11.01 and 11.02 before a board asks for one.
+- **11.05–06 is lighter**: the savings story and the "set the two equal" idea moved out; it has a horizontal line
+  (y = 4) board. **"Intersect / point of intersection" and "coefficient of x" are taught** (11.05, 11.07).
+- **Graph days**: an Example's question slide shows the empty grid; each Your Turn works from two tables in rows (a
+  Your Turn slide cannot carry a figure); in 11.07 the set's first question is drawn right after Example 1 with the
+  teacher circulating; the read-the-graph boards are free response at full size; 11.08's Example 2 is in liters.
+- **The two Wednesdays (11.03, 11.07) name their 43-minute cut** under Materials.
+
 ## The unit's standing decisions (each reversible)
 
 1. **Unit 11 comes before Unit 10 and Unit 7** (ruling 52: its equations are the district's Q2 essential benchmark).

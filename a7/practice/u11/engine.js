@@ -279,7 +279,7 @@ function numPart(o) { return Object.assign({ kind: 'num', label: '', stem: '' },
 const shownLine = h => '<span class="shown">' + h + '</span>';           /* FAST's way: announce it, show it on its own line, then ask */
 function eqItem(fam, slotPrm, e) {
   const v = e.v, part = numPart({ fam, prm: slotPrm, eq: e, v, ans: ending(e).s, key: keyOf(fam, slotPrm) });
-  return { type: 'solo', stem: 'An equation is shown.' + shownLine(M(eqH(e))) + 'What is the value of ' + vi(v) + '?', part, eq: e };
+  return { type: 'solo', stem: 'An equation is shown.' + shownLine(M(eqH(e))) + 'What value of ' + vi(v) + ' makes the equation true?', part, eq: e };
 }
 
 /* ---------- section 1: MA.8.AR.2.1, solving equations */
@@ -379,7 +379,7 @@ function q5(seed) {
     if (eqs.some(e => !e || shownEq(e))) return { bad: true };
     const parts = eqs.map((e, i) => { const en = ending(e), prm = Object.assign({ end: order[i], t: e.t }, e.prm);
       return { label: 'abc'[i], kind: 'mc', fam: 'endings', prm, eq: e, stem: M(eqH(e)), opts: ENDINGS.slice(), end: en, correct: ['one', 'none', 'all'].indexOf(order[i]), key: keyOf('endings', prm) }; });
-    return { type: 'parts', stem: 'How many solutions does each equation have: one solution, no solution or infinitely many solutions? If it has one, find it.', parts };
+    return { type: 'parts', stem: 'Each equation has one solution, no solution or infinitely many solutions. Which? If it has one solution, find it.', parts };
   });
 }
 /* Q6 — fill the box: no solution (the number multiplying x), or infinitely many (that number with the same constant, or the
@@ -398,7 +398,7 @@ function q6(seed) {
     const e = { L, R, v: X }, ans = Q(x.goal === 'allc' ? x.C : x.K);
     if (shownEq(e)) return { bad: true };
     const want = x.goal === 'none' ? 'no solution' : 'infinitely many solutions';
-    return { type: 'solo', stem: 'What number in the box makes&nbsp; ' + M(eqH(e)) + ' &nbsp;have ' + want + '?', eq: e,
+    return { type: 'solo', stem: 'Complete the equation so that it has ' + want + '. What number goes in the box?' + shownLine(M(eqH(e))), eq: e,
       part: numPart({ fam: 'box', prm: x, eq: e, v: null, ans, key: keyOf('box', x) }) };
   });
 }
@@ -413,13 +413,13 @@ const PLANS = [
     ask: 'After how many months will the two gyms have cost the same?', who: ['gym A', 'gym B'] },
   { id: 'pool', v: 'v', unit: 'visits', one: 'visit', n: [4, 15], a: [2, 9], fee: [12, 60],
     A: (f, a) => 'A pool pass costs $' + f + ' plus $' + a + ' a visit.', B: (g, b) => 'Without the pass, a visit costs $' + b + (g ? ' plus ' + aDollar(g) + ' one-time card fee.' : '.'),
-    ask: 'For how many visits do the two ways cost the same?', who: ['the pass', 'paying without it'] },
+    ask: 'After how many visits will the two ways have cost the same?', who: ['the pass', 'paying without it'] },
   { id: 'kayak', v: 'h', unit: 'hours', one: 'hour', n: [2, 8], a: [6, 25], fee: [8, 40],
     A: (f, a) => 'Shop A rents kayaks for ' + aDollar(f) + ' fee plus $' + a + ' an hour.', B: (g, b) => 'Shop B charges $' + b + ' an hour' + (g ? ' and ' + aDollar(g) + ' fee.' : ' and no fee.'),
-    ask: 'For how many hours do the two shops cost the same?', who: ['shop A', 'shop B'] },
+    ask: 'After how many hours will the two shops have cost the same?', who: ['shop A', 'shop B'] },
   { id: 'art', v: 'c', unit: 'classes', one: 'class', n: [3, 12], a: [6, 20], fee: [15, 80],
     A: (f, a) => 'An art studio’s plan A costs $' + f + ' to join and $' + a + ' a class.', B: (g, b) => 'Plan B costs $' + b + ' a class' + (g ? ' and $' + g + ' to join.' : ' and nothing to join.'),
-    ask: 'For how many classes do the two plans cost the same?', who: ['plan A', 'plan B'] }
+    ask: 'After how many classes will the two plans have cost the same?', who: ['plan A', 'plan B'] }
 ];
 function aDollar(m) { return (/^(8|11|18|8\d)(\D|$)/.test(String(m)) ? 'an' : 'a') + ' $' + m; }
 function q7(seed) {
@@ -470,25 +470,32 @@ function q8(seed) {
     if (sys.length !== 5) return { bad: true };
     const shown = T.shuffle(sys), prm = { a, b, sys: shown.map(z => z.key) };
     return { type: 'multi', fam: 'selSys', prm, pa: a, pb: b, systems: shown.map(z => [z.l1, z.l2]),
-      stem: 'Select ALL the systems of equations that have ' + M(pairH(Q(a), Q(b))) + ' as a solution.', opts: shown.map(z => sysStem(z.l1, z.l2)),
+      stem: 'Select all the systems that have&nbsp; ' + M(pairH(Q(a), Q(b))) + ' &nbsp;as a solution.', opts: shown.map(z => sysStem(z.l1, z.l2)),
       correct: shown.map((z, i) => z.ok ? i : -1).filter(i => i >= 0), key: keyOf('selSys', prm) };
   });
 }
-/* Q9 — is (x, y) a solution? A choice that pairs the verdict with its reason */
+/* Q9 — is (x, y) a solution? Four choices, each a verdict with a claim about THIS pair that can be checked: "Yes — it makes both
+   equations true", "No — it makes only y = … true" (each equation), "No — it makes neither equation true". The four claims are
+   the four ways a pair can sit (on both lines, on the first only, on the second only, on neither), so exactly one option is true
+   for every pair; "Yes" goes only with both (14 Nov 2026: the old "Yes — it makes the first true" was true, word for word, of the
+   solution itself — an arguable key). The pair is the solution, on one line only, or (about one set in seven) on neither. */
+const ISSOL_RIGHT = { sol: 'both', first: 'only1', second: 'only2', neither: 'neither' };
 function q9(seed) {
   return D('q9', seed, T => {
     const s = intSystem(T, { x: [-5, 6], y: [-8, 9], ok: s => s.x0 !== 0 });
     const [l1, l2] = sysLines(s);
     if (shownSys(l1, l2)) return { bad: true };
-    const scen = T.pick(['first', 'first', 'second', 'sol']);
+    const scen = T.pick(['first', 'first', 'second', 'second', 'sol', 'sol', 'neither']);
     let px = s.x0, py = s.y0;
-    if (scen !== 'sol') { const l = scen === 'first' ? l1 : l2; px = T.until(() => T.ri(-5, 6), xx => xx !== s.x0 && Math.abs(qnum(yAt(l, xx))) <= 12); py = qnum(yAt(l, px)); }
-    const one = scen === 'second' ? 2 : 1, eqOf = k => M(lineH(k === 1 ? l1 : l2));
-    const O = { both: 'Yes — it makes both equations true.', noFirst: 'No — it makes ' + eqOf(1) + ' false.', noSecond: 'No — it makes ' + eqOf(2) + ' false.', yesOne: 'Yes — it makes ' + eqOf(one) + ' true.' };
-    const ids = T.shuffle(['yesOne', 'noFirst', 'both', 'noSecond']), right = scen === 'sol' ? 'both' : scen === 'first' ? 'noSecond' : 'noFirst';
+    if (scen === 'first' || scen === 'second') { const l = scen === 'first' ? l1 : l2; px = T.until(() => T.ri(-5, 6), xx => xx !== s.x0 && Math.abs(qnum(yAt(l, xx))) <= 12); py = qnum(yAt(l, px)); }
+    if (scen === 'neither') { px = T.until(() => T.ri(-5, 6), xx => xx !== s.x0); const y1 = qnum(yAt(l1, px)), y2 = qnum(yAt(l2, px));
+      py = T.until(() => (T.r() < 0.5 ? y1 : y2) + pm(T, 1, 3), y => y !== y1 && y !== y2); if (Math.abs(py) > 12) return { bad: true }; }
+    const eqOf = k => M(lineH(k === 1 ? l1 : l2));
+    const O = { both: 'Yes — it makes both equations true.', only1: 'No — it makes only ' + eqOf(1) + ' true.', only2: 'No — it makes only ' + eqOf(2) + ' true.', neither: 'No — it makes neither equation true.' };
+    const ids = T.shuffle(['both', 'only1', 'only2', 'neither']), right = ISSOL_RIGHT[scen];
     const prm = { m1: s.m1, b1: s.b1, m2: s.m2, b2: s.b2, px, py, scen, ids };
-    return { type: 'mc', fam: 'isSol', prm, l1, l2, px, py, scen, ids, one,
-      stem: 'A system of equations is shown.' + sysShown(l1, l2) + 'Is ' + M(pairH(Q(px), Q(py))) + ' a solution of the system? Choose the answer with the reason that shows it.',
+    return { type: 'mc', fam: 'isSol', prm, l1, l2, px, py, scen, ids,
+      stem: 'Is&nbsp; ' + M(pairH(Q(px), Q(py))) + ' &nbsp;a solution of the system&nbsp; ' + sysStem(l1, l2) + '?',
       opts: ids.map(k => O[k]), correct: ids.indexOf(right), key: keyOf('isSol', prm) };
   });
 }
@@ -517,7 +524,7 @@ function q10(seed) {
     const [l1, l2] = sysLines(s), w = windowFor([[s.x0, s.y0], [0, s.b1], [0, s.b2]], { mx: 2, my: 2 });
     if (w.x1 - w.x0 > 10 || w.y1 - w.y0 > 14 || inWindow(l1, w) < 4 || inWindow(l2, w) < 4 || shownSys(l1, l2)) return { bad: true };
     const prm = { m1: s.m1, b1: s.b1, m2: s.m2, b2: s.b2, w: [w.x0, w.x1, w.y0, w.y1] };
-    return { type: 'mc', fam: 'countCross', prm, l1, l2, cross: { x: Q(s.x0), y: Q(s.y0) }, stem: 'The graph of a system of equations is shown.' + sysShown(l1, l2) + 'How many solutions does the system have?',
+    return { type: 'mc', fam: 'countCross', prm, l1, l2, cross: { x: Q(s.x0), y: Q(s.y0) }, stem: 'The graphs of the system&nbsp; ' + sysStem(l1, l2) + ' &nbsp;are shown. How many solutions does the system have?',
       fig: { kind: 'plane', w, lines: [l1, l2], legend: [lineH(l1), lineH(l2)] }, opts: COUNTOPTS.slice(), correct: 0, key: keyOf('countCross', prm) };
   });
 }
@@ -538,7 +545,7 @@ function q11(seed) {
     const w = { x0: -3, x1: 3, y0: Math.min(-2, ...[l1, l2].map(l => qnum(l.b) - 3)), y1: Math.max(2, ...[l1, l2].map(l => qnum(l.b) + 3)) };
     if (w.y1 - w.y0 > 14 || inWindow(l1, w) < 4 || inWindow(l2, w) < 4 || shownSys(l1, l2)) return { bad: true };
     prm.w = [w.x0, w.x1, w.y0, w.y1];
-    const stem = 'The graph of a system of equations is shown.' + sysShown(l1, l2) + (same ? 'Both equations graph as the one line shown. ' : '') + 'How many solutions does the system have?';
+    const stem = 'The graphs of the system&nbsp; ' + sysStem(l1, l2) + ' &nbsp;are shown. ' + (same ? 'Both equations graph as the one line shown. ' : '') + 'How many solutions does the system have?';
     return { type: 'mc', fam: 'countPar', prm, l1, l2, same, stem, fig: { kind: 'plane', w, lines: same ? [l1] : [l1, l2], legend: same ? [lineH(l1) + ' and ' + lineH(l2)] : [lineH(l1), lineH(l2)], both: same },
       opts: COUNTOPTS.slice(), correct: same ? 2 : 1, key: keyOf('countPar', prm) };
   });
@@ -558,7 +565,7 @@ function q12(seed) {
     const w = windowFor([[s.x0, s.y0], [0, qnum(l1.b)], [0, qnum(l2.b)]], { mx: 2, my: 2 });
     if (w.x1 - w.x0 > 12 || w.y1 - w.y0 > 14 || inWindow(l1, w) < 4 || inWindow(l2, w) < 4 || shownSys(l1, l2)) return { bad: true };
     const prm = { m1: kstr(l1.m), b1: kstr(l1.b), m2: kstr(l2.m), b2: kstr(l2.b), x0: s.x0, y0: s.y0, w: [w.x0, w.x1, w.y0, w.y1] };
-    return { type: 'solo', stem: 'The graph of a system of equations is shown.' + sysShown(l1, l2) + 'What is the solution of the system?', l1, l2,
+    return { type: 'solo', stem: 'A system of equations is graphed:&nbsp; ' + sysStem(l1, l2) + '. What is the solution of the system?', l1, l2,
       fig: { kind: 'plane', w, lines: [l1, l2], legend: [lineH(l1), lineH(l2)] },
       part: pairPart({ fam: 'readGraph', prm, l1, l2, ans: [Q(s.x0), Q(s.y0)], key: keyOf('readGraph', prm) }) };
   });
@@ -573,15 +580,21 @@ function q13(seed) {
     if (y1.concat(y2).some(v => Math.abs(v) > 20) || shownSys(l1, l2)) return { bad: true };
     const prm = { m1: s.m1, b1: s.b1, m2: s.m2, b2: s.b2, miss };
     const fig = { kind: 'tables', xs, rows: [y1.map((v, i) => i === miss ? null : v), y2], titles: [lineH(l1), lineH(l2)] };
-    return { type: 'parts', stem: 'A system of equations is shown.' + sysShown(l1, l2) + 'The tables are for its two equations.', fig, l1, l2,
+    return { type: 'parts', stem: 'The tables are for&nbsp; ' + sysStem(l1, l2) + '.', fig, l1, l2,
       parts: [numPart({ label: 'a', fam: 'tableGap', stem: 'What number is missing from the table for ' + M(lineH(l1)) + '?', prm, l1, l2, xs, miss, ans: Q(y1[miss]), key: keyOf('tableGap', prm) }),
         pairPart({ label: 'b', fam: 'tableSol', stem: 'What is the solution of the system?', prm, l1, l2, xs, miss, ans: [Q(s.x0), Q(s.y0)], key: keyOf('tableSol', prm) })] };
   });
 }
 /* Q14 — (a) a story with its graph, axes named and scaled: when the two are equal and what both equal, whole numbers on grid
-   lines; (b) a second system whose point of intersection falls between the grid lines, estimated to the nearest tenth: any x and
-   y within 0.1 of the exact point is right (audit E15: never demand the exact pair; the review, 14 Nov: 0.1, and no grid or
-   half-grid point inside that range). Each part has its own graph. */
+   lines; (b) a second system whose point of intersection falls between the grid lines, estimated to the nearest tenth. The lead's
+   ruling (14 Nov 2026), as the paper keys it: the key is the crossing rounded to the tenth in each coordinate, and a reading is
+   right when each coordinate is within 0.1 of that rounded value, inclusive — (5/3, 8/3) is keyed (1.7, 2.7), and 1.6 to 1.8,
+   2.6 to 2.8 are right. Each rounded coordinate is at least 0.2 from every grid and half-grid line the graph prints (it ends in
+   .2, .3, .7 or .8), so no printed grid or half-grid point is ever inside the accepted range; the exact crossing is never a
+   rounding tie (its hundredths never exactly 5). Each part has its own graph. */
+/* a rounded coordinate at least 0.2 from every grid and half-grid line (in tenths: 2, 3, 7 or 8 past a whole), and an exact one
+   that is no rounding tie (20·c an odd whole number would be one) */
+function clearOfGrid(c) { const t = qmul(tenthOf(c), Q(10)), k = ((Number(t.n) % 5) + 5) % 5, tw = qmul(c, Q(20)); return isInt(t) && (k === 2 || k === 3) && !(isInt(tw) && tw.n % 2n !== 0n); }
 const STORIES = [
   { id: 'saveSpend', unit: 'dollars', xname: 'weeks', yname: 'dollars', say: (A, B, s) => A + ' has $' + s.b1 + ' and saves $' + s.m1 + ' each week. ' + B + ' has $' + s.b2 + ' and spends $' + (-s.m2) + ' each week.',
     ask: (A, B) => 'After how many weeks will ' + A + ' and ' + B + ' have the same amount, and how much will each have?', amt: v => '$' + v, each: 'each', up: false },
@@ -608,17 +621,17 @@ function q14(seed) {
       const p = L_(b.m1, b.b1), q = L_(b.m2, b.b2), c = meet(p, q); if (!c) return false;
       const fx = qnum(c.x) - Math.floor(qnum(c.x)), fy = qnum(c.y) - Math.floor(qnum(c.y));
       const half = v => Math.abs(v * 2 - Math.round(v * 2)) / 2;          /* the distance to the nearest grid or half-grid line */
-      return qnum(c.x) > 0.5 && qnum(c.x) < 4 && qnum(c.y) > 0.5 && qnum(c.y) < 6 && half(qnum(c.x)) >= 0.15 && half(qnum(c.y)) >= 0.15 && [3n, 5n, 6n, 7n].includes(c.x.d) && [3n, 5n, 6n, 7n].includes(c.y.d) && Math.abs(qnum(c.x) - qnum(c.y)) >= 0.5 && !shownSys(p, q); });
+      return qnum(c.x) > 0.5 && qnum(c.x) < 4 && qnum(c.y) > 0.5 && qnum(c.y) < 6 && clearOfGrid(c.x) && clearOfGrid(c.y) && [3n, 5n, 6n, 7n].includes(c.x.d) && [3n, 5n, 6n, 7n].includes(c.y.d) && Math.abs(qnum(c.x) - qnum(c.y)) >= 0.5 && !shownSys(p, q); });
     const p = L_(b.m1, b.b1), q = L_(b.m2, b.b2), c = meet(p, q);
     const wb = { x0: 0, x1: Math.max(3, Math.ceil(qnum(c.x)) + 1), y0: 0, y1: Math.max(4, Math.ceil(qnum(c.y)) + 1), half: true };
     if (inWindow(p, wb) < 2 || inWindow(q, wb) < 2) return { bad: true };
     const prm = { st: st.id, A, B, x0: x.x0, y0: x.y0, m1: x.m1, b1: x.b1, m2: x.m2, b2: x.b2, ys, bm1: b.m1, bb1: b.b1, bm2: b.m2, bb2: b.b2 };
-    const figA = { kind: 'plane', w: wa, lines: [l1, l2], legend: [A, B], xname: st.xname, yname: st.yname, story: true };
-    const figB = { kind: 'plane', w: wb, lines: [p, q], legend: [lineH(p), lineH(q)] };
-    const pa = pairPart({ label: 'a', kind: 'story', fam: 'storyMeet', stem: st.ask(A, B), prm, l1, l2, st, A, B, ans: [Q(x.x0), Q(x.y0)], key: keyOf('storyMeet', prm) });
-    const pb = pairPart({ label: 'b', fam: 'estimate', stem: 'The graph for part (b) shows the system' + sysShown(p, q) + 'Estimate the point of intersection to the nearest tenth.', fig: figB, prm, l1: p, l2: q, exact: c,
+    const figA = { kind: 'plane', w: wa, lines: [l1, l2], legend: [A, B], xname: st.xname, yname: st.yname, story: true, title: 'PART (a): ' + A + ' and ' + B };
+    const figB = { kind: 'plane', w: wb, lines: [p, q], legend: [lineH(p), lineH(q)], title: 'PART (b): a different system' };
+    const pa = pairPart({ label: 'a', kind: 'story', fam: 'storyMeet', stem: 'The PART (a) graph shows ' + (st.id === 'plants' ? 'the height y, in centimeters, of each plant' : 'the dollars y each has') + ' after x weeks. ' + st.ask(A, B), prm, l1, l2, st, A, B, ans: [Q(x.x0), Q(x.y0)], key: keyOf('storyMeet', prm) });
+    const pb = pairPart({ label: 'b', fam: 'estimate', stem: 'The PART (b) graph shows a different system,&nbsp; ' + sysStem(p, q) + '. Estimate its point of intersection to the nearest tenth.', fig: figB, prm, l1: p, l2: q, exact: c,
       ans: [tenthOf(c.x), tenthOf(c.y)], tol: Q(1, 10), key: keyOf('estimate', prm) });
-    return { type: 'parts', stem: st.say(A, B, x) + ' The graph shows ' + (st.id === 'plants' ? 'the height y, in centimeters, of each plant' : 'the dollars y each has') + ' after x weeks.', fig: figA, parts: [pa, pb] };
+    return { type: 'parts', stem: st.say(A, B, x), fig: figA, parts: [pa, pb] };
   });
 }
 
@@ -632,7 +645,7 @@ function generate(seed) {
 }
 function partsOf(it) { return it.type === 'parts' ? it.parts : it.type === 'solo' ? [it.part] : [it]; }
 
-const api = { printedNums, fracT, FRACS, sysShown, UNIT_ID, TITLES, NAMES, ENDINGS, PLANS, STORIES, Q, qadd, qsub, qmul, qdiv, qneg, qabs, qeq, qlt, qnum, qsign, isInt, places, decPlain, qdec, qv, kstr, numStr, N, nHtml, tenthOf,
+const api = { clearOfGrid, ISSOL_RIGHT, printedNums, fracT, FRACS, sysShown, UNIT_ID, TITLES, NAMES, ENDINGS, PLANS, STORIES, Q, qadd, qsub, qmul, qdiv, qneg, qabs, qeq, qlt, qnum, qsign, isInt, places, decPlain, qdec, qv, kstr, numStr, N, nHtml, tenthOf,
   esc, fr, M, vi, speakH, pairH, pairT, T_, G_, B_, sideH, sideT, eqH, eqT, lin, fill, ending, evalSide, plainSide, substT, sideNums, sgnOf, absOf,
   L_, lineSide, lineH, lineT, onLine, yAt, meet, inWindow, readAns, readNum, parseNum, tidy, setClean, generate, partsOf, eqKey, sysKey, storyShown, ZERO, ONE };
 if (node) module.exports = api; else root.Practice = api;

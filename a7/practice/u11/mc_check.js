@@ -25,7 +25,7 @@ for (let s = 1; s <= N; s++) U.generate(s).sections.forEach((sec, si) => sec.ite
     ch.forEach((c, i) => { const v = nums(c);
       if (shape(c) !== shape(key)) fail(s, w, '"' + c + '" is not in the key\'s shape "' + key + '"');
       if (v.length !== kv.length) { fail(s, w, '"' + c + '" has ' + v.length + ' numbers'); return; }
-      if (p.fam === 'estimate') { const ex = [E.qnum(p.exact.x), E.qnum(p.exact.y)]; if (Math.abs(v[0] - ex[0]) <= 0.1 + 1e-9 && Math.abs(v[1] - ex[1]) <= 0.1 + 1e-9) fail(s, w, '"' + c + '" is inside the tolerance'); }
+      if (p.fam === 'estimate') { const ex = [E.qnum(p.ans[0]), E.qnum(p.ans[1])];      /* within 0.1 of the key, the lead's ruling of 14 Nov 2026 */ if (Math.abs(v[0] - ex[0]) <= 0.1 + 1e-9 && Math.abs(v[1] - ex[1]) <= 0.1 + 1e-9) fail(s, w, '"' + c + '" is inside the tolerance'); }
       else if (v.every((x, j) => Math.abs(x - kv[j]) < 1e-9)) fail(s, w, '"' + c + '" is the answer');
       if (p.fam === 'plans' && !(v[0] > 0)) fail(s, w, '"' + c + '" is not a count');
       if (i < 3) { const m = mods.some(mv => mv.every((x, j) => Math.abs((p.fam === 'estimate' ? Math.round(x * 10) / 10 : x) - v[j]) < 1e-9));

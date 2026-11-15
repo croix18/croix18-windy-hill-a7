@@ -60,7 +60,8 @@ function plane(f) {
   const key = (i, h) => '<span class="lk"><svg class="lks" viewBox="0 0 34 10" aria-hidden="true"><line class="' + (i ? 'ln2' : 'ln1') + '" x1="1" y1="5" x2="33" y2="5"/></svg><span class="lt">' + h + (f.story ? '' : '') + '</span></span>';
   const lg = f.both ? '<div class="lgd">' + key(0, 'both equations: ' + f.legend[0].split(' and ').map(t => E.M(t)).join(' and ')) + '</div>'
     : '<div class="lgd">' + f.legend.map((h, i) => key(i, (f.story ? E.esc(h) : E.M(h)) + (i ? ' (dashed)' : ' (solid)'))).join('') + '</div>';
-  return { html: '<div class="qfig">' + svg + lg + '</div>', segs, ticks, k, w };
+  const cap = f.title ? '<div class="fcap">' + E.esc(f.title) + '</div>' : '';          /* the paper's caption: "PART (b): a different system" */
+  return { html: '<div class="qfig">' + cap + svg + lg + '</div>', segs, ticks, k, w };
 }
 function tables(f) {
   const one = (t, ys) => '<table class="vt"><caption>' + E.M(t) + '</caption><tr><th scope="row">' + E.M('<i>x</i>') + '</th>' + f.xs.map(x => '<td>' + E.M(mn(x)) + '</td>').join('') + '</tr>' +

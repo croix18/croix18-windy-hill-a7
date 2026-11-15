@@ -24,7 +24,7 @@ not seen the specs reviewed it.
   The package is `a7/packages/A7 Unit 11 - Solving Equations and Systems/`; the master sheet has its rows.
 - **The practice page** (`a7/practice/u11`, README there): one generator per question of the paper; every part over
   1,000 versions; `u11_check.js` (3,000 sets read back from their printed words), `verify.py` (sympy; what the lessons
-  showed is read from the lesson specs — `python3 shown43.py --emit` after any lesson changes), 43 of 43 planted errors,
+  showed is read from the lesson specs — `python3 shown43.py --emit` after any lesson changes), 49 of 49 planted errors,
   `mc_check.js` (the all-multiple-choice retake). The teacher copy prints the test as random sets
   (`teacher/gen_test.py` after the paper changes). **Not published** — nothing of Unit 11 is on the website.
 - **The review** (`/home/claude/work/review_*.md` in the session; the dispositions are in the audit's last section): no
@@ -49,6 +49,10 @@ not seen the specs reviewed it.
 5. **START HERE's dates for 11.02 and 11.03 are a day late** — they come from the plan vendored on 25 Oct
    (`assets/windmill`); the scope and the lessons are right. `python3 tools/vendor_windmill.py` when Windmill's plan is current.
 6. **The kit's Teacher Edition prints "neighbour"**; the lessons are in American English.
+7. **The practice page's 14(b) (the estimate) has 38 different systems**, under ruling 49's floor of 100 — the kit's
+   variety check passes because it counts 14(b) with its story (19,984). Lines whose crossing is well clear of every
+   grid and half-grid line on a small window are few; a wider window or thirds-and-fifths coefficients would add more.
+8. **The page's question 12 takes the ordered pair in one box** (the kit gives a part one box); the paper asks for x and y.
 
 # Earlier — 25 October 2026
 

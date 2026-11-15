@@ -47,7 +47,8 @@ const Unit = {
   solution: (x, type) => type === 'text' ? C.solution(x) : C.mcSolution(x),
   walk: (x, type) => type === 'text' ? W.steps(x) : W.stepsMC(x),
   readNum: W.readNum,
-  /* a Hint step's number: exactly — or, for an estimate read off the graph, any number within the tolerance of the exact one */
+  /* a Hint step's number: exactly — or, for an estimate read off the graph, any number within the tolerance of the key (the crossing
+     rounded to the tenth; the lead's ruling, 14 Nov 2026) */
   numOk: (s, v) => s.tol ? Math.abs(E.qnum(v) - E.qnum(s.near)) <= E.qnum(s.tol) + 1e-9 : E.qeq(v, s.ans),
   /* for the checks: what a student would type for the key */
   keyText: p => p.kind === 'num' ? E.kstr(p.ans) : p.kind === 'story' ? E.kstr(p.ans[0]) + ', ' + E.kstr(p.ans[1]) : '(' + E.kstr(p.ans[0]) + ', ' + E.kstr(p.ans[1]) + ')'

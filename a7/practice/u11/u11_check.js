@@ -90,11 +90,14 @@ function words(seed, w, h) {
   const t = plainOf(h);
   if (BANNED.test(t)) fail(seed, w, 'a student reads "×", "slope" or "intercept": ' + t.slice(0, 140));
   /* a chain of numeric expressions joined by =, with no letter touching it */
-  const s = t.replace(/−/g, '-');
+  /* a full stop ends a sentence, never a decimal point (always a digit after it): made a ';' so that a claim which ends its
+     sentence is read, not skipped, and two sentences are never one claim (14 Nov 2026) */
+  const s = t.replace(/−/g, '-').replace(/\.(?=\s|$)/g, ';');
   const re = /[\d.()+\-*/½⅓⅔¼¾⅕⅖⅗⅘·÷\s]*\d[\d.()+\-*/½⅓⅔¼¾⅕⅖⅗⅘·÷\s=]*/g; let m;
   while ((m = re.exec(s))) {
     const run = m[0]; if (run.indexOf('=') < 0) continue;
     const before = s.slice(0, m.index).replace(/\s+$/, ''), after = s.slice(m.index + run.length);
+    if (/\bleft is$/.test(before)) continue;                          /* "What is left is 38 = −4": the ending quoted, then judged in words */
     if (/(^|[^A-Za-z])[A-Za-z]$|[□’']$/.test(before) || /^[A-Za-z□](?![A-Za-z])/.test(after.replace(/^\s+/, ''))) continue;      /* a letter touching it: part of an equation, not arithmetic */
     const segs = run.split('=').map(x => x.trim().replace(/^[(]+(?=[^)]*$)/, '').replace(/(?<=^[^(]*)[)]+$/, ''));
     if (segs.some(x => !x)) continue;
@@ -112,10 +115,50 @@ const SPEC = fs.readFileSync(path.join(__dirname, '..', '..', 'build', 'u11', 'u
 const TEST_TITLES = [...SPEC.matchAll(/dict\(title="([^"]+)", benchmark="MA\.8\.AR\.\d\.\d", items=_ar\d\d\(\)\)/g)].map(m => m[1]);
 if (TEST_TITLES.length !== 4) { console.log('could not read the test\'s four section titles from unit.py'); process.exit(1); }
 const TRACK = /tracker=\{"MA\.8\.AR\.2\.1": (\d+), "MA\.8\.AR\.4\.1": (\d+), "MA\.8\.AR\.4\.2": (\d+), "MA\.8\.AR\.4\.3": (\d+)\}/.exec(SPEC).slice(1).map(Number);
-/* >>> THE PAPER'S SHAPE, BY HAND — update here if unit.py's practice paper changes kind. The section titles above are read from
-   unit.py (any wording; the page's must match them). Q8 is "Select ALL the systems that have (a, b) as a solution" (the lead,
-   14 Nov 2026: one pair, five systems, two or three right) — still a select-all, 'multi', so nothing here names its words. <<< */
-const WANT = { items: '7,2,2,3', points: TRACK.join(','), types: 'solo,solo,solo,solo,parts,solo,solo|multi,mc|mc,mc|solo,parts,parts' };
+/* >>> THE PAPER'S SHAPE AND WORDS, BY HAND — update here when unit.py's practice paper changes. The section titles above are
+   read from unit.py (any wording; the page's must match them). Since the review pass of 14 Nov 2026 the paper is in FAST's
+   house style, and each question's own words are held here: `paper` is a phrase of unit.py's question (it must still be in
+   unit.py — if the paper is reworded this check fails and says which, so this table is brought up to date), `page` is what
+   the page's stem must say for that question (a pattern; the page's numbers are its own). Q8 is "Select all the systems that
+   have (a, b) as a solution" (five systems, two or three right); Q9's four options are a verdict with a claim about the pair
+   (both / only the first / only the second / neither), exactly one of them true; Q14's two graphs are captioned "PART (a)" and
+   "PART (b): a different system". <<< */
+const WANT = { items: '7,2,2,3', points: TRACK.join(','), types: 'solo,solo,solo,solo,parts,solo,solo|multi,mc|mc,mc|solo,parts,parts',
+  words: [
+    [1, 'An equation is shown.', /^An equation is shown\.\s*.+?\s*What value of [a-z] makes the equation true\?$/],
+    [2, 'What value of " + v + " makes the equation true?', /^An equation is shown\.\s*.+?\s*What value of [a-z] makes the equation true\?$/],
+    [3, 'An equation is shown.', /^An equation is shown\.\s*.+?\s*What value of [a-z] makes the equation true\?$/],
+    [4, 'An equation is shown.', /^An equation is shown\.\s*.+?\s*What value of [a-z] makes the equation true\?$/],
+    [5, 'Each equation has one solution, no solution or infinitely many solutions. Which? If it has one solution, find it.', /^Each equation has one solution, no solution or infinitely many solutions\. Which\? If it has one solution, find it\.$/],
+    [6, 'Complete the equation so that it has no solution. What number goes in the box?', /^Complete the equation so that it has (?:no solution|infinitely many solutions)\. What number goes in the box\?\s*.+$/],
+    [7, 'After how many months will the two companies have cost the same?', /\. After how many (?:months|visits|hours|classes) will the two (?:companies|gyms|ways|shops|plans) have cost the same\?$/],
+    [8, 'Select all the systems that have', /^Select all the systems that have \(.+\) as a solution\.$/],
+    [9, 'a solution of the system', /^Is \(.+\) a solution of the system y = .+ and y = .+\?$/],
+    [10, 'The graphs of the system', /^The graphs of the system y = .+ and y = .+ are shown\. How many solutions does the system have\?$/],
+    [11, 'are shown. How many solutions does the system have?', /^The graphs of the system y = .+ and y = .+ are shown\. (?:Both equations graph as the one line shown\. )?How many solutions does the system have\?$/],
+    [12, 'A system of equations is graphed:', /^A system of equations is graphed: y = .+ and y = .+\. What is the solution of the system\?$/],
+    [13, 'The tables are for', /^The tables are for y = .+ and y = .+\.$/],
+    [14, 'The PART (a) graph shows', /^\w+(?: has|’s plant is) .+ each week\. \w+(?: has|’s plant is) .+ each week\.$/]],
+  parts: [[13, 'a', 'What number is missing from the table for', /^What number is missing from the table for y = .+\?$/], [13, 'b', 'What is the solution of the system?', /^What is the solution of the system\?$/],
+    [14, 'a', 'After how many weeks will', /^The PART \(a\) graph shows (?:the dollars y each has|the height y, in centimeters, of each plant) after x weeks\. After how many weeks will .+\?$/],
+    [14, 'b', 'a different system', /^The PART \(b\) graph shows a different system, y = .+ and y = .+\. Estimate its point of intersection to the nearest tenth\.$/]],
+  captions: [['PART (a):  Mia and Leo', /^PART \(a\): \w+ and \w+$/], ['PART (b):  a different system', /^PART \(b\): a different system$/]],
+  q9claims: ['Yes — it makes both equations true.', 'No — it makes only E true.', 'No — it makes only E true.', 'No — it makes neither equation true.'] };
+{ const gone = WANT.words.map(w => w[1]).concat(WANT.parts.map(w => w[2]), WANT.captions.map(w => w[0])).filter(ph => SPEC.indexOf(ph) < 0);
+  if (gone.length) { console.log('unit.py\'s practice paper no longer says: ' + gone.map(g => '"' + g + '"').join(', ') + ' — update THE PAPER\'S SHAPE AND WORDS in u11_check.js'); process.exit(1); } }
+const wordsOk = (seed, w, h, re) => { const t = plainOf(h); if (!re.test(t)) fail(seed, w, 'not the paper\'s words (' + re + '): ' + t.slice(0, 160)); };
+/* Q9: an option read as a verdict and a claim about the pair, and judged true or false against the two equations */
+function q9Claim(o, lines, t) {
+  const m = /^(Yes|No) — it makes (.+?)\.$/.exec(o); if (!m) throw new Error('an option is not a verdict with its claim: ' + o);
+  const yes = m[1] === 'Yes', c = m[2], idx = e => lines.findIndex(L => L === e);
+  let claim;
+  if (c === 'both equations true') claim = t[0] && t[1];
+  else if (c === 'neither equation true') claim = !t[0] && !t[1];
+  else { const mm = /^(only )?(y = .+) (true|false)$/.exec(c); if (!mm) throw new Error('an option\'s claim is not read: ' + o);
+    const i = idx(mm[2]); if (i < 0) throw new Error('an option names an equation not in the system: ' + mm[2]);
+    claim = mm[3] === 'true' ? t[i] && (!mm[1] || !t[1 - i]) : !t[i] && !mm[1]; }
+  return { yes, claim, whole: claim && yes === (t[0] && t[1]) };     /* an option is true when its claim is, and its verdict is too */
+}
 
 /* ------------------------------------------------------------------ the figures, read back from their SVG */
 function readPlane(seed, w, html, lines, want) {
@@ -170,6 +213,12 @@ function typeBack(seed, w, p) {
     const f = C.F[p.fam].models(p).filter(m => !E.qeq(m.v, p.ans));
     f.forEach(m => wrong(E.places(m.v) >= 0 ? kt(m.v) : (Math.round(E.qnum(m.v) * 100) / 100).toFixed(2), true));
     if (p.ans.n !== 0n) wrong(kt(E.qneg(p.ans)), false);
+    /* the sign help (14 Nov 2026): it names the places in THIS equation's work where a negative is — each with its value, read
+       by words() — or, if it says the work never makes one, no minus sign is printed in the equation or any worked line */
+    f.filter(m => m.sign).forEach(m => { const said = plainOf(m.say), work = [p.eq ? E.eqT(p.eq) : ''].concat(U.solution(p, 'text').map(l => plainOf(l.say) + ' ' + (l.ex && typeof l.ex === 'object' ? plainOf(E.eqH(l.ex)) : ''))).join(' ');
+      if (/never makes/.test(said)) { if (/−/.test(work)) fail(seed, w, 'the sign help says the work makes no negative, but it does: ' + work.slice(0, 160)); }
+      else if (!/signs? to watch in this equation: where|signs? to watch in this equation: in the division/.test(said)) fail(seed, w, 'the sign help names no place: ' + said);
+      counts.signs = (counts.signs || 0) + 1; });
     wrong(kt(E.qadd(p.ans, E.Q(1))), false);
   } else {
     const [x, y] = p.ans;
@@ -177,12 +226,13 @@ function typeBack(seed, w, p) {
     else { right(kt(x) + ', ' + kt(y)); right('x = ' + kt(x) + ', y = ' + kt(y)); right('(' + kt(x) + ',' + kt(y) + ')'); }
     C.PF[p.fam].models(p).forEach(m => { if (E.qeq(m.v[0], x) && E.qeq(m.v[1], y)) return; wrong('(' + kt(m.v[0]) + ', ' + kt(m.v[1]) + ')', true); });
     if (p.fam === 'estimate') {
-      const ex = p.exact, t = 0.1;
-      [[0.05, 0], [-0.05, 0.05], [0, -0.05], [0.15, 0], [0, -0.15]].forEach(([a, b]) => { const X = Math.round((fl([ex.x.n, ex.x.d]) + a) * 10) / 10, Y = Math.round((fl([ex.y.n, ex.y.d]) + b) * 10) / 10;
-        const inside = Math.abs(X - E.qnum(ex.x)) <= t + 1e-9 && Math.abs(Y - E.qnum(ex.y)) <= t + 1e-9; const r = U.judge.text(p, '(' + X + ', ' + Y + ')');
-        if ((r.v === 'right') !== inside) fail(seed, w, '(' + X + ', ' + Y + ') is ' + r.v + ' but is ' + (inside ? 'inside' : 'outside') + ' the tolerance'); });
-      const far = '(' + (Math.round((E.qnum(ex.x) + 0.2) * 10) / 10) + ', ' + (Math.round(E.qnum(ex.y) * 10) / 10) + ')';
-      if (U.judge.text(p, far).v === 'right') fail(seed, w, far + ' is 0.2 off and marked right');
+      /* the lead's ruling (14 Nov 2026), the paper's: right when each coordinate is within 0.1 of the KEY (the crossing rounded to
+         the tenth), inclusive — every tenth from key − 0.2 to key + 0.2 in each coordinate typed, and judged as that rule says */
+      const K = p.ans.map(q => Math.round(E.qnum(q) * 10));
+      for (let a = -2; a <= 2; a++) for (let b2 = -2; b2 <= 2; b2++) { const X = (K[0] + a) / 10, Y = (K[1] + b2) / 10, inside = Math.abs(a) <= 1 && Math.abs(b2) <= 1;
+        const r = U.judge.text(p, '(' + X + ', ' + Y + ')'); if ((r.v === 'right') !== inside) fail(seed, w, '(' + X + ', ' + Y + ') is ' + r.v + ' but is ' + (inside ? 'inside' : 'outside') + ' the range'); }
+      [[0.05, 0.05], [-0.1, 0.1], [0.11, 0], [0, -0.11]].forEach(([a, b2]) => { const X = +(K[0] / 10 + a).toFixed(2), Y = +(K[1] / 10 + b2).toFixed(2), inside = Math.abs(a) <= 0.1 && Math.abs(b2) <= 0.1;
+        const r = U.judge.text(p, '(' + X + ', ' + Y + ')'); if ((r.v === 'right') !== inside) fail(seed, w, '(' + X + ', ' + Y + ') is ' + r.v + ' but is ' + (inside ? 'inside' : 'outside') + ' the range'); });
       if (E.qnum(p.tol) !== 0.1) fail(seed, w, 'the tolerance is not 0.1');
     } else wrong('(' + kt(y) + ', ' + kt(x) + ')', !E.qeq(x, y));
   }
@@ -229,6 +279,10 @@ for (let seed = 1; seed <= NSETS; seed++) {
   let q = 0;
   secs.forEach(sec => sec.items.forEach(it => { q++; const w = 'Q' + q, stem = U.view.stem(it), figH = U.view.figure(it);
     words(seed, w + ' stem', stem);
+    WANT.words.filter(x => x[0] === q).forEach(x => wordsOk(seed, w + ' stem', stem, x[2]));
+    WANT.parts.filter(x => x[0] === q).forEach(x => { const p = it.parts.find(pp => pp.label === x[1]); if (!p) fail(seed, w, 'no part ' + x[1]); else wordsOk(seed, w + x[1], p.stem, x[3]); });
+    if (q === 14) { const caps = [figH, U.view.line(it.parts[1])].map(h => (/<div class="fcap">([^<]*)<\/div>/.exec(h) || [])[1] || '');
+      caps.forEach((c, i) => { if (!WANT.captions[i][1].test(c)) fail(seed, w, 'graph ' + (i + 1) + ' is not captioned as the paper: "' + c + '"'); }); }
     const DI = D ? { q, type: it.type, stem, fig: figH, parts: [], opts: it.opts || null, correct: it.correct == null ? null : it.correct } : null;
     const eqRun = mathSpans(stem);
     try {
@@ -281,7 +335,7 @@ for (let seed = 1; seed <= NSETS; seed++) {
         if (s0.kind !== 'one' || !eqr(s0.s, nn)) fail(seed, w, 'the worked equation ' + t0 + ' is not the story\'s');
         typeBack(seed, w, p); checkHelp(seed, w, it, p, 'text', t0, p.v);
       } else if (q === 8 || q === 9) {
-        const L1 = q === 9 ? lineOf(eqRun[0]) : null, L2 = q === 9 ? lineOf(eqRun[1]) : null;
+        const L1 = q === 9 ? lineOf(eqRun[1]) : null, L2 = q === 9 ? lineOf(eqRun[2]) : null;
         if (q === 9) { if (eqr(L1[0], L2[0])) fail(seed, w, 'the same number multiplies x'); held43(seed, w, { lines: [L1, L2] }); [L1, L2].forEach(l => { if (l[0][1] !== 1n) fail(seed, w, 'not an integer multiplier'); }); }
         if (q === 8) {
           const pr = (() => { const m = /\((-?[\d.]+),\s*(-?[\d.]+)\)/.exec(eqRun[0].replace(/−/g, '-')); return [numR(m[1]), numR(m[2])]; })();
@@ -295,15 +349,20 @@ for (let seed = 1; seed <= NSETS; seed++) {
             if (rights.indexOf(i) < 0) { const why = U.view.why(it, i); if (!why) fail(seed, w, 'system ' + i + ' has no reason'); words(seed, w, why); } });
           if (new Set(sysL.map(ls => ls.map(l => l.join()).sort().join(';'))).size !== 5) fail(seed, w, 'two systems the same');
           if (/\b(two|three|2|3) (of|systems)\b/i.test(plainOf(stem))) fail(seed, w, 'the stem says how many');
+          if (it.opts.length !== 5) fail(seed, w, it.opts.length + ' systems, not five');
         } else {
-          const m = /\((-?[\d.]+),\s*(-?[\d.]+)\)/.exec(eqRun[2].replace(/−/g, '-')), pr = [numR(m[1]), numR(m[2])], t = [on(L1, ...pr), on(L2, ...pr)];
-          const pick = it.opts.map(o => { const s = plainOf(o); const which = s.indexOf(plainOf(E.lineH(it.l1))) >= 0 && !/both/.test(s) ? 1 : s.indexOf(plainOf(E.lineH(it.l2))) >= 0 ? 2 : 0;
-            if (/^Yes — it makes both/.test(s)) return t[0] && t[1];
-            if (/^Yes/.test(s)) return false;                                  /* one equation is never the reason */
-            return !(t[0] && t[1]) && !t[which - 1] && (which === 1 || which === 2); });
-          const rights = pick.map((v, i) => v ? i : -1).filter(i => i >= 0);
-          if (rights.length !== 1 || rights[0] !== it.correct) fail(seed, w, 'the right reason is ' + rights + ', the key ' + it.correct);
-          if (!t[0] && !t[1]) fail(seed, w, 'the pair is on neither line');
+          /* every option is a verdict with a claim about THIS pair; exactly one option is true, and it is the key — so no
+             option is arguable (14 Nov 2026: "Yes — it makes the first equation true" was true of the solution itself) */
+          const m = /\((-?[\d.]+),\s*(-?[\d.]+)\)/.exec(eqRun[0].replace(/−/g, '-')), pr = [numR(m[1]), numR(m[2])], t = [on(L1, ...pr), on(L2, ...pr)];
+          const names = [eqRun[1], eqRun[2]], judged = it.opts.map(o => q9Claim(plainOf(o), names, t)); counts.pairs++;
+          const trueOnes = judged.map((j, i) => j.whole ? i : -1).filter(i => i >= 0);
+          if (trueOnes.length !== 1 || trueOnes[0] !== it.correct) fail(seed, w, 'the options true of ' + plainOf(eqRun[0]) + ' are ' + trueOnes + ', the key ' + it.correct + ' (' + it.opts.map(plainOf).join(' | ') + ')');
+          judged.forEach((j, i) => { if (j.claim !== j.whole) fail(seed, w, 'option ' + i + "'s claim is true but its verdict is not: " + plainOf(it.opts[i])); });
+          const shapes = it.opts.map(o => plainOf(o).replace(/y = .+? (?=true)/, 'E ')).sort().join('|');
+          if (shapes !== WANT.q9claims.slice().sort().join('|')) fail(seed, w, 'the options are not the four claims (both, only each one, neither): ' + it.opts.map(plainOf).join(' | '));
+          if (it.opts.map(plainOf).filter(o => /only/.test(o)).map(o => /only (y = .+) true/.exec(o)[1]).sort().join('|') !== names.slice().sort().join('|')) fail(seed, w, 'the two "only" options do not name the two equations');
+          { const ws = it.opts.map((o, k) => k === it.correct ? null : (U.judge.mc(it, k).what || [])[0]).filter(x => x != null); if (new Set(ws).size !== ws.length) fail(seed, w, 'two wrong options get the same reason'); }
+          counts.q9 = (counts.q9 || 0) + 1; counts.q9t = counts.q9t || {}; const pat = (t[0] ? 'A' : '-') + (t[1] ? 'B' : '-'); counts.q9t[pat] = (counts.q9t[pat] || 0) + 1;
         }
         (it.opts || []).forEach((o, k) => { words(seed, w, o); if (it.type === 'mc' && k !== it.correct) { const r = U.judge.mc(it, k); counts.mc++; if (r.v !== 'wrong' || !r.what[0]) fail(seed, w, 'choice ' + k + ' not named'); words(seed, w, r.what[0]); } });
         if (it.type === 'mc' && U.judge.mc(it, it.correct).v !== 'right') fail(seed, w, 'the key is not right');
@@ -353,12 +412,16 @@ for (let seed = 1; seed <= NSETS; seed++) {
         const bx = dv(ad(B2[1], ng(B1[1])), ad(B1[0], ng(B2[0]))), by = at(B1, bx), fx = fl(bx), fy = fl(by);
         const frac = v => v - Math.floor(v);
         const half = v => Math.abs(v * 2 - Math.round(v * 2)) / 2;
-        if (half(fx) < 0.15 || half(fy) < 0.15) fail(seed, w + 'b', 'the crossing (' + fx + ', ' + fy + ') is not well between the grid and half-grid lines');
-        /* no grid or half-grid point inside the accepted range (it would be marked right, and it is on at most one line) */
-        for (let gx = Math.floor((fx - 0.1) * 2); gx <= Math.ceil((fx + 0.1) * 2); gx++) for (let gy = Math.floor((fy - 0.1) * 2); gy <= Math.ceil((fy + 0.1) * 2); gy++)
-          if (Math.abs(gx / 2 - fx) <= 0.1 + 1e-9 && Math.abs(gy / 2 - fy) <= 0.1 + 1e-9) fail(seed, w + 'b', 'the grid point (' + gx / 2 + ', ' + gy / 2 + ') is inside the tolerance');
-        if (Math.abs(fl([pb.ans[0].n, pb.ans[0].d]) - fx) > 0.05 + 1e-9 || Math.abs(fl([pb.ans[1].n, pb.ans[1].d]) - fy) > 0.05 + 1e-9) fail(seed, w + 'b', 'the key is not the crossing to the tenth');
-        if (Math.abs(fx - fy) <= 0.2) fail(seed, w + 'b', 'the swapped pair is inside the tolerance');
+        /* the key: the crossing rounded to the tenth, never from a tie; each rounded coordinate at least 0.2 from every grid and
+           half-grid line, so no printed grid or half-grid point is inside the accepted box (key ± 0.1, inclusive) */
+        const KX = Math.round(fx * 10), KY = Math.round(fy * 10), tie = v => { const t = mu(v, R(20)); return t[1] === 1n && t[0] % 2n !== 0n; };
+        if (!sameR(R(KX, 10), pb.ans[0]) || !sameR(R(KY, 10), pb.ans[1])) fail(seed, w + 'b', 'the key is not the crossing rounded to the tenth');
+        if (tie(bx) || tie(by)) fail(seed, w + 'b', 'the crossing is a rounding tie');
+        [KX, KY].forEach(k => { const d = Math.min(...[0, 5].map(o => { const r = ((k - o) % 5 + 5) % 5; return Math.min(r, 5 - r); })); if (d < 2) fail(seed, w + 'b', 'the key ' + k / 10 + ' is ' + d / 10 + ' from a grid or half-grid line'); });
+        const ws = /data-win="([^"]+)"/.exec(lineH)[1].split(' ').map(Number);
+        for (let gx = ws[0] * 2; gx <= ws[1] * 2; gx++) for (let gy = ws[2] * 2; gy <= ws[3] * 2; gy++)
+          if (Math.abs(gx * 5 - KX) <= 1 && Math.abs(gy * 5 - KY) <= 1) fail(seed, w + 'b', 'the grid point (' + gx / 2 + ', ' + gy / 2 + ') is inside the accepted range');
+        if (Math.abs(KX - KY) <= 1) fail(seed, w + 'b', 'the swapped pair is inside the accepted range');
         readPlane(seed, w + 'b', lineH, [B1, B2], { n: 2, cross: [bx, by] }); held43(seed, w + 'b', { lines: [B1, B2] });
         { const mm = /^(\w+)\D*?(\d+)\D+?(\d+) (?:cm )?each week\. (\w+)\D*?(\d+)\D+?(saves|spends|grows) \$?(\d+)/.exec(tx); held43(seed, w + 'a', { story: [mm[2], mm[3], mm[5], mm[7]] }); }
         if (!/gridln2/.test(lineH)) fail(seed, w + 'b', 'no half lines to read between');
@@ -376,6 +439,6 @@ for (let seed = 1; seed <= NSETS; seed++) {
 }
 fs.writeFileSync(path.join(__dirname, 'dump.json'), JSON.stringify({ TITLES: E.TITLES, sets: dump }));
 console.log(counts.sets + ' sets: ' + counts.eqs + ' equations solved again from their words, ' + counts.keys + ' keys typed back, ' + counts.models + ' mistakes typed, ' + counts.lines + ' worked lines and ' +
-  counts.steps + ' Hint steps, ' + counts.claims + ' arithmetic claims, ' + counts.pairs + ' ordered pairs in both equations, ' + counts.figs + ' graphs (' + counts.segs + ' lines read back), ' + counts.tables + ' table pairs, ' + counts.mc + ' wrong choices named, ruling 43 held on ' + counts.r43 + ' questions; ' + NDUMP + ' sets written to dump.json');
+  counts.steps + ' Hint steps, ' + counts.claims + ' arithmetic claims, ' + counts.pairs + ' ordered pairs in both equations, ' + counts.figs + ' graphs (' + counts.segs + ' lines read back), ' + counts.tables + ' table pairs, ' + counts.mc + ' wrong choices named, Q9 (pairs on both lines, A only, B only, neither) '  + JSON.stringify(counts.q9t || {}) + ' with exactly one option true, ruling 43 held on ' + counts.r43 + ' questions; ' + NDUMP + ' sets written to dump.json');
 if (nfail) { console.log(nfail + ' PROBLEMS'); fails.forEach(f => console.log('  ' + f)); process.exit(1); }
 console.log('u11_check: ALL CHECKS PASS');

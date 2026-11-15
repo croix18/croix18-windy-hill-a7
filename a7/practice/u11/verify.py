@@ -194,12 +194,25 @@ for S in DUMP["sets"]:
                     held43(w, lines=ls)
                 if rights != it["correct"] or not 2 <= len(rights) <= 3: no(w, "the systems solved by %s are %s; the key %s" % (pr, rights, it["correct"]))
             elif q == 9:
-                ls = [line(t) for t in M if t.startswith("y")][:2]
+                ls = [line(t) for t in M if t.startswith("y")][:2]; names = [t for t in M if t.startswith("y")][:2]
                 if len(ls) != 2 or ls[0][0] == ls[1][0]: no(w, "not two lines with different numbers multiplying x")
-                pr = pair(M[2]); t = [l[0] * pr[0] + l[1] == pr[1] for l in ls]; n["pairs"] += 1
-                o = text(it["opts"][it["correct"]])
-                ok = (o.startswith("Yes — it makes both") and all(t)) or (o.startswith("No") and not all(t) and ((M[0] in o and not t[0]) or (M[1] in o and not t[1])))
-                if not ok: no(w, "the key '%s' is not the right verdict and reason for %s (%s)" % (o, pr, t))
+                pr = pair(M[0]); t = [l[0] * pr[0] + l[1] == pr[1] for l in ls]; n["pairs"] += 1
+                # every option a verdict with a claim about this pair, judged here: exactly one true, and it is the key
+                true_ones = []
+                for i, o in enumerate(it["opts"]):
+                    o = text(o); m = re.match(r"^(Yes|No) — it makes (.+?)\.$", o)
+                    if not m: no(w, "option %d is not a verdict with its claim: %s" % (i, o)); continue
+                    c = m.group(2)
+                    if c == "both equations true": claim = t[0] and t[1]
+                    elif c == "neither equation true": claim = not t[0] and not t[1]
+                    else:
+                        mm = re.match(r"^(only )?(y = .+) (true|false)$", c)
+                        if not mm or mm.group(2) not in names: no(w, "option %d's claim is not read: %s" % (i, o)); continue
+                        k = names.index(mm.group(2))
+                        claim = (t[k] and (not mm.group(1) or not t[1 - k])) if mm.group(3) == "true" else (not t[k] and not mm.group(1))
+                    if claim and (m.group(1) == "Yes") == (t[0] and t[1]): true_ones.append(i)
+                    elif claim: no(w, "option %d's claim is true but its verdict is not: %s" % (i, o))
+                if true_ones != [it["correct"]]: no(w, "the options true of %s are %s; the key %s" % (pr, true_ones, it["correct"]))
                 held43(w, lines=ls)
             elif q in (10, 11):
                 ls = [line(t) for t in M if t.startswith("y")][:2]
@@ -242,15 +255,22 @@ for S in DUMP["sets"]:
                 held43(w + "a", story=[m.group(2), m.group(3), m.group(5), m.group(7)])
                 ls = [line(t) for t in maths(pb["line"]) if t.startswith("y")][:2]; s2 = solve_sys(*ls)
                 ex, ey = s2[0][X], s2[0][Y]; key = pair(text(pb["key"]))
-                if abs(key[0] - ex) > Q(1, 20) or abs(key[1] - ey) > Q(1, 20): no(w + "b", "the key %s is not (%s, %s) to the tenth" % (key, ex, ey))
-                for vv in (ex, ey):
-                    if abs(2 * vv - round(2 * vv)) / 2 <= Q(1, 10): no(w + "b", "a grid or half-grid line is within 0.1 of the point of intersection (%s, %s)" % (ex, ey))
-                if abs(ex - ey) <= Q(1, 5): no(w + "b", "the swapped pair would be inside the tolerance")
-                if "0.1" not in json.dumps(pb["steps"]) and not any(s_.get("tol") == "0.1" for s_ in pb["steps"]): no(w + "b", "the Hint does not accept 0.1 around the exact point")
+                # the lead's ruling (14 Nov 2026), the paper's: the key is the crossing rounded to the tenth (never from a tie), and a
+                # reading is right within 0.1 of the KEY, inclusive. Every lattice and half-lattice point inside the window that lies
+                # in the accepted box must not exist.
+                for vv, kk in ((ex, key[0]), (ey, key[1])):
+                    if (20 * vv).q == 1 and (20 * vv).p % 2: no(w + "b", "the crossing coordinate %s is a rounding tie" % vv)
+                    if kk != sp.floor(10 * vv + Q(1, 2)) / 10: no(w + "b", "the key %s is not %s rounded to the tenth" % (kk, vv))
+                win = [Q(v) for v in re.search(r'data-win="([^"]+)"', pb["line"]).group(1).split()[:4]]
+                inbox = [(gx, gy) for gx in [Q(k, 2) for k in range(int(2 * win[0]), int(2 * win[1]) + 1)] for gy in [Q(k, 2) for k in range(int(2 * win[2]), int(2 * win[3]) + 1)]
+                         if abs(gx - key[0]) <= Q(1, 10) and abs(gy - key[1]) <= Q(1, 10)]
+                if inbox: no(w + "b", "grid or half-grid points %s are inside the accepted box around %s" % (inbox, key))
+                if abs(key[0] - key[1]) <= Q(1, 10): no(w + "b", "the swapped pair would be inside the accepted box")
+                if "0.1" not in json.dumps(pb["steps"]) and not any(s_.get("tol") == "0.1" for s_ in pb["steps"]): no(w + "b", "the Hint does not accept 0.1 around the key")
                 if not any("from" in text(s["say"]) and "to" in text(s["say"]) for s in pb["sol"]): no(w + "b", "the worked solution does not state the range it accepts")
                 plane(w + "b", pb["line"], ls, 2, (ex, ey))
                 for p in (pa, pb): check_steps(w + p["label"], p["steps"])
-                check_choices(w + "a", pa, (Q(nums[0]), Q(nums[1]))); check_choices(w + "b", pb, None, est=(ex, ey)); held43(w + "b", lines=ls)
+                check_choices(w + "a", pa, (Q(nums[0]), Q(nums[1]))); check_choices(w + "b", pb, None, est=key); held43(w + "b", lines=ls)
         except Exception as e:
             no(w, "could not check: %r" % (e,))
 

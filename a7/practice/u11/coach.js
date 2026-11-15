@@ -106,8 +106,9 @@ function steps(e) {
       if (vs.length > 1) walk.push(numS('Collect the ' + vi(v) + '-terms: ' + M(sideH(vs)) + ' is how many ' + vi(v) + '’s? What is ' + M(vs.map((c, i) => i ? (qsign(c.c) < 0 ? ' − ' + n(qabs(c.c)) : ' + ' + n(c.c)) : n(c.c)).join('')) + '?',
         vs.reduce((a, c) => qadd(a, c.c), ZERO), vs.length === 2 ? arith('add', vs[0].c, vs[1].c) : 'Add them one at a time.'));
       if (cs.length > 1) walk.push(numS('Collect the numbers: what is ' + M(sideH(cs)) + '?', cs.reduce((a, c) => qadd(a, c.c), ZERO), cs.length === 2 ? arith('add', cs[0].c, cs[1].c) : 'Add them one at a time.')); });
+    const groups = [L, R].reduce((a, sd) => a.concat([sd.filter(c => c.v), sd.filter(c => !c.v)].filter(g => g.length > 1)), []);
     L = collect(L); R = collect(R);
-    out.push({ k: 'coll', say: 'Collect the like terms: ' + bits.join('; ') + '.', eq: eqNow(), walk });
+    out.push({ k: 'coll', say: 'Collect the like terms: ' + bits.join('; ') + '.', eq: eqNow(), walk, groups });
   }
   /* 3. the letter on both sides: take the same variable term from both */
   const a = coefOf(L), b = coefOf(R);
@@ -128,7 +129,7 @@ function steps(e) {
     }
     L = collect(L.concat([T_(qneg(take), v)])); R = collect(R.concat([T_(qneg(take), v)]));
     const other = qeq(take, a) ? b : a;
-    out.push({ k: 'var', say: wd + ': the ' + vi(v) + '-terms are now on one side.', eq: eqNow(), take, walk: [walk0, numCalc('sub', other, take, 'What is ' + M(calcText('sub', other, take)) + '? (That many ' + vi(v) + '’s are left.)')] });
+    out.push({ k: 'var', say: wd + ': the ' + vi(v) + '-terms are now on one side.', eq: eqNow(), take, other, walk: [walk0, numCalc('sub', other, take, 'What is ' + M(calcText('sub', other, take)) + '? (That many ' + vi(v) + '’s are left.)')] });
   }
   /* which side has the letter now */
   const vs = coefOf(L).n !== 0n ? 'L' : coefOf(R).n !== 0n ? 'R' : null;
@@ -152,7 +153,7 @@ function steps(e) {
   const co = coefOf(Vside()), rhs = constOf(Oside()), s = qdiv(rhs, co);
   if (!qeq(co, ONE)) {
     L = [T_(1, v)]; R = [T_(s)];
-    out.push({ k: 'div', say: 'Divide both sides by ' + n(co) + (qsign(co) < 0 ? ', sign and all.' : '.'), eq: eqNow(), co,
+    out.push({ k: 'div', say: 'Divide both sides by ' + n(co) + (qsign(co) < 0 ? ', sign and all.' : '.'), eq: eqNow(), co, rhs,
       walk: [numCalc('div', rhs, co, 'What is ' + M(calcText('div', rhs, co)) + '?')] });
   } else if (vs === 'R') { L = [T_(1, v)]; R = [T_(s)]; out.push({ k: 'flip', say: 'So ' + v + ' = ' + n(s) + '.', eq: eqNow(), walk: [] }); }
   return out;
@@ -183,8 +184,24 @@ function tailModels(e) {
     if (!qeq(qabs(K), ONE)) out.push({ v: qmul(prod, K), say: 'multiplied by ' + n(K) + ' instead of dividing', step: null });
     if (qsign(K) < 0) out.push({ v: qneg(s), say: 'divided by ' + n(qabs(K)) + ' instead of ' + n(K) + ': the sign goes with the number', step: null });
   }
-  if (s.n !== 0n && !out.some(m => qeq(m.v, qneg(s)))) out.push({ v: qneg(s), say: 'lost a minus sign along the way: put your answer back in and the two sides do not match', step: null, sign: true });
+  if (s.n !== 0n && !out.some(m => qeq(m.v, qneg(s)))) { const sp = signSpots(st);
+    out.push({ v: qneg(s), say: sp.length ? 'lost a minus sign along the way: ' + n(qneg(s)) + ' is the right size, with the wrong sign. ' + (sp.length > 1 ? 'The signs to watch in this equation: ' : 'The sign to watch in this equation: ') + sp.join('; ') + '. Find the step where yours went the other way'
+      : 'put in a minus sign this equation never makes: every number in it and in its work is positive. Put your answer back in and the two sides do not match', step: null, sign: true }); }
   return out;
+}
+/* where a sign goes missing in THIS equation, in its own numbers (14 Nov 2026: "lost a minus sign" said only "check it"): a
+   negative distributed, a term moved across the equals sign (taken from, or added to, both sides), the division — each with
+   its right value, and only where a negative number is in it. At most three, in the order the work meets them. */
+function signSpots(st) {
+  const out = [], neg = (...q) => q.some(x => qsign(x) < 0), d = st.find(x => x.k === 'dist'), vr = st.find(x => x.k === 'var'), c = st.find(x => x.k === 'const'), dv = st.find(x => x.k === 'div');
+  if (d) d.gs.forEach(g => { const F0 = g.fr && !isInt(g.f) ? E.fracT(g.f) : n(g.f);
+    g.t.forEach(t => { if (!t.v && neg(g.f, t.c)) out.push('where the ' + F0 + ' multiplies the ' + n(t.c) + ', (' + F0 + ')(' + n(t.c) + ') = ' + n(qmul(g.f, t.c))); }); });
+  const cl = st.find(x => x.k === 'coll');
+  if (cl) cl.groups.forEach(g => { if (g.some(c => qsign(c.c) < 0)) { const sum = g.reduce((a, c) => qadd(a, c.c), ZERO); out.push('where the like terms are collected, ' + sideT(g) + ' = ' + sideT([T_(sum, g[0].v)])); } });
+  if (vr && neg(vr.take, vr.other, qsub(vr.other, vr.take))) out.push('where the ' + termT(vr.take, vr.eq.v) + ' moves across the equals sign (' + termT(qabs(vr.take), vr.eq.v) + (qsign(vr.take) < 0 ? ' added to' : ' taken from') + ' both sides), ' + calcText('sub', vr.other, vr.take) + ' = ' + n(qsub(vr.other, vr.take)));
+  if (c && neg(c.o0, c.k0, qsub(c.o0, c.k0))) out.push('where the ' + (qsign(c.k0) > 0 ? '+ ' : '− ') + n(qabs(c.k0)) + ' moves across the equals sign (' + n(qabs(c.k0)) + (qsign(c.k0) > 0 ? ' taken from' : ' added to') + ' both sides), ' + (qsign(c.k0) > 0 ? calcText('sub', c.o0, c.k0) : calcText('add', c.o0, qabs(c.k0))) + ' = ' + n(qsub(c.o0, c.k0)));
+  if (dv && neg(dv.rhs, dv.co)) out.push('in the division, ' + calcText('div', dv.rhs, dv.co) + ' = ' + n(qdiv(dv.rhs, dv.co)));
+  return out.slice(0, 3);
 }
 
 /* ------------------------------------------------------------------ the families of typed answers */
@@ -365,8 +382,10 @@ PF.storyMeet = {
     numS('Go straight down from the point of intersection. How many weeks?', p.ans[0], 'Read the number on the weeks axis under the crossing.'),
     numS('Go straight across from the point of intersection. How much does each have then?', p.ans[1], 'Read the number on the ' + p.st.yname + ' axis level with the crossing.')]
 };
-const within = (p, x, y) => Math.abs(qnum(x) - qnum(p.exact.x)) <= qnum(p.tol) + 1e-9 && Math.abs(qnum(y) - qnum(p.exact.y)) <= qnum(p.tol) + 1e-9;
-const rangeOf = (c, t) => [Math.ceil((qnum(c) - t) * 10 - 1e-9) / 10, Math.floor((qnum(c) + t) * 10 + 1e-9) / 10];
+/* the lead's ruling (14 Nov 2026), the paper's: within 0.1 of the KEY (the crossing rounded to the tenth), inclusive, exactly */
+const near1 = (v, k, t) => !qlt(t, qabs(qsub(qv(v), k)));
+const within = (p, x, y) => near1(x, p.ans[0], p.tol) && near1(y, p.ans[1], p.tol);
+const rangeOf = (k, t) => [qsub(k, t), qadd(k, t)];
 const fmt1 = v => n(qdec(v.toFixed(1)));
 PF.estimate = {
   rule: () => 'Between the grid lines, estimate: read each coordinate to the nearest tenth (the pale lines are halves), and say “about”. Check the estimate in both equations — the two values come out close, not equal.',
@@ -375,12 +394,12 @@ PF.estimate = {
     out.push({ v: [ZERO, p.l1.b], say: 'gave where the solid line meets the y-axis: that point is on one line only', exact: true });
     out.push({ v: [ZERO, p.l2.b], say: 'gave where the dashed line meets the y-axis: that point is on one line only', exact: true });
     return out; },
-  sol: p => { const c = p.exact, [ax, ay] = p.ans, rx = rangeOf(c.x, qnum(p.tol)), ry = rangeOf(c.y, qnum(p.tol));
+  sol: p => { const c = p.exact, [ax, ay] = p.ans, rx = rangeOf(ax, p.tol), ry = rangeOf(ay, p.tol);
     return [{ say: 'The lines intersect between the grid lines: x is between ' + Math.floor(qnum(c.x)) + ' and ' + Math.ceil(qnum(c.x)) + ', about ' + n(ax) + '; y is between ' + Math.floor(qnum(c.y)) + ' and ' + Math.ceil(qnum(c.y)) + ', about ' + n(ay) + '.' },
       { say: 'Check the estimate in both equations — ' + [p.l1, p.l2].map(l => lineT(l) + ': ' + substT(E.lineSide(l), ax) + ' = ' + n(yAt(l, ax))).join('; ') + '. Both are close to ' + n(ay) + ': a good estimate.' },
-      { say: 'Exactly, the point of intersection is x = ' + M(nHtml(c.x)) + ' and y = ' + M(nHtml(c.y)) + '. A careful read with x from ' + fmt1(rx[0]) + ' to ' + fmt1(rx[1]) + ' and y from ' + fmt1(ry[0]) + ' to ' + fmt1(ry[1]) + ' is right.', ex: 'about ' + pairH(ax, ay) }]; },
-  walk: p => [numS('Find the point of intersection on the graph. About what is its x, to the nearest tenth?', p.ans[0], 'Is it nearer the grid line to its left or to its right? The pale line in between is the half.', null, { tol: p.tol, near: p.exact.x }),
-    numS('About what is its y, to the nearest tenth?', p.ans[1], 'Is it nearer the grid line below it or above it? The pale line in between is the half.', null, { tol: p.tol, near: p.exact.y })]
+      { say: 'Exactly, the point of intersection is x = ' + M(nHtml(c.x)) + ' and y = ' + M(nHtml(c.y)) + ': about ' + pairT(ax, ay) + ' to the nearest tenth. Anything from ' + n(rx[0]) + ' to ' + n(rx[1]) + ' and ' + n(ry[0]) + ' to ' + n(ry[1]) + ' is a careful reading.', ex: 'about ' + pairH(ax, ay) }]; },
+  walk: p => [numS('Find the point of intersection on the graph. About what is its x, to the nearest tenth?', p.ans[0], 'Is it nearer the grid line to its left or to its right? The pale line in between is the half.', null, { tol: p.tol, near: p.ans[0] }),
+    numS('About what is its y, to the nearest tenth?', p.ans[1], 'Is it nearer the grid line below it or above it? The pale line in between is the half.', null, { tol: p.tol, near: p.ans[1] })]
 };
 
 /* ------------------------------------------------------------------ marking a typed answer */
@@ -424,10 +443,10 @@ function pairFeedback(p, typed) {
   const [x, y] = r.nums.map(z => z.q), est = p.fam === 'estimate';
   if (est ? within(p, x, y) : qeq(x, p.ans[0]) && qeq(y, p.ans[1])) return { v: 'right', what: [] };
   const mods = fam.models(p).filter(m => !(qeq(m.v[0], p.ans[0]) && qeq(m.v[1], p.ans[1])));
-  const hit = mods.filter(m => est && m.within ? Math.abs(qnum(x) - qnum(m.v[0])) <= qnum(p.tol) && Math.abs(qnum(y) - qnum(m.v[1])) <= qnum(p.tol) : qeq(x, m.v[0]) && qeq(y, m.v[1]));
+  const hit = mods.filter(m => est && m.within ? near1(x, m.v[0], p.tol) && near1(y, m.v[1], p.tol) : qeq(x, m.v[0]) && qeq(y, m.v[1]));
   if (hit.length) return { v: 'wrong', what: [joinSays(hit)], rule };
   if (est) {
-    const okx = Math.abs(qnum(x) - qnum(p.exact.x)) <= qnum(p.tol) + 1e-9, oky = Math.abs(qnum(y) - qnum(p.exact.y)) <= qnum(p.tol) + 1e-9;
+    const okx = near1(x, p.ans[0], p.tol), oky = near1(y, p.ans[1], p.tol);
     return { v: 'wrong', what: [(okx ? 'Your x is a good estimate, but look again at y: ' : oky ? 'Your y is a good estimate, but look again at x: ' : 'Look again at the crossing: ') + 'check your pair in both equations — ' + [p.l1, p.l2].map(l => lineT(l) + ' gives ' + n(yAt(l, x)) + ' at x = ' + n(x)).join(', ') + '. A good estimate makes both close to its y.'], rule };
   }
   if (p.fam === 'storyMeet') {
@@ -460,20 +479,25 @@ const MC = {
     walk: p => { const w = eqWalk(p.eq), en = p.end; if (en.kind === 'one') w.push(choice('It ends at ' + M(vi(p.eq.v) + ' = ' + nHtml(en.s)) + '. How many solutions?', [ch('One solution', 1), ch('No solution', 0, qeq(en.s, ZERO) ? '0 is a number: ' + vi(p.eq.v) + ' = 0 is one solution.' : 'One number works.'), ch('Infinitely many solutions', 0, 'Only that one number makes it true.')], null, { keep: true })); return w; }
   },
   isSol: {
-    why: (x, k) => { const id = x.ids[k], l = [x.l1, x.l2], t = l.map(L => onLine(L, x.px, x.py)), P = pairT(Q(x.px), Q(x.py));
-      const at = i => lineT(l[i]) + ' gives ' + substT(E.lineSide(l[i]), Q(x.px)) + ' = ' + n(yAt(l[i], x.px)) + (t[i] ? ', true' : ', not ' + n(Q(x.py)));
-      if (id === 'yesOne') return t[0] && t[1] ? 'It does make that one true — but one equation is not enough to show it. A solution makes BOTH true: check the other too.' : 'One equation is not enough: ' + at(x.one - 1) + ', but ' + at(2 - x.one) + '. A solution makes both true.';
-      if (id === 'both') return 'Check both: ' + at(0) + '; ' + at(1) + '.';
-      const i = id === 'noFirst' ? 0 : 1; return t[i] ? 'Look again: ' + at(i) + '.' + (t[1 - i] ? ' It makes both true.' : '') : at(i) + ' — but the reason has to be the equation it makes false.'; },
+    /* each option is a verdict and a claim about this pair; a wrong one is answered with the two checks and what they show */
+    truth: x => [x.l1, x.l2].map(L => onLine(L, x.px, x.py)),
+    shows: x => { const t = MC.isSol.truth(x), P = pairT(Q(x.px), Q(x.py));
+      return t[0] && t[1] ? P + ' makes both equations true: it is a solution.' : t[0] || t[1] ? P + ' makes only ' + lineT(t[0] ? x.l1 : x.l2) + ' true — one equation is not enough: it is not a solution.' : P + ' makes neither equation true: it is not a solution.'; },
+    at: (x, i) => { const L = i ? x.l2 : x.l1, t = onLine(L, x.px, x.py);
+      return lineT(L) + ' gives ' + substT(E.lineSide(L), Q(x.px)) + ' = ' + n(yAt(L, x.px)) + (t ? ', true' : ', not ' + n(Q(x.py))); },
+    /* what is false in the option picked — its own words, so no two wrong options say the same — then the two checks */
+    why: (x, k) => { const id = x.ids[k], t = MC.isSol.truth(x), L = [x.l1, x.l2].map(lineT), i = id === 'only1' ? 0 : 1;
+      const lead = id === 'both' ? 'Not both equations are true.' : id === 'neither' ? L[t[0] ? 0 : 1] + ' is true for this pair.'
+        : t[i] ? 'Not only ' + L[i] + ': ' + L[1 - i] + ' is true too.' : L[i] + ' is not true for this pair.';
+      return lead + ' ' + MC.isSol.at(x, 0) + '; ' + MC.isSol.at(x, 1) + '. So ' + MC.isSol.shows(x); },
     rule: () => 'A solution of a system makes BOTH equations true. Put the x into each equation and see whether it gives the y — one equation is not enough.',
-    sol: x => { const l = [x.l1, x.l2], P = pairT(Q(x.px), Q(x.py)), t = l.map(L => onLine(L, x.px, x.py));
-      return l.map((L, i) => ({ say: (i ? 'Second: ' : 'First: ') + lineT(L) + ' with x = ' + n(Q(x.px)) + ' gives ' + substT(E.lineSide(L), Q(x.px)) + ' = ' + n(yAt(L, x.px)) + (t[i] ? ' — true.' : ', not ' + n(Q(x.py)) + ' — false.') }))
-        .concat([{ say: (t[0] && t[1] ? P + ' makes both true: it is a solution.' : P + ' makes ' + (t[0] ? 'the second' : 'the first') + ' false, so it is not a solution.') + ' The answer is ' + LET[x.correct] + '.' }]); },
-    walk: x => { const l = [x.l1, x.l2], t = l.map(L => onLine(L, x.px, x.py)), Qx = Q(x.px);
-      return [numS('Put x = ' + n(Q(x.px)) + ' into ' + M(lineH(x.l1)) + '. What y does it give?', yAt(x.l1, x.px), x.l1.m.n ? arith('mul', x.l1.m, Qx) + ' Then add the number added.' : 'Read the number added.'),
-        choice('Is that the pair’s y, ' + n(Q(x.py)) + '?', [ch(t[0] ? 'Yes — the first is true' : 'No — the first is false', 1), ch(t[0] ? 'No — the first is false' : 'Yes — the first is true', 0, 'Compare ' + n(yAt(x.l1, x.px)) + ' with ' + n(Q(x.py)) + '.')]),
-        numS('Now put x = ' + n(Q(x.px)) + ' into ' + M(lineH(x.l2)) + '. What y does it give?', yAt(x.l2, x.px), x.l2.m.n ? arith('mul', x.l2.m, Qx) + ' Then add the number added.' : 'Read the number added.'),
-        choice('So which answer has the right reason?', x.opts.map((o, i) => ch(LET[i], i === x.correct, i === x.correct ? '' : MC.isSol.why(x, i))), null, { keep: true })]; }
+    sol: x => { const t = MC.isSol.truth(x);
+      return [0, 1].map(i => ({ say: (i ? 'Second: ' : 'First: ') + MC.isSol.at(x, i).replace(/, true$/, ' — true.').replace(/, (not [^,]*)$/, ', $1 — false.') }))
+        .concat([{ say: MC.isSol.shows(x) + ' The answer is ' + LET[x.correct] + '.' }]); },
+    walk: x => { const t = MC.isSol.truth(x), Qx = Q(x.px), ask = L => numS('Put x = ' + n(Qx) + ' into ' + M(lineH(L)) + '. What y does it give?', yAt(L, x.px), L.m.n ? arith('mul', L.m, Qx) + ' Then add the number added.' : 'Read the number added.');
+      const isIt = (i, w) => choice('Is that the pair’s y, ' + n(Q(x.py)) + '?', [ch(t[i] ? 'Yes — the ' + w + ' is true' : 'No — the ' + w + ' is false', 1), ch(t[i] ? 'No — the ' + w + ' is false' : 'Yes — the ' + w + ' is true', 0, 'Compare ' + n(yAt(i ? x.l2 : x.l1, x.px)) + ' with ' + n(Q(x.py)) + '.')], null, { keep: true });
+      return [ask(x.l1), isIt(0, 'first'), ask(x.l2), isIt(1, 'second'),
+        choice('So which answer is true of ' + M(pairH(Q(x.px), Q(x.py))) + '?', x.opts.map((o, i) => ch(LET[i], i === x.correct, i === x.correct ? '' : MC.isSol.why(x, i))), null, { keep: true })]; }
   },
   countCross: {
     why: (x, k) => k === 1 ? 'The lines intersect — at ' + pairT(x.cross.x, x.cross.y) + ' — so they share that point: one solution. Parallel lines would never meet.' : 'Two different lines that cross share one point only. Infinitely many is one line drawn for both equations.',
@@ -537,7 +561,8 @@ function judgeMC(x, k) { return x.fam === 'endings' ? mcFeedback(Object.assign({
 function clean(it) {
   if (!it || it.bad) return false;
   if (it.type === 'mc') { if (new Set(it.opts).size !== it.opts.length) return false;
-    if (it.fam === 'isSol') { const t = [it.l1, it.l2].map(L => onLine(L, it.px, it.py)); if (it.scen === 'sol' ? !(t[0] && t[1]) : it.scen === 'first' ? !(t[0] && !t[1]) : !(t[1] && !t[0])) return false; }
+    if (it.fam === 'isSol') { const t = [it.l1, it.l2].map(L => onLine(L, it.px, it.py)), want = { sol: [1, 1], first: [1, 0], second: [0, 1], neither: [0, 0] }[it.scen];
+      if (!want || t[0] !== !!want[0] || t[1] !== !!want[1] || it.ids[it.correct] !== E.ISSOL_RIGHT[it.scen]) return false; }
     return true; }
   if (it.type === 'multi') {
     if (it.correct.length < 2 || it.correct.length > 3) return false;

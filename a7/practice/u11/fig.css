@@ -7,6 +7,7 @@ svg.fig .tick{font:500 11px var(--ui,system-ui,sans-serif);fill:var(--mut);text-
 svg.fig .axn{font:600 12px var(--ui,system-ui,sans-serif);fill:var(--ink);text-anchor:middle;dominant-baseline:central}
 svg .ln1{fill:none;stroke:var(--ink);stroke-width:2.4;stroke-linecap:round}
 svg .ln2{fill:none;stroke:var(--teal);stroke-width:2.4;stroke-dasharray:7 5;stroke-linecap:butt}
+.qfig .fcap{font:600 14px/1.4 var(--ui);letter-spacing:.02em;margin:4px 0 2px}
 .qfig .lgd{display:flex;flex-wrap:wrap;gap:4px 18px;margin:2px 0 8px;font:15px/1.5 var(--ui)}
 .qfig .lk{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
 .qfig .lks{width:34px;height:10px;flex:0 0 34px}

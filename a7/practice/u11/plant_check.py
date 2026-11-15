@@ -21,7 +21,15 @@ PLANTS = [
       ("coach.js", "return !qeq(l1.m, l2.m) && (it.correct.indexOf(i) >= 0 ? t[0] && t[1] : t[0] !== t[1]); });", "return true; });")]),
     ("Q8's wrong system true in neither equation", "engine.js", "if (which === 1) l1 = L_(m1, b - m1 * a + off); else l2 = L_(m2, b - m2 * a + off);", "l1 = L_(m1, b - m1 * a + off); l2 = L_(m2, b - m2 * a + off);"),
     ("Q8 may have one right system (and the clean rule lets it)", [("engine.js", "k = T.pick([2, 3, 3]);", "k = T.pick([1, 2, 3]);"), ("coach.js", "    if (it.correct.length < 2 || it.correct.length > 3) return false;\n", "")]),
-    ("Q9 keyed to the wrong equation's reason", "engine.js", "right = scen === 'sol' ? 'both' : scen === 'first' ? 'noSecond' : 'noFirst';", "right = scen === 'sol' ? 'both' : scen === 'first' ? 'noFirst' : 'noSecond';"),
+    ("Q9 keyed to the other equation's claim", "engine.js", "const ISSOL_RIGHT = { sol: 'both', first: 'only1', second: 'only2', neither: 'neither' };", "const ISSOL_RIGHT = { sol: 'both', first: 'only2', second: 'only1', neither: 'neither' };"),
+    # 14 Nov 2026: Q9's options are verdicts with claims about the pair, exactly one of them true — u11_check.js and verify.py
+    # judge every option's claim against the two equations
+    ("Q9's arguable key back: 'Yes — it makes the first true' beside the solution", "engine.js", "only1: 'No — it makes only ' + eqOf(1) + ' true.',", "only1: 'Yes — it makes ' + eqOf(1) + ' true.',"),
+    ("Q9's 'neither' pair lands on the first line (and the clean rule lets it)", [("engine.js", "py = T.until(() => (T.r() < 0.5 ? y1 : y2) + pm(T, 1, 3), y => y !== y1 && y !== y2);", "py = y1;"),
+      ("coach.js", "if (!want || t[0] !== !!want[0] || t[1] !== !!want[1] || it.ids[it.correct] !== E.ISSOL_RIGHT[it.scen]) return false; }", "}")]),
+    ("the sign help's division says the wrong sign", "coach.js", "out.push('in the division, ' + calcText('div', dv.rhs, dv.co) + ' = ' + n(qdiv(dv.rhs, dv.co)));", "out.push('in the division, ' + calcText('div', dv.rhs, dv.co) + ' = ' + n(qneg(qdiv(dv.rhs, dv.co))));"),
+    ("Q1-4 back to the old words, 'What is the value of n?'", "engine.js", "'What value of ' + vi(v) + ' makes the equation true?'", "'What is the value of ' + vi(v) + '?'"),
+    ("Q14(b)'s graph without its PART (b) caption", "engine.js", "legend: [lineH(p), lineH(q)], title: 'PART (b): a different system' };", "legend: [lineH(p), lineH(q)] };"),
     ("Q10 keyed to no solution", "engine.js", "opts: COUNTOPTS.slice(), correct: 0, key: keyOf('countCross', prm)", "opts: COUNTOPTS.slice(), correct: 1, key: keyOf('countCross', prm)"),
     ("Q11's one line keyed as parallel", "engine.js", "opts: COUNTOPTS.slice(), correct: same ? 2 : 1,", "opts: COUNTOPTS.slice(), correct: 1,"),
     ("Q11's one line written two ways is not one line", "engine.js", "const c = pm(T, 1, 4), d = pm(T, 1, 6), b = m * c + d;", "const c = pm(T, 1, 4), d = pm(T, 1, 6), b = m * c + d + 1;"),
@@ -33,7 +41,8 @@ PLANTS = [
     ("Q14(a)'s amount a grid line too high", "engine.js", "ans: [Q(x.x0), Q(x.y0)], key: keyOf('storyMeet', prm)", "ans: [Q(x.x0), Q(x.y0 + ys)], key: keyOf('storyMeet', prm)"),
     ("Q14(b)'s estimate keyed swapped", "engine.js", "ans: [tenthOf(c.x), tenthOf(c.y)], tol:", "ans: [tenthOf(c.y), tenthOf(c.x)], tol:"),
     ("Q14(b)'s tolerance back to 0.2", "engine.js", "tol: Q(1, 10), key", "tol: Q(1, 5), key"),
-    ("Q14(b)'s crossing allowed near a half-grid line", "engine.js", "half(qnum(c.x)) >= 0.15 && half(qnum(c.y)) >= 0.15 && [3n, 5n, 6n, 7n].includes(c.x.d) && [3n, 5n, 6n, 7n].includes(c.y.d)", "true"),
+    ("Q14(b)'s accepted range swallows a grid or half-grid point (the 0.2 rule dropped)", "engine.js", "clearOfGrid(c.x) && clearOfGrid(c.y) && [3n, 5n, 6n, 7n].includes(c.x.d)", "[3n, 5n, 6n, 7n].includes(c.x.d)"),
+    ("Q14(b) judged around the exact crossing, not the rounded key", "coach.js", "const within = (p, x, y) => near1(x, p.ans[0], p.tol) && near1(y, p.ans[1], p.tol);", "const within = (p, x, y) => near1(x, p.exact.x, p.tol) && near1(y, p.exact.y, p.tol);"),
     ("Q14(b)'s estimate cut off, not rounded", "engine.js", "function tenthOf(q) { const t = Math.round(", "function tenthOf(q) { const t = Math.floor("),
     ("ruling 43: the engine stops steering by what the lessons showed", "engine.js", "const SHOWN_EQ = new Set(SHOWN.eq), SHOWN_SYS = new Set(SHOWN.sys);", "const SHOWN_EQ = new Set(), SHOWN_SYS = new Set();"),
     # figures
