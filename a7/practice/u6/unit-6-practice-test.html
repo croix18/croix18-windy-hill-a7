@@ -1689,8 +1689,10 @@ X.gloss = o => { Object.assign(GL, o); return GL; };
 X.has = id => Object.prototype.hasOwnProperty.call(GL, id);
 const g = id => GL[id] || { word: id, def: '' };
 X.def = (id, shown) => '<b class="xterm xfirst">' + (shown || g(id).word) + '</b><span class="xdefn"> (' + g(id).def + ')</span>';
-X.term = (id, shown) => '<button type="button" class="xterm" data-xterm="' + esc(id) + '" aria-expanded="false" title="' + esc(g(id).def) + '">' + (shown || g(id).word) +
-  '</button><span class="xdef" role="note" hidden> (' + g(id).def + ')</span>';
+/* a term is inline text (role button), not a <button>: a <button> is an inline block, so a line could break between it and the
+   period after it ("Equality\n."), 15 Nov 2026 */
+X.term = (id, shown) => '<span role="button" tabindex="0" class="xterm" data-xterm="' + esc(id) + '" aria-expanded="false" title="' + esc(g(id).def) + '">' + (shown || g(id).word) +
+  '</span><span class="xdef" role="note" hidden> (' + g(id).def + ')</span>';
 /* [[id]] or [[id|shown words]] in a help string: 'def' and 'tap' make every term tappable (named, bold, its definition shown
    inline only on a tap — Croix, 14 Nov 2026: "Don't spell it out first"); 'plain' (inside an option button, which can't hold a button) leaves the word, bold. seen carries the ids already
    spelled out across the strings of one rung. */
@@ -1797,11 +1799,21 @@ X.simPair = ({ A, B, col, turn, label }) => {
 };
 
 /* the inline definition of a tapped term (delegated, so it survives every repaint of a card) */
-if (typeof document !== 'undefined') document.addEventListener('click', e => {
-  const b = e.target && e.target.closest ? e.target.closest('[data-xterm]') : null; if (!b) return;
-  const d = b.nextElementSibling; if (!d || !d.classList.contains('xdef')) return;
-  const open = d.hidden; d.hidden = !open; b.setAttribute('aria-expanded', open ? 'true' : 'false');
-});
+const toggle = b => { const d = b.nextElementSibling; if (!d || !d.classList.contains('xdef')) return;
+  const open = d.hidden; d.hidden = !open; b.setAttribute('aria-expanded', open ? 'true' : 'false'); };
+if (typeof document !== 'undefined') {
+  document.addEventListener('click', e => { const b = e.target && e.target.closest ? e.target.closest('[data-xterm]') : null; if (b) toggle(b); });
+  document.addEventListener('keydown', e => { const b = e.target && e.target.closest ? e.target.closest('[data-xterm]') : null;
+    if (b && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); toggle(b); } });
+}
+/* a Why: that only names a property or theorem gets what it lets you do, so it is a sentence (15 Nov 2026) */
+const DOES = { addProp: 'lets you add the same number to both sides and keep them equal', subProp: 'lets you subtract the same number from both sides and keep them equal',
+  mulProp: 'lets you multiply both sides by the same number and keep them equal', divProp: 'lets you divide both sides by the same number and keep them equal',
+  addPropI: 'lets you add the same number to both sides and keep the inequality true', subPropI: 'lets you subtract the same number from both sides and keep the inequality true',
+  mulPropI: 'lets you multiply both sides by the same number, but a negative number reverses the symbol', distProp: 'says the number outside multiplies every term inside the parentheses',
+  pyth: 'says a² + b² = c² in every right triangle, where c is the hypotenuse' };
+X.whyOf = w => String(w || '').replace(/^the \[\[(\w+)\]\](?:\.|:)?\s*(.*)$/, (m0, id, rest) => { if (!DOES[id]) return m0; if (/^(keeps|undoes|lets|says)\b/.test(rest) || /^[a-c]²/.test(rest)) rest = '';   /* a rest that only restates the property */
+  return 'the [[' + id + ']] ' + DOES[id] + '.' + (rest ? ' ' + rest.charAt(0).toUpperCase() + rest.slice(1) : ''); });
 root.Kit = root.Kit || {}; root.Kit.X = X;
 if (typeof module !== 'undefined' && module.exports) module.exports = X;
 })(typeof window !== 'undefined' ? window : this);
@@ -2663,7 +2675,7 @@ const lightPic = p => { const x = p.prm, sh = x.mode === 'shadow', h1 = +x.h1, s
 
 /* ------------------------------------------------------------------ rendering */
 const why = s => s ? ' <span class="xwhy"><b>Why:</b> ' + s + '</span>' : '';
-const line = (l, seen) => { const o = Object.assign({}, l, { say: X.teach((l.say || '') + why(l.why) + (l.pic || ''), 'def', seen) }); delete o.why; delete o.pic; return o; };
+const line = (l, seen) => { const o = Object.assign({}, l, { say: X.teach((l.say || '') + why(l.why && X.whyOf(l.why)) + (l.pic || ''), 'def', seen) }); delete o.why; delete o.pic; return o; };
 function stepOut(s, seen) {
   const o = Object.assign({}, s, { ask: X.teach(fix(s.ask), 'def', seen) });
   if (s.opts) o.opts = s.opts.map(p => Object.assign({}, p, { label: X.teach(fix(p.label), 'plain'), why: X.teach(fix(p.why), 'plain') }));
@@ -2675,7 +2687,7 @@ const FIX = [[/^Count on from (\d+) by (\d+)\.$/, 'Add $1 and $2: the tens first
   [/^Three of the choices begin with ([\d.]+), the match for (\d+)\./, 'Pair shortest with shortest: $1 corresponds to $2.'], [/the order of the letters is the matching, /, 'the letters pair up in order: '], [/, so it matches ([A-Z]{2}), the /, ', so it corresponds to $1, the '], [/^Multiply the matching side by k\./, 'Multiply the corresponding side by k.'], [/^The scale factor from a pair you know:/, 'Find the scale factor from a pair you know both of:'], [/ — a near miss/, ' — close, but not equal'], [/^Subtract the smaller from the larger\.$/, 'Subtract the lower y-coordinate from the higher one.'], [/One is below zero and one above/, 'One is left of zero and one is right of it'],
   [/the copy(?!’)/g, 'the second triangle'], [/The copy(?!’)/g, 'The second triangle'], [/^Then (\d+) becomes/, 'The first triangle’s $1 becomes'], [/Match like with like: a (\w+) with a \w+, a height with a height\./, 'Match $1 with $1 and height with height.'],
   [/stands alone on one side/g, 'is by itself on one side of the equals sign'], [/is the hypotenuse of those two/, 'is the hypotenuse of a right triangle with those two sides as its legs'],
-  [/Use the square-root key and keep three decimal places: round once, at the end\./, 'Use the square-root key and write it to three decimal places; round to the tenth only at the very end.'], [/MORE/g, 'more'], [/SHORTER/g, 'shorter'], [/SQUARES/g, 'squares'], [/MULTIPLIED/g, 'multiplied']];
+  [/Use the square-root key and keep three decimal places: round once, at the end\./, 'Use the square-root key and write it to three decimal places; round to the tenth only at the very end.'], [/^Never equal to either — that would lie flat\./, 'The third side can never equal the difference or the sum: that would lie flat.'], [/MORE/g, 'more'], [/SHORTER/g, 'shorter'], [/SQUARES/g, 'squares'], [/MULTIPLIED/g, 'multiplied']];
 const fix = s => typeof s === 'string' ? FIX.reduce((t, [a, b]) => t.replace(a, b), s) : s;
 const withWhy = (old, whys) => old.map((l, i) => Object.assign({}, l, { say: fix(l.say) }, whys[i] ? { why: whys[i] } : {}));
 
@@ -2725,7 +2737,7 @@ SPEC.legTenth = { terms: ['hyp', 'leg', 'pyth', 'tenth'], pic: true,
     tri('a = ' + p.prm.a + ' (' + W[1] + ')', 'b = ?\n(' + W[2] + ')', 'c = ' + p.prm.c + '\n(' + W[0] + ')', p.prm.a, Math.sqrt(p.prm.c * p.prm.c - p.prm.a * p.prm.a), 'A right triangle: the ' + W[0] + ', ' + p.prm.c + ', is the hypotenuse; ' + p.prm.a + ' and the unknown side are the legs.', triCap); },
   sol: (p, old) => { const { c, a } = p.prm, m = c * c - a * a, r = Math.floor(Math.sqrt(m));
     return [{ say: fix(old[0].say) }, { say: 'Write the Pythagorean Theorem with the numbers: ' + sq(a) + ' + b² = ' + sq(c) + '.' },
-      { say: fix(old[1].say).replace(/^Subtract to find the leg squared:/, 'Subtract ' + sq(a) + ' from both sides:'), why: 'that gets b² alone.' },
+      { say: fix(old[1].say).replace(/^Subtract to find the leg squared:/, 'Subtract ' + sq(a) + ' from both sides:'), why: 'subtracting from both sides leaves b² by itself.' },
       { say: fix(old[2].say), why: m + ' is between ' + sq(r) + ' = ' + r * r + ' and ' + sq(r + 1) + ' = ' + (r + 1) * (r + 1) + ', so b is between ' + r + ' and ' + (r + 1) + '.' },
       Object.assign({}, old[3], { say: old[3].say.replace(/the hundredths digit is (\d), so/, (s0, d) => 'the hundredths digit is ' + d + ', which is ' + (+d >= 5 ? '5 or more' : 'less than 5') + ', so') + ' Check: a leg is shorter than the hypotenuse, and ' + S(p.ans) + ' is less than ' + c + '.' })]; },
   walk: (p, old) => { const { c, a } = p.prm; return [old[0], { type: 'choice', ask: 'Which equation fits this triangle?', opts: [O(sq(a) + ' + ' + sq(c) + ' = b²', false, 'That puts the hypotenuse, ' + c + ', with the legs. The hypotenuse stands alone: a² + b² = c².'),
