@@ -567,7 +567,7 @@ function q12(seed) {
     const prm = { m1: kstr(l1.m), b1: kstr(l1.b), m2: kstr(l2.m), b2: kstr(l2.b), x0: s.x0, y0: s.y0, w: [w.x0, w.x1, w.y0, w.y1] };
     return { type: 'solo', stem: 'A system of equations is graphed:&nbsp; ' + sysStem(l1, l2) + '. What is the solution of the system?', l1, l2,
       fig: { kind: 'plane', w, lines: [l1, l2], legend: [lineH(l1), lineH(l2)] },
-      part: pairPart({ fam: 'readGraph', prm, l1, l2, ans: [Q(s.x0), Q(s.y0)], key: keyOf('readGraph', prm) }) };
+      part: pairPart({ fam: 'readGraph', prm, l1, l2, ans: [Q(s.x0), Q(s.y0)], key: keyOf('readGraph', prm), figw: w }) };
   });
 }
 /* Q13 — two tables of values: (a) the value missing from the first, (b) the solution, where the two tables agree */
@@ -614,21 +614,25 @@ function q14(seed) {
     const l1 = L_(x.m1, x.b1), l2 = L_(x.m2, x.b2);
     const X1 = Math.min(12, Math.max(x.x0 + 2, 6)), wa = { x0: 0, x1: X1, y0: 0, y1: ys * Math.min(12, Math.max(Math.ceil(x.b2 / ys), x.y0 / ys + 2)), ys };
     if (inWindow(l1, wa) < 2 || inWindow(l2, wa) < 2) return { bad: true };
-    /* part (b): integer numbers multiplying x; the crossing at least a quarter from every whole number, and x and y far enough
-       apart that the swapped pair is never inside the tolerance */
-    const b = T.until(() => { const m1 = T.pick([1, 2, 3, -1, 'h']), m2 = T.pick([-1, -2, -3, 1, 2]), b1 = T.ri(-1, 3), b2 = T.ri(1, 7);
-      return { m1: m1 === 'h' ? '1/2' : String(m1), m2: String(m2), b1, b2 }; }, b => {
+    /* part (b) (widened 15 Nov 2026 to well over Croix's floor of 100 versions on its own; ruling 49): the numbers multiplying x
+       whole or halves (½, 3/2, 5/2), either sign, so the crossing's coordinates are thirds, fifths, sixths or sevenths; the
+       crossing in any of the four quadrants, at least half a unit from both axes; x and y far enough apart that the swapped pair
+       is never inside the tolerance. The window holds the origin and the crossing, a unit or more beyond it on every side. */
+    const MB = ['1', '2', '3', '1/2', '3/2', '5/2', '-1', '-2', '-3', '-1/2', '-3/2', '-5/2'];
+    const b = T.until(() => ({ m1: T.pick(MB), m2: T.pick(MB), b1: T.ri(-3, 5), b2: T.ri(-3, 7) }), b => {
+      if (b.m1 === b.m2) return false;
       const p = L_(b.m1, b.b1), q = L_(b.m2, b.b2), c = meet(p, q); if (!c) return false;
-      const fx = qnum(c.x) - Math.floor(qnum(c.x)), fy = qnum(c.y) - Math.floor(qnum(c.y));
-      const half = v => Math.abs(v * 2 - Math.round(v * 2)) / 2;          /* the distance to the nearest grid or half-grid line */
-      return qnum(c.x) > 0.5 && qnum(c.x) < 4 && qnum(c.y) > 0.5 && qnum(c.y) < 6 && clearOfGrid(c.x) && clearOfGrid(c.y) && [3n, 5n, 6n, 7n].includes(c.x.d) && [3n, 5n, 6n, 7n].includes(c.y.d) && Math.abs(qnum(c.x) - qnum(c.y)) >= 0.5 && !shownSys(p, q); });
+      const X = qnum(c.x), Y = qnum(c.y);
+      return Math.abs(X) >= 0.5 && Math.abs(X) < 4 && Math.abs(Y) >= 0.5 && Math.abs(Y) < 6 && clearOfGrid(c.x) && clearOfGrid(c.y) && [3n, 5n, 6n, 7n].includes(c.x.d) && [3n, 5n, 6n, 7n].includes(c.y.d) && Math.abs(X - Y) >= 0.5 && !shownSys(p, q); });
     const p = L_(b.m1, b.b1), q = L_(b.m2, b.b2), c = meet(p, q);
-    const wb = { x0: 0, x1: Math.max(3, Math.ceil(qnum(c.x)) + 1), y0: 0, y1: Math.max(4, Math.ceil(qnum(c.y)) + 1), half: true };
+    const span = (v, least) => { let lo = Math.min(0, Math.floor(v) - 1), hi = Math.max(0, Math.ceil(v) + 1); while (hi - lo < least) { if (v >= 0) hi++; else lo--; } return [lo, hi]; };
+    const [bx0, bx1] = span(qnum(c.x), 3), [by0, by1] = span(qnum(c.y), 4);
+    const wb = { x0: bx0, x1: bx1, y0: by0, y1: by1, half: true };
     if (inWindow(p, wb) < 2 || inWindow(q, wb) < 2) return { bad: true };
     const prm = { st: st.id, A, B, x0: x.x0, y0: x.y0, m1: x.m1, b1: x.b1, m2: x.m2, b2: x.b2, ys, bm1: b.m1, bb1: b.b1, bm2: b.m2, bb2: b.b2 };
     const figA = { kind: 'plane', w: wa, lines: [l1, l2], legend: [A, B], xname: st.xname, yname: st.yname, story: true, title: 'PART (a): ' + A + ' and ' + B };
     const figB = { kind: 'plane', w: wb, lines: [p, q], legend: [lineH(p), lineH(q)], title: 'PART (b): a different system' };
-    const pa = pairPart({ label: 'a', kind: 'story', fam: 'storyMeet', stem: 'The PART (a) graph shows ' + (st.id === 'plants' ? 'the height y, in centimeters, of each plant' : 'the dollars y each has') + ' after x weeks. ' + st.ask(A, B), prm, l1, l2, st, A, B, ans: [Q(x.x0), Q(x.y0)], key: keyOf('storyMeet', prm) });
+    const pa = pairPart({ label: 'a', kind: 'story', fam: 'storyMeet', stem: 'The PART (a) graph shows ' + (st.id === 'plants' ? 'the height y, in centimeters, of each plant' : 'the dollars y each has') + ' after x weeks. ' + st.ask(A, B), prm, l1, l2, st, A, B, figw: wa, ans: [Q(x.x0), Q(x.y0)], key: keyOf('storyMeet', prm) });
     const pb = pairPart({ label: 'b', fam: 'estimate', stem: 'The PART (b) graph shows a different system,&nbsp; ' + sysStem(p, q) + '. Estimate its point of intersection to the nearest tenth.', fig: figB, prm, l1: p, l2: q, exact: c,
       ans: [tenthOf(c.x), tenthOf(c.y)], tol: Q(1, 10), key: keyOf('estimate', prm) });
     return { type: 'parts', stem: st.say(A, B, x), fig: figA, parts: [pa, pb] };

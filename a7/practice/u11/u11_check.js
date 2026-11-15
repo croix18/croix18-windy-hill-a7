@@ -260,6 +260,16 @@ function checkHelp(seed, w, it, p, kind, eqText, v) {
       if (new RegExp('=\\s*' + a.replace(/[.()]/g, '\\$&') + '(?!\\d|\\.\\d|\\s*[-+·*/(])').test(said)) fail(seed, sw, 'the Hint states its own answer: ' + said);
       if (!U.numOk(s, s.ans)) fail(seed, sw, 'its own answer is not accepted');
       if (s.tol) [0.2, -0.2].forEach(d => { const v = E.qadd(s.near, E.Q(Math.round(d * 10), 10)); if (U.numOk(s, v)) fail(seed, sw, 'the estimate step accepts ' + E.numStr(v) + ', 0.2 off'); }); } });
+  /* Hints 1 and 2 (help.js, 15 Nov 2026): every claim and word read; an equation with parentheses is taught DISTRIBUTE FIRST
+     (Croix, 14 Nov 2026: "they are terrible at distributing. So let's do distribute") — Hint 2, the first worked line and the
+     walkthrough's first move all distribute, and nothing divides first */
+  const RG = U.rungs ? U.rungs(p, kind === 'text' ? 'text' : 'mc', {}) : null;
+  if (!RG || !RG.notice) fail(seed, w, 'no Hint 1');
+  else { words(seed, w + ' Hint 1', RG.notice); if (RG.first) words(seed, w + ' Hint 2', RG.first.say); }
+  if (eqText && /\(/.test(eqText) && !(p.fam === 'plans')) { counts.dist = (counts.dist || 0) + 1;
+    const t0 = plainOf((RG && RG.first || {}).say || ''), l0 = plainOf((sol[0] || {}).say || ''), m0 = (st || []).find(s => s.type === 'choice'), r0 = m0 ? plainOf((m0.opts.find(o => o.ok) || {}).label || '') : '';
+    if (!/^Distribute/.test(t0) || !/^Distribute/.test(l0) || !/^Distribute/.test(r0)) fail(seed, w, 'parentheses not distributed first: Hint 2 "' + t0.slice(0, 40) + '", line 1 "' + l0.slice(0, 40) + '", walk "' + r0.slice(0, 40) + '"');
+    if (/^Divide/.test(t0 + l0) || /^Divide/.test(r0)) fail(seed, w, 'the help divides first'); }
   /* the rule (Hint 1) and every named mistake's words: read too */
   const fam = C.F[p.fam] || C.PF[p.fam]; if (fam) words(seed, w + ' rule', fam.rule(p));
   else if (C.MC[p.fam]) words(seed, w + ' rule', C.MC[p.fam].rule(p));
@@ -268,6 +278,7 @@ function checkHelp(seed, w, it, p, kind, eqText, v) {
 
 /* ------------------------------------------------------------------ one set */
 const dump = [];
+const V14B = new Set();               /* Q14(b)'s versions counted on their own (ruling 49's floor, 100; 15 Nov 2026) */
 for (let seed = 1; seed <= NSETS; seed++) {
   counts.sets++;
   const G = U.generate(seed), D = seed <= NDUMP ? { seed, items: [] } : null;
@@ -423,6 +434,7 @@ for (let seed = 1; seed <= NSETS; seed++) {
           if (Math.abs(gx * 5 - KX) <= 1 && Math.abs(gy * 5 - KY) <= 1) fail(seed, w + 'b', 'the grid point (' + gx / 2 + ', ' + gy / 2 + ') is inside the accepted range');
         if (Math.abs(KX - KY) <= 1) fail(seed, w + 'b', 'the swapped pair is inside the accepted range');
         readPlane(seed, w + 'b', lineH, [B1, B2], { n: 2, cross: [bx, by] }); held43(seed, w + 'b', { lines: [B1, B2] });
+        V14B.add(runs.slice(0, 2).join(' ; '));                       /* 14(b)'s own version: its two printed equations, in order */
         { const mm = /^(\w+)\D*?(\d+)\D+?(\d+) (?:cm )?each week\. (\w+)\D*?(\d+)\D+?(saves|spends|grows) \$?(\d+)/.exec(tx); held43(seed, w + 'a', { story: [mm[2], mm[3], mm[5], mm[7]] }); }
         if (!/gridln2/.test(lineH)) fail(seed, w + 'b', 'no half lines to read between');
         [pa, pb].forEach(p => { words(seed, w + p.label, p.stem); typeBack(seed, w + p.label, p); checkHelp(seed, w + p.label, it, p, 'text', null, null); });
@@ -437,8 +449,12 @@ for (let seed = 1; seed <= NSETS; seed++) {
   }));
   if (D) dump.push(D);
 }
+/* the floor of 100 versions holds for Q14(b) by itself, not only with its story (the kit's variety check counts the two together):
+   a run of 1,000 sets or more must show 100 different systems; a shorter run (plant_check's 300) at least 80% of its sets */
+{ const need = NSETS >= 1000 ? 100 : Math.ceil(0.8 * NSETS); counts.v14b = V14B.size;
+  if (V14B.size < need) fail('all', 'Q14b', 'only ' + V14B.size + ' different systems in ' + NSETS + ' sets (the floor: ' + need + ')'); }
 fs.writeFileSync(path.join(__dirname, 'dump.json'), JSON.stringify({ TITLES: E.TITLES, sets: dump }));
 console.log(counts.sets + ' sets: ' + counts.eqs + ' equations solved again from their words, ' + counts.keys + ' keys typed back, ' + counts.models + ' mistakes typed, ' + counts.lines + ' worked lines and ' +
-  counts.steps + ' Hint steps, ' + counts.claims + ' arithmetic claims, ' + counts.pairs + ' ordered pairs in both equations, ' + counts.figs + ' graphs (' + counts.segs + ' lines read back), ' + counts.tables + ' table pairs, ' + counts.mc + ' wrong choices named, Q9 (pairs on both lines, A only, B only, neither) '  + JSON.stringify(counts.q9t || {}) + ' with exactly one option true, ruling 43 held on ' + counts.r43 + ' questions; ' + NDUMP + ' sets written to dump.json');
+  counts.steps + ' Hint steps, ' + counts.claims + ' arithmetic claims, ' + counts.pairs + ' ordered pairs in both equations, ' + counts.figs + ' graphs (' + counts.segs + ' lines read back), ' + counts.tables + ' table pairs, ' + counts.mc + ' wrong choices named, Q9 (pairs on both lines, A only, B only, neither) '  + JSON.stringify(counts.q9t || {}) + ' with exactly one option true, ruling 43 held on ' + counts.r43 + ' questions, ' + counts.dist + ' equations with parentheses distributed first in the help, Q14(b) in ' + counts.v14b + ' versions of its own; ' + NDUMP + ' sets written to dump.json');
 if (nfail) { console.log(nfail + ' PROBLEMS'); fails.forEach(f => console.log('  ' + f)); process.exit(1); }
 console.log('u11_check: ALL CHECKS PASS');

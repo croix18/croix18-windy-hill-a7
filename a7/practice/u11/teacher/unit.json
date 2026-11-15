@@ -3,7 +3,22 @@
  "file": "a7-unit-11-teacher.html",
  "download": "A7 Unit 11 Teacher Copy.html",
  "contentVersion": 1,
- "css": ["../fig.css", "../unit.css"],
- "scripts": ["../shown.js", "../engine.js", "../fig.js", "../coach.js", "../unit.js", "test.js", "../../kit/teacher.js"],
- "checks": ["python3 gen_test.py --check", "node ../../kit/check/teacher_check.js ."]
+ "css": [
+  "../fig.css",
+  "../unit.css"
+ ],
+ "scripts": [
+  "../shown.js",
+  "../engine.js",
+  "../fig.js",
+  "../help.js",
+  "../coach.js",
+  "../unit.js",
+  "test.js",
+  "../../kit/teacher.js"
+ ],
+ "checks": [
+  "python3 gen_test.py --check",
+  "node ../../kit/check/teacher_check.js ."
+ ]
 }

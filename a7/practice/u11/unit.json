@@ -11,6 +11,7 @@
   "shown.js",
   "engine.js",
   "fig.js",
+  "help.js",
   "coach.js",
   "unit.js"
  ],

@@ -395,7 +395,7 @@ PF.estimate = {
     out.push({ v: [ZERO, p.l2.b], say: 'gave where the dashed line meets the y-axis: that point is on one line only', exact: true });
     return out; },
   sol: p => { const c = p.exact, [ax, ay] = p.ans, rx = rangeOf(ax, p.tol), ry = rangeOf(ay, p.tol);
-    return [{ say: 'The lines intersect between the grid lines: x is between ' + Math.floor(qnum(c.x)) + ' and ' + Math.ceil(qnum(c.x)) + ', about ' + n(ax) + '; y is between ' + Math.floor(qnum(c.y)) + ' and ' + Math.ceil(qnum(c.y)) + ', about ' + n(ay) + '.' },
+    return [{ say: 'The lines intersect between the grid lines: x is between ' + n(Q(Math.floor(qnum(c.x)))) + ' and ' + n(Q(Math.ceil(qnum(c.x)))) + ', about ' + n(ax) + '; y is between ' + n(Q(Math.floor(qnum(c.y)))) + ' and ' + n(Q(Math.ceil(qnum(c.y)))) + ', about ' + n(ay) + '.' },
       { say: 'Check the estimate in both equations — ' + [p.l1, p.l2].map(l => lineT(l) + ': ' + substT(E.lineSide(l), ax) + ' = ' + n(yAt(l, ax))).join('; ') + '. Both are close to ' + n(ay) + ': a good estimate.' },
       { say: 'Exactly, the point of intersection is x = ' + M(nHtml(c.x)) + ' and y = ' + M(nHtml(c.y)) + ': about ' + pairT(ax, ay) + ' to the nearest tenth. Anything from ' + n(rx[0]) + ' to ' + n(rx[1]) + ' and ' + n(ry[0]) + ' to ' + n(ry[1]) + ' is a careful reading.', ex: 'about ' + pairH(ax, ay) }]; },
   walk: p => [numS('Find the point of intersection on the graph. About what is its x, to the nearest tenth?', p.ans[0], 'Is it nearer the grid line to its left or to its right? The pale line in between is the half.', null, { tol: p.tol, near: p.ans[0] }),
@@ -618,5 +618,8 @@ function choices(p) {
 const api = { F, PF, MC, choices, keyHtml, feedback, numFeedback, pairFeedback, mcFeedback: judgeMC, selectFeedback, mcSolution: solMC, solution, clean, joinSays,
   steps, eqLines, eqWalk, tailModels, checkSay, SELWHY, arith, within, isPairFam, ENDW };
 const walkApi = { steps: walk, stepsMC: walkMC, readNum: E.readNum };
+/* the help's words and pictures (help.js, 15 Nov 2026): Hints 1–3, the walkthrough and the coach's lines, to the help standard */
+const HELP = node ? require('./help.js') : root.Help;
+if (HELP) HELP(api, walkApi);
 if (node) module.exports = Object.assign({}, api, { Walk: walkApi }); else { root.Coach = api; root.Walk = walkApi; }
 })(this);

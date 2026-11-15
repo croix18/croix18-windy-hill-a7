@@ -19,3 +19,27 @@ table.vt th{background:var(--field)}
 table.vt .gap{font-weight:700}
 .line .qfig{margin-top:6px}
 @media print{ svg .ln1{stroke:#000} svg .ln2{stroke:#000} svg.fig .gridln{stroke:#888;stroke-opacity:1} svg.fig .gridln2{stroke:#bbb;stroke-opacity:1} table.vt th,table.vt td{border-color:#555} }
+/* the help's pictures (fig.js helpPlane, zoomPic, tablePic, arrowsPic, threePic; 15 Nov 2026): the kit's explain.css look,
+   the three signal colors with their own line styles (x1 solid, x2 dashed, x3 dotted), light and dark */
+svg.xsvg .xgrid{fill:none;stroke:var(--mut);stroke-opacity:.32;stroke-width:.8}
+svg.xsvg .xtk{font:500 13px var(--ui,system-ui,sans-serif);fill:var(--mut);dominant-baseline:central}
+svg.xsvg .xguide{fill:none;stroke:var(--x3);stroke-width:2;stroke-dasharray:2 4;stroke-linecap:round}
+svg.xsvg .xmark{fill:var(--x3);stroke:var(--paper);stroke-width:2}
+svg.xsvg .xpt{fill:var(--ink);stroke:var(--paper);stroke-width:1.5}
+svg.xsvg .xlabbg{fill:var(--paper);fill-opacity:.92;stroke:none}
+svg.xsvg .xgap{stroke:var(--x2);stroke-width:2.2;stroke-dasharray:5 3}
+svg.xsvg .xgaph{fill:none;stroke:var(--x2);stroke-width:2.2}
+svg.xsvg .xtenth{fill:none;stroke:var(--mut);stroke-opacity:.22;stroke-width:.8}
+svg.xsvg .xhalf{fill:none;stroke:var(--mut);stroke-opacity:.55;stroke-width:1.2;stroke-dasharray:4 3}
+svg.xsvg .xsq{fill:none;stroke:var(--ink);stroke-opacity:.6;stroke-width:1.3}
+svg.xsvg .xhi{fill:var(--x3t);stroke:var(--x3);stroke-width:2;stroke-dasharray:2 3}
+svg.xsvg .xcell{fill:none;stroke:var(--mut);stroke-opacity:.6;stroke-width:1}
+svg.xsvg .xcell.xhead{fill:var(--field)}
+svg.xsvg .xbig2{font-size:19px}
+svg.xsvg .xarr{fill:none;stroke-width:2.2}
+svg.xsvg .xarr1{stroke:var(--x1)} svg.xsvg .xarr2{stroke:var(--x2);stroke-dasharray:6 4}
+svg.xsvg .xhead1{fill:var(--x1)} svg.xsvg .xhead2{fill:var(--x2)}
+svg.xsvg .ln1,svg.xsvg .ln2{stroke-width:2.6}
+/* the help's planes, tables and zoom sit in Hint 3's narrower list too: their words a size larger, so they still read at 12.5 px
+   or more on a 390 px phone (kit check/help_page.js) */
+svg.xsvg.u11h .xt{font-size:19.5px} svg.xsvg.u11h .xsm{font-size:18.5px} svg.xsvg.u11h .xtk{font-size:15px}

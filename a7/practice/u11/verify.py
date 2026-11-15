@@ -139,6 +139,7 @@ def held43(where, eqs=(), lines=(), story=None):
         w = shown43.story_hit(story, SHOWN["story"])
         if w: n["shown"] += 1; no(where, "tells a story with the numbers %s, which %s showed" % (story, w))
 
+V14B = set()   # Q14(b)'s versions on their own (ruling 49's floor of 100; 15 Nov 2026)
 for S in DUMP["sets"]:
     seed = S["seed"]
     for it in S["items"]:
@@ -269,10 +270,16 @@ for S in DUMP["sets"]:
                 if "0.1" not in json.dumps(pb["steps"]) and not any(s_.get("tol") == "0.1" for s_ in pb["steps"]): no(w + "b", "the Hint does not accept 0.1 around the key")
                 if not any("from" in text(s["say"]) and "to" in text(s["say"]) for s in pb["sol"]): no(w + "b", "the worked solution does not state the range it accepts")
                 plane(w + "b", pb["line"], ls, 2, (ex, ey))
+                V14B.add(" ; ".join(maths(pb["line"])[:2]))   # Q14(b)'s own version: its two printed equations, in order
                 for p in (pa, pb): check_steps(w + p["label"], p["steps"])
                 check_choices(w + "a", pa, (Q(nums[0]), Q(nums[1]))); check_choices(w + "b", pb, None, est=key); held43(w + "b", lines=ls)
         except Exception as e:
             no(w, "could not check: %r" % (e,))
+
+# Q14(b) clears the floor of 100 versions by itself, not only beside its story: 100 different systems in a dump of 1,000 sets or
+# more; in a shorter one (plant_check's 100) at least 80% of its sets
+need = 100 if len(DUMP["sets"]) >= 1000 else -(-8 * len(DUMP["sets"]) // 10)
+if len(V14B) < need: no("Q14b", "only %d different systems in %d sets (the floor: %d)" % (len(V14B), len(DUMP["sets"]), need))
 
 # ---------------------------------------------------------------- the test itself: the practice is its blueprint (ruling 49)
 paper = U["assessment"]["forms"]["practice"]
@@ -287,8 +294,8 @@ for G in DUMP["sets"][:200]:
     theirs = [len(it.get("parts", [])) or 1 for s in paper for it in s["items"]]
     if mine != theirs: no("set %d" % G["seed"], "its parts %s are not the test's %s" % (mine, theirs))
 
-print("%d sets: %d equations solved, %d worked lines and %d Hint steps read back, %d ordered pairs put in both equations, %d drawn lines on their equations, %d table pairs, %d paper choices; ruling 43 from the specs: %d equations, %d systems, %d stories shown, %d hits; the test's %d questions and %d points matched: %s"
-      % (len(DUMP["sets"]), n["eq"], n["lines"], n["steps"], n["pairs"], n["segs"], n["tables"], n["choices"], len(SHOWN["eq"]), len(SHOWN["sys"]), len(SHOWN["story"]), n["shown"],
+print("%d sets: %d equations solved, %d worked lines and %d Hint steps read back, %d ordered pairs put in both equations, %d drawn lines on their equations, %d table pairs, %d paper choices; ruling 43 from the specs: %d equations, %d systems, %d stories shown, %d hits; Q14(b) in %d versions of its own; the test's %d questions and %d points matched: %s"
+      % (len(DUMP["sets"]), n["eq"], n["lines"], n["steps"], n["pairs"], n["segs"], n["tables"], n["choices"], len(SHOWN["eq"]), len(SHOWN["sys"]), len(SHOWN["story"]), n["shown"], len(V14B),
          sum(len(s["items"]) for s in paper), pts, "ALL SOUND" if not bad else "%d PROBLEMS" % len(bad)))
 for b in bad[:40]: print("  " + b)
 sys.exit(1 if bad else 0)

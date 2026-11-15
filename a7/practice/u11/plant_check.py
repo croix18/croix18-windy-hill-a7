@@ -6,7 +6,7 @@ import os, shutil, subprocess, sys, tempfile
 HERE = os.path.dirname(os.path.abspath(__file__))
 PRACTICE = os.path.dirname(HERE)
 A7 = os.path.dirname(PRACTICE)
-FILES = ["shown.js", "shown43.py", "engine.js", "coach.js", "fig.js", "unit.js", "u11_check.js", "verify.py", "mc_check.js"]
+FILES = ["shown.js", "shown43.py", "engine.js", "coach.js", "help.js", "fig.js", "unit.js", "u11_check.js", "verify.py", "mc_check.js"]
 PLANTS = [
     # keys
     ("Q1's key one too big", "engine.js", "const v = e.v, part = numPart({ fam, prm: slotPrm, eq: e, v, ans: ending(e).s,", "const v = e.v, part = numPart({ fam, prm: slotPrm, eq: e, v, ans: fam === 'like' ? qadd(ending(e).s, ONE) : ending(e).s,"),
@@ -57,8 +57,14 @@ PLANTS = [
     ("a Hint states its own answer", "coach.js", "  return sign + posHint(t, qabs(x), qabs(y));\n}", "  return sign + posHint(t, qabs(x), qabs(y)) + ' It comes to = ' + n(OPV[t](x, y)) + '.';\n}"),
     ("a named mistake is marked right", "coach.js", "if (hit.length) return { v: 'wrong', what: [joinSays(hit)], rule, step: hit[0].step == null ? null : hit[0].step };", "if (hit.length) return { v: 'right', what: [joinSays(hit)], rule, step: null };"),
     ("Q5's wrong endings not named", "coach.js", "    why: (p, k) => { const got = endIdx(k), en = p.end, es = endStep(p), v = p.eq.v;", "    why: (p, k) => { return ''; const got = endIdx(k), en = p.end, es = endStep(p), v = p.eq.v;"),
-    ("a Hint multiplies with ×", "coach.js", "function calcText(t, x, y) { return t === 'mul' ? n(x) + '(' + n(y) + ')' :", "function calcText(t, x, y) { return t === 'mul' ? n(x) + ' × ' + par(y) :"),
-    ("the word slope in the rule", "coach.js", "'Two lines that intersect meet once, at their point of intersection: one solution.", "'Two lines with different slopes intersect once, at their point of intersection: one solution."),
+    ("a Hint multiplies with ×", "help.js", "what is ' + M(n(m) + '(' + p.miss + ')') + '?'", "what is ' + M(n(m) + ' × ' + p.miss) + '?'"),
+    ("the word slope in Hint 1", "help.js", "Lines that [[intersect]] once share one point, the [[pointInt]].", "Lines with different slopes [[intersect]] once, at the [[pointInt]]."),
+    # the help (help.js, 15 Nov 2026)
+    ("the help's Distribute line adds the number in front instead of multiplying", "help.js", "' + tT(qmul(g.f, t.c), t.v); };", "' + tT(t.v ? qmul(g.f, t.c) : qadd(g.f, t.c), t.v); };"),
+    ("the help's walkthrough divides first", "help.js", "ch('Divide both sides by the ' + F0 + ' to clear the parentheses', 0,", "ch('Divide both sides by the ' + F0 + ' to clear the parentheses', 1,"),
+    ("Hint 2 for Q1 starts with collecting, not distributing", "help.js", "first: p => { const s = C0.steps(p.eq)[0]; return Object.assign(distLine(s, p.eq.v), { pic: arrows(s.gs, true) }); },\n  sol: p => solveLines(p.eq, { pic: true }).concat(SOLVED.tail(p.eq)),\n  walk: p => eqWalk(p.eq) };\n/* Q2", "first: p => { const s = C0.steps(p.eq)[1]; return collLine(s); },\n  sol: p => solveLines(p.eq, { pic: true }).concat(SOLVED.tail(p.eq)),\n  walk: p => eqWalk(p.eq) };\n/* Q2"),
+    ("a Why's arithmetic wrong (the like terms' coefficients)", "help.js", "' = ' + n(sum)); });", "' = ' + n(qadd(sum, ONE))); });"),
+    ("Q14(b) narrowed back to a few systems (ruling 49's floor)", "engine.js", "const MB = ['1', '2', '3', '1/2', '3/2', '5/2', '-1', '-2', '-3', '-1/2', '-3/2', '-5/2'];", "const MB = ['1', '2', '-1'];"),
     ("the paper's wrong answers include the key", "coach.js", "  const out = [], seen = [keyHtml(p)];", "  const out = [keyHtml(p)], seen = [];"),
     ("the estimate's paper choices may sit inside the tolerance", [("coach.js", "PF[p.fam].models(p).forEach(m => add(p.fam === 'estimate' ? [E.tenthOf(m.v[0]), E.tenthOf(m.v[1])] : m.v));", "(p.fam === 'estimate' ? [{ v: [qadd(p.ans[0], Q(1, 10)), p.ans[1]] }] : []).concat(PF[p.fam].models(p)).forEach(m => add(p.fam === 'estimate' ? [E.tenthOf(m.v[0]), E.tenthOf(m.v[1])] : m.v));"),
       ("coach.js", "else if (p.fam === 'estimate' ? within(p, v[0], v[1]) :", "else if (p.fam === 'estimate' ? false :")]),
