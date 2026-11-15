@@ -699,6 +699,25 @@ body.printing>.kcalc,body.tview>.kcalc{display:none!important}
 .keys button{flex:0 0 auto;width:44px;min-width:44px;height:44px;min-height:44px;padding:0;display:inline-grid;place-items:center}
 .keys button.kwide{width:auto;padding:0 10px}
 .keys .krow>.kgap{margin-left:8px}
+
+/* ==== several boxes in one part (15 Nov 2026): "x = ▢  y = ▢" — the boxes in a row, each with its label, then Check and Hint;
+   on a phone the boxes share one line while they fit (they wrap, never squeeze under 4.5rem), Check and Hint the row under them.
+   A one-box part never carries .boxes, so nothing here touches it. */
+.ans.boxes .bxs{display:inline-flex;flex-wrap:wrap;align-items:center;gap:8px 16px;flex:0 1 auto;min-width:0}
+.ans.boxes .bx{display:inline-flex;align-items:center;gap:6px;flex-wrap:wrap;min-width:0}
+.ans.boxes .bx input[type=text]{flex:0 1 7.5rem;width:7.5rem;min-width:4.5rem;max-width:9rem}
+.ans.boxes .bx .pre{white-space:nowrap}
+.ans.boxes .bx{position:relative}
+.ans.boxes .bx .pv{position:absolute;right:0;top:100%;margin-top:2px;font-size:.9em;line-height:1.2;white-space:nowrap} .ans.boxes .bx .pv:empty{display:none}   /* the typed answer's preview under its box, never moving the row */
+.ans.boxes:has(.pv:not(:empty)){padding-bottom:1.4em}
+.ans.boxes .bx .unit{min-width:0}
+@media (max-width:480px){
+  .ans.boxes .bxs{flex:1 1 100%}
+  .ans.boxes .bx{flex:1 1 0;min-width:8rem}
+  .ans.boxes .bx input[type=text]{flex:1 1 0;width:auto;min-width:4.5rem;max-width:none}
+}
+.pans.pboxes .pbx{display:inline-flex;align-items:baseline;gap:6px;margin-right:18px}
+.pans.pboxes .pblank{min-width:6em}
 /* Practice-test kit: one question at a time, as on the FAST (pager.js, 14 Nov 2026). The released-test page's look (the site's
    released/kit/fast.css: .qhead, .flagb, .nav, .mapc and .map, .rlist) on the kit's own tokens (kit.css), so light and true dark
    come with them: the question's number in the eyebrow's teal capitals, Flag for review a quiet pill (pressed: the ink's edge and
@@ -810,6 +829,67 @@ body.printing>.kcalc,body.tview>.kcalc{display:none!important}
 .pgtip{margin:0 0 12px;padding-bottom:10px;border-bottom:1px solid var(--rule)}
 .pgtip .pinote{display:block;font:400 13.5px/1.45 var(--ui);color:var(--mut)}
 @media print{ .pgstart,.pgtip{display:none!important} }
+/* Practice kit: explain.css — the help's terms, signaling colours and pictures (explain.js; 14 Nov 2026). Its own file so
+   kit.css stays untouched. Three signal colours, each with its own underline style, light and dark. */
+:root{--x1:#0F6B74;--x2:#9A4614;--x3:#6A4FB0;--x1t:rgba(15,107,116,.12);--x2t:rgba(179,84,30,.12);--x3t:rgba(106,79,176,.12)}
+@media screen and (prefers-color-scheme: dark){ :root:not([data-theme="light"]){--x1:#5FD9CC;--x2:#FFA36E;--x3:#C9A8FF;--x1t:rgba(95,217,204,.16);--x2t:rgba(255,163,110,.16);--x3t:rgba(201,168,255,.16)} }
+@media screen{ :root[data-theme="dark"]{--x1:#5FD9CC;--x2:#FFA36E;--x3:#C9A8FF;--x1t:rgba(95,217,204,.16);--x2t:rgba(255,163,110,.16);--x3t:rgba(201,168,255,.16)} }
+/* a term: bold, with a dotted underline that says "tap me" */
+.xterm{font:inherit;font-weight:700;color:var(--ink);background:none;border:0;padding:0;margin:0;cursor:pointer;
+  text-decoration:underline dotted;text-decoration-color:var(--teal);text-decoration-thickness:2px;text-underline-offset:3px;min-height:0}
+.xterm.xfirst{cursor:default;text-decoration-style:solid}
+.xterm:focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:3px}
+.xdefn,.xdef{color:var(--mut);font-weight:400}
+.xdef{display:inline}
+.xdef[hidden]{display:none}
+/* signaling: the same colour in the words and in the picture, with an underline style of its own */
+.xc{font-weight:700;border-bottom:2.5px solid;padding:0 1px}
+.xc1{color:var(--x1);border-color:var(--x1)}
+.xc2{color:var(--x2);border-color:var(--x2);border-bottom-style:dashed}
+.xc3{color:var(--x3);border-color:var(--x3);border-bottom-style:dotted}
+/* a picture in a hint, a step or a coach line */
+figure.xfig{margin:10px -4px 4px;padding:8px 2px 8px;background:var(--field);border-radius:10px;max-width:100%}
+figure.xfig figcaption{font:14px/1.45 var(--ui);color:var(--ink);margin-top:6px}
+.wask figure.xfig{font-weight:400}
+svg.xsvg{display:block;width:100%;max-width:460px;height:auto;margin:0 auto;overflow:visible}
+svg.xbig{display:block;width:100%!important;max-width:min(100%,460px);height:auto;margin:0 auto}
+svg.xsvg .xt{font:600 16.5px var(--ui,system-ui,sans-serif);fill:var(--ink);dominant-baseline:central}
+svg.xsvg .xsm{font-size:15.5px;font-weight:500}
+svg.xsvg .xmut{fill:var(--mut);font-weight:400}
+svg.xsvg .xeq{font-size:22px}
+svg.xsvg .xchip,svg.xsvg .xseg{fill:var(--paper);stroke:var(--ink);stroke-width:1.4}
+svg.xsvg .xbeam{stroke:var(--ink);stroke-width:3;stroke-linecap:round}
+svg.xsvg .xpivot{fill:var(--mut);opacity:.5}
+svg.xsvg .xadd{stroke-dasharray:4 3}
+svg.xsvg .xdash{stroke-dasharray:5 4;fill:none}
+svg.xsvg .xgone{opacity:.55}
+svg.xsvg .xstrike{stroke:var(--no);stroke-width:2}
+svg.xsvg .xbrace{fill:none;stroke:var(--mut);stroke-width:1.3}
+svg.xsvg .xaxis{stroke:var(--ink);stroke-width:1.3}
+svg.xsvg .xarc{fill:none;stroke-width:1.6;stroke-dasharray:4 3}
+svg.xsvg .xdot{stroke-width:2}
+svg.xsvg .xside{stroke-width:3;stroke-linecap:round}
+svg.xsvg .xthick{stroke-width:4.5}
+svg.xsvg .xtri{fill:var(--mut);fill-opacity:.1;stroke:none}
+svg.xsvg .xplain{stroke:var(--ink);stroke-width:2}
+svg.xsvg .xf1{fill:var(--x1)} svg.xsvg .xf2{fill:var(--x2)} svg.xsvg .xf3{fill:var(--x3)}
+svg.xsvg .xra{fill:none;stroke:var(--ink);stroke-width:1.3}
+svg.xsvg .xs1{stroke:var(--x1)} svg.xsvg .xchip.xs1,svg.xsvg .xseg.xs1{fill:var(--x1t)} svg.xsvg .xdot.xs1{fill:var(--x1)}
+svg.xsvg .xs2{stroke:var(--x2)} svg.xsvg .xchip.xs2,svg.xsvg .xseg.xs2{fill:var(--x2t)} svg.xsvg .xdot.xs2{fill:var(--paper)}
+svg.xsvg .xs3{stroke:var(--x3)} svg.xsvg .xchip.xs3,svg.xsvg .xseg.xs3{fill:var(--x3t)}
+svg.xsvg .xs2.xside{stroke-dasharray:9 5}
+/* an annotated copy of a unit's own figure: its sides recoloured by the help */
+svg.fig .xs1{stroke:var(--x1);stroke-width:4} svg.fig .xs2{stroke:var(--x2);stroke-width:4;stroke-dasharray:9 5} svg.fig .xs3{stroke:var(--x3);stroke-width:3;stroke-dasharray:2 4}
+/* a step that says why, set apart: "Why:" in the help's own voice */
+.xwhy{display:block;margin-top:4px;color:var(--mut)}
+.xwhy b{color:var(--ink)}
+@media print{figure.xfig{background:none;border:1px solid #999}}
+/* the units' own pictures inside the help (Hint 3's "See why it works", a walkthrough's picture): the panel's full width, and
+   labels a student can read on a phone (the axes' small tick numbers stay as the figure drew them) */
+.rung .vis svg,.rung details.why svg,.wpic svg,.walk details.why svg{width:100%!important;max-width:min(100%,460px)!important;height:auto;margin:0 auto;display:block}
+.rung svg.nl text,.wpic svg.nl text,.walk svg.nl text{font-size:19.5px}
+.rung svg.fig .ax,.wpic svg.fig .ax{font-size:18px}
+.rung svg.fig .lab,.rung svg.fig .tx,.wpic svg.fig .lab,.wpic svg.fig .tx,.walk svg.fig .lab,.walk svg.fig .tx,.rung svg .lab,.rung svg .tx,.wpic svg .lab{font-size:18px}
 /* A7 Unit 5: the kit's sheet carries the page; a sentence with math in it may wrap between its math spans on a phone. */
 .cv .m{white-space:normal}
 .stem .m{white-space:normal}
@@ -856,7 +936,7 @@ function tools(r) {
   const until = (f, ok) => { for (let k = 0; k < 4000; k++) { const x = f(); if (ok(x)) return x; } throw new Error('generator could not find numbers'); };
   return { r, ri, pick, shuffle, until };
 }
-function slot(unitId, seed, slotName) { return tools(rng(fnv1a(unitId + '|' + seed + '|' + slotName))); }
+function slot(unitId, seed, slotName) { UNIT_SEEN = String(unitId); return tools(rng(fnv1a(unitId + '|' + seed + '|' + slotName))); }
 /* draw one slot's question: build until ok (test-form avoidance, the clean rule); the stream continues across retries,
    so the result depends only on (unit, seed, slot) and the code of this slot */
 function draw(unitId, seed, slotName, build, ok, tries) {
@@ -891,34 +971,51 @@ function split(q) {
   return rest.n === 0n ? [q] : [head, rest];
 }
 /* one smaller step for a × b: break one factor by place value, keeping the order the question used (never the final answer) */
+/* a negative factor (15 Nov 2026): the hints read the digits of a number, and a minus sign is not a digit — hint.mul(−3, 4) threw
+   (Array(−3)), so a unit's walk that asked for it lost its Hint. Now the size first, then the sign, said in words. */
+const neg = q => q.n < 0n;
+/* times (15 Nov 2026; Croix's classroom rule — x is always a variable, so multiplication is a dot or parentheses, never ×). The
+   hints wrote "Think: 3 × ? = 12" and "26 × 1.4 = 26 × 1 + …" into every unit; A7 Unit 11 and M7 Units 5 and 13 turned × into
+   · in their own coaches. Now the kit writes the dot. A unit built before the rule, whose own words use × (LEGACY_TIMES, counted
+   by check/times.js), keeps the × it was checked with — its sentence readers read × and its Portuguese tables hold those
+   sentences — until it is rebuilt and taken off the list. The kit knows the unit by the id it draws its questions with
+   (slot, draw: every unit draws before it asks for a hint). check/hints.js reads every kind of hint, both ways. */
+const LEGACY_TIMES = ['a7u3', 'a7u4', 'a7u5', 'a7u6', 'm7u4', 'm7u8', 'm7u9', 'm7u10'];
+let UNIT_SEEN = null;
+const XS = () => UNIT_SEEN && LEGACY_TIMES.indexOf(UNIT_SEEN) >= 0 ? ' × ' : ' · ';
+const TM = (a, b) => S(a) + XS() + S(b);
+const ASK = (b, a) => 'Think: ' + S(b) + XS() + '? = ' + S(a) + '.';
+const signSay = (a, b, what) => ' Then the sign: ' + (neg(a) && neg(b) ? 'both numbers are negative, so the ' + what + ' is positive.' : 'one number is negative, so the ' + what + ' is negative.');
 function hintMul(a, b) {
+  if (neg(a) || neg(b)) return 'First the size: ' + hintMul(big(a), big(b)) + signSay(a, b, 'product');
   const H = Q(1, 2);
   if (a.n * H.d === H.n * a.d) return 'Times 0.5 is the same as half. ' + hintDiv(b, Q(2));
   if (b.n * H.d === H.n * b.d) return 'Times 0.5 is the same as half. ' + hintDiv(a, Q(2));
   if (isInt(a) && isInt(b) && big(a).n <= 9n && big(b).n <= 9n) {
     const c = b.n <= a.n ? b : a, o = c === b ? a : b;
-    if (c.n <= 5n) return S(a) + ' × ' + S(b) + ' = ' + Array(Number(c.n)).fill(S(o)).join(' + ') + '.';
-    return S(a) + ' × ' + S(b) + ' = ' + S(o) + ' × ' + S(Q(c.n - 1n)) + ' + ' + S(o) + ' = ' + S(qmul(o, Q(c.n - 1n))) + ' + ' + S(o) + '.';
+    if (c.n <= 5n) return TM(a, b) + ' = ' + Array(Number(c.n)).fill(S(o)).join(' + ') + '.';
+    return TM(a, b) + ' = ' + TM(o, Q(c.n - 1n)) + ' + ' + S(o) + ' = ' + S(qmul(o, Q(c.n - 1n))) + ' + ' + S(o) + '.';
   }
   /* a round number: 20 × 6 → 2 × 6, then the zeros */
   for (const [r, o] of [[a, b], [b, a]]) {
     if (isInt(r) && isInt(o) && r.n >= 10n) { let k = r.n, z = 0; while (k % 10n === 0n) { k /= 10n; z++; }
-      if (z > 0 && k < 10n) return S(a) + ' × ' + S(b) + ': work out ' + S(Q(k)) + ' × ' + S(o) + ', then put ' + (z === 1 ? 'one 0' : z + ' zeros') + ' on the end.'; }
+      if (z > 0 && k < 10n) return TM(a, b) + ': work out ' + TM(Q(k), o) + ', then put ' + (z === 1 ? 'one 0' : z + ' zeros') + ' on the end.'; }
   }
   /* split the decimal factor if there is one, else the bigger one */
   let which = !isInt(a) && isInt(b) ? 0 : !isInt(b) && isInt(a) ? 1 : (big(a).n * big(b).d >= big(b).n * big(a).d ? 0 : 1);
   let parts = split(which === 0 ? a : b);
   if (parts.length < 2) { which = 1 - which; parts = split(which === 0 ? a : b); }
   if (parts.length < 2) return 'Multiply ' + S(a) + ' by ' + S(b) + ' one digit at a time, then place the decimal point.';
-  const other = which === 0 ? b : a, term = p => which === 0 ? S(p) + ' × ' + S(other) : S(other) + ' × ' + S(p);
-  return 'Break it up: ' + S(a) + ' × ' + S(b) + ' = ' + parts.map(term).join(' + ') + ' = ' + parts.map(p => S(qmul(p, other))).join(' + ') + '. Now add.';
+  const other = which === 0 ? b : a, term = p => which === 0 ? TM(p, other) : TM(other, p);
+  return 'Break it up: ' + TM(a, b) + ' = ' + parts.map(term).join(' + ') + ' = ' + parts.map(p => S(qmul(p, other))).join(' + ') + '. Now add.';
 }
 /* a ÷ b: a nearby multiple of b as a stepping stone — never one that states the quotient. 14.4 ÷ 1.2 began "Start with
    1.2 × 10 = 12", and 12 is the answer; when the hint would say "= <the answer>" it asks the plain question instead
    (A7 Unit 6 guarded this in its own coach; in the kit since 25 Oct 2026, check/hints.js) */
 function hintDiv(a, b) {
+  if ((neg(a) || neg(b)) && a.n !== 0n) return 'First the size: ' + hintDiv(big(a), big(b)) + signSay(a, b, 'quotient');
   const h = hintDivStep(a, b), q = S(qdiv(a, b)).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  return new RegExp('= ' + q + '(?![\\d.])').test(h) ? 'Think: ' + S(b) + ' × ? = ' + S(a) + '.' : h;
+  return new RegExp('= ' + q + '(?![\\d.])').test(h) ? ASK(b, a) : h;
 }
 function hintDivStep(a, b) {
   const qq = qdiv(a, b);
@@ -927,19 +1024,21 @@ function hintDivStep(a, b) {
     if (parts.length < 2) { if (isInt(a) && a.n % 2n === 1n && a.n > 1n) parts = [Q(a.n - 1n), Q(1)]; else return 'Half of ' + S(a) + ': what number added to itself makes ' + S(a) + '?'; }
     return 'Half of ' + S(a) + ': ' + parts.map(p => 'half of ' + S(p) + ' is ' + S(qdiv(p, Q(2)))).join(', and ') + '. Now add.';
   }
-  if (isInt(qq) && qq.n >= 10n) { const ten = Q((qq.n / 10n) * 10n); if (ten.n !== qq.n) return 'Think: ' + S(b) + ' × ? = ' + S(a) + '. Start with ' + S(b) + ' × ' + S(ten) + ' = ' + S(qmul(b, ten)) + '; ' + S(a) + ' − ' + S(qmul(b, ten)) + ' = ' + S(qsub(a, qmul(b, ten))) + ' is left.'; }
+  if (isInt(qq) && qq.n >= 10n) { const ten = Q((qq.n / 10n) * 10n); if (ten.n !== qq.n) return ASK(b, a) + ' Start with ' + TM(b, ten) + ' = ' + S(qmul(b, ten)) + '; ' + S(a) + ' − ' + S(qmul(b, ten)) + ' = ' + S(qsub(a, qmul(b, ten))) + ' is left.'; }
   if (places(b) > 0) { const k = 10n ** BigInt(places(b)); return 'Move both decimal points ' + places(b) + ' place' + (k === 10n ? '' : 's') + ': ' + S(a) + ' ÷ ' + S(b) + ' is the same as ' + S(qmul(a, Q(k))) + ' ÷ ' + S(qmul(b, Q(k))) + '.'; }
-  return 'Think: ' + S(b) + ' × ? = ' + S(a) + '.';
+  return ASK(b, a);
 }
 function hintAdd(a, b) {
+  if (neg(b)) return 'Adding ' + S(b) + ' is taking away ' + S(big(b)) + '. ' + hintSub(a, big(b));   /* 15 Nov 2026: a negative to add threw */
   if (isInt(a) && isInt(b)) { const p = split(b); if (p.length < 2) return 'Count on from ' + S(a) + ' by ' + S(b) + '.'; return S(a) + ' + ' + S(b) + ' = ' + S(a) + ' + ' + p.map(S).join(' + ') + ' = ' + S(qadd(a, p[0])) + ' + ' + S(p[1]) + '.'; }
   return 'Line up the decimal points, then add.';
 }
 function hintSub(a, b) {
+  if (neg(b)) return 'Taking away ' + S(b) + ' is adding ' + S(big(b)) + '. ' + hintAdd(a, big(b));
   if (isInt(a) && isInt(b)) { const p = split(b); if (p.length < 2) return 'Count back from ' + S(a) + ' by ' + S(b) + '.'; return S(a) + ' − ' + S(b) + ' = ' + S(a) + ' − ' + p.map(S).join(' − ') + ' = ' + S(qsub(a, p[0])) + ' − ' + S(p[1]) + '.'; }
   return 'Line up the decimal points, then subtract.';
 }
-function hintSq(a) { const two = a.n === 2n * a.d; return S(a) + '² means ' + S(a) + ' × ' + S(a) + (two ? '' : ' (not ' + S(a) + ' × 2)') + '. ' + hintMul(a, a); }
+function hintSq(a) { const two = a.n === 2n * a.d; return S(a) + '² means ' + TM(a, a) + (two ? '' : ' (not ' + TM(a, Q(2)) + ')') + '. ' + hintMul(a, a); }
 
 /* ---- equivalent forms of an answer (7 Nov 2026, the practice-test deepening, item 3; the survey's "x=3 was not accepted unless
    written as 3=x"). A small safe parser — no eval — reads a typed answer and the unit's own key into one canonical form and
@@ -1195,7 +1294,16 @@ function ansEquiv(typed, key, form) {
 }
 const Ans = { prep: ansPrep, parse: ansParse, canon: (t, o) => { const x = typeof t === 'string' ? ansParse(t, o) : t; return x ? ansCanon(x).s : null; }, shape: ansShape, form: ansForm, equiv: ansEquiv };
 
-const api = { fnv1a, rng, tools, slot, draw, hint: { mul: hintMul, div: hintDiv, add: hintAdd, sub: hintSub, sq: hintSq }, Q, decStr, Ans };
+/* the order a walkthrough step shows its options in (15 Nov 2026; HELP_STANDARD §5.2: "The right option's position varies with the
+   question; it is never always first"): 0..n−1 shuffled by a hash of the question and the step, so it is the same every time the
+   same question is opened (on any device, in any set that has it) and differs from question to question. ui.js walkHtml. */
+function order(n, s) {
+  const a = []; let h = fnv1a(String(s)) >>> 0;
+  for (let i = 0; i < n; i++) a.push(i);
+  for (let i = n - 1; i > 0; i--) { h = (Math.imul(h, 1664525) + 1013904223) >>> 0; const j = (h >>> 8) % (i + 1); const t = a[i]; a[i] = a[j]; a[j] = t; }
+  return a;
+}
+const api = { fnv1a, rng, tools, slot, draw, order, LEGACY_TIMES, times: XS, hint: { mul: hintMul, div: hintDiv, add: hintAdd, sub: hintSub, sq: hintSq }, Q, decStr, Ans };
 if (typeof module !== 'undefined' && module.exports) module.exports = api; else root.Kit = api;
 })(this);
 </script>
@@ -1569,6 +1677,158 @@ function mount(U, lang){
 var api = {make: make, protect: protect, sentences: sentences, mount: mount};
 if (typeof module !== 'undefined' && module.exports) module.exports = api; else { root.Kit = root.Kit || {}; root.Kit.Bi = api; }
 })(this);
+</script>
+<script>/* Practice kit: explain.js — the help's words and pictures (14 Nov 2026, the help proofs; see kit/HELP_STANDARD in the
+   course plan). A small module of its own, so ui.js and kit.css stay untouched: everything here returns HTML that a unit's
+   rungs, solution lines, walkthrough steps and coach lines carry in their own strings.
+     Kit.X.gloss({id: {word, def}})      a unit's glossary (the lesson decks' own terms and words)
+     Kit.X.def(id[, shown])              a term the first time: highlighted, with its plain definition right after it
+     Kit.X.term(id[, shown])             a term after that: highlighted, tap to show its definition inline (tap again to hide)
+     Kit.X.c(n, html)                    signaling: words in colour n (1–3) with a matching underline style, so the link from a
+                                         word to its part of the picture never rests on colour alone
+     Kit.X.fig(svg, caption)             a picture with its caption, sized for a phone
+     Kit.X.balance({left, right, note})  an equation as a balance: chips on two pans (the decks' "algebra tiles on a balance")
+     Kit.X.tape({rows, w})               a tape (bar) diagram: rows of segments on one scale, braces under segments
+     Kit.X.mirror({a, b})                why a negative multiplier reverses the symbol: a < b, then −a > −b, on one number line
+     Kit.X.rightTri({a, b, c, ...})      a right triangle with its right angle marked, the hypotenuse and the legs in colour
+   Pure string builders: they run under Node too (a unit's checks can read what they print). */
+(function (root) {
+'use strict';
+const esc = s => String(s).replace(/[&<>"]/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[ch]));
+const GL = {};
+const X = {};
+X.gloss = o => { Object.assign(GL, o); return GL; };
+X.has = id => Object.prototype.hasOwnProperty.call(GL, id);
+const g = id => GL[id] || { word: id, def: '' };
+X.def = (id, shown) => '<b class="xterm xfirst">' + (shown || g(id).word) + '</b><span class="xdefn"> (' + g(id).def + ')</span>';
+/* a term is inline text (role button), not a <button>: a <button> is an inline block, so a line could break between it and the
+   period after it ("Equality\n."), 15 Nov 2026 */
+X.term = (id, shown) => '<span role="button" tabindex="0" class="xterm" data-xterm="' + esc(id) + '" aria-expanded="false" title="' + esc(g(id).def) + '">' + (shown || g(id).word) +
+  '</span><span class="xdef" role="note" hidden> (' + g(id).def + ')</span>';
+/* [[id]] or [[id|shown words]] in a help string: 'def' and 'tap' make every term tappable (named, bold, its definition shown
+   inline only on a tap — Croix, 14 Nov 2026: "Don't spell it out first"); 'plain' (inside an option button, which can't hold a button) leaves the word, bold. seen carries the ids already
+   spelled out across the strings of one rung. */
+X.teach = (html, mode, seen) => String(html == null ? '' : html).replace(/\[\[([A-Za-z0-9]+)(?:\|([^\]]+))?\]\]/g, (m0, id, shown) => {
+  if (mode === 'plain') return '<b>' + (shown || g(id).word) + '</b>';
+  /* 'def' once spelled the definition out at a term's first appearance; Croix, 14 Nov 2026 (after seeing it live): "Don't spell
+     it out first." Every appearance is now tappable, the definition shown only on a tap. */
+  return X.term(id, shown); });
+X.ids = html => { const out = []; String(html || '').replace(/\[\[([A-Za-z0-9]+)/g, (m0, id) => { if (out.indexOf(id) < 0) out.push(id); }); return out; };
+/* a unit's own figure, drawn at the help panel's width: its fixed max-width goes, so the labels grow with the drawing */
+X.big = svg => String(svg || '').replace(/ style="max-width:\d+px"/, '').replace('<svg class="', '<svg class="xbig ');
+X.c = (n, html) => '<span class="xc xc' + n + '">' + html + '</span>';
+X.fig = (svg, cap) => '<figure class="xfig">' + svg + (cap ? '<figcaption>' + cap + '</figcaption>' : '') + '</figure>';
+
+/* ---- SVG pieces: text is plain (no tags), numbers already formatted by the unit */
+const T = (x, y, s, cls, anchor) => '<text x="' + r1(x) + '" y="' + r1(y) + '" class="' + (cls || 'xt') + '"' + (anchor ? ' text-anchor="' + anchor + '"' : '') + '>' + esc(s) + '</text>';
+const r1 = v => Math.round(v * 10) / 10;
+const tw = s => String(s).length * 9.6 + 14;                          /* a chip's width for its text at 15px */                         /* a chip's width for its text at 13px */
+const svgOpen = (w, h, label) => '<svg class="xsvg" viewBox="0 0 ' + r1(w) + ' ' + r1(h) + '" role="img" aria-label="' + esc(label) + '">';
+
+/* a balance: left and right are lists of chips {t, c (colour 1–3, optional), add (a chip just put on: dashed edge), gone (a
+   chip that cancels: struck through)} */
+X.balance = ({ left, right, label, tag }) => {
+  /* chips sit on the pans two to a row (a third goes on a row above), so the drawing keeps the panel's width and its labels their size */
+  const rows = cs => [cs.slice(0, 2), cs.slice(2)].filter(r => r.length), rw = r => r.reduce((t, c) => t + tw(c.t) + 6, -6);
+  const half = Math.max(...rows(left).map(rw), ...rows(right).map(rw)) + 20, up = Math.max(rows(left).length, rows(right).length) > 1 ? 40 : 0;
+  const W = Math.max(280, 2 * half + 24), cx = W / 2, beamY = 70 + up, lm = cx - 16 - half / 2, rm = cx + 16 + half / 2;
+  const row = (cs, mid) => { let out = '';
+    rows(cs).forEach((r, j) => { let x = mid - rw(r) / 2; const y0 = beamY - 40 - j * 40;
+      r.forEach(c => { const w = tw(c.t);
+        out += '<rect x="' + r1(x) + '" y="' + y0 + '" width="' + r1(w) + '" height="34" rx="7" class="xchip' + (c.c ? ' xs' + c.c : '') + (c.add ? ' xadd' : '') + (c.gone ? ' xgone' : '') + '"/>' +
+          T(x + w / 2, y0 + 18, c.t, 'xt', 'middle') + (c.gone ? '<line x1="' + r1(x + 4) + '" y1="' + (y0 + 31) + '" x2="' + r1(x + w - 4) + '" y2="' + (y0 + 3) + '" class="xstrike"/>' : '');
+        x += w + 6; }); });
+    return out; };
+  return svgOpen(W, 120 + up, label || 'A balance: the left side equals the right side') +
+    '<line x1="' + r1(lm - half / 2) + '" y1="' + beamY + '" x2="' + r1(rm + half / 2) + '" y2="' + beamY + '" class="xbeam"/>' +
+    '<path d="M' + cx + ' ' + beamY + ' L' + (cx - 18) + ' ' + (beamY + 32) + ' L' + (cx + 18) + ' ' + (beamY + 32) + ' Z" class="xpivot"/>' +
+    T(cx, beamY + 44, tag || 'equal', 'xt xmut', 'middle') + row(left, lm) + row(right, rm) + T(cx, beamY - 22, '=', 'xt xeq', 'middle') + '</svg>';
+};
+
+/* a tape diagram: rows [{segs: [{w, t, c, dash, brace}], x0}] on one scale; w in units, the whole drawing fits W */
+X.tape = ({ rows, label, unitW }) => {
+  const W = 280, H = 32, gap = 22, L = rows.some(r => r.lab) ? 24 : 2, RM = rows.some(r => r.mark) ? 46 : 2; let y = 6, out = '', maxU = 0;
+  rows.forEach(r => { maxU = Math.max(maxU, (r.x0 || 0) + r.segs.reduce((s, z) => s + z.w, 0)); });
+  const k = unitW || (W - L - RM) / maxU;
+  rows.forEach(r => { let x = L + (r.x0 || 0) * k;
+    if (r.lab) out += T(4, y + H / 2 + 1, r.lab, 'xt', 'start');
+    if (r.mark) out += T(W - RM + 8, y + H / 2 + 1, r.mark, 'xt', 'start');
+    r.segs.forEach(z => { const w = z.w * k;
+      out += '<rect x="' + r1(x) + '" y="' + y + '" width="' + r1(w) + '" height="' + H + '" class="xseg' + (z.c ? ' xs' + z.c : '') + (z.dash ? ' xdash' : '') + '"/>' + (z.t ? T(x + w / 2, y + H / 2 + 1, z.t, 'xt', 'middle') : '');
+      if (z.cells) { const cw = w / z.cells.length;                  /* equal cells inside one segment: "10.50 | 10.50 | … | 10.50" */
+        z.cells.forEach((t, i) => { if (i) out += '<line x1="' + r1(x + i * cw) + '" y1="' + y + '" x2="' + r1(x + i * cw) + '" y2="' + (y + H) + '" class="xseg' + (z.c ? ' xs' + z.c : '') + '"/>';
+          out += T(x + (i + 0.5) * cw, y + H / 2 + 1, t, 'xt xsm', 'middle'); }); }
+      if (z.brace) out += '<path d="M' + r1(x + 2) + ' ' + (y + H + 4) + ' q0 6 6 6 L' + r1(x + w / 2 - 5) + ' ' + (y + H + 10) + ' l5 5 l5 -5 L' + r1(x + w - 8) + ' ' + (y + H + 10) + ' q6 0 6 -6" class="xbrace"/>' + T(x + w / 2, y + H + 26, z.brace, 'xt xsm', 'middle');
+      x += w; });
+    y += H + (r.segs.some(z => z.brace) ? gap + 14 : 10) + (r.after || 0); });
+  return svgOpen(W, y, label || 'A tape diagram') + out + '</svg>';
+};
+
+/* why the symbol reverses: a and b (0 < a < b) and their opposites on one number line */
+X.mirror = ({ a, b, label }) => {
+  const W = 280, y = 46, m = Math.max(Math.abs(a), Math.abs(b)) + 1, k = (W / 2 - 20) / m, X0 = W / 2, px = v => X0 + v * k;
+  let out = '<line x1="10" y1="' + y + '" x2="' + (W - 10) + '" y2="' + y + '" class="xaxis"/>';
+  for (let v = -m; v <= m; v++) out += '<line x1="' + r1(px(v)) + '" y1="' + (y - 4) + '" x2="' + r1(px(v)) + '" y2="' + (y + 4) + '" class="xaxis"/>' + (v === 0 ? T(px(0), y + 18, '0', 'xt xsm', 'middle') : '');
+  const dot = (v, cls, lab, up) => '<circle cx="' + r1(px(v)) + '" cy="' + y + '" r="5.5" class="xdot ' + cls + '"/>' + T(px(v), up ? y - 14 : y + 20, lab, 'xt', 'middle');
+  const arc = (v1, v2, cls) => { const x1 = px(v1), x2 = px(v2); return '<path d="M' + r1(x1) + ' ' + (y - 8) + ' Q' + r1((x1 + x2) / 2) + ' ' + (y - 40) + ' ' + r1(x2) + ' ' + (y - 8) + '" class="xarc ' + cls + '"/>'; };
+  out += arc(a, -a, 'xs1') + arc(b, -b, 'xs2') + dot(a, 'xs1', String(a), false) + dot(b, 'xs2', String(b), false) + dot(-a, 'xs1', '−' + a, false) + dot(-b, 'xs2', '−' + b, false);
+  return svgOpen(W, 76, label || 'Opposites on a number line') + out + '</svg>';
+};
+
+/* a right triangle: legs a (along the bottom) and b (up the side), hypotenuse c; each {t (its label), c (colour)}; the
+   proportions come from the real lengths when both legs are known (la, lb), else a 4:3 shape */
+X.rightTri = ({ a, b, c, la, lb, label }) => {
+  const W = 280, ratio = la && lb ? lb / la : 0.75, w = Math.max(70, Math.min(150, 150 / ratio)), h = Math.max(60, Math.min(150, w * ratio));
+  const x0 = 100, y0 = 14 + h, P = [x0, y0], Q = [x0 + w, y0], R = [x0, y0 - h];
+  const L = (p, q, cls) => '<line x1="' + r1(p[0]) + '" y1="' + r1(p[1]) + '" x2="' + r1(q[0]) + '" y2="' + r1(q[1]) + '" class="xside ' + cls + '"/>';
+  let out = '<path d="M' + x0 + ' ' + (y0 - 14) + ' h14 v14" class="xra"/>' + L(P, Q, 'xs' + (a.c || 2)) + L(P, R, 'xs' + (b.c || 2)) + L(Q, R, 'xs' + (c.c || 1) + ' xthick');
+  const lines = (t, x, y, anchor) => String(t).split('\n').map((ln, i) => T(x, y + i * 18, ln, 'xt', anchor)).join('');
+  out += lines(a.t, x0 + w / 2, y0 + 20, 'middle') + lines(b.t, x0 - 10, y0 - h / 2 - 8, 'end') + lines(c.t, x0 + w / 2 + 14, y0 - h / 2 - 16, 'start');
+  return svgOpen(W, y0 + 52, label || 'A right triangle') + out + '</svg>';
+};
+
+/* two similar triangles, one above the other, at the panel's width: A and B are {s: [p, q, r] side lengths, lab: [p, q, r]
+   labels, nm: [3 corner letters]}; side p runs between corners 0 and 2, q between 1 and 2, r between 0 and 1 (as the units'
+   figures do); col: {p, q, r} → signal colour 1–3 (or 0 for plain); turn: 'flip' mirrors the second, '180' turns it */
+X.simPair = ({ A, B, col, turn, label }) => {
+  const pts = s => { const [p, q, r] = s.map(Number), x = (p * p - q * q + r * r) / (2 * r), y = Math.sqrt(Math.max(0, p * p - x * x)); return [[0, 0], [r, 0], [x, y]]; };
+  const PA = pts(A.s), PB = pts(B.s), box = P => { const xs = P.map(v => v[0]), ys = P.map(v => v[1]); return [Math.min(...xs), Math.max(...xs), Math.min(...ys), Math.max(...ys)]; };
+  const ba = box(PA), bb = box(PB), sc = Math.min(210 / Math.max(ba[1] - ba[0], bb[1] - bb[0]), 130 / Math.max(ba[3] - ba[2], bb[3] - bb[2]));
+  const W = 280; let out = '', y = 30;
+  [[A, PA, ba, ''], [B, PB, bb, turn]].forEach(([T0, P, bx, tn]) => {
+    const wpx = (bx[1] - bx[0]) * sc, hpx = (bx[3] - bx[2]) * sc, ox = (W - wpx) / 2;
+    let Q = P.map(v => [ox + (v[0] - bx[0]) * sc, y + hpx - (v[1] - bx[2]) * sc]);
+    if (tn === 'flip') Q = Q.map(v => [2 * ox + wpx - v[0], v[1]]); else if (tn === '180') Q = Q.map(v => [2 * ox + wpx - v[0], 2 * y + hpx - v[1]]);
+    const cen = [(Q[0][0] + Q[1][0] + Q[2][0]) / 3, (Q[0][1] + Q[1][1] + Q[2][1]) / 3], E = { p: [0, 2], q: [1, 2], r: [0, 1] };
+    out += '<polygon points="' + Q.map(v => r1(v[0]) + ',' + r1(v[1])).join(' ') + '" class="xtri"/>';
+    ['p', 'q', 'r'].forEach((sd, i) => { const a = Q[E[sd][0]], b = Q[E[sd][1]], k = col && col[sd];
+      out += '<line x1="' + r1(a[0]) + '" y1="' + r1(a[1]) + '" x2="' + r1(b[0]) + '" y2="' + r1(b[1]) + '" class="xside ' + (k ? 'xs' + k : 'xplain') + '"/>';
+      const m = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2], d = [m[0] - cen[0], m[1] - cen[1]], L = Math.hypot(d[0], d[1]) || 1;
+      out += T(m[0] + d[0] / L * 16, m[1] + d[1] / L * 16, T0.lab[i], 'xt' + (k ? ' xf' + k : ''), 'middle'); });
+    if (T0.nm) Q.forEach((v, i) => { const d = [v[0] - cen[0], v[1] - cen[1]], L = Math.hypot(d[0], d[1]) || 1; out += T(v[0] + d[0] / L * 15, v[1] + d[1] / L * 15, T0.nm[i], 'xt xmut', 'middle'); });
+    y += hpx + 58; });
+  return svgOpen(W, y - 20, label || 'Two similar triangles') + out + '</svg>';
+};
+
+/* the inline definition of a tapped term (delegated, so it survives every repaint of a card) */
+const toggle = b => { const d = b.nextElementSibling; if (!d || !d.classList.contains('xdef')) return;
+  const open = d.hidden; d.hidden = !open; b.setAttribute('aria-expanded', open ? 'true' : 'false'); };
+if (typeof document !== 'undefined') {
+  document.addEventListener('click', e => { const b = e.target && e.target.closest ? e.target.closest('[data-xterm]') : null; if (b) toggle(b); });
+  document.addEventListener('keydown', e => { const b = e.target && e.target.closest ? e.target.closest('[data-xterm]') : null;
+    if (b && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); toggle(b); } });
+}
+/* a Why: that only names a property or theorem gets what it lets you do, so it is a sentence (15 Nov 2026) */
+const DOES = { addProp: 'lets you add the same number to both sides and keep them equal', subProp: 'lets you subtract the same number from both sides and keep them equal',
+  mulProp: 'lets you multiply both sides by the same number and keep them equal', divProp: 'lets you divide both sides by the same number and keep them equal',
+  addPropI: 'lets you add the same number to both sides and keep the inequality true', subPropI: 'lets you subtract the same number from both sides and keep the inequality true',
+  mulPropI: 'lets you multiply both sides by the same number, but a negative number reverses the symbol', distProp: 'says the number outside multiplies every term inside the parentheses',
+  pyth: 'says a² + b² = c² in every right triangle, where c is the hypotenuse' };
+X.whyOf = w => String(w || '').replace(/^the \[\[(\w+)\]\](?:\.|:)?\s*(.*)$/, (m0, id, rest) => { if (!DOES[id]) return m0; if (/^(keeps|undoes|lets|says)\b/.test(rest) || /^[a-c]²/.test(rest)) rest = '';   /* a rest that only restates the property */
+  return 'the [[' + id + ']] ' + DOES[id] + '.' + (rest ? ' ' + rest.charAt(0).toUpperCase() + rest.slice(1) : ''); });
+root.Kit = root.Kit || {}; root.Kit.X = X;
+if (typeof module !== 'undefined' && module.exports) module.exports = X;
+})(typeof window !== 'undefined' ? window : this);
 </script>
 <script>/* A7 Unit 5 practice (Multi-Step Proportional Relationships): exact numbers, reading what a student types, drawing the
    numbers, and the questions.
@@ -3099,7 +3359,7 @@ function judgePart(p, typed){
     if (isFinite(a) && isFinite(b) && Math.abs(a - b) <= Math.max(0.005 * Math.abs(b), 1e-9)){
       var hasPi = /π/.test(String(bp.key));
       if (hasPi) return {v: 'form', what: ['That is its value. The question asks for it in terms of π: keep π in the answer.']};
-      if (shape === 'sci') return {v: 'form', what: ['That is its value. Write it in scientific notation, like 3.2 × 10^5.']};
+      if (shape === 'sci') return {v: 'form', what: ['That is its value. Write it in scientific notation, like 3.2 · 10^5.']};
       if (shape === 'power') return {v: 'form', what: ['That is its value. The question asks for it as a power.']};
       if (bp.precision && !close(a, b)) return {v: 'wrong', what: []};
       if (shape === 'fraction' || shape === 'mixed') return {v: 'form', what: ['That is close, but not exact. Give the exact value as a fraction.']};
@@ -3666,7 +3926,38 @@ function build(){
 /* ------------------------------------------------ drawing the sheet */
 function fig(it){ try { return V.figure(it) || ''; } catch(e){ return ''; } }
 function flabHtml(p, id){ var fm = formOf(p); return fm.label ? '<div class="flab" id="fl' + id + '">' + esc(fm.label.charAt(0).toUpperCase() + fm.label.slice(1)) + '</div>' : ''; }
+/* ---- several boxes in one part (15 Nov 2026; Croix: "Fix everything" — A7 Unit 11's question 12 asks "Give its x and its y" and
+   the kit allowed one box a part). A unit gives a part its boxes with view.boxes(part) → [{pre, unit, say, placeholder, imode,
+   kind, form}] (two or more; fewer is the one box of before, exactly). The part is still ONE point: its answer is the boxes'
+   strings in order (S.ans[id] an array), judged together by the unit's judge.text(part, [typed…], ctx) — each box read by the
+   unit's own reader — and Unit.keyText(part) gives one string per box. Box k's input is #a<id> for the first, #a<id>_<k> after;
+   each has the part's data-part and its own data-box. A blank box is not a try: "Fill in every box" (Not counted yet). */
+var BOXES = typeof WeakMap === 'function' ? new WeakMap() : null;
+function boxesOf(p){
+  if (!p || p.kind === 'mc' || p.kind === 'nline') return null;
+  if (BOXES && BOXES.has(p)) return BOXES.get(p);
+  var b = null; try { b = V.boxes ? V.boxes(p) : null; } catch(e){ b = null; }
+  if (!b && Array.isArray(p.boxes)) b = p.boxes;
+  b = Array.isArray(b) && b.length >= 2 ? b.map(function(x){ return x || {}; }) : null;
+  if (BOXES) BOXES.set(p, b); return b;
+}
+function boxId(id, k){ return 'a' + id + (k ? '_' + k : ''); }
+function boxAns(p, a){                                     /* a part's answer as one string per box (a string saved before is dropped) */
+  var B = boxesOf(p); if (!B) return a;
+  return B.map(function(x, k){ return Array.isArray(a) && a[k] != null ? String(a[k]) : ''; });
+}
+function boxSay(bx, k){ var s = bx.say || plainText(bx.pre || '').replace(/\s*=\s*$/, '').trim() || plainText(bx.unit || '').trim(); return s || 'box ' + (k + 1); }
+function boxesHtml(p, id, lab, B){
+  var fl = formOf(p).label, last = B.length - 1;
+  var row = B.map(function(bx, k){ var pre = bx.pre || '', unit = bx.unit || '';
+    return '<span class="bx">' + (pre ? '<span class="pre" id="bp' + id + '_' + k + '" aria-hidden="true">' + pre + '</span>' : '') +
+      '<input type="text" id="' + boxId(id, k) + '" data-part="' + esc(id) + '" data-box="' + k + '" data-kind="' + esc(bx.kind || p.kind) + '" aria-label="Answer to question ' + esc(lab) + ', ' + esc(boxSay(bx, k)) + '" aria-describedby="ln' + id + (fl ? ' fl' + id : '') + '" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="' + (k < last ? 'next' : 'done') + '"' + (bx.imode || p.imode ? ' inputmode="' + esc(bx.imode || p.imode) + '"' : '') + (bx.placeholder ? ' placeholder="' + esc(bx.placeholder) + '"' : '') + '>' +
+      (unit ? '<span class="unit" aria-hidden="true">' + unit + '</span>' : '') + '<span class="pv" aria-hidden="true"></span></span>'; }).join('');
+  return flabHtml(p, id) + '<div class="ans boxes" role="group" aria-label="Answer to question ' + esc(lab) + ', ' + B.length + ' boxes"><span class="bxs">' + row + '</span>' +
+    '<span class="acts"><button type="button" class="chk go" data-check="' + id + '" aria-label="Check ' + lab + '">Check</button><span class="hslot" id="hs' + id + '"></span></span><span class="rd" id="rd' + id + '" aria-live="polite"></span></div>';
+}
 function inputHtml(p, id, lab){
+  var B = boxesOf(p); if (B) return boxesHtml(p, id, lab, B);
   var pre = V.pre(p), unit = V.unit(p), ph = V.placeholder(p), fl = formOf(p).label;
   return flabHtml(p, id) + '<div class="ans">' + (pre ? '<span class="pre">' + pre + '</span>' : '') +
     '<input type="text" id="a' + id + '" data-kind="' + esc(p.kind) + '" aria-label="Answer to question ' + lab + '" aria-describedby="ln' + id + (fl ? ' fl' + id : '') + '" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done"' + (p.imode ? ' inputmode="' + esc(p.imode) + '"' : '') + (ph ? ' placeholder="' + esc(ph) + '"' : '') + '>' +
@@ -3900,7 +4191,8 @@ function another(baseId){
 /* ------------------------------------------------ marking and coaching */
 function byIdBase(id){ for (var i = 0; i < ITEMS.length; i++) if (ITEMS[i].id === id) return ITEMS[i]; return null; }
 function byId(id){ return byIdBase(id) || EX[id] || null; }
-function answered(it){ var a = S.ans[it.id]; return it.type === 'multi' ? !!(a && a.length) : it.type === 'nline' ? !NL.empty(a) : a != null && String(a).trim() !== ''; }
+function answered(it){ var a = S.ans[it.id]; if (it.type === 'text' && boxesOf(it.x)) return boxAns(it.x, a).every(function(v){ return v.trim() !== ''; });   /* several boxes: every one filled */
+  return it.type === 'multi' ? !!(a && a.length) : it.type === 'nline' ? !NL.empty(a) : a != null && String(a).trim() !== ''; }
 /* the mode rides along (25 Oct 2026): on "Like the real test" a part done right from a wrong part (a) earns its point, as the
    printed test's follow-through line says (ruling 19); in practice the coach says fix part (a) first */
 /* what the coach may know about a part: the student's part (a) and whether it is right yet, whether this is a fresh one
@@ -3912,6 +4204,14 @@ function ctxOf(it){
 }
 function judgeAns(it, a, tries){
   if (it.type === 'nline'){ try { return NL.judge(it.x, a, ctxOf(it), U.judge.nline); } catch(e){ return {v: 'unread', what: ['Place the point, then choose a dot and an arrow.']}; } }
+  var B = it.type === 'text' ? boxesOf(it.x) : null;
+  if (B){                                                   /* several boxes: all blank is blank; some blank is not a try yet */
+    var bs = boxAns(it.x, a), empty = bs.map(function(v){ return v.trim() === ''; });
+    if (empty.every(Boolean)) return {v: 'blank', what: []};
+    if (empty.some(Boolean)) return {v: 'unread', partial: true, what: ['Fill in every box: ' + B.map(function(x, k){ return empty[k] ? '<b>' + esc(boxSay(x, k)) + '</b>' : ''; }).filter(Boolean).join(' and ') + (empty.filter(Boolean).length === 1 ? ' is' : ' are') + ' still empty.']};
+    try { bs = bs.map(tidy); return equivUp(it, bs, U.judge.text(it.x, bs, ctxOf(it))); }
+    catch(e){ return {v: 'unread', what: ['I can’t read that yet. Type just your answer in each box.']}; }
+  }
   if (it.type === 'multi' ? !(a && a.length) : (a == null || String(a).trim() === '')) return {v: 'blank', what: []};
   try {
     if (it.type === 'text'){ a = tidy(a); return equivUp(it, a, U.judge.text(it.x, a, ctxOf(it))); }
@@ -3943,11 +4243,26 @@ function tidy(a){
 }
 function equivUp(it, a, f){
   if (!f || f.v === 'right' || f.v === 'blank' || !K.Ans) return f;
+  if (Array.isArray(a)) return equivBoxes(it, a, f);
   var fm = formOf(it.x), r; if (!fm.key) return f;
   try { r = K.Ans.equiv(a, fm.key, fm); } catch(e){ return f; }
   if (!r || !r.ok) return f;
   var nudge = r.nudge ? esc(r.nudge) : f.v === 'form' && f.what && f.what[0] ? f.what[0] : '';   /* a unit's own "almost" words become the nudge */
   return {v: 'right', what: nudge ? [nudge] : [], equiv: true};
+}
+/* several boxes: right when every box is its key written another way (each box's own form: its pre "x =", its unit, its form) */
+function boxForm(p, k){
+  var B = boxesOf(p), bx = B[k] || {}, keys = boxKeys(p), f;
+  try { f = K.Ans.form(keys[k] || '', {declared: Object.assign({}, bx.form || {}), placeholder: bx.placeholder || '', pre: bx.pre || '', unit: bx.unit || ''}); } catch(e){ f = {equiv: false}; }
+  f.key = keys[k] || ''; return f;
+}
+function boxKeys(p){ var t = null; try { t = U.keyText ? U.keyText(p) : null; } catch(e){} return Array.isArray(t) ? t.map(String) : []; }
+function equivBoxes(it, a, f){
+  var B = boxesOf(it.x), d = formOf(it.x); if (!B || d.equiv === false || boxKeys(it.x).length !== B.length) return f;
+  var nudges = [];
+  for (var k = 0; k < B.length; k++){ var fk = boxForm(it.x, k), r; if (!fk.key) return f; try { r = K.Ans.equiv(a[k], fk.key, fk); } catch(e){ return f; } if (!r || !r.ok) return f; if (r.nudge) nudges.push(esc(r.nudge)); }
+  if (!nudges.length && f.v === 'form' && f.what && f.what[0]) nudges.push(f.what[0]);
+  return {v: 'right', what: nudges, equiv: true};
 }
 function res(it){ return S.res[it.id] || (S.res[it.id] = {tries: 0, first: null, v: null, shown: false, hinted: false, steps: 0}); }
 function plainText(h){ var d = document.createElement('div'); d.innerHTML = h; return d.textContent; }
@@ -4057,7 +4372,7 @@ function ruleOf(it){                                       /* the coach's rule f
   var r = '';
   try {
     var probe = function(a){ var f = U.judge.text(it.x, a, ctxOf(it)); return f && f.rule || ''; };
-    if (it.type === 'text') r = probe('987654') || probe('-987654') || probe('0');
+    if (it.type === 'text'){ var nb = boxesOf(it.x), pr = function(v){ return nb ? nb.map(function(){ return v; }) : v; }; r = probe(pr('987654')) || probe(pr('-987654')) || probe(pr('0')); }
     else if (it.type === 'nline') r = '';
     else if (it.type === 'mc'){ for (var k = 0; k < it.x.opts.length && !r; k++) if (k !== it.x.correct){ var f = U.judge.mc(it.x, k); r = f && f.rule || ''; } }
     else { var g = U.judge.multi(it.x, [], 1); r = g && g.rule || ''; }
@@ -4139,7 +4454,7 @@ function paintItem(it){
   st.hidden = !rung; if (rung) st.innerHTML = ladderHtml(it, R);
   wl.hidden = !walkOn; if (walkOn) wl.innerHTML = walkHtml(it);
   paintChoices(it, R.v ? R : null);
-  var input = $('a' + it.id); if (input){ input.readOnly = R.v === 'right'; if (R.v === 'right' && keys.target === input) hideKeys(); }
+  Array.prototype.forEach.call(host.querySelectorAll('input[type=text]'), function(input){ if (input.id !== 'a' + it.id && input.getAttribute('data-part') !== it.id) return; input.readOnly = R.v === 'right'; if (R.v === 'right' && keys.target === input) hideKeys(); });   /* every box of the part */
   var btn = host.querySelector('[data-check="' + it.id + '"]'); if (btn){ btn.disabled = R.v === 'right';
     /* Check is the primary (navy, as button.go) — it was the greyest thing on the page — but one primary at a time: when
        "Try another like this" or "Next ↓" is the primary under this part, Check steps back (7 Nov 2026, the site review) */
@@ -4190,7 +4505,7 @@ function walkHtml(it){
       h += '<div class="wgot"><span class="wok">✓</span> ' + got + (W.gave[k] ? ' <span class="wgave">(shown)</span>' : '') + '</div>';
       if (s.then) h += '<div class="ex">' + V.ex(it.x, s.then, it.type) + '</div>';
     } else if (s.type === 'choice'){
-      h += '<div class="wopts">' + s.opts.map(function(o, j){ var bad = W.wrong[k + '.' + j];
+      h += '<div class="wopts">' + walkOrder(it, k, s).map(function(j){ var o = s.opts[j], bad = W.wrong[k + '.' + j];
         return '<button type="button" class="wopt' + (bad ? ' bad' : '') + '" data-wopt="' + it.id + '|' + k + '|' + j + '"' + (bad ? ' disabled' : '') + '>' + o.label + '</button>'; }).join('') + '</div>';
       if (W.bad[k] != null) h += '<div class="wwhy"><span class="wno">✗</span> ' + s.opts[W.bad[k]].why + '</div>' + (s.pic ? walkPic(it, 'Here is a picture of why:') : '');
     } else {
@@ -4206,6 +4521,11 @@ function walkHtml(it){
   if (W.i >= st.length) h += '<p class="wfin done">' + keyHtml(it) + '</p>';
   return h;
 }
+/* a step's options in an order fixed by the question (15 Nov 2026; HELP_STANDARD §5.2 — the right one was always where the unit
+   wrote it, first in most units): Kit.order over the question's key, the step's place and its ask, so the same question shows
+   the same order every time it is opened, and the right option's place changes from question to question. data-wopt keeps
+   each option's own index, so a pick, a saved wrong pick and the checks are the unit's order as before. */
+function walkOrder(it, k, s){ var n = s.opts.length, key = ''; try { key = String(U.key(it.x)); } catch(e){} return K.order ? K.order(n, key + '|' + k + '|' + String(s.ask || '')) : s.opts.map(function(o, j){ return j; }); }
 function walkFocus(it){
   var wl = $('wl' + it.id); if (!wl) return;
   var t = wl.querySelector('li.cur .wopt:not([disabled])') || wl.querySelector('#wn' + it.id) || wl.querySelector('.wclose');
@@ -4275,7 +4595,9 @@ function krank(k){ var i = KORDER.indexOf(k.label); return i < 0 ? KREL - 0.5 : 
 KEYPAD = KEYPAD.map(function(k, i){ return [k, i]; }).sort(function(a, b){ return krank(a[0]) - krank(b[0]) || a[1] - b[1]; }).map(function(x){ return x[0]; });
 function coarse(){ try { return !!(window.matchMedia && matchMedia('(pointer: coarse)').matches); } catch(e){ return false; } }
 var keys = document.createElement('div'); keys.className = 'keys'; keys.hidden = true;
-var KEYBTNS = KEYPAD.map(function(k){ var b = document.createElement('button'); b.type = 'button'; if (k.tpl) { b.className = 'ktpl'; b.innerHTML = '<span class="kfr" aria-hidden="true"><i></i><i></i></span>'; } else { b.textContent = k.label; if (k.label.length > 2) b.className = 'kwide'; } if (k.kinds) b.dataset.kinds = k.kinds.join(' '); b.tabIndex = -1; b.setAttribute('aria-label', 'Insert ' + (k.say || k.label)); b.dataset.k = k.label; b.dataset.g = krank(k) < KREL ? 'op' : 'rel'; keys.appendChild(b); return b; });   /* [R1-9] not a tab stop */
+/* times is a dot (15 Nov 2026; Croix: x is always a variable): the key named × (it types *) shows ·, its name kept for the unit's keys */
+var KSHOW = {'×': '·'};
+var KEYBTNS = KEYPAD.map(function(k){ var b = document.createElement('button'); b.type = 'button'; if (k.tpl) { b.className = 'ktpl'; b.innerHTML = '<span class="kfr" aria-hidden="true"><i></i><i></i></span>'; } else { b.textContent = KSHOW[k.label] || k.label; if (k.label.length > 2) b.className = 'kwide'; } if (k.kinds) b.dataset.kinds = k.kinds.join(' '); b.tabIndex = -1; b.setAttribute('aria-label', 'Insert ' + (k.say || k.label)); b.dataset.k = k.label; b.dataset.g = krank(k) < KREL ? 'op' : 'rel'; keys.appendChild(b); return b; });   /* [R1-9] not a tab stop */
 /* the rows: the keys this box shows, in as few rows as fit between the box's left edge and the row's right edge, split evenly */
 var KGAP = 6, KGROUP = 14;
 function px(v){ return parseFloat(v) || 0; }
@@ -4335,9 +4657,10 @@ function hideKeys(){ if (keys.hidden) return; var a = document.activeElement, y0
 document.addEventListener('input', function(e){
   var t = e.target;
   if (!t.id || t.id.charAt(0) !== 'a' || !t.closest('#paper')) return;
-  var it = byId(t.id.slice(1)); if (!it) return;
+  var bp = t.getAttribute('data-part'), it = byId(bp != null ? bp : t.id.slice(1)); if (!it) return;
   if (!S.running && !S.done && !it.extra) start();
-  S.ans[it.id] = t.value; setPreview(t);
+  if (bp != null){ var bv = boxAns(it.x, S.ans[it.id]); bv[+t.getAttribute('data-box') || 0] = t.value; S.ans[it.id] = bv; } else S.ans[it.id] = t.value;   /* several boxes: this box's string in its place */
+  setPreview(t);
   if (FLASH[it.id]){ delete FLASH[it.id]; paintItem(it); }                                /* [R1-1] the old note goes when they type */
   var rd = $('rd' + it.id); if (rd) rd.textContent = '';
   save(); paintProgress(); paintScore(true);
@@ -4345,7 +4668,7 @@ document.addEventListener('input', function(e){
 document.addEventListener('change', function(e){
   var t = e.target;
   if (t.id && t.id.charAt(0) === 'a' && t.closest('#paper') && S.mode === 'test' && !S.done){       /* [W-7] test mode: say only "can't read this yet", nothing about right or wrong */
-    var it0 = byId(t.id.slice(1)); if (it0 && !it0.extra){ var f0 = judge(it0, 0), rd = $('rd' + it0.id); if (rd) rd.innerHTML = f0.v === 'unread' ? '<span class="kl">Can’t read this yet:</span> ' + esc(plainText(f0.what[0] || '')) : ''; }
+    var it0 = byId(t.getAttribute('data-part') != null ? t.getAttribute('data-part') : t.id.slice(1)); if (it0 && !it0.extra){ var f0 = judge(it0, 0), rd = $('rd' + it0.id); if (rd) rd.innerHTML = f0.v === 'unread' && !f0.partial ? '<span class="kl">Can’t read this yet:</span> ' + esc(plainText(f0.what[0] || '')) : ''; }
   }
   if (!t.name || t.name.charAt(0) !== 'q' || !t.closest('#paper')) return;
   var id = t.name.slice(1), it = byId(id); if (!it) return;
@@ -4358,7 +4681,10 @@ document.addEventListener('change', function(e){
 document.addEventListener('keydown', function(e){
   if (e.key === 'Escape' && !$('confirm').hidden){ closeAsk(); var bf = $('bFinish'); if (bf) bf.focus(); return; }
   if (e.key === 'Enter' && e.target.id && e.target.id.indexOf('wn') === 0){ e.preventDefault(); walkNum(e.target.id.slice(2)); return; }
-  if (e.key === 'Enter' && e.target.matches && e.target.matches('#paper input[type=text]')){ e.preventDefault(); var it = byId(e.target.id.slice(1)); if (it && (S.mode === 'practice' || S.done || it.extra)) check(it.id); }
+  if (e.key === 'Enter' && e.target.matches && e.target.matches('#paper input[type=text]')){ e.preventDefault();
+    var bp = e.target.getAttribute('data-part'), it = byId(bp != null ? bp : e.target.id.slice(1));
+    if (bp != null && it){ var nb = $(boxId(it.id, (+e.target.getAttribute('data-box') || 0) + 1)); if (nb && nb.value.trim() === ''){ nb.focus(); return; } }   /* several boxes: Enter goes on to an empty next box, then checks */
+    if (it && (S.mode === 'practice' || S.done || it.extra)) check(it.id); }
 });
 
 /* ------------------------------------------------ the clock and the score */
@@ -4524,7 +4850,8 @@ function earnedOf(rec){                                   /* a set saved before 
 }
 function restoreOne(it){
   var a = S.ans[it.id]; if (a == null) return;
-  if (it.type === 'text'){ var el = $('a' + it.id); if (el){ el.value = a; setPreview(el); } }
+  if (it.type === 'text' && boxesOf(it.x)){ boxAns(it.x, a).forEach(function(v, k){ var el = $(boxId(it.id, k)); if (el){ el.value = v; setPreview(el); } }); }
+  else if (it.type === 'text'){ var el = $('a' + it.id); if (el){ el.value = a; setPreview(el); } }
   else if (it.type === 'nline') nlPaint(it);
   else (it.type === 'mc' ? [a] : a).forEach(function(v){ var x = document.querySelector('input[name="q' + it.id + '"][value="' + v + '"]'); if (x) x.checked = true; });
 }
@@ -4585,7 +4912,9 @@ document.addEventListener('visibilitychange', function(){ if (document.hidden &&
 function pq(d, qn){
   var it = d.it, h = '<div class="pq"><div class="pqh">' + qidHtml(qidOf(d.si, d.ii, it), 'pqid') + '<div class="stem"><b class="num">' + qn + '.</b><span class="st">' + V.stem(it) + '</span></div>' + fig(it) + '</div>';   /* the stem and its figure stay together; parts may go to the next page */
   var line = function(p, lab){ return '<div class="line">' + (lab ? '<b class="lab">' + lab + '.</b>' : '') + '<span class="st">' + V.line(p) + '</span></div>'; };
-  var blank = function(p){ var u = V.unit(p), pre = V.pre(p); return '<div class="pans"><span class="pal bt">Answer:</span> ' + (pre ? '<span class="pre">' + pre + '</span>' : '') + (V.blank ? V.blank(p) || '<span class="pblank"></span>' : '<span class="pblank"></span>') + (u ? ' <span class="unit">' + esc(u) + '</span>' : '') + '</div><div class="pwork"></div>'; };
+  var blank = function(p){ var u = V.unit(p), pre = V.pre(p), B = boxesOf(p);
+    if (B) return '<div class="pans pboxes"><span class="pal bt">Answer:</span> ' + B.map(function(x){ return '<span class="pbx">' + (x.pre ? '<span class="pre">' + x.pre + '</span>' : '') + '<span class="pblank"></span>' + (x.unit ? ' <span class="unit">' + x.unit + '</span>' : '') + '</span>'; }).join(' ') + '</div><div class="pwork"></div>';   /* a blank per box, each with its label */
+    return '<div class="pans"><span class="pal bt">Answer:</span> ' + (pre ? '<span class="pre">' + pre + '</span>' : '') + (V.blank ? V.blank(p) || '<span class="pblank"></span>' : '<span class="pblank"></span>') + (u ? ' <span class="unit">' + esc(u) + '</span>' : '') + '</div><div class="pwork"></div>'; };
   var choices = function(x){ return '<div class="pchoices">' + x.opts.map(function(o, k){ return '<div class="pch"><span class="pbox' + (it.type === 'multi' ? ' sq' : '') + '"></span><span class="cl">' + LET[k] + '.</span><span class="cv">' + V.opt(x, k) + '</span></div>'; }).join('') + '</div>'; };
   if (it.type === 'parts') it.parts.forEach(function(p, pi){ if (d.keep && !d.keep[pi]) return; h += '<div class="ppart">' + line(p, p.label) + (p.kind === 'mc' ? choices(p) : p.kind === 'nline' ? NL.blankHtml(p) : blank(p)) + '</div>'; });
   else if (it.type === 'solo') h += '<div class="ppart">' + (it.part.kind === 'nline' ? line(it.part, '') + NL.blankHtml(it.part) : blank(it.part)) + '</div>';
@@ -4611,6 +4940,7 @@ function keyListHtml(){
 }
 function yourAnswer(it){
   var a = S.ans[it.id];
+  if (it.type === 'text' && boxesOf(it.x)){ var B = boxesOf(it.x), bs = boxAns(it.x, a); return bs.every(function(v){ return v.trim() === ''; }) ? '' : B.map(function(x, k){ return (x.pre ? x.pre + ' ' : '') + (bs[k].trim() ? esc(bs[k]) : '—') + (x.unit ? ' ' + x.unit : ''); }).join('; '); }
   if (it.type === 'text') return a == null || String(a).trim() === '' ? '' : esc(a);
   if (it.type === 'nline') return NL.empty(a) ? '' : NL.svg(it.x, a, {mode: 'key', cls: 'nl-small'}) + '<span class="nlkw">' + esc(NL.say(it.x, a)) + '</span>';
   if (it.type === 'mc') return a == null ? '' : '<b>' + LET[+a] + '.</b> ' + V.opt(it.x, +a);

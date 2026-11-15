@@ -95,6 +95,17 @@ NOTES3 = S(figs.row([figs.plane((-1, 6), (-1, 6), lines=[(1, 1, ""), (-1, 5, "")
                     captions=["one solution", "no solution", "infinitely many"]),
            inches=11.4, pt=16, reserve=1.95)
 EX2 = S(figs.plane((-2, 4), (-2, 4), lines=[(H, 2), (H, -1)]), inches=4.2, pt=18, reserve=0.9)
+# the worked slide (15 Nov: a worked entry carries `fig`): the same graph beside its rows, the two lines' points
+# at x = 0, 2 and 4 marked — always 3 apart
+EX2W = S(figs.plane((-2, 4), (-2, 4), lines=[(H, 2), (H, -1)],
+                    points=[(0, 2, ""), (0, -1, ""), (2, 3, ""), (2, 0, ""), (4, 4, ""), (4, 1, "")]),
+         inches=4.2, pt=18, reserve=0.9)
+# the Your Turn (critic 3 / barton 1, 15 Nov: a Your Turn carries `fig` and `fig_a`): the same kind as Example 2 —
+# the graph of two parallel lines, read; the answer slide marks their points at x = 0, 1 and 2
+YT2 = S(figs.plane((-2, 2), (-4, 10), lines=[(4, 1), (4, -3)], ys=2), inches=4.2, pt=18, reserve=0.9)
+YT2A = S(figs.plane((-2, 2), (-4, 10), lines=[(4, 1), (4, -3)], ys=2,
+                    points=[(0, 1, ""), (0, -3, ""), (1, 5, ""), (1, 1, ""), (2, 9, ""), (2, 5, "")]),
+         inches=4.2, pt=18, reserve=0.9)
 
 
 # ---- the board figures at 11.07's sizes (14 Nov): one bold row of words over a window no bigger than the system
@@ -117,6 +128,7 @@ B7A = figs.plane((-1, 5), (-1, 7), lines=[(0, 4), (1, 1)], solution=(3, 4), poin
 
 L = dict(
     code="11.05", unit=11, lesson_no="5–6", label="Lessons 5–6",
+    align="=",   # every run of rows that solve an equation set with its equals signs in one column (kit, 15 Nov 2026)
     title="Systems: Which Points Are Solutions; How Many Solutions",
     unit_title="Solving Equations and Systems",
     benchmark="MA.8.AR.4.1",
@@ -213,18 +225,16 @@ L = dict(
                           rows=[("x = 0:\\quad 2 \\quad\\text{and}\\quad -1", "3 apart"),
                                 ("x = 2:\\quad 3 \\quad\\text{and}\\quad 0", "3 apart"),
                                 ("x = 4:\\quad 4 \\quad\\text{and}\\quad 1", "always 3 apart: they never meet")],
-                          answer="No solution")],
+                          fig=EX2W, answer="No solution")],
              check=("many", never_meet("F(1,2)*u + 2", "F(1,2)*u - 1"),
                     sat("F(1,2)*u + 2", "0", "2"), sat("F(1,2)*u - 1", "0", "-1"), sat("F(1,2)*u + 2", "2", "3"),
                     sat("F(1,2)*u - 1", "2", "0"), sat("F(1,2)*u + 2", "4", "4"), sat("F(1,2)*u - 1", "4", "1")),
-             # the Your Turn carries its two tables in rows (the kit's Your Turn slide carries no figure — the lead's
-             # ruling, 15 Nov): the same kind as the worked slide, a pair of lines always the same distance apart
-             your_turn=dict(min=2, note="The tables, read column by column: 1 and −3, 5 and 1, 9 and 5 — the first is always 4 more, so the lines stay 4 apart and never meet: no solution. A board with 'one' expects them to meet past the table; with 'infinitely many', read two lines that go on forever.",
-                            prompt=["$y = 4x + 1$   and   $y = 4x - 3$",
-                                    "At  $x = 0,\\ 1,\\ 2$:   $y = 4x + 1$  gives  $1,\\ 5,\\ 9$",
-                                    "and   $y = 4x - 3$  gives  $-3,\\ 1,\\ 5$"],
-                            ask="How many solutions does the system have?",
-                            steps=["at each x the first is 4 more:   1 and $-3$,   5 and 1,   9 and 5",
+             # the Your Turn reads a graph, as Example 2 does (15 Nov: a Your Turn carries a figure): a pair of lines
+             # always the same distance apart
+             your_turn=dict(min=2, note="Read the graph at x = 0, 1 and 2: 1 and −3, 5 and 1, 9 and 5 — the first line is always 4 above, so the lines stay 4 apart and never meet: no solution. A board with 'one' expects them to meet off the grid; with 'infinitely many', read two lines that go on forever.",
+                            prompt=["$y = 4x + 1$  and  $y = 4x - 3$  are graphed. How many solutions?"], fig=YT2, fig_a=YT2A, ask="",
+                            steps=["$x = 0$:   1 and $-3$",
+                                   "$x = 1$:   5 and 1",
                                    "always 4 apart:  parallel, they never meet"],
                             gloss="always 4 apart", answer="No solution"),
              yt_check=("many", never_meet("4*u + 1", "4*u - 3"), table_of("4*u + 1", [0, 1, 2], [1, 5, 9]),
@@ -277,17 +287,15 @@ L = dict(
              note="The pattern breaks: no crossing to read. The same number (1) multiplies x in both, and the added numbers differ, so the first line is always 4 above the second and they never meet. A board with 'one' expects them to meet somewhere off the grid; with 'infinitely many', saw two lines that go on forever.",
              check=never_meet("u + 3", "u - 1"),
              wrong="one — the lines are taken to meet off the grid [B1G-M, AR.4.2]; infinitely many — 'the lines go on forever' [B1G-M, AR.4.2]"),
-        # board 6 (critic 8, 15 Nov): a multiple-choice question slide leaves a graph about 1.5 in tall (its four options
-        # take 1.75 in), so the one line and its two marked points are given in words and the graph, at full size, is
-        # on the reveal — as 11.07's board 6 does
-        dict(kind="mc", text=["$y = x - 1$  and  $y = -1 + x$  are one line,", "with  $(1, 0)$  and  $(3, 2)$  marked on it.",
-                              "**How many solutions does the system have?"],
-             qtext="y = x − 1 and y = −1 + x graph as one line. Two points of it are marked: (1, 0) and (3, 2). How many solutions does the system have?",
-             fig_a=S(B6, inches=4.2, pt=18, reserve=1.0),
+        # board 6 (critic 8, 15 Nov): the graph is on the question slide, its four options beside it (the kit sets a
+        # choice board's options beside its figure when that makes the figure taller)
+        dict(kind="mc", text=["**$y = x - 1$  and  $y = -1 + x$  graph as one line. How many solutions?"],
+             qtext="y = x − 1 and y = −1 + x graph as the one line shown, with two of its points marked. How many solutions does the system have?",
+             fig=B(B6), fig_a=S(B6, inches=4.2, pt=18, reserve=1.0),
              hint="Which points are on both?", steps=["$10 - 1 = 9$  and  $-1 + 10 = 9$"],
              choices=["one", "infinitely many", "none", "two"], correct=1, answer="B — infinitely many",
              errors={"A": "one line drawn, read as one solution [B1G-M, AR.4.2: the same-line case]", "C": "no crossing point seen, so 'no solution' [B1G-M, AR.4.2: the same-line case]", "D": "only the two marked points counted [B1G-M, AR.4.3: only the plotted points]"},
-             note="Diagnostic on the same-line case, the state's named misconception for AR.4.2; the graph is on the reveal. Every point of the line is on both graphs, the points nobody marked too: (10, 9) is off the grid and makes both true. Option D counts the two marked points; option C looks for a crossing and finds none; option A counts the one line. A and C are the same misreading — the same line taken for something other than every point — and get the same response: point at a third point of the line and check it in both.",
+             note="Diagnostic on the same-line case, the state's named misconception for AR.4.2. Every point of the line is on both graphs, the points nobody marked too: (10, 9) is off the grid and makes both true. Option D counts the two marked points; option C looks for a crossing and finds none; option A counts the one line. A and C are the same misreading — the same line taken for something other than every point — and get the same response: point at a third point of the line and check it in both.",
              check=("many", one_line("u - 1", "-1 + u"), sat("u - 1", "1", "0"), sat("u - 1", "3", "2"),
                     sat("u - 1", "10", "9"), sat("-1 + u", "10", "9"))),
         # board 7 (barton 3, fast 5): the savings story went (a crossing in a story is 11.08's board 2); a level
@@ -460,14 +468,14 @@ L = dict(
         read_first=[
             "Two book lessons in one period (11.5 and 11.6). Built from the benchmarks and the B1G-M first (the unit's Lesson Outlines, §11.05–06), then read against Math Nation (the unit audit, Part 2, §3–§5). The title slide names AR.4.1; AR.4.2 is taught the same day.",
             "The class has never graphed y = mx + b: Notes I is the first line it sees, made from a table (x = 0 and two more; the third point is the check). Every system is given solved for y. Today reads pictures: parallel is 'never meet', and the reasons from the equations (the same coefficient of x; ½ and 0.5 one number; setting the two expressions equal) are 11.07's. You may say slope here, the slides do not. If the room is slow, run Example 1, its Your Turn and boards 1–2 straight after Notes II, before Notes III: the class does something with a system before the three cases arrive.",
-            "A failed check is written as a true computation with its verdict — '3(2) − 2 = 4, not 5' — never as a false equation (audit E10, E11) and never with ≠ as a line of work. The Your Turn of Example 2 carries its two tables in rows (a Your Turn slide carries no figure): always 4 apart, so never meet — the same reading as Example 2's worked slide.",
+            "A failed check is written as a true computation with its verdict — '3(2) − 2 = 4, not 5' — never as a false equation (audit E10, E11) and never with ≠ as a line of work. The Your Turn of Example 2 shows its graph, as Example 2 does: read at x = 0 and 1, always 4 apart, so never meet — the same reading as Example 2's worked slide, which shows the graph beside its rows.",
             "Not reproduced: the off-unit warm-up, the partner exploration, the algebraic solves of 11.5.2–11.5.3 (§3), Bevan's −7/2 slip (E3), the end labels off the grid (E13), the definition of a system that its own examples break (E17). The audit's §4 gaps are here: a select-all that never says how many (set 3, bank 12), and a same-line point off the grid (board 6's (10, 9))."],
         standard_notes=[("Clarification", "AR.4.1: a solution satisfies both equations at once (Clarification 1). AR.4.2: one, none or infinitely many, read from two lines on one plane; its named misconception is the same-line case read as anything but infinitely many (B1G-M)."),
                         ("Unit boundary", "Slope-intercept form only (AR.4.3's boundary, kept from today), a level line y = 4 included; every graph is read, none is drawn by a student (standing decision 9); whole-number crossings on the grid lines.")],
         sits="The unit's first systems day, after four days of AR.2.1. IXL's N46, AGZ and 9Z8 are due by the Unit 11 test (Fri 11 Dec), whose questions 8–11 are today's: a select-all of the systems a pair solves, a pair with its reason, and two graphs to count.",
         lives="Notes II — both equations, one is not enough — and Notes III's three pictures. Board 4 is the pair diagnostic (one equation only, the other only, swapped); board 6 the same-line diagnostic; board 9 the one-equation check in writing.",
         materials="Whiteboards and markers. The Independent Set, one per student (its graphs are to read, not to draw on).",
-        variation="Boards 1–2 test a pair, true in both and then false in one; 3 reads a crossing from a graph and checks it, with the grid's height as the extra number; 4 votes on four pairs. The pattern breaks at 5 — parallel, no crossing to read — and 6 votes on the same line (its graph on the reveal); 7 is a level line, y = 4, crossing a slanted one once; 8 runs backwards; 9 is written. The independent set: a solution, a pair that fails one equation, a select-all of the systems a pair solves (two of five, the count unsaid), then three graphs — parallel, crossing, the same line.",
+        variation="Boards 1–2 test a pair, true in both and then false in one; 3 reads a crossing from a graph and checks it, with the grid's height as the extra number; 4 votes on four pairs. The pattern breaks at 5 — parallel, no crossing to read — and 6 votes on the same line, its graph beside the options; 7 is a level line, y = 4, crossing a slanted one once; 8 runs backwards; 9 is written. The independent set: a solution, a pair that fails one equation, a select-all of the systems a pair solves (two of five, the count unsaid), then three graphs — parallel, crossing, the same line.",
         audit=["Every pair re-derived by sympy at build time in both equations of its system, over the real numbers; every crossing solved as a system; every parallel pair checked to have no common point and every same-line pair to be one expression; every graph drawn from its equations by u11/figs.py, which refuses a stated crossing that is not on both lines.",
                "Math Nation 11.5–11.6 read against this lesson (A7 Unit 11 Audit, Part 2, E3, E10, E11, E13, E17, E18, §3–§5): their sound shapes — candidate tables, three graphed systems, an error analysis — are here with our own numbers; the defects are not reproduced."],
         changes=["11.5.1 scientific-notation warm-up → four retrieval questions, the prerequisite (evaluate y for an x) last.",

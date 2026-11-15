@@ -2,7 +2,7 @@
 
 Windy Hill Middle School · course 1205050 · seven teaching days (eight book lessons; 11.5 and 11.6 merged), a review sent home Thu 10 Dec, the test as one period on Fri 11 Dec (a random set of the practice page).
 
-**By the plan** (Windmill's spine as of 2026-10-25; `tools/scope_calendar.py` is its source): lessons Mon 30 Nov – Thu 10 Dec, the assessment Fri 11 Dec, 2026. The dates move when the as-run log does (the plan follows the class), and a day is logged from the phone view of the plan.
+**By the plan** (Windmill's spine as of 2026-10-31; `tools/scope_calendar.py` is its source): lessons Mon 30 Nov – Thu 10 Dec, the assessment Fri 11 Dec, 2026. The dates move when the as-run log does (the plan follows the class), and a day is logged from the phone view of the plan.
 
 Nothing exists until it is committed. This folder is generated from `a7/build/u11/` by `install_unit.py`; edit the specs and rebuild rather than editing these files by hand.
 
@@ -36,8 +36,8 @@ Nothing exists until it is committed. This folder is generated from `a7/build/u1
 | Day | Planned | Lesson | Benchmark | The line that carries the day |
 |---|---|---|---|---|
 | 11.01 | Mon 30 Nov | Equations with Like Terms and the Distributive Property | MA.8.AR.2.1 | Collect the like terms first. The number outside the parentheses multiplies every term inside — and a minus in front goes in with it. |
-| 11.02 | Wed 2 Dec | Equations with Variables on Both Sides | MA.8.AR.2.1 | Take the same variable term from both sides; check in both sides of the first equation. |
-| 11.03 | Thu 3 Dec | One Solution, No Solution, Infinitely Many Solutions | MA.8.AR.2.1 | x = a: one solution. A true sentence like 5 = 5: infinitely many. A false one like 5 = 9: none. x = 0 is one solution. |
+| 11.02 | Tue 1 Dec | Equations with Variables on Both Sides | MA.8.AR.2.1 | Take the same variable term from both sides; check in both sides of the first equation. |
+| 11.03 | Wed 2 Dec | One Solution, No Solution, Infinitely Many Solutions | MA.8.AR.2.1 | x = a: one solution. A true sentence like 5 = 5: infinitely many. A false one like 5 = 9: none. x = 0 is one solution. |
 | 11.04 | Fri 4 Dec | Multi-Step Equations | MA.8.AR.2.1 | A fraction or a decimal outside the parentheses — negative ones too — multiplies every term inside; to clear fractions, multiply every term by a common denominator. |
 | 11.05–06 | Mon 7 Dec | Systems: Which Points Are Solutions; How Many Solutions | MA.8.AR.4.1 | A solution of a system makes both equations true. Read from the picture: cross once (intersect), one; parallel, none; the same line, infinitely many — a level line such as y = 4 included. |
 | 11.07 | Wed 9 Dec | Solving Systems by Graphing | MA.8.AR.4.3 | Graph each line from a table; the solution is the point of intersection, checked in both equations. The same coefficient of x and different numbers added: parallel. Question 1 of the set is drawn in class; a 43-minute Wednesday, its cut named in the Teacher Edition. |

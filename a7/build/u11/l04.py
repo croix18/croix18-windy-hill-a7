@@ -54,6 +54,7 @@ def not_every(left, right):
 
 L = dict(
     code="11.04", unit=11, lesson_no=4,
+    align="=",   # every run of rows that solve an equation set with its equals signs in one column (kit, 15 Nov 2026)
     title="Multi-Step Equations",
     unit_title="Solving Equations and Systems",
     benchmark="MA.8.AR.2.1",
@@ -159,7 +160,7 @@ L = dict(
                     solves("3*u + 3", "2*u + 5", "2")),
              your_turn=dict(min=2, note="Quarters and sixths clear with 12: 12 times x/4 is 3x, 12 times −1 is −12, 12 times x/6 is 2x, 12 times 1 is 12. Take 2x: x − 12 = 12, so x = 24. Check: 6 − 1 = 5 and 4 + 1 = 5. A board with 3x − 1 = 2x + 1 multiplied only the fractions (x = 2); one with 24 as the multiplier is right too, with bigger numbers.",
                             prompt=["$\\frac{x}{4} - 1 = \\frac{x}{6} + 1$", "Solve it, then check in both sides."],
-                            steps=["Every term times 12:  $3x - 12$  on the left,  $2x + 12$  on the right",
+                            steps=["[equation] Every term times 12:  $3x - 12 = 2x + 12$",
                                    "Take 2x from both sides:  $x - 12 = 12$",
                                    "Add 12:  $x = 24$",
                                    "Check:  $24 \\div 4 - 1 = 5$  and  $24 \\div 6 + 1 = 5$"],
@@ -238,11 +239,11 @@ L = dict(
         dict(text=["Shop A rents a bike for \\$12 plus \\$4.50 an hour.", "Shop B, 3 blocks away, charges \\$7.50 an hour.",
                    "**For how many hours do the two shops cost the same?"],
              unneeded="3",
-             steps=["Shop A costs  $12 + 4.5h$.   Shop B costs  $7.5h$.",
-                    "Take 4.5h from both:  $12 = 3h$",
+             steps=["[equation] h hours at the same cost:  $12 + 4.5h = 7.5h$",
+                    "Take 4.5h from both sides:  $12 = 3h$",
                     "Divide by 3:  $h = 4$",
                     "Check:  $12 + 4.5(4) = 30$  and  $7.5(4) = 30$"],
-             gloss="12 + 4.5h = 7.5h", answer="4 hours",
+             gloss="12 + 4.5h = 7.5h", answer="4 hours (h = 4)",
              note="The extra-number board (ruling 22): Shop B's 3 blocks are not needed. Each shop's cost is an expression in h; they cost the same when the expressions are equal, 12 + 4.5h = 7.5h. Take 4.5h (the smaller) from both sides. Check: both cost \\$30 for 4 hours.",
              check=("many", solves("12 + F(9,2)*u", "F(15,2)*u", "4"), ("eq", "12 + F(9,2)*4", "30"), ("eq", "F(15,2)*4", "30"),
                     solves("12", "(F(9,2) + F(15,2))*u", "1"), solves("12", "F(15,2)*u", "F(8,5)")),

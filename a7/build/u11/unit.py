@@ -258,6 +258,9 @@ R_READ = figs.plane((-4, 1), (-2, 5), lines=[(1, 4), (-2, -2)], solution=(-2, 2)
 R_TABLES = figs.table([([0, 1, 2, 3, 4, 5], [-6, -3, 0, 3, 6, 9]), ([0, 1, 2, 3, 4, 5], [2, 3, 4, 5, 6, 7])],
                       titles=["y = 3x − 6", "y = x + 2"], inches=6.0)
 R_GRID = figs.plane((-4, 2), (-5, 4), inches=3.0)
+# its key's own figure (fig_key, 15 Nov — critic 2): both lines drawn on the same window, the crossing marked and named
+R_GRID_KEY = figs.plane((-4, 2), (-5, 4), lines=[(1, 1), (-1, -3)], solution=(-2, -1), points=[(-2, -1, None, "r++")],
+                        inches=3.0)
 R_STORY = figs.plane((0, 10), (0, 50), lines=[(3, 20, "Ava"), (6, 5, "Ben")], ys=5, xname="weeks", yname="dollars",
                      solution=(5, 35), inches=3.0)
 # the estimate cropped to its crossing and printed at 3 in (critic 6)
@@ -472,7 +475,7 @@ U = dict(
                  why="At x = 4 both tables give 6: 3(4) − 6 = 6 and 4 + 2 = 6.",
                  check=("many", crosses("3*u - 6", "u + 2", "4", "6"), table_of("3*u - 6", [0, 1, 2, 3, 4, 5], [-6, -3, 0, 3, 6, 9]),
                         table_of("u + 2", [0, 1, 2, 3, 4, 5], [2, 3, 4, 5, 6, 7])), space=0.4),
-            dict(stem="Graph both lines on the grid and solve the system:   $y = x + 1$   and   $y = -x - 3$", fig=R_GRID, answer="(−2, −1)",
+            dict(stem="Graph both lines on the grid and solve the system:   $y = x + 1$   and   $y = -x - 3$", fig=R_GRID, fig_key=R_GRID_KEY, answer="(−2, −1)",
                  why="Tables at x = 0, −1, −2: y = 1, 0, −1 and y = −3, −2, −1. Both give −1 at x = −2: −2 + 1 = −1 and 2 − 3 = −1.",
                  check=("many", crosses("u + 1", "-u - 3", "-2", "-1"), table_of("u + 1", [0, -1, -2], [1, 0, -1]), table_of("-u - 3", [0, -1, -2], [-3, -2, -1])), space=0.8),
             dict(stem="Ava has \\$20 and saves \\$3 a week. Ben has \\$5 and saves \\$6 a week. The graph shows the dollars y each has after x weeks. When will they have the same amount, and how much will each have?",

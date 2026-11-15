@@ -16,7 +16,7 @@ script in Croix's Google account refills every hour, and falls back to a search 
 exact name (see "links" below; `--links github` points them at the repository instead). Rerun
 after any unit is built; the file records its commit.
 """
-import os, re, sys, csv, glob, hashlib, datetime, subprocess, unicodedata, urllib.parse, importlib.util, contextlib, io
+import os, re, sys, csv, glob, hashlib, datetime, subprocess, unicodedata, urllib.parse, contextlib, io
 from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.utils import get_column_letter
@@ -39,6 +39,7 @@ REPO = "https://github.com/croix18/croix18-windy-hill-a7"
 FONT = "Arial"
 sys.path.insert(0, HERE)
 sys.path.insert(0, BUILD)
+from lib.unitload import load                   # the build kit's spec loader (a7/build/lib/unitload.py)
 import tex2text
 with contextlib.redirect_stdout(io.StringIO()):
     import scope_calendar as SC            # the school days, the holidays, lesson -> book lessons
@@ -160,12 +161,8 @@ def book_lines(nums, toc):
 def load_specs():
     specs = {}
     for f in sorted(glob.glob(os.path.join(BUILD, "u*", "l*.py"))):
-        # each unit has its own figs.py (u6, u11): the spec must import ITS unit's, not one cached from another unit
-        sys.modules.pop("figs", None); sys.path.insert(0, os.path.dirname(f))
-        s = importlib.util.spec_from_file_location("spec", f)
-        m = importlib.util.module_from_spec(s)
         with contextlib.redirect_stdout(io.StringIO()):
-            s.loader.exec_module(m)
+            m = load(f)                         # the kit's loader: each unit's own figs.py, never another unit's
         specs[m.L["code"]] = m.L
     return specs
 
@@ -173,12 +170,8 @@ def load_specs():
 def load_units():
     units = {}
     for f in sorted(glob.glob(os.path.join(BUILD, "u*", "unit.py"))):
-        # each unit has its own figs.py (u6, u11): the spec must import ITS unit's, not one cached from another unit
-        sys.modules.pop("figs", None); sys.path.insert(0, os.path.dirname(f))
-        s = importlib.util.spec_from_file_location("unit", f)
-        m = importlib.util.module_from_spec(s)
         with contextlib.redirect_stdout(io.StringIO()):
-            s.loader.exec_module(m)
+            m = load(f, "unit")                 # the kit's loader: each unit's own figs.py, never another unit's
         U = [v for v in vars(m).values() if isinstance(v, dict) and "assessment" in v][0]
         units[U["unit"]] = U
     return units

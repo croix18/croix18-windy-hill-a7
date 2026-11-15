@@ -2,7 +2,7 @@
 
 Windy Hill Middle School · course 1205050 · ten teaching days (nine book lessons, merged to eight, plus the two Thread A days), a review sent home as practice, an assessment built for two periods and given in one (Thu 15 Oct).
 
-**By the plan** (Windmill's spine as of 2026-10-24; `tools/scope_calendar.py` is its source): lessons Wed 23 Sep – Fri 9 Oct, the assessment Thu 15 Oct, 2026. The dates move when the as-run log does (the plan follows the class), and a day is logged from the phone view of the plan.
+**By the plan** (Windmill's spine as of 2026-10-31; `tools/scope_calendar.py` is its source): lessons Wed 23 Sep – Fri 9 Oct, the assessment Thu 15 Oct, 2026. The dates move when the as-run log does (the plan follows the class), and a day is logged from the phone view of the plan.
 
 Nothing exists until it is committed. This folder is generated from `a7/build/u3/` by `install_unit.py`; edit the specs and rebuild rather than editing these files by hand.
 
@@ -19,6 +19,7 @@ Nothing exists until it is committed. This folder is generated from `a7/build/u3
 | Folder | What is in it |
 |---|---|
 | **All Slides** | `A7 Unit 3 Exponents and Scientific Notation - All Slides.pptx` — the whole unit in one PowerPoint, in teaching order; each lesson keeps its own slide numbers, so the Teacher Edition lines up. **A deck is its Slides file** (ruling 41, 5 October 2026): there is no HTML deck and no console. **To teach from one in Deckhand**: upload the lesson's `Slides.pptx` (or this file) to Google Drive, open it — it opens as Google Slides — and paste that link into Deckhand's Slides card; the pen and the timers are Deckhand's. The slides are set in Lexend, which Google Slides has, so they arrive as built. A board is two slides: the question, then the same question with its steps and its answer. |
+| **All in One** | Merged PDFs, in teaching order, one bookmark per document: *All Teacher Editions*, *All Lesson Plans*, *All Assessments* (each form's paper, then its key, then its worked answers) and *All Keys*. The same pages as the per-document PDFs, for printing or reading the unit straight through (Croix, 17 October). |
 | **Lessons** | **One folder per lesson, named by its number (`3.08`; the title is in every file's name), everything for that day in it**, each document with its PDF beside it (the PDF is what gets printed and posted). *Slides* — the lesson's own deck, a `.pptx` (upload it to Drive and it opens as Google Slides; paste that link into Deckhand's Slides card). *Teacher Edition* — three or four pages, read in twenty minutes (ruling 26): page 1 is the period (benchmark with its Must and Must-not lines, the target, the MTRs, the timing table, the three sentences to say out loud), then one line per slide, each board carrying its answer, its named distractors and the split-board move, and Misconceptions to Watch at the end. *Lesson Plan* — the Florida-format plan (ruling 25): standards, the MTRs with their evidence, the sequence read from the deck, gradual release, higher-order questions with DOK, checks for understanding with the response to each, differentiation. *Independent Set* — the six questions written in silence (ruling 21). *Question Bank* and *Additional Question Bank* — retired worksheets are question banks (ruling 11): draw from them for practice, exit tickets or re-teaching. |
 | **Lessons / … / Keys** | Inside each lesson's folder: that lesson's three answer keys and nothing else. |
 | **Review** | The Unit Review and its key (unscored; it goes home as practice — ruling 27a, A7 has no review day). |
@@ -62,17 +63,17 @@ Title and learning target (1 min) → warm-up, four spaced-retrieval questions (
 | Lesson | Teaching (title, warm-up, notes, examples) | Whiteboard round | IXL | Total |
 |---|---|---|---|---|
 | 3.01 | 38 min | 10 min | 5 min | 53 min |
-| 3.02 | 35 min | 13 min | 5 min | 53 min |
-| 3.03 | 34 min | 14 min | 5 min | 53 min |
-| 3.04 | 35 min | 13 min | 5 min | 53 min |
-| 3.05 | 35 min | 13 min | 5 min | 53 min |
+| 3.02 | 36 min | 12 min | 5 min | 53 min |
+| 3.03 | 35 min | 13 min | 5 min | 53 min |
+| 3.04 | 36 min | 12 min | 5 min | 53 min |
+| 3.05 | 36 min | 12 min | 5 min | 53 min |
 | 3.06–07 | 38 min | 10 min | 5 min | 53 min |
-| T-A1 | 35 min | 13 min | 5 min | 53 min |
-| T-A2 | 35 min | 13 min | 5 min | 53 min |
-| 3.08 | 35 min | 13 min | 5 min | 53 min |
-| 3.09 | 35 min | 13 min | 5 min | 53 min |
+| T-A1 | 36 min | 12 min | 5 min | 53 min |
+| T-A2 | 36 min | 12 min | 5 min | 53 min |
+| 3.08 | 36 min | 12 min | 5 min | 53 min |
+| 3.09 | 36 min | 12 min | 5 min | 53 min |
 
-The whiteboard round is the remainder — 10–14 minutes across the unit — and the build refuses any plan whose remainder falls outside 10–20. Every plan totals 53 exactly. There is no shortened variant; short days are absorbed by the person in the room.
+The whiteboard round is the remainder — 10–13 minutes across the unit — and the build refuses any plan whose remainder falls outside 10–20. Every plan totals 53 exactly. There is no shortened variant; short days are absorbed by the person in the room.
 
 <!-- end timing table -->
 
@@ -99,4 +100,4 @@ The whiteboard round is the remainder — 10–14 minutes across the unit — an
 - **The assessment is one paper over two periods, 36 points** (ruling 27). Students stop when the first period ends and continue from where they stopped — it is not two papers, and nothing on it says 'Day 1'. Four sections by benchmark, numbered 1–16 straight through. **Croix sat the paper himself on 7 October (17 minutes 27 seconds) and cut five questions:** the last one, which he did not know (between which two consecutive powers of 10 a number lies), and the four answered in a sentence — he does not want to read explanations. Every answer is now a number, an expression or a letter. Both transfer items (ruling 18) were among the five, so the paper carries none; the key says so, and the Score Tracker maps every question to its benchmark.
 - **The Reference Sheet is the only handout.** Give it out at 3.04 or earlier; it is the document students study from. It does not go into the test.
 
-Installed: 225 files from the build, plus this page and the Reference folder.
+Installed: 197 files from the build, plus this page and the Reference folder.

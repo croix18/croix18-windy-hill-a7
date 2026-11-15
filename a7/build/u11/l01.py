@@ -40,6 +40,7 @@ def not_root(left, right, value):
 
 L = dict(
     code="11.01", unit=11, lesson_no=1,
+    align="=",   # every run of rows that solve an equation set with its equals signs in one column (kit, 15 Nov 2026)
     title="Equations with Like Terms and the Distributive Property",
     unit_title="Solving Equations and Systems",
     benchmark="MA.8.AR.2.1",

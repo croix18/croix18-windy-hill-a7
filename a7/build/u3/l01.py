@@ -27,7 +27,7 @@ L = dict(
     warmup_note="Q4 is the prerequisite: a rational base is squared by squaring numerator and denominator. A board showing 4/3 or 2/9 tells you the base was not treated as one number.",
 
     notes=[
-        dict(numeral="I", head="A power is a shorthand for repeated multiplication", min=3, sub="Copy the three words.",
+        dict(numeral="I", head="A power is a shorthand for repeated multiplication", min=2, sub="Copy the three words.",
              note="Students copy the three vocabulary rows. Say them aloud: base, exponent, power. The exponent COUNTS factors; it is not a factor itself — that is the misconception behind 2³ = 6.\nOFF: Ask: what does 2 to the 3 mean? Insist on the answer 'three 2s multiplied', not 'six'.",
              items=[("base", "the number used as a factor"),
                     ("exponent", "how many times the base is a factor"),

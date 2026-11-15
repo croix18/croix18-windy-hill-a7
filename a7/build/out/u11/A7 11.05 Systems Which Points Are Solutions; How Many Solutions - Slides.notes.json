@@ -110,7 +110,7 @@
    "title": "Your Turn",
    "sub": "Same steps, your numbers. Boards up when done.",
    "min": 2,
-   "note": "The tables, read column by column: 1 and \u22123, 5 and 1, 9 and 5 \u2014 the first is always 4 more, so the lines stay 4 apart and never meet: no solution. A board with 'one' expects them to meet past the table; with 'infinitely many', read two lines that go on forever.",
+   "note": "Read the graph at x = 0, 1 and 2: 1 and \u22123, 5 and 1, 9 and 5 \u2014 the first line is always 4 above, so the lines stay 4 apart and never meet: no solution. A board with 'one' expects them to meet off the grid; with 'infinitely many', read two lines that go on forever.",
    "kind": "yourturn"
   },
   {
@@ -206,7 +206,7 @@
    "title": "Whiteboards   \u00b7   Question 6 of 9",
    "sub": "Boards up on three.",
    "min": 0,
-   "note": "Diagnostic on the same-line case, the state's named misconception for AR.4.2; the graph is on the reveal. Every point of the line is on both graphs, the points nobody marked too: (10, 9) is off the grid and makes both true. Option D counts the two marked points; option C looks for a crossing and finds none; option A counts the one line. A and C are the same misreading \u2014 the same line taken for something other than every point \u2014 and get the same response: point at a third point of the line and check it in both.",
+   "note": "Diagnostic on the same-line case, the state's named misconception for AR.4.2. Every point of the line is on both graphs, the points nobody marked too: (10, 9) is off the grid and makes both true. Option D counts the two marked points; option C looks for a crossing and finds none; option A counts the one line. A and C are the same misreading \u2014 the same line taken for something other than every point \u2014 and get the same response: point at a third point of the line and check it in both.",
    "kind": "wb"
   },
   {

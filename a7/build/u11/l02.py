@@ -44,6 +44,7 @@ def one_root(left, right):
 
 L = dict(
     code="11.02", unit=11, lesson_no=2,
+    align="=",   # every run of rows that solve an equation set with its equals signs in one column (kit, 15 Nov 2026)
     title="Equations with Variables on Both Sides",
     unit_title="Solving Equations and Systems",
     benchmark="MA.8.AR.2.1",
@@ -196,7 +197,7 @@ L = dict(
              wrong="x = 11/3 ≈ 3.67 — 2x + 7 = 5x − 4, the 2 to one term only [Florida B1G-M, AR.2.1: distributing to only one term]; x = 10/3 ≈ 3.33 — 14 − 4 = 3x, the 4 subtracted instead of added [Notes I: undo − 4 by adding 4]"),
         dict(kind="mc", latex="4(x - 2) = 2(x + 5)",
              qtext="Solve 4(x − 2) = 2(x + 5).",
-             hint="Distribute on both sides.", steps=["Distribute:  $4x - 8$  on the left,  $2x + 10$  on the right",
+             hint="Distribute on both sides.", steps=["[equation] Distribute:  $4x - 8 = 2x + 10$",
                                                       "Take 2x from both sides:  $2x - 8 = 10$",
                                                       "Add 8:  $2x = 18$",
                                                       "Divide by 2:  $x = 9$",
@@ -208,7 +209,7 @@ L = dict(
                     solves("4*u - 2", "2*u + 5", "F(7,2)"), solves("4*u + 8", "2*u + 10", "1"), solves("4*u - 8 + 2*u", "10", "3"))),
         dict(text=["A gym is open 7 days a week. It has two plans:", "\\$30 a month plus \\$5 a visit, or \\$8 a visit.", "**After how many visits in a month do the plans cost the same?"],
              unneeded="7",
-             hint="Write each plan's cost.", steps=["Plan 1 costs  $30 + 5v$.  Plan 2 costs  $8v$.",
+             hint="Write each plan's cost.", steps=["[equation] v visits at the same cost:  $30 + 5v = 8v$",
                                                     "Take 5v from both sides:  $30 = 3v$",
                                                     "Divide by 3:  $v = 10$",
                                                     "Check:  $30 + 5(10) = 80$  and  $8(10) = 80$"],

@@ -12,7 +12,7 @@
   {
    "n": 2,
    "title": "Warm-Up",
-   "sub": "On your own. Four minutes. No notes.",
+   "sub": "On your own. No notes.",
    "min": 4,
    "note": "Q4 is the prerequisite: a rational base is squared by squaring numerator and denominator. A board showing 4/3 or 2/9 tells you the base was not treated as one number.",
    "kind": "warmup"
@@ -27,14 +27,30 @@
   },
   {
    "n": 4,
+   "title": "Vocabulary",
+   "sub": "The new words, before they are used.",
+   "min": 1,
+   "note": "Read each word and its meaning once; the notes use them next. Students copy the words, not the definitions.",
+   "kind": "vocab"
+  },
+  {
+   "n": 5,
+   "title": "Vocabulary",
+   "sub": "The new words, continued.",
+   "min": 0,
+   "note": "The rest of the words; the same minute.",
+   "kind": "vocab"
+  },
+  {
+   "n": 6,
    "title": "Notes",
    "sub": "Copy the three words.",
-   "min": 3,
+   "min": 2,
    "note": "Students copy the three vocabulary rows. Say them aloud: base, exponent, power. The exponent COUNTS factors; it is not a factor itself \u2014 that is the misconception behind 2\u00b3 = 6.\nOFF: Ask: what does 2 to the 3 mean? Insist on the answer 'three 2s multiplied', not 'six'.",
    "kind": "notes"
   },
   {
-   "n": 5,
+   "n": 7,
    "title": "Notes",
    "sub": "Where the rule comes from.",
    "min": 4,
@@ -42,7 +58,7 @@
    "kind": "notes"
   },
   {
-   "n": 6,
+   "n": 8,
    "title": "Notes",
    "sub": "",
    "min": 3,
@@ -50,7 +66,7 @@
    "kind": "notes"
   },
   {
-   "n": 7,
+   "n": 9,
    "title": "Notes",
    "sub": "",
    "min": 4,
@@ -58,7 +74,7 @@
    "kind": "notes"
   },
   {
-   "n": 8,
+   "n": 10,
    "title": "Example 1",
    "sub": "Two ways to the same value.",
    "min": 1,
@@ -66,7 +82,7 @@
    "kind": "example"
   },
   {
-   "n": 9,
+   "n": 11,
    "title": "Example 1",
    "sub": "Worked both ways.",
    "min": 2,
@@ -74,7 +90,7 @@
    "kind": "example"
   },
   {
-   "n": 10,
+   "n": 12,
    "title": "Your Turn",
    "sub": "Same steps, your numbers. Boards up when done.",
    "min": 2,
@@ -82,7 +98,7 @@
    "kind": "yourturn"
   },
   {
-   "n": 11,
+   "n": 13,
    "title": "Your Turn",
    "sub": "Answer.",
    "min": 1,
@@ -90,7 +106,7 @@
    "kind": "yourturn"
   },
   {
-   "n": 12,
+   "n": 14,
    "title": "Example 2",
    "sub": "A negative base and a power of a power.",
    "min": 1,
@@ -98,7 +114,7 @@
    "kind": "example"
   },
   {
-   "n": 13,
+   "n": 15,
    "title": "Example 2",
    "sub": "Worked.",
    "min": 2,
@@ -106,7 +122,7 @@
    "kind": "example"
   },
   {
-   "n": 14,
+   "n": 16,
    "title": "Your Turn",
    "sub": "Same steps, your numbers. Boards up when done.",
    "min": 2,
@@ -114,7 +130,7 @@
    "kind": "yourturn"
   },
   {
-   "n": 15,
+   "n": 17,
    "title": "Your Turn",
    "sub": "Answer.",
    "min": 1,
@@ -122,7 +138,7 @@
    "kind": "yourturn"
   },
   {
-   "n": 16,
+   "n": 18,
    "title": "Whiteboards   \u00b7   Question 1 of 9",
    "sub": "Boards up on three.",
    "min": 0,
@@ -130,7 +146,7 @@
    "kind": "wb"
   },
   {
-   "n": 17,
+   "n": 19,
    "title": "Whiteboards   \u00b7   Question 1 of 9",
    "sub": "Answer.",
    "min": 0,
@@ -138,7 +154,7 @@
    "kind": "wb"
   },
   {
-   "n": 18,
+   "n": 20,
    "title": "Whiteboards   \u00b7   Question 2 of 9",
    "sub": "Boards up on three.",
    "min": 0,
@@ -146,7 +162,7 @@
    "kind": "wb"
   },
   {
-   "n": 19,
+   "n": 21,
    "title": "Whiteboards   \u00b7   Question 2 of 9",
    "sub": "Answer.",
    "min": 0,
@@ -154,7 +170,7 @@
    "kind": "wb"
   },
   {
-   "n": 20,
+   "n": 22,
    "title": "Whiteboards   \u00b7   Question 3 of 9",
    "sub": "Boards up on three.",
    "min": 0,
@@ -162,7 +178,7 @@
    "kind": "wb"
   },
   {
-   "n": 21,
+   "n": 23,
    "title": "Whiteboards   \u00b7   Question 3 of 9",
    "sub": "Answer.",
    "min": 0,
@@ -170,7 +186,7 @@
    "kind": "wb"
   },
   {
-   "n": 22,
+   "n": 24,
    "title": "Whiteboards   \u00b7   Question 4 of 9",
    "sub": "Boards up on three.",
    "min": 0,
@@ -178,7 +194,7 @@
    "kind": "wb"
   },
   {
-   "n": 23,
+   "n": 25,
    "title": "Whiteboards   \u00b7   Question 4 of 9",
    "sub": "Answer.",
    "min": 0,
@@ -186,7 +202,7 @@
    "kind": "wb"
   },
   {
-   "n": 24,
+   "n": 26,
    "title": "Whiteboards   \u00b7   Question 5 of 9",
    "sub": "Boards up on three.",
    "min": 0,
@@ -194,7 +210,7 @@
    "kind": "wb"
   },
   {
-   "n": 25,
+   "n": 27,
    "title": "Whiteboards   \u00b7   Question 5 of 9",
    "sub": "Answer.",
    "min": 0,
@@ -202,7 +218,7 @@
    "kind": "wb"
   },
   {
-   "n": 26,
+   "n": 28,
    "title": "Whiteboards   \u00b7   Question 6 of 9",
    "sub": "Boards up on three.",
    "min": 0,
@@ -210,7 +226,7 @@
    "kind": "wb"
   },
   {
-   "n": 27,
+   "n": 29,
    "title": "Whiteboards   \u00b7   Question 6 of 9",
    "sub": "Answer.",
    "min": 0,
@@ -218,7 +234,7 @@
    "kind": "wb"
   },
   {
-   "n": 28,
+   "n": 30,
    "title": "Whiteboards   \u00b7   Question 7 of 9",
    "sub": "Boards up on three.",
    "min": 0,
@@ -226,7 +242,7 @@
    "kind": "wb"
   },
   {
-   "n": 29,
+   "n": 31,
    "title": "Whiteboards   \u00b7   Question 7 of 9",
    "sub": "Answer.",
    "min": 0,
@@ -234,7 +250,7 @@
    "kind": "wb"
   },
   {
-   "n": 30,
+   "n": 32,
    "title": "Whiteboards   \u00b7   Question 8 of 9",
    "sub": "Boards up on three.",
    "min": 0,
@@ -242,7 +258,7 @@
    "kind": "wb"
   },
   {
-   "n": 31,
+   "n": 33,
    "title": "Whiteboards   \u00b7   Question 8 of 9",
    "sub": "Answer.",
    "min": 0,
@@ -250,7 +266,7 @@
    "kind": "wb"
   },
   {
-   "n": 32,
+   "n": 34,
    "title": "Whiteboards   \u00b7   Question 9 of 9",
    "sub": "Take your time. Boards up when you have written it.",
    "min": 0,
@@ -258,7 +274,7 @@
    "kind": "wb"
   },
   {
-   "n": 33,
+   "n": 35,
    "title": "Whiteboards   \u00b7   Question 9 of 9",
    "sub": "Answer.",
    "min": 0,
@@ -266,7 +282,7 @@
    "kind": "wb"
   },
   {
-   "n": 34,
+   "n": 36,
    "title": "Independent Set",
    "sub": "Six questions. On your own, in writing.",
    "min": 6,
@@ -274,11 +290,11 @@
    "kind": "independent"
   },
   {
-   "n": 35,
+   "n": 37,
    "title": "IXL",
    "sub": "Last five minutes.",
    "min": 5,
-   "note": "IXL: every listed skill is required, SmartScore 67. Due at the start of the next class.",
+   "note": "IXL: every listed skill is required, SmartScore 67. Due by the Unit 3 test.",
    "kind": "ixl"
   }
  ]

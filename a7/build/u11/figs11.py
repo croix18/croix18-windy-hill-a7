@@ -87,7 +87,8 @@ def plane(xr, yr, lines=(), points=(), xs=1, ys=1, xname="x", yname="y", step=No
     top; text="" prints nothing. With (x, where) the text is set instead beside the line's point at that x, in
     the corner `where` ('ur', 'dl', 'r', …) — added for 11.07's candles, two falling lines that leave the plane
     only through its bottom edge. `points` are (x, y) or (x, y, name) or (x, y, name, where): a dot, and its name or
-    coordinates when given ("" for a bare dot). `solution` = (x, y) is checked against EVERY line and refused if it
+    coordinates when given ("" for a bare dot); a `where` ending in "+" or "++" ("u+", "r++") sets the name two or three times as far
+    from its dot (added 15 Nov for the keys' crossings). `solution` = (x, y) is checked against EVERY line and refused if it
     is not on all of them — give it whenever the words name a crossing. A point whose name is "on" is checked to lie
     on at least one line. `xname`, `yname` title the axes ("x" and "y" sit at the axes' ends; a longer name is set
     under and beside the plane)."""
@@ -211,9 +212,11 @@ def plane(xr, yr, lines=(), points=(), xs=1, ys=1, xname="x", yname="y", step=No
         if name:
             ha = "left" if "r" in where else "right" if "l" in where else "center"
             va = "bottom" if "u" in where else "top" if "d" in where else "center"
+            k = 1 + where.count("+")                 # "u+", "d++", …: the name set two or three times as far off (a
+            #                                          key's crossing between two lines that meet at a narrow angle)
             sh.append(_t(X(px), Y(py), name, ha=ha, va=va,
-                         off=(0.5 if ha == "left" else -0.5 if ha == "right" else 0,
-                              0.45 if va == "bottom" else -0.45 if va == "top" else 0)))
+                         off=(k * (0.5 if ha == "left" else -0.5 if ha == "right" else 0),
+                              k * (0.45 if va == "bottom" else -0.45 if va == "top" else 0))))
     return dict(kind="shapes", fs=fs, pt=pt, **{"in": inches}, shapes=sh)
 
 

@@ -12,7 +12,7 @@ test's question map and points against its spec; the month grid against the scho
 LaTeX left anywhere. With Florida's B.E.S.T. standards text present (outside the repo, at
 /root/best), also checks the MTR titles and that every Source of Truth statement is complete and
 verbatim. Exit status 1 on any problem."""
-import os, re, sys, csv, glob, hashlib, unicodedata, subprocess, datetime, urllib.parse, importlib.util, collections, io, contextlib
+import os, re, sys, csv, glob, hashlib, unicodedata, subprocess, datetime, urllib.parse, collections, io, contextlib
 import pymupdf
 from openpyxl import load_workbook
 ROOT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
@@ -213,12 +213,12 @@ std = open(STD, encoding="utf-8", errors="replace").read() if os.path.exists(STD
 std_n = norm(std.replace(" - ", "-")) if std else None
 sys.path.insert(0, os.path.join(ROOT, "tools")); sys.path.insert(0, os.path.join(ROOT, "a7", "build"))
 import tex2text
+from lib.unitload import load                   # the build kit's spec loader (a7/build/lib/unitload.py)
 with contextlib.redirect_stdout(io.StringIO()):
     import scope_calendar as SC
 specs = {}
 for f in glob.glob(f"{ROOT}/a7/build/u*/l*.py"):
-    sys.modules.pop("figs", None); sys.path.insert(0, os.path.dirname(f))   # each unit imports its own figs.py (u6, u11)
-    s = importlib.util.spec_from_file_location("m", f); m = importlib.util.module_from_spec(s); s.loader.exec_module(m); specs[m.L["code"]] = m.L
+    m = load(f); specs[m.L["code"]] = m.L      # the kit's loader: each unit's own figs.py, never another unit's
 stem = lambda code, u: (f"{u}.T{code[-1]}" if code.startswith("T-") else re.split(r"[+–]", code)[0])
 
 wb = load_workbook(XLSX, data_only=True)
@@ -444,8 +444,7 @@ for k, ds in exam_dates.items():
     if not r or [x for x in (D(r[1].value), D(r[2].value)) if x is not None] != ds: bad("test dates", k, ds)   # one date when the test took one day
 units = {}
 for f in glob.glob(f"{ROOT}/a7/build/u*/unit.py"):
-    sys.modules.pop("figs", None); sys.path.insert(0, os.path.dirname(f))   # each unit imports its own figs.py (u6, u11)
-    s = importlib.util.spec_from_file_location("m", f); m = importlib.util.module_from_spec(s); s.loader.exec_module(m)
+    m = load(f, "unit")                         # the kit's loader
     U = [v for v in vars(m).values() if isinstance(v, dict) and "assessment" in v][0]; units[U["unit"]] = U
 for u, U in sorted(units.items()):
     if cal_rows[f"Unit {u}"][3].value != U["assessment"]["total"]: bad(f"Unit {u} points", cal_rows[f'Unit {u}'][3].value)

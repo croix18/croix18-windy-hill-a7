@@ -1,4 +1,60 @@
-# State of the work — 14 November 2026 (read this first)
+# State of the work — 15 November 2026 (read this first)
+
+## 15 November — the kits fixed in Windmill; Unit 11 uses the new pieces; Units 3–6 rebuilt on them
+
+Croix, 8:40 am, of the kit limits and open items Unit 11's report listed: *"Fix windmill. Fix the other kits. Fix
+everything"*; at 10:16 am he sent the cause of Windmill's failing GitHub check (matplotlib 3.11's glyph tuples). What
+was done in Windmill is in its `HANDOFF.md` (the first sections) and in `kit/README.md` and `practice/kit/README.md`
+(the 15 Nov sections). In this repository:
+
+- **The build kit is at Windmill `095d912`** (`a7/build/KIT_VERSION`). New in a spec (`a7/build/SPEC SCHEMA.md`): `fig`
+  on a Your Turn (`fig_a` for its answer slide), on a worked slide, a warm-up question and a set question; `fig_key` on
+  a paper question (the key's own figure); a step that opens `[equation]` or `[false]`; `align="="` at a lesson's top
+  level (rows that solve an equation are set with their equals signs in one column). Changed without asking: every
+  figure is trimmed to its ink; a choice board's options stand beside its figure when that makes the figure taller;
+  each unit's own `figs.py` is loaded for that unit (`lib/unitload.py`; `tools/master_sheet.py` and
+  `check_master_sheet.py` use it); the Teacher Edition says "neighbor"; no student paper prints the follow-through
+  line; **a build stops on any matplotlib but 3.10** (`lib/mathimg.MATPLOTLIB` — 3.11 draws stacked fractions a
+  quarter taller and several decks no longer fit; moving to it is its own job).
+- **Unit 11 uses the new pieces** (rebuilt and installed, `checks: 0 findings`; still NOT published):
+  - the graph days' Your Turns (11.05, 11.07, 11.08) show their tables and grid, and their answer slides the graph;
+    every graph Example's worked slide carries the finished graph;
+  - the key of every "graph both lines" question draws both lines and marks the crossing (`fig_key`: the sets, banks
+    and additional banks of 11.07 and 11.08, and the Review);
+  - the multiple-choice graph boards are back, the graph beside the options at 2.65–3.16 in (11.05 board 6; 11.07
+    boards 4 and 6; 11.08 board 4); 11.07 board 2 and 11.08 board 2 are free response;
+  - a no-solution ending is the false equation and its words on answer slides too (`[false]`), and worded lines that
+    hid an equation are `[equation]` lines the build solves (11.02 boards 6–7; 11.03 Example 2's Your Turn and boards
+    2, 6, 7, 8; 11.04 Example 2's Your Turn and board 7). The kit holds a `[false]` line to be false and its equation
+    to have no solution; that it follows from the line before was checked by hand;
+  - `align="="` in all seven lessons (48 runs of rows lined up). An answer slide's labelled steps ("Add 9: 3x = 24")
+    are not lined up: the kit aligns rows that are one relation each;
+  - START HERE's dates are right (11.02 Tue 1 Dec, 11.03 Wed 2 Dec);
+  - 11.07 board 6 says "Four points on the lines are marked." (the crossing is one of them, so "each line passes
+    through two marked points" was not what the picture showed); 11.08 board 4's stem ends "Best estimate?" because
+    the full sentence does not fit on one line and a second line drops the graph under the options.
+- **Units 3, 4, 5 and 6 are rebuilt and installed on this kit**, each at `checks: 0 findings`; no question, answer or
+  number changed. Page counts that moved: Unit 6 — 6.07's set key 2→1; Unit 5 — the Practice Test 6→5; Unit 4 — Forms A
+  and B 8→7 each. **Unit 3 changed most.** It was last built on the morning of 25 Oct, before the kit printed a
+  Vocabulary slide and before its present type sizes: each deck gains a Vocabulary slide (All Slides 344→355), nine
+  Teacher Editions run 3→4 pages, an All in One folder is new, and the mathematics on 59 slides is set at the size
+  every later unit has had (two thirds to nine tenths of its old height — 3.06 built on the kit this repository carried
+  from 25 Oct to this morning comes out the same as today's, so it is not today's change). Two plans no longer fit
+  with the Vocabulary minute and gave it one of their own: 3.01 Notes I 3→2 min, 3.06 Notes III 4→3 min.
+- **Units 3–6's practice pages and teacher copies** were run again on the practice kit as fixed this morning: every
+  one ends ALL CHECKS PASSED and no set lock moved. They keep their × hints (`LEGACY_TIMES` in the kit's `core.js`).
+- The master sheet is regenerated (0 problems) and `tools/check.sh` passes.
+
+### Open, for Croix
+1. **Unit 11 waits for his word to be published.** The rebuilt Units 3–6 are in this repository only; the website
+   serves the builds it had.
+2. **Three IXL skills of the plan may ask for what Unit 11 does not teach yet** — TS7 "Write a system of equations given
+   a graph", 9Z8 "Solve a system of equations in slope-intercept form", AGZ "Find the number of solutions to a system of
+   equations by graphing" — read from their titles; nobody here could open IXL. If they need slope, they move to Unit 10.
+3. **`drive/WindyHill.gs` in Windmill is version 3.1** (an unfinished pull is finished on the next run): paste it over
+   version 3 in the Drive script editor.
+4. **Not done, on purpose:** a 43-minute Lesson Plan (HOUSE STYLE has no Wednesday plan; the lessons' materials line
+   says what to cut); the move to matplotlib 3.11.
 
 ## 14 November — A7 Unit 11, Solving Equations and Systems: built, reviewed, fixed; held for Croix's word before it is published
 
@@ -34,25 +90,8 @@ not seen the specs reviewed it.
 - **`tools/`:** `master_sheet.py` and `check_master_sheet.py` load each unit's own figure module; `tex2text.py` and the
   sheet's check read an escaped dollar ("\\$24") as money.
 
-### Open, for Croix
-1. **Two kit limits shape the graph days** (Windmill `kit/`, not changed here): a Your Turn slide cannot carry a
-   figure, and a paper's key prints the same figure as its page — so a graph-day Your Turn works from two tables, and
-   the Independent Set keys of 11.07 and 11.08 give each crossing in words over the empty grid. A `fig` on a Your Turn
-   and a key-only figure would fix both.
-2. **Three IXL skills of the plan may ask for what Unit 11 does not teach yet** — TS7 "Write a system of equations given
-   a graph", 9Z8 "Solve a system of equations in slope-intercept form", AGZ "Find the number of solutions to a system of
-   equations by graphing" — read from their titles; nobody here could open IXL. If they need slope, they move to Unit 10.
-3. **The kit's steps check refuses a false line** ("8 = 5") on an answer slide, so a board's no-solution ending is in
-   words there; the worked examples print it.
-4. **The build kit's printed Practice Test still prints the follow-through line** under each section (Unit 6's too;
-   Croix's ruling of 7 Nov took it off every page). The test Croix prints comes from the teacher copy, which does not.
-5. **START HERE's dates for 11.02 and 11.03 are a day late** — they come from the plan vendored on 25 Oct
-   (`assets/windmill`); the scope and the lessons are right. `python3 tools/vendor_windmill.py` when Windmill's plan is current.
-6. **The kit's Teacher Edition prints "neighbour"**; the lessons are in American English.
-7. **The practice page's 14(b) (the estimate) has 38 different systems**, under ruling 49's floor of 100 — the kit's
-   variety check passes because it counts 14(b) with its story (19,984). Lines whose crossing is well clear of every
-   grid and half-grid line on a small window are few; a wider window or thirds-and-fifths coefficients would add more.
-8. **The page's question 12 takes the ordered pair in one box** (the kit gives a part one box); the paper asks for x and y.
+### Open, for Croix (14 Nov)
+All eight items of this list were closed on 15 Nov except the IXL question, which is item 2 of the list above.
 
 # Earlier — 25 October 2026
 

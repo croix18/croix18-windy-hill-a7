@@ -35,7 +35,7 @@ L = dict(
                      "$\\left(\\frac{1}{5}\\right)^{4}\\cdot\\left(\\frac{1}{5}\\right)^{-2} = \\left(\\frac{1}{5}\\right)^{-8}$   — wrong: multiplied; should be $\\left(\\frac{1}{5}\\right)^{2}$",
                      "$\\left(\\frac{3}{2}\\right)^{-3} = \\frac{2^{-3}}{3^{-3}}$   — wrong: flipped, kept the minus; should be $\\left(\\frac{2}{3}\\right)^{3}$"],
              letters=False, size=21),
-        dict(numeral="III", head="Different bases, same value — rewrite to a common base", min=4, sub="",
+        dict(numeral="III", head="Different bases, same value — rewrite to a common base", min=3, sub="",
              note="8 is 2³, so 8⁵ is (2³)⁵ = 2¹⁵. 9 is 3², so 9⁴ = 3⁸. And 2³ · 4³ = 2³ · (2²)³ = 2³ · 2⁶ = 2⁹. The table of squares, cubes and fourth powers from Unit 2 is the tool; the move is power of a power. Ask: which bases can be rewritten as powers of 2? (4, 8, 16, 32, 64.) Of 3? (9, 27, 81.)",
              math=["$8^{5} = \\left(2^{3}\\right)^{5} = 2^{15}$        $9^{4} = \\left(3^{2}\\right)^{4} = 3^{8}$",
                    "$2^{3}\\cdot 4^{3} = 2^{3}\\cdot\\left(2^{2}\\right)^{3} = 2^{3}\\cdot 2^{6} = 2^{9}$"],

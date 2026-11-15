@@ -2,7 +2,7 @@
 
 Windy Hill Middle School · course 1205050 · six teaching days (eleven book lessons, merged to six), a review sent home Tue 3 Nov, the test as one period on Thu 5 Nov (a random draw of the practice test; Forms A and B as built).
 
-**By the plan** (Windmill's spine as of 2026-10-25; `tools/scope_calendar.py` is its source): lessons Tue 27 Oct – Tue 3 Nov, the assessment Thu 5 Nov, 2026. The dates move when the as-run log does (the plan follows the class), and a day is logged from the phone view of the plan.
+**By the plan** (Windmill's spine as of 2026-10-31; `tools/scope_calendar.py` is its source): lessons Tue 27 Oct – Tue 3 Nov, the assessment Thu 5 Nov, 2026. The dates move when the as-run log does (the plan follows the class), and a day is logged from the phone view of the plan.
 
 Nothing exists until it is committed. This folder is generated from `a7/build/u5/` by `install_unit.py`; edit the specs and rebuild rather than editing these files by hand.
 
