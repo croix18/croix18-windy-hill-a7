@@ -22,11 +22,13 @@ G.sections.forEach(sec => sec.items.forEach(it => { q++; if (only.length && only
       console.log('  SHOW ME HOW:'); C.mcSolution(p).forEach(l => console.log('    - ' + plain(l.say) + (l.ex ? '   [' + plain(l.ex) + ']' : '')));
       console.log('  HINT:'); walkOut(U.walk(p, 'mc'));
       p.opts.forEach((o, k) => { if (k !== p.correct) console.log('  WRONG ' + o + ': ' + plain(C.mcFeedback(p, k).what[0])); }); return; }
-    console.log(' -- (' + (p.label || '-') + ') ' + plain(U.view.line(p)) + '   KEY: ' + plain(U.view.key(p)) + '   typed: ' + U.keyText(p));
+    const B = U.view.boxes(p);                                      /* two boxes (15 Nov 2026): shown as the page labels them */
+    console.log(' -- (' + (p.label || '-') + ') ' + plain(U.view.line(p)) + '   KEY: ' + plain(U.view.key(p)) + '   typed: ' + (B ? B.map((b, k) => plain(b.pre || '') + ' [' + U.keyText(p)[k] + '] ' + plain(b.unit || '')).join('  ') : U.keyText(p)));
     console.log('  RULE: ' + plain((C.F[p.fam] || C.PF[p.fam]).rule(p)));
     console.log('  SHOW ME HOW:'); C.solution(p).forEach(l => console.log('    - ' + plain(l.say) + (l.ex ? '   [' + plain(l.ex) + ']' : '')));
     console.log('  HINT:'); walkOut(U.walk(p, 'text'));
-    ((C.F[p.fam] || C.PF[p.fam]).models(p)).forEach(m => { const t = Array.isArray(m.v) ? '(' + m.v.map(E.kstr).join(', ') + ')' : E.places(m.v) >= 0 ? E.kstr(m.v) : E.kstr(m.v); console.log('  MISTAKE ' + t + ': ' + plain(C.feedback(p, t).what[0])); });
+    ((C.F[p.fam] || C.PF[p.fam]).models(p)).forEach(m => { const t = Array.isArray(m.v) ? (B ? m.v.map(E.kstr) : '(' + m.v.map(E.kstr).join(', ') + ')') : E.kstr(m.v); console.log('  MISTAKE ' + (Array.isArray(t) ? t.map(z => '[' + z + ']').join(' ') : t) + ': ' + plain(C.feedback(p, t).what[0])); });
+    if (B) { const k = U.keyText(p); [[k[0], '7'], ['7', k[1]], [k[0] + ', ' + k[1], ''], [k[0], k[1] + ', ' + k[0]]].forEach(t => console.log('  BOXES ' + t.map(z => '[' + z + ']').join(' ') + ': ' + C.feedback(p, t).v + ' — ' + plain((C.feedback(p, t).what || [])[0] || ''))); }
     console.log('  ALL-MC WRONG: ' + U.choices(p).map(plain).join(' | '));
   });
 }));

@@ -68,7 +68,18 @@ PLANTS = [
     ("the paper's wrong answers include the key", "coach.js", "  const out = [], seen = [keyHtml(p)];", "  const out = [keyHtml(p)], seen = [];"),
     ("the estimate's paper choices may sit inside the tolerance", [("coach.js", "PF[p.fam].models(p).forEach(m => add(p.fam === 'estimate' ? [E.tenthOf(m.v[0]), E.tenthOf(m.v[1])] : m.v));", "(p.fam === 'estimate' ? [{ v: [qadd(p.ans[0], Q(1, 10)), p.ans[1]] }] : []).concat(PF[p.fam].models(p)).forEach(m => add(p.fam === 'estimate' ? [E.tenthOf(m.v[0]), E.tenthOf(m.v[1])] : m.v));"),
       ("coach.js", "else if (p.fam === 'estimate' ? within(p, v[0], v[1]) :", "else if (p.fam === 'estimate' ? false :")]),
-    ("the pair reader swaps x and y", "engine.js", "  let nums = got.map(g => ({ q: g.val, tag: g.tag }));", "  let nums = got.map(g => ({ q: g.val, tag: g.tag })).reverse();"),
+    # the two boxes (15 Nov 2026): Q12, Q13(b), Q14(a), Q14(b) — one string per box, judged together. (The plant "the pair reader
+    # swaps x and y" went: no part takes an ordered pair in one box now, so that reader only tells a box it holds two numbers.)
+    ("the two boxes read the other way round (a swapped pair accepted)", "coach.js", "  return { ok: true, nums: got, labels: true, shape: 'pair' };", "  return { ok: true, nums: got.reverse(), labels: true, shape: 'pair' };"),
+    ("one box right and the other wrong accepted", "coach.js", "if (est ? within(p, x, y) : qeq(x, p.ans[0]) && qeq(y, p.ans[1])) return { v: 'right', what: [] };", "if (est ? within(p, x, y) : qeq(x, p.ans[0]) || qeq(y, p.ans[1])) return { v: 'right', what: [] };"),
+    ("the estimate's boxes: one within 0.1 is enough", "coach.js", "const within = (p, x, y) => near1(x, p.ans[0], p.tol) && near1(y, p.ans[1], p.tol);", "const within = (p, x, y) => near1(x, p.ans[0], p.tol) || near1(y, p.ans[1], p.tol);"),
+    ("the x box takes the y's letter", "coach.js", "    if (r.letter && r.letter !== v) return", "    if (r.letter && r.letter === 'z') return"),
+    ("the weeks box takes a dollar amount", "coach.js", "    if (p.kind === 'story' && tag && tag !== (k ? 'amt' : 'count')) return", "    if (p.kind === 'story' && tag && tag === 'none') return"),
+    ("one box left empty is a try", "coach.js", "    if (!t.trim()) return { ok: false, msg: 'Fill in every box: the ' + nm + ' box is still empty.' };", "    if (!t.trim()) return { ok: true, nums: [{ q: E.ZERO }, { q: E.ZERO }], labels: true, shape: 'pair' };"),
+    ("Q14(b)'s boxes say = instead of ≈", "unit.js", "(p.fam === 'estimate' ? ' ≈' : ' =')", "(p.fam === 'estimate' ? ' =' : ' =')"),
+    ("Q14(a)'s boxes swapped on the screen (the amount first)", "unit.js", "  ? [{ pre: 'after', unit: 'weeks', say: 'weeks', kind: 'num' }, p.st.unit === 'dollars' ? { pre: '$', unit: 'each', say: 'dollars each', kind: 'num' } : { unit: 'cm tall', say: 'centimeters tall', kind: 'num' }]", "  ? [p.st.unit === 'dollars' ? { pre: '$', unit: 'each', say: 'dollars each', kind: 'num' } : { unit: 'cm tall', say: 'centimeters tall', kind: 'num' }, { pre: 'after', unit: 'weeks', say: 'weeks', kind: 'num' }]"),
+    ("Q13(b) loses its boxes", "unit.js", "const twoBox = p => p.kind === 'pair' || p.kind === 'story';", "const twoBox = p => (p.kind === 'pair' || p.kind === 'story') && p.fam !== 'tableSol';"),
+    ("the boxes' keys one string, not one a box", "unit.js", "keyText: p => p.kind === 'num' ? E.kstr(p.ans) : [E.kstr(p.ans[0]), E.kstr(p.ans[1])]", "keyText: p => p.kind === 'num' ? E.kstr(p.ans) : '(' + E.kstr(p.ans[0]) + ', ' + E.kstr(p.ans[1]) + ')'"),
     ("the estimate's Hint accepts anything within 0.5", "unit.js", "numOk: (s, v) => s.tol ? Math.abs(E.qnum(v) - E.qnum(s.near)) <= E.qnum(s.tol) + 1e-9", "numOk: (s, v) => s.tol ? Math.abs(E.qnum(v) - E.qnum(s.near)) <= 0.5"),
     ("the key a student types is not the key", "unit.js", "keyText: p => p.kind === 'num' ? E.kstr(p.ans)", "keyText: p => p.kind === 'num' ? E.kstr(E.qadd(p.ans, E.Q(1, 10)))"),
 ]

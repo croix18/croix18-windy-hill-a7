@@ -334,7 +334,9 @@ F.tableGap = {
 /* ---------- the typed answers that are two numbers: an ordered pair, or the weeks and the amount of a story */
 const pairOf = p => p.ans;
 const PF = {};
-const swapM = p => ({ v: [p.ans[1], p.ans[0]], say: 'swapped the coordinates: x comes first, then y — ' + pairT(p.ans[0], p.ans[1]) + ', not ' + pairT(p.ans[1], p.ans[0]) });
+/* every typed answer of two numbers has two boxes since 15 Nov 2026 (the kit's several boxes in one part): x = ▢ and y = ▢, or
+   after ▢ weeks and $▢ each — so a swap is said box by box */
+const swapM = p => ({ v: [p.ans[1], p.ans[0]], say: 'swapped the coordinates: the x box takes ' + (p.fam === 'tableSol' ? 'the column, ' + n(p.ans[0]) + ', and the y box what both tables give there, ' : 'how far across, ' + n(p.ans[0]) + ', and the y box how far up or down, ') + n(p.ans[1]) });
 const pairT = E.pairT;
 const yAxis = (l, which) => ({ v: [ZERO, l.b], say: 'gave where ' + which + ' meets the y-axis, ' + pairT(ZERO, l.b) + ': that point is on one line only' });
 function bothSay(p, x, y) {                                       /* a pair put into both equations, as a student checks it */
@@ -368,7 +370,7 @@ PF.tableSol = {
 const storyAmt = (p, v) => p.st.amt(n(v));
 PF.storyMeet = {
   rule: () => 'The two amounts are equal at the point of intersection: read the weeks across, then the amount up. Say it with its units.',
-  models: p => { const out = [{ v: [p.ans[1], p.ans[0]], say: 'swapped the two numbers: the weeks are across (x) and the amount is up (y)' },
+  models: p => { const out = [{ v: [p.ans[1], p.ans[0]], say: 'swapped the two boxes: the weeks are across the bottom (x) and go in the weeks box, and the amount is up the side (y)' },
     { v: [ZERO, p.l2.b], say: 'gave where one line starts, at 0 weeks: that is ' + p.B + '’s start, not where the two meet' },
     { v: [ZERO, p.l1.b], say: 'gave where one line starts, at 0 weeks: that is ' + p.A + '’s start, not where the two meet' }];
     const x1 = qadd(p.ans[0], ONE); out.push({ v: [x1, yAt(p.l1, x1)], say: 'read the crossing one grid line too far: at ' + n(x1) + ' weeks the two are no longer equal' });
@@ -389,7 +391,7 @@ const rangeOf = (k, t) => [qsub(k, t), qadd(k, t)];
 const fmt1 = v => n(qdec(v.toFixed(1)));
 PF.estimate = {
   rule: () => 'Between the grid lines, estimate: read each coordinate to the nearest tenth (the pale lines are halves), and say “about”. Check the estimate in both equations — the two values come out close, not equal.',
-  models: p => { const c = p.exact, out = [{ v: [p.ans[1], p.ans[0]], say: 'swapped the coordinates: x comes first, then y', within: true }];
+  models: p => { const c = p.exact, out = [{ v: [p.ans[1], p.ans[0]], say: 'swapped the coordinates: the x box takes the reading across and the y box the reading up or down', within: true }];
     out.push({ v: [Q(Math.round(qnum(c.x))), Q(Math.round(qnum(c.y)))], say: 'took the nearest grid point. It is on neither line: the crossing is between the grid lines, so estimate each coordinate to the tenth', exact: true });
     out.push({ v: [ZERO, p.l1.b], say: 'gave where the solid line meets the y-axis: that point is on one line only', exact: true });
     out.push({ v: [ZERO, p.l2.b], say: 'gave where the dashed line meets the y-axis: that point is on one line only', exact: true });
@@ -437,8 +439,31 @@ function numFeedback(p, typed) {
   if (qeq(val, qneg(ans))) return { v: 'wrong', what: ['The size is right, but the sign isn’t. ' + chk], rule };
   return { v: 'wrong', what: [chk + ' Tap Hint to go one step at a time.'], rule };
 }
+/* the two boxes (15 Nov 2026): each read by this unit's own number reader. A box may carry its own letter ("x = 4" in the x box)
+   or its own unit ("5 weeks", "$40", "12 cm"), never the other box's; two numbers in one box are not read as a pair */
+const BOXV = ['x', 'y'];
+const boxName = (p, k) => p.kind === 'story' ? (k ? 'amount' : 'weeks') : BOXV[k];
+const boxNames = p => p.kind === 'story' ? 'the weeks in the weeks box and the amount in the other' : 'the x in the x box and the y in the y box';
+function readBoxes(p, typed) {
+  const got = [];
+  if (typed.every(t => t == null || !String(t).trim())) return { ok: false, blank: true };
+  for (let k = 0; k < 2; k++) {
+    const raw = typed[k] == null ? '' : String(typed[k]), t = p.kind === 'story' ? raw.replace(/\btall\b/gi, ' ') : raw, v = BOXV[k], nm = boxName(p, k);
+    if (!t.trim()) return { ok: false, msg: 'Fill in every box: the ' + nm + ' box is still empty.' };
+    const two = E.readAns(t, p.kind === 'story' ? 'story' : 'pair');
+    if (two.ok && two.nums && two.nums.length === 2) return { ok: false, msg: 'The ' + nm + ' box has two numbers. Put ' + boxNames(p) + '.' };
+    const r = E.readAns(t, 'num');
+    if (!r.ok) return { ok: false, msg: 'The ' + nm + ' box: ' + r.msg };
+    if (r.unsolved || !r.nums || r.nums.length !== 1 || r.shape === 'expr') return { ok: false, msg: 'The ' + nm + ' box: type just the number, like ' + (p.kind === 'story' ? (k ? '40' : '5') : '4 or −2') + '.' };
+    if (r.letter && r.letter !== v) return { ok: false, msg: 'The ' + nm + ' box takes the ' + (p.kind === 'story' ? nm : v) + '. Put ' + boxNames(p) + '.' };
+    const tag = r.nums[0].tag;
+    if (p.kind === 'story' && tag && tag !== (k ? 'amt' : 'count')) return { ok: false, msg: 'The ' + nm + ' box takes the ' + nm + '. Put ' + boxNames(p) + '.' };
+    got.push(r.nums[0]);
+  }
+  return { ok: true, nums: got, labels: true, shape: 'pair' };
+}
 function pairFeedback(p, typed) {
-  const kind = p.kind === 'story' ? 'story' : 'pair', r = E.readAns(typed, kind), rule = RULE(p), fam = PF[p.fam];
+  const kind = p.kind === 'story' ? 'story' : 'pair', r = Array.isArray(typed) ? readBoxes(p, typed) : E.readAns(typed, kind), rule = RULE(p), fam = PF[p.fam];
   if (!r.ok) return r.blank ? { v: 'blank', what: [] } : { v: 'unread', what: [r.msg] };
   const [x, y] = r.nums.map(z => z.q), est = p.fam === 'estimate';
   if (est ? within(p, x, y) : qeq(x, p.ans[0]) && qeq(y, p.ans[1])) return { v: 'right', what: [] };
@@ -447,13 +472,15 @@ function pairFeedback(p, typed) {
   if (hit.length) return { v: 'wrong', what: [joinSays(hit)], rule };
   if (est) {
     const okx = near1(x, p.ans[0], p.tol), oky = near1(y, p.ans[1], p.tol);
-    return { v: 'wrong', what: [(okx ? 'Your x is a good estimate, but look again at y: ' : oky ? 'Your y is a good estimate, but look again at x: ' : 'Look again at the crossing: ') + 'check your pair in both equations — ' + [p.l1, p.l2].map(l => lineT(l) + ' gives ' + n(yAt(l, x)) + ' at x = ' + n(x)).join(', ') + '. A good estimate makes both close to its y.'], rule };
+    return { v: 'wrong', what: [(okx ? 'Your x is a good estimate, but look again at y: ' : oky ? 'Your y is a good estimate, but look again at x: ' : 'Look again at the crossing: ') + 'check your two numbers in both equations — ' + [p.l1, p.l2].map(l => lineT(l) + ' gives ' + n(yAt(l, x)) + ' at x = ' + n(x)).join(', ') + '. A good estimate makes both close to its y.'], rule };
   }
   if (p.fam === 'storyMeet') {
     const a = yAt(p.l1, x), b = yAt(p.l2, x);
-    return { v: 'wrong', what: [qeq(x, p.ans[0]) ? 'The weeks are right. Now read the amount up the side at that crossing: after ' + n(x) + ' weeks ' + p.A + ' has ' + storyAmt(p, a) + '.' : 'After ' + n(x) + ' weeks ' + p.A + ' has ' + storyAmt(p, a) + ' and ' + p.B + ' has ' + storyAmt(p, b) + ' — not the same yet.'], rule };
+    return { v: 'wrong', what: [qeq(x, p.ans[0]) ? 'The weeks are right. Now the amount: from the point of intersection, go straight across to the ' + p.st.yname + ' axis and read it.' : 'After ' + n(x) + ' weeks ' + p.A + ' has ' + storyAmt(p, a) + ' and ' + p.B + ' has ' + storyAmt(p, b) + ' — not the same yet.'], rule };
   }
-  return { v: 'wrong', what: ['Check ' + pairT(x, y) + ' in both equations — ' + bothSay(p, x, y) + '. A solution makes both true.'], rule };
+  const okx = qeq(x, p.ans[0]), oky = qeq(y, p.ans[1]), read = p.fam === 'tableSol' ? ['Find the column where both tables give the same y.', 'Read the y that both tables give in that column.'] : ['From the point of intersection, go straight up or down to the x-axis.', 'From the point of intersection, go straight across to the y-axis.'];
+  const lead = okx ? 'Your x is right, but look again at the y. ' + read[1] + ' ' : oky ? 'Your y is right, but look again at the x. ' + read[0] + ' ' : '';
+  return { v: 'wrong', what: [lead + 'Check x = ' + n(x) + ' and y = ' + n(y) + ' in both equations — ' + bothSay(p, x, y) + '. A solution makes both true.'], rule };
 }
 function feedback(p, typed) { return p.kind === 'num' ? numFeedback(p, typed) : pairFeedback(p, typed); }
 
@@ -615,7 +642,7 @@ function choices(p) {
   return out;
 }
 
-const api = { F, PF, MC, choices, keyHtml, feedback, numFeedback, pairFeedback, mcFeedback: judgeMC, selectFeedback, mcSolution: solMC, solution, clean, joinSays,
+const api = { F, PF, MC, choices, keyHtml, feedback, numFeedback, pairFeedback, readBoxes, mcFeedback: judgeMC, selectFeedback, mcSolution: solMC, solution, clean, joinSays,
   steps, eqLines, eqWalk, tailModels, checkSay, SELWHY, arith, within, isPairFam, ENDW };
 const walkApi = { steps: walk, stepsMC: walkMC, readNum: E.readNum };
 /* the help's words and pictures (help.js, 15 Nov 2026): Hints 1–3, the walkthrough and the coach's lines, to the help standard */

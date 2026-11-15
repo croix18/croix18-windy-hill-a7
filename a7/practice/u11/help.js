@@ -224,14 +224,14 @@ const COACH = [
   [/^gave the cost\. The question asks how many (\w+): that is the letter$/, 'gave the cost. The question asks how many $1, which is the value of the [[variable]]'],
   [/^added the (.+?) and the x instead of multiplying: (.+)$/, 'added the $1 and the x instead of multiplying. $2'],
   [/^took the sign of the (.+?) the wrong way$/, 'took the sign of the $1 the wrong way. The number added keeps its own sign: y is the coefficient of x times x, then add $1'],
-  [/^swapped the coordinates: x comes first, then y — (.+?), not (.+)$/, 'swapped the coordinates. In an [[orderedPair]], x comes first, then y: $1, not $2'],
-  [/^swapped the coordinates: x comes first, then y$/, 'swapped the coordinates. In an [[orderedPair]], x comes first, then y'],
+  /* the two boxes (15 Nov 2026): x = ▢ and y = ▢, or after ▢ weeks and $▢ each */
+  [/^swapped the coordinates: the x box takes (.+)$/, 'swapped the coordinates. The x box takes $1'],
   [/^gave where (the \w+ line|one line|\w+) meets the ([xy])-axis, (.+?): (?:that point is )?on one line only$/, 'gave where $1 meets the $2-axis, $3. That point is on one line only, and a [[solSys]] is on both'],
   [/^gave where the (\w+) line meets the y-axis: that point is on one line only$/, 'gave where the $1 line meets the y-axis. That point is on one line only, and a [[solSys]] is on both'],
   [/^took the column where the two y’s are closest, x = (\S+) — there (\S+) and (\S+) are near but not equal\. Near is not the same$/, 'took the column where the two y’s are closest, x = $1. There $2 and $3 are close but not equal, and a solution needs the same y in both'],
   [/^gave the first column of one table: (.+)$/, (m0, r) => 'gave the first column of one table. ' + r.charAt(0).toUpperCase() + r.slice(1)],
   [/^gave the missing value’s column: (.+)$/, (m0, r) => 'gave the missing value’s column. ' + r.charAt(0).toUpperCase() + r.slice(1)],
-  [/^swapped the two numbers: the weeks are across \(x\) and the amount is up \(y\)$/, 'swapped the two numbers. The weeks are x, across the bottom, so they come first; the amount is y, up the side'],
+  [/^swapped the two boxes: the weeks are across the bottom \(x\) and go in the weeks box, and the amount is up the side \(y\)$/, 'swapped the two boxes. The weeks are x, read across the bottom, so they go in the weeks box. The amount is y, read up the side'],
   [/^gave where one line starts, at 0 weeks: that is (.+?), not where the two meet$/, 'gave where one line starts, at 0 weeks. That is $1, not the [[pointInt]]'],
   [/^read the crossing one grid line too far: (.+)$/, (m0, r) => 'read the crossing one grid line too far. ' + r.charAt(0).toUpperCase() + r.slice(1)],
   [/^took the nearest grid point\. It is on neither line: the crossing is between the grid lines, so estimate each coordinate to the tenth$/, 'took the nearest grid point. That point is on neither line, so read each coordinate between the grid lines to the [[tenth]]']];
@@ -393,11 +393,12 @@ SPEC.countPar = { mc: true, terms: ['coefX', 'parallel', 'sameLine'], pic: true,
 const crossPic = (w, l1, l2, P, cap, story, dots) => planePic({ w, lines: [l1, l2], dots, mark: { x: P[0], y: P[1], t: pairT(P[0], P[1]) }, guides: true, story: !!story, names: story,
   label: 'The graph with the point of intersection, ' + pairT(P[0], P[1]) + ', marked, and a dotted path from it to each axis.' }, cap);
 SPEC.readGraph = { terms: ['solSys', 'pointInt'], pic: true,
-  notice: p => 'The [[solSys]] is the [[pointInt]], where the two lines cross. Read its x first, across, then its y, up or down.',
-  first: p => ({ say: 'Find the point of intersection. Go straight ' + (qsign(p.ans[1]) < 0 ? 'up' : 'down') + ' from it to the x-axis and read its x.', why: 'an ordered pair gives x first, then y.' }),
+  notice: p => 'The [[solSys]] is the [[pointInt]], where the two lines cross. Read its x across for the x box, then its y, up or down, for the y box.',
+  first: p => ({ say: 'Find the point of intersection. Go straight ' + (qsign(p.ans[1]) < 0 ? 'up' : 'down') + ' from it to the x-axis and read its x.', why: 'x is how far across, and it goes in the x box.' }),
   sol: (p, old) => [Object.assign({}, old[0], { pic: crossPic(p.figw, p.l1, p.l2, p.ans, 'The dotted paths lead from ' + c3(pairT(p.ans[0], p.ans[1])) + ' to x = ' + n(p.ans[0]) + ' and y = ' + n(p.ans[1]) + '.') }),
-    { say: old[1].say.replace(/^Check it in both equations — /, 'Check it in both equations: ') , why: 'a solution of a system must make both equations true.', ex: old[1].ex }],
-  walk: (p, old) => old };
+    { say: old[1].say.replace(/^Check it in both equations — /, 'Check it in both equations: ') , why: 'a solution of a system must make both equations true.' },
+    { say: 'Type ' + n(p.ans[0]) + ' in the x box and ' + n(p.ans[1]) + ' in the y box.', ex: old[1].ex }],
+  walk: (p, old) => boxAsk(old) };
 /* Q13 — two tables of values */
 function tableLine(p, filled, which) {
   const l = which ? p.l2 : p.l1, xs = p.xs, ys = xs.map(x => qnum(yAt(l, x))), w = winAround(xs.map((x, i) => [Q(x), Q(ys[i])]), 1);
@@ -418,23 +419,24 @@ SPEC.tableGap = { terms: ['table', 'coefX'], pic: true,
       [choice('Does ' + n(y) + ' fit the table, between ' + n(prev) + ' and ' + n(next) + '?', [ch('Yes: each step of 1 in x ' + (qsign(m) > 0 ? 'adds ' + n(m) + ' to' : 'takes ' + n(qabs(m)) + ' from') + ' y, so ' + n(prev) + ', ' + n(y) + ', ' + n(next), 1),
         ch('No: it should be the same as the number beside it', 0, 'Each column has its own x, so each y is different. The y’s change by the same amount at every step.')])]); } };
 SPEC.tableSol = { terms: ['solSys', 'table'], pic: true,
-  notice: p => 'A [[solSys]] makes both equations true, so it is where both tables give the same y for the same x. Compare the two [[table|tables of values]] one column at a time.',
+  notice: p => 'A [[solSys]] makes both equations true, so both tables give the same y for the same x. Compare the two [[table|tables of values]] one column at a time. That column’s x goes in the x box, and its y in the y box.',
   first: p => ({ say: 'Start at x = 0: the first table gives ' + n(yAt(p.l1, 0)) + ' and the second gives ' + n(yAt(p.l2, 0)) + '. Move right, one column at a time.', why: 'a solution needs the same x and the same y in both tables.' }),
   sol: (p, old) => { const A = tableLine(p, true, 0), B = tableLine(p, true, 1), j = p.xs.indexOf(qnum(p.ans[0])), w = winAround(p.xs.map((x, i) => [Q(x), Q(A.ys[i])]).concat(p.xs.map((x, i) => [Q(x), Q(B.ys[i])])), 1);
     return [Object.assign({}, old[0], { why: 'the solution of a system is the one pair that makes both equations true.', pic: X.fig(FG.tablePic({ xs: p.xs, hi: j, rows: [{ name: lineT(p.l1), ys: A.ys.map((v, i) => i === p.miss ? null : v), hl: true }, { name: lineT(p.l2), ys: B.ys, hl: true }], label: 'Both tables of values, with the column x = ' + n(p.ans[0]) + ' boxed: both give y = ' + n(p.ans[1]) + '.' }),
       'In the ' + c3('boxed column') + ', both tables give ' + n(p.ans[1]) + '.') }),
-      Object.assign({}, old[1], { say: old[1].say.replace(/^Check it in both equations — /, 'Check it in both equations: '), pic: crossPic(w, p.l1, p.l2, p.ans, 'Graphed from their tables' + ' (the dots), the two lines intersect at ' + c3(pairT(p.ans[0], p.ans[1])) + ', the same pair.', null, p.xs.map((x, i) => ({ x: Q(x), y: Q(A.ys[i]) })).filter((d, i) => i !== p.miss).concat(p.xs.map((x, i) => ({ x: Q(x), y: Q(B.ys[i]) })))) })]; },
+      Object.assign({}, old[1], { say: old[1].say.replace(/^Check it in both equations — /, 'Check it in both equations: ').replace(/ The solution is (\(.+?\))\.$/, ' The solution is $1: type ' + n(p.ans[0]) + ' in the x box and ' + n(p.ans[1]) + ' in the y box.'), pic: crossPic(w, p.l1, p.l2, p.ans, 'Graphed from their tables' + ' (the dots), the two lines intersect at ' + c3(pairT(p.ans[0], p.ans[1])) + ', the same pair.', null, p.xs.map((x, i) => ({ x: Q(x), y: Q(A.ys[i]) })).filter((d, i) => i !== p.miss).concat(p.xs.map((x, i) => ({ x: Q(x), y: Q(B.ys[i]) })))) })]; },
   walk: (p, old) => { const l = p.l2, x = p.ans[0];
-    return old.concat([{ type: 'num', ask: 'Check it in the second equation, ' + M(lineH(l)) + '. What is ' + M(substT(lineSide(l), x)) + '?', ans: yAt(l, x), hint: C0.arith('mul', l.m, x) + ' Then add the number added.', then: null }]); } };
+    return boxAsk(old).concat([{ type: 'num', ask: 'Check it in the second equation, ' + M(lineH(l)) + '. What is ' + M(substT(lineSide(l), x)) + '?', ans: yAt(l, x), hint: C0.arith('mul', l.m, x) + ' Then add the number added.', then: null }]); } };
 /* Q14 — (a) the story's point of intersection; (b) an estimate between the grid lines */
 SPEC.storyMeet = { terms: ['intersect', 'pointInt'], pic: true,
-  notice: p => 'The two amounts are equal where the lines [[intersect]], at the [[pointInt]]. Read the weeks across the bottom first, then the amount up the side.',
-  first: p => ({ say: 'Find the point of intersection. Go straight down from it to the weeks axis and read the weeks.', why: 'the weeks are x, across the bottom, so they come first.' }),
+  notice: p => 'The two amounts are equal where the lines [[intersect]], at the [[pointInt]]. Read the weeks across the bottom for the weeks box, then the amount up the side for the other box.',
+  first: p => ({ say: 'Find the point of intersection. Go straight down from it to the weeks axis and read the weeks.', why: 'the weeks are x, across the bottom, and they go in the weeks box.' }),
   sol: (p, old) => [Object.assign({}, old[0], { pic: p.figw ? crossPic(p.figw, p.l1, p.l2, p.ans, 'The dotted paths lead from the crossing to ' + c3(n(p.ans[0]) + ' weeks') + ' and ' + c3(p.st.amt(n(p.ans[1]))) + '.', ['weeks', p.st.yname]) : '' }),
-      Object.assign({}, old[1], { why: 'at the point of intersection both equations give the same amount.' }), old[2]],
-  walk: (p, old) => old };
+      Object.assign({}, old[1], { why: 'at the point of intersection both equations give the same amount.' }),
+      Object.assign({}, old[2], { say: old[2].say + ' Type ' + n(p.ans[0]) + ' in the weeks box and ' + n(p.ans[1]) + ' in the ' + (p.st.unit === 'dollars' ? 'dollars' : 'centimeters') + ' box.' })],
+  walk: (p, old) => old.map(s => s.type !== 'num' ? s : Object.assign({}, s, { ask: s.ask + (qeq(s.ans, p.ans[0]) && /weeks\?$/.test(s.ask) ? ' That goes in the weeks box.' : ' That goes in the ' + (p.st.unit === 'dollars' ? 'dollars' : 'centimeters') + ' box.') })) };
 SPEC.estimate = { terms: ['intersect', 'approx', 'tenth'], pic: true,
-  notice: p => 'These lines [[intersect]] between the grid lines, so the answer is an [[approx]]. Find the grid lines on each side of the crossing, then read each coordinate to the [[tenth]]. The pale dashed lines are the halves.',
+  notice: p => 'These lines [[intersect]] between the grid lines, so the answer is an [[approx]]. Find the grid lines on each side of the crossing, then read x and y, each to the [[tenth]], for their boxes. The pale dashed lines are the halves.',
   first: p => { const c = p.exact, fx = Math.floor(qnum(c.x)), fy = Math.floor(qnum(c.y));
     return { say: 'Find the grid square the crossing is in: x is between ' + mn(fx) + ' and ' + mn(fx + 1) + ', and y is between ' + mn(fy) + ' and ' + mn(fy + 1) + '.', why: 'the grid lines on each side give the whole-number part of each coordinate.' }; },
   sol: (p, old) => { const c = p.exact;
@@ -443,10 +445,12 @@ SPEC.estimate = { terms: ['intersect', 'approx', 'tenth'], pic: true,
       (() => { const same = qeq(yAt(p.l1, p.ans[0]), yAt(p.l2, p.ans[0])) && qeq(yAt(p.l1, p.ans[0]), p.ans[1]);   /* a crossing exactly on a tenth (fifths): both give the same y */
         return Object.assign({}, old[1], { say: old[1].say.replace(/^Check the estimate in both equations — /, 'Check the estimate in both equations: ').replace(/ Both are close to (\S+): a good estimate\.$/, same ? ' Both are exactly $1: this crossing falls right on a tenth.' : ' Both are close to $1: a good estimate.'),
           why: same ? 'when the crossing falls exactly on a tenth, the reading is exact; most crossings give two y’s that are close, not equal.' : 'an estimate is not exact, so the two equations give y’s that are close, not equal.' }); })(),
-      old[2]]; },
+      Object.assign({}, old[2], { say: old[2].say + ' Type ' + n(p.ans[0]) + ' in the x box and ' + n(p.ans[1]) + ' in the y box.' })]; },
   walk: (p, old) => { const c = p.exact, fx = Math.floor(qnum(c.x)), fy = Math.floor(qnum(c.y)), sq = (a, b) => 'x between ' + mn(a) + ' and ' + mn(a + 1) + ', y between ' + mn(b) + ' and ' + mn(b + 1);
     return [choice('Which grid square is the point of intersection in?', [ch(sq(fx, fy), 1), fx !== fy ? ch(sq(fy, fx), 0, 'That swaps x and y. x is read across, left to right; y is read up and down.') : ch(sq(fx, fy + 1), 0, 'Look again at y: the crossing is below the grid line y = ' + mn(fy + 1) + ', so y is between ' + mn(fy) + ' and ' + mn(fy + 1) + '.'),
-      ch('Exactly on the grid point (' + mn(Math.round(qnum(c.x))) + ', ' + mn(Math.round(qnum(c.y))) + ')', 0, 'The lines cross between the grid lines, not on a grid point. That is why the answer is an estimate.')])].concat(old); } };
+      ch('Exactly on the grid point (' + mn(Math.round(qnum(c.x))) + ', ' + mn(Math.round(qnum(c.y))) + ')', 0, 'The lines cross between the grid lines, not on a grid point. That is why the answer is an estimate.')])].concat(boxAsk(old)); } };
+/* the walkthrough's x and y steps say which box each number goes in (the two boxes, 15 Nov 2026) */
+function boxAsk(old) { let k = 0; return old.map(s => { if (s.type !== 'num' || k > 1) return s; const v = 'xy'[k++]; return Object.assign({}, s, { ask: s.ask + ' That goes in the ' + v + ' box.' }); }); }
 const mn = v => String(v).replace(/^-/, '−');
 
 /* ------------------------------------------------------------------ apply to the coach */

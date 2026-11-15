@@ -136,7 +136,7 @@ const WANT = { items: '7,2,2,3', points: TRACK.join(','), types: 'solo,solo,solo
     [9, 'a solution of the system', /^Is \(.+\) a solution of the system y = .+ and y = .+\?$/],
     [10, 'The graphs of the system', /^The graphs of the system y = .+ and y = .+ are shown\. How many solutions does the system have\?$/],
     [11, 'are shown. How many solutions does the system have?', /^The graphs of the system y = .+ and y = .+ are shown\. (?:Both equations graph as the one line shown\. )?How many solutions does the system have\?$/],
-    [12, 'A system of equations is graphed:', /^A system of equations is graphed: y = .+ and y = .+\. What is the solution of the system\?$/],
+    [12, 'What is the solution of the system? Give its x and its y.', /^A system of equations is graphed: y = .+ and y = .+\. What is the solution of the system\? Give its x and its y\.$/],   /* the paper's last sentence too since 15 Nov 2026 (two boxes) */
     [13, 'The tables are for', /^The tables are for y = .+ and y = .+\.$/],
     [14, 'The PART (a) graph shows', /^\w+(?: has|’s plant is) .+ each week\. \w+(?: has|’s plant is) .+ each week\.$/]],
   parts: [[13, 'a', 'What number is missing from the table for', /^What number is missing from the table for y = .+\?$/], [13, 'b', 'What is the solution of the system?', /^What is the solution of the system\?$/],
@@ -221,20 +221,44 @@ function typeBack(seed, w, p) {
       counts.signs = (counts.signs || 0) + 1; });
     wrong(kt(E.qadd(p.ans, E.Q(1))), false);
   } else {
-    const [x, y] = p.ans;
-    if (p.kind === 'story') { right(kt(x) + ' weeks, ' + (p.st.unit === 'dollars' ? '$' + kt(y) : kt(y) + ' cm')); right(p.st.unit === 'dollars' ? '$' + kt(y) + ' after ' + kt(x) + ' weeks' : kt(y) + ' cm after ' + kt(x) + ' weeks'); right(kt(x) + ' and ' + kt(y)); }
-    else { right(kt(x) + ', ' + kt(y)); right('x = ' + kt(x) + ', y = ' + kt(y)); right('(' + kt(x) + ',' + kt(y) + ')'); }
-    C.PF[p.fam].models(p).forEach(m => { if (E.qeq(m.v[0], x) && E.qeq(m.v[1], y)) return; wrong('(' + kt(m.v[0]) + ', ' + kt(m.v[1]) + ')', true); });
+    /* two boxes since 15 Nov 2026 (the kit's several boxes in one part): x = ▢ and y = ▢ (Q12, Q13(b)), x ≈ ▢ and y ≈ ▢ (Q14(b)),
+       after ▢ weeks and $▢ each / ▢ cm tall (Q14(a)) — one point, judged together; every answer typed as one string per box */
+    const [x, y] = p.ans, B = U.view.boxes(p), story = p.kind === 'story', dol = story && p.st.unit === 'dollars';
+    if (!B || B.length !== 2) { fail(seed, w, 'a part of two numbers without its two boxes'); return; }
+    const labs = B.map(b => plainOf((b.pre || '') + ' ▢ ' + (b.unit || '')).replace(/\s+/g, ' ').trim());
+    const wantLabs = story ? ['after ▢ weeks', dol ? '$ ▢ each' : '▢ cm tall'] : p.fam === 'estimate' ? ['x ≈ ▢', 'y ≈ ▢'] : ['x = ▢', 'y = ▢'];
+    if (JSON.stringify(labs) !== JSON.stringify(wantLabs)) fail(seed, w, 'the boxes are labeled ' + JSON.stringify(labs) + ', not ' + JSON.stringify(wantLabs));
+    if (B.some(b => !b.say)) fail(seed, w, 'a box has no name for a screen reader');
+    if (JSON.stringify(U.keyText(p)) !== JSON.stringify([kt(x), kt(y)])) fail(seed, w, 'the two boxes\' keys are ' + JSON.stringify(U.keyText(p)));
+    const neg = t => t.replace(/^-/, '−');
+    right([kt(x), ' ' + kt(y) + ' ']); right([neg(kt(x)), neg(kt(y))]);
+    if (story) { right([kt(x) + ' weeks', dol ? '$' + kt(y) : kt(y) + ' cm']); if (!dol) right([kt(x), kt(y) + ' cm tall']); }
+    else right(['x = ' + kt(x), 'y = ' + kt(y)]);
+    /* never right: a box holding the other's letter or unit, both numbers in one box, a box left empty */
+    const bad = story ? [['$' + kt(x), kt(y)], [kt(x) + ', ' + kt(y), kt(y)], [kt(x), ''], ['', kt(y)]] : [['y = ' + kt(x), kt(y)], [kt(x), 'x = ' + kt(y)], [kt(x) + ', ' + kt(y), kt(y)], ['(' + kt(x) + ', ' + kt(y) + ')', ''], [kt(x), ''], ['', kt(y)]];
+    bad.forEach(t => { const r = U.judge.text(p, t); counts.models++; if (r.v === 'right' || r.v === 'wrong') fail(seed, w, 'the boxes ' + JSON.stringify(t) + ' are ' + r.v + ' (they must be unread, not a try)'); (r.what || []).forEach(z => words(seed, w + ' ' + JSON.stringify(t), z)); });
+    if (U.judge.text(p, ['', '']).v !== 'blank') fail(seed, w, 'two empty boxes are not blank');
+    C.PF[p.fam].models(p).forEach(m => { if (E.qeq(m.v[0], x) && E.qeq(m.v[1], y)) return; wrong([kt(m.v[0]), kt(m.v[1])], true); });
     if (p.fam === 'estimate') {
       /* the lead's ruling (14 Nov 2026), the paper's: right when each coordinate is within 0.1 of the KEY (the crossing rounded to
-         the tenth), inclusive — every tenth from key − 0.2 to key + 0.2 in each coordinate typed, and judged as that rule says */
+         the tenth), inclusive — every tenth from key − 0.2 to key + 0.2 in each coordinate typed, box by box, and judged as that rule says */
       const K = p.ans.map(q => Math.round(E.qnum(q) * 10));
       for (let a = -2; a <= 2; a++) for (let b2 = -2; b2 <= 2; b2++) { const X = (K[0] + a) / 10, Y = (K[1] + b2) / 10, inside = Math.abs(a) <= 1 && Math.abs(b2) <= 1;
-        const r = U.judge.text(p, '(' + X + ', ' + Y + ')'); if ((r.v === 'right') !== inside) fail(seed, w, '(' + X + ', ' + Y + ') is ' + r.v + ' but is ' + (inside ? 'inside' : 'outside') + ' the range'); }
+        const r = U.judge.text(p, [String(X), String(Y)]); if ((r.v === 'right') !== inside) fail(seed, w, 'x ≈ ' + X + ', y ≈ ' + Y + ' is ' + r.v + ' but is ' + (inside ? 'inside' : 'outside') + ' the range'); }
       [[0.05, 0.05], [-0.1, 0.1], [0.11, 0], [0, -0.11]].forEach(([a, b2]) => { const X = +(K[0] / 10 + a).toFixed(2), Y = +(K[1] / 10 + b2).toFixed(2), inside = Math.abs(a) <= 0.1 && Math.abs(b2) <= 0.1;
-        const r = U.judge.text(p, '(' + X + ', ' + Y + ')'); if ((r.v === 'right') !== inside) fail(seed, w, '(' + X + ', ' + Y + ') is ' + r.v + ' but is ' + (inside ? 'inside' : 'outside') + ' the range'); });
+        const r = U.judge.text(p, [String(X), String(Y)]); if ((r.v === 'right') !== inside) fail(seed, w, 'x ≈ ' + X + ', y ≈ ' + Y + ' is ' + r.v + ' but is ' + (inside ? 'inside' : 'outside') + ' the range'); });
       if (E.qnum(p.tol) !== 0.1) fail(seed, w, 'the tolerance is not 0.1');
-    } else wrong('(' + kt(y) + ', ' + kt(x) + ')', !E.qeq(x, y));
+      /* one box right and the other wrong is wrong, and says which */
+      const offx = String((K[0] + 5) / 10), offy = String((K[1] + 5) / 10);
+      [[[String(K[0] / 10), offy], /Your x is a good estimate/], [[offx, String(K[1] / 10)], /Your y is a good estimate/]].forEach(([t, re]) => { const r = U.judge.text(p, t); counts.models++;
+        if (r.v !== 'wrong') fail(seed, w, JSON.stringify(t) + ' (one box right) is ' + r.v); else if (!re.test((r.what || []).join(' ')) && !/That is what you get if you/.test((r.what || []).join(' '))) fail(seed, w, JSON.stringify(t) + ' does not say which box is right: ' + (r.what || []).join(' ')); });
+    } else {
+      wrong([kt(y), kt(x)], !E.qeq(x, y));
+      /* one box right and the other wrong: wrong, and (unless it is a named mistake) it says which box is right */
+      const ox = E.qadd(x, E.Q(7)), oy = E.qadd(y, E.Q(7));
+      [[[kt(x), kt(oy)], story ? /The weeks are right/ : /Your x is right/], [[kt(ox), kt(y)], story ? /not the same yet/ : /Your y is right/]].forEach(([t, re]) => { const r = U.judge.text(p, t); counts.models++; (r.what || []).forEach(z => words(seed, w + ' ' + JSON.stringify(t), z));
+        if (r.v !== 'wrong') fail(seed, w, JSON.stringify(t) + ' (one box right) is ' + r.v); else if (!re.test((r.what || []).join(' ')) && !/That is what you get if you/.test((r.what || []).join(' '))) fail(seed, w, JSON.stringify(t) + ' does not say which box is right: ' + (r.what || []).join(' ')); });
+    }
   }
 }
 
@@ -441,7 +465,12 @@ for (let seed = 1; seed <= NSETS; seed++) {
       }
     } catch (e) { fail(seed, w, 'could not read it back: ' + e.message); }
     if (DI) { if (q !== 5) E.partsOf(it).forEach(p => { if (it.type === 'mc' || it.type === 'multi') return;
+        const B = U.view.boxes(p);                   /* the two boxes (15 Nov 2026): their labels, and answers typed box by box with the page's verdict, for verify.py to judge again */
+        const tries = !B ? null : (() => { const k = p.ans.map(q => E.qnum(q)), f = v => String(+v.toFixed(2)), out = [[k[0], k[1]], [k[1], k[0]], [k[0], k[1] + 3], [k[0] + 3, k[1]], [k[0] + 1, k[1] + 1]];
+          if (p.fam === 'estimate') [[0.1, 0.1], [-0.1, -0.1], [0.1, -0.2], [0.2, 0], [0, 0.2], [-0.2, 0.1]].forEach(([a, b2]) => out.push([k[0] + a, k[1] + b2]));
+          return out.map(([a, b2]) => { const t = [f(a), f(b2)]; return { typed: t, v: U.judge.text(p, t).v }; }); })();
         DI.parts.push({ label: p.label, kind: p.kind, fam: p.fam, line: U.view.line(p), key: U.view.key(p), keyText: U.keyText(p), choices: U.choices(p),
+          boxes: B ? B.map(b => plainOf((b.pre || '') + ' ▢ ' + (b.unit || '')).replace(/\s+/g, ' ').trim()) : null, tries,
           sol: U.solution(p, 'text').map(l => ({ say: l.say, ex: l.ex == null ? null : typeof l.ex === 'string' ? l.ex : E.eqH(l.ex) })),
           steps: U.walk(p, 'text').filter(s => s.type === 'num').map(s => ({ ask: s.ask, ans: E.kstr(s.ans), tol: s.tol ? E.kstr(s.tol) : null, near: s.near ? E.kstr(s.near) : null })) }); });
       if (it.type === 'mc' || it.type === 'multi') DI.sol = U.solution(it, 'mc').map(l => l.say);

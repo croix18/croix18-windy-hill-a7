@@ -565,7 +565,7 @@ function q12(seed) {
     const w = windowFor([[s.x0, s.y0], [0, qnum(l1.b)], [0, qnum(l2.b)]], { mx: 2, my: 2 });
     if (w.x1 - w.x0 > 12 || w.y1 - w.y0 > 14 || inWindow(l1, w) < 4 || inWindow(l2, w) < 4 || shownSys(l1, l2)) return { bad: true };
     const prm = { m1: kstr(l1.m), b1: kstr(l1.b), m2: kstr(l2.m), b2: kstr(l2.b), x0: s.x0, y0: s.y0, w: [w.x0, w.x1, w.y0, w.y1] };
-    return { type: 'solo', stem: 'A system of equations is graphed:&nbsp; ' + sysStem(l1, l2) + '. What is the solution of the system?', l1, l2,
+    return { type: 'solo', stem: 'A system of equations is graphed:&nbsp; ' + sysStem(l1, l2) + '. What is the solution of the system? Give its x and its y.', l1, l2,
       fig: { kind: 'plane', w, lines: [l1, l2], legend: [lineH(l1), lineH(l2)] },
       part: pairPart({ fam: 'readGraph', prm, l1, l2, ans: [Q(s.x0), Q(s.y0)], key: keyOf('readGraph', prm), figw: w }) };
   });

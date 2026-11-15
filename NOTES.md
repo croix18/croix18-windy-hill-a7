@@ -33,6 +33,21 @@ was done in Windmill is in its `HANDOFF.md` (the first sections) and in `kit/REA
   - 11.07 board 6 says "Four points on the lines are marked." (the crossing is one of them, so "each line passes
     through two marked points" was not what the picture showed); 11.08 board 4's stem ends "Best estimate?" because
     the full sentence does not fit on one line and a second line drops the graph under the options.
+- **Unit 11's practice page** (`a7/practice/u11`; still NOT published) has the kit's several boxes: questions 12 and
+  13(b) take `x =` and `y =`; 14(a) "after ▢ weeks" and the amount; 14(b) `x ≈` and `y ≈`, each within 0.1. A part is
+  still one point, and the key and the all-multiple-choice paper show the whole pair. 63 of 63 planted errors. Today's
+  lesson changes moved three sets (9, 154, 174) under ruling 43 and the sets were locked again — allowed only because
+  the page has never been published (`contentVersion` 1). The printed test's directions are the two sentences of every
+  teacher copy; the unit's own note about writing a point is gone. Page and teacher copy: ALL CHECKS PASSED on the
+  practice kit at Windmill `bf7af44`, the lock unchanged across the last runs. Three lines on the page that explain the
+  screen were left for Croix's word (Windmill `HANDOFF.md`, "Words on a page"): "Each to the nearest tenth" over
+  14(b)'s boxes; Hint 3's "Type 3 in the x box and 2 in the y box." and the walkthrough's "That goes in the x box.";
+  the coach's "Open Hint, then tap Step by step with me."
+- **The practice kit is at Windmill `bf7af44`** (`a7/practice/kit/KIT_VERSION`): a part may have several labelled boxes
+  (`view.boxes`), a walkthrough's options are shuffled by the question, the kit writes a dot and never × (Units 3–6
+  keep the × their checks hold: `LEGACY_TIMES`), and on a phone a box with a unit takes its own row. Units 3–6's pages
+  were run on the kit one commit earlier, which differs only in the boxes' phone layout (they have no boxes), so their
+  `CHECKED` stamps are one kit behind: `run.py` before the next build of one, as after any vendoring.
 - **Units 3, 4, 5 and 6 are rebuilt and installed on this kit**, each at `checks: 0 findings`; no question, answer or
   number changed. Page counts that moved: Unit 6 — 6.07's set key 2→1; Unit 5 — the Practice Test 6→5; Unit 4 — Forms A
   and B 8→7 each. **Unit 3 changed most.** It was last built on the morning of 25 Oct, before the kit printed a
@@ -42,7 +57,7 @@ was done in Windmill is in its `HANDOFF.md` (the first sections) and in `kit/REA
   from 25 Oct to this morning comes out the same as today's, so it is not today's change). Two plans no longer fit
   with the Vocabulary minute and gave it one of their own: 3.01 Notes I 3→2 min, 3.06 Notes III 4→3 min.
 - **Units 3–6's practice pages and teacher copies** were run again on the practice kit as fixed this morning: every
-  one ends ALL CHECKS PASSED and no set lock moved. They keep their × hints (`LEGACY_TIMES` in the kit's `core.js`).
+  one ends ALL CHECKS PASSED and no set lock moved.
 - The master sheet is regenerated (0 problems) and `tools/check.sh` passes.
 
 ### Open, for Croix

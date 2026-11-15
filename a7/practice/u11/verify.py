@@ -25,7 +25,7 @@ GLY = str.maketrans({"½": "(1/2)", "⅓": "(1/3)", "⅔": "(2/3)", "¼": "(1/4)
 TR = standard_transformations + (implicit_multiplication_application, rationalize)
 bad = []
 def no(where, msg): bad.append("%s: %s" % (where, msg))
-n = dict(eq=0, lines=0, steps=0, pairs=0, segs=0, tables=0, choices=0, shown=0)
+n = dict(eq=0, lines=0, steps=0, pairs=0, segs=0, tables=0, choices=0, shown=0, boxes=0, box_tries=0)
 
 def text(h):
     t = re.sub(r'<span class="fr"><span class="nu">([^<]*)</span><span class="de">([^<]*)</span></span>', r"((\1)/(\2))", str(h))
@@ -122,6 +122,19 @@ def check_choices(where, p, keyval, est=None):
             m = re.findall(r"−?\d+(?:\.\d+)?", t)
             if m and num(m[-1]) == keyval: no(where, "a wrong choice %s is the key" % t)
     if len(p["choices"]) < 3: no(where, "fewer than three wrong answers for the paper")
+
+def check_boxes(where, p, key, labels, est=False):
+    """the two boxes (15 Nov 2026): their labels, their keys one per box, and every answer the dump typed box by box judged
+    again here — right exactly when both boxes hold the key (an estimate: each within 0.1 of it, inclusive)"""
+    n["boxes"] += 1
+    if p.get("boxes") != labels: no(where, "the boxes are labeled %s, not %s" % (p.get("boxes"), labels)); return
+    kt = p.get("keyText")
+    if not isinstance(kt, list) or len(kt) != 2 or (num(kt[0]), num(kt[1])) != tuple(key): no(where, "the boxes' keys %s are not %s" % (kt, key))
+    for tr in p.get("tries") or []:
+        a, b = num(tr["typed"][0]), num(tr["typed"][1]); n["box_tries"] += 1
+        ok = abs(a - key[0]) <= Q(1, 10) and abs(b - key[1]) <= Q(1, 10) if est else (a, b) == tuple(key)
+        if ok != (tr["v"] == "right"): no(where, "the boxes %s are marked %s; they are %s" % (tr["typed"], tr["v"], "right" if ok else "wrong"))
+    if not p.get("tries"): no(where, "no answers typed into the boxes")
 
 def eq_key(t, ending_):
     nums = sorted(shown43.numbers(t.replace("−", "-").replace("½", "(1/2)")))
@@ -230,6 +243,7 @@ for S in DUMP["sets"]:
                 if len(sol) != 1 or (sol[0][X], sol[0][Y]) != key: no(w, "the system solves to %s; the key %s" % (sol, key))
                 elif not (key[0].is_integer and key[1].is_integer): no(w, "the crossing is not a grid point")
                 plane(w, it["fig"], ls, 2, key); check_steps(w, p["steps"]); check_choices(w, p, key); held43(w, lines=ls)
+                check_boxes(w, p, key, ["x = ▢", "y = ▢"])
             elif q == 13:
                 ls = [line(t) for t in M if t.startswith("y")][:2]; n["tables"] += 1
                 tabs = re.findall(r'<table class="vt"><caption>([\s\S]*?)</caption>([\s\S]*?)</table>', it["fig"]); gap = None; cols = None
@@ -246,6 +260,8 @@ for S in DUMP["sets"]:
                 if len(agree) != 1 or pair(text(pb["key"])) != (agree[0], ls[0][0] * agree[0] + ls[0][1]): no(w + "b", "the tables agree at %s; the key %s" % (agree, text(pb["key"])))
                 for p in (pa, pb): check_steps(w + p["label"], p["steps"])
                 check_choices(w + "a", pa, num(text(pa["key"]))); check_choices(w + "b", pb, pair(text(pb["key"]))); held43(w, lines=ls)
+                if pa.get("boxes"): no(w + "a", "one number with boxes")
+                check_boxes(w + "b", pb, pair(text(pb["key"])), ["x = ▢", "y = ▢"])
             elif q == 14:
                 pa, pb = it["parts"]
                 m = re.match(r"^(\w+)\D*?(\d+)\D+?(\d+) (?:cm )?each week\. (\w+)\D*?(\d+)\D+?(saves|spends|grows) \$?(\d+)", st)
@@ -273,6 +289,8 @@ for S in DUMP["sets"]:
                 V14B.add(" ; ".join(maths(pb["line"])[:2]))   # Q14(b)'s own version: its two printed equations, in order
                 for p in (pa, pb): check_steps(w + p["label"], p["steps"])
                 check_choices(w + "a", pa, (Q(nums[0]), Q(nums[1]))); check_choices(w + "b", pb, None, est=key); held43(w + "b", lines=ls)
+                check_boxes(w + "a", pa, (Q(nums[0]), Q(nums[1])), ["after ▢ weeks", "▢ cm tall" if " cm " in st else "$ ▢ each"])
+                check_boxes(w + "b", pb, key, ["x ≈ ▢", "y ≈ ▢"], est=True)
         except Exception as e:
             no(w, "could not check: %r" % (e,))
 
@@ -294,6 +312,8 @@ for G in DUMP["sets"][:200]:
     theirs = [len(it.get("parts", [])) or 1 for s in paper for it in s["items"]]
     if mine != theirs: no("set %d" % G["seed"], "its parts %s are not the test's %s" % (mine, theirs))
 
+if n["boxes"] < 4 * len(DUMP["sets"]): no("the boxes", "only %d parts with two boxes in %d sets (Q12, Q13(b), Q14(a), Q14(b) in every set)" % (n["boxes"], len(DUMP["sets"])))
+print("%d parts with two boxes, their labels and keys, %d answers typed box by box judged again" % (n["boxes"], n["box_tries"]))
 print("%d sets: %d equations solved, %d worked lines and %d Hint steps read back, %d ordered pairs put in both equations, %d drawn lines on their equations, %d table pairs, %d paper choices; ruling 43 from the specs: %d equations, %d systems, %d stories shown, %d hits; Q14(b) in %d versions of its own; the test's %d questions and %d points matched: %s"
       % (len(DUMP["sets"]), n["eq"], n["lines"], n["steps"], n["pairs"], n["segs"], n["tables"], n["choices"], len(SHOWN["eq"]), len(SHOWN["sys"]), len(SHOWN["story"]), n["shown"], len(V14B),
          sum(len(s["items"]) for s in paper), pts, "ALL SOUND" if not bad else "%d PROBLEMS" % len(bad)))
