@@ -135,6 +135,9 @@ def linear_text(latex):
     return re.sub(r"\s+", " ", t).strip()
 
 
+KEY_FIGURE = "fig_key"     # the mark on a key's own figure (docPr descr), read by checks.py keytwin
+
+
 class Doc:
     def __init__(self, eyebrow, title, sub, key=False, name_block=True, margins=1440,
                  banner="ANSWER KEY", font=None):
@@ -378,7 +381,7 @@ class Doc:
 
     # ---------- questions ----------
     def question(self, stem, answer=None, reasoning=None, space=1.0, parts=None, points=None,
-                 choices=None, choice_answer=None, table=None, number=None, lines=None, fig=None):
+                 choices=None, choice_answer=None, table=None, number=None, lines=None, fig=None, fig_is_key=False):
         """One question in one unsplittable block.
         stem: rich text. answer/reasoning: key only. space: inches of work room (student only).
         parts: list of (label, text, answer, reasoning, space). choices: list of rich strings
@@ -408,7 +411,9 @@ class Doc:
             path, w, h = figkit.draw(figkit.slide(fig) if self.font == "Lexend" else fig, fig.get("in", 2.4))
             fp = c.add_paragraph(); fp.alignment = WD_ALIGN_PARAGRAPH.CENTER
             fp.paragraph_format.space_before = Pt(2); fp.paragraph_format.space_after = Pt(4)
-            fp.add_run().add_picture(path, width=Inches(w), height=Inches(h))
+            pic = fp.add_run().add_picture(path, width=Inches(w), height=Inches(h))
+            if fig_is_key:                    # the key's own figure (`fig_key`): checks.py keytwin lets it differ from the page's
+                pic._inline.docPr.set("descr", KEY_FIGURE)
         if table:
             widths, rows, hdr = table
             self._inner_table(c, widths, rows, hdr)
@@ -416,7 +421,7 @@ class Doc:
             self._choices(c, choices, choice_answer)
         if parts:
             for i, part in enumerate(parts):
-                lab, text, ans, why, sp = (list(part) + [None, None, None, None])[:5]
+                lab, text, ans, why, sp, pch, pcorr = (list(part) + [None] * 7)[:7]
                 pp = c.add_paragraph(); pf = pp.paragraph_format
                 pf.space_before = Pt(4); pf.space_after = Pt(4)
                 pf.left_indent = Twips(900); pf.first_line_indent = Twips(-380)
@@ -424,7 +429,11 @@ class Doc:
                 if points is not None:
                     pt = points[i] if isinstance(points, (list, tuple)) else 1
                     self._pts(pp, pt)
-                if self.key:
+                if pch:                              # a lettered part with choices (2 Nov 2026, M7 U9 Q8): bubbles under the part
+                    self._choices(c, pch, pcorr, indent=1700)
+                    if self.key and why:
+                        self._answer(c, None, why, indent=900)
+                elif self.key:
                     self._answer(c, ans, why, indent=900)
                 else:
                     self._space(c, sp if sp is not None else space)
@@ -473,12 +482,12 @@ class Doc:
             pf.space_before = Pt(0); pf.space_after = Pt(6); pf.left_indent = Twips(indent)
             self.rich(pp, why, size=9.5, italic=True, color=GRAY)
 
-    def _choices(self, c, choices, correct):
+    def _choices(self, c, choices, correct, indent=1300):
         corr = set(correct if isinstance(correct, (list, tuple, set)) else [correct]) if correct is not None else set()
         multi = isinstance(correct, (list, tuple, set))
         for i, ch in enumerate(choices):
             pp = c.add_paragraph(); pf = pp.paragraph_format
-            pf.space_before = Pt(2); pf.space_after = Pt(2); pf.left_indent = Twips(1300); pf.first_line_indent = Twips(-380)
+            pf.space_before = Pt(2); pf.space_after = Pt(2); pf.left_indent = Twips(indent); pf.first_line_indent = Twips(-380)
             mark = ("☒" if i in corr else "☐") if (self.key and multi) else ("●" if (self.key and i in corr) else ("□" if multi else "○"))
             r = self._run(pp, mark + "   ", 11, color=(RED if (self.key and i in corr) else INK), font="FreeSerif")
             self.rich(pp, f"{chr(65 + i)}.  " + ch, color=(RED if (self.key and i in corr) else INK),
