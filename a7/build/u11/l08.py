@@ -68,8 +68,19 @@ def table_of(rhs, xs, ys):
 
 def near(exact, est, tol="0.05"):
     """The keyed estimate is within tol of the exact coordinate (AR.4.3 Clar. 1; audit E15). A keyed read is a
-    tenth: within 0.05 of the exact value. The key also accepts any careful read within 0.2."""
+    tenth: within 0.05 of the exact value. The key accepts a read within 0.1 of the keyed tenth (one policy for
+    the unit, fast 15 / critic 1, 15 Nov)."""
     return ("approx", exact, est, tol)
+
+
+def no_grid_point(kx, ky, xs="1", ys="1"):
+    """The accepted box — x within 0.1 of kx, y within 0.1 of ky — holds no printed grid intersection (grid lines
+    every xs across and ys up): a nearest-grid-point read, which lies on one line at most, is never accepted."""
+    lo_x, hi_x = "(" + kx + " - F(1,10))", "(" + kx + " + F(1,10))"
+    lo_y, hi_y = "(" + ky + " - F(1,10))", "(" + ky + " + F(1,10))"
+    has_x = "(sp.floor(" + hi_x + "/(" + xs + "))*(" + xs + ") >= " + lo_x + ")"
+    has_y = "(sp.floor(" + hi_y + "/(" + ys + "))*(" + ys + ") >= " + lo_y + ")"
+    return ("true", "not (" + has_x + " and " + has_y + ")")
 
 
 def estimate(r1, r2, x, y, ex, ey):
@@ -77,7 +88,7 @@ def estimate(r1, r2, x, y, ex, ey):
     NOT on both lines (it is an estimate: the two values in the check come out close, not equal)."""
     off = ("true", "sp.simplify((" + _u(r1) + ").subs(" + X + ", " + ex + ") - (" + ey + ")) != 0 or "
            "sp.simplify((" + _u(r2) + ").subs(" + X + ", " + ex + ") - (" + ey + ")) != 0")
-    return ("many", crosses(r1, r2, x, y), near(x, ex), near(y, ey), off)
+    return ("many", crosses(r1, r2, x, y), near(x, ex), near(y, ey), off, no_grid_point(ex, ey))
 
 
 # ---- the board figures: 11.07's sizes (the largest a board allows): one bold row over the figure, a window no
@@ -122,12 +133,14 @@ NOTES2 = S(figs.plane((0, 8), (0, 32), lines=[(2, 10, "pass: y = 2x + 10"), (4, 
 NOTES3 = S(figs.plane((-1, 5), (-2, 5), lines=[(2, -1), (-1, 4)], solution=F3,
                       points=[(F3[0], F3[1], "about (1.7, 2.3)", "r")]),
            inches=4.4, pt=16, reserve=1.0)
-EX1 = S(figs.plane((0, 14), (0, 100), lines=[(5, 30, "A"), (2, 60, "B")], xs=2, ys=10,
-                   xname="minutes", yname="water (liters)", solution=(10, 80), step=2),
+# The Examples' question slides (barton 24, 15 Nov): an empty grid with the story's axes (Example 1), and the two
+# tables with an empty grid (Example 2) — the teacher draws while the class watches; the worked slide gives the
+# equations, the crossing and its check. Example 2 is liters now, not pages (critic 11: half a page is strained).
+EX1 = S(figs.plane((0, 14), (0, 100), xs=2, ys=10, xname="minutes", yname="water (liters)", step=2),
         inches=4.6, pt=16, reserve=0.9)
-EX2 = S(figs.plane((0, 4), (0, 12), lines=[(3, 0, "A"), (1, 5, "B")], ys=3,
-                   xname="minutes", yname="pages printed", solution=(Fr(5, 2), Fr(15, 2))),
-        inches=4.6, pt=16, reserve=0.9)
+EX2 = S(figs.row([figs.table([([0, 1, 2, 3], [0, 3, 6, 9]), ([0, 1, 2, 3], [5, 6, 7, 8])], titles=["Tub A", "Tub B"], cw=1.0),
+                  figs.plane((0, 4), (0, 12), ys=3, xname="minutes", yname="water (liters)")],
+                 gap=1.4), inches=11.4, pt=16, reserve=0.8)
 
 # ---- the boards
 P1 = figs.plane((0, 6), (0, 30), lines=[(3, 6, "A"), (5, 0, "B")], ys=5,
@@ -142,7 +155,9 @@ P3 = figs.plane((0, 3), (0, 5), lines=[(1, 0, ""), (-2, 5, "")], solution=(Fr(5,
 # board 3 at one row of words: its equations are the lines' labels (14 Nov), so the plane takes the room a second row had
 P3L = figs.plane((0, 3), (0, 5), lines=[(1, 0), (-2, 5)], solution=(Fr(5, 3), Fr(5, 3)))
 P4 = figs.plane((0, 3), (0, 5), lines=[(2, 1, ""), (-1, 5, "")], solution=(Fr(4, 3), Fr(11, 3)))
-P4A = figs.plane((-1, 4), (-1, 6), lines=[(2, 1), (-1, 5)], solution=(Fr(4, 3), Fr(11, 3)))
+# the reveal keeps the question's window and marks the crossing (critic 16)
+P4A = figs.plane((0, 3), (0, 5), lines=[(2, 1, ""), (-1, 5, "")], solution=(Fr(4, 3), Fr(11, 3)),
+                 points=[(Fr(4, 3), Fr(11, 3), "")])
 P5 = figs.plane((0, 8), (0, 48), lines=[(3, 12, "A"), (6, 0, "B")], ys=6,
                 xname="hours", yname="cost (dollars)", solution=(4, 24), step=2)
 P5A = figs.plane((0, 8), (0, 48), lines=[(3, 12, "A"), (6, 0, "B")], ys=6,
@@ -152,11 +167,10 @@ P7 = figs.plane((0, 16), (0, 80), lines=[(4, 10, "sunflower"), (2, 30, "bean")],
                 xname="weeks", yname="height (cm)", solution=(10, 50), step=2)
 P7A = figs.plane((0, 16), (0, 80), lines=[(4, 10, "sunflower"), (2, 30, "bean")], xs=2, ys=10,
                  xname="weeks", yname="height (cm)", solution=(10, 50), step=2, points=[(10, 50, "")])
-P9 = figs.plane((0, 12), (0, 120), lines=[(6, 24, "A"), (10, 0, "B")], xs=2, ys=20,
-                xname="months", yname="cost (dollars)", solution=(6, 60))
-P9A = figs.plane((0, 12), (0, 120), lines=[(6, 24, "A"), (10, 0, "B")], xs=2, ys=20,
-                 xname="months", yname="cost (dollars)", solution=(6, 60),
-                 points=[(6, 60, ""), (10, 84, ""), (10, 100, "")])
+# board 9 (barton 20): the written exit board is an estimate and its check — the skill the test's 14(b) asks
+P9 = figs.plane((0, 3), (0, 6), lines=[(1, 3, ""), (-2, 5, "")], solution=(Fr(2, 3), Fr(11, 3)))
+P9A = figs.plane((0, 3), (0, 6), lines=[(1, 3, ""), (-2, 5, "")], solution=(Fr(2, 3), Fr(11, 3)),
+                 points=[(Fr(2, 3), Fr(11, 3), "")])
 
 
 # ---- the Independent Set and the banks: an empty grid for each system a student graphs (decision 9). A grid is
@@ -181,18 +195,18 @@ L = dict(
     vocab_note="One phrase. An estimate is a careful read, not a guess: nearest half or tenth, the word 'about', and a check in both equations that comes out close.",
     ixl=["Solve a system of equations by graphing: word problems — W9J"],
     title_note="The last lesson before Friday's test, and there is no review day: hand out the Unit Review at the IXL slide; it goes home tonight. Say so out loud — no slide does.",
-    closure="Board 9 is written work and it is the exit evidence: Plan A costs less for 10 months, because the lines cross at 6 months and after the crossing Plan A's line is lower — \\$84 against \\$100. A board that names Plan A with no reason, or reasons from the \\$24 start alone, has the verdict and not the crossing.",
+    closure="Board 9 is written work and it is the exit evidence: an estimate of about (0.7, 3.7) for y = x + 3 and y = −2x + 5, with both checks written — 0.7 + 3 = 3.7 and −2(0.7) + 5 = 3.6, close. A board with (1, 4) took the nearest grid point, which is on one line only; a board with no check has the guess and not the estimate.",
 
     mtr=[("MTR.5.1", "a story's amount per 1 and start become (amount)·x + (start)"),
          ("MTR.6.1", "every estimate checked in both equations: close, not equal"),
-         ("MTR.7.1", "boards 1, 2, 5, 7, 9: the crossing said with units")],
+         ("MTR.7.1", "boards 1, 2, 5, 7: the crossing said with units")],
     hoq=[("Your estimate gives 2.4 in one equation and 2.3 in the other. Why does that not mean your estimate is wrong?", "DOK 2"),
          ("Before the crossing one plan is cheaper; after it, the other. How does the graph show which is which?", "DOK 2"),
          ("Two savers add the same amount each week but start with different amounts. Why will they never be equal?", "DOK 3")],
     differentiation=[
         ("ESE / 504", "A card on the desk: 'amount per 1 · x + start'. For an estimate, a printed strip of the grid between two lines cut in tenths, laid along the crossing."),
         ("ELL", "**Per**: for each one. **Start**: what you have at 0. **About**: close, not exact. **Costs less**: cheaper."),
-        ("Enrichment", "Board 9 finishes early for some: change Plan A's start so the plans are equal at 10 months. (6(10) + s = 10(10), so s = \\$40.)")],
+        ("Enrichment", "Board 5 finishes early for some: change Shop A's start so the shops cost the same at 7 hours. (3(7) + s = 6(7), so s = \\$21.)")],
 
     warmup=[
         dict(stem="Use tables to solve:  $y = x + 3$  and  $y = 2x$", answer="(3, 6)", band="last lesson",
@@ -204,11 +218,11 @@ L = dict(
         dict(stem="A 6-ft post casts a 4-ft shadow. A tree casts 10 ft. How tall?", answer="15 ft", band="last unit",
              source="6.07 — similar triangles: 6/4 = h/10",
              check=("eq", "F(6,4)*10", "15")),
-        dict(stem="What number is halfway between 2 and 3?", answer="2.5", band="the prerequisite this lesson needs",
-             source="decimals — the half between two grid lines; Example 2 reads one",
-             check=("eq", "F(2 + 3, 2)", "F(5,2)")),
+        dict(stem="A gym costs \\$15 to join and \\$4 a visit. What do 5 visits cost?", answer="\\$35", band="the prerequisite this lesson needs",
+             source="1.06–1.07 — a start plus an amount per one, from a story (Unit 1); every line today is one",
+             check=("eq", "15 + 4*5", "35")),
     ],
-    warmup_note="Q1 is yesterday in one line; Q4 is today's new reading — a crossing halfway between two grid lines. Two minutes silent, then reveal.",
+    warmup_note="Q1 is yesterday in one line; Q4 is today's move — a start plus an amount for each one: 15 + 4(5). Every line today is (the amount per 1)·x + (the start). Two minutes silent, then reveal.",
 
     notes=[
         dict(numeral="I", head="A story is a system", min=4, sub="Copy both equations.",
@@ -224,47 +238,60 @@ L = dict(
              items2=["At 5 rides, both cost \\$20.   Fewer rides: pay per ride.   More: buy the pass."],
              letters=False),
         dict(numeral="III", head="Between the grid lines: estimate", min=3, sub="",
-             note="These lines cross between x = 1 and x = 2, a little past the middle, and a little above y = 2: about (1.7, 2.3). Read to the nearest half or tenth and write 'about'. Check the estimate in both equations: 2(1.7) − 1 = 2.4 and −1.7 + 4 = 2.3 — close, not equal, which is what an estimate gives. The exact crossing is 5/3 and 7/3; nobody is asked for it (Algebra 1). A careful read of (1.5, 2.5) is also an estimate the test accepts.\nOFF: 'Between which grid lines? Nearer which one? Then about, and check: close is right.'",
+             note="These lines cross between x = 1 and x = 2, a little past the middle, and a little above y = 2: about (1.7, 2.3). Read each coordinate to the nearest tenth and write 'about'. Check the estimate in both equations: 2(1.7) − 1 = 2.4 and −1.7 + 4 = 2.3 — close, not equal, which is what an estimate gives. The exact crossing is 5/3 and 7/3; nobody is asked for it (Algebra 1). A read within 0.1 of each — (1.6, 2.3), (1.7, 2.4) — is a good estimate; a grid point such as (2, 2) is on one line only, and is not.\nOFF: 'Between which grid lines? Nearer which one? Then about, and check: close is right.'",
              fig=NOTES3,
              items2=["Check:   $2(1.7) - 1 = 2.4$   and   $-1.7 + 4 = 2.3$.   Close: a good estimate."],
              letters=False),
     ],
 
     examples=[
-        dict(title="Example 1", sub="A story to a system; the crossing in words.", min_q=1,
-             note_q="Ask for each tank's start and amount per minute before anyone writes an equation. Then read the axes' names and scale aloud: minutes across, every 2; liters up, every 10.",
+        # barton 9: writing a system from a story is modeled here (Notes I, then this worked slide, a line each)
+        # before board 6 asks for it
+        dict(title="Example 1", sub="A story to a system; the crossing in words.", min_q=2,
+             note_q="The grid is empty on purpose. Ask for each tank's start and amount per minute before anyone writes an equation; write the two equations, a line each. Read the axes' names and scale aloud: minutes across, every 2; liters up, every 10. Then plot each tank at 0 and 6 minutes and draw the two lines on the projected grid; ask the room where they cross.",
              prompt=["Tank A: 30 liters, gaining 5 a minute. Tank B: 60 liters, gaining 2 a minute."],
              fig=EX1, ask="When do the tanks hold the same amount, and how much is that?",
-             worked=[dict(sub="Worked.", min=2,
+             worked=[dict(sub="Worked.", min=1,
                           note="Tank A: start 30, 5 per minute, y = 5x + 30. Tank B: y = 2x + 60. The lines cross at (10, 80): x = 10 minutes, y = 80 liters. Check: 5(10) + 30 = 80 and 2(10) + 60 = 80. Say it in the story's words. A board with 'after 80 minutes' swapped the coordinates.",
-                          rows=[("\\mathrm{A}:\\ y = 5x + 30 \\qquad \\mathrm{B}:\\ y = 2x + 60", "start and amount per minute"),
-                                ("(10, 80):\\quad 5(10) + 30 = 80 \\quad\\text{and}\\quad 2(10) + 60 = 80", "the crossing, checked in both")],
+                          rows=[("\\mathrm{A}:\\ y = 5x + 30", "start 30, 5 per minute"),
+                                ("\\mathrm{B}:\\ y = 2x + 60", "start 60, 2 per minute"),
+                                ("5(10) + 30 = 80", "A at 10 minutes"),
+                                ("2(10) + 60 = 80", "B at 10 minutes: the crossing (10, 80)")],
                           answer="After 10 minutes, both hold 80 liters.")],
              check=("many", crosses("5*u + 30", "2*u + 60", "10", "80"), sat("5*u + 30", "10", "80"), sat("2*u + 60", "10", "80")),
-             your_turn=dict(min=2, note="Mia: y = 10x + 40; Noah: y = 5x + 100. Equal at 12 weeks: 10(12) + 40 = 160 and 5(12) + 100 = 160. Graphed with weeks every 2 and dollars every 20, the crossing is on a grid line. A board with 'after 160 weeks' swapped; one with 'after 6 weeks' set 10x + 40 = 100.",
-                            prompt=["Mia has \\$40 and saves \\$10 a week. Noah has \\$100 and saves \\$5 a week."],
+             # the Your Turn carries its two tables in rows (a Your Turn slide carries no figure — the lead's ruling,
+             # 15 Nov), and the crossing is inside them (critic 3d: the old one needed a table out to 12 weeks)
+             your_turn=dict(min=2, note="The tables: Mia has 40, 60, 80, 100 and Noah 70, 80, 90, 100 at 0, 2, 4, 6 weeks — both 100 at 6 weeks. As a system, Mia y = 10x + 40 and Noah y = 5x + 70: 10(6) + 40 = 100 and 5(6) + 70 = 100. A board with 'after 100 weeks' swapped; one with 'after 4 weeks' took the column where Mia is closest before she catches up (80 against 90).",
+                            prompt=["Mia has \\$40 and saves \\$10 a week. Noah has \\$70 and saves \\$5 a week.",
+                                    "At  $0,\\ 2,\\ 4,\\ 6$  weeks:   Mia has  $40,\\ 60,\\ 80,\\ 100$",
+                                    "and   Noah has  $70,\\ 80,\\ 90,\\ 100$"],
                             ask="When will they have the same amount, and how much?",
-                            steps=["Mia:  $y = 10x + 40$     Noah:  $y = 5x + 100$",
-                                   "at $x = 12$:   $10(12) + 40 = 160$   and   $5(12) + 100 = 160$"],
-                            gloss="the crossing, in weeks and dollars", answer="After 12 weeks, both have \\$160."),
-             yt_check=("many", crosses("10*u + 40", "5*u + 100", "12", "160"), sat("10*u + 40", "12", "160"), sat("5*u + 100", "12", "160"))),
-        dict(title="Example 2", sub="A crossing halfway between grid lines.", min_q=1,
-             note_q="Ask where the lines cross before anyone says a number: between which two x's? Between which two y's? Halfway, both ways.",
-             prompt=["Printer A: 3 pages a minute. Printer B: 5 pages done, then 1 a minute."],
-             fig=EX2, ask="When have the printers printed the same amount?",
-             worked=[dict(sub="Worked.", min=2,
-                          note="A: y = 3x. B: y = x + 5. The lines cross halfway between x = 2 and x = 3 and halfway between the grid lines y = 6 and y = 9 (one line every 3 pages): (2.5, 7.5). This read lands exactly: 3(2.5) = 7.5 and 2.5 + 5 = 7.5. In the story: after 2.5 minutes both have printed 7.5 pages — each is halfway through its eighth page. A board with (2, 6) or (3, 9) took a nearby grid point; check it — (2, 6) is on A only: 2 + 5 = 7, not 6.",
-                          rows=[("\\mathrm{A}:\\ y = 3x \\qquad \\mathrm{B}:\\ y = x + 5", "amount per minute; B's start is 5"),
-                                ("(2.5, 7.5):\\quad 3(2.5) = 7.5 \\quad\\text{and}\\quad 2.5 + 5 = 7.5", "halfway, checked in both")],
-                          answer="After 2.5 minutes, both have printed 7.5 pages.")],
-             check=("many", crosses("3*u", "u + 5", "F(5,2)", "F(15,2)"), sat("3*u", "F(5,2)", "F(15,2)"), sat("u + 5", "F(5,2)", "F(15,2)")),
-             your_turn=dict(min=2, note="Tables at x = 0, 1, 2: 4x gives 0, 4, 8 and 2x + 3 gives 3, 5, 7. At x = 1 the first is lower, at x = 2 higher: the crossing is between, halfway — (1.5, 6). Check: 4(1.5) = 6 and 2(1.5) + 3 = 6. A board with (6, 1.5) swapped; one with (2, 8) took the grid point on one line only.",
-                            prompt=["$y = 4x$   and   $y = 2x + 3$"],
-                            ask="Solve the system by graphing.",
-                            steps=["halfway between $x = 1$ and $x = 2$",
-                                   "$4(1.5) = 6$   and   $2(1.5) + 3 = 6$"],
+                            steps=["Mia:  $10(6) + 40 = 100$     Noah:  $5(6) + 70 = 100$"],
+                            gloss="the crossing, in weeks and dollars", answer="After 6 weeks, both have \\$100."),
+             yt_check=("many", crosses("10*u + 40", "5*u + 70", "6", "100"), table_of("10*u + 40", [0, 2, 4, 6], [40, 60, 80, 100]),
+                       table_of("5*u + 70", [0, 2, 4, 6], [70, 80, 90, 100]))),
+        dict(title="Example 2", sub="A crossing halfway between grid lines.", min_q=2,
+             note_q="Read the two tables first: at 2 minutes Tub A is behind (6 against 7), at 3 minutes ahead (9 against 8) — so they are equal somewhere between. Draw both lines on the projected grid from the tables, then ask where they cross: between which two x's? Between which two y's? Halfway, both ways.",
+             prompt=["Tub A: empty, gaining 3 liters a minute. Tub B: 5 liters, gaining 1 a minute."],
+             fig=EX2, ask="When do the tubs hold the same amount?",
+             worked=[dict(sub="Worked.", min=1,
+                          note="A: y = 3x. B: y = x + 5. The lines cross halfway between x = 2 and x = 3 and halfway between the grid lines y = 6 and y = 9 (one line every 3 liters): (2.5, 7.5). This read lands exactly: 3(2.5) = 7.5 and 2.5 + 5 = 7.5. In the story: after 2.5 minutes both tubs hold 7.5 liters. A board with (2, 6) or (3, 9) took a nearby grid point; check it — (2, 6) is on A only: 2 + 5 = 7, not 6.",
+                          rows=[("\\mathrm{A}:\\ y = 3x", "no start, 3 per minute"),
+                                ("\\mathrm{B}:\\ y = x + 5", "start 5, 1 per minute"),
+                                ("3(2.5) = 7.5", "A, halfway between 2 and 3"),
+                                ("2.5 + 5 = 7.5", "B: the same, so (2.5, 7.5)")],
+                          answer="After 2.5 minutes, both hold 7.5 liters.")],
+             check=("many", crosses("3*u", "u + 5", "F(5,2)", "F(15,2)"), sat("3*u", "F(5,2)", "F(15,2)"), sat("u + 5", "F(5,2)", "F(15,2)"),
+                    table_of("3*u", [0, 1, 2, 3], [0, 3, 6, 9]), table_of("u + 5", [0, 1, 2, 3], [5, 6, 7, 8])),
+             your_turn=dict(min=2, note="Tables at x = 0, 1, 2: 4x gives 0, 4, 8 and 2x + 3 gives 3, 5, 7. At x = 1 the first is lower, at x = 2 higher: they change places between, and halfway works — (1.5, 6). Check: 4(1.5) = 6 and 2(1.5) + 3 = 6. A board with (6, 1.5) swapped; one with (2, 8) took the grid point on one line only.",
+                            prompt=["$y = 4x$   and   $y = 2x + 3$",
+                                    "At  $x = 0,\\ 1,\\ 2$:   $y = 4x$  gives  $0,\\ 4,\\ 8$",
+                                    "and   $y = 2x + 3$  gives  $3,\\ 5,\\ 7$"],
+                            ask="Solve the system.",
+                            steps=["halfway from 1 to 2:   $4(1.5) = 6$   and   $2(1.5) + 3 = 6$"],
                             gloss="a half, checked in both", answer="(1.5, 6)"),
-             yt_check=("many", crosses("4*u", "2*u + 3", "F(3,2)", "6"), sat("4*u", "F(3,2)", "6"), sat("2*u + 3", "F(3,2)", "6"))),
+             yt_check=("many", crosses("4*u", "2*u + 3", "F(3,2)", "6"), table_of("4*u", [0, 1, 2], [0, 4, 8]),
+                       table_of("2*u + 3", [0, 1, 2], [3, 5, 7]))),
     ],
 
     # The round: a story's crossing read with its units (1) and a crossing's meaning (2); then the estimates —
@@ -313,7 +340,7 @@ L = dict(
                     "$2(1.3) + 1 = 3.6$   and   $-1.3 + 5 = 3.7$:  close"],
              gloss="between the grid lines: an estimate", answer="about (1.3, 3.7)",
              wrong="(3.7, 1.3) — the coordinates of the estimate swapped [B1G-M, GR.1.2: x and y inverted]; (1, 3) — the nearest grid point, on y = 2x + 1 only: −1 + 5 = 4, not 3 [B1G-M, AR.4.3: plotting and graphing errors]; (0, 5) — where y = −x + 5 starts, on one line only [B1G-M, AR.4.1: a solution satisfies both]",
-             note="The estimate, read at full size. The keyed read is about (1.3, 3.7); the exact crossing is (4/3, 11/3), so any careful read within about 0.2 — (1.3, 3.6), (1.4, 3.7) — is a good estimate. Check (1.3, 3.7) in both aloud: 3.6 and 3.7, close. A board with (3.7, 1.3) swapped it; one with (1, 3) took the nearest grid point, which is on one line only; one with (0, 5) read where a line starts.",
+             note="The estimate, read at full size. The keyed read is about (1.3, 3.7); the exact crossing is (4/3, 11/3), and a read within 0.1 of each — (1.3, 3.6), (1.4, 3.7) — is a good estimate. Check (1.3, 3.7) in both aloud: 3.6 and 3.7, close. A board with (3.7, 1.3) swapped it; one with (1, 3) took the nearest grid point, which is on one line only; one with (0, 5) read where a line starts.",
              check=("many", estimate("2*u + 1", "-u + 5", "F(4,3)", "F(11,3)", "1.3", "3.7"),
                     fails("2*u + 1", "3.7", "1.3"), fails("-u + 5", "3.7", "1.3"),
                     sat("2*u + 1", "1", "3"), fails("-u + 5", "1", "3"),
@@ -351,17 +378,21 @@ L = dict(
              note="Backwards: the crossing's x is given, and the second plan's amount per month is missing. The first plan costs 8(6) + 30 = 78 at 6 months, so □ · 6 = 78 and □ = 13. Check: 13(6) = 78. A board with 8 copied the first plan's amount; one with 5 did 30 ÷ 6.",
              check=("many", ("eq", "(8*6 + 30)/6", "13"), crosses("8*u + 30", "13*u", "6", "78")),
              wrong="8 — the first plan's amount copied [B1G-M, AR.4.1: substitution errors]; 5 — 30 ÷ 6, the start shared over the months [B1G-M, AR.4.1: substitution errors]"),
-        dict(kind="written", text=["Music app plan A: \\$24 to start, \\$6 a month. Plan B: \\$10 a month.",
-                                   "**Which plan costs less for 10 months? Explain."],
-             qtext="Music app plan A is \\$24 to start and \\$6 a month. Plan B is \\$10 a month. The graph shows both. Which plan costs less for 10 months? Explain.",
+        # board 9 (barton 20, 15 Nov): the written exit board is an estimate and its check written out — the skill of
+        # the test's 14(b), taught the day before it; the cheaper side of a crossing stays on board 5
+        dict(kind="written", text=["$y = x + 3$  and  $y = -2x + 5$  are graphed.",
+                                   "**Estimate the solution. Show that it is close in both equations."],
+             qtext="y = x + 3 and y = −2x + 5 are graphed. Estimate the solution. Show that your estimate is close in both equations.",
              fig=B(P9), fig_a=BA2(P9A),
-             steps=["equal at $(6, 60)$;  after 6 months, A's line is lower",
-                    "A:  $6(10) + 24 = 84$     B:  $10(10) = 100$"],
-             gloss="the crossing decides", answer="Plan A — \\$84 against \\$100.",
-             te_answer="Full credit: 'Plan A' AND the reason from the crossing — the plans cost the same at 6 months (\\$60), and after 6 months Plan A's line is below Plan B's, so at 10 months Plan A costs \\$84 and Plan B \\$100. 'Plan A' with no reason, or 'Plan B, because it has no start', earns none.",
-             note="Written, and the exit evidence: the crossing decides. Read two aloud — one that uses the crossing, one that uses only the two costs at 10 months; both are right, and the crossing says why it will stay that way.",
-             check=("many", crosses("6*u + 24", "10*u", "6", "60"), sat("6*u + 24", "10", "84"), sat("10*u", "10", "100"), ("true", "84 < 100")),
-             wrong="'Plan B, because it has no start fee' — true only before 6 months [B1G-M, AR.3.5: misinterpreting in context]"),
+             steps=["between $x = 0$ and $x = 1$, nearer 1:  about $(0.7, 3.7)$",
+                    "$-2(0.7) + 5 = 3.6$   and   $0.7 + 3 = 3.7$:  close"],
+             gloss="an estimate, checked in both", answer="about (0.7, 3.7)",
+             te_answer="Full credit: an estimate within 0.1 of (0.7, 3.7) — x from 0.6 to 0.8, y from 3.6 to 3.8 — AND both checks written, with the two values close: 0.7 + 3 = 3.7 and −2(0.7) + 5 = 3.6. (Exactly 2/3 and 11/3.) (1, 4), the nearest grid point, is on y = x + 3 only (−2 + 5 = 3) and earns none; an estimate with no check earns half.",
+             note="Written, and the exit evidence: tomorrow's question 14(b). The lines cross between x = 0 and x = 1, nearer 1, a little below y = 4. Read two aloud — one whose two checks come out close, one that took (1, 4) and whose check shows it: 4 and 3, not close.",
+             check=("many", estimate("u + 3", "-2*u + 5", "F(2,3)", "F(11,3)", "0.7", "3.7"),
+                    sat("u + 3", "1", "4"), fails("-2*u + 5", "1", "4"),
+                    ("eq", "0.7 + 3", "3.7"), ("eq", "-2*0.7 + 5", "3.6")),
+             wrong="(1, 4) — the nearest grid point, on y = x + 3 only [B1G-M, AR.4.3: plotting and graphing errors]; (3.7, 0.7) — the coordinates swapped [B1G-M, GR.1.2: x and y inverted]"),
     ],
 
     # The six: a story's graph read (1), what a crossing means (2), an estimate on an empty grid (3), the system a
@@ -381,9 +412,10 @@ L = dict(
         dict(stem="Graph both lines and estimate the solution:   $y = 2x - 2$   and   $y = -x + 2$",
              fig=GRID((-1, 4), (-3, 4)),
              answer="about (1.3, 0.7)",
-             why="Tables at x = 0, 1, 2: y = −2, 0, 2 and y = 2, 1, 0. The lines cross between x = 1 and x = 2, nearer 1, a little above y = 0.5: about (1.3, 0.7). Check: 2(1.3) − 2 = 0.6 and −1.3 + 2 = 0.7 — close. Accept a careful read within about 0.2 of each, such as (1.5, 0.5).",
+             why="Tables at x = 0, 1, 2: y = −2, 0, 2 and y = 2, 1, 0. The lines cross between x = 1 and x = 2, nearer 1, a little above y = 0.5: about (1.3, 0.7). Check: 2(1.3) − 2 = 0.6 and −1.3 + 2 = 0.7 — close. Accept a read within 0.1 of each: x from 1.2 to 1.4, y from 0.6 to 0.8, such as (1.4, 0.6). (1, 1) and (2, 0) are grid points on one line only.",
              check=("many", estimate("2*u - 2", "-u + 2", "F(4,3)", "F(2,3)", "1.3", "0.7"),
-                    near("F(4,3)", "1.5", "0.2"), near("F(2,3)", "0.5", "0.2"),
+                    near("F(4,3)", "1.4", "0.1"), near("F(2,3)", "0.6", "0.1"),
+                    sat("-u + 2", "1", "1"), fails("2*u - 2", "1", "1"), sat("-u + 2", "2", "0"), fails("2*u - 2", "2", "0"),
                     table_of("2*u - 2", [0, 1, 2], [-2, 0, 2]), table_of("-u + 2", [0, 1, 2], [2, 1, 0])),
              space=0.3),
         dict(stem="Shop A sells shirts for \\$7 each plus \\$15 to ship. Shop B sells them for \\$12 each with free shipping. Write a system for the cost y of x shirts.",
@@ -391,13 +423,13 @@ L = dict(
              why="Shop A: \\$7 per shirt and a start of \\$15. Shop B: \\$12 per shirt and no start. (They cost the same at 3 shirts, \\$36.)",
              check=("many", sat("7*u + 15", "1", "22"), sat("12*u", "1", "12"), crosses("7*u + 15", "12*u", "3", "36")), space=0.5),
         dict(stem="Club A costs \\$12 to join and \\$2 a week. Club B costs \\$5 a week. Graph both. Which club costs less for 6 weeks?",
-             fig=GRID((0, 8), (0, 40), ys=5, xname="weeks", yname="cost (dollars)"),
+             fig=GRID((0, 8), (0, 40), ys=4, xname="weeks", yname="cost (dollars)"),
              answer="Club A: \\$24 against \\$30.",
              why="y = 2x + 12 and y = 5x cross at (4, 20). After 4 weeks Club A's line is lower: 2(6) + 12 = 24 and 5(6) = 30.",
              check=("many", crosses("2*u + 12", "5*u", "4", "20"), sat("2*u + 12", "6", "24"), sat("5*u", "6", "30")),
              space=0.3),
         dict(stem="Lia has \\$25 and saves \\$4 a week. Omar has \\$40 and saves \\$4 a week. Graph both. Will they ever have the same amount? Explain.",
-             fig=GRID((0, 8), (0, 80), ys=10, xname="weeks", yname="savings (dollars)"),
+             fig=GRID((0, 8), (0, 80), ys=5, xname="weeks", yname="savings (dollars)"),
              answer="No: the lines are parallel — no solution.",
              why="y = 4x + 25 and y = 4x + 40: both add \\$4 a week, so Omar always has \\$15 more. The lines are parallel and never meet.",
              check=("many", never_meet("4*u + 25", "4*u + 40"), ("eq", "(4*8 + 40) - (4*8 + 25)", "15")), space=0.3),
@@ -415,13 +447,13 @@ L = dict(
              answer="After 4 hours, both have 60%.", why="The lines cross at (4, 60): −10(4) + 100 = 60 and −5(4) + 80 = 60.",
              check=("many", crosses("-10*u + 100", "-5*u + 80", "4", "60")), space=0.4),
         dict(heading="Say what the point means."),
-        dict(stem="Van A costs $y = 2x + 40$ dollars for x miles, and Van B costs $y = 3x + 25$ dollars. The graphs cross at $(15, 70)$. What does that point mean?",
+        dict(stem="Van A costs $c = 2m + 40$ dollars for m miles, and Van B costs $c = 3m + 25$ dollars. The graphs cross at $(15, 70)$. What does that point mean?",
              answer="For 15 miles, both vans cost \\$70.", why="2(15) + 40 = 70 and 3(15) + 25 = 70.",
              check=("many", crosses("2*u + 40", "3*u + 25", "15", "70")), space=0.4),
         dict(heading="For questions 3 and 4, use the graph."),
         dict(stem="$y = 2x$  and  $y = -x + 4$  are graphed. Estimate the solution to the nearest tenth.",
-             fig=figs.plane((-1, 5), (-2, 5), lines=[(2, 0), (-1, 4)], solution=(Fr(4, 3), Fr(8, 3)), inches=2.4),
-             answer="about (1.3, 2.7)", why="Between x = 1 and x = 2, nearer 1: about (1.3, 2.7). Check: 2(1.3) = 2.6 and −1.3 + 4 = 2.7 — close. Accept a careful read within about 0.2.",
+             fig=figs.plane((0, 3), (0, 5), lines=[(2, 0), (-1, 4)], solution=(Fr(4, 3), Fr(8, 3)), inches=3.0),
+             answer="about (1.3, 2.7)", why="Between x = 1 and x = 2, nearer 1: about (1.3, 2.7). Check: 2(1.3) = 2.6 and −1.3 + 4 = 2.7 — close. Accept a read within 0.1 of each: x from 1.2 to 1.4, y from 2.6 to 2.8.",
              check=estimate("2*u", "-u + 4", "F(4,3)", "F(8,3)", "1.3", "2.7"), space=0.4),
         dict(stem="$y = 3x - 1$  and  $y = -x + 6$  are graphed. Between which two whole numbers is the x of the crossing?",
              fig=figs.plane((-1, 4), (-4, 7), lines=[(3, -1), (-1, 6)], solution=(Fr(7, 4), Fr(17, 4)), inches=2.4),
@@ -433,12 +465,12 @@ L = dict(
              check=("many", sat("15*u + 25", "1", "40"), sat("20*u", "1", "20"), crosses("15*u + 25", "20*u", "5", "100")), space=0.5),
         dict(heading="For questions 6 and 7, graph both lines on the grid and answer."),
         dict(stem="Rink A charges \\$9 and \\$4 an hour. Rink B charges \\$7 an hour. Which rink costs less for 5 hours?",
-             fig=GRID((0, 6), (0, 42), ys=7, xname="hours", yname="cost (dollars)"),
+             fig=GRID((0, 6), (0, 42), ys=3, xname="hours", yname="cost (dollars)"),
              answer="Rink A: \\$29 against \\$35.", why="y = 4x + 9 and y = 7x cross at (3, 21). After 3 hours Rink A is lower: 4(5) + 9 = 29 and 7(5) = 35.",
              check=("many", crosses("4*u + 9", "7*u", "3", "21"), sat("4*u + 9", "5", "29"), sat("7*u", "5", "35")), space=0.6),
         dict(stem="Estimate the solution:   $y = x + 4$   and   $y = -2x + 6$",
              fig=GRID((-1, 4), (-1, 7)),
-             answer="about (0.7, 4.7)", why="Tables at x = 0, 1: 4, 5 and 6, 4. The lines cross between x = 0 and x = 1, nearer 1: about (0.7, 4.7). Check: 0.7 + 4 = 4.7 and −2(0.7) + 6 = 4.6 — close.",
+             answer="about (0.7, 4.7)", why="Tables at x = 0, 1: 4, 5 and 6, 4. The lines cross between x = 0 and x = 1, nearer 1: about (0.7, 4.7). Check: 0.7 + 4 = 4.7 and −2(0.7) + 6 = 4.6 — close. Accept a read within 0.1 of each: x from 0.6 to 0.8, y from 4.6 to 4.8.",
              check=estimate("u + 4", "-2*u + 6", "F(2,3)", "F(14,3)", "0.7", "4.7"), space=0.6),
         dict(heading="Work backwards."),
         dict(stem="Two plans cost the same for 4 months:  $y = 6x + 20$  and  $y = □x$. What number goes in the box?", answer="11",
@@ -446,7 +478,7 @@ L = dict(
              check=("many", ("eq", "(6*4 + 20)/4", "11"), crosses("6*u + 20", "11*u", "4", "44")), space=0.6),
         dict(heading="Choose one."),
         dict(stem="$y = x + 2$ and $y = -2x + 6$ are graphed. Which is closest to the solution?",
-             fig=figs.plane((-1, 4), (-1, 6), lines=[(1, 2), (-2, 6)], solution=(Fr(4, 3), Fr(10, 3)), inches=2.2),
+             fig=figs.plane((0, 3), (0, 6), lines=[(1, 2), (-2, 6, "y = −2x + 6", (Fr(1, 2), "r"))], solution=(Fr(4, 3), Fr(10, 3)), inches=3.0),
              choices=["$(1.3, 3.3)$", "$(1, 3)$", "$(0, 6)$", "$(3.3, 1.3)$"], correct=0, answer="A",
              why="Between x = 1 and x = 2, nearer 1: about (1.3, 3.3). Check: 1.3 + 2 = 3.3 and −2(1.3) + 6 = 3.4 — close.",
              check=("many", estimate("u + 2", "-2*u + 6", "F(4,3)", "F(10,3)", "1.3", "3.3"),
@@ -485,8 +517,8 @@ L = dict(
              check=("many", crosses("3*u + 30", "5*u + 10", "10", "60")), space=0.4),
         dict(heading="For questions 3 and 4, use the graph."),
         dict(stem="$y = 2x - 1$  and  $y = -x + 3$  are graphed. Estimate the solution to the nearest tenth.",
-             fig=figs.plane((-1, 4), (-3, 4), lines=[(2, -1), (-1, 3)], solution=(Fr(4, 3), Fr(5, 3)), inches=2.4),
-             answer="about (1.3, 1.7)", why="Between x = 1 and x = 2, nearer 1: about (1.3, 1.7). Check: 2(1.3) − 1 = 1.6 and −1.3 + 3 = 1.7 — close. Accept a careful read within about 0.2.",
+             fig=figs.plane((0, 4), (-1, 4), lines=[(2, -1), (-1, 3)], solution=(Fr(4, 3), Fr(5, 3)), inches=3.0),
+             answer="about (1.3, 1.7)", why="Between x = 1 and x = 2, nearer 1: about (1.3, 1.7). Check: 2(1.3) − 1 = 1.6 and −1.3 + 3 = 1.7 — close. Accept a read within 0.1 of each: x from 1.2 to 1.4, y from 1.6 to 1.8.",
              check=estimate("2*u - 1", "-u + 3", "F(4,3)", "F(5,3)", "1.3", "1.7"), space=0.4),
         dict(stem="$y = 2x - 3$  and  $y = -x + 4$  are graphed. Between which two whole numbers is the x of the crossing?",
              fig=figs.plane((-1, 5), (-4, 5), lines=[(2, -3), (-1, 4)], solution=(Fr(7, 3), Fr(5, 3)), inches=2.4),
@@ -503,7 +535,7 @@ L = dict(
              check=("many", crosses("3*u + 10", "5*u", "5", "25"), sat("3*u + 10", "7", "31"), sat("5*u", "7", "35")), space=0.6),
         dict(stem="Estimate the solution:   $y = x - 2$   and   $y = -2x + 3$",
              fig=GRID((-1, 4), (-4, 4)),
-             answer="about (1.7, −0.3)", why="Tables at x = 0, 1, 2: −2, −1, 0 and 3, 1, −1. The lines cross between x = 1 and x = 2, nearer 2: about (1.7, −0.3). Check: 1.7 − 2 = −0.3 and −2(1.7) + 3 = −0.4 — close.",
+             answer="about (1.7, −0.3)", why="Tables at x = 0, 1, 2: −2, −1, 0 and 3, 1, −1. The lines cross between x = 1 and x = 2, nearer 2: about (1.7, −0.3). Check: 1.7 − 2 = −0.3 and −2(1.7) + 3 = −0.4 — close. Accept a read within 0.1 of each: x from 1.6 to 1.8, y from −0.4 to −0.2.",
              check=estimate("u - 2", "-2*u + 3", "F(5,3)", "F(-1,3)", "1.7", "-0.3"), space=0.6),
         dict(heading="Work backwards."),
         dict(stem="Two plans cost the same for 6 months:  $y = 7x + 18$  and  $y = □x$. What number goes in the box?", answer="10",
@@ -511,7 +543,7 @@ L = dict(
              check=("many", ("eq", "(7*6 + 18)/6", "10"), crosses("7*u + 18", "10*u", "6", "60")), space=0.6),
         dict(heading="Choose one."),
         dict(stem="$y = x + 1$ and $y = -2x + 5$ are graphed. Which is closest to the solution?",
-             fig=figs.plane((-1, 4), (-1, 6), lines=[(1, 1), (-2, 5)], solution=(Fr(4, 3), Fr(7, 3)), inches=2.2),
+             fig=figs.plane((0, 3), (0, 5), lines=[(1, 1), (-2, 5)], solution=(Fr(4, 3), Fr(7, 3)), inches=3.0),
              choices=["$(1.3, 2.3)$", "$(2.3, 1.3)$", "$(1, 2)$", "$(0, 5)$"], correct=0, answer="A",
              why="Between x = 1 and x = 2, nearer 1: about (1.3, 2.3). Check: 1.3 + 1 = 2.3 and −2(1.3) + 5 = 2.4 — close.",
              check=("many", estimate("u + 1", "-2*u + 5", "F(4,3)", "F(7,3)", "1.3", "2.3"),
@@ -545,15 +577,15 @@ L = dict(
         must_not="Slope or y-intercept by name (Unit 10); substitution or elimination (Algebra 1); keying an exact pair where an estimate is asked (audit E15).",
         read_first=[
             "Thu 10 Dec, 53 minutes, the last lesson before the one-period Unit 11 test on Fri 11 Dec. No review day (ruling 27a): the Unit Review goes home today — hand it out at the IXL slide. Built from the benchmark and the B1G-M first (Lesson Outlines §11.08, standing decisions 1, 2, 3, 6, 7, 9), then read against Math Nation 11.8 (audit Part 2: E7, E8, E12, E14, E15, §3–§5).",
-            "Every story crosses at a whole number of games, months, weeks or miles, inside its window and on a grid line; each y-axis names what both lines measure (E7, E14). The one half-unit story (Example 2's printers) is read as 'halfway through the eighth page'.",
-            "An estimate is keyed as 'about' a read to the nearest tenth, and its check holds that read within 0.05 of the exact crossing; the key accepts a careful read within about 0.2 (E15). The exact crossing is never asked for.",
-            "Boards 7 and 9 are designed here (the outline left them open): the plants with an \\$8 price nobody needs, crossing at (10, 50); and the music app, crossing at (6, 60), decided at 10 months. The Independent Set prints empty grids for 3, 5 and 6; its key gives the crossing in words."],
+            "Every story crosses at a whole number of games, months, weeks or miles, inside its window and on a grid line; each y-axis names what both lines measure (E7, E14). The one half-unit story (Example 2's tubs) crosses at 2.5 minutes and 7.5 liters. The Examples' question slides show an empty grid (and Example 2 its two tables): draw on the projected slide; the worked slide gives the equations, a line each, and the check. The Your Turns carry their tables in rows and cross inside them.",
+            "One policy for every estimate in the unit: keyed as 'about' a read to the nearest tenth (within 0.05 of the exact crossing), and the key accepts a read within 0.1 of each keyed coordinate — a range that holds no printed grid point, so the nearest-grid-point read, on one line only, never earns credit (E15; the build checks both). The exact crossing is never asked for.",
+            "Boards 7 and 9 are designed here (the outline left them open): the plants with an \\$8 price nobody needs, crossing at (10, 50); and board 9, an estimate with its check written out — tomorrow's question 14(b). The Independent Set prints empty grids for 3, 5 and 6, each numbered so the lines' points land on grid lines; its key gives the crossing in words."],
         standard_notes=[("Clarification", "AR.4.3 Clar. 1: approximate non-integer solutions — to the nearest half or tenth, with 'about'."),
-                        ("Unit boundary", "Every system is given solved for y, or written from a story as (amount per 1)·x + (start).")],
+                        ("Unit boundary", "Every system is given solved for y, or written from a story as (amount per 1)·x + (start); one story is in c and m, not x and y (bank 2).")],
         sits="The unit's last teaching day. IXL W9J is due by the Unit 11 test (Fri 11 Dec), whose question 14 is today's: a story with its graph, (a) when the two are equal and what both equal, (b) a crossing between the grid lines, approximated.",
-        lives="Notes II — the crossing in the story's words — and Notes III's estimate and its close-not-equal check. Board 2 is the meaning-of-a-crossing diagnostic (swapped, one taxi only, the same line), board 4 the estimate at full size, board 6 the write-a-system diagnostic, board 9 the crossing as the reason in writing.",
+        lives="Notes II — the crossing in the story's words — and Notes III's estimate and its close-not-equal check. Board 2 is the meaning-of-a-crossing diagnostic (swapped, one taxi only, the same line), board 4 the estimate at full size, board 5 the cheaper side of a crossing, board 6 the write-a-system diagnostic, board 9 an estimate checked in both, in writing.",
         materials="Whiteboards and markers; rulers. The Independent Set, one per student. The Unit Review, one per student — it goes home today.",
-        variation="Boards 1–2 read a story's crossing and say it with units (2 a vote); 3–4 estimate a crossing between the grid lines (where, then about what). The pattern changes at 5 — the cheaper side of the crossing — and 6 votes on the system a story makes; 7 is the plants with their price as the extra number; 8 runs backwards from a crossing; 9 is written. The independent set: a story's graph read, a crossing's meaning, an estimate drawn, a system written, the cheaper side drawn, and two savers who never meet.",
+        variation="Boards 1–2 read a story's crossing and say it with units (2 a vote); 3–4 estimate a crossing between the grid lines (where, then about what). The pattern changes at 5 — the cheaper side of the crossing — and 6 votes on the system a story makes; 7 is the plants with their price as the extra number; 8 runs backwards from a crossing; 9 is a written estimate with its check. The independent set: a story's graph read, a crossing's meaning, an estimate drawn, a system written, the cheaper side drawn, and two savers who never meet.",
         audit=["Every crossing re-derived by sympy at build time as the system's one solution and checked in both equations; every estimate held within 0.05 of the exact crossing and shown not to be on either line exactly; every graph drawn from its equations by u11/figs.py, which refuses a stated crossing that is not on both lines.",
                "Math Nation 11.8 read against this lesson (A7 Unit 11 Audit, Part 2, E7, E8, E12, E14, E15, §3–§5): its sound shapes — a story graphed, the meaning of the crossing, an estimate — are here with our own numbers; its defects are not reproduced."],
         changes=["11.8.1 video warm-up → four retrieval questions (no video).",

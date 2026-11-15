@@ -107,67 +107,74 @@ Q13_FIG = figs.table([([0, 1, 2, 3, 4, 5], [-5, -3, "?", 1, 3, 5]), ([0, 1, 2, 3
                      titles=["y = 2x − 5", "y = −x + 7"], inches=6.0)
 # question 14's two graphs are one picture (the kit prints one figure per item): the story's for part (a), with its
 # names on its lines, and part (b)'s system, whose equations are set over it in the colours of their lines (solid,
-# dashed) so that no label sits on the window a tenth is read from; its grid has a line every half (decision 7: read to the
-# nearest half or tenth), which also draws it at twice the story's scale.
+# dashed) so that no label sits on the window a tenth is read from; its grid has a line every half, which also draws
+# it at twice the story's scale. Critic 18 / barton 22 (15 Nov): each graph's caption names its part and its system,
+# so part (b)'s graph cannot be read as Mia and Leo's.
 Q14_FIG = figs.row([figs.plane((0, 8), (0, 60), lines=[(6, 10, "Mia"), (-4, 60, "Leo")], ys=10,
                                xname="weeks", yname="dollars", solution=(5, 40)),
                     figs.plane((0, 3), (0, 5), lines=[(1, 1, ""), (-2, 6, "")], xs=Fr(1, 2), ys=Fr(1, 2), step=2, solution=(Fr(5, 3), Fr(8, 3)))],
-                   gap=4.0, titles=["for part (a)", ["for part (b)", ("y = x + 1   (solid)", BLUE), ("y = −2x + 6   (dashed)", ORANGE)]],
+                   gap=4.0, titles=[["PART (a):  Mia and Leo"], ["PART (b):  a different system", ("y = x + 1   (solid)", BLUE), ("y = −2x + 6   (dashed)", ORANGE)]],
                    inches=6.3)
 
 
 def _ar21():
-    q1 = dict(stem="Solve:   $2(3n - 4) + 5n = 25$", answer="n = 3",
-              why="Distribute: 6n − 8 + 5n = 25. Collect: 11n − 8 = 25, so 11n = 33 and n = 3. Check: 2(9 − 4) + 15 = 10 + 15 = 25. 6n − 4 + 5n (the 2 to one term only) gives 29/11; 6n − 8 = 25 (the 5n not collected) gives 5.5.",
+    # FAST's house style on the paper (fast 9, 15 Nov): "An equation is shown." / the equation / "What value of n makes
+    # the equation true?" — the kind, order and points of every question unchanged (the practice page is built from them)
+    def shown(eq, v):
+        return "An equation is shown.     " + eq + "     What value of " + v + " makes the equation true?"
+    q1 = dict(stem=shown("$2(3n - 4) + 5n = 25$", "n"), answer="n = 3",
+              why="Distribute: 6n − 8 + 5n = 25. Collect: 11n − 8 = 25. Add 8: 11n = 33. Divide by 11: n = 3. Check: 2(9 − 4) + 15 = 10 + 15 = 25. 6n − 4 + 5n (the 2 to one term only) gives 29/11; 6n − 8 = 25 (the 5n not collected) gives 5.5.",
               check=("many", solves("2*(3*u - 4) + 5*u", "25", "3"), same("2*(3*u - 4) + 5*u", "11*u - 8")), space=0.9)
-    q2 = dict(stem="Solve:   $9h + 4 = 5h - 24$", answer="h = −7",
-              why="Take 5h from both sides: 4h + 4 = −24. Subtract 4: 4h = −28, so h = −7. Check: 9(−7) + 4 = −59 and 5(−7) − 24 = −59. h = 7 lost the sign of −28; h = −5 added 4 instead of subtracting it (4h = −20).",
+    q2 = dict(stem=shown("$9h + 4 = 5h - 24$", "h"), answer="h = −7",
+              why="Take 5h from both sides: 4h + 4 = −24. Subtract 4: 4h = −28. Divide by 4: h = −7. Check: 9(−7) + 4 = −59 and 5(−7) − 24 = −59. h = 7 lost the sign of −28; h = −5 added 4 instead of subtracting it (4h = −20).",
               check=solves("9*u + 4", "5*u - 24", "-7"), space=0.9)
-    q3 = dict(stem="Solve:   $5(m - 2) = 3(m + 4)$", answer="m = 11",
-              why="Distribute both sides: 5m − 10 = 3m + 12. Take 3m from both sides: 2m − 10 = 12, so 2m = 22 and m = 11. Check: 5(9) = 45 and 3(15) = 45. 5m − 2 = 3m + 4 (each factor to one term only) gives m = 3.",
-              check=("many", solves("5*(u - 2)", "3*(u + 4)", "11"), same("5*(u - 2)", "5*u - 10"), same("3*(u + 4)", "3*u + 12")), space=0.9)
-    # question 4 — the decimal distributed, the state's lowest-scoring released Grade 8 skill (standing decision 5)
-    q4 = dict(stem="Solve:   $0.6(5v + 10) = 2v + 13$", answer="v = 7",
-              why="The 0.6 multiplies both terms: 3v + 6 = 2v + 13. Take 2v from both sides: v + 6 = 13, so v = 7. Check: 0.6(35 + 10) = 0.6(45) = 27 and 2(7) + 13 = 27. 3v + 10 (the 0.6 to the 5v only — the state's most common miss) gives v = 3.",
-              check=("many", solves("F(6,10)*(5*u + 10)", "2*u + 13", "7"), same("F(6,10)*(5*u + 10)", "3*u + 6"),
-                     solves("3*u + 10", "2*u + 13", "3")), space=0.9)
+    # question 3 (barton 10, fast 2): parentheses on both sides, one multiplier a negative fraction
+    q3 = dict(stem=shown("$-\\frac{1}{2}(4m - 6) = 3(m - 4)$", "m"), answer="m = 3",
+              why="The −½ multiplies both terms: −2m + 3. The 3 multiplies both: 3m − 12. So −2m + 3 = 3m − 12. Add 2m to both sides: 3 = 5m − 12. Add 12: 15 = 5m. Divide by 5: m = 3. Check: −½(12 − 6) = −3 and 3(3 − 4) = −3. −2m − 3 (the sign of (−½)(−6) lost) gives m = 1.8; −2m − 6 (the −½ to the 4m only) gives m = 1.2.",
+              check=("many", solves("-F(1,2)*(4*u - 6)", "3*(u - 4)", "3"), same("-F(1,2)*(4*u - 6)", "-2*u + 3"), same("3*(u - 4)", "3*u - 12"),
+                     solves("-2*u - 3", "3*u - 12", "F(9,5)"), solves("-2*u - 6", "3*u - 12", "F(6,5)")), space=0.9)
+    # question 4 — the decimal distributed, the state's lowest-scoring released Grade 8 skill (standing decision 5); the
+    # factor is negative now (fast 3 / barton 10), the state's own item shape
+    q4 = dict(stem=shown("$-1.5(4v - 2) = v - 11$", "v"), answer="v = 2",
+              why="The −1.5 multiplies both terms: −6v + 3 = v − 11. Take v from both sides: −7v + 3 = −11. Subtract 3: −7v = −14. Divide by −7: v = 2. Check: −1.5(8 − 2) = −9 and 2 − 11 = −9. −6v − 3 (the sign of (−1.5)(−2) lost) gives v = 8/7; −6v − 2 (the −1.5 to the 4v only — the state's most common miss) gives v = 9/7.",
+              check=("many", solves("-F(3,2)*(4*u - 2)", "u - 11", "2"), same("-F(3,2)*(4*u - 2)", "-6*u + 3"),
+                     solves("-6*u - 3", "u - 11", "F(8,7)"), solves("-6*u - 2", "u - 11", "F(9,7)")), space=0.9)
     # question 5 — one of each ending; (b) is x = 0, one solution (the guide's named misconception)
-    q5 = dict(stem="How many solutions does each equation have: one solution, no solution or infinitely many solutions? If it has one, find it.",
+    q5 = dict(stem="Each equation has one solution, no solution or infinitely many solutions. Which? If it has one solution, find it.",
               parts=[dict(label="a", stem="$3(2x - 1) + 4 = 6x + 5$", answer="No solution",
                           why="6x − 3 + 4 = 6x + 5, so 6x + 1 = 6x + 5. Take 6x from both sides: 1 = 5 — never true: no solution.",
                           check=never("3*(2*u - 1) + 4", "6*u + 5"), space=0.7),
                      dict(label="b", stem="$6x + 5 = 5 - 3x$", answer="One solution:  x = 0",
-                          why="Add 3x to both sides: 9x + 5 = 5, so 9x = 0 and x = 0 — one solution. Check: 0 + 5 = 5 and 5 − 0 = 5. 'No solution' read x = 0 as nothing.",
+                          why="Add 3x to both sides: 9x + 5 = 5. Subtract 5: 9x = 0, so x = 0 — one solution. Check: 0 + 5 = 5 and 5 − 0 = 5. 'No solution' read x = 0 as nothing.",
                           check=solves("6*u + 5", "5 - 3*u", "0"), space=0.7),
                      dict(label="c", stem="$5x - 2(x + 3) = 3x - 6$", answer="Infinitely many solutions",
                           why="5x − 2x − 6 = 3x − 6, so 3x − 6 = 3x − 6. Take 3x from both sides: −6 = −6 — always true: infinitely many. 5x − 2x + 6 (the sign of (−2)(+3) lost) gives 6 = −6 and 'no solution'.",
                           check=("many", same("5*u - 2*(u + 3)", "3*u - 6"), never("5*u - 2*u + 6", "3*u - 6")), space=0.7)])
-    q6 = dict(stem="What number in the box makes   $2(4x + 3) - x = □x + 1$   have no solution?", answer="7",
+    q6 = dict(stem="Complete the equation so that it has no solution. What number goes in the box?     $2(4x + 3) - x = □x + 1$", answer="7",
               why="The left side is 8x + 6 − x = 7x + 6. With 7 in the box, 7x + 6 = 7x + 1 ends at 6 = 1 — never true. Any other number gives one solution (8 gives 7x + 6 = 8x + 1, so x = 5). 8 forgot the − x.",
               check=("many", same("2*(4*u + 3) - u", "7*u + 6"), never("2*(4*u + 3) - u", "7*u + 1"),
                      solves("2*(4*u + 3) - u", "8*u + 1", "5")), space=0.7)
     q7 = dict(stem="Storage company A charges a \\$35 move-in fee and \\$9 a month. Company B charges \\$14 a month and no fee. After how many months will the two companies have cost the same?",
               answer="7 months",
-              why="35 + 9m = 14m. Take 9m from both sides: 35 = 5m, so m = 7. Check: 35 + 9(7) = 98 and 14(7) = 98 — both \\$98. 35 ÷ 14 = 2.5 ignores A's monthly price; 35 ÷ 9 ≈ 3.9 ignores B's.",
+              why="35 + 9m = 14m. Take 9m from both sides: 35 = 5m. Divide by 5: m = 7. Check: 35 + 9(7) = 98 and 14(7) = 98 — both \\$98. 35 ÷ 14 = 2.5 ignores A's monthly price; 35 ÷ 9 ≈ 3.9 ignores B's.",
               check=("many", solves("35 + 9*u", "14*u", "7"), ("eq", "35 + 9*7", "98"), ("eq", "14*7", "98")), space=0.9)
     return [q1, q2, q3, q4, q5, q6, q7]
 
 
 def _ar41():
-    # question 8 — FAST's multiselect, which never says how many: two crossing lines meet once, so ONE pair is right;
-    # each of the four wrong pairs makes exactly one of the two equations true (the named error: one is not enough)
-    q8 = dict(stem="Select ALL the solutions of the system   $y = 3x - 2$   and   $y = x + 6$.",
-              choices=["$(2, 4)$", "$(1, 7)$", "$(4, 10)$", "$(3, 7)$", "$(0, 6)$"], correct=[2], answer="C", space=0.4,
-              errors={"A": "makes y = 3x − 2 true only: 2 + 6 = 8, not 4 [B1G-M, AR.4.1: a solution satisfies both]",
-                      "B": "makes y = x + 6 true only: 3(1) − 2 = 1, not 7 [B1G-M, AR.4.1: a solution satisfies both]",
-                      "D": "makes y = 3x − 2 true only: 3 + 6 = 9, not 7 [B1G-M, AR.4.1: a solution satisfies both]",
-                      "E": "makes y = x + 6 true only: 3(0) − 2 = −2, not 6 [B1G-M, AR.4.1: a solution satisfies both]"},
-              why="(4, 10): 3(4) − 2 = 10 and 4 + 6 = 10. Each other pair makes one equation true and the other false. Two lines that cross meet once, so there is only one — C and nothing else for the point.",
-              check=("many", crosses("3*u - 2", "u + 6", "4", "10"), sat("3*u - 2", "4", "10"), sat("u + 6", "4", "10"),
-                     sat("3*u - 2", "2", "4"), fails("u + 6", "2", "4"),
-                     sat("u + 6", "1", "7"), fails("3*u - 2", "1", "7"),
-                     sat("3*u - 2", "3", "7"), fails("u + 6", "3", "7"),
-                     sat("u + 6", "0", "6"), fails("3*u - 2", "0", "6")))
+    # question 8 (critic 12 = fast 4, 15 Nov): FAST's multiselect, which never says how many — five systems, two of
+    # them right; each wrong system is true in exactly one of its equations (the named error: one is not enough)
+    q8 = dict(stem="Select all the systems that have  $(3, -2)$  as a solution.",
+              choices=["$y = x - 5$  and  $y = -2x + 4$", "$y = 2x - 8$  and  $y = x - 4$", "$y = -x + 1$  and  $y = 3x - 11$",
+                       "$y = 4x - 14$  and  $y = -x + 2$", "$y = -2x + 3$  and  $y = x - 5$"], correct=[0, 2], answer="A, C", space=0.4,
+              errors={"B": "true in y = 2x − 8 only: 3 − 4 = −1, not −2 [B1G-M, AR.4.1: a solution satisfies both]",
+                      "D": "true in y = 4x − 14 only: −3 + 2 = −1, not −2 [B1G-M, AR.4.1: a solution satisfies both]",
+                      "E": "true in y = x − 5 only: −2(3) + 3 = −3, not −2 [B1G-M, AR.4.1: a solution satisfies both]"},
+              why="A: 3 − 5 = −2 and −2(3) + 4 = −2. C: −3 + 1 = −2 and 3(3) − 11 = −2. B, D and E each make one equation true and the other false — one is not enough.",
+              check=("many", crosses("u - 5", "-2*u + 4", "3", "-2"), crosses("-u + 1", "3*u - 11", "3", "-2"),
+                     sat("2*u - 8", "3", "-2"), fails("u - 4", "3", "-2"),
+                     sat("4*u - 14", "3", "-2"), fails("-u + 2", "3", "-2"),
+                     sat("u - 5", "3", "-2"), fails("-2*u + 3", "3", "-2")))
     q9 = dict(stem="Is $(4, -1)$ a solution of the system   $y = -x + 3$   and   $y = 2x - 7$?",
               choices=["Yes — it makes $y = -x + 3$ true.", "No — it makes $y = -x + 3$ false.",
                        "Yes — it makes both equations true.", "No — it makes $y = 2x - 7$ false."], correct=3, answer="D", space=0.4,
@@ -180,21 +187,21 @@ def _ar41():
 
 
 def _ar42():
-    q10 = dict(stem="The graphs of   $y = 3x + 2$   and   $y = -x - 2$   are shown. How many solutions does the system have?",
+    q10 = dict(stem="The graphs of the system   $y = 3x + 2$   and   $y = -x - 2$   are shown. How many solutions does the system have?",
                fig=Q10_FIG, answer="One solution",
-               why="The lines cross once (at (−1, −1): 3(−1) + 2 = −1 and −(−1) − 2 = −1), so there is exactly one solution. Different numbers multiply x, 3 and −1, so they must cross.",
+               why="The lines intersect once (at (−1, −1): 3(−1) + 2 = −1 and −(−1) − 2 = −1), so there is exactly one solution. The coefficients of x, 3 and −1, are different, so they must cross.",
                check=("many", crosses("3*u + 2", "-u - 2", "-1", "-1"), two_lines("3*u + 2", "-u - 2")), space=0.4)
-    q11 = dict(stem="The graphs of   $y = 4x + 3$   and   $y = 4x - 2$   are shown. How many solutions does the system have?",
+    q11 = dict(stem="The graphs of the system   $y = 4x + 3$   and   $y = 4x - 2$   are shown. How many solutions does the system have?",
                fig=Q11_FIG, answer="No solution",
-               why="The same number, 4, multiplies x in both and the numbers added differ: the lines are parallel, always 5 apart, and never meet. 'One' guessed that two lines must cross; 'infinitely many' read the shared 4x as one line.",
+               why="The coefficient of x is 4 in both and the numbers added differ: the lines are parallel, always 5 apart, and never intersect. 'One' guessed that two lines must cross; 'infinitely many' read the shared 4x as one line.",
                check=("many", never_meet("4*u + 3", "4*u - 2"), two_lines("4*u + 3", "4*u - 2")), space=0.4)
     return [q10, q11]
 
 
 def _ar43():
-    q12 = dict(stem="The system   $y = -x + 2$   and   $y = \\frac{1}{2}x - 4$   is graphed. What is its solution? Give its x and its y.",
+    q12 = dict(stem="A system of equations is graphed:   $y = -x + 2$   and   $y = \\frac{1}{2}x - 4$.   What is the solution of the system? Give its x and its y.",
                fig=Q12_FIG, answer="x = 4,  y = −2   — the point (4, −2)",
-               why="The lines cross at (4, −2): −4 + 2 = −2 and ½(4) − 4 = −2. (−2, 4) swaps the coordinates — it is on y = −x + 2 only; (0, 2) and (0, −4) are where one line meets the y-axis, on that line only.",
+               why="The lines intersect at (4, −2): −4 + 2 = −2 and ½(4) − 4 = −2. (−2, 4) swaps the coordinates — it is on y = −x + 2 only; (0, 2) and (0, −4) are where one line meets the y-axis, on that line only.",
                check=("many", crosses("-u + 2", "F(1,2)*u - 4", "4", "-2"), sat("-u + 2", "-2", "4"), fails("F(1,2)*u - 4", "-2", "4"), fails("F(1,2)*u - 4", "0", "2")), space=0.4)
     q13 = dict(stem="The tables are for   $y = 2x - 5$   and   $y = -x + 7$.",
                fig=Q13_FIG,
@@ -208,21 +215,25 @@ def _ar43():
                                   table_of("-u + 7", [0, 1, 2, 3, 4, 5], [7, 6, 5, 4, 3, 2])), space=0.4)])
     # question 14 — (a) a story's crossing said in its words; (b) a crossing between the grid lines, estimated (AR.4.3
     # Clar. 1). The key gives the exact crossing and the range it accepts (audit E15: the book keyed an exact pair and
-    # took points off a correct estimate). The range is strictly between the grid lines, so the nearest grid point and
-    # the swapped pair earn nothing; the check holds the exact value inside it.
-    q14 = dict(stem="Mia has \\$10 and saves \\$6 each week. Leo has \\$60 and spends \\$4 each week. The graph for part (a) shows the dollars y each has after x weeks.",
+    # took points off a correct estimate). Critic 1 = fast 1 (15 Nov): part (b)'s grid has a line every half, so the
+    # range is within 0.1 of the keyed (1.7, 2.7) — x from 1.6 to 1.8, y from 2.6 to 2.8 — and holds no printed grid
+    # point: (1.5, 2.5) and (2, 3), each on y = x + 1 only, are outside it. Stem in two sentences (fast 16).
+    q14 = dict(stem="Mia has \\$10 and saves \\$6 each week. Leo has \\$60 and spends \\$4 each week.",
                fig=Q14_FIG,
-               parts=[dict(label="a", stem="After how many weeks will Mia and Leo have the same amount, and how much will each have?",
+               parts=[dict(label="a", stem="The PART (a) graph shows the dollars y each has after x weeks. After how many weeks will Mia and Leo have the same amount, and how much will each have?",
                            answer="After 5 weeks;  \\$40 each",
-                           why="Mia's line y = 6x + 10 and Leo's y = −4x + 60 cross at (5, 40): 6(5) + 10 = 40 and −4(5) + 60 = 40. (40, 5) swaps the coordinates.",
+                           why="Mia's line y = 6x + 10 and Leo's y = −4x + 60 intersect at (5, 40): 6(5) + 10 = 40 and −4(5) + 60 = 40. (40, 5) swaps the coordinates.",
                            check=crosses("6*u + 10", "-4*u + 60", "5", "40"), space=0.5),
-                      dict(label="b", stem="The graph for part (b) shows   $y = x + 1$   and   $y = -2x + 6$. Estimate the solution of that system to the nearest tenth.",
+                      dict(label="b", stem="The PART (b) graph shows a different system,   $y = x + 1$   and   $y = -2x + 6$.   Estimate its point of intersection to the nearest tenth.",
                            answer="about (1.7, 2.7)",
-                           why="Exactly (5/3, 8/3) = (1.666…, 2.666…). Accept a careful read with x from 1.5 to 1.9 and y from 2.5 to 2.9, such as (1.6, 2.7) or (1.7, 2.6). Check (1.7, 2.7): 1.7 + 1 = 2.7 and −2(1.7) + 6 = 2.6 — close. (2, 3) is the nearest grid point, on y = x + 1 only; (2.7, 1.7) swaps the coordinates.",
+                           why="Exactly (5/3, 8/3) = (1.666…, 2.666…). Accept a read within 0.1 of (1.7, 2.7): x from 1.6 to 1.8 and y from 2.6 to 2.8, such as (1.6, 2.7) or (1.7, 2.6). Check (1.7, 2.7): 1.7 + 1 = 2.7 and −2(1.7) + 6 = 2.6 — close. (1.5, 2.5) and (2, 3) are grid points on y = x + 1 only; (2.7, 1.7) swaps the coordinates.",
                            check=("many", crosses("u + 1", "-2*u + 6", "F(5,3)", "F(8,3)"),
-                                  ("approx", "F(5,3)", "1.7", "0.05"), ("approx", "F(8,3)", "2.7", "0.05"),
-                                  ("true", "F(3,2) <= F(5,3) <= F(19,10) and F(5,2) <= F(8,3) <= F(29,10)"),
-                                  ("true", "1 < F(3,2) and F(19,10) < 2 and 2 < F(5,2) and F(29,10) < 3"),
+                                  ("approx", "F(5,3)", "F(17,10)", "F(1,20)"), ("approx", "F(8,3)", "F(27,10)", "F(1,20)"),
+                                  ("true", "F(8,5) <= F(5,3) <= F(9,5) and F(13,5) <= F(8,3) <= F(14,5)"),
+                                  # no grid point (every half) inside the accepted box: the halves nearest are 1.5 and 2,
+                                  # 2.5 and 3, all outside it
+                                  ("true", "F(3,2) < F(8,5) and F(9,5) < 2 and F(5,2) < F(13,5) and F(14,5) < 3"),
+                                  sat("u + 1", "F(3,2)", "F(5,2)"), fails("-2*u + 6", "F(3,2)", "F(5,2)"),
                                   sat("u + 1", "2", "3"), fails("-2*u + 6", "2", "3")), space=0.5)])
     return [q12, q13, q14]
 
@@ -249,7 +260,15 @@ R_TABLES = figs.table([([0, 1, 2, 3, 4, 5], [-6, -3, 0, 3, 6, 9]), ([0, 1, 2, 3,
 R_GRID = figs.plane((-4, 2), (-5, 4), inches=3.0)
 R_STORY = figs.plane((0, 10), (0, 50), lines=[(3, 20, "Ava"), (6, 5, "Ben")], ys=5, xname="weeks", yname="dollars",
                      solution=(5, 35), inches=3.0)
-R_EST = figs.plane((-1, 4), (-3, 4), lines=[(2, -2), (-1, 3)], solution=(Fr(5, 3), Fr(4, 3)), inches=2.8)
+# the estimate cropped to its crossing and printed at 3 in (critic 6)
+R_EST = figs.plane((0, 4), (-2, 3), lines=[(2, -2), (-1, 3)], solution=(Fr(5, 3), Fr(4, 3)), inches=3.0)
+# fast 5: level lines — two of them (parallel, none) and one with a slanted line (one solution)
+R_LEVEL = figs.row([figs.plane((-1, 4), (-3, 6), lines=[(0, 4, ""), (0, -1, "")]),
+                    figs.plane((-4, 1), (-1, 6), lines=[(0, 3, ""), (-1, 1, "")], solution=(-2, 3))],
+                   gap=3.4, titles=[[("y = 4", BLUE), ("y = −1", ORANGE), "a"], [("y = 3", BLUE), ("y = −x + 1", ORANGE), "b"]], inches=5.4)
+# fast 9: FAST's matching grid, on the Review (the paper keeps its kinds)
+R_MATCH = figs.match_grid(["a.   4(x + 3) = 4x + 12", "b.   6x − 1 = 6x + 4", "c.   8x + 5 = 3x + 5"],
+                          ["one solution", "no solution", "infinitely many"], cw=5.2, rh=1.4, pt=11, inches=6.6)
 
 
 U = dict(
@@ -271,10 +290,11 @@ U = dict(
                          ["$6x + 2 - x = 2x + 17$", "distribute: 2 times 3x, 2 times 1"],
                          ["$5x + 2 = 2x + 17$", "collect: 6x − x = 5x"],
                          ["$3x + 2 = 17$", "take 2x from both sides"],
-                         ["$3x = 15$,   $x = 5$", "subtract 2; divide by 3"],
+                         ["$3x = 15$", "subtract 2 from both sides"],
+                         ["$x = 5$", "divide both sides by 3"],
                          ["$2(16) - 5 = 27$  and  $2(5) + 17 = 27$", "the check: 27 on both sides"]])),
                      "**A fraction or a decimal outside the parentheses multiplies every term too.**  $0.4(5x + 15) = x + 12$ becomes $2x + 6 = x + 12$, so $x = 6$ — not $2x + 15$, the decimal to one term only.",
-                     "**To clear fractions, multiply EVERY term on both sides by a common denominator.**  $\\frac{x}{3} + 2 = \\frac{x}{2} - 1$: times 6, $2x + 12 = 3x - 6$, so $x = 18$. Check: $6 + 2 = 8$ and $9 - 1 = 8$."]),
+                     "**To clear fractions, multiply EVERY term on both sides by a common denominator.**  $\\frac{x}{3} + 2 = \\frac{x}{2} - 1$ times 6 is $2x + 12 = 3x - 6$; take 2x from both sides, $12 = x - 6$; add 6, $x = 18$. Check: $6 + 2 = 8$ and $9 - 1 = 8$."]),
         dict(title="2.   One Solution, No Solution, Infinitely Many", right="Lessons 3–4 · read what is left",
              blocks=["**Simplify each side, take the same variable term from both sides, and read what is left.**",
                      dict(table=([2600, 2600, 4160], [
@@ -288,39 +308,40 @@ U = dict(
         dict(title="3.   Solutions of a System", right="Lessons 5–6 · both equations true",
              blocks=["**A system is two equations together. Its solution is an ordered pair (x, y) that makes BOTH true.**  $(5, 3)$ for $y = x - 2$ and $y = -x + 8$: $5 - 2 = 3$ and $-5 + 8 = 3$ — a solution. $(2, 0)$: $2 - 2 = 0$ is true, but $-2 + 8 = 6$, not 0 — one equation is not enough, so it is not a solution.",
                      "**x first, then y.**  $(3, 5)$ is a different point from $(5, 3)$.",
-                     "**Two lines that cross meet once.**  So a system whose lines cross has exactly one solution — when you test several pairs, at most one can pass."]),
+                     "**Test every pair, or every system, in both equations.**  If the two lines cross, exactly one pair passes. If the two equations are the same line, every pair on that line passes. So never stop at the first one that works."]),
         dict(title="4.   A Line from a Table of Values", right="Lessons 5–6 and Lesson 7 · x = 0 and two more",
              blocks=["**Make a table: x = 0 and two more. Put each x in and get its y.**  Plot the points: two draw the line and the third is the check — if it misses, a y is wrong. Every point of the line is a solution of its equation.",
                      dict(table=([3360, 2000, 2000, 2000], [
                          ["x", "0", "1", "2"],
                          ["$y = 3x - 4$", "−4", "−1", "2"]]), header=False),
-                     "**A fraction multiplying x: use even x.**  Then every y is a whole number to plot.",
+                     "**A half multiplying x: use even x (for thirds, multiples of 3).**  Then every y is a whole number to plot.",
                      dict(table=([3360, 2000, 2000, 2000], [
                          ["x", "0", "2", "4"],
                          ["$y = \\frac{1}{2}x - 1$", "−1", "0", "1"]]), header=False)]),
         dict(title="5.   How Many Solutions a System Has", right="Lessons 5–6 · cross, parallel, the same line",
              blocks=[dict(table=([2000, 3300, 2000, 2060], [
                          ["The two lines", "The equations", "Solutions", "Example"],
-                         ["cross once", "different numbers multiply x", "one: the crossing", "$y = x - 2$, $y = -x + 8$"],
-                         ["parallel: never meet", "the same number multiplies x, different numbers added", "none", "$y = 3x + 1$, $y = 3x - 4$"],
+                         ["intersect once", "different coefficients of x", "one: the point of intersection", "$y = x - 2$, $y = -x + 8$"],
+                         ["parallel: never meet", "the same coefficient of x, different numbers added", "none", "$y = 3x + 1$, $y = 3x - 4$"],
                          ["the same line", "one equation written two ways", "infinitely many: every point of the line", "$y = 4(x - 1)$, $y = 4x - 4$"]])),
-                     "**Parallel lines have the same steepness: the same number multiplies x.**  ½ and 0.5 are one number. 2 and −2 are not: $y = 2x + 1$ and $y = -2x + 1$ cross, at (0, 1).",
+                     "**Parallel lines have the same steepness in the same direction: the same coefficient of x.**  ½ and 0.5 are one number. 2 and −2 are not: $y = 2x + 1$ and $y = -2x + 1$ cross, at (0, 1). A level line is a line too: $y = 2$ and $y = -3$ have 0 multiplying x, so they are parallel, and $y = 2$ crosses $y = -x + 6$ once, at (4, 2).",
                      "**The same line is infinitely many, not one and not none.**  Write both equations the same way first: $4(x - 1)$ is $4x - 4$."]),
         dict(title="6.   Solving a System by Graphing", right="Lessons 7–8 · read the crossing, check it in both",
              blocks=["**Graph both lines; the solution is where they cross.**  Read x, then y, and check the pair in both equations. Tables find it too: the solution is the column where both tables give the same y — $y = x - 2$ and $y = -x + 8$ both give 3 at $x = 5$, so the solution is $(5, 3)$.",
                      "**In a story, say what the crossing means, with its units.**  Club A costs $y = 8x + 15$ dollars and Club B $y = 11x$ dollars for x months. The lines cross at $(5, 55)$: at 5 months both clubs cost \\$55. Each line is (the amount per 1) times x, plus the start.",
-                     "**Between the grid lines, estimate — and say 'about'.**  Read each coordinate to the nearest tenth, then check the estimate in both equations: the two values come out close, not equal. $y = x + 2$ and $y = -2x + 4$ cross at about $(0.7, 2.7)$: $0.7 + 2 = 2.7$ and $-2(0.7) + 4 = 2.6$ — close. (Exactly, $x = \\frac{2}{3}$ and $y = \\frac{8}{3}$.) The nearest grid point, (1, 3), is on $y = x + 2$ only — not a solution."]),
+                     "**Between the grid lines, estimate — and say 'about'.**  Read each coordinate to the nearest tenth, then check the estimate in both equations: the two values come out close, not equal. A good estimate is within 0.1 of each coordinate. $y = x + 2$ and $y = -2x + 4$ cross at about $(0.7, 2.7)$: $0.7 + 2 = 2.7$ and $-2(0.7) + 4 = 2.6$ — close. (Exactly, $x = \\frac{2}{3}$ and $y = \\frac{8}{3}$.) The nearest grid point, (1, 3), is on $y = x + 2$ only — not a solution."]),
         dict(title="7.   Vocabulary",
              blocks=[dict(vocab=[
                  ("like terms", "terms with the same variable to the same power: $6x$ and $-x$"),
-                 ("coefficient; constant", "the number that multiplies the variable (6 in $6x$); a term with no variable"),
+                 ("coefficient; constant", "the number that multiplies the variable (6 in $6x$; the coefficient of x in $y = -x + 4$ is −1); a term with no variable"),
                  ("distributive property", "$a(b + c) = ab + ac$ — the number outside multiplies every term inside"),
                  ("solution of an equation", "a number that makes the equation true"),
                  ("no solution; infinitely many solutions", "never true, whatever the number (it ends at a = b); true for every number (it ends at a = a)"),
                  ("system of equations", "two equations about the same two variables, taken together"),
                  ("solution of a system", "an ordered pair (x, y) that makes both equations true; on a graph, where the lines cross"),
                  ("ordered pair", "(x, y): the x first, then the y"),
-                 ("parallel lines", "lines that never meet: the same number multiplies x and different numbers are added"),
+                 ("intersect; point of intersection", "cross; the point where two lines cross — on a graph, the solution of the system"),
+                 ("parallel lines", "lines that never meet: the same coefficient of x and different numbers added"),
                  ("estimate", "a careful read between the grid lines, written with 'about' and checked in both equations")])]),
     ],
 
@@ -347,17 +368,26 @@ U = dict(
                 dict(label="b", stem="$\\frac{1}{4}(8x + 12) = x + 9$", answer="x = 6", why="A quarter of 8x is 2x and a quarter of 12 is 3: 2x + 3 = x + 9. Check: ¼(60) = 15 and 6 + 9 = 15.",
                      check=solves("F(1,4)*(8*u + 12)", "u + 9", "6"), space=0.5),
                 dict(label="c", stem="$\\frac{x}{4} + 3 = \\frac{x}{2} - 2$", answer="x = 20", why="Times 4, every term: x + 12 = 2x − 8, so x = 20. Check: 5 + 3 = 8 and 10 − 2 = 8.",
-                     check=("many", solves("u/4 + 3", "u/2 - 2", "20"), same("4*(u/4 + 3)", "u + 12"), same("4*(u/2 - 2)", "2*u - 8")), space=0.5)]),
+                     check=("many", solves("u/4 + 3", "u/2 - 2", "20"), same("4*(u/4 + 3)", "u + 12"), same("4*(u/2 - 2)", "2*u - 8")), space=0.5),
+                dict(label="d", stem="$-0.4(5x - 10) = x + 2.5$", answer="x = 0.5", why="The −0.4 multiplies both terms: −2x + 4 = x + 2.5. Add 2x: 4 = 3x + 2.5. Subtract 2.5: 1.5 = 3x, so x = 0.5. Check: −0.4(2.5 − 10) = 3 and 0.5 + 2.5 = 3.",
+                     check=("many", solves("-F(2,5)*(5*u - 10)", "u + F(5,2)", "F(1,2)"), same("-F(2,5)*(5*u - 10)", "-2*u + 4")), space=0.5),
+                dict(label="e", stem="$-\\frac{3}{4}(4x - 8) = x + 1$", answer="x = 1.25", why="The −¾ multiplies both terms: −3x + 6 = x + 1. Add 3x: 6 = 4x + 1. Subtract 1: 5 = 4x, so x = 1.25. Check: −¾(5 − 8) = 2.25 and 1.25 + 1 = 2.25.",
+                     check=("many", solves("-F(3,4)*(4*u - 8)", "u + 1", "F(5,4)"), same("-F(3,4)*(4*u - 8)", "-3*u + 6")), space=0.5)]),
             dict(stem="What number goes in the box so that   $5(x + 2) - x = 4x + □$   has infinitely many solutions?", answer="10",
                  why="The left side is 5x + 10 − x = 4x + 10, so the box is 10: 4x + 10 = 4x + 10 is true for every number. Any other number gives no solution.",
                  check=("many", same("5*(u + 2) - u", "4*u + 10"), never("5*(u + 2) - u", "4*u + 2")), space=0.5),
             dict(stem="A pottery studio has two plans. Plan A costs \\$45 to join and \\$8 a class. Plan B costs \\$13 a class. For how many classes do the two plans cost the same?",
                  answer="9 classes (both \\$117)", why="45 + 8c = 13c, so 45 = 5c and c = 9. Check: 45 + 72 = 117 and 13(9) = 117.",
                  check=("many", solves("45 + 8*u", "13*u", "9"), ("eq", "45 + 8*9", "117"), ("eq", "13*9", "117")), space=0.6),
-            # the SSDD block (HOUSE STYLE §16 rule 3: the end of Part A): four equations on one surface — 4(x − 2) on the
-            # left, an x-term on the right — that end four ways. The name and the four endings print on the key only.
+            # FAST's matching grid (fast 9): the three endings, one box a row
+            dict(stem="Each equation has one solution, no solution or infinitely many solutions. Mark one box in each row.", fig=R_MATCH,
+                 parts=[dict(label="a", stem="$4(x + 3) = 4x + 12$", answer="Infinitely many solutions", why="4x + 12 = 4x + 12: take 4x from both sides, 12 = 12 — always true.",
+                             check=same("4*(u + 3)", "4*u + 12"), space=0.2),
+                        dict(label="b", stem="$6x - 1 = 6x + 4$", answer="No solution", why="Take 6x from both sides: −1 = 4 — never true.",
+                             check=never("6*u - 1", "6*u + 4"), space=0.2),
+                        dict(label="c", stem="$8x + 5 = 3x + 5$", answer="One solution (x = 0)", why="Take 3x from both sides: 5x + 5 = 5. Subtract 5: 5x = 0, so x = 0 — one solution.",
+                             check=solves("8*u + 5", "3*u + 5", "0"), space=0.2)]),
             dict(stem="Solve each equation. If it has no solution or infinitely many solutions, say so.",
-                 key_stem="**SSDD.**   Solve each equation. Every part has 4(x − 2) on the left and an x-term on the right.  Same surface, four different endings: one solution, a negative solution, no solution and infinitely many — the moves are the same every time (distribute, take the same x-term from both sides) and what is left decides, so that a student learns to read the ending and not the look of the equation.",
                  parts=[
                      dict(label="a", stem="$4(x - 2) = x + 7$", answer="x = 5", why="4x − 8 = x + 7, so 3x = 15. Check: 4(3) = 12 and 5 + 7 = 12.",
                           check=solves("4*(u - 2)", "u + 7", "5"), space=0.4),
@@ -367,6 +397,24 @@ U = dict(
                           check=never("4*(u - 2)", "4*u + 8"), space=0.4),
                      dict(label="d", stem="$4(x - 2) = 4x - 8$", answer="Infinitely many solutions", why="4x − 8 = 4x − 8; take 4x from both sides: −8 = −8 — always true.",
                           check=same("4*(u - 2)", "4*u - 8"), space=0.4)]),
+            # the SSDD block (HOUSE STYLE §16 rule 3: the end of Part A) — barton 8, 15 Nov: ONE context, FOUR different
+            # structures (an equation, two expressions set equal, a pair tested in a system, a system with no solution),
+            # so that a student must decide what kind of problem each part is. The name prints on the key only.
+            dict(stem="Gym A costs \\$36 to join and \\$4 a visit. Gym B costs \\$10 a visit. Answer each part.",
+                 key_stem="**SSDD.**   Gym A costs \\$36 to join and \\$4 a visit; Gym B costs \\$10 a visit. One story, four different structures: (a) one equation (11.01), (b) two plans set equal (11.02), (c) a pair tested in a system (11.05), (d) a system that never meets (11.03, 11.05) — the student decides which kind each part is.",
+                 parts=[
+                     dict(label="a", stem="Dana has paid Gym A \\$64 in all. How many visits has she made?", answer="7 visits",
+                          why="36 + 4v = 64. Subtract 36: 4v = 28. Divide by 4: v = 7. Check: 36 + 28 = 64.",
+                          check=solves("36 + 4*u", "64", "7"), space=0.5),
+                     dict(label="b", stem="After how many visits have the two gyms cost the same?", answer="6 visits (both \\$60)",
+                          why="36 + 4v = 10v. Take 4v from both sides: 36 = 6v, so v = 6. Check: 36 + 24 = 60 and 10(6) = 60.",
+                          check=("many", solves("36 + 4*u", "10*u", "6"), ("eq", "36 + 4*6", "60")), space=0.5),
+                     dict(label="c", stem="Is $(5, 56)$ a solution of the system  $y = 4x + 36$  and  $y = 10x$?", answer="No",
+                          why="4(5) + 36 = 56 is true, but 10(5) = 50, not 56: one equation is not enough.",
+                          check=("many", sat("4*u + 36", "5", "56"), fails("10*u", "5", "56")), space=0.5),
+                     dict(label="d", stem="Gym C costs \\$50 to join and \\$4 a visit. Will Gym A and Gym C ever have cost the same? Explain.", answer="Never — Gym C always costs \\$14 more.",
+                          why="36 + 4v = 50 + 4v; take 4v from both sides: 36 = 50 — never true. Both add \\$4 a visit, so the difference stays \\$14: parallel lines, no solution.",
+                          check=("many", never("36 + 4*u", "50 + 4*u"), never_meet("4*u + 36", "4*u + 50")), space=0.5)]),
         ]),
         dict(letter="B", title="Solutions of a System", lessons="Lessons 5–6", benchmark="MA.8.AR.4.1", items=[
             dict(stem="Is the ordered pair a solution of the system? Show both checks.", parts=[
@@ -376,16 +424,15 @@ U = dict(
                      check=("many", sat("-2*u + 1", "-2", "5"), fails("u + 6", "-2", "5")), space=0.4),
                 dict(label="c", stem="$(8, 3)$;   $y = \\frac{1}{2}x - 1$  and  $y = -x + 11$", answer="Yes", why="½(8) − 1 = 3 and −8 + 11 = 3: both true.",
                      check=("many", sat("F(1,2)*u - 1", "8", "3"), sat("-u + 11", "8", "3")), space=0.4)]),
-            dict(stem="Select ALL the solutions of the system   $y = 2x + 4$   and   $y = -x + 1$.",
-                 choices=["$(1, 6)$", "$(0, 1)$", "$(2, -1)$", "$(-1, 2)$", "$(0, 4)$"], correct=[3], answer="D", space=0.4,
-                 errors={"A": "makes y = 2x + 4 true only: −1 + 1 = 0, not 6 [B1G-M, AR.4.1: a solution satisfies both]",
-                         "B": "makes y = −x + 1 true only: 2(0) + 4 = 4, not 1 [B1G-M, AR.4.1: a solution satisfies both]",
-                         "C": "makes y = −x + 1 true only: 2(2) + 4 = 8, not −1 [B1G-M, AR.4.1: a solution satisfies both]",
-                         "E": "makes y = 2x + 4 true only: −0 + 1 = 1, not 4 [B1G-M, AR.4.1: a solution satisfies both]"},
-                 why="(−1, 2): 2(−1) + 4 = 2 and −(−1) + 1 = 2. Every other pair makes one equation true and not the other; two lines that cross meet once.",
-                 check=("many", crosses("2*u + 4", "-u + 1", "-1", "2"),
-                        sat("2*u + 4", "1", "6"), fails("-u + 1", "1", "6"), sat("-u + 1", "0", "1"), fails("2*u + 4", "0", "1"),
-                        sat("-u + 1", "2", "-1"), fails("2*u + 4", "2", "-1"), sat("2*u + 4", "0", "4"), fails("-u + 1", "0", "4"))),
+            # critic 12 = fast 4: the systems a pair solves, the count unsaid — three of five here
+            dict(stem="Select all the systems that have  $(-1, 3)$  as a solution.",
+                 choices=["$y = x + 4$  and  $y = -2x + 1$", "$y = -x + 2$  and  $y = 3x + 6$", "$y = 2x + 5$  and  $y = x + 3$",
+                          "$y = -3x$  and  $y = x + 4$", "$y = 4x + 7$  and  $y = -x + 1$"], correct=[0, 1, 3], answer="A, B, D", space=0.4,
+                 errors={"C": "true in y = 2x + 5 only: −1 + 3 = 2, not 3 [B1G-M, AR.4.1: a solution satisfies both]",
+                         "E": "true in y = 4x + 7 only: −(−1) + 1 = 2, not 3 [B1G-M, AR.4.1: a solution satisfies both]"},
+                 why="A: −1 + 4 = 3 and −2(−1) + 1 = 3. B: 1 + 2 = 3 and 3(−1) + 6 = 3. D: −3(−1) = 3 and −1 + 4 = 3. C and E each make one equation true only.",
+                 check=("many", crosses("u + 4", "-2*u + 1", "-1", "3"), crosses("-u + 2", "3*u + 6", "-1", "3"), crosses("-3*u", "u + 4", "-1", "3"),
+                        sat("2*u + 5", "-1", "3"), fails("u + 3", "-1", "3"), sat("4*u + 7", "-1", "3"), fails("-u + 1", "-1", "3"))),
             dict(stem="$(□, 9)$ is a solution of   $y = 2x + 3$   and   $y = 4x - 3$. What number goes in the box?", answer="3",
                  why="2x + 3 = 9 gives x = 3, and 4(3) − 3 = 9 as well: (3, 9) makes both true.",
                  check=("many", crosses("2*u + 3", "4*u - 3", "3", "9")), space=0.5),
@@ -406,6 +453,15 @@ U = dict(
                          "D": "the same two digits read as the same line — the lines cross once, at (1, 9) [B1G-M, AR.4.2: the same-line case]"},
                  why="3(x + 2) = 3x + 6: one equation written two ways, so every point of the line is a solution.",
                  check=("many", one_line("3*u + 6", "3*(u + 2)"), never_meet("3*u + 6", "3*u - 6"), crosses("3*u + 6", "-3*u + 6", "0", "6"), crosses("3*u + 6", "6*u + 3", "1", "9"))),
+            dict(stem="Each picture shows a system with a level line. How many solutions does each system have?", fig=R_LEVEL, parts=[
+                     dict(label="a", stem="$y = 4$ and $y = -1$", answer="No solution", why="Two level lines: 0 multiplies x in both and the numbers differ — parallel, they never meet.",
+                          check=never_meet("4 + 0*u", "-1 + 0*u"), space=0.3),
+                     dict(label="b", stem="$y = 3$ and $y = -x + 1$", answer="One solution: (−2, 3)", why="The lines intersect once, at (−2, 3): y = 3 there, and −(−2) + 1 = 3.",
+                          check=crosses("3 + 0*u", "-u + 1", "-2", "3"), space=0.3)]),
+            # FAST's dropdown sentence (fast 9), on the Review: choose one from each bracket
+            dict(stem="Complete the sentence about the system  $y = -3x + 2$  and  $y = -3x - 4$.   The lines  [ intersect once  /  are parallel  /  are the same line ],  so the system has  [ one solution  /  no solution  /  infinitely many solutions ].",
+                 answer="are parallel;  no solution", why="The coefficient of x is −3 in both and the numbers added differ: parallel lines never meet.",
+                 check=never_meet("-3*u + 2", "-3*u - 4"), space=0.4),
             dict(stem="Without graphing: how many solutions does the system   $y = 5x - 2$   and   $y = 5x + 1$   have? How do you know?", answer="No solution — the same number, 5, multiplies x and the numbers added differ, so the lines are parallel.",
                  why="parallel lines never meet", check=never_meet("5*u - 2", "5*u + 1"), space=0.5),
         ]),
@@ -422,9 +478,11 @@ U = dict(
             dict(stem="Ava has \\$20 and saves \\$3 a week. Ben has \\$5 and saves \\$6 a week. The graph shows the dollars y each has after x weeks. When will they have the same amount, and how much will each have?",
                  fig=R_STORY, answer="After 5 weeks, \\$35 each.", why="y = 3x + 20 and y = 6x + 5 cross at (5, 35): 3(5) + 20 = 35 and 6(5) + 5 = 35.",
                  check=crosses("3*u + 20", "6*u + 5", "5", "35"), space=0.5),
-            dict(stem="The system   $y = 2x - 2$   and   $y = -x + 3$   is graphed. Estimate its solution to the nearest tenth.", fig=R_EST, answer="about (1.7, 1.3)",
-                 why="Exactly (5/3, 4/3). Accept a careful read within about 0.2 of each coordinate. Check (1.7, 1.3): 2(1.7) − 2 = 1.4 and −1.7 + 3 = 1.3 — close.",
-                 check=("many", crosses("2*u - 2", "-u + 3", "F(5,3)", "F(4,3)"), ("approx", "F(5,3)", "1.7", "0.05"), ("approx", "F(4,3)", "1.3", "0.05")), space=0.4),
+            dict(stem="The system   $y = 2x - 2$   and   $y = -x + 3$   is graphed. Estimate its point of intersection to the nearest tenth.", fig=R_EST, answer="about (1.7, 1.3)",
+                 why="Exactly (5/3, 4/3). Accept a read within 0.1 of each: x from 1.6 to 1.8, y from 1.2 to 1.4. Check (1.7, 1.3): 2(1.7) − 2 = 1.4 and −1.7 + 3 = 1.3 — close. (2, 1) is a grid point on y = −x + 3 only.",
+                 check=("many", crosses("2*u - 2", "-u + 3", "F(5,3)", "F(4,3)"), ("approx", "F(5,3)", "F(17,10)", "F(1,20)"), ("approx", "F(4,3)", "F(13,10)", "F(1,20)"),
+                        ("true", "1 < F(8,5) and F(9,5) < 2 and 1 < F(6,5) and F(7,5) < 2"),
+                        sat("-u + 3", "2", "1"), fails("2*u - 2", "2", "1")), space=0.4),
             dict(stem="Two plans cost the same for 5 months:   $y = 7x + 25$   and   $y = □x$. What number goes in the box?", answer="12",
                  why="7(5) + 25 = 60 at 5 months, so □(5) = 60 and □ = 12.", check=("many", ("eq", "F(7*5 + 25, 5)", "12"), crosses("7*u + 25", "12*u", "5", "60")), space=0.5),
         ]),

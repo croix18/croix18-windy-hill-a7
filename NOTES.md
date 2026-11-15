@@ -1,4 +1,56 @@
-# State of the work — 25 October 2026 (read this first)
+# State of the work — 14 November 2026 (read this first)
+
+## 14 November — A7 Unit 11, Solving Equations and Systems: built, reviewed, fixed; held for Croix's word before it is published
+
+Croix, 10:50 am: *"Can you get working on the next unit in a7"*. The next unit taught is **Unit 11** (ruling 52: before
+Units 7 and 10; MA.8.AR.2.1 and MA.8.AR.4.1–4.3; seven days, Mon 30 Nov – Thu 10 Dec, the one-period test Fri 11 Dec).
+One session did it as the brief of 24 Oct lays out (`Windmill/briefs`, "What comes next"): the lead (Claude Fable 5.2)
+wrote the outlines, the briefs and the rulings on the review; Claude Opus 5.5 built each piece; three readers who had
+not seen the specs reviewed it.
+
+- **The plan and the audit** (`a7/reference/A7 Unit 11 Solving Equations and Systems - Lesson Outlines.md`, `… - Audit.md`):
+  outlined from the benchmarks first, 126 equations solved by sympy before a spec was written; then Math Nation 11.1–11.8
+  and its test read from Croix's Drive (kept in `/root/mn/unit11`, never in git) — **29 student-facing defects and key
+  errors** (D1–D11, E1–E18), none reproduced. The outlines' nine standing decisions are the unit's rules; the three that
+  matter most: **a line is graphed from a table of values and "slope" / "y-intercept" are not on a student page** (Unit 10
+  comes later); **no substitution or elimination**; **a false ending is the false equation and its words** ("8 = 5, never
+  true: no solution"), never "8 ≠ 5" as a line of work.
+- **Built:** `a7/build/u11/` — `l01.py` 11.01, `l02.py` 11.02, `l03.py` 11.03 (a 43-minute Wednesday), `l04.py` 11.04,
+  `l05.py` 11.05–06 (merged), `l07.py` 11.07 (43 minutes), `l08.py` 11.08; `unit.py` (the Practice Test, 14 questions,
+  18 points — the test's blueprint, ruling 49; the Review with its SSDD block; the Reference Sheet); `manifest.py`;
+  **`figs11.py`** — `plane` (a coordinate plane with one or two lines drawn from m and b, which refuses a stated
+  crossing that is not on every line), `table`, `row`, `slide`. The module is named `figs11`, not `figs`: every unit's
+  gates run in one process and a second module called `figs` was read as Unit 6's (`gates.py` crashed on `figs.strips`).
+  The package is `a7/packages/A7 Unit 11 - Solving Equations and Systems/`; the master sheet has its rows.
+- **The practice page** (`a7/practice/u11`, README there): one generator per question of the paper; every part over
+  1,000 versions; `u11_check.js` (3,000 sets read back from their printed words), `verify.py` (sympy; what the lessons
+  showed is read from the lesson specs — `python3 shown43.py --emit` after any lesson changes), 43 of 43 planted errors,
+  `mc_check.js` (the all-multiple-choice retake). The teacher copy prints the test as random sets
+  (`teacher/gen_test.py` after the paper changes). **Not published** — nothing of Unit 11 is on the website.
+- **The review** (`/home/claude/work/review_*.md` in the session; the dispositions are in the audit's last section): no
+  wrong answer, key, worked line or graph. One blocker — the Practice Test's 14(b) accepted a point that is on one line
+  only — and 28 majors about what a student and a teacher can do with the pages; fixed in a second pass (the audit lists
+  each finding and what was done).
+- **`tools/`:** `master_sheet.py` and `check_master_sheet.py` load each unit's own figure module; `tex2text.py` and the
+  sheet's check read an escaped dollar ("\\$24") as money.
+
+### Open, for Croix
+1. **Two kit limits shape the graph days** (Windmill `kit/`, not changed here): a Your Turn slide cannot carry a
+   figure, and a paper's key prints the same figure as its page — so a graph-day Your Turn works from two tables, and
+   the Independent Set keys of 11.07 and 11.08 give each crossing in words over the empty grid. A `fig` on a Your Turn
+   and a key-only figure would fix both.
+2. **Three IXL skills of the plan may ask for what Unit 11 does not teach yet** — TS7 "Write a system of equations given
+   a graph", 9Z8 "Solve a system of equations in slope-intercept form", AGZ "Find the number of solutions to a system of
+   equations by graphing" — read from their titles; nobody here could open IXL. If they need slope, they move to Unit 10.
+3. **The kit's steps check refuses a false line** ("8 = 5") on an answer slide, so a board's no-solution ending is in
+   words there; the worked examples print it.
+4. **The build kit's printed Practice Test still prints the follow-through line** under each section (Unit 6's too;
+   Croix's ruling of 7 Nov took it off every page). The test Croix prints comes from the teacher copy, which does not.
+5. **START HERE's dates for 11.02 and 11.03 are a day late** — they come from the plan vendored on 25 Oct
+   (`assets/windmill`); the scope and the lessons are right. `python3 tools/vendor_windmill.py` when Windmill's plan is current.
+6. **The kit's Teacher Edition prints "neighbour"**; the lessons are in American English.
+
+# Earlier — 25 October 2026
 
 ## 30 October, late — Unit 5's printed test: the repeats of the lessons changed (Croix: "Yeah change them")
 

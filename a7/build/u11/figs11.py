@@ -310,3 +310,28 @@ def row(specs, gap=3.0, titles=None, captions=None, fs=22, pt=9.5, inches=6.0):
                 sh.append(_t(mid, bottom, text, va="top", off=(0, -1.9 - 1.25 * j)))
         left += (x1 - x0) + gap
     return dict(kind="shapes", fs=fs, pt=pt, **{"in": inches}, shapes=sh)
+
+
+def match_grid(rows, cols, rw=7.5, cw=3.6, rh=1.15, fs=22, pt=9.5, inches=6.0):
+    """A matching grid in FAST's shape: one row per item (its words at the left), one column per choice (its name
+    on top), an empty box in every cell for a student's mark. Added for the Unit Review (fast 9)."""
+    sh = []
+    n, m = len(rows), len(cols)
+    W = rw + m * cw
+    for r in range(n + 2):
+        sh.append(dict(t="seg", a=(0, -r * rh), b=(W, -r * rh)))
+    for c in range(m + 2):
+        x = 0 if c == 0 else rw + (c - 1) * cw
+        sh.append(dict(t="seg", a=(x, 0), b=(x, -(n + 1) * rh)))
+    for c, name in enumerate(cols):
+        sh.append(_t(rw + (c + 0.5) * cw, -0.5 * rh, name))
+    for r, name in enumerate(rows):
+        yc = -(r + 1.5) * rh
+        sh.append(_t(0.4, yc, name, ha="left"))
+        for c in range(m):
+            xc = rw + (c + 0.5) * cw
+            q = 0.28
+            for (a, b) in (((xc - q, yc - q), (xc + q, yc - q)), ((xc + q, yc - q), (xc + q, yc + q)),
+                           ((xc + q, yc + q), (xc - q, yc + q)), ((xc - q, yc + q), (xc - q, yc - q))):
+                sh.append(dict(t="seg", a=a, b=b))
+    return dict(kind="shapes", fs=fs, pt=pt, **{"in": inches}, shapes=sh)
