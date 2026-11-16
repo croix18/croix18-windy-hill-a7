@@ -1,5 +1,21 @@
 # State of the work — 15 November 2026 (read this first)
 
+## 15 November, evening — every practice page and teacher copy re-run on the kit's words pass (the site session)
+
+Croix, 15 Nov, 7:16 pm, to the site session (session_01W9n2WyPU16kWQaNQXN3FUe), after Windmill's practice kit lost the
+notes he had been circling on the website (Windmill `HANDOFF.md`, "Words on a page"; `practice/kit/README.md`, "15 Nov
+2026 — the words pass"): *"Go through and rebuild and republish everything that needs it."*
+- **The practice kit is at Windmill `9f3dc9b`** (`a7/practice/kit/KIT_VERSION`): `cgraph` (a circle graph the student
+  builds; nothing of A7's uses it — one more inlined script) and the words pass. What a page says now: nothing in the bar
+  before the first check, no "Whole practice test" chip, the end panel headed by its set number with "points" and "time",
+  no note about Hint and Try a similar one, no heading over the list after Finish, one short line where the page asks
+  before a change. Words only: no question, key, set lock or `contentVersion` moved (Unit 11 stays at 1).
+- **Re-run on it, each ending ALL CHECKS PASSED:** Units 3, 4, 5, 6 and 11 — the page and the teacher copy.
+- **On the website** in the site commit that follows this one: the ten practice pages and teacher copies only. The
+  slides and the units' documents are as they were published at site `e919cfe`; nothing else in this repository changed.
+- The site's `tools/test_site.mjs` now fails a practice page or teacher copy built on a kit from before the words pass,
+  so a page is re-run on the vendored kit before it is put up.
+
 ## 15 November — the kits fixed in Windmill; Unit 11 uses the new pieces; Units 3–6 rebuilt on them; all of it published that evening
 
 Croix, 8:40 am, of the kit limits and open items Unit 11's report listed: *"Fix windmill. Fix the other kits. Fix

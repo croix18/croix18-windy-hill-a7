@@ -305,7 +305,7 @@ details.setbox summary:has(.tr){flex-wrap:wrap} details.setbox summary .tr{flex-
   max-width:46rem;margin:0 auto;color:#000}
 body.printing>.watch,body.printing>.result,body.printing>.sheet{display:none!important}
 .pbar{position:sticky;top:0;z-index:5;display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding:10px 0;background:var(--ground);font-family:var(--ui)}
-.pbar button{min-height:44px} .pvhint{font:13px/1.3 var(--ui);color:#555;flex:1 1 12rem}
+.pbar button{min-height:44px}
 body.printing{background:var(--ground)}
 .ppage{background:#fff;color:#000;padding:28px clamp(14px,5vw,40px);box-shadow:0 1px 2px rgba(20,30,60,.08),0 8px 28px rgba(20,30,60,.08);font-family:var(--serif)}
 .phead .pt1{font:700 21px/1.25 var(--serif)} .phead .pt2{font:14px/1.3 var(--ui);color:#444;margin-top:2px}
@@ -639,6 +639,58 @@ svg.nlg.nl-small{width:min(100%,14rem)}
 #printview svg.nlg{color:#000} #printview .nlkw{color:#333}
 .ptab .kv .nlkey{width:2.9in}
 @media print{ .nctl,.nltk,.nsay{display:none!important} svg.nlg{color:#000} .pnlband{height:10mm} .nlpt{outline:none!important} }
+/* ==== The circle graph a student builds (15 Nov 2026, cgraph.js; MA.7.DP.1.4's first verb is construct) ====
+   The circle is marked every 10° and numbered every 30° outside the rim, the line from the center to 0° already drawn, all in the
+   pen (currentColor). A tap on a mark draws a line, the same again erases it, a drag moves one; while the pointer is down a ghost
+   line follows to the nearest mark (turquoise with the ink's edge) and the readout says the mark. Under it: the sector to name
+   (‹ › and a second Tab stop), the names (a 44 px radiogroup, a word each), Start over. The sector selected is the one live thing:
+   the live tint with a turquoise edge. On paper: the circle alone, 60 mm across; the key draws the graph in ink. */
+.cgp .cgw,.cgp>.ckrow{margin-left:var(--i2)} .cgp.solo .cgw,.cgp.solo>.ckrow{margin-left:0} .xq .cgp .cgw,.xq .cgp>.ckrow{margin-left:0}
+.cgw{margin-top:8px;max-width:28rem;position:relative}
+.cgc{border-radius:12px;cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+.cgc:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.cgw.locked .cgc{cursor:default}
+svg.cgg{display:block;width:100%;height:auto;overflow:visible;color:var(--pen)}
+svg.cgg .cgo{fill:none;stroke:currentColor;stroke-width:1.8}
+svg.cgg .cgk{stroke:currentColor;stroke-width:1.6} svg.cgg .cgk2{stroke:currentColor;stroke-width:1.1}
+svg.cgg .cgb{font:500 14.5px var(--ui);fill:currentColor;text-anchor:middle}
+svg.cgg .cgz{stroke:currentColor;stroke-width:2.2;stroke-linecap:round} svg.cgg .cgl{stroke:currentColor;stroke-width:2.6;stroke-linecap:round}
+svg.cgg .cgc0{fill:currentColor}
+svg.cgg .cgn{font:600 15px var(--ui);fill:currentColor} svg.cgg .cgd{font:500 13.5px var(--ui);fill:currentColor}
+svg.cgg .cgld{stroke:currentColor;stroke-width:1.2}
+svg.cgg .cgsel{fill:var(--live);stroke:var(--hot);stroke-width:2.5;stroke-linejoin:round}
+svg.cgg .cggh0{stroke:var(--ink);stroke-width:6;stroke-linecap:round} svg.cgg .cggh{stroke:var(--hot);stroke-width:3.4;stroke-linecap:round}
+svg.cgg .cgcur{display:none} svg.cgg .cgcur line{stroke:var(--focus);stroke-width:1.5;stroke-dasharray:4 3} svg.cgg .cgcur circle{fill:none;stroke:var(--focus);stroke-width:2}
+.cgc:focus-visible svg.cgg .cgcur{display:inline}
+svg.cgg .cgring,svg.cgg .cgm{fill:transparent;stroke:none;touch-action:none}
+@media (hover:hover){ .cgw:not(.locked) .cgc:hover svg.cgg .cgm:hover{fill:var(--field2)} }
+.cgrd{position:absolute;top:4px;left:4px;z-index:1;font:700 15px/1 var(--ui);color:var(--hotInk);background:var(--hot);box-shadow:inset 0 0 0 1.5px var(--ink);border-radius:999px;padding:6px 10px;visibility:hidden}
+.cgrd.on{visibility:visible}
+.cghow{margin:4px 0 0;font:13.5px/1.4 var(--ui);color:var(--mut)}
+.cgctl{display:flex;flex-direction:column;gap:10px;margin-top:6px}
+.cgrow{display:flex;align-items:center;gap:6px}
+.cgrow button{flex:none;width:44px;height:44px;border:0;border-radius:999px;background:var(--field);color:var(--ink);font:700 22px/1 var(--ui)}
+.cgrow button[disabled]{opacity:.4}
+.cgpk{flex:1 1 auto;min-height:44px;display:flex;align-items:center;justify-content:center;text-align:center;padding:4px 10px;border-radius:10px;background:var(--field);font:600 14.5px/1.25 var(--ui);color:var(--ink)}
+.cgpk:focus-visible{outline:2px solid var(--focus);outline-offset:2px} .cgpk[aria-disabled=true]{color:var(--mut);font-weight:500}
+.cgseg{flex-wrap:wrap;flex:none} .cgseg .nsl{flex:0 0 100%} .cgnb{flex-wrap:wrap;border-radius:22px} .cgnb button{flex:1 1 auto;min-width:4.5em}
+.cgnb button.used{color:var(--ink);text-decoration:underline dotted 1.5px;text-underline-offset:4px}
+.cgnb button[disabled]:not([aria-checked=true]){opacity:.45}
+.cgacts{display:flex} .cgclr{min-height:44px;border:1px solid var(--rule);border-radius:999px;background:transparent;color:var(--ink);font:600 14.5px/1 var(--ui);padding:8px 16px}
+.cgclr[disabled]{opacity:.45}
+.cgp>.ckrow{margin-top:10px}
+.cgtk{max-width:28rem}
+.cgkey{display:inline-block;width:min(100%,19rem);vertical-align:top} .cgkey svg.cgg{margin:2px 0} .cgkw{display:block;font:13px/1.3 var(--ui);color:var(--mut)}
+svg.cgg.cg-small{width:min(100%,14rem)}
+.key:has(.cgkey) .kv{flex:1 1 100%;min-width:0} .key .kv .cgkey,.wfin .cgkey{display:block;width:min(100%,22rem)}
+@media (max-width:480px){ .cgp .cgw,.cgp>.ckrow,.cgtk{margin-left:0} }
+.cgp.solo .nlsolo{margin-top:6px} .cgp.solo .nlsolo .st{font-weight:600}
+/* paper: the circle alone, 60 mm across (the drawing is 400 wide, the circle 208 of it); the key and the four graphs in ink */
+.pcg{margin:4px 0 8px var(--i2)} .pcg svg.cgg{width:115mm;max-width:100%;color:#000}
+.pcgc{display:block;max-width:2.9in} .pcgc svg.cgg{color:#000} .pchoices.pcg4 .pch{break-inside:avoid}
+#printview svg.cgg{color:#000} #printview .cgkw{color:#333}
+.ptab .kv .cgkey{width:2.9in}
+@media print{ .cgctl,.cgtk,.cgrd,.cghow,.cgw .nsay{display:none!important} svg.cgg{color:#000} .cgc{outline:none!important} }
 /* which practice this is (7 Nov 2026, Croix: "It was the switching mechanism that confused me"): a quiet chip under the title */
 .nlp.solo .nlsolo{margin-top:6px} .nlp.solo .nlsolo .st{font-weight:600}
 .scopechip{display:inline-flex;align-items:center;font:normal 600 12.5px/1.2 var(--ui);color:var(--ink);background:var(--field);border:1px solid var(--rule);border-radius:999px;padding:3px 10px;margin:4px 8px 2px 0;vertical-align:middle}
@@ -703,19 +755,21 @@ body.printing>.kcalc,body.tview>.kcalc{display:none!important}
 
 /* ==== several boxes in one part (15 Nov 2026): "x = ▢  y = ▢" — the boxes in a row, each with its label, then Check and Hint;
    on a phone the boxes share one line while they fit (they wrap, never squeeze under 4.5rem), Check and Hint the row under them.
-   A one-box part never carries .boxes, so nothing here touches it. */
+   A box's label, box and unit never wrap apart ("after ▢ weeks" is one piece); on a phone a box with a unit (.bxu, ui.js) takes a
+   row of its own (15 Nov 2026, evening). A one-box part never carries .boxes, so nothing here touches it. */
 .ans.boxes .bxs{display:inline-flex;flex-wrap:wrap;align-items:center;gap:8px 16px;flex:0 1 auto;min-width:0}
-.ans.boxes .bx{display:inline-flex;align-items:center;gap:6px;flex-wrap:wrap;min-width:0}
+.ans.boxes .bx{display:inline-flex;align-items:center;gap:6px;flex-wrap:nowrap;min-width:auto}
 .ans.boxes .bx input[type=text]{flex:0 1 7.5rem;width:7.5rem;min-width:4.5rem;max-width:9rem}
 .ans.boxes .bx .pre{white-space:nowrap}
 .ans.boxes .bx{position:relative}
 .ans.boxes .bx .pv{position:absolute;right:0;top:100%;margin-top:2px;font-size:.9em;line-height:1.2;white-space:nowrap} .ans.boxes .bx .pv:empty{display:none}   /* the typed answer's preview under its box, never moving the row */
 .ans.boxes:has(.pv:not(:empty)){padding-bottom:1.4em}
-.ans.boxes .bx .unit{min-width:0}
+.ans.boxes .bx .unit{white-space:nowrap}
 @media (max-width:480px){
   .ans.boxes .bxs{flex:1 1 100%}
-  .ans.boxes .bx{flex:1 1 0;min-width:8rem}
-  .ans.boxes .bx input[type=text]{flex:1 1 0;width:auto;min-width:4.5rem;max-width:none}
+  .ans.boxes .bx{flex:1 1 0;min-width:auto}
+  .ans.boxes .bx.bxu{flex:1 1 100%}
+  .ans.boxes .bx input[type=text]{flex:1 1 0;width:4.5rem;min-width:4.5rem;max-width:none}
 }
 .pans.pboxes .pbx{display:inline-flex;align-items:baseline;gap:6px;margin-right:18px}
 .pans.pboxes .pblank{min-width:6em}
@@ -803,8 +857,6 @@ body.printing>.kcalc,body.tview>.kcalc{display:none!important}
 
 /* after Finish: every question, right or not — a tap opens it to review */
 .pglist{margin-top:24px;padding-top:18px;border-top:1px solid var(--rule)}
-.pglist h2{margin:0 0 4px;font:700 16px/1.2 var(--chrome);color:var(--ink)}
-.pgnote{margin:0 0 10px;font:400 14px/1.4 var(--ui);color:var(--mut)}
 .pgrows{list-style:none;margin:0;padding:0}
 .pgrow{display:grid;grid-template-columns:26px 2rem minmax(0,1fr) auto 16px;align-items:center;gap:10px;width:100%;min-height:52px;padding:6px;border:0;border-bottom:1px solid var(--rule);border-radius:0;background:transparent;text-align:left;font:500 15px/1.25 var(--chrome);color:var(--ink)}
 .pgrow:hover{background:var(--field);border-color:var(--rule)}
@@ -1601,6 +1653,260 @@ function rungs(p) {
 const api = { W, H, X0, X1, A0, A1, Y, R, spec, val, idx, px, fmt, kstr, norm, graphOf, empty, complete, model, say, svg, keyHtml, keyText, widget, controls, tickAt, blankHtml, INSTR, judge, rungs, defaultLine };
 if (typeof module !== 'undefined' && module.exports) module.exports = api;
 else { const K = root.Kit = root.Kit || {}; K.NL = api; }
+})(this);
+</script>
+<script>/* Practice-test kit — the circle graph a student builds (15 Nov 2026).
+
+   Croix, 7 Nov 2026, of number lines: "I'd like the practice tests and tests to make them graph … instead of just describing
+   them." MA.7.DP.1.4's first verb is construct: in class students draw circle graphs on a printed circle marked every 10° (no
+   protractor), with a line already drawn from the center to 0° at the top, and the data are chosen so that every central angle
+   is a multiple of 10°. A part of kind 'cgraph' asks for that graph, built, not chosen. The authoring shape:
+
+       {kind: 'cgraph', circle: {step: 10}, graph: [{name: 'Fruit', deg: 160}, {name: 'Chips', deg: 90}, …], title?: '…'}
+
+   2 to 6 categories, every deg a positive multiple of step, the degs summing to 360 (check() says what is wrong with a part that
+   is not; a unit's checks refuse it). The student's answer is a list in the same shape — the sectors as built, clockwise from
+   0°, a name null while the sector has none ([] when nothing is drawn). It is right when every category names exactly one
+   sector and that sector is the key's size; the order of the sectors is free. When it is not, the coach names one thing:
+   the sizes first, then the names.
+
+   Everything here is pure — strings in, strings out — so a unit's Node checks run it; ui.js wires the events. */
+(function (root) {
+'use strict';
+const W = 400, H = 340, CX = 200, CY = 170, R = 104, RN = R + 18, RING0 = 0.7 * R, RING1 = R + 30, RL = R + 36, FS = 15, FN = 14.5;
+const f1 = v => (Math.round(v * 10) / 10).toString();
+function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
+const rad = d => d * Math.PI / 180;
+const pt = (d, r) => [CX + r * Math.sin(rad(d)), CY - r * Math.cos(rad(d))];          /* clockwise from the top */
+const deg = d => d + '°';
+
+/* ---------------------------------------------------------------- the part */
+function spec(p) {
+  const step = +((p && p.circle && p.circle.step) || 10), key = ((p && p.graph) || []).map(s => ({ name: String(s.name), deg: +s.deg }));
+  return { step, n: Math.round(360 / step), key, cats: key.map(s => s.name) };
+}
+/* what is wrong with a part as authored ('' when nothing): a unit's checks call it on every part they make */
+function check(p) {
+  const S = spec(p), k = S.key, bad = [];
+  if (!(S.step > 0) || 360 % S.step) bad.push('the step ' + S.step + ' does not divide 360');
+  if (k.length < 2 || k.length > 6) bad.push(k.length + ' categories (2 to 6)');
+  if (new Set(k.map(s => s.name.toLowerCase())).size !== k.length) bad.push('a category named twice');
+  if (k.some(s => !s.name.trim())) bad.push('a category with no name');
+  k.forEach(s => { if (!(Number.isInteger(s.deg) && s.deg > 0 && s.deg % S.step === 0)) bad.push(s.name + ' = ' + s.deg + '° is not a positive multiple of ' + S.step + '°'); });
+  const sum = k.reduce((a, s) => a + s.deg, 0); if (sum !== 360) bad.push('the angles add to ' + sum + '°, not 360°');
+  return bad.join('; ');
+}
+const graphOf = p => spec(p).key;
+/* the answer, normalised: sectors clockwise from 0° whose sizes are positive multiples of the step adding to 360, each name one
+   of the part's categories and on one sector at most — or [] (nothing drawn) */
+function norm(p, a) {
+  const S = spec(p); let list = Array.isArray(a) ? a : a && Array.isArray(a.graph) ? a.graph : [];
+  list = list.map(s => ({ name: s && s.name != null && S.cats.indexOf(String(s.name)) >= 0 ? String(s.name) : null, deg: s ? Math.round(+s.deg) : 0 }));
+  if (!list.length || list.some(s => !(s.deg > 0) || s.deg % S.step) || list.reduce((t, s) => t + s.deg, 0) !== 360) return [];
+  const seen = {}; list.forEach(s => { if (s.name != null) { if (seen[s.name]) s.name = null; else seen[s.name] = 1; } });
+  return list.length === 1 && list[0].name == null ? [] : list;
+}
+const empty = (p, a) => norm(p, a).length === 0;
+/* answered, for the pager's map and Finish: a line drawn and every sector named */
+const done = (p, a) => { const g = norm(p, a); return g.length > 0 && g.every(s => s.name != null); };
+/* the lines drawn (0 first) and back */
+function linesOf(p, a) { const L = [0]; let t = 0; norm(p, a).forEach((s, i, all) => { t += s.deg; if (i < all.length - 1) L.push(t); }); return L; }
+function sectors(p, a) { let t = 0; return norm(p, a).map((s, i) => { const o = { i, from: t, to: t + s.deg, deg: s.deg, name: s.name }; t += s.deg; return o; }); }
+function fromLines(lines, names) {
+  const L = Array.from(new Set(lines.concat([0]))).filter(d => d >= 0 && d < 360).sort((x, y) => x - y);
+  if (L.length < 2) return [];
+  return L.map((d, i) => ({ name: names && names[d] != null ? names[d] : null, deg: (i < L.length - 1 ? L[i + 1] : 360) - d }));
+}
+const namesOf = (p, a) => { const m = {}; sectors(p, a).forEach(s => { m[s.from] = s.name; }); return m; };
+/* the edits ui.js makes: a line drawn or erased at a mark (never the 0° line), a line moved, a sector named, all cleared */
+function toggle(p, a, d) {
+  const S = spec(p); d = ((Math.round(d / S.step) * S.step) % 360 + 360) % 360; if (d === 0) return norm(p, a);
+  const L = linesOf(p, a), nm = namesOf(p, a), i = L.indexOf(d);
+  if (i >= 0) { L.splice(i, 1); delete nm[d]; } else L.push(d);
+  return fromLines(L, nm);
+}
+function move(p, a, from, to) {
+  const L = linesOf(p, a), nm = namesOf(p, a);
+  if (from === 0 || to === 0 || from === to || L.indexOf(from) < 0 || L.indexOf(to) >= 0) return norm(p, a);
+  const n = nm[from]; L.splice(L.indexOf(from), 1); delete nm[from]; L.push(to); nm[to] = n;
+  return fromLines(L, nm);
+}
+function name(p, a, i, nmv) {
+  const list = norm(p, a).map(s => ({ name: s.name, deg: s.deg })); if (!list[i]) return list;
+  list.forEach(s => { if (s.name === nmv) s.name = null; }); list[i].name = nmv == null ? null : String(nmv);
+  return norm(p, list);
+}
+const sectorAt = (p, a, ang) => { const s = sectors(p, a); ang = ((ang % 360) + 360) % 360; for (const x of s) if (ang >= x.from && ang < x.to) return x.i; return s.length ? s.length - 1 : -1; };
+const markAt = (p, ang) => { const S = spec(p); return ((Math.round(ang / S.step) * S.step) % 360 + 360) % 360; };
+/* a point of the drawing (its own units) → {r, ang, mark, zone: 'ring' (the lines) | 'sector'} */
+function hit(p, x, y) {
+  const dx = x - CX, dy = y - CY, r = Math.sqrt(dx * dx + dy * dy); let ang = Math.atan2(dx, -dy) * 180 / Math.PI; if (ang < 0) ang += 360;
+  return { r, ang, mark: markAt(p, ang), zone: r >= RING0 && r <= RING1 ? 'ring' : 'sector' };
+}
+
+/* ---------------------------------------------------------------- words */
+const sectorWords = s => 'The sector from ' + deg(s.from) + ' to ' + deg(s.to) + (s.name ? ' is ' + s.name + '.' : ' has no name yet.');
+function say(p, a) {                                   /* "4 lines: 0°, 160°, 250°, 320°. The sector from 0° to 160° is Fruit. …" */
+  const L = linesOf(p, a);
+  if (L.length < 2) return 'A circle marked every ' + spec(p).step + '°, with a line from the center to 0°. No other lines yet.';
+  return L.length + ' lines: ' + L.map(deg).join(', ') + '. ' + sectors(p, a).map(sectorWords).join(' ');
+}
+const listWords = g => g.map(s => s.name + ' ' + deg(s.deg)).join(', ');
+const ANY = 'Any order of sectors earns the point.';
+const keyWords = p => listWords(graphOf(p)) + '. ' + ANY;
+
+/* ---------------------------------------------------------------- the picture
+   o: {mode: 'live' (the student's widget) | 'key' (a graph drawn: the key, an answer, a choice) | 'blank' (paper: the circle
+   alone), degs: the sizes beside the names (key mode; default true), focus: the mark the keyboard is on, ghost: the mark a
+   pointer is at, sel: the sector selected, cls} */
+const tw = (s, fs) => String(s).length * fs * 0.58 + 4;           /* a label's width, near enough for Lexend at that size */
+function inSector(s, x, y) { const h = hit(null, x, y); if (h.r > R - 4 || h.r < 6) return false; const d = s.to - s.from; let a = h.ang - s.from; if (a < 0) a += 360; return a > 2 && a < d - 2; }
+function boxIn(s, x, y, w, h) { return [[-w / 2, -h / 2], [w / 2, -h / 2], [-w / 2, h / 2], [w / 2, h / 2], [0, -h / 2], [0, h / 2], [-w / 2, 0], [w / 2, 0]].every(c => inSector(s, x + c[0], y + c[1])); }
+function layout(secs, degs) {
+  const out = [], side = [];
+  secs.forEach(s => {
+    if (!s.name) return;
+    const t = [s.name].concat(degs ? [deg(s.deg)] : []), w = Math.max.apply(null, t.map(z => tw(z, FS))), h = t.length * (FS + 2), mid = s.from + s.deg / 2;
+    for (const rr of [0.56 * R, 0.5 * R, 0.44 * R, 0.62 * R, 0.68 * R, 0.38 * R]) { const c = pt(mid, rr); if (s.deg >= 180 || boxIn(s, c[0], c[1], w, h)) { out.push({ s, t, x: c[0], y: c[1], w, h, inside: true }); return; } }
+    /* beside the circle, with a short leader from the rim: to the right of a sector on the right, to the left on the left */
+    const sn = Math.sin(rad(mid)), cs = -Math.cos(rad(mid)), anchor = Math.abs(sn) < 0.06 ? 'middle' : sn > 0 ? 'start' : 'end';
+    const o = { s, t, w, h, inside: false, anchor, mid, e: pt(mid, R), x: CX + RL * sn, y: CY + RL * cs + (anchor === 'middle' ? (cs > 0 ? 1 : -1) * h / 2 : 0) };
+    side.push(o); out.push(o);
+  });
+  const x0 = o => o.anchor === 'start' ? o.x : o.anchor === 'end' ? o.x - o.w : o.x - o.w / 2;
+  const boxOf = o => [x0(o), o.y - o.h / 2, o.w, o.h];
+  const meets = (a, b2) => a[0] < b2[0] + b2[2] && b2[0] < a[0] + a[2] && a[1] < b2[1] + b2[3] && b2[1] < a[1] + a[3];
+  const nums = []; for (let d = 0; d < 360; d += 30) { const c = pt(d, RN), w = tw(d + '°', FN); nums.push([c[0] - w / 2, c[1] - FN * 0.62, w, FN * 1.15]); }
+  /* on each side, top to bottom, a label never sits on the one above it (it moves down), nor on a number (it moves out) */
+  ['start', 'end', 'middle'].forEach(a => { const L = side.filter(o => o.anchor === a).sort((u, v) => u.y - v.y);
+    L.forEach((o, i) => { for (let j = 0; j < i; j++) if (meets(boxOf(L[j]), boxOf(o))) o.y = L[j].y + (L[j].h + o.h) / 2 + 2;
+      const out1 = a === 'start' ? 1 : a === 'end' ? -1 : 0;
+      for (let k = 0; k < 8 && nums.some(nb => meets(boxOf(o), nb)); k++) { if (out1) o.x += out1 * 5; else o.y += (o.y > CY ? 5 : -5); } }); });
+  side.forEach(o => { const lo = x0(o); if (lo < 2) o.x += 2 - lo; if (lo + o.w > W - 2) o.x -= lo + o.w - (W - 2); o.y = Math.max(o.h / 2 + 1, Math.min(H - o.h / 2 - 1, o.y));
+    o.l = o.anchor === 'start' ? [x0(o) - 3, o.y] : o.anchor === 'end' ? [x0(o) + o.w + 3, o.y] : [o.x, o.y + (o.y > CY ? -o.h / 2 - 1 : o.h / 2 + 1)]; });
+  return out;
+}
+function sectorPath(s) {
+  if (s.deg >= 360) return 'M' + f1(CX) + ' ' + f1(CY - R) + 'A' + R + ' ' + R + ' 0 1 1 ' + f1(CX - 0.01) + ' ' + f1(CY - R) + 'z';
+  const a = pt(s.from, R), b = pt(s.to, R);
+  return 'M' + CX + ' ' + CY + 'L' + f1(a[0]) + ' ' + f1(a[1]) + 'A' + R + ' ' + R + ' 0 ' + (s.deg > 180 ? 1 : 0) + ' 1 ' + f1(b[0]) + ' ' + f1(b[1]) + 'z';
+}
+function textEl(o) {
+  const n = o.t.length, y0 = o.y - (n - 1) * (FS + 2) / 2 + FS * 0.35, anchor = o.inside ? 'middle' : o.anchor;   /* o.y is the label's middle */
+  return o.t.map((t, k) => '<text class="' + (k ? 'cgd' : 'cgn') + '" x="' + f1(o.x) + '" y="' + f1(y0 + k * (FS + 2)) + '" text-anchor="' + anchor + '">' + esc(t) + '</text>').join('');
+}
+function svg(p, a, o) {
+  o = o || {}; const S = spec(p), mode = o.mode || 'key', els = [], list = mode === 'blank' ? [] : norm(p, a), L = linesOf(p, list), secs = sectors(p, list);
+  if (mode === 'live' && o.sel != null && secs[o.sel]) els.push('<path class="cgsel" d="' + sectorPath(secs[o.sel]) + '"/>');
+  els.push('<circle class="cgo" cx="' + CX + '" cy="' + CY + '" r="' + R + '"/>');
+  for (let d = 0; d < 360; d += S.step) { const big = d % 30 === 0, a0 = pt(d, R), a1 = pt(d, R - (big ? 11 : 7));
+    els.push('<line class="' + (big ? 'cgk' : 'cgk2') + '" x1="' + f1(a0[0]) + '" y1="' + f1(a0[1]) + '" x2="' + f1(a1[0]) + '" y2="' + f1(a1[1]) + '"/>');
+    if (big) { const t = pt(d, RN); els.push('<text class="cgb" x="' + f1(t[0]) + '" y="' + f1(t[1] + FN * 0.36) + '">' + d + '°</text>'); } }
+  if (mode === 'live' && o.focus != null) { const c = pt(o.focus, R); els.push('<g class="cgcur"><line x1="' + CX + '" y1="' + CY + '" x2="' + f1(c[0]) + '" y2="' + f1(c[1]) + '"/><circle cx="' + f1(c[0]) + '" cy="' + f1(c[1]) + '" r="9"/></g>'); }
+  L.forEach(d => { const e = pt(d, R); els.push('<line class="' + (d === 0 ? 'cgz' : 'cgl') + '" data-d="' + d + '" x1="' + CX + '" y1="' + CY + '" x2="' + f1(e[0]) + '" y2="' + f1(e[1]) + '"/>'); });
+  if (mode === 'live' && o.ghost != null) { const e = pt(o.ghost, R + 4); els.push('<line class="cggh0" x1="' + CX + '" y1="' + CY + '" x2="' + f1(e[0]) + '" y2="' + f1(e[1]) + '"/><line class="cggh" x1="' + CX + '" y1="' + CY + '" x2="' + f1(e[0]) + '" y2="' + f1(e[1]) + '"/>'); }
+  els.push('<circle class="cgc0" cx="' + CX + '" cy="' + CY + '" r="2.6"/>');
+  if (mode !== 'blank') layout(secs, mode === 'key' && o.degs !== false).forEach(lb => {
+    if (!lb.inside) els.push('<line class="cgld" x1="' + f1(lb.e[0]) + '" y1="' + f1(lb.e[1]) + '" x2="' + f1(lb.l[0]) + '" y2="' + f1(lb.l[1]) + '"/>');
+    els.push(textEl(lb)); });
+  if (mode === 'live') {
+    /* the lines' ring (a touch there draws, so it does not scroll the page) and a handle on every mark, for the pointer and the checks */
+    const ring = (r0, r1) => 'M' + CX + ' ' + f1(CY - r1) + 'A' + r1 + ' ' + r1 + ' 0 1 1 ' + CX + ' ' + f1(CY + r1) + 'A' + r1 + ' ' + r1 + ' 0 1 1 ' + CX + ' ' + f1(CY - r1) + 'z' +
+      'M' + CX + ' ' + f1(CY - r0) + 'A' + r0 + ' ' + r0 + ' 0 1 0 ' + CX + ' ' + f1(CY + r0) + 'A' + r0 + ' ' + r0 + ' 0 1 0 ' + CX + ' ' + f1(CY - r0) + 'z';
+    els.push('<path class="cgring" d="' + ring(RING0, RING1) + '"/>');
+    for (let d = 0; d < 360; d += S.step) { const c = pt(d, R); els.push('<circle class="cgm" data-d="' + d + '" cx="' + f1(c[0]) + '" cy="' + f1(c[1]) + '" r="8"/>'); }
+  }
+  const alt = mode === 'blank' ? 'A blank circle marked every ' + S.step + '°, numbered every 30°, with a line from the center to 0°.' : list.length ? 'Circle graph: ' + listWords(list.map(s => ({ name: s.name || 'no name', deg: s.deg }))) + '.' : say(p, list);
+  return '<svg class="cgg cg-' + mode + (o.cls ? ' ' + o.cls : '') + '" viewBox="0 0 ' + W + ' ' + H + '"' + (mode === 'live' ? ' aria-hidden="true" focusable="false"' : ' role="img" aria-label="' + esc(alt) + '"') + '>' + els.join('') + '</svg>';
+}
+/* the key, drawn, with its words under it (the teacher reads both; a screen reader the label) */
+function keyHtml(p) { return '<span class="cgkey">' + svg(p, graphOf(p), { mode: 'key' }) + '<span class="cgkw">' + esc(keyWords(p)) + '</span></span>'; }
+const keyText = g => 'cgraph:' + (Array.isArray(g) ? g : graphOf(g)).map(s => s.name + '=' + s.deg).join('|');
+
+/* ---------------------------------------------------------------- the widget (ui.js draws it, wires it and repaints it) */
+function namesHtml(id, p, a, sel) {
+  const S = spec(p), secs = sectors(p, a), cur = secs[sel] ? secs[sel].name : null, on = secs.length >= 2 && secs[sel];
+  const where = {}; secs.forEach(s => { if (s.name) where[s.name] = s; });
+  return S.cats.map((c, k) => { const ch = c === cur, at = where[c];
+    return '<button type="button" role="radio" data-cg="' + id + '" data-cgn="' + esc(c) + '" aria-checked="' + ch + '" tabindex="' + (ch || (cur == null && k === 0) ? 0 : -1) + '"' + (on ? '' : ' disabled') +
+      ' class="' + (at && !ch ? 'used' : '') + '" aria-label="' + esc(c + (at && !ch ? ', now on the sector from ' + deg(at.from) + ' to ' + deg(at.to) : '')) + '">' + esc(c) + '</button>'; }).join('');
+}
+function pickText(p, a, sel) {
+  const secs = sectors(p, a), s = secs[sel];
+  if (secs.length < 2) return 'Draw a line to make sectors';
+  return 'Sector ' + (sel + 1) + ' of ' + secs.length + ': ' + deg(s.from) + ' to ' + deg(s.to) + (s.name ? ', ' + s.name : '');
+}
+function widget(id, p, a, o) {
+  o = o || {}; const S = spec(p), sel = o.sel || 0, secs = sectors(p, a), ok = secs.length >= 2, cur = o.focus || 0, lineAt = linesOf(p, a).indexOf(cur) >= 0;
+  return '<div class="cgw" data-cgw="' + id + '"><div class="cgrd" id="cgr' + id + '" aria-hidden="true"></div>' +
+    '<div class="cgc" id="cgc' + id + '" role="slider" tabindex="0" data-cg="' + id + '" aria-label="' + esc(o.label || 'Lines on the circle') + '. Arrow keys move ' + S.step + '°, Space draws or erases a line." aria-valuemin="0" aria-valuemax="' + (360 - S.step) + '" aria-valuenow="' + cur + '" aria-valuetext="' + esc(markWords(p, a, cur)) + '"' + (o.describedby ? ' aria-describedby="' + o.describedby + '"' : '') + '>' +
+    svg(p, a, { mode: 'live', focus: cur, sel: ok ? sel : null }) + '</div>' +
+    '<p class="cghow" aria-hidden="true">' + HOW + '</p>' +
+    '<div class="cgctl"><div class="cgrow"><button type="button" class="cgpv" data-cg="' + id + '" data-cgstep="-1" tabindex="-1" aria-hidden="true"' + (ok ? '' : ' disabled') + '>‹</button>' +
+    '<div class="cgpk" id="cgp' + id + '" role="slider" tabindex="0" data-cg="' + id + '" aria-label="Sector to name" aria-valuemin="1" aria-valuemax="' + Math.max(1, secs.length) + '" aria-valuenow="' + (ok ? sel + 1 : 1) + '" aria-valuetext="' + esc(pickText(p, a, sel)) + '"' + (ok ? '' : ' aria-disabled="true"') + '>' + esc(pickText(p, a, sel)) + '</div>' +
+    '<button type="button" class="cgnx" data-cg="' + id + '" data-cgstep="1" tabindex="-1" aria-hidden="true"' + (ok ? '' : ' disabled') + '>›</button></div>' +
+    '<div class="nseg cgseg" role="radiogroup" aria-label="Name for the sector" id="cgs' + id + '"><span class="nsl" aria-hidden="true">Name</span><span class="nsb cgnb">' + namesHtml(id, p, a, sel) + '</span></div>' +
+    '<div class="cgacts"><button type="button" class="cgclr" data-cg="' + id + '" data-cgclr="1">Start over</button></div></div>' +
+    '<div class="nsay" id="cgy' + id + '" aria-live="polite">' + esc(say(p, a)) + '</div></div>';
+}
+/* what to do, in a line under the circle (a screen reader hears the circle's own label instead) */
+const HOW = 'Tap a mark to draw a line from the center. Tap it again to erase it. Then choose each sector and tap its name.';
+function markWords(p, a, d) { return d === 0 ? '0°: the line to 0° is drawn' : deg(d) + (linesOf(p, a).indexOf(d) >= 0 ? ': a line is drawn' : ': no line'); }
+
+/* ---------------------------------------------------------------- paper */
+const INSTR = 'Draw and label the circle graph.';
+const MC_LINE = 'Which graph shows the data?';
+function blankHtml(p) { return '<div class="pcg">' + svg(p, null, { mode: 'blank', cls: 'cg-paper' }) + '</div>'; }
+
+/* ---------------------------------------------------------------- the four graphs of an all-multiple-choice paper
+   the key and three wrong graphs: the unit's (its graphs, each a named mistake) first, then the kit's — the names of the largest
+   and the smallest sector traded; every sector the same size; the sizes in the reverse order against the names; then, if one of
+   those is the key or another choice, the names turned one sector on, the two largest traded, the two smallest traded */
+const canon = g => g.map(s => s.name + '=' + s.deg).sort().join('|');
+function okGraph(p, g) { const S = spec(p); return Array.isArray(g) && g.length === S.key.length && canon(g.map(s => ({ name: s.name, deg: 0 }))) === canon(S.key.map(s => ({ name: s.name, deg: 0 }))) && Math.abs(g.reduce((t, s) => t + +s.deg, 0) - 360) < 1e-9 && g.every(s => +s.deg > 0); }
+function defaults(p) {
+  const k = graphOf(p), n = k.length, by = k.map((s, i) => i).sort((x, y) => k[y].deg - k[x].deg || x - y), big = by[0], small = by[n - 1];
+  const trade = (i, j) => k.map((s, m) => ({ name: m === i ? k[j].name : m === j ? k[i].name : s.name, deg: s.deg }));
+  return [trade(big, small), k.map(s => ({ name: s.name, deg: 360 / n })), k.map((s, m) => ({ name: s.name, deg: k[n - 1 - m].deg })),
+    k.map((s, m) => ({ name: k[(m + 1) % n].name, deg: s.deg })), trade(by[0], by[1]), trade(by[n - 2], by[n - 1])];
+}
+function choices(p, unitGraphs) {
+  const key = graphOf(p), seen = [canon(key)], wrong = [];
+  (unitGraphs || []).map(g => Array.isArray(g) ? g : g && Array.isArray(g.graph) ? g.graph : null).concat(defaults(p)).forEach(g => {
+    if (wrong.length >= 3 || !okGraph(p, g)) return; const c = canon(g); if (seen.indexOf(c) >= 0) return; seen.push(c); wrong.push(g.map(s => ({ name: String(s.name), deg: +s.deg }))); });
+  return wrong.length === 3 ? [key].concat(wrong) : null;
+}
+
+/* ---------------------------------------------------------------- judging
+   → {v: right | wrong | unread | blank, what, which: 'size' | 'names' | null, rule}
+   lines(part, which, answer, ctx) may give the unit's own words for the one thing that is off; else the kit's */
+function defaultLine(p, which) {
+  if (which === 'size') return 'Each sector is its category’s fraction of the whole, times 360°. Find every angle first: together they make 360°. Then draw each sector from the line before it.';
+  return 'The sizes are right, but a name is on the wrong sector. Match each name to the sector with its own angle.';
+}
+function judge(p, a, ctx, lines) {
+  const k = graphOf(p), g = norm(p, a), n = k.length;
+  if (!g.length) return { v: 'blank', what: [] };
+  if (g.length !== n) return { v: 'unread', what: ['Draw one sector for each category: ' + n + ' sectors.'] };
+  if (g.some(s => s.name == null)) return { v: 'unread', what: ['Name every sector.'] };
+  const sz = l => l.map(s => s.deg).sort((x, y) => x - y).join(',');
+  const which = sz(g) !== sz(k) ? 'size' : k.some(s => !g.some(t => t.name === s.name && t.deg === s.deg)) ? 'names' : null;
+  if (!which) return { v: 'right', what: [] };
+  let w = ''; try { w = lines ? lines(p, which, g, ctx || {}) || '' : ''; } catch (e) { w = ''; }
+  return { v: 'wrong', what: [w || defaultLine(p, which)], which, rule: defaultLine(p, 'size') };
+}
+/* the three rungs a part without its own: the sizes, the first line, then every sector in turn — Hint 3 ends on the graph drawn */
+function rungs(p) {
+  const k = graphOf(p); let t = 0;
+  const run = k.map(s => { const o = s.name + ' from ' + deg(t) + ' to ' + deg(t + s.deg); t += s.deg; return o; }).join(', ');
+  const first = 'Start at the 0° line. Count ' + k[0].deg / spec(p).step + ' marks clockwise for ' + k[0].name + ' (' + deg(k[0].deg) + ') and draw its line there.';
+  return { notice: defaultLine(p, 'size'), first: { say: first, ex: null },
+    steps: [{ say: 'The angles: ' + listWords(k) + '. They add to 360°.', ex: null }, { say: 'Go clockwise from 0°, each sector starting at the line before it: ' + run + '.', ex: null }, { say: 'Label each sector with its category. Any order of sectors is fine, as long as each is its own size.', ex: null }] };
+}
+
+const api = { W, H, CX, CY, R, RING0, RING1, spec, check, graphOf, norm, empty, done, linesOf, sectors, fromLines, toggle, move, name, sectorAt, markAt, hit, pt, say, svg, keyHtml, keyText, keyWords, listWords, widget, namesHtml, pickText, markWords, blankHtml, INSTR, MC_LINE, choices, defaults, canon, judge, rungs, defaultLine, ANY };
+if (typeof module !== 'undefined' && module.exports) module.exports = api;
+else { const K = root.Kit = root.Kit || {}; K.CG = api; }
 })(this);
 </script>
 <script>/* Practice-test kit: a second language, shown under the English (Croix, 16 Oct 2026: "a Portuguese version of the
@@ -3921,7 +4227,7 @@ var API = window.TEACHER = {random: !FIXED, forms: FORMS, errors: errors,
 })(0);
 
 function mount(PK){
-var K = window.Kit || {}, AP = K.Approvals || null, Unit = window.Unit, V = Unit.view, NL = K.NL;
+var K = window.Kit || {}, AP = K.Approvals || null, Unit = window.Unit, V = Unit.view, NL = K.NL, CG = K.CG;
 var ONSITE = !!(AP && AP.onSite), BASE = AP ? AP.base : '', COURSE = (AP && AP.course) || String(T.course).toLowerCase(), UNITN = (AP && AP.unit) || T.unit;
 var API_T = BASE + '/teacher/api/tests/' + COURSE + '/' + UNITN, API_I = BASE + '/teacher/api/items/' + COURSE + '/' + UNITN;
 var LKEY = 'teacher.tests.' + COURSE + '.' + UNITN, PICK_KEY = 'teacher.pick.' + T.course + '.' + T.unit;
@@ -4020,7 +4326,7 @@ function withEd(it, ed){
   PK.partsOf(c).forEach(function(p){
     var lab = c.type === 'parts' ? p.label : '', choice = p.kind === 'mc' || c.type === 'mc' || c.type === 'multi';
     if (ed.line && typeof ed.line[lab] === 'string') p._eln = clean(ed.line[lab]);
-    if (ed.key && typeof ed.key[lab] === 'string' && p.kind !== 'nline' && !choice) p._ekey = clean(ed.key[lab]);
+    if (ed.key && typeof ed.key[lab] === 'string' && p.kind !== 'nline' && p.kind !== 'cgraph' && !choice) p._ekey = clean(ed.key[lab]);
     if (ed.opt && Array.isArray(ed.opt[lab]) && choice) p._eopt = ed.opt[lab].map(function(h){ return typeof h === 'string' ? clean(h) : null; });
   });
   return c;
@@ -4031,6 +4337,7 @@ function keysOf(it){
   if (!it) return [];
   return PK.partsOf(it).map(function(p){ try {
     if (p.kind === 'nline') return 'g:' + NL.keyText(NL.graphOf(p));
+    if (p.kind === 'cgraph') return 'g:' + CG.keyText(CG.graphOf(p));
     if (it.type === 'mc' || p.kind === 'mc') return 'c:' + plain(V.opt(p, p.correct));
     if (it.type === 'multi') return 'm:' + p.correct.map(function(c){ return plain(V.opt(p, c)); }).sort().join('|');
     return 't:' + String(Unit.keyText(p)).replace(/\s+/g, '');
@@ -4212,7 +4519,7 @@ function showPrint(kind, f, opener, back){
   else body = kind === 'key' ? '<div class="pform pkeyform tpage">' + r.key + '</div>' : '<div class="pform tpage" data-form="' + f + '">' + r.test + '</div>' + (kind === 'tk' ? '<div class="pbreak"></div><div class="pform pkeyform tpage">' + r.key + '</div>' : '');
   var pv = overlay('print', 'Print preview', opener);
   OV.back = back || null;
-  pv.innerHTML = '<div class="pbar"><button type="button" class="go" id="pvPrint">Print</button><button type="button" id="pvClose">' + (back ? 'Back' : 'Close') + '</button><span class="pvhint">If nothing happens, use your browser’s Print (Ctrl + P).</span></div><div class="ppage' + (FIXED ? ' tpage' : '') + '">' + body + '</div>';
+  pv.innerHTML = '<div class="pbar"><button type="button" class="go" id="pvPrint">Print</button><button type="button" id="pvClose">' + (back ? 'Back' : 'Close') + '</button></div><div class="ppage' + (FIXED ? ' tpage' : '') + '">' + body + '</div>';
   $('pvPrint').onclick = function(){ try { window.print(); } catch(e){} };
   $('pvClose').onclick = function(){ if (back) back(); else closeOverlay(); };
   $('pvPrint').focus();
@@ -4239,7 +4546,7 @@ function rowsByK(r){ var m = {}; (r.rows || []).forEach(function(x){ (m[x.k] = m
 function keyLine(f, k, rows, item){
   var it, parts = [];
   if (FIXED){ it = item || fixedAt(f, k, SPEC); (it.parts || [it]).forEach(function(p){ parts.push([it.parts ? p.label : '', ansHtml(it, p)]); }); }
-  else (rows || []).forEach(function(x){ var h = x.key; if (x.type === 'nline'){ var d = document.createElement('div'); d.innerHTML = h; var w = d.querySelector('.nlkw'); h = w ? esc(w.textContent) : h; } parts.push([x.label, h]); });
+  else (rows || []).forEach(function(x){ var h = x.key; if (x.type === 'nline' || x.type === 'cgraph'){ var d = document.createElement('div'); d.innerHTML = h; var w = d.querySelector('.nlkw, .cgkw'); h = w ? esc(w.textContent) : h; } parts.push([x.label, h]); });
   return parts.length ? '<div class="tvkey"><span class="kl">Key</span>' + parts.map(function(x){ return '<span class="tvk">' + (x[0] ? '<b>' + esc(x[0]) + '.</b> ' : '') + x[1] + '</span>'; }).join('') + '</div>' : '';
 }
 function stripHtml(f, k){
@@ -4329,12 +4636,12 @@ function editRandom(el, k){
   var chs = function(x, lab, multi){ return '<div class="pchoices">' + x.opts.map(function(o, i){ return '<div class="pch"><span class="pbox' + (multi ? ' sq' : '') + '"></span><span class="cl">' + LET[i] + '.</span>' + edSpan(x._eopt && x._eopt[i] != null ? x._eopt[i] : V.opt(x, i), 'opt:' + lab + ':' + i, 'Choice ' + LET[i] + (lab ? ' of part ' + lab : '')) + '</div>'; }).join('') + '</div>'; };
   var right = function(x, multi){ var c = multi ? x.correct : [x.correct]; return stays('The right answer stays ' + c.map(function(i){ return LET[i]; }).join(' and ') + '.'); };
   var keyEd = function(p, lab){ return '<div class="tvkeyed"><span class="kl">Key</span>' + edSpan(p._ekey != null ? p._ekey : V.key(p), 'key:' + lab, 'Key' + (lab ? ' for part ' + lab : '')) + '</div>'; };
-  var graph = function(p){ return '<div class="tvkeyed"><span class="kl">Key</span>' + NL.keyHtml(p) + '</div>' + stays('The graph stays. To change its numbers, use New version.'); };
+  var graph = function(p){ return '<div class="tvkeyed"><span class="kl">Key</span>' + (p.kind === 'cgraph' ? CG.keyHtml(p) : NL.keyHtml(p)) + '</div>' + stays('The graph stays. To change its numbers, use New version.'); };
   if (it.type === 'parts') it.parts.forEach(function(p){
     h += '<div class="ppart"><div class="line"><b class="lab">' + esc(p.label) + '.</b>' + edSpan(p._eln != null ? p._eln : V.line(p), 'line:' + p.label, 'Part ' + p.label + ', its words') + '</div>' +
-      (p.kind === 'mc' ? chs(p, p.label, false) + right(p, false) : p.kind === 'nline' ? graph(p) : keyEd(p, p.label)) + '</div>';
+      (p.kind === 'mc' ? chs(p, p.label, false) + right(p, false) : p.kind === 'nline' || p.kind === 'cgraph' ? graph(p) : keyEd(p, p.label)) + '</div>';
   });
-  else if (it.type === 'solo') h += '<div class="ppart">' + (it.part.kind === 'nline' ? '<div class="line">' + edSpan(it.part._eln != null ? it.part._eln : V.line(it.part), 'line:', 'Its words') + '</div>' + graph(it.part) : keyEd(it.part, '')) + '</div>';
+  else if (it.type === 'solo') h += '<div class="ppart">' + (it.part.kind === 'nline' || it.part.kind === 'cgraph' ? '<div class="line">' + edSpan(it.part._eln != null ? it.part._eln : V.line(it.part), 'line:', 'Its words') + '</div>' + graph(it.part) : keyEd(it.part, '')) + '</div>';
   else h += '<div class="ppart">' + chs(it, '', it.type === 'multi') + right(it, it.type === 'multi') + '</div>';
   h += '<div class="tvedbar"><button type="button" class="go" data-tv="save">Save</button><button type="button" data-tv="cancel" data-k="' + k + '">Cancel</button></div>';
   el.innerHTML = h; el.classList.add('tvediting');
@@ -4899,7 +5206,7 @@ K.Bank = {
   at: function(id, base){
     var b = BYID[id]; if (!b) return null;
     var it = kitItem(b);
-    var tt = function(pt){ return pt.kind === 'mc' ? 'mc' : pt.kind === 'nline' ? 'nline' : 'text'; };
+    var tt = function(pt){ return pt.kind === 'mc' ? 'mc' : pt.kind === 'nline' ? 'nline' : pt.kind === 'cgraph' ? 'cgraph' : 'text'; };
     if (it.type === 'parts'){ var pi = base.x && base.x.bpi != null ? base.x.bpi : 0, pt = it.parts[Math.min(pi, it.parts.length - 1)]; return {type: tt(pt), part: pt, x: pt, item: it}; }
     if (it.type === 'solo') return {type: tt(it.part), part: it.part, x: it.part, item: it};
     return {type: it.type === 'multi' ? 'multi' : 'mc', x: it, item: it};
@@ -5032,7 +5339,7 @@ K.Pager = function(api){
     '<button type="button" class="pgflag" id="pgFlag" aria-pressed="false">Flag for review</button>');
   var nav = make('nav', 'pgnav', '<button type="button" class="pgprev" id="pgPrev">Back</button><button type="button" id="pgBack" hidden>Score summary</button>' +
     '<button type="button" class="go pgnext" id="pgNext">Next</button>', {'aria-label': 'Back and Next'});
-  var list = make('section', 'pglist', '<h2 class="bt" id="pgLh">Every question</h2><p class="pgnote bt">Tap a question to review it.</p><ol class="pgrows" id="pgRows"></ol>', {'aria-labelledby': 'pgLh'});
+  var list = make('section', 'pglist', '<ol class="pgrows" id="pgRows"></ol>', {'aria-label': 'Questions'});   /* no heading and no note over it (15 Nov 2026, the words pass) */
   var map = make('section', 'sheet pgmap', '<button type="button" class="pgmt" id="pgMt" aria-expanded="false" aria-controls="pgGrid"></button><div class="pgmh"><h2 class="bt" id="pgMh">Questions</h2><ul class="pglg" aria-hidden="true"><li><i class="a"></i><span class="bt">Answered</span></li>' +
     '<li><i class="f"></i><span class="bt">Flagged</span></li><li><i class="c"></i><span class="bt">On screen</span></li></ul></div>' +
     '<nav class="pgm" id="pgGrid" aria-labelledby="pgMh"></nav>', {'aria-labelledby': 'pgMh'});
@@ -5232,7 +5539,7 @@ try { document.documentElement.lang = 'en'; } catch(e){}
 var G0 = U.generate(1), NSEC = G0.sections.length;
 var SCOPES = { all: 'Whole test' };
 G0.sections.forEach(function(s, k){ SCOPES['p' + (k + 1)] = s.title + ' only'; });   /* ruling 54: a section is named, never numbered */
-SCOPES.miss = 'My misses, with new numbers';
+SCOPES.miss = 'My misses';
 /* a lesson's practice from Cadence (bank.js, 7 Nov 2026): one choice per lesson of the plan, after the test's own */
 if (K.Bank) K.Bank.scopes(SCOPES);
 function lessonScope(sc){ return !!(K.Bank && K.Bank.isLesson(sc)); }
@@ -5353,7 +5660,7 @@ function flabHtml(p, id){ var fm = formOf(p); return fm.label ? '<div class="fla
    each has the part's data-part and its own data-box. A blank box is not a try: "Fill in every box" (Not counted yet). */
 var BOXES = typeof WeakMap === 'function' ? new WeakMap() : null;
 function boxesOf(p){
-  if (!p || p.kind === 'mc' || p.kind === 'nline') return null;
+  if (!p || p.kind === 'mc' || p.kind === 'nline' || p.kind === 'cgraph') return null;
   if (BOXES && BOXES.has(p)) return BOXES.get(p);
   var b = null; try { b = V.boxes ? V.boxes(p) : null; } catch(e){ b = null; }
   if (!b && Array.isArray(p.boxes)) b = p.boxes;
@@ -5369,7 +5676,7 @@ function boxSay(bx, k){ var s = bx.say || plainText(bx.pre || '').replace(/\s*=\
 function boxesHtml(p, id, lab, B){
   var fl = formOf(p).label, last = B.length - 1;
   var row = B.map(function(bx, k){ var pre = bx.pre || '', unit = bx.unit || '';
-    return '<span class="bx">' + (pre ? '<span class="pre" id="bp' + id + '_' + k + '" aria-hidden="true">' + pre + '</span>' : '') +
+    return '<span class="bx' + (unit ? ' bxu' : '') + '">' + (pre ? '<span class="pre" id="bp' + id + '_' + k + '" aria-hidden="true">' + pre + '</span>' : '') +
       '<input type="text" id="' + boxId(id, k) + '" data-part="' + esc(id) + '" data-box="' + k + '" data-kind="' + esc(bx.kind || p.kind) + '" aria-label="Answer to question ' + esc(lab) + ', ' + esc(boxSay(bx, k)) + '" aria-describedby="ln' + id + (fl ? ' fl' + id : '') + '" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="' + (k < last ? 'next' : 'done') + '"' + (bx.imode || p.imode ? ' inputmode="' + esc(bx.imode || p.imode) + '"' : '') + (bx.placeholder ? ' placeholder="' + esc(bx.placeholder) + '"' : '') + '>' +
       (unit ? '<span class="unit" aria-hidden="true">' + unit + '</span>' : '') + '<span class="pv" aria-hidden="true"></span></span>'; }).join('');
   return flabHtml(p, id) + '<div class="ans boxes" role="group" aria-label="Answer to question ' + esc(lab) + ', ' + B.length + ' boxes"><span class="bxs">' + row + '</span>' +
@@ -5397,12 +5704,14 @@ function choicesHtml(x, id, lab, multi){
 function partHtml(p, id, solo, lab, lone){
   /* a lone graph to build (a Cadence item with one part) still says what to do: its line, without a second "1 pt" */
   if (solo && p.kind === 'nline') return '<div class="prt nlp solo" data-host="' + id + '"><div class="line nlsolo"><span class="st">' + V.line(p) + '</span></div>' + nlHtml(p, id, lab) + '</div>';
+  if (solo && p.kind === 'cgraph') return '<div class="prt cgp solo" data-host="' + id + '"><div class="line nlsolo"><span class="st">' + V.line(p) + '</span></div>' + cgHtml(p, id, lab) + '</div>';
   var line = solo ? '' : '<div class="line" id="ln' + id + '">' + (p.label && !lone ? '<b class="lab">' + p.label + '.</b>' : '<b class="lab" aria-hidden="true"></b>') + '<span class="st">' + V.line(p) + '</span>' + (p.label ? '<span class="pt">1 pt</span>' : '') + '</div>';
   if (p.kind === 'mc') return '<div class="prt mcp" data-host="' + id + '">' + line + choicesHtml(p, id, lab, false) + '</div>';
   if (p.kind === 'nline') return '<div class="prt nlp' + (solo ? ' solo' : '') + '" data-host="' + id + '">' + line + nlHtml(p, id, lab) + '</div>';
+  if (p.kind === 'cgraph') return '<div class="prt cgp' + (solo ? ' solo' : '') + '" data-host="' + id + '">' + line + cgHtml(p, id, lab) + '</div>';
   return '<div class="prt' + (solo ? ' solo' : '') + '" data-host="' + id + '">' + line + inputHtml(p, id, lab) + tailHtml(id) + '</div>';
 }
-function textType(p){ return p.kind === 'mc' ? 'mc' : p.kind === 'nline' ? 'nline' : 'text'; }
+function textType(p){ return p.kind === 'mc' ? 'mc' : p.kind === 'nline' ? 'nline' : p.kind === 'cgraph' ? 'cgraph' : 'text'; }
 /* ---- a number-line graph the student builds (kind 'nline', kit/nline.js; 7 Nov 2026, Croix: "make them graph inequalities with
    an open or closed dot and an arrow instead of just describing them"): the line with a tap zone per tick (or drag, or ← → on
    the keyboard), then Dot · Open | Closed and Arrow · Left | Right; the ray draws as soon as a point and a direction exist. No
@@ -5468,12 +5777,110 @@ document.addEventListener('keydown', function(e){
   var to = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? (k + 1) % grp.length : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? (k + grp.length - 1) % grp.length : e.key === 'Home' ? 0 : e.key === 'End' ? grp.length - 1 : -1;
   if (to < 0 || grp[to].disabled) return; e.preventDefault(); grp[to].click(); grp[to].focus();
 });
+/* ---- a circle graph the student builds (kind 'cgraph', kit/cgraph.js; 15 Nov 2026 — MA.7.DP.1.4's first verb is construct, and
+   in class students draw on a printed circle marked every 10° with the 0° line drawn). The circle is one Tab stop (a slider over
+   its marks: ← → ↑ ↓ 10° at a time, Home to 0°, Space or Enter draws or erases a line at the cursor); a tap or a click on a mark
+   draws a line from the center (the same again erases it; never the 0° line), a drag moves one, and while the pointer is down a
+   ghost line follows to the nearest mark with its readout. The sectors are a second Tab stop (‹ › on a touch screen, or a tap
+   inside one); the names are a radiogroup that names the sector selected (a name on another sector moves). Start over clears it.
+   No typing, so no keypad. The answer is the list of sectors clockwise from 0° ({name, deg}); Check and the ladder are the kit's. */
+var CG = K.CG, CGUI = {};
+function cgUi(id){ return CGUI[id] || (CGUI[id] = {cur: 0, sel: 0, ghost: null}); }
+function cgHtml(p, id, lab){
+  var tk = teacherPage() ? '<div class="nltk cgtk" translate="no"><span class="kl">Key</span>' + CG.keyHtml(p) + '</div>' : '', u = cgUi(id);
+  return CG.widget(id, p, S && S.ans[id], {label: 'Lines on the circle, question ' + lab, focus: u.cur, sel: u.sel}) + '<div class="ckrow"><button type="button" class="chk go" data-check="' + id + '" aria-label="Check ' + lab + '">Check</button><span class="hslot" id="hs' + id + '"></span></div>' + tk + tailHtml(id);
+}
+function cgPaint(it, svgOnly){
+  var w = document.querySelector('[data-cgw="' + it.id + '"]'); if (!w) return;
+  var a = CG.norm(it.x, S.ans[it.id]), R = S.res[it.id], lock = !!(R && R.v === 'right'), u = cgUi(it.id), secs = CG.sectors(it.x, a), ok = secs.length >= 2;
+  if (u.sel >= secs.length) u.sel = Math.max(0, secs.length - 1);
+  var c = $('cgc' + it.id); c.innerHTML = CG.svg(it.x, a, {mode: 'live', focus: u.cur, ghost: u.ghost, sel: ok && !lock ? u.sel : null});
+  c.setAttribute('aria-valuenow', String(u.cur)); c.setAttribute('aria-valuetext', CG.markWords(it.x, a, u.cur)); c.setAttribute('aria-disabled', String(lock)); w.classList.toggle('locked', lock);
+  var rd = $('cgr' + it.id); if (rd){ rd.textContent = u.ghost != null ? u.ghost + '°' : ''; rd.classList.toggle('on', u.ghost != null); }
+  if (svgOnly) return;
+  var sp = $('cgp' + it.id), t = CG.pickText(it.x, a, u.sel); sp.textContent = t; sp.setAttribute('aria-valuetext', t); sp.setAttribute('aria-valuemax', String(Math.max(1, secs.length))); sp.setAttribute('aria-valuenow', String(ok ? u.sel + 1 : 1));
+  if (ok && !lock) sp.removeAttribute('aria-disabled'); else sp.setAttribute('aria-disabled', 'true');
+  Array.prototype.forEach.call(w.querySelectorAll('[data-cgstep]'), function(b){ b.disabled = !ok || lock; });
+  var nb = w.querySelector('.cgnb'), had = nb.contains(document.activeElement) ? document.activeElement.getAttribute('data-cgn') : null;
+  nb.innerHTML = CG.namesHtml(it.id, it.x, a, u.sel);
+  Array.prototype.forEach.call(nb.querySelectorAll('button'), function(b){ if (lock) b.disabled = true; });
+  if (had != null){ var hb = nb.querySelector('[data-cgn="' + (window.CSS && CSS.escape ? CSS.escape(had) : had) + '"]'); if (hb) hb.focus({preventScroll: true}); }
+  var cl = w.querySelector('.cgclr'); if (cl) cl.disabled = lock || !a.length;
+  var sy = $('cgy' + it.id); if (sy) sy.textContent = CG.say(it.x, a);
+}
+function cgSet(id, a2){
+  var it = byId(id); if (!it || it.type !== 'cgraph') return;
+  var R = S.res[id]; if (R && R.v === 'right') return;
+  var a = CG.norm(it.x, a2);
+  if (sameAns(CG.norm(it.x, S.ans[id]), a) && S.ans[id]) { cgPaint(it); return; }
+  S.ans[id] = a.map(function(s){ return {name: s.name, deg: s.deg}; });
+  if (!S.running && !S.done && !it.extra) start();
+  if (FLASH[id]){ delete FLASH[id]; paintItem(it); }
+  cgPaint(it); save(); paintProgress(); paintScore(true);
+}
+function cgLocked(el){ return el.getAttribute('aria-disabled') === 'true'; }
+var CGDRAG = null;
+function cgHit(c, ev){ var it = byId(c.dataset.cg), svg = c.querySelector('svg'); if (!it || !svg) return null; var r = svg.getBoundingClientRect(); if (!r.width) return null;
+  return {it: it, h: CG.hit(it.x, (ev.clientX - r.left) / r.width * CG.W, (ev.clientY - r.top) / r.height * CG.H)}; }
+document.addEventListener('pointerdown', function(e){
+  var c = e.target && e.target.closest && e.target.closest('.cgc'); if (!c || cgLocked(c)) return;
+  if (e.button != null && e.button > 0) return;
+  var q = cgHit(c, e); if (!q) return; var it = q.it, u = cgUi(it.id), a = CG.norm(it.x, S.ans[it.id]);
+  e.preventDefault(); c.focus({preventScroll: true});
+  if (q.h.zone === 'ring'){
+    var m = q.h.mark, has = m !== 0 && CG.linesOf(it.x, a).indexOf(m) >= 0;
+    CGDRAG = {c: c, id: it.id, pid: e.pointerId, from: has ? m : null, at: m}; u.ghost = m; u.cur = m;
+    try { c.setPointerCapture(e.pointerId); } catch(x){}
+    cgPaint(it, true);
+  } else if (CG.sectors(it.x, a).length >= 2){ u.sel = CG.sectorAt(it.x, a, q.h.ang); cgPaint(it); }
+});
+document.addEventListener('pointermove', function(e){
+  if (!CGDRAG || e.pointerId !== CGDRAG.pid) return; var q = cgHit(CGDRAG.c, e); if (!q) return;
+  var m = q.h.mark; if (m === CGDRAG.at) return; CGDRAG.at = m; var u = cgUi(CGDRAG.id); u.ghost = m; u.cur = m; cgPaint(q.it, true);
+});
+document.addEventListener('pointerup', function(e){
+  if (!CGDRAG || e.pointerId !== CGDRAG.pid) return; var d = CGDRAG; CGDRAG = null;
+  var it = byId(d.id); if (!it) return; var u = cgUi(d.id), a = CG.norm(it.x, S.ans[it.id]), L = CG.linesOf(it.x, a); u.ghost = null; u.cur = d.at;
+  if (d.from == null){ if (d.at !== 0 && L.indexOf(d.at) < 0) a = CG.toggle(it.x, a, d.at); }
+  else if (d.at === d.from) a = CG.toggle(it.x, a, d.from);
+  else a = CG.move(it.x, a, d.from, d.at);
+  cgSet(d.id, a); cgPaint(it);
+});
+document.addEventListener('pointercancel', function(){ if (!CGDRAG) return; var it = byId(CGDRAG.id); cgUi(CGDRAG.id).ghost = null; CGDRAG = null; if (it) cgPaint(it, true); });
+document.addEventListener('click', function(e){
+  var b = e.target && e.target.closest && e.target.closest('[data-cgn],[data-cgstep],[data-cgclr]'); if (!b || b.disabled) return;
+  var id = b.dataset.cg, it = byId(id); if (!it) return; var u = cgUi(id), a = CG.norm(it.x, S.ans[id]), n = CG.sectors(it.x, a).length;
+  if (b.hasAttribute('data-cgn')){ if (n >= 2) cgSet(id, CG.name(it.x, a, u.sel, b.getAttribute('data-cgn'))); }
+  else if (b.hasAttribute('data-cgstep')){ if (n >= 2){ u.sel = (u.sel + (+b.getAttribute('data-cgstep')) + n) % n; cgPaint(it); } }
+  else { u.sel = 0; u.cur = 0; cgSet(id, []); var c0 = $('cgc' + id); if (c0) c0.focus({preventScroll: true}); }
+});
+document.addEventListener('keydown', function(e){
+  var t = e.target; if (!t || !t.closest) return;
+  if (t.classList && t.classList.contains('cgc')){
+    var it = byId(t.dataset.cg); if (!it || cgLocked(t)) return; var u = cgUi(it.id), st = CG.spec(it.x).step, j = null;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowUp') j = (u.cur + st) % 360; else if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') j = (u.cur + 360 - st) % 360;
+    else if (e.key === 'Home') j = 0; else if (e.key === 'End') j = 360 - st;
+    else if (e.key === ' ' || e.key === 'Enter'){ e.preventDefault(); if (u.cur !== 0) cgSet(it.id, CG.toggle(it.x, S.ans[it.id], u.cur)); return; }
+    if (j == null) return; e.preventDefault(); u.cur = j; cgPaint(it, true); return;
+  }
+  if (t.classList && t.classList.contains('cgpk')){
+    var it2 = byId(t.dataset.cg); if (!it2 || cgLocked(t)) return; var u2 = cgUi(it2.id), n = CG.sectors(it2.x, S.ans[it2.id]).length, k = null;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') k = (u2.sel + 1) % n; else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') k = (u2.sel + n - 1) % n;
+    else if (e.key === 'Home') k = 0; else if (e.key === 'End') k = n - 1;
+    if (k == null || n < 2) return; e.preventDefault(); u2.sel = k; cgPaint(it2); return;
+  }
+  var rb = t.closest('[data-cgn]'); if (!rb) return;
+  var grp = Array.prototype.slice.call(rb.parentNode.querySelectorAll('[role=radio]')), i = grp.indexOf(rb);
+  var to = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? (i + 1) % grp.length : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? (i + grp.length - 1) % grp.length : e.key === 'Home' ? 0 : e.key === 'End' ? grp.length - 1 : -1;
+  if (to < 0 || grp[to].disabled) return; e.preventDefault(); var nm = grp[to].getAttribute('data-cgn'); grp[to].click();
+  var nb2 = document.querySelector('[data-cg="' + rb.dataset.cg + '"][data-cgn="' + (window.CSS && CSS.escape ? CSS.escape(nm) : nm) + '"]'); if (nb2) nb2.focus();
+});
 /* the place a student is sent to in a question: its box, its first choice, or its number line */
-function fieldOf(host, id){ return $('a' + id) || host.querySelector('.ch input') || host.querySelector('.nlpt'); }
+function fieldOf(host, id){ return $('a' + id) || host.querySelector('.ch input') || host.querySelector('.nlpt') || host.querySelector('.cgc'); }
 function render(){
   DS = build(); ITEMS = []; EX = {}; RULES = {};
   var h = [], qn = 0;
-  if (!DS.length) h.push('<p class="how">' + (scope === 'miss' ? 'No misses saved on this device yet. Finish a set first, then come back to practice the ones you missed.' : 'No questions here right now.') + '</p>');
+  if (!DS.length) h.push('<p class="how">' + (scope === 'miss' ? 'No misses yet. Finish a set first.' : 'No questions here right now.') + '</p>');
   DS.forEach(function(sec, di){
     var pts = 0;
     var body = sec.items.map(function(d){
@@ -5505,9 +5912,10 @@ function render(){
   if (teacherPage()){ var sc0 = $('setchk'); if (!sc0){ sc0 = document.createElement('p'); sc0.id = 'setchk'; sc0.className = 'setchk'; sc0.setAttribute('translate', 'no'); $('mMenu').appendChild(sc0); } sc0.textContent = scope === 'all' ? 'Set ' + seed + ' · version ' + U.contentVersion + ' · check ' + setCheck() : ''; sc0.hidden = scope !== 'all'; }   /* its own line at the foot of the ⋯ menu, never translated */
   /* which practice this is, always in sight (7 Nov 2026, Croix: "It was the switching mechanism that confused me. I would assume
      that if I open a specific lesson it would open to that section. Likewise if I open the full practice test."): a chip under the
-     title names the choice from What to practice, and a lesson's line says what it is — "Lesson 10.04 · 8 questions · today's
-     practice" */
-  $('total').textContent = lessonScope(scope) ? qn + ' question' + (qn === 1 ? '' : 's') + ' · today’s practice' : ITEMS.length + ' point' + (ITEMS.length === 1 ? '' : 's');
+     title names the choice from What to practice when it is not the whole test (15 Nov 2026, the words pass: the whole test's
+     title is the unit's, and a chip there said nothing), and a lesson's line is its chip and its count — "Lesson 10.04 · 8
+     questions" */
+  $('total').textContent = lessonScope(scope) ? qn + ' question' + (qn === 1 ? '' : 's') : ITEMS.length + ' point' + (ITEMS.length === 1 ? '' : 's');
   paintChip();
   paintScopes();
   Object.keys(S.more || {}).forEach(function(id){ var b = byIdBase(id); if (b) mountExtra(b); });
@@ -5522,7 +5930,7 @@ function paintScopes(){
   sc.innerHTML = les.length ? '<optgroup label="Practice test">' + test.map(opt).join('') + '</optgroup><optgroup label="Lessons" translate="no">' + les.map(opt).join('') + '</optgroup>' : test.map(opt).join('');
 }
 function scopeChip(){
-  if (scope === 'all') return 'Whole practice test';
+  if (scope === 'all') return '';
   if (scope === 'miss') return 'My misses';
   if (lessonScope(scope)) return String(K.Bank.name(scope) || '').split(' · ')[0];
   var k = +String(scope).slice(1) - 1; return G0.sections[k] ? plainText(G0.sections[k].title) : String(SCOPES[scope] || '');
@@ -5532,7 +5940,7 @@ function paintChip(){
   /* on the line under the title, before the points (its own row pushed question 1 off a phone's first screen on a teacher copy) */
   var t = $('total'), row = t && t.parentNode;
   if (!c){ c = document.createElement('span'); c.id = 'scopechip'; c.className = 'scopechip'; c.setAttribute('translate', 'no'); if (row) row.insertBefore(c, t); else h.parentNode.insertBefore(c, h.nextSibling); }
-  c.textContent = scopeChip(); c.setAttribute('aria-label', 'Practising: ' + scopeChip());
+  var cw = scopeChip(); c.textContent = cw; c.hidden = !cw; if (cw) c.setAttribute('aria-label', 'Practicing: ' + cw); else c.removeAttribute('aria-label');
 }
 /* the eyebrow and the title: the unit's, or in a lesson choice the lesson's ("GRADE 7 MATH · UNIT 9 · LESSON 9.03 PRACTICE") */
 function paintHead(){
@@ -5589,20 +5997,20 @@ function another(baseId){
     if (!nb) return;
     M0.n++; M0.bank = nb; seenB.push(nb); if (seenB.length > 40) seenB.shift(); save();
     mountExtra(b0); paintItem(b0);
-    var nidB = baseId + 'x' + M0.n, inpB = $('a' + nidB) || document.querySelector('input[name="q' + nidB + '"]') || $('nlp' + nidB), elB = $('ag' + baseId);
+    var nidB = baseId + 'x' + M0.n, inpB = $('a' + nidB) || document.querySelector('input[name="q' + nidB + '"]') || $('nlp' + nidB) || $('cgc' + nidB), elB = $('ag' + baseId);
     if (elB && elB.scrollIntoView) elB.scrollIntoView({block: 'nearest'}); if (inpB) inpB.focus({preventScroll: true});
     return;
   }
   M0.n++; var s, was = M0.seed ? U.key(atPos(U.generate(M0.seed), b0.pos).x) : null, base = U.key(b0.x), tries = 0, k;
   var seen = M0.seen || (M0.seen = []); if (was && seen.indexOf(was) < 0) seen.push(was);          /* never numbers served before (7 Nov 2026, item 2) */
-  var ansOf = function(x){ try { return x && x.kind === 'nline' ? NL.keyText(NL.graphOf(x)) : U.keyText && x && x.kind !== 'mc' ? String(U.keyText(x)) : null; } catch(e){ return null; } }, baseAns = ansOf(b0.x), k2, a2;
+  var ansOf = function(x){ try { return x && x.kind === 'nline' ? NL.keyText(NL.graphOf(x)) : x && x.kind === 'cgraph' ? CG.keyText(CG.graphOf(x)) : U.keyText && x && x.kind !== 'mc' ? String(U.keyText(x)) : null; } catch(e){ return null; } }, baseAns = ansOf(b0.x), k2, a2;
   /* never a disapproved kind (approvals.js, 8 Nov 2026): the draw goes on until the kind is approved (similarOk said one is) */
   do { s = randomSeed(); tries++; a2 = atPos(U.generate(s), b0.pos); k2 = a2.x; k = U.key(k2); } while ((famOff(a2.item) && tries < 400) || ((s === seed || k === base || k === was || (seen.indexOf(k) >= 0 && tries < 40) || (baseAns != null && ansOf(k2) === baseAns)) && tries < 60));
   if (famOff(a2.item)){ M0.n--; if (!M0.n && !M0.seed) delete S.more[baseId]; return; }
   seen.push(k); if (seen.length > 40) seen.shift();   /* never the same question again — nor the same answer (30 Oct 2026: a Hint that ended "5 tanks" was followed by a fresh one whose answer was 5) */
   M0.seed = s; save();
   mountExtra(b0); paintItem(b0);
-  var nid = baseId + 'x' + M0.n, inp = $('a' + nid) || document.querySelector('input[name="q' + nid + '"]') || $('nlp' + nid);
+  var nid = baseId + 'x' + M0.n, inp = $('a' + nid) || document.querySelector('input[name="q' + nid + '"]') || $('nlp' + nid) || $('cgc' + nid);
   var el = $('ag' + baseId); if (el && el.scrollIntoView) el.scrollIntoView({block: 'nearest'});
   if (inp) inp.focus({preventScroll: true});                                           /* [R1-2] */
 }
@@ -5611,7 +6019,7 @@ function another(baseId){
 function byIdBase(id){ for (var i = 0; i < ITEMS.length; i++) if (ITEMS[i].id === id) return ITEMS[i]; return null; }
 function byId(id){ return byIdBase(id) || EX[id] || null; }
 function answered(it){ var a = S.ans[it.id]; if (it.type === 'text' && boxesOf(it.x)) return boxAns(it.x, a).every(function(v){ return v.trim() !== ''; });   /* several boxes: every one filled */
-  return it.type === 'multi' ? !!(a && a.length) : it.type === 'nline' ? !NL.empty(a) : a != null && String(a).trim() !== ''; }
+  return it.type === 'multi' ? !!(a && a.length) : it.type === 'nline' ? !NL.empty(a) : it.type === 'cgraph' ? CG.done(it.x, a) : a != null && String(a).trim() !== ''; }
 /* the mode rides along (25 Oct 2026): on "Like the real test" a part done right from a wrong part (a) earns its point, as the
    printed test's follow-through line says (ruling 19); in practice the coach says fix part (a) first */
 /* what the coach may know about a part: the student's part (a) and whether it is right yet, whether this is a fresh one
@@ -5623,6 +6031,7 @@ function ctxOf(it){
 }
 function judgeAns(it, a, tries){
   if (it.type === 'nline'){ try { return NL.judge(it.x, a, ctxOf(it), U.judge.nline); } catch(e){ return {v: 'unread', what: ['Place the point, then choose a dot and an arrow.']}; } }
+  if (it.type === 'cgraph'){ try { return CG.judge(it.x, a, ctxOf(it), U.judge.cgraph); } catch(e){ return {v: 'unread', what: ['Draw the lines, then name every sector.']}; } }
   var B = it.type === 'text' ? boxesOf(it.x) : null;
   if (B){                                                   /* several boxes: all blank is blank; some blank is not a try yet */
     var bs = boxAns(it.x, a), empty = bs.map(function(v){ return v.trim() === ''; });
@@ -5716,7 +6125,7 @@ function check(id){
 var TAG = {right: '<span class="tag ok">✓ Correct</span>', form: '<span class="tag fm">Almost</span>', wrong: '<span class="tag no">✗ Not yet</span>', unread: '<span class="tag fm">Not counted yet</span>'};
 function flash(it, f){
   FLASH[it.id] = 1;
-  $('fb' + it.id).innerHTML = f.v === 'blank' ? '<div class="fbx"><p>' + (it.type === 'text' ? 'Type an answer first.' : it.type === 'nline' ? 'Tap the number line to place the point first.' : 'Pick an answer first.') + '</p></div>'
+  $('fb' + it.id).innerHTML = f.v === 'blank' ? '<div class="fbx"><p>' + (it.type === 'text' ? 'Type an answer first.' : it.type === 'nline' ? 'Tap the number line to place the point first.' : it.type === 'cgraph' ? 'Tap a mark on the circle to draw a line first.' : 'Pick an answer first.') + '</p></div>'
     : '<div class="fbx"><p>' + TAG.unread + ' ' + (f.what[0] || '') + '</p></div>';
 }
 /* a choice's named misconception (7 Nov 2026, item 4; the survey after Diagnostic Questions: every distractor exposes one
@@ -5737,7 +6146,7 @@ function namedWhat(it, R){
 function cardHtml(it, R, f){
   var v = R.v;
   if (v === 'right'){
-    var own = R.first && !R.helped, line = R.late ? '✓ Correct — checked at Finish' : own ? (it.extra ? '✓ Correct on your own' : '✓ Correct on the first try') : R.first ? '✓ Correct' : R.shown ? '✓ Correct after seeing the steps' : '✓ Correct on try ' + R.tries;   /* [J-5] */
+    var own = R.first && !R.helped, line = R.late ? '✓ Correct' : own ? (it.extra ? '✓ Correct on your own' : '✓ Correct on the first try') : R.first ? '✓ Correct' : R.shown ? '✓ Correct after seeing the steps' : '✓ Correct on try ' + R.tries;   /* [J-5] */
     var note = f && f.v === 'right' && f.what && f.what.length ? '<p class="note2">' + f.what.join(' ') + '</p>' : '';
     var pt = S.mode === 'test' ? '' : !it.extra && R.earned && !own ? ' <span class="tag ok">point earned</span>' : '';
     var next = S.mode === 'test' || own || R.earned || (it.extra && res(byId(it.base)).earned) ? '' : '<p class="note2">One on your own earns the point.</p>';
@@ -5755,12 +6164,14 @@ function cardHtml(it, R, f){
 }
 function keyHtml(it){
   if (it.type === 'nline') return NL.keyHtml(it.x);
+  if (it.type === 'cgraph') return CG.keyHtml(it.x);
   if (it.type === 'mc') return '<b>' + LET[it.x.correct] + '.</b> ' + vOpt(it.x, it.x.correct);
   if (it.type === 'multi') return it.x.correct.map(function(k){ return '<b>' + LET[k] + '.</b> ' + vOpt(it.x, k); }).join('&nbsp;&nbsp; ');
   return it.x && it.x._ekey != null ? it.x._ekey : V.key(it.x);      /* a pinned test's tweaked key (teacher.js) */
 }
-function solOf(it){ try { var a = authored(it); return a && a.steps ? a.steps : U.solution(it.x, it.type, ctxOf(it)) || (it.type === 'nline' ? NL.rungs(it.x).steps : null); } catch(e){ return it.type === 'nline' ? NL.rungs(it.x).steps : null; } }
-function authored(it){ try { var a = U.rungs ? U.rungs(it.x, it.type, ctxOf(it)) || null : null; return a || (it.type === 'nline' ? NL.rungs(it.x) : null); } catch(e){ return it.type === 'nline' ? NL.rungs(it.x) : null; } }
+function graphRungs(it){ return it.type === 'nline' ? NL.rungs(it.x) : it.type === 'cgraph' ? CG.rungs(it.x) : null; }   /* a graph to build: the kit's own rungs when the unit gives none */
+function solOf(it){ try { var a = authored(it); return a && a.steps ? a.steps : U.solution(it.x, it.type, ctxOf(it)) || (graphRungs(it) || {}).steps || null; } catch(e){ return (graphRungs(it) || {}).steps || null; } }
+function authored(it){ try { var a = U.rungs ? U.rungs(it.x, it.type, ctxOf(it)) || null : null; return a || graphRungs(it); } catch(e){ return graphRungs(it); } }
 function picOf(it){ try { return V.picture(it.x, it.type) || ''; } catch(e){ return ''; } }
 function stepsHtml(it, R){
   var sol = solOf(it), n = sol ? sol.length : 0, shown = Math.min(R.steps || 0, n);
@@ -5792,7 +6203,7 @@ function ruleOf(it){                                       /* the coach's rule f
   try {
     var probe = function(a){ var f = U.judge.text(it.x, a, ctxOf(it)); return f && f.rule || ''; };
     if (it.type === 'text'){ var nb = boxesOf(it.x), pr = function(v){ return nb ? nb.map(function(){ return v; }) : v; }; r = probe(pr('987654')) || probe(pr('-987654')) || probe(pr('0')); }
-    else if (it.type === 'nline') r = '';
+    else if (it.type === 'nline' || it.type === 'cgraph') r = '';
     else if (it.type === 'mc'){ for (var k = 0; k < it.x.opts.length && !r; k++) if (k !== it.x.correct){ var f = U.judge.mc(it.x, k); r = f && f.rule || ''; } }
     else { var g = U.judge.multi(it.x, [], 1); r = g && g.rule || ''; }
   } catch(e){}
@@ -5880,11 +6291,12 @@ function paintItem(it){
     btn.classList.toggle('go', R.v !== 'right' && !mo.querySelector('button.go')); }
   /* a right answer locks this question's own choices — not the "Try another" mounted inside its box (23 Oct 2026: a
      student who got a select-all right on her second try asked for another; it opened locked, and she could not touch it) */
-  if (it.type !== 'text' && it.type !== 'nline') Array.prototype.forEach.call(host.querySelectorAll('.ch input'), function(x){ if (x.closest('[data-host]') === host) x.disabled = R.v === 'right'; });
+  if (it.type !== 'text' && it.type !== 'nline' && it.type !== 'cgraph') Array.prototype.forEach.call(host.querySelectorAll('.ch input'), function(x){ if (x.closest('[data-host]') === host) x.disabled = R.v === 'right'; });
 }
 function paintChoices(it, R){
   if (it.type === 'nline') nlPaint(it);
-  if (it.type === 'text' || it.type === 'nline') return;
+  if (it.type === 'cgraph') cgPaint(it);
+  if (it.type === 'text' || it.type === 'nline' || it.type === 'cgraph') return;
   it.x.opts.forEach(function(o, k){
     var ch = $('ch' + it.id + LET[k]); if (!ch) return; ch.classList.remove('picked-no', 'is-key');
     if (!R) return;
@@ -5981,7 +6393,7 @@ document.addEventListener('click', function(e){
   var jm = t.closest('[data-jump]'); if (jm){ var ji = byId(jm.dataset.jump), jh = ji && hostOf(ji); if (jh){ jh.scrollIntoView({block: 'center'}); var jf = fieldOf(jh, ji.id); if (jf) jf.focus({preventScroll: true}); } return; }
   var nw = t.closest('[data-new]'); if (nw){ var sc = nw.dataset.scope || scope;
     var go = function(){ goSet(randomSeed(), sc, 'practice'); };                     /* [R2-N2] the results' buttons always practise with checking */
-    if (started() && !S.done) ask('Leave this set? It stays saved on this device.', 'Leave', go); else go(); return; }
+    if (started() && !S.done) ask('Leave this set? It stays saved.', 'Leave', go); else go(); return; }
 });
 document.addEventListener('toggle', function(e){ var d = e.target; if (d && d.dataset && d.dataset.pic){ var it = byId(d.dataset.pic); if (it){ res(it).pic = d.open; save(); } } }, true);
 
@@ -6134,8 +6546,8 @@ var progRaf = 0; window.addEventListener('scroll', function(){ if (progRaf) retu
 document.addEventListener('focusin', function(e){ if (DS && e.target && e.target.closest && e.target.closest('#paper')) paintProgress(); });
 function paintScore(light){
   var t = tally(), sc = $('score'), N = ITEMS.length, nb = function(s){ return '<span class="nw">' + s + '</span>'; };
-  if (S.mode === 'test' && !S.done) sc.innerHTML = nb('<b>' + ITEMS.filter(answered).length + ' of ' + N + '</b> answered') + ' · ' + nb('marked when you finish');
-  else if (!Object.keys(S.res).length && !S.done) sc.innerHTML = nb('<b>' + N + '</b> part' + (N === 1 ? '' : 's') + ' to answer');
+  if (S.mode === 'test' && !S.done) sc.innerHTML = nb('<b>' + ITEMS.filter(answered).length + ' of ' + N + '</b> answered');
+  else if (!Object.keys(S.res).length && !S.done) sc.innerHTML = '';                 /* nothing to say before the first check (15 Nov 2026, the words pass) */
   else sc.innerHTML = nb('<b>' + t.earned + '</b> ' + (S.mode === 'test' ? 'right' : 'earned')) + (t.helped ? bulb(t.helped) : '') + ' · ' + nb('<b>' + t.done + '</b> of ' + N + ' done') + runHtml();   /* [J-2]; the points earned on your own (24 Oct 2026) */
   if (light) return;
   paintResult(t); paintScopes(); paintSections();
@@ -6150,7 +6562,7 @@ function paintBar(){
   $('bPause').hidden = S.done || !S.running || !testMode;                                /* [J-2] Pause only while it runs */
   $('bResume').hidden = S.done || S.running || !started0 || !testMode;
   $('bFinish').hidden = S.done || !ITEMS.length;
-  $('bFinish').textContent = S.mode === 'test' ? 'Finish & mark' : 'Finish';
+  $('bFinish').textContent = 'Finish';
   document.body.classList.toggle('hidechk', S.mode === 'test' && !S.done);
   Array.prototype.forEach.call(document.querySelectorAll('.mode button'), function(b){ b.setAttribute('aria-pressed', String(b.dataset.mode === S.mode)); });
 }
@@ -6173,10 +6585,9 @@ function paintResult(t){
       (twin ? newSet(!nm) : '<button type="button"' + (nm ? '' : ' class="go"') + ' data-new="1" data-scope="all">New whole test</button>' + newSet(false));
   var hk = scope + '.' + S.mode, H = hist()[hk] || [], prev = H.filter(function(x){ return !(x.seed === seed && x.at === S.finishedAt); })[0];
   var pe = prev ? (prev.earned == null ? prev.first : prev.earned) : 0;
-  /* "Since last time: up / down / the same" (item 5; the survey after Khan's session summary), from this device's history of
-     the same practice choice and mode — as a share of the points when the sets differ in size */
-  var dir = prev ? (prev.of === N ? Math.sign(t.earned - pe) : Math.sign(t.earned / N - pe / prev.of)) : 0;
-  var lastLine = prev ? '<p class="last since">Since last time: <b>' + (dir > 0 ? 'up' : dir < 0 ? 'down' : 'the same') + '</b> — ' + pe + ' / ' + prev.of + ' then, ' + t.earned + ' / ' + N + ' today.</p>' : '';   /* [J-10] */
+  /* "Last time: 12 / 36" (item 5; the survey after Khan's session summary), from this device's history of the same practice
+     choice and mode — the score, and no more words (15 Nov 2026, the words pass) */
+  var lastLine = prev ? '<p class="last since">Last time: ' + pe + ' / ' + prev.of + '</p>' : '';   /* [J-10] */
   /* per skill — the unit's sections — as text and an icon, never colour alone (item 5; the survey after ALEKS's labelled
      pie): Secure at 80% or more right on the first check with no help, Getting there at 50%, else Not yet */
   var ICON = function(fill){ return '<svg class="ci" viewBox="0 0 12 12" aria-hidden="true"><circle cx="6" cy="6" r="4.6" fill="none" stroke="currentColor" stroke-width="1.6"/>' + (fill === 2 ? '<circle cx="6" cy="6" r="4.6" fill="currentColor"/>' : fill === 1 ? '<path d="M6 1.4a4.6 4.6 0 0 1 0 9.2z" fill="currentColor"/>' : '') + '</svg>'; };   /* empty, half, full: a shape as well as a word */
@@ -6189,13 +6600,12 @@ function paintResult(t){
      it was right. A help opened after a right answer is not counted. */
   var ef = effort(), effortLine = test ? '' : '<p class="last effort">Solved without help: <b>' + ef.own + '</b> · With a hint: <b>' + ef.hint + '</b> · Saw the solution: <b>' + ef.saw + '</b></p>';
   var rec = record_(), runLine = test || !(S.best >= 2) ? '' : '<p class="last">Best run this set: <b>' + S.best + '</b> in a row' + (S.newRecord ? ' — a new record' : rec.n > S.best ? ' · your record: ' + rec.n : '') + '</p>';
-  box.innerHTML = '<h2>Set ' + seed + ' · ' + esc(SCOPES[scope]) + ' · ' + (test ? 'Like the real test' : 'Check as I go') + '</h2>' +
-    '<div class="big"><div><b>' + t.earned + '<small> / ' + N + '</small></b><span>' + (test ? 'right' : 'points earned on your own') + '</span></div><div><b>' + fmt(S.acc) + '</b><span>time on the clock</span></div></div>' +
+  box.innerHTML = '<h2>Set ' + seed + (scope === 'all' ? '' : ' · ' + esc(SCOPES[scope])) + '</h2>' +
+    '<div class="big"><div><b>' + t.earned + '<small> / ' + N + '</small></b><span>' + (test ? 'right' : 'points') + '</span></div><div><b>' + fmt(S.acc) + '</b><span>time</span></div></div>' +
     firstLine + effortLine + runLine + lastLine +
     (alone ? '<p class="perfect">Every one on the first try.</p>' : perfect ? '<p class="perfect">Every point earned.</p>' : '') + chips +
     '<div class="tw"><table><thead><tr><th>Section</th><th class="r">' + (test ? 'Right' : 'Earned') + '</th>' + (test ? '' : '<th class="r">First try</th><th class="r">' + bulb() + '</th>') + '</tr></thead><tbody>' + rows + '</tbody></table></div>' +
-    (notYet.length ? '<p class="note"><span class="nry">Not right yet:</span> ' + notYet.map(function(it){ return '<button type="button" class="jump" data-jump="' + it.id + '">' + it.lab + '</button>'; }).join(' ') + '</p>' +
-      '<p class="note"><b>Hint</b> goes one step at a time, up to the worked solution; <b>Try a similar one</b> gives you a fresh one.</p>' : '') +
+    (notYet.length ? '<p class="note"><span class="nry">Not right yet:</span> ' + notYet.map(function(it){ return '<button type="button" class="jump" data-jump="' + it.id + '">' + it.lab + '</button>'; }).join(' ') + '</p>' : '') +
     '<div class="btns">' + btns + '</div>';
   box.hidden = false;
 }
@@ -6253,7 +6663,7 @@ function openSet(n, sc, mode){
   S.more = S.more || {}; S.walk = S.walk || {}; S.walkOpen = S.walkOpen || {}; S.running = false; S.startedAt = null; FLASH = {};
   render(); paintHead();
   NOTICE = '';
-  if (loaded && S.hash && S.hash !== HASHV){ var m0 = S.mode, p0 = S.pos; S = fresh(m0); if (p0) S.pos = p0; render(); NOTICE = 'This set was updated since you last opened it, so it starts fresh.'; }   /* [W-2] never old answers on new questions; only for a set this device saved before [B2] */
+  if (loaded && S.hash && S.hash !== HASHV){ var m0 = S.mode, p0 = S.pos; S = fresh(m0); if (p0) S.pos = p0; render(); NOTICE = 'This set was updated, so it starts over.'; }   /* [W-2] never old answers on new questions; only for a set this device saved before [B2] */
   S.hash = HASHV;
   try { history.replaceState(null, '', hashOf(seed, scope)); } catch(e){}
   LSEED = 0;
@@ -6272,6 +6682,7 @@ function restoreOne(it){
   if (it.type === 'text' && boxesOf(it.x)){ boxAns(it.x, a).forEach(function(v, k){ var el = $(boxId(it.id, k)); if (el){ el.value = v; setPreview(el); } }); }
   else if (it.type === 'text'){ var el = $('a' + it.id); if (el){ el.value = a; setPreview(el); } }
   else if (it.type === 'nline') nlPaint(it);
+  else if (it.type === 'cgraph') cgPaint(it);
   else (it.type === 'mc' ? [a] : a).forEach(function(v){ var x = document.querySelector('input[name="q' + it.id + '"][value="' + v + '"]'); if (x) x.checked = true; });
 }
 function restore(){ ITEMS.forEach(restoreOne); }
@@ -6280,28 +6691,28 @@ $('bPause').addEventListener('click', pause);
 $('bResume').addEventListener('click', start);
 $('bFinish').addEventListener('click', function(){
   var left = ITEMS.length - ITEMS.filter(answered).length;
-  ask((left ? left + ' of ' + ITEMS.length + ' still blank. ' : '') + (S.mode === 'test' ? 'Stop the clock and mark everything?' : 'Stop the clock and see your score?'), 'Yes, finish', finish);
+  ask(left ? left + ' of ' + ITEMS.length + ' still blank. Finish anyway?' : 'Finish and see your score?', 'Yes, finish', finish);
 });
 Array.prototype.forEach.call(document.querySelectorAll('.mode button'), function(b){
   b.addEventListener('click', function(){
     var m = b.dataset.mode; if (m === S.mode) return;
     var go = function(){ var pos = S.pos; drop(key()); S = fresh(m); if (pos) S.pos = pos; render(); S.hash = HASHV; save(); paintAll(); };
-    if (started()) ask('Switching starts this set over. Your answers will be cleared.', 'Switch', go); else go();
+    if (started()) ask('Switching clears your answers.', 'Switch', go); else go();
   });
 });
 $('scope').addEventListener('change', function(){ var v = this.value; if (v === scope) return; moreClose();
   var to = v === 'all' ? (scope === 'all' ? seed : (load('lastAll') || seed)) : randomSeed();   /* [R2-N3] one part or misses: new numbers; back to the whole test you were on [B6] */
   var go = function(){ goSet(to, v); };
-  if (started() && !S.done) ask('Switch to “' + SCOPES[v] + '”? This set stays saved on this device.', 'Switch', go); else go();
+  if (started() && !S.done) ask('Switch to “' + SCOPES[v] + '”? This set stays saved.', 'Switch', go); else go();
   $('scope').value = scope; });
 function setBad(t){ var b = $('setbad'); if (!b){ b = document.createElement('span'); b.id = 'setbad'; b.className = 'setbad'; b.setAttribute('role', 'alert'); $('setin').parentNode.appendChild(b); } b.textContent = t; b.hidden = !t; if (t) $('setin').setAttribute('aria-invalid', 'true'); else $('setin').removeAttribute('aria-invalid'); }
 $('setgo').addEventListener('click', function(){ var v = okSetText($('setin').value); if (v){ setBad(''); moreClose(); goSet(v, scope); } else { setBad('A set number is 1 to 99999. This is still set ' + seed + '.'); $('setin').select(); } });   /* a number that is not one says so (14 Nov 2026): "48.5" was set 48, "4.8e3" set 4800, and anything else was dropped without a word */
 $('setin').addEventListener('input', function(){ setBad(''); });
 $('setin').addEventListener('keydown', function(e){ if (e.key === 'Enter'){ e.preventDefault(); $('setgo').click(); } });
-function newSet(){ var go = function(){ goSet(randomSeed(), scope === 'miss' ? 'all' : scope); }; if (started() && !S.done) ask('Leave this set for a new one? This one stays saved on this device.', 'New set', go); else go(); }
+function newSet(){ var go = function(){ goSet(randomSeed(), scope === 'miss' ? 'all' : scope); }; if (started() && !S.done) ask('Start a new set? This one stays saved.', 'New set', go); else go(); }
 $('bNew').addEventListener('click', function(){ moreClose(); newSet(); });
 document.addEventListener('click', function(e){ if (e.target && e.target.closest && e.target.closest('[data-newset]')) newSet(); });   /* the end panel's "Try a new set" */
-$('bAgain').addEventListener('click', function(){ moreClose(); ask('Clear your answers to this set and start it again?', 'Start over', function(){ var m = S.mode, pos = S.pos; drop(key()); S = fresh(m); if (pos) S.pos = pos; render(); S.hash = HASHV; save(); paintAll(); window.scrollTo(0, 0); }); });
+$('bAgain').addEventListener('click', function(){ moreClose(); ask('Clear your answers and start over?', 'Start over', function(){ var m = S.mode, pos = S.pos; drop(key()); S = fresh(m); if (pos) S.pos = pos; render(); S.hash = HASHV; save(); paintAll(); window.scrollTo(0, 0); }); });
 /* Ruling 49 (22 Oct 2026): on a unit whose test is a random set of this page, the teacher bar (teacher.js) prints the
    TEST as n forms — the make-up printing, headed "Test · Form A" instead of "Make-up" (the set number on the key only,
    25 Oct 2026). Teacher copies only. */
@@ -6335,8 +6746,8 @@ function pq(d, qn){
     if (B) return '<div class="pans pboxes"><span class="pal bt">Answer:</span> ' + B.map(function(x){ return '<span class="pbx">' + (x.pre ? '<span class="pre">' + x.pre + '</span>' : '') + '<span class="pblank"></span>' + (x.unit ? ' <span class="unit">' + x.unit + '</span>' : '') + '</span>'; }).join(' ') + '</div><div class="pwork"></div>';   /* a blank per box, each with its label */
     return '<div class="pans"><span class="pal bt">Answer:</span> ' + (pre ? '<span class="pre">' + pre + '</span>' : '') + (V.blank ? V.blank(p) || '<span class="pblank"></span>' : '<span class="pblank"></span>') + (u ? ' <span class="unit">' + esc(u) + '</span>' : '') + '</div><div class="pwork"></div>'; };
   var choices = function(x){ return '<div class="pchoices">' + x.opts.map(function(o, k){ return '<div class="pch"><span class="pbox' + (it.type === 'multi' ? ' sq' : '') + '"></span><span class="cl">' + LET[k] + '.</span><span class="cv">' + V.opt(x, k) + '</span></div>'; }).join('') + '</div>'; };
-  if (it.type === 'parts') it.parts.forEach(function(p, pi){ if (d.keep && !d.keep[pi]) return; h += '<div class="ppart">' + line(p, p.label) + (p.kind === 'mc' ? choices(p) : p.kind === 'nline' ? NL.blankHtml(p) : blank(p)) + '</div>'; });
-  else if (it.type === 'solo') h += '<div class="ppart">' + (it.part.kind === 'nline' ? line(it.part, '') + NL.blankHtml(it.part) : blank(it.part)) + '</div>';
+  if (it.type === 'parts') it.parts.forEach(function(p, pi){ if (d.keep && !d.keep[pi]) return; h += '<div class="ppart">' + line(p, p.label) + (p.kind === 'mc' ? choices(p) : p.kind === 'nline' ? NL.blankHtml(p) : p.kind === 'cgraph' ? CG.blankHtml(p) : blank(p)) + '</div>'; });
+  else if (it.type === 'solo') h += '<div class="ppart">' + (it.part.kind === 'nline' ? line(it.part, '') + NL.blankHtml(it.part) : it.part.kind === 'cgraph' ? line(it.part, '') + CG.blankHtml(it.part) : blank(it.part)) + '</div>';
   else h += '<div class="ppart">' + choices(it) + '</div>';
   return h + '</div>';
 }
@@ -6362,6 +6773,7 @@ function yourAnswer(it){
   if (it.type === 'text' && boxesOf(it.x)){ var B = boxesOf(it.x), bs = boxAns(it.x, a); return bs.every(function(v){ return v.trim() === ''; }) ? '' : B.map(function(x, k){ return (x.pre ? x.pre + ' ' : '') + (bs[k].trim() ? esc(bs[k]) : '—') + (x.unit ? ' ' + x.unit : ''); }).join('; '); }
   if (it.type === 'text') return a == null || String(a).trim() === '' ? '' : esc(a);
   if (it.type === 'nline') return NL.empty(a) ? '' : NL.svg(it.x, a, {mode: 'key', cls: 'nl-small'}) + '<span class="nlkw">' + esc(NL.say(it.x, a)) + '</span>';
+  if (it.type === 'cgraph') return CG.empty(it.x, a) ? '' : '<span class="cgkey">' + CG.svg(it.x, a, {mode: 'key', degs: false, cls: 'cg-small'}) + '<span class="cgkw">' + esc(CG.say(it.x, a)) + '</span></span>';
   if (it.type === 'mc') return a == null ? '' : '<b>' + LET[+a] + '.</b> ' + V.opt(it.x, +a);
   return (a || []).map(function(k){ return '<b>' + LET[+k] + '.</b> ' + V.opt(it.x, +k); }).join('; ');
 }
@@ -6374,7 +6786,7 @@ function verdict(it){
 function resultsHtml(){
   var t = tally(), N = ITEMS.length, test = S.mode === 'test';
   var h = printHead('Results') + '<p class="pmeta"><span class="bt">' + setLine() + ' · ' + (test ? 'Like the real test' : 'Check as I go') + '</span></p>';
-  h += '<p class="pscore"><span class="bt"><b>' + t.earned + ' / ' + N + '</b> ' + (test ? 'right' : 'points earned on your own') + '</span>' + (test ? '' : '<span class="bt">' + t.first + ' / ' + N + ' right on the first try' + (t.helped ? ' ' + bulb(t.helped) : '') + '</span>') + '<span class="bt">' + t.done + ' of ' + N + ' done · time on the clock ' + fmt(elapsed()) + '</span>' +
+  h += '<p class="pscore"><span class="bt"><b>' + t.earned + ' / ' + N + '</b> ' + (test ? 'right' : 'points') + '</span>' + (test ? '' : '<span class="bt">' + t.first + ' / ' + N + ' right on the first try' + (t.helped ? ' ' + bulb(t.helped) : '') + '</span>') + '<span class="bt">' + t.done + ' of ' + N + ' done · time ' + fmt(elapsed()) + '</span>' +
     (S.done ? '' : '<span class="bt">Not finished yet.</span>') + '</p>';
   h += '<table class="ptab pres"><thead><tr><th><span class="bt">Section</span></th><th class="r"><span class="bt">' + (test ? 'Right' : 'Earned') + '</span></th></tr></thead><tbody>' +
     DS.map(function(s, k){ return '<tr><td><span class="bt">' + s.title + '</span></td><td class="r">' + (test ? t.bySec[k].got : t.bySec[k].earned) + ' / ' + t.bySec[k].of + '</td></tr>'; }).join('') + '</tbody></table>';
@@ -6437,7 +6849,7 @@ function checkCode(s){ var n = K.fnv1a(s), o = ''; for (var i = 0; i < 5; i++){ 
 function setCheck(){
   return checkCode(U.id + '#' + U.contentVersion + '#' + ITEMS.map(function(it){
     var x = it.x, a;
-    try { a = it.type === 'nline' ? NL.keyText(NL.graphOf(x)) : it.type === 'mc' ? 'c:' + vOpt(x, x.correct) : it.type === 'multi' ? 'm:' + x.correct.map(function(k){ return vOpt(x, k); }).join('|') : x._ekey != null ? x._ekey : V.key(x); }
+    try { a = it.type === 'nline' ? NL.keyText(NL.graphOf(x)) : it.type === 'cgraph' ? CG.keyText(CG.graphOf(x)) : it.type === 'mc' ? 'c:' + vOpt(x, x.correct) : it.type === 'multi' ? 'm:' + x.correct.map(function(k){ return vOpt(x, k); }).join('|') : x._ekey != null ? x._ekey : V.key(x); }
     catch(e){ a = '?'; }
     return U.key(x) + '=' + a + (it.item && it.item._est != null ? '~' + it.item._est : '') + (x._eln != null ? '~' + x._eln : '');
   }).join(';'));
@@ -6476,6 +6888,10 @@ function mcOf(p){
       all = [g, {c: g.c, closed: g.closed, dir: turn}, {c: g.c, closed: !g.closed, dir: g.dir}, {c: g.c, closed: !g.closed, dir: turn}]
         .map(function(x){ return '<span class="pnlc">' + NL.svg(p, x, {mode: 'key'}) + '</span>'; });
       tag = 'nline:' + NL.keyText(g);
+    } else if (p.kind === 'cgraph'){                         /* a circle graph to draw: four graphs — the key, the unit's named mistakes, else the kit's */
+      var gs = CG.choices(p, U.choices(p) || []); if (!gs) return null;
+      all = gs.map(function(x){ return '<span class="pcgc">' + CG.svg(p, x, {mode: 'key', degs: false}) + '</span>'; });
+      tag = CG.keyText(CG.graphOf(p));
     } else {
       var key = p._ekey != null ? p._ekey : V.key(p), seen = [mcSame(key)], wrong = [];
       (U.choices(p) || []).forEach(function(h){ var t = typeof h === 'string' ? mcSame(h) : ''; if (!t || seen.indexOf(t) >= 0 || wrong.length >= 3) return; seen.push(t); wrong.push(h); });
@@ -6484,19 +6900,19 @@ function mcOf(p){
     }
   } catch(e){ return null; }
   var ord = mcOrder(4, String(U.key(p)) + '|' + (p.label || '') + '|' + tag);
-  return {opts: ord.map(function(k){ return all[k]; }), correct: ord.indexOf(0), nline: p.kind === 'nline'};
+  return {opts: ord.map(function(k){ return all[k]; }), correct: ord.indexOf(0), nline: p.kind === 'nline' || p.kind === 'cgraph', cgraph: p.kind === 'cgraph'};
 }
 function mcChoices(p){                                      /* a part's four choices on the paper, or '' when it stays as written */
   var m = ALLMC ? mcOf(p) : null; if (!m) return '';
-  return (m.nline ? '' : '<div class="pwork pwmc"></div>') + '<div class="pchoices pmc ' + (m.nline ? 'pgr' : 'p2') + '">' + m.opts.map(function(o, k){ return '<div class="pch"><span class="pbox"></span><span class="cl">' + LET[k] + '.</span><span class="cv">' + o + '</span></div>'; }).join('') + '</div>';
+  return (m.nline ? '' : '<div class="pwork pwmc"></div>') + '<div class="pchoices pmc ' + (m.nline ? 'pgr' + (m.cgraph ? ' pcg4' : '') : 'p2') + '">' + m.opts.map(function(o, k){ return '<div class="pch"><span class="pbox"></span><span class="cl">' + LET[k] + '.</span><span class="cv">' + o + '</span></div>'; }).join('') + '</div>';
 }
 /* a number line to graph that prints as four graphs asks for a choice, not a drawing (Croix, 14 Nov 2026: on the all-multiple-
    choice paper "Graph the solution" is wrong where the student is choosing); a line the teacher edited on a pinned form is his */
 var MC_GRAPH_LINE = 'Which graph shows the solution?';
-function mcLine(p){ return p && p.kind === 'nline' && p._eln == null && mcChoices(p) ? (V.mcLine ? V.mcLine(p) : MC_GRAPH_LINE) : vLine(p); }
+function mcLine(p){ return p && (p.kind === 'nline' || p.kind === 'cgraph') && p._eln == null && mcChoices(p) ? (V.mcLine ? V.mcLine(p) : p.kind === 'cgraph' ? CG.MC_LINE : MC_GRAPH_LINE) : vLine(p); }
 function mcKey(it){                                         /* its row on the key: the letter, then the answer */
-  var m = ALLMC && (it.type === 'text' || it.type === 'nline') ? mcOf(it.x) : null;
-  return m ? '<b>' + LET[m.correct] + '.</b> ' + (m.nline ? NL.keyHtml(it.x) : m.opts[m.correct]) : '';
+  var m = ALLMC && (it.type === 'text' || it.type === 'nline' || it.type === 'cgraph') ? mcOf(it.x) : null;
+  return m ? '<b>' + LET[m.correct] + '.</b> ' + (m.cgraph ? CG.keyHtml(it.x) : m.nline ? NL.keyHtml(it.x) : m.opts[m.correct]) : '';
 }
 /* A printed test form — a ruling-49 test or a make-up — has the paper's shape (A7 Unit 6's review, 25 Oct 2026): the points
    on the head, on every section and on every part; the show-your-work and follow-through lines the paper prints (from the
@@ -6508,8 +6924,8 @@ function pqTest(d, qn){
   var h = '<div class="pq"' + (d.k != null ? ' data-k="' + d.k + '"' : '') + '><div class="pqh">' + qidHtml(qidOf(d.si, d.ii, it), 'pqid') + '<div class="stem"><b class="num">' + qn + '.</b><span class="st">' + vStem(it) + '</span>' + (it.type === 'parts' ? '' : one) + '</div>' + fig(it) + '</div>';
   var line = function(p, lab){ return '<div class="line">' + (lab ? '<b class="lab">' + lab + '.</b>' : '') + '<span class="st">' + mcLine(p) + '</span>' + one + '</div>'; };
   var choices = function(x){ return '<div class="pchoices">' + x.opts.map(function(o, k){ return '<div class="pch"><span class="pbox' + (it.type === 'multi' ? ' sq' : '') + '"></span><span class="cl">' + LET[k] + '.</span><span class="cv">' + vOpt(x, k) + '</span></div>'; }).join('') + '</div>'; };
-  if (it.type === 'parts') it.parts.forEach(function(p, pi){ if (d.keep && !d.keep[pi]) return; h += '<div class="ppart" data-p="' + pi + '">' + line(p, p.label) + (p.kind === 'mc' ? choices(p) : mcChoices(p) || (p.kind === 'nline' ? NL.blankHtml(p) : '<div class="pwork"></div>')) + '</div>'; });
-  else if (it.type === 'solo') h += '<div class="ppart" data-p="0">' + (it.part.kind === 'nline' ? '<div class="line"><span class="st">' + mcLine(it.part) + '</span></div>' + (mcChoices(it.part) || NL.blankHtml(it.part)) : mcChoices(it.part) || '<div class="pwork"></div>') + '</div>';
+  if (it.type === 'parts') it.parts.forEach(function(p, pi){ if (d.keep && !d.keep[pi]) return; h += '<div class="ppart" data-p="' + pi + '">' + line(p, p.label) + (p.kind === 'mc' ? choices(p) : mcChoices(p) || (p.kind === 'nline' ? NL.blankHtml(p) : p.kind === 'cgraph' ? CG.blankHtml(p) : '<div class="pwork"></div>')) + '</div>'; });
+  else if (it.type === 'solo') h += '<div class="ppart" data-p="0">' + (it.part.kind === 'nline' ? '<div class="line"><span class="st">' + mcLine(it.part) + '</span></div>' + (mcChoices(it.part) || NL.blankHtml(it.part)) : it.part.kind === 'cgraph' ? '<div class="line"><span class="st">' + mcLine(it.part) + '</span></div>' + (mcChoices(it.part) || CG.blankHtml(it.part)) : mcChoices(it.part) || '<div class="pwork"></div>') + '</div>';
   else h += '<div class="ppart" data-p="0">' + choices(it) + '</div>';
   return h + '</div>';
 }
@@ -6586,10 +7002,10 @@ function pinnedForm(secs, o){
 function sampleOf(it){
   var lineOf = function(p, lab){ return '<div class="line">' + (lab ? '<b class="lab">' + lab + '.</b>' : '') + '<span class="st">' + V.line(p) + '</span></div>'; };
   var chs = function(x, multi){ return '<div class="choices">' + x.opts.map(function(o, k){ return '<div class="ch"><span class="box' + (multi ? ' sq' : '') + '"></span><span class="cl">' + LET[k] + '.</span><span class="cv">' + V.opt(x, k) + '</span></div>'; }).join('') + '</div>'; };
-  var nl = function(p){ return '<div class="nlw">' + NL.svg(p, null, {mode: 'blank'}) + '</div>'; };
+  var nl = function(p){ return p.kind === 'cgraph' ? '<div class="cgw">' + CG.svg(p, null, {mode: 'blank'}) + '</div>' : '<div class="nlw">' + NL.svg(p, null, {mode: 'blank'}) + '</div>'; };
   var h = '<div class="stem"><span class="st">' + V.stem(it) + '</span></div>' + fig(it), keys = [];
-  if (it.type === 'parts') it.parts.forEach(function(p){ h += '<div class="prt' + (p.kind === 'mc' ? ' mcp' : p.kind === 'nline' ? ' nlp' : '') + '">' + lineOf(p, p.label) + (p.kind === 'mc' ? chs(p, false) : p.kind === 'nline' ? nl(p) : '') + '</div>'; keys.push({lab: p.label, key: keyHtml({type: textType(p), x: p})}); });
-  else if (it.type === 'solo'){ if (it.part.kind === 'nline') h += '<div class="prt nlp solo">' + lineOf(it.part, '') + nl(it.part) + '</div>'; keys.push({lab: '', key: keyHtml({type: textType(it.part), x: it.part})}); }
+  if (it.type === 'parts') it.parts.forEach(function(p){ h += '<div class="prt' + (p.kind === 'mc' ? ' mcp' : p.kind === 'nline' ? ' nlp' : p.kind === 'cgraph' ? ' cgp' : '') + '">' + lineOf(p, p.label) + (p.kind === 'mc' ? chs(p, false) : p.kind === 'nline' || p.kind === 'cgraph' ? nl(p) : '') + '</div>'; keys.push({lab: p.label, key: keyHtml({type: textType(p), x: p})}); });
+  else if (it.type === 'solo'){ if (it.part.kind === 'nline' || it.part.kind === 'cgraph') h += '<div class="prt ' + (it.part.kind === 'cgraph' ? 'cgp' : 'nlp') + ' solo">' + lineOf(it.part, '') + nl(it.part) + '</div>'; keys.push({lab: '', key: keyHtml({type: textType(it.part), x: it.part})}); }
   else { h += '<div class="mcp">' + chs(it, it.type === 'multi') + '</div>'; keys.push({lab: '', key: keyHtml({type: it.type === 'multi' ? 'multi' : 'mc', x: it})}); }
   return {html: h, keys: keys};
 }
@@ -6606,7 +7022,7 @@ function showPrint(kind, label){
   if (kind === 'mk' || kind === 'mc'){ makeupMenu(kind === 'mc'); return; }
   var mk = /^m([kc])(\d)$/.exec(kind);
   var body = mk ? makeupHtml(+mk[2], label, mk[1] === 'c') : kind === 'res' ? resultsHtml() : worksheetHtml() + (kind === 'wk' ? '<div class="pbreak"></div>' + keyListHtml() : '');
-  pv.innerHTML = '<div class="pbar"><button type="button" class="go" id="pvPrint">Print</button><button type="button" id="pvClose">Close</button><span class="pvhint bt">If nothing happens, use your browser’s Print (Ctrl + P).</span></div><div class="ppage">' + body + '</div>';
+  pv.innerHTML = '<div class="pbar"><button type="button" class="go" id="pvPrint">Print</button><button type="button" id="pvClose">Close</button></div><div class="ppage">' + body + '</div>';
   pv.hidden = false; document.body.classList.add('printing'); window.scrollTo(0, 0);
   $('pvPrint').onclick = function(){ try { window.print(); } catch(e){} };
   $('pvClose').onclick = closePrint;

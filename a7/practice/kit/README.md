@@ -44,7 +44,7 @@ in the code; the four reports are in the Windmill HANDOFF.
   gray bulb (the Hint button's own icon, no words) and "One on your own earns the point."; its fresh one, right unaided, earns
   it, and the question's card then says "point earned". A fresh one answered wrong and then corrected earns nothing; the next
   fresh one can. Two measures, never conflated: the bar and the end panel lead with the points earned ("9 earned 💡2 · 12 of
-  36 done"; "9 / 36 points earned on your own"); "Right on the first try: 7 / 36" is kept beneath as what happened on the
+  36 done"; "9 / 36 points"); "Right on the first try: 7 / 36" is kept beneath as what happened on the
   original first check, and is never rewritten. Help after the point is earned changes nothing. Croix brought the rule from a
   ChatGPT review of the A7 Unit 4 page (24 Oct): "The student may learn with as much help as needed. The final practice point
   must represent a complete and independent solution to a fresh problem, not merely recognition of an answer they just saw."
@@ -70,15 +70,14 @@ in the code; the four reports are in the Windmill HANDOFF.
 - **Where you are, and how it went** (7 Nov 2026, item 5): the bar says *"Question 4 of 16"* over a thin turquoise line (the question
   holding the focus, else the first on the screen; questions, not parts). The end panel keeps the first-try score and adds a
   chip per skill (the unit's sections) — **● Secure** (80% or more right on the first check with no help), **◐ Getting there**
-  (50% or more), **○ Not yet** — a word and an icon, never colour alone; and *"Since last time: up — 12 / 36 then, 18 / 36
-  today."* (down, the same) from this device's history of the same practice choice and mode, as a share when the sizes differ.
+  (50% or more), **○ Not yet** — a word and an icon, never colour alone; and *"Last time: 12 / 36"* from this device's history of the same practice choice and mode.
   Calm: no confetti, nothing that nags.
 - **Practice menu:** whole test, one part (two rounds with new numbers), or my misses (new numbers; one round if there
   are more than 8).
 - **The end:**
   - "Every one on the first try." when it's perfect; "Every point earned." when every point came, some from a fresh one.
   - Otherwise, jump links to the parts not right yet, "Practice my misses", and the parts under 80%.
-  - "Since last time: up — … then, … today." (it was "Last time: … Today: … (+6)").
+  - "Last time: 12 / 36" (15 Nov 2026; it was "Since last time: up — … then, … today.", and before that "Last time: … Today: … (+6)").
 - **The clock:** it starts with the first answer and pauses when the page is hidden (Resume brings it back). It is shown only in
   *Like the real test* (7 Nov 2026); in *Check as I go* it runs unseen, so the end panel still has the time.
 - **Progress:** each device keeps its last 25 sets in its own browser storage. Nothing is sent anywhere.
@@ -314,8 +313,9 @@ the graph of a one-variable inequality, built, not chosen:
   spec has one) still prints on the teacher's key. `check/page.js` part K fails a built page that holds "earlier part is wrong".
 - **Which practice this is, always in sight.** Croix: *"It was the switching mechanism that confused me. I would assume that if I
   open a specific lesson it would open to that section. Likewise if I open the full practice test."* A chip under the title names
-  the choice from What to practice — "Whole practice test", the section's name, "My misses", "Lesson 10.04" — and in a lesson the
-  line under the title reads "[Lesson 10.04] 8 questions · today's practice", the chip leading it (the count is the set's).
+  the choice from What to practice — the section's name, "My misses", "Lesson 10.04"; none on the whole test, whose title is
+  the unit's (15 Nov 2026, the words pass) — and in a lesson the line under the title reads "[Lesson 10.04] 8 questions", the
+  chip leading it (the count is the set's).
   A lone graph to build says its instruction line on the screen and on paper. Teacher copies the same.
   `check/page.js` part K checks the chip per scope and the lesson line against the cards.
 
@@ -591,7 +591,8 @@ My misses and every lesson set — shows one question at a time**, in the releas
   after a miss are not shown with the pager — its Next does what they did (the next question not right yet, the focus in its
   box) and takes the focus after a right answer; otherwise it opens the next question. The end panel's "Not right yet" links
   open their question. The bar's "Question 4 of 16" is hidden on the summary, where no question is on the screen.
-- **Finish** gives the score: the end panel, as before, and under the title **Every question** — ✓ Right, ✗ Not right (or
+- **Finish** gives the score: the end panel, as before, and under it every question, with no heading over the list (15 Nov
+  2026) — ✓ Right, ✗ Not right (or
   "1 of 2 right"), – Blank, with its section and ID. A tap opens the question to review (its verdict beside its number, the end
   panel out of the way); **Score summary** goes back. A finished set reopens on its summary.
 - **Saved:** the question on the screen and the flags are kept in the set's own record (`S.pg`), so a reload or a return opens
@@ -641,11 +642,47 @@ line meets is **`HELP_STANDARD.md`**. The kit carries what it needs as a module 
 - First met by M7 Unit 10 and A7 Unit 6. Other units are unchanged until they write a `help.js`; vendoring this kit into them is
   harmless (the module loads, nothing calls it).
 
+## 15 Nov 2026 — the words pass (`ui.js`, `pager.js`, `teacher.js`, `lang/pt-BR.js`, `check/page.js`)
+
+Croix, 15 Nov 2026, after circling notes on the site's pages for three days: *"Can you see the pattern in the text I am
+asking you to remove. They are what I consider ai mannerisms that make a project feel like ai. The over explaining, the odd
+phrasing, etc."* — and of the list that pass left for him, the unit practice pages among them: *"Fix them all."* The rule is
+in Windmill's HANDOFF ("Words on a page") and the site's README: a row is its name and a button is its verb; no note on how
+to use the screen, no choice said back, no count nobody asked for. What the kit's own words lost (the units' questions,
+feedback, hints and help are the units' and were not touched):
+
+- **The bar** says nothing before the first check (it said "18 parts to answer"), and in *Like the real test* "3 of 18
+  answered" (no "marked when you finish"). The button is **Finish** in both modes (it was "Finish & mark").
+- **The start sheet** has no chip on the whole test (it said "Whole practice test"; a section, My misses and a lesson keep
+  theirs), and a lesson's line is "8 questions" (no "today's practice").
+- **The end panel** is headed "Set 4821" (the practice choice only when it is not the whole test; the mode is not said back),
+  the score is "9 / 36 points" and the time "time"; "Last time: 12 / 36" for "Since last time: up — … then, … today."; the note
+  under "Not right yet" (what Hint and Try a similar one do) is gone. The list under it has no heading and no note ("Every
+  question", "Tap a question to review it.").
+- **Asking:** "Leave this set? It stays saved." · "12 of 18 still blank. Finish anyway?" / "Finish and see your score?" ·
+  "Switching clears your answers." · "Switch to “…”? This set stays saved." · "Start a new set? This one stays saved." ·
+  "Clear your answers and start over?" · the notice "This set was updated, so it starts over." · "No misses yet. Finish a set
+  first."
+- **Names:** What to practice says "My misses" (it was "My misses, with new numbers"); a right answer first checked at Finish
+  says "✓ Correct"; the chip's label for a screen reader is "Practicing: …".
+- **Print:** the preview's bar has Print and Close and no line under them (student page and teacher copy); the results sheet
+  says "points" and "time". The printed results still name the mode: on paper it is the teacher's to read.
+- **Kept on purpose:** the two streak lines, the first-try and effort lines, the skill chips and the table, "One on your own
+  earns the point.", the map's three-word legend, and every message a student needs in order to go on.
+
+`lang/pt-BR.js` has the same words as they now are, and the keys of the lines that went are gone (M7 Unit 4's own
+`bi_check.js`, the one unit check that wrote a kit sentence out, says "This set stays saved." since the same evening).
+`check/page.js` part K fails a built page that still holds any of the old lines (its `WORDS` list, read in the page with its
+comments taken out), holds the whole test to no chip and a lesson's line to its count; the "Last time" check reads the new
+line. A unit's page changes when it is next built on this kit; no question, key
+or set number moves, and `contentVersion` stays.
+
 ## Files
 | Kit (`practice/kit/`) | |
 |---|---|
 | `core.js` | `slot(unit, seed, slotName)`, `draw(unit, seed, slot, build, ok)`, `fnv1a`, `hint.mul/div/add/sub/sq` (one smaller step of arithmetic, never the final answer), and `Ans` (the answer normaliser: `parse`, `canon`, `form`, `equiv`) |
 | `nline.js` | the number-line graph a student builds (kind `nline`): the line, the widget, judging, paper; pure, so a unit's Node checks use it |
+| `cgraph.js` | the circle graph a student builds (kind `cgraph`, 15 Nov 2026, below): the marked circle, the widget, the edits, judging, the key, paper, the four graphs; pure, so a unit's Node checks use it |
 | `ui.js` | the whole page: sets, scopes, the coach card, Hint, Show me how, Try another, scoring, the clock, saved state, focus, keypad |
 | `kit.css` | the sheet: light and dark mode (the site's palette), 44px tap targets, print |
 | `vendor/fonts/` | Lexend, DM Sans, DM Serif Display as small woff2 (SIL OFL), inlined by `build.py`; `make_fonts.py` cuts them |
@@ -671,6 +708,7 @@ line meets is **`HELP_STANDARD.md`**. The kit carries what it needs as a module 
 | `check/bank.js` | a unit's lesson bank: schema, map against the plan, every item drawn light and dark, 30 answered through the page, the keypad's = < ≤ ≥ > on a touch screen ("c<-16.5" with its sign tapped, ✓) |
 | `check/walk.js`, `check/times.js` | a walkthrough's options shuffled by the question; no × for multiplication, the kit's words and the unit's (15 Nov 2026, below). `run.py` runs both on every student page |
 | `check/boxes.js`, `check/boxes_page.js`, `check/order_page.js` | typing into a part's boxes for every page check; page.js part T (several boxes in one part) and part U (a walkthrough's order in the browser, no × on the sheet or any paper), 15 Nov 2026 |
+| `check/cgraph.js`, `check/cgraph_page.js` | answering a circle graph through the page for every page check (the keyboard, as a student without a mouse does); page.js part V (a circle graph the student builds), 15 Nov 2026 |
 | `check/page.js` | **in a real browser** (Playwright): every key typed on 3 sets scores N / N; then the flows: Cancel, re-checking the same answer, focus after Hint / Show me how / Try another / Next / Close, Show this step, Finish marking typed-but-unchecked answers, test mode, tap targets, the keypad not being a tab stop, bad links |
 
 | A unit (`practice/u4/`, …) | |
@@ -690,7 +728,9 @@ title, eyebrow, h1, notes: [html],
 keypad: [{label, say, ins(kind) → text}],
 generate(seed) → {sections: [{title, items}]}
    item: {type: 'parts' | 'solo' | 'mc' | 'multi', stem, fig?, parts | part | opts+correct}
-   part: {label, kind ('mc' for a lettered multiple choice), fam, prm, …}
+   part: {label, kind ('mc' for a lettered multiple choice; 'nline' a number line to graph; 'cgraph' a circle graph to draw), fam, prm, …}
+   a cgraph part: {kind: 'cgraph', circle: {step: 10}, graph: [{name, deg}, …], title?}   // 2–6 categories, each deg a positive
+                                                                       // multiple of step, 360 in all (Kit.CG.check(part) says what is wrong)
 key(partOrItem) → string                      // what makes two questions the same
 view: {stem(item), figure(item), line(part), pre(part), unit(part), placeholder(part), opt(x, k), why?(x, k), key(part), form?(part),
        boxes?(part), start(x, type), ex(x, ast, type), got(step), picture(x, type), pretty(text, kind)}
@@ -701,15 +741,23 @@ judge: {text(part, typed, ctx), mc(item, k), multi(item, ks, tries)} → {v: rig
    ctx = {prev: the student's part (a) answer, prevPart, prevOk (is part (a) right yet), extra (a fresh "Try another", with no
           part (a) of its own), aShown, mode}
    part.imode: an inputmode for the phone's keyboard ('decimal' for a box that never needs a space, a slash or a minus)
+judge.nline?(part, which, graph, ctx) → html     // which: 'boundary' | 'dot' | 'arrow' — the one thing off, in the unit's words (else the kit's)
+judge.cgraph?(part, which, answer, ctx) → html   // which: 'size' | 'names' — the one thing off; answer: [{name, deg}] clockwise from 0°
+                                                 // (else the kit's two lines); '' falls back to the kit's line
 rungs?(x, type, ctx) → {notice, first, steps}   // the help ladder's three rungs, any of them (else derived)
-view.mcLine?(part) → html                      // a number line's instruction on an all-multiple-choice paper (default "Which graph shows the solution?")
+view.mcLine?(part) → html                      // a graph's instruction on an all-multiple-choice paper (default "Which graph shows the solution?";
+                                                // a circle graph's "Which graph shows the data?")
 choices?(part) → [html]                        // a typed part's wrong answers as its key would show them, the likeliest first, three
-                                                // or more: an all-multiple-choice paper (14 Nov 2026); never the answer
+                                                // or more: an all-multiple-choice paper (14 Nov 2026); never the answer. A cgraph part:
+                                                // wrong GRAPHS in the part's own shape ([{name, deg}] lists, each a named mistake),
+                                                // the likeliest first; the kit adds its own after them (15 Nov 2026)
 solution(x, type, ctx) → [{say, ex}]          // every ex equals the answer (checked); ctx as judge's — a part (b) can keep part (a)'s
                                                 // number out of its lines until part (a) is right
 walk(x, type, ctx) → steps: {type: 'choice', ask, opts: [{label, ok, why}], then?, pic} | {type: 'num', ask, ans, hint, then?}
 readNum(text) → rational | null, numOk(step, value) → bool
-keyText(part) → what a student would type (for the checks); a part with boxes: one string per box
+keyText(part) → what a student would type (for the checks); a part with boxes: one string per box; a cgraph part:
+                                                // Kit.CG.keyText(part.graph), e.g. cgraph:Fruit=160|Chips=90|Yogurt=70|Nuts=40
+rungs / solution / walk get type 'cgraph' for a circle graph (and 'nline' for a number line); a unit with none gets the kit's
 ```
 
 ## Making the next unit (the skill "practice-test-from-unit-test" walks through it)
@@ -768,7 +816,7 @@ marks right, results match, only the printout on paper, Close restores the page,
   questions as the unit test, new numbers every set.)"* Under the title there is only the unit's `notes` — how to write an
   answer ("Use 3.14 for π…") — and nothing at all when it has none; the old `intro` is not read. He added *"And this line
   'Same kinds of questions as the unit test, new numbers every set.'"*, so the menus' asides went too: the make-up prompt is
-  just "How many different forms?", and the practice menu's "My misses, with new numbers" has no "(none yet)" (it still
+  just "How many different forms?", and the practice menu's "My misses" has no "(none yet)" (it still
   shows how many when there are some).
 
 ## Make-up tests (18 Oct 2026)
@@ -926,3 +974,78 @@ their own coaches), the times key shows · (it is still named × and types *), a
   that threw before get new words. `check/hints.js` reads them all.
 - **A copy of uncommitted changes did not say so.** `tools/practice_kit.py --vendor` wrote "Windmill practice/kit at <commit>" even
   when the kit had changes not yet committed; it now adds "+ uncommitted kit changes", as `vendor_into.py` does for the build kit.
+
+## 15 Nov 2026 — a circle graph the student builds (`cgraph.js`)
+Croix, 7 Nov 2026, of number lines: *"I'd like the practice tests and tests to make them graph … instead of just describing
+them."* MA.7.DP.1.4's first verb is **construct**, so M7 Unit 7's test has a student draw a circle graph. In class they draw on a
+printed circle marked every 10° (no protractor), with a line already drawn from the center to 0° at the top, and the data are chosen
+so every central angle is a multiple of 10°. A part of kind **`cgraph`** (`cgraph.js`, on the model of `nline` on every surface) asks
+for that graph, built, not chosen.
+- **The authoring shape:** `{kind: 'cgraph', circle: {step: 10}, graph: [{name: 'Fruit', deg: 160}, {name: 'Chips', deg: 90},
+  {name: 'Yogurt', deg: 70}, {name: 'Nuts', deg: 40}], title?: '…'}` — 2 to 6 categories, every `deg` a positive multiple of `step`
+  (10 unless the unit says otherwise), the degs summing to 360. `Kit.CG.check(part)` returns what is wrong with a part ('' when
+  nothing); a unit's own checks call it on every part they make and fail loudly (the kit draws whatever it is given). The categories
+  are the names the student chooses from, in the part's order. The student's answer is a list in the same shape — the sectors as
+  built, clockwise from 0°, a `name` null while a sector has none (`[]` when nothing is drawn); `keyText` is
+  `cgraph:Fruit=160|Chips=90|Yogurt=70|Nuts=40`. **Right** = every category names exactly one sector and that sector is the key's
+  size; the order of the sectors is free.
+- **On the screen** (`ui.js`, `kit.css`): the circle marked every 10°, numbered every 30° outside the rim (0°, 30°, … 330°), the
+  fixed line from the center to 0°; strokes in the pen (`currentColor`: navy on the paper, white in the dark). The circle is drawn
+  400 × 340 (the circle 208 across) and fills the column, so it is as large as a phone allows with no sideways scroll at 360 px.
+  **Lines:** a tap or a click on a mark draws a line from the center to it, the same again erases it (never the 0° line); while the
+  pointer is down a ghost line (turquoise with the ink's edge, the one live thing) follows to the nearest mark and a readout pill says
+  it ("160°"); releasing commits; a line can be dragged to another mark (its sector's name goes with it). A touch on the ring of
+  marks draws and does not scroll the page; a touch anywhere else scrolls as usual. **Keyboard:** the circle is one Tab stop (a
+  `role=slider` over the marks): ← → ↑ ↓ move a cursor 10° at a time, Home to 0°, End to 350°, Space or Enter draws or erases a line
+  at the cursor. **Names:** the sectors are the regions between neighboring lines. A tap inside one, or the second Tab stop (a slider
+  "Sector 2 of 4: 160° to 250°, Chips"; ← → Home End; ‹ › beside it for a touch screen, where a thin sector is hard to hit) selects it,
+  drawn in the live tint with a turquoise edge; under it a radiogroup of the category names (44 px, a word each; a name already on
+  another sector is underlined dotted, and choosing it moves it there). A name is drawn inside its sector when it fits and beside the
+  circle with a short leader when it does not (labels beside the circle keep off the numbers and each other). **Start over** clears
+  the lines and the names. One muted line under the circle says what to do ("Tap a mark to draw a line from the center. Tap it
+  again to erase it. Then choose each sector and tap its name."; not printed). A visually hidden live line says the state in words ("4 lines: 0°, 160°, 250°, 320°. The sector from 0° to
+  160° is Fruit. …"). No typing, so no keypad.
+- **Judging** (`Kit.CG.judge(part, answer, ctx, Unit.judge.cgraph)`): not finished is *Not counted yet*, never a try — nothing drawn
+  ("Tap a mark on the circle to draw a line first."), the wrong number of sectors ("Draw one sector for each category: 4 sectors."),
+  a sector with no name ("Name every sector."). When wrong, the card names ONE thing, **sizes before names** (`which` is `'size'` when
+  the sizes, as a set, are not the key's; `'names'` when they are and a name is on the wrong one): a unit gives its own words with
+  `judge.cgraph(part, which, answer, ctx)` (M7 Unit 7: the percent used as degrees, a count used as degrees, each angle measured
+  from the 0° line instead of from the line before), else the kit's two lines. The rungs follow the same order (a unit's
+  `rungs(x, 'cgraph', ctx)`, else the kit's: the sizes, the first line from 0°, every sector in turn), and Hint 3 ends on the graph
+  drawn with its words. First-try scoring, the streaks, Try a similar one (a fresh circle in focus), the ladder, Show me how, *Like
+  the real test*, saving and restoring (the list, as built), the pager's map (answered only when every sector is named): as `nline`.
+- **Paper:** the worksheet and every printed test form print the part's line ("Draw and label the circle graph.") over the blank
+  marked circle — 60 mm across, marks every 10°, numbers every 30°, the 0° line — and nothing else. The keys (the worksheet's, the
+  make-ups', the ruling-49 test's) draw the finished graph in ink, each sector's name and size inside it or beside it, with its words
+  ("Fruit 160°, Chips 90°, Yogurt 70°, Nuts 40°. Any order of sectors earns the point."). The teacher copy shows the key's graph under
+  the item on screen; a pinned form's graph is not editable (New version changes its numbers), as `nline`'s. My results draws the
+  student's own graph with its words.
+- **The all-multiple-choice paper** prints four graphs two by two — the key and three wrong ones — under "Which graph shows the
+  data?" (a unit may give `view.mcLine`). The wrong graphs are the unit's (`Unit.choices(part)` returning graphs in the part's own
+  shape, `[{name, deg}]` lists, each a named mistake, the likeliest first) and then the kit's: the names of the largest and the
+  smallest sector traded; every sector the same size; the sizes in the reverse order against the names; and, if one of those is the
+  key or another choice, the names turned one sector on, the two largest traded, the two smallest traded. A graph is the same graph
+  in any order of its sectors; each choice differs from the key and from the others (`Kit.CG.choices(part, unitGraphs)`). The
+  choice graphs show the names only (the sizes are what the student reads off the marks); the key's row draws the key with its
+  sizes. The key's place among the four comes from the question, as for every other part.
+- **Nothing changes for a unit with no `cgraph` part** but the page carrying one more inlined script (`cgraph.js`, after
+  `nline.js`; `build.py`, `check/run.py`'s hash, `tools/practice_kit.py`'s manifest).
+- **Checked:** `check/page.js` part V (`check/cgraph_page.js`, a unit with a `cgraph` part on sets 11, 4821, 12–15 or 1–300; else
+  skipped): the untouched circle (its 36 marks, its 12 numbers, only the 0° line, the names disabled, 44 px, no text box); a tap (the
+  ghost and the readout while down, the line on release, the focus, the saved list, the live line), the same tap again, the 0° mark;
+  a drag; the keys (→ ← Home End, Space and Enter both ways); Tab to the sectors and to the names, → in each, a tap inside a sector,
+  a name that moves; a sector with no name and too few sectors are not a try; the key built through the widget ✓ on the first try
+  with its point and locked; a reload restores it; a size off, names traded, and both (the size first), each its own line, three
+  tries; Hint 3 ends on the graph drawn with its words; Try a similar one; the worksheet's blank circle (60 mm ± 6, black ink, no
+  controls, the line) and the key's graph; on a teacher copy the key's graph under the item, Tests' blank circles and their keys'
+  graphs, the all-multiple-choice paper's four different graphs and its line; a touch screen at 390 and 360 (a tap draws, a tap
+  names, no keypad, nothing past the edge); the pager's map; every stroke and word ≥ 3:1 in the dark. `KIT_CG_SHOTS=<folder>` saves
+  screenshots of each state at 390 and 1280, light and dark, and of the paper. Every other page check that answers questions with
+  their keys answers a `cgraph` part through `check/cgraph.js` (the keyboard: Home, → and Space for each line; the sectors' stop and
+  the names' buttons); `check/mc_page.js` reads the four graphs; `check/set_page.js` the check code; `check/variety.js` counts a
+  graph's angles among its numbers; `check/times.js`, `check/walk.js` and `check/help.js` read its words and steps.
+- **For a unit author** (M7 Unit 7 first): give the part its shape and
+  `view.line` its line; `view.key` → `Kit.CG.keyHtml(part)`, `keyText` → `Kit.CG.keyText(part.graph)`, `view.pre`/`view.unit` '' for
+  it; `judge.cgraph` your one line for `'size'` and `'names'`; `rungs`, `solution` and `walk` for type `'cgraph'` (or none, for the
+  kit's); `choices(part)` your named wrong graphs (or `[]`, for the kit's); in your own checks, `Kit.CG.check(part)` on every part,
+  the key and the key in another order right, unfinished graphs never a try, each named mistake judged on its own `which`.
