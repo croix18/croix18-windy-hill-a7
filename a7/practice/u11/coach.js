@@ -367,7 +367,7 @@ PF.tableSol = {
   walk: p => [numS('In which column do the two tables give the same y? What is its x?', p.ans[0], 'Compare the two y’s in each column, one column at a time.'),
     numS('What y do both tables give in that column?', p.ans[1], 'Read either table in that column: they agree there.')]
 };
-const storyAmt = (p, v) => p.st.amt(n(v));
+const storyAmt = (p, v) => p.st.unit === 'dollars' ? '$' + n(v) : n(v) + ' cm';   /* the story's amt, from the part's own data: a part holds no function (16 Nov 2026: a part must survive Kit.pack, for the test the site judges) */
 PF.storyMeet = {
   rule: () => 'The two amounts are equal at the point of intersection: read the weeks across, then the amount up. Say it with its units.',
   models: p => { const out = [{ v: [p.ans[1], p.ans[0]], say: 'swapped the two boxes: the weeks are across the bottom (x) and go in the weeks box, and the amount is up the side (y)' },

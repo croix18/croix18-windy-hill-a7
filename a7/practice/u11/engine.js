@@ -632,7 +632,7 @@ function q14(seed) {
     const prm = { st: st.id, A, B, x0: x.x0, y0: x.y0, m1: x.m1, b1: x.b1, m2: x.m2, b2: x.b2, ys, bm1: b.m1, bb1: b.b1, bm2: b.m2, bb2: b.b2 };
     const figA = { kind: 'plane', w: wa, lines: [l1, l2], legend: [A, B], xname: st.xname, yname: st.yname, story: true, title: 'PART (a): ' + A + ' and ' + B };
     const figB = { kind: 'plane', w: wb, lines: [p, q], legend: [lineH(p), lineH(q)], title: 'PART (b): a different system' };
-    const pa = pairPart({ label: 'a', kind: 'story', fam: 'storyMeet', stem: 'The PART (a) graph shows ' + (st.id === 'plants' ? 'the height y, in centimeters, of each plant' : 'the dollars y each has') + ' after x weeks. ' + st.ask(A, B), prm, l1, l2, st, A, B, figw: wa, ans: [Q(x.x0), Q(x.y0)], key: keyOf('storyMeet', prm) });
+    const pa = pairPart({ label: 'a', kind: 'story', fam: 'storyMeet', stem: 'The PART (a) graph shows ' + (st.id === 'plants' ? 'the height y, in centimeters, of each plant' : 'the dollars y each has') + ' after x weeks. ' + st.ask(A, B), prm, l1, l2, st: { id: st.id, unit: st.unit, xname: st.xname, yname: st.yname, each: st.each, up: st.up }, A, B, figw: wa, ans: [Q(x.x0), Q(x.y0)], key: keyOf('storyMeet', prm) });
     const pb = pairPart({ label: 'b', fam: 'estimate', stem: 'The PART (b) graph shows a different system,&nbsp; ' + sysStem(p, q) + '. Estimate its point of intersection to the nearest tenth.', fig: figB, prm, l1: p, l2: q, exact: c,
       ans: [tenthOf(c.x), tenthOf(c.y)], tol: Q(1, 10), key: keyOf('estimate', prm) });
     return { type: 'parts', stem: st.say(A, B, x), fig: figA, parts: [pa, pb] };

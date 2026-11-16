@@ -1,5 +1,30 @@
 # State of the work — 15 November 2026 (read this first)
 
+## 16 November, afternoon — the kit with the test: every page and teacher copy re-run, each unit's test built; Unit 11's story part made storable (session_01W9n2WyAa6qRsqsdQj871ge)
+
+Croix, 15 Nov, 7:52 pm, of a test taken on the website and judged there: *"I'm fully on board with a bigger build. Make it
+airtight."* The design, the reviews and what was changed after them are in Windmill (`practice/exam/DESIGN.md`,
+`practice/exam/review-16nov/`).
+- **The practice kit is at Windmill `86dfa38`** (`a7/practice/kit/KIT_VERSION`). For a practice page two things changed:
+  the page judges through `judge.js` (the judging moved, unchanged, into one module the site also calls — 16,800 parts
+  judged before and after, no verdict different), and `exam_link.js` shows a third choice, **Test**, on the start screen
+  while the site says the unit's test is open (on mrshaffer.org only). A teacher copy also carries `exam_pool.js`: asked
+  by the cockpit at `#exam-pool`, it draws the tests the site hands out. No question, key, set lock or `contentVersion`
+  moved.
+- **Unit 11's story question (14a) holds data only now.** Its part carried three functions (`st.say`, `st.ask`, `st.amt`),
+  so it could not be kept as text and judged on the site. `engine.js` gives the part the story's data (`id`, `unit`,
+  `xname`, `yname`, `each`, `up`) and `coach.js` and `help.js` say an amount from the part's own `unit`. Compared before
+  and after on 300 sets (600 parts: the stem, the key, the solution, the walkthrough, three judgments): identical.
+  `kit/check/pack.js` passes: 1,080 parts over 60 sets, every part judged the same after `unpack(pack())`.
+- **Re-run, each ALL CHECKS PASSED, page and teacher copy:** Units 3, 4, 5, 6 and 11. The pages were run on the kit at
+  `4f19284` and rebuilt byte for byte on `86dfa38` (nothing a page is built from changed between them; `build.py` takes
+  the stamp); the teacher copies were run on `86dfa38`.
+- **Each unit's test built and checked** (`kit/exam/build_exam.py`, each TEST BUILT AND CHECKED): `A7 Unit N Test.html`
+  (the test page: no engine, no key) and `test_bundle/` (what the site judges with), for Units 3, 4, 5, 6 and 11. A unit's
+  teacher copy and its bundle carry the same kit version; they are published together.
+- **On the site:** the site's commit of this day names this one.
+
+
 ## 16 November, morning — scratch paper, the calculators hardened, the docked panels: every practice page and teacher copy re-run (session_01W9n2WyAa6qRsqsdQj871ge)
 
 Croix, 15 Nov, 7:12 pm: *"add a scratch notes to the practice and fast practice as well as a scratch grid."* 7:36 pm: *"Also

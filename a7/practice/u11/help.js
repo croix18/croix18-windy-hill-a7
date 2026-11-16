@@ -431,7 +431,7 @@ SPEC.tableSol = { terms: ['solSys', 'table'], pic: true,
 SPEC.storyMeet = { terms: ['intersect', 'pointInt'], pic: true,
   notice: p => 'The two amounts are equal where the lines [[intersect]], at the [[pointInt]]. Read the weeks across the bottom for the weeks box, then the amount up the side for the other box.',
   first: p => ({ say: 'Find the point of intersection. Go straight down from it to the weeks axis and read the weeks.', why: 'the weeks are x, across the bottom, and they go in the weeks box.' }),
-  sol: (p, old) => [Object.assign({}, old[0], { pic: p.figw ? crossPic(p.figw, p.l1, p.l2, p.ans, 'The dotted paths lead from the crossing to ' + c3(n(p.ans[0]) + ' weeks') + ' and ' + c3(p.st.amt(n(p.ans[1]))) + '.', ['weeks', p.st.yname]) : '' }),
+  sol: (p, old) => [Object.assign({}, old[0], { pic: p.figw ? crossPic(p.figw, p.l1, p.l2, p.ans, 'The dotted paths lead from the crossing to ' + c3(n(p.ans[0]) + ' weeks') + ' and ' + c3(p.st.unit === 'dollars' ? '$' + n(p.ans[1]) : n(p.ans[1]) + ' cm') + '.', ['weeks', p.st.yname]) : '' }),
       Object.assign({}, old[1], { why: 'at the point of intersection both equations give the same amount.' }),
       Object.assign({}, old[2], { say: old[2].say + ' Type ' + n(p.ans[0]) + ' in the weeks box and ' + n(p.ans[1]) + ' in the ' + (p.st.unit === 'dollars' ? 'dollars' : 'centimeters') + ' box.' })],
   walk: (p, old) => old.map(s => s.type !== 'num' ? s : Object.assign({}, s, { ask: s.ask + (qeq(s.ans, p.ans[0]) && /weeks\?$/.test(s.ask) ? ' That goes in the weeks box.' : ' That goes in the ' + (p.st.unit === 'dollars' ? 'dollars' : 'centimeters') + ' box.') })) };
