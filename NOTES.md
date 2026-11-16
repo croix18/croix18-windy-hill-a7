@@ -1,12 +1,18 @@
 # State of the work — 15 November 2026 (read this first)
 
-## 15 November — the kits fixed in Windmill; Unit 11 uses the new pieces; Units 3–6 rebuilt on them
+## 15 November — the kits fixed in Windmill; Unit 11 uses the new pieces; Units 3–6 rebuilt on them; all of it published that evening
 
 Croix, 8:40 am, of the kit limits and open items Unit 11's report listed: *"Fix windmill. Fix the other kits. Fix
 everything"*; at 10:16 am he sent the cause of Windmill's failing GitHub check (matplotlib 3.11's glyph tuples). What
 was done in Windmill is in its `HANDOFF.md` (the first sections) and in `kit/README.md` and `practice/kit/README.md`
 (the 15 Nov sections). In this repository:
 
+- **Published** (Croix, 15 Nov, 6:55 pm: *"Publish it"*): site `e919cfe` (`mrshaffer-site`) — **Unit 11 is on the
+  website** (its seven days of slides, the practice page, the teacher copy and the unit's documents; `/a7/unit-11/`),
+  and Units 3–6 are there as rebuilt. `publish_web.py`, then the site's `schedule.py`, `build.mjs` and `test_site.mjs`:
+  SITE CHECKS PASS (218 pages, 2619 links); Cloudflare's build of that commit succeeded. Unit 11's practice page is
+  live at `contentVersion` 1, so from here its sets are fixed like every published page's: a change that moves a set
+  is a new content version.
 - **The build kit is at Windmill `095d912`** (`a7/build/KIT_VERSION`). New in a spec (`a7/build/SPEC SCHEMA.md`): `fig`
   on a Your Turn (`fig_a` for its answer slide), on a worked slide, a warm-up question and a set question; `fig_key` on
   a paper question (the key's own figure); a step that opens `[equation]` or `[false]`; `align="="` at a lesson's top
@@ -16,7 +22,7 @@ was done in Windmill is in its `HANDOFF.md` (the first sections) and in `kit/REA
   `check_master_sheet.py` use it); the Teacher Edition says "neighbor"; no student paper prints the follow-through
   line; **a build stops on any matplotlib but 3.10** (`lib/mathimg.MATPLOTLIB` — 3.11 draws stacked fractions a
   quarter taller and several decks no longer fit; moving to it is its own job).
-- **Unit 11 uses the new pieces** (rebuilt and installed, `checks: 0 findings`; still NOT published):
+- **Unit 11 uses the new pieces** (rebuilt and installed, `checks: 0 findings`):
   - the graph days' Your Turns (11.05, 11.07, 11.08) show their tables and grid, and their answer slides the graph;
     every graph Example's worked slide carries the finished graph;
   - the key of every "graph both lines" question draws both lines and marks the crossing (`fig_key`: the sets, banks
@@ -33,11 +39,11 @@ was done in Windmill is in its `HANDOFF.md` (the first sections) and in `kit/REA
   - 11.07 board 6 says "Four points on the lines are marked." (the crossing is one of them, so "each line passes
     through two marked points" was not what the picture showed); 11.08 board 4's stem ends "Best estimate?" because
     the full sentence does not fit on one line and a second line drops the graph under the options.
-- **Unit 11's practice page** (`a7/practice/u11`; still NOT published) has the kit's several boxes: questions 12 and
+- **Unit 11's practice page** (`a7/practice/u11`) has the kit's several boxes: questions 12 and
   13(b) take `x =` and `y =`; 14(a) "after ▢ weeks" and the amount; 14(b) `x ≈` and `y ≈`, each within 0.1. A part is
   still one point, and the key and the all-multiple-choice paper show the whole pair. 63 of 63 planted errors. Today's
   lesson changes moved three sets (9, 154, 174) under ruling 43 and the sets were locked again — allowed only because
-  the page has never been published (`contentVersion` 1). The printed test's directions are the two sentences of every
+  the page had not yet been published (`contentVersion` 1). The printed test's directions are the two sentences of every
   teacher copy; the unit's own note about writing a point is gone. Page and teacher copy: ALL CHECKS PASSED on the
   practice kit at Windmill `bf7af44`, the lock unchanged across the last runs. Three lines on the page that explain the
   screen were left for Croix's word (Windmill `HANDOFF.md`, "Words on a page"): "Each to the nearest tenth" over
@@ -61,8 +67,7 @@ was done in Windmill is in its `HANDOFF.md` (the first sections) and in `kit/REA
 - The master sheet is regenerated (0 problems) and `tools/check.sh` passes.
 
 ### Open, for Croix
-1. **Unit 11 waits for his word to be published.** The rebuilt Units 3–6 are in this repository only; the website
-   serves the builds it had.
+1. *(closed: everything above was published on 15 Nov.)*
 2. **Three IXL skills of the plan may ask for what Unit 11 does not teach yet** — TS7 "Write a system of equations given
    a graph", 9Z8 "Solve a system of equations in slope-intercept form", AGZ "Find the number of solutions to a system of
    equations by graphing" — read from their titles; nobody here could open IXL. If they need slope, they move to Unit 10.
@@ -71,7 +76,7 @@ was done in Windmill is in its `HANDOFF.md` (the first sections) and in `kit/REA
 4. **Not done, on purpose:** a 43-minute Lesson Plan (HOUSE STYLE has no Wednesday plan; the lessons' materials line
    says what to cut); the move to matplotlib 3.11.
 
-## 14 November — A7 Unit 11, Solving Equations and Systems: built, reviewed, fixed; held for Croix's word before it is published
+## 14 November — A7 Unit 11, Solving Equations and Systems: built, reviewed, fixed; held for Croix's word (published 15 Nov, above)
 
 Croix, 10:50 am: *"Can you get working on the next unit in a7"*. The next unit taught is **Unit 11** (ruling 52: before
 Units 7 and 10; MA.8.AR.2.1 and MA.8.AR.4.1–4.3; seven days, Mon 30 Nov – Thu 10 Dec, the one-period test Fri 11 Dec).
