@@ -4,7 +4,7 @@
       Show me how, Try another, a right answer (Next) and Close; Show this step after two misses; Finish marks typed but
       unchecked answers; results buttons practise in "Check as I go"; test mode says only "can't read this yet";
       tap targets; the keypad is not a tab stop; a bad link does not open another set; no page errors.
-   C–V: see each part below (T, several boxes in one part; U, a walkthrough's order and no × — 15 Nov 2026; V, a circle graph the student builds, check/cgraph_page.js). A–Q see every question on one screen (the checks' switch, window.KIT_PAGER_OFF); R checks the
+   C–V: see each part below (T, several boxes in one part; U, a walkthrough's order and no × — 15 Nov 2026; V, a circle graph the student builds, check/cgraph_page.js; W, scratch paper, check/scratch_page.js). A–Q see every question on one screen (the checks' switch, window.KIT_PAGER_OFF); R checks the
    pager — one question at a time, as on the FAST (pager.js, 14 Nov 2026) — as students have it (check/pager_page.js). */
 const path = require('path');
 const { chromium } = require('playwright');
@@ -1005,7 +1005,7 @@ async function fresh(p, seed) { await p.goto(url + '#set-' + seed); await p.eval
   await require('./approve_page.js')(b, url, U, dir, fail);
   if (/^teacher$/.test(path.basename(dir))) await require('./tests_page.js')(b, url, U, dir, fail);
   /* N. the calculators (calc.js, 8 Nov 2026): the FAST one and the TI-30Xa, both addresses answered by stand-ins (page.route) */
-  await require('./calc_page.js')(b, url, U, dir, fail);
+  await require('./calc_page.js')(b, url, U, dir, fail, rawContext);   /* and the room made for it docked (check/dock.js), as students have the page */
   /* O. the keypad, even and tidy, with the unit's keys (8 Nov 2026) */
   await require('./keys_page.js')(b, url, U, dir, fail);
   /* P. an all-multiple-choice test (14 Nov 2026): a teacher copy of a unit that gives its wrong answers */
@@ -1022,6 +1022,8 @@ async function fresh(p, seed) { await p.goto(url + '#set-' + seed); await p.eval
   await require('./order_page.js')(b, url, U, dir, fail);
   /* V. a circle graph the student builds (kit kind cgraph, 15 Nov 2026): run when the unit has one */
   await require('./cgraph_page.js')(b, rawContext, url, U, dir, fail);
+  /* W. scratch paper (scratch.js, 15 Nov 2026): notes and graph paper per question, as students have it (and once with the checks' switch) */
+  await require('./scratch_page.js')(rawContext, b.newContext, url, U, dir, fail);
   await b.close(); server.close();
   console.log('B. flows checked');
   if (fails.length) { console.log('FAILURES (' + fails.length + '):\n' + fails.join('\n')); process.exit(1); }

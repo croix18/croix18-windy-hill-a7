@@ -433,36 +433,68 @@ who never opens a calculator makes no request at all (`page.js` F still fails an
   time it is picked — `referrerpolicy="no-referrer"`, `title="FAST calculator (Desmos scientific)"` or `"TI-30Xa calculator"`,
   its exact address — and after that closing only hides the panel and switching only hides the other one, so a student's work
   in either stays while the page is open. Each has its own natural size: the FAST one 360 × 560, as on the test; the TI-30Xa
-  389 × 636 (the emulator's 315.6 × 600 picture 28 px into its page, with room for a scrollbar). In a short window the FAST one
-  gets shorter (Desmos lays itself out again) and the TI-30Xa is drawn smaller, whole.
-- **The header** holds the title, Close, the switch and an always-visible **Open in a new tab** (`target="_blank"`,
-  `rel="noopener noreferrer"`) to the calculator shown. Whether either site lets itself be framed could not be checked from the
-  build's sandbox, which cannot reach them: if one refuses, its frame shows the browser's error and the link is the way through.
-  Offline (`navigator.onLine` false) one line beside the link says *The calculator needs the internet.*; a frame first opened
-  offline loads again when the device is back online.
+  389 × 636 (the emulator's 315.6 × 600 picture 28 px into its page, with room for a scrollbar). Each is laid out once at that
+  size and never sized again: in a short or narrow window, and on a phone, it is drawn smaller whole (a transform), so the
+  frame's own window never changes and Desmos never lays itself out again because of the page (15 Nov 2026, below).
+- **The header** is one row: the title, the switch and Close (it wraps, the switch under the title and Close, only when the
+  panel is too narrow for the row). No link and no way out to a new tab (15 Nov 2026). Offline (`navigator.onLine` false) one
+  line under the row says *The calculator needs the internet.*; a frame first opened offline loads again when the device is
+  back online. Until a frame has loaded its place pulses quietly; if it has not loaded 12 seconds after its address was set,
+  *The calculator didn’t load.* and **Try again**, which makes the frame again at the same address.
 - **Wide screens:** a floating window, as the test's own calculator is — dragged by its header, docked at the right side at
   first, never over the top bar, its place remembered on the device (`practice.calc.pos`, from its nearer side) and kept on the
   screen when the window changes size. It floats over the page, as the test's does; a student drags it where it helps.
 - **Phones** (≤ 600 px wide or ≤ 460 px tall): a full-height sheet with Close; the page behind it is inert while it is open.
-- **Keyboard:** opening puts focus on the panel's header; Tab goes Close → the switch → the link → the calculator; Escape (in the
-  panel, or on the button) closes it and gives focus back to the button. The panel and the button are `translate="no"`.
+- **Keyboard:** opening on a wide screen puts focus in the calculator, so typing reaches it without a click first (picking a
+  calculator by a click does too; by the arrows, focus stays on the switch); on a phone's sheet focus goes to the title. Tab
+  goes Close → the switch → the calculator; Escape (in the panel's header, or on the button) closes it and gives focus back to
+  the button. The panel and the button are `translate="no"`.
 - **Never printed:** the button and the panel are hidden in `@media print` and never show over a print preview or the teacher's
   panels; the worksheets, keys and tests print exactly as before.
 - **Embedded, never copied:** each calculator is its author's page in a frame, by its address. No file of either — not the
   emulator's code (GPL-3.0, github.com/AldenMB/calculator_emulator) nor its photo of the calculator, which is Texas Instruments'
-  — is in Windmill or a course repository. Under the TI-30Xa the panel credits it: *TI-30Xa emulator by Alden Bradford*,
-  linking to its page.
+  — is in Windmill or a course repository. Under the TI-30Xa the panel credits it in plain text: *TI-30Xa emulator by Alden
+  Bradford*.
 - **The look:** the ⋯ menu's surface (true dark in dark: a neutral near-black with white words, never navy), the Appearance
-  row's switch, teal ink for the links, DM Sans as the bar. What the calculators draw inside their frames is their own.
+  row's switch, DM Sans as the bar. What the calculators draw inside their frames is their own.
 - **Checked:** `check/page.js` part N (`check/calc_page.js`), both addresses answered by small stand-in pages (`page.route`): no
   iframe and no request to either host before it is picked, and nothing in the built page that could fetch one; the button
   (44 px, the word on a wide screen, the icon alone on a phone); the FAST frame's exact address, attributes and 360 × 560, asked
-  once with no Referer, docked at the right under the bar; focus on the header; Tab order; Escape back to the button; the same
-  frame again with what was typed in it; the TI-30Xa made only when picked, with its credit, both frames kept through switching
-  and neither loaded again, the new-tab link following the calculator shown, the pick after a reload; dragging (never over the
-  bar, remembered across closing and a reload, kept inside a smaller window); the phone's sheet at 390 (whole screen, the page
-  inert, Close 44 px back to the button); the offline line beside the link; print (neither prints, a worksheet's pages the same
-  with the panel open, nothing over a print preview); true dark; a lesson set. On student pages and teacher copies alike.
+  once with no Referer, docked at the right under the bar; the header one row, no link; focus in the calculator and a key typed
+  at once reaching it; Tab order; Escape back to the button; the same frame again with what was typed in it; the TI-30Xa made
+  only when picked, with its plain credit, both frames kept through switching and neither loaded again, the pick after a
+  reload; dragging (never over the bar, remembered across closing and a reload, kept inside a smaller window); the phone's
+  sheet at 390 (whole screen, the page inert, focus on the title, Close 44 px back to the button); the offline line under the
+  row; print (neither prints, a worksheet's pages the same with the panel open, nothing over a print preview); true dark; a
+  lesson set; and the hardening below. On student pages and teacher copies alike.
+
+**15 Nov 2026 — hardened.** Croix: *"Also get rid of open in new tab for the calculators inside of the practice tests and
+tests. Harden the calculators to work. They do now, just harden to make sure they do always. The desmos I was having issues
+with, it wouldn't respond when I was clicking clear and it only reacted when I clicked the number pad."* Desmos's site cannot
+be reached from the build's sandbox, so his report could not be reproduced. Nothing on the page covered the frame; what a
+probe of the published Unit 10 did show is that on a Chromebook-height window (1366 × 657) the FAST frame was resized to 454 px
+tall, and resized again on every window or bar change, so Desmos laid itself out again under the student. The likeliest cause:
+a button that needs a whole click (clear) lost it when the frame was re-laid or had no focus, while the keypad acts on a press.
+So every way the page could disturb the frame is gone:
+- **No way out:** the *Open in a new tab* link is gone; the TI-30Xa's credit is plain text.
+- **One header row** (the title, the switch, Close), about 50 px more for the calculator.
+- **The test's own layout, always:** the FAST frame's own window is 360 × 560 from the moment it is made, at every window size
+  and on the phone's sheet (scaled to fit, centered, never above 1); a window too small draws it smaller whole.
+- **Nothing moves under a click:** `layout()` runs at most once an animation frame and writes a style only when its value
+  changes; called 20 times it writes nothing.
+- **Focus in the calculator** on opening and on a click of the switch (wide screens).
+- **The drag never leaves the frame dead:** the frames lose the pointer (`kcdrag`) only once a drag has moved 3 px, never on a
+  plain press, and get it back at the drag's end, a cancel, a lost capture, the window's blur, a hidden page, closing, and the
+  next press anywhere in the panel.
+- **A calculator that did not load says so:** the loading state, then after 12 seconds *The calculator didn’t load.* and
+  **Try again** (offline keeps its own line). `window.KitCalc` is the checks' hook: `layout()`, and `wait`, the 12 seconds.
+- **Checked** (part N): the FAST frame's own window 360 × 560 with no `resize` in it at six window sizes and on a phone, drawn
+  smaller whole at its own shape (at least 490 px tall at 1366 × 657); a grid of 63 points across the frame all reach it —
+  docked, dragged to each corner, 1366 × 657, 560 px tall, after a press on the header that did not move, the phone's sheet,
+  the sheet with the pager's drawer open, the unit's keypad showing on a touch screen, after a drag left on and a press in the
+  panel; real clicks at its top right and in its lower half reach the stand-in; `layout()` 20 times writes nothing; the stuck
+  drags; a calculator that never answers (a route that never replies, the wait shortened through the hook): the loading
+  state, the line, Try again asking again and then loading.
 
 ## 8 Nov 2026 — the keypad, even and tidy (`ui.js`, `keyset.js`)
 Croix, of an A7 Unit 6 lesson set on his phone: *"Can you fix the symbols across everything so that they are even looking not
@@ -677,6 +709,81 @@ comments taken out), holds the whole test to no chip and a lesson's line to its 
 line. A unit's page changes when it is next built on this kit; no question, key
 or set number moves, and `contentVersion` stays.
 
+## 15 Nov 2026 — scratch paper (`scratch.js`, `scratch.css`)
+
+Croix, 15 Nov 2026: *"add a scratch notes to the practice and fast practice as well as a scratch grid."* Asked what the grid
+should be, he chose **graph paper to plot on**: a click drops a point, points join into lines, things can be erased, and a
+Chromebook's trackpad is enough. The FAST gives a typed notepad per question, so the notes are typed and kept per question;
+students never handwrite on a computer (his ruling), so nothing here is freehand. The same two files, byte for byte, are on the
+site's FAST pages (`mrshaffer-site` `released/kit/`), so `scratch.css` uses only the tokens both pages define.
+- **The button** (`#bScratch`, written by `build.py` right after the Calculator): the Calculator's look (`class="calcb scrb"`),
+  a pencil and *Scratch paper*, the icon alone at ≤ 480 px, 44 px, `aria-expanded`, `aria-controls`, `translate="no"`. Hidden
+  when no question is on the screen (the start, the score summary, a print preview, a teacher's view). On a question with notes
+  or anything on its grid it carries a small teal dot, and its label is "Scratch paper, used on this question".
+- **The panel:** *Scratch paper*, the question's number as a teal-caps chip ("QUESTION 4"), Close; under them **Notes | Grid**
+  (a radiogroup; the last pick remembered, `practice.scratch.tab`). It always shows the question on the screen: when the
+  question changes it saves and shows the new one's; when no question is on the screen it closes.
+- **Wide screens:** a floating window like the calculator's, docked at the **left** under the bar at first (the calculator docks
+  right), dragged by its header, never over the bar, its place remembered (`practice.scratch.pos`) and kept on the screen when
+  the window changes size; with both open, the one pressed last is on top. **Phones** (≤ 600 px wide or ≤ 460 px tall): a
+  bottom sheet, not modal; the page gets bottom padding as tall as the sheet (screen only), so the question scrolls clear.
+- **Notes:** one textarea (Lexend 16 px, no spellcheck, 2,000 characters), no placeholder. **Clear**, then **Undo** until the next
+  edit or question.
+- **Grid:** 20 × 20 squares, **four quadrants** (−10 to 10) or the **first** (0 to 20); **Scale 1 · 2 · 5 · 10** is what one
+  square is worth (the numbers and the readout change; what is plotted stays on the paper); both kept per question. Gridlines,
+  axes with arrowheads, "x" and "y", numbers every 2 squares — all under what is plotted. **Point · Segment · Line · Erase**,
+  every end on an intersection: a segment by two clicks or a drag (a dashed preview after the first end); a line runs to the
+  paper's edges with an arrowhead at each end and shows its two points; Erase takes the nearest thing within about 10 px (a
+  point before a line), shown dashed first. A turquoise ring marks the intersection under the pointer, and the readout says it,
+  `(3, −2)`. **Undo** (adds, erases, clears; per question, for the visit) and **Clear**. At most 200 things. Nothing on it
+  computes anything: no slope, no equation, no length.
+- **Keyboard:** the graph is one tab stop (`role="application"`); the arrows move a cursor a square (Shift: five), Enter or Space
+  plots with the tool, Backspace or Delete erases at the cursor, Escape first cancels a half-drawn segment or line and then
+  closes. A polite live region says where the cursor is and lists what is on the paper after each change.
+- **Words:** only Scratch paper, Question N, Close, Notes, Grid, Point, Segment, Line, Erase, Scale, Undo, Clear, and labels for
+  a screen reader. No instructions, captions or empty-state text.
+- **Saved on the device:** `practice.scratch.v1.<set>` → `{t, q: {"<q>": {n, g: {v: [4 or 1, scale], o: [["p",x,y],
+  ["s",x1,y1,x2,y2], ["l",x1,y1,x2,y2]]}}}}`, in squares from the paper's lower left. Saved 300 ms after typing, on blur, close,
+  a question change and `pagehide`; each write reads the entry again and replaces only its question (a second tab keeps the
+  other's), and a `storage` event redraws when focus is not in the panel. The 30 sets used last are kept; a full storage
+  prunes and tries once more. Storage refused: it all works for the visit. Never sent anywhere; the module makes no request.
+- **Never printed** (`@media print`), never over a print preview or a teacher's view (`body.printing`, `body.tview`).
+- **Its own module:** `scratch.js` (before `ui.js`) defines `Kit.Scratch(host)`; `scratch.css` comes after `explain.css`. The
+  page hands it `where()` (null, or `{set, q, label}`) and `set()` (the set's storage name, for a reset with no question on the
+  screen), calls `at()` when the question may have changed and `reset()` when the set starts over. `ui.js`: created once at its
+  end (`set` is the set's own record name, `q` the card's `data-q`, the question the bar's line names with the checks' switch);
+  `paintProgress` calls `at()`; Start over, a mode switch that clears and the "this set was updated" restart call `reset()`. A
+  new set number has its own name and starts empty. A body class change (a print preview, a teacher's view) also calls `at()`.
+- **Checked:** `check/page.js` part W (`check/scratch_page.js`), on student pages and teacher copies: the button (after the
+  Calculator, 44 px, the word wide and the icon on a phone, hidden on the start and the summary, the dot); open, docked left
+  under the bar, focus in the notes, Escape back to the button, Tab order; notes per question across Next and Back and a reload,
+  Clear and Undo; the grid by mouse (a point, a segment by two clicks and by a drag, a line to the edges, the ring and readout,
+  erase with its dashed preview, Undo, Clear and Undo, both views, Scale 5's numbers and readout, kept after a reload, another
+  question's own grid) and by keyboard (the arrows, Shift, Enter, Space, Escape cancelling first, Delete, the live region);
+  Start over and a mode switch empty the set, a new set starts empty; the 30-set pruning; a second tab; dragging (never over
+  the bar, remembered, kept inside a smaller window, on top of the calculator when pressed last); the phone's sheet at 390 × 844
+  (focus on the title, 44 px targets, no sideways scroll, the question scrolls clear, Next usable behind it); true dark and
+  forced light; print (none of it, the same pages with the panel open), nothing over a print preview or a teacher's view; the
+  panel's words exactly its list; every question on one screen (the checks' switch) naming the bar's question; storage
+  refused; no request off the page.
+
+**The page makes room for a docked panel (15 Nov 2026, the coordinator's ruling on a panel covering Back).** A panel must not
+sit on the question. On a wide screen a panel within 24 px of the window's left or right edge (its first place, or dragged
+back there) reports how far it reaches to `window.KitDock` — the same few lines at the top of `calc.js` and `scratch.js`,
+defined by whichever loads first. The registry sets `--dockL` and `--dockR` on `<html>` (the reach plus a 12 px gap, less the
+body's own 16 px) and the classes `kdock` (one side) and `kdock2` (both); if under 520 px would be left between the panels it
+reserves nothing and they float, as before. The rules are in `kit.css`'s calculator block (so the site's `calc.css` has them):
+the body's sides grow, so the sheet and the map card center in what is left and narrow if they must; the bar stays full-bleed
+and its row centers with them, so its buttons end where the sheet ends; with both docked the Calculator and Scratch paper
+buttons are their icons. Screen only; never under a print preview or a teacher's view; nothing on a phone; no animation.
+Opening, closing, dragging and a resize update it; the calculator's frame is never re-laid by it. At 1366 × 657: scratch paper
+docks left and the sheet keeps 736 px; the calculator docks right; both leave a sheet of about 517 px. At 1280 × 800 both float
+(under 520 px would be left). At 1024 × 700 one panel still docks (604 px is left), the sheet narrowing to 576 px.
+**Checked:** `check/dock.js`, run by part N (the calculator) and part W (scratch paper, and both): at 1366 × 657 Back, Next,
+Flag for review, Check and the first answer not under a panel, the bar's buttons ending at the sheet's edge, no sideways
+scroll, both leaving 460–600 px; 1280 × 800 reserving nothing; dragged away and closed reserving nothing; a print preview, a
+teacher's view and print reserving nothing.
+
 ## Files
 | Kit (`practice/kit/`) | |
 |---|---|
@@ -703,6 +810,9 @@ or set number moves, and `contentVersion` stays.
 | `check/help.js`, `check/help_page.js` | the help standard, in Node over 300 sets and in a browser at 390 px, light and dark (a unit with `help.js`) |
 | `pager.js`, `pager.css` | one question at a time, as on the FAST: the number, Flag for review, Back and Next, the map, the summary after Finish (14 Nov 2026, above) |
 | `check/pager_page.js` | page.js part R (one question at a time, 14 Nov 2026, above), on every page, without the checks' switch that parts A–Q use |
+| `scratch.js`, `scratch.css` | scratch paper: Notes and graph paper to plot on, per question, in a panel from the top bar (15 Nov 2026, above); the same two files on the site's FAST pages |
+| `check/scratch_page.js` | page.js part W (scratch paper, 15 Nov 2026, above), on every page |
+| `check/dock.js` | the room the page makes for a docked panel (15 Nov 2026, above), run by parts N and W |
 | `check/calc_page.js`, `check/keys_page.js` | page.js parts N (the calculators, against stand-ins for both addresses) and O (the keypad: the unit's keys, even rows at five widths, typing through it) |
 | `bank.js` | a lesson's practice from Cadence: the bank's practice choices, sets, items, judging and help (above) |
 | `check/bank.js` | a unit's lesson bank: schema, map against the plan, every item drawn light and dark, 30 answered through the page, the keypad's = < ≤ ≥ > on a touch screen ("c<-16.5" with its sign tapped, ✓) |
@@ -927,7 +1037,9 @@ whose paper says "Give its x and its y"). Now a unit may give a part labeled box
 - **A unit that gives no boxes is exactly as before**: the same HTML, the same answers, the same locks (A7 Units 6 and 11, M7 Units
   10 and 13, student pages and teacher copies, every check passing on this kit untouched). The boxes are a view of the part, so
   giving a part boxes does not change a set's questions or its lock.
-- **Checked:** `check/page.js` part T (`check/boxes_page.js`, a unit with a part that has boxes): the names, the group, the Tab order;
+- **Checked:** `check/page.js` part T (`check/boxes_page.js`, a unit with a part that has boxes — in a lettered question too: the
+  worksheet's blanks are read for that part alone, and the pager's map after the question's other typed parts are filled; M7
+  Unit 7's 6(a), 15 Nov): the names, the group, the Tab order;
   one line at 360, 390 and 1280 px, nothing past the edge; and every part with boxes in the unit (each boxed place, and each way its
   boxes are labeled, from set 4821 then 1–300) at 360, 390 and 1280 px: each box's label and unit on its box's row, the Check button
   on the screen, no sideways scroll, boxes without a unit on one line, boxes with a unit a row each on a phone; one box filled is not a try; Enter; a wrong pair (the key reversed), its
@@ -1000,7 +1112,8 @@ for that graph, built, not chosen.
   at the cursor. **Names:** the sectors are the regions between neighboring lines. A tap inside one, or the second Tab stop (a slider
   "Sector 2 of 4: 160° to 250°, Chips"; ← → Home End; ‹ › beside it for a touch screen, where a thin sector is hard to hit) selects it,
   drawn in the live tint with a turquoise edge; under it a radiogroup of the category names (44 px, a word each; a name already on
-  another sector is underlined dotted, and choosing it moves it there). A name is drawn inside its sector when it fits and beside the
+  another sector is underlined dotted, and choosing it moves it there; in the group an arrow key only moves the focus and Space or
+  Enter names the sector — an arrow that chose would take names off sectors on the way past). A name is drawn inside its sector when it fits and beside the
   circle with a short leader when it does not (labels beside the circle keep off the numbers and each other). **Start over** clears
   the lines and the names. One muted line under the circle says what to do ("Tap a mark to draw a line from the center. Tap it
   again to erase it. Then choose each sector and tap its name."; not printed). A visually hidden live line says the state in words ("4 lines: 0°, 160°, 250°, 320°. The sector from 0° to

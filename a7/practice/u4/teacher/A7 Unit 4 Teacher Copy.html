@@ -698,7 +698,8 @@ svg.cgg.cg-small{width:min(100%,14rem)}
    a dream come true", then "I would also like this t130xa calculator embedded as well … it should be the same as the desmos") ====
    Calm and small: the button is the bar's own quiet button (sand), the word beside its icon — the icon alone on a phone; open,
    it has the ink's edge (nothing live about it, so never turquoise). The panel is the ⋯ menu's surface (true dark in dark), the
-   switch the Appearance row's, the link teal ink. What the calculators draw inside their frames is their own. */
+   switch the Appearance row's. What the calculators draw inside their frames is their own. Since 15 Nov 2026 the header is one
+   row, there is no way out to a new tab, and each calculator keeps its own size inside and is drawn smaller whole (calc.js). */
 .watch .btns .calcb{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:9px 14px 9px 11px}
 .calcb svg{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 .calcb svg .kd{fill:currentColor;stroke:none}
@@ -709,35 +710,48 @@ svg.cgg.cg-small{width:min(100%,14rem)}
 .kcalc[hidden]{display:none}
 .kch{padding:6px 6px 0;cursor:grab;touch-action:none;-webkit-user-select:none;user-select:none}
 .kcalc.kcdrag,.kcalc.kcdrag .kch{cursor:grabbing} .kcalc.kcdrag iframe{pointer-events:none}
-.kcbar{display:flex;align-items:center;justify-content:space-between;gap:8px;padding-left:10px}
-.kct{margin:0;font:700 15px/1.2 var(--chrome);letter-spacing:.005em;color:var(--ink)}
+/* one row: the title, the switch, Close (Close first in the markup, for Tab; last on the screen) */
+.kcbar{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;padding-left:10px}
+.kct{margin:0 auto 0 0;font:700 15px/1.2 var(--chrome);letter-spacing:.005em;color:var(--ink);white-space:nowrap}
 .kct:focus{outline:none} .kct:focus-visible{outline:2px solid var(--focus);outline-offset:3px;border-radius:4px}
-.kcx{min-height:44px;padding:8px 15px;border-radius:999px;font:600 14px/1 var(--chrome);color:var(--ink);background:var(--field);border:1px solid var(--rule)}
+.kcx{order:2;min-height:44px;padding:8px 14px;border-radius:999px;font:600 14px/1 var(--chrome);color:var(--ink);background:var(--field);border:1px solid var(--rule)}
 .kcx:hover{background:var(--field2)}
-.kcrow{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 8px;margin-top:6px}
-.kcsw{display:inline-flex;gap:2px;padding:3px;border-radius:999px;background:var(--field)}
-.kcsw button{min-height:44px;border:0;border-radius:999px;background:transparent;color:var(--mut);font:600 13.5px/1 var(--chrome);padding:8px 12px;white-space:nowrap}
+.kcsw{order:1;display:inline-flex;gap:2px;padding:3px;border-radius:999px;background:var(--field)}
+.kcsw button{min-height:44px;border:0;border-radius:999px;background:transparent;color:var(--mut);font:600 13.5px/1 var(--chrome);padding:8px 11px;white-space:nowrap}
 .kcsw button[aria-checked=true]{color:var(--ink);font-weight:700;background:var(--seg);box-shadow:inset 0 0 0 1.5px var(--navyLine)}
 .kcsw button:not([aria-checked=true]):hover{background:var(--field2)}
-.kcl{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:0 10px;margin-left:auto;max-width:100%}
-.kcnew{display:inline-flex;align-items:center;gap:4px;min-height:44px;padding:0 2px;border-radius:8px;font:600 13px/1.2 var(--chrome);color:var(--link);text-decoration:none;white-space:nowrap}
-.kcnew:hover{text-decoration:underline;text-underline-offset:2px}
-.kcnew svg{width:15px;height:15px;flex:none;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
-.kcnew:focus-visible,.kccr a:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
-.kcoff{font:500 12.5px/1.3 var(--chrome);color:var(--mut)} .kcoff[hidden]{display:none}
-.kcsr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-.kcb{display:flex;flex-direction:column;align-items:center;padding:4px 6px 8px}
+.kcalc.kcwrap .kcsw{order:3}   /* too narrow for one row: the title and Close, the switch under them (calc.js) */
+.kcoff{margin:4px 0 0;padding-left:10px;font:500 12.5px/1.3 var(--chrome);color:var(--mut)} .kcoff[hidden]{display:none}
+.kcb{display:flex;flex-direction:column;align-items:center;padding:6px 6px 8px}
 .kcfr{display:flex;flex-direction:column;align-items:center;max-width:100%} .kcfr[hidden]{display:none}
-.kcsc{overflow:hidden;border-radius:10px;background:var(--paper);box-shadow:0 0 0 1px var(--rule)}
+.kcsc{position:relative;overflow:hidden;border-radius:10px;background:var(--paper);box-shadow:0 0 0 1px var(--rule)}
 .kcsc iframe{display:block;border:0;transform-origin:0 0}
-.kccr{margin:8px 0 0;font:500 12px/1.3 var(--chrome);text-align:center}
-.kccr a{color:var(--link);text-decoration:none} .kccr a:hover{text-decoration:underline;text-underline-offset:2px}
+/* not loaded yet: a quiet pulse where the calculator will be; not loaded after 12 seconds: one line and Try again (calc.js) */
+.kcfr.kcload iframe{opacity:0}
+.kcfr.kcload .kcsc{animation:kcwait 1.4s ease-in-out infinite alternate}
+@keyframes kcwait{from{background:var(--paper)}to{background:var(--field)}}
+@media (prefers-reduced-motion:reduce){ .kcfr.kcload .kcsc{animation:none;background:var(--field)} }
+.kcno{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:16px;background:var(--paper);text-align:center}
+.kcno[hidden]{display:none}
+.kcno p{margin:0;font:600 14px/1.35 var(--chrome);color:var(--ink)}
+.kccr{margin:8px 0 0;font:500 12px/1.3 var(--chrome);color:var(--mut);text-align:center}
 /* a phone: the whole screen, Close at the top right, the page behind it inert (calc.js) and still */
 .kcalc.kcfull{inset:0;width:auto;height:100%;min-width:0;max-width:none;border:0;border-radius:0;box-shadow:none;
   padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px)}
 .kcalc.kcfull .kch{cursor:auto;touch-action:auto;padding:8px 10px 0}
 .kcalc.kcfull .kcb{flex:1 1 auto;min-height:0;padding:6px 6px 10px}
+
 html.kcalc-lock,html.kcalc-lock body{overflow:hidden}
+/* the page makes room for a docked panel (15 Nov 2026; calc.js and scratch.js set --dockL and --dockR through window.KitDock):
+   the body's sides grow, so the sheet and the map card center in what is left (narrower if they must); the bar stays full-bleed
+   and its row centers with them. Screen only; never under a print preview or a teacher's view. */
+@media screen{
+  body:not(.printing):not(.tview){padding-left:calc(16px + var(--dockL,0px));padding-right:calc(16px + var(--dockR,0px))}
+  body:not(.printing):not(.tview) .watch{margin-left:calc(-16px - var(--dockL,0px));margin-right:calc(-16px - var(--dockR,0px));
+    padding-left:calc(16px + var(--dockL,0px));padding-right:calc(16px + var(--dockR,0px))}
+  html.kdock .watch .score{overflow-wrap:normal}
+  html.kdock2 .watch .btns .calcb{width:44px;padding:0} html.kdock2 .watch .calcb .cw{display:none}
+}
 /* never over a print preview or the teacher's panels, and never on paper */
 body.printing>.kcalc,body.tview>.kcalc{display:none!important}
 @media print{ .kcalc,.calcb{display:none!important} }
@@ -942,6 +956,83 @@ svg.fig .xs1{stroke:var(--x1);stroke-width:4} svg.fig .xs2{stroke:var(--x2);stro
 .rung svg.nl text,.wpic svg.nl text,.walk svg.nl text{font-size:19.5px}
 .rung svg.fig .ax,.wpic svg.fig .ax{font-size:18px}
 .rung svg.fig .lab,.rung svg.fig .tx,.wpic svg.fig .lab,.wpic svg.fig .tx,.walk svg.fig .lab,.walk svg.fig .tx,.rung svg .lab,.rung svg .tx,.wpic svg .lab{font-size:18px}
+/* ==== scratch paper (15 Nov 2026, scratch.js; Croix: "add a scratch notes to the practice and fast practice as well as a scratch
+   grid") ==== The same file on the kit's pages and the site's FAST pages, so only the tokens both define (or a fallback). The
+   button is the Calculator's (class calcb); the panel is the calculator panel's surface: the menu's, true dark in dark. Turquoise
+   only for the intersection under the pointer; the teal dot on the button says this question has scratch work. */
+.watch .btns .scrb{position:relative}
+.watch .btns .scrb[hidden]{display:none}
+.scrb svg .f{fill:currentColor;stroke:none}
+.scrb.used::after{content:"";position:absolute;top:6px;right:6px;width:8px;height:8px;border-radius:50%;background:var(--link);box-shadow:0 0 0 2px var(--menu)}
+.kscr{position:fixed;z-index:30;top:0;left:0;display:flex;flex-direction:column;width:404px;max-width:calc(100vw - 16px);box-sizing:border-box;overflow:auto;
+  background:var(--menu);color:var(--ink);border:1px solid var(--rule);border-radius:16px;box-shadow:var(--pop);font-family:var(--chrome);overscroll-behavior:contain}
+.kscr[hidden]{display:none}
+.kscr .ksh{padding:6px 6px 0;cursor:grab;touch-action:none;-webkit-user-select:none;user-select:none}
+.kscr.ksdrag,.kscr.ksdrag .ksh{cursor:grabbing}
+.kscr .ksbar{display:flex;align-items:center;gap:10px;padding-left:10px}
+.kscr .kst{margin:0;font:700 15px/1.2 var(--chrome);letter-spacing:.005em;color:var(--ink)}
+.kscr .kst:focus{outline:none} .kscr .kst:focus-visible{outline:2px solid var(--focus);outline-offset:3px;border-radius:4px}
+.kscr .ksq{font:700 11px/1 var(--chrome);letter-spacing:.12em;text-transform:uppercase;color:var(--link);font-variant-numeric:tabular-nums;white-space:nowrap}
+.kscr .ksq:empty{display:none}
+.kscr .ksbtn{min-height:44px;min-width:44px;margin:0;padding:8px 15px;border-radius:999px;font:600 14px/1 var(--chrome);color:var(--ink);background:var(--field);border:1px solid var(--rule);cursor:pointer;box-shadow:none}
+.kscr .ksbtn:hover{background:var(--field2);border-color:var(--rule)}
+.kscr .ksbtn:disabled{opacity:.45;cursor:default} .kscr .ksbtn:disabled:hover{background:var(--field)}
+.kscr .ksx{margin-left:auto}
+.kscr button:focus-visible,.kscr textarea:focus-visible,.kscr .ksg.kb{outline:2px solid var(--focus);outline-offset:2px}
+.kscr .ksg:focus{outline:none} .kscr .ksg.kb:focus{outline:2px solid var(--focus)}
+/* a switch: Notes | Grid, the tools, the view, the scale — the calculator's FAST | TI-30Xa look */
+.kscr .kssw,.kscr .kstools,.kscr .ksseg{display:flex;gap:2px;padding:3px;border-radius:999px;background:var(--field)}
+.kscr .kssw{display:inline-flex;margin:6px 0 0 10px}
+.kscr [role=radio]{min-height:44px;margin:0;border:0;border-radius:999px;background:transparent;color:var(--mut);font:600 13.5px/1 var(--chrome);padding:8px 14px;white-space:nowrap;cursor:pointer;box-shadow:none}
+.kscr [role=radio][aria-checked=true]{color:var(--ink);font-weight:700;background:var(--seg);box-shadow:inset 0 0 0 1.5px var(--navyLine)}
+.kscr [role=radio]:not([aria-checked=true]):hover{background:var(--field2)}
+.kscr .ksb{padding:10px 16px 12px}
+.kscr .ksta{display:block;box-sizing:border-box;width:100%;height:300px;margin:0;resize:none;font:16px/1.5 var(--serif);color:var(--pen,var(--ink));
+  background:var(--paper);border:1px solid var(--rule);border-radius:10px;padding:10px 12px;box-shadow:none}
+.kscr .ksf{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:10px}
+.kscr .ksfb{display:flex;gap:8px;margin-left:auto}
+.kscr .ksro{font:600 14px/1 var(--chrome);color:var(--ink);font-variant-numeric:tabular-nums;padding-left:4px;white-space:nowrap}
+.kscr .kstools [role=radio]{flex:1 1 0;display:inline-flex;align-items:center;justify-content:center;gap:5px;padding:8px 6px;min-width:0}
+.kscr [role=radio] svg{width:19px;height:19px;flex:none;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.kscr [role=radio] svg .f{fill:currentColor;stroke:none}
+.kscr [role=radio] svg .o{stroke-width:1.1;opacity:.55}
+.kscr .ksopts{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:8px}
+.kscr .ksseg{display:inline-flex}
+.kscr .ksic{width:44px;padding:0!important;display:inline-flex;align-items:center;justify-content:center}
+.kscr .ksic svg{width:21px;height:21px}
+.kscr .ksscale{display:flex;align-items:center;gap:8px}
+.kscr .kslab{font:600 13px/1 var(--chrome);color:var(--mut)}
+.kscr .ksnum{min-width:44px;padding:8px 0!important;font-variant-numeric:tabular-nums}
+.kscr .ksgw{display:flex;justify-content:center;margin-top:4px}
+.kscr .ksg{display:block;width:var(--ksgs,372px);height:var(--ksgs,372px);max-width:100%;touch-action:none;-webkit-user-select:none;user-select:none;border-radius:6px;cursor:crosshair;overflow:visible}
+.kscr .ksg[data-tool=e]{cursor:pointer}
+.kscr .kssr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+/* the paper: gridlines, axes and numbers under everything plotted; what is plotted in the pen's colour */
+.ksg .kspp{fill:var(--paper)}
+.ksg .ksgl{fill:none;stroke:var(--rule);stroke-width:1}
+.ksg .ksax{fill:none;stroke:var(--ink);stroke-width:1.7}
+.ksg .ksah{fill:var(--ink)}
+.ksg .ksxy{fill:var(--ink);font:600 14px var(--serif)}
+.ksg .ksn{fill:var(--mut);font:500 11.5px var(--chrome);font-variant-numeric:tabular-nums}
+.ksg .ksn.h{paint-order:stroke;stroke:var(--paper);stroke-width:3.2px;stroke-linejoin:round}
+.ksg .kspen{fill:none;stroke:var(--pen,var(--ink));stroke-width:2.6;stroke-linecap:round}
+.ksg .ksdot,.ksg .ksarr{fill:var(--pen,var(--ink))}
+.ksg .ksdo{fill:none;stroke:var(--pen,var(--ink));stroke-width:1.8;stroke-dasharray:3 2.6}
+.ksg .kspen.ksgo{stroke-dasharray:6 5}
+.ksg .ksdot.ksgo,.ksg .ksarr.ksgo{fill:none;stroke:var(--pen,var(--ink));stroke-width:1.4;stroke-dasharray:2.5 2}
+.ksg .kspv{fill:none;stroke:var(--pen,var(--ink));stroke-width:2;stroke-dasharray:6 5;opacity:.7}
+.ksg .ksring{fill:none;stroke:var(--hot);stroke-width:2.8}
+.ksg .ksring2{fill:none;stroke:var(--ink);stroke-width:1.2}
+/* a phone: a sheet along the bottom, not modal; the page gets room under it (scratch.js) */
+.kscr.kssheet{left:0!important;right:0;top:auto!important;bottom:0;width:auto;max-width:none;border-width:1px 0 0;border-radius:16px 16px 0 0;
+  padding:0 env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px)}
+.kscr.kssheet .ksh{cursor:auto;touch-action:auto;padding:6px 4px 0}
+.kscr.kssheet .ksb{padding:8px 14px 10px}
+.kscr.kssheet .ksta{height:min(180px,26vh)}
+@media screen{ html.kscr-pad body{padding-bottom:var(--kscrpad)!important} }
+/* never over a print preview or the teacher's panels, and never on paper */
+body.printing>.kscr,body.tview>.kscr{display:none!important}
+@media print{ .kscr,.scrb{display:none!important} }
 /* A7 Unit 4: radicals — a drawn radical sign (Croix, 18 Oct 2026: "Is there a way to have actual radical signs?").
    The markup keeps the √ character (the checks and screen readers read it); on screen and paper the glyph is invisible
    and the tick is a mask that stretches to the radicand's height, in the text colour, so the stroke meets the bar at the
@@ -1105,7 +1196,7 @@ body.tview{background:var(--ground)}
   <a class="back" id="back" href="#" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span id="backl">Unit</span></a>
   <div class="time" id="time" aria-label="Time on the clock">0:00</div>
   <div class="score" id="score"></div>
-  <div class="btns"><button type="button" class="calcb" id="bCalc" aria-expanded="false" aria-label="Calculator" translate="no"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="2.75" width="14" height="18.5" rx="2.6"/><rect x="8" y="5.75" width="8" height="3.5" rx=".9"/><circle class="kd" cx="8.9" cy="12.7" r="1.05"/><circle class="kd" cx="12" cy="12.7" r="1.05"/><circle class="kd" cx="15.1" cy="12.7" r="1.05"/><circle class="kd" cx="8.9" cy="16.7" r="1.05"/><circle class="kd" cx="12" cy="16.7" r="1.05"/><circle class="kd" cx="15.1" cy="16.7" r="1.05"/></svg><span class="cw">Calculator</span></button><button type="button" id="bPause" hidden>Pause</button><button type="button" class="go" id="bResume" hidden>Resume</button><button type="button" id="bFinish">Finish</button></div>
+  <div class="btns"><button type="button" class="calcb" id="bCalc" aria-expanded="false" aria-label="Calculator" translate="no"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="2.75" width="14" height="18.5" rx="2.6"/><rect x="8" y="5.75" width="8" height="3.5" rx=".9"/><circle class="kd" cx="8.9" cy="12.7" r="1.05"/><circle class="kd" cx="12" cy="12.7" r="1.05"/><circle class="kd" cx="15.1" cy="12.7" r="1.05"/><circle class="kd" cx="8.9" cy="16.7" r="1.05"/><circle class="kd" cx="12" cy="16.7" r="1.05"/><circle class="kd" cx="15.1" cy="16.7" r="1.05"/></svg><span class="cw">Calculator</span></button><button type="button" class="calcb scrb" id="bScratch" aria-expanded="false" aria-label="Scratch paper" translate="no" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 19.5l1-4.2L15.8 5a1.9 1.9 0 012.7 0l.5.5a1.9 1.9 0 010 2.7L8.7 18.5z"/><path d="M13.9 6.9l3.2 3.2"/></svg><span class="cw">Scratch paper</span></button><button type="button" id="bPause" hidden>Pause</button><button type="button" class="go" id="bResume" hidden>Resume</button><button type="button" id="bFinish">Finish</button></div>
   <div class="confirm" id="confirm" role="alertdialog" aria-live="assertive" hidden></div>
 </div><div class="qbar"><span class="qof" id="qof"></span><span class="bar" aria-hidden="true"><i id="prog"></i></span></div></div>
 <div class="result" id="result" hidden></div>
@@ -5434,6 +5525,506 @@ K.Pager = function(api){
 };
 })();
 </script>
+<script>/* Practice-test kit: scratch paper (15 Nov 2026). Croix: "add a scratch notes to the practice and fast practice as well as a
+   scratch grid." Asked what the grid should be, he chose graph paper to plot on: a click drops a point, points join into lines,
+   things can be erased, and it works with a Chromebook's trackpad. The FAST gives a typed notepad per question, so the notes are
+   typed and kept per question; students never handwrite on a computer (his ruling), so nothing here is freehand.
+
+   One button in the top bar (#bScratch, written by build.py or the site's tools/released.mjs right after #bCalc) opens one
+   panel with a switch, Notes | Grid. It always shows the question on the screen, and closes when no question is (the start, the
+   score summary, a print preview, a teacher's view). The page drives it the same way on a kit page (ui.js) and on the site's
+   FAST pages (fast.js):
+     var scr = Kit.Scratch({where: function(){ return null or {set: "<the set's storage name>", q: "<the question's id>",
+                                                              label: "Question 4"}; },
+                            set: function(){ return "<the set's storage name>"; }});   // set: for reset() with no question shown
+     scr.at();     // whenever the question on the screen may have changed
+     scr.reset();  // when the set starts over: its scratch is deleted
+   - Wide screens: a floating window, as the calculator's is — dragged by its header, docked at the left under the bar at first
+     (the calculator docks right), never over the bar, its place remembered (practice.scratch.pos) and kept on the screen when
+     the window changes size. With both open, the one pressed last is on top.
+   - Phones (≤ 600 px wide, or ≤ 460 px tall): a bottom sheet, not modal; the page behind gets bottom padding as tall as the
+     sheet, so the question scrolls clear above it.
+   - Notes: one textarea per question; Clear, then Undo until the next edit.
+   - Grid: a 20 × 20 square of graph paper, four quadrants (−10 to 10) or the first (0 to 20); Scale 1 · 2 · 5 · 10 is what one
+     square is worth (the numbers and the readout change; what is plotted stays on the paper). Point · Segment · Line · Erase,
+     every end on an intersection. The arrow keys move a cursor, Enter or Space plots, Delete erases. Nothing on it computes
+     anything for the student: no slope, no equation, no length.
+   Saved on the device, one entry per set: practice.scratch.v1.<set> = {t, q: {<q>: {n: notes, g: {v: [4 or 1, scale],
+   o: [["p",x,y], ["s",x1,y1,x2,y2], ["l",x1,y1,x2,y2]]}}}} in paper squares from the lower left. Each write reads the entry
+   again and replaces only the question on the screen (a second tab keeps its other questions); the 30 sets used last are kept.
+   Every read and write is in try/catch: with storage refused it all works for the visit. It never asks the network for
+   anything. Never printed; translate="no". */
+(function(){
+'use strict';
+var K = window.Kit = window.Kit || {};
+K.Scratch = function(host){
+  var btn = document.getElementById('bScratch');
+  if (!btn || !host || typeof host.where !== 'function') return null;
+  /* the page makes room for a docked panel (15 Nov 2026): window.KitDock, the same lines in calc.js and scratch.js, defined by the
+     first to load. A panel within 24 px of the window's left or right edge reports how far it reaches in; the page gets that
+     much plus a 12 px gap at that side (--dockL, --dockR on <html>; kit.css's calculator block), unless under 520 px would be
+     left between the panels, when nothing is reserved and they float. */
+  var DOCK = window.KitDock || (window.KitDock = (function(){
+    var R = {}, cur = '';
+    function paint(){
+      var W = document.documentElement.clientWidth, l = 0, r = 0, s = document.documentElement.style;
+      Object.keys(R).forEach(function(k){ if (R[k].s === 'l') l = Math.max(l, R[k].e); else r = Math.max(r, R[k].e); });
+      if (W - l - r < 520) l = r = 0;
+      var L = l ? Math.round(l - 4) : 0, Rt = r ? Math.round(r - 4) : 0, key = L + ',' + Rt;   /* the body's own 16 px padding stays */
+      if (key === cur) return; cur = key;
+      if (L) s.setProperty('--dockL', L + 'px'); else s.removeProperty('--dockL');
+      if (Rt) s.setProperty('--dockR', Rt + 'px'); else s.removeProperty('--dockR');
+      document.documentElement.classList.toggle('kdock', !!(L || Rt)); document.documentElement.classList.toggle('kdock2', !!(L && Rt));   /* both: the bar's two buttons are icons */
+    }
+    return {set: function(id, side, reach){ if (side) R[id] = {s: side, e: reach}; else delete R[id]; paint(); }, paint: paint};
+  })());
+
+  var PRE = 'practice.scratch.v1.', TABKEY = 'practice.scratch.tab', POSKEY = 'practice.scratch.pos', KEEP = 30, MAXO = 200, MAXU = 200;
+  var GAP = 8, PHONE = '(max-width: 600px), (max-height: 460px)', NS = 'http://www.w3.org/2000/svg';
+  var N = 20, C = 18, PP = N * C, M = 26, SCALES = [1, 2, 5, 10];
+  var $ = function(id){ return document.getElementById(id); };
+  function get(k){ try { return localStorage.getItem(k); } catch(e){ return null; } }
+  function put(k, v){ try { localStorage.setItem(k, v); } catch(e){} }
+  function vw(){ return document.documentElement.clientWidth || window.innerWidth; }
+  function vh(){ return window.innerHeight || document.documentElement.clientHeight; }
+  function phone(){ return !!(window.matchMedia && window.matchMedia(PHONE).matches); }
+  function barBottom(){ var w = document.querySelector('.watch'); if (!w) return 0; var r = w.getBoundingClientRect(); return r.height ? Math.max(0, Math.round(r.bottom)) : 0; }
+  function focusNo(el){ if (!el) return; try { el.focus({preventScroll: true}); } catch(e){ el.focus(); } }
+  function esc(s){ return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;'); }
+  function isEsc(e){ return e.key === 'Escape' || e.key === 'Esc'; }
+
+  /* ---------------------------------------------------------------- what is kept for one question */
+  function blank(){ return {n: '', g: {v: [4, 1], o: []}}; }
+  function int(v){ return typeof v === 'number' && v === Math.round(v) && v >= 0 && v <= N; }
+  function okThing(t){ return Array.isArray(t) && ((t[0] === 'p' && t.length === 3 && int(t[1]) && int(t[2])) ||
+    ((t[0] === 's' || t[0] === 'l') && t.length === 5 && int(t[1]) && int(t[2]) && int(t[3]) && int(t[4]) && (t[1] !== t[3] || t[2] !== t[4]))); }
+  function cleanQ(x){
+    var d = blank(); if (!x || typeof x !== 'object') return d;
+    if (typeof x.n === 'string') d.n = x.n.slice(0, 2000);
+    var g = x.g && typeof x.g === 'object' ? x.g : {}, v = Array.isArray(g.v) ? g.v : [];
+    d.g.v = [v[0] === 1 ? 1 : 4, SCALES.indexOf(v[1]) >= 0 ? v[1] : 1];
+    d.g.o = (Array.isArray(g.o) ? g.o : []).filter(okThing).slice(0, MAXO).map(function(t){ return t.slice(); });
+    return d;
+  }
+  function used(d){ return !!(d && ((d.n && d.n.trim()) || d.g.o.length)); }
+  function bare(d){ return !d.n && !d.g.o.length && d.g.v[0] === 4 && d.g.v[1] === 1; }
+
+  /* ---------------------------------------------------------------- the device's copy */
+  var MEM = {};                                                 /* storage refused: the visit's own copy */
+  function readSet(set){
+    var o; try { o = JSON.parse(localStorage.getItem(PRE + set) || 'null'); } catch(e){ return MEM[set] || null; }
+    return o && typeof o === 'object' && o.q && typeof o.q === 'object' && !Array.isArray(o.q) ? o : null;
+  }
+  function prune(keep, mine){
+    try {
+      var all = [];
+      for (var i = 0; i < localStorage.length; i++){ var k = localStorage.key(i); if (k && k.indexOf(PRE) === 0 && k !== mine){ var t = 0; try { t = +(JSON.parse(localStorage.getItem(k) || '{}') || {}).t || 0; } catch(e){} all.push({k: k, t: t}); } }
+      all.sort(function(a, b){ return b.t - a.t; });
+      all.slice(Math.max(0, keep - (mine ? 1 : 0))).forEach(function(x){ localStorage.removeItem(x.k); });
+    } catch(e){}
+  }
+  function write(){
+    if (!CUR) return;
+    var k = PRE + CUR.set, e = readSet(CUR.set) || {t: 0, q: {}};
+    if (bare(DATA)) delete e.q[CUR.q]; else e.q[CUR.q] = {n: DATA.n, g: {v: DATA.g.v.slice(), o: DATA.g.o.map(function(t){ return t.slice(); })}};
+    e.t = Date.now();
+    var s = JSON.stringify(e), any = Object.keys(e.q).length > 0; MEM[CUR.set] = e;
+    try { if (any) localStorage.setItem(k, s); else localStorage.removeItem(k); }
+    catch(err){ prune(10, k); try { localStorage.setItem(k, s); } catch(err2){} }   /* full: the older sets go, then once more */
+    if (any) prune(KEEP, k);
+  }
+  var TIMER = 0, DIRTY = false;
+  function later(){ DIRTY = true; clearTimeout(TIMER); TIMER = setTimeout(flush, 300); }
+  function flush(){ clearTimeout(TIMER); TIMER = 0; if (DIRTY){ DIRTY = false; write(); } }
+
+  /* ---------------------------------------------------------------- state */
+  var CUR = null, DATA = blank(), TAB = get(TABKEY) === 'grid' ? 'grid' : 'notes', TOOL = 'p';
+  var UNDO = {}, NUNDO = null, PEND = null, CX = 10, CY = 10, HOVER = false, KB = false, PDOWN = false, GO = -1;
+  var P = null, POS = null, D = null, BASEPAD = null, SVG = null;
+  function ukey(){ return CUR ? CUR.set + '\n' + CUR.q : ''; }
+  function stack(){ var k = ukey(); return UNDO[k] || (UNDO[k] = []); }
+
+  /* ---------------------------------------------------------------- the button */
+  function mark(){
+    var u = used(DATA) && !!CUR;
+    btn.classList.toggle('used', u);
+    btn.setAttribute('aria-label', u ? 'Scratch paper, used on this question' : 'Scratch paper');
+  }
+
+  /* ---------------------------------------------------------------- the panel, made on the first open */
+  var I = {
+    p: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle class="f" cx="12" cy="12" r="3.4"/></svg>',
+    s: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 17.5l11-11"/><circle class="f" cx="6.5" cy="17.5" r="2.3"/><circle class="f" cx="17.5" cy="6.5" r="2.3"/></svg>',
+    l: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20L20 4M14.5 4H20v5.5M9.5 20H4v-5.5"/><circle class="f" cx="9.5" cy="14.5" r="1.9"/><circle class="f" cx="14.5" cy="9.5" r="1.9"/></svg>',
+    e: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.6 4.9l5.5 5.5-8.3 8.3H6.9l-2.6-2.6a1.4 1.4 0 010-2z"/><path d="M9.1 9.4l5.5 5.5M11.5 18.7h8"/></svg>',
+    q4: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect class="o" x="4" y="4" width="16" height="16" rx="1.5"/><path d="M12 4v16M4 12h16"/></svg>',
+    q1: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect class="o" x="4" y="4" width="16" height="16" rx="1.5"/><path d="M5 4v15h15"/></svg>'
+  };
+  var TOOLS = [['p', 'Point'], ['s', 'Segment'], ['l', 'Line'], ['e', 'Erase']];
+  function radios(list, cls){ return list.map(function(r){ return '<button type="button" role="radio" class="' + cls + '" data-v="' + r[0] + '" aria-checked="false" tabindex="-1"' + (r[2] ? ' aria-label="' + r[2] + '"' : '') + '>' + r[1] + '</button>'; }).join(''); }
+  function build(){
+    if (P) return P;
+    P = document.createElement('div'); P.className = 'kscr'; P.id = 'kscr'; P.hidden = true;
+    P.setAttribute('role', 'dialog'); P.setAttribute('aria-labelledby', 'kscrT'); P.setAttribute('translate', 'no');
+    P.innerHTML = '<div class="ksh" id="kscrH">' +
+        '<div class="ksbar"><h2 class="kst" id="kscrT" tabindex="-1">Scratch paper</h2><span class="ksq" id="kscrQ"></span><button type="button" class="ksbtn ksx" id="kscrX">Close</button></div>' +
+        '<div class="kssw" role="radiogroup" aria-label="Notes or grid" id="kscrS">' + radios([['notes', 'Notes'], ['grid', 'Grid']], 'kstab') + '</div>' +
+      '</div>' +
+      '<div class="ksb">' +
+        '<div class="ksnotes" id="kscrNP"><textarea class="ksta" id="kscrN" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" maxlength="2000"></textarea>' +
+          '<div class="ksf"><span></span><span class="ksfb"><button type="button" class="ksbtn" id="kscrNC">Clear</button></span></div></div>' +
+        '<div class="ksgrid" id="kscrGP" hidden>' +
+          '<div class="kstools" role="radiogroup" aria-label="Tool" id="kscrTo">' + radios(TOOLS.map(function(t){ return [t[0], I[t[0]] + '<span>' + t[1] + '</span>']; }), 'kstool') + '</div>' +
+          '<div class="ksopts"><div class="ksseg ksview" role="radiogroup" aria-label="View" id="kscrV">' + radios([['4', I.q4, 'Four quadrants'], ['1', I.q1, 'First quadrant']], 'ksic') + '</div>' +
+            '<div class="ksscale"><span class="kslab" id="kscrSL">Scale</span><div class="ksseg" role="radiogroup" aria-labelledby="kscrSL" id="kscrSc">' + radios(SCALES.map(function(s){ return [String(s), String(s)]; }), 'ksnum') + '</div></div></div>' +
+          '<div class="ksgw"><svg class="ksg" id="kscrG" xmlns="' + NS + '" viewBox="' + (-M) + ' ' + (-M) + ' ' + (PP + 2 * M) + ' ' + (PP + 2 * M) + '" tabindex="0" role="application" focusable="true"></svg></div>' +
+          '<div class="ksf"><span class="ksro" id="kscrR" aria-hidden="true"></span><span class="ksfb"><button type="button" class="ksbtn" id="kscrU">Undo</button><button type="button" class="ksbtn" id="kscrC">Clear</button></span></div>' +
+          '<div class="kssr" id="kscrL" aria-live="polite"></div>' +
+        '</div>' +
+      '</div>';
+    var bar = document.querySelector('.watch');
+    if (bar && bar.parentNode) bar.parentNode.insertBefore(P, bar.nextSibling); else document.body.appendChild(P);
+    btn.setAttribute('aria-controls', 'kscr');
+    SVG = $('kscrG');
+
+    $('kscrX').addEventListener('click', function(){ close(true); });
+    P.addEventListener('keydown', function(e){ if (isEsc(e)){ e.preventDefault(); e.stopPropagation(); close(true); } });
+    group($('kscrS'), function(v){ setTab(v, true); });
+    group($('kscrTo'), function(v){ TOOL = v; PEND = null; GO = -1; paintTools(); drawLive(); });
+    group($('kscrV'), function(v){ DATA.g.v[0] = +v; later(); paintOpts(); draw(); });
+    group($('kscrSc'), function(v){ DATA.g.v[1] = +v; later(); paintOpts(); draw(); });
+
+    var ta = $('kscrN');
+    ta.addEventListener('input', function(){ DATA.n = ta.value.slice(0, 2000); NUNDO = null; later(); paintNotes(); mark(); });
+    ta.addEventListener('blur', flush);
+    $('kscrNC').addEventListener('click', function(){
+      if (NUNDO != null){ DATA.n = NUNDO; NUNDO = null; } else { if (!DATA.n) return; NUNDO = DATA.n; DATA.n = ''; }
+      ta.value = DATA.n; later(); paintNotes(); mark();
+    });
+    $('kscrU').addEventListener('click', function(){ undo(); keepFocus(); });
+    $('kscrC').addEventListener('click', function(){ clearAll(); keepFocus(); });
+    graphEvents();
+
+    /* dragging (wide screens): by the header, not by its buttons */
+    var hd = $('kscrH');
+    hd.addEventListener('pointerdown', function(e){
+      if (P.classList.contains('kssheet') || (e.button != null && e.button !== 0) || (e.target.closest && e.target.closest('button'))) return;
+      var r = P.getBoundingClientRect(); D = {id: e.pointerId, dx: e.clientX - r.left, dy: e.clientY - r.top};
+      try { hd.setPointerCapture(e.pointerId); } catch(err){}
+      P.classList.add('ksdrag'); e.preventDefault();
+    });
+    hd.addEventListener('pointermove', function(e){ if (D && e.pointerId === D.id) moveTo(e.clientX - D.dx, e.clientY - D.dy, true); });
+    var end = function(e){ if (!D || e.pointerId !== D.id) return; D = null; P.classList.remove('ksdrag'); if (POS) put(POSKEY, JSON.stringify(POS)); };
+    hd.addEventListener('pointerup', end); hd.addEventListener('pointercancel', end); hd.addEventListener('lostpointercapture', end);
+
+    /* the one pressed last is on top: this panel or the calculator's */
+    P.addEventListener('pointerdown', function(){ P.style.zIndex = '31'; }, true);
+    document.addEventListener('pointerdown', function(e){ var c = $('kcalc'); if (c && e.target && c.contains(e.target)) P.style.zIndex = '29'; }, true);
+    var cb = $('bCalc'); if (cb) cb.addEventListener('click', function(){ P.style.zIndex = '29'; });
+
+    window.addEventListener('resize', layout);
+    if (window.ResizeObserver){ var ro = new ResizeObserver(function(){ if (P.classList.contains('kssheet')) pad(true); }); ro.observe(P); if (bar) new ResizeObserver(layout).observe(bar); }
+    try { POS = JSON.parse(get(POSKEY) || 'null'); } catch(e){ POS = null; }
+    if (!POS || (POS.s !== 'l' && POS.s !== 'r') || !isFinite(POS.x) || !isFinite(POS.y)) POS = null;
+    return P;
+  }
+  /* a radiogroup: a click picks; the arrows, Home and End move and pick */
+  function group(el, pick){
+    var all = function(){ return Array.prototype.slice.call(el.querySelectorAll('[role=radio]')); };
+    el.addEventListener('click', function(e){ var b = e.target.closest && e.target.closest('[role=radio]'); if (b) pick(b.getAttribute('data-v')); });
+    el.addEventListener('keydown', function(e){
+      var o = all(), i = o.indexOf(e.target.closest ? e.target.closest('[role=radio]') : null); if (i < 0) return;
+      var j = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? (i + 1) % o.length : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? (i + o.length - 1) % o.length : e.key === 'Home' ? 0 : e.key === 'End' ? o.length - 1 : -1;
+      if (j < 0) return; e.preventDefault(); pick(o[j].getAttribute('data-v')); o[j].focus(); });
+  }
+  function check(el, v){ Array.prototype.forEach.call(el.querySelectorAll('[role=radio]'), function(b){ var on = b.getAttribute('data-v') === String(v); b.setAttribute('aria-checked', String(on)); b.tabIndex = on ? 0 : -1; }); }
+  function keepFocus(){ var a = document.activeElement; if (a && a.disabled) focusNo(!$('kscrU').disabled ? $('kscrU') : SVG); }
+
+  /* ---------------------------------------------------------------- painting the panel */
+  function paint(){
+    if (!P || !CUR) return;
+    $('kscrQ').textContent = CUR.label || '';
+    $('kscrN').setAttribute('aria-label', 'Notes' + (CUR.label ? ', ' + CUR.label : ''));
+    SVG.setAttribute('aria-label', 'Graph paper' + (CUR.label ? ', ' + CUR.label : ''));
+    if ($('kscrN').value !== DATA.n) $('kscrN').value = DATA.n;
+    check($('kscrS'), TAB); $('kscrNP').hidden = TAB !== 'notes'; $('kscrGP').hidden = TAB !== 'grid';
+    paintNotes(); paintTools(); paintOpts(); draw();
+  }
+  function paintNotes(){ var b = $('kscrNC'); b.textContent = NUNDO != null ? 'Undo' : 'Clear'; b.disabled = NUNDO == null && !DATA.n; }
+  function paintTools(){ check($('kscrTo'), TOOL); SVG.setAttribute('data-tool', TOOL); }
+  function paintOpts(){ check($('kscrV'), DATA.g.v[0]); check($('kscrSc'), DATA.g.v[1]); }
+  function paintFoot(){ $('kscrU').disabled = !stack().length; $('kscrC').disabled = !DATA.g.o.length; }
+  function setTab(v, keep){
+    TAB = v === 'grid' ? 'grid' : 'notes'; if (keep) put(TABKEY, TAB);
+    PEND = null; GO = -1;
+    if (P && !P.hidden){ paint(); layout(); }
+  }
+
+  /* ---------------------------------------------------------------- the graph paper */
+  function quad(){ return DATA.g.v[0] === 4; }
+  function val(g, axis){ var s = DATA.g.v[1]; return (quad() ? g - 10 : g) * s; }
+  function num(n){ return n < 0 ? '−' + (-n) : String(n); }
+  function pt(x, y){ return '(' + num(val(x)) + ', ' + num(val(y)) + ')'; }
+  function X(g){ return g * C; } function Y(g){ return PP - g * C; }
+  function arrow(x, y, dx, dy, cls){
+    var L = Math.sqrt(dx * dx + dy * dy) || 1, ux = dx / L, uy = dy / L, a = 9, b = 4.6;
+    return '<path class="' + cls + '" d="M' + f(x) + ' ' + f(y) + 'L' + f(x - ux * a - uy * b) + ' ' + f(y - uy * a + ux * b) + 'L' + f(x - ux * a + uy * b) + ' ' + f(y - uy * a - ux * b) + 'Z"/>';
+  }
+  function f(n){ return Math.round(n * 100) / 100; }
+  function paperSvg(){
+    var h = ['<rect class="kspp" x="0" y="0" width="' + PP + '" height="' + PP + '"/>'], d = '', i;
+    for (i = 0; i <= N; i++) d += 'M' + i * C + ' 0V' + PP + 'M0 ' + i * C + 'H' + PP;
+    h.push('<path class="ksgl" d="' + d + '"/>');
+    var q = quad(), ax = q ? X(10) : 0, ay = q ? Y(10) : PP, E = 11, s = DATA.g.v[1];
+    h.push('<path class="ksax" d="M' + (q ? -E + 4 : 0) + ' ' + ay + 'H' + (PP + E - 4) + 'M' + ax + ' ' + (q ? PP + E - 4 : PP) + 'V' + (-E + 4) + '"/>');
+    h.push(arrow(PP + E, ay, 1, 0, 'ksah') + arrow(ax, -E, 0, -1, 'ksah'));
+    if (q) h.push(arrow(-E, ay, -1, 0, 'ksah') + arrow(ax, PP + E, 0, 1, 'ksah'));
+    h.push('<text class="ksxy" x="' + (PP + E + 3) + '" y="' + (ay + 4.5) + '">x</text><text class="ksxy" x="' + (ax + 7) + '" y="' + (-E + 4) + '">y</text>');
+    var t = [], halo = q ? ' h' : '';
+    for (i = q ? -10 : 2; i <= (q ? 10 : 20); i += 2){
+      if (!i) continue;
+      t.push('<text class="ksn' + halo + '" x="' + (ax + i * C) + '" y="' + (ay + 15) + '" text-anchor="middle">' + num(i * s) + '</text>');
+      t.push('<text class="ksn' + halo + '" x="' + (ax - 5) + '" y="' + (ay - i * C + 4) + '" text-anchor="end">' + num(i * s) + '</text>');
+    }
+    if (!q) t.push('<text class="ksn" x="' + (ax - 5) + '" y="' + (ay + 15) + '" text-anchor="end">0</text>');   /* four quadrants: no 0 crowding the origin */
+    h.push('<g aria-hidden="true">' + t.join('') + '</g>');
+    return h.join('');
+  }
+  /* a line through two points, to the paper's edges */
+  function clip(t){
+    var x1 = t[1], y1 = t[2], dx = t[3] - x1, dy = t[4] - y1, lo = -Infinity, hi = Infinity;
+    [[dx, x1], [dy, y1]].forEach(function(a){ if (a[0] === 0) return; var u = (0 - a[1]) / a[0], v = (N - a[1]) / a[0]; lo = Math.max(lo, Math.min(u, v)); hi = Math.min(hi, Math.max(u, v)); });
+    return [x1 + dx * lo, y1 + dy * lo, x1 + dx * hi, y1 + dy * hi];
+  }
+  function thingSvg(t, cls){
+    var k = cls ? ' ' + cls : '';
+    if (t[0] === 'p') return cls ? '<circle class="ksdo' + k + '" cx="' + X(t[1]) + '" cy="' + Y(t[2]) + '" r="5"/>' : '<circle class="ksdot" cx="' + X(t[1]) + '" cy="' + Y(t[2]) + '" r="4.6"/>';
+    var ends = '<circle class="ksdot' + k + '" cx="' + X(t[1]) + '" cy="' + Y(t[2]) + '" r="3.6"/><circle class="ksdot' + k + '" cx="' + X(t[3]) + '" cy="' + Y(t[4]) + '" r="3.6"/>';
+    if (t[0] === 's') return '<line class="kspen' + k + '" x1="' + X(t[1]) + '" y1="' + Y(t[2]) + '" x2="' + X(t[3]) + '" y2="' + Y(t[4]) + '"/>' + ends;
+    var c = clip(t), ax = X(c[0]), ay = Y(c[1]), bx = X(c[2]), by = Y(c[3]), dx = bx - ax, dy = by - ay, L = Math.sqrt(dx * dx + dy * dy) || 1, ux = dx / L, uy = dy / L;
+    return '<line class="kspen' + k + '" x1="' + f(ax + ux * 6) + '" y1="' + f(ay + uy * 6) + '" x2="' + f(bx - ux * 6) + '" y2="' + f(by - uy * 6) + '"/>' +
+      arrow(bx, by, ux, uy, 'ksarr' + k) + arrow(ax, ay, -ux, -uy, 'ksarr' + k) + ends;
+  }
+  function draw(){
+    if (!SVG) return;
+    SVG.innerHTML = '<g class="ksbase">' + paperSvg() + '</g><g class="ksitems"></g><g class="kslive"></g>';
+    drawItems(); paintFoot();
+  }
+  function drawItems(){
+    var g = SVG && SVG.querySelector('.ksitems'); if (!g) return;
+    var o = DATA.g.o, h = [];
+    o.forEach(function(t, i){ if (t[0] !== 'p') h.push(thingSvg(t, i === GO ? 'ksgo' : '')); });
+    o.forEach(function(t, i){ if (t[0] === 'p') h.push(thingSvg(t, i === GO ? 'ksgo' : '')); });   /* points over lines */
+    g.innerHTML = h.join('');
+    drawLive();
+  }
+  function drawLive(){
+    var g = SVG && SVG.querySelector('.kslive'); if (!g) return;
+    var on = HOVER || (KB && document.activeElement === SVG), h = [];
+    if (PEND && on && (PEND[0] !== CX || PEND[1] !== CY)){
+      var t = [TOOL, PEND[0], PEND[1], CX, CY];
+      if (TOOL === 'l'){ var c = clip(t); h.push('<line class="kspv" x1="' + f(X(c[0])) + '" y1="' + f(Y(c[1])) + '" x2="' + f(X(c[2])) + '" y2="' + f(Y(c[3])) + '"/>'); }
+      else h.push('<line class="kspv" x1="' + X(PEND[0]) + '" y1="' + Y(PEND[1]) + '" x2="' + X(CX) + '" y2="' + Y(CY) + '"/>');
+    }
+    if (PEND) h.push('<circle class="ksdot" cx="' + X(PEND[0]) + '" cy="' + Y(PEND[1]) + '" r="3.6"/>');
+    if (on){
+      if (KB) h.push('<circle class="ksring2" cx="' + X(CX) + '" cy="' + Y(CY) + '" r="9.6"/>');
+      h.push('<circle class="ksring" cx="' + X(CX) + '" cy="' + Y(CY) + '" r="7.6"/>');
+    }
+    g.innerHTML = h.join('');
+    SVG.classList.toggle('kb', KB && document.activeElement === SVG);
+    $('kscrR').textContent = on ? pt(CX, CY) : '';
+  }
+
+  /* what is near: a point before a segment or a line; within tol squares */
+  function dist(t, x, y){
+    if (t[0] === 'p') return Math.hypot(t[1] - x, t[2] - y);
+    var ax = t[1], ay = t[2], dx = t[3] - ax, dy = t[4] - ay, L = dx * dx + dy * dy, u = ((x - ax) * dx + (y - ay) * dy) / L;
+    if (t[0] === 's') u = Math.max(0, Math.min(1, u));
+    return Math.hypot(ax + u * dx - x, ay + u * dy - y);
+  }
+  function near(x, y, tol){
+    var best = -1, bd = Infinity, pass;
+    for (pass = 0; pass < 2; pass++){
+      DATA.g.o.forEach(function(t, i){ if ((t[0] === 'p') !== !pass) return; var d = dist(t, x, y); if (d <= tol && d < bd){ bd = d; best = i; } });
+      if (best >= 0) return best;
+    }
+    return -1;
+  }
+  function same(a, b){
+    if (a[0] !== b[0]) return false;
+    if (a[0] === 'p') return a[1] === b[1] && a[2] === b[2];
+    if (a[0] === 's') return (a[1] === b[1] && a[2] === b[2] && a[3] === b[3] && a[4] === b[4]) || (a[1] === b[3] && a[2] === b[4] && a[3] === b[1] && a[4] === b[2]);
+    var cr = function(x, y){ return (a[3] - a[1]) * (y - a[2]) - (a[4] - a[2]) * (x - a[1]); };
+    return cr(b[1], b[2]) === 0 && cr(b[3], b[4]) === 0;   /* the same line through other points */
+  }
+  function add(t){
+    if (DATA.g.o.length >= MAXO || DATA.g.o.some(function(o){ return same(o, t); })) return;
+    DATA.g.o.push(t); push({a: 'add', t: t}); changed();
+  }
+  function eraseAt(i){ if (i < 0) return; var t = DATA.g.o.splice(i, 1)[0]; push({a: 'del', t: t, i: i}); GO = -1; changed(); }
+  function clearAll(){ if (!DATA.g.o.length) return; push({a: 'clr', o: DATA.g.o.slice()}); DATA.g.o = []; PEND = null; GO = -1; changed(); }
+  function push(u){ var s = stack(); s.push(u); if (s.length > MAXU) s.shift(); }
+  function undo(){
+    var u = stack().pop(); if (!u) return;
+    if (u.a === 'add'){ var i = DATA.g.o.lastIndexOf(u.t); if (i >= 0) DATA.g.o.splice(i, 1); }
+    else if (u.a === 'del') DATA.g.o.splice(Math.min(u.i, DATA.g.o.length), 0, u.t);
+    else DATA.g.o = u.o.slice();
+    GO = -1; changed();
+  }
+  function describe(t){
+    if (t[0] === 'p') return 'Point ' + pt(t[1], t[2]);
+    if (t[0] === 's') return 'Segment ' + pt(t[1], t[2]) + ' to ' + pt(t[3], t[4]);
+    return 'Line through ' + pt(t[1], t[2]) + ' and ' + pt(t[3], t[4]);
+  }
+  function say(s){ var l = $('kscrL'); if (!l) return; l.textContent = ''; setTimeout(function(){ l.textContent = s; }, 30); }
+  function changed(){
+    later(); drawItems(); paintFoot(); mark();
+    say(DATA.g.o.length ? DATA.g.o.map(describe).join('. ') + '.' : 'Nothing on the graph paper.');
+  }
+  function sayCursor(){
+    var at = DATA.g.o.filter(function(t){ return dist(t, CX, CY) < 0.01; }).map(function(t){ return t[0] === 'p' ? 'point' : t[0] === 's' ? 'segment' : 'line'; });
+    say(pt(CX, CY) + (at.length ? ', ' + at.join(', ') : '') + (PEND ? ', from ' + pt(PEND[0], PEND[1]) : ''));
+  }
+  function act(x, y){
+    if (TOOL === 'p') add(['p', x, y]);
+    else if (TOOL === 'e') eraseAt(GO >= 0 ? GO : near(x, y, 0.35));
+    else if (!PEND){ PEND = [x, y]; drawLive(); }
+    else if (PEND[0] !== x || PEND[1] !== y){ var p = PEND; PEND = null; add([TOOL, p[0], p[1], x, y]); }
+  }
+  function toPaper(e){
+    var m = SVG.getScreenCTM(); if (!m) return null;
+    var p = SVG.createSVGPoint(); p.x = e.clientX; p.y = e.clientY; p = p.matrixTransform(m.inverse());
+    return {x: p.x / C, y: (PP - p.y) / C, px: Math.abs(m.a) * C};
+  }
+  function snapTo(p){ CX = Math.max(0, Math.min(N, Math.round(p.x))); CY = Math.max(0, Math.min(N, Math.round(p.y))); }
+  function graphEvents(){
+    var downAt = null;
+    var hover = function(p){ var g = TOOL === 'e' ? near(p.x, p.y, 10 / p.px) : -1; if (g !== GO){ GO = g; drawItems(); } else drawLive(); };
+    SVG.addEventListener('pointerdown', function(e){
+      if (e.button != null && e.button !== 0) return;
+      PDOWN = true; KB = false; var p = toPaper(e); if (!p) return;
+      HOVER = true; snapTo(p); hover(p); downAt = [CX, CY, GO];
+      try { SVG.setPointerCapture(e.pointerId); } catch(err){}
+      if ((TOOL === 's' || TOOL === 'l') && !PEND){ PEND = [CX, CY]; downAt.push(1); drawLive(); }
+      focusNo(SVG); PDOWN = false; e.preventDefault();
+    });
+    SVG.addEventListener('pointermove', function(e){ var p = toPaper(e); if (!p) return; var was = HOVER, x = CX, y = CY; HOVER = true; snapTo(p); if (!was || x !== CX || y !== CY || TOOL === 'e') hover(p); });
+    SVG.addEventListener('pointerup', function(e){
+      if (!downAt) return; var d = downAt; downAt = null; var p = toPaper(e); if (p) snapTo(p);
+      if (TOOL === 'p') add(['p', d[0], d[1]]);
+      else if (TOOL === 'e') eraseAt(d[2]);
+      else if (PEND && (PEND[0] !== CX || PEND[1] !== CY)){ var a = PEND; PEND = null; add([TOOL, a[0], a[1], CX, CY]); }
+      if (e.pointerType && e.pointerType !== 'mouse'){ HOVER = false; GO = -1; drawItems(); }
+    });
+    SVG.addEventListener('pointercancel', function(){ downAt = null; HOVER = false; drawLive(); });
+    SVG.addEventListener('pointerleave', function(){ if (downAt) return; HOVER = false; if (GO >= 0){ GO = -1; drawItems(); } else drawLive(); });
+    SVG.addEventListener('focus', function(){ if (!PDOWN){ KB = true; drawLive(); } });
+    SVG.addEventListener('blur', function(){ KB = false; if (GO >= 0 && !HOVER){ GO = -1; drawItems(); } else drawLive(); });
+    SVG.addEventListener('keydown', function(e){
+      var k = e.key, st = e.shiftKey ? 5 : 1, mv = {ArrowLeft: [-st, 0], ArrowRight: [st, 0], ArrowUp: [0, st], ArrowDown: [0, -st]}[k];
+      if (mv){ e.preventDefault(); KB = true; CX = Math.max(0, Math.min(N, CX + mv[0])); CY = Math.max(0, Math.min(N, CY + mv[1]));
+        var g = TOOL === 'e' ? near(CX, CY, 0.35) : -1; if (g !== GO){ GO = g; drawItems(); } else drawLive(); sayCursor(); return; }
+      if (k === 'Enter' || k === ' ' || k === 'Spacebar'){ e.preventDefault(); KB = true; act(CX, CY); if (PEND) sayCursor(); return; }
+      if (k === 'Backspace' || k === 'Delete'){ e.preventDefault(); KB = true; eraseAt(near(CX, CY, 0.35)); return; }
+      if (isEsc(e) && PEND){ e.preventDefault(); e.stopPropagation(); PEND = null; drawLive(); sayCursor(); }
+    });
+  }
+
+  /* ---------------------------------------------------------------- the place and the size */
+  function layout(){
+    if (!P || P.hidden) return;
+    var sheet = phone();
+    P.classList.toggle('kssheet', sheet);
+    fit(sheet); place(sheet); pad(sheet);
+  }
+  function fit(sheet){
+    var top = sheet ? 0 : barBottom() + GAP, room = sheet ? Math.floor(vh() * (TAB === 'grid' ? 0.7 : 0.6)) : vh() - top - GAP;
+    P.style.maxHeight = room + 'px';
+    if (TAB !== 'grid'){ P.style.setProperty('--ksgs', ''); return; }
+    var w = sheet ? Math.min(vw() - 24, 420) : 372;
+    P.style.setProperty('--ksgs', w + 'px');
+    var over = P.scrollHeight - room;
+    if (over > 0) P.style.setProperty('--ksgs', Math.max(200, w - over) + 'px');
+  }
+  function place(sheet){
+    if (sheet){ P.style.left = ''; P.style.top = ''; DOCK.set('scratch', null); return; }
+    if (POS) moveTo(POS.s === 'l' ? POS.x : vw() - P.offsetWidth - POS.x, POS.y, false); else moveTo(2 * GAP, barBottom() + GAP + 4, false);
+  }
+  function moveTo(x, y, remember){
+    var w = P.offsetWidth, h = P.offsetHeight, top0 = barBottom() + GAP, W = vw(), H = vh();
+    x = Math.round(Math.min(Math.max(x, GAP), Math.max(GAP, W - w - GAP)));
+    y = Math.round(Math.min(Math.max(y, top0), Math.max(top0, H - h - GAP)));
+    P.style.left = x + 'px'; P.style.top = y + 'px';
+    if (remember){ var r = W - x - w; POS = r < x ? {s: 'r', x: Math.max(0, r), y: y} : {s: 'l', x: x, y: y}; }
+    DOCK.set('scratch', x <= 24 ? 'l' : W - x - w <= 24 ? 'r' : null, x <= 24 ? x + w : W - x);
+  }
+  /* the phone's sheet: the page gets room under it (screen only, so paper is never changed) */
+  function pad(on){
+    var de = document.documentElement;
+    if (on && P && !P.hidden){
+      if (BASEPAD == null){ de.classList.remove('kscr-pad'); BASEPAD = parseFloat(getComputedStyle(document.body).paddingBottom) || 0; }
+      de.style.setProperty('--kscrpad', Math.ceil(BASEPAD + P.offsetHeight) + 'px'); de.classList.add('kscr-pad');
+    } else { de.classList.remove('kscr-pad'); de.style.removeProperty('--kscrpad'); BASEPAD = null; }
+  }
+
+  /* ---------------------------------------------------------------- open and close */
+  function open(){
+    if (!CUR) return;
+    build(); P.hidden = false; btn.setAttribute('aria-expanded', 'true'); P.style.zIndex = '31';
+    paint(); layout();
+    focusNo(phone() ? $('kscrT') : TAB === 'grid' ? SVG : $('kscrN'));
+  }
+  function close(back){
+    if (!P || P.hidden) return;
+    flush(); PEND = null; GO = -1; HOVER = false;
+    P.hidden = true; btn.setAttribute('aria-expanded', 'false'); pad(false); DOCK.set('scratch', null);
+    if (D){ D = null; P.classList.remove('ksdrag'); }
+    if (back && !btn.hidden) focusNo(btn);
+  }
+  btn.addEventListener('click', function(){ if (P && !P.hidden) close(true); else open(); });
+  btn.addEventListener('keydown', function(e){ if (isEsc(e) && P && !P.hidden){ e.preventDefault(); e.stopPropagation(); close(true); } });
+
+  /* ---------------------------------------------------------------- following the page */
+  function loadQ(){ var e = CUR && readSet(CUR.set); return cleanQ(e && e.q[CUR.q]); }
+  function at(){
+    var w = null; try { w = host.where(); } catch(e){ w = null; }
+    if (w && (w.set == null || w.q == null)) w = null;
+    btn.hidden = !w;
+    if (!w){ close(false); flush(); CUR = null; DATA = blank(); mark(); return; }
+    var q = String(w.q), set = String(w.set);
+    if (!CUR || CUR.set !== set || CUR.q !== q){
+      flush();
+      CUR = {set: set, q: q, label: w.label || ''}; DATA = loadQ(); NUNDO = null; PEND = null; GO = -1;
+      CX = quad() ? 10 : 0; CY = CX;
+      if (P && !P.hidden){ paint(); layout(); }
+    } else if (CUR.label !== (w.label || '')){ CUR.label = w.label || ''; if (P && !P.hidden) paint(); }
+    mark();
+  }
+  function reset(){
+    var set = null; try { set = host.set ? host.set() : null; } catch(e){}
+    if (set == null && CUR) set = CUR.set;
+    if (set == null) return;
+    set = String(set);
+    clearTimeout(TIMER); TIMER = 0;
+    if (CUR && CUR.set === set) DIRTY = false;
+    delete MEM[set]; try { localStorage.removeItem(PRE + set); } catch(e){}
+    Object.keys(UNDO).forEach(function(k){ if (k.indexOf(set + '\n') === 0) delete UNDO[k]; });
+    if (CUR && CUR.set === set){ CUR = null; DATA = blank(); }
+    at();
+  }
+  window.addEventListener('pagehide', flush);
+  window.addEventListener('storage', function(e){
+    if (!CUR || (e.key !== null && e.key !== PRE + CUR.set)) return;
+    if (P && !P.hidden && P.contains(document.activeElement)) return;
+    flush(); DATA = loadQ(); NUNDO = null; PEND = null; GO = -1; mark(); if (P && !P.hidden) paint();
+  });
+  if (window.MutationObserver) new MutationObserver(at).observe(document.body, {attributes: true, attributeFilter: ['class', 'data-view']});
+  at();
+  return {at: at, reset: reset};
+};
+})();
+</script>
 <script>/* Practice-test kit: the page. One script for every unit; the unit supplies window.Unit (see kit/README.md).
    Design decisions (Croix, Oct 2026) the kit keeps: help as a ladder of three rungs (7 Nov 2026: what to notice, the first
    step with the step-by-step walkthrough, its picture at the step it explains, then the worked solution), Try another like this, the Practice menu (whole test / one part / my misses),
@@ -5797,8 +6388,9 @@ document.addEventListener('keydown', function(e){
   var rb = t.closest('[data-cgn]'); if (!rb) return;
   var grp = Array.prototype.slice.call(rb.parentNode.querySelectorAll('[role=radio]')), i = grp.indexOf(rb);
   var to = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? (i + 1) % grp.length : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? (i + grp.length - 1) % grp.length : e.key === 'Home' ? 0 : e.key === 'End' ? grp.length - 1 : -1;
-  if (to < 0 || grp[to].disabled) return; e.preventDefault(); var nm = grp[to].getAttribute('data-cgn'); grp[to].click();
-  var nb2 = document.querySelector('[data-cg="' + rb.dataset.cg + '"][data-cgn="' + (window.CSS && CSS.escape ? CSS.escape(nm) : nm) + '"]'); if (nb2) nb2.focus();
+  /* an arrow only moves the focus; Space or Enter (the button's own click) names the sector. Choosing on the way past would
+     take a name off a sector already named — a graph could not be named in order with the keys (15 Nov 2026, M7 Unit 7's review) */
+  if (to < 0 || grp[to].disabled) return; e.preventDefault(); grp[to].focus();
 });
 /* the place a student is sent to in a question: its box, its first choice, or its number line */
 function fieldOf(host, id){ return $('a' + id) || host.querySelector('.ch input') || host.querySelector('.nlpt') || host.querySelector('.cgc'); }
@@ -6464,6 +7056,7 @@ function paintProgress(){
   if (i < 0){ var top = document.querySelector('.watch').getBoundingClientRect().bottom + 8, lim = Math.max(top + 40, window.innerHeight * 0.35);
     for (var k = 0; k < N; k++){ var r = qs[k].getBoundingClientRect(); if (r.bottom > lim){ i = k; break; } } if (i < 0) i = N - 1; }
   var n = N ? i + 1 : 0, q = $('qof'); if (q) q.textContent = N ? 'Question ' + n + ' of ' + N : '';
+  SQ = N ? i : -1; if (SCR) SCR.at();                         /* scratch paper (scratch.js) follows the question on the screen */
   $('prog').style.width = (N ? 100 * n / N : 0) + '%';
   return ITEMS.filter(answered).length;
 }
@@ -6588,7 +7181,7 @@ function openSet(n, sc, mode){
   S.more = S.more || {}; S.walk = S.walk || {}; S.walkOpen = S.walkOpen || {}; S.running = false; S.startedAt = null; FLASH = {};
   render(); paintHead();
   NOTICE = '';
-  if (loaded && S.hash && S.hash !== HASHV){ var m0 = S.mode, p0 = S.pos; S = fresh(m0); if (p0) S.pos = p0; render(); NOTICE = 'This set was updated, so it starts over.'; }   /* [W-2] never old answers on new questions; only for a set this device saved before [B2] */
+  if (loaded && S.hash && S.hash !== HASHV){ var m0 = S.mode, p0 = S.pos; S = fresh(m0); if (p0) S.pos = p0; render(); NOTICE = 'This set was updated, so it starts over.'; if (SCR) SCR.reset(); }   /* [W-2] never old answers on new questions; only for a set this device saved before [B2] */
   S.hash = HASHV;
   try { history.replaceState(null, '', hashOf(seed, scope)); } catch(e){}
   LSEED = 0;
@@ -6621,7 +7214,7 @@ $('bFinish').addEventListener('click', function(){
 Array.prototype.forEach.call(document.querySelectorAll('.mode button'), function(b){
   b.addEventListener('click', function(){
     var m = b.dataset.mode; if (m === S.mode) return;
-    var go = function(){ var pos = S.pos; drop(key()); S = fresh(m); if (pos) S.pos = pos; render(); S.hash = HASHV; save(); paintAll(); };
+    var go = function(){ var pos = S.pos; drop(key()); if (SCR) SCR.reset(); S = fresh(m); if (pos) S.pos = pos; render(); S.hash = HASHV; save(); paintAll(); };
     if (started()) ask('Switching clears your answers.', 'Switch', go); else go();
   });
 });
@@ -6637,7 +7230,7 @@ $('setin').addEventListener('keydown', function(e){ if (e.key === 'Enter'){ e.pr
 function newSet(){ var go = function(){ goSet(randomSeed(), scope === 'miss' ? 'all' : scope); }; if (started() && !S.done) ask('Start a new set? This one stays saved.', 'New set', go); else go(); }
 $('bNew').addEventListener('click', function(){ moreClose(); newSet(); });
 document.addEventListener('click', function(e){ if (e.target && e.target.closest && e.target.closest('[data-newset]')) newSet(); });   /* the end panel's "Try a new set" */
-$('bAgain').addEventListener('click', function(){ moreClose(); ask('Clear your answers and start over?', 'Start over', function(){ var m = S.mode, pos = S.pos; drop(key()); S = fresh(m); if (pos) S.pos = pos; render(); S.hash = HASHV; save(); paintAll(); window.scrollTo(0, 0); }); });
+$('bAgain').addEventListener('click', function(){ moreClose(); ask('Clear your answers and start over?', 'Start over', function(){ var m = S.mode, pos = S.pos; drop(key()); if (SCR) SCR.reset(); S = fresh(m); if (pos) S.pos = pos; render(); S.hash = HASHV; save(); paintAll(); window.scrollTo(0, 0); }); });
 /* Ruling 49 (22 Oct 2026): on a unit whose test is a random set of this page, the teacher bar (teacher.js) prints the
    TEST as n forms — the make-up printing, headed "Test · Form A" instead of "Make-up" (the set number on the key only,
    25 Oct 2026). Teacher copies only. */
@@ -7028,6 +7621,10 @@ $('intro').innerHTML = notesHtml; $('intro').hidden = !notesHtml;
 /* one question at a time, as on the FAST (kit/pager.js, 14 Nov 2026): it is handed what it needs, told when the sheet is painted
    (paintAll) and asked which question is on the screen (paintProgress); none on a page built without it, or with the checks' switch */
 var PG = K.Pager ? K.Pager({S: function(){ return S; }, key: key, items: function(){ return ITEMS; }, answered: answered, byId: byId, hostOf: hostOf, nextOpen: nextOpen, save: save, progress: paintProgress}) : null;
+/* scratch paper (kit/scratch.js, 15 Nov 2026): the question on the screen — none on the start, the summary, a print preview or a
+   teacher's view — and the set's own storage name; paintProgress tells it when the question may have changed, a start over resets it */
+var SQ = -1, SCR = K.Scratch ? K.Scratch({set: function(){ return PRE + key(); }, where: function(){ var b = document.body.classList, c = cards()[SQ];
+  return !c || b.contains('printing') || b.contains('tview') || (PG && !b.contains('pg-q')) ? null : {set: PRE + key(), q: c.getAttribute('data-q'), label: 'Question ' + (SQ + 1)}; }}) : null;
 openSet(seed, scope);
 if (K.Bi && U.second) K.Bi.mount(U, (window.KitLang || {})[U.second.code]);   /* the second-language toggle (kit/bilingual.js), when the unit has one; after the first set is drawn */
 })();
@@ -7043,36 +7640,63 @@ if (K.Bi && U.second) K.Bi.mount(U, (window.KitLang || {})[U.second.code]);   /*
    either stays while the page is open.
    - Wide screens: a floating window, like the test's own — dragged by its header, docked at the right side at first, never over
      the top bar, its place remembered on the device (practice.calc.pos, from its nearer side, so a window that changes size
-     keeps it on that side) and kept on the screen when the window changes size. Each calculator has its own natural size (the
-     FAST one 360 × 560, as on the test); in a short window the FAST one gets shorter (Desmos lays itself out again) and the
-     TI-30Xa is drawn smaller whole (a picture of a calculator cannot reflow).
-   - Phones (≤ 600 px wide, or ≤ 460 px tall): a full-height sheet with Close; the page behind it is inert while it is open.
-   - The header: the title and Close; the switch (a radiogroup — the arrows move and choose; the pick is remembered,
-     practice.calc.pick); an always-visible "Open in a new tab" link to the calculator shown — if a site refuses to be framed,
-     the frame shows the browser's error and the link is the way through. Offline (navigator.onLine false) one line beside the
-     link says the calculator needs the internet; a frame first opened offline is loaded again when the device is back online.
-   - Opening puts focus on the panel's header; Escape (focus in the panel, or on the button) closes it and gives focus back to
-     the button.
+     keeps it on that side) and kept on the screen when the window changes size.
+   - Each calculator is laid out once at its natural size (the FAST one 360 × 560, as on the test; the TI-30Xa 389 × 636) and
+     never laid out again by this page: a window too short or narrow draws it smaller whole (a transform), so the frame's own
+     window never changes size and Desmos never lays itself out again under a student's click (15 Nov 2026; Croix: "it wouldn't
+     respond when I was clicking clear"). layout() runs at most once a frame and writes a style only when its value changes.
+   - Phones (≤ 600 px wide, or ≤ 460 px tall): a full-height sheet with Close; the page behind it is inert while it is open;
+     the calculator scaled to fit, never above its own size.
+   - The header, one row: the title, the switch (a radiogroup — the arrows move and choose; the pick is remembered,
+     practice.calc.pick) and Close. No way out to another tab (15 Nov 2026: "get rid of open in new tab"). Offline
+     (navigator.onLine false) one line under the row says the calculator needs the internet; a frame first opened offline is
+     loaded again when the device is back online. A frame that has not loaded shows a quiet loading state; 12 seconds after its
+     address was set without a load, "The calculator didn't load." and Try again, which sets the address again.
+   - Opening (and picking a calculator by a click) on a wide screen puts focus in the calculator, so typing reaches it at once;
+     on the phone's sheet focus goes to the title. Tab goes Close → the switch → the calculator. Escape (focus in the panel's
+     header, or on the button) closes it and gives focus back to the button.
+   - The drag turns the frames' pointer off only once it has really moved (3 px), and always turns it back on: at the drag's
+     end, its cancel, a lost capture, the window losing focus or being hidden, closing, and the next press in the panel.
    - Never printed (kit.css @media print), never over a print preview or the teacher's panels; translate="no", so the kit's own
      second language and a browser's translator leave its words alone (two of them are names).
-   Every storage read and write is in try/catch: with storage refused, everything works for the visit. */
+   Every storage read and write is in try/catch: with storage refused, everything works for the visit.
+   window.KitCalc: the checks' hook (layout, and wait, the 12 seconds). */
 (function(){
 'use strict';
 var btn = document.getElementById('bCalc'); if (!btn) return;
+/* the page makes room for a docked panel (15 Nov 2026): window.KitDock, the same lines in calc.js and scratch.js, defined by the
+   first to load. A panel within 24 px of the window's left or right edge reports how far it reaches in; the page gets that
+   much plus a 12 px gap at that side (--dockL, --dockR on <html>; kit.css's calculator block), unless under 520 px would be
+   left between the panels, when nothing is reserved and they float. */
+var DOCK = window.KitDock || (window.KitDock = (function(){
+  var R = {}, cur = '';
+  function paint(){
+    var W = document.documentElement.clientWidth, l = 0, r = 0, s = document.documentElement.style;
+    Object.keys(R).forEach(function(k){ if (R[k].s === 'l') l = Math.max(l, R[k].e); else r = Math.max(r, R[k].e); });
+    if (W - l - r < 520) l = r = 0;
+    var L = l ? Math.round(l - 4) : 0, Rt = r ? Math.round(r - 4) : 0, key = L + ',' + Rt;   /* the body's own 16 px padding stays */
+    if (key === cur) return; cur = key;
+    if (L) s.setProperty('--dockL', L + 'px'); else s.removeProperty('--dockL');
+    if (Rt) s.setProperty('--dockR', Rt + 'px'); else s.removeProperty('--dockR');
+    document.documentElement.classList.toggle('kdock', !!(L || Rt)); document.documentElement.classList.toggle('kdock2', !!(L && Rt));   /* both: the bar's two buttons are icons */
+  }
+  return {set: function(id, side, reach){ if (side) R[id] = {s: side, e: reach}; else delete R[id]; paint(); }, paint: paint};
+})());
 
 var CALCS = {
-  /* the FAST test's calculator (Cambium's Desmos for assessment, its restricted scientific mode): a live app that fills the size
-     it is given, so it is sized, never scaled */
-  fast: {name: 'FAST (Desmos)', title: 'FAST calculator (Desmos scientific)', url: 'https://desmosforassessment.cambiumtds.com/TDSCalculator.html?mode=tds_dc_scirestricted', w: 360, h: 560, fluid: true},
+  /* the FAST test's calculator (Cambium's Desmos for assessment, its restricted scientific mode): a live app, laid out once at
+     the test's 360 × 560 and drawn smaller whole when the window is short, never sized again */
+  fast: {name: 'FAST (Desmos)', title: 'FAST calculator (Desmos scientific)', url: 'https://desmosforassessment.cambiumtds.com/TDSCalculator.html?mode=tds_dc_scirestricted', w: 360, h: 560},
   /* Alden Bradford's TI-30Xa emulator (github.com/AldenMB/calculator_emulator, GPL-3.0; the photo of the calculator is Texas
      Instruments'): a fixed 315.6 × 600 picture, 28 px into its page — 372 px wide, and 17 more so that a classic scrollbar in
      the frame never pushes the right-hand keys out of sight; 636 px down shows the whole calculator */
-  ti: {name: 'TI-30Xa', title: 'TI-30Xa calculator', url: 'https://aldenbradford.com/calculator_emulator/', w: 389, h: 636, fluid: false,
+  ti: {name: 'TI-30Xa', title: 'TI-30Xa calculator', url: 'https://aldenbradford.com/calculator_emulator/', w: 389, h: 636,
        credit: 'TI-30Xa emulator by Alden Bradford'}
 };
 var ORDER = ['fast', 'ti'];
 var PICKKEY = 'practice.calc.pick', POSKEY = 'practice.calc.pos';
-var GAP = 8, MINW = 372, PHONE = '(max-width: 600px), (max-height: 460px)';
+var GAP = 8, MINW = 372, MOVE = 3, PHONE = '(max-width: 600px), (max-height: 460px)';
+var API = window.KitCalc = {wait: 12000, layout: function(){ layout(); }};
 
 function get(k){ try { return localStorage.getItem(k); } catch(e){ return null; } }
 function put(k, v){ try { localStorage.setItem(k, v); } catch(e){} }
@@ -7083,22 +7707,26 @@ function barBottom(){ var w = document.querySelector('.watch'); if (!w) return 0
 function esc(s){ return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;'); }
 function px(v){ return parseFloat(v) || 0; }
 function focusNo(el){ try { el.focus({preventScroll: true}); } catch(e){ el.focus(); } }
+/* a style written only when its value changes, so a layout that finds nothing new touches nothing */
+function st(el, k, v){ if (el.style[k] !== v) el.style[k] = v; }
+function attr(el, k, v){ if (el.getAttribute(k) !== v) el.setAttribute(k, v); }
 
-var P = null, F = {}, pick = null, POS = null, INERT = [], D = null;
-var EXT = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 16L16 8M9 8h7v7"/></svg>';
+var P = null, F = {}, pick = null, POS = null, INERT = [], D = null, RAF = 0;
 
 /* the panel: made on the first open and placed right after the top bar (Tab goes from the bar's buttons into it, then on to the
-   sheet); no iframe yet — frame() makes each one when its calculator is first picked */
+   sheet); no iframe yet — frame() makes each one when its calculator is first picked. Close comes before the switch in the
+   markup (Tab: Close, the switch, the calculator) and after it on the screen. */
 function build(){
   if (P) return P;
   P = document.createElement('div'); P.className = 'kcalc'; P.id = 'kcalc'; P.hidden = true;
   P.setAttribute('role', 'dialog'); P.setAttribute('aria-labelledby', 'kcalcT'); P.setAttribute('translate', 'no');
-  P.innerHTML = '<div class="kch" id="kcalcH">' +
-      '<div class="kcbar"><h2 class="kct" id="kcalcT" tabindex="-1">Calculator</h2><button type="button" class="kcx" id="kcalcX">Close</button></div>' +
-      '<div class="kcrow"><div class="kcsw" role="radiogroup" aria-label="Which calculator">' +
+  P.innerHTML = '<div class="kch" id="kcalcH"><div class="kcbar">' +
+      '<h2 class="kct" id="kcalcT" tabindex="-1">Calculator</h2>' +
+      '<button type="button" class="kcx" id="kcalcX">Close</button>' +
+      '<div class="kcsw" role="radiogroup" aria-label="Which calculator">' +
         ORDER.map(function(k){ return '<button type="button" role="radio" data-calc="' + k + '" aria-checked="false" tabindex="-1">' + esc(CALCS[k].name) + '</button>'; }).join('') +
-      '</div><div class="kcl"><span class="kcoff" id="kcalcO" role="status" hidden>The calculator needs the internet.</span>' +
-        '<a class="kcnew" id="kcalcN" href="' + esc(CALCS.fast.url) + '" target="_blank" rel="noopener noreferrer">Open in a new tab<span class="kcsr" id="kcalcNs"></span>' + EXT + '</a></div></div>' +
+      '</div></div>' +
+      '<p class="kcoff" id="kcalcO" role="status" hidden>The calculator needs the internet.</p>' +
     '</div><div class="kcb" id="kcalcB"></div>';
   var bar = document.querySelector('.watch');
   if (bar && bar.parentNode) bar.parentNode.insertBefore(P, bar.nextSibling); else document.body.appendChild(P);
@@ -7107,85 +7735,132 @@ function build(){
   P.querySelector('#kcalcX').addEventListener('click', function(){ close(true); });
   P.addEventListener('keydown', function(e){ if (e.key === 'Escape' || e.key === 'Esc'){ e.preventDefault(); e.stopPropagation(); close(true); } });
   var sw = P.querySelector('.kcsw'), radios = function(){ return Array.prototype.slice.call(sw.querySelectorAll('[role=radio]')); };
-  sw.addEventListener('click', function(e){ var b = e.target.closest && e.target.closest('[role=radio]'); if (b) setPick(b.getAttribute('data-calc'), true); });
+  sw.addEventListener('click', function(e){ var b = e.target.closest && e.target.closest('[role=radio]'); if (!b) return; setPick(b.getAttribute('data-calc'), true); if (!phone()) into(); });
   sw.addEventListener('keydown', function(e){
     var o = radios(), i = o.indexOf(e.target.closest ? e.target.closest('[role=radio]') : null); if (i < 0) return;
     var j = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? (i + 1) % o.length : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? (i + o.length - 1) % o.length : e.key === 'Home' ? 0 : e.key === 'End' ? o.length - 1 : -1;
     if (j < 0) return; e.preventDefault(); setPick(o[j].getAttribute('data-calc'), true); o[j].focus(); });
 
-  /* dragging (wide screens): by the header, not by its controls; the frames take no pointer while it moves */
+  /* dragging (wide screens): by the header, not by its controls. A press alone changes nothing; only a move of 3 px starts the
+     drag and turns the frames' pointer off (kcdrag), and every way a drag can end turns it on again. */
   var hd = P.querySelector('#kcalcH');
+  P.addEventListener('pointerdown', function(){ unstick(false); }, true);
   hd.addEventListener('pointerdown', function(e){
     if (P.classList.contains('kcfull') || (e.button != null && e.button !== 0) || (e.target.closest && e.target.closest('button,a'))) return;
-    var r = P.getBoundingClientRect(); D = {id: e.pointerId, dx: e.clientX - r.left, dy: e.clientY - r.top};
+    var r = P.getBoundingClientRect(); D = {id: e.pointerId, x: e.clientX, y: e.clientY, dx: e.clientX - r.left, dy: e.clientY - r.top, moved: false};
     try { hd.setPointerCapture(e.pointerId); } catch(err){}
-    P.classList.add('kcdrag'); e.preventDefault();
+    e.preventDefault();
   });
-  hd.addEventListener('pointermove', function(e){ if (D && e.pointerId === D.id) moveTo(e.clientX - D.dx, e.clientY - D.dy, true); });
-  var end = function(e){ if (!D || e.pointerId !== D.id) return; D = null; P.classList.remove('kcdrag'); if (POS) put(POSKEY, JSON.stringify(POS)); };
+  hd.addEventListener('pointermove', function(e){
+    if (!D || e.pointerId !== D.id) return;
+    if (!D.moved){ if (Math.abs(e.clientX - D.x) < MOVE && Math.abs(e.clientY - D.y) < MOVE) return; D.moved = true; P.classList.add('kcdrag'); }
+    moveTo(e.clientX - D.dx, e.clientY - D.dy, true);
+  });
+  var end = function(e){ if (D && e.pointerId === D.id) unstick(true); };
   hd.addEventListener('pointerup', end); hd.addEventListener('pointercancel', end); hd.addEventListener('lostpointercapture', end);
+  window.addEventListener('blur', function(){ unstick(true); });
+  document.addEventListener('visibilitychange', function(){ unstick(true); });
 
   window.addEventListener('resize', layout);
   if (window.ResizeObserver && bar) new ResizeObserver(layout).observe(bar);
   window.addEventListener('offline', net);
-  window.addEventListener('online', function(){ net(); ORDER.forEach(function(k){ var f = F[k]; if (f && f.offline){ f.offline = false; f.f.setAttribute('src', CALCS[k].url); } }); });
+  window.addEventListener('online', function(){ net(); ORDER.forEach(function(k){ var f = F[k]; if (f && f.offline){ f.offline = false; load(k, false); } }); });
   try { POS = JSON.parse(get(POSKEY) || 'null'); } catch(e){ POS = null; }
   if (!POS || (POS.s !== 'l' && POS.s !== 'r') || !isFinite(POS.x) || !isFinite(POS.y)) POS = null;
   return P;
 }
+/* the drag over, however it ended: the frames take the pointer again; a drag that moved keeps its place */
+function unstick(keep){
+  var moved = D && D.moved; D = null;
+  if (P) P.classList.remove('kcdrag');
+  if (keep && moved && POS) put(POSKEY, JSON.stringify(POS));
+}
 
-/* a calculator's frame, made the first time it is picked: no referrer, its own title, its exact address */
+/* a calculator's frame, made the first time it is picked: no referrer, its own title, its exact address; until it loads a quiet
+   loading state, and if it has not loaded 12 seconds after its address was set, a line and Try again */
 function frame(k){
   if (F[k]) return F[k];
-  var c = CALCS[k], wrap = document.createElement('div'); wrap.className = 'kcfr'; wrap.setAttribute('data-calc', k);
+  var c = CALCS[k], wrap = document.createElement('div'); wrap.className = 'kcfr kcload'; wrap.setAttribute('data-calc', k);
   var sc = document.createElement('div'); sc.className = 'kcsc';
-  var f = document.createElement('iframe');
-  f.setAttribute('referrerpolicy', 'no-referrer'); f.setAttribute('title', c.title); f.setAttribute('src', c.url);
-  sc.appendChild(f); wrap.appendChild(sc);
-  if (c.credit){ var p = document.createElement('p'); p.className = 'kccr'; p.innerHTML = '<a href="' + esc(c.url) + '" target="_blank" rel="noopener noreferrer">' + esc(c.credit) + '</a>'; wrap.appendChild(p); }
+  var no = document.createElement('div'); no.className = 'kcno'; no.hidden = true;
+  no.innerHTML = '<p role="alert">The calculator didn’t load.</p><button type="button" class="kcx">Try again</button>';
+  sc.appendChild(no); wrap.appendChild(sc);
+  if (c.credit){ var p = document.createElement('p'); p.className = 'kccr'; p.textContent = c.credit; wrap.appendChild(p); }
   P.querySelector('#kcalcB').appendChild(wrap);
-  return (F[k] = {wrap: wrap, sc: sc, f: f, offline: navigator.onLine === false});
+  F[k] = {wrap: wrap, sc: sc, f: null, no: no, timer: 0, offline: navigator.onLine === false};
+  no.querySelector('button').addEventListener('click', function(){ load(k, true); if (!phone()) into(); });
+  load(k, true);
+  return F[k];
+}
+/* the frame itself, at its own size once and never sized again. A first load and Try again make a new one (a frame stuck on
+   its first request would not ask again for the same address); back online, the same frame asks again. */
+function load(k, fresh){
+  var x = F[k], c = CALCS[k], f = x.f; clearTimeout(x.timer);
+  if (fresh){
+    f = document.createElement('iframe');
+    f.setAttribute('referrerpolicy', 'no-referrer'); f.setAttribute('title', c.title);
+    f.style.width = c.w + 'px'; f.style.height = c.h + 'px';
+    var old = x.f, tf = old && old.style.transform; if (tf) f.style.transform = tf;
+    f.addEventListener('load', function(){ if (x.f !== f) return; clearTimeout(x.timer); x.wrap.classList.remove('kcload'); x.wrap.removeAttribute('aria-busy'); x.no.hidden = true;
+      if (document.activeElement === f) try { f.contentWindow.focus(); } catch(e){} });
+    if (old) x.sc.replaceChild(f, old); else x.sc.insertBefore(f, x.no);
+    x.f = f;
+  }
+  x.wrap.classList.add('kcload'); x.wrap.setAttribute('aria-busy', 'true'); x.no.hidden = true;
+  f.setAttribute('src', c.url);
+  x.timer = setTimeout(function(){ if (x.f === f && x.wrap.classList.contains('kcload') && navigator.onLine !== false) x.no.hidden = false; }, API.wait);
+}
+
+/* focus into the calculator shown, so a key reaches it without a click first */
+function into(){
+  var x = F[pick]; if (!x || P.hidden) return;
+  focusNo(x.f); try { x.f.contentWindow.focus(); } catch(e){}
 }
 
 function setPick(k, keep){
   if (!CALCS[k]) k = 'fast';
   pick = k; frame(k);
   ORDER.forEach(function(x){ if (F[x]) F[x].wrap.hidden = x !== k; });
-  Array.prototype.forEach.call(P.querySelectorAll('.kcsw [role=radio]'), function(b){ var on = b.getAttribute('data-calc') === k; b.setAttribute('aria-checked', String(on)); b.tabIndex = on ? 0 : -1; });
-  P.querySelector('#kcalcN').setAttribute('href', CALCS[k].url); P.querySelector('#kcalcNs').textContent = ': ' + CALCS[k].name;
+  Array.prototype.forEach.call(P.querySelectorAll('.kcsw [role=radio]'), function(b){ var on = b.getAttribute('data-calc') === k; attr(b, 'aria-checked', String(on)); b.tabIndex = on ? 0 : -1; });
   if (keep) put(PICKKEY, k);
-  layout();
+  now();
 }
 
-function net(){ if (P) P.querySelector('#kcalcO').hidden = navigator.onLine !== false; }
+function net(){ if (P){ P.querySelector('#kcalcO').hidden = navigator.onLine !== false; layout(); } }
 
-/* the size: each calculator at its natural size when the window has room; else the FAST one shorter (and as wide as a phone)
-   and the TI-30Xa scaled down whole. Two passes, since the header's height depends on the panel's width. */
+/* the size: the calculator always at its own size inside (its frame is never resized), drawn smaller whole when the window has
+   no room for it. Three passes, since the header's height depends on the panel's width. */
 function size(){
   var c = CALCS[pick], fr = F[pick], sheet = phone();
-  P.classList.toggle('kcfull', sheet); P.setAttribute('aria-modal', String(sheet));
-  document.documentElement.classList.toggle('kcalc-lock', sheet); inert(sheet);
+  if (P.classList.contains('kcfull') !== sheet) P.classList.toggle('kcfull', sheet);
+  attr(P, 'aria-modal', String(sheet));
+  if (document.documentElement.classList.contains('kcalc-lock') !== sheet) document.documentElement.classList.toggle('kcalc-lock', sheet);
+  inert(sheet);
   var ps = getComputedStyle(P), bs = getComputedStyle(P.querySelector('#kcalcB'));
   var chromeW = P.offsetWidth - P.clientWidth + px(ps.paddingLeft) + px(ps.paddingRight) + px(bs.paddingLeft) + px(bs.paddingRight);
-  var fw = c.w, fh = c.h, s = 1;
+  /* the header's one row, at its natural width; a panel narrower than that puts the switch under the title and Close */
+  var row = P.querySelector('.kcbar'), rs = getComputedStyle(row), gap = px(rs.columnGap), hs = getComputedStyle(P.querySelector('#kcalcH'));
+  var need = Math.ceil(P.querySelector('#kcalcT').offsetWidth + P.querySelector('.kcsw').offsetWidth + P.querySelector('#kcalcX').offsetWidth + 2 * gap +
+    px(rs.paddingLeft) + px(hs.paddingLeft) + px(hs.paddingRight) + P.offsetWidth - P.clientWidth + px(ps.paddingLeft) + px(ps.paddingRight)) + 1;
+  var room = sheet ? vw() : vw() - 2 * GAP;
+  if (P.classList.contains('kcwrap') !== need > room) P.classList.toggle('kcwrap', need > room);
+  var s = 1;
   for (var pass = 0; pass < 3; pass++){
-    apply(fr, c, fw, fh, s); P.style.width = sheet ? '' : Math.max(MINW, Math.ceil(fw + chromeW)) + 'px';
+    apply(fr, c, s); st(P, 'width', sheet ? '' : Math.min(room, Math.max(MINW, need, Math.ceil(Math.floor(c.w * s) + chromeW))) + 'px');
     if (pass === 2) break;
     var chromeH = P.offsetHeight - P.clientHeight + px(ps.paddingTop) + px(ps.paddingBottom) + P.querySelector('#kcalcH').offsetHeight + px(bs.paddingTop) + px(bs.paddingBottom) + fr.wrap.offsetHeight - fr.sc.offsetHeight;
     var aw = (sheet ? vw() : vw() - 2 * GAP) - chromeW, ah = (sheet ? vh() : vh() - barBottom() - 2 * GAP) - chromeH;
-    if (c.fluid){ s = 1; fw = Math.max(200, sheet ? aw : Math.min(c.w, aw)); fh = Math.max(200, sheet ? ah : Math.min(c.h, ah)); }
-    else { s = Math.max(0.3, Math.min(1, aw / c.w, ah / c.h)); fw = c.w * s; fh = c.h * s; }
+    s = Math.max(0.3, Math.min(1, aw / c.w, ah / c.h));
   }
 }
-function apply(fr, c, fw, fh, s){
-  fr.sc.style.width = Math.floor(fw) + 'px'; fr.sc.style.height = Math.floor(fh) + 'px';
-  fr.f.style.width = (c.fluid ? Math.floor(fw) : c.w) + 'px'; fr.f.style.height = (c.fluid ? Math.floor(fh) : c.h) + 'px';
-  fr.f.style.transform = !c.fluid && s < 1 ? 'scale(' + s.toFixed(4) + ')' : '';
+function apply(fr, c, s){
+  st(fr.sc, 'width', Math.floor(c.w * s) + 'px'); st(fr.sc, 'height', Math.floor(c.h * s) + 'px');
+  st(fr.f, 'transform', s < 1 ? 'scale(' + s.toFixed(4) + ')' : '');
 }
 
 /* the place: the remembered one, else docked at the right just under the bar — always inside the window, never over the bar */
 function place(){
-  if (P.classList.contains('kcfull')){ P.style.left = ''; P.style.top = ''; return; }
+  if (P.classList.contains('kcfull')){ st(P, 'left', ''); st(P, 'top', ''); DOCK.set('calc', null); return; }
   var w = P.offsetWidth, top0 = barBottom() + GAP;
   if (POS) moveTo(POS.s === 'l' ? POS.x : vw() - w - POS.x, POS.y, false); else moveTo(vw() - w - 2 * GAP, top0 + 4, false);
 }
@@ -7193,10 +7868,13 @@ function moveTo(x, y, remember){
   var w = P.offsetWidth, h = P.offsetHeight, top0 = barBottom() + GAP, W = vw(), H = vh();
   x = Math.round(Math.min(Math.max(x, GAP), Math.max(GAP, W - w - GAP)));
   y = Math.round(Math.min(Math.max(y, top0), Math.max(top0, H - h - GAP)));
-  P.style.left = x + 'px'; P.style.top = y + 'px';
+  st(P, 'left', x + 'px'); st(P, 'top', y + 'px');
   if (remember){ var r = W - x - w; POS = r < x ? {s: 'r', x: Math.max(0, r), y: y} : {s: 'l', x: x, y: y}; }
+  DOCK.set('calc', x <= 24 ? 'l' : W - x - w <= 24 ? 'r' : null, x <= 24 ? x + w : W - x);
 }
-function layout(){ if (!P || P.hidden || !pick) return; size(); place(); }
+/* at most once a frame, however many resizes and bar changes ask */
+function layout(){ if (!RAF && P && !P.hidden) RAF = requestAnimationFrame(now); }
+function now(){ if (RAF){ cancelAnimationFrame(RAF); RAF = 0; } if (!P || P.hidden || !pick) return; size(); place(); }
 
 /* the phone's sheet covers the page: the rest is inert while it is open, and given back exactly as it was */
 function inert(on){
@@ -7209,13 +7887,13 @@ function open(){
   P.hidden = false; btn.setAttribute('aria-expanded', 'true');
   net();
   setPick(pick || get(PICKKEY) || 'fast', false);
-  focusNo(P.querySelector('#kcalcT'));
+  if (phone()) focusNo(P.querySelector('#kcalcT')); else into();
 }
 function close(back){
   if (!P || P.hidden) return;
+  unstick(true);
   inert(false); document.documentElement.classList.remove('kcalc-lock');
-  P.hidden = true; btn.setAttribute('aria-expanded', 'false');
-  if (D){ D = null; P.classList.remove('kcdrag'); }
+  P.hidden = true; btn.setAttribute('aria-expanded', 'false'); DOCK.set('calc', null);
   if (back) focusNo(btn);
 }
 btn.addEventListener('click', function(){ if (P && !P.hidden) close(true); else open(); });

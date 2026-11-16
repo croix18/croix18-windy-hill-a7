@@ -1,5 +1,23 @@
 # State of the work — 15 November 2026 (read this first)
 
+## 16 November, morning — scratch paper, the calculators hardened, the docked panels: every practice page and teacher copy re-run (session_01W9n2WyAa6qRsqsdQj871ge)
+
+Croix, 15 Nov, 7:12 pm: *"add a scratch notes to the practice and fast practice as well as a scratch grid."* 7:36 pm: *"Also
+get rid of open in new tab for the calculators inside of the practice tests and tests. Harden the calculators to work."*
+- **The practice kit is at Windmill `2ff88d0`** (`a7/practice/kit/KIT_VERSION`): scratch paper (`scratch.js`, `scratch.css`:
+  one bar button, Notes and Grid for the question on the screen, kept on the device), the calculators hardened (`calc.js`:
+  no way out to a new tab, the FAST calculator always in its own layout, focus into it on opening) and the page making
+  room for a docked panel (`window.KitDock`). Each has a dated section in the kit's README. No question, key, set lock
+  or `contentVersion` moved (Unit 11 stays at 1).
+- **Re-run, each ALL CHECKS PASSED, page and teacher copy:** Units 3, 4, 5, 6 and 11; Units 3 to 6 on top of last night's
+  Cadence 29.28 banks.
+- **On the site:** all five (the site's commit of 16 Nov names this one).
+- **For the test that is being built** (Windmill `practice/exam/DESIGN.md`): Unit 11's 14(a) carries three functions
+  inside the part (`st.say`, `st.ask`, `st.amt`), so it cannot be kept as text and judged on the site
+  (`kit/check/pack.js` will say so). It needs those moved out of the part before Unit 11 can have a test page. Nothing
+  about its practice page is wrong.
+
+
 ## 15 November, evening — every practice page and teacher copy re-run on the kit's words pass (the site session)
 
 Croix, 15 Nov, 7:16 pm, to the site session (session_01W9n2WyPU16kWQaNQXN3FUe), after Windmill's practice kit lost the
