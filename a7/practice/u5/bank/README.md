@@ -1,6 +1,6 @@
 # A7 Unit 5 — the lesson bank from Cadence
 
-Made by Windmill `tools/cadence_bank.py` from Cadence `fc26d3a29ad0` (build 29.16), tier "Grade 7 Accelerated", on 2026-11-07. Re-make it whenever Cadence or the plan changes; `--check` says whether this copy is current.
+Made by Windmill `tools/cadence_bank.py` from Cadence `60f1e7b02e5b` (build 29.28), tier "Grade 7 Accelerated", on 2026-11-15. Re-make it whenever Cadence or the plan changes; `--check` says whether this copy is current.
 
 `cadence.json` — per Cadence lesson, the items a lesson practice set draws from (the page draws 8: 6 regular, 2 high rigor
 when the lesson has them, never repeating on a device until the bank is used up). Every stem, choice, key and solution
