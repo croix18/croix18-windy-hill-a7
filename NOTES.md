@@ -1,5 +1,28 @@
 # State of the work — 15 November 2026 (read this first)
 
+## 16 November, night — lesson tests: every teacher copy re-run, each unit's test rebuilt; no practice page changed (session_01W9n2WyAa6qRsqsdQj871ge)
+
+Croix, 16 Nov, 8:12 pm: *"Once that's completely done, I want you to apply that across all of the practice tests, so I can
+test on a specific unit or lesson to test on."* Asked how large a lesson's test should be: *"8, like a practice set."*
+- **The practice kit is at Windmill `f322aa1`** (`a7/practice/kit/KIT_VERSION`; kit version `3f3540b015d8`). New, in a teacher
+  copy and the test page only: a **lesson test** is the same locked test (the site's Test card, the start code, the one test
+  page, judged and sealed by the site, the code, Tally, See the test) on one lesson's 8 bank questions: 6 regular and 2 high
+  rigor (8 regular where a lesson has none), a pure function of the unit, the lesson and a 128-bit seed. `exam_lesson.js`
+  (teacher copies only) draws them for the cockpit; the test page shows them from the site's answer and holds nothing of the
+  bank; the unit's bundle judges them (`UL`, bank.js's judging as a module, no bank data) and lists the unit's lessons for the
+  card. A unit test is untouched (Windmill `practice/exam/DESIGN.md`, "6. Lesson tests").
+- **Not secret:** a lesson's bank is about 60 fixed questions students also practice on. A lesson test is a check on a lesson,
+  not a sealed test with new numbers as the unit's is.
+- **No practice page changed.** Every unit's page was rebuilt with plain `build.py` (its `CHECKED` stamp taken) to the same
+  bytes. No question, key, set lock or `contentVersion` moved.
+- **Re-run, each ALL CHECKS PASSED:** the teacher copies of Units 3, 4, 5, 6 and 11.
+- **Each unit's test rebuilt and checked** (each TEST BUILT AND CHECKED; for a unit with a bank that is every lesson choice:
+  three tests drawn, proved in the page and by the bundle under Node, the test page's cards held to the teacher copy's, a whole
+  lesson test through the stand-in site, See the test for a lesson): Units 3, 4, 5 and 6 have lessons (12, 7, 14 and 12
+  choices); Unit 11 has no bank and keeps the unit test only.
+- **On the site:** all five (the site's commit of this night names this one).
+
+
 ## 16 November, evening — See the test: every teacher copy re-run, each unit's test rebuilt; no practice page changed (session_01W9n2WyAa6qRsqsdQj871ge)
 
 Croix, 16 Nov, 6:34 pm, after his first dummy run of a test on the site (this course's Unit 6, on his tablet, opened in
