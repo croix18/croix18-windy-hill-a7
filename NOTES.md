@@ -1,5 +1,30 @@
 # State of the work — 15 November 2026 (read this first)
 
+## 16 November, evening — See the test: every teacher copy re-run, each unit's test rebuilt; no practice page changed (session_01W9n2WyAa6qRsqsdQj871ge)
+
+Croix, 16 Nov, 6:34 pm, after his first dummy run of a test on the site (this course's Unit 6, on his tablet, opened in
+Tally): *"That's really excellent! I did a dummy run. It seems to work really well. Is there any way to have it be able to
+show me the exact questions as well?"*
+- **The practice kit is at Windmill `41c736e`** (`a7/practice/kit/KIT_VERSION`; kit version `2e2c5655dbf6`). One thing is new,
+  in a teacher copy only: `exam_show.js` with `exam_show.css`. Opened at `…/practice/#test=<payload>` (Tally's "See the
+  test" link), the teacher copy redraws that student's test from the record's seed, proves it is the same test (the same
+  parts in the same order, every key equal) and shows each question as the page drew it, with what the student answered,
+  the verdict and the key. A unit changed since the test shows one line and no question. The payload holds no name and is
+  never sent to the site (Windmill `practice/exam/DESIGN.md`, "See the test").
+- **This course found the kit's one slip.** Unit 6's figures carry the class `q` (`svg.fig.q`), and the first build of the
+  view gave them a question card's padding and rule line; its own check failed on Unit 6's teacher run ("19 of 14"). Fixed
+  in `41c736e` (the sheet's rules are for `.q[data-q]` only, and the check fails if anything else inside a card takes the
+  card's rule); the check then passed on every teacher copy of both courses before the full runs.
+- **No practice page changed.** The new files are built into, and hashed for, a teacher copy only; every unit's page was
+  rebuilt with plain `build.py` (its `CHECKED` stamp taken) to the same bytes. No question, key, set lock or
+  `contentVersion` moved.
+- **Re-run, each ALL CHECKS PASSED (the new check, `check/exam_show_page.js`, among them):** the teacher copies of Units
+  3, 4, 5, 6 and 11.
+- **Each unit's test rebuilt and checked** (each TEST BUILT AND CHECKED), so a unit's teacher copy, test page and site
+  bundle carry one kit version: Units 3, 4, 5, 6 and 11.
+- **On the site:** all five (the site's commit of this evening names this one).
+
+
 ## 16 November, afternoon — the kit with the test: every page and teacher copy re-run, each unit's test built; Unit 11's story part made storable (session_01W9n2WyAa6qRsqsdQj871ge)
 
 Croix, 15 Nov, 7:52 pm, of a test taken on the website and judged there: *"I'm fully on board with a bigger build. Make it
