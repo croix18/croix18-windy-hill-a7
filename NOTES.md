@@ -7,6 +7,10 @@ nothing moves"**: Thu 3 Dec (ELA PM2) and Tue 8 Dec (math PM2) are `review` line
 periods; spiral review"), not `off`. Unit 11 (11.01 Mon 30 Nov … 11.08 Thu 10 Dec, test Fri 11 Dec), the semester review
 (14–16 Dec) and the catch-up days (17–18 Dec) are unchanged, and so is the Unit 11 build. `tools/master_sheet.py` finds the PM2
 row from either kind of day. Ruling 57 in HOUSE STYLE (M7's half — Unit 10 tested 1–2 Dec, Unit 13 15–16 Dec — in M7's).
+**For the Unit 11 build:** `u11/l04.py` and `u11/l07.py` still say Thu 3 and Tue 8 Dec have no class (the TE notes on
+11.04 and 11.07). The days are spiral days now, so the warm-ups stand (the lesson before 11.04 is still 11.03, and the one
+before 11.07 is still 11.05–06); only those words need changing, and they were left to the build chat so its work in progress
+is not touched.
 
 ## 16 November, night — lesson tests: every teacher copy re-run, each unit's test rebuilt; no practice page changed (session_01W9n2WyAa6qRsqsdQj871ge)
 
