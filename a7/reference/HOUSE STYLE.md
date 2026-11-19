@@ -3724,3 +3724,19 @@ not."**
   goes home), A7 Unit 5 (Thu 5 November), M7 Unit 5 (21–22 January), then every unit as it is built. **The units already
   tested are skipped for now** (Croix, 5:00 pm: "Skip past units for now"): M7 Units 2–3 and A7 Units 1–2 get no page
   unless he asks.
+
+## 13b(xxviii). Ruling 57 — 18 November: the PM days are class days, condensed [both courses; M7's half in its rulebook]
+
+**Ruling 57 — Croix, 18 November 2026, evening.** Re-laying M7 around Thanksgiving: *"There's still class on pm days just
+condensed"* and *"Well the 3rd is the ela fast so also a short day."* Asked how A7 uses the two days (Unit 11 runs around
+them; its test is Fri 11 Dec), he chose **"Spiral days, nothing moves."**
+
+1. **Thu 3 Dec (ELA PM2) and Tue 8 Dec (math PM2) are A7 class days with condensed periods**, run as spiral review — no
+   lesson, nothing graded. Their `off` lines in the as-run log are now `review` lines ("FAST PM2 (ELA) — short periods; spiral review",
+   "FAST PM2 — short periods; spiral review" — the note is what the calendar calls the day).
+   Supersedes ruling 47's "no class" for those two days.
+2. **Every other A7 date stays:** Unit 11 as briefed (11.01 Mon 30 Nov … 11.08 Thu 10 Dec), its one-period test Fri 11 Dec,
+   the semester review Mon–Wed 14–16 Dec, catch-up Thu–Fri 17–18 Dec. The Unit 11 build is unchanged.
+3. The site still shows both days as FAST days: M7's `tools/mkscope.py` carries them as the day's event (`PM2_DAYS`), the
+   spine puts it on the day for both courses, and the site marks the day `testing`.
+4. M7's half (Unit 10 tested Tue–Wed 1–2 Dec, Unit 13 tested Tue–Wed 15–16 Dec in Q3) is ruling 57 in M7's rulebook.

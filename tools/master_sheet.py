@@ -666,10 +666,11 @@ def build(out):
             else:
                 put(wt, r, j, "not built yet" if (j == 5 and not pkg_folder(u)) else None, font=DIM)
         r += 1
-    pm = [x for x in cal if x["code"] == "off" and "PM2" in x["taught"]]     # the school's PM2 day, from the as-run log
+    # the school's PM2 days, from the as-run log: no class until ruling 57 (18 Nov 2026), class days with short periods since
+    pm = [x for x in cal if x["code"] in ("off", "extra") and "PM2" in x["taught"]]
     put(wt, r, 1, "PM2", font=BOLD)
     put(wt, r, 2, pm[0]["date"], fmt="ddd d mmm"); put(wt, r, 3, pm[-1]["date"], fmt="ddd d mmm")
-    put(wt, r, 4, None); put(wt, r, 5, "no class (Croix, 22 October); the three review days come after it now — the semester review, in the week before Q2 ends", font=DIM)
+    put(wt, r, 4, None); put(wt, r, 5, "class meets with short periods, a spiral review day (Croix, 18 November, ruling 57 — no class by ruling 47 until then); the three review days come after it — the semester review, in the week before Q2 ends", font=DIM)
     wt.merge_cells(start_row=r, start_column=5, end_row=r, end_column=9); r += 1
     put(wt, r, 1, "PM3", font=BOLD)
     put(wt, r, 2, datetime.date(2027, 5, 3), fmt="ddd d mmm"); put(wt, r, 3, SC.end, fmt="ddd d mmm")

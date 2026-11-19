@@ -44,10 +44,10 @@
 | Nov 30 | Mon | 11 | 11.01 | Equations with like terms and the distributive property | 8.AR.2.1 | Solve equations involving like terms — Q2B; Solve equations using the distributive property — QWE; Solve two-step equations: word problems — 8CZ | Dec 11 |
 | Dec 01 | Tue | 11 | 11.02 | Variables on both sides | 8.AR.2.1 | Solve equations with variables on both sides — ZYL | Dec 11 |
 | Dec 02 | Wed (43 min) | 11 | 11.03 | One, none, infinitely many solutions | 8.AR.2.1 | Find the number of solutions — XDE; Create equations with no solutions or infinitely many solutions — 7TY | Dec 11 |
-| Dec 03 | Thu | 11 | off | *off* FAST PM2 (ELA) — no class |  |  |  |
+| Dec 03 | Thu | 11 | extra | *extra* FAST PM2 (ELA) — short periods; spiral review |  |  |  |
 | Dec 04 | Fri | 11 | 11.04 | Multi-step equations | 8.AR.2.1 | Solve multi-step equations — 55K; Solve multi-step equations: complete the solution — PGH; Solve equations: mixed review — HZZ | Dec 11 |
 | Dec 07 | Mon | 11 | 11.05+06 | Systems: which points are solutions; how many solutions | 8.AR.4.1 · 8.AR.4.2 | Is (x, y) a solution to the system of equations? — N46; Find the number of solutions to a system of equations by graphing — AGZ; Solve a system of equations in slope-intercept form — 9Z8 | Dec 11 |
-| Dec 08 | Tue | 11 | off | *off* FAST PM2 — no class |  |  |  |
+| Dec 08 | Tue | 11 | extra | *extra* FAST PM2 — short periods; spiral review |  |  |  |
 | Dec 09 | Wed (43 min) | 11 | 11.07 | Solving systems by graphing | 8.AR.4.3 | Solve a system of equations by graphing — C8X; Write a system of equations given a graph — TS7 | Dec 11 |
 | Dec 10 | Thu | 11 | 11.08 | Systems in context (approximate solutions) | 8.AR.4.3 | Solve a system of equations by graphing: word problems — W9J | Dec 11 |
 | Dec 11 | Fri | 11 | 11.X | **exam** Unit 11 exam |  |  |  |
@@ -149,8 +149,8 @@ The dates above are laid out from the sequence of lessons, the school calendar a
 - Fri Oct 23 2026: Study guide (period 1); relationship-building day (period 3)
 - Mon Oct 26 2026: the class began 4.X
 - Tue Oct 27 2026: the class began 5.01
-- Thu Dec 03 2026: FAST PM2 (ELA) — no class
-- Tue Dec 08 2026: FAST PM2 — no class
+- Thu Dec 03 2026: FAST PM2 (ELA) — short periods; spiral review
+- Tue Dec 08 2026: FAST PM2 — short periods; spiral review
 - Thu Dec 17 2026: Catch-up day — make-up tests and missing work; nothing new and nothing graded
 - Fri Dec 18 2026: Catch-up day — make-up tests and missing work; nothing new and nothing graded
 

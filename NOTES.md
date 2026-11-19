@@ -1,5 +1,13 @@
 # State of the work — 15 November 2026 (read this first)
 
+## 18 November, night — ruling 57: the PM2 days are class days; A7 keeps every date (session_01W9n2X1DGdhkjT92EJfNN3K)
+
+Croix (re-laying M7 around Thanksgiving): *"There's still class on pm days just condensed."* For A7 he chose **"Spiral days,
+nothing moves"**: Thu 3 Dec (ELA PM2) and Tue 8 Dec (math PM2) are `review` lines in the as-run log now ("FAST PM2 … — short
+periods; spiral review"), not `off`. Unit 11 (11.01 Mon 30 Nov … 11.08 Thu 10 Dec, test Fri 11 Dec), the semester review
+(14–16 Dec) and the catch-up days (17–18 Dec) are unchanged, and so is the Unit 11 build. `tools/master_sheet.py` finds the PM2
+row from either kind of day. Ruling 57 in HOUSE STYLE (M7's half — Unit 10 tested 1–2 Dec, Unit 13 15–16 Dec — in M7's).
+
 ## 16 November, night — lesson tests: every teacher copy re-run, each unit's test rebuilt; no practice page changed (session_01W9n2WyAa6qRsqsdQj871ge)
 
 Croix, 16 Nov, 8:12 pm: *"Once that's completely done, I want you to apply that across all of the practice tests, so I can
