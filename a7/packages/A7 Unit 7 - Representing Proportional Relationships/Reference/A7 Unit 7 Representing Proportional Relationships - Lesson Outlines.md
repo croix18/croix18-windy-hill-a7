@@ -436,3 +436,7 @@ Where the sections above say otherwise, this is what was built:
   and 11(c) asks about y = 9x − 4.
 - **The banks** were read by the lead after the review: eleven questions changed, most because their tables were
   the paper's.
+
+**Reworded, 21 Nov (ruling 58).** The words of every deck and paper were changed that afternoon — "versus", "per", "for
+every 1 unit of x", pairs for rows, the definition as "a constant multiple", whole questions — and no number, picture or
+key. The sentences quoted above are the plan's; what is printed now is in the Review Rulings, "the wording pass".

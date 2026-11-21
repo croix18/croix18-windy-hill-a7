@@ -292,3 +292,66 @@ font throughout every document." Every document of the unit is rebuilt in Lexend
 The Lexend build stopped once, on 7.07's Lesson Plan: three boards' `qtext` wrote money with a bare dollar sign, and
 the words between two amounts had been drawn as mathematics all along. Fixed; the gate refuses it now. 7.02's
 Independent Set gave up a little work room on questions 1–4 to stay on two pages.
+
+## 21 Nov, afternoon — the wording pass (ruling 58)
+
+Croix sent two outside audits of the All Slides PDF (a slide-by-slide "revision guide", 11:06 am; ChatGPT's language
+audit, 11:43 am) and, on the defaults put to him, said "Go" (11:58 am). No number, picture or key was changed.
+
+**Rules applied to every deck, Independent Set, Question Bank, Lesson Plan and paper**
+
+1. A graph shows y "versus" x. Never "against".
+2. A rate is "per": "\$3 per mile", "the same amount per pound", "60 minutes per hour". The constant of proportionality
+   is "the amount of y for every 1 unit of x"; the unit rate is "the amount of y for 1 unit of x".
+3. A table drawn left to right has pairs, and its rows are its two quantities: "y ÷ x is the same for every pair",
+   "check a pair", "which cost would have to change, and what should it be?".
+4. The definition, in the same words wherever it is given: "two quantities are in a proportional relationship when one
+   quantity is always a constant multiple of the other: y = px".
+5. A stem is a whole question or command. A variable does not open a sentence ("Let e represent her earnings, in
+   dollars, after h hours."). Two sentences are two sentences, not one joined by a colon.
+6. A student is told to "explain", "identify", "tell" or "write", never to "say" (a person in a problem still says
+   something: "Kim says the line for y = 0.6x is steeper…"). "The other way around". "Either quantity can be y" (not
+   "the subject", not "alone").
+7. A choice gives its reason in words: "B only, because its line passes through the origin."; "No. 15 ÷ 4 is not 4.";
+   "Jo, with the steeper line". No answer line has two dashes.
+8. A description in a select-all names its two quantities in parentheses: "A tutor charges \$30 per hour (cost and
+   hours)."
+9. "Read the scales first: the cost axis counts by 2." (not "is scaled by", "goes by", "cost by 2").
+10. "Choose x-values that give whole-number y-values" (not "easy points").
+
+**Headings and bold lines changed**: 7.01 Notes I "What makes a relationship proportional?", Notes II "The graph of a
+proportional relationship"; 7.04 Notes I "The table test: check every pair", Notes II "The graph test: two conditions"
+with "The graph must be a straight line, and it must pass through the origin.", Notes III "Nothing added at the start"
+with "A linear relationship with nothing added is proportional: y = px."; 7.05 Notes II "From a graph or a
+description", Notes III "Either quantity can be y"; 7.07 Notes I "Compare the constants" with "Find each constant in
+the same units, then compare them."; the Reference Sheet's section 5, "Writing the Equation in Both Directions".
+
+**Kit-wide (ruling 58 in the kit's ledger)**: a board prints no "Answer it."; a written board says "Write your answer
+in complete sentences."; the IXL slide's three lines and "Required IXL skills"; the cover's "the next slide links to
+each one"; a Review section of one question says "1 question"; a Lesson Plan with no new word says "No new terms.".
+
+**Not taken**: y = kx (Florida writes y = px); the guide's "math error" on 7.04's warm-up (the slide reads y = 3x), its
+k = 0.625d and its × sign; "every row" kept by ChatGPT's audit; the removal of the ruling-22 numbers (the snail's age,
+the 180 passengers, the 40 seats, the 50 pages); "Independent Practice" for "Independent Set"; serial commas where a
+target quotes its benchmark; "initial value of 0" (the unit's words are "nothing added at the start"); "steady" left
+as it is (both audits write "constant" — Croix's to say); every rewrite too long for its slide.
+
+**What the slide would not hold** (found by the test build and the lead's look, and shortened): a warm-up stem is one
+line, so 7.01's "Plan A costs 12 + 4w. Plan B costs 6w. When are they equal?", 7.04's "Find the constant of
+proportionality for (4, 6) and (10, 15).", 7.05's "For (3, 5), (6, 10) and (9, 16), is y proportional to x?" and "Find
+the constant, in dollars per pencil.", 7.07's "y is proportional to x. When x is 4, y is 26. Write the equation." and
+"Which costs less per pound: 3 pounds for \$7.20 or 5 for \$11.50?"; 7.02 board 5 keeps one line of words ("Find the
+constant of proportionality of the line."), and 7.04 board 4 one line ("A line passes through (0, 1) and (2, 5). Is it
+proportional?"), so their graphs keep their size; 7.04's Example 2 and Your Turn ask a whole question of each situation ("A taxi
+charges \$4 to start plus \$3 per mile. Is the cost proportional to the number of miles?"), which the slide wraps
+onto a second line, and answer in one line ("Taxi: no. Bus: yes.", "Gym: no. Phone plan: yes."); 7.05's Your Turn
+is "Theo earns \$160 for 4 hours at a steady rate." with "Find the constant, the equation for e, the table and two
+graph points."
+
+**Proof**: gates 0 (282 items re-derived); `unit_repeats.py u7` 0; `checks: 0 findings`; 151 reworded questions solved
+blind by two solvers, no key differs; two of their doubts were real and are fixed (7.05's Your Turn did not name the
+letter e; 7.07's first warm-up read "the equation y = px" as given); every changed slide looked at (152 in the
+first pass, 14 after the fixes, 3 after Example 2's whole questions went back in) and the papers on contact sheets;
+every PDF searched for the old lines ("Answer it.", "against", "the other way round", "easy points": none left);
+every character of text is Lexend (the only other glyphs are the answer bubbles, the check boxes and the back arrow,
+which Lexend does not have).

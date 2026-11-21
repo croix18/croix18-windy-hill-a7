@@ -27,7 +27,7 @@ on the website, and M7 has not been moved to the new kit.
   fitted its cell and nothing refused it. Fixed, and the kit's `rulingcheck` now refuses it (no other unit has one).
 - **Math Nation** is read for a unit's scope and its test's item shapes, in one note that stays out of the repository. There
   is no Unit 7 audit and there will not be one.
-- **The kit** (Windmill `ac81351`, vendored): the five lean tools (`reader_copy.py`, `student_view.py`, `blind_diff.py`,
+- **The kit** (Windmill `b0d893e`, vendored): `reword.py` (a wording pass as exact strings) and the five lean tools (`reader_copy.py`, `student_view.py`, `blind_diff.py`,
   `unit_repeats.py`, `changed_slides.py`), `BUILDER CARD.md`, `RULINGS LEDGER.md`; a one-point section prints "1 point"; a
   paper's title keeps clear of the name lines.
 - **Unit 7, Representing Proportional Relationships** (MA.7.AR.4.1–4.5, MA.8.AR.3.1; taught Wed 6 – Tue 12 Jan, spiral day
@@ -43,47 +43,60 @@ on the website, and M7 has not been moved to the new kit.
   ruled, six fixers applied it; the 82 questions that changed solved blind again, no key differs; the lead looked at every
   changed slide and a sheet of each whole deck.
 
+- **The wording pass (ruling 58).** Croix sent two outside audits of the All Slides PDF on 21 Nov (11:06 am, a
+  slide-by-slide "revision guide"; 11:43 am, ChatGPT's language audit: *"Here's what chat said."*) and, on the defaults
+  put to him at midday, 11:58 am: *"Go"*. Done that afternoon in every deck, Independent Set, Question Bank and Lesson
+  Plan, the Review, the Practice Test, the Reference Sheet and 00 - START HERE:
+  - a graph shows y "versus" x, never "against"; a rate is "per" ("\$3 per mile", "the same amount per pound"), and the
+    constant of proportionality is "the amount of y for every 1 unit of x";
+  - a table drawn left to right has pairs, not rows: "y ÷ x is the same for every pair", "which cost would have to
+    change, and what should it be?";
+  - the definition, in the same words in 7.01, 7.04 and the Reference Sheet: "two quantities are in a proportional
+    relationship when one quantity is always a constant multiple of the other: y = px";
+  - whole questions for fragments ("When equal?", "Its equation?", "The same table."); "Let e represent…" where a
+    sentence began with a letter; two sentences where a colon joined two; "explain" and "identify" for "say"; "the
+    other way around"; "either quantity can be y" for "the subject" and "alone"; options as "B only, because its line
+    passes through the origin." and "No. 15 ÷ 4 is not 4." in place of the two-dash lines;
+  - headings: 7.01 "What makes a relationship proportional?" and "The graph of a proportional relationship"; 7.04 "The
+    table test: check every pair", "The graph test: two conditions", "Nothing added at the start"; 7.05 "From a graph
+    or a description", "Either quantity can be y"; 7.07 "Compare the constants", with "Find each constant in the same
+    units, then compare them.";
+  - kit-wide, so in every unit of both courses at its next rebuild: no "Answer it." under a board; "Write your answer
+    in complete sentences."; the IXL slide ("Open IXL and work on the skills listed below." / "Show your work on
+    paper. IXL's answer box does not record it." / "Complete every listed skill to a SmartScore of at least 67." and
+    the due line, under "Required IXL skills"); the unit cover's "the next slide links to each one"; "1 question";
+    "No new terms." in a Lesson Plan with no new word.
+
+  Not taken, with the reason: the guide's y = kx (Florida writes y = px), its "math error" on 7.04's warm-up (the
+  slide reads y = 3x), its k = 0.625d and its × sign; chat's "every row" (the pairs are columns), its removal of the
+  ruling-22 numbers, serial commas where a target quotes its benchmark, "initial value of 0" (the unit's words are
+  "nothing added at the start"), and every rewrite too long for its slide — a warm-up stem is one line of about 60
+  characters, so "Find the constant, in dollars per pencil." (7.05) and "or 5 for \$11.50" (7.07) stay short.
+
+  How it was run and proved (Windmill `briefs/LEAN WORKFLOW.md`, "A wording pass"): about 470 strings written by the
+  lead and applied by `reword.py`; gates 0, `unit_repeats.py u7` 0, a clean build, `checks: 0 findings`; the 151
+  questions whose words changed solved blind by two Opus solvers (216,000 tokens, the pass's only agent runs) — no key
+  differs; of their 27 doubts two were real and are fixed (7.05's Your Turn never named the letter e; 7.07's warm-up
+  read "the equation y = px" as given), the rest were the solver file's misplaced bank headings or ruling-22 numbers;
+  the lead looked at all 152 changed slides and at the papers, and shortened nine lines that left one word on a
+  second line, wrapped an answer or squeezed a graph (14 slides, looked at again). 7.04's Example 2 and Your Turn
+  then got their whole questions back ("Is the cost proportional to the number of miles?"), which the slide wraps
+  onto a second line: 3 slides, looked at. Every PDF was searched for the old lines (none left) and for a font other
+  than Lexend (none but the answer bubbles, check boxes and back arrow, which Lexend does not have). Page counts are
+  unchanged but for two bank keys (one page each way).
+
 ### Open, for Croix (21 Nov)
 
-- **His revision guide** (21 Nov, 11:06 am — a slide-by-slide list of wording changes for Unit 7). Checked against the built
-  unit and answered the same morning. Right, and to apply on his go: "in every row" where the tables' pairs are columns
-  (7.02, 7.04, 7.05, Practice Test question 8, the Reference Sheet) — "for every pair", "column"; "the other way round" —
-  "around"; "can be the subject" — "can be isolated"; "against" — "versus" (Units 3–6 and 11 say "against" too); sentences
-  that begin with a lowercase letter; fragments ("When equal?"); "say" — "explain"; two dashes in an answer line. Wrong, and
-  not to apply: its y = kx (Florida writes y = px), its "math error" on slide 73 (the slide reads y = 3x), its k = 0.625d,
-  its × sign. His to decide: "versus" or another word, and the kit-wide lines ("Answer it.", "Write your answer in
-  sentences.", the two IXL lines, the cover line). The pass must cover the papers, the sets and the banks, not the slides
-  alone.
-- **ChatGPT's language audit** of the All Slides PDF (21 Nov, 11:43 am — "Here's what chat said."). Answered at midday. It
-  lands where the guide and the lead did on "versus", "1 unit of x", "explain" for "say", whole questions for fragments,
-  "Let e represent…", the definition, "Answer it." (it says delete; the guide allows delete) and the IXL lines. To take
-  from it as well: answer captions as short whole sentences where the cap allows; headings as plain questions ("I. What
-  makes a relationship proportional?"); two sentences where a stem joins two with a colon. Not to take: it keeps "every
-  row" (the pairs are columns); it removes the snail's age, the 180 passengers, the 40 seats and the 50 pages (ruling 22,
-  one board a lesson carries a number the question does not need — and it says itself "unless intentionally testing");
-  "Independent Set" renamed "Independent Practice" (the name is in every file name, the site, the master sheet and six
-  taught units — the lead would keep it; his call); serial commas in a target that quotes its benchmark; "at each labeled
-  mark" (wrong where labels skip gridlines); "initial value of 0" ("the starting amount is 0"); any rewrite longer than
-  its slide's cap (the fix is taken in fewer words).
-- **The pass, as the lead would run it on his go** — defaults given to him at midday, his to change: "Answer it." deleted;
-  "Write your answer in complete sentences."; the IXL slide "Open IXL and work on the skills listed below." / "Show your
-  work on paper. IXL's answer box does not record it." / "Complete every listed skill to a SmartScore of at least N" and
-  the due line / "Required IXL skills"; the cover line "select a lesson on the next slide to jump to it"; "versus", the
-  y-quantity first; "for every 1 unit of x", and the story's own units in a story ("costs the same amount per pound");
-  the definition "one quantity is always a constant multiple of the other: y = px" (7.01, 7.04 word for word, the
-  Reference Sheet twice); "Independent Set" and the ruling-22 numbers kept. The four kit-wide lines change every unit of
-  both courses at its next rebuild. Cheapest sound way: the lead writes each old-to-new string, a script applies them and
-  refuses a string that is not found exactly once, the gates catch a line over its cap, one Opus solver re-solves the
-  reworded questions blind, and the lead looks at every changed slide and page.
-- **Found reading the Lexend pages, for the same pass:** the Review's section line "Lesson 7.04 · 1 questions" (kit,
-  `unitbuild.py`: "1 question"); the Reference Sheet's sections 1 and 3, where the note beside the title is too long for
-  the line in Lexend and wraps ("… times the / other", "… for each / 1 of x"); 7.07's Lesson Plan prints "Vocabulary."
-  with nothing after it (kit, `plankit.py`: say "No new terms.").
-
+- **Wording left as it is, his to say:** "steady" (speed, rate, pace: both audits write "constant" in their rewrites; the
+  state's guide says "constant rate of change" of slope and never "steady"); the name "Independent Set" (one audit wants
+  "Independent Practice": it is in every file name, the site, the master sheet and six taught units); the ruling-22
+  numbers (the snail's age, the 180 passengers, the 40 seats, the 50 pages, room 114).
+- **Units 3–6 and 11 keep the old wording** until they are rebuilt: "against" in every one of them, "the other way
+  round" in Units 4 and 5, "Answer it." under every board, the old IXL lines. Unit 11 is taught from 30 Nov.
 - **Merge and publish:** say the word and the branch goes to `main` and Unit 7 onto the site. The site has not yet shown a
   unit with no Teacher Edition: `publish_web.py` publishes what a package holds, and that wants one look on the site.
 - **The practice page** for Unit 7 is not built (the test is a random set of it). Question 1(b) needs a part where a student
-  plots points, and 8(b) takes a row and a cost, or "none".
+  plots points, and 8(b) takes a cost and what it should be, or "none".
 - **M7** builds its next unit (11, from 11 Feb) the same way once it vendors this kit.
 - Unit 11's notes on 11.04 and 11.07 still call Thu 3 and Tue 8 Dec no-class days (ruling 57, below): unchanged here.
 
