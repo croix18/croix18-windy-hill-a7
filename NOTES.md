@@ -95,6 +95,10 @@ on the website, and M7 has not been moved to the new kit.
   round" in Units 4 and 5, "Answer it." under every board, the old IXL lines. Unit 11 is taught from 30 Nov.
 - **Merge and publish:** say the word and the branch goes to `main` and Unit 7 onto the site. The site has not yet shown a
   unit with no Teacher Edition: `publish_web.py` publishes what a package holds, and that wants one look on the site.
+  **Windmill's branch merges with it** (`41a5a7c`): Windmill's Drive-script test waited twelve hours for a file he
+  deleted to come back, and with Unit 7's package the mirror's hourly check needs fifteen (1,769 files at 120 an hour),
+  so Windmill `main`'s `tools/check.sh` fails beside an A7 that holds Unit 7. The test is fixed on Windmill's branch; the
+  script in his Google account is unchanged (Windmill HANDOFF, 21 Nov).
 - **The practice page** for Unit 7 is not built (the test is a random set of it). Question 1(b) needs a part where a student
   plots points, and 8(b) takes a cost and what it should be, or "none".
 - **M7** builds its next unit (11, from 11 Feb) the same way once it vendors this kit.
