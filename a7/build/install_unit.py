@@ -227,7 +227,10 @@ def start_here(placed):
       + ("No transfer items: a random set can only ask what the practice asks (ruling 49)." if random_test else
          "Two questions are **transfer items** (ruling 18) — same benchmark, a surface that appears on no review and in no question bank — and the key names them."))
     A("- **No benchmark codes on student pages.** The deck title slide and the keys and " + ("Teacher Editions" if editions else "Lesson Plans") + " carry them.")
-    A("- **Opens cleanly in Google Docs.** Every document is a fixed-width table layout with no nested tables and a spacer after every block; fonts are Times New Roman / Georgia / Arial with FreeSerif for the bubbles only.")
+    face = getattr(C, "DOC_FONT", None)       # Croix, 21 Nov 2026: "It should be the lexend font throughout every document."
+    A("- **Opens cleanly in Google Docs.** Every document is a fixed-width table layout with no nested tables and a spacer after every block; "
+      + (f"every document and every slide is set in {face} (a Google font), with FreeSerif for the bubbles only." if face else
+         "fonts are Times New Roman / Georgia / Arial with FreeSerif for the bubbles only."))
     A("- **Every answer is re-derived by machine at build time.** Every item carries a `check` that sympy evaluates (variable bases as symbols); every multiple-choice distractor must name its error; every scientific-notation coefficient is scanned for the [1, 10) rule; the build refuses on any finding. The post-build suite (`checks.py`) then reads the rendered PDFs for off-page text, glyph coverage, Google-Docs layout rules and the timing plan.")
     if AUDIT:
         A("- **Math Nation's copyrighted pages are not in this repository.** The audit in `Reference/` records what was checked and what was found; the items here are a mix of the book's (verified) and original ones, aligned to the benchmark text and the B1G-M first.")

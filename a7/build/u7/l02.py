@@ -258,23 +258,24 @@ L = dict(
     # The six: a table in a context with a decimal constant (1), a table with a fraction constant (2), a graph scaled by 1 (3),
     # a graph scaled by 5 and what its constant means (4), a description with the direction named (5), and the
     # pattern breaks at 6 — a negative constant from a table.
+    # work room trimmed on questions 1–4 (21 Nov): in Lexend the set ran to a third page that Times did not need
     independent=[
         dict(stem="Bananas cost the same amount for each pound. Find the constant of proportionality, in dollars per pound.",
              fig=figs.table([([2, 3, 6], ["1.18", "1.77", "3.54"])], head=("pounds", "cost ($)"), cw=1.7, inches=4.0),
              answer="$0.59 per pound", why="1.18 ÷ 2 = 0.59, 1.77 ÷ 3 = 0.59 and 3.54 ÷ 6 = 0.59: the same in every row.",
-             check=ratios([2, 3, 6], ["1.18", "1.77", "3.54"], R("0.59")), space=0.6),
+             check=ratios([2, 3, 6], ["1.18", "1.77", "3.54"], R("0.59")), space=0.4),
         dict(stem="Find the constant of proportionality.",
              fig=figs.table([([7, 14, 35], [3, 6, 15])], inches=4.0),
              answer="3/7", why="3 ÷ 7 = 3/7, 6 ÷ 14 = 3/7 and 15 ÷ 35 = 3/7: y ÷ x, not x ÷ y (7/3).",
-             check=("many", ratios([7, 14, 35], [3, 6, 15], "F(3,7)"), ("true", "F(7,3) != F(3,7)")), space=0.6),
+             check=("many", ratios([7, 14, 35], [3, 6, 15], "F(3,7)"), ("true", "F(7,3) != F(3,7)")), space=0.4),
         dict(stem="The line passes through the origin, $(4, 3)$ and $(8, 6)$. Find the constant of proportionality.",
              fig=GRAPH((0, 8), (0, 6), Fr(3, 4), [(4, 3), (8, 6)]),
              answer="3/4", why="3 ÷ 4 = 3/4; check: 6 ÷ 8 = 3/4.",
-             check=ratios([4, 8], [3, 6], "F(3,4)"), space=0.5),
+             check=ratios([4, 8], [3, 6], "F(3,4)"), space=0.35),
         dict(stem="The graph shows the money a car wash raises. Find the constant of proportionality, in dollars per car, and say what it means.",
              fig=GRAPH((0, 6), (0, 45), Fr(15, 2), [(2, 15), (4, 30)], ys=5, xname="cars washed", yname="dollars raised"),
              answer="7.5: the car wash raises $7.50 for each car.", why="Read the scales first: dollars count by 5. 15 ÷ 2 = 7.5 and 30 ÷ 4 = 7.5.",
-             check=ratios([2, 4], [15, 30], R("7.5")), space=0.6),
+             check=ratios([2, 4], [15, 30], R("7.5")), space=0.5),
         dict(stem="Lena runs at a steady pace: 3 miles in 27 minutes. Find the constant of proportionality, in minutes per mile.",
              answer="9 minutes per mile", why="Minutes are y: 27 ÷ 3 = 9.",
              check=("eq", "F(27, 3)", "9"), space=0.6),

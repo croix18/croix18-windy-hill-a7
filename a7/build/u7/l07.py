@@ -188,7 +188,7 @@ L = dict(
     whiteboard=[
         dict(text=["Store A's rice prices are in the table.", "Store B:  $c = 3.3w$  (c dollars for w pounds).",
                    "**Which store's rice costs less per pound?"],
-             qtext="Store A's rice prices are in the table: 2 pounds cost $7.00 and 4 pounds cost $14.00. Store B: c = 3.3w (c dollars for w pounds). Which store's rice costs less per pound?",
+             qtext="Store A's rice prices are in the table: 2 pounds cost \\$7.00 and 4 pounds cost \\$14.00. Store B: c = 3.3w (c dollars for w pounds). Which store's rice costs less per pound?",
              fig=S(RICE, inches=4.6, pt=22, reserve=0.75), fig_a=S(RICE, inches=4.0, pt=20, reserve=0.95),
              steps=["Store A:  $7.00 \\div 2 = 3.50$", "Store B:  \\$3.30 per pound",
                     "Compare:  $3.30 < 3.50$"],
@@ -199,7 +199,7 @@ L = dict(
         # repeat_ok: the same table as board 1 on purpose — one thing changes, Store B's equation (the plan's board 2).
         dict(repeat_ok=True, text=["The same table for Store A. Store B is now $c = 3.75w$.",
                                    "**Which store's rice costs less per pound?"],
-             qtext="Store A's rice prices are in the table: 2 pounds cost $7.00 and 4 pounds cost $14.00. Store B is now c = 3.75w. Which store's rice costs less per pound?",
+             qtext="Store A's rice prices are in the table: 2 pounds cost \\$7.00 and 4 pounds cost \\$14.00. Store B is now c = 3.75w. Which store's rice costs less per pound?",
              fig=S(RICE, inches=4.6, pt=22, reserve=0.75), fig_a=S(RICE, inches=4.0, pt=20, reserve=0.95),
              steps=["Store A:  $14.00 \\div 4 = 3.50$", "Store B:  \\$3.75 per pound",
                     "Compare:  $3.50 < 3.75$"],
@@ -235,7 +235,7 @@ L = dict(
              wrong="C = 4 — x ÷ y, the ratio in the wrong order [Florida B1G-M, AR.4.2: the ratio in the wrong order]; 5, 2, 1/4 — greatest first [Notes II: the greater positive constant gives the steeper line]"),
         dict(kind="mc", text=["Plan P: \\$0.90 a song. Plan Q: 12 songs for \\$9.60.",
                               "**Which is cheaper for 30 songs, and by how much?"],
-             qtext="Plan P charges $0.90 a song. Plan Q charges $9.60 for 12 songs. Which plan is cheaper for 30 songs, and by how much?",
+             qtext="Plan P charges \\$0.90 a song. Plan Q charges \\$9.60 for 12 songs. Which plan is cheaper for 30 songs, and by how much?",
              steps=["Plan Q:  $9.60 \\div 12 = 0.80$",
                     "30 songs:  $0.90(30) = 27.00$  and  $0.80(30) = 24.00$", "Difference:  $27.00 - 24.00 = 3.00$"],
              choices=["Q, by \\$3.00", "Q, by \\$0.10", "Q, by \\$17.40", "P, by \\$3.00"],

@@ -16,9 +16,18 @@ on the website, and M7 has not been moved to the new kit.
   readers and fixers are Claude Opus 5.5; the lead plans, rules and looks.
 - **No Teacher Edition** from here on: `TEACHER_EDITION = False` in `a7/build/course.py`. The Lesson Plan stays. Units 3–6
   and 11 keep the editions they were built with until they are rebuilt.
+- **Every document in Lexend** (Croix, 21 Nov, 11:08 am, of the Review in Times beside the Practice Test in Lexend in one
+  PDF: *"why does the font switch? It should be the lexend font throughout every document."*). Ruling 46 had set the
+  assessment papers alone; `DOC_FONT = "Lexend"` in `a7/build/course.py` (the kit's new profile name) sets every document:
+  the lesson's pages and keys, the Lesson Plan, the Review, the Reference Sheet, mathematics and figure lettering included.
+  Unit 7 is rebuilt and installed so. Lexend is a wider face: each Lesson Plan runs five pages, not four. Units 3–6 and 11
+  keep Times in those documents until they are rebuilt.
+- **A bare dollar sign** — found by the Lexend build. Three boards of 7.07 wrote their money in `qtext` as `$7.00`, not
+  `\$7.00`, so the Lesson Plan drew "7.00 and 4 pounds cost" as mathematics between two dollar signs; in Times the picture
+  fitted its cell and nothing refused it. Fixed, and the kit's `rulingcheck` now refuses it (no other unit has one).
 - **Math Nation** is read for a unit's scope and its test's item shapes, in one note that stays out of the repository. There
   is no Unit 7 audit and there will not be one.
-- **The kit** (Windmill `04c4056`, vendored): the five lean tools (`reader_copy.py`, `student_view.py`, `blind_diff.py`,
+- **The kit** (Windmill `ac81351`, vendored): the five lean tools (`reader_copy.py`, `student_view.py`, `blind_diff.py`,
   `unit_repeats.py`, `changed_slides.py`), `BUILDER CARD.md`, `RULINGS LEDGER.md`; a one-point section prints "1 point"; a
   paper's title keeps clear of the name lines.
 - **Unit 7, Representing Proportional Relationships** (MA.7.AR.4.1–4.5, MA.8.AR.3.1; taught Wed 6 – Tue 12 Jan, spiral day
@@ -35,6 +44,16 @@ on the website, and M7 has not been moved to the new kit.
   changed slide and a sheet of each whole deck.
 
 ### Open, for Croix (21 Nov)
+
+- **His revision guide** (21 Nov, 11:06 am — a slide-by-slide list of wording changes for Unit 7). Checked against the built
+  unit and answered the same morning. Right, and to apply on his go: "in every row" where the tables' pairs are columns
+  (7.02, 7.04, 7.05, Practice Test question 8, the Reference Sheet) — "for every pair", "column"; "the other way round" —
+  "around"; "can be the subject" — "can be isolated"; "against" — "versus" (Units 3–6 and 11 say "against" too); sentences
+  that begin with a lowercase letter; fragments ("When equal?"); "say" — "explain"; two dashes in an answer line. Wrong, and
+  not to apply: its y = kx (Florida writes y = px), its "math error" on slide 73 (the slide reads y = 3x), its k = 0.625d,
+  its × sign. His to decide: "versus" or another word, and the kit-wide lines ("Answer it.", "Write your answer in
+  sentences.", the two IXL lines, the cover line). The pass must cover the papers, the sets and the banks, not the slides
+  alone.
 
 - **Merge and publish:** say the word and the branch goes to `main` and Unit 7 onto the site. The site has not yet shown a
   unit with no Teacher Edition: `publish_web.py` publishes what a package holds, and that wants one look on the site.
