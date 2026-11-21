@@ -8,6 +8,7 @@ import os, sys, glob, importlib.util
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 from lib import names
+from lib.profile import C
 
 
 def write(unit):
@@ -31,9 +32,12 @@ def _text(Ls, un):
          "The question-bank commentary for every lesson in the unit: how each bank varies, what the",
          "audit against Math Nation found, what changed from the book, and the answers.",
          "",
-         "**This is not a handout and it is not the teacher's edition.** Under ruling 26 the teacher's",
-         "edition is four pages read in twenty minutes; this is the reference behind it, read once when",
-         "the unit is planned. The printed keys in each lesson's `Keys` folder are generated from the same specs.",
+         *(["**This is not a handout and it is not the teacher's edition.** Under ruling 26 the teacher's",
+            "edition is four pages read in twenty minutes; this is the reference behind it, read once when",
+            "the unit is planned."] if C.TEACHER_EDITION else
+           # Croix, 20 Nov 2026: A7 builds no Teacher Edition (course.py TEACHER_EDITION = False)
+           ["**This is not a handout.** It is the reference behind the lesson plans, read once when the unit is planned."]),
+         "The printed keys in each lesson's `Keys` folder are generated from the same specs.",
          ""]
   def answers(items, title):
       out.append(f"**{title}.**  ")

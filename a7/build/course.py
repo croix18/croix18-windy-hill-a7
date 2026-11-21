@@ -12,7 +12,7 @@ GRADE_FAST = "Grade 8 FAST"
 UNITS = {1: "Equations and Inequalities", 2: "Real Numbers, Square Roots and Cube Roots",
          3: "Exponents and Scientific Notation", 4: "Solving Problems with Rational Numbers",
          5: "Multi-Step Proportional Relationships", 6: "Relationships in Triangles",
-         11: "Solving Equations and Systems"}
+         7: "Representing Proportional Relationships", 11: "Solving Equations and Systems"}
 IXL_SMARTSCORE = 67                # ruling 28 — 67 accelerated, 60 on-level (Croix, 20 Sep)
 
 SET = "handout"                    # ruling 21: the six questions are a printed page and its key
@@ -22,7 +22,9 @@ PAPER_FONT = "Lexend"     # ruling 46 (Croix, 17 Oct): the assessment papers —
 EXAM_PERIODS = 1                   # ruling 51 (23 Oct): every A7 unit test is one period. The plan's test days decide first; this is for a unit the plan has no test day for
 CLOSE = False
 BANK = "docx"                      # Question Bank and Question Bank - Additional, each with a key
-TE_STYLE = "lines"
+TE_STYLE = "lines"                 # how the edition was laid out, for units built before 20 Nov 2026
+TEACHER_EDITION = False            # Croix, 20 Nov 2026: "You can get rid of the 4 page teacher edition." No edition from now
+                                   # on; units installed before keep theirs in their packages (SPEC SCHEMA: "A course that builds no Teacher Edition")
 PLAN_STYLE = "sections"
 SLOTS = "exponent"                 # §2a: base blue, exponent orange, read off the layout
 CAPS = ("fracexp", "sci", "gap", "radicand")     # MA.8.NSO.1.5 and 1.7's boundaries are taught here

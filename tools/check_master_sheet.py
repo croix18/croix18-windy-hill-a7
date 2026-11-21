@@ -306,7 +306,11 @@ for i, (cells, c) in enumerate(zip(rows, cal), 2):
     lesson_like = not exam and code not in ("spiral", "flex", "extra", "off") and not code.startswith("PM")
     if day_built and lesson_like:
         built_rows += 1
-        missing = [h for h in hdr[5:16] if not cells[H[h]].hyperlink]
+        # a lesson built without a Teacher Edition (course.py TEACHER_EDITION = False, Croix 20 Nov 2026) has no link to
+        # one; a unit installed before then still has its editions, and each one's link is still required
+        has_te = any(t.startswith(pkg_u) and f"/Lessons/{stem(code, u)}/" in t and t.endswith(" - Teacher Edition.pdf") for t in PKG_FILES)
+        missing = [h for h in hdr[5:16] if not cells[H[h]].hyperlink and (h != "Teacher Edition" or has_te)]
+        if not has_te and cells[H["Teacher Edition"]].hyperlink: bad(f"r{i} {code}: a Teacher Edition link, and the lesson's folder holds none")
         if missing: bad(f"r{i} {code} missing links", missing)
         L = specs[stem(code, u)]
         if v["Learning target"] != L["target"] or v["Essential question"] != L["essential"]: bad(f"r{i} target/EQ")
