@@ -1,5 +1,48 @@
 # State of the work — 15 November 2026 (read this first)
 
+## 20–21 November — the lean workflow; Unit 7 built with it, on a branch, held for Croix's word (session_01W9n2X1V97j7Nf5Y7z1DaCq)
+
+Croix, 20 Nov, of how the lesson slides are built: *"It feels extremely inefficient and is burning tons of tokens."* Shown a
+plan, 11:30 pm: *"You can get rid of the 4 page teacher edition. Only read math nation for scope and test item shapes. The
+reviewers yeah opus then fable. Let's do it. Run the next unit to test."*
+
+**Everything below is on the branch `claude/lean-workflow`** (this repository and Windmill). `main` is untouched, nothing is
+on the website, and M7 has not been moved to the new kit.
+
+- **The procedure** is Windmill's `briefs/LEAN WORKFLOW.md`, with the briefs it ran on in `briefs/lean/`: the test settled
+  first and the plan reviewed before any spec; builders who read a 12 KB card (`BUILDER CARD.md`), not the history; one
+  builder to a lesson, each in its own copy; reviewers who read the unit as text and its figures on sheets, not slides; one
+  blind solve in place of three recomputations; one fix pass, then only what changed checked again. Builders, solvers,
+  readers and fixers are Claude Opus 5.5; the lead plans, rules and looks.
+- **No Teacher Edition** from here on: `TEACHER_EDITION = False` in `a7/build/course.py`. The Lesson Plan stays. Units 3–6
+  and 11 keep the editions they were built with until they are rebuilt.
+- **Math Nation** is read for a unit's scope and its test's item shapes, in one note that stays out of the repository. There
+  is no Unit 7 audit and there will not be one.
+- **The kit** (Windmill `04c4056`, vendored): the five lean tools (`reader_copy.py`, `student_view.py`, `blind_diff.py`,
+  `unit_repeats.py`, `changed_slides.py`), `BUILDER CARD.md`, `RULINGS LEDGER.md`; a one-point section prints "1 point"; a
+  paper's title keeps clear of the name lines.
+- **Unit 7, Representing Proportional Relationships** (MA.7.AR.4.1–4.5, MA.8.AR.3.1; taught Wed 6 – Tue 12 Jan, spiral day
+  13 Jan, test Thu 14 Jan): five decks (7.01, 7.02–03, 7.04, 7.05–06, 7.07), each with its Lesson Plan, Independent Set and
+  two Question Banks; the Practice Test (15 questions, 20 points — the blueprint of the test), the Review (17 questions) and
+  the Reference Sheet. `gates` 0 (282 items re-derived), `unit_repeats.py u7` 0, `checks: 0 findings`, installed.
+  7.05–06's deck is titled "Writing Equations; Translating Representations" (the calendar's longer name made a
+  key's path in the package 184 characters; the install's limit is 180).
+  The plan and what was built differently: `a7/reference/A7 Unit 7 … - Lesson Outlines.md` ("As built" at its foot). Every
+  review ruling in exact words: `a7/reference/A7 Unit 7 … - Review Rulings.md`.
+- **How it was proved:** the plan read by two readers before any spec (41 findings, 3 blockers — a line each to fix); the
+  built unit solved blind, 269 questions, no wrong key; read by three readers (1 blocker, 13 majors, 21 minors); the lead
+  ruled, six fixers applied it; the 82 questions that changed solved blind again, no key differs; the lead looked at every
+  changed slide and a sheet of each whole deck.
+
+### Open, for Croix (21 Nov)
+
+- **Merge and publish:** say the word and the branch goes to `main` and Unit 7 onto the site. The site has not yet shown a
+  unit with no Teacher Edition: `publish_web.py` publishes what a package holds, and that wants one look on the site.
+- **The practice page** for Unit 7 is not built (the test is a random set of it). Question 1(b) needs a part where a student
+  plots points, and 8(b) takes a row and a cost, or "none".
+- **M7** builds its next unit (11, from 11 Feb) the same way once it vendors this kit.
+- Unit 11's notes on 11.04 and 11.07 still call Thu 3 and Tue 8 Dec no-class days (ruling 57, below): unchanged here.
+
 ## 18 November, night — ruling 57: the PM2 days are class days; A7 keeps every date (session_01W9n2X1DGdhkjT92EJfNN3K)
 
 Croix (re-laying M7 around Thanksgiving): *"There's still class on pm days just condensed."* For A7 he chose **"Spiral days,

@@ -68,12 +68,20 @@ if set(_by_code) != {row[0] for row in LESSONS}:
         raise SystemExit(f"lesson specs and manifest disagree about {sorted(set(_by_code) ^ {row[0] for row in LESSONS})}")
 SPECS = [_by_code[row[0]] for row in LESSONS]
 
+AUDIT = os.path.exists(os.path.join(REF, f"{names.unit_stem(U)} - Audit.md"))
+
+
 def reference_files():
     """[(source path, name in the package's Reference/)]."""
     ustem = names.unit_stem(U)
-    out = [(bank_file.write(UNITDIR), None),
-           (os.path.join(REF, f"{ustem} - Audit.md"), None),
-           (os.path.join(REF, "A7 Scope and Sequence 2026-27.md"), None),
+    out = [(bank_file.write(UNITDIR), None)]
+    # a unit built before 20 Nov 2026 has a Math Nation audit; a unit built by the lean workflow has none (Croix,
+    # 20 Nov: "Only read math nation for scope and test item shapes") and carries its plan and its review's rulings
+    for doc in ("Audit", "Lesson Outlines", "Review Rulings"):
+        f = os.path.join(REF, f"{ustem} - {doc}.md")
+        if os.path.exists(f) and (doc == "Audit" or not AUDIT):
+            out.append((f, None))
+    out += [(os.path.join(REF, "A7 Scope and Sequence 2026-27.md"), None),
            (os.path.join(REF, "A7 IXL Due Dates 2026-27.md"), None),
            (os.path.join(REF, "Florida BEST Grade 8 - Source of Truth.md"), None)]
     return [(src, dst or os.path.basename(src)) for src, dst in out]
@@ -165,7 +173,7 @@ def start_here(placed):
     else:
         A(f"| **Assessment** | The unit test (one paper, {periods}) and its key. |")
     A("| **Handouts** | The Reference Sheet. Students study from it; it may NOT be used on the assessment (ruling 13). There is no study guide (ruling 11). |")
-    A(f"| **Reference** | Not handouts: `{names.unit(U, 'Question Bank', 'md')}` (how each question bank varies, what the audit found, what changed from the book, and every bank answer" + (" — ruling 26 moved this out of the teacher's edition" if editions else "") + "), the Math Nation package audit, the scope and sequence, the IXL due-date sheet, the Grade 8 source of truth. |")
+    A(f"| **Reference** | Not handouts: `{names.unit(U, 'Question Bank', 'md')}` (how each question bank varies" + (", what the audit found, what changed from the book," if AUDIT else "") + " and every bank answer" + (" — ruling 26 moved this out of the teacher's edition" if editions else "") + "), " + ("the Math Nation package audit" if AUDIT else "the unit's plan (Lesson Outlines) and the rulings on its review") + ", the scope and sequence, the IXL due-date sheet, the Grade 8 source of truth. |")
     A("")
     A("**Nothing with an answer printed on it sits beside a student page:** a lesson's keys are in its `Keys` folder, and every such file says Key in its name.")
     A("")
@@ -221,7 +229,10 @@ def start_here(placed):
     A("- **No benchmark codes on student pages.** The deck title slide and the keys and " + ("Teacher Editions" if editions else "Lesson Plans") + " carry them.")
     A("- **Opens cleanly in Google Docs.** Every document is a fixed-width table layout with no nested tables and a spacer after every block; fonts are Times New Roman / Georgia / Arial with FreeSerif for the bubbles only.")
     A("- **Every answer is re-derived by machine at build time.** Every item carries a `check` that sympy evaluates (variable bases as symbols); every multiple-choice distractor must name its error; every scientific-notation coefficient is scanned for the [1, 10) rule; the build refuses on any finding. The post-build suite (`checks.py`) then reads the rendered PDFs for off-page text, glyph coverage, Google-Docs layout rules and the timing plan.")
-    A("- **Math Nation's copyrighted pages are not in this repository.** The audit in `Reference/` records what was checked and what was found; the items here are a mix of the book's (verified) and original ones, aligned to the benchmark text and the B1G-M first.")
+    if AUDIT:
+        A("- **Math Nation's copyrighted pages are not in this repository.** The audit in `Reference/` records what was checked and what was found; the items here are a mix of the book's (verified) and original ones, aligned to the benchmark text and the B1G-M first.")
+    else:
+        A("- **Nothing here is taken from Math Nation.** The book was read for the unit's scope and the shapes of its test's questions only; every lesson and question is built from the benchmark text and the B1G-M. The plan and the review's rulings are in `Reference/`.")
     A("")
     A("---")
     A("")

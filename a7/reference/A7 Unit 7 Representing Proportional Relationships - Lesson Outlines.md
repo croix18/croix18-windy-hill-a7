@@ -109,7 +109,7 @@ three points though Math Nation's own test never asks it; "slope" is on no page.
 ## Shared across the unit (the unit sheet — every builder holds to it)
 
 - **Reserved for the paper — keep these off every lesson and the Review:** the stories fabric by the yard, the
-  snail in seconds, robots, pages a minute, apples, plumber, pens, gas, tickets at 8.50, Marcus, water's weight,
+  ladybug in seconds (a snail in the plan; see "As built"), robots, pages a minute, apples, plumber, pens, gas, tickets at 8.50, Marcus, water's weight,
   trains, the pump in liters; and their relationships in the same form — the tables of 1, 4, 6, 7A, 7B, 8, 10,
   13 and 14; the lines through (2, 1) and (4, 2) · (1, 3), (2, 3), (3, 2) and (2, 2) together on one grid ·
   (5, 3) and (10, 6) · (5, 1) and (10, 2) · (0, 2) and (2, 4) · (2, 6) beside (2, 8) · (5, 2) and (10, 4) ·
@@ -121,7 +121,7 @@ three points though Math Nation's own test never asks it; "slope" is on no page.
   greater constant gives the steeper line".
 - **Warm-ups** are written out below, four a day in the kit's bands — yesterday · last week (inside the unit's
   first week, an earlier lesson of the unit) · last unit (Unit 11) · the prerequisite. None repeats another day's.
-- **Figures** come from `u7/figs7.py` (`/home/claude/lean/u7/FIGS7.md` says how to call it). Question slides:
+- **Figures** come from `u7/figs7.py` (`a7/build/u7/FIGS7.md` says how to call it). Question slides:
   lettering 18 pt or more; a graph a student reads is at least 2.6 in tall (the four-graph row is 2.2 in: the one
   exception).
 - **Every lesson:** nine boards, the ninth written; the multiple-choice boards are diagnostics — each wrong option
@@ -275,7 +275,7 @@ which row, and what it would have to be · *select all* from five (two tables, a
 proportional) · two lines on one grid, one through the origin: "Both are linear. Which is also proportional?" ·
 linear and not proportional, from an equation.
 
-## 7.05+06 · Mon 11 Jan · Equations of Proportional Relationships; Translating Representations · MA.7.AR.4.4
+## 7.05+06 · Mon 11 Jan · Writing Equations; Translating Representations · MA.7.AR.4.4
 
 IXL: Write equations for proportional relationships from tables — 6GU; Write equations for proportional
 relationships from graphs — JKH; Write and solve equations for proportional relationships — VKK.
@@ -393,7 +393,7 @@ description; writing y = px, and the other way round; comparing; reading a scale
 
 Two readers who had not seen the plan written — a Barton reader and a FAST reader, both Claude Opus 5.5 —
 recomputed every number (none wrong) and filed 41 findings: 3 blockers, 16 majors, 22 minors
-(`plan_barton.md`, `plan_fast.md` in the session). All are taken as they stand except these:
+(`plan_barton.md`, `plan_fast.md`, in the session's workspace and not kept). All are taken as they stand except these:
 - The test's last choice question (FAST 10) became a table from an equation with an entry found backward (13),
   rather than a reworded description; "what it means" is asked once, in 5(b).
 - The robots question (FAST 12) moved into the AR.4.3 section; the tracker is 4 and 3.
@@ -403,3 +403,36 @@ recomputed every number (none wrong) and filed 41 findings: 3 blockers, 16 major
 - 7.02+03's first Your Turn (Barton 14) has numbers of its own — the reader's were the test's table 7A.
 The blockers were a discrete context under a draw-the-line key (the test's question 1), a description that did
 not name its two quantities (7E), and a scale distractor that pointed the wrong way (7.01 board 6).
+
+## As built (21 Nov) — where the unit differs from this plan
+
+The built unit was solved blind (269 questions, no wrong key) and read by three readers who had not seen it written
+(a critic, a Barton reader and a FAST reader, Claude Opus 5.5): 1 blocker, 13 majors, 21 minors. The lead ruled on
+each, six fixers applied the rulings, and the changed questions were solved blind again. Every ruling, with its
+exact words and what was not taken, is in `A7 Unit 7 Representing Proportional Relationships - Review Rulings.md`.
+Where the sections above say otherwise, this is what was built:
+
+- **The method sentence** is "On the same axes, the greater positive constant gives the steeper line." (the plan's
+  was false for the unit's negative constants).
+- **The test.** 2: a ladybug. 5(a) asks for the constant with no unit named, and 5(b)'s four choices carry no
+  number. 8(a)'s choices name no row; 8(b) is "If the cost is not proportional, which row would have to change, and
+  what would its cost have to be? If it is proportional, write "none"." 9's choices are A and B · B only · A only ·
+  Neither (the plan's "y goes up 3 for each 1 of x in both" went to the Review). The key prints each scoring rule
+  and the equal forms it accepts.
+- **7.01.** Board 4's y-axis counts by 7. Board 7 is a copier (pages a minute is the paper's).
+- **7.02+03.** Warm-up 4 is 7/8. The Independent Set's second table has whole numbers and the constant 3/7.
+- **7.04.** The lesson names both benchmarks in its plan. Notes II's second graph is y = 2x + 3; Notes III is
+  "Proportional: nothing added at the start" and holds the description test, which the plan left to Example 2.
+  Board 6's descriptions are a tub that starts at 10 gallons and parking at \$3 an hour.
+- **7.05+06.** The deck is titled "Writing Equations; Translating Representations": with the longer title a key's path in the
+  package passed 180 characters and the install refused it. Example 1 is \$120 for 4 hours (e = 30h, the axis by 20); its Your Turn is \$160 for 4 hours and asks
+  for two points, not a drawn graph. Board 4 is eggs in cartons of 18; board 5 writes d for kilometers; the
+  Independent Set writes n for yards and completes a table for y = 4.2x.
+- **7.07.** Notes I says "Make both say y for each 1 of x, then compare the constants."; Notes III says "Past the
+  edge of the grid, use the equation". Example 2 is a sloth and is worked with its equation (10 = (2/3)t); its Your
+  Turn is a label printer; board 8 is an elevator; the Independent Set's last question has Kayla walking, 90
+  minutes.
+- **The Review** has 17 questions: the paper's two picture-choice shapes were added (4 and 5), 11(a) is a choice
+  and 11(c) asks about y = 9x − 4.
+- **The banks** were read by the lead after the review: eleven questions changed, most because their tables were
+  the paper's.

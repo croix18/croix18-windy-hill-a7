@@ -116,7 +116,7 @@ def square(a, x1, x0=0, n=24):
 
 
 def plane(xr, yr, lines=(), points=(), xs=1, ys=1, xname="x", yname="y", step=None, fs=22, pt=9.5, inches=3.0,
-          label=True, solution=None, curves=(), letters=None, xstep=None, ystep=None):
+          label=True, solution=None, curves=(), letters=None, xstep=None, ystep=None, aspect=1):
     """A coordinate plane from xr[0] to xr[1] and yr[0] to yr[1] (in the story's own numbers) with its pale grid, one
     grid line every `xs` across and every `ys` up (1, 2, 4, 5, 10, 20 … — each axis its own), the two axes and their
     numbers. xr = (0, …), yr = (0, …) is the first quadrant; negative ranges give the four-quadrant plane.
@@ -133,7 +133,9 @@ def plane(xr, yr, lines=(), points=(), xs=1, ys=1, xname="x", yname="y", step=No
     lists of (x, y) in the story's numbers (`square(a, x1)`), drawn after the lines in the next style, every point on
     the plane. `xname`, `yname` title the axes ("x" and "y" sit at the axes' ends; a longer name — "pounds", "cost
     in dollars" — is set under the plane and over its top-left corner). `xstep`/`ystep` (default `step`, default
-    by room) number every k-th grid line."""
+    by room) number every k-th grid line. `aspect` is a grid cell's height against its width (default 1, square
+    cells, as every call before 21 Nov 2026 drew them); below 1 the cells are wider than tall — added for 7.01
+    board 6, four graphs on one row that must each be 2 in wide in a row 2.8 in tall."""
     x0, x1 = xr
     y0, y1 = yr
     L = []
@@ -274,6 +276,8 @@ def plane(xr, yr, lines=(), points=(), xs=1, ys=1, xname="x", yname="y", step=No
             h = 0.13 * i / 6.5
             w = (0.13 ** 2 - h * h) ** 0.5
             sh.append(dict(t="seg", a=(X(px) - w, Y(py) + h), b=(X(px) + w, Y(py) + h), color=INK))
+            if aspect != 1:
+                sh[-1]["_dot"] = Y(py)          # a dot's chord moves with its centre and keeps its round shape
         if name is None:
             name = f"({_minus(px)}, {_minus(py)})"
         if name:
@@ -283,6 +287,20 @@ def plane(xr, yr, lines=(), points=(), xs=1, ys=1, xname="x", yname="y", step=No
             sh.append(_t(X(px), Y(py), name, ha=ha, va=va,
                          off=(k * (0.5 if ha == "left" else -0.5 if ha == "right" else 0),
                               k * (0.45 if va == "bottom" else -0.45 if va == "top" else 0))))
+    if aspect != 1:
+        # every height in the plane drawn `aspect` times as tall; a dot stays round (its circle and its chords
+        # move with its centre), and the labels' offsets are in ems, so they do not change
+        k = float(aspect)
+        for s in sh:
+            if s["t"] == "seg" and "_dot" in s:
+                d = s.pop("_dot") * (k - 1)
+                s["a"] = (s["a"][0], s["a"][1] + d); s["b"] = (s["b"][0], s["b"][1] + d)
+            elif s["t"] == "seg":
+                s["a"] = (s["a"][0], s["a"][1] * k); s["b"] = (s["b"][0], s["b"][1] * k)
+            elif s["t"] == "circle":
+                s["c"] = (s["c"][0], s["c"][1] * k)
+            elif s["t"] == "text":
+                s["xy"] = (s["xy"][0], s["xy"][1] * k)
     return dict(kind="shapes", fs=fs, pt=pt, **{"in": inches}, shapes=sh)
 
 
