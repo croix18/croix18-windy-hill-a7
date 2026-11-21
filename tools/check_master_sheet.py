@@ -314,7 +314,8 @@ for i, (cells, c) in enumerate(zip(rows, cal), 2):
         if missing: bad(f"r{i} {code} missing links", missing)
         L = specs[stem(code, u)]
         if v["Learning target"] != L["target"] or v["Essential question"] != L["essential"]: bad(f"r{i} target/EQ")
-        if v["Vocabulary"] != ", ".join(t for t, _ in L["vocab"]): bad(f"r{i} vocab")
+        # a lesson that introduces no term (A7 7.07) has an empty cell, which reads back as None
+        if (v["Vocabulary"] or "") != ", ".join(t for t, _ in L["vocab"]): bad(f"r{i} vocab")
         b9 = L["whiteboard"][8]
         if v["Closure question (board 9)"] != tex2text.text(b9["qtext"]) or v["Closure answer"] != tex2text.text(b9["answer"]): bad(f"r{i} closure")   # the sheet prints the question as words (a board with $…$ since 18 Oct)
         mt = v["MTRs (tap for where they show up)"].split("\n")
@@ -467,7 +468,9 @@ for u, U in sorted(units.items()):
             exp.append((n, pts, sec["benchmark"], bool(it.get("transfer")), "Multiple choice" if it.get("choices") else ("Parts" if it.get("parts") else "Written")))
     got = [(r[0].value, r[2].value, r[4].value, r[6].value == "yes", r[5].value) for r in items]
     if got != exp: bad(f"Unit {u} item map differs")
-    summ = {wt.cell(row=start + 2 + k, column=9).value: wt.cell(row=start + 2 + k, column=10).value for k in range(1, 6)}
+    # one row for each benchmark of the tracker (Unit 7 has six; the first five units had five or fewer)
+    summ = {wt.cell(row=start + 2 + k, column=9).value: wt.cell(row=start + 2 + k, column=10).value
+            for k in range(1, len(U["assessment"]["tracker"]) + 1)}
     for bm, pts in U["assessment"]["tracker"].items():
         if summ.get(bm) != pts: bad(f"Unit {u} {bm} points", summ.get(bm), pts)
     print(f"Unit {u} test: {len(items)} questions, {sum(x[1] for x in exp)} points; by benchmark {U['assessment']['tracker']} matches the sheet")
@@ -477,7 +480,10 @@ wsd = wb["Standards"]; srows = list(wsd.iter_rows(min_row=2))
 codes_seen = [r[0].value for r in srows]
 if len(set(codes_seen)) != len(codes_seen): bad("duplicate standards rows")
 if set(SOT) - set(codes_seen): bad("SoT benchmark missing from Standards", set(SOT) - set(codes_seen))
-test_pts = {bm: p for U in units.values() for bm, p in U["assessment"]["tracker"].items()}
+test_pts = collections.Counter()       # a benchmark tested in two units (MA.7.AR.4.5: Units 5 and 7) has both tests' points
+for U in units.values():
+    for bm, p in U["assessment"]["tracker"].items():
+        test_pts[bm] += p
 for r in srows:
     code = r[0].value
     if code in SOT and r[2].value != SOT[code]: bad("Standards wording", code)
