@@ -440,3 +440,7 @@ Where the sections above say otherwise, this is what was built:
 **Reworded, 21 Nov (ruling 58).** The words of every deck and paper were changed that afternoon — "versus", "per", "for
 every 1 unit of x", pairs for rows, the definition as "a constant multiple", whole questions — and no number, picture or
 key. The sentences quoted above are the plan's; what is printed now is in the Review Rulings, "the wording pass".
+
+**Reworded again, 21 Nov, later (ruling 59).** "Constant" for "steady"; the Lesson Plans in whole sentences; no
+instruction line on an Independent Set; the constant of proportionality "for every pair where x is not 0" at its
+definition. The outlines above keep the words they were planned in; the Review Rulings list what changed.

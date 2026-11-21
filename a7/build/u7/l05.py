@@ -102,25 +102,25 @@ L = dict(
     benchmark_text="Given any representation of a proportional relationship, translate the representation to a written description, table or equation.",
     target="I can write the equation y = px from a table, a graph or a description, and translate from one representation to another.",
     essential="How does one number, the constant of proportionality, let us write the same relationship as a table, a graph, an equation and a sentence?",
-    building_on="7.04 — is it proportional? the table, graph and description tests; linear and also proportional; 7.02–03 — the constant from a table, a graph and a description; Grade 6 — one-step equations.",
-    working_toward="7.07 — comparing proportional relationships: each one's constant, then the question asked; Unit 10 (January) — the constant named as the slope of y = px.",
+    building_on="Lesson 7.04 tested whether a relationship is proportional from a table, a graph and a description, including linear relationships that are also proportional. Lessons 7.02–03 found the constant from a table, a graph and a description. In Grade 6, students solved one-step equations.",
+    working_toward="Lesson 7.07 compares proportional relationships by finding each one's constant and then answering the question asked. In Unit 10 (January), the constant is named as the slope of y = px.",
     vocab=[("equation of a proportional relationship", "$y = px$, where p is the constant of proportionality (some books write k)")],
     ixl=["Write equations for proportional relationships from tables — 6GU",
          "Write equations for proportional relationships from graphs — JKH",
          "Write and solve equations for proportional relationships — VKK"],
-    closure="Board 9 is written work and it is the exit evidence: Lee divided x by y; y ÷ x is the same for every pair, 2 ÷ 8 = 1/4, so y = (1/4)x, and the check (1/4)(20) = 5 holds. A board with the right equation and no check, or no word on what went wrong, has half of it.",
+    closure="Whiteboard question 9 is answered in writing and serves as the exit ticket. A complete answer says that Lee divided x by y. Because y ÷ x is the same for every pair and 2 ÷ 8 = 1/4, the equation is y = (1/4)x, and the check (1/4)(20) = 5 holds. An answer with the right equation but no check, or with no explanation of the mistake, is only half complete.",
 
-    mtr=[("MTR.2.1", "one relationship as a table, a graph, an equation and a sentence (Example 1, boards 6 and 8)"),
-         ("MTR.4.1", "boards 3 and 5: a split vote, sixty seconds to convince a neighbor, re-vote"),
-         ("MTR.6.1", "every equation checked by substituting a pair (Notes I, board 9)")],
+    mtr=[("MTR.2.1", "Students show one relationship as a table, a graph, an equation and a sentence (Example 1 and whiteboard questions 6 and 8)."),
+         ("MTR.4.1", "On whiteboard questions 3 and 5, a divided class has sixty seconds to convince a neighbor and then votes again."),
+         ("MTR.6.1", "Students check every equation by substituting a pair of values (Notes I and whiteboard question 9).")],
     hoq=[("Why is one pair from a table enough to find p, but not enough to know the table is proportional?", "DOK 2"),
          ("m = 60h and h = (1/60)m: how can one relationship have two constants?", "DOK 3"),
-         ("Board 3: the line through (6, 2). Why is y = 6x wrong, and how could you see it without dividing?", "DOK 2"),
+         ("On whiteboard question 3, the line passes through (6, 2). Why is y = 6x wrong, and how could you see it without dividing?", "DOK 2"),
          ("How can you tell from an equation alone that its graph goes through the origin?", "DOK 2")],
     differentiation=[
-        ("ESE / 504", "A card with the three forms side by side — table, y ÷ x, y = px — and the line \"y ÷ x is the same for every pair\" printed on it; Notes I stays up from board 1 to board 2."),
+        ("ESE / 504", "Provide a card that shows the three forms side by side (a table, y ÷ x and y = px) with the line “y ÷ x is the same for every pair” printed on it. Keep Notes I on display for whiteboard questions 1 and 2."),
         ("ELL", "**Equation**: a sentence with an equals sign, c = 7.5n. **Constant**: the number that stays the same, the amount of y for every 1 unit of x. **y**: the quantity the equation gives, alone on one side."),
-        ("Enrichment", "After board 8, write board 7's equation the other way around — the minutes t for d miles (t = (1/9)d) — and explain what 1/9 means: one ninth of a minute per mile.")],
+        ("Enrichment", "After whiteboard question 8, students write question 7's equation the other way around, giving the minutes t for d miles (t = (1/9)d), and explain what 1/9 means: one ninth of a minute per mile.")],
 
     warmup=[
         dict(stem="For (3, 5), (6, 10) and (9, 16), is y proportional to x?", answer="No",
@@ -171,7 +171,7 @@ L = dict(
              # repeat_ok: rule 43 matches 160 and 40 only on Example 1's dollars axis (0 to 180 by 20) and the hours
              # 0, 2, 4, 6 that every table in this structure shares (rule 5: same structure, new numbers).
              your_turn=dict(repeat_ok=True, min=4,
-                            prompt=["Theo earns \\$160 for 4 hours at a steady rate."],
+                            prompt=["Theo earns \\$160 for 4 hours at a constant rate."],
                             ask="Find the constant, the equation for e, the table and two graph points.",
                             fig=YT1, fig_a=YT1A,
                             steps=["Constant:  $160 \\div 4 = 40$ dollars per hour",
@@ -265,7 +265,7 @@ L = dict(
              steps=["9 miles per minute:  $d = 9t$", "$d = 9(40) = 360$"],
              answer="d = 9t; 360 miles",
              check=("many", ("eq", "9*40", "360")),
-             wrong="d = 180t — the passengers taken as the rate [ruling 22: the extra number]; 49 — 9 + 40, added [Notes II: y = px]"),
+             wrong="d = 180t — the passengers taken as the rate [an extra number, included on purpose]; 49 — 9 + 40, added [Notes II: y = px]"),
         # repeat_ok: rule 43 matches only the 12 (and 1) shared with warm-up 2's 12 pencils — a coincidence of values.
         dict(repeat_ok=True, text=["The equation $t = 12c$ gives the minutes t it takes to wash c cars.",
                    "**What does the 12 tell you? Answer in a complete sentence."],
@@ -439,13 +439,13 @@ L = dict(
     ],
 
     te=dict(
-        must="Equation from a table/graph/description; table from an equation; description from a graph; either variable as y.",
-        must_not="Anything not through the origin.",
+        must="Students write an equation from a table, a graph or a description, make a table from an equation and write a description from a graph. Either variable can be y.",
+        must_not="Every relationship in this lesson passes through the origin. Lines that do not are not used.",
         read_first=[
             "Two book lessons, 7.5 and 7.6, taught as one day: writing y = px from a table, a graph and a description, then going from any one form to the others. Built from the benchmark and its clarifications first (the unit's Lesson Outlines, §7.05+06, standing decisions 2, 4, 6 and 10).",
             "Florida writes p; say once, at the vocabulary slide, that some books write k. Notes III is the benchmark's own example: m = 60h and h = (1/60)m are one relationship, two constants — the question tells which quantity is y, and the test asks it once (question 12b).",
             "Example 1 goes from a description to the other three forms; its graph's dollars axis counts by 20: say \"read the scales first\" before a point is plotted. Example 2 writes and then solves, and solves again the other way around to show the same answer."],
-        materials="Whiteboards and markers. The Independent Set, one per student, after board 9.",
+        materials="Whiteboards and markers. Hand out the Independent Set, one per student, after whiteboard question 9.",
         variation="Boards 1–2 write the equation from a table (whole numbers, then money with named letters); 3 votes on a graph's equation; 4 from a description; 5 votes on which quantity is y. The pattern breaks at 6 — a table FROM an equation, its last x found backward; 7 is the plane story with its passengers as the extra number; 8 says an equation in a sentence; 9 is Lee's x ÷ y, written. The set breaks at 4: the same relationship the other way around.",
         audit=["Every constant re-derived by sympy at build time as y ÷ x for every printed pair, over exact rationals; every table from an equation checked entry by entry, the backward entry solved; every graph drawn from y = px by u7/figs7.py, which refuses a marked point not on its line.",
                "Every wrong option of a choice item checked to fail at the item's own point or at the origin."],

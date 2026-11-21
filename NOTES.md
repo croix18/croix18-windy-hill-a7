@@ -27,7 +27,7 @@ on the website, and M7 has not been moved to the new kit.
   fitted its cell and nothing refused it. Fixed, and the kit's `rulingcheck` now refuses it (no other unit has one).
 - **Math Nation** is read for a unit's scope and its test's item shapes, in one note that stays out of the repository. There
   is no Unit 7 audit and there will not be one.
-- **The kit** (Windmill `b0d893e`, vendored): `reword.py` (a wording pass as exact strings) and the five lean tools (`reader_copy.py`, `student_view.py`, `blind_diff.py`,
+- **The kit** (Windmill `7344e7e`, vendored): `reword.py` (a wording pass as exact strings) and the five lean tools (`reader_copy.py`, `student_view.py`, `blind_diff.py`,
   `unit_repeats.py`, `changed_slides.py`), `BUILDER CARD.md`, `RULINGS LEDGER.md`; a one-point section prints "1 point"; a
   paper's title keeps clear of the name lines.
 - **Unit 7, Representing Proportional Relationships** (MA.7.AR.4.1–4.5, MA.8.AR.3.1; taught Wed 6 – Tue 12 Jan, spiral day
@@ -85,17 +85,56 @@ on the website, and M7 has not been moved to the new kit.
   than Lexend (none but the answer bubbles, check boxes and back arrow, which Lexend does not have). Page counts are
   unchanged but for two bank keys (one page each way).
 
+- **The second wording pass (ruling 59).** At 3:08 pm on 21 Nov Croix sent ChatGPT's third audit, of the rebuilt slides and
+  the All Documents packet (*"Here's what chat found"*). Seven of its findings were real. Four of its "top ten" were wrong on
+  the facts: Theo's e and h are named by the table's rows; both pumps are named, on the table and on the graph; the
+  Reference Sheet is its own handout, which was not in the two PDFs; "two constants" is the standard statement. His three
+  answers, asked one at a time: "steady" — *"Switch to "constant""*; the Independent Set's opening line — *"Just get rid of
+  it completely"*; who reads the Lesson Plans — *"John or admin: write it out"*.
+  - **Kit** (ruling 59, card 20): the Lesson Plan template prints whole sentences in both plan styles — "Required by the
+    benchmark." and "Not part of this lesson." for "Must." and "Must not."; the sequence rows, the gradual release, "Peer
+    discussion (MTR.4.1)", the practice line; the checks table headed "Likely wrong answers and their causes"; the build's
+    notes beside three headings gone. An Independent Set prints no instruction line. The Review's directions are the
+    Practice Test's ("Show your work for problems that require calculations."). No ruling number prints: the key's
+    follow-through note and the transfer note say it in words.
+  - **Unit 7's specs** (`reword.py`, 91 edits): "constant" for "steady" in 28 places; every plan field of the five lessons
+    as sentences (`te.must`, `te.must_not`, the MTR evidence, Building on, Working toward, three higher-order questions,
+    the ESE / 504 and Enrichment rows, the closure, the materials — 7.01's 43-minute day no longer mentions the build);
+    "[an extra number, included on purpose]" for "[ruling 22]"; the constant of proportionality "equals y ÷ x for every
+    pair where x is not 0", once, at its definition (7.02–03's vocabulary slide and the Reference Sheet), and a fourth
+    higher-order question in 7.02–03's plan ("Why can that pair not be used to find the constant?"); 7.04's note "Going
+    up by the same amount does not make y ÷ x the same."; 7.04 board 5 "passes through (0, 0)"; "Explain." for "Give the
+    reason.".
+  - **What the slide would not hold:** 7.04 board 5's answer line is "It passes through (0, 0)." ("Their line passes
+    through" ran to two lines); the definition says "where x is not 0" in words ("(0, 0)" set as mathematics broke across
+    the line and printed a dollar sign, which `markup` refused; without the space it left a gap before its colon); the
+    snail of 7.02–03 board 7 "crawls 34 centimeters every 8 minutes" ("at a constant speed." left one word on a second
+    line); the pump question's fuller form needs two lines and stays as it was.
+  - **Not taken** (each with its reason in the Review Rulings): "x ≠ 0" on every line; "two reciprocal unit rates"; the
+    longer board questions; dropping the comma before a unit; "The price per pound is constant"; removing the B1G-M tags;
+    "Independent Practice".
+  - **Proof:** gates 0 (282 items re-derived), `unit_repeats.py u7` 0, `checks: 0 findings` after a full rebuild;
+    `student_view.py` before and after differs in 23 questions (20 that said "steady", the snail among them, and 3
+    that said "Give the reason.") and 3 answers, and in no key and no check — so no solver was run, because nothing that is asked changed; all 12 changed
+    slides, the five plans and one page of each changed paper looked at; every PDF searched for the old lines. Page
+    counts are unchanged.
+
 ### Open, for Croix (21 Nov)
 
-- **Wording left as it is, his to say:** "steady" (speed, rate, pace: both audits write "constant" in their rewrites; the
-  state's guide says "constant rate of change" of slope and never "steady"); the name "Independent Set" (one audit wants
-  "Independent Practice": it is in every file name, the site, the master sheet and six taught units); the ruling-22
-  numbers (the snail's age, the 180 passengers, the 40 seats, the 50 pages, room 114).
+- **Wording left as it is, his to say:** the name "Independent Set" (the audits want "Independent Practice": it is in
+  every file name, the site, the master sheet and six taught units); the ruling-22 numbers (the snail's age, the 180
+  passengers, the 40 seats, the 50 pages, room 114).
+- **The follow-through note is still on the Practice Test key**, now without its ruling number. On 7 Nov he asked for the
+  line gone "across everything"; on 14 Nov the student papers dropped it and the key kept it as the teacher's grading
+  note. Whether the key keeps it is his to say (`FOLLOW_THROUGH_KEY` in the kit's `unitbuild.py`).
 - **Units 3–6 and 11 keep the old wording** until they are rebuilt: "against" in every one of them, "the other way
-  round" in Units 4 and 5, "Answer it." under every board, the old IXL lines. Unit 11 is taught from 30 Nov.
+  round" in Units 4 and 5, "Answer it." under every board, the old IXL lines; and, since ruling 59, the Lesson Plans'
+  shorthand, the Independent Set's opening line and "Circle your final answer" on the Review. The kit's lines change at a
+  rebuild; a unit's own plan sentences (`te.must`, the MTR evidence, the closure) need the rewrite Unit 7 had. Unit 11
+  is taught from 30 Nov.
 - **Merge and publish:** say the word and the branch goes to `main` and Unit 7 onto the site. The site has not yet shown a
   unit with no Teacher Edition: `publish_web.py` publishes what a package holds, and that wants one look on the site.
-  **Windmill's branch merges with it** (`41a5a7c`): Windmill's Drive-script test waited twelve hours for a file he
+  **Windmill's branch merges with it** (`2a925fa`; the Drive test's fix is `41a5a7c`, the kit of ruling 59 `7344e7e`): Windmill's Drive-script test waited twelve hours for a file he
   deleted to come back, and with Unit 7's package the mirror's hourly check needs fifteen (1,769 files at 120 an hour),
   so Windmill `main`'s `tools/check.sh` fails beside an A7 that holds Unit 7. The test is fixed on Windmill's branch; the
   script in his Google account is unchanged (Windmill HANDOFF, 21 Nov).

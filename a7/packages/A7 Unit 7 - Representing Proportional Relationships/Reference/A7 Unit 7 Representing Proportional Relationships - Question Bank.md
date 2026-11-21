@@ -86,10 +86,10 @@ The printed keys in each lesson's `Keys` folder are generated from the same spec
 - Board 6: option E (parking, \$3 per hour) added — the kit sets five options on a select-all.
 
 **Question Bank answers.**  
-1. Yes. y ÷ x is 4/3 for every pair.  2. No. 9 ÷ 2 = 4.5, but 17 ÷ 4 = 4.25.  3. The miles for 6 hours. It should be 72 miles.  4. Yes. It is a straight line through the origin.  5. No. It does not pass through the origin.  6. Yes. The points lie on a line that reaches (0, 0).  7. No. It starts at 6 cm.  8. Yes. 12 cars per hour, with nothing added at the start.  9. B B  10. No. When x is 0, y is −6.  11. A, B, E A, B, E  12. No. 16 ÷ 3 is not 5, and y ÷ x must be the same for every pair.
+1. Yes. y ÷ x is 4/3 for every pair.  2. No. 9 ÷ 2 = 4.5, but 17 ÷ 4 = 4.25.  3. The miles for 6 hours. It should be 72 miles.  4. Yes. It is a straight line through the origin.  5. No. It does not pass through the origin.  6. Yes. The points lie on a line that passes through (0, 0).  7. No. It starts at 6 cm.  8. Yes. 12 cars per hour, with nothing added at the start.  9. B B  10. No. When x is 0, y is −6.  11. A, B, E A, B, E  12. No. 16 ÷ 3 is not 5, and y ÷ x must be the same for every pair.
 
 **Question Bank – Additional answers.**  
-1. Yes. y ÷ x is 0.75 for every pair.  2. No. 9 ÷ 4 = 2.25, but 11 ÷ 5 = 2.2.  3. The minutes for 7 laps. It should be 21 minutes.  4. Yes. It is a straight line through the origin.  5. No. It does not pass through the origin.  6. Yes. The points lie on a line that reaches (0, 0).  7. No. It starts at 300 gallons.  8. Yes. 45 bottles per minute, with nothing added at the start.  9. A A  10. No. When x is 0, y is 5.  11. A, B, D A, B, D  12. No. 26 ÷ 6 is not 4.5, and y ÷ x must be the same for every pair.
+1. Yes. y ÷ x is 0.75 for every pair.  2. No. 9 ÷ 4 = 2.25, but 11 ÷ 5 = 2.2.  3. The minutes for 7 laps. It should be 21 minutes.  4. Yes. It is a straight line through the origin.  5. No. It does not pass through the origin.  6. Yes. The points lie on a line that passes through (0, 0).  7. No. It starts at 300 gallons.  8. Yes. 45 bottles per minute, with nothing added at the start.  9. A A  10. No. When x is 0, y is 5.  11. A, B, D A, B, D  12. No. 26 ÷ 6 is not 4.5, and y ÷ x must be the same for every pair.
 
 ---
 

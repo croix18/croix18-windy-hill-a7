@@ -355,3 +355,57 @@ first pass, 14 after the fixes, 3 after Example 2's whole questions went back in
 every PDF searched for the old lines ("Answer it.", "against", "the other way round", "easy points": none left);
 every character of text is Lexend (the only other glyphs are the answer bubbles, the check boxes and the back arrow,
 which Lexend does not have).
+
+## 21 Nov, later — the second wording pass (ruling 59)
+
+ChatGPT's third audit ("Deep Second-Pass Editorial and Consistency Audit"), of the rebuilt All Slides and All Documents
+PDFs, sent by Croix at 3:08 pm. His three answers: "steady" — "Switch to "constant""; the Independent Set's opening line
+— "Just get rid of it completely"; who reads the Lesson Plans — "John or admin: write it out".
+
+**Taken**
+
+1. Nothing printed carries a ruling number or a word about the build. 7.01's Materials said "the build cannot print a
+   43-minute one"; six wrong answers were cited "[ruling 22]" (now "[an extra number, included on purpose]"); the
+   Practice Test key's note said "(ruling 19)".
+2. The constant of proportionality "equals y ÷ x for every pair where x is not 0" — at its definition (7.02–03's
+   vocabulary slide, the Reference Sheet) and nowhere else: a table whose x-values are 2, 4 and 8 is still tested
+   "for every pair". 7.02–03's plan gains the question "Every proportional relationship includes the pair (0, 0). Why can
+   that pair not be used to find the constant?" (DOK 2).
+3. 7.04 Notes I and the Reference Sheet: "Going up by the same amount does not make y ÷ x the same." A proportional
+   table goes up by the same amount too, so "is not the same ratio" was loose.
+4. 7.04 board 5 and its two bank twins: a line "passes through (0, 0)", the unit's phrase, not "reaches". ("Extend the
+   line, and it reaches (0, 0)" stays in Notes II and on the Reference Sheet: there the line is being extended.)
+5. "Explain." for "Give the reason." (nine places in 7.04), so a set asks one way.
+6. The Review's directions are the Practice Test's first sentence: "Show your work for problems that require
+   calculations." (kit).
+7. "Constant" for "steady": a constant rate, speed, pace or increase, in 28 places.
+8. The Lesson Plans in whole sentences (kit template and each lesson's own fields), and "whiteboard question 3" for
+   "board 3" in a plan's prose. The checks table keeps its compact form (wrong answer — cause [source]) under the
+   heading "Likely wrong answers and their causes".
+9. An Independent Set prints no instruction line (kit).
+
+**Wrong on the facts**: Theo's e and h are named by his table's rows ("hours h", "dollars e"); both pumps are named, on
+the table and on the graph; the Reference Sheet exists (Handouts) and was not in the two PDFs; "two constants" is the
+standard statement (one for each direction); "11.07–08" is right, because A7 teaches Unit 11 before Unit 7; the packet's
+Independent Sets and banks are its keys by design (All Documents is the teacher's packet; the student copies are in
+Lessons).
+
+**Not taken**: "x ≠ 0" on every line that says "every pair"; "two reciprocal unit rates, depending on which quantity we
+treat as the output"; every longer board question (a board is read at a glance); "× " in a worked line; dropping the
+comma before a unit ("…, in dollars per pound" is how the state's items write it); "The price per pound is constant" for
+"cost the same amount per pound"; removing the B1G-M tags (the state's guide, cited for each wrong answer); "Independent
+Practice"; "Higher-Order Questions" renamed; the ruling-22 numbers removed; "inverse conversion equation" for "the other
+way around"; a second sentence on every answer slide.
+
+**What the slide would not hold**: 7.04 board 5's answer line is "C — Yes. It passes through (0, 0)." ("Their line
+passes through" and "The line passes through" each ran to two lines; the step above it names the line); the definition
+is in words, "where x is not 0" ("$(0, 0)$" broke across the line at its space and printed a dollar sign — `markup`
+refused it — and without the space left a gap before the colon); 7.02–03 board 7 is "A 3-year-old snail crawls 34
+centimeters every 8 minutes." ("…in 8 minutes at a constant speed." left "speed." alone on a second line; "every" is
+how the unit gives a rate: "8 copies every minute"); the pump question keeps "by how many gallons in 15 minutes?"
+("How many more gallons does it move in 15 minutes?" needs a second line).
+
+**Proof**: gates 0 (282 items re-derived); `unit_repeats.py u7` 0; a full rebuild, `checks: 0 findings`; the student
+view before and after differs in 23 questions (19 "steady" to "constant", 3 "Give the reason." to "Explain.", the
+snail) and 3 answers, in no key and no check, so no solver was run; the 12 changed slides, the five plans and a page of
+each changed paper looked at; every PDF searched for the old lines; page counts unchanged (plans 5 pages each).

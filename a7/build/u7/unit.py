@@ -154,7 +154,7 @@ def _ar43():
               why="Read the scales first: each square up is 0.5 centimeter. d = 0.5t gives 0.5(2) = 1 and 0.5(4) = 2: the line through the origin, (2, 1) and (4, 2) is graph D. In grid squares graph B looks like 0.5 — half a square for each second — but its line is d = 0.25t.",
               check=("many", ("eq", "F(1,2)*2", "1"), ("eq", "F(1,2)*4", "2"),
                      ("true", "2*1 != F(1,2)*1"), ("true", "F(1,4)*4 != F(1,2)*4"), ("true", "F(1,2) != F(1,2)*0")))
-    q3 = dict(stem="Four robots each move at a steady speed. The graph shows the distance each robot travels, in meters, versus the time, in seconds. Which line shows the robot that travels 3 meters every 2 seconds?",
+    q3 = dict(stem="Four robots each move at a constant speed. The graph shows the distance each robot travels, in meters, versus the time, in seconds. Which line shows the robot that travels 3 meters every 2 seconds?",
               fig=Q3_FIG, choices=["Line A", "Line B", "Line C", "Line D"], correct=1, answer="B", space=0.3,
               errors={"A": "3 meters every 1 second: line A passes through (1, 3) [B1G-M, MA.7.AR.4.3: the rate read for 1 second]",
                       "C": "the ratio reversed: line C goes 2 meters every 3 seconds, through (3, 2) [B1G-M, MA.7.AR.4.3: the ratio taken in the wrong order]",
@@ -166,7 +166,7 @@ def _ar43():
 
 
 def _ar42():
-    q4 = dict(stem="Kai reads at a steady pace. The table shows the number of pages he reads in different numbers of minutes. What is the constant of proportionality, in pages per minute?",
+    q4 = dict(stem="Kai reads at a constant pace. The table shows the number of pages he reads in different numbers of minutes. What is the constant of proportionality, in pages per minute?",
               fig=Q4_FIG, answer="3.5 pages per minute   (3.5 or 7/2)",
               why="y ÷ x is the same for every pair: 14 ÷ 4 = 3.5, 21 ÷ 6 = 3.5, 35 ÷ 10 = 3.5, 56 ÷ 16 = 3.5. 4/14 = 2/7 divides minutes by pages (minutes per page).",
               check=ratios([4, 6, 10, 16], [14, 21, 35, 56], "3.5"), space=0.7)
@@ -197,7 +197,7 @@ def _ar41():
                        "A plumber charges \\$40 to come to the house plus \\$55 per hour (total cost and number of hours).",
                        "A store sells pens for \\$0.85 each (total cost and number of pens)."],
               correct=[0, 2, 5], answer="A, C, F", space=0.3,
-              errors={"B": "a constant difference taken for a constant ratio: y goes up 2 each time, but 4 ÷ 1 = 4 and 6 ÷ 2 = 3 [B1G-M, MA.7.AR.4.1: a steady increase taken for proportional]",
+              errors={"B": "a constant difference taken for a constant ratio: y goes up 2 each time, but 4 ÷ 1 = 4 and 6 ÷ 2 = 3 [B1G-M, MA.7.AR.4.1: a constant increase taken for proportional]",
                       "D": "straight, but not through the origin: the line passes through (0, 2) [B1G-M, MA.7.AR.4.1: every straight line taken as proportional]",
                       "E": "a fee added at the start: 1 hour costs \\$95 and 2 hours \\$150, and 95 ÷ 1 is not 150 ÷ 2 [B1G-M, MA.7.AR.4.1: a start added]"},
               why="One point for exactly A, C and F. A: y ÷ x is 5.5 for every pair. C: a straight line through the origin, (5, 1) and (10, 2): 0.2 each time. F: the cost is 0.85 times the pens, nothing added at the start. B goes up by the same amount (4 ÷ 1 = 4, 6 ÷ 2 = 3); D passes through (0, 2); E adds a \\$40 fee.",
@@ -228,7 +228,7 @@ def _ar31():
               correct=2, answer="C", space=0.3,
               errors={"A": "every straight line taken as proportional: B passes through (0, 2) [B1G-M, MA.8.AR.3.1: every line taken as proportional]",
                       "B": "the start on the y-axis taken for the test: B starts at 2, so its y is not 0 when x is 0 [B1G-M, MA.8.AR.3.1: the start on the y-axis taken for the test]",
-                      "D": "the origin taken as missing because it is not marked: line A reaches (0, 0) [B1G-M, MA.8.AR.3.1: the origin taken as missing because it is not marked]"},
+                      "D": "the origin taken as missing because it is not marked: line A passes through (0, 0) [B1G-M, MA.8.AR.3.1: the origin taken as missing because it is not marked]"},
               why="A relationship that is linear is also proportional only when its line passes through the origin. A does (y = 3x: 3(2) = 6); B crosses the y-axis at 2 (y = 3x + 2: 3(2) + 2 = 8), so B is linear and not proportional.",
               check=("many", ("eq", "3*2", "6"), ("eq", "3*0", "0"), ("eq", "3*2 + 2", "8"),
                      ("true", "3*0 + 2 != 0"), ("true", "3*0 == 0")))
@@ -261,7 +261,7 @@ def _ar44():
 
 
 def _ar45():
-    q14 = dict(stem="Two trains travel at steady speeds. The table shows Train A's distances. The graph shows Train B's.", fig=Q14_FIG,
+    q14 = dict(stem="Two trains travel at constant speeds. The table shows Train A's distances. The graph shows Train B's.", fig=Q14_FIG,
                parts=[dict(label="a", stem="What is each train's constant of proportionality, in miles per hour?",
                            answer="Train A: 65 miles per hour;  Train B: 60 miles per hour",
                            why="One point: both. A: 130 ÷ 2 = 195 ÷ 3 = 325 ÷ 5 = 65. B: read the scales first — the line passes through (1, 60), (2, 120) and (3, 180): 60.",
@@ -269,7 +269,7 @@ def _ar45():
                       dict(label="b", stem="After 4 hours, how many miles farther has the faster train gone?", answer="20 miles",
                            why="Train A is faster (65 > 60). 65(4) = 260 and 60(4) = 240: 260 − 240 = 20. 5 is the difference for one hour.",
                            check=("many", ("eq", "65*4 - 60*4", "20"), ("true", "65 > 60")), space=0.6)])
-    q15 = dict(stem="A pump fills a tank at a steady rate. The graph shows the liters of water it pumps versus the minutes it runs. At this rate, how many minutes will it take to pump 30 liters?",
+    q15 = dict(stem="A pump fills a tank at a constant rate. The graph shows the liters of water it pumps versus the minutes it runs. At this rate, how many minutes will it take to pump 30 liters?",
                fig=Q15_FIG, answer="24 minutes",
                why="The line passes through (4, 5) and (8, 10): 5 ÷ 4 = 1.25 liters per minute. 30 = 1.25m, so m = 30 ÷ 1.25 = 24 — past the edge of the grid. 37.5 multiplies 30 by 1.25.",
                check=("many", ratios([4, 8], [5, 10], Fr(5, 4)), ("eq", "30/F(5,4)", "24")), space=0.8)
@@ -346,10 +346,10 @@ U = dict(
                          ["Shown as", "Proportional when", "Not proportional, for example"],
                          ["a table", "y ÷ x is the same for every pair", "x 1, 2, 3;  y 3, 7, 11:  3, then 3.5 — not the same"],
                          ["a graph", "a straight line through the origin", "a straight line from (0, 3); a curve"],
-                         ["a description", "a steady rate, nothing added at the start", "a \\$15 fee plus \\$2 per mile"],
+                         ["a description", "a constant rate, nothing added at the start", "a \\$15 fee plus \\$2 per mile"],
                          ["an equation", "y = px, nothing added", "y = 4x + 1"]])),
                      "**Test every pair.**  Two pairs that agree do not make a table proportional. One pair that is off breaks it: its y would have to be p times its x.",
-                     "**Going up by the same amount is not the same ratio.**  y 3, 7, 11 goes up 4 each time, but 3 ÷ 1 = 3 and 7 ÷ 2 = 3.5.",
+                     "**Going up by the same amount does not make y ÷ x the same.**  y 3, 7, 11 goes up 4 each time, but 3 ÷ 1 = 3 and 7 ÷ 2 = 3.5.",
                      "**A table need not show the pair (0, 0), and a graph need not mark it.**  Extend the line: if it reaches the origin, it passes the graph test.",
                      "**Linear, and also proportional?**  A linear relationship has a straight-line graph. It is also proportional only when its line passes through the origin: $y = 1.4x$ is proportional; $y = 1.4x + 2$ is linear but not proportional, because y is 2 when x is 0."]),
         dict(title="3.   Finding the Constant of Proportionality", right="Lessons 2–3 · y ÷ x",
@@ -380,7 +380,7 @@ U = dict(
         dict(title="7.   Vocabulary",
              blocks=[dict(vocab=[
                  ("proportional relationship", "two quantities are in a proportional relationship when one quantity is always a constant multiple of the other: y = px"),
-                 ("constant of proportionality", "the number p in y = px. It equals y ÷ x for every pair: the amount of y for every 1 unit of x (some books write k)"),
+                 ("constant of proportionality", "the number p in y = px. It equals y ÷ x for every pair where x is not 0: the amount of y for every 1 unit of x (some books write k)"),
                  ("unit rate", "the amount of y for 1 unit of x (grade 6); the constant of proportionality with its unit"),
                  ("origin", "the point (0, 0)"),
                  ("linear relationship", "a relationship whose graph is a straight line"),
@@ -420,7 +420,7 @@ U = dict(
                         ("eq", "F(2,3)*3", "2"), ("true", "F(2,3)*3 != F(3,2)*3"),
                         ("eq", "F(3,4)*2", "F(3,2)"), ("true", "F(3,4)*2 != F(3,2)*2"),
                         ("eq", "0 + F(3,2)", "F(3,2)"), ("eq", "1 + F(3,2)", "F(5,2)"), ("true", "0 + F(3,2) != F(3,2)*0"))),
-            dict(stem="Four toy cars each roll at a steady speed. The graph shows the distance each car rolls, in meters, versus the time, in seconds. Which line shows the car that rolls 4 meters every 3 seconds?",
+            dict(stem="Four toy cars each roll at a constant speed. The graph shows the distance each car rolls, in meters, versus the time, in seconds. Which line shows the car that rolls 4 meters every 3 seconds?",
                  fig=RC_FIG, choices=["Line A", "Line B", "Line C", "Line D"], correct=0, answer="A", space=0.3,
                  errors={"B": "4 meters every 1 second: line B passes through (1, 4) [B1G-M, MA.7.AR.4.3: the rate read for 1 second]",
                          "C": "the ratio reversed: line C goes 3 meters every 4 seconds, through (4, 3) [B1G-M, MA.7.AR.4.3: the ratio taken in the wrong order]",
@@ -430,7 +430,7 @@ U = dict(
                         ("true", "4*3 != 4"), ("true", "F(3,4)*3 != 4"), ("true", "1*3 != 4"))),
         ]),
         dict(title="The Constant of Proportionality", lessons="Lessons 2–3", benchmark="MA.7.AR.4.2", items=[
-            dict(stem="A kayaker paddles at a steady speed. The table shows the miles she paddles in different numbers of hours. What is the constant of proportionality, in miles per hour?",
+            dict(stem="A kayaker paddles at a constant speed. The table shows the miles she paddles in different numbers of hours. What is the constant of proportionality, in miles per hour?",
                  fig=R4_FIG, answer="2.8 miles per hour",
                  why="y ÷ x for every pair: 8.4 ÷ 3 = 2.8, 14 ÷ 5 = 2.8, 22.4 ÷ 8 = 2.8.",
                  check=ratios([3, 5, 8], ["8.4", 14, "22.4"], "2.8"), space=0.5),
@@ -452,7 +452,7 @@ U = dict(
                           "Each bag of ice weighs 10 pounds (total weight and number of bags).",
                           "A bowling alley charges \\$3.00 for shoes plus \\$4.80 per game (total cost and number of games)."],
                  correct=[1, 3], answer="B, D", space=0.3,
-                 errors={"A": "a constant difference: y goes up 3 each time, but 6 ÷ 1 = 6 and 9 ÷ 2 = 4.5 [B1G-M, MA.7.AR.4.1: a steady increase taken for proportional]",
+                 errors={"A": "a constant difference: y goes up 3 each time, but 6 ÷ 1 = 6 and 9 ÷ 2 = 4.5 [B1G-M, MA.7.AR.4.1: a constant increase taken for proportional]",
                          "C": "straight, but from (0, 3), not the origin [B1G-M, MA.7.AR.4.1: every straight line taken as proportional]",
                          "E": "a \\$3.00 start added: 1 game costs \\$7.80 and 2 games \\$12.60, and 7.80 ÷ 1 is not 12.60 ÷ 2 [B1G-M, MA.7.AR.4.1: a start added]"},
                  why="B: 7 ÷ 4 = 14 ÷ 8 = 21 ÷ 12 = 28 ÷ 16 = 1.75. D: the weight is 10 times the bags, nothing added at the start. A goes up by the same amount; C starts at (0, 3); E adds \\$3.00 for shoes.",
@@ -472,9 +472,9 @@ U = dict(
                              choices=["A and B, because in both, y goes up the same amount for every 1 unit of x.", "B only, because its line passes through the origin.",
                                       "A only, because its line starts on the y-axis at 6.", "Neither, because no point is marked at (0, 0)."],
                              correct=1, answer="B",
-                             errors={"A": "a steady increase taken for proportional: A goes up 1.8 for every 1 unit of x too, but starts at 6 [B1G-M, MA.8.AR.3.1: a steady increase taken for proportional]",
+                             errors={"A": "a constant increase taken for proportional: A goes up 1.8 for every 1 unit of x too, but starts at 6 [B1G-M, MA.8.AR.3.1: a constant increase taken for proportional]",
                                      "C": "the start on the y-axis taken for the test: A starts at 6, so its y is not 0 when x is 0 [B1G-M, MA.8.AR.3.1: the start on the y-axis taken for the test]",
-                                     "D": "the origin taken as missing because it is not marked: line B reaches (0, 0) [B1G-M, MA.8.AR.3.1: the origin taken as missing because it is not marked]"},
+                                     "D": "the origin taken as missing because it is not marked: line B passes through (0, 0) [B1G-M, MA.8.AR.3.1: the origin taken as missing because it is not marked]"},
                              why="B. Both lines go up 1.8 for every 1 unit of x, but only B passes through (0, 0). A linear relationship is also proportional only when its line passes through the origin; A is 6 when x is 0.",
                              check=("many", ("eq", "F(9,5)*5", "9"), ("eq", "F(9,5)*0", "0"), ("eq", "F(9,5)*5 + 6", "15"),
                                     ("true", "F(9,5)*0 + 6 != 0"), ("true", "F(9,5)*0 == 0"))),
@@ -500,7 +500,7 @@ U = dict(
                  check=("many", table_of(Fr(24, 5), [5, 15, 20], [24, 72, 96]), ("eq", "96/F('4.8')", "20")), space=0.5),
         ]),
         dict(title="Comparing Proportional Relationships", lessons="Lesson 7", benchmark="MA.7.AR.4.5", items=[
-            dict(stem="Two machines make snow at steady rates. The table shows Machine A's tons of snow. Machine B makes s tons in h hours, where  $s = 6.8h$.",
+            dict(stem="Two machines make snow at constant rates. The table shows Machine A's tons of snow. Machine B makes s tons in h hours, where  $s = 6.8h$.",
                  fig=R13_FIG,
                  parts=[dict(label="a", stem="Which machine makes more snow each hour?", answer="Machine A: 7.2 tons per hour versus 6.8",
                              why="A: 14.4 ÷ 2 = 21.6 ÷ 3 = 36 ÷ 5 = 7.2.",
