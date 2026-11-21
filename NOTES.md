@@ -54,6 +54,31 @@ on the website, and M7 has not been moved to the new kit.
   its × sign. His to decide: "versus" or another word, and the kit-wide lines ("Answer it.", "Write your answer in
   sentences.", the two IXL lines, the cover line). The pass must cover the papers, the sets and the banks, not the slides
   alone.
+- **ChatGPT's language audit** of the All Slides PDF (21 Nov, 11:43 am — "Here's what chat said."). Answered at midday. It
+  lands where the guide and the lead did on "versus", "1 unit of x", "explain" for "say", whole questions for fragments,
+  "Let e represent…", the definition, "Answer it." (it says delete; the guide allows delete) and the IXL lines. To take
+  from it as well: answer captions as short whole sentences where the cap allows; headings as plain questions ("I. What
+  makes a relationship proportional?"); two sentences where a stem joins two with a colon. Not to take: it keeps "every
+  row" (the pairs are columns); it removes the snail's age, the 180 passengers, the 40 seats and the 50 pages (ruling 22,
+  one board a lesson carries a number the question does not need — and it says itself "unless intentionally testing");
+  "Independent Set" renamed "Independent Practice" (the name is in every file name, the site, the master sheet and six
+  taught units — the lead would keep it; his call); serial commas in a target that quotes its benchmark; "at each labeled
+  mark" (wrong where labels skip gridlines); "initial value of 0" ("the starting amount is 0"); any rewrite longer than
+  its slide's cap (the fix is taken in fewer words).
+- **The pass, as the lead would run it on his go** — defaults given to him at midday, his to change: "Answer it." deleted;
+  "Write your answer in complete sentences."; the IXL slide "Open IXL and work on the skills listed below." / "Show your
+  work on paper. IXL's answer box does not record it." / "Complete every listed skill to a SmartScore of at least N" and
+  the due line / "Required IXL skills"; the cover line "select a lesson on the next slide to jump to it"; "versus", the
+  y-quantity first; "for every 1 unit of x", and the story's own units in a story ("costs the same amount per pound");
+  the definition "one quantity is always a constant multiple of the other: y = px" (7.01, 7.04 word for word, the
+  Reference Sheet twice); "Independent Set" and the ruling-22 numbers kept. The four kit-wide lines change every unit of
+  both courses at its next rebuild. Cheapest sound way: the lead writes each old-to-new string, a script applies them and
+  refuses a string that is not found exactly once, the gates catch a line over its cap, one Opus solver re-solves the
+  reworded questions blind, and the lead looks at every changed slide and page.
+- **Found reading the Lexend pages, for the same pass:** the Review's section line "Lesson 7.04 · 1 questions" (kit,
+  `unitbuild.py`: "1 question"); the Reference Sheet's sections 1 and 3, where the note beside the title is too long for
+  the line in Lexend and wraps ("… times the / other", "… for each / 1 of x"); 7.07's Lesson Plan prints "Vocabulary."
+  with nothing after it (kit, `plankit.py`: say "No new terms.").
 
 - **Merge and publish:** say the word and the branch goes to `main` and Unit 7 onto the site. The site has not yet shown a
   unit with no Teacher Edition: `publish_web.py` publishes what a package holds, and that wants one look on the site.

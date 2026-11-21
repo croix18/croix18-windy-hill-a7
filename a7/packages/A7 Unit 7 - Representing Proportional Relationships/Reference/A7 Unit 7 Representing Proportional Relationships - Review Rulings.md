@@ -284,3 +284,11 @@ open questions and the same answer in other words).
 `unit_repeats.py` did not read them. The lead read all five banks: 7.07's bank question 5 was the Review's
 question 14 word for word, and seven bank or set tables shared rows with the paper's tables (2.5, 3.5, 5.5). Both gaps are
 closed in the kit: `reader_copy.py --bank` is what a reader gets, and `unit_repeats.py` reads the banks.
+
+## 21 Nov, late morning — Lexend throughout
+
+Croix, of the Review in Times beside the Practice Test in Lexend: "why does the font switch? It should be the lexend
+font throughout every document." Every document of the unit is rebuilt in Lexend (`DOC_FONT`), at `checks: 0 findings`.
+The Lexend build stopped once, on 7.07's Lesson Plan: three boards' `qtext` wrote money with a bare dollar sign, and
+the words between two amounts had been drawn as mathematics all along. Fixed; the gate refuses it now. 7.02's
+Independent Set gave up a little work room on questions 1–4 to stay on two pages.
