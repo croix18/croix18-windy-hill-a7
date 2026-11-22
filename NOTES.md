@@ -63,20 +63,36 @@ republishing wait for his word (nothing on `main` or the site moves without it; 
   smaller; each is one line again. (4) A line the kit measured as two (its 6% margin) left a blank line and a smaller
   figure (11.08's first Your Turn and question 5): shortened. (5) One-word last lines on four slides: reworded. (6)
   11.07's Additional Question Bank ran 8 pages for 6: two of its figures are 0.2 and 0.3 in smaller.
+- **Croix, 6:24 pm, reading the review copy:** *"Similar triangles. Find x. What the heck does that mean"*. It is
+  11.01's second warm-up question, "Similar triangles: 6/9 = x/12. Find x." **The pass had not read the unit's 28
+  warm-up questions against rule 19**; it rewrote the boards, sets, banks and papers. Five were a label and its data.
+  **Why they were written so:** the kit made a warm-up question fit one line at 23 pt, about 65 characters, and a whole
+  sentence about remote interior angles is longer. The kit sets a long warm-up question on two lines now (Windmill
+  `3192c1c`, `deckkit.stem_rows`: broken after a sentence; a question that fits one line is drawn as it was, and Unit 7
+  test-builds unchanged). Rewritten: 11.01 questions 2 and 3 ("The sides of two similar triangles give 6/9 = x/12.
+  Solve for x."; "A map's scale is 1 cm : 20 km. What distance does 3 cm on the map represent?"), 11.02 questions 2
+  and 3 ("The two remote interior angles of a triangle are 50° and 65°. Find the exterior angle."; "A right triangle
+  has a hypotenuse of 13 and a leg of 5. Find the other leg."), 11.03 question 2 ("An exterior angle is 130°. One
+  remote interior angle is 55°. Find the other remote interior angle."), 11.08 questions 1 and 3 ("Use tables to solve
+  the system y = x + 3 and y = 2x."; "A 6-ft post casts a 4-ft shadow. A tree casts a 10-ft shadow. How tall is the
+  tree?") and question 2's answer ("One solution, x = 0"). Unit 7's twenty warm-up questions were read the same
+  evening: each is a whole question. **The Notes slides keep their short lines** ("Cross once: one. Never meet: none."):
+  students copy them while the teacher talks. His to say if those should be sentences too.
 - **Seen, not changed:** a box or fraction equation in a Lesson Plan's question cell is a picture at the body's size,
   larger than the 9-pt words of its cell, as it was on 14 Nov: the kit sets a picture at one size (`dockit.img`).
 - **Left on purpose:** a whiteboard question that is a bare equation shows the equation alone (ruling 58 took "Answer
   it." away; whether "Solve for x." should stand there is asked of Croix); the step labels; the notes' short lines; the
   banks' data lines under a heading ("(3, 5);  y = 2x − 1 and y = x + 2"); "Florida B1G-M" in the plans' cause notes;
   the Review key's SSDD note; `te.say`, `note` and the other fields that print nowhere now.
-- **Proof.** 332 exact strings by `reword.py` (lists and their generators in the session's `lean/u11/edits`; the
-  generator is Windmill's `briefs/lean/edit_list.py` now). Gates 0 (390 items re-derived); `unit_repeats.py u11` 0; five
-  full builds, the fourth from an emptied `out/u11` and the committed figure cache and the fifth from an emptied
-  `out/u11` on that cache, each `checks: 0 findings`. `student_view.py u11 --bank` before and after: 376 ids, **99 questions
-  and 34 answer lines reworded, no check, keyed letter, list of choices or kind moved, and no digit differs in any
+- **Proof.** 341 exact strings by `reword.py` (lists and their generators in the session's `lean/u11/edits`; the
+  generator is Windmill's `briefs/lean/edit_list.py` now). Gates 0 (390 items re-derived); `unit_repeats.py u11` 0; six
+  full builds, the fourth from an emptied `out/u11` and the committed figure cache and the fifth and sixth from an
+  emptied `out/u11` on that cache, each `checks: 0 findings`. `student_view.py u11 --bank` before and after: 376 ids, **105 questions
+  and 35 answer lines reworded, no check, keyed letter, list of choices or kind moved, and no digit differs in any
   question or answer**. 146 of 248 slides differ from the build of 14 Nov: all looked at, and the 20 that the look sent
-  back looked at again; the last three builds' decks differ in the two slides meant to change and no other, and the
-  fifth build changed the words of three plans and nine keys and of nothing else. Every PDF scanned: no
+  back looked at again; the fourth and fifth builds' decks differ from the third's in the two slides meant to
+  change and no other, the fifth build changed the words of three plans and nine keys and of nothing else, and the
+  sixth changed eight warm-up slides and nothing else. Every PDF scanned: no
   equation broken across a line, no last line under ten characters, no line beginning with a lone variable, none of the
   old lines. Package reinstalled (128 files, no Teacher Edition); master sheet regenerated; `tools/check.sh` passes.
 - **Not done:** not merged and not published; the site's Unit 11 pages and web decks are the build of 14 Nov (and still

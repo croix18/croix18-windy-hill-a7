@@ -236,13 +236,13 @@ L = dict(
         ("Enrichment", "Students who finish whiteboard question 5 early change Shop A's starting charge so that the two shops cost the same at 7 hours. They solve 3(7) + s = 6(7) for s, so s = \\$21.")],
 
     warmup=[
-        dict(stem="Use tables to solve:  $y = x + 3$  and  $y = 2x$", answer="(3, 6)", band="last lesson",
+        dict(stem="Use tables to solve the system  $y = x + 3$  and  $y = 2x$.", answer="(3, 6)", band="last lesson",
              source="11.07 — a crossing read from two tables: at x = 3 both give 6",
              check=("many", crosses("u + 3", "2*u", "3", "6"))),
-        dict(stem="How many solutions does  $5x + 4 = 2x + 4$  have?", answer="One:  x = 0", band="last week",
+        dict(stem="How many solutions does  $5x + 4 = 2x + 4$  have?", answer="One solution, x = 0", band="last week",
              source="11.03 — x = 0 is one solution: 3x = 0",
              check=("eq", "sp.solve(sp.Eq(5*" + X + " + 4, 2*" + X + " + 4), " + X + ")[0]", "0")),
-        dict(stem="A 6-ft post's shadow is 4 ft. A tree's is 10 ft. How tall is the tree?", answer="15 ft", band="last unit",
+        dict(stem="A 6-ft post casts a 4-ft shadow. A tree casts a 10-ft shadow. How tall is the tree?", answer="15 ft", band="last unit",
              source="6.07 — similar triangles: 6/4 = h/10",
              check=("eq", "F(6,4)*10", "15")),
         dict(stem="A gym costs \\$15 to join and \\$4 a visit. What do 5 visits cost?", answer="\\$35", band="the prerequisite this lesson needs",

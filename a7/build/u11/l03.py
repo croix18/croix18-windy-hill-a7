@@ -86,7 +86,7 @@ L = dict(
         dict(stem="Solve for x:  $6x - 4 = 2x + 20$", answer="x = 6", band="last lesson",
              source="11.02 — the variable on both sides",
              check=solves("6*u - 4", "2*u + 20", "6")),
-        dict(stem="Exterior angle 130°, one remote interior 55°. Find the other.", answer="75°", band="last week",
+        dict(stem="An exterior angle is 130°. One remote interior angle is 55°. Find the other remote interior angle.", answer="75°", band="last week",
              source="T-B2 — an exterior angle equals the sum of the two remote interior angles",
              check=("eq", "130 - 55", "75")),
         dict(stem="Find the distance from (1, 2) to (4, 6).", answer="5", band="last unit",
