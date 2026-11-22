@@ -1,13 +1,30 @@
 # State of the work — 15 November 2026 (read this first)
 
-## 20–22 November — the lean workflow; Unit 7 built with it, on a branch, held for Croix's word (session_01W9n2X1V97j7Nf5Y7z1DaCq)
+## 20–22 November — the lean workflow; Unit 7 built with it, merged and published on 22 Nov (session_01W9n2X1V97j7Nf5Y7z1DaCq)
 
 Croix, 20 Nov, of how the lesson slides are built: *"It feels extremely inefficient and is burning tons of tokens."* Shown a
 plan, 11:30 pm: *"You can get rid of the 4 page teacher edition. Only read math nation for scope and test item shapes. The
 reviewers yeah opus then fable. Let's do it. Run the next unit to test."*
 
-**Everything below is on the branch `claude/lean-workflow`** (this repository and Windmill). `main` is untouched, nothing is
-on the website, and M7 has not been moved to the new kit.
+**Merged and published, 22 Nov** (Croix, 3:50 pm: *"Merge and publish."*). The branch `claude/lean-workflow` is `main` in
+this repository and in Windmill, and Unit 7 is on the website: `mrshaffer.org/a7/unit-7/`, the five days' slides at
+`/a7/slides/7.01/` … `/a7/slides/7.07/`, the calendar's five days linked, the teacher page behind the password (site
+`efe8178`, from this repository's `05fd1f3`; Cloudflare's build of that commit succeeded and the live pages were read).
+M7 has not been moved to the new kit.
+
+- **What publishing found.** (1) **The web deck let a graph run over its question and its answer line**: on 7.01's web
+  pages the picture beside a Your Turn's steps covered "Complete the table…" above it and "Answer:" below. The
+  PowerPoint never had it; the web deck is a second renderer (`lib/htmlkit`) that no gate looks at. One rule of its
+  stylesheet was wrong (Windmill `557f670`, vendored here in `05fd1f3`). All 177 slides of Unit 7's five web decks were
+  looked at after the fix. **The web decks of Units 3–6 and 11 on the site still have the fault** (11.07's Example 1 and
+  both Your Turns, for one): each is mended when its unit is next published, and not before, because a deck made today
+  would carry this kit's lines beside a PowerPoint that does not. (2) The site's own check that an unnamed unit shows as
+  "Unit N" alone named Unit 7, and failed the moment Unit 7 had a name; it reads the unnamed units from the plan now.
+  (3) Unit 7 is the first unit on the site with no Teacher Edition and no practice page: the teacher page lists Lesson
+  Plans, banks and keys, "All in one" has four files, and the unit page has no online practice test. Both pages were
+  looked at. (4) On the unit page a lesson's name is its file's name, so "Is It Proportional?" reads "Is It
+  Proportional" and 7.02–03 has no colon: every unit's page does this.
+
 
 - **The procedure** is Windmill's `briefs/LEAN WORKFLOW.md`, with the briefs it ran on in `briefs/lean/`: the test settled
   first and the plan reviewed before any spec; builders who read a 12 KB card (`BUILDER CARD.md`), not the history; one
@@ -233,12 +250,12 @@ on the website, and M7 has not been moved to the new kit.
   taught. The kit's lines change at a
   rebuild; a unit's own plan sentences (`te.must`, the MTR evidence, the closure) need the rewrite Unit 7 had. Unit 11
   is taught from 30 Nov.
-- **Merge and publish:** say the word and the branch goes to `main` and Unit 7 onto the site. The site has not yet shown a
-  unit with no Teacher Edition: `publish_web.py` publishes what a package holds, and that wants one look on the site.
-  **Windmill's branch merges with it** (the Drive test's fix is `41a5a7c`, the kit of ruling 59 `7344e7e`, the kit of the third pass `33a26e0`, the kit of ruling 60 `d144647`): Windmill's Drive-script test waited twelve hours for a file he
-  deleted to come back, and with Unit 7's package the mirror's hourly check needs fifteen (1,769 files at 120 an hour),
-  so Windmill `main`'s `tools/check.sh` fails beside an A7 that holds Unit 7. The test is fixed on Windmill's branch; the
-  script in his Google account is unchanged (Windmill HANDOFF, 21 Nov).
+- **Merged and published on 22 Nov** (above). Windmill's `main` carries the Drive test's fix (`41a5a7c`), the kits of
+  ruling 59 (`7344e7e`), the third pass (`33a26e0`) and ruling 60 (`d144647`), and the web deck's fix (`557f670`). The
+  Drive script in his Google account is unchanged (Windmill HANDOFF, 21 Nov); its mirror picks up Unit 7's package by
+  itself.
+- **The web decks of Units 3–6 and 11 on the site** have the graph-over-its-question fault until each unit is published
+  again. Unit 11 is taught from 30 Nov.
 - **The practice page** for Unit 7 is not built (the test is a random set of it). Question 1(b) needs a part where a student
   plots points, and 8(b) takes a cost and what it should be, or "none".
 - **M7** builds its next unit (11, from 11 Feb) the same way once it vendors this kit.
