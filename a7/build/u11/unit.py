@@ -144,7 +144,7 @@ def _ar21():
               parts=[dict(label="a", stem="$3(2x - 1) + 4 = 6x + 5$", answer="No solution",
                           why="6x − 3 + 4 = 6x + 5, so 6x + 1 = 6x + 5. Take 6x from both sides: 1 = 5 — never true: no solution.",
                           check=never("3*(2*u - 1) + 4", "6*u + 5"), space=0.7),
-                     dict(label="b", stem="$6x + 5 = 5 - 3x$", answer="One solution:  x = 0",
+                     dict(label="b", stem="$6x + 5 = 5 - 3x$", answer="One solution, x = 0",
                           why="Add 3x to both sides: 9x + 5 = 5. Subtract 5: 9x = 0, so x = 0 — one solution. Check: 0 + 5 = 5 and 5 − 0 = 5. 'No solution' read x = 0 as nothing.",
                           check=solves("6*u + 5", "5 - 3*u", "0"), space=0.7),
                      dict(label="c", stem="$5x - 2(x + 3) = 3x - 6$", answer="Infinitely many solutions",
@@ -271,22 +271,22 @@ R_LEVEL = figs.row([figs.plane((-1, 4), (-3, 6), lines=[(0, 4, ""), (0, -1, "")]
                    gap=3.4, titles=[[("y = 4", BLUE), ("y = −1", ORANGE), "a"], [("y = 3", BLUE), ("y = −x + 1", ORANGE), "b"]], inches=5.4)
 # fast 9: FAST's matching grid, on the Review (the paper keeps its kinds)
 R_MATCH = figs.match_grid(["a.   4(x + 3) = 4x + 12", "b.   6x − 1 = 6x + 4", "c.   8x + 5 = 3x + 5"],
-                          ["one solution", "no solution", "infinitely many"], cw=5.2, rh=1.4, pt=11, inches=6.6)
+                          ["one solution", "no solution", "infinitely many"], rw=7.8, cw=5.8, rh=1.4, pt=10, inches=6.6)
 
 
 U = dict(
     unit=11, title="Solving Equations and Systems",
     review_note="HOW TO USE THIS.   This review covers every learning target of Lessons 1–8 — more than the test does. Work it in parts. If you miss two or more in a part, that part is where to spend your study time. The reference sheet has everything you need for each part.",
-    reference_intro="Nothing in this unit is on the Grade 8 FAST reference sheet: the order of work for an equation, the three endings, what a solution of a system is and how to read one from a graph are all tested from memory. On this unit's test you will not have either sheet.",
+    reference_intro="Nothing in this unit is on the Grade 8 FAST reference sheet: the order of work for an equation, the three endings, what a solution of a system is and how to read one from a graph are all tested from memory. You may not use this sheet or the FAST reference sheet on the Unit 11 test.",
 
     reference=[
-        dict(title="1.   Solving an Equation", right="Lessons 1–4 · distribute, collect, one side, divide, check",
+        dict(title="1.   Solving an Equation", right="Lessons 1–4 · distribute, collect, one side, isolate, check",
              blocks=[dict(bullets=[
-                         "**Distribute.**  The number outside the parentheses multiplies EVERY term inside — and a minus in front goes in with it: $15 - 2(x - 4) = 15 - 2x + 8$.",
-                         "**Collect the like terms on each side.**  Same letter, same power: $6x$ and $-x$ are like terms; $6x$ and $2$ are not.",
-                         "**Take the same variable term from both sides.**  Either one may go; taking the smaller keeps the number multiplying x positive.",
-                         "**Undo the number added, then divide.**  What is left is a two-step equation.",
-                         "**Check in the FIRST equation, both sides:** the same number twice."]),
+                         "**Distribute.**  The number outside the parentheses multiplies EVERY term inside, and a minus sign in front is multiplied too: $15 - 2(x - 4) = 15 - 2x + 8$.",
+                         "**Collect the like terms on each side.**  Like terms have the same letter to the same power: $6x$ and $-x$ are like terms, but $6x$ and $2$ are not.",
+                         "**Take the same variable term from both sides.**  Either term can be taken. Taking the smaller one keeps the coefficient of x positive.",
+                         "**Isolate x.**  What is left is a two-step equation: undo the number added, then divide both sides by the coefficient of x.",
+                         "**Check in the FIRST equation.**  Substitute the solution into both sides. The two sides must give the same number."]),
                      dict(table=([4300, 5060], [
                          ["Each line", "What was done"],
                          ["$2(3x + 1) - x = 2x + 17$", "the equation"],
@@ -294,30 +294,30 @@ U = dict(
                          ["$5x + 2 = 2x + 17$", "collect: 6x − x = 5x"],
                          ["$3x + 2 = 17$", "take 2x from both sides"],
                          ["$3x = 15$", "subtract 2 from both sides"],
-                         ["$x = 5$", "divide both sides by 3"],
+                         ["$x = 5$", "divide both sides by 3: x is isolated"],
                          ["$2(16) - 5 = 27$  and  $2(5) + 17 = 27$", "the check: 27 on both sides"]])),
-                     "**A fraction or a decimal outside the parentheses multiplies every term too.**  $0.4(5x + 15) = x + 12$ becomes $2x + 6 = x + 12$, so $x = 6$ — not $2x + 15$, the decimal to one term only.",
-                     "**To clear fractions, multiply EVERY term on both sides by a common denominator.**  $\\frac{x}{3} + 2 = \\frac{x}{2} - 1$ times 6 is $2x + 12 = 3x - 6$; take 2x from both sides, $12 = x - 6$; add 6, $x = 18$. Check: $6 + 2 = 8$ and $9 - 1 = 8$."]),
+                     "**A fraction or a decimal outside the parentheses multiplies every term too.**  The equation $0.4(5x + 15) = x + 12$ becomes $2x + 6 = x + 12$, so $x = 6$. The left side is not $2x + 15$, which multiplies only one term by the decimal.",
+                     "**To clear fractions, multiply EVERY term on both sides by a common denominator.**  Multiply every term of $\\frac{x}{3} + 2 = \\frac{x}{2} - 1$ by 6 to get $2x + 12 = 3x - 6$. Take 2x from both sides, so $12 = x - 6$, and add 6 to both sides, so $x = 18$. Check: $6 + 2 = 8$ and $9 - 1 = 8$."]),
         dict(title="2.   One Solution, No Solution, Infinitely Many", right="Lessons 3–4 · read what is left",
              blocks=["**Simplify each side, take the same variable term from both sides, and read what is left.**",
                      dict(table=([2600, 2600, 4160], [
                          ["What is left", "The equation has", "Example"],
                          ["x = a number", "one solution", "$7x - 3 = 4x - 3$:  $3x = 0$, so $x = 0$"],
-                         ["a = a, always true", "infinitely many solutions — every number works", "$5(x - 1) = 5x - 5$:  $-5 = -5$"],
-                         ["a = b, never true", "no solution — no number works", "$5(x - 1) = 5x + 2$:  $-5 = 2$"]])),
-                     "**x = 0 is one solution.**  Zero is a number: $7x - 3 = 4x - 3$ has exactly one solution, and it is 0 — not 'no solution'.",
-                     "**Read the ending; do not test numbers.**  Five numbers that work do not show that every number works. Simplify both sides and read what is left.",
-                     "**The same x-terms on both sides decide it.**  Different x-terms: one solution. The same x-terms and the same number: infinitely many. The same x-terms and different numbers: none. $4(x + 2) = 4x + □$ has infinitely many solutions with 8 in the box and none with any other number."]),
+                         ["a = a, always true", "infinitely many solutions (every number works)", "$5(x - 1) = 5x - 5$:  $-5 = -5$"],
+                         ["a = b, never true", "no solution (no number works)", "$5(x - 1) = 5x + 2$:  $-5 = 2$"]])),
+                     "**A solution of 0 is one solution.**  Zero is a number, so $7x - 3 = 4x - 3$ has exactly one solution, x = 0. It does not have \"no solution.\"",
+                     "**Read what is left. Do not test numbers.**  Five numbers that work do not show that every number works. Simplify both sides and read what is left.",
+                     "**Compare the x-terms on the two sides.**  With different x-terms, the equation has one solution. With the same x-terms and the same constant, it has infinitely many solutions. With the same x-terms and different constants, it has no solution. The equation $4(x + 2) = 4x + □$ has infinitely many solutions with 8 in the box and no solution with any other number."]),
         dict(title="3.   Solutions of a System", right="Lessons 5–6 · both equations true",
-             blocks=["**A system is two equations together. Its solution is an ordered pair (x, y) that makes BOTH true.**  $(5, 3)$ for $y = x - 2$ and $y = -x + 8$: $5 - 2 = 3$ and $-5 + 8 = 3$ — a solution. $(2, 0)$: $2 - 2 = 0$ is true, but $-2 + 8 = 6$, not 0 — one equation is not enough, so it is not a solution.",
-                     "**x first, then y.**  $(3, 5)$ is a different point from $(5, 3)$.",
-                     "**Test every pair, or every system, in both equations.**  If the two lines cross, exactly one pair passes. If the two equations are the same line, every pair on that line passes. So never stop at the first one that works."]),
-        dict(title="4.   A Line from a Table of Values", right="Lessons 5–6 and Lesson 7 · x = 0 and two more",
-             blocks=["**Make a table: x = 0 and two more. Put each x in and get its y.**  Plot the points: two draw the line and the third is the check — if it misses, a y is wrong. Every point of the line is a solution of its equation.",
+             blocks=["**A system is two equations taken together. Its solution is an ordered pair (x, y) that makes BOTH equations true.**  For $y = x - 2$ and $y = -x + 8$, the pair $(5, 3)$ is a solution because $5 - 2 = 3$ and $-5 + 8 = 3$. The pair $(2, 0)$ is not a solution: $2 - 2 = 0$ is true, but $-2 + 8 = 6$, not 0. Making one equation true is not enough.",
+                     "**An ordered pair gives x first, then y.**  The point $(3, 5)$ is different from the point $(5, 3)$.",
+                     "**Test every pair, or every system, in both equations.**  If the two lines cross, exactly one pair makes both equations true. If the two equations graph as the same line, every pair on that line does. Do not stop at the first one that works."]),
+        dict(title="4.   A Line from a Table of Values", right="Lessons 5–7 · x = 0 and two more",
+             blocks=["**Make a table of values: x = 0 and two more values of x. Substitute each x to get its y.**  Plot the three points. Two points draw the line, and the third is a check: if it is off the line, a y-value is wrong. Every point on the line is a solution of the equation.",
                      dict(table=([3360, 2000, 2000, 2000], [
                          ["x", "0", "1", "2"],
                          ["$y = 3x - 4$", "−4", "−1", "2"]]), header=False),
-                     "**A half multiplying x: use even x (for thirds, multiples of 3).**  Then every y is a whole number to plot.",
+                     "**When the coefficient of x is a half, choose even values of x. For thirds, choose multiples of 3.**  Then every y is a whole number, which is easy to plot.",
                      dict(table=([3360, 2000, 2000, 2000], [
                          ["x", "0", "2", "4"],
                          ["$y = \\frac{1}{2}x - 1$", "−1", "0", "1"]]), header=False)]),
@@ -327,45 +327,46 @@ U = dict(
                          ["intersect once", "different coefficients of x", "one: the point of intersection", "$y = x - 2$, $y = -x + 8$"],
                          ["parallel: never meet", "the same coefficient of x, different numbers added", "none", "$y = 3x + 1$, $y = 3x - 4$"],
                          ["the same line", "one equation written two ways", "infinitely many: every point of the line", "$y = 4(x - 1)$, $y = 4x - 4$"]])),
-                     "**Parallel lines have the same steepness in the same direction: the same coefficient of x.**  ½ and 0.5 are one number. 2 and −2 are not: $y = 2x + 1$ and $y = -2x + 1$ cross, at (0, 1). A level line is a line too: $y = 2$ and $y = -3$ have 0 multiplying x, so they are parallel, and $y = 2$ crosses $y = -x + 6$ once, at (4, 2).",
-                     "**The same line is infinitely many, not one and not none.**  Write both equations the same way first: $4(x - 1)$ is $4x - 4$."]),
+                     "**Parallel lines have the same steepness in the same direction, so they have the same coefficient of x.**  The coefficients ½ and 0.5 are the same number. The coefficients 2 and −2 are not, so $y = 2x + 1$ and $y = -2x + 1$ cross, at (0, 1). A horizontal line is a line too. The lines $y = 2$ and $y = -3$ both have 0 as the coefficient of x, so they are parallel, and $y = 2$ crosses $y = -x + 6$ once, at (4, 2).",
+                     "**Two equations for the same line have infinitely many solutions, not one and not none.**  Write both equations the same way first: $4(x - 1)$ is $4x - 4$."]),
         dict(title="6.   Solving a System by Graphing", right="Lessons 7–8 · read the crossing, check it in both",
-             blocks=["**Graph both lines; the solution is where they cross.**  Read x, then y, and check the pair in both equations. Tables find it too: the solution is the column where both tables give the same y — $y = x - 2$ and $y = -x + 8$ both give 3 at $x = 5$, so the solution is $(5, 3)$.",
-                     "**In a story, say what the crossing means, with its units.**  Club A costs $y = 8x + 15$ dollars and Club B $y = 11x$ dollars for x months. The lines cross at $(5, 55)$: at 5 months both clubs cost \\$55. Each line is (the amount per 1) times x, plus the start.",
-                     "**Between the grid lines, estimate — and say 'about'.**  Read each coordinate to the nearest tenth, then check the estimate in both equations: the two values come out close, not equal. A good estimate is within 0.1 of each coordinate. $y = x + 2$ and $y = -2x + 4$ cross at about $(0.7, 2.7)$: $0.7 + 2 = 2.7$ and $-2(0.7) + 4 = 2.6$ — close. (Exactly, $x = \\frac{2}{3}$ and $y = \\frac{8}{3}$.) The nearest grid point, (1, 3), is on $y = x + 2$ only — not a solution."]),
+             blocks=["**Graph both lines. The solution is the point where they cross.**  Read x, then y, and check the pair in both equations. Two tables show the solution too: it is the column where both tables give the same y. The equations $y = x - 2$ and $y = -x + 8$ both give 3 at $x = 5$, so the solution is $(5, 3)$.",
+                     "**In a story, explain what the point of intersection means, with its units.**  Club A costs $y = 8x + 15$ dollars and Club B costs $y = 11x$ dollars for x months. The lines cross at $(5, 55)$, so at 5 months both clubs cost \\$55. Each equation is the amount per 1, times x, plus the starting amount.",
+                     "**Between the grid lines, estimate, and write \"about.\"**  Read each coordinate to the nearest tenth. Then check the estimate in both equations: the two values come out close, not equal. A good estimate is within 0.1 of each coordinate. The lines $y = x + 2$ and $y = -2x + 4$ cross at about $(0.7, 2.7)$, because $0.7 + 2 = 2.7$ and $-2(0.7) + 4 = 2.6$, which are close. (The exact solution is $x = \\frac{2}{3}$ and $y = \\frac{8}{3}$.) The nearest grid point, (1, 3), is on $y = x + 2$ only, so it is not a solution."]),
         dict(title="7.   Vocabulary",
              blocks=[dict(vocab=[
                  ("like terms", "terms with the same variable to the same power: $6x$ and $-x$"),
                  ("coefficient; constant", "the number that multiplies the variable (6 in $6x$; the coefficient of x in $y = -x + 4$ is −1); a term with no variable"),
                  ("distributive property", "$a(b + c) = ab + ac$ — the number outside multiplies every term inside"),
                  ("solution of an equation", "a number that makes the equation true"),
+                 ("isolate; solve for", "to isolate a variable is to get it alone on one side of the equals sign; an equation solved for x has x isolated"),
                  ("no solution; infinitely many solutions", "never true, whatever the number (it ends at a = b); true for every number (it ends at a = a)"),
                  ("system of equations", "two equations about the same two variables, taken together"),
                  ("solution of a system", "an ordered pair (x, y) that makes both equations true; on a graph, where the lines cross"),
                  ("ordered pair", "(x, y): the x first, then the y"),
                  ("intersect; point of intersection", "cross; the point where two lines cross — on a graph, the solution of the system"),
                  ("parallel lines", "lines that never meet: the same coefficient of x and different numbers added"),
-                 ("estimate", "a careful read between the grid lines, written with 'about' and checked in both equations")])]),
+                 ("estimate", "a careful read between the grid lines, written with \"about\" and checked in both equations")])]),
     ],
 
     # ------------------------------------------------------------------ unit review (unscored; home Thu 10 Dec)
     review=[
         dict(letter="A", title="Solving Equations", lessons="Lessons 1–4", benchmark="MA.8.AR.2.1", items=[
-            dict(stem="Solve. Check your solution in the first equation.", parts=[
+            dict(stem="Solve for the variable. Check your solution in the first equation.", parts=[
                 dict(label="a", stem="$6x - 2x + 7 = 31$", answer="x = 6", why="Collect: 4x + 7 = 31, so 4x = 24. Check: 36 − 12 + 7 = 31.",
                      check=solves("6*u - 2*u + 7", "31", "6"), space=0.5),
                 dict(label="b", stem="$4(2n + 1) - 3n = 29$", answer="n = 5", why="8n + 4 − 3n = 29, so 5n + 4 = 29 and 5n = 25. Check: 4(11) − 15 = 29.",
                      check=solves("4*(2*u + 1) - 3*u", "29", "5"), space=0.5),
                 dict(label="c", stem="$20 - 4(w - 3) = 8$", answer="w = 6", why="The −4 multiplies both terms: 20 − 4w + 12 = 8, so 32 − 4w = 8, −4w = −24. Check: 20 − 4(3) = 8.",
                      check=solves("20 - 4*(u - 3)", "8", "6"), space=0.5)]),
-            dict(stem="Solve. Check your solution in both sides.", parts=[
+            dict(stem="Solve for the variable. Check your solution in both sides.", parts=[
                 dict(label="a", stem="$8m - 5 = 3m + 20$", answer="m = 5", why="Take 3m from both sides: 5m − 5 = 20, so 5m = 25. Check: 35 and 35.",
                      check=solves("8*u - 5", "3*u + 20", "5"), space=0.5),
                 dict(label="b", stem="$2h + 15 = 7h + 40$", answer="h = −5", why="Take 2h from both sides: 15 = 5h + 40, so 5h = −25. Check: 5 and 5.",
                      check=solves("2*u + 15", "7*u + 40", "-5"), space=0.5),
                 dict(label="c", stem="$6(v - 1) = 2(v + 9)$", answer="v = 6", why="6v − 6 = 2v + 18, so 4v = 24. Check: 6(5) = 30 and 2(15) = 30.",
                      check=solves("6*(u - 1)", "2*(u + 9)", "6"), space=0.5)]),
-            dict(stem="Solve.", parts=[
+            dict(stem="Solve for x.", parts=[
                 dict(label="a", stem="$0.3(10x - 20) = x + 8$", answer="x = 7", why="The 0.3 multiplies both terms: 3x − 6 = x + 8, so 2x = 14. Check: 0.3(50) = 15 and 7 + 8 = 15.",
                      check=("many", solves("F(3,10)*(10*u - 20)", "u + 8", "7"), same("F(3,10)*(10*u - 20)", "3*u - 6")), space=0.5),
                 dict(label="b", stem="$\\frac{1}{4}(8x + 12) = x + 9$", answer="x = 6", why="A quarter of 8x is 2x and a quarter of 12 is 3: 2x + 3 = x + 9. Check: ¼(60) = 15 and 6 + 9 = 15.",
@@ -390,7 +391,7 @@ U = dict(
                              check=never("6*u - 1", "6*u + 4"), space=0.2),
                         dict(label="c", stem="$8x + 5 = 3x + 5$", answer="One solution (x = 0)", why="Take 3x from both sides: 5x + 5 = 5. Subtract 5: 5x = 0, so x = 0 — one solution.",
                              check=solves("8*u + 5", "3*u + 5", "0"), space=0.2)]),
-            dict(stem="Solve each equation. If it has no solution or infinitely many solutions, say so.",
+            dict(stem="Solve each equation for x. If it has no solution or infinitely many solutions, write which.",
                  parts=[
                      dict(label="a", stem="$4(x - 2) = x + 7$", answer="x = 5", why="4x − 8 = x + 7, so 3x = 15. Check: 4(3) = 12 and 5 + 7 = 12.",
                           check=solves("4*(u - 2)", "u + 7", "5"), space=0.4),
@@ -415,7 +416,7 @@ U = dict(
                      dict(label="c", stem="Is $(5, 56)$ a solution of the system  $y = 4x + 36$  and  $y = 10x$?", answer="No",
                           why="4(5) + 36 = 56 is true, but 10(5) = 50, not 56: one equation is not enough.",
                           check=("many", sat("4*u + 36", "5", "56"), fails("10*u", "5", "56")), space=0.5),
-                     dict(label="d", stem="Gym C costs \\$50 to join and \\$4 a visit. Will Gym A and Gym C ever have cost the same? Explain.", answer="Never — Gym C always costs \\$14 more.",
+                     dict(label="d", stem="Gym C costs \\$50 to join and \\$4 a visit. Will Gym A and Gym C ever have cost the same? Explain.", answer="Never. Gym C always costs \\$14 more.",
                           why="36 + 4v = 50 + 4v; take 4v from both sides: 36 = 50 — never true. Both add \\$4 a visit, so the difference stays \\$14: parallel lines, no solution.",
                           check=("many", never("36 + 4*u", "50 + 4*u"), never_meet("4*u + 36", "4*u + 50")), space=0.5)]),
         ]),
@@ -436,7 +437,7 @@ U = dict(
                  why="A: −1 + 4 = 3 and −2(−1) + 1 = 3. B: 1 + 2 = 3 and 3(−1) + 6 = 3. D: −3(−1) = 3 and −1 + 4 = 3. C and E each make one equation true only.",
                  check=("many", crosses("u + 4", "-2*u + 1", "-1", "3"), crosses("-u + 2", "3*u + 6", "-1", "3"), crosses("-3*u", "u + 4", "-1", "3"),
                         sat("2*u + 5", "-1", "3"), fails("u + 3", "-1", "3"), sat("4*u + 7", "-1", "3"), fails("-u + 1", "-1", "3"))),
-            dict(stem="$(□, 9)$ is a solution of   $y = 2x + 3$   and   $y = 4x - 3$. What number goes in the box?", answer="3",
+            dict(stem="The ordered pair $(□, 9)$ is a solution of the system   $y = 2x + 3$   and   $y = 4x - 3$. What number goes in the box?", answer="3",
                  why="2x + 3 = 9 gives x = 3, and 4(3) − 3 = 9 as well: (3, 9) makes both true.",
                  check=("many", crosses("2*u + 3", "4*u - 3", "3", "9")), space=0.5),
         ]),
@@ -456,16 +457,16 @@ U = dict(
                          "D": "the same two digits read as the same line — the lines cross once, at (1, 9) [B1G-M, AR.4.2: the same-line case]"},
                  why="3(x + 2) = 3x + 6: one equation written two ways, so every point of the line is a solution.",
                  check=("many", one_line("3*u + 6", "3*(u + 2)"), never_meet("3*u + 6", "3*u - 6"), crosses("3*u + 6", "-3*u + 6", "0", "6"), crosses("3*u + 6", "6*u + 3", "1", "9"))),
-            dict(stem="Each picture shows a system with a level line. How many solutions does each system have?", fig=R_LEVEL, parts=[
-                     dict(label="a", stem="$y = 4$ and $y = -1$", answer="No solution", why="Two level lines: 0 multiplies x in both and the numbers differ — parallel, they never meet.",
+            dict(stem="Each picture shows a system with a horizontal line. How many solutions does each system have?", fig=R_LEVEL, parts=[
+                     dict(label="a", stem="$y = 4$ and $y = -1$", answer="No solution", why="Two horizontal lines: 0 multiplies x in both and the numbers differ — parallel, they never meet.",
                           check=never_meet("4 + 0*u", "-1 + 0*u"), space=0.3),
-                     dict(label="b", stem="$y = 3$ and $y = -x + 1$", answer="One solution: (−2, 3)", why="The lines intersect once, at (−2, 3): y = 3 there, and −(−2) + 1 = 3.",
+                     dict(label="b", stem="$y = 3$ and $y = -x + 1$", answer="One solution, (−2, 3)", why="The lines intersect once, at (−2, 3): y = 3 there, and −(−2) + 1 = 3.",
                           check=crosses("3 + 0*u", "-u + 1", "-2", "3"), space=0.3)]),
             # FAST's dropdown sentence (fast 9), on the Review: choose one from each bracket
             dict(stem="Complete the sentence about the system  $y = -3x + 2$  and  $y = -3x - 4$.   The lines  [ intersect once  /  are parallel  /  are the same line ],  so the system has  [ one solution  /  no solution  /  infinitely many solutions ].",
                  answer="are parallel;  no solution", why="The coefficient of x is −3 in both and the numbers added differ: parallel lines never meet.",
                  check=never_meet("-3*u + 2", "-3*u - 4"), space=0.4),
-            dict(stem="Without graphing: how many solutions does the system   $y = 5x - 2$   and   $y = 5x + 1$   have? How do you know?", answer="No solution — the same number, 5, multiplies x and the numbers added differ, so the lines are parallel.",
+            dict(stem="Without graphing, tell how many solutions the system   $y = 5x - 2$   and   $y = 5x + 1$   has. Explain how you know.", answer="No solution. The coefficient of x is 5 in both equations and the numbers added differ, so the lines are parallel.",
                  why="parallel lines never meet", check=never_meet("5*u - 2", "5*u + 1"), space=0.5),
         ]),
         dict(letter="D", title="Solving Systems by Graphing", lessons="Lessons 7–8", benchmark="MA.8.AR.4.3", items=[
@@ -487,7 +488,7 @@ U = dict(
                         ("true", "1 < F(8,5) and F(9,5) < 2 and 1 < F(6,5) and F(7,5) < 2"),
                         sat("-u + 3", "2", "1"), fails("2*u - 2", "2", "1")), space=0.4),
             dict(stem="Two plans cost the same for 5 months:   $y = 7x + 25$   and   $y = □x$. What number goes in the box?", answer="12",
-                 why="7(5) + 25 = 60 at 5 months, so □(5) = 60 and □ = 12.", check=("many", ("eq", "F(7*5 + 25, 5)", "12"), crosses("7*u + 25", "12*u", "5", "60")), space=0.5),
+                 why="7(5) + 25 = 60 at 5 months, so $□(5) = 60$ and the box is 12.", check=("many", ("eq", "F(7*5 + 25, 5)", "12"), crosses("7*u + 25", "12*u", "5", "60")), space=0.5),
         ]),
     ],
 

@@ -3,9 +3,8 @@
 The question-bank commentary for every lesson in the unit: how each bank varies, what the
 audit against Math Nation found, what changed from the book, and the answers.
 
-**This is not a handout and it is not the teacher's edition.** Under ruling 26 the teacher's
-edition is four pages read in twenty minutes; this is the reference behind it, read once when
-the unit is planned. The printed keys in each lesson's `Keys` folder are generated from the same specs.
+**This is not a handout.** It is the reference behind the lesson plans, read once when the unit is planned.
+The printed keys in each lesson's `Keys` folder are generated from the same specs.
 
 ## 11.01  Equations with Like Terms and the Distributive Property
 
@@ -100,10 +99,10 @@ the unit is planned. The printed keys in each lesson's `Keys` folder are generat
 - 11.3.4 classification grid → boards 1–6 and the Independent Set, each verdict with its ending.
 
 **Question Bank answers.**  
-1. No solution  2. Infinitely many solutions  3. One solution: q = 0  4. Infinitely many solutions  5. No solution  6. One solution: r = 7  7. Infinitely many solutions  8. No solution  9. 20  10. Never: no solution  11. C C  12. B, C B, C
+1. No solution  2. Infinitely many solutions  3. One solution, q = 0  4. Infinitely many solutions  5. No solution  6. One solution, r = 7  7. Infinitely many solutions  8. No solution  9. 20  10. Never. There is no solution.  11. C C  12. B, C B, C
 
 **Question Bank – Additional answers.**  
-1. No solution  2. Infinitely many solutions  3. One solution: c = 0  4. Infinitely many solutions  5. No solution  6. One solution: w = 5  7. Infinitely many solutions  8. No solution  9. 18  10. Never: no solution  11. A A  12. B, E B, E
+1. No solution  2. Infinitely many solutions  3. One solution, c = 0  4. Infinitely many solutions  5. No solution  6. One solution, w = 5  7. Infinitely many solutions  8. No solution  9. 18  10. Never. There is no solution.  11. A A  12. B, E B, E
 
 ---
 
@@ -115,7 +114,7 @@ the unit is planned. The printed keys in each lesson's `Keys` folder are generat
 
 **Read this once, when you plan the unit.**
 
-- The unit's fourth day, after a day with no class (Thu 3 Dec). Built from the benchmark and the B1G-M first (the unit's Lesson Outlines, §11.04), then read against Math Nation 11.4 (the unit audit, Part 1). The moves are the last three days'; the new content is the benchmark's 'rational number coefficients' — a fraction distributed, fractions cleared by a common denominator, a decimal distributed.
+- The unit's fourth day, after a spiral day with no deck (Thu 3 Dec, FAST PM2). Built from the benchmark and the B1G-M first (the unit's Lesson Outlines, §11.04), then read against Math Nation 11.4 (the unit audit, Part 1). The moves are the last three days'; the new content is the benchmark's 'rational number coefficients' — a fraction distributed, fractions cleared by a common denominator, a decimal distributed.
 - The two example pairs go to the techniques that need a model: Example 1 is the decimal distributed with the variable on both sides, Example 2 clears fractions with a common denominator, its second line written out — 6(x/2) + 6(3) = 6(x/3) + 6(5) — because that is the step students skip. Notes I shows every move of the whole-number order on its own line. The decimal distribution is the lowest-scoring released Grade 8 FAST skill (21%): Notes III is the state's own shape (−2.4(5x − 3) = −40.8: a negative decimal factor, a decimal product, the equation of FAST's released item at our numbers), then Example 1, board 3 (products not whole: 1.8x + 2.4), board 4 (a negative decimal, −1.5, as a diagnostic), board 9 and set question 4 (−2.5). A negative fraction is on the slides too: Notes II (−½), board 2 (−⅓) and set question 1 (−¾). Bank 3 and additional 3 end at a fraction (13/21, 5/19) — the state's 'tedious' value.
 - Every multiple-choice wrong option is one of the B1G-M's named AR.2.1 errors — distributing to only one term, a sign error while distributing, expecting variable = constant — or a named slip (a term carried across the equals sign with its sign unchanged; the x-terms added). A false ending is written as the false equation with its words, never as '≠'; on an answer slide it is said in words because the build's step check holds every printed equation true.
 - Not reproduced from the book: the 11.4.1 game-statistics warm-up (no AR.2.1 content); Clare's error analysis, whose stem says 'a mistake' over two (D7); the 11.4.3 card sort, whose cards were never supplied (D11, T8) and whose card K work line has both signs wrong (D8); PP #10, whose student page and key are different equations (D6 — here each item's key is worked from the very equation printed); the key lines with wrong constants, '10 ≠ 3' and '0.8 ≠ 1.8' (D9, D10); the partner work.
@@ -181,7 +180,7 @@ the unit is planned. The printed keys in each lesson's `Keys` folder are generat
 
 **Read this once, when you plan the unit.**
 
-- The 43-minute day (Wed 9 Dec; Tuesday 8 Dec has no class, so the last lesson is Monday's 11.05–06). The kit's timing table must total 53, so the table below is the full lesson; the cut is under Materials at the end of this edition. Built from the benchmark and the B1G-M first (the unit's Lesson Outlines, §11.07, standing decisions 1, 2, 3, 6 and 9), then read against Math Nation 11.7 (the unit audit, Part 2, E4, E5, E12, E13, §3–§5).
+- The 43-minute day (Wed 9 Dec; Tuesday 8 Dec is a spiral day with no deck, so the last lesson is Monday's 11.05–06). The kit's timing table must total 53, so the table below is the full lesson; the cut is under Materials in the Lesson Plan. Built from the benchmark and the B1G-M first (the unit's Lesson Outlines, §11.07, standing decisions 1, 2, 3, 6 and 9), then read against Math Nation 11.7 (the unit audit, Part 2, E4, E5, E12, E13, §3–§5).
 - Every line is graphed from a table (x = 0 and two more; the third point is the check). Today's words: the coefficient of x (Monday's 'number multiplying x'), and intersect — the point of intersection is the crossing. You may say slope here, the slides do not. The reasons from the equations that Monday only pictured are taught here (Notes III): the same coefficient of x and different numbers added — parallel, two level lines included; one equation written two ways — one line. The bridge x + 1 = −2x + 7 is printed once, a move a line, and practiced nowhere.
 - The Examples' question slides show empty tables and an empty grid: fill and draw them on the projected slide while the class watches; the worked slide gives the tables and the check beside the finished graph. Each Your Turn shows its two tables filled beside an empty grid, and its answer slide the graph with the crossing marked; both cross inside their tables. Right after Example 1's Your Turn, hand out the Independent Set: every student draws question 1 on its grid while you circulate (three of that Your Turn's five minutes) — the first lines are drawn where you can see them. The boards read a graph or two tables; nobody draws two lines on a whiteboard. The key draws both lines on each student grid, from their equations, with the crossing marked and named.
 - Changed from the outline: board 5 is y = 2x + 2 and y = 2x − 3 (the outline's y = 2x + 1 and y = 2x − 3 is 11.05's Notes III system). Not reproduced: the off-grid key graphs (E4, E5), end labels past the grid (E13), x = 3.5 (audit decision 2), the partner tasks.
@@ -234,9 +233,9 @@ the unit is planned. The printed keys in each lesson's `Keys` folder are generat
 - Practice and Homework L8 → the Independent Set; the y-axis names what both lines measure (E14).
 
 **Question Bank answers.**  
-1. After 4 hours, both have 60%.  2. For 15 miles, both vans cost \$70.  3. about (1.3, 2.7)  4. 1 and 2  5. y = 15x + 25  and  y = 20x  6. Rink A: \$29 against \$35.  7. about (0.7, 4.7)  8. 11  9. A A  10. B B  11. A, E A, E  12. No: Kai always has \$15 more — parallel lines, no solution.
+1. After 4 hours, both have 60%.  2. For 15 miles, both vans cost \$70.  3. about (1.3, 2.7)  4. 1 and 2  5. y = 15x + 25  and  y = 20x  6. Rink A (\$29 versus \$35)  7. about (0.7, 4.7)  8. 11  9. A A  10. B B  11. A, E A, E  12. No. Kai always has \$15 more, so the lines are parallel and there is no solution.
 
 **Question Bank – Additional answers.**  
-1. After 3 hours, both have 45%.  2. For 10 miles, both trucks cost \$60.  3. about (1.3, 1.7)  4. 2 and 3  5. y = 12x + 20  and  y = 16x  6. Arcade A: \$31 against \$35.  7. about (1.7, −0.3)  8. 10  9. A A  10. B B  11. A, D A, D  12. No: Ray always has \$15 more — parallel lines, no solution.
+1. After 3 hours, both have 45%.  2. For 10 miles, both trucks cost \$60.  3. about (1.3, 1.7)  4. 2 and 3  5. y = 12x + 20  and  y = 16x  6. Arcade A (\$31 versus \$35)  7. about (1.7, −0.3)  8. 10  9. A A  10. B B  11. A, D A, D  12. No. Ray always has \$15 more, so the lines are parallel and there is no solution.
 
 ---

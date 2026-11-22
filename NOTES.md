@@ -1,5 +1,86 @@
 # State of the work — 15 November 2026 (read this first)
 
+## 22 November, evening — Unit 11 rebuilt on today's kit, with "isolate" and "solve for" (branch `claude/u11-terms`; NOT merged, NOT published) (session_01W9n2X1V97j7Nf5Y7z1DaCq)
+
+Croix, 22 Nov, 3:50 pm: *"Merge and publish. Then take a wack at 11 with these changes."* The first half is the section
+below. **The reading taken of "these changes":** everything Unit 7 was given in its four passes. Unit 11 (built 14 Nov on
+the old kit, taught Mon 30 Nov – Thu 10 Dec, test Fri 11 Dec) is rebuilt on the kit of 22 Nov, ruling 60's two words are
+put where the unit names those ideas, the card's rules 19 and 20 are applied to the unit's own text, and ruling 57's
+words are corrected. **It is on a branch**: `main` and the website still hold the build of 14 Nov, and merging and
+republishing wait for his word (nothing on `main` or the site moves without it; his word of 3:50 pm named Unit 7).
+
+- **What the kit changes at a rebuild:** no Teacher Edition (seven files gone; the package has none); every document in
+  Lexend (the Lesson Plans run five pages, 11.03's six; ten keys run a page longer; **no student paper changed its page
+  count**); "Answer it." gone from under every whiteboard question; the IXL slide's and the Lesson Plan's standing lines;
+  the Independent Set's opening line; the paper typesetting of the third pass.
+- **Five figures were refused in Lexend lettering** (a wider face: a label ran through a line or an axis name): 11.07's
+  bank label "(1, 4)", two key labels "(4, 1)" and "(4, 0)", 11.08's key label "about (1.7, −0.3)", and the Review's
+  matching grid, whose "infinitely many" met a rule. Each label was moved or the grid re-proportioned; nothing else in
+  those figures changed.
+- **Ruling 60.** *"Solve for x"*, in each item's own letter, is the instruction: "Solve for x, then check." (the Examples
+  and Your Turns of 11.01, 11.02 and 11.04), "Solve for h:  9h − 2h + 4 = 60" (25 warm-up, set and bank stems that said
+  "Solve:"), "Solve 1.5(4x − 2) + x = 2(x + 6) for x.", "Solve for x both ways.", the Review's "Solve for the variable."
+  and "Solve each equation for x.", the banks' "…the equation has fractions. Solve for the variable." *"Isolate"*: 11.01
+  Notes I is "Collect the like terms. Then isolate x in two steps."; the Reference Sheet's fourth step is "Isolate x."
+  (its worked table ends "divide both sides by 3: x is isolated") and its vocabulary has "isolate; solve for"; the
+  Lesson Plans' MTR lines, ELL lines ("Isolate: get the variable alone on one side of the equals sign. Solve for x:
+  isolate x.") and cause notes ("[Notes I: to isolate x, subtract 4 from both sides]", which read "undo + 4 by
+  subtracting 4"). "Every system is given solved for y" was already the unit's phrase. The operation labels on the
+  answer slides stay ("Take 5x from both sides:", "Add 9:", "Divide by 3:").
+- **Card 19 on the student pages.** Whole questions for fragments: 11.03's question line is "How many solutions does it
+  have? If it has one, find it." (it read "One solution, no solution or infinitely many? If one, find it."); "How many
+  solutions are there?"; "Which estimate is best?"; 11.08's stories are sentences ("Tank A holds 30 liters and gains 5
+  liters a minute.", "Plan A costs \$6 for shoes and \$3 a game.", "Gym A costs \$20 to join…"); "For y = 2x + 1, find y
+  when x = 3." A paper's sentence does not open with an equation or a pair ("The solution of 3(x + □) + 2x = 46 is
+  x = 8.", "The ordered pair (3, □) is a solution of the system…", "The system y = 3x − 3 and y = −x + 5 is
+  graphed."). "Work backwards." heads no group now: "Find the missing number." Answer lines: "Yes, because 3(2) + 1 =
+  7", "No, because 3(2) − 2 = 4, not 5.", "One solution, x = 0", "Never. There is no solution.", "No solution. The lines
+  are parallel.", "Shop A (\$33 versus \$42)" (it read "against"). Students "explain" or "write", never "say" (11.08's
+  target and Notes II, a bank heading, the Review's question 7, the Reference Sheet); "a horizontal line" for "a level
+  line"; "the crossing's x-value" for "the x of the crossing". The Reference Sheet's prose is rewritten in whole
+  sentences throughout. **The Practice Test's stems are untouched** (they are the state's item shapes, and the practice
+  page words its questions the same way); one of its key lines changed ("One solution, x = 0").
+- **Card 20 in the seven Lesson Plans.** "Required by the benchmark", "Not part of this lesson", the three MTR lines,
+  Building on, Working toward, Differentiation, Closure and Materials are whole sentences that say "whiteboard question
+  9", not "board 9"; no ruling number, audit code or word about the build is printed ("(audit D4)", "(audit E15)",
+  "[ruling 22]", "THE 43-MINUTE CUT (… the build cannot print a 43-minute one)" are gone: the two Wednesdays' cuts are
+  sentences under Materials, as 7.01's is); the wrong answer that uses the unneeded number is cited "[an extra number,
+  included on purpose]". "Grade 7 (MA.7.AR.4.3) — graphing y = px from a table" is out of 11.05's and 11.07's Building
+  on: Unit 7 is taught after Unit 11.
+- **Ruling 57's words:** `u11/l04.py`, `u11/l07.py` and the manifest said Thu 3 Dec and Tue 8 Dec have no class; they
+  are spiral days with no deck. No date moved.
+- **A wrong premise, found while rewording:** 11.01's first higher-order question asked why the 4 in 3(2x − 5) + 4 = 25
+  cannot be subtracted from the 25 before the 3 is distributed. It can. It reads: "…the 4 can be subtracted from both
+  sides before the 3 is distributed. Why can the 4 not be added to the −5 first?"
+- **Found by building and by looking, and mended:** (1) **□, ⅓ and ⅔ are not Lexend glyphs**: 16 `glyph` findings in
+  plans and keys; a box in prose is written as mathematics ("the value of $8 + □$") or in words ("so the box is 7"),
+  a third as "(1/3)". (2) **The IXL slide's third line** left "test." alone on a second line on all seven IXL slides,
+  because "Unit 11" is a character longer than "Unit 7": a kit line, mended in the kit (Windmill `1b560a0`: the due
+  sentence wraps whole). (3) **A second row of words over a graph is paid for out of the graph**: 11.08's whiteboard
+  question 4 came out with a graph a quarter of an inch tall, and 11.05's second Your Turn and question 7 a quarter
+  smaller; each is one line again. (4) A line the kit measured as two (its 6% margin) left a blank line and a smaller
+  figure (11.08's first Your Turn and question 5): shortened. (5) One-word last lines on four slides: reworded. (6)
+  11.07's Additional Question Bank ran 8 pages for 6: two of its figures are 0.2 and 0.3 in smaller.
+- **Left on purpose:** a whiteboard question that is a bare equation shows the equation alone (ruling 58 took "Answer
+  it." away; whether "Solve for x." should stand there is asked of Croix); the step labels; the notes' short lines; the
+  banks' data lines under a heading ("(3, 5);  y = 2x − 1 and y = x + 2"); "Florida B1G-M" in the plans' cause notes;
+  the Review key's SSDD note; `te.say`, `note` and the other fields that print nowhere now.
+- **Proof.** 319 exact strings by `reword.py` (lists and their generators in the session's `lean/u11/edits`). Gates 0
+  (390 items re-derived); `unit_repeats.py u11` 0; four full builds, the last from an emptied `out/u11` and the
+  committed figure cache, `checks: 0 findings`. `student_view.py u11 --bank` before and after: 376 ids, **99 questions
+  and 34 answer lines reworded, no check, keyed letter, list of choices or kind moved, and no digit differs in any
+  question or answer**. 146 of 248 slides differ from the build of 14 Nov: all looked at, and the 20 that the look sent
+  back looked at again; between the last two builds only the two slides meant to change did. Every PDF scanned: no
+  equation broken across a line, no last line under ten characters, no line beginning with a lone variable, none of the
+  old lines. Package reinstalled (128 files, no Teacher Edition); master sheet regenerated; `tools/check.sh` passes.
+- **Not done:** not merged and not published; the site's Unit 11 pages and web decks are the build of 14 Nov (and still
+  have the graph-over-question fault). **Before publishing, look at Unit 11's web decks** (Windmill's `briefs/REVIEW AND
+  PUBLISH`): the web deck is a second renderer that no gate looks at. The practice page is untouched, and needs no
+  change for this pass. M7 is not on this kit.
+- **Open, for Croix:** merge and republish Unit 11 before 30 Nov; and whether a bare-equation whiteboard question should
+  say "Solve for x." under its equation.
+
+
 ## 20–22 November — the lean workflow; Unit 7 built with it, merged and published on 22 Nov (session_01W9n2X1V97j7Nf5Y7z1DaCq)
 
 Croix, 20 Nov, of how the lesson slides are built: *"It feels extremely inefficient and is burning tons of tokens."* Shown a

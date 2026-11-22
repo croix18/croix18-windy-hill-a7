@@ -361,3 +361,14 @@ that look alike — parentheses on the left, an x-term on the right — and end 
 solution; no solution; infinitely many), then two systems on the same grid shape, one crossing and one parallel.
 The Reference Sheet: the order of work for an equation; the three endings; what a solution of a system is; the
 three pictures (cross, parallel, same line); a line from a table; reading a crossing and saying what it means.
+
+---
+
+**22 November 2026 — the wording of these outlines is the plan's; the pages now read as follows** (Croix: *"take a wack
+at 11 with these changes"*). The unit was rebuilt on the kit of 22 Nov: no Teacher Edition, every document in Lexend.
+An equation to be solved is given with "Solve for x" in the item's own letter, and a variable alone on one side is
+"isolated" (ruling 60): 11.01 Notes I ends "Collect the like terms. Then isolate x in two steps." 11.03's question line
+is "How many solutions does it have? If it has one, find it." 11.08's target says "explain what the crossing point
+means". A group of box questions is headed "Find the missing number." Thu 3 Dec and Tue 8 Dec are spiral days with no
+deck (ruling 57), and the two 43-minute Wednesdays' cuts are under Materials in the Lesson Plans of 11.03 and 11.07. No
+number, check or keyed letter changed. The record is in `NOTES.md` (22 November, evening).
