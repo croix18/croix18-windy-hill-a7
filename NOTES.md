@@ -10,7 +10,7 @@ words are corrected. **It is on a branch**: `main` and the website still hold th
 republishing wait for his word (nothing on `main` or the site moves without it; his word of 3:50 pm named Unit 7).
 
 - **What the kit changes at a rebuild:** no Teacher Edition (seven files gone; the package has none); every document in
-  Lexend (the Lesson Plans run five pages, 11.03's six; ten keys run a page longer; **no student paper changed its page
+  Lexend (the Lesson Plans run five pages, 11.03's six; eleven keys run a page longer; **no student paper changed its page
   count**); "Answer it." gone from under every whiteboard question; the IXL slide's and the Lesson Plan's standing lines;
   the Independent Set's opening line; the paper typesetting of the third pass.
 - **Five figures were refused in Lexend lettering** (a wider face: a label ran through a line or an axis name): 11.07's
@@ -53,24 +53,30 @@ republishing wait for his word (nothing on `main` or the site moves without it; 
   cannot be subtracted from the 25 before the 3 is distributed. It can. It reads: "…the 4 can be subtracted from both
   sides before the 3 is distributed. Why can the 4 not be added to the −5 first?"
 - **Found by building and by looking, and mended:** (1) **□, ⅓ and ⅔ are not Lexend glyphs**: 16 `glyph` findings in
-  plans and keys; a box in prose is written as mathematics ("the value of $8 + □$") or in words ("so the box is 7"),
-  a third as "(1/3)". (2) **The IXL slide's third line** left "test." alone on a second line on all seven IXL slides,
+  plans and keys. A third is written "(1/3)". A box in a key's worked line or a plan's cause note is in words ("Put 4
+  in for x: 5 times the parentheses, minus 8, is 37. The parentheses are 9, so the box is 5."): written as mathematics
+  it is a picture, and it stood half again as tall as the small words beside it (the fourth build; the fifth has the
+  words). In a sentence of the body's size it stays mathematics (the Lesson Plans' Enrichment lines). (2) **The IXL slide's third line** left "test." alone on a second line on all seven IXL slides,
   because "Unit 11" is a character longer than "Unit 7": a kit line, mended in the kit (Windmill `1b560a0`: the due
   sentence wraps whole). (3) **A second row of words over a graph is paid for out of the graph**: 11.08's whiteboard
   question 4 came out with a graph a quarter of an inch tall, and 11.05's second Your Turn and question 7 a quarter
   smaller; each is one line again. (4) A line the kit measured as two (its 6% margin) left a blank line and a smaller
   figure (11.08's first Your Turn and question 5): shortened. (5) One-word last lines on four slides: reworded. (6)
   11.07's Additional Question Bank ran 8 pages for 6: two of its figures are 0.2 and 0.3 in smaller.
+- **Seen, not changed:** a box or fraction equation in a Lesson Plan's question cell is a picture at the body's size,
+  larger than the 9-pt words of its cell, as it was on 14 Nov: the kit sets a picture at one size (`dockit.img`).
 - **Left on purpose:** a whiteboard question that is a bare equation shows the equation alone (ruling 58 took "Answer
   it." away; whether "Solve for x." should stand there is asked of Croix); the step labels; the notes' short lines; the
   banks' data lines under a heading ("(3, 5);  y = 2x − 1 and y = x + 2"); "Florida B1G-M" in the plans' cause notes;
   the Review key's SSDD note; `te.say`, `note` and the other fields that print nowhere now.
-- **Proof.** 319 exact strings by `reword.py` (lists and their generators in the session's `lean/u11/edits`). Gates 0
-  (390 items re-derived); `unit_repeats.py u11` 0; four full builds, the last from an emptied `out/u11` and the
-  committed figure cache, `checks: 0 findings`. `student_view.py u11 --bank` before and after: 376 ids, **99 questions
+- **Proof.** 332 exact strings by `reword.py` (lists and their generators in the session's `lean/u11/edits`; the
+  generator is Windmill's `briefs/lean/edit_list.py` now). Gates 0 (390 items re-derived); `unit_repeats.py u11` 0; five
+  full builds, the fourth from an emptied `out/u11` and the committed figure cache and the fifth from an emptied
+  `out/u11` on that cache, each `checks: 0 findings`. `student_view.py u11 --bank` before and after: 376 ids, **99 questions
   and 34 answer lines reworded, no check, keyed letter, list of choices or kind moved, and no digit differs in any
   question or answer**. 146 of 248 slides differ from the build of 14 Nov: all looked at, and the 20 that the look sent
-  back looked at again; between the last two builds only the two slides meant to change did. Every PDF scanned: no
+  back looked at again; the last three builds' decks differ in the two slides meant to change and no other, and the
+  fifth build changed the words of three plans and nine keys and of nothing else. Every PDF scanned: no
   equation broken across a line, no last line under ten characters, no line beginning with a lone variable, none of the
   old lines. Package reinstalled (128 files, no Teacher Edition); master sheet regenerated; `tools/check.sh` passes.
 - **Not done:** not merged and not published; the site's Unit 11 pages and web decks are the build of 14 Nov (and still

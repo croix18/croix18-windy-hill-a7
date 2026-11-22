@@ -488,7 +488,7 @@ U = dict(
                         ("true", "1 < F(8,5) and F(9,5) < 2 and 1 < F(6,5) and F(7,5) < 2"),
                         sat("-u + 3", "2", "1"), fails("2*u - 2", "2", "1")), space=0.4),
             dict(stem="Two plans cost the same for 5 months:   $y = 7x + 25$   and   $y = □x$. What number goes in the box?", answer="12",
-                 why="7(5) + 25 = 60 at 5 months, so $□(5) = 60$ and the box is 12.", check=("many", ("eq", "F(7*5 + 25, 5)", "12"), crosses("7*u + 25", "12*u", "5", "60")), space=0.5),
+                 why="7(5) + 25 = 60 at 5 months, so 5 times the box is 60 and the box is 12.", check=("many", ("eq", "F(7*5 + 25, 5)", "12"), crosses("7*u + 25", "12*u", "5", "60")), space=0.5),
         ]),
     ],
 
