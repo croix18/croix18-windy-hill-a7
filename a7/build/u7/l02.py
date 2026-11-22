@@ -106,7 +106,7 @@ L = dict(
          ("MTR.7.1", "Students state every constant with its unit and explain what it means in context.")],
     hoq=[("Why must y ÷ x give the same number for every pair, not just the first?", "DOK 2"),
          ("On a graph scaled by 4, why does counting squares give the wrong constant?", "DOK 2"),
-         ("120 miles on 5 gallons gives 24 and 1/24. Which one is the constant, and what tells you?", "DOK 3"),
+         ("120 miles on 5 gallons gives 24 and 1/24. Which value is the constant, and how do you know which variable to isolate?", "DOK 3"),
          ("Every proportional relationship includes the pair (0, 0). Why can that pair not be used to find the constant?", "DOK 2")],
     differentiation=[
         ("ESE / 504", "Provide a printed card that reads “constant = y ÷ x — y on top”. Before dividing, students write the question's two quantities as y and x. Keep Notes I on display from whiteboard question 1 onward."),
@@ -180,7 +180,7 @@ L = dict(
              yt_check=ratios([3, 6], [-5, -10], "F(-5,3)")),
     ],
 
-    # The round: a table in a context (1), the same table the other way (2: only which quantity is y changes), the
+    # The round: a table in a context (1), the same table with the other quantity as y (2: only which quantity is y changes), the
     # diagnostic on a bare table (3), a graph scaled by 10 (4), the diagnostic on a graph scaled by 4 (5), the
     # diagnostic on what a constant means (6), a description with an extra number (7), the pattern breaks at 8 — a
     # negative constant from a table — and the written verdict on a reversed ratio (9).
@@ -410,7 +410,7 @@ L = dict(
         must_not="The word “slope” is not used. Students do not estimate a constant from a graph that has no readable point; the state's guidance is to begin with identifiable points.",
         read_first=[
             "Two book lessons (7.2 and 7.3) taught as one day. Built from the benchmark and the B1G-M first (the unit's Lesson Outlines, §7.02+03, standing decisions 2–6), with Math Nation read for scope only.",
-            "Today names the constant of proportionality: yesterday's unit rate, the p in y = px, y ÷ x for every pair. Every constant is said with its unit (dollars per pound), and which quantity is y is said in every item: board 2 asks board 1's table the other way around. Negative constants are taught in a bare context only (Example 2, board 8). No 'slope' on any page."],
+            "Today names the constant of proportionality: yesterday's unit rate, the p in y = px, y ÷ x for every pair. Every constant is said with its unit (dollars per pound), and which quantity is y is said in every item: board 2 asks for the constant of board 1's table with the other quantity as y. Negative constants are taught in a bare context only (Example 2, board 8). No 'slope' on any page."],
         materials="Whiteboards and markers. The Independent Set, one per student.",
         variation="Boards 1–2 read one table both ways (only which quantity is y changes); 3 votes on a bare table; 4 reads a graph scaled by 10, 5 votes on one scaled by 4, 6 votes on what a constant means; 7 is a description with an extra number (the snail's age). The pattern breaks at 8 — a negative constant from a table — and 9 judges a reversed ratio, written. The set: a table with a decimal, a table with a fraction constant, a graph by 1, a graph by 5 with its meaning, a description with the direction named, then a negative constant.",
         audit=["Every constant re-derived by sympy at build time as y ÷ x for every printed pair, decimals read as exact numbers; every graph drawn from y = px by u7/figs7.py, which refuses a marked point not on its line.",

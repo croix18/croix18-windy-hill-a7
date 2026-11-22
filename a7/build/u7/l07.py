@@ -77,7 +77,7 @@ L = dict(
     benchmark_text="Solve real-world problems involving proportional relationships.",
     target="I can compare two proportional relationships shown in different ways, and solve problems with them.",
     essential="When two relationships are shown in different ways, what one number lets us compare them?",
-    building_on="Lessons 7.05–06 wrote the equation y = px from a table, a graph and a description, with either quantity as y. Lessons 7.02–03 defined the constant of proportionality as the amount of y for every 1 unit of x. In Grade 6 (MA.6.AR.3.5), students used unit rates to find the better buy.",
+    building_on="Lessons 7.05–06 wrote the equation y = px from a table, a graph and a description, and solved it for either variable. Lessons 7.02–03 defined the constant of proportionality as the amount of y for every 1 unit of x. In Grade 6 (MA.6.AR.3.5), students used unit rates to find the better buy.",
     working_toward="Questions 14 and 15 of the Unit 7 test (Thu 14 Jan) come from this lesson. In Unit 10 (19 Jan), students learn the word “slope” for the steepness of a line. Grade 8 (MA.8.AR.3.4 and 3.5) compares linear relationships.",
     vocab=[],
     vocab_slide=False,
@@ -127,7 +127,7 @@ L = dict(
              items=["In 8 hours, how much more does Ana earn than Ben?"],
              math=["$\\text{Ana:}\\quad 12.5(8) = 100 \\qquad \\text{Ben:}\\quad 11(8) = 88$", "$100 - 88 = 12$"],
              items2=["In 8 hours, Ana earns \\$12.00 more.",
-                     "For values beyond the grid, use the equation. Substitute the value you know, then solve for the other one."],
+                     "For values beyond the grid, use the equation. Substitute the value you know, then solve for the other variable."],
              letters=False),
     ],
 
@@ -175,7 +175,7 @@ L = dict(
                             ask="At this rate, how many minutes does it take to print 45 labels?",
                             steps=["Constant:  $9 \\div 4 = 2.25$  labels per minute",
                                    "Equation:  $n = 2.25t$",
-                                   "Solve:  $45 = 2.25t$,  so  $t = 20$"],
+                                   "Solve for t:  $45 = 2.25t$,  so  $t = 20$"],
                             answer="20 minutes"),
              yt_check=("many", rate("9", "4", "F(9,4)"), ("eq", "45 / F(9,4)", "20"),
                        ("true", "sp.solve(sp.Eq(45, F(9,4)*" + X + "), " + X + ") == [20]"))),
@@ -184,7 +184,7 @@ L = dict(
     # The round: a table versus an equation (1), and again with only the equation changed (2); a vote on two lines
     # (3); a description versus a graph (4); three constants read off one grid and put in order (5); a vote on which
     # plan is cheaper and by how much (6); two descriptions with the seats as the extra number (7); a graph read and
-    # gone past (8, backwards); Kim's claim about digits, written (9).
+    # gone past (8, solved for t); Kim's claim about digits, written (9).
     whiteboard=[
         dict(text=["The table shows Store A's rice prices.", "At Store B, c = 3.3w (c dollars for w pounds).",
                    "**Which store's rice costs less per pound?"],
@@ -258,7 +258,7 @@ L = dict(
              qtext="The graph shows how far an elevator rises, feet versus seconds, through (3, 8); the grid ends at 10 feet. At this rate, how many seconds does it take to rise 24 feet?",
              fig=BP((0, 6), (0, 10), **LIFT), fig_a=BPA((0, 6), (0, 10), **LIFT),
              steps=["Constant:  $8 \\div 3 = \\frac{8}{3}$  feet per second", "Equation:  $h = \\frac{8}{3}t$",
-                    "Solve:  $24 = \\frac{8}{3}t$,  so  $t = 9$"],
+                    "Solve for t:  $24 = \\frac{8}{3}t$,  so  $t = 9$"],
              answer="9 seconds",
              check=("many", rate("8", "3", "F(8,3)"), ("eq", "24 / F(8,3)", "9"),
                     ("true", "sp.solve(sp.Eq(24, F(8,3)*" + X + "), " + X + ") == [9]")),
@@ -275,7 +275,7 @@ L = dict(
 
     # The six: a table versus an equation (1); an equation versus a description, then how much farther (2); two
     # lines on one grid (3); three constants in order (4); which is cheaper and by how much (5); a graph read, then a
-    # value past its edge found backward (6). The pattern breaks at 4: no question to answer after the constants,
+    # value beyond its grid solved for (6). The pattern breaks at 4: no question to answer after the constants,
     # only their order.
     independent=[
         dict(stem="The table shows Store A's rope prices. At Store B, $c = 0.8f$ (c dollars for f feet). Which store charges less per foot?",
@@ -308,7 +308,7 @@ L = dict(
              fig=figs.plane((0, 40), (0, 4), lines=[figs.prop(Fr(1, 10), "")], xs=5, xname="minutes", yname="kilometers",
                             points=[(10, 1, "on"), (20, 2, "on"), (30, 3, "on")], inches=3.2),
              answer="90 minutes",
-             why="1 ÷ 10 = 0.1 kilometers per minute, so d = 0.1t; 9 = 0.1t, so t = 9 ÷ 0.1 = 90.",
+             why="1 ÷ 10 = 0.1 kilometers per minute, so d = 0.1t. Solve 9 = 0.1t for t: t = 9 ÷ 0.1 = 90.",
              check=("many", rate("1", "10", "F(1,10)"), rate("2", "20", "F(1,10)"), rate("3", "30", "F(1,10)"),
                     ("eq", "9 / F(1,10)", "90"), ("true", "sp.solve(sp.Eq(9, F(1,10)*" + X + "), " + X + ") == [90]")), space=0.5),
     ],

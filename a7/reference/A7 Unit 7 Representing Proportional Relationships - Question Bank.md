@@ -45,7 +45,7 @@ The printed keys in each lesson's `Keys` folder are generated from the same spec
 **Read this once, when you plan the unit.**
 
 - Two book lessons (7.2 and 7.3) taught as one day. Built from the benchmark and the B1G-M first (the unit's Lesson Outlines, §7.02+03, standing decisions 2–6), with Math Nation read for scope only.
-- Today names the constant of proportionality: yesterday's unit rate, the p in y = px, y ÷ x for every pair. Every constant is said with its unit (dollars per pound), and which quantity is y is said in every item: board 2 asks board 1's table the other way around. Negative constants are taught in a bare context only (Example 2, board 8). No 'slope' on any page.
+- Today names the constant of proportionality: yesterday's unit rate, the p in y = px, y ÷ x for every pair. Every constant is said with its unit (dollars per pound), and which quantity is y is said in every item: board 2 asks for the constant of board 1's table with the other quantity as y. Negative constants are taught in a bare context only (Example 2, board 8). No 'slope' on any page.
 
 **What the audit against Math Nation found.**
 
@@ -97,17 +97,17 @@ The printed keys in each lesson's `Keys` folder are generated from the same spec
 
 *MA.7.AR.4.4*
 
-**Variation.**  Boards 1–2 write the equation from a table (whole numbers, then money with named letters); 3 votes on a graph's equation; 4 from a description; 5 votes on which quantity is y. The pattern breaks at 6 — a table FROM an equation, its last x found backward; 7 is the plane story with its passengers as the extra number; 8 says an equation in a sentence; 9 is Lee's x ÷ y, written. The set breaks at 4: the same relationship the other way around.
+**Variation.**  Boards 1–2 write the equation from a table (whole numbers, then money with named letters); 3 votes on a graph's equation; 4 from a description; 5 votes on which variable is isolated. The pattern breaks at 6 — a table FROM an equation, its last x solved for; 7 is the plane story with its passengers as the extra number; 8 says an equation in a sentence; 9 is Lee's x ÷ y, written. The set breaks at 4: the same equation solved for the other variable.
 
 **Read this once, when you plan the unit.**
 
 - Two book lessons, 7.5 and 7.6, taught as one day: writing y = px from a table, a graph and a description, then going from any one form to the others. Built from the benchmark and its clarifications first (the unit's Lesson Outlines, §7.05+06, standing decisions 2, 4, 6 and 10).
-- Florida writes p; say once, at the vocabulary slide, that some books write k. Notes III is the benchmark's own example: m = 60h and h = (1/60)m are one relationship, two constants — the question tells which quantity is y, and the test asks it once (question 12b).
-- Example 1 goes from a description to the other three forms; its graph's dollars axis counts by 20: say "read the scales first" before a point is plotted. Example 2 writes and then solves, and solves again the other way around to show the same answer.
+- Florida writes p; say once, at the vocabulary slide, that some books write k. Notes III is the benchmark's own example: m = 60h and h = (1/60)m are one relationship, two constants — the question tells which variable to solve for, and the test asks it once (question 12b).
+- Example 1 goes from a description to the other three forms; its graph's dollars axis counts by 20: say "read the scales first" before a point is plotted. Example 2 writes the equation for f and solves for s, then uses the equation solved for s to show the same answer.
 
 **What the audit against Math Nation found.**
 
-- Every constant re-derived by sympy at build time as y ÷ x for every printed pair, over exact rationals; every table from an equation checked entry by entry, the backward entry solved; every graph drawn from y = px by u7/figs7.py, which refuses a marked point not on its line.
+- Every constant re-derived by sympy at build time as y ÷ x for every printed pair, over exact rationals; every table from an equation checked entry by entry, its missing x solved for; every graph drawn from y = px by u7/figs7.py, which refuses a marked point not on its line.
 - Every wrong option of a choice item checked to fail at the item's own point or at the origin.
 
 **What changed from the book.**
@@ -116,10 +116,10 @@ The printed keys in each lesson's `Keys` folder are generated from the same spec
 - 7.6 translating between representations → Notes III, Examples 1–2, boards 5–8 and the set's questions 4–6.
 
 **Question Bank answers.**  
-1. y = 7x  2. g = 3.5t  3. y = (2/3)x  4. m = 15h  5. g = 6t  6. g = (1/4)q  7. y = 6 and 12; x = 12  8. c = 0.75f; 12 feet  9. Each case holds 24 bottles.  10. D D  11. A A  12. C, D C, D
+1. y = 7x  2. g = 3.5t  3. y = (2/3)x  4. m = 15h  5. g = 6t  6. g = (1/4)q, or g = q ÷ 4  7. y = 6 and 12; x = 12  8. c = 0.75f; 12 feet  9. Each case holds 24 bottles.  10. D D  11. A A  12. C, D C, D
 
 **Question Bank – Additional answers.**  
-1. y = 9x  2. f = 2.2t  3. y = (1/4)x  4. d = 12.5h  5. c = 14t  6. m = (1/100)c, or m = 0.01c  7. y = 13 and 39; x = 12  8. c = 1.25m; 8 meters  9. Each box holds 8 crayons.  10. C C  11. B B  12. A, C A, C
+1. y = 9x  2. f = 2.2t  3. y = (1/4)x  4. d = 12.5h  5. c = 14t  6. m = (1/100)c, m = 0.01c or m = c ÷ 100  7. y = 13 and 39; x = 12  8. c = 1.25m; 8 meters  9. Each box holds 8 crayons.  10. C C  11. B B  12. A, C A, C
 
 ---
 

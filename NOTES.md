@@ -1,6 +1,6 @@
 # State of the work — 15 November 2026 (read this first)
 
-## 20–21 November — the lean workflow; Unit 7 built with it, on a branch, held for Croix's word (session_01W9n2X1V97j7Nf5Y7z1DaCq)
+## 20–22 November — the lean workflow; Unit 7 built with it, on a branch, held for Croix's word (session_01W9n2X1V97j7Nf5Y7z1DaCq)
 
 Croix, 20 Nov, of how the lesson slides are built: *"It feels extremely inefficient and is burning tons of tokens."* Shown a
 plan, 11:30 pm: *"You can get rid of the 4 page teacher edition. Only read math nation for scope and test item shapes. The
@@ -27,7 +27,7 @@ on the website, and M7 has not been moved to the new kit.
   fitted its cell and nothing refused it. Fixed, and the kit's `rulingcheck` now refuses it (no other unit has one).
 - **Math Nation** is read for a unit's scope and its test's item shapes, in one note that stays out of the repository. There
   is no Unit 7 audit and there will not be one.
-- **The kit** (Windmill `33a26e0`, vendored): `reword.py` (a wording pass as exact strings) and the five lean tools (`reader_copy.py`, `student_view.py`, `blind_diff.py`,
+- **The kit** (Windmill `d144647`, vendored): `reword.py` (a wording pass as exact strings) and the five lean tools (`reader_copy.py`, `student_view.py`, `blind_diff.py`,
   `unit_repeats.py`, `changed_slides.py`), `BUILDER CARD.md`, `RULINGS LEDGER.md`; a one-point section prints "1 point"; a
   paper's title keeps clear of the name lines.
 - **Unit 7, Representing Proportional Relationships** (MA.7.AR.4.1–4.5, MA.8.AR.3.1; taught Wed 6 – Tue 12 Jan, spiral day
@@ -167,8 +167,52 @@ on the website, and M7 has not been moved to the new kit.
     Review, the Practice Test, the five Independent Sets and pages of the banks, a plan and a key; every PDF searched
     for the old lines and for a line break inside an equation; fonts Lexend but for the bubbles, the check boxes and the
     back arrow; every PDF has the page count it had.
+- **The fourth wording pass (ruling 60): "isolate" and "solve for".** The third pass had refused those two words where
+  Gemini asked for them, on the ground that Unit 7 does not teach them. Croix, 21 Nov, 11:40 pm: *"What do you have now
+  instead of isolate?"* Shown the six places, 22 Nov, 1:54 pm: *"Isolate and solve for are correct terminology. That's
+  what should be used across the whole unit."* (A7's Unit 1, Equations and Inequalities, taught both: "Describe the
+  operation that isolates n on the left side.", "Solve for x, then simplify." The third pass had not looked.) **Ruling
+  60** is on the kit's card (19) and in its ledger: a variable alone on one side is *isolated*, and the equation is
+  *solved for* it; "the other way around", "work backward", "an equation for either quantity" and "which quantity the
+  equation is for" are retired for that idea. 74 exact strings by `reword.py`.
+  - **On the slides** (8 of 179 changed): 7.05–06 Notes III is "Either variable can be isolated" ("Solved for m",
+    "Solved for h", "The question tells you which variable to solve for."); its second Your Turn ("solve for g: 350 =
+    25g, so g = 14"; "Solved for g: g = (1/25)m…"); whiteboard questions 5 ("Solved for d, the kilometers: d = 1.6m")
+    and 6 ("solve for x: 36 = 2.4x, so x = 15"); the Independent Set's question 4; 7.07 Notes III ("…then solve for the
+    other variable."), its second Your Turn and whiteboard question 8 ("Solve for t: …").
+  - **On the papers:** 7.05–06's set, question 4, "Solve the equation for n, the yards in f feet." (key: "n = (1/3)f, or
+    n = f ÷ 3"; the state's own second form is h = m/60); both banks' heading "Solve for the other variable." and its
+    question; the Reference Sheet's section 5, now "Writing and Solving the Equation" ("Either variable can be
+    isolated…", "Solve for x when you know y… Isolate x by dividing both sides by 1.4"), with a line each in sections 3
+    and 6; the keys ("Solve 63 = 4.2x for x: x = 15." for "working backward"); the Lesson Plans (7.02–03's third
+    question, in Gemini's words; 7.05–06's "Required by the benchmark", ELL and enrichment lines and two causes in its
+    checks table; 7.07's "Building on").
+  - **Two questions now ask something a little different: the Review's 13(b) and the Practice Test's 12(b)**, "Solve
+    your equation for w, the pounds that c dollars buy." and "Solve your equation for h, the hours it takes him to earn
+    e dollars." Before, each asked for a second equation, which a student could write from 12 ÷ 240 without part (a);
+    now part (b) starts from the student's own equation, so a wrong (a) carries into (b) and ruling 19 scores it. Each
+    key gives three forms (h = e ÷ 20, h = (1/20)e or h = 0.05e). His to turn back.
+  - **Left as it was, on purpose:** "which quantity is y" where the page names no letters and the question is the
+    constant (7.02–03 Notes III, "With gallons as y"; its boards and keys; the Reference Sheet's sections 1 and 3):
+    nothing is isolated there, and Gemini's own list keeps "The constant depends on which quantity is y." "Write the
+    equation for f" and the Review's "Write an equation for…" stay: the question names the variable the equation is
+    solved for. The example slides stay mathematics only (ruling 37); their notes in the spec use the terms.
+  - **What the pages showed.** The Practice Test's 12(b) ran into its "1 pt" (shortened). On 7.05–06's set the paper
+    broke "Solve the equation for / n, the yards in f feet." **Kit, Windmill `d144647`:** on a paper a one-letter
+    variable now stays with the word before it (`dockit.tie_letters`), and the rule that keeps a paragraph's closing
+    words together reaches across its pieces. That second fix mends a line the third pass's proof had missed: 7.01's
+    Question Bank, question 7, ended "What is y when / x = 1?", six characters alone on a line, where the proof said no
+    student paper had a last line under ten (the scan counted "x = 1?" as three words). It reads "What is y / when x =
+    1?" now. Two Reference Sheet paragraphs that ended on "constants." and "that point." were reworded.
+  - **Proof:** gates 0 (282 items re-derived); `unit_repeats.py u7` 0; three full builds, the last one clean, `checks: 0
+    findings`; `student_view.py` before and after: 5 questions and their answers reworded and 2 headings, no keyed letter
+    and no check moved, each of the five worked by hand (f = 3n gives n = f ÷ 3), so no solver was run; all 8 changed
+    slides looked at in their last form; the 9 changed pages of the student papers looked at, with the Reference Sheet
+    whole, a plan page and two key pages; 33 paper pages differ in all, in 19 papers; every PDF searched for the retired
+    lines (none), for an equation broken across a line (none) and, by a scan written from the rule this time, for a last
+    line under ten characters (none); all 50 PDFs keep their page counts; kit tests 301 of 301, 300 of 300 and 53 of 53.
 
-### Open, for Croix (21 Nov)
+### Open, for Croix (22 Nov)
 
 - **Wording left as it is, his to say:** the name "Independent Set" (the audits want "Independent Practice": it is in
   every file name, the site, the master sheet and six taught units); the ruling-22 numbers (the snail's age, the 180
@@ -180,12 +224,18 @@ on the website, and M7 has not been moved to the new kit.
   round" in Units 4 and 5, "Answer it." under every board, the old IXL lines; and, since ruling 59, the Lesson Plans'
   shorthand, the Independent Set's opening line and "Circle your final answer" on the Review; and, since the third pass,
   a key's follow-through note and the way a paper is set (an equation may break across a line, a fraction rides high, a
-  last line may be one word). The kit's lines change at a
+  last line may be one word, a line may begin with a lone variable). **Ruling 60 is not in them either:** Units 4 and 5
+  say "the other way round" where Unit 7 now says "solve for", and **Unit 11, Solving Equations and Systems (taught from
+  30 Nov), has neither "isolate" nor "solve for" on any page** (its 74 PDFs searched): its notes say "undo + 25 by
+  subtracting". Unit 1's pages did use both ("Describe the operation that isolates n on the left side.", "Solve for x,
+  then simplify."), which is why the two words are his class's own. ("Work backwards." heads a group in Unit 11's banks
+  and in Units 3 and 4: a kind of question, not this idea.) His to say whether Unit 11 gets the two words before it is
+  taught. The kit's lines change at a
   rebuild; a unit's own plan sentences (`te.must`, the MTR evidence, the closure) need the rewrite Unit 7 had. Unit 11
   is taught from 30 Nov.
 - **Merge and publish:** say the word and the branch goes to `main` and Unit 7 onto the site. The site has not yet shown a
   unit with no Teacher Edition: `publish_web.py` publishes what a package holds, and that wants one look on the site.
-  **Windmill's branch merges with it** (the Drive test's fix is `41a5a7c`, the kit of ruling 59 `7344e7e`, the kit of the third pass `33a26e0`): Windmill's Drive-script test waited twelve hours for a file he
+  **Windmill's branch merges with it** (the Drive test's fix is `41a5a7c`, the kit of ruling 59 `7344e7e`, the kit of the third pass `33a26e0`, the kit of ruling 60 `d144647`): Windmill's Drive-script test waited twelve hours for a file he
   deleted to come back, and with Unit 7's package the mirror's hourly check needs fifteen (1,769 files at 120 an hour),
   so Windmill `main`'s `tools/check.sh` fails beside an A7 that holds Unit 7. The test is fixed on Windmill's branch; the
   script in his Google account is unchanged (Windmill HANDOFF, 21 Nov).

@@ -484,7 +484,7 @@ checked); the 3 in slide 73's equation is a 3; the Practice Test key prints "83 
 **Not taken**: "Write an equation for f in terms of s" on a slide (the unit says "the equation for f"; "in terms of"
 is on the Review and the Practice Test, as the state writes it); "which variable to isolate", "Solve for the other
 variable", "Either variable can be isolated" (the unit's words are "which quantity" and "the other way around", ruling
-58); "SSDD" taken out as a British term (it is Croix's own word for the routine); the dates taken out of 7.07's plan
+58) — **overruled the next day: ruling 60, at the foot of this file**; "SSDD" taken out as a British term (it is Croix's own word for the routine); the dates taken out of 7.07's plan
 (the plan is for his calendar); "[distractor information used]" for "[an extra number, included on purpose]"; "a \$40
 service fee" for "\$40 to come to the house"; "Does it represent a proportional relationship?"; "the last pair breaks
 the proportional pattern"; "\$0.25 per minute means each minute costs \$0.25" (it says one thing twice); "Plot a third
@@ -508,3 +508,94 @@ no solver was run; all 62 changed slides looked at in their last form; the Refer
 Test and the five Independent Sets looked at page by page, with pages of the banks, a plan and a key; no line of any
 paper breaks inside an equation (25 did) and no paragraph of a student paper ends on a line under ten characters; every
 PDF searched for the old lines; every PDF has the page count it had.
+(**Not so for one line**, found on 22 Nov: 7.01's Question Bank, question 7, ended "What is y when / x = 1?" The scan
+counted a last line by its words and took "x = 1?" for three. Mended in the fourth pass, below.)
+
+## 22 Nov — the fourth wording pass: "isolate" and "solve for" (ruling 60)
+
+Croix, 21 Nov, 11:40 pm, of the third pass's "Not taken": *"What do you have now instead of isolate?"* Shown the six
+places and what stood in each, 22 Nov, 1:54 pm: *"Isolate and solve for are correct terminology. That's what should be
+used across the whole unit."* The third pass had kept the two words off the pages on the ground that Unit 7 does not
+teach them. Unit 1 did: "Describe the operation that isolates n on the left side." (1.03's Question Bank), "Solve for
+x, then simplify." (1.02's slides). **Ruling 60** (the kit's card 19, ledger row 60): a variable alone on one side is
+*isolated*, and the equation is *solved for* it. "The other way around", "work backward", "an equation for either
+quantity" and "which quantity the equation is for" are retired for that idea.
+
+**Where the two terms stand** (74 exact strings by `reword.py`: 66, then 8 from the look at the pages):
+
+1. **7.05–06 Notes III** — "Either variable can be isolated": "Solved for m — m = 60h: 60 minutes per hour"; "Solved
+   for h — h = (1/60)m: 1/60 hour per minute"; "One relationship, 60 minutes in 1 hour, has two constants. The question
+   tells you which variable to solve for."
+2. **7.05–06, the second Your Turn** — "Equation: m = 25g; solve for g: 350 = 25g, so g = 14"; "Solved for g: g =
+   (1/25)m, (1/25)(350) = 14". Example 2's two worked slides show mathematics only (ruling 37); their notes in the spec
+   read "isolate s: divide both sides by 1.5" and "the equation solved for s: 7 again".
+3. **7.05–06, whiteboard question 5** — "Solved for d, the kilometers: d = 1.6m" (Gemini: "Solve for distance in
+   kilometers (d):"). **Question 6** — "solve for x: 36 = 2.4x, so x = 15".
+4. **7.05–06, the Independent Set, question 4** — "There are 3 feet in 1 yard, so f = 3n gives the feet f in n yards.
+   Solve the equation for n, the yards in f feet." Key: "n = (1/3)f, or n = f ÷ 3" (the state's own second form is
+   h = m/60).
+5. **7.05–06, both banks** — the heading "Solve for the other variable." (Gemini's words); "Solve the equation for g,
+   the gallons in q quarts." (key "g = (1/4)q, or g = q ÷ 4"); "Solve the equation for m, the meters in c centimeters."
+   (key "m = (1/100)c, m = 0.01c or m = c ÷ 100").
+6. **7.07** — Notes III "Substitute the value you know, then solve for the other variable."; the second Your Turn "Solve
+   for t: 45 = 2.25t, so t = 20"; whiteboard question 8 "Solve for t: 24 = (8/3)t, so t = 9".
+7. **The Review, 13(b), and the Practice Test, 12(b)** — "Solve your equation for w, the pounds that c dollars buy."
+   (key "w = c ÷ 1.25, w = 0.8c or w = (4/5)c") and "Solve your equation for h, the hours it takes him to earn e
+   dollars." (key "h = e ÷ 20, h = (1/20)e or h = 0.05e"). **These two now ask something a little different.** Before,
+   each asked for a second equation ("Write an equation for the number of hours h it takes him to earn e dollars."),
+   which a student could write from 12 ÷ 240 without part (a). Now part (b) starts from the student's own equation: a
+   wrong (a) carries into (b), and ruling 19 scores it. His to turn back.
+8. **The Reference Sheet** — section 5 is "Writing and Solving the Equation": "Either variable can be isolated. The
+   equation w = 50m is solved for w, and it gives the words typed in m minutes. To solve it for m, divide both sides
+   by 50. The equation m = (1/50)w, or m = 0.02w, gives the minutes for w words. One relationship has two constants,
+   50 and 1/50."; "Solve for x when you know y. If y = 1.4x and y is 21, substitute 21 for y: 21 = 1.4x. Isolate x by
+   dividing both sides by 1.4: x = 21 ÷ 1.4 = 15." Section 6: "If the grid ends before y reaches 28, solve 28 = 1.4x
+   for x: x = 20." Section 3: "With minutes as y, it is 5 ÷ 250 = 1/50 minute per word."
+9. **The Lesson Plans** — 7.02–03's third question: "Which value is the constant, and how do you know which variable
+   to isolate?" (Gemini's words). 7.05–06: "Either variable can be isolated: m = 60h is solved for m, and h = (1/60)m
+   is solved for h."; the ELL line defines both terms ("Isolate: get a variable alone on one side of the equals sign.
+   Solve for h: isolate h, so m = 60h becomes h = (1/60)m."); the enrichment is "students solve question 7's equation,
+   d = 9t, for t". 7.07's "Building on": "…and solved it for either variable." Two causes in 7.05–06's checks table:
+   "m and d swapped: m is isolated, but 1.6 is kilometers per mile"; "36 substituted for x, though it is y [B1G-M,
+   AR.4.3: dependent and independent confused]" (it had cited AR.4.4 for a misconception the state lists under AR.4.3).
+10. **The keys** — "Solve 63 = 4.2x for x: x = 15." for "working backward, …"; "solved for m, m = (1/40)w" for "the
+    other way around"; "Divide both sides by 3: n = f ÷ 3, which is n = (1/3)f, 1/3 yard per foot."; "n = 8.5c swaps
+    c and n." for "reverses it".
+11. **Not printed** — the package's START HERE; the teacher's notes in `u7/l05.py` (`te`), the comments and the
+    Question Bank file made from them.
+
+**Left as it was, on purpose** (each is his to overrule):
+
+- **"Which quantity is y"** where the page names no letters and the question is the constant: 7.02–03 Notes III ("From
+  a description — which quantity is y?", "With gallons as y"), its boards ("Cups are y now:") and keys ("Minutes are y:
+  27 ÷ 3 = 9."), and the Reference Sheet's sections 1 and 3. Nothing is isolated there. Gemini's list keeps "The
+  constant depends on which quantity is y."
+- **"Write the equation for f"**, "Write the equation for d, the dollars earned, after h hours." and the Review's and
+  Practice Test's "Write an equation for…" and "What equation gives c in terms of n?": the question names the variable
+  the equation is solved for, and "Write the equation solved for f" is not how a question is asked.
+- **The example slides** show mathematics only (ruling 37: he had the comments beside the worked lines removed).
+- **"Solve the problem."** (7.07's banks) and "Write the equation, then solve." are the benchmark's "solve".
+
+**What the pages showed:**
+
+1. The Practice Test's 12(b), at 79 characters, ran into its "1 pt": "the number of hours" became "the hours".
+2. On 7.05–06's Independent Set the paper broke "Solve the equation for / n, the yards in f feet." **Kit (Windmill
+   `d144647`): `dockit.tie_letters`** — on a paper, a one-letter variable stays with the word before it. It also moved
+   "a ladybug crawls in / t seconds." (Practice Test, question 2), "Divide y by / x" and "(substitute / x to get y)"
+   (Reference Sheet) and "the cans c in / t minutes." (7.05–06's Additional Question Bank).
+3. 7.01's Question Bank, question 7, ended "What is y when / x = 1?" — in the third pass's build too. `dockit.bind_tail`
+   read only a paragraph's last piece, and here that was the question mark after `$x = 1$`. **Kit, the same commit:**
+   `dockit.rich` reads each stretch of words between two pictures as one text, so the closing words stay together
+   across a change of face. It reads "What is y / when x = 1?" now.
+4. Two Reference Sheet paragraphs ended on "constants." and "that point.": the first now ends "constants, 50 and
+   1/50.", the second is one sentence shorter.
+
+**Proof:** gates 0 (282 items re-derived); `unit_repeats.py u7` 0; three full builds, the last one clean, `checks: 0
+findings`; `student_view.py` before and after: 5 questions with their answers and 2 headings reworded, no keyed letter
+and no check moved, the five worked by hand (f = 3n gives n = f ÷ 3; q = 4g gives g = q ÷ 4; c = 100m gives m = c ÷ 100;
+c = 1.25w gives w = c ÷ 1.25 = 0.8c; e = 20h gives h = e ÷ 20 = 0.05e), so no solver was run; 8 of 179 slides changed,
+all looked at in the last build; 33 paper pages changed in 19 papers, the 9 on student papers looked at, with the
+Reference Sheet whole, a plan's checks table and two key pages; every PDF searched for the retired lines (none), for an
+equation broken across a line (none), for a line that begins with a lone variable (none) and, by a scan written from
+the rule itself, for a last line under ten characters (none); all 50 PDFs keep their page counts; the kit's tests 301
+of 301, 300 of 300 and 53 of 53.

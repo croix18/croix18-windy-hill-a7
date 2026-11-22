@@ -238,7 +238,7 @@ def _ar31():
 def _ar44():
     q10 = dict(stem="The table shows the cost c, in dollars, of n tickets. What equation gives c in terms of n?", fig=Q10_FIG,
                answer="c = 8.5n",
-               why="c ÷ n is 8.5 for every pair: 17.00 ÷ 2, 25.50 ÷ 3, 51.00 ÷ 6, 68.00 ÷ 8. So c = 8.5n; check a pair: 8.5(6) = 51. n = 8.5c reverses it.",
+               why="c ÷ n is 8.5 for every pair: 17.00 ÷ 2, 25.50 ÷ 3, 51.00 ÷ 6, 68.00 ÷ 8. So c = 8.5n; check a pair: 8.5(6) = 51. n = 8.5c swaps c and n.",
                check=("many", ratios([2, 3, 6, 8], ["17.00", "25.50", "51.00", "68.00"], "8.5"), table_of(Fr(17, 2), [2, 3, 6, 8], [17, "25.5", 51, 68])),
                space=0.7)
     q11 = dict(stem="A graph of a proportional relationship is shown. What is the equation of the relationship?", fig=Q11_FIG,
@@ -249,13 +249,13 @@ def _ar44():
                parts=[dict(label="a", stem="Write an equation for his earnings e, in dollars, after h hours.", answer="e = 20h",
                            why="240 ÷ 12 = 20 dollars per hour. Check: 20(12) = 240.",
                            check=("many", ("eq", "F(240,12)", "20"), ("eq", "20*12", "240")), space=0.6),
-                      dict(label="b", stem="Write an equation for the number of hours h it takes him to earn e dollars.",
-                           answer="h = 0.05e,   h = (1/20)e   or   h = e ÷ 20",
-                           why="12 ÷ 240 = 1/20 = 0.05 hours per dollar. Check: 0.05(240) = 12.",
+                      dict(label="b", stem="Solve your equation for h, the hours it takes him to earn e dollars.",
+                           answer="h = e ÷ 20,   h = (1/20)e   or   h = 0.05e",
+                           why="Divide both sides of e = 20h by 20: h = e ÷ 20, which is (1/20)e or 0.05e, 0.05 hours per dollar. Check: 0.05(240) = 12.",
                            check=("many", ("eq", "F(12,240)", "F('0.05')"), ("eq", "F('0.05')*240", "12")), space=0.6)])
     q13 = dict(stem="The equation  $w = 8.3g$  gives the weight w, in pounds, of g gallons of water. Complete the table.",
                fig=Q13_FIG, answer="w = 16.6 and 41.5;   g = 10",
-               why="One point: all three. 8.3(2) = 16.6 and 8.3(5) = 41.5. Working backward: 83 = 8.3g, so g = 83 ÷ 8.3 = 10.",
+               why="One point: all three. 8.3(2) = 16.6 and 8.3(5) = 41.5. Solve 83 = 8.3g for g: g = 83 ÷ 8.3 = 10.",
                check=("many", table_of(Fr(83, 10), [2, 5, 10], ["16.6", "41.5", 83]), ("eq", "F(83)/F('8.3')", "10")), space=0.6)
     return [q10, q11, q12, q13]
 
@@ -271,7 +271,7 @@ def _ar45():
                            check=("many", ("eq", "65*4 - 60*4", "20"), ("true", "65 > 60")), space=0.6)])
     q15 = dict(stem="A pump fills a tank at a constant rate. The graph shows the liters of water it pumps versus the minutes it runs. At this rate, how many minutes will it take to pump 30 liters?",
                fig=Q15_FIG, answer="24 minutes",
-               why="The line passes through (4, 5) and (8, 10): 5 ÷ 4 = 1.25 liters per minute. 30 = 1.25m, so m = 30 ÷ 1.25 = 24 — beyond the grid. 37.5 multiplies 30 by 1.25.",
+               why="The line passes through (4, 5) and (8, 10): 5 ÷ 4 = 1.25 liters per minute. Solve 30 = 1.25m for m: m = 30 ÷ 1.25 = 24 — beyond the grid. 37.5 multiplies 30 by 1.25.",
                check=("many", ratios([4, 8], [5, 10], Fr(5, 4)), ("eq", "30/F(5,4)", "24")), space=0.8)
     return [q14, q15]
 
@@ -359,7 +359,7 @@ U = dict(
                          ["a graph", "Read the scales first. Choose a point on the line where two grid lines cross, and divide its y by its x: (5, 7) gives 7 ÷ 5 = 1.4."],
                          ["a description", "Divide the y-quantity by the x-quantity. Sam types 250 words in 5 minutes: 250 ÷ 5 = 50 words per minute."]])),
                      "**The constant of proportionality is the amount of y for every 1 unit of x.**  Divide y by x to find it, in any representation.",
-                     "**The constant depends on which quantity is y.**  Typing 250 words in 5 minutes is $250 \\div 5 = 50$ words per minute. The other way around, it is $5 \\div 250 = 1/50$ minute per word. The question tells you which one to find.",
+                     "**The constant depends on which quantity is y.**  Typing 250 words in 5 minutes is $250 \\div 5 = 50$ words per minute. With minutes as y, it is $5 \\div 250 = 1/50$ minute per word. The question tells you which one to find.",
                      "**A constant can be negative.**  For x: −2, 1, 4 and y: 6, −3, −12, y ÷ x = −3 for every pair, and the line goes down from left to right through the origin.",
                      "**Explain what it means, with its units.**  A constant of 0.25 dollars per minute means that each minute costs \\$0.25. It is not a starting amount, and it is not the number of minutes per dollar."]),
         dict(title="4.   Graphing a Proportional Relationship", right="Lesson 1 · a line through the origin",
@@ -367,16 +367,16 @@ U = dict(
                      "**Choose x-values that give whole-number y-values.**  For $y = \\frac{5}{3}x$, the x-values 0, 3 and 6 give the y-values 0, 5 and 10.",
                      "**Read the scales first.**  Before you read or plot a point, find what one square stands for on each axis. If the grid lines are numbered 0, 10, 20, one square stands for 10. The two axes may have different scales.",
                      "**The point (1, p) is on the line.**  It shows the constant: the amount of y for 1 unit of x."]),
-        dict(title="5.   Writing the Equation in Both Directions", right="Lessons 5–6 · y = px",
+        dict(title="5.   Writing and Solving the Equation", right="Lessons 5–6 · y = px",
              blocks=["**Find p, then write y = px using the problem's letters.**  Sam types w words in m minutes, so $w = 50m$. Check it with a pair: $50(5) = 250$.",
-                     "**You can write an equation for either quantity.**  The equation $w = 50m$ gives the words typed in m minutes. The equation $m = (1/50)w$, or $m = 0.02w$, gives the minutes for w words. One relationship has two constants.",
+                     "**Either variable can be isolated.**  The equation $w = 50m$ is solved for w, and it gives the words typed in m minutes. To solve it for m, divide both sides by 50. The equation $m = (1/50)w$, or $m = 0.02w$, gives the minutes for w words. One relationship has two constants, 50 and 1/50.",
                      "**Translate from one representation to another.**  An equation gives a table (substitute x to get y), the table gives the graph, and any one of them gives p.",
-                     "**Work backward to find x.**  If $y = 1.4x$ and y is 21, then $21 = 1.4x$, so $x = 21 \\div 1.4 = 15$."]),
+                     "**Solve for x when you know y.**  If $y = 1.4x$ and y is 21, substitute 21 for y:  $21 = 1.4x$. Isolate x by dividing both sides by 1.4:  $x = 21 \\div 1.4 = 15$."]),
         dict(title="6.   Comparing Proportional Relationships", right="Lesson 7 · compare the constants",
              blocks=["**Find each constant in the same units, then compare them.**  Store A: 4 pounds for \\$12.20 is \\$3.05 per pound. Store B: $c = 3.15w$ is \\$3.15 per pound. Store A costs less per pound.",
                      "**On the same axes, the greater positive constant gives the steeper line.**  The line $y = 2x$ is steeper than the line $y = 1.4x$.",
                      "**Then answer the question asked.**  For 10 pounds, Store A costs $3.05(10) = 30.50$ and Store B costs $3.15(10) = 31.50$, so Store A costs \\$1.00 less.",
-                     "**For values beyond the grid, use the equation.**  The line through the origin and (5, 7) is $y = 1.4x$. When y is 28, $28 = 1.4x$, so $x = 20$, even if the grid ends before that point."]),
+                     "**For values beyond the grid, use the equation.**  The line through the origin and (5, 7) is $y = 1.4x$. If the grid ends before y reaches 28, solve $28 = 1.4x$ for x:  $x = 20$."]),
         dict(title="7.   Vocabulary",
              blocks=[dict(vocab=[
                  ("proportional relationship", "two quantities are in a proportional relationship when one quantity is always a constant multiple of the other: y = px"),
@@ -492,11 +492,11 @@ U = dict(
             dict(stem="Kiwis cost the same amount per pound, and 4 pounds cost \\$5.00.",
                  parts=[dict(label="a", stem="Write an equation for the cost c, in dollars, of w pounds.", answer="c = 1.25w",
                              why="5.00 ÷ 4 = 1.25 dollars per pound. Check: 1.25(4) = 5.", check=("eq", "F('5.00')/4", "F('1.25')"), space=0.4),
-                        dict(label="b", stem="Write an equation for the pounds w that c dollars buy.", answer="w = 0.8c   (w = (4/5)c is the same)",
-                             why="4 ÷ 5.00 = 0.8 pounds per dollar. Check: 0.8(5) = 4.", check=("many", ("eq", "4/F('5.00')", "F('0.8')"), ("eq", "F('0.8')*5", "4")), space=0.4)]),
+                        dict(label="b", stem="Solve your equation for w, the pounds that c dollars buy.", answer="w = c ÷ 1.25,   w = 0.8c   or   w = (4/5)c",
+                             why="Divide both sides of c = 1.25w by 1.25: w = c ÷ 1.25, which is 0.8c, 0.8 pounds per dollar. Check: 0.8(5) = 4.", check=("many", ("eq", "4/F('5.00')", "F('0.8')"), ("eq", "F('0.8')*5", "4")), space=0.4)]),
             dict(stem="The equation  $h = 4.8t$  gives how many feet h a weather balloon has risen t seconds after it is released. Complete the table.",
                  fig=R12_FIG, answer="h = 24 and 72;   t = 20",
-                 why="4.8(5) = 24 and 4.8(15) = 72. Working backward: 96 = 4.8t, so t = 96 ÷ 4.8 = 20.",
+                 why="4.8(5) = 24 and 4.8(15) = 72. Solve 96 = 4.8t for t: t = 96 ÷ 4.8 = 20.",
                  check=("many", table_of(Fr(24, 5), [5, 15, 20], [24, 72, 96]), ("eq", "96/F('4.8')", "20")), space=0.5),
         ]),
         dict(title="Comparing Proportional Relationships", lessons="Lesson 7", benchmark="MA.7.AR.4.5", items=[
@@ -522,7 +522,7 @@ U = dict(
                         dict(label="b", stem="Write an equation for Shop A's cost c, in dollars, for h hours.", answer="c = 9.6h",
                              why="c = ph with p = 9.6. Check: 9.6(5) = 48.", check=("eq", "F('9.6')*5", "48"), space=0.4),
                         dict(label="c", stem="For how many hours can you rent a kayak from Shop A for \\$144?", answer="15 hours",
-                             why="144 = 9.6h, so h = 144 ÷ 9.6 = 15 — beyond the grid.", check=("eq", "144/F('9.6')", "15"), space=0.4),
+                             why="Solve 144 = 9.6h for h: h = 144 ÷ 9.6 = 15 — beyond the grid.", check=("eq", "144/F('9.6')", "15"), space=0.4),
                         dict(label="d", stem="Which shop charges less per hour, and how much less does it cost for 6 hours?",
                              answer="Shop A; \\$5.40 less",
                              why="Shop B: 21.00 ÷ 2 = 31.50 ÷ 3 = 52.50 ÷ 5 = 10.50 dollars per hour, more than 9.60. For 6 hours: 10.50(6) − 9.60(6) = 63.00 − 57.60 = 5.40.",

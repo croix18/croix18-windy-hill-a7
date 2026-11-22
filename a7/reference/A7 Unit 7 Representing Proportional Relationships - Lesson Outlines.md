@@ -450,3 +450,10 @@ rides"; "Write the equation for f"; no sentence opens with a numeral and no "No.
 simple expression at the end of a long line is written in words; on paper an equation does not break across a line, a
 fraction stands on the line and a last line is never one short word. The outlines above keep the words they were
 planned in; the Review Rulings list what changed.
+
+**Reworded a fourth time, 22 Nov (ruling 60).** "Isolate" and "solve for" are the unit's words (Croix: "That's what
+should be used across the whole unit."): 7.05–06 Notes III is "Either variable can be isolated", its banks say "Solve
+for the other variable.", a table's missing x is found by "solve for x", and the Review's 13(b) and the Practice
+Test's 12(b) are "Solve your equation for…". Where the outlines above say "the other way round", "found backward" or
+"Either quantity may be the subject", the pages now say that. "Which quantity is y" stays in 7.02–03, where the
+question is the constant. The Review Rulings list what changed.
