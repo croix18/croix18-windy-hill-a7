@@ -444,3 +444,9 @@ key. The sentences quoted above are the plan's; what is printed now is in the Re
 **Reworded again, 21 Nov, later (ruling 59).** "Constant" for "steady"; the Lesson Plans in whole sentences; no
 instruction line on an Independent Set; the constant of proportionality "for every pair where x is not 0" at its
 definition. The outlines above keep the words they were planned in; the Review Rulings list what changed.
+
+**Reworded a third time, 21 Nov, night.** The follow-through note is off the keys; a graph "shows how far a cyclist
+rides"; "Write the equation for f"; no sentence opens with a numeral and no "No." stands before one; on a slide a
+simple expression at the end of a long line is written in words; on paper an equation does not break across a line, a
+fraction stands on the line and a last line is never one short word. The outlines above keep the words they were
+planned in; the Review Rulings list what changed.

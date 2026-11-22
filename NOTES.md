@@ -27,7 +27,7 @@ on the website, and M7 has not been moved to the new kit.
   fitted its cell and nothing refused it. Fixed, and the kit's `rulingcheck` now refuses it (no other unit has one).
 - **Math Nation** is read for a unit's scope and its test's item shapes, in one note that stays out of the repository. There
   is no Unit 7 audit and there will not be one.
-- **The kit** (Windmill `7344e7e`, vendored): `reword.py` (a wording pass as exact strings) and the five lean tools (`reader_copy.py`, `student_view.py`, `blind_diff.py`,
+- **The kit** (Windmill `33a26e0`, vendored): `reword.py` (a wording pass as exact strings) and the five lean tools (`reader_copy.py`, `student_view.py`, `blind_diff.py`,
   `unit_repeats.py`, `changed_slides.py`), `BUILDER CARD.md`, `RULINGS LEDGER.md`; a one-point section prints "1 point"; a
   paper's title keeps clear of the name lines.
 - **Unit 7, Representing Proportional Relationships** (MA.7.AR.4.1–4.5, MA.8.AR.3.1; taught Wed 6 – Tue 12 Jan, spiral day
@@ -119,22 +119,73 @@ on the website, and M7 has not been moved to the new kit.
     slides, the five plans and one page of each changed paper looked at; every PDF searched for the old lines. Page
     counts are unchanged.
 
+- **The third wording pass: the follow-through line dropped, and the pages looked at.** At 8:50 pm on 21 Nov Croix sent
+  Gemini's checklist, the fourth outside audit (*"Drop the line. Also here is what Gemini found. I want the student facing
+  slides and handouts specifically to be perfect."*). "The line" is the follow-through note on a key, asked of him after
+  the second pass. Gemini's list was checked item by item against the pages; then every student-facing question, every
+  slide line and the Reference Sheet were read again; then the built pages were looked at, which found what no reading of
+  the words had.
+  - **Kit** (Windmill `f8634ee`, `254e1b0`, `5b374da`, `33a26e0`; card 19). No key prints a follow-through note (ruling
+    19's scoring stands). The Review's "How to use this review" is three plain sentences. A bank says "Show your work for
+    problems that require calculations." and no longer "Circle your final answer". **Three things about how a paper is
+    set, for every unit at its next rebuild:** an equation written in a sentence does not break across a line
+    (`dockit.glue`: 25 lines of this unit's papers ended on a sign or began with one, "She wrote 5 / ÷ 1 = 5" in 7.04's
+    Question Bank among them; none does now); a stacked fraction stands on the line with its comma beside it
+    (`dockit.img`: it rode a third of a line high with a gap on each side, "Graph    y = ¼x   .  Choose"); a paragraph's
+    last line is never one short word (`dockit.bind_tail`: "…in miles per / hour?", "…and find each / y.").
+  - **Unit 7's specs** (`reword.py`, about 180 lines in the five lessons and `unit.py`). From Gemini: a line "passes
+    through" a point; a graph "shows how far a cyclist rides", not "miles versus hours"; a decimal takes a plural unit
+    ("0.8 pounds per dollar"); "Write the equation for f" where the letters are not x and y; "For values beyond the grid,
+    use the equation."; a comparison's answer is "Store B (\$3.30 per pound versus \$3.50)", not a second colon after
+    "Answer:"; the Reference Sheet, sentence by sentence; the Review key's question 17 prints its question; the plans'
+    last loose sentences. From the reading: a sentence does not open with a numeral ("Five notebooks cost \$9.00.";
+    7.02–03 board 6 is "Rice costs the same amount per pound, and 5 pounds cost \$8.00." over "The constant of
+    proportionality is 1.6. What does 1.6 mean?"); "No." is not followed by a numeral, where it reads as "number" ("No, 20
+    prints would have to cost \$7.00."; "No, because 6 ÷ 1 = 6 but 10 ÷ 2 = 5."); 7.07 board 3's choices are facts about
+    the lines ("Jo. Jo's line is steeper."), not "The steeper line is faster."; "how many marbles are in 2, 5 and 7 bags"
+    and "how far she paddles" for "different numbers of".
+  - **From the look at the pages:** a word alone on a slide's second line (7.02–03 board 2 is now "in cups per cookie";
+    7.01's set, question 6, "The point (1, 3.5) is on the graph from question 5. What does it mean?"); a semicolon adrift
+    after an equation on 7.04's Vocabulary slide; and **the gap before an equation on a slide**. The deck keeps a 6%
+    margin on the measured width of a run of words, so a picture of an equation after a long run stands about half an inch
+    off. Sixteen lines of this unit now write a simple expression in the sentence's own words ("…passes through (5, 13).",
+    "…of the other: y = px", "Store B's equation is now c = 3.75w."), and two put the picture early ("The point (7, □) is
+    on the graph of copies versus minutes."; "Ana says 1/5 is the constant of proportionality."). Short runs keep their
+    pictures, and so do the five Independent Set slides (7.07's does not hold its six questions otherwise).
+  - **Wrong on the facts** (Gemini): the Reference Sheet prints "x: −2, 1, 4" (the audit read 2); the 3 of slide 73 is a 3.
+  - **What the slide would not hold:** 7.01's first warm-up still does not say what w is ("After w weeks, Plan A costs…"
+    is 12.9 in on a line of 10.45 in; the three wordings that fit are worse sentences); 7.05–06's first Your Turn keeps
+    "Find the constant, the equation for e, the table and two graph points." (its table names e and h; the fuller
+    sentence takes the room the four steps need); the pump question keeps "by how many gallons in 15 minutes?"; 7.01
+    board 5 keeps "y = (5/6)x. Choose three x-values…"; 7.04 board 6's tub "gains 4 per minute".
+  - **Not taken** (each with its reason in the Review Rulings): "in terms of" and "isolate" on a slide; "SSDD" removed
+    (his word); the dates taken out of 7.07's plan (it is his calendar); "[distractor information used]"; "a \$40 service
+    fee"; "Does it represent a proportional relationship?"; "\$0.25 per minute means each minute costs \$0.25".
+  - **Proof:** gates 0 (282 items re-derived); `unit_repeats.py u7` 0; a clean rebuild, `checks: 0 findings`;
+    `student_view.py` before and after: 58 questions, 28 answers and 5 lists of choices reworded, no keyed letter and no
+    check moved, so no solver was run; all 62 changed slides looked at in their last form, with the Reference Sheet, the
+    Review, the Practice Test, the five Independent Sets and pages of the banks, a plan and a key; every PDF searched
+    for the old lines and for a line break inside an equation; fonts Lexend but for the bubbles, the check boxes and the
+    back arrow; every PDF has the page count it had.
+
 ### Open, for Croix (21 Nov)
 
 - **Wording left as it is, his to say:** the name "Independent Set" (the audits want "Independent Practice": it is in
   every file name, the site, the master sheet and six taught units); the ruling-22 numbers (the snail's age, the 180
   passengers, the 40 seats, the 50 pages, room 114).
-- **The follow-through note is still on the Practice Test key**, now without its ruling number. On 7 Nov he asked for the
-  line gone "across everything"; on 14 Nov the student papers dropped it and the key kept it as the teacher's grading
-  note. Whether the key keeps it is his to say (`FOLLOW_THROUGH_KEY` in the kit's `unitbuild.py`).
+- **The gap before an equation on a slide is the kit's, and in every unit.** Unit 7's long lines were rewritten in
+  words (above). The kit could set a simple expression inside a sentence as words on every slide, as it does on paper:
+  a change to the look of every deck, to be seen in Google Slides before it is made. His to say.
 - **Units 3–6 and 11 keep the old wording** until they are rebuilt: "against" in every one of them, "the other way
   round" in Units 4 and 5, "Answer it." under every board, the old IXL lines; and, since ruling 59, the Lesson Plans'
-  shorthand, the Independent Set's opening line and "Circle your final answer" on the Review. The kit's lines change at a
+  shorthand, the Independent Set's opening line and "Circle your final answer" on the Review; and, since the third pass,
+  a key's follow-through note and the way a paper is set (an equation may break across a line, a fraction rides high, a
+  last line may be one word). The kit's lines change at a
   rebuild; a unit's own plan sentences (`te.must`, the MTR evidence, the closure) need the rewrite Unit 7 had. Unit 11
   is taught from 30 Nov.
 - **Merge and publish:** say the word and the branch goes to `main` and Unit 7 onto the site. The site has not yet shown a
   unit with no Teacher Edition: `publish_web.py` publishes what a package holds, and that wants one look on the site.
-  **Windmill's branch merges with it** (`2a925fa`; the Drive test's fix is `41a5a7c`, the kit of ruling 59 `7344e7e`): Windmill's Drive-script test waited twelve hours for a file he
+  **Windmill's branch merges with it** (the Drive test's fix is `41a5a7c`, the kit of ruling 59 `7344e7e`, the kit of the third pass `33a26e0`): Windmill's Drive-script test waited twelve hours for a file he
   deleted to come back, and with Unit 7's package the mirror's hourly check needs fifteen (1,769 files at 120 an hour),
   so Windmill `main`'s `tools/check.sh` fails beside an A7 that holds Unit 7. The test is fixed on Windmill's branch; the
   script in his Google account is unchanged (Windmill HANDOFF, 21 Nov).

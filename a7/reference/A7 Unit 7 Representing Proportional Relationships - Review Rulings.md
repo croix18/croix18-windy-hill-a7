@@ -409,3 +409,102 @@ how the unit gives a rate: "8 copies every minute"); the pump question keeps "by
 view before and after differs in 23 questions (19 "steady" to "constant", 3 "Give the reason." to "Explain.", the
 snail) and 3 answers, in no key and no check, so no solver was run; the 12 changed slides, the five plans and a page of
 each changed paper looked at; every PDF searched for the old lines; page counts unchanged (plans 5 pages each).
+
+## 21 Nov, night — the third wording pass (the pages looked at)
+
+Gemini's "Comprehensive Proofreading & Edit Checklist", the fourth outside audit, sent by Croix at 8:50 pm with "Drop the
+line. Also here is what Gemini found. I want the student facing slides and handouts specifically to be perfect." "The
+line" is the follow-through note on a key.
+
+**Taken from Gemini**
+
+1. No key prints a follow-through note (kit). Ruling 19's scoring is unchanged.
+2. A line "passes through" a point, everywhere: the Reference Sheet and 7.04 Notes II no longer say "reaches".
+3. A graph "shows how far a cyclist rides", "how far she walks", "how much two workers earn", "how many tons of snow
+   Machine A makes"; the compressed "two cyclists' miles versus hours" is gone. "Versus" stays where it names both
+   quantities in full ("the distance each car rolls, in meters, versus the time, in seconds") and where a student is
+   told what to graph ("graph cost versus pounds").
+4. A decimal takes a plural unit: "0.8 pounds per dollar", "0.75 gallons per room", "0.2 liters", "0.6 dollars per
+   pound". A fraction keeps the singular ("1/24 gallon per mile").
+5. Where the letters are not x and y, the equation is "for" a letter: 7.05–06 Notes III is "An equation for either
+   quantity"; Example 2 and its Your Turn ask "Write the equation for f" and "for m"; board 5's step is "kilometers =
+   1.6 · miles".
+6. 7.02–03 Notes III names the unit before each division ("miles per gallon: 120 ÷ 5 = 24"), so no dash stands before a
+   number.
+7. 7.04: the captions "no: starts at (0, 3)" and "yes: extends to (0, 0)"; board 3's step "the last pair does not give
+   4"; board 4 "Is y proportional to x?".
+8. 7.07: "For values beyond the grid, use the equation."; a comparison's answer is "Store B (\$3.30 per pound versus
+   \$3.50)", with no second colon after "Answer:"; "Bus A has 40 seats and travels 135 miles in 3 hours."
+9. The Reference Sheet: "You may not use this sheet or the FAST reference sheet on the Unit 7 test."; "In 0 hours you
+   earn \$0"; "If even one pair gives a different value of y ÷ x, the relationship is not proportional."; "A table does
+   not have to show the pair (0, 0)…"; "The constant depends on which quantity is y."; "goes down from left to right
+   through the origin"; "A constant of 0.25 dollars per minute means that each minute costs \$0.25."; "Use the third
+   point as a check"; "find what one square stands for on each axis"; "using the problem's letters"; "You can write an
+   equation for either quantity."
+10. The papers: the Review's "How to use this review" (kit); "Which graph shows the relationship y = 1.5x?" without
+    "Each graph shows y versus x."; "after it is released"; "For how many hours can you rent a kayak from Shop A for
+    \$144?"; "how many more miles has the faster train traveled?"; the bank headings "Find the unit rate." and "Write the
+    equation the other way around."; "the gallons g of water in a tank after t minutes"; the hose question; "Which
+    store has the lowest price per pound?"; and "different numbers of" gone ("how many marbles are in 2, 5 and 7 bags",
+    "how far she paddles", "how many pages he reads").
+11. The keys: the Review key's question 17 prints its question above the SSDD note; "Working backward:"; "D says no, but
+    its reason is not valid"; "one pair with a different value means the relationship is not proportional"; "beyond the
+    grid".
+12. The plans: "are not introduced until lesson 7.04"; "explain what it means in context"; "Which one is the constant,
+    and what tells you?"; 7.04's ESE row "a row for y ÷ x"; 7.07's sentences on one form and on the word "slope".
+
+**From the reading and the look, beyond the list**
+
+13. A sentence does not open with a numeral: "Five notebooks cost \$9.00.", "Twelve pencils cost \$3.", "In 0 hours you
+    earn \$0", "Typing 250 words in 5 minutes is…", "One relationship, 60 minutes in 1 hour, has two constants.";
+    7.02–03 board 6 is two rows, "Rice costs the same amount per pound, and 5 pounds cost \$8.00." and "The constant of
+    proportionality is 1.6. What does 1.6 mean?".
+14. "No." is not followed by a numeral, where it reads as "number": "No, 20 prints would have to cost \$7.00."; "No,
+    because 6 ÷ 1 = 6 but 10 ÷ 2 = 5."; 7.04 board 3's choice D is "No. The last pair gives 3.75."
+15. 7.07 board 3's choices are facts about the two lines ("Max. Max's line is longer.", "Jo. Jo's line is steeper."),
+    not "The steeper line is faster": a line has no speed, and the student decides which fact answers the question.
+16. 7.02–03 board 9's answer is "Ben. y ÷ x = 5, and Ana divided x by y."; 7.04 board 9's is "y = x + 4, for example.
+    It is a straight line through (0, 4), not the origin."
+17. On the Reference Sheet a sentence does not open with an equation ("The equation w = 50m gives…", "The line y = 2x
+    is steeper than the line y = 1.4x."), and the comparison is two short equations ("Store A costs 3.05(10) = 30.50
+    and Store B costs 3.15(10) = 31.50").
+18. A word alone on a slide's second line: 7.02–03 board 2 asks "in cups per cookie" (board 1 says "cookies per cup");
+    7.01's set, question 6, is "The point (1, 3.5) is on the graph from question 5. What does it mean?".
+19. The gap before an equation on a slide (the deck's 6% margin on a run of words): sixteen lines write a simple
+    expression in words, among them the four Vocabulary slides, 7.01 board 8, 7.02–03's second example and Your Turn,
+    7.04 Notes II and III, 7.05–06 Notes I and II, 7.07 boards 1 and 2; two put the picture early (7.01 board 7, "The
+    point (7, □) is on the graph of copies versus minutes."; 7.02–03 board 9, "Ana says 1/5 is the constant of
+    proportionality.").
+20. On paper (kit): an equation in a sentence does not break across a line; a stacked fraction stands on the line
+    with its comma beside it; a paragraph's last line is never one short word.
+
+**Wrong on the facts**: the Reference Sheet prints "x: −2, 1, 4" (the audit read 2 and asked for the mathematics to be
+checked); the 3 in slide 73's equation is a 3; the Practice Test key prints "83 = 8.3g".
+
+**Not taken**: "Write an equation for f in terms of s" on a slide (the unit says "the equation for f"; "in terms of"
+is on the Review and the Practice Test, as the state writes it); "which variable to isolate", "Solve for the other
+variable", "Either variable can be isolated" (the unit's words are "which quantity" and "the other way around", ruling
+58); "SSDD" taken out as a British term (it is Croix's own word for the routine); the dates taken out of 7.07's plan
+(the plan is for his calendar); "[distractor information used]" for "[an extra number, included on purpose]"; "a \$40
+service fee" for "\$40 to come to the house"; "Does it represent a proportional relationship?"; "the last pair breaks
+the proportional pattern"; "\$0.25 per minute means each minute costs \$0.25" (it says one thing twice); "Plot a third
+point to check that your line is straight" (three points are plotted and the third is the check); "Award 0 points
+if…" (the key gives the reason in a sentence); a new stem for "A table is shown. y is proportional to x." (the
+state's form); "Max, because his line is longer" (the choices became facts instead, item 15).
+
+**What the slide would not hold**: 7.01's first warm-up does not say what w is ("After w weeks, Plan A costs 12 + 4w
+and Plan B costs 6w." measures 12.9 in and a warm-up line is 10.45 in; "Plans cost 12 + 4w and 6w for w weeks." and
+"Costs for w weeks: 12 + 4w and 6w." fit and are worse sentences); 7.05–06's first Your Turn keeps "Find the
+constant, the equation for e, the table and two graph points." (the table's rows are "hours h" and "dollars e"; the
+fuller sentence is two lines, and the answer slide then cannot hold its four steps); the pump example keeps "Which pump
+is faster, and by how many gallons in 15 minutes?" (the fuller question ran into the footer); 7.01 board 5 keeps "y =
+(5/6)x. Choose three x-values…" ("For y = (5/6)x, choose…" took a second line from the answer's steps); 7.04 board 6's
+tub "gains 4 per minute"; 7.07's Independent Set slide holds its six questions only with their equations as pictures,
+and 7.02–03's keeps one so that the five set slides look alike.
+
+**Proof**: gates 0 (282 items re-derived); `unit_repeats.py u7` 0; a clean rebuild and `checks: 0 findings`; the student
+view before and after differs in 58 questions, 28 answers and 5 lists of choices, in no keyed letter and no check, so
+no solver was run; all 62 changed slides looked at in their last form; the Reference Sheet, the Review, the Practice
+Test and the five Independent Sets looked at page by page, with pages of the banks, a plan and a key; no line of any
+paper breaks inside an equation (25 did) and no paragraph of a student paper ends on a line under ten characters; every
+PDF searched for the old lines; every PDF has the page count it had.

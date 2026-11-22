@@ -61,7 +61,7 @@ The printed keys in each lesson's `Keys` folder are generated from the same spec
 1. 9 marbles per bag  2. 4.5  3. −3.5  4. 2.5  5. 40 words per minute  6. −2/3  7. 1.5 cups per loaf  8. 1/45 hour per mile  9. C C  10. D D  11. A A  12. No. y ÷ x = 1/3; Sam divided x by y.
 
 **Question Bank – Additional answers.**  
-1. 8 crayons per box  2. 10.5  3. −4.5  4. 4/3  5. 10 gallons per minute  6. −5/2  7. 0.75 gallon per room  8. 1/42 hour per mile  9. B B  10. C C  11. D D  12. No. y ÷ x = 1/4; Mia divided x by y.
+1. 8 crayons per box  2. 10.5  3. −4.5  4. 4/3  5. 10 gallons per minute  6. −5/2  7. 0.75 gallons per room  8. 1/42 hour per mile  9. B B  10. C C  11. D D  12. No. y ÷ x = 1/4; Mia divided x by y.
 
 ---
 
@@ -86,10 +86,10 @@ The printed keys in each lesson's `Keys` folder are generated from the same spec
 - Board 6: option E (parking, \$3 per hour) added — the kit sets five options on a select-all.
 
 **Question Bank answers.**  
-1. Yes. y ÷ x is 4/3 for every pair.  2. No. 9 ÷ 2 = 4.5, but 17 ÷ 4 = 4.25.  3. The miles for 6 hours. It should be 72 miles.  4. Yes. It is a straight line through the origin.  5. No. It does not pass through the origin.  6. Yes. The points lie on a line that passes through (0, 0).  7. No. It starts at 6 cm.  8. Yes. 12 cars per hour, with nothing added at the start.  9. B B  10. No. When x is 0, y is −6.  11. A, B, E A, B, E  12. No. 16 ÷ 3 is not 5, and y ÷ x must be the same for every pair.
+1. Yes. y ÷ x is 4/3 for every pair.  2. No, because 9 ÷ 2 = 4.5 but 17 ÷ 4 = 4.25.  3. The miles for 6 hours. It should be 72 miles.  4. Yes. It is a straight line through the origin.  5. No. It does not pass through the origin.  6. Yes. The points lie on a line that passes through (0, 0).  7. No. It starts at 6 centimeters.  8. Yes. 12 cars per hour, with nothing added at the start.  9. B B  10. No. When x is 0, y is −6.  11. A, B, E A, B, E  12. No, because 16 ÷ 3 is not 5, and y ÷ x must be the same for every pair.
 
 **Question Bank – Additional answers.**  
-1. Yes. y ÷ x is 0.75 for every pair.  2. No. 9 ÷ 4 = 2.25, but 11 ÷ 5 = 2.2.  3. The minutes for 7 laps. It should be 21 minutes.  4. Yes. It is a straight line through the origin.  5. No. It does not pass through the origin.  6. Yes. The points lie on a line that passes through (0, 0).  7. No. It starts at 300 gallons.  8. Yes. 45 bottles per minute, with nothing added at the start.  9. A A  10. No. When x is 0, y is 5.  11. A, B, D A, B, D  12. No. 26 ÷ 6 is not 4.5, and y ÷ x must be the same for every pair.
+1. Yes. y ÷ x is 0.75 for every pair.  2. No, because 9 ÷ 4 = 2.25 but 11 ÷ 5 = 2.2.  3. The minutes for 7 laps. It should be 21 minutes.  4. Yes. It is a straight line through the origin.  5. No. It does not pass through the origin.  6. Yes. The points lie on a line that passes through (0, 0).  7. No. It starts at 300 gallons.  8. Yes. 45 bottles per minute, with nothing added at the start.  9. A A  10. No. When x is 0, y is 5.  11. A, B, D A, B, D  12. No, because 26 ÷ 6 is not 4.5, and y ÷ x must be the same for every pair.
 
 ---
 
@@ -127,7 +127,7 @@ The printed keys in each lesson's `Keys` folder are generated from the same spec
 
 *MA.7.AR.4.5*
 
-**Variation.**  Boards 1–2 are a table versus an equation, and only the equation changes, so the verdict flips. 3 votes on two lines on one grid (the slower line drawn longer and lower). 4 is a description versus a graph; 5 reads three constants off one grid and orders them. 6 votes on cheaper-and-by-how-much; 7 is two descriptions with the seats as the extra number; 8 reads a graph and goes past its edge; 9 is Kim's digits claim, written. The independent set: a table versus an equation, an equation versus a description and how much farther, two lines on one grid, three constants in order (the pattern breaks: no question after the order), which is cheaper and by how much, and a graph read past its edge.
+**Variation.**  Boards 1–2 are a table versus an equation, and only the equation changes, so the verdict flips. 3 votes on two lines on one grid (the slower line drawn longer and lower). 4 is a description versus a graph; 5 reads three constants off one grid and orders them. 6 votes on cheaper-and-by-how-much; 7 is two descriptions with the seats as the extra number; 8 reads a graph for a value beyond its grid; 9 is Kim's digits claim, written. The independent set: a table versus an equation, an equation versus a description and how much farther, two lines on one grid, three constants in order (the pattern breaks: no question after the order), which is cheaper and by how much, and a graph read past its edge.
 
 **Read this once, when you plan the unit.**
 
@@ -144,9 +144,9 @@ The printed keys in each lesson's `Keys` folder are generated from the same spec
 - Independent Set question 2: Car A is given as the equation d = 62t, not a graph — 62 miles an hour cannot sit on a grid corner at the unit's scales (2, 4, 5, 10, 20).
 
 **Question Bank answers.**  
-1. Store A: \$1.40 per pound versus \$1.50  2. Walker A: 2.5 miles per hour versus 2.25  3. A, \$2.00 more per hour  4. 0.65, 2/3, 0.7  5. y = 0.9x  6. Store F, by \$4.00  7. 15 miles (Boat A)  8. 15 minutes  9. 17.5 cups  10. D D  11. B B  12. C, E C, E
+1. Store A (\$1.40 per pound versus \$1.50)  2. Walker A (2.5 miles per hour versus 2.25)  3. A, \$2.00 more per hour  4. 0.65, 2/3, 0.7  5. y = 0.9x  6. Store F, by \$4.00  7. 15 miles (Boat A)  8. 15 minutes  9. 17.5 cups  10. D D  11. B B  12. C, E C, E
 
 **Question Bank – Additional answers.**  
-1. Store B: \$1.70 per pound versus \$1.80  2. Walker A: 3.5 miles per hour versus 3.25  3. B, \$1.00 more per hour  4. 3/4, 0.78, 0.8  5. y = (5/2)x  6. Store F, by \$1.50  7. 12 miles (Boat A)  8. 16 minutes  9. 12 cups  10. D D  11. A A  12. B, D B, D
+1. Store B (\$1.70 per pound versus \$1.80)  2. Walker A (3.5 miles per hour versus 3.25)  3. B, \$1.00 more per hour  4. 3/4, 0.78, 0.8  5. y = (5/2)x  6. Store F, by \$1.50  7. 12 miles (Boat A)  8. 16 minutes  9. 12 cups  10. D D  11. A A  12. B, D B, D
 
 ---

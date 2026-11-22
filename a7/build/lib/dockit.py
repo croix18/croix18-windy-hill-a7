@@ -135,6 +135,67 @@ def linear_text(latex):
     return re.sub(r"\s+", " ", t).strip()
 
 
+_NB = "\u00a0"
+_RELATIONS = frozenset("=<>\u2260\u2264\u2265")
+_BINARY = frozenset("\u00f7\u00b7+\u2212\u00d7")
+
+
+def glue(text):
+    """`text` with the spaces inside an equation made non-breaking, so a line of a paper never ends on an operator
+    or begins with one ("She wrote 5" closed a line of A7 7.04's Question Bank and "÷ 1 = 5" opened the next, 21 Nov
+    2026). An equation here is operands joined by signs that stand alone between spaces: 5 ÷ 1 = 5, y ÷ x, 372 − 348
+    = 24. One of up to 30 characters is kept whole. A longer chain may break, but only before = (or another relation
+    sign), which is where a displayed equation breaks. A pair of coordinates, (8, 3), stays together too. Nothing is
+    changed but spaces. A middle dot is a multiplication sign only between numbers: "Unit 7 · Lesson 1" is left alone."""
+    toks = text.split(" ")
+    seps = [" "] * len(toks)                       # seps[k] stands before toks[k]
+    def operand(t):
+        return bool(t) and not (len(t) == 1 and (t in _RELATIONS or t in _BINARY))
+    def sign(k):
+        t = toks[k]
+        if len(t) != 1 or not (t in _RELATIONS or t in _BINARY) or not (operand(toks[k - 1]) and operand(toks[k + 1])):
+            return False
+        if t == "\u00b7":
+            return bool(re.search(r"[0-9)]$", toks[k - 1]) and re.match(r"[0-9(\u2212]|.{1,2}$", toks[k + 1]))
+        return True
+    k = 1
+    while k < len(toks) - 1:
+        if not sign(k):
+            k += 1; continue
+        a, b = k - 1, k + 1
+        while b + 2 < len(toks) and sign(b + 1):
+            b += 2
+        whole = len(" ".join(toks[a:b + 1])) <= 30
+        for j in range(a + 1, b, 2):               # the signs
+            seps[j + 1] = _NB                      # a sign is never the last thing on a line
+            if whole or toks[j] in _BINARY:
+                seps[j] = _NB                      # … and only a relation sign may begin one, in a long chain
+        k = b + 1
+    out = toks[0] + "".join(s + t for s, t in zip(seps[1:], toks[1:]))
+    return re.sub(r"\(([^()\s]{1,8}), ([^()\s]{1,8})\)", lambda m: f"({m.group(1)},{_NB}{m.group(2)})", out)
+
+
+def bind_tail(text, least=10, most=24):
+    """`text` with its last words joined by non-breaking spaces until they make `least` characters, so a paragraph's
+    last line is never one short word: "…in miles per" closed a line of A7 Unit 7's Review and "hour?" stood alone
+    under it; "…and find each" and then "y." (21 Nov 2026). The words move down together, so the paragraph keeps its
+    number of lines. At most three spaces are joined, never across a double space (a gap that was meant), and never
+    into a group longer than `most` characters, which a narrow table cell could not take whole."""
+    body = text.rstrip(" ")
+    end = text[len(body):]
+    cut = len(body)
+    for _ in range(3):
+        j = body.rfind(" ", 0, cut)
+        if j < 1 or body[j - 1] == " " or len(body) - j - 1 >= least:
+            break
+        k = body.rfind(" ", 0, j)
+        if len(body) - k - 1 > most:
+            break
+        body = body[:j] + _NB + body[j + 1:]
+        cut = j
+    return body + end
+
+
 KEY_FIGURE = "fig_key"     # the mark on a key's own figure (docPr descr), read by checks.py keytwin
 
 
@@ -204,13 +265,17 @@ class Doc:
         """Inline markup: $latex$ becomes an image; **bold**; __vocab__ (blue bold)."""
         text = slotmark.strip(text or "").replace("\\$", "\ue000")      # \$ is a literal dollar sign (money)
         parts = re.split(r"(\$[^$]+\$|\*\*[^*]+\*\*|__[^_]+__)", text)
-        for part in parts:
+        last = max((i for i, part in enumerate(parts) if part), default=-1)
+        for i, part in enumerate(parts):
             if not part:
                 continue
             if part.startswith("$") and part.endswith("$"):
                 latex = part[1:-1].replace("\ue000", "\\$")
                 words = linear_text(latex) if self.font == "Lexend" else None
                 if words is not None:
+                    # A short expression does not break across a line: "y" ended one line of A7 Unit 7's Reference
+                    # Sheet and "= 1.4x + 2" began the next (21 Nov 2026). A long one breaks only before a relation sign.
+                    words = words.replace(" ", _NB) if len(words) <= 30 else glue(words)
                     # ruling 46: in a Lexend paper a linear expression is set as text in the
                     # paper's own face, on the text baseline — an inline picture sits with its
                     # lowest ink on the baseline, so one with a parenthesis or a fraction rode
@@ -219,13 +284,14 @@ class Doc:
                 else:
                     self.img(p, latex, color=color)
                 continue
-            part = part.replace("\ue000", "$")
+            part = glue(part.replace("\ue000", "$"))     # an equation in the paper's own words does not break either
+            tail = bind_tail if i == last else (lambda t: t)       # … and the words that close the text stay together
             if part.startswith("**"):
-                self._run(p, part[2:-2], size, True, italic, color)
+                self._run(p, tail(part[2:-2]), size, True, italic, color)
             elif part.startswith("__"):
-                self._run(p, part[2:-2], size, True, italic, VOCAB)
+                self._run(p, tail(part[2:-2]), size, True, italic, VOCAB)
             else:
-                self._run(p, part, size, bold, italic, color)
+                self._run(p, tail(part), size, bold, italic, color)
 
     def img(self, p, latex, surface="doc", color=INK):
         if surface == "doc" and self.font == "Lexend":
@@ -233,6 +299,23 @@ class Doc:
         path, w, h = mathimg.m(latex, surface, color)
         r = p.add_run()
         r.add_picture(path, width=Inches(w), height=Inches(h))
+        # An inline picture with no distance of its own is given LibreOffice's default, about an eighth of an inch on
+        # each side: "Graph    y = ¼x   .  Choose x-values" on A7 7.01's Independent Set, the period adrift (21 Nov
+        # 2026). Zero is what Word writes for a picture in a line.
+        for inline in r._r.xpath(".//wp:inline"):
+            for side in ("distT", "distB", "distL", "distR"):
+                inline.set(side, "0")
+        # … and a picture stands with its lowest ink on the line, so a stacked fraction, whose denominator hangs below
+        # the baseline, carried its "y =" a third of a line above the words. A paragraph that holds one sets its
+        # pieces by their middles: the fraction bar comes level with the middle of the words, about a point high in
+        # place of five. (The picture cannot be lowered by its depth: LibreOffice ignores w:position on a picture.) A
+        # picture with nothing below its baseline, an exponent, keeps the line as it was.
+        if mathimg.DEPTH.get(path, 0.0) >= 0.03:
+            pPr = p._p.get_or_add_pPr()
+            if pPr.find(qn("w:textAlignment")) is None:
+                ta = OxmlElement("w:textAlignment"); ta.set(qn("w:val"), "center")
+                pPr.insert_element_before(ta, "w:textboxTightWrap", "w:outlineLvl", "w:divId", "w:cnfStyle", "w:rPr",
+                                          "w:sectPr", "w:pPrChange")
         return r
 
     def spacer(self, pt=1):
