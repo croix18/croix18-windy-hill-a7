@@ -49,22 +49,33 @@ def TT(xs, ys, inches=3.2):
     return figs.table([(xs, ys)], head=("x", "y"), inches=inches)
 
 
+def run_off_axis(fig, run, x):
+    """A slope triangle whose run is centred on the y-axis has its run's number struck by the axis: set the number
+    over the run's right half, at x (the triangle's own colour; figs10.tri has no place for it)."""
+    for sh in fig["shapes"]:
+        if sh["t"] == "text" and sh["s"] == run and sh.get("color") == figs.TRIS[0]:
+            sh["xy"] = (x, sh["xy"][1])
+            return fig
+    raise ValueError(f"run_off_axis: no run number {run}")
+
+
 # ---- notes
-NOTES1 = S(figs.plane((0, 5), (0, 7), lines=[(2, 1, "")], points=[(0, 1, ""), (2, 5, "")],
+NOTES1 = S(figs.plane((0, 5), (0, 6), lines=[(2, 1, "")], points=[(0, 1, ""), (2, 5, "")],
                       triangles=[figs.tri((0, 1), (2, 5), "run 2", "rise 4")], inches=4.2, pt=18),
-           inches=4.2, pt=18, reserve=1.2)
-NOTES2 = S(figs.plane((0, 8), (0, 6), lines=[(Fr(1, 2), 1, "")], points=[(0, 1, ""), (2, 2, ""), (6, 4, "")],
+           inches=4.2, pt=18, reserve=2.05)
+NOTES2 = S(figs.plane((0, 7), (0, 4), lines=[(Fr(1, 2), 1, "")], points=[(0, 1, ""), (2, 2, ""), (6, 4, "")],
                       triangles=[figs.tri((0, 1), (2, 2)), figs.tri((2, 2), (6, 4))], inches=4.2, pt=18),
-           inches=4.2, pt=18, reserve=1.2)
+           inches=3.6, pt=18, reserve=1.6)
 NOTES3 = S(figs.table([([-3, 1, 9], [2, 5, 11])], head=("x", "y"), cw=2.0, rh=1.5), inches=4.0, pt=18, reserve=1.2)
 
 # ---- examples
-EX1 = B(P((-4, 4), (-3, 6), lines=[(Fr(-3, 2), 2, "")], points=[(-2, 5, None, "ur+"), (2, -1, None, "r")]))
-EX1W = S(figs.plane((-4, 4), (-3, 6), lines=[(Fr(-3, 2), 2, "")], points=[(-2, 5, ""), (2, -1, "")],
-                    triangles=[figs.tri((-2, 5), (2, -1), run="", side="over")], inches=4.2, pt=16), inches=4.2, pt=16, reserve=1.4)
-YT1 = B(P((-4, 4), (-3, 7), lines=[(Fr(-4, 3), 2, "")], points=[(-3, 6), (3, -2)]))
-YT1A = BA(P((-4, 4), (-3, 7), lines=[(Fr(-4, 3), 2, "")], points=[(-3, 6, ""), (3, -2, "")],
-            triangles=[figs.tri((-3, 6), (3, -2), run="", side="over")]))
+EX1 = B(P((-5, 4), (-3, 6), lines=[(Fr(-3, 2), 2, "")], points=[(-2, 5, None, "dl"), (2, -1, None, "r")]))
+EX1W = run_off_axis(S(figs.plane((-5, 4), (-3, 6), lines=[(Fr(-3, 2), 2, "")], points=[(-2, 5, ""), (2, -1, "")],
+                    triangles=[figs.tri((-2, 5), (2, -1), side="over")], inches=4.2, pt=18), inches=4.2, pt=18, reserve=1.4), "4", 1)
+YT1 = S(P((-7, 5), (-3, 7), lines=[(Fr(-4, 3), 2, "")], points=[(-3, 6, None, "dl"), (3, -2, None, "r")], ystep=2),
+        inches=4.2, pt=18, reserve=0.5)
+YT1A = run_off_axis(BA(P((-7, 5), (-3, 7), lines=[(Fr(-4, 3), 2, "")], points=[(-3, 6, ""), (3, -2, "")], ystep=2,
+            triangles=[figs.tri((-3, 6), (3, -2), side="over")])), "6", 1.5)
 EX2 = S(figs.table([([-4, -1, 5], [13, 4, -14])], head=("x", "y"), cw=2.0, rh=1.5), inches=5.0, pt=18, reserve=0.9)
 EX2W = S(figs.table([([-4, -1, 5], [13, 4, -14])], head=("x", "y"), cw=2.0, rh=1.5), inches=4.0, pt=16, reserve=0.9)
 YT2 = S(figs.table([([-6, -2, 6], [1, -1, -5])], head=("x", "y"), cw=2.0, rh=1.5), inches=5.0, pt=18, reserve=0.9)
@@ -72,10 +83,10 @@ YT2A = S(figs.table([([-6, -2, 6], [1, -1, -5])], head=("x", "y"), cw=2.0, rh=1.
 
 # ---- boards
 T3 = S(figs.table([([1, 3, 5], [10, 4, -2])], head=("x", "y"), cw=2.0, rh=1.5), inches=4.6, pt=18, reserve=0.75)
-P4 = P((-3, 4), (-3, 5), lines=[(-2, 2, "")], points=[(-1, 4), (2, -2)])
+P4 = P((-5, 4), (-3, 5), lines=[(-2, 2, "")], points=[(-1, 4, None, "l"), (2, -2, None, "r")])
 P5 = P((-1, 7), (-1, 5), lines=[(Fr(-2, 3), 4, "")], points=[(0, 4), (6, 0)])
 P6 = P((0, 9), (0, 9), lines=[(Fr(3, 4), 2, "")], points=[(0, 2, ""), (4, 5, ""), (8, 8, "")],
-       triangles=[figs.tri((0, 2), (4, 5))])
+       triangles=[figs.tri((0, 2), (4, 5))], step=2)
 
 
 L = dict(
@@ -124,7 +135,9 @@ L = dict(
              letters=False),
         dict(numeral="II", head="Any two points on the line give the same slope", min=3,
              fig=NOTES2,
-             items2=["Rise 1, run 2  and  rise 2, run 4.   The triangles are similar (6.07–08):   $\\frac{1}{2} = \\frac{2}{4}$"],
+             items2=["Rise 1, run 2  and  rise 2, run 4.   The triangles are similar (6.07–08):   $\\frac{1}{2} = \\frac{2}{4}$",
+                     "On this line a run of 6 has a rise of 3, and a rise of 5 has a run of 10:",
+                     "the slope stays $\\frac{1}{2}$."],
              letters=False),
         dict(numeral="III", head="Without a graph: subtract in the same order", min=4,
              items=["$m = \\frac{y_2 - y_1}{x_2 - x_1}$    Through (1, 7) and (4, 1):   $\\frac{1 - 7}{4 - 1} = \\frac{-6}{3} = -2$.   The line falls."],
@@ -143,8 +156,8 @@ L = dict(
                           fig=EX1W, answer="The slope is −3/2.")],
              check=("many", ("eq", slope((-2, 5), (2, -1)), "F(-3, 2)"), on("F(-3,2)", "2", "-2", "5"), on("F(-3,2)", "2", "2", "-1")),
              your_turn=dict(min=3, repeat_ok=True,  # repeat_ok: rule D matches only small digits (axis numbers); these points appear nowhere above
-                            prompt=["Find the slope of the line through (−3, 6) and (3, −2)."], fig=YT1, fig_a=YT1A,
-                            ask="",
+                            prompt=["The line passes through (−3, 6) and (3, −2)."], fig=YT1, fig_a=YT1A,
+                            ask="Find the slope of the line.",
                             steps=["Subtract in the same order:  $\\frac{-2 - 6}{3 - (-3)} = \\frac{-8}{6} = -\\frac{4}{3}$"],
                             answer="The slope is −4/3."),
              yt_check=("many", ("eq", slope((-3, 6), (3, -2)), "F(-4, 3)"), on("F(-4,3)", "2", "-3", "6"), on("F(-4,3)", "2", "3", "-2"))),
@@ -180,7 +193,8 @@ L = dict(
              answer="−3",
              check=("eq", slope((2, 3), (5, -6)), "-3"),
              wrong="3 — subtracted in different orders, 3 − (−6) over 5 − 2 [Notes III: subtract in the same order]; −1/3 — run over rise [B1G-M, AR.3.2: run over rise]"),
-        dict(kind="mc", text=["The table shows a linear relationship.", "**What is its slope?"],
+        # repeat_ok: rule D matches small digits only; Notes II's added line (run 6, rise 3, rise 5, run 10) shares 3, 5 and 10 with this table (x 1, 3, 5; y 10, 4, −2); the problem appears nowhere above.
+        dict(repeat_ok=True, kind="mc", text=["The table shows a linear relationship.", "**What is its slope?"],
              qtext="The table shows a linear relationship: x 1, 3, 5; y 10, 4, −2. What is its slope?",
              fig=T3,
              steps=["Change in y:  $4 - 10 = -6$", "Change in x:  $3 - 1 = 2$", "Divide:  $\\frac{-6}{2} = -3$"],
@@ -245,7 +259,7 @@ L = dict(
              check=("eq", slope((-3, -9), (-1, -1)), "4"), space=0.6),
         # repeat_ok: rule D matches only small digits (axis numbers 0 to 7, the notes' table and points); this problem appears nowhere above.
         dict(repeat_ok=True, stem="Find the slope of the line.",
-             fig=PP((-5, 5), (-5, 3), inches=3.0, lines=[(Fr(1, 2), -2, "")], points=[(-2, -3), (4, 0)]),
+             fig=PP((-5, 5), (-5, 3), inches=3.8, lines=[(Fr(1, 2), -2, "")], points=[(-2, -3), (4, 0)]),
              answer="1/2", why="(0 − (−3)) ÷ (4 − (−2)) = 3 ÷ 6 = 1/2. The line rises: positive.",
              check=("many", ("eq", slope((-2, -3), (4, 0)), "F(1, 2)"), on("F(1,2)", "-2", "-2", "-3"), on("F(1,2)", "-2", "4", "0")),
              space=0.4),
@@ -262,7 +276,7 @@ L = dict(
              check=("many", ("eq", slope((-4, 7), (-2, 4)), "F(-3, 2)"), ("eq", slope((-2, 4), (4, -5)), "F(-3, 2)")),
              space=0.6),
         dict(stem="A slope triangle on the line has a rise of 2 and a run of 4. A larger slope triangle on the same line has a rise of 9. What is its run?",
-             fig=PP((0, 10), (0, 8), inches=3.0, lines=[(Fr(1, 2), 2, "")], points=[(0, 2, ""), (4, 4, "")],
+             fig=PP((0, 10), (0, 8), inches=3.8, lines=[(Fr(1, 2), 2, "")], points=[(0, 2, ""), (4, 4, "")],
                     triangles=[figs.tri((0, 2), (4, 4))]),
              answer="18", why="The slope is 2/4 = 1/2, so the run is twice the rise: 2(9) = 18.",
              check=("many", ("eq", "9 / F(2, 4)", "18"), ("eq", slope((0, 2), (4, 4)), "F(1, 2)")), space=0.5),
@@ -306,9 +320,9 @@ L = dict(
              check=("many", ("eq", slope((-3, -10), (-1, -2)), "4"), ("eq", slope((-1, -2), (4, 18)), "4")),
              space=0.4),
         dict(heading="Use similar triangles."),
-        dict(stem="A slope triangle on a line has a rise of 2 and a run of 4. A larger slope triangle on the same line has a run of 14. What is its rise?",
-             answer="7", why="The slope is 2/4 = 1/2, so the rise is (1/2)(14) = 7.",
-             check=("eq", "F(2, 4)*14", "7"), space=0.5),
+        dict(stem="A slope triangle on a line has a rise of 3 and a run of 4. A larger slope triangle on the same line has a run of 16. What is its rise?",
+             answer="12", why="The slope is 3/4, so the rise is (3/4)(16) = 12.",
+             check=("eq", "F(3, 4)*16", "12"), space=0.5),
         dict(heading="Find the missing number."),
         dict(stem="The slope of the line through $(-1, 5)$ and $(2, □)$ is −3. Find the missing number.",
              answer="−4", why="The change in x is 2 − (−1) = 3, so the change in y is −3(3) = −9, and 5 − 9 = −4.",
@@ -326,7 +340,7 @@ L = dict(
                     ("eq", "4 - 3", "1"), ("eq", "(2 - 0)/(4 - 3)", "2"), ("eq", "(3 - 4)/(2 - 0)", "-F(1, 2)")),
              errors={"A": "the change in x over the change in y [B1G-M, AR.3.2: run over rise]", "C": "subtracted in different orders, 3 − 4 over 2 − 0 [Notes III: subtract in the same order]", "D": "the change in y alone, not divided by the change in x [standing decision 5: a table's x-steps are not 1]"}),
         dict(stem="The graph shows a line. What is its slope?",
-             fig=PP((-3, 3), (-3, 8), lines=[(-4, 3, "")], points=[(-1, 7), (1, -1)]),
+             fig=PP((-3, 3), (-3, 8), inches=2.6, pt=8.5, lines=[(-4, 3, "")], points=[(-1, 7), (1, -1)]),
              choices=["$-\\frac{1}{4}$", "$4$", "$-8$", "$-4$"], correct=3, answer="D",
              why="(−1 − 7) ÷ (1 − (−1)) = −8 ÷ 2 = −4. The line falls: negative.",
              check=("many", ("eq", slope((-1, 7), (1, -1)), "-4"), on("-4", "3", "-1", "7"), on("-4", "3", "1", "-1"),

@@ -57,9 +57,9 @@ def TB(xs, ys, reserve=0.75):
     return S(figs.table([(xs, ys)], cw=1.6, rh=1.3), inches=6.4, pt=20, reserve=reserve)
 
 
-def GP(xr, yr, lines, points):
+def GP(xr, yr, lines, points, inches=2.6):
     """A paper graph: the line drawn, unlabeled, its two points named."""
-    return figs.plane(xr, yr, lines=lines, points=points, inches=2.6)
+    return figs.plane(xr, yr, lines=lines, points=points, inches=inches)
 
 
 def PT(xs, ys):
@@ -67,8 +67,8 @@ def PT(xs, ys):
 
 
 # ---- notes and examples
-NOTES1 = S(figs.plane((-1, 7), (0, 4), lines=[(-H, 3, "")], points=[(0, 3), (4, 1), (2, 2, "")], inches=4.0, pt=18),
-           inches=4.0, pt=18, reserve=1.0)
+NOTES1 = S(figs.plane((-1, 6), (0, 4), lines=[(-H, 3, "")], points=[(0, 3), (4, 1), (2, 2, "")], inches=5.3, pt=18),
+           inches=5.3, pt=18, reserve=1.4)
 NOTES2 = S(figs.table([([0, 4, 8], [-5, -2, 1])], cw=1.6, rh=1.3), inches=5.0, pt=20, reserve=1.6)
 EX1_T = figs.table([([2, 5, 8], [13, 7, 1])], cw=1.6, rh=1.3)
 EX1 = S(EX1_T, inches=5.4, pt=20, reserve=0.9)
@@ -105,7 +105,7 @@ L = dict(
          ("MTR.6.1", "Every equation is checked with a point that was not used to write it.")],
     hoq=[("Why does any point on the line give the same b when you substitute it?", "DOK 2"),
          ("Whiteboard questions 1 and 2 have the same slope. Why does only the second need a step to find b?", "DOK 2"),
-         ("A table has no x = 0. How could you find y at x = 0 without substituting?", "DOK 3")],
+         ("A table has no pair for x = 0. How could you find y at x = 0 without substituting?", "DOK 3")],
     differentiation=[
         ("ESE / 504", "Students keep a printed card with the three steps: find m, substitute a point and solve for b, then check with another point."),
         ("ELL", "The words slope, y-intercept and substitute stay on the board all period, each beside its symbol: m, b and an arrow from a point into the equation."),
@@ -135,8 +135,8 @@ L = dict(
              math=["$b = -5 \\qquad m = \\frac{-2 - (-5)}{4 - 0} = \\frac{3}{4} \\qquad y = \\frac{3}{4}x - 5$"],
              items2=["The y-intercept is the value of y when x is 0."],
              letters=False),
-        dict(numeral="III", head="No y-intercept in sight", min=3,
-             items=["**Substitute a point and solve for b.**", "The line passes through $(2, 3)$ and $(6, 11)$."],
+        dict(numeral="III", head="No y-intercept in sight: substitute a point and solve for b", min=3,
+             items=["The line passes through $(2, 3)$ and $(6, 11)$."],
              math=["$m = \\frac{11 - 3}{6 - 2} = \\frac{8}{4} = 2$", "$3 = 2(2) + b$", "$b = -1$"],
              items2=["$y = 2x - 1$.   Check with $(6, 11)$:   $12 - 1 = 11$"],
              letters=False),
@@ -144,7 +144,7 @@ L = dict(
 
     examples=[
         dict(title="Example 1", min_q=1,
-             prompt=["The table shows a linear relationship. It has no x = 0."], fig=EX1,
+             prompt=["The table shows a linear relationship. It has no pair for x = 0."], fig=EX1,
              ask="Write its equation in slope-intercept form.",
              worked=[dict(min=3,
                           rows=[("m = \\frac{7 - 13}{5 - 2} = \\frac{-6}{3} = -2", "change in y over change in x"),
@@ -155,13 +155,12 @@ L = dict(
                           fig=EX1W, answer="y = −2x + 17")],
              check=("many", slope((2, 13), (5, 7), "-2"), through("-2*u + 17", (2, 13), (5, 7), (8, 1))),
              your_turn=dict(min=3,
-                            prompt=["The table shows a linear relationship.", "Write its equation in slope-intercept form."],
-                            fig=YT1, fig_a=YT1A, ask="",
+                            prompt=["The table shows a linear relationship."],
+                            fig=YT1, fig_a=YT1A, ask="Write its equation in slope-intercept form.",
                             steps=["Slope:  $\\frac{11 - 16}{6 - 4} = -\\frac{5}{2}$",
                                    "Substitute $(4, 16)$:  $16 = -\\frac{5}{2}(4) + b$",
                                    "Solve for b:  $16 = -10 + b$,  so  $b = 26$",
-                                   "Check $(10, 1)$:  $-25 + 26 = 1$",
-                                   "The equation:  $y = -\\frac{5}{2}x + 26$"],
+                                   "Check $(10, 1)$:  $-25 + 26 = 1$"],
                             answer="y = −(5/2)x + 26"),
              yt_check=("many", slope((4, 16), (6, 11), "F(-5, 2)"),
                        through("-F(5,2)*u + 26", (4, 16), (6, 11), (10, 1)))),
@@ -169,20 +168,19 @@ L = dict(
              prompt=["A line passes through (−3, 7) and (3, 3)."], ask="Write its equation in slope-intercept form.",
              worked=[dict(min=2,
                           rows=[("m = \\frac{3 - 7}{3 - (-3)} = \\frac{-4}{6} = -\\frac{2}{3}", "change in y over change in x"),
-                                ("3 = -\\frac{2}{3}(3) + b", "substitute (3, 3):  3 = −2 + b"),
-                                ("b = 5", "add 2 to both sides"),
-                                ("y = -\\frac{2}{3}x + 5", "check (−3, 7):  2 + 5 = 7")],
+                                ("3 = -\\frac{2}{3}(3) + b", "substitute (3, 3)"),
+                                ("3 = -2 + b", ""),
+                                ("b = 5", "add 2 to both sides; check (−3, 7):  2 + 5 = 7")],
                           answer="y = −(2/3)x + 5")],
              check=("many", slope((-3, 7), (3, 3), "F(-2, 3)"), through("-F(2,3)*u + 5", (-3, 7), (3, 3))),
              # repeat_ok: rule D matches only small digits (2, 4, 7) shared with Example 1; this line appears nowhere above.
              your_turn=dict(repeat_ok=True, min=3,
-                            prompt=["A line passes through (−4, 7) and (2, −2).", "Write its equation in slope-intercept form."],
-                            ask="",
+                            prompt=["A line passes through (−4, 7) and (2, −2)."],
+                            ask="Write its equation in slope-intercept form.",
                             steps=["Slope:  $\\frac{-2 - 7}{2 - (-4)} = \\frac{-9}{6} = -\\frac{3}{2}$",
                                    "Substitute $(2, -2)$:  $-2 = -\\frac{3}{2}(2) + b$",
                                    "Solve for b:  $-2 = -3 + b$,  so  $b = 1$",
-                                   "Check $(-4, 7)$:  $6 + 1 = 7$",
-                                   "The equation:  $y = -\\frac{3}{2}x + 1$"],
+                                   "Check $(-4, 7)$:  $6 + 1 = 7$"],
                             answer="y = −(3/2)x + 1"),
              yt_check=("many", slope((-4, 7), (2, -2), "F(-3, 2)"), through("-F(3,2)*u + 1", (-4, 7), (2, -2)))),
     ],
@@ -234,7 +232,7 @@ L = dict(
                     "Check $(3, 16)$:  $5(3) + 1 = 16$"],
              choices=["$y = 5x + 1$", "$y = x + 5$", "$y = \\frac{1}{5}x + 1$", "$y = 5x + 6$"], correct=0,
              answer="A — y = 5x + 1",
-             errors={"B": "the slope and the y-intercept exchanged [Florida B1G-M, AR.3.3: swapping m and b]", "C": "the change in x over the change in y [Florida B1G-M, AR.3.3: inverted slope]", "D": "the first y-value, 6, taken as b, though the table has no x = 0 [Notes III: substitute a point and solve for b]"},
+             errors={"B": "the slope and the y-intercept exchanged [Florida B1G-M, AR.3.3: swapping m and b]", "C": "the change in x over the change in y [Florida B1G-M, AR.3.3: inverted slope]", "D": "the first y-value, 6, taken as b, though the table has no pair for x = 0 [Notes III: substitute a point and solve for b]"},
              check=("many", slope((1, 6), (2, 11), "5"), through("5*u + 1", (1, 6), (2, 11), (3, 16)),
                     misses("5*u + 6", (1, 6), (2, 11), (3, 16)), misses("F(1,5)*u + 1", (1, 6), (2, 11), (3, 16)),
                     misses("u + 5", (1, 6), (2, 11), (3, 16)))),
@@ -256,13 +254,14 @@ L = dict(
              answer="y = −(3/2)x + 6",
              check=("many", slope((0, 6), (4, 0), "F(-3, 2)"), through("-F(3,2)*u + 6", (0, 6), (4, 0))),
              wrong="y = −(3/10)x + 6 — the grid's width, 20, used as the x-axis crossing [an extra number, included on purpose]; y = −(2/3)x + 6 — the slope turned over [Florida B1G-M, AR.3.3: inverted slope]; y = 4x + 6 — the x-axis crossing taken as the slope [Notes I: slope is the change in y divided by the change in x]"),
-        dict(text=["The line $y = □x + 5$ passes through (2, −1).", "**Find the missing number."],
-             steps=["Substitute $(2, -1)$:  $-1 = □(2) + 5$",
-                    "Subtract 5:  $-6 = □(2)$",
-                    "Divide by 2:  $□ = -3$"],
-             answer="−3",
-             check=("many", ("eq", "F(-1 - 5, 2)", "-3"), sat("-3*u + 5", "2", "-1")),
-             wrong="3 — the sign lost in −1 − 5 [Notes III: substitute a point and solve]; 2 — (−1 + 5) ÷ 2, the 5 added instead of subtracted [Notes III: substitute a point and solve]"),
+        dict(text=["The line $y = □x + 2$ passes through (3, −10).", "**Find the missing number."],
+             steps=["Substitute $(3, -10)$:  $-10 = □(3) + 2$",
+                    "Subtract 2 from both sides:  $-12 = □(3)$",
+                    "Divide both sides by 3:  $□ = -4$"],
+             answer="−4",
+             check=("many", ("eq", "F(-10 - 2, 3)", "-4"), sat("-4*u + 2", "3", "-10"),
+                    ("eq", "F(10 + 2, 3)", "4"), ("eq", "F(-10 + 2, 3)", "F(-8, 3)")),
+             wrong="4 — the sign lost in −10 − 2 [Notes III: substitute a point and solve for b]; −8/3 — (−10 + 2) ÷ 3, the 2 added instead of subtracted [Notes III: substitute a point and solve for b]"),
         # repeat_ok: rule D matches only small digits shared by coordinates and answers; this line appears nowhere above.
         dict(repeat_ok=True, kind="written", text=["For the line through (0, 7) and (2, 17), Sam writes y = 7x + 5.",
                                    "**What is Sam's mistake? Write the correct equation."],
@@ -281,12 +280,12 @@ L = dict(
     independent=[
         # repeat_ok: rule D matches only small digits shared by coordinates and answers; this line appears nowhere above.
         dict(repeat_ok=True, stem="The graphed line passes through $(0, 5)$ and $(2, -1)$. Write its equation in slope-intercept form.",
-             fig=GP((-1, 4), (-2, 6), [(-3, 5, "")], [(0, 5), (2, -1)]),
+             fig=GP((-1, 4), (-2, 6), [(-3, 5, "")], [(0, 5), (2, -1)], inches=2.15),
              answer="y = −3x + 5", why="b = 5. Slope: (−1 − 5) ÷ (2 − 0) = −6 ÷ 2 = −3. So y = −3x + 5.",
              check=("many", slope((0, 5), (2, -1), "-3"), through("-3*u + 5", (0, 5), (2, -1))), space=0.6),
         # repeat_ok: rule D matches only small digits shared by coordinates and answers; this line appears nowhere above.
         dict(repeat_ok=True, stem="The graphed line passes through $(0, -1)$ and $(3, -3)$. Write its equation in slope-intercept form.",
-             fig=GP((-4, 5), (-5, 3), [(Fr(-2, 3), -1, "")], [(0, -1), (3, -3)]),
+             fig=GP((-4, 5), (-5, 3), [(Fr(-2, 3), -1, "")], [(0, -1), (3, -3)], inches=3.3),
              answer="y = −(2/3)x − 1", why="b = −1. Slope: (−3 − (−1)) ÷ (3 − 0) = −2/3. So y = −(2/3)x − 1.",
              check=("many", slope((0, -1), (3, -3), "F(-2, 3)"), through("-F(2,3)*u - 1", (0, -1), (3, -3))), space=0.6),
         # repeat_ok: rule D matches only small digits shared by coordinates and answers; this line appears nowhere above.
@@ -322,10 +321,10 @@ L = dict(
              answer="y = −(1/2)x − 1", why="b = −1. Slope: (−3 − (−1)) ÷ (4 − 0) = −2/4 = −1/2.",
              check=("many", slope((0, -1), (4, -3), "F(-1, 2)"), through("-F(1,2)*u - 1", (0, -1), (4, -3))), space=0.5),
         dict(heading="For questions 3 and 4, the table shows a linear relationship. Write its equation in slope-intercept form."),
-        dict(stem="The table has a column for x = 0.", fig=PT([0, 2, 6], [7, 1, -11]),
+        dict(stem="The table has a pair for x = 0.", fig=PT([0, 2, 6], [7, 1, -11]),
              answer="y = −3x + 7", why="At x = 0, y = 7, so b = 7. Slope: (1 − 7) ÷ (2 − 0) = −3. Check (6, −11): −18 + 7 = −11.",
              check=("many", slope((0, 7), (2, 1), "-3"), through("-3*u + 7", (0, 7), (2, 1), (6, -11))), space=0.5),
-        dict(stem="The table has no column for x = 0.", fig=PT([2, 3, 6], [5, 9, 21]),
+        dict(stem="The table has no pair for x = 0.", fig=PT([2, 3, 6], [5, 9, 21]),
              answer="y = 4x − 3", why="Slope: (9 − 5) ÷ (3 − 2) = 4. Substitute (2, 5): 5 = 8 + b, so b = −3. Check (6, 21): 24 − 3 = 21.",
              check=("many", slope((2, 5), (3, 9), "4"), through("4*u - 3", (2, 5), (3, 9), (6, 21))), space=0.5),
         dict(heading="For questions 5 and 6, write the equation of the line in slope-intercept form."),
@@ -360,7 +359,7 @@ L = dict(
              why="Slope: (1 − (−1)) ÷ (2 − 1) = 2. Substitute (1, −1): −1 = 2 + b, so b = −3.",
              check=("many", through("2*u - 3", (1, -1), (2, 1), (3, 3)), misses("2*u - 1", (1, -1), (2, 1), (3, 3)),
                     misses("-3*u + 2", (1, -1), (2, 1), (3, 3)), misses("F(1,2)*u - 3", (1, -1), (2, 1), (3, 3))),
-             errors={"A": "the change in x over the change in y [Florida B1G-M, AR.3.3: inverted slope]", "C": "the first y-value taken as b, though the table has no x = 0 [Notes III: substitute a point and solve for b]", "D": "the slope and the y-intercept exchanged [Florida B1G-M, AR.3.3: swapping m and b]"}),
+             errors={"A": "the change in x over the change in y [Florida B1G-M, AR.3.3: inverted slope]", "C": "the first y-value taken as b, though the table has no pair for x = 0 [Notes III: substitute a point and solve for b]", "D": "the slope and the y-intercept exchanged [Florida B1G-M, AR.3.3: swapping m and b]"}),
         dict(heading="Select all that apply."),
         dict(stem="Select all the equations of the line through $(-2, 7)$ and $(2, 1)$.",
              choices=["$y = -\\frac{3}{2}x + 7$", "$y = 4x - \\frac{3}{2}$", "$y = 4 - \\frac{3}{2}x$", "$y = \\frac{3}{2}x + 4$", "$y = -\\frac{3}{2}x + 4$"],
@@ -383,10 +382,10 @@ L = dict(
              answer="y = −(1/2)x − 2", why="b = −2. Slope: (−4 − (−2)) ÷ (4 − 0) = −2/4 = −1/2.",
              check=("many", slope((0, -2), (4, -4), "F(-1, 2)"), through("-F(1,2)*u - 2", (0, -2), (4, -4))), space=0.5),
         dict(heading="For questions 3 and 4, the table shows a linear relationship. Write its equation in slope-intercept form."),
-        dict(stem="The table has a column for x = 0.", fig=PT([0, 2, 3], [1, -5, -8]),
+        dict(stem="The table has a pair for x = 0.", fig=PT([0, 2, 3], [1, -5, -8]),
              answer="y = −3x + 1", why="At x = 0, y = 1, so b = 1. Slope: (−5 − 1) ÷ (2 − 0) = −3. Check (3, −8): −9 + 1 = −8.",
              check=("many", slope((0, 1), (2, -5), "-3"), through("-3*u + 1", (0, 1), (2, -5), (3, -8))), space=0.5),
-        dict(stem="The table has no column for x = 0.", fig=PT([2, 4, 8], [4, -1, -11]),
+        dict(stem="The table has no pair for x = 0.", fig=PT([2, 4, 8], [4, -1, -11]),
              answer="y = −(5/2)x + 9", why="Slope: (−1 − 4) ÷ (4 − 2) = −5/2. Substitute (2, 4): 4 = −5 + b, so b = 9. Check (8, −11): −20 + 9 = −11.",
              check=("many", slope((2, 4), (4, -1), "F(-5, 2)"), through("-F(5,2)*u + 9", (2, 4), (4, -1), (8, -11))), space=0.5),
         dict(heading="For questions 5 and 6, write the equation of the line in slope-intercept form."),
@@ -397,9 +396,9 @@ L = dict(
              answer="y = 4x + 6", why="Substitute (−1, 2): 2 = 4(−1) + b = −4 + b, so b = 6.",
              check=("many", sat("4*u + 6", "-1", "2"), ("eq", "sp.diff(4*" + X + " + 6, " + X + ")", "4")), space=0.5),
         dict(heading="For questions 7 and 8, write the equation of the line through the two points in slope-intercept form."),
-        dict(stem="$(-2, 3)$ and $(2, -3)$",
-             answer="y = −(3/2)x", why="Slope: (−3 − 3) ÷ (2 − (−2)) = −6/4 = −3/2. Substitute (2, −3): −3 = −3 + b, so b = 0.",
-             check=("many", slope((-2, 3), (2, -3), "F(-3, 2)"), through("-F(3,2)*u", (-2, 3), (2, -3))), space=0.5),
+        dict(stem="$(-4, 2)$ and $(4, -2)$",
+             answer="y = −(1/2)x", why="Slope: (−2 − 2) ÷ (4 − (−4)) = −4/8 = −1/2. Substitute (4, −2): −2 = −2 + b, so b = 0.",
+             check=("many", slope((-4, 2), (4, -2), "F(-1, 2)"), through("-F(1,2)*u", (-4, 2), (4, -2))), space=0.5),
         dict(stem="$(1, -3)$ and $(4, 3)$",
              answer="y = 2x − 5", why="Slope: (3 − (−3)) ÷ (4 − 1) = 6/3 = 2. Substitute (1, −3): −3 = 2 + b, so b = −5.",
              check=("many", slope((1, -3), (4, 3), "2"), through("2*u - 5", (1, -3), (4, 3))), space=0.5),
@@ -421,7 +420,7 @@ L = dict(
              why="Slope: (2 − 5) ÷ (2 − 1) = −3. Substitute (1, 5): 5 = −3 + b, so b = 8.",
              check=("many", through("-3*u + 8", (1, 5), (2, 2), (3, -1)), misses("-3*u + 5", (1, 5), (2, 2), (3, -1)),
                     misses("8*u - 3", (1, 5), (2, 2), (3, -1)), misses("-F(1,3)*u + 8", (1, 5), (2, 2), (3, -1))),
-             errors={"B": "the first y-value taken as b, though the table has no x = 0 [Notes III: substitute a point and solve for b]", "C": "the slope and the y-intercept exchanged [Florida B1G-M, AR.3.3: swapping m and b]", "D": "the change in x over the change in y [Florida B1G-M, AR.3.3: inverted slope]"}),
+             errors={"B": "the first y-value taken as b, though the table has no pair for x = 0 [Notes III: substitute a point and solve for b]", "C": "the slope and the y-intercept exchanged [Florida B1G-M, AR.3.3: swapping m and b]", "D": "the change in x over the change in y [Florida B1G-M, AR.3.3: inverted slope]"}),
         dict(heading="Select all that apply."),
         dict(stem="Select all the equations of the line through $(-3, 6)$ and $(3, 2)$.",
              choices=["$y = 4 - \\frac{2}{3}x$", "$y = 4x - \\frac{2}{3}$", "$y = \\frac{2}{3}x + 4$", "$y = -\\frac{2}{3}x + 6$", "$y = -\\frac{2}{3}x + 4$"],
@@ -437,7 +436,7 @@ L = dict(
         must="Students write the equation of a line in slope-intercept form from a graph, from a table or from two points. When the y-intercept is not shown, they substitute a point and solve for b.",
         must_not="Point-slope form and standard form are not taught or accepted as a final answer. Stories, with their own letters, wait for lesson 10.10.",
         materials="Whiteboards and markers, and the Independent Set, one copy per student.",
-        variation="Whiteboard questions 1 and 2 change one thing: the point leaves the y-axis, so b has to be found. Question 3 reads a graph and question 4 a table through x = 0 with a negative slope; question 5 is a table with no x = 0, where the first y-value is the trap. Question 6 gives two points, question 7 two axis crossings with the grid's width as an extra number, question 8 runs backwards to the slope, and question 9 is written. The pattern breaks at question 7, where the line's two points are its crossings and neither is marked as a point. In the Independent Set the pattern breaks at question 3, whose table shows x = 0 between negative and positive x-values.",
+        variation="Whiteboard questions 1 and 2 change one thing: the point leaves the y-axis, so b has to be found. Question 3 reads a graph and question 4 a table through x = 0 with a negative slope; question 5 is a table with no pair for x = 0, where the first y-value is the trap. Question 6 gives two points, question 7 two axis crossings with the grid's width as an extra number, question 8 runs backwards to the slope, and question 9 is written. The pattern breaks at question 7, where the line's two points are its crossings and neither is marked as a point. In the Independent Set the pattern breaks at question 3, whose table shows x = 0 between negative and positive x-values.",
         audit=["Every equation is checked by sympy at build time to pass through every point and every table value it was written from, every slope is recomputed from two points as an exact fraction, and every wrong option is checked to miss at least one of the points.",
                "Math Nation was read for scope and item shapes only; nothing in this lesson is taken from it."],
         changes=["The lesson is new for this unit and is built from the unit's Lesson Outlines, section 10.09."],

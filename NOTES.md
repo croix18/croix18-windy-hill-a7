@@ -1,8 +1,37 @@
 # State of the work — 15 November 2026 (read this first)
 
+## 27 November, afternoon — Unit 10 (Linear Relationships) built with the lean workflow; NOT merged, NOT published (session_01W9n2X1V97j7Nf5Y7z1DaCq)
+
+Croix, 27 Nov, 7:20 am: *"Can you move on to the next unit"*. **Unit 10 is built and held** on the branch
+`claude/a7-u10` (it branches from `claude/u11-terms`, so Unit 11's rebuild is in it), on Windmill's kit `877c70e`.
+Eight decks, Fri 15 Jan – Wed 27 Jan 2027 (10.04 and 10.10 are 43-minute days); the test Thu 28 Jan. Merging and
+publishing wait for his word, as Unit 11's do. The plan is `a7/reference/A7 Unit 10 Linear Relationships - Lesson
+Outlines.md` (its "As built" says where the unit now differs from it); the review and every ruling are in `… - Review
+Rulings.md`.
+
+- **The workflow, second run** (Windmill `briefs/LEAN WORKFLOW.md`): scope from Math Nation (never in a repository),
+  the plan with the test settled first, two plan readers (Barton, FAST), the figure module `u10/figs10.py`, eight lesson
+  builders and a papers builder in their own copies, integration, a review wave (six blind solvers, three readers),
+  rulings, nine fixers, and a fresh blind solver of everything that changed. **No key was wrong** in 413 questions.
+- **What the review changed:** one way of saying each idea across the unit ("The rate is the slope, and the start is
+  the y-intercept"; "Go back to x = 0 at the rate of change"; "the coefficient of x"); a question in a bold line on
+  every board and Example; pictures large enough to read (every slide picture measured on the built deck); 10.04's
+  board 4, 10.06's board 3, 10.10's boards 1–2 and several bank questions rewritten; six of the Review's questions
+  sharpened (6b, 10, 11, 12a, 16c, 17). **The kit:** a printed title too long for its line breaks where its two lines are most even (`877c70e`).
+- **What it taught** (Windmill `HANDOFF.md`, 27 Nov): measure pictures on the built pages, not the spec — the kit sets
+  a Your Turn's bold line over its picture, so a Your Turn whose picture is a graph keeps its question in one line; the
+  repeat gate needed 45 `repeat_ok` comments in a unit of small coordinates (each names its digits); the nine fixers
+  were stopped once with the server and resumed from their saved transcripts.
+- **Proof.** Gates 0 (429 items re-derived), `unit_repeats.py` 0, a clean `build_all.py u10` at `checks: 0 findings`,
+  279 pictures drawn at every size, 91 changed questions solved blind with no key differing. The package is installed
+  and the master sheet regenerated.
+- **His calls, still open:** the five test-blueprint questions sent on 27 Nov (two drawn graphs on the test; the
+  temperature formula printed; no line of fit on this test; standard form in 10.06 for IXL 7MZ; naming days); IXL N7D
+  on 10.05. Unit 11: "publish 11" (he teaches it from Mon 30 Nov).
+
 ## 27 November — Unit 11 looked at as it will stand on the website; three kit fixes; still NOT merged, NOT published (session_01W9n2X1V97j7Nf5Y7z1DaCq)
 
-Croix, 27 Nov, 7:20 am: *"Can you move on to the next unit"* — Unit 10 (below, when it is built; branch `claude/a7-u10`).
+Croix, 27 Nov, 7:20 am: *"Can you move on to the next unit"* — Unit 10 (above; branch `claude/a7-u10`).
 Unit 11 still waits for his word; he was told so that morning. So that publishing takes minutes when he gives it, the
 rebuilt unit was published into a scratch copy of the site and its seven web decks were read slide by slide (246
 slides, the second renderer). Three faults, all the kit's, all fixed in Windmill (`b211635`, `d70dceb`, `72a02f6`):

@@ -51,15 +51,15 @@ def slope(p, q):
 
 # ---- the notes
 T1 = figs.table([([-3, 0, 3, 6], [4, 2, 0, -2])], head=("x", "y"), cw=2.0, rh=1.5)
-NOTES1 = S(figs.row([T1, figs.plane((-4, 7), (-4, 6), lines=[(Fr(-2, 3), 2, "")],
+NOTES1 = S(figs.row([T1, figs.plane((-4, 7), (-4, 6), lines=[(Fr(-2, 3), 2, "")], step=2, inches=3.2, pt=18,
                                     points=[(-3, 4, ""), (0, 2, ""), (3, 0, ""), (6, -2, "")])],
-                    gap=2.5), inches=8.4, pt=18, reserve=1.1)
+                    gap=2.5), inches=8.4, pt=18, reserve=1.75)   # the line with fractions under it clears the footer rule
 POOL = dict(xname="minutes", yname="gallons", ys=100)
 NOTES2 = S(figs.plane((0, 6), (0, 500), lines=[(50, 200, "")], **POOL,
                       points=[(0, 200, "on", "dr"), (2, 300, "on", "dr"), (4, 400, "on", "dr")], inches=4.4, pt=18),
            inches=4.4, pt=18, reserve=1.3)
 T3 = figs.table([([0, 2, 4], [8, 4, 0])], head=("x", "y"), cw=1.8, rh=1.5, titles=["2x + y = 8"])
-NOTES3 = S(figs.row([T3, figs.plane((-1, 5), (-1, 9), lines=[(-2, 8, "")],
+NOTES3 = S(figs.row([T3, figs.plane((-1, 5), (-1, 9), lines=[(-2, 8, "")], aspect=0.5, ystep=2, inches=2.6, pt=18,
                                     points=[(0, 8, ""), (2, 4, ""), (4, 0, "")])],
                     gap=2.5), inches=7.6, pt=18, reserve=1.3)
 
@@ -69,25 +69,25 @@ EX1 = S(figs.row([figs.table([([-2, 0, 2, 4], [BL, BL, BL, BL])], cw=1.8, rh=1.5
 EX1W = S(figs.plane((-3, 5), (-1, 6), lines=[(H, 3, "")],
                     points=[(-2, 2, ""), (0, 3, "on", "ul"), (2, 4, ""), (4, 5, "on", "dr")],
                     inches=4.0, pt=18), inches=4.0, pt=18, reserve=0.9)
-YT1 = S(figs.row([figs.table([([0, 1, 2, 4], [BL, BL, BL, BL])], cw=1.8, rh=1.5),
-                  figs.plane((-1, 5), (-6, 4))], gap=2.5), inches=8.0, pt=18, reserve=0.9)
+YT1 = S(figs.row([figs.table([([0, 1, 2, 4], [BL, BL, BL, BL])], cw=2.4, rh=2.0),
+                  figs.plane((-1, 5), (-6, 4), step=2, inches=2.0, pt=18)], gap=2.5), inches=11.0, pt=18, reserve=0.9)
 YT1A = S(figs.plane((-1, 5), (-6, 4), lines=[(2, -5, "")],
                     points=[(0, -5, "on", "r"), (1, -3, "on", "r"), (2, -1, "on", "r"), (4, 3, "on", "r")],
-                    inches=4.2, pt=18), inches=4.2, pt=18, reserve=0.95)
+                    step=2, inches=2.8, pt=18), inches=2.8, pt=18, reserve=0.95)
 
 # ---- Example 2: the cyclist, 60 miles out, 12 miles every hour; Your Turn 2: the bucket, 40 liters, 8 every minute
 BIKE = dict(xname="hours", yname="miles from home", ys=12)
 EX2 = S(figs.row([figs.table([([0, 1, 2, 5], [BL, BL, BL, BL])], head=("hours", "miles"), cw=1.6, rh=1.5),
-                  figs.plane((0, 5), (0, 60), **BIKE)], gap=2.5), inches=8.4, pt=18, reserve=0.9)
+                  figs.plane((0, 5), (0, 60), **BIKE, inches=3.2, pt=18)], gap=2.5), inches=11.0, pt=18, reserve=0.9)
 EX2W = S(figs.plane((0, 5), (0, 60), lines=[(-12, 60, "", None, (0, 5))], **BIKE,
                     points=[(0, 60, "on", "r"), (1, 48, "on", "ur"), (2, 36, "on", "ur"), (5, 0, "on", "ur")],
                     inches=4.0, pt=18), inches=4.0, pt=18, reserve=0.9)
-PAIL = dict(xname="minutes", yname="liters", ys=8)
+PAIL = dict(xname="minutes", yname="liters", ys=8, aspect=0.7)
 YT2 = S(figs.row([figs.table([([0, 1, 2, 5], [BL, BL, BL, BL])], head=("minutes", "liters"), cw=1.6, rh=1.5),
-                  figs.plane((0, 5), (0, 40), **PAIL)], gap=2.5), inches=8.4, pt=18, reserve=0.9)
+                  figs.plane((0, 5), (0, 40), **PAIL, inches=3.2, pt=18)], gap=2.5), inches=11.0, pt=18, reserve=0.9)
 YT2A = S(figs.plane((0, 5), (0, 40), lines=[(-8, 40, "", None, (0, 5))], **PAIL,
-                    points=[(0, 40, "on", "r"), (1, 32, "on", "ur"), (2, 24, "on", "ur"), (5, 0, "on", "ur")],
-                    inches=4.2, pt=18), inches=4.2, pt=18, reserve=0.95)
+                    points=[(0, 40, "on", "r"), (1, 32, "on", "r"), (2, 24, "on", "r"), (5, 0, "on", "ur")],
+                    inches=3.8, pt=18), inches=3.8, pt=18, reserve=0.95)
 
 # ---- the boards
 B1T = figs.table([([-1, 0, 2, 5], [BL, BL, BL, BL])], cw=1.8, rh=1.5)
@@ -95,15 +95,14 @@ B1A = figs.table([([-1, 0, 2, 5], [-7, -4, 2, 11])], cw=1.8, rh=1.5)
 B2T = figs.table([([0, 2, 4], [6, 5, 4])], cw=1.8, rh=1.5)
 B5T = figs.table([([1, 2, 3], [5, 8, 11])], cw=1.8, rh=1.5)
 # Board 3: four graphs, each on its own axes, the same scales on all four (gallons by 5, minutes by 1)
-TUB = dict(ys=5, ystep=2, inches=2.6, pt=18)
-G_OK = figs.plane((0, 4), (0, 30), lines=[(5, 10, "")], points=[(0, 10, ""), (2, 20, "")], **TUB)
-G_SWAP = figs.plane((0, 4), (0, 30), lines=[(10, 5, "")], points=[(0, 5, ""), (2, 25, "")], **TUB)
-G_ZERO = figs.plane((0, 4), (0, 30), lines=[(5, 0, "")], points=[(2, 10, "")], **TUB)
-G_FALL = figs.plane((0, 4), (0, 30), lines=[(-5, 10, "", None, (0, 2))], points=[(0, 10, ""), (1, 5, "")], **TUB)
-C3 = S(figs.choices4([G_SWAP, G_ZERO, G_FALL, G_OK], gap=2.2), inches=14.0, pt=18, reserve=0.75)
-C3A = S(figs.row([figs.plane((0, 4), (0, 30), lines=[(5, 10, "")], xname="minutes", yname="gallons", ys=5, ystep=2,
-                             points=[(0, 10, "on", "ul"), (2, 20, "on", "ul")])], titles=["D"], inches=4.2, pt=18),
-        inches=4.2, pt=18, reserve=1.0)
+TUB = dict(ys=5, ystep=2, xname="minutes", yname="gallons", aspect=0.5, inches=2.2, pt=18)
+G_OK = figs.plane((0, 4), (0, 35), lines=[(5, 10, "")], points=[(2, 20, "")], **TUB)
+G_SWAP = figs.plane((0, 4), (0, 35), lines=[(10, 5, "")], points=[(2, 25, "")], **TUB)
+G_ZERO = figs.plane((0, 4), (0, 35), lines=[(5, 0, "")], points=[(2, 10, "")], **TUB)
+G_FALL = figs.plane((0, 4), (0, 35), lines=[(-5, 10, "", None, (0, 2))], points=[(1, 5, "")], **TUB)
+C3 = S(figs.choices4([G_SWAP, G_ZERO, G_FALL, G_OK], gap=2.2), inches=14.0, pt=18, reserve=0.35)
+C3A = S(figs.plane((0, 4), (0, 35), lines=[(5, 10, "")], xname="minutes", yname="gallons", ys=5, ystep=2, aspect=0.5,
+                   points=[(2, 20, "on", "dr")], inches=2.6, pt=18), inches=2.6, pt=18, reserve=1.0)
 
 
 def BT(t):
@@ -116,8 +115,8 @@ def BTA(t):
 
 # ---- the handout: empty grids, and the key's line drawn on the same window (figs.pair). In Quadrant I a key marks
 # only the points off the axes: a dot on a numbered axis tick is read by the kit as a line through that number.
-def TAB(xs, ys, head=("x", "y"), title=None):
-    return figs.table([(xs, ys)], head=head, titles=[title] if title else None)
+def TAB(xs, ys, head=("x", "y"), title=None, **kw):
+    return figs.table([(xs, ys)], head=head, titles=[title] if title else None, **kw)
 
 
 IS1_G, IS1_K = figs.pair((-1, 5), (-6, 4), lines=[(2, -5, "")],
@@ -126,7 +125,7 @@ IS2_G, IS2_K = figs.pair((-7, 7), (-6, 4), lines=[(Fr(-2, 3), -1, "")],
                          points=[(-6, 3, ""), (-3, 1, ""), (0, -1, ""), (3, -3, ""), (6, -5, "")], inches=3.2)
 IS3_G, IS3_K = figs.pair((0, 6), (0, 400), lines=[(50, 100, "")],
                          points=[(2, 200, ""), (4, 300, ""), (6, 400, "")],
-                         xname="hours", yname="miles from the station", ys=50, ystep=1, aspect=0.6, inches=3.2)
+                         xname="hours", yname="miles from the station", ys=50, ystep=1, aspect=0.6, inches=2.5)
 IS4_G, IS4_K = figs.pair((0, 7), (0, 35), lines=[(-5, 30, "", None, (0, 6))],
                          points=[(2, 20, ""), (4, 10, "")],
                          xname="minutes", yname="tons of gravel", ys=5, inches=3.2)
@@ -135,27 +134,27 @@ IS6 = figs.plane((0, 8), (0, 10), lines=[(H, 6, "")], points=[(4, 8, "on", "dr")
                  xname="hours", yname="inches of snow", inches=3.2)
 
 # ---- the banks' grids
-QB4_G, QB4_K = figs.pair((-5, 5), (-5, 3), lines=[(H, -2, "")], points=[(-4, -4, ""), (0, -2, ""), (4, 0, "")], inches=3.0)
+QB4_G, QB4_K = figs.pair((-5, 5), (-5, 3), lines=[(H, -2, "")], points=[(-4, -4, ""), (0, -2, ""), (4, 0, "")], inches=4.0)
 QB5_G, QB5_K = figs.pair((-2, 3), (-9, 8), lines=[(5, -3, "")], points=[(-1, -8, ""), (0, -3, ""), (1, 2, ""), (2, 7, "")],
                          ystep=2, inches=3.0)
 QB6_G, QB6_K = figs.pair((0, 6), (0, 450), lines=[(50, 150, "")], points=[(2, 250, ""), (4, 350, "")],
                          xname="minutes", yname="meters above the ground", ys=50, ystep=1, aspect=0.6, inches=3.0)
 QB7_G, QB7_K = figs.pair((0, 3), (0, 16), lines=[(-8, 16, "", None, (0, 2))], points=[(1, 8, "")],
-                         xname="hours", yname="miles from home", ys=2, inches=3.0)
-QB8_G, QB8_K = figs.pair((-1, 4), (-1, 10), lines=[(-3, 9, "")], points=[(0, 9, ""), (1, 6, ""), (3, 0, "")], inches=3.0)
-QB9 = figs.plane((0, 6), (0, 24), lines=[(3, 4, "")], points=[(0, 4, "on", "ul"), (2, 10, "on", "ul")],
-                 xname="weeks", yname="height (cm)", ys=2, ystep=2, inches=3.0)
+                         xname="hours", yname="miles from home", xs=H, xstep=2, ys=2, inches=2.4)
+QB8_G, QB8_K = figs.pair((-1, 4), (-1, 10), lines=[(-3, 9, "")], points=[(0, 9, ""), (1, 6, ""), (3, 0, "")], inches=2.2)
+QB9 = figs.plane((0, 6), (0, 24), lines=[(3, 4, "")], points=[(2, 10, "on", "dr")],
+                 xname="weeks", yname="height (cm)", ys=2, ystep=2, inches=2.8)
 
-QA4_G, QA4_K = figs.pair((-5, 5), (-3, 5), lines=[(Fr(1, 4), 2, "")], points=[(-4, 1, ""), (0, 2, ""), (4, 3, "")], inches=3.0)
+QA4_G, QA4_K = figs.pair((-5, 5), (-3, 5), lines=[(Fr(1, 4), 2, "")], points=[(-4, 1, ""), (0, 2, ""), (4, 3, "")], inches=4.0)
 QA5_G, QA5_K = figs.pair((-3, 4), (-8, 4), lines=[(2, -3, "")], points=[(-2, -7, ""), (0, -3, ""), (1, -1, ""), (3, 3, "")],
                          ystep=2, inches=3.0)
-QA6_G, QA6_K = figs.pair((0, 6), (0, 400), lines=[(50, 100, "")], points=[(2, 200, ""), (4, 300, "")],
+QA6_G, QA6_K = figs.pair((0, 6), (0, 400), lines=[(50, 50, "")], points=[(2, 150, ""), (4, 250, ""), (6, 350, "")],
                          xname="minutes", yname="feet above the ground", ys=50, ystep=1, aspect=0.6, inches=3.0)
 QA7_G, QA7_K = figs.pair((0, 5), (0, 48), lines=[(-12, 48, "", None, (0, 4))], points=[(2, 24, "")],
-                         xname="minutes", yname="pounds left", ys=6, ystep=2, inches=3.0)
+                         xname="minutes", yname="pounds left", ys=6, ystep=2, inches=2.2)
 QA8_G, QA8_K = figs.pair((-1, 6), (-1, 11), lines=[(-2, 10, "")], points=[(0, 10, ""), (2, 6, ""), (5, 0, "")], inches=3.0)
-QA9 = figs.plane((0, 6), (0, 40), lines=[(5, 10, "")], points=[(0, 10, "on", "ul"), (2, 20, "on", "ul")],
-                 xname="hours", yname="length (cm)", ys=5, ystep=2, inches=3.0)
+QA9 = figs.plane((0, 6), (0, 40), lines=[(5, 10, "")], points=[(2, 20, "on", "dr")],
+                 xname="hours", yname="length (cm)", ys=5, ystep=2, inches=2.8)
 
 
 L = dict(
@@ -200,15 +199,15 @@ L = dict(
     notes=[
         dict(numeral="I", head="From a table: plot the pairs, then draw the line through them", min=3,
              fig=NOTES1,
-             items2=["The line crosses the y-axis at 2", "and goes down 2 for every 3 units to the right.",
+             size=21,       # 23 pt wraps the first line and leaves "right." alone on the second
+             items2=["The line crosses the y-axis at 2 and goes down 2 for every 3 units to the right.",
                      "Slope $-\\frac{2}{3}$:   $y = -\\frac{2}{3}x + 2$"],
              letters=False),
         dict(numeral="II", head="From a description", min=4,
-             text=["The start is the y-intercept and the rate is the slope.",
-                   "A pool holds 200 gallons, and a hose adds 50 gallons every minute."],
              fig=NOTES2,
-             items2=["Choose scales that fit: minutes 0 to 6, gallons 0 to 500 counting by 100.",
-                     "A real-world graph starts at x = 0."],
+             text=["A pool holds 200 gallons, and a hose adds 50 gallons every minute.",
+                   "The rate is the slope, and the start is the y-intercept.",
+                   "Choose scales that fit. A real-world graph starts at x = 0."],
              letters=False),
         dict(numeral="III", head="An equation in another form: make a table of values", min=3,
              fig=NOTES3,
@@ -232,15 +231,15 @@ L = dict(
              # standing decision 12: this Your Turn IS the Independent Set's question 1 — hand the set out now; every
              # student draws question 1 on its grid while the teacher circulates.
              your_turn=dict(min=5,
-                            prompt=["Handout, question 1:  $y = 2x - 5$"], fig=YT1, fig_a=YT1A,
-                            ask="Complete the table for x = 0, 1, 2 and 4, then graph the line.",
+                            prompt=["Handout, question 1:  complete the table and graph  $y = 2x - 5$."], fig=YT1, fig_a=YT1A,
+                            ask="",
                             steps=["at $x = 0$ and $1$:   $2(0) - 5 = -5$   and   $2(1) - 5 = -3$",
                                    "at $x = 2$:   $2(2) - 5 = -1$",
                                    "at $x = 4$:   $2(4) - 5 = 3$"],
                             answer="The line through (0, −5) and (4, 3)"),
              yt_check=table_of("2*u - 5", [0, 1, 2, 4], [-5, -3, -1, 3])),
         dict(title="Example 2", min_q=1,
-             prompt=["A cyclist is 60 miles from home and rides toward home at 12 miles every hour."], fig=EX2,
+             prompt=["A cyclist is 60 miles from home and rides home at 12 miles every hour."], fig=EX2,
              ask="Graph her distance from home versus time.",
              worked=[dict(min=2,
                           rows=[("(0, 60)", "the start is the y-intercept"),
@@ -280,8 +279,9 @@ L = dict(
              check=("many", ("eq", slope(("0", "6"), ("2", "5")), "-1/2"), ("eq", slope(("2", "5"), ("4", "4")), "-1/2"),
                     table_of("-F(1,2)*u + 6", [0, 2, 4], [6, 5, 4]), ("eq", "(-F(1,2)*" + X + " + 6).subs(" + X + ", 0)", "6")),
              wrong="slope −2 — the change in x over the change in y [B1G-M, AR.3.2: inverting x and y in the slope]; slope −1 — the change in y alone [standing decision 5: x-steps that are not 1]; y-intercept 4 — the last y read [Notes II: the y-intercept is the value of y when x is 0]"),
-        dict(kind="mc", text=["**A tub has 10 gallons and gains 5 per minute. Which is its graph?"],
-             qtext="A tub has 10 gallons and gains 5 gallons per minute. Four graphs, each with minutes across and gallons up, the gallons axis counting by 5. Which graph shows the gallons in the tub versus the minutes?",
+        dict(kind="mc", text=["A tub holds 10 gallons, and a faucet adds 5 gallons every minute.",
+                              "**Which graph shows the gallons in the tub versus the minutes?"],
+             qtext="A tub holds 10 gallons, and a faucet adds 5 gallons every minute. Four graphs, each with minutes across and gallons up, the gallons axis counting by 5. Which graph shows the gallons in the tub versus the minutes?",
              fig=C3, fig_a=C3A,
              steps=["start:   $(0, 10)$", "after 2 minutes:   $10 + 5(2) = 20$"],
              choices=["A", "B", "C", "D"], correct=3, answer="D — through (0, 10) and (2, 20)",
@@ -297,13 +297,13 @@ L = dict(
              answer="(0, 2), (2, 3) and (4, 4)",
              check=table_of("F(1,2)*u + 2", [0, 2, 4], [2, 3, 4]),
              wrong="(0, 0.5), (2, 4.5), (4, 8.5) — the start and the rate exchanged [B1G-M, AR.3.4: swapping m and b]; (2, 2.5) and (4, 3) — 0.5 added once for each point, not for each week [Notes II: the rate is the slope]"),
-        dict(kind="mc", text=["A table of a linear relationship has the x-values 1, 2, 3 and the y-values 5, 8, 11.",
+        dict(kind="mc", text=["A linear relationship has the x-values 1, 2, 3 and the y-values 5, 8, 11.",
                               "**Where does its line cross the y-axis?"],
-             qtext="A table of a linear relationship has the x-values 1, 2, 3 and the y-values 5, 8, 11. Where does its line cross the y-axis?",
-             fig=BT(B5T), fig_a=BTA(B5T),
-             steps=["slope:   $\\frac{8 - 5}{2 - 1} = 3$", "one step back to $x = 0$:   $5 - 3 = 2$"],
+             qtext="A linear relationship has the x-values 1, 2, 3 and the y-values 5, 8, 11. Where does its line cross the y-axis?",
+             fig_a=S(B5T, inches=3.8, pt=18, reserve=0.95),     # under its steps' long line, a smaller table
+             steps=["slope:   $\\frac{8 - 5}{2 - 1} = 3$", "Go back to x = 0 at the rate of change:   $5 - 3 = 2$"],
              choices=["At 3", "At 2", "At 5", "At 0"], correct=1, answer="B — at 2",
-             errors={"A": "the slope read as the y-intercept [B1G-M, AR.3.4: swapping m and b]", "C": "the first y-value read as the y-intercept, at x = 1 and not x = 0 [Notes II: the y-intercept is the value of y when x is 0]", "D": "every line taken to start at the origin [standing decision 3: a linear relationship is proportional only through the origin]"},
+             errors={"A": "the slope read as the y-intercept [B1G-M, AR.3.4: swapping m and b]", "C": "the first y-value read as the y-intercept, at x = 1 and not x = 0 [10.05 vocabulary: the y-intercept is the value of y when x is 0]", "D": "every line taken to start at the origin [standing decision 3: a linear relationship is proportional only through the origin]"},
              check=("many", table_of("3*u + 2", [1, 2, 3], [5, 8, 11]), ("eq", "(3*" + X + " + 2).subs(" + X + ", 0)", "2"),
                     fails("3*u + 2", "0", "5"), fails("3*u + 2", "0", "3"), fails("3*u + 2", "0", "0"))),
         dict(text=["**For $3x + y = 12$, find y when x is 0, 2 and 4."],
@@ -336,7 +336,7 @@ L = dict(
              qtext="A pool holds 50 gallons and gains 20 gallons every minute. Lee plots (0, 20) and (2, 120). What is Lee's mistake? Write two correct points.",
              steps=["Lee's points:   $20 + 50(2) = 120$:  start 20, rate 50", "start 50, rate 20:   $(0, 50)$",
                     "$50 + 20(2) = 90$:   the point $(2, 90)$"],
-             answer="Lee exchanged the start and rate: (0, 50) and (2, 90).",
+             answer="Lee exchanged the start and the rate: (0,\u00a050) and (2,\u00a090).",   # no break inside a pair
              check=("many", table_of("50*u + 20", [0, 2], [20, 120]), other_line("50*u + 20", "20*u + 50"),
                     table_of("20*u + 50", [0, 2], [50, 90])),
              wrong="'Lee used the wrong x-values' — the points read for their x's, not their y's [B1G-M, AR.3.4: swapping m and b]; (0, 50) and (2, 70) — the rate added once, not for each minute [Notes II: the rate is the slope]"),
@@ -356,8 +356,8 @@ L = dict(
         # repeat_ok: rule D matches only the axis numbers 0 to 6 and the answer's 1; the table (−6, 3), (−3, 1),
         # (3, −3), (6, −5) and its y-intercept −1 appear nowhere above.
         dict(repeat_ok=True, stem="Graph the line through the points in the table. What is its y-intercept?",
-             fig=figs.row([TAB([-6, -3, 3, 6], [3, 1, -3, -5]), IS2_G], gap=1.8),
-             fig_key=figs.row([TAB([-6, -3, 3, 6], [3, 1, -3, -5]), IS2_K], gap=1.8),
+             fig=figs.row([TAB([-6, -3, 3, 6], [3, 1, -3, -5], cw=1.5, rh=1.2), IS2_G], gap=1.8, inches=8.1),
+             fig_key=figs.row([TAB([-6, -3, 3, 6], [3, 1, -3, -5], cw=1.5, rh=1.2), IS2_K], gap=1.8, inches=8.1),
              answer="The y-intercept is −1.",
              why="Each step of 3 to the right goes down 2: slope −2/3. From (−3, 1), one step of 3 to the right reaches (0, −1).",
              check=("many", table_of("-F(2,3)*u - 1", [-6, -3, 3, 6], [3, 1, -3, -5]),
@@ -367,19 +367,19 @@ L = dict(
         dict(repeat_ok=True, stem="A train is 100 miles from the station and travels away from it at 50 miles every hour. Graph its distance from the station versus time.",
              fig=IS3_G, fig_key=IS3_K,
              answer="The line from (0, 100) through (2, 200) to (6, 400)",
-             why="The start, 100 miles, is the y-intercept; the rate, 50 miles per hour, is the slope: 100 + 50(2) = 200 and 100 + 50(6) = 400.",
+             why="The rate, 50 miles per hour, is the slope, and the start, 100 miles, is the y-intercept: 100 + 50(2) = 200 and 100 + 50(6) = 400.",
              check=table_of("50*u + 100", [0, 2, 4, 6], [100, 200, 300, 400]), space=0.3),
         dict(stem="A dump truck holds 30 tons of gravel and unloads 5 tons every minute. Graph the tons of gravel in the truck versus time.",
              fig=IS4_G, fig_key=IS4_K,
              answer="The line from (0, 30) to (6, 0)",
-             why="The start, 30 tons, is the y-intercept; the slope is −5: 30 − 5(2) = 20 and 30 − 5(6) = 0, empty after 6 minutes.",
+             why="The rate, −5, is the slope, and the start, 30 tons, is the y-intercept: 30 − 5(2) = 20 and 30 − 5(6) = 0, empty after 6 minutes.",
              check=("many", table_of("-5*u + 30", [0, 2, 6], [30, 20, 0]), ("eq", "sp.solve(30 - 5*" + X + ", " + X + ")[0]", "6")),
              space=0.3),
         # repeat_ok: the outline's own question; it shares only the form 2x + y with Notes III (2x + y = 8). The
         # equation 2x + y = 6, its x-values 0, 1, 3 and its table 6, 4, 0 are new.
         dict(repeat_ok=True, stem="Complete the table for $2x + y = 6$, then graph the line.",
-             fig=figs.row([TAB([0, 1, 3], [BL, BL, BL]), IS5_G], gap=1.8),
-             fig_key=figs.row([TAB([0, 1, 3], [6, 4, 0]), IS5_K], gap=1.8),
+             fig=figs.row([TAB([0, 1, 3], [BL, BL, BL]), IS5_G], gap=1.8, inches=5.0),
+             fig_key=figs.row([TAB([0, 1, 3], [6, 4, 0]), IS5_K], gap=1.8, inches=5.0),
              answer="6, 4, 0; the line through (0, 6) and (3, 0)",
              why="2(0) + y = 6, so y = 6; 2(1) + y = 6, so y = 4; 2(3) + y = 6, so y = 0. Solved for y: y = −2x + 6.",
              check=std_table(2, 6, [0, 1, 3], [6, 4, 0]), space=0.3),
@@ -414,17 +414,17 @@ L = dict(
              answer="The line through (−4, −4), (0, −2) and (4, 0)", why="Even x's: ½(−4) − 2 = −4, ½(0) − 2 = −2, ½(4) − 2 = 0.",
              check=table_of("F(1,2)*u - 2", [-4, 0, 4], [-4, -2, 0]), space=0.9),
         dict(stem="Graph the line through the points in the table. What is its y-intercept?",
-             fig=figs.row([TAB([-1, 1, 2], [-8, 2, 7]), QB5_G], gap=1.8), fig_key=figs.row([TAB([-1, 1, 2], [-8, 2, 7]), QB5_K], gap=1.8),
-             answer="The y-intercept is −3.", why="From (1, 2) to (2, 7) is up 5 for 1 to the right: slope 5. One step back from (1, 2) gives (0, −3).",
+             fig=figs.row([TAB([-1, 1, 2], [-8, 2, 7]), QB5_G], gap=1.8, inches=4.6), fig_key=figs.row([TAB([-1, 1, 2], [-8, 2, 7]), QB5_K], gap=1.8, inches=4.6),
+             answer="The y-intercept is −3.", why="From (1, 2) to (2, 7) is up 5 for 1 to the right: slope 5. Go back to x = 0 at the rate of change: 2 − 5 = −3.",
              check=("many", table_of("5*u - 3", [-1, 1, 2], [-8, 2, 7]), ("eq", "2 - (" + slope(("1", "2"), ("2", "7")) + ")", "-3")), space=0.9),
         dict(heading="For questions 6 and 7, graph the situation on the grid."),
         dict(stem="A balloon is 150 meters above the ground and rises 50 meters every minute. Graph its height versus time.",
              fig=QB6_G, fig_key=QB6_K,
-             answer="The line from (0, 150) through (2, 250) to (6, 450)", why="The start, 150, is the y-intercept; the slope is 50: 150 + 50(2) = 250 and 150 + 50(6) = 450.",
+             answer="The line from (0, 150) through (2, 250) to (6, 450)", why="The rate, 50, is the slope, and the start, 150, is the y-intercept: 150 + 50(2) = 250 and 150 + 50(6) = 450.",
              check=table_of("50*u + 150", [0, 2, 6], [150, 250, 450]), space=0.9),
         dict(stem="A jogger is 16 miles from home and runs toward home at 8 miles every hour. Graph her distance from home versus time.",
              fig=QB7_G, fig_key=QB7_K,
-             answer="The line from (0, 16) to (2, 0)", why="The start, 16, is the y-intercept; the slope is −8: 16 − 8(1) = 8 and 16 − 8(2) = 0.",
+             answer="The line from (0, 16) to (2, 0)", why="The rate, −8, is the slope, and the start, 16, is the y-intercept: 16 − 8(1) = 8 and 16 − 8(2) = 0.",
              check=table_of("-8*u + 16", [0, 1, 2], [16, 8, 0]), space=0.9),
         dict(heading="An equation in another form."),
         dict(stem="Complete a table for $3x + y = 9$ at $x = 0$, $1$ and $3$, then graph the line.",
@@ -439,10 +439,10 @@ L = dict(
         dict(heading="Choose one."),
         dict(stem="A table of a linear relationship has the x-values 2, 3, 4 and the y-values 1, 4, 7. Where does its line cross the y-axis?",
              choices=["At 3", "At 0", "At −5", "At 1"], correct=2, answer="C",
-             why="The slope is 3. Two steps back from (2, 1) to x = 0: 1 − 3(2) = −5.",
+             why="The slope is 3. Go back to x = 0 at the rate of change: 1 − 3(2) = −5.",
              check=("many", table_of("3*u - 5", [2, 3, 4], [1, 4, 7]), ("eq", "(3*" + X + " - 5).subs(" + X + ", 0)", "-5"),
                     fails("3*u - 5", "0", "1"), fails("3*u - 5", "0", "3"), fails("3*u - 5", "0", "0")),
-             errors={"A": "the slope read as the y-intercept [B1G-M, AR.3.4: swapping m and b]", "B": "every line taken to start at the origin [standing decision 3: a linear relationship is proportional only through the origin]", "D": "the first y-value read as the y-intercept, at x = 2 and not x = 0 [Notes II: the y-intercept is the value of y when x is 0]"}),
+             errors={"A": "the slope read as the y-intercept [B1G-M, AR.3.4: swapping m and b]", "B": "every line taken to start at the origin [standing decision 3: a linear relationship is proportional only through the origin]", "D": "the first y-value read as the y-intercept, at x = 2 and not x = 0 [10.05 vocabulary: the y-intercept is the value of y when x is 0]"}),
         dict(stem="A tub holds 5 gallons, and a hose adds 3 gallons every minute. Which two points are on the graph of the gallons in the tub versus the minutes?",
              choices=["$(0, 5)$ and $(2, 11)$", "$(0, 5)$ and $(2, -1)$", "$(0, 0)$ and $(2, 6)$", "$(0, 3)$ and $(2, 13)$"],
              correct=0, answer="A",
@@ -478,16 +478,16 @@ L = dict(
              check=table_of("F(1,4)*u + 2", [-4, 0, 4], [1, 2, 3]), space=0.9),
         dict(stem="Graph the line through the points in the table. What is its y-intercept?",
              fig=figs.row([TAB([-2, 1, 3], [-7, -1, 3]), QA5_G], gap=1.8), fig_key=figs.row([TAB([-2, 1, 3], [-7, -1, 3]), QA5_K], gap=1.8),
-             answer="The y-intercept is −3.", why="From (1, −1) to (3, 3) is up 4 for 2 to the right: slope 2. One step back from (1, −1) gives (0, −3).",
+             answer="The y-intercept is −3.", why="From (1, −1) to (3, 3) is up 4 for 2 to the right: slope 2. Go back to x = 0 at the rate of change: −1 − 2 = −3.",
              check=("many", table_of("2*u - 3", [-2, 1, 3], [-7, -1, 3]), ("eq", "-1 - (" + slope(("1", "-1"), ("3", "3")) + ")", "-3")), space=0.9),
         dict(heading="For questions 6 and 7, graph the situation on the grid."),
-        dict(stem="A drone is 100 feet above the ground and rises 50 feet every minute. Graph its height versus time.",
+        dict(stem="A drone is 50 feet above the ground and rises 50 feet every minute. Graph its height versus time.",
              fig=QA6_G, fig_key=QA6_K,
-             answer="The line from (0, 100) through (2, 200) to (6, 400)", why="The start, 100, is the y-intercept; the slope is 50: 100 + 50(2) = 200 and 100 + 50(6) = 400.",
-             check=table_of("50*u + 100", [0, 2, 6], [100, 200, 400]), space=0.9),
+             answer="The line from (0, 50) through (2, 150) to (6, 350)", why="The rate, 50, is the slope, and the start, 50, is the y-intercept: 50 + 50(2) = 150 and 50 + 50(6) = 350.",
+             check=table_of("50*u + 50", [0, 2, 6], [50, 150, 350]), space=0.9),
         dict(stem="A bag holds 48 pounds of mulch, and a gardener spreads 12 pounds every minute. Graph the pounds left in the bag versus time.",
              fig=QA7_G, fig_key=QA7_K,
-             answer="The line from (0, 48) to (4, 0)", why="The start, 48, is the y-intercept; the slope is −12: 48 − 12(2) = 24 and 48 − 12(4) = 0.",
+             answer="The line from (0, 48) to (4, 0)", why="The rate, −12, is the slope, and the start, 48, is the y-intercept: 48 − 12(2) = 24 and 48 − 12(4) = 0.",
              check=table_of("-12*u + 48", [0, 2, 4], [48, 24, 0]), space=0.9),
         dict(heading="An equation in another form."),
         dict(stem="Complete a table for $2x + y = 10$ at $x = 0$, $2$ and $5$, then graph the line.",
@@ -502,10 +502,10 @@ L = dict(
         dict(heading="Choose one."),
         dict(stem="A table of a linear relationship has the x-values 2, 4, 6 and the y-values 4, 5, 6. Where does its line cross the y-axis?",
              choices=["At 0", "At 3", "At 0.5", "At 4"], correct=1, answer="B",
-             why="The slope is 1/2. One step of 2 back from (2, 4) to x = 0: 4 − 1 = 3.",
+             why="The slope is 1/2. Go back to x = 0 at the rate of change: 4 − (1/2)(2) = 3.",
              check=("many", table_of("F(1,2)*u + 3", [2, 4, 6], [4, 5, 6]), ("eq", "(F(1,2)*" + X + " + 3).subs(" + X + ", 0)", "3"),
                     fails("F(1,2)*u + 3", "0", "4"), fails("F(1,2)*u + 3", "0", "F(1,2)"), fails("F(1,2)*u + 3", "0", "0")),
-             errors={"A": "every line taken to start at the origin [standing decision 3: a linear relationship is proportional only through the origin]", "C": "the slope read as the y-intercept [B1G-M, AR.3.4: swapping m and b]", "D": "the first y-value read as the y-intercept, at x = 2 and not x = 0 [Notes II: the y-intercept is the value of y when x is 0]"}),
+             errors={"A": "every line taken to start at the origin [standing decision 3: a linear relationship is proportional only through the origin]", "C": "the slope read as the y-intercept [B1G-M, AR.3.4: swapping m and b]", "D": "the first y-value read as the y-intercept, at x = 2 and not x = 0 [10.05 vocabulary: the y-intercept is the value of y when x is 0]"}),
         dict(stem="A bucket holds 4 liters, and a faucet adds 5 liters every minute. Which two points are on the graph of the liters in the bucket versus the minutes?",
              choices=["$(0, 4)$ and $(2, 14)$", "$(0, 4)$ and $(2, -6)$", "$(0, 5)$ and $(2, 13)$", "$(0, 0)$ and $(2, 10)$"],
              correct=0, answer="A",
@@ -524,7 +524,7 @@ L = dict(
         must_not="Point-slope form and standard form are not expectations of the benchmark, so the one equation in another form today is graphed from a table of values and is never on the test.",
         read_first=[
             "Built from the benchmark and the B1G-M first (the unit's Lesson Outlines, §10.06). Math Nation was read for scope only, and nothing is taken from it.",
-            "Every line is graphed one of two ways: from a description, the start is the y-intercept and the rate is the slope; from a table or another form, plot the pairs and draw the line through them. A real-world graph starts at x = 0 and stops where the story ends.",
+            "Every line is graphed one of two ways: from a description, the rate is the slope, and the start is the y-intercept; from a table or another form, plot the pairs and draw the line through them. A real-world graph starts at x = 0 and stops where the story ends.",
             "Right after Example 1, hand out the Independent Set: Your Turn 1 is its question 1 (y = 2x − 5), and every student completes the table and draws the line on the handout's grid while you circulate. The boards read a table, a description or a graph; nobody draws a graph on a whiteboard. The key draws each line on the student's own grid.",
             "Changed from the outline: the boat on whiteboard question 7 has 4 seats, not 6, because 6 is also the answer's number of hours; board 4's kitten gains 0.5 pounds, plural with a decimal."],
         materials="Whiteboards and markers, rulers, and the Independent Set, one per student, handed out at Example 1's Your Turn so that question 1 is drawn in class.",

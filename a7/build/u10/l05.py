@@ -57,13 +57,15 @@ NOTES2 = S(figs.plane((-2, 6), (-3, 5), lines=[(Fr(3, 2), -2, "")],
                       points=[(0, -2, ""), (2, 1, ""), (4, 4, "")],
                       triangles=[figs.tri((0, -2), (2, 1)), figs.tri((2, 1), (4, 4))], inches=4.0, pt=17),
            inches=4.0, pt=17, reserve=1.6)
+# both planes start at y = −1, so the x-axis lies inside each grid and its name stands at the axis's end, clear of the
+# numbers under the grid (with the left plane starting at 0, its "x" sat after its last number and read "3x")
 NOTES3 = S(figs.row([figs.plane((-1, 4), (-1, 6), lines=[(-2, 5, "")],
                                 points=[(0, 5, ""), (1, 3, ""), (2, 1, "")],
                                 triangles=[figs.tri((0, 5), (1, 3))]),
-                     figs.plane((-1, 7), (-2, 4), lines=[(Fr(-1, 3), 2, "")],
+                     figs.plane((-3, 7), (-1, 6), lines=[(Fr(-1, 3), 2, "")],
                                 points=[(0, 2, ""), (3, 1, ""), (6, 0, "")],
                                 triangles=[figs.tri((0, 2), (3, 1))])],
-                    gap=1.8, titles=["y = −2x + 5", "y = −(1/3)x + 2"]), inches=8.4, pt=16, reserve=1.2)
+                    gap=2.6, titles=["y = −2x + 5", "y = −(1/3)x + 2"]), inches=10.5, pt=18, reserve=1.95)   # the fraction under it clears the footer rule
 
 # ---- the examples: an empty grid on the question slide; the line drawn beside the worked rows
 EXW = dict(inches=4.2, pt=18)
@@ -88,18 +90,18 @@ C5 = S(figs.choices4([figs.plane((-4, 6), (-4, 6), lines=[(m, b, "")], **g2) for
        inches=14.0, pt=18, reserve=0.75)
 C5A = S(figs.row([figs.plane((-4, 6), (-4, 6), lines=[(2, -3, "")], points=[(0, -3, "on", "l"), (2, 1, "on", "r")],
                              inches=4.2, pt=18, step=2)], titles=["A"], inches=4.2, pt=18),
-        inches=4.2, pt=18, reserve=1.3)
+        inches=4.2, pt=18, reserve=0.9)
 
 
 # ---- the handout: empty grids, the key's graph on the same window
-def PAIR(xr, yr, m, b, pts):
-    return figs.pair(xr, yr, lines=[(m, b, "")], points=[(a, c, "") for a, c in pts], inches=3.2)
+def PAIR(xr, yr, m, b, pts, inches=3.2):
+    return figs.pair(xr, yr, lines=[(m, b, "")], points=[(a, c, "") for a, c in pts], inches=inches)
 
 
 IS1_G, IS1_K = PAIR((-1, 7), (-4, 6), Fr(4, 3), -3, [(0, -3), (3, 1), (6, 5)])
 IS2_G, IS2_K = PAIR((-3, 4), (-4, 6), -2, 3, [(0, 3), (1, 1), (2, -1)])
-IS3_G, IS3_K = PAIR((-2, 8), (-1, 6), Fr(-1, 2), 4, [(0, 4), (2, 3), (4, 2)])
-IS4_G, IS4_K = PAIR((-3, 3), (-7, 7), 3, 0, [(0, 0), (1, 3), (2, 6)])
+IS3_G, IS3_K = PAIR((-2, 8), (-1, 6), Fr(-1, 2), 4, [(0, 4), (2, 3), (4, 2)], inches=3.8)   # squares 0.27 in (10 columns)
+IS4_G, IS4_K = PAIR((-3, 3), (-7, 7), 3, 0, [(0, 0), (1, 3), (2, 6)], inches=2.6)   # the tall window: squares 0.28 in
 
 BK5_G, BK5_K = PAIR((-2, 6), (-2, 5), H, 1, [(0, 1), (2, 2), (4, 3)])
 BK6_G, BK6_K = PAIR((-1, 7), (-7, 5), Fr(-5, 3), 4, [(0, 4), (3, -1), (6, -6)])
@@ -121,7 +123,7 @@ L = dict(
     benchmark_text="Given a mathematical or real-world context, graph a two-variable linear equation from a written description, a table or an equation in slope-intercept form.",
     target="I can name the slope and the y-intercept of y = mx + b and use them to graph the line.",
     essential="How do the two numbers in y = mx + b tell you where a line starts and which way it goes?",
-    building_on="In lessons 10.02+03 and 10.04, students found the slope of a line from a graph, a table and two points, and in context. In Unit 11, they graphed a line from a table of values and called the number that multiplies x the coefficient of x.",
+    building_on="In lessons 10.02+03 and 10.04, students found the slope of a line from a graph, a table and two points, and in context. In Unit 11, they graphed a line from a table of values and used the term coefficient of x.",
     working_toward="Lesson 10.06 graphs a line from a table and from a context, and lessons 10.07+08 interpret the slope and the y-intercept. In lesson 10.09, students write the equation of a line in slope-intercept form.",
     vocab=[("y-intercept", "the value of y where a line crosses the y-axis: the value of y when x is 0"),
            ("slope-intercept form", "y = mx + b, where m is the slope and b is the y-intercept")],
@@ -220,27 +222,27 @@ L = dict(
              steps=["Slope:   the coefficient of x,  $m = 4$", "y-intercept:   at $x = 0$,  $4(0) - 7 = -7$"],
              answer="The slope is 4 and the y-intercept is −7.",
              check=mb("4*u - 7", "4", "-7"),
-             wrong="slope 4, y-intercept 7 — the sign of b dropped [B1G-M, AR.3.4: swapping m and b]; slope −7, y-intercept 4 — the two numbers exchanged [B1G-M, AR.3.4: swapping m and b]"),
+             wrong="slope 4, y-intercept 7 — the sign of b dropped [Notes I: y = 2x − 3: b is −3]; slope −7, y-intercept 4 — the two numbers exchanged [B1G-M, AR.3.4: swapping m and b]"),
         # repeat_ok: the one change from question 1 is the order (y = −7 + 4x is 4x − 7 written with b first) — the
         # point of the board, as the plan sets it.
         dict(repeat_ok=True, text=["**What are the slope and the y-intercept of y = −7 + 4x?"],
-             steps=["Slope:   the number with x,  $m = 4$", "y-intercept:   at $x = 0$,  $-7 + 4(0) = -7$"],
+             steps=["Slope:   the coefficient of x,  $m = 4$", "y-intercept:   at $x = 0$,  $-7 + 4(0) = -7$"],
              answer="The slope is 4 and the y-intercept is −7.",
              check=("many", mb("-7 + 4*u", "4", "-7"), one_line("-7 + 4*u", "4*u - 7")),
              wrong="slope −7, y-intercept 4 — the first number taken as the slope [B1G-M, AR.3.4: swapping m and b]"),
         dict(kind="mc", text=["**Which statement describes the line $y = 6 + \\frac{1}{2}x$?"],
              qtext="Which statement describes the line y = 6 + (1/2)x?",
              steps=["Slope:   $\\frac{1}{2}$", "At $x = 0$:   $y = 6$"],
-             choices=["Slope 6, y-intercept $(0, \\frac{1}{2})$", "Slope $\\frac{1}{2}$, y-intercept (0, 6)", "Slope 2, y-intercept (0, 6)", "Slope $\\frac{1}{2}$, y-intercept (6, 0)"],
-             correct=1, answer="B — Slope 1/2, y-intercept (0, 6)",
-             errors={"A": "the first number taken as the slope [B1G-M, AR.3.4: swapping m and b]", "C": "the fraction turned over [B1G-M, AR.3.4: inverting rise and run]", "D": "the intercept put on the x-axis [B1G-M, GR.1.2: x and y inverted]"},
+             choices=["Slope 6; through $(0, \\frac{1}{2})$", "Slope $\\frac{1}{2}$; through (0, 6)", "Slope 2; through (0, 6)", "Slope $\\frac{1}{2}$; through (6, 0)"],
+             correct=1, answer="B — Slope 1/2; through (0, 6)",
+             errors={"A": "the first number taken as the slope [B1G-M, AR.3.4: swapping m and b]", "C": "the fraction turned over [B1G-M, AR.3.4: inverting rise and run]", "D": "the y-intercept put on the x-axis [B1G-M, GR.1.2: x and y inverted]"},
              check=("many", mb("6 + F(1,2)*u", "F(1,2)", "6"), sat("6 + F(1,2)*u", "0", "6"),
                     slope_not("6 + F(1,2)*u", "6"), fails("6 + F(1,2)*u", "0", "F(1,2)"),
                     slope_not("6 + F(1,2)*u", "2"), fails("6 + F(1,2)*u", "6", "0"))),
         # repeat_ok: rule D matches only small digits that the notes' and examples' lines also carry (a coincidence
         # of values); this equation, its givens and its answer appear nowhere above.
         dict(repeat_ok=True, text=["A line has the y-intercept 2 and the slope −3.",
-                   "**Start at the y-intercept and move with the slope twice. Which two points do you reach?"],
+                   "**Start at the y-intercept and move with the slope twice, to the right. Which two points do you reach?"],
              steps=["Start:   $(0, 2)$", "Once:   down 3 and right 1 to $(1, -1)$", "Twice:   down 3 and right 1 to $(2, -4)$"],
              answer="(1, −1) and (2, −4)",
              check=("many", sat("-3*u + 2", "1", "-1"), sat("-3*u + 2", "2", "-4")),
@@ -252,7 +254,7 @@ L = dict(
              fig=C5, fig_a=C5A,
              steps=["Start:   $b = -3$,  the point $(0, -3)$", "Move:   up 2 and right 1, twice, to $(2, 1)$"],
              choices=["A", "B", "C", "D"], correct=0, answer="A",
-             errors={"B": "the sign of b dropped: through (0, 3) and (1, 5) [B1G-M, AR.3.4: swapping m and b]", "C": "rise and run exchanged, slope 1/2: through (0, −3) and (2, −2) [B1G-M, AR.3.4: inverting rise and run]", "D": "the slope and the y-intercept exchanged, y = −3x + 2: through (0, 2) and (1, −1) [B1G-M, AR.3.4: swapping m and b]"},
+             errors={"B": "the sign of b dropped: through (0, 3) and (1, 5) [Notes I: y = 2x − 3: b is −3]", "C": "rise and run exchanged, slope 1/2: through (0, −3) and (2, −2) [B1G-M, AR.3.4: inverting rise and run]", "D": "the slope and the y-intercept exchanged, y = −3x + 2: through (0, 2) and (1, −1) [B1G-M, AR.3.4: swapping m and b]"},
              check=("many", sat("2*u - 3", "0", "-3"), sat("2*u - 3", "2", "1"),
                     sat("2*u + 3", "0", "3"), sat("2*u + 3", "1", "5"), fails("2*u - 3", "0", "3"),
                     sat("F(1,2)*u - 3", "2", "-2"), fails("2*u - 3", "2", "-2"),
@@ -272,9 +274,9 @@ L = dict(
              steps=["Start:   $(0, -2)$", "Move:   up 3 to $-2 + 3 = 1$,  right 1 to $x = 1$"],
              answer="(1, 1)",
              check=("many", sat("3*u - 2", "0", "-2"), sat("3*u - 2", "1", "1"), ("eq", "-2 + 3", "1")),
-             wrong="(1, 5) — up 3 from 2, the sign of b dropped [B1G-M, AR.3.4: swapping m and b]; (3, −1) — right 3 and up 1, rise and run exchanged [B1G-M, AR.3.4: inverting rise and run]; (1, 206) — the room number used as the start [an extra number, included on purpose]"),
+             wrong="(1, 5) — up 3 from 2, the sign of b dropped [Notes I: y = 2x − 3: b is −3]; (3, −1) — right 3 and up 1, rise and run exchanged [B1G-M, AR.3.4: inverting rise and run]; (1, 206) — the room number used as the start [an extra number, included on purpose]"),
         dict(text=["The line $y = 2x + □$ passes through (3, 10).", "**Find the missing number."],
-             steps=["Substitute (3, 10):   $10 = 2(3) + b$", "Simplify:   $10 = 6 + b$", "Solve for b:   $b = 4$"],
+             steps=["Substitute (3, 10):   $10 = 2(3) + □$", "Simplify:   $10 = 6 + □$", "Subtract 6 from both sides:   $□ = 4$"],
              answer="4",
              check=("many", ("eq", "10 - 2*3", "4"), sat("2*u + 4", "3", "10")),
              wrong="7 — 10 − 3, the x-value subtracted [B1G-M, AR.4.1: substitution errors]; 16 — 10 + 6, the 6 added, not subtracted [B1G-M, AR.4.1: substitution errors]"),
@@ -338,7 +340,7 @@ L = dict(
              answer="The slope is 3/2 and the y-intercept is 4.", why="m is the coefficient of x, 3/2; b is the number added, 4.",
              check=mb("F(3,2)*u + 4", "F(3,2)", "4"), space=0.4),
         dict(stem="$y = 1 - 5x$",
-             answer="The slope is −5 and the y-intercept is 1.", why="The y-intercept is written first: b = 1, and the number with x is −5.",
+             answer="The slope is −5 and the y-intercept is 1.", why="The y-intercept is written first: b = 1, and the coefficient of x is −5.",
              check=mb("1 - 5*u", "-5", "1"), space=0.4),
         dict(heading="For questions 3 and 4, write the equation of the line in slope-intercept form."),
         dict(stem="A line has the slope $\\frac{4}{3}$ and the y-intercept −2.",
@@ -358,7 +360,7 @@ L = dict(
              answer="The line through (0, −4), (2, −1) and (4, 2)", why="The y-intercept is written first: start at (0, −4); up 3 and right 2 to (2, −1), then (4, 2).",
              check=table_of("-4 + F(3,2)*u", [0, 2, 4], [-4, -1, 2]), space=0.3),
         dict(heading="Move with the slope."),
-        dict(stem="A line has the y-intercept −1 and the slope $\\frac{4}{3}$. Start at the y-intercept and move with the slope twice. Which two points do you reach?",
+        dict(stem="A line has the y-intercept −1 and the slope $\\frac{4}{3}$. Start at the y-intercept and move with the slope twice, to the right. Which two points do you reach?",
              answer="(3, 3) and (6, 7)", why="From (0, −1): up 4 and right 3 to (3, 3), then again to (6, 7).",
              check=table_of("F(4,3)*u - 1", [3, 6], [3, 7]), space=0.5),
         dict(heading="Find the missing number."),
@@ -366,11 +368,11 @@ L = dict(
              answer="7", why="−3 = −5(2) + b = −10 + b, so b = 7.",
              check=("many", ("eq", "-3 + 10", "7"), sat("-5*u + 7", "2", "-3")), space=0.6),
         dict(heading="Choose one."),
-        dict(stem="Which statement describes the line $y = 2 - \\frac{1}{3}x$?",
-             choices=["Its slope is 2 and it crosses the y-axis at $(0, -\\frac{1}{3})$.", "Its slope is −3 and it crosses the y-axis at (0, 2).", "Its slope is $-\\frac{1}{3}$ and it crosses the y-axis at (2, 0).", "Its slope is $-\\frac{1}{3}$ and it crosses the y-axis at (0, 2)."],
-             correct=3, answer="D", why="The number with x is −1/3, the slope; at x = 0, y = 2, so the line crosses the y-axis at (0, 2).",
-             check=("many", mb("2 - F(1,3)*u", "-F(1,3)", "2"), slope_not("2 - F(1,3)*u", "2"), fails("2 - F(1,3)*u", "0", "-F(1,3)"),
-                    slope_not("2 - F(1,3)*u", "-3"), fails("2 - F(1,3)*u", "2", "0")),
+        dict(stem="Which statement describes the line $y = 4 - \\frac{1}{3}x$?",
+             choices=["Its slope is 4 and it passes through $(0, -\\frac{1}{3})$.", "Its slope is −3 and it passes through (0, 4).", "Its slope is $-\\frac{1}{3}$ and it passes through (4, 0).", "Its slope is $-\\frac{1}{3}$ and it passes through (0, 4)."],
+             correct=3, answer="D", why="The coefficient of x is −1/3, the slope; at x = 0, y = 4, so the line passes through (0, 4).",
+             check=("many", mb("4 - F(1,3)*u", "-F(1,3)", "4"), slope_not("4 - F(1,3)*u", "4"), fails("4 - F(1,3)*u", "0", "-F(1,3)"),
+                    slope_not("4 - F(1,3)*u", "-3"), fails("4 - F(1,3)*u", "4", "0")),
              errors={"A": "the first number taken as the slope [B1G-M, AR.3.4: swapping m and b]", "B": "the fraction turned over [B1G-M, AR.3.4: inverting rise and run]", "C": "the intercept put on the x-axis [B1G-M, GR.1.2: x and y inverted]"}),
         dict(stem="The graph shows a line through $(0, 1)$ and $(1, -1)$. Which equation does it show?",
              fig=figs.plane((-3, 3), (-4, 4), lines=[(-2, 1, "")], points=[(0, 1, "on", "r"), (1, -1, "on", "r")], inches=2.4),
@@ -386,7 +388,7 @@ L = dict(
              why="At x = 0 each of B, D and E gives 3. A crosses at (0, −3); C crosses at (0, 1).",
              check=("many", sat("F(1,2)*u + 3", "0", "3"), sat("3 - F(5,3)*u", "0", "3"), sat("0*u + 3", "0", "3"),
                     fails("3*u + 1", "0", "3"), fails("F(4,3)*u - 3", "0", "3")),
-             errors={"A": "the sign of b dropped [B1G-M, AR.3.4: swapping m and b]", "C": "the slope 3 taken as the y-intercept [B1G-M, AR.3.4: swapping m and b]"}),
+             errors={"A": "the sign of b dropped [Notes I: y = 2x − 3: b is −3]", "C": "the slope 3 taken as the y-intercept [B1G-M, AR.3.4: swapping m and b]"}),
     ],
 
     additional=[
@@ -395,7 +397,7 @@ L = dict(
              answer="The slope is −1/3 and the y-intercept is 6.", why="m is the coefficient of x, −1/3; b is the number added, 6.",
              check=mb("-F(1,3)*u + 6", "-F(1,3)", "6"), space=0.4),
         dict(stem="$y = 8 - 2x$",
-             answer="The slope is −2 and the y-intercept is 8.", why="The y-intercept is written first: b = 8, and the number with x is −2.",
+             answer="The slope is −2 and the y-intercept is 8.", why="The y-intercept is written first: b = 8, and the coefficient of x is −2.",
              check=mb("8 - 2*u", "-2", "8"), space=0.4),
         dict(heading="For questions 3 and 4, write the equation of the line in slope-intercept form."),
         dict(stem="A line has the slope $\\frac{1}{2}$ and the y-intercept −6.",
@@ -415,7 +417,7 @@ L = dict(
              answer="The line through (0, −1), (2, 2) and (4, 5)", why="The y-intercept is written first: start at (0, −1); up 3 and right 2 to (2, 2), then (4, 5).",
              check=table_of("-1 + F(3,2)*u", [0, 2, 4], [-1, 2, 5]), space=0.3),
         dict(heading="Move with the slope."),
-        dict(stem="A line has the y-intercept 3 and the slope $-\\frac{1}{3}$. Start at the y-intercept and move with the slope twice. Which two points do you reach?",
+        dict(stem="A line has the y-intercept 3 and the slope $-\\frac{1}{3}$. Start at the y-intercept and move with the slope twice, to the right. Which two points do you reach?",
              answer="(3, 2) and (6, 1)", why="From (0, 3): down 1 and right 3 to (3, 2), then again to (6, 1).",
              check=table_of("-F(1,3)*u + 3", [3, 6], [2, 1]), space=0.5),
         dict(heading="Find the missing number."),
@@ -424,8 +426,8 @@ L = dict(
              check=("many", ("eq", "-3 + 8", "5"), sat("-2*u + 5", "4", "-3")), space=0.6),
         dict(heading="Choose one."),
         dict(stem="Which statement describes the line $y = 5 + \\frac{4}{3}x$?",
-             choices=["Its slope is 5 and it crosses the y-axis at $(0, \\frac{4}{3})$.", "Its slope is $\\frac{4}{3}$ and it crosses the y-axis at (0, 5).", "Its slope is $\\frac{3}{4}$ and it crosses the y-axis at (0, 5).", "Its slope is $\\frac{4}{3}$ and it crosses the y-axis at (5, 0)."],
-             correct=1, answer="B", why="The number with x is 4/3, the slope; at x = 0, y = 5, so the line crosses the y-axis at (0, 5).",
+             choices=["Its slope is 5 and it passes through $(0, \\frac{4}{3})$.", "Its slope is $\\frac{4}{3}$ and it passes through (0, 5).", "Its slope is $\\frac{3}{4}$ and it passes through (0, 5).", "Its slope is $\\frac{4}{3}$ and it passes through (5, 0)."],
+             correct=1, answer="B", why="The coefficient of x is 4/3, the slope; at x = 0, y = 5, so the line passes through (0, 5).",
              check=("many", mb("5 + F(4,3)*u", "F(4,3)", "5"), slope_not("5 + F(4,3)*u", "5"), fails("5 + F(4,3)*u", "0", "F(4,3)"),
                     slope_not("5 + F(4,3)*u", "F(3,4)"), fails("5 + F(4,3)*u", "5", "0")),
              errors={"A": "the first number taken as the slope [B1G-M, AR.3.4: swapping m and b]", "C": "the fraction turned over [B1G-M, AR.3.4: inverting rise and run]", "D": "the intercept put on the x-axis [B1G-M, GR.1.2: x and y inverted]"}),
@@ -443,7 +445,7 @@ L = dict(
              why="At x = 0 each of A, B and E gives −4. C crosses at (0, 4); D crosses at (0, 1).",
              check=("many", sat("-F(1,3)*u - 4", "0", "-4"), sat("-4 - 2*u", "0", "-4"), sat("0*u - 4", "0", "-4"),
                     fails("-4*u + 1", "0", "-4"), fails("F(1,2)*u + 4", "0", "-4")),
-             errors={"C": "the sign of b dropped [B1G-M, AR.3.4: swapping m and b]", "D": "the slope −4 taken as the y-intercept [B1G-M, AR.3.4: swapping m and b]"}),
+             errors={"C": "the sign of b dropped [Notes I: y = 2x − 3: b is −3]", "D": "the slope −4 taken as the y-intercept [B1G-M, AR.3.4: swapping m and b]"}),
     ],
 
     te=dict(

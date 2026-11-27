@@ -8,6 +8,30 @@ the lessons are built to it. Eight decks: Fri 15 Jan – Wed 27 Jan 2027 (Mon 18
 (6–14 January), so it is built on what those two taught. The plan was read by a Barton reader and a FAST reader before
 any lesson was written; what they changed is at the foot.*
 
+## As built (27 November, after the review) — where the unit now differs from the plan below
+
+The plan below is what the lessons were built from. Three readers and six blind solvers then reviewed the built unit,
+the lead ruled, and nine fixers changed it (`A7 Unit 10 Linear Relationships - Review Rulings.md` has every ruling and
+how it was applied). The specs in `a7/build/u10/` are the truth; the differences that matter:
+- **The question is the bold line** on every Example, Your Turn and board, except a Your Turn whose picture is a graph:
+  it keeps its question in its one line (10.05 YT1 and YT2, 10.06 YT1, 10.07 YT1), because the kit sets a Your Turn's
+  bold line over its picture. 10.07's Your Turn 1 is "A skater's distance from a wall: explain the slope and the
+  y-intercept." (a line through (0, 15) and (4, 35)).
+- **One way of saying each idea**, everywhere: "The rate is the slope, and the start is the y-intercept"; "no pair for
+  x = 0"; "Go back to x = 0 at the rate of change"; "the coefficient of x"; "An amount that goes down has a negative
+  slope." Money keeps two decimals in an equation (a = 40 − 2.50n, c = 1.50d + □).
+- **Stories that changed:** 10.04 board 4 is a stack of cups (4 cups 15 cm, 10 cups 33 cm: 3 centimeters per cup);
+  10.06 board 3 is a tub that holds 10 gallons and gains 5 every minute, four graphs on minutes and gallons axes; 10.06
+  bank A6 is a drone at 50 feet rising 50 feet a minute; 10.10 board 1 is a kayak club (c = 10h + 150) and board 2 the
+  kayak pass (a = −10h + 150); 10.10 bank K11 is a karate school (c = 20n + 45). The Review's question 17 is a swim
+  school (c = 18n + 75), 12(a) is 40 °C (104 °F), 16(c) asks for which x y is −1 (16), 6(b) has four options.
+- **Notes changed:** 10.06's three notes were rewritten (Notes I one sentence, Notes II three lines, Notes III a wider
+  plane); 10.09's Notes III head is "No y-intercept in sight: substitute a point and solve for b"; 10.10's Notes II
+  shows both a = 40 − 2.50n and a = −2.50n + 40. The Reference Sheet's section 6 leads with "When no pair has x = 0,
+  substitute a point and solve for b."
+- **Standard form stays in 10.06** as decision 10 has it (Croix's IXL list); IXL N7D on 10.05 and the five blueprint
+  questions sent on 27 Nov are his calls.
+
 ## The unit's standing decisions (each reversible)
 
 1. **Where the class stands.** Unit 11 graphed a line from a table of values (x = 0 first, then two more; the third point
@@ -27,7 +51,8 @@ any lesson was written; what they changed is at the foot.*
    plainly curved may appear as a wrong choice: through the origin, not straight, not proportional.
 4. **The slope formula is words first.** "Slope is the change in y divided by the change in x. Subtract in the same
    order." The formula m = (y₂ − y₁)/(x₂ − x₁) is shown once, in 10.02+03 Notes III, and on the Reference Sheet; no
-   question needs its notation.
+   question needs its notation. (The Grade 8 FAST reference sheet prints this formula, "where m = slope": it is the
+   one thing in this unit that the state's sheet carries, and the unit's Reference Sheet says so.)
 5. **A table's x-values do not always go up by 1** (the state's own item, slope from a table, was answered correctly by 26
    percent). From 10.02+03 on, every lesson has a table whose x-steps are not 1, and 10.02+03, 10.04, 10.05, 10.07+08,
    10.09 and 10.10 each have one whose steps are unequal. Where such a table is a multiple-choice question about its
@@ -43,8 +68,10 @@ any lesson was written; what they changed is at the foot.*
    a context (c = 20n + 35). No point-slope form, no standard form on the test. When no y-intercept is in sight: "Substitute
    a point and solve for b" (the B1G-M's method; Unit 11's equation), or step back to x = 0 in a table whose steps allow it.
 10. **One exception for IXL.** Croix's IXL plan puts "Graph a line from an equation in standard form" (7MZ) on 10.06. The
-    lesson gives it one Notes block and one whiteboard question — an equation in another form is graphed from a table of
-    values — and the test never asks it.
+    lesson gives it one Notes block, one whiteboard question, one question of the Independent Set and one question in
+    each bank — an equation in another form is graphed from a table of values — and the Review and the test never ask
+    it. (The benchmark's boundary keeps standard form out of what the state expects; it is here because the IXL skill
+    is assigned. If the skill comes off the list, these five questions come out with it.)
 11. **Graphing a line has two methods.** From y = mx + b: start at the y-intercept, move with the slope, and take a third
     point as the check. From anything else: Unit 11's table of values. A negative slope "goes down as you move right": −2/3
     is down 2, right 3.
@@ -627,13 +654,14 @@ graph in context with scales · two moments again, with the slope and the y-inte
 ## The Unit Review (goes home Tue 26 Jan) and the Reference Sheet
 
 The Review follows the test's five sections with numbers of its own (none of the paper's, none of a lesson's): a
-linear table with no row for x = 0, the start found and the decision made; one *select all* of equations and a
+linear table with no pair for x = 0, the start found and the decision made; one *select all* of equations and a
 description; a row of four graphs, two of them dots; slopes from two points, from a table with unequal steps and from a scaled graph in context, with its meaning;
 a slope triangle and a larger one past the grid; a line to draw from its equation and one from a description, with its table; a context equation
-with both numbers matched to their meanings; a table with no row for x = 0, its slope and its start; F = 1.8C + 32 used for a
+with both numbers matched to their meanings; a table with no pair for x = 0, its slope and its start; F = 1.8C + 32 used for a
 value and for its 32; equations from a graph, a table, two points and two moments. Its *Same Surface, Different Deep*
-question (§16 rule 3) is one table asked four ways, parts a–d: the slope; y when x is 0; whether the relationship is
-proportional; the equation. Its last section (equations for contexts) is taught on Wed 27 Jan, the day after it goes
+question (§16 rule 3) is one table asked four ways, parts a–d: the slope; y when x is 0; x for a given y; the
+equation (as first planned its third part asked whether the relationship is proportional, which is the second part
+asked again; questions 1 and 2 of the Review already ask it). Its last section (equations for contexts) is taught on Wed 27 Jan, the day after it goes
 home; the Review says so in a line above that section. The Reference Sheet: linear and proportional; slope — the
 words, the formula, the signs, a table with unequal steps worked; slope as a rate with units; y = mx + b and its other
 clothes; graphing from the y-intercept and the slope; what m and b mean in a context; writing the equation — b shown,

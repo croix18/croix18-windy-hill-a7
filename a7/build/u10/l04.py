@@ -40,8 +40,9 @@ def B(spec, reserve=0.75):
 
 
 def _pt(p):
-    """(x, y) -> a named dot that must be on the line; (x, y, where) -> the same, its name placed `where`."""
-    return (p[0], p[1], "on") if len(p) == 2 else (p[0], p[1], None, p[2])
+    """(x, y) -> a named dot that must be on the line; (x, y, where) -> the same, its name placed `where`;
+    (x, y, name, where) as figs.plane takes it ("" a bare dot)."""
+    return (p[0], p[1], "on") if len(p) == 2 else p if len(p) == 4 else (p[0], p[1], None, p[2])
 
 
 def P(xr, yr, m, b, pts, **k):
@@ -62,19 +63,24 @@ CLIMB = [(1, 2300), (3, 2900), (6, 3800)]
 NOTES1 = S(figs.table([([1, 3, 6], [2300, 2900, 3800])], head=("hours", "elevation (feet)"), cw=2.4, rh=1.25),
            inches=8.0, pt=22, reserve=0.3)
 NOTES2 = S(figs.plane((0, 8), (0, 120), lines=[(-12, 100, "")], points=[(0, 100, None, "ur"), (5, 40, "on")], ys=20,
-                      xname="hours", yname="charge (percent)", inches=4.2, pt=18), inches=4.2, pt=18, reserve=0.6)
+                      xname="hours", yname="charge (percent)", inches=4.6, pt=18), inches=4.6, pt=18, reserve=0.6)
 
 BALLOON = dict(ys=150, xname="minutes", yname="height (feet)")
 EX1 = B(P((0, 6), (0, 750), 75, 150, [(2, 300, "dr"), (4, 450, "dr")], **BALLOON), reserve=0.9)
 EX1W = S(P((0, 6), (0, 750), 75, 150, [(2, 300, "dr"), (4, 450, "dr")], triangles=[figs.tri((2, 300), (4, 450), side="over")], **BALLOON),
          inches=4.2, pt=18, reserve=1.5)
-SNOW = dict(ys=3, xname="hours", yname="depth (inches)")
-YT1 = B(P((0, 8), (0, 18), Fr(3, 2), 6, [(2, 9, "dr"), (6, 15, "dr")], **SNOW), reserve=0.5)
-YT1A = B(P((0, 8), (0, 18), Fr(3, 2), 6, [(2, 9, "dr"), (6, 15, "dr")], triangles=[figs.tri((2, 9), (6, 15), side="over")], **SNOW), reserve=1.7)
+SNOW = dict(ys=3, aspect=0.8, xname="hours", yname="depth (inches)")     # a little flat: the answer room under it holds its height
+YT1 = B(P((0, 8), (0, 18), Fr(3, 2), 6, [(2, 9, "dr"), (6, 15, "dr")], **SNOW), reserve=1.05)
+YT1A = B(P((0, 8), (0, 18), Fr(3, 2), 6, [(2, 9, "dr"), (6, 15, "dr")], triangles=[figs.tri((2, 9), (6, 15), side="over")], **SNOW), reserve=1.05)
 
 PUPPY = [(2, 8), (4, 12.5), (6, 17)]
 T1 = figs.table([([2, 4, 6], [8, 12.5, 17])], head=("weeks", "pounds"), cw=2.0, rh=1.3)
-ELEV = P((0, 8), (0, 160), -15, 120, [(0, 120, "ur"), (8, 0)], ys=40, xname="seconds", yname="height (feet)")
+# Rows 1.2 times as tall as wide. The question slide's options stand beside the graph and hold its width, so there
+# (8, 0) is a bare dot on the 8 (the slope is given; no name overhangs the right edge); the reveal, whose steps use
+# it, names it above its dot.
+_ELEV = dict(ys=40, aspect=1.2, xname="seconds", yname="height (feet)")
+ELEV = P((0, 8), (0, 160), -15, 120, [(0, 120, "ur"), (8, 0, "", "u")], **_ELEV)
+ELEVA = P((0, 8), (0, 160), -15, 120, [(0, 120, "ur"), (8, 0, "u+")], **_ELEV)
 PAY = [(2, 31), (4, 57), (8, 109)]
 T5 = T([2, 4, 8], [31, 57, 109], ("hours", "pay ($)"), cw=1.8)
 PAGES = P((0, 10), (0, 360), -30, 300, [(0, 300, "ur"), (6, 120)], ys=60, xname="days", yname="pages left")
@@ -131,14 +137,14 @@ L = dict(
              fig=NOTES1,
              text=["(2,900 − 2,300) ÷ (3 − 1) = 300   and   (3,800 − 2,900) ÷ (6 − 3) = 300",
                      "300 feet per hour: the climber gains 300 feet every hour.",
+                     "From 3 hours to 5 hours: 2 · 300 = 600 more feet, so 3,500 feet at 5 hours.",
                      "The slope is not y ÷ x here: 2,300 ÷ 1 is not the rate, because the climb did not start at 0 feet.",
                      "IXL calls a linear relationship a linear function."],
              letters=False),
-        dict(numeral="II", head="A negative slope: the amount goes down", min=4,
+        dict(numeral="II", head="An amount that goes down has a negative slope", min=4,
              fig=NOTES2,
              text=["Read the scales first.   (40 − 100) ÷ (5 − 0) = −12",
-                     "−12 percent per hour: the phone loses 12 percent of its charge every hour.",
-                     "A negative slope goes down as you move right."],
+                     "−12 percent per hour: the phone loses 12 percent of its charge every hour."],
              letters=False),
     ],
 
@@ -158,7 +164,7 @@ L = dict(
                             ask="Find the slope, with its unit, and explain what it means.",
                             fig=YT1, fig_a=YT1A,
                             steps=["Slope:   $(15 - 9) \\div (6 - 2) = 6 \\div 4 = 1.5$"],
-                            answer="The snow gets 1.5 inches deeper every hour."),
+                            answer="The snow gains 1.5 inches every hour."),
              yt_check=("many", ("eq", slope((2, 9), (6, 15)), "F(3,2)"), on(Fr(3, 2), 6, 2, 9), on(Fr(3, 2), 6, 6, 15))),
         dict(title="Example 2", min_q=1,
              prompt=["A hiker walks down a mountain at a constant rate. After 2 hours her elevation is 5,400 feet, and after 5 hours it is 3,300 feet."],
@@ -199,25 +205,25 @@ L = dict(
              wrong="'the puppy weighed 2.25 pounds' — the slope read as a weight [B1G-M, AR.3.5: misinterpreting the slope in context]; 'the puppy takes 2.25 weeks to gain 1 pound' — the rate turned over [B1G-M, AR.3.2: inverting the x- and y-values]"),
         dict(kind="mc", text=["The graph shows an elevator's height. The slope is −15.", "**What does the slope mean?"],
              qtext="The graph shows an elevator's height, in feet, versus time, in seconds, a line from (0, 120) to (8, 0). The slope of the line is −15. What does the slope mean?",
-             fig=B(ELEV), fig_a=B(ELEV, reserve=1.6),
+             fig=B(ELEV), fig_a=B(ELEVA, reserve=1.15),
              steps=["Slope:   $\\frac{0 - 120}{8 - 0} = -15$ feet per second", "Negative:   the height goes down"],
              choices=["The elevator goes up 15 feet every second.", "The elevator goes down 15 feet every second.", "The elevator takes 15 seconds to go down 1 foot.", "The elevator starts 15 feet above the ground."],
-             correct=1, answer="B — It goes down 15 feet every second.",
+             correct=1, answer="B — Down 15 feet every second.",
              errors={"A": "the sign ignored: a negative slope read as rising [B1G-M, AR.3.5: misinterpreting the slope in context]", "C": "the rate turned over: seconds per foot [B1G-M, AR.3.2: inverting the x- and y-values]", "D": "the slope read as a start [B1G-M, AR.3.5: misidentifying slope and y-intercept]"},
              check=("many", ("eq", slope((0, 120), (8, 0)), "-15"), ("true", "(" + slope((0, 120), (8, 0)) + ") < 0"),
                     ("true", "120 != 15"), ("true", "(" + slope((120, 0), (0, 8)) + ") != -15"))),
-        dict(text=["A baker has used 15 cups of flour after 4 batches", "and 33 cups after 10 batches.",
+        dict(text=["A stack of 4 cups is 15 centimeters tall, and", "a stack of 10 cups is 33 centimeters tall.",
                    "**Find the rate of change, with its unit."],
-             steps=["Change in flour:   $33 - 15 = 18$", "Change in batches:   $10 - 4 = 6$", "Rate:   $18 \\div 6 = 3$"],
-             answer="3 cups per batch",
+             steps=["Change in height:   $33 - 15 = 18$", "Change in cups:   $10 - 4 = 6$", "Rate:   $18 \\div 6 = 3$"],
+             answer="3 centimeters per cup",
              check=("eq", slope((4, 15), (10, 33)), "3"),
-             wrong="3.75 cups per batch — 15 ÷ 4, one pair divided [B1G-M, AR.3.2: slope is not the constant of proportionality]; 1/3 batch per cup — the rate turned over [B1G-M, AR.3.2: inverting the x- and y-values]"),
+             wrong="3.75 centimeters per cup — 15 ÷ 4, one pair divided [B1G-M, AR.3.2: slope is not the constant of proportionality]; 1/3 cup per centimeter — the rate turned over [B1G-M, AR.3.2: inverting the x- and y-values]"),
         dict(kind="mc", text=["The table shows a worker's pay.", "**What is the slope?"],
              qtext="The table shows a worker's pay: hours 2, 4, 8; pay in dollars 31, 57, 109. What is the slope?",
              fig=S(T5, inches=5.4, pt=18, reserve=0.75), fig_a=S(T5, inches=5.4, pt=18, reserve=0.95),
              steps=["Change in pay:   $57 - 31 = 26$", "Change in hours:   $4 - 2 = 2$", "Slope:   $26 \\div 2 = 13$",
                     "Check:   $(109 - 57) \\div (8 - 4) = 52 \\div 4 = 13$"],
-             choices=["26 dollars per hour", "15.5 dollars per hour", "13 dollars per hour", "$\\frac{1}{13}$ dollar per hour"],
+             choices=["26 dollars per hour", "15.5 dollars per hour", "13 dollars per hour", "$\\frac{1}{13}$ hour per dollar"],
              correct=2, answer="C — 13 dollars per hour",
              errors={"A": "the change in pay alone, not divided by the change in hours [B1G-M, AR.3.2: slope is the change in y over the change in x]", "B": "31 ÷ 2: one pair divided, as if proportional [B1G-M, AR.3.2: slope is not the constant of proportionality]", "D": "the change in hours over the change in pay: turned over [B1G-M, AR.3.2: inverting the x- and y-values]"},
              check=("many", rate(PAY, "13"), ("true", "57 - 31 != 13"), ("true", "F(31, 2) != 13"),
@@ -324,7 +330,7 @@ L = dict(
              errors={"B": "the sign ignored [B1G-M, AR.3.5: misinterpreting the slope in context]", "C": "the slope read as a start [B1G-M, AR.3.5: misidentifying slope and y-intercept]", "D": "the rate turned over [B1G-M, AR.3.2: inverting the x- and y-values]"}),
         dict(stem="The table shows the cost of tickets. What is the slope?",
              fig=T([2, 5, 6], [19, 40, 47], ("tickets", "cost ($)")),
-             choices=["$\\frac{1}{7}$ dollar per ticket", "21 dollars per ticket", "9.50 dollars per ticket", "7 dollars per ticket"],
+             choices=["$\\frac{1}{7}$ ticket per dollar", "21 dollars per ticket", "9.50 dollars per ticket", "7 dollars per ticket"],
              correct=3, answer="D", why="(40 − 19) ÷ (5 − 2) = 21 ÷ 3 = 7, and (47 − 40) ÷ (6 − 5) = 7.",
              check=("many", rate([(2, 19), (5, 40), (6, 47)], "7"), ("true", "40 - 19 != 7"), ("true", "F(19, 2) != 7"),
                     ("eq", slope((19, 2), (40, 5)), "F(1,7)")),
@@ -338,9 +344,10 @@ L = dict(
              why="(34 − 22) ÷ (4 − 2) = 6, and 22 − 2(6) = 10: not proportional.",
              check=("many", rate([(2, 22), (4, 34), (6, 46)], "6"), start([(2, 22), (4, 34)], "10"), ("true", "F(22, 2) != 6")),
              space=0.7),
-        dict(stem="A crew paints a fence at a constant rate of 18 feet per hour. They have painted 24 feet after 2 hours. After how many hours will they have painted 96 feet?",
-             answer="After 6 hours", why="96 − 24 = 72 more feet, and 72 ÷ 18 = 4 more hours: 2 + 4 = 6.",
-             check=("many", ("eq", "2 + F(96 - 24, 18)", "6"), ("eq", slope((2, 24), (6, 96)), "18")), space=0.5),
+        dict(stem="A crew paints a fence at a constant rate of 18 feet per hour. They have painted 36 feet after 2 hours. After how many hours will they have painted 108 feet?",
+             answer="After 6 hours", why="(108 − 36) ÷ 18 = 72 ÷ 18 = 4 more hours, so 2 + 4 = 6; 108 ÷ 18 = 6 agrees.",
+             check=("many", ("eq", "2 + F(108 - 36, 18)", "6"), ("eq", slope((2, 36), (6, 108)), "18"),
+                    ("eq", "F(108, 18)", "6"), ("eq", "F(36, 2)", "18")), space=0.5),
     ],
 
     additional=[
@@ -358,9 +365,9 @@ L = dict(
              answer="22.5 centimeters per week", why="(150 − 60) ÷ (6 − 2) = 90 ÷ 4 = 22.5.",
              check=("many", ("eq", slope((2, 60), (6, 150)), "F(45,2)"), on(Fr(45, 2), 15, 2, 60), on(Fr(45, 2), 15, 6, 150)), space=0.5),
         dict(stem="The graph shows the sand left in the top of an hourglass.",
-             fig=G((0, 4), (0, 225), -50, 200, [(0, 200, "ur"), (3, 50)], ys=25, xname="minutes", yname="sand left (grams)"),
-             answer="−50 grams per minute", why="(50 − 200) ÷ (3 − 0) = −150 ÷ 3 = −50.",
-             check=("many", ("eq", slope((0, 200), (3, 50)), "-50"), on(-50, 200, 3, 50)), space=0.5),
+             fig=G((0, 4), (0, 250), -50, 200, [(1, 150), (3, 50)], inches=1.8, ys=50, xname="minutes", yname="sand left (grams)"),
+             answer="−50 grams per minute", why="(50 − 150) ÷ (3 − 1) = −100 ÷ 2 = −50.",
+             check=("many", ("eq", slope((1, 150), (3, 50)), "-50"), on(-50, 200, 1, 150), on(-50, 200, 3, 50)), space=0.5),
         dict(stem="A train travels at a constant speed. It has gone 135 miles after 3 hours and 351 miles after 7 hours.",
              answer="54 miles per hour", why="(351 − 135) ÷ (7 − 3) = 216 ÷ 4 = 54.",
              check=("eq", slope((3, 135), (7, 351)), "54"), space=0.5),
@@ -379,7 +386,7 @@ L = dict(
              errors={"A": "the rate turned over [B1G-M, AR.3.2: inverting the x- and y-values]", "B": "the slope read as a start [B1G-M, AR.3.5: misidentifying slope and y-intercept]", "D": "the sign ignored [B1G-M, AR.3.5: misinterpreting the slope in context]"}),
         dict(stem="The table shows the cost of rice. What is the slope?",
              fig=T([2, 6, 7], [17, 41, 47], ("pounds", "cost ($)")),
-             choices=["24 dollars per pound", "6 dollars per pound", "8.50 dollars per pound", "$\\frac{1}{6}$ dollar per pound"],
+             choices=["24 dollars per pound", "6 dollars per pound", "8.50 dollars per pound", "$\\frac{1}{6}$ pound per dollar"],
              correct=1, answer="B", why="(41 − 17) ÷ (6 − 2) = 24 ÷ 4 = 6, and (47 − 41) ÷ (7 − 6) = 6.",
              check=("many", rate([(2, 17), (6, 41), (7, 47)], "6"), ("true", "41 - 17 != 6"), ("true", "F(17, 2) != 6"),
                     ("eq", slope((17, 2), (41, 6)), "F(1,6)")),
@@ -393,9 +400,10 @@ L = dict(
              why="(45 − 27) ÷ (6 − 3) = 6, and 27 − 3(6) = 9: not proportional.",
              check=("many", rate([(3, 27), (6, 45), (9, 63)], "6"), start([(3, 27), (6, 45)], "9"), ("true", "F(27, 3) != 6")),
              space=0.7),
-        dict(stem="A crew lays tile at a constant rate of 14 square feet per hour. They have laid 30 square feet after 2 hours. After how many hours will they have laid 100 square feet?",
-             answer="After 7 hours", why="100 − 30 = 70 more square feet, and 70 ÷ 14 = 5 more hours: 2 + 5 = 7.",
-             check=("many", ("eq", "2 + F(100 - 30, 14)", "7"), ("eq", slope((2, 30), (7, 100)), "14")), space=0.5),
+        dict(stem="A crew lays tile at a constant rate of 14 square feet per hour. They have laid 28 square feet after 2 hours. After how many hours will they have laid 98 square feet?",
+             answer="After 7 hours", why="(98 − 28) ÷ 14 = 70 ÷ 14 = 5 more hours, so 2 + 5 = 7; 98 ÷ 14 = 7 agrees.",
+             check=("many", ("eq", "2 + F(98 - 28, 14)", "7"), ("eq", slope((2, 28), (7, 98)), "14"),
+                    ("eq", "F(98, 14)", "7"), ("eq", "F(28, 2)", "14")), space=0.5),
     ],
 
     te=dict(
@@ -405,7 +413,7 @@ L = dict(
             "Wednesday 20 January, a 43-minute day. The kit's timing table must total 53, so the table is the full lesson; the cut is under Materials. Built from the benchmarks and the B1G-M first (the unit's Lesson Outlines, §10.04, and its standing decisions 2, 5, 6, 7, 13 and 15).",
             "Every slope is the change in y divided by the change in x, with its unit, the y-unit per x-unit, and every meaning is a sentence with both units. Notes I says once that IXL calls a linear relationship a linear function; the pages keep 'linear relationship'. Read the scales first: the graphs count by 20, 150, 3 and 60.",
             "Board 9 and the set's last question turn on Unit 7's habit of dividing one pair: it gives the rate only when the line passes through the origin."],
-        materials="Whiteboards and markers. On this 43-minute day, skip whiteboard question 4 first (the baker) and then whiteboard question 8 (the tickets). Shorten the warm-up to 4 minutes, and the Independent Set goes home. Do not cut whiteboard questions 3 and 5 (the two votes) or question 9.",
+        materials="Whiteboards and markers. On this 43-minute day, skip whiteboard question 4 first (the stack of cups) and then whiteboard question 8 (the tickets). Shorten the warm-up to 4 minutes, and the Independent Set goes home. Do not cut whiteboard questions 3 and 5 (the two votes) or question 9.",
         variation="Boards 1 and 2 use one table, and only the question changes, from the slope to its meaning; 3 votes on a meaning; 4 is a description with two moments; 5 votes on a slope from a table with unequal steps; 6 is a falling graph; 7 carries the truck's boxes as the extra number; 8 finds a missing cost; 9 is written. The set breaks the pattern at question 6, a table that is not proportional.",
         audit=["Every slope re-derived by sympy at build time from the printed points, each consecutive pair of every table; every graph drawn from its equation by u10/figs10.py, which refuses a marked point that is not on its line; every wrong option checked from its error."],
         changes=["Built from the benchmarks and the unit plan; no Math Nation item is reproduced."],

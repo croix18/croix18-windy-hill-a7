@@ -81,23 +81,23 @@ def TA(spec, inches=6.0):
 
 # ---- the notes
 # Notes I: one relationship, x counting by 1 and by 2, and its graph (Unit 11 drew it)
-NOTES1 = S(figs.row([figs.table([([0, 1, 2, 3], [3, 5, 7, 9])], cw=1.6, rh=1.4),
-                     figs.table([([0, 2, 4, 6], [3, 7, 11, 15])], cw=1.6, rh=1.4),
-                     figs.plane((0, 6), (0, 16), ystep=4, lines=[(2, 3)], aspect=0.25,
+NOTES1 = S(figs.row([figs.table([([0, 1, 2, 3], [3, 5, 7, 9])], cw=1.6, rh=1.8),
+                     figs.table([([0, 2, 4, 6], [3, 7, 11, 15])], cw=1.6, rh=1.8),
+                     figs.plane((0, 6), (0, 16), ys=2, ystep=2, xstep=2, aspect=1.15, lines=[(2, 3)],
                                 points=[(0, 3, ""), (2, 7, ""), (4, 11, ""), (6, 15, "")])],
                     captions=["up 2 for every 1", "up 4 for every 2", "a straight line"], gap=2.0, pt=18),
-           inches=11.0, pt=18, reserve=1.3)
+           inches=11.0, pt=18, reserve=1.45)
 # Notes II: y = 2x and y = 2x + 3 on one grid; beside them, a curve through the origin
-NOTES2 = S(figs.row([figs.plane((0, 4), (0, 12), ystep=2, aspect=0.5, lines=[figs.prop(2, ""), (2, 3, "")],
+NOTES2 = S(figs.row([figs.plane((0, 4), (0, 12), ystep=2, aspect=0.5, lines=[figs.prop(2), (2, 3)],
                                 points=[(0, 3, "")]),
-                     figs.plane((0, 3), (0, 9), ys=3, curves=[figs.square(1, 3)])],
-                    titles=[[("y = 2x: through (0, 0)", figs.BLUE), ("y = 2x + 3: through (0, 3)", figs.ORANGE), "both: rate of change 2"], "a curve: not linear"], gap=4.5, pt=18),
-           inches=9.0, pt=18, reserve=1.4)
+                     figs.plane((0, 4), (0, 9), ys=3, aspect=2, curves=[figs.square(1, 3)])],
+                    titles=[None, "a curve: not linear"], gap=4.5, pt=18),
+           inches=9.0, pt=18, reserve=1.5)
 # Notes III: two tables with no pair for x = 0
 NOTES3 = S(figs.row([figs.table([([2, 4, 6], [9, 13, 17])], cw=1.6, rh=1.4),
                      figs.table([([4, 8, 12], [2, 4, 6])], cw=1.6, rh=1.4)],
                     titles=["first table", "second table"], gap=2.5, pt=18),
-           inches=8.0, pt=18, reserve=1.9)
+           inches=10.0, pt=18, reserve=2.3)
 
 # ---- the examples
 EX1_T = figs.table([([4, 8, 12], [9, 15, 21])], cw=1.8, rh=1.4)
@@ -113,7 +113,7 @@ TB3 = figs.table([([4, 8, 12, 16], [3, 6, 9, 12])], cw=1.6, rh=1.4)
 # Board 5: four graphs on one window, the same scales on all four. Lettered in their final order (keyed A):
 # A the points (1, 3), (2, 6), (3, 9); B a curve through (0, 0), (1, 1) and (2, 4); C a line through (0, 3) and (3, 6);
 # D the points (2, 5), (4, 6), (6, 7).
-g5 = dict(inches=2.6, pt=18, ystep=2, xstep=2, aspect=1.4)
+g5 = dict(inches=2.6, pt=18, ystep=2, xstep=2)
 G5_LINE = figs.plane((0, 7), (0, 10), lines=[(1, 3, "")], points=[(0, 3, ""), (3, 6, "")], **g5)
 G5_RATE = figs.plane((0, 7), (0, 10), points=[(2, 5, ""), (4, 6, ""), (6, 7, "")], **g5)
 G5_OK = figs.plane((0, 7), (0, 10), points=[(1, 3, ""), (2, 6, ""), (3, 9, "")], **g5)
@@ -125,25 +125,25 @@ C5A = S(figs.row([figs.plane((0, 7), (0, 10), lines=[figs.prop(3, "")], points=[
 
 
 # ---- paper figures
-def PTS(xr, yr, pts, **k):
-    return figs.plane(xr, yr, points=[(a, b, "") for a, b in pts], inches=2.6, **k)
+def PTS(xr, yr, pts, inches=2.6, **k):
+    return figs.plane(xr, yr, points=[(a, b, "") for a, b in pts], inches=inches, **k)
 
 
-IS3K = figs.plane((0, 8), (0, 6), points=[(0, 2, "on"), (2, 3, "on"), (4, 4, "on"), (6, 5, "on")], lines=[(Fr(1, 2), 2, "")], inches=2.6)
+IS3K = figs.plane((0, 8), (0, 6), points=[(0, 2, "on"), (2, 3, "on"), (4, 4, "on"), (6, 5, "on")], lines=[(Fr(1, 2), 2, "")], inches=3.0)
 IS6 = figs.row([figs.table([([2, 3, 5], [8, 12, 20])]), figs.table([([1, 3, 5], [6, 10, 14])])],
                titles=["first table", "second table"], gap=2.0, inches=5.0)
 
 gb = dict(inches=2.0, ystep=2, xstep=2)
-BK11 = figs.choices4([figs.plane((0, 6), (0, 10), points=[(1, 5, ""), (2, 6, ""), (3, 7, "")], **gb),
-                      figs.plane((0, 6), (0, 10), lines=[(Fr(1, 2), 3, "")], points=[(0, 3, ""), (4, 5, "")], **gb),
-                      figs.plane((0, 6), (0, 10), curves=[figs.square(Fr(1, 4), 6)], points=[(2, 1, ""), (4, 4, "")], **gb),
-                      figs.plane((0, 6), (0, 10), points=[(1, 2, ""), (2, 4, ""), (3, 6, "")], **gb)],
+BK11 = figs.choices4([figs.plane((0, 4), (0, 10), points=[(1, 5, ""), (2, 6, ""), (3, 7, "")], **gb),
+                      figs.plane((0, 4), (0, 10), lines=[(Fr(1, 2), 3, "")], points=[(0, 3, ""), (4, 5, "")], **gb),
+                      figs.plane((0, 4), (0, 10), curves=[figs.square(Fr(1, 4), 4)], points=[(2, 1, ""), (4, 4, "")], **gb),
+                      figs.plane((0, 4), (0, 10), points=[(1, 2, ""), (2, 4, ""), (3, 6, "")], **gb)],
                      gap=1.6, inches=6.6, pt=9.5)
 ga = dict(inches=2.0, ystep=2, xstep=2)
-AD11 = figs.choices4([figs.plane((0, 6), (0, 14), points=[(1, 7, ""), (2, 8, ""), (3, 9, "")], **ga),
-                      figs.plane((0, 6), (0, 14), lines=[(2, 4, "")], points=[(0, 4, ""), (4, 12, "")], **ga),
-                      figs.plane((0, 6), (0, 14), points=[(2, 6, ""), (3, 9, ""), (4, 12, "")], **ga),
-                      figs.plane((0, 6), (0, 14), curves=[figs.square(2, Fr(5, 2))], points=[(1, 2, ""), (2, 8, "")], **ga)],
+AD11 = figs.choices4([figs.plane((0, 4), (0, 14), points=[(1, 7, ""), (2, 8, ""), (3, 9, "")], **ga),
+                      figs.plane((0, 4), (0, 14), lines=[(2, 4, "")], points=[(0, 4, ""), (4, 12, "")], **ga),
+                      figs.plane((0, 4), (0, 14), points=[(2, 6, ""), (3, 9, ""), (4, 12, "")], **ga),
+                      figs.plane((0, 4), (0, 14), curves=[figs.square(2, Fr(5, 2))], points=[(1, 2, ""), (2, 8, "")], **ga)],
                      gap=1.6, inches=6.6, pt=9.5)
 
 
@@ -193,21 +193,21 @@ L = dict(
     notes=[
         dict(numeral="I", head="Linear: a constant rate of change", min=3,
              fig=NOTES1,
-             items2=["A linear relationship has a constant rate of change.",
-                     "Up 4 for every 2 units of x is 2 for every 1 unit."],
+             text=["A linear relationship has a constant rate of change.",
+                   "Up 4 for every 2 units of x is 2 for every 1 unit."],
              letters=False),
         dict(numeral="II", head="Also proportional? Look at x = 0.", min=4,
              fig=NOTES2,
-             items2=["It is also proportional when y is 0 when x is 0:", "its line passes through the origin."],
+             text=["It is also proportional when y is 0 when x is 0:", "its line passes through the origin."],
              letters=False),
         # figwords_ok: the words' 1 is "for every 1 unit", a rate, not a value of the tables; the tables' other values
         # (12, 13, 17, 6, 8) are read off the picture as a table is, and the words work only from the first pairs.
         dict(figwords_ok=True, numeral="III", head="When the table has no pair for x = 0", min=3,
              fig=NOTES3,
-             items2=["Go back to x = 0 at the rate of change.",
-                     "First:  2 for every 1 unit.   $9 - 2 - 2 = 5$:  not proportional.",
-                     "Second:  0.5 for every 1 unit.   $2 - 4(0.5) = 0$:  proportional.",
-                     "Check the second:  y ÷ x is 0.5 for every pair."],
+             text=["Go back to x = 0 at the rate of change.",
+                   "First:  2 for every 1 unit.   9 − 2 − 2 = 5:  not proportional.",
+                   "Second:  0.5 for every 1 unit.   2 − 4(0.5) = 0:  proportional.",
+                   "Check the second:  y ÷ x is 0.5 for every pair."],
              letters=False),
     ],
 
@@ -225,8 +225,8 @@ L = dict(
              your_turn=dict(min=3,
                             prompt=["The table shows a linear relationship."], fig=YT1, fig_a=YT1A,
                             ask="Is it also proportional?",
-                            steps=["Rate of change:   $6 \\div 5 = 1.2$",
-                                   "Back 5 units:   $6 - 5(1.2) = 0$"],
+                            steps=["Rate of change:   $(12 - 6) \\div (10 - 5) = 1.2$",
+                                   "Go back to x = 0:   $6 - 5(1.2) = 0$"],
                             answer="Proportional: y is 0 when x is 0."),
              yt_check=("many", rates([5, 10, 15], [6, 12, 18], "F(6,5)"), at0([5, 10, 15], [6, 12, 18], "0"),
                        ("eq", "6 - 5*F(6,5)", "0"), ratios([5, 10, 15], [6, 12, 18], "F(6,5)"))),
@@ -283,7 +283,7 @@ L = dict(
              steps=["At $x = 0$:   $6(0) - 1 = -1$", "−1 is not 0:  not proportional"],
              answer="No, because y is −1 when x is 0.",
              check=("many", sat("6*u - 1", "0", "-1"), not_prop_eq("6*u - 1")),
-             wrong="yes, 6 multiplies x — the number subtracted ignored [Notes II: look at x = 0]"),
+             wrong="yes, 6 is the coefficient of x — the number subtracted ignored [Notes II: look at x = 0]"),
         dict(kind="mc", text=["**Which graph shows a proportional relationship?"],
              qtext="Four graphs, each on its own axes with the same scales: A the points (1, 3), (2, 6) and (3, 9); B a curve through (0, 0), (1, 1) and (2, 4); C a line through (0, 3) and (3, 6); D the points (2, 5), (4, 6) and (6, 7). Which graph shows a proportional relationship?",
              fig=C5, fig_a=C5A,
@@ -312,10 +312,10 @@ L = dict(
              check=("many", ("eq", "F(9,4)*0 + F(7,2)", "F(7,2)"), not_prop_eq("F(9,4)*u + F(7,2)")),
              wrong="yes, \\$2.25 for every mile — the start charge ignored [Notes II: look at x = 0]; 4 seats used as the rate [an extra number, included on purpose]"),
         dict(text=["A linear relationship includes the pairs (2, 11) and (5, 23).", "**What is y when x is 0?"],
-             steps=["Rate of change:   $(23 - 11) \\div (5 - 2) = 4$", "Back 2 units from x = 2:   $11 - 2(4) = 3$"],
+             steps=["Rate of change:   $(23 - 11) \\div (5 - 2) = 4$", "Go back to x = 0:   $11 - 2(4) = 3$"],
              answer="3",
              check=("many", rates([2, 5], [11, 23], "4"), at0([2, 5], [11, 23], "3")),
-             wrong="11 — the y of the first pair read as the start [Notes III: go back to x = 0]; 7 — 11 − 4, back one unit only [Notes III: back 2 units from x = 2]"),
+             wrong="11 — the y of the first pair read as the start [Notes III: go back to x = 0 at the rate of change]; 7 — 11 − 4, back one unit only [Notes III: go back to x = 0 at the rate of change]"),
         # repeat_ok: rule D matches only Notes II's axis numbers (0 to 10) against the plan's table 1, 2, 3 / 6, 8, 10;
         # the relationship y = 2x + 4 appears nowhere above.
         dict(repeat_ok=True, kind="written", text=["Mia says the table with the x-values 1, 2, 3 and the y-values 6, 8, 10",
@@ -324,7 +324,7 @@ L = dict(
                                    "**Is Mia correct? Explain."],
              qtext="Mia says the table with the x-values 1, 2, 3 and the y-values 6, 8, 10 shows a proportional relationship, because y increases by the same amount every time. Is Mia correct? Explain.",
              steps=["Rate of change:   $8 - 6 = 2$   and   $10 - 8 = 2$:   linear",
-                    "Back 1 unit from x = 1:   $6 - 2 = 4$"],
+                    "Go back to x = 0:   $6 - 2 = 4$"],
              answer="No, it is linear, but y is 4 when x is 0.",
              check=("many", rates([1, 2, 3], [6, 8, 10], "2"), at0([1, 2, 3], [6, 8, 10], "4"), not_prop([1, 2, 3], [6, 8, 10])),
              wrong="yes, it goes up by 2 every time — a constant rate of change taken for proportional [Florida B1G-M, AR.3.1: every linear relationship taken as proportional]"),
@@ -341,12 +341,12 @@ L = dict(
              check=("many", rates([0, 4, 8, 12], [1, 4, 7, 10], "F(3,4)"), ne("1", "0")), space=0.5),
         dict(stem="The table shows a linear relationship. What is y when x is 0? Is the relationship also proportional?",
              fig=figs.table([([3, 6, 9], [11, 20, 29])], inches=3.0),
-             answer="2; no", why="The rate of change is 9 for every 3 units, 3 for every 1 unit. Back 3 units from x = 3: 11 − 3(3) = 2, so y is 2 when x is 0, and the relationship is not proportional.",
+             answer="2; no", why="The rate of change is 9 for every 3 units, 3 for every 1 unit. Go back to x = 0 at the rate of change: 11 − 3(3) = 2, so y is 2 when x is 0, and the relationship is not proportional.",
              check=("many", rates([3, 6, 9], [11, 20, 29], "3"), at0([3, 6, 9], [11, 20, 29], "2"), not_prop([3, 6, 9], [11, 20, 29])), space=0.6),
         # repeat_ok: rule D matches only the grid's axis numbers (0 to 8, as on Notes I's graph) and the answer's
         # 0 and 2; the points (2, 3), (4, 4), (6, 5) and the relationship y = 0.5x + 2 appear nowhere above.
         dict(repeat_ok=True, stem="The points of a linear relationship are graphed. Is the relationship also proportional? Explain.",
-             fig=PTS((0, 8), (0, 6), [(2, 3), (4, 4), (6, 5)]), fig_key=IS3K,
+             fig=PTS((0, 8), (0, 6), [(2, 3), (4, 4), (6, 5)], inches=3.0), fig_key=IS3K,
              answer="No, its line passes through (0, 2).", why="The points go up 1 for every 2 units of x. Back 2 units from (2, 3) is (0, 2): y is 2 when x is 0, so the line does not pass through the origin.",
              check=("many", rates([2, 4, 6], [3, 4, 5], "F(1,2)"), at0([2, 4, 6], [3, 4, 5], "2"), not_prop([2, 4, 6], [3, 4, 5])), space=0.5),
         dict(stem="Select all the equations that show a proportional relationship.",
@@ -374,10 +374,10 @@ L = dict(
              check=("many", rates([0, 4, 8, 12], [6, 9, 12, 15], "F(3,4)"), ne("6", "0")), space=0.4),
         dict(heading="For questions 3 and 4, the table shows a linear relationship. What is y when x is 0? Is the relationship also proportional?"),
         dict(stem="", fig=figs.table([([2, 4, 6], [7, 8, 9])], inches=3.0),
-             answer="6; no", why="The rate of change is 1 for every 2 units, 0.5 for every 1 unit. Back 2 units from x = 2: 7 − 2(0.5) = 6.",
+             answer="6; no", why="The rate of change is 1 for every 2 units, 0.5 for every 1 unit. Go back to x = 0 at the rate of change: 7 − 2(0.5) = 6.",
              check=("many", rates([2, 4, 6], [7, 8, 9], "F(1,2)"), at0([2, 4, 6], [7, 8, 9], "6"), not_prop([2, 4, 6], [7, 8, 9])), space=0.5),
         dict(stem="", fig=figs.table([([4, 8, 12], [12, 24, 36])], inches=3.0),
-             answer="0; yes", why="The rate of change is 12 for every 4 units, 3 for every 1 unit. Back 4 units from x = 4: 12 − 4(3) = 0.",
+             answer="0; yes", why="The rate of change is 12 for every 4 units, 3 for every 1 unit. Go back to x = 0 at the rate of change: 12 − 4(3) = 0.",
              check=("many", rates([4, 8, 12], [12, 24, 36], "3"), at0([4, 8, 12], [12, 24, 36], "0"), ratios([4, 8, 12], [12, 24, 36], "3")), space=0.5),
         dict(heading="Use the graph."),
         dict(stem="The points of a linear relationship are graphed. Is the relationship also proportional? Explain.",
@@ -396,12 +396,12 @@ L = dict(
              answer="c = 2h + 5; no", why="0 hours cost 2(0) + 5 = 5 dollars, not 0.",
              check=("many", ("eq", "2*0 + 5", "5"), not_prop_eq("2*u + 5")), space=0.5),
         dict(stem="Apples cost \\$1.20 for every pound. Write an equation for the cost c, in dollars, of w pounds. Is the cost proportional to the number of pounds?",
-             answer="c = 1.2w; yes", why="0 pounds cost 1.2(0) = 0 dollars, and c ÷ w is 1.2 for every pair.",
+             answer="c = 1.20w; yes", why="0 pounds cost 1.20(0) = 0 dollars, and c ÷ w is 1.20 for every pair.",
              check=("many", ("eq", "F(6,5)*0", "0"), prop_eq("F(6,5)*u")), space=0.5),
-        dict(heading="Find the missing number."),
-        dict(stem="A linear relationship includes the pairs (3, 10) and (7, 22). What is y when x is 0? Is the relationship also proportional?",
-             answer="1; no", why="The rate of change is (22 − 10) ÷ (7 − 3) = 3. Back 3 units from x = 3: 10 − 3(3) = 1.",
-             check=("many", rates([3, 7], [10, 22], "3"), at0([3, 7], [10, 22], "1")), space=0.6),
+        dict(heading="Use the two pairs."),
+        dict(stem="A linear relationship includes the pairs (3, 14) and (7, 26). What is y when x is 0? Is the relationship also proportional?",
+             answer="5; no", why="The rate of change is (26 − 14) ÷ (7 − 3) = 3. Go back to x = 0 at the rate of change: 14 − 3(3) = 5.",
+             check=("many", rates([3, 7], [14, 26], "3"), at0([3, 7], [14, 26], "5"), not_prop([3, 7], [14, 26])), space=0.6),
         dict(heading="Choose one."),
         dict(stem="The table shows a linear relationship with the x-values 10, 20, 30 and the y-values 5, 10, 15. Is it also proportional?",
              choices=["No, the table has no pair for x = 0.", "No, y is 5 when x is 0.", "Yes, y ÷ x is 0.5 for every pair.", "No, y is not a whole-number multiple of x."],
@@ -433,10 +433,10 @@ L = dict(
              check=("many", rates([0, 5, 10, 15], [3, 9, 15, 21], "F(6,5)"), ne("3", "0")), space=0.4),
         dict(heading="For questions 3 and 4, the table shows a linear relationship. What is y when x is 0? Is the relationship also proportional?"),
         dict(stem="", fig=figs.table([([2, 4, 6], [4, 5, 6])], inches=3.0),
-             answer="3; no", why="The rate of change is 1 for every 2 units, 0.5 for every 1 unit. Back 2 units from x = 2: 4 − 2(0.5) = 3.",
+             answer="3; no", why="The rate of change is 1 for every 2 units, 0.5 for every 1 unit. Go back to x = 0 at the rate of change: 4 − 2(0.5) = 3.",
              check=("many", rates([2, 4, 6], [4, 5, 6], "F(1,2)"), at0([2, 4, 6], [4, 5, 6], "3"), not_prop([2, 4, 6], [4, 5, 6])), space=0.5),
         dict(stem="", fig=figs.table([([6, 12, 18], [12, 24, 36])], inches=3.0),
-             answer="0; yes", why="The rate of change is 12 for every 6 units, 2 for every 1 unit. Back 6 units from x = 6: 12 − 6(2) = 0.",
+             answer="0; yes", why="The rate of change is 12 for every 6 units, 2 for every 1 unit. Go back to x = 0 at the rate of change: 12 − 6(2) = 0.",
              check=("many", rates([6, 12, 18], [12, 24, 36], "2"), at0([6, 12, 18], [12, 24, 36], "0"), ratios([6, 12, 18], [12, 24, 36], "2")), space=0.5),
         dict(heading="Use the graph."),
         dict(stem="The points of a linear relationship are graphed. Is the relationship also proportional? Explain.",
@@ -455,11 +455,11 @@ L = dict(
              answer="c = 3g + 4; no", why="0 games cost 3(0) + 4 = 4 dollars, not 0.",
              check=("many", ("eq", "3*0 + 4", "4"), not_prop_eq("3*u + 4")), space=0.5),
         dict(stem="Bananas cost \\$0.50 for every pound. Write an equation for the cost c, in dollars, of w pounds. Is the cost proportional to the number of pounds?",
-             answer="c = 0.5w; yes", why="0 pounds cost 0.5(0) = 0 dollars, and c ÷ w is 0.5 for every pair.",
+             answer="c = 0.50w; yes", why="0 pounds cost 0.50(0) = 0 dollars, and c ÷ w is 0.50 for every pair.",
              check=("many", ("eq", "F(1,2)*0", "0"), prop_eq("F(1,2)*u")), space=0.5),
-        dict(heading="Find the missing number."),
+        dict(heading="Use the two pairs."),
         dict(stem="A linear relationship includes the pairs (2, 9) and (6, 21). What is y when x is 0? Is the relationship also proportional?",
-             answer="3; no", why="The rate of change is (21 − 9) ÷ (6 − 2) = 3. Back 2 units from x = 2: 9 − 2(3) = 3.",
+             answer="3; no", why="The rate of change is (21 − 9) ÷ (6 − 2) = 3. Go back to x = 0 at the rate of change: 9 − 2(3) = 3.",
              check=("many", rates([2, 6], [9, 21], "3"), at0([2, 6], [9, 21], "3")), space=0.6),
         dict(heading="Choose one."),
         dict(stem="The table shows a linear relationship with the x-values 2, 4, 6, 8 and the y-values 1, 2, 3, 4. Is it also proportional?",
