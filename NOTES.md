@@ -1,5 +1,16 @@
 # State of the work — 15 November 2026 (read this first)
 
+## 27 November, afternoon — Unit 11 built an eighth time, on the kit of 27 Nov, to be published (session_01W9n2X1V97j7Nf5Y7z1DaCq)
+
+Croix, 27 Nov, 2:12 pm, of Unit 11: *"Rebuild, check, then publish"*. The unit is built on Windmill `5fbd8c1`, which
+adds three changes made while Unit 10 was built: a printed title too long for its line breaks where its two lines are
+most even and never after a joining word, and breaks at a semicolon when both lines fit (`877c70e`, `5fbd8c1`); and on
+the web deck an option keeps the space before its mathematics (`70c8ea2`). **What changed against the seventh build:**
+the handout titles of 11.01, 11.02, 11.03 and 11.08 ("Equations with Variables / on Both Sides" was "Equations with
+Variables on Both / Sides"), in their seven printed documents each and the three combined PDFs; nothing else in any
+PDF's text, and no page count. Gates 0, `unit_repeats.py` 0, `checks: 0 findings` from an emptied `out/u11`, the
+package reinstalled (128 files), the master sheet regenerated and checked, `tools/check.sh` all passed.
+
 ## 27 November — Unit 11 looked at as it will stand on the website; three kit fixes; still NOT merged, NOT published (session_01W9n2X1V97j7Nf5Y7z1DaCq)
 
 Croix, 27 Nov, 7:20 am: *"Can you move on to the next unit"* — Unit 10 (below, when it is built; branch `claude/a7-u10`).
