@@ -18,14 +18,19 @@ of that commit succeeded; the live unit page lists all seven lessons with their 
 the review, and the live 11.02 Independent Set reads "Equations with Variables / on Both Sides". Before publishing, the
 three decks whose options carry mathematics (11.01–11.03) were looked at on a scratch copy of the site: each option
 keeps its space ("one solution, x = 0"). Unit 10 is not on `main` or the site.
-## 27 November, afternoon — Unit 10 (Linear Relationships) built with the lean workflow; NOT merged, NOT published (session_01W9n2X1V97j7Nf5Y7z1DaCq)
+## 27 November, afternoon — Unit 10 (Linear Relationships) built with the lean workflow, merged and published (session_01W9n2X1V97j7Nf5Y7z1DaCq)
 
-Croix, 27 Nov, 7:20 am: *"Can you move on to the next unit"*. **Unit 10 is built and held** on the branch
-`claude/a7-u10` (it branches from `claude/u11-terms`, and Unit 11's publication is merged into it), on Windmill's kit `70c8ea2`.
-Eight decks, Fri 15 Jan – Wed 27 Jan 2027 (10.04 and 10.10 are 43-minute days); the test Thu 28 Jan. Merging and
-publishing wait for his word, as Unit 11's do. The plan is `a7/reference/A7 Unit 10 Linear Relationships - Lesson
-Outlines.md` (its "As built" says where the unit now differs from it); the review and every ruling are in `… - Review
-Rulings.md`.
+Croix, 27 Nov, 7:20 am: *"Can you move on to the next unit"*; 3:02 pm, after the review copies: *"Publish 10"*.
+**Published, 27 Nov:** `main` is the branch `claude/a7-u10` (`8157017`, fast-forwarded; Unit 11's publication is
+merged into it); the site is `945bdaf` — the unit page `mrshaffer.org/a7/unit-10/`, the eight days' slides at
+`/a7/slides/10.01/` … `/a7/slides/10.10/`, the calendar's eight days linked (Jan 15 – Jan 28), the package on the
+teacher page; `SITE CHECKS PASS` (280 pages, 3403 links); Cloudflare's build succeeded; the live unit page lists the
+eight lessons with their slides and sets, the Review, the Practice Test on paper and the Reference Sheet, and the live
+10.02 Independent Set reads "Slope from Graphs, / Tables and Two Points". Like Unit 7, it has no practice page.
+The unit was built on the branch `claude/a7-u10`, on Windmill's kit `70c8ea2`. Eight decks, Fri 15 Jan – Wed 27 Jan
+2027 (10.04 and 10.10 are 43-minute days); the test Thu 28 Jan. The plan is `a7/reference/A7 Unit 10 Linear
+Relationships - Lesson Outlines.md` (its "As built" says where the unit now differs from it); the review and every
+ruling are in `… - Review Rulings.md`.
 
 - **The workflow, second run** (Windmill `briefs/LEAN WORKFLOW.md`): scope from Math Nation (never in a repository),
   the plan with the test settled first, two plan readers (Barton, FAST), the figure module `u10/figs10.py`, eight lesson
