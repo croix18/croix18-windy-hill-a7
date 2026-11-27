@@ -1,9 +1,27 @@
 # State of the work — 15 November 2026 (read this first)
 
+## 27 November, afternoon — Unit 11 built an eighth time, on the kit of 27 Nov, and published (session_01W9n2X1V97j7Nf5Y7z1DaCq)
+
+Croix, 27 Nov, 2:12 pm, of Unit 11: *"Rebuild, check, then publish"*. The unit is built on Windmill `5fbd8c1`, which
+adds three changes made while Unit 10 was built: a printed title too long for its line breaks where its two lines are
+most even and never after a joining word, and breaks at a semicolon when both lines fit (`877c70e`, `5fbd8c1`); and on
+the web deck an option keeps the space before its mathematics (`70c8ea2`). **What changed against the seventh build:**
+the handout titles of 11.01, 11.02, 11.03 and 11.08 ("Equations with Variables / on Both Sides" was "Equations with
+Variables on Both / Sides"), in their seven printed documents each and the three combined PDFs; nothing else in any
+PDF's text, and no page count. Gates 0, `unit_repeats.py` 0, `checks: 0 findings` from an emptied `out/u11`, the
+package reinstalled (128 files), the master sheet regenerated and checked, `tools/check.sh` all passed.
+
+**Published, 27 Nov.** `main` is `claude/u11-terms` here (`1093bb3`) and `claude/a7-u10` in Windmill (`5fbd8c1`, which
+holds Unit 10's notes and tools but changes no course on its own). The site is `3ecc91f`: only Unit 11's files changed
+(the package, the student files, the seven web decks); `SITE CHECKS PASS` (263 pages, 3183 links); Cloudflare's build
+of that commit succeeded; the live unit page lists all seven lessons with their slides and sets, the practice test and
+the review, and the live 11.02 Independent Set reads "Equations with Variables / on Both Sides". Before publishing, the
+three decks whose options carry mathematics (11.01–11.03) were looked at on a scratch copy of the site: each option
+keeps its space ("one solution, x = 0"). Unit 10 is not on `main` or the site.
 ## 27 November, afternoon — Unit 10 (Linear Relationships) built with the lean workflow; NOT merged, NOT published (session_01W9n2X1V97j7Nf5Y7z1DaCq)
 
 Croix, 27 Nov, 7:20 am: *"Can you move on to the next unit"*. **Unit 10 is built and held** on the branch
-`claude/a7-u10` (it branches from `claude/u11-terms`, so Unit 11's rebuild is in it), on Windmill's kit `70c8ea2`.
+`claude/a7-u10` (it branches from `claude/u11-terms`, and Unit 11's publication is merged into it), on Windmill's kit `70c8ea2`.
 Eight decks, Fri 15 Jan – Wed 27 Jan 2027 (10.04 and 10.10 are 43-minute days); the test Thu 28 Jan. Merging and
 publishing wait for his word, as Unit 11's do. The plan is `a7/reference/A7 Unit 10 Linear Relationships - Lesson
 Outlines.md` (its "As built" says where the unit now differs from it); the review and every ruling are in `… - Review
@@ -29,7 +47,7 @@ Rulings.md`.
   is installed and the master sheet regenerated.
 - **His calls, still open:** the five test-blueprint questions sent on 27 Nov (two drawn graphs on the test; the
   temperature formula printed; no line of fit on this test; standard form in 10.06 for IXL 7MZ; naming days); IXL N7D
-  on 10.05. Unit 11: "publish 11" (he teaches it from Mon 30 Nov).
+  on 10.05. (Unit 11 was published the same afternoon, above.)
 
 ## 27 November — Unit 11 looked at as it will stand on the website; three kit fixes; still NOT merged, NOT published (session_01W9n2X1V97j7Nf5Y7z1DaCq)
 
