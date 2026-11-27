@@ -245,7 +245,7 @@ L = dict(
                           rows=[("(0, 60)", "the start is the y-intercept"),
                                 ("60 - 12 = 48,\\ \\ 48 - 12 = 36", "after 1 hour and 2 hours"),
                                 ("60 - 12(5) = 0", "home after 5 hours: (5, 0)"),
-                                ("\\text{slope } -12", "a negative slope goes down as you move right")],
+                                ("\\text{slope} = -12", "a negative slope goes down as you move right")],
                           fig=EX2W, answer="The line from (0, 60) to (5, 0)")],
              check=table_of("-12*u + 60", [0, 1, 2, 5], [60, 48, 36, 0]),
              your_turn=dict(min=2,

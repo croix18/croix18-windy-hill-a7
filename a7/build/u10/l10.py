@@ -253,7 +253,7 @@ L = dict(
              qtext="A studio charges a \\$25 sign-up fee and \\$10 for every class. Dev writes c = 25n + 10. What is Dev's mistake? Write the correct equation and tell what n stands for.",
              steps=["The rate is the slope, and the start is the y-intercept:  $c = 10n + 25$",
                     "n is the number of classes"],
-             answer="Dev exchanged the rate and the start. It is c = 10n + 25 for n classes.",
+             answer="Dev exchanged the rate and the start. It is c\u00a0=\u00a010n\u00a0+\u00a025 for n classes.",
              check=("many", rule("10*u + 25", "25", "10"), not_rule("25*u + 10", "25", "10")),
              wrong="'c = 10n + 25' with no reason — the equation without the mistake named [B1G-M, AR.3.3: swapping m and b]; 'n is the cost' — the letters of the story mixed up [B1G-M, AR.3.5: context confusion]"),
     ],

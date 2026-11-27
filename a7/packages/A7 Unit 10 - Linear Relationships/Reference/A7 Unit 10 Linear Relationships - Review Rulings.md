@@ -379,11 +379,19 @@ Sheet found six more things, none of them mathematics, all fixed:
 6. 10.07 Your Turn 2 — "A taxi charges a starting amount…" was given a blank line's room under it; it is "a starting
    fee".
 
+**The web decks**, published into a scratch copy of the site and read slide by slide (273 slides, no page error),
+showed three more, fixed the same day:
+7. 10.06 Example 2's worked line "slope −12" was set as a subtraction ("slope − 12") on both renderers; it is
+   "slope = −12".
+8. 10.10 board 9's answer broke "c = / 10n + 25" across its lines on the web deck; the equation is kept whole.
+9. The web deck dropped the space before the mathematics in an option ("through(0, ½)", 10.05 board 3, and every
+   option of that kind): a kit fault, fixed in Windmill `70c8ea2`.
+
 **Proved again:** gates at 0 (429 items re-derived), `unit_repeats.py u10` at 0 (8 lessons, 47 paper questions, the
 banks read), the unit rebuilt from a clean slate at `checks: 0 findings`, `figure_sheets.py` drew all 279 pictures at
 every size, and the 91 questions whose words, key or picture changed (49 on the decks and the papers, 42 in the
 banks) were solved blind by a fresh solver who saw no key: no key differs. The script marks 11 rows where the solver
-named the same line by more points and 15 where it gave the same answer in other words. Items 4 to 6 above changed
+named the same line by more points and 15 where it gave the same answer in other words. Items 4 to 8 above changed
 words only after that solve; the gates re-derive them. Every picture on the slides was measured: three stand below
 a floor and are kept, each named above (10.05 Notes III's left plane at 1.4 by 2.0 in, the floor itself; 10.06
 board 3; 10.07 Your Turn 1 at 2.2 by 1.9 in, the floor itself). Every printed picture is inside its ranges.
