@@ -66,6 +66,22 @@ def _tex(latex, slots):
     return latex
 
 
+def inline_pt(text, surface, size):
+    """The point size of an expression that stands inside a sentence, or None for a row with no sentence round its
+    mathematics (and for the surfaces whose expressions already follow their words). The PowerPoint's rule
+    (deckkit._mixed, 18 Oct 2026): 26/24 of the words, never larger than the surface's own size. Until 27 Nov 2026
+    this page set every expression of a slidemid row at 32 pt whatever size the row's words were, so the Vocabulary
+    slide's "3x and 5x" stood at twice the size of its 16-pt definition (seen on A7 Unit 11's web deck)."""
+    if surface not in ("slide", "slidemid", "slidebig"):
+        return None
+    parts = [p for p in re.split(r"(\$[^$]+\$)", text.replace("\\$", "\ue000")) if p]
+    if not any(p.startswith("$") for p in parts):
+        return None
+    if not any(re.search(r"[A-Za-z]{2,}", slotmark.strip(p)) for p in parts if not p.startswith("$")):
+        return None
+    return round(min(size * 26 / 24, mathimg.SIZES[surface]), 1)
+
+
 def rich(text, size=None, slots=False):
     """Plain spec text → HTML: $…$ becomes a KaTeX span (display style, so fractions stay
     full-size), unicode superscripts become <sup>, **…** becomes bold, and — with slots — a named
@@ -147,8 +163,9 @@ class HtmlDeck:
             self._add(f'<p class="t {align}" style="{st}">{rich(text, slots=slots)}</p>')
 
     def _mixed(self, text, x, y, surface="slidemid", size=26, color=INK, bold=False, align="left", width=None, slots=False):
-        st = f"font-size:{size}pt;color:#{color};" + ("font-weight:700;" if bold else "")
-        self._add(f'<p class="t {align} s-{surface}{" slots" if slots and AUTO_SLOTS else ""}" style="{st}">{rich(text, slots=slots)}</p>')
+        k = inline_pt(text, surface, size)
+        st = f"font-size:{size}pt;color:#{color};" + ("font-weight:700;" if bold else "") + (f"--k:{k:g}pt;" if k else "")
+        self._add(f'<p class="t {align} s-{surface}{" inl" if k else ""}{" slots" if slots and AUTO_SLOTS else ""}" style="{st}">{rich(text, slots=slots)}</p>')
         return 0.0, 0.5
 
     def measure(self, text, surface="slidemid", size=26, bold=False):
@@ -242,13 +259,26 @@ class HtmlDeck:
     def answer_math(self, latex, y=5.1):
         self._add(f'<p class="answer bottom"><span class="lab">Answer:</span> <span class="k big" data-tex="{esc(_tex(latex, False))}"></span></p>')
 
+    def _warmup_p(self, text, answer=None):
+        """One warm-up question as a paragraph in the page's flow: its number in a box of its own and the question
+        hung beside it, so a long question's second line starts under its first word (the PowerPoint sets it on two
+        rows the same way, deckkit.stem_rows) and not under the number. With `answer`, the red answer follows it, and
+        goes to the next line whole when the question's line has no room for it (.wa is an inline block)."""
+        m = re.match(r"(\d+\.)\s+(.*)", text, re.S)
+        num, stem = (m.group(1), m.group(2)) if m else ("", text)
+        k = inline_pt(text, "slide", 23)
+        cls = "t left s-slide" + (" wq" if num else "") + (" inl" if k else "")
+        st = "font-size:23pt;" + (f"--k:{k:g}pt;" if k else "")
+        n = f'<span class="wn">{esc(num)}</span>' if num else ""
+        a = f'<span class="wa">{rich(answer)}</span>' if answer is not None else ""
+        self._add(f'<p class="{cls}" style="{st}">{n}{rich(stem)}{a}</p>')
+
     def warmup_question(self, text, x=None):
-        # a paragraph in the page's flow: a long question wraps by itself (the PowerPoint sets it on two rows)
-        self.math_row(text, surface="slide", gap=0.22, size=23, align="left", x=x)
+        self._warmup_p(text)
 
     def warmup_answers(self, pairs, x=None):
         for stem, answer in pairs:
-            self._add(f'<p class="t left" style="font-size:23pt">{rich(stem)}<span class="wa">{rich(answer)}</span></p>')
+            self._warmup_p(stem, answer)
 
     def worked_row(self, latex, gloss=None, slots=False):
         # the expression alone: the grey reason beside it is not on a slide (ruling 37)
@@ -381,6 +411,9 @@ class HtmlDeck:
         """Ruling 21 with the six questions on the slide (in the handout course too: the same six
         are the printed page). `figs` — [(question number, figure)] — in a column on the right."""
         self.section(title, "Six questions. On your own, in writing.", minutes, note, kind)
+        if figs and any(f.get("pt", 18) < 11.5 for _, f in figs):
+            figs = None       # lettered for the printed page (A7 11.07's blank grids at 9.5 pt): too small to read on a slide,
+                              # and the PowerPoint leaves them off (deckkit._set_with_figures) — the six get the slide's width
         if figs:
             size = 19 if sum(len(q) for q in questions) < 400 else 17
             ol = f'<ol class="numbered" style="font-size:{size}pt">' + "".join(f"<li>{rich(r)}</li>" for r in questions) + "</ol>"
@@ -517,6 +550,9 @@ table.tbl{border-collapse:collapse;margin:4px auto}table.tbl th,table.tbl td{bor
 .k:not(.d){font-size:1.05em}
 p.s-slidemid .k:not(.d){font-size:32pt}p.s-slidebig .k:not(.d){font-size:40pt}p.s-slide .k:not(.d){font-size:26pt}
 p.s-slidestep .k:not(.d),p.s-slidestepmid .k:not(.d){font-size:1em}
+p.t.inl .k:not(.d){font-size:var(--k)}
+.k:not(.d){white-space:nowrap}
+p.t,ol.numbered li,ol.items li,ol.choices li,.cover .target{text-wrap:pretty}
 .body{gap:14px}
 .katex{font-size:1em}
 MATHFACE
@@ -529,7 +565,8 @@ ol.choices.mathy{row-gap:14px}ol.choices.mathy li{display:flex;align-items:cente
 .bottom{margin-top:auto}
 .answer{text-align:center;font-size:32pt;font-weight:700;color:#RED;margin:10px 0 0}.answer .lab{margin-right:.4em}.answer .k{font-size:40pt}
 .ask{text-align:center}.ask p{margin:0;font-size:26pt;font-weight:700}
-.wa{color:#RED;font-weight:700;margin-left:.9em}
+.wa{color:#RED;font-weight:700;margin-left:.9em;display:inline-block;text-indent:0}
+p.wq{padding-left:calc(40px + 2.3em);text-indent:-2.3em}p.wq .wn{display:inline-block;width:2.3em;text-indent:0}
 .cover{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding-bottom:60px}
 .cover .eyebrow{font-size:15pt;color:#GRAY;letter-spacing:.04em;margin:0 0 10px}.cover h2{font-size:34pt;margin:0 0 16px}
 .cover .rule{width:610px;border-top:2px solid #INK;border-bottom:1px solid #INK;height:6px;margin-bottom:16px}

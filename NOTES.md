@@ -1,5 +1,27 @@
 # State of the work — 15 November 2026 (read this first)
 
+## 27 November — Unit 11 looked at as it will stand on the website; three kit fixes; still NOT merged, NOT published (session_01W9n2X1V97j7Nf5Y7z1DaCq)
+
+Croix, 27 Nov, 7:20 am: *"Can you move on to the next unit"* — Unit 10 (below, when it is built; branch `claude/a7-u10`).
+Unit 11 still waits for his word; he was told so that morning. So that publishing takes minutes when he gives it, the
+rebuilt unit was published into a scratch copy of the site and its seven web decks were read slide by slide (246
+slides, the second renderer). Three faults, all the kit's, all fixed in Windmill (`b211635`, `d70dceb`, `72a02f6`):
+
+- **The web deck's Vocabulary slide set its mathematics at twice the size of its words** ("3x and 5x" at 32 pt in a 16-pt
+  definition). The PowerPoint has scaled an expression inside a sentence to its words since 18 Oct; the page had not.
+  `htmlkit.inline_pt` is the same rule. This is on the published web decks of Units 3–7 too until each is republished.
+- **A long warm-up question's second line began under its number on the web deck**, and a long answer broke inside itself
+  ("Infinitely many / solutions"). The number stands in a box of its own now; an answer moves down whole.
+- **11.07's Independent Set slide ended question 2 on a lone "0."** in the PowerPoint — the last piece was a picture, so
+  the scan for short last lines could not see it — and the web deck broke "y = −5 + / 2x" inside the expression and showed
+  the printed page's blank grids as thumbnails. `deckkit._flow_lines` does not leave a last line under ten characters;
+  on the page an expression is one piece and page-lettered figures stay off the slide, as in the PowerPoint.
+
+**Proof.** Kit tests 310 of 310 and 309 of 309, tools 53 of 53. Unit 11 built a seventh time from an emptied `out/u11`:
+`checks: 0 findings`; of 66 PDFs, two differ in text from the sixth build (11.07's Slides and the unit's All Slides) and
+none in page count; `changed_slides.py`: one slide changed in the unit, 11.07's Independent Set. The package is
+reinstalled (128 files). The scratch site builds and ends `SITE CHECKS PASS`; no page error in any of the seven decks.
+
 ## 22 November, evening — Unit 11 rebuilt on today's kit, with "isolate" and "solve for" (branch `claude/u11-terms`; NOT merged, NOT published) (session_01W9n2X1V97j7Nf5Y7z1DaCq)
 
 Croix, 22 Nov, 3:50 pm: *"Merge and publish. Then take a wack at 11 with these changes."* The first half is the section
