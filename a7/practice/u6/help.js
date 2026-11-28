@@ -1,7 +1,7 @@
 /* A7 Unit 6 practice: the help's words and pictures, to the help standard (Windmill practice/kit/HELP_STANDARD.md, 14 Nov 2026).
    coach.js calls this at its end — help(api, walkApi) — so the unit's checks read exactly what a student reads. For each family:
-     notice  Hint 1: the kind of problem and its one idea, in the decks' words; each required term spelled out in the sentence the
-             first time ([[id]]), tappable after that (Croix, 14 Nov 2026: "Spell it out first time then Show on tap after")
+     notice  Hint 1: the kind of problem and its one idea, in the decks' words; every term tappable ([[id]]) and never spelled
+             out (Croix, 14 Nov 2026: "Don't spell it out first"), its card behind the tap (27 Nov 2026: the glossary below)
      first   Hint 2: the first move and why (else the worked solution's first line)
      sol     Hint 3: one move a line, each with its Why: (the values are the coach's own)
      walk    Step by step with me: the coach's steps, reworded; a "why" question only on the unit's key idea — the hypotenuse is
@@ -18,23 +18,7 @@ const O = (label, ok, why) => ({ label, ok: !!ok, why: why || '' });
 const c1 = h => X.c(1, h), c2 = h => X.c(2, h), c3 = h => X.c(3, h);
 const kOut = k => E.kOut ? E.kOut(k) : S(k);
 
-X.gloss({
-  triIneq: { word: 'Triangle Inequality Theorem', def: 'any two sides of a triangle add to more than the third side' },
-  leg: { word: 'legs', def: 'the two sides that form the right angle' },
-  leg1: { word: 'leg', def: 'one of the two sides that form the right angle' },
-  hyp: { word: 'hypotenuse', def: 'the side across from the right angle; the longest side' },
-  pyth: { word: 'Pythagorean Theorem', def: 'in a right triangle, a² + b² = c², where c is the hypotenuse' },
-  converse: { word: 'converse', def: 'the theorem turned around: if a² + b² = c², the triangle is a right triangle' },
-  sqrt: { word: 'square root', def: 'the number that, times itself, makes the given number' },
-  tenth: { word: 'nearest tenth', def: 'one digit after the decimal point' },
-  horiz: { word: 'horizontal distance', def: 'the distance left to right, from the x-coordinates' },
-  vert: { word: 'vertical distance', def: 'the distance up and down, from the y-coordinates' },
-  perimeter: { word: 'perimeter', def: 'the distance all the way around a shape' },
-  similar: { word: 'similar', def: 'the same shape: every side is multiplied by one number' },
-  corr: { word: 'corresponding sides', def: 'sides in matching positions in the two triangles' },
-  corr1: { word: 'corresponding side', def: 'the side in the matching position in the other triangle' },
-  scale: { word: 'scale factor', def: 'the number every side is multiplied by, k' }
-});
+/* the glossary: its words and their cards are below the pictures they draw ("the glossary and its cards") */
 
 /* ------------------------------------------------------------------ pictures */
 const bars = (sets, label) => X.tape({ label, rows: [].concat(...sets.map(([lab, s]) => { const t = sorted(s), sum = t[0] + t[1];
@@ -53,6 +37,102 @@ const simPic = p => { const x = p.prm, k = E.qk(x.k), val = { p: x.p, q: x.q, r:
 const lightPic = p => { const x = p.prm, sh = x.mode === 'shadow', h1 = +x.h1, s1 = +(sh ? x.s1 : x.d1), s2 = +(sh ? x.s2 : x.d2), k = s2 / s1, w = sh ? 'shadow' : 'distance';
   return X.fig(X.simPair({ A: { s: [h1, Math.hypot(h1, s1), s1], lab: [S(E.qv(x.h1)) + ' ft', '', S(E.qv(sh ? x.s1 : x.d1)) + ' ft'] }, B: { s: [h1 * k, Math.hypot(h1 * k, s2), s2], lab: ['?', '', S(E.qv(sh ? x.s2 : x.d2)) + ' ft'] }, col: { p: 2, r: 1 },
     label: 'Two similar right triangles: the heights drawn dashed, the ' + w + 's drawn solid.' }), c1('The ' + w + 's') + ' match each other, and ' + c2('the heights') + ' match each other.'); };
+
+/* ------------------------------------------------------------------ the glossary and its cards (27 Nov 2026)
+   A term in the help opens its card (kit explain.js X.card; Croix, 27 Nov 2026: "I would like a card to pop up that's the
+   definition and everything else in depth about the word"): def is the lead line (the help's own since 14 Nov), more says what
+   it means, sym the rule in symbols, ex one worked example, watch the common mistake, see the related words. Every card says
+   what the decks say (a7/build/u6/l01–l07.py, their vocabulary and notes), with numbers of its own: no lesson's triangle
+   (3-4-5, 6-8-10, 8-15-17, 7-24-25 …), none the page can ask (its whole hypotenuses are 5-12-13 and 9-12-15, its whole legs
+   have a square up to 225), and none of a question on the page. cards_check.js proves every example's arithmetic and scans
+   the page's sets for its numbers. Multiplication is a dot or parentheses here, never ×. */
+const kx = s => String(s).replace(/sqrt\(([^()]+)\)|\^(\d)|([a-z])|<|>|-|\*/g, (m0, r, e, v) => r !== undefined ? E.sqrtH(kx(r)) : e ? E.sup(e) : v ? '<i>' + v + '</i>' :
+  m0 === '<' ? '&lt;' : m0 === '>' ? '&gt;' : m0 === '-' ? '−' : '·');
+const km = s => E.M(kx(s));                                             /* a piece of math, as the help writes it: 20² + 21² */
+const kl = s => '<span class="xcl">' + km(s) + '</span>';                /* a line of math on its own */
+const kp = s => '<p>' + s + '</p>', ki = v => '<i>' + v + '</i>';
+const kw = (a, b) => b ? '<ul><li>' + a + '</li><li>' + b + '</li></ul>' : a;   /* a Watch out: one item, or two as a list (HELP_STANDARD §3, 27 Nov 2026) */
+X.gloss({
+  triIneq: { word: 'Triangle Inequality Theorem', def: 'any two sides of a triangle add to more than the third side',
+    more: 'The two shorter sides have to reach across the longest side and meet above it. So any two sides must add to more than the third side. Add the two shorter sides: if that is more than the longest side, the sides make a triangle.',
+    ex: kp('Sides 3, 5 and 7 make a triangle: ' + km('3 + 5 = 8') + ', and ' + km('8 > 7') + '. Sides 2, 5 and 7 do not: ' + km('2 + 5 = 7') + ', so they lie flat.') +
+      X.fig(bars([['A', [3, 5, 7]], ['B', [2, 5, 7]]], 'Two sets of sides, the two shorter end to end over the longest. A: 3 and 5 reach past 7. B: 2 and 5 reach exactly 7.'),
+        'A: ' + c1('3') + ' and ' + c2('5') + ' reach past ' + c3('7') + ', so they can meet above it. B: 2 and 5 only reach 7, so they lie flat.'),
+    watch: 'Check that the two shorter sides add to more than the longest side. Sides 2, 5 and 7 make no triangle, because ' + km('2 + 5 = 7') + ', not more.',
+    see: ['converse', 'perimeter'] },
+  leg: { word: 'legs', def: 'the two sides that form the right angle',
+    more: 'A right triangle has one square corner, the right angle. The two sides that meet there are the legs, ' + ki('a') + ' and ' + ki('b') + ', in either order. The third side, across from the right angle, is the hypotenuse.',
+    ex: X.fig(X.rightTri({ a: { t: 'leg 28', c: 2 }, b: { t: 'leg 21', c: 2 }, c: { t: '35', c: 1 }, la: 28, lb: 21, label: 'A right triangle with legs 21 and 28 and hypotenuse 35; the right angle is marked.' }), triCap) +
+      kp('The legs, 21 and 28, form the right angle. Check: ' + km('21^2 + 28^2 = 441 + 784 = 1,225') + ', and ' + km('35^2 = 1,225') + '.'),
+    watch: 'Subtract the squares. For hypotenuse 35 and leg 28, the other leg is 21, not about 44.8, which comes from adding the squares.',
+    see: ['hyp', 'pyth'] },
+  leg1: { word: 'leg', def: 'one of the two sides that form the right angle', card: 'leg' },
+  hyp: { word: 'hypotenuse', def: 'the side across from the right angle; the longest side', say: 'hy-POT-n-oos',
+    more: 'The hypotenuse is the side across from the right angle, and it is always the longest side. In ' + km('a^2 + b^2 = c^2') + ', it is ' + ki('c') + '. Find the square corner first: the side across from it is the hypotenuse, however the triangle is turned.',
+    ex: X.fig(X.rightTri({ a: { t: '6', c: 2 }, b: { t: '2.5', c: 2 }, c: { t: 'c', c: 1 }, la: 6, lb: 2.5, label: 'A right triangle with legs 2.5 and 6; the hypotenuse c is across from the right angle.' }), triCap) +
+      kl('c^2 = 2.5^2 + 6^2 = 6.25 + 36 = 42.25') + kl('c = sqrt(42.25) = 6.5') + kp('The legs are 2.5 and 6. The hypotenuse, 6.5, is longer than either leg.'),
+    watch: 'Pick the side across from the right angle. In the triangle above, the hypotenuse is 6.5, not 6, the bottom side.',
+    see: ['leg', 'pyth', 'converse'] },
+  pyth: { word: 'Pythagorean Theorem', def: 'in a right triangle, a² + b² = c², where c is the hypotenuse', say: 'puh-thag-uh-REE-uhn',
+    more: 'In every right triangle, the squares of the two legs add up to the square of the hypotenuse. To find the hypotenuse: square, add, then take the square root. To find a leg: square both, subtract, then take the square root.',
+    sym: km('a^2 + b^2 = c^2'),
+    ex: X.fig(X.rightTri({ a: { t: 'a', c: 2 }, b: { t: '5', c: 2 }, c: { t: '16', c: 1 }, la: Math.sqrt(231), lb: 5, label: 'A right triangle with one leg 5, the other leg a, and hypotenuse 16.' }), 'The hypotenuse is ' + c1('16') + ', so the leg ' + c2(ki('a')) + ' comes from subtracting.') +
+      kl('a^2 + 5^2 = 16^2') + kl('a^2 = 256 - 25 = 231') + kl('a = sqrt(231) ≈ 15.2') + kp('Check: 15.2 is shorter than 16, as a leg must be.'),
+    watch: 'Use ' + ki('c') + ' for the hypotenuse only. With hypotenuse 16 and leg 5, ' + km('a^2 = 16^2 - 5^2') + ', not ' + km('16^2 + 5^2') + '.',
+    see: ['hyp', 'leg', 'sqrt', 'converse'] },
+  converse: { word: 'converse', def: 'the theorem turned around: if a² + b² = c², the triangle is a right triangle', say: 'KON-vurs',
+    more: 'The converse turns the Pythagorean Theorem around. Square the two shorter sides and add them. If the sum equals the square of the longest side, the triangle is a right triangle; if not, it is not.',
+    ex: kp('Sides 30, 50 and 40: ' + km('30^2 + 40^2 = 900 + 1,600 = 2,500') + ', and ' + km('50^2 = 2,500') + '. The squares match, so it is a right triangle.') +
+      kp('Sides 30, 40 and 51: the same ' + km('30^2 + 40^2 = 2,500') + ', but ' + km('51^2 = 2,601') + '. It is not a right triangle.'),
+    watch: 'Use the longest side as ' + ki('c') + '. For sides 30, 50 and 40, test ' + km('30^2 + 40^2 = 50^2') + ', not ' + km('30^2 + 50^2 = 40^2') + '.',
+    see: ['pyth', 'hyp', 'triIneq'] },
+  sqrt: { word: 'square root', def: 'the number that, times itself, makes the given number',
+    more: 'The square root undoes squaring: ' + km('sqrt(49) = 7') + ', because ' + km('7 * 7 = 49') + '. When a number is not a perfect square, its root is between two whole numbers. ' + km('sqrt(30)') + ' is between 5 and 6, because ' + km('25 < 30 < 36') + '.',
+    ex: kl('sqrt(42) ≈ 6.5') + kp('42 is not a perfect square, so its root is between 6 and 7: ' + km('36 < 42 < 49') + '. To the nearest tenth, it is 6.5.'),
+    watch: 'Ask what number times itself makes the number under the root. ' + km('sqrt(36) = 6') + ', not 18, because ' + km('6 * 6 = 36') + '.',
+    see: ['pyth', 'tenth'] },
+  tenth: { word: 'nearest tenth', def: 'one digit after the decimal point',
+    more: 'Keep one digit after the decimal point. Look at the next digit: 5 or more rounds up, and 4 or less leaves the tenth as it is. Round once, at the end, after the square root.',
+    ex: kp(km('sqrt(22) = 4.690…') + ', which rounds to 4.7.') + kp(km('sqrt(14) = 3.741…') + ', which rounds to 3.7.'),
+    watch: kw('Round up when the next digit is 5 or more. ' + km('sqrt(22) = 4.690…') + ' rounds to 4.7, not 4.6.',
+      'Round once, at the end, not before you add. ' + km('sqrt(5) + sqrt(5) ≈ 4.5') + ', not 4.4 from ' + km('2.2 + 2.2') + '.'),
+    see: ['sqrt'] },
+  horiz: { word: 'horizontal distance', def: 'the distance left to right, from the x-coordinates',
+    more: 'Two points with the same ' + ki('y') + ' lie on one horizontal line. The distance between them is the difference of their x-coordinates. When the points are on opposite sides of 0, the two pieces add.',
+    ex: kp('(−3, 8) and (5, 8): ' + km('5 - (-3) = 8') + ' units. That is 3 to the y-axis and 5 past it: ' + km('3 + 5 = 8') + '.'),
+    watch: 'Subtract the ' + ki('x') + '-coordinates with their signs. From −3 to 5 is 8 units, not 2, because ' + km('5 - (-3) = 8') + '.',
+    see: ['vert', 'hyp', 'leg'] },
+  vert: { word: 'vertical distance', def: 'the distance up and down, from the y-coordinates',
+    more: 'Two points with the same ' + ki('x') + ' lie on one vertical line. The distance between them is the difference of their y-coordinates. For a slanted segment, the horizontal and vertical distances are the legs of a right triangle.',
+    ex: kp('(8, −6) and (8, 1): ' + km('1 - (-6) = 7') + ' units. That is 6 down to the x-axis and 1 up past it: ' + km('6 + 1 = 7') + '.'),
+    watch: 'Subtract the coordinates that change. For (8, −6) and (8, 1), the distance is 7, not 0 from ' + km('8 - 8') + ', because ' + km('1 - (-6) = 7') + '.',
+    see: ['horiz', 'leg', 'hyp'] },
+  perimeter: { word: 'perimeter', def: 'the distance all the way around a shape',
+    more: 'Perimeter is the distance around a figure: add the lengths of all its sides. On a grid, a side along a grid line can be counted. A slanted side is found with the Pythagorean Theorem.',
+    ex: kp('A triangle has corners (0, 0), (10, 0) and (10, 12). Two sides are 10 and 12, and the slanted side is ' + km('sqrt(10^2 + 12^2) = sqrt(244)') + '.') + kl('P = 10 + 12 + sqrt(244) ≈ 37.6') + kp('The perimeter is about 37.6 units: round once, at the end.'),
+    watch: 'Find a slanted side with the Pythagorean Theorem. From (0, 0) to (10, 12) is about 15.6, not 22 along the grid lines.',
+    see: ['horiz', 'vert', 'hyp'] },
+  similar: { word: 'similar', def: 'the same shape: every side is multiplied by one number',
+    more: 'Similar triangles have the same shape, but not always the same size. Their matching angles are equal. Every side of one is its matching side in the other times the same number, the scale factor.',
+    ex: X.fig(X.simPair({ A: { s: [1.5, 2.5, 3], lab: ['1.5', '2.5', '3'] }, B: { s: [6, 10, 12], lab: ['6', '10', '12'] }, col: { p: 1, q: 2, r: 3 }, label: 'Two similar triangles, one above the other: sides 1.5, 2.5 and 3, and sides 6, 10 and 12. Each pair of matching sides is drawn in the same color and line style.' }),
+      'Each pair of matching sides is drawn in one color and line style.') +
+      kp('Sides 1.5, 2.5, 3 and 6, 10, 12: ' + km('6 ÷ 1.5 = 4') + ', ' + km('10 ÷ 2.5 = 4') + ' and ' + km('12 ÷ 3 = 4') + '. Every ratio is 4, so the triangles are similar.'),
+    watch: 'Check all three pairs of sides, not just one. Sides 2, 3, 4 and 4, 6, 9 are not similar, because ' + km('9 ÷ 4 = 2.25') + ', not 2.',
+    see: ['corr', 'scale'] },
+  corr: { word: 'corresponding sides', def: 'sides in matching positions in the two triangles', say: 'kor-uh-SPON-ding',
+    more: 'Corresponding sides are the sides that match in two similar triangles. Match them by size: shortest with shortest, middle with middle, longest with longest. Do not match them by where they sit on the page.',
+    ex: X.fig(X.simPair({ A: { s: [1.5, 2, 3], lab: ['1.5', '2', '3'] }, B: { s: [4.5, 6, 9], lab: ['4.5', '6', '9'] }, col: { p: 1, q: 2, r: 3 }, turn: '180', label: 'Two similar triangles, the second turned upside down: sides 1.5, 2 and 3, and sides 4.5, 6 and 9. Corresponding sides are drawn in the same color and line style.' }),
+      'The second triangle is turned over. Its sides still match by size, in matching colors.') +
+      kp('Shortest with shortest, 1.5 and 4.5; middle with middle, 2 and 6; longest with longest, 3 and 9. Each pair has the same ratio: ' + km('4.5 ÷ 1.5 = 6 ÷ 2 = 9 ÷ 3 = 3') + '.'),
+    watch: 'Match shortest with shortest and longest with longest, not by where sides sit on the page. 1.5 matches 4.5, not 6, also on the left.',
+    see: ['similar', 'scale'] },
+  corr1: { word: 'corresponding side', def: 'the side in the matching position in the other triangle', card: 'corr' },
+  scale: { word: 'scale factor', def: 'the number every side is multiplied by, k',
+    more: 'The scale factor ' + ki('k') + ' is copy ÷ original, for one pair of corresponding sides. Every side of the copy is ' + ki('k') + ' times its matching side. Find ' + ki('k') + ' first, then multiply to find a missing side.',
+    ex: kp('An original triangle has sides 2 and 5. In the copy, the side that matches 2 is 7.') + kl('k = 7 ÷ 2 = 3.5') + kl('x = 5(3.5) = 17.5') + kp('The side that matches 5 is 17.5.'),
+    watch: 'Divide the copy’s side by the original’s side. ' + km('k = 7 ÷ 2 = 3.5') + ', not ' + km('2 ÷ 7') + ', which would shrink the copy.',
+    see: ['similar', 'corr'] }
+});
 
 /* ------------------------------------------------------------------ rendering */
 const why = s => s ? ' <span class="xwhy"><b>Why:</b> ' + s + '</span>' : '';

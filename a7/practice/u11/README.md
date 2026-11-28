@@ -105,7 +105,8 @@ of the 14 questions, Hint 1 (two or three sentences and a picture), Hint 2 (the 
 line: Do, Why, the resulting line — the coach's own mathematics — ending with a check), the walkthrough (one question a step,
 options shuffled, each wrong option's reason naming its misconception) and the named mistakes in the pattern "That is what you
 get if you … . <the idea it broke and the fix>".
-- **The lessons' words, every one tappable** (definition on a tap only, Croix 14 Nov): like terms, coefficient, constant,
+- **The lessons' words, every one tappable** (definition on a tap only, Croix 14 Nov; since 27 Nov 2026 the tap opens the
+  word's card, below): like terms, coefficient, constant,
   Distributive Property, variable term, the Addition / Subtraction / Division Property of Equality, no solution, infinitely
   many solutions, solution of a system, ordered pair, intersect, point of intersection, parallel lines, the same line, table
   of values, coefficient of x, approximate solution, nearest tenth. No "slope", no "y-intercept"; no substitution, no
@@ -127,6 +128,14 @@ get if you … . <the idea it broke and the fix>".
 - `python3 ../kit/check/run.py .` now runs the kit's `check/help.js` (300 sets: terms, Why lines, pictures, Hint 1's length)
   and `check/help_page.js` (every help picture at 390 px, light and dark: width, label size, contrast).
 - `node show_set.js 4821` still prints a set with all its help.
+
+## 27 Nov 2026 — a term opens its card (`help.js`'s glossary)
+A tapped term opens its card (the kit's `explain.js`, Croix: "a card to pop up that's the definition and everything else in
+depth about the word"): `help.js`'s glossary gives all 24 terms (23 cards; like term opens like terms) a definition, What it means, an example in the lessons' words
+with numbers of its own (a picture on 11), a Watch out to the lead's rule (HELP_STANDARD §3) and related words; `cards_check.js`
+proves every card's arithmetic and keeps its examples off every set of the page. The distribute picture's arrows (the card's
+example and every Hint that draws them, `fig.js` `arrowsPic`) leave the number in front side by side, the arrow to the farther
+term on the left and higher, so neither crosses the other (the lead, 27 Nov 2026); `cards_check.js` proves it.
 
 ## Q14(b), widened (15 Nov 2026; ruling 49)
 
@@ -208,4 +217,5 @@ and Q10 (2,013) — their lines are drawn from small multipliers to stay readabl
 | `verify.py` | The sympy oracle over the rendered HTML of 1,500 sets: every equation, box, story, pair, system, graph line, table and estimate worked again; every worked line and Hint step; every paper choice; ruling 43 from the specs; the test's sections and points. |
 | `plant_check.py` | 63 planted errors (15 Nov, the two boxes: read the other way round, one box right accepted, one estimate box within 0.1 enough, the x box taking the y's letter, the weeks box taking dollars, an empty box a try, Q14(b)'s ≈ shown as =, Q14(a)'s boxes in the other order, Q13(b) without boxes, one key string for two boxes — and "the pair reader swaps x and y" retired, as no box takes a pair; since 15 Nov: the help's Distribute line wrong, a Hint step's ×, its walkthrough dividing first, Hint 2 not distributing, a Why's arithmetic wrong, "slopes" in Hint 1, Q14(b) narrowed), and before it (Q9's old arguable option, Q9 keyed to the other equation, a "neither" pair on a line, the sign help's value wrong, the old question words, Q14(b) uncaptioned, wrong keys in every question, a printed sign, a fraction's reciprocal, a decimal off the list, Q8's key and clean rule weakened together, a tolerance of 0.2, a crossing on a half line, a line drawn a unit high, a dashed line drawn solid, the axis numbered a step off, a grid too small, the worked lines distributing to one term, a Hint stating its answer, ×, "slopes", a mistake marked right, the paper offering the key as a wrong answer …): every one must be caught. |
 | `mc_check.js` | 3,000 sets: three wrong answers for every typed part, in the key's shape, never the key, never inside an estimate's tolerance, each a named mistake or (counted) a value one away. |
+| `cards_check.js` | 20,000 sets: every card read back from its printed text with its own polynomial reader: every statement of numbers true (or false where the words say so, after "not" too), every equation, identity and system claim, every Watch out's wrong result really wrong, no ×, "slope" or "intercept"; no card's example (or the equation a Watch out solves) printed by a question on the page; in the card and every Hint over 2,000 sets, no two distribute arrows starting together or crossing. |
 | `show_set.js` | not a check: `node show_set.js 4821` prints one set with all its help, for reading it as a student does. |

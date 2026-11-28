@@ -33,32 +33,7 @@ const ch = (label, ok, why) => ({ label, ok: !!ok, why: why || '' });
 const choice = (ask, opts, extra) => Object.assign({ type: 'choice', ask, opts, then: null }, extra || {});
 let C0 = null;
 
-X.gloss({
-  likeTerms: { word: 'like terms', def: 'terms with the same variable part, like 3x and 5x' },
-  likeTerm: { word: 'like term', def: 'a term with the same variable part, like 3x and 5x' },
-  coef: { word: 'coefficient', def: 'the number that multiplies the variable: 3 in 3x' },
-  constant: { word: 'constant', def: 'a term with no variable, like the 4 in 8x + 4' },
-  variable: { word: 'variable', def: 'the letter that stands for the unknown number' },
-  distProp: { word: 'Distributive Property', def: 'the number outside the parentheses multiplies every term inside' },
-  varTerm: { word: 'variable term', def: 'a term with a variable in it, like 5x' },
-  addProp: { word: 'Addition Property of Equality', def: 'add the same thing to both sides and they stay equal' },
-  subProp: { word: 'Subtraction Property of Equality', def: 'subtract the same thing from both sides and they stay equal' },
-  divProp: { word: 'Division Property of Equality', def: 'divide both sides by the same number and they stay equal' },
-  solution: { word: 'solution', def: 'the number that makes the two sides of an equation equal' },
-  noSol: { word: 'no solution', def: 'the equation is never true, whatever number the variable is' },
-  infSol: { word: 'infinitely many solutions', def: 'the equation is true for every number the variable could be' },
-  system: { word: 'system of equations', def: 'two equations taken together' },
-  solSys: { word: 'solution of a system', def: 'an ordered pair (x, y) that makes BOTH equations true' },
-  orderedPair: { word: 'ordered pair', def: 'a point written (x, y): x first, then y' },
-  intersect: { word: 'intersect', def: 'cross; two lines that intersect meet at one point' },
-  pointInt: { word: 'point of intersection', def: 'the point where two lines cross' },
-  parallel: { word: 'parallel lines', def: 'lines that never meet: the same coefficient of x, different numbers added' },
-  sameLine: { word: 'the same line', def: 'two equations, written two ways, that graph as one line' },
-  table: { word: 'table of values', def: 'x-values you choose and the y each one gives' },
-  coefX: { word: 'coefficient of x', def: 'the number that multiplies x: 3 in y = 3x − 1' },
-  approx: { word: 'approximate solution', def: 'a crossing read between the grid lines, written with “about”' },
-  tenth: { word: 'nearest tenth', def: 'one digit after the decimal point' }
-});
+/* the glossary: its words and their cards are below the pictures they draw ("the glossary and its cards") */
 
 /* ------------------------------------------------------------------ rendering */
 const why = s => s ? ' <span class="xwhy"><b>Why:</b> ' + s + '</span>' : '';
@@ -116,6 +91,156 @@ function winAround(pts, pad) {                                          /* a win
   const lo = Math.min(...ys), hi = Math.max(...ys), sp = hi - lo + 2 * pad, st = sp > 28 ? 5 : sp > 14 ? 2 : 1;
   return { x0: Math.floor(Math.min(...xs)) - pad, x1: Math.ceil(Math.max(...xs)) + pad, y0: st * Math.floor((lo - pad) / st), y1: st * Math.ceil((hi + pad) / st), ys: st };
 }
+
+/* ------------------------------------------------------------------ the glossary and its cards (27 Nov 2026)
+   A term in the help opens its card (kit explain.js X.card; Croix, 27 Nov 2026: "I would like a card to pop up that's the
+   definition and everything else in depth about the word"): def is the lead line (the help's own since 14 Nov), more says what
+   it means, sym the rule in symbols, ex one worked example, watch the common mistake, see the related words. Every card says
+   what the decks say (a7/build/u11/l01–l08.py, their vocabulary and notes; unit.py's Reference Sheet), with small numbers of its
+   own: no lesson's, the paper's or the test's, and none of a question on the page (the card is the same wherever it opens).
+   cards_check.js proves every example's arithmetic and scans the page's sets for its numbers. No × anywhere, no "slope". */
+const kx = s => String(s).replace(/\{([^{}]+)\/([^{}]+)\}|([a-z])|-|\*/g, (m0, a, b, v) => a !== undefined ? E.fr(kx(a), kx(b)) : v ? vi(v) : m0 === '-' ? '−' : '·');
+const km = s => M(kx(s));                                               /* a piece of math, as the help writes it: 2x − 3 */
+const kl = s => '<span class="xcl">' + km(s) + '</span>';                /* a line of math on its own */
+const kp = s => '<p>' + s + '</p>';
+const kw = (a, b) => b ? '<ul><li>' + a + '</li><li>' + b + '</li></ul>' : a;   /* a Watch out: one item, or two as a list (HELP_STANDARD §3, 27 Nov 2026) */
+const Ln = (m, b) => ({ m: E.qv(m), b: E.qv(b) });
+const kPlane = (lines, mk, win, label, cap, more) => planePic(Object.assign({ w: win, lines, mark: mk && { x: Q(mk[0]), y: Q(mk[1]), t: pairT(Q(mk[0]), Q(mk[1])) }, label }, more || {}), cap);
+X.gloss({
+  likeTerms: { word: 'like terms', def: 'terms with the same variable part, like 3x and 5x',
+    more: 'Like terms have the same letter to the same power. Collect them by adding their coefficients: three x’s and five more x’s are eight x’s. A constant is like another constant, but never like a variable term.',
+    sym: km('ax + bx = (a + b)x'),
+    ex: kl('6n + 5 - 2n = 4n + 5') + kp(km('6n') + ' and ' + km('-2n') + ' are like terms: ' + km('6 - 2 = 4') + '. The 5 is a constant, so it stays as it is.'),
+    watch: kw('Use the sign in front of each term when you combine like terms. ' + km('5x - 2x = 3x') + ', not ' + km('7x') + ', because ' + km('5 - 2 = 3') + '.',
+      'Combine only like terms. ' + km('4x + 3') + ' stays ' + km('4x + 3') + ', not ' + km('7x') + ', because 3 has no ' + vi('x') + '.'),
+    see: ['coef', 'constant', 'varTerm'] },
+  likeTerm: { word: 'like term', def: 'a term with the same variable part, like 3x and 5x', card: 'likeTerms' },
+  coef: { word: 'coefficient', def: 'the number that multiplies the variable: 3 in 3x', say: 'koh-uh-FISH-uhnt',
+    more: 'In a term like ' + km('3x') + ', the 3 is the coefficient: ' + km('3x') + ' means 3 times ' + vi('x') + '. A minus sign belongs to it, so the coefficient of ' + km('-4y') + ' is −4. A variable on its own, like ' + vi('x') + ', has a coefficient of 1.',
+    ex: kl('-3y = 12') + kl('y = -4') + kp('The coefficient of ' + vi('y') + ' is −3, so divide both sides by −3, sign and all: ' + km('12 ÷ (-3) = -4') + '.'),
+    watch: 'Divide both sides by the whole coefficient, including its minus sign. ' + km('-3y = 12') + ' gives ' + km('y = -4') + ', not ' + km('y = 4') + ', because ' + km('12 ÷ (-3) = -4') + '.',
+    see: ['variable', 'constant', 'coefX'] },
+  constant: { word: 'constant', def: 'a term with no variable, like the 4 in 8x + 4',
+    more: 'A constant is a number on its own. Its value never changes, whatever number the variable is. Constants are like terms of each other, so they can be added.',
+    ex: kl('3x + 6 - 1 = 3x + 5') + kp('The 6 and the −1 are constants, so they combine: ' + km('6 - 1 = 5') + '. The ' + km('3x') + ' has a variable, so it is not a constant.'),
+    watch: kw('Find the term that has no variable. In ' + km('3x + 7') + ', the constant is 7, not 3.',
+      'Write a constant with its sign. In ' + km('2x - 9') + ', the constant is ' + km('-9') + ', not 9.'),
+    see: ['coef', 'likeTerms', 'varTerm'] },
+  variable: { word: 'variable', def: 'the letter that stands for the unknown number',
+    more: 'A variable holds the place of a number you do not know yet. Any letter can be one: ' + vi('x') + ', ' + vi('n') + ', ' + vi('w') + ' or ' + vi('k') + '. To solve an equation is to find the number the variable stands for.',
+    ex: kl('w + 4 = 10') + kl('w = 6') + kp(vi('w') + ' is the variable. It stands for 6, because ' + km('6 + 4 = 10') + '.'),
+    watch: 'Multiply when a number is written next to a variable. If ' + km('x = 5') + ', then ' + km('3x = 3(5) = 15') + ', not 35.',
+    see: ['coef', 'solution', 'varTerm'] },
+  distProp: { word: 'Distributive Property', def: 'the number outside the parentheses multiplies every term inside', say: 'dih-STRIB-yuh-tiv',
+    more: 'Distribute means hand out to everyone. The number in front of the parentheses multiplies each term inside, sign and all. Then the parentheses are gone, and you can collect like terms and solve.',
+    sym: km('a(b + c) = ab + ac'),
+    ex: kl('4(x + 3) = 4x + 12') + X.fig(FG.arrowsPic([{ f: '4', t: ['x', '3'], p: ['4x', '12'] }], 'An arrow from the 4 to each term inside the parentheses, x and 3, and each product under its term: 4x and 12.'),
+      'Each arrow is one multiplication: ' + c1(km('4(x) = 4x')) + ' and ' + c2(km('4(3) = 12')) + '.'),
+    watch: kw('Multiply every term inside, not just the first one. ' + km('4(x + 3) = 4x + 12') + ', not ' + km('4x + 3') + '.',                       /* the lead's words, 27 Nov 2026 */
+      'If the number in front is negative, multiply each term by that negative number. ' + km('-2(y - 5) = -2y + 10') + ', because ' + km('-2 * (-5) = +10') + '.'),
+    see: ['likeTerms', 'coef', 'constant'] },
+  varTerm: { word: 'variable term', def: 'a term with a variable in it, like 5x',
+    more: 'A variable term is a coefficient times a variable, like ' + km('5x') + ' or ' + km('-3x') + '. When an equation has a variable term on each side, take the same variable term from both sides. Then the variable is on one side only.',
+    ex: kl('7x + 2 = 3x + 14') + kl('4x + 2 = 14') + kp(km('7x') + ' and ' + km('3x') + ' are the variable terms. Subtract ' + km('3x') + ', the smaller one, from both sides.'),
+    watch: 'Subtract the smaller variable term from both sides. ' + km('7x + 2 = 3x + 14') + ' becomes ' + km('4x + 2 = 14') + ', not ' + km('10x + 2 = 14') + ', because ' + km('7x - 3x = 4x') + '.',
+    see: ['likeTerms', 'subProp', 'coef'] },
+  addProp: { word: 'Addition Property of Equality', def: 'add the same thing to both sides and they stay equal',
+    more: 'An equation is like a balance: both sides have the same value. Add the same number, or the same term, to both sides, and they stay equal. Use it to undo a subtraction.',
+    ex: kl('y - 6 = 2') + kl('y = 8') + balanceMove({ L: [T_(1, 'y'), T_(-6)], R: [T_(2)], v: 'y' }, Q(6), null) + kp('Add 6 to both sides. The −6 and +6 make 0, and ' + km('2 + 6 = 8') + '.'),
+    watch: 'Add the same number to both sides. ' + km('y - 6 = 2') + ' becomes ' + km('y = 8') + ', not ' + km('y = 2') + ', because ' + km('2 + 6 = 8') + '.',
+    see: ['subProp', 'divProp', 'solution'] },
+  subProp: { word: 'Subtraction Property of Equality', def: 'subtract the same thing from both sides and they stay equal',
+    more: 'Subtract the same number, or the same term, from both sides, and they stay equal. Use it to undo an addition, or to take the same variable term from both sides.',
+    ex: kl('5x + 1 = 2x + 7') + kl('3x + 1 = 7') + balanceMove({ L: [T_(5, 'x'), T_(1)], R: [T_(2, 'x'), T_(7)], v: 'x' }, Q(-2), 'x') + kp('Subtract ' + km('2x') + ' from both sides. Now the variable is on one side only.'),
+    watch: 'Subtract the same term from both sides. ' + km('5x + 1 = 2x + 7') + ' becomes ' + km('3x + 1 = 7') + ', not ' + km('3x + 1 = 2x + 7') + '.',
+    see: ['addProp', 'varTerm', 'divProp'] },
+  divProp: { word: 'Division Property of Equality', def: 'divide both sides by the same number and they stay equal',
+    more: 'Divide both sides by the same number, and they stay equal. It is often the last move: divide by the coefficient, and the variable is alone. You can divide by any number but 0.',
+    ex: kl('4n = 18') + kl('n = 4.5') + kp('Divide both sides by 4, the coefficient of ' + vi('n') + ': ' + km('18 ÷ 4 = 4.5') + '.'),
+    watch: 'Divide both sides by the coefficient. ' + km('4n = 18') + ' gives ' + km('n = 4.5') + ', not ' + km('n = 72') + ', because ' + km('18 ÷ 4 = 4.5') + '.',
+    see: ['coef', 'subProp', 'addProp'] },
+  solution: { word: 'solution', def: 'the number that makes the two sides of an equation equal',
+    more: 'A solution is not just the last line of your work. It is the number that makes both sides of the first equation come out the same. To check it, put it into both sides and get the same number twice.',
+    ex: kl('2x + 5 = 3x + 1') + kp('Try ' + km('x = 4') + ': ' + km('2(4) + 5 = 13') + ' and ' + km('3(4) + 1 = 13') + '. The same number twice, so 4 is the solution.'),
+    watch: 'Give the value of the variable, not the value of each side. For ' + km('2x + 5 = 3x + 1') + ', the solution is ' + km('x = 4') + ', not 13.',
+    see: ['variable', 'noSol', 'infSol'] },
+  noSol: { word: 'no solution', def: 'the equation is never true, whatever number the variable is',
+    more: 'Sometimes the variable terms cancel and what is left is false, like ' + km('5 = 9') + ', which is never true. The variable is gone, so no number can make it true. The equation has no solution.',
+    ex: kl('3x + 4 = 3x + 1') + kl('4 = 1') + kp('Subtract ' + km('3x') + ' from both sides. What is left, ' + km('4 = 1') + ', is never true: no solution.'),
+    watch: 'Say no solution only when the variable is gone and what is left is false. ' + km('3x = 0') + ' has one solution, ' + km('x = 0') + ', not no solution.',
+    see: ['infSol', 'solution', 'parallel'] },
+  infSol: { word: 'infinitely many solutions', def: 'the equation is true for every number the variable could be', say: 'IN-fuh-nit-lee',
+    more: 'Sometimes the variable terms cancel and what is left is true, like ' + km('5 = 5') + '. Then every number works, because the two sides are the same expression. The equation has infinitely many solutions.',
+    ex: kl('4(x + 1) = 4x + 4') + kl('4x + 4 = 4x + 4') + kl('4 = 4') + kp('Distribute, then subtract ' + km('4x') + ' from both sides. What is left, ' + km('4 = 4') + ', is always true.'),
+    watch: 'Say infinitely many solutions only when the variable is gone and what’s left is true, like ' + km('4 = 4') + '. ' + km('2x + 4 = 5x + 4') + ' has one solution, ' + km('x = 0') + ', not infinitely many.',
+    see: ['noSol', 'solution', 'sameLine'] },
+  system: { word: 'system of equations', def: 'two equations taken together',
+    more: 'A system is two equations about the same ' + vi('x') + ' and ' + vi('y') + '. Each equation graphs as a line. A solution of the system has to make both equations true at once.',
+    ex: kl('y = x + 1') + kl('y = -5x + 13') + kPlane([Ln(1, 1), Ln(-5, 13)], [2, 3], { x0: -1, x1: 4, y0: -1, y1: 6, ys: 1 }, 'The lines y = x + 1, solid, and y = −5x + 13, dashed, crossing at the point (2, 3).', 'The two lines cross at ' + c3('(2, 3)') + '.') +
+      kp('The point (2, 3) makes both equations true: ' + km('2 + 1 = 3') + ' and ' + km('-5(2) + 13 = 3') + '.'),
+    watch: 'Give the solution of a system as an ordered pair. For ' + km('y = x + 1') + ' and ' + km('y = -5x + 13') + ', the solution is (2, 3), not just ' + km('x = 2') + '.',
+    see: ['solSys', 'pointInt', 'orderedPair'] },
+  solSys: { word: 'solution of a system', def: 'an ordered pair (x, y) that makes BOTH equations true',
+    more: 'To test a pair, put its ' + vi('x') + ' into each equation and see whether you get its ' + vi('y') + '. If both equations give its ' + vi('y') + ', the pair is a solution of the system. On a graph, it is the point on both lines.',
+    ex: kl('y = 6x - 5') + kl('y = x + 5') + kp('(2, 7): ' + km('6(2) - 5 = 7') + ' and ' + km('2 + 5 = 7') + '. Both are true, so (2, 7) is a solution.') +
+      kp('(1, 1): ' + km('6(1) - 5 = 1') + ', but ' + km('1 + 5 = 6') + ', not 1. So (1, 1) is not a solution.'),
+    watch: 'Test the pair in both equations, not just one. (1, 1) fits ' + km('y = 6x - 5') + ' but fails ' + km('y = x + 5') + ', because ' + km('1 + 5 = 6') + ', not 1.',
+    see: ['system', 'orderedPair', 'pointInt'] },
+  orderedPair: { word: 'ordered pair', def: 'a point written (x, y): x first, then y',
+    more: 'The first number is ' + vi('x') + ': how far across, left or right. The second is ' + vi('y') + ': how far up or down. The order matters, so (2, 5) and (5, 2) are different points.',
+    ex: kp('(3, −1): start at 0, go 3 to the right, then 1 down.') + kPlane([], [3, -1], { x0: -1, x1: 4, y0: -3, y1: 2, ys: 1 }, 'The point (3, −1) marked, 3 to the right of 0 and 1 down, with a dotted path to each axis.', 'From 0, go ' + c3('3 right') + ', then ' + c3('1 down') + '.', { guides: true }),
+    watch: kw('Write ' + vi('x') + ' first, then ' + vi('y') + '. 3 right and 1 down is (3, −1), not (−1, 3).',
+      'Put the first number in the ' + vi('x') + ' box. For (3, −1), the ' + vi('x') + ' box gets 3, not −1.'),
+    see: ['solSys', 'pointInt'] },
+  intersect: { word: 'intersect', def: 'cross; two lines that intersect meet at one point', say: 'in-ter-SEKT',
+    more: 'Two lines intersect where they cross. Lines with different coefficients of ' + vi('x') + ' always intersect, at exactly one point. That point is on both lines.',
+    ex: kl('y = 6x - 12') + kl('y = x + 3') + kPlane([Ln(6, -12), Ln(1, 3)], [3, 6], { x0: -1, x1: 5, y0: -1, y1: 8, ys: 1 }, 'The lines y = 6x − 12, solid, and y = x + 3, dashed, intersecting at the point (3, 6).', 'The lines intersect at ' + c3('(3, 6)') + '.') +
+      kp('These lines intersect at (3, 6): ' + km('6(3) - 12 = 6') + ' and ' + km('3 + 3 = 6') + '.'),
+    watch: 'Draw each line on to the edge of the grid, not only between your points. ' + km('y = x + 3') + ' and ' + km('y = 6x - 12') + ' cross at (3, 6), past your points.',
+    see: ['pointInt', 'parallel', 'solSys'] },
+  pointInt: { word: 'point of intersection', def: 'the point where two lines cross',
+    more: 'The point of intersection is on both lines, so its ' + vi('x') + ' and ' + vi('y') + ' make both equations true. That is why it is the solution of the system. Read its ' + vi('x') + ' across, then its ' + vi('y') + ' up or down.',
+    ex: kl('y = x - 1') + kl('y = -5x + 17') + kPlane([Ln(1, -1), Ln(-5, 17)], [3, 2], { x0: -1, x1: 5, y0: -2, y1: 6, ys: 1 }, 'The lines y = x − 1, solid, and y = −5x + 17, dashed, crossing at (3, 2), with a dotted path from the crossing to each axis.', 'The dotted paths lead from ' + c3('(3, 2)') + ' to ' + km('x = 3') + ' and ' + km('y = 2') + '.', { guides: true }) +
+      kp('Check it in both equations: ' + km('3 - 1 = 2') + ' and ' + km('-5(3) + 17 = 2') + '.'),
+    watch: 'Use the point where the two lines cross, not where one line meets an axis. ' + km('y = x - 1') + ' and ' + km('y = -5x + 17') + ' cross at (3, 2), not at (0, −1).',
+    see: ['intersect', 'solSys', 'approx'] },
+  parallel: { word: 'parallel lines', def: 'lines that never meet: the same coefficient of x, different numbers added',
+    more: 'Parallel lines slant the same way at the same steepness, so they stay the same distance apart. Their equations have the same coefficient of ' + vi('x') + ' and different numbers added. A system of parallel lines has no solution.',
+    ex: kl('y = 0.5x + 3') + kl('y = 0.5x - 1') + kPlane([Ln(Q(1, 2), 3), Ln(Q(1, 2), -1)], null, { x0: -4, x1: 5, y0: -3, y1: 6, ys: 1 }, 'The parallel lines y = 0.5x + 3, solid, and y = 0.5x − 1, dashed, with the distance between them marked: 4 apart, measured straight up and down, at every x.', 'Measured straight up and down, the lines are always ' + c2('4 apart') + ', so they never meet.', { gaps: [{ x: Q(2), y1: Q(4), y2: Q(0), t: '4 apart' }] }) +
+      kp('The coefficient of ' + vi('x') + ' is 0.5 in both, and 3 and −1 are different. The lines never meet: no solution.'),
+    watch: 'Compare the coefficients of ' + vi('x') + ' with their signs. ' + km('y = 2x + 1') + ' and ' + km('y = -2x + 4') + ' are crossing lines, not parallel lines, because 2 and −2 are different.',
+    see: ['coefX', 'noSol', 'sameLine'] },
+  sameLine: { word: 'the same line', def: 'two equations, written two ways, that graph as one line',
+    more: 'Two equations can look different and still say the same thing. Simplify them, and they match: the same coefficient of ' + vi('x') + ' and the same number added. Every point of the line works in both, so the system has infinitely many solutions.',
+    ex: kl('y = 6(x - 1)') + kl('y = 6x - 6') + X.fig(FG.tablePic({ xs: [0, 1, 2], rows: [{ name: 'y = 6(x − 1)', ys: [-6, 0, 6] }, { name: 'y = 6x − 6', ys: [-6, 0, 6] }], label: 'Tables of values for y = 6(x − 1) and y = 6x − 6 at x = 0, 1 and 2: both give −6, 0 and 6.' }), 'Both equations make the same table of values, so their graphs are one line.') +
+      kp('Distribute: ' + km('6(x - 1) = 6x - 6') + '. The two equations are one line.'),
+    watch: kw('Compare values, not how the numbers look. ' + km('y = ½x + 9') + ' and ' + km('y = 0.5x + 9') + ' are the same line, not parallel lines, because ' + km('½ = 0.5') + '.',
+      'Distribute before you compare. ' + km('y = 6(x - 1)') + ' is the same line as ' + km('y = 6x - 6') + ', not a different line.'),
+    see: ['parallel', 'infSol', 'distProp'] },
+  table: { word: 'table of values', def: 'x-values you choose and the y each one gives',
+    more: 'Choose ' + km('x = 0') + ' first, then two more values of ' + vi('x') + '. Put each ' + vi('x') + ' into the equation to get its ' + vi('y') + '. Plot the three points: two of them draw the line, and the third is a check.',
+    ex: kl('y = 6x - 4') + X.fig(FG.tablePic({ xs: [0, 1, 2], rows: [{ name: 'y = 6x − 4', ys: [-4, 2, 8] }], label: 'The table of values for y = 6x − 4: x = 0, 1 and 2 give y = −4, 2 and 8.' }), 'Each ' + vi('x') + ' gives its own ' + vi('y') + '.') +
+      kp(km('6(0) - 4 = -4') + ', ' + km('6(1) - 4 = 2') + ' and ' + km('6(2) - 4 = 8') + '.'),
+    watch: 'Multiply the coefficient by the ' + vi('x') + '-value. For ' + km('y = 6x - 4') + ', ' + km('x = 0') + ' gives ' + km('y = -4') + ', not 2, because ' + km('6(0) = 0') + '.',
+    see: ['coefX', 'orderedPair', 'pointInt'] },
+  coefX: { word: 'coefficient of x', def: 'the number that multiplies x: 3 in y = 3x − 1', say: 'koh-uh-FISH-uhnt',
+    more: 'Each step of 1 in ' + vi('x') + ' adds the coefficient of ' + vi('x') + ' to ' + vi('y') + '. In ' + km('y = -x + 13') + ' it is −1, and in ' + km('y = 15') + ' it is 0. Lines with the same coefficient of ' + vi('x') + ' are equally steep in the same direction.',
+    ex: kl('y = 6x + 1') + kp(km('6(0) + 1 = 1') + ', ' + km('6(1) + 1 = 7') + ' and ' + km('6(2) + 1 = 13') + '. Each step of 1 in ' + vi('x') + ' adds 6, the coefficient of ' + vi('x') + ', to ' + vi('y') + '.'),
+    watch: 'Find the number that multiplies ' + vi('x') + ', even when the ' + vi('x') + '-term is last. In ' + km('y = 5 - 2x') + ', the coefficient of ' + vi('x') + ' is −2, not 5.',
+    see: ['coef', 'parallel', 'table'] },
+  approx: { word: 'approximate solution', def: 'a crossing read between the grid lines, written with “about”', say: 'uh-PROK-suh-mit',
+    more: 'When two lines cross between the grid lines, the point cannot be read exactly. Find the grid lines on each side, then read each coordinate to the nearest tenth. Write about in front of it.',
+    ex: kl('y = 6x - 9') + kl('y = -x + 7') + X.fig(FG.zoomPic({ l1: Ln(6, -9), l2: Ln(-1, 7), c: E.meet(Ln(6, -9), Ln(-1, 7)), ax: 'about 2.3', ay: 'about 4.7', label: 'One grid square zoomed in, cut into tenths: the lines y = 6x − 9 and y = −x + 7 cross at about x = 2.3 and y = 4.7.' }),
+      'Zoomed in to one grid square, cut into tenths. The ' + c3('crossing') + ' reads about 2.3 across and about 4.7 up.') +
+      kp('They cross at about (2.3, 4.7). Check: ' + km('6(2.3) - 9 = 4.8') + ' and ' + km('-2.3 + 7 = 4.7') + '. Close, not equal: a good estimate.'),
+    watch: 'Read each coordinate between the grid lines, to the tenth. The crossing is about (2.3, 4.7), not (2, 5), the nearest grid point.',
+    see: ['pointInt', 'tenth', 'intersect'] },
+  tenth: { word: 'nearest tenth', def: 'one digit after the decimal point',
+    more: 'To round to the nearest tenth, keep one digit after the decimal point. Then look at the next digit: 5 or more rounds up, and 4 or less leaves it. On a graph, a tenth is one of ten equal steps between two grid lines.',
+    ex: kp('3.46 rounds to 3.5, because the next digit, 6, is 5 or more.') + kp('1.82 rounds to 1.8, because the next digit, 2, is 4 or less.'),
+    watch: 'Round up when the next digit is 5 or more. 3.46 rounds to 3.5, not 3.4.',
+    see: ['approx'] }
+});
 
 /* ------------------------------------------------------------------ an equation, solved one move a line (the lessons' order:
    distribute, collect, the same variable term from both sides, undo the constant, divide, check) */
@@ -386,8 +511,8 @@ SPEC.countPar = { mc: true, terms: ['coefX', 'parallel', 'sameLine'], pic: true,
           'Both equations make the same table of values, so their graphs are one line.') })]; }
     const d = qabs(qsub(l1.b, l2.b)), g = [-2, 2].filter(v => v >= x.fig.w.x0 + 0.5 && v <= x.fig.w.x1 - 0.5).map(v => ({ x: Q(v), y1: yAt(l1, v), y2: yAt(l2, v), t: n(d) + ' apart' })).filter(z => [z.y1, z.y2].every(y => qnum(y) >= x.fig.w.y0 && qnum(y) <= x.fig.w.y1));
     return [Object.assign({}, old[0], { why: 'the coefficient of x is the same, so for every x the two y’s stay the same distance apart.' }),
-      Object.assign({}, old[1], { say: old[1].say.replace(/^So the lines are parallel — always (\S+) apart up the side — and never meet: no solution\./, 'So the lines are parallel, always $1 apart up the side, and they never meet: no solution.'),
-        pic: planePic({ w: x.fig.w, lines: [l1, l2], gaps: g, label: 'The two parallel lines with the distance between them marked: ' + n(d) + ' apart up the side at every x.' }, 'Up the side, the lines are always ' + c2(n(d) + ' apart') + ', so they never meet.') })]; },
+      Object.assign({}, old[1], { say: old[1].say.replace(/^So the lines are parallel — always (\S+) apart up the side — and never meet: no solution\./, 'So the lines are parallel, always $1 apart measured straight up and down, and they never meet: no solution.'),
+        pic: planePic({ w: x.fig.w, lines: [l1, l2], gaps: g, label: 'The two parallel lines with the distance between them marked: ' + n(d) + ' apart, measured straight up and down, at every x.' }, 'Measured straight up and down, the lines are always ' + c2(n(d) + ' apart') + ', so they never meet.') })]; },
   walk: (x, old) => old };
 /* Q12 — read the solution from the graph */
 const crossPic = (w, l1, l2, P, cap, story, dots) => planePic({ w, lines: [l1, l2], dots, mark: { x: P[0], y: P[1], t: pairT(P[0], P[1]) }, guides: true, story: !!story, names: story,

@@ -64,6 +64,12 @@ progress, Print, and the checks that run in a real browser.
   a clear place. A leg that crosses the other axis keeps its number off that axis (6.05 Notes III, 24 Oct). Lexend has no
   italics (ruling 46): the words on a figure and the axes' x and y are upright.
 
+## The help's words: a term opens its card (27 Nov 2026)
+A tapped term in the help opens its card (the kit's `explain.js`; Croix, 27 Nov 2026): `help.js`'s glossary gives all 15 terms
+(13 cards; leg and corresponding side open their plural's) a definition, What it means, an example in the lessons' words with
+numbers of its own (a picture on 6), a Watch out to the lead's rule (the kit's HELP_STANDARD §3) and related words;
+`cards_check.js` proves every card's arithmetic and keeps its triangles off every set of the page.
+
 ## Ruling 43 on the test (the second review, 25 Oct 2026)
 
 A lesson's warm-up, notes, worked examples and Your Turns are what the class has been shown; the test never asks them again
@@ -89,4 +95,5 @@ place at a real size — 43 rectangles once ruling 43 takes off the ten whose le
 |---|---|
 | `u6_check.js` | 3,000 sets: the shape of the test (titles read from `build/u6/unit.py`); every key typed back is right, with its unit and with "about"; every modelled mistake typed is wrong and named (a mistake that ends on a root, typed to the tenth or the hundredth); the exact root and the longer decimal are "Almost", the cut-off decimal wrong; the clean rule, checked on its own; follow-through from a wrong part (a), its value worked out here and not taken from the coach; every worked line and Hint step carries the answer; no Hint asks for a number no one can type or gives its own answer away; every Hint choice has one right option and a reason for each wrong one; every arithmetic claim in every sentence is true, chains, √ and cut-off decimals ("√218 = 14.764…") included, and no fraction is printed; every figure and picture: each label states the length drawn, sits nearest its own segment, crosses no line, covers no point or number and touches no other label; ruling 43 on the test (above). Writes `dump.json`. |
 | `verify.py` | The independent check: every question read back from what a student sees — words, choices, the figure's labels — and worked again exactly in sympy; every key, worked line, rounding sentence ("the hundredths digit is 4, so the tenths digit stays") and Hint step compared; the unit's bounds checked from the words; the test's sections, kinds of question and points matched. |
+| `cards_check.js` | 20,000 sets: every card read back from its printed text with its own reader of numbers, squares and roots: every statement true (or false where the words say so, after "not" too), every root cut or rounded as printed, every claim the card makes; no card's triangle, sides or points printed by a question of its kind on the page. |
 | `plant_check.py` | 35 planted errors (a key off by one, a tenth cut off, a side left out of the perimeter, a mislabelled figure, a copy drawn to the wrong size, a wrong hundredths digit, a wrong cut-off decimal, a Hint across zero off by one, a fraction in a reason, the clean rule weakened, "Almost" marked right, a follow-through gone wrong, a garden 1 m wide, a grown-up 4 ft tall, a mirror whose words drop "similar", a copy's corners lettered out of order, words that name them out of order, a Hint choice with two right options, a ladder whose words and key disagree, …): the checks must catch every one. |

@@ -19,6 +19,7 @@
   "node u11_check.js 3000 1500",
   "python3 verify.py",
   "python3 plant_check.py",
-  "node mc_check.js 3000"
+  "node mc_check.js 3000",
+  "node cards_check.js"
  ]
 }

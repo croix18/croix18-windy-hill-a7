@@ -81,7 +81,14 @@ const r1 = v => Math.round(v * 10) / 10;
 const TX = (x, y, s, cls, anchor, extra) => '<text x="' + r1(x) + '" y="' + r1(y) + '" class="' + (cls || 'xt') + '"' + (anchor ? ' text-anchor="' + anchor + '"' : '') + (extra || '') + '>' + E.esc(s) + '</text>';
 const open = (w, h, label, big) => '<svg class="xsvg' + (big ? ' u11h' : '') + '" viewBox="0 0 ' + r1(w) + ' ' + r1(h) + '" role="img" aria-label="' + E.esc(label) + '">';
 const cw = s => String(s).length * 9.6 + 14;                         /* a chip's width for its text */
-const cwb = s => String(s).length * 11.4 + 16;                       /* a label's width in the larger help type (.u11h) */
+/* a label on a box (a point's coordinates, a zoomed reading) in the larger help type (.u11h: Lexend Bold, 19.5 units): its box
+   hugs it, centered on it, with even padding (the lead, 27 Nov 2026: the box of "(3, 6)" ran far past the text). The width is the
+   font's own advance widths, measured in Chromium on 27 Nov 2026 (any other character counts 13); the text is anchored at the
+   box's center, so it is centered whatever the font does. Kit check/help_page.js holds every rect.xlabbg and its text. */
+const GW = { '0': 13.17, '1': 10.95, '2': 10.69, '3': 11.53, '4': 12.92, '5': 11.63, '6': 11.3, '7': 10.8, '8': 11.69, '9': 11.27, '(': 7.61, ')': 7.61, ',': 5.61, '.': 5.02,
+  ' ': 6.2, '−': 11.31, '-': 8.75, a: 12.86, b: 12.84, o: 12.5, u: 12.53, t: 7.77 };
+const labW = s => [...String(s)].reduce((a, c) => a + (GW[c] != null ? GW[c] : 13), 0) + 12;   /* the text and 6 units each side */
+const labBox = (cx, cy, s, h) => '<rect class="xlabbg" x="' + r1(cx - labW(s) / 2) + '" y="' + r1(cy - h / 2) + '" width="' + r1(labW(s)) + '" height="' + h + '" rx="5"/>' + TX(cx, cy, s, 'xt xf3', 'middle');
 /* a coordinate plane for the help: the grid, the axes and their numbers, lines clipped to the window (the first solid, the
    second dashed, as on the question's own graph), and on top what the help points at — a point (marked in color 3 with a
    dotted path to each axis and its coordinates), pairs of points joined by a dashed bracket (color 2: "always 3 apart"), dots */
@@ -108,8 +115,7 @@ function helpPlane(o) {
     if (o.guides) out += '<path class="xguide" d="M' + r1(mx) + ' ' + r1(my) + 'V' + r1(y0) + 'M' + r1(mx) + ' ' + r1(my) + 'H' + r1(x0) + '"/>';
     out += '<circle class="xmark" cx="' + r1(mx) + '" cy="' + r1(my) + '" r="6"/>';
     if (o.mark.t) { const right = mx < ox + pw * 0.6, up = my > top + 26;
-      out += '<rect class="xlabbg" x="' + r1(right ? mx + 9 : mx - 9 - cwb(o.mark.t) + 6) + '" y="' + r1((up ? my - 22 : my + 22) - 13) + '" width="' + r1(cwb(o.mark.t) - 6) + '" height="26" rx="5"/>' +
-        TX(right ? mx + 12 : mx - 12, up ? my - 22 : my + 22, o.mark.t, 'xt xf3', right ? 'start' : 'end'); } }
+      const bw = labW(o.mark.t); out += labBox(right ? mx + 9 + bw / 2 : mx - 9 - bw / 2, up ? my - 22 : my + 22, o.mark.t, 26); } }
   if (!story && w.y0 <= 0 && 0 <= w.y1) out += TX(ox + pw + 4, PY(0) - 10, 'x', 'xt xsm', 'start');
   if (!story && w.x0 <= 0 && 0 <= w.x1) out += TX(PX(0) + 7, top + 2, 'y', 'xt xsm', 'start');
   let h = top + ph + 26;
@@ -131,8 +137,8 @@ function zoomPic(o) {
   out += '<path class="xguide" d="M' + r1(mx) + ' ' + r1(my) + 'V' + (top + S) + 'M' + r1(mx) + ' ' + r1(my) + 'H' + L + '"/><circle class="xmark" cx="' + r1(mx) + '" cy="' + r1(my) + '" r="6"/>';
   [X0, X0 + 0.5, X0 + 1].forEach(v => { out += TX(PX(v), top + S + 14, mn(v), 'xtk tick', 'middle'); });
   [Y0, Y0 + 0.5, Y0 + 1].forEach(v => { out += TX(L - 6, PY(v), mn(v), 'xtk tick', 'end'); });
-  const yw = cwb(o.ay) - 6, yy = my < top + 30 ? my + 20 : my - 20;      /* the y reading inside the square, just above (or below) its dotted path */
-  out += TX(mx, top + S + 34, o.ax, 'xt xf3', 'middle') + '<rect class="xlabbg" x="' + (L + 3) + '" y="' + r1(yy - 12) + '" width="' + r1(yw) + '" height="24" rx="5"/>' + TX(L + 6, yy, o.ay, 'xt xf3', 'start');
+  const yy = my < top + 30 ? my + 20 : my - 20;                         /* the y reading inside the square, just above (or below) its dotted path */
+  out += TX(mx, top + S + 34, o.ax, 'xt xf3', 'middle') + labBox(L + 3 + labW(o.ay) / 2, yy, o.ay, 24);
   return open(W, top + S + 50, o.label, true) + out + '</svg>';
 }
 /* tables of values as the lessons draw them: an x row and a y row per equation, the equation above its table; one column may be
@@ -163,8 +169,12 @@ function arrowsPic(groups, label) {
     const cx = [];
     g.t.forEach((t, i) => { out += '<rect x="' + r1(x) + '" y="' + top + '" width="' + r1(ws[i]) + '" height="34" rx="7" class="xchip xs' + (i + 1) + (i ? ' xadd' : '') + '"/>' + TX(x + ws[i] / 2, top + 17, t, 'xt', 'middle'); cx.push(x + ws[i] / 2); x += ws[i] + 8; });
     out += TX(x + 1, top + 17, ')', 'xt xbig2', 'middle');
-    cx.forEach((c, i) => { const h = 18 + i * 12, y1 = top - 4, y0 = top - 2;
-      out += '<path class="xarr xarr' + (i + 1) + '" d="M' + r1(fx) + ' ' + y0 + ' Q' + r1((fx + c) / 2) + ' ' + (y1 - h * 2) + ' ' + r1(c) + ' ' + (y1 - 2) + '"/>' +
+    /* the arrows leave the number side by side, each from its own point (the lead, 27 Nov 2026: they started at one point and
+       the first arrow's tail sat on the dashed one): the arrow to the farther term starts on the left and arcs higher, the arrow
+       to the nearer term starts on the right and stays under it, so neither crosses the other (cards_check.js proves it) */
+    const nA = cx.length;
+    cx.forEach((c, i) => { const h = 14 + i * 18, y1 = top - 4, y0 = top - 2, sx = nA > 1 ? fx + 4 * (nA - 1 - 2 * i) / (nA - 1) : fx;
+      out += '<path class="xarr xarr' + (i + 1) + '" d="M' + r1(sx) + ' ' + y0 + ' Q' + r1((sx + c) / 2) + ' ' + (y1 - h * 2) + ' ' + r1(c) + ' ' + (y1 - 2) + '"/>' +
         '<path class="xhead' + (i + 1) + '" d="M' + r1(c - 5) + ' ' + (y1 - 9) + ' L' + r1(c) + ' ' + (y1 - 1) + ' L' + r1(c + 5) + ' ' + (y1 - 9) + ' Z"/>'; });
     y = top + 34;
     if (g.p) { g.p.forEach((p, i) => { out += TX(cx[i], y + 18, p, 'xt xf' + (i + 1), 'middle'); }); y += 30; }
